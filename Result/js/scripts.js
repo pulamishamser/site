@@ -1,4 +1,4 @@
-/*!
+﻿/*!
 * Start Bootstrap - Freelancer v7.0.3 (https://startbootstrap.com/theme/freelancer)
 * Copyright 2013-2021 Start Bootstrap
 * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-freelancer/blob/master/LICENSE)
@@ -53,22 +53,6 @@ window.addEventListener('DOMContentLoaded', event => {
 
 });
 
-const shareBtn = document.querySelector('.share-btn');
-const shareOptions = document.querySelector('.share-options');
-
-shareBtn.addEventListener('click', () => {
-    shareOptions.classList.toggle('active');
-})
-
-
-
-
-
-
-
-
-
-
 
 
 const shareBtn = document.querySelector('.share-btn');
@@ -77,3 +61,16 @@ const shareOptions = document.querySelector('.share-options');
 shareBtn.addEventListener('click', () => {
     shareOptions.classList.toggle('active');
 })
+
+
+
+
+FB.api(
+  '/https://shamser.info.np/HomePage/innovation.mp4',
+  'POST',
+  {},
+  function(response) {
+      // Insert your code here
+  }
+);
+
