@@ -1,4 +1,30 @@
 
+var myButton = document.getElementById("my-button");
+//Getting the button with "my-button" as id.
+var myOutput = document.getElementById("my-output");
+//Getting the id for the tag where you want to output your number
+var startNumber = 0;
+
+/*Creating a function where it adds 1 to the startNumber variable
+for every time you click on myButton.*/
+function addToNumber(){
+	//Using template literal here.
+	myOutput.innerHTML = `The current number is: ${1+startNumber++}`;
+	/*Sets the startNumber to 1+ startNumber++.
+ 	This makes it look like it starts to count from 1 and not 0
+    the first time you click the the button.*/
+}
+myButton.onclick = addToNumber;
+
+
+
+
+
+
+
+
+
+
 
 
 
