@@ -97,3 +97,13 @@ likeBtn.addEventListener("click", () => {
   }
 })
 }
+
+
+
+
+const likeBtn = document.querySelector(".like_btn"); let likeIcon = document.querySelector("#icon"),
+count = document.querySelector("#count");
+let clicked = false;
+likeBtn.addEventListener("click", O => { if (Iclicked) {
+clicked = true;
+likeIcon.innerHTML = '<i class="fas fa-thumbsup"></i>';
