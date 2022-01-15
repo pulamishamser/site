@@ -6,11 +6,14 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
+<!-- slider fade out fade in -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <link rel="stylesheet" href="css/styles"/>
 <link rel="stylesheet" href="jquiry.js"/>
 
-        <title>Login Result</title>
+        <title>गृहपृष्ठ (HomePage)मा स्वागत छ</title>
     </head>
 
     <body>
@@ -28,7 +31,7 @@ margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
+    font-size: 14px;
     background-size: cover;
 }
 
@@ -39,8 +42,8 @@ padding:45px;
 color: #003300;
 }
 
-
-
+p
+ font-size: 14px;
 }
 .wrapper {
   background: #50a3a2;
@@ -255,30 +258,39 @@ form button:hover {
 <body> 
 <div class="wrapper">
 <div class="containerid">
-
-
-
-
-
-
+<p id="blink" style="color:red; font-size:18px;text-align:center;"> तपाईलाई   गृहपृष्ठ (HomePage) मा  जान अनुमति छैन । यसको लागि  तल Login गर्नु होस्  ।</p>
+    <script type="text/javascript">
+    var blink = document.getElementById('blink');
+    setInterval(function() {
+    blink.style.opacity = (blink.style.opacity == 0 ? 1 : 0);
+    }, 1500);
+    </script>
 
 <br>
+<div class="column">
+<img alt=""  height="200"src="../HomePage/img/Pic2.png" width="200" align="left"></div>
 <br>
-<p>Login गर्न   Password चाहिन्छ   Login गरेर मात्र हुँदैन आफूलाई चाहेको डकुमेन्ट डाउनलोड गर्न link Open  भएको हुनुपर्छ  । 
-यसको लागि  sanima bank Account no खातामा रु १००० जम्मा गरेको भउचर पठाउनुहोला </p>
-</br>
-<br>
-<br>
-<p> Help me </p>
-</br>
-<br>
-<br>
-<p> कुन कुन बिषयमा कुन कुन ग्रेड आयो ? कसको कति GPA आयो ?  ग्रेड सिट सहित हेर्न रिजल्टमा Login गर्नुहोस् ।</p>
 
+<p  style="color:blue; font-size:11px;text-align:center;"> <a href="https://shamser.info.np/LoginPage/Logindocument.html">परियोजना कार्य कार्यमुलक अनुसन्धान योजना प्रपोजल विद्यालय सुधार योजना आदि चाहिएमा  यहाँ  Click गर्नुहोस् </p>
+</br><br>
+<p  style="color:blue; font-size:11px;text-align:center;"> <a href="https://shamser.info.np/LoginPage/LoginClass-11-12.html"> कक्षा ११ र १२ कक्षाको लागि नोट हाललाई  (Education Development and Child Development मात्र ) प्रश्नपत्र र अन्य शैक्षणिक सामाग्री  चाहिएमा   यहाँ  Clickगर्नुहोस्</p>
+</br><br>
+<p  style="color:blue; font-size:11px;text-align:center;"> <a href="https://shamser.info.np/LoginPage/LoginPage.html">कुन कुन बिषयमा कुन कुन ग्रेड आयो ? कसको कति GPA आयो ?  ग्रेड सिट सहित रिजल्ट  हेर्न   यहाँ  Click गर्नुहोस् ।  </p>
 </br>
 
 
-<h2> Login Result</h2> 
+<br>
+
+<p style =font:11px> <a href="https://docs.google.com/forms/d/1MkMpJ35I8SOmfuY2jbI6WY23ZDVM29wrPlFsxoXd3Xc/edit?usp=sharing">  Login गर्न   Password चाहिन्छ   Login गरेर मात्र हुँदैन आफूलाई चाहेको डकुमेन्ट डाउनलोड गर्न link Open भएको हुनुपर्छ  । 
+यसको लागि  sanima bank Account no खातामा रु १००० जम्मा भएको हुनुपर्नेछ ।</p>
+</br>
+<p> यहाँ Click गर्नुभएमा एउटा फर्म आउँछ सो फर्म भर्नुहोला </p>
+<br>
+<p> खातामा रकम जम्मा गर्न सिधै तल दिएको  लोगो (QR code) scan  गर्नुहोस् </p>
+</br>
+
+
+<h2> Login HomePage </h2> 
 
             <form name="login">
             Username<input type="text" name="userid"/>
@@ -290,7 +302,7 @@ form button:hover {
             function check(form) { /*function to check userid & password*/
                 /*the following code checkes whether the entered userid and password are matching*/
                 if(form.userid.value == "Admin" && form.pswrd.value == "1234") {
-                    window.open('https://shamser.info.np/?fbclid=IwAR2i_Jtr0aMj8oSns4i2subgBEm2RPICeLdpS130E4llX3SNoTBKhL89TFY')/*opens the target page while Id & password matches*/
+                    window.open('../index.html')/*opens the target page while Id & password matches*/
                 }
                 else {
                     alert("Error Password or Username")/*displays error message*/
@@ -300,6 +312,8 @@ form button:hover {
 
 
 <br>
+
+
 <marquee bgcolor=red direction=left><font size=2 color=white>यस वेभसाइटमा बिज्ञापन दिएर आफ्नो स‌ँस्था पेशा व्यसायको प्रचार प्रसार गर्नहोस् ।</font></marquee>
 <div class="row">
  
@@ -310,6 +324,7 @@ form button:hover {
 </br>
 
 <marquee bgcolor=yellow direction=right><font size=3 color=black; width=100%;> <a href="../LoginPage/LoginPage.html"> कक्षा १ देखि १ ० सम्मको नतिजा प्रकासित भयो । नतिजा हेर्न यहाँ login गर्नुहोस्</font></marquee>
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeV3q_g3tjo9B8SfJXJIPt6eV-3FUaqJblO8FJ33vQw8nvoFw/viewform?embedded=true" width="700" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+
+
 
 </html>
