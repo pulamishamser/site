@@ -1,4 +1,6 @@
 <?php
+inclued_get_data("upload.PHP");
+?>
 if (($_FILES['my_file']['name']!="")){
 // Where the file is going to be stored
 	$target_dir = "upload/";
