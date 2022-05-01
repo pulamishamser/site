@@ -79,11 +79,3 @@ shareBtn.addEventListener('click', () => {
 })
 
 
-
-
-
-
-
-
-
-
