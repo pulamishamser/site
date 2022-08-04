@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="style.css" type="text/css">
+<script src="https://kit.fontawesome.com/ab2155e76b.js" crossorigin="anonymous"></script>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+    </style>
+<title>UANTO Member Name Entry_Form</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header"> 
+          <h2 style="color:blue; font-size:18px;">UANTO Member Name Entry_Form</h2>
+        </div>
+
+   <h1 id="msg"></h1>
+    <form>
+    
+          <div class="form-control ">
+          <label for="Name" >Name</label>
+          <input id="Name" name="Name" type= "text" placeholder="Enter Your First Name *"value="" required=""/>
+            
+  
+          
+          </div>
+
+          <div class="form-control ">
+          <label for="School Name" >School Name</label>
+          <input id="School Name" name="School Name" type= "text" placeholder="Enter Your School Name *"value="" required=""/>
+              
+            
+          
+          
+          <div class="form-control ">
+          <label for="Email">Email</label>
+          <input id="Email" name="Email" type= "email" placeholder="name@gmail.com">
+            
+    
+          
+          </div>
+          <div class="form-control">
+            <label for="number">Contact Number</label>
+            <input id ="Contact No."name="Contact No." type= "Contact No."
+             
+              placeholder="Enter Your Contact Number*" value="" required=""/>    
+            
+                   
+          </div>
+          <div class="form-control">
+            <label for="number">UANTO Post</label>
+            <input id ="UANTO Post"name="UANTO Post" type= "Contact No."
+             
+              placeholder="Enter Your UANTO Post*" value="" required=""/>    
+          </div>
+        <input type="submit" id="sub">
+    <inpu type= "Reset"  id=value="res">
+    </form>
+    <script>
+        let form = document.querySelector("form");
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            document.querySelector("#sub").value = "Submiting..";
+            let data = new FormData(form);
+            fetch('https://script.google.com/macros/s/AKfycbwi9yesdTYCwniYWvH0w2N5YePu2JMh05pvf51bgTFnFBWcns0h/exec', {
+                    method: "POST",
+                    body: data
+                })
+                .then(res => res.text())
+                .then(data => {
+                    document.querySelector("#msg").innerHTML = data;
+                    document.querySelector("#sub").value = "Submit"
+
+               });
+        })
+    </script>
+
+
+      </div>
+
+      <script src="/app.js"></script>
+    
+</body>
+</html>
