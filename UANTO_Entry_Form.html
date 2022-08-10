@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="Entry_Form/style.css" type="text/css">
+<script src="https://kit.fontawesome.com/ab2155e76b.js" crossorigin="anonymous"></script>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+    </style>
+<title>UANTO Member Name Entry_Form</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header"> 
+          <h2 style="color:blue; font-size:18px;">UANTO Member Name Entry_Form</h2>
+        </div>
+
+   <h1 id="msg"></h1>
+    <form>      
+          <div class="form-control ">
+          <label for="Name" >सदस्यको नाम</label>
+          <input id="Name" name="सदस्यको नाम" type= "Name" placeholder="Enter Your  Name *"value="" required=""/
+          </div>
+
+          <div class="form-control ">
+          <label for="School Name" >कार्यरत विद्यालय को नाम</label>
+          <input id="School Name" name="कार्यरत विद्यालय को नाम" type= "School Name" placeholder="Enter Your School Name *"value="" required=""/>
+	  </div>
+          
+          <div class="form-control ">
+          <label for="Email">इमेल</label>
+          <input id="Email" name="इमेल" type= "email" placeholder="name@gmail.com"/>   
+          </div>
+		
+          <div class="form-control">
+            <label for="number">पद( UANTO)</label>
+            <input id ="Post"name="पद( UANTO)" type= "पद( UANTO)" placeholder="Enter Your UANTO Post*" value="" required=""/>    
+          </div>
+          <div class="form-control">
+            <label for="number">सम्पर्क नं</label>
+            <input id ="Contact No."name="सम्पर्क नं" type= "Contact No." placeholder="Enter Your Contact Number*" value="" required=""/>    
+	     </div>
+ <div class="form-control">
+            <label for="number">जिल्ला</label>
+            <input id ="Post"name="जिल्ला" type= "जिल्ला" placeholder="Enter Your District's Name*" value="" required=""/>    
+          </div>
+ <div class="form-control">
+            <label for="number">पालिका</label>
+            <input id ="Post"name="पालिका" type= "पालिका" placeholder="Enter Your Palika's Name*" value="" required=""/>    
+          </div>
+
+ <div class="form-control">
+            <label for="number">वडा नं</label>
+            <input id ="Post"name="वडा नं" type= "वडा नं" placeholder="Enter Your Ward No*" value="" required=""/>    
+          </div>
+        <input type="submit" id="sub">
+<button type="button" onClick="window.location.reload()">
+   <a href="#">Reload Page
+</button>
+<button type="button" onClick="">
+<a href="UANTO_Entry_Form.html">Entry Form
+</button>
+
+    </form>
+    <script>
+        let form = document.querySelector("form");
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            document.querySelector("#sub").value = "Submiting..";
+            let data = new FormData(form);
+            fetch('https://script.google.com/macros/s/AKfycbw-ji0q58Y-q0ERCI8BBR0UktutTA_jOtXKNJl5d3s/dev', {
+                    method: "POST",
+                    body: data
+                })
+                .then(res => res.text())
+                .then(data => {
+                    document.querySelector("#msg").innerHTML = data;
+                    document.querySelector("#sub").value = "Submit"
+               });
+        })
+    </script>
+      </div>
+
+      <script src="/app.js"></script>
+    
+</body>
+
+</html>
+
+
+
