@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <link rel="stylesheet" href="Entry_Form/style.css" type="text/css">
 <script src="https://kit.fontawesome.com/ab2155e76b.js" crossorigin="anonymous"></script>
 <style>
@@ -18,28 +17,47 @@
         </div>
 
    <h1 id="msg"></h1>
-    <form>      
+ <form>      
           <div class="form-control ">
-          <label for="Name" >सदस्यको नाम</label>
-          <input id="Name" name="सदस्यको नाम" type= "Name" placeholder="Enter Your First Name *"value="" required=""/
+          <label for="सदस्यको नाम" > &nbsp;&nbsp;&nbsp;<b>सदस्यको नाम :  </b></label>
+          <input id="सदस्यकोनाम" name="सदस्यको नाम" type= "Name" placeholder="Enter Your  Name *"value="" required=""/>
           </div>
 
           <div class="form-control ">
-          <label for="School Name" >कार्यरत विद्यालय को नाम</label>
-          <input id="School Name" name="कार्यरत विद्यालय को नाम" type= "School Name" placeholder="Enter Your School Name *"value="" required=""/>
+          <label for="कार्यरत विद्यालयको नाम" > &nbsp;&nbsp;&nbsp;<b>कार्यरत विद्यालयको नाम : </b></label>
+          <input id="कार्यरतविद्यालयको नाम" name="कार्यरत विद्यालयको नाम" type= "कार्यरत विद्यालयको नाम" placeholder="Enter Your School Name *"value="" required=""/>
 	  </div>
           
           <div class="form-control ">
-          <label for="Email">इमेल</label>
+          <label for="Email"> &nbsp;&nbsp;&nbsp;<b>इमेल :</b></label>
           <input id="Email" name="इमेल" type= "email" placeholder="name@gmail.com"/>   
           </div>
+		
           <div class="form-control">
-            <label for="number">सम्पर्क नं</label>
-            <input id ="Contact No."name="सम्पर्क नं" type= "Contact No." placeholder="Enter Your Contact Number*" value="" required=""/>    
-	     </div>		
+            <label for="पद( UANTO)"> &nbsp;&nbsp;&nbsp;<b>पद( UANTO) :</b></label>
+            <input id ="पद( UANTO)"name="पद( UANTO)" type= "पद( UANTO)" placeholder="Enter Your UANTO Post*" value="" />    
+          </div>
           <div class="form-control">
-            <label for="number">पद( UANTO)</label>
-            <input id ="Post"name="पद( UANTO)" type= "पद( UANTO)" placeholder="Enter Your UANTO Post*" value="" required=""/>    
+            <label for="सम्पर्क नं"> &nbsp;&nbsp;&nbsp;<b>सम्पर्क नं : </b></label>
+            <input id ="सम्पर्कनं."name="सम्पर्क नं" type= "Contact No." placeholder="Enter Your Contact Number*" value="" required=""/>    
+	     </div>
+
+ <div class="form-control">
+            <label for="प्रदेश"> &nbsp;&nbsp;&nbsp;<b>प्रदेश :</b></label>
+            <input id ="प्रदेश"name="प्रदेश" type= "प्रदेश" placeholder="Enter Your Prades Name*" value="" required=""/>    
+          </div>
+ <div class="form-control">
+            <label for="जिल्ला"> &nbsp;&nbsp;&nbsp;<b>जिल्ला :</b></label>
+            <input id ="जिल्ला"name="जिल्ला" type= "जिल्ला" placeholder="Enter Your District Name*" value="" required=""/>    
+          </div>
+ <div class="form-control">
+            <label for="पालिका"> &nbsp;&nbsp;&nbsp;<b>पालिका :</b></label>
+            <input id ="पालिका"name="पालिका" type= "पालिका" placeholder="Enter Your Palika Name*" value="" required=""/>    
+          </div>
+
+ <div class="form-control">
+            <label for="वडा नं"> &nbsp;&nbsp;&nbsp;<b><b>वडा नं : </b></label>
+            <input id ="वडानं"name="वडा नं" type= "वडा नं" placeholder="Enter Your Ward No*" value="" required=""/>    
           </div>
         <input type="submit" id="sub">
 <button type="button" onClick="window.location.reload()">
@@ -56,7 +74,7 @@
             e.preventDefault();
             document.querySelector("#sub").value = "Submiting..";
             let data = new FormData(form);
-            fetch('https://script.google.com/macros/s/AKfycbwi9yesdTYCwniYWvH0w2N5YePu2JMh05pvf51bgTFnFBWcns0h/exec', {
+            fetch('https://script.google.com/macros/s/AKfycbyeY71dOsqHH4iknU6SuEEpQbYgkJPoRBYdyfKP1rZHxmJ1xPbApq1-Jwcf6vU-I-CAZA/exec', {
                     method: "POST",
                     body: data
                 })
