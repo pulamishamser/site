@@ -1,46 +1,92 @@
 
 
 * {
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 
 html {font-family: "Lucida Sans", sans-serif;}
 
 .header{
-
-  position:fixed;
-  width: 100%;
+position: absolute;
+width:100%;
 color: #888888;
 padding: 15px;
 min-height: 100px; 
-
+background-color: #fffff7;
 box-shadow: 3px 5px 7px #666666; 
 border: 1px solid blue;
  font-size: 14px;
-  position: fixed;
 }
 .menu{
-min-height: 50px; 
+position: sticky;
+min-height: 40px; 
 background-color: blue;
 box-shadow: 3px 5px 7px #666666; 
 border: 1px solid blue;
-width: 100%;
+
 }
+@media screen and (min-width: 480px) 
 
 .body{
-width: 100%;
 margin-top: 35;  
-
+background-color:#87AFC7;
 box-shadow: 3px 5px 7px #666666; 
 border: 1px solid blue;
- position: fixed;
+width: 100%;
+align:center;
+}
+
+@media screen and (max-width: 600px) 
+{
+div.example {
+    display: none;
+}
+@media screen and (min-width: 600px) {
+  div.example {
+    font-size: 80px;
+  }
+
+@media screen and (max-width: 600px) {
+  div.example {
+    font-size: 30px;
+  }
 }
 
 
+
+
+
+
+
+
+
+@media screen and (max-width: 600px) 
+{
+*html, body {
+    margin: 0;
+    padding: 0;
+     top: 100;
+}
+@media screen and (max-width: 600px) 
+{
+
+body {
+  top: 100;
+  margin: 0;
+  font-family: var(--bs-font-sans-serif);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  
+}
+}
 
 p
 {
- margin: 10px;
+ margin: 20px;
   text-align: justify;
 }
 
@@ -137,7 +183,7 @@ nav{
 }
 nav .navbar{
   height: 100%;
-  max-width: 1400px;
+  max-width: 1280px;
   width: 100%;
   display: flex;
   align-items: right;
@@ -440,7 +486,7 @@ nav .navbar .links li .sub-menu li{
   margin: 0;
   padding: 0;
   border: 0;
-  list-style: none;
+   list-style: none;
   line-height: 1;
   display: block;
   position: relative;
@@ -464,19 +510,15 @@ nav .navbar .links li .sub-menu li{
 #cssmenu {
   font-family: arial, sans-serif;
   background: #004b8e;
- max-width:100%;
- position: absolute;
-margin-bottom: 20px;
-
+  width: 100%;
+  position: sticky;
 }
-
-
 #cssmenu > ul > li {
   float: left;
 }
 #cssmenu.align-center > ul {
   font-size: 0;
-  text-align: justify;
+  text-align: center;
 }
 #cssmenu.align-center > ul > li {
   display: inline-block;
@@ -947,107 +989,6 @@ margin-bottom: 20px;
 
 
 
-<!-- footer -->
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-.footer
-*{
-  font-family: 'Poppins', sans-serif;
-    line-height: .5;
-
-}
-
-  margin:0;
-  padding:0;
-  box-sizing: border-box;
-}
-.container{
-  max-width: auto;
-  margin:auto;
-
-}
-.row{
-  display: flex;
-  flex-wrap: wrap;
-
-}
-ul{
-  list-style: none;
-  color:#ffffff;
-}
-
-
-.footer{
- background-color: #FFEBCD;
-    padding: 60px 0;
-    text-align: left;
- color: #FFFFC2;
-}
-.footer-col{
-   width: 26%;
-   padding: 0 19px;
-
-
- }
-.footer-col h4::before{
-  position: relative;
-
-  content: '';
-  position: absolute;
-  left:0;6
-  bottom: -10px;
-
-  height: 2px;
-  box-sizing: border-box;
-  width: 50px;
-
-}
-.footer-col ul li:not(:last-child){
-  margin-bottom: 10px;
-}
-.footer-col ul li a{
-  font-size: 14px;
-  text-transform: capitalize;
-  color: #ffffff;
-  text-decoration: none;
-  font-weight: 400;
- 
-  display: block;
-  transition: all 0.3s ease;
-}
-.footer-col ul li a:hover{
-  color: #ffffff;
-  padding-left: 12px;
-}
-.footer-col .social-links a{
-  display: inline-block;
-  height: 30px;
-  width:30px;
-  background-color: rgba(255,255,255,0.2);
-  margin:0 6px 6px 0;
-  text-align: center;
-  line-height: 30px;
-  border-radius: 30%;
-  color: #ffffff;
-  transition: all 0.5s ease;
-}
-.footer-col .social-links a:hover{
-  color: #24262b;
-  background-color: #ffffff;
-}
-
-/*responsive*/
-@media(max-width: 667px){
-  .footer-col{
-    width: 50%;
-    margin-bottom: 30px;
-}
-}
-@media(max-width:874px){
-  .footer-col{
-      width: auto; 
-}
-</footer>
 
 
 
@@ -1069,6 +1010,104 @@ section {
   .card .card-image img {
     width: 100%;
   }
+
+
+
+
+
+
+*html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+  margin: 0;
+  font-family: var(--bs-font-sans-serif);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+}
+
+p
+{
+ margin: 20px;
+  text-align: justify;
+}
+
+overflow-x:hidden;
+font-family:'PT Sans', sans-serif;
+}
+.section-container
+{
+--bs-gutter-x: 1.5rem;
+--bs-gutter-y: 0;
+display: flex;
+flex-wrap: wrap;
+}
+.section-container .columns
+{
+flex:0 0 auto;
+width:50%;
+}
+.section-container .columns.image
+{
+background-position:left;
+background-repeat:no-repeat;
+background-size:cover;
+}
+.section-container .columns.content .content-container
+{
+padding:40px 50px;
+}
+.section-container .columns.content .content-container h5
+{
+font-weight:700;
+font-size:25px;
+margin-bottom:20px;
+}
+.section-container .columns.content .content-container p
+{
+font-weight:400;
+font-size:14px;
+margin-bottom:20px;
+margin-bottom:12px;
+text-align:justify;
+line-spacing:double;
+}
+@media screen and (max-width:777px)
+{
+.section-container
+{
+flex-flow:row wrap;
+}
+.section-container .columns.image{
+display:block;
+order:1;
+width:100%;
+height:250px;
+}
+.section-container .columns.content
+{
+display:block;
+order:2;
+width:100%;
+}
+.section-container .columns.content .content-container
+{
+padding:20px 35px;
+}
+.section-container .columns.content .content-container h5
+{
+margin-bottom:5px;
+}
+}
+
+
 
 
 /* Googlefont Poppins CDN Link */
@@ -1466,6 +1505,7 @@ nav .navbar .links li .sub-menu li{
 
 
 
+
 <!-- footer -->
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
@@ -1479,12 +1519,11 @@ nav .navbar .links li .sub-menu li{
   margin:0;
   padding:0;
   box-sizing: border-box;
-
 }
 .container{
-  max-width: 1600px;
+  max-width: 1200px;
   margin:auto;
- 
+
 }
 .row{
   display: flex;
@@ -1497,7 +1536,7 @@ ul{
 
 
 .footer{
-width:100%;
+ background-color: #0000CD;
     padding: 50px 0;
     text-align: left;
 color:red ;
@@ -1583,12 +1622,11 @@ color:red ;
   margin:0;
   padding:0;
   box-sizing: border-box;
-
 }
 .container{
   max-width: auto;
   margin:auto;
- width:100%;
+
 }
 .row{
   display: flex;
@@ -1597,15 +1635,15 @@ color:red ;
 }
 ul{
   list-style: none;
-  color:#000000;
+  color:#ffffff;
 }
 
 
 .footer{
-
+ background-color: #0000CD;
     padding: 60px 0;
     text-align: left;
- color: 
+ color: #FFFFC2;
 }
 .footer-col{
    width: 26%;
@@ -1636,7 +1674,7 @@ ul{
   text-decoration: none;
   font-weight: 400;
  
-
+  display: block;
   transition: all 0.3s ease;
 }
 .footer-col ul li a:hover{
@@ -1657,7 +1695,7 @@ ul{
 }
 .footer-col .social-links a:hover{
   color: #24262b;
-  background-color: ##FAFAD2;
+  background-color: #ffffff;
 }
 
 /*responsive*/
@@ -1675,3 +1713,52 @@ ul{
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+.wrapper {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.zoom-effect-container {
+    float: left;
+    position: relative;
+    width: 400px;
+    height: 200px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.image-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  
+}
+
+.image-card img {
+  -webkit-transition: 0.4s ease;
+  transition: 0.4s ease;
+}
+
+.zoom-effect-container:hover .image-card img {
+  -webkit-transform: scale(1.08);
+  transform: scale(1.08);
+}
+
+a{
+  display: block;
+  text-align:center;
+  margin: 0 auto;
+  width: 100%;
+  color: #aaa;
+}
