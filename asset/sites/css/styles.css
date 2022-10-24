@@ -1,0 +1,148 @@
+:root {
+ --doc-height: 100%;
+}
+
+html,
+body {
+ padding: 0;
+ margin: 0;
+ height: 100vh; /* fallback for Js load */
+ height: var(--doc-height);
+
+}
+/* Add a gray background color with some padding */
+body{ 
+
+  margin: 0;
+min-height: 100vh;
+  background: lightslategrey;
+  overflow-x: hidden;
+   padding: 0;
+width: 100%;
+
+}
+  
+/* Header/Blog Title */
+.header {
+width: 100%;
+margin-top: 10px;
+  font-size: 15px;
+  background: #fff;
+  align: center; 
+ overflow-x:hidden;      /*Hide horizontal scrolbar*/
+}
+ 
+
+
+ 
+.split{
+  display:flex; 
+  gap: 2em;}
+
+@media screen (max-width: 40em){
+
+.split{displayLblock;}
+
+
+}
+
+h1;h2 {font-size: 20px;word-break: break-all;}
+.row {
+  margin: 8px -16px;
+  display: flex;
+}
+
+/* Add padding BETWEEN each column */
+.row,
+.row >.column {
+  padding: 8px;
+}
+@media screen and (min-width: 400px){
+
+@media screen and (max-width: 768px){
+/* Create four equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 25%;
+}
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 900px){
+  .column {
+    width: 50%;
+  }
+}
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+
+/* Create two columns that floats next to each other */
+.col{
+  float: left;
+  width:30%;
+  padding: 10px;
+}}
+
+
+
+/* Left column */
+.leftcolumn {   
+  float: left;
+  width: 75%;
+}
+
+/* Right column */
+.rightcolumn {
+  float: left;
+  width: 25%;
+  padding-left: 20px;
+}
+.col-sm{ float: left;
+  width: 25%;}
+
+
+
+/* Fake image */
+.fakeimg {
+  background-color: #aaa;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Add a card effect for articles */
+.card {
+   background-color: #004b8e;
+   padding: 10px;
+   margin-top: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Footer */
+.footer {
+  padding: 20px;
+  text-align: center;
+  background:#004b8e;
+  margin-top: 20px;
+
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+  .leftcolumn, .rightcolumn {   
+    width: 100%;
+    padding: 0;
+  }
+}
+
+
+
+
+
+
+
