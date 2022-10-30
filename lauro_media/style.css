@@ -1,12 +1,42 @@
+
+
+:root {
+ --doc-height: 100%;
+}
+
+html,
 body {
-font-family: "Roboto", sans-serif;
+  
+ padding: 0;
+ height: 100vh; /* fallback for Js load */
+ height: var(--doc-height);
+
+}
+/* Add a gray background color with some padding */
+body{ 
+
 margin: 0;
 min-height: 100vh;
-background: fff;
-overflow-x: hidden;
-padding: 0;
+  background: fff;
+  overflow-x: hidden;
+   padding: 0;
 width: 100%;
+
 }
+  
+/* Header/Blog Title */
+.header {
+width: 100%;
+margin-top: 10px;
+  font-size: 15px;
+  background: #fff;
+  align: center; 
+ overflow-x:hidden;      /*Hide horizontal scrolbar*/
+}
+ 
+
+
+
 
 h1 {
   padding: 8px;
@@ -55,7 +85,7 @@ textarea:focus {
 
 #banner {
   height: 100vh;
-  overflow-x: hidden;
+   overflow-x:hidden; 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -69,8 +99,7 @@ textarea:focus {
 }
 
 #banner h3 {
-  background: #eee;
-  color: #fff;
+  background: #fff;
   border-radius: 8px;
   padding: 0 24px;
   font-size: 24px;
@@ -82,7 +111,7 @@ textarea:focus {
   position: fixed;
   right: 0;
   top: 24px;
-  width: 300px;
+  width: 500px;
   pointer-events: none;
   z-index: 50;
   transition: 0.4s;
@@ -97,11 +126,11 @@ textarea:focus {
 
 nav {
   height: 72px;
+   overflow-x:hidden; 
   background: #202125;
   width: 100%;
   margin: 0;
   position: fixed;
-  overflow-x: hidden;
   font-family: "Roboto Condensed", sans-serif;
   font-size: 20px;
   display: flex;
@@ -119,7 +148,7 @@ nav a {
 
 nav a:hover {
   text-decoration: none;
-  color: green;
+  color: red;
 }
 
 nav ul {
@@ -137,9 +166,9 @@ nav ul {
 
 #logo-img {
   display: flex;
-  height:80%;
+  height: 80%;
   background: #111;
-  padding: 32px;
+  padding: 0 32px;
   align-items: center;
   color: white;
   transition: 0.4s;
@@ -150,12 +179,12 @@ nav ul {
 }
 
 #logo-img:hover {
-  background:#fff;
+  background: black;
 }
 
 #menu-icon {
-  height: 100%;
-  font-size: 28px;
+  height: 90%;
+  font-size: 22px;
   padding: 0 4px;
   color: #eee;
   display: none;
@@ -166,7 +195,7 @@ nav ul {
 
 #search-icon {
   color: white;
-  padding: 0 22px;
+  padding: 0 32px;
   cursor: pointer;
   transition: 0.4s;
 }
@@ -511,12 +540,12 @@ footer #social-media-footer ul li:hover a .fa-github {
   footer #social-media-footer a .fa-facebook,
   footer #social-media-footer a .fa-youtube,
   footer #social-media-footer a .fa-github {
-    color: #eee;
+    color: black;
     transition: 0.4s;
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 576px) {
   main {
     width: 100%;
   }
@@ -538,11 +567,9 @@ footer #social-media-footer ul li:hover a .fa-github {
   }
 }
 
-@media (min-width: 720px) 
-      {
-  main 
-        {
-        width: 95%;
+@media (min-width: 720px) {
+  main {
+    width: 95%;
   }
   .card {
     width: 45%;
@@ -557,5 +584,3 @@ footer #social-media-footer ul li:hover a .fa-github {
     width: 85%;
   }
 }
-
-
