@@ -175,61 +175,117 @@
             <a <a href="https://draft.blogger.com/blog/post/edit/preview/426850199120534114/334492679712436922"> class="btn-readmore">बेलखानेको छोरो भन्थे : शिक्षाविद कोइराला</a>
         </section>
 
-        <footer>
-            <div id="left-footer">
-                <h3>Quick Links</h3>
-                <p>
-                    <ul>
-                        <li>
-                            <a href="index.html">Home</a>
-                        </li>
-                        <li>
-                            <a href="about.html">About</a>
-                        </li>
-                        <li>
-                            <a href="#">Privacy Policy</a>
-                        </li>
-                        <li>
-                            <a href="blogslist.html">Blogs</a>
-                        </li>
-                        <li>
-                            <a href="blogslist.html">Projects</a>
-                        </li>
-                        <li>
-                            <a href="#">Contact</a>
-                        </li>
-                    </ul>
-                </p>
+         <div id="right-footer">
+            <h3>Follow us on</h3>
+            <div id="social-media-footer">
+                <ul>
+                    <li>
+                        <a href="https://www.facebook.com/shamserblog">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.youtube.com/channel/UCfGP1pKJErzg10EjftyC3lg?sub_confirmation=1">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </li>
+                    <li>
+                            <a href="https://twitter.com/shamser_info">
+                                <i class="fab fa-twitter"></i>
+                        </a>
+                    </li>
+                </ul>
             </div>
+       <p><i class="fas fa-phone"></i> &nbsp;फोन नम्बर :<br>
+	&nbsp; &nbsp; +977-9817-826200, +977-984-4087012
+        </div>
+    </footer>
 
-            <div id="right-footer">
-                <h3>Follow us on</h3>
-                <div id="social-media-footer">
-                    <ul>
-                        <li>
-                            <a href="#">
-                                <i class="fab fa-facebook"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fab fa-youtube"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fab fa-github"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <p>This website is developed by GTCoding</p>
-            </div>
-        </footer>
+  </main>
 
-    </main>
+  <script src="main.js"></script>
 
-    <script src="main.js"></script>
+<!-----------------------popup--------------------------------------------->
+ <style>
+.popup{
+    background-color:#00FFFF;
+    width: 390px;
+    padding: 20px 25px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    top: 55%;
+    border-radius: 5px;
+    font-family: "Poppins",sans-serif;
+    display: none; 
+    text-align: center;
+
+z-index: 1001;
+}
+.popup button{
+    display: block;
+    margin:  0 0 20px auto;
+    background-color: transparent;
+    font-size: 22px;
+    color: #FF0099;
+		background:#00FFFF;
+		border-radius: 100%;
+		width: 20px;
+		height: 20px;
+		margin top:  18px;
+		
+    border: none;
+    outline: none;
+    cursor: pointer;
+ </style>
+               
+<div class="popup">
+ <button type="button" class="close" data-dismiss="modal">
+<button id="close">&times;</button>
+  
+ <h4 style="font-size:14px;color:red">सार्वजनिक हितमा जारी जानकारी।&nbsp;</h4>
+ <p  style="font-size:12px">तपाईँले आफ्ना बालबालिकालाई  भर्ना गर्न छुटाउनु भएको त छैन  ?  अहिले गएर भर्ना गराउनुहोस् ।</p>
+     <img src="https://thumbs.dreamstime.com/b/d-rendering-multidevices-online-school-responsive-design-website-online-school-website-responsive-design-screen-109989364.jpg" align="center" width="300" height="250"></p> 
+<p style="font-size:13px"><a href="https://bit.ly/3NzkPi9" target="_blank">कक्षा १२ बोर्ड परीक्षााबारे जानकारी</a> <p>
+
+<div style="width: 100%; display: table;">
+<div style="display: table-row; height: 100px;">
+ <div style="width: 50%; display: table-cell;">
+<p style="font-size:13px" align="left" > <a href="https://www.facebook.com/shamser500">
+<i class="fab fa-facebook-messenger" style="font-size:26px"> </i>&nbsp; message me </a></p>
+
+<p style="font-size:13px" align="left"> <a href="https://www.youtube.com/channel/UCfGP1pKJErzg10EjftyC3lg">
+<i class="fab fa-youtube" style="font-size:22px;color:#ff0000"></i>&nbsp;Subscribe Now</a></p>
+</div>
+<div style="display: table-cell;"> 
+<p style="font-size:13px" align="left"> <a href="mailto:shamserpulami500@gmail.com">
+<i class="far fa-envelope fa-lg" style="font-size:22px">&nbsp;</i>&nbsp;info@shamser.com.np:&nbsp;</a></p>
+
+<p style="font-size:13px" align="left"><a href="https://shamserpulami.blogspot.com/"> 
+<i class ="fab fa-blogger fa-lg" style="font-size:22px; color:#fb8f3d"></i>&nbsp;blogspot</a></p>
+
+        </div>
+    </div>
+</div>
+   </div>
+
+    <!--Script-->
+    <script type="text/javascript">
+window.addEventListener("load", function(){
+    setTimeout(
+        function open(event){
+            document.querySelector(".popup").style.display = "block";
+        },
+        800 
+    )
+});
+
+document.querySelector("#close").addEventListener("click", function(){
+    document.querySelector(".popup").style.display = "none";
+});
+    </script>
+<!-----------------------popup--------------------------------------------->
+
 </body>
 
 </html>
