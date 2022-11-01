@@ -1,7 +1,7 @@
 
 html,
 body {
-  
+  overflow-x: hidden;
  padding: 0;
  height: 100vh; /* fallback for Js load */
  height: var(--doc-height);
@@ -112,7 +112,7 @@ textarea:focus {
 
 #searchbox input {
   height: 38px;
-  width: 800%;
+  width: 80%;
 }
 
 /* Navigation */
@@ -121,7 +121,7 @@ nav {
   height: 72px;
   overflow-x:hidden; 
   background: #202125;
-  width: 80%;
+  width: 100%;
   margin: 0;
   position: fixed;
   font-family: "Roboto Condensed", sans-serif;
@@ -209,7 +209,7 @@ nav ul {
   position: fixed;
   transition: 0.4s;
   margin-top: 72px;
-  width: 80%;
+  width: 100%;
   text-align: center;
   opacity:0;
   pointer-events:none;
@@ -231,7 +231,7 @@ nav ul {
 }
 
 #slideout-menu input {
-  width: 85%;
+  width: 90%;
   padding: 8px;
   font-family: "Roboto Condensed", sans-serif;
   font-size: 20px;
@@ -247,7 +247,7 @@ section {
 }
 
 .section-heading {
-  font-size: 32px;
+  font-size: 30px;
   font-family: "Roboto Condensed", sans-serif;
   border-left: 3px solid black;
   border-right: 3px solid black;
@@ -342,7 +342,8 @@ footer #left-footer {
 }
 
 footer #left-footer ul {
-  padding: 0;
+  padding: 0;text-align: justify;
+}
   list-style: none;
   line-height: 1.5;
 }
@@ -350,7 +351,7 @@ footer #left-footer ul {
 footer #right-footer {
   flex: 2;
   padding: 8px;
-  text-align: center;
+  text-align: justify;
 }
 
 footer #social-media-footer a .fa-facebook,
@@ -361,14 +362,14 @@ footer #social-media-footer a .fa-twitter {
 }
 
 footer #social-media-footer ul {
-  display: flex;
+  display: flex;flex:wrap;
   list-style: none;
   justify-content: center;
   padding: 0;
 }
 
 footer #social-media-footer ul li {
-  font-size: 48px;
+  font-size: 45px;
   padding: 16px;
   transition: 0.4s;
 }
