@@ -31,7 +31,10 @@
 <link href="asset/sites/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="asset/sites/css/team-footer.css" rel="stylesheet" type="text/css" />
 <!-- Core theme JS-->
-<link href="asset/sites/css/profile-card.css" rel="stylesheet" type="text/css" />
+<!-- <link href="asset/sites/css/profile-card.css" rel="stylesheet" type="text/css" />-->
+<link href="lauro_media/profile-card/profile-card.css" rel="stylesheet" type="text/css" />									      
+									      
+									      
 <link href="asset/sites/css/team-footer.css" rel="stylesheet" type="text/css" />								    
 <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet" type="text/css" />									    
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" rel="stylesheet">
@@ -359,12 +362,7 @@ shamser.info.np</p></a>
 </div>
 </div>	
 		    	
-
-<!-----------------------popup--------------------------------------------->
-
-
-<!-----------------------popup--------------------------------------------->
-							   
+						   
 							   
 <div class="container bgwhite">
 <marquee behavior="scroll" direction="left"
@@ -1333,9 +1331,113 @@ padding:10;
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v14.0&appId=429323168732214&autoLogAppEvents=1" nonce="lBxtz7bH"></script>
 <div class="fb-comments" data-href="https://shamser.info.np" data-width="800" data-numposts="5"></div>
 </div>
-    </section>											       
-															       
-   <div class="container footer" width="100%">
+    </section>		
+	
+											       
+
+
+<!-----------------------popup--------------------------------------------->
+ <style>
+.popup{
+    background-color:#00FFFF;
+    width: 350px;
+    padding: 10px 15px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    top: 55%;
+    border-radius: 5px;
+    font-family: "Poppins",sans-serif;
+    display: none; 
+    text-align: center;
+
+z-index: 1001;
+}
+.popup button{
+    display: block;
+    margin:  0 0 20px auto;
+    background-color: transparent;
+    font-size: 22px;
+    color: #FF0099;
+		background:#00FFFF;
+		border-radius: 100%;
+		width: 20px;
+		height: 20px;
+		margin top:  8px;
+		
+    border: none;
+    outline: none;
+    cursor: pointer;
+ </style>
+               
+<div class="popup">
+ <button type="button" class="close" data-dismiss="modal">
+<button id="close">&times;</button>
+   <h4 style="font-size:12px;color:red"><a href="https://shamser.info.np/online_result.html">आ—आफ्नो विद्यालयको अनलाइन रिजल्ट हेर्न यहाँ टच गर्नुहोस्।</a>&nbsp;</h4>
+ <h4 style="font-size:12px;color:red"><a href="https://Shamser.info.np/response_pop.html">लालबन्दी इश्वरपुरका मा वि तहका स्कुलहरुको <br>website ( sample )हेर्न यहाँ टच गर्नुहोस्।</a>&nbsp;</h4>
+<iframe width="200" height="100" src="https://www.youtube.com/embed/jMc4F0hKOI8?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
+
+<h4 color="red" align="left" style="font-size:16px" >
+<a href="https://www.youtube.com/channel/UCfGP1pKJErzg10EjftyC3lg?sub_confirmation=1">निशुल्क डाउनलोड गर्नुहोस् । </a></h4>
+<a href="https://drive.google.com/file/d/1kBTRLGg5PRHCVW2jEcCk3kfEtmO6WQEQ/view?usp=sharing"> 
+<h4 style="font-size:15px" align="left">&nbsp;तपाईले आफ्नो कृति वा शिक्षासम्बन्धि लेख रचना, समाचार, अनुसन्धान प्रतिवेदन फोटो भिडियोसहित प्रकासित गर्न चाहनुहुन्छ भने यहाँ फोटोमा क्लिक गर्नुहोला ।</h4>
+<a href="LoginPage/Login_download.html"> 
+<img src="https://shamser.info.np/recent-news-boxes/pic1.png" width="42" height="40" alt="img"></a>
+<div style="width: 100%; display: table;">
+<div style="display: table-row; height: 100px;">
+ <div style="width: 50%; display: table-cell;">
+
+<p style="font-size:12px" align="left" > <a href="https://www.facebook.com/shamser500">
+<i class="fab fa-facebook-messenger" style="font-size:24px"> </i>&nbsp; message me </a></p>
+<p style="font-size:12px" align="left"> <a href="https://www.youtube.com/channel/UCfGP1pKJErzg10EjftyC3lg?sub_confirmation=1">
+<i class="fab fa-youtube" style="font-size:22px;color:#ff0000"></i>&nbsp;Subscribe Now</a></p>
+</div>
+<div style="display: table-cell;"> 
+<p style="font-size:12px" align="left"> <a href="mailto:shamserpulami500@gmail.com">
+<i class="far fa-envelope fa-lg" style="font-size:23px">&nbsp;</i>&nbsp;info@shamser.com.np:&nbsp;</a></p>
+
+<p style="font-size:12px" align="left"><a href="https://shamserpulami.blogspot.com/"> 
+<i class ="fab fa-blogger fa-lg" style="font-size:22px; color:#fb8f3d"></i>&nbsp;blogspot</a></p>
+
+        </div>
+    </div>
+</div>
+   </div>
+
+    <!--Script-->
+    <script type="text/javascript">
+window.addEventListener("load", function(){
+    setTimeout(
+        function open(event){
+            document.querySelector(".popup").style.display = "block";
+        },
+        5000 
+    )
+});
+
+document.querySelector("#close").addEventListener("click", function(){
+    document.querySelector(".popup").style.display = "none";
+});
+    </script>
+<!-----------------------popup--------------------------------------------->											       
+											       
+											       
+											       
+											       
+											       
+											       
+											       
+											       
+											       
+											       
+											       
+											       
+											       
+											       
+											       
+											       
+<!----footer---------------->															       
+ <div class="container footer">
      <div class="container">
         <div class="row">
 	  <div class="sharethis-inline-share-buttons" width="100%"></div>
