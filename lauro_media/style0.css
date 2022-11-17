@@ -1,17 +1,44 @@
+
+html,
 body {
-  font-family: "Roboto", sans-serif;
-  margin: 0;
+  overflow-x: hidden;
+ padding: 0;
+ height: 100vh; /* fallback for Js load */
+ height: var(--doc-height);
+
 }
+/* Add a gray background color with some padding */
+body{ 
+
+margin: 0;
+min-height: 100vh;
+  background: fff;
+  overflow-x: hidden;
+   padding: 0;
+width: 100%;
+
+}
+  
+/* Header/Blog Title */
+.header {
+width: 100%;
+  background: #fff;
+ overflow-x:hidden;      /*Hide horizontal scrolbar*/
+}
+ 
+
+
+
 
 h1 {
   padding: 8px;
   background: rgba(255, 0, 0, 0.8);
   border-radius: 8px;
-  margin-bottom: -600px;
-  font-size: 30px;
+  margin: 0;
   font-family: "Roboto Slab", serif;
+    font-size: 30px;
+  
 }
-
 p {
   line-height: 1.5;
 }
@@ -49,12 +76,13 @@ textarea:focus {
 /* Banner */
 
 #banner {
-  height: 100vh;
+  height: 95vh;
+   overflow-x:hidden; 
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background: rgba(0, 0, 0, 0.2) url("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhFsAj0gHp_GJyeJSMMm4rUaFJWlNMPUC7vJuje5exmEFZvrCuHBAdJl8LDPwvd3fZrJa0VMIISKpGcueGitoNkMw4xGIq2zH2rKw7QL3-5oMHDy1IlKHHydS9Mjyj0S7I-q5239HurEqvMg9uwPNhRweiwcKauMged0CaXi7NgAm-4Na89A-rv3b_R/s320/cover.png");
+  background: rgba(0, 0, 0, 0.2) url("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiWshUsr4i9d9AYnWcfjXKvCdVq3Lai708m_WmHRFBZFFXA9jArs1thJGjSkbwU0wnNwtIP7w5D2xvy9Nvn5bLNRAjmDlIhs45ctmqbO6QB_XhqWbpGG4lKJRBgftRgUTqSF9HkC9vAz5QSwR36x3-fKYUO2_z0J1rqm7yz7TdYTIjsJ_p7RwQtUBqp/w254-h365/lady.JPG");
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
@@ -67,9 +95,7 @@ textarea:focus {
   border-radius: 8px;
   padding: 0 24px;
   font-size: 22px;
-  margin-bottom: 0 auto;
-    margin-bottom:-20px;
-  
+ color:black;
 }
 
 /* Search Box */
@@ -78,21 +104,22 @@ textarea:focus {
   position: fixed;
   right: 0;
   top: 24px;
-  width: 500px;
+  width: 300px;
   pointer-events: none;
   z-index: 50;
   transition: 0.4s;
 }
 
 #searchbox input {
-  height: 48px;
-  width: 100%;
+  height: 38px;
+  width: 80%;
 }
 
 /* Navigation */
 
 nav {
-  height: 60px;
+  height: 72px;
+  overflow-x:hidden; 
   background: #202125;
   width: 100%;
   margin: 0;
@@ -100,6 +127,7 @@ nav {
   font-family: "Roboto Condensed", sans-serif;
   font-size: 20px;
   display: flex;
+   flex: wrap;
   justify-content: space-between;
   padding: 0 16px 0 0;
   box-sizing: border-box;
@@ -132,26 +160,28 @@ nav ul {
 
 #logo-img {
   display: flex;
-  height: 85%;
+ flex: wrap;
+  height: 80%;
   background: #111;
-  padding: 0 12px;
+  padding: 0 32px;
   align-items: center;
   color: white;
   transition: 0.4s;
 }
 
 #logo-img img {
-  height: 50px;
+  height: 80px;
+   flex: wrap;
 }
 
 #logo-img:hover {
-  background: black;
+  background:green;
 }
 
 #menu-icon {
-  height: 80%;
-  font-size: 28px;
-  padding: 0 12px;
+  height: 90%;
+  font-size: 22px;
+  padding: 0 4px;
   color: #eee;
   display: none;
   align-items: center;
@@ -201,7 +231,7 @@ nav ul {
 }
 
 #slideout-menu input {
-  width: 85%;
+  width: 90%;
   padding: 8px;
   font-family: "Roboto Condensed", sans-serif;
   font-size: 20px;
@@ -217,7 +247,7 @@ section {
 }
 
 .section-heading {
-  font-size: 32px;
+  font-size: 25px;
   font-family: "Roboto Condensed", sans-serif;
   border-left: 3px solid black;
   border-right: 3px solid black;
@@ -227,7 +257,7 @@ section {
 }
 
 .section-heading:hover {
-  padding: 4px 48px;
+  padding: 4px 44px;
   background: red;
 }
 
@@ -235,12 +265,12 @@ section {
 
 #section-source p {
   padding: 8px;
-  text-align: center;
+  text-align: justify;
 }
 
 #section-source a {
   margin: 8px;
-  text-align: center;
+  text-align: justify;
 }
 
 /* Card */
@@ -255,6 +285,7 @@ section {
 
 .card .card-description {
   padding: 0 8px;
+   text-align: justify;
 }
 
 .card-meta-blogpost{
@@ -262,10 +293,12 @@ section {
   font-size:14px;
   padding: 16px;
   font-family:'Roboto Slab', serif;
+   text-align: justify;
 }
 
 .card-meta-blogpost a{
   color:#333;
+   text-align: justify;
 }
 
 /* Button Read more */
@@ -305,37 +338,38 @@ footer a {
 footer #left-footer {
   flex: 1;
   border-right: 1px solid red;
-  padding-left: 32px;
+  padding-left: 2px;
 }
 
 footer #left-footer ul {
-  padding: 0;
+  padding: 0;text-align: justify;
+}
   list-style: none;
   line-height: 1.5;
 }
 
 footer #right-footer {
-  flex: 2;
+  flex: 1;
   padding: 8px;
-  text-align: center;
+  text-align: justify;
 }
 
 footer #social-media-footer a .fa-facebook,
 footer #social-media-footer a .fa-youtube,
-footer #social-media-footer a .fa-twitter{
+footer #social-media-footer a .fa-twitter {
   color: white;
   transition: 0.4s;
 }
 
 footer #social-media-footer ul {
-  display: flex;
+  display: flex;flex:wrap;
   list-style: none;
   justify-content: center;
   padding: 0;
 }
 
 footer #social-media-footer ul li {
-  font-size: 48px;
+  font-size: 35px;
   padding: 16px;
   transition: 0.4s;
 }
@@ -348,14 +382,14 @@ footer #social-media-footer ul li:hover a .fa-facebook {
   color: #3b5998;
 }
 
-footer #social-media-footer ul li:hover a .fa-twitter{
+footer #social-media-footer ul li:hover a .fa-twitter {
   color: #bbb;
 }
 
 /* Blog List page */
 
 .page-heading{
-  font-size:32px;
+  font-size:25px;
   font-family:'Roboto Condensed', sans-serif;
   border-left:3px solid black;
   border-right:3px solid black;
@@ -384,7 +418,7 @@ footer #social-media-footer ul li:hover a .fa-twitter{
 /* Pagination */
 
 .pagination{
-  padding:8px;
+  padding:4px;
   text-align:center;
   font-weight:bold;
 }
@@ -469,7 +503,7 @@ footer #social-media-footer ul li:hover a .fa-twitter{
   }
 }
 
-@media (max-width: 719px) {
+@media (max-width: 600px) {
   main {
     width: 95%;
   }
@@ -511,17 +545,17 @@ footer #social-media-footer ul li:hover a .fa-twitter{
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 576px) {
   main {
     width: 100%;
   }
 
   h1 {
-    font-size: 48px;
+    font-size: 30px;
   }
 
   #banner h3 {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .card {
@@ -535,7 +569,7 @@ footer #social-media-footer ul li:hover a .fa-twitter{
 
 @media (min-width: 720px) {
   main {
-    width: 95%;
+    width: 85%;
   }
   .card {
     width: 45%;
@@ -545,8 +579,8 @@ footer #social-media-footer ul li:hover a .fa-twitter{
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 900px) {
   main {
-    width: 85%;
+    width: 75%;
   }
 }
