@@ -254,23 +254,24 @@ a{
             <div class="info">1. प्रत्येक प्रश्नको उत्तर 25 सेकेण्ड भित्र दिनु पर्नेछ ।</div>
             <div class="info">2. एकपटक उत्तर दिएपछि त्यही प्रश्नको उत्तर पुन दिन पाइने छैन ।</div>
             <div class="info">3. एकपटक समय गुमेपछि कुनै अप्सन छान्न पाइने छैन ।</div>
-            <div class="info">4. क्वीज भइरहेको अवस्थामा गेम क्वीट गर्न पाइने छैन ।</div>
+            <div class="info">4. Quiz भइरहेको अवस्थामा Quiz र  Hold गर्न पाइने छैन ।</div>
             <div class="info">5. ठीक उत्तर भएमा हरियो र गलत भएमा रातो कलर देखापर्दछ ।</div>
 	   <div class="info">6. ठीक उत्तरभएमा प्रत्येकको एक अङ्क प्राप्त हुनेछ । </div>
-   <div class="info">7. Next Queमा क्लिक गर्ने बित्तिकै टाइम काउन्ट हुन्छ । </div>
+   <div class="info">7. Next Que मा क्लिक गर्ने बित्तिकै Time Count हुन्छ । </div>
    <div class="info">8. चार अप्शनमध्ये कुनैमा नलगाएपनि अङ्क कट्टा हुनेछ । </div>
  <div class="info">9. गलत उत्तरको पेनाल्टी हुनेछैन । </div>
         </div>
         <div class="buttons">
             <button class="quit">Exit Quiz</button>
             <button class="restart">Continue</button>
+  
         </div>
     </div>
 
     <!-- Quiz Box -->
     <div class="quiz_box">
         <header>
-            <div class="title">T.S.C.Quiz </div>
+            <div class="title">शिक्षा सम्बन्धि प्रश्नहरु</div>
             <div class="timer">
                 <div class="time_left_txt">Time Left</div>
                 <div class="timer_sec">25</div>
@@ -303,11 +304,25 @@ a{
         <div class="complete_text">You've completed the Quiz!</div>
         <div class="score_text">
             <!-- Here I've inserted Score Result from JavaScript -->
+
         </div>
         <div class="buttons">
-            <button class="restart">Replay Quiz</button>
+
+          <button class="restart">Restart_quiz</button>
             <button class="quit">Quit Quiz</button>
-        </div>
+
+     </div>
+   <p align="center">
+    <input style="width: auto;" type="button" onclick="print('form')" value="Save your score"></p>
+   <script>
+     function Print(form){
+      var printdata = document.getElementById(form);
+      newwin = window.open("");
+      newwin.document.write(printdata.outerHTML);
+      newwin.print();
+      newwin.close();
+     }
+    </script>
     </div>
 
     <!-- Inside this JavaScript file I've inserted Questions and Options only -->
@@ -315,7 +330,7 @@ a{
 
     <!-- Inside this JavaScript file I've coded all Quiz Codes -->
     <script src="script.js"></script>
-9
+
 </body>
 </html>
 </html>
