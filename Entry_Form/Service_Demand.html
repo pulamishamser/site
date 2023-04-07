@@ -8,13 +8,39 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   
   <link rel="stylesheet" href="css/style.css">
+
+
+<script type='text/javascript' src='../platform-api.sharethis.com/js/sharethis.js#property=5b5b234df5aa6d001130d104&product=inline-share-buttons' async='async'></script>
+              <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = '../connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    </script>            
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.js"></script>
+
+
+
+
+
+
+
+
+  
   </head>
   <body>
   <section class="ftco-section">
   <div class="container">
   <div class="row justify-content-center">
         <div class="col-md-6 text-center mb-3">
-        <h2 class="heading-section">Demand Form</h2>
+        <h2 class="heading-section">यहाँ दिइएको QR scan गरी बैङ्कमा रकम जम्मा गरि दिनुहोला र यसको screenshoot यही तल दिइएको Upload_file मा submit गरि दिनुहोला</h2>
+
+<div class="sharethis-inline-share-buttons"></div>
+
         </div>
         </div>
         <div class="row justify-content-center">
@@ -40,8 +66,8 @@
             </div>
             <div class="col-md-12">
             <div class="form-group">
-            <label class="label" for="scl_name">पूरा ठेगाना</label>
-            <input type="text" class="form-control" name="पूरा ठेगाना" id="scl_name" placeholder="Enter Your full address *" required="">
+            <label class="label" for="Ads">पूरा ठेगाना</label>
+            <input type="text" class="form-control" name="पूरा ठेगाना" id="Ads" placeholder="Enter Your full address *" required="">
             </div>
             </div>
             <div class="col-md-6"> 
@@ -52,52 +78,98 @@
             </div>
             <div class="col-md-12">
             <div class="form-group">
-            <label class="label" for="Contact_No">सम्पर्क नं  :</label>
-            <input type="text" class="form-control" name="Contact_No" id="Contact_No"  placeholder="Contact_No *" required="">
+            <label class="label" for="Contact_No">Mobile No</label>
+            <input type="text" class="form-control" name="Mobile No" id="Contact_No"  placeholder="Contact_No*" required="">
             </div>
             </div>
   
             <div class="col-md-12">
             <div class="form-group">
+     	<label class="label" for="service">Demand_Service</label><br>
+           
+		<select name="Demand_Service" id="service">
 
-
-     	<label class="label" for="Service">Service</label><br>
-
-		<select name="cars" id="cars">
 		<option value=" विद्यालय विकास प्रस्ताव">विद्यालय विकास प्रस्ताव</option>
-  		<option value="सबै कक्षाको आन्तरिक परीक्षाको प्रश्नपत्र"> सबै कक्षाको आन्तरिक परीक्षाको प्रश्नपत्र </option>
-  		<option value="विद्यालय  शिक्षक(आन्तरिक)तथा कर्मचारी व्यवस्थापन कार्यबिधि">विद्यालय  शिक्षक(आन्तरिक)तथा कर्मचारी व्यवस्थापन कार्यबिधि</option>
-  		<option value="कक्षा ११ र १२ शिक्षा र बिकास बिषयको नोट ">कक्षा ११ र १२ शिक्षा र बिकास बिषयको नोट </option>
-</select></br>
-            </div>
-            </div>
+  		<option value="आन्तरिक परीक्षाको प्रश्नपत्र">आन्तरिक परीक्षाको प्रश्नपत्र </option>
+  		<option value="शिक्षक/कर्मचारी छनौट कार्यबिधि">शिक्षक/कर्मचारी छनौट कार्यबिधि</option>
+  		<option value="कक्षा ११ र १२ को शिक्षण नोट ">कक्षा ११ र १२ को शिक्षण नोट </option>
+
+		<option value=" Action Research Report">Action Research Report</option>
+  		<option value="Project work Report"> Project work Report </option>
+  		<option value="TIP">TIP</option>
+  		<option value="Case Study Report">Case Study Report</option>
+ 		<option value="School Report">School Report</option>
+<option value="Portfolio Report ">Portfolio Report</option>
+    <option value=" Action Research Report">Develop Personal Website</option>
+      <option value="Project work Report"> Make blog</option>
+      <option value="TIP">Monitize Youtube channel</option>
+      <option value="Case Study Report">Monitize Facebook Page/Twitter</option>
+    <option value="School Report">Quiz App</option>
+<option value="Portfolio Report ">Online Result with gradesheet</option>
+    </select></br>
+            </div>       
+          </div>
 
             <div class="col-md-12">
             <div class="form-group">
-  <label for="myfile">Select a file:</label><br>
+ Upload a file
+        <div id="data"></div>
+        <input name="file" id="uploadfile" type="file">
 
-  			<input type="file" id="myfile" name="myfile"></br>
-
-            </div>
-            </div>
+            </div>       
+          </div>
 
 
+
+    <script>
+    $('#uploadfile').on("change", function() {
+        var file = this.files[0];
+        var fr = new FileReader();
+        fr.fileName = file.name;
+        fr.onload = function(e) {
+            e.target.result
+            html = '<input type="hidden" name="data" value="' + e.target.result.replace(/^.*,/, '') + '" >';
+            html += '<input type="hidden" name="mimetype" value="' + e.target.result.match(/^.*(?=;)/)[0] + '" >';
+            html += '<input type="hidden" name="filename" value="' + e.target.fileName + '" >';
+            $("#data").empty().append(html);
+        }
+        fr.readAsDataURL(file);
+    });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
             <div class="col-md-12">
             <div class="form-group">
-            <label class="label" for="message">केही लेख्नुस</label>
-            <textarea name="message" class="form-control" id="message" cols="40" rows="2" text="I agree" placeholder="Leave your Comment here"></textarea>
+            <label class="label" for="message">Message</label>
+            <textarea name="message" class="form-control" id="message" cols="40" rows="2" text="I agree" placeholder="Message"></textarea>
             </div>
             </div>
+  
             <div class="col-md-12">
             <div class="form-group">
-            <input type="submit" id="sub" value="Submit " class="btn btn-primary">
+            <input type="submit" id="sub" value="Submit " class="btn btn-danger">
             <div class="submitting"></div>
 
             <button type="button"  class="" onClick="window.location.reload()">
               <a href="#">Reload Page
             </button>
+		   <button type="button"  class="" onClick="our_service">
+              <a href="our_service.html">Back
+            </button>
 
-          
 
             
             </div>
@@ -108,11 +180,11 @@
             </form>
             <div class="col-lg-4 col-md-5 d-flex align-items-stretch">
             <div class="info-wrap bg-info w-100 p-md-6 p-4">
-            <h3>You are welcome in lauro_media service</h3>
-            <img class="img-fluid img-thumbnail" src="https://3.bp.blogspot.com/-v4-b7eAmkhs/YixuSvjWTXI/AAAAAAAABTM/gYkgQZvJ2Yk3lOBqiP_hNR1TSUhfgZYBgCK4BGAYYCw/s113-pf/profile%2Bpic.JPG" alt="shamser">
+        <!----<h3><strong>scan here</strong></h3>--------->
+            <img class="img-fluid img-thumbnail" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEidlO9PKwmI7hmuadU87_aRqfFBizNba4543pW-CsocDDUwd5l04YVCSzvU5OOAUxA1HgWdLWUG9Tjx3delYCODYi98u73E5oNHMUD1YUW53Xybd317mILoMZbeZ4eneaM336jwfrK-V0gVv5VV2qjzzkdCAevuERe9ixcbJ9IQN9wC8tsUo4b53-7D/w142-h137/rbb.png" alt="Bank_Account_Number">
                         </center>
-                            <h5 ><strong>Shamser Bahadur Magar</strong></h5>
-            <h5><strong>Teacher</strong></h5>
+                           
+               <h3><strong>scan here</strong></h3>
             <div class="dbox w-100 d-flex align-items-start">
                 <div class="icon d-flex align-items-center justify-content-center">
                       <span class="fa fa-map-marker"></span>
@@ -159,16 +231,22 @@
               </a></p>
                 <div></div>
                 <br>
+
+
+            <img class="img-fluid img-thumbnail" src="https://3.bp.blogspot.com/-v4-b7eAmkhs/YixuSvjWTXI/AAAAAAAABTM/gYkgQZvJ2Yk3lOBqiP_hNR1TSUhfgZYBgCK4BGAYYCw/s113-pf/profile%2Bpic.JPG" alt="shamser">
+                        </center>
+                            <h5 ><strong>Shamser Bahadur Magar</strong></h5>
                   <div class="text pl-3">
                       <p style="font-size:14px;"> <a href= "https://shamser.info.np/profile/profile-2.html"><strong>Connect with social media</strong></a></p>
 
-              </a></p>
+  
                  <div>
                          </div>
                        </div>
                        </div>
                        </div>
                              </div>
+
                   </div>
                   </div>
                   </div>
@@ -182,7 +260,7 @@
                           e.preventDefault();
                          document.querySelector("#sub").value = "Data Submitted..refresh for new entry";
                           let data = new FormData(form);
-                          fetch('https://script.google.com/macros/s/AKfycbxFKrK7XqAnMut93qlWLvy4__zU4zz6NS9ij-9ouQz4qdbNjNGC8F_2MhPX29YA5TG4/exec', {
+                          fetch('https://script.google.com/macros/s/AKfycbwEIyDgrCTbnglpb2UHMajsvjSQb2QuTJdhUVui7Z8KU5LwURpPhFa5vixuvFkSYUw/exec', {
                                 method: "POST",
                                 body: data
                             })
