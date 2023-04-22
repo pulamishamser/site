@@ -1,6 +1,7 @@
 <!DOCTYPE html> 
 <html> 
 <head>
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
  <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet" type="text/css" />
 <link href="" rel="stylesheet" type="text/css" />			
@@ -40,31 +41,340 @@
 
 
 
+</head>
 
 <title>Namelist</title>
+
+
+
+
+<body>
+ <style type="text/css">
+    .u-row {
+      display: flex;
+      flex-wrap: nowrap;
+      margin-left: 0;
+      margin-right: 0;
+    }
+    
+    .u-row .u-col {
+      position: relative;
+      width: 100%;
+      padding-right: 0;
+      padding-left: 0;
+    }
+    
+    .u-row .u-col.u-col-100 {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+    
+    @media (max-width: 767px) {
+      .u-row:not(.no-stack) {
+        flex-wrap: wrap;
+      }
+      .u-row:not(.no-stack) .u-col {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+      }
+    }
+    
+    body,
+    html {
+      padding: 0;
+      margin: 0
+    }
+    
+    html {
+      box-sizing: border-box
+    }
+    
+    *,
+    :after,
+    :before {
+      box-sizing: inherit
+    }
+    
+    html {
+      font-size: 14px;
+      -ms-overflow-style: scrollbar;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+    }
+    
+    p {
+      margin: 0
+    }
+    
+    form .error-field {
+      -webkit-animation-name: shake;
+      animation-name: shake;
+      -webkit-animation-duration: 1s;
+      animation-duration: 1s;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both
+    }
+    
+    form .error-field input,
+    form .error-field textarea {
+      border-color: #a94442!important;
+      color: #a94442!important
+    }
+    
+    form .field-error {
+      padding: 5px 10px;
+      font-size: 14px;
+      font-weight: 700;
+      position: absolute;
+      top: -20px;
+      right: 10px
+    }
+    
+    form .field-error:after {
+      top: 100%;
+      left: 50%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+      border-color: rgba(136, 183, 213, 0);
+      border-top-color: #ebcccc;
+      border-width: 5px;
+      margin-left: -5px
+    }
+    
+    form .spinner {
+      margin: 0 auto;
+      width: 70px;
+      text-align: center
+    }
+    
+    form .spinner>div {
+      width: 12px;
+      height: 12px;
+      background-color: hsla(0, 0%, 100%, .5);
+      margin: 0 2px;
+      border-radius: 100%;
+      display: inline-block;
+      -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+      animation: sk-bouncedelay 1.4s infinite ease-in-out both
+    }
+    
+    form .spinner .bounce1 {
+      -webkit-animation-delay: -.32s;
+      animation-delay: -.32s
+    }
+    
+    form .spinner .bounce2 {
+      -webkit-animation-delay: -.16s;
+      animation-delay: -.16s
+    }
+    
+    @-webkit-keyframes sk-bouncedelay {
+      0%,
+      80%,
+      to {
+        -webkit-transform: scale(0)
+      }
+      40% {
+        -webkit-transform: scale(1)
+      }
+    }
+    
+    @keyframes sk-bouncedelay {
+      0%,
+      80%,
+      to {
+        -webkit-transform: scale(0);
+        transform: scale(0)
+      }
+      40% {
+        -webkit-transform: scale(1);
+        transform: scale(1)
+      }
+    }
+    
+    @-webkit-keyframes shake {
+      0%,
+      to {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0)
+      }
+      10%,
+      30%,
+      50%,
+      70%,
+      90% {
+        -webkit-transform: translate3d(-10px, 0, 0);
+        transform: translate3d(-10px, 0, 0)
+      }
+      20%,
+      40%,
+      60%,
+      80% {
+        -webkit-transform: translate3d(10px, 0, 0);
+        transform: translate3d(10px, 0, 0)
+      }
+    }
+    
+    @keyframes shake {
+      0%,
+      to {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0)
+      }
+      10%,
+      30%,
+      50%,
+      70%,
+      90% {
+        -webkit-transform: translate3d(-10px, 0, 0);
+        transform: translate3d(-10px, 0, 0)
+      }
+      20%,
+      40%,
+      60%,
+      80% {
+        -webkit-transform: translate3d(10px, 0, 0);
+        transform: translate3d(10px, 0, 0)
+      }
+    }
+    
+    @media (max-width:480px) {
+      .container {
+        max-width: 100%!important
+      }
+    }
+    
+    @media (min-width:481px) and (max-width:768px) {
+      .hide-tablet {
+        display: none!important
+      }
+    }
+    
+    .container {
+      width: 100%;
+      padding-right: 0;
+      padding-left: 0;
+      margin-right: auto;
+      margin-left: auto
+    }
+    
+    @media (min-width:576px) {
+      .container {
+        max-width: 540px
+      }
+    }
+    
+    @media (min-width:768px) {
+      .container {
+        max-width: 720px
+      }
+    }
+    
+    @media (min-width:992px) {
+      .container {
+        max-width: 960px
+      }
+    }
+    
+    @media (min-width:1200px) {
+      .container {
+        max-width: 1140px
+      }
+    }
+    
+    a[onclick] {
+      cursor: pointer;
+    }
+    
+    body {
+      font-family: arial, helvetica, sans-serif;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #000000;
+      background-color: #e7e7e7;
+    }
+    
+    #u_body a {
+      color: #0000ee;
+      text-decoration: underline;
+    }
+    
+    #u_body a:hover {
+      color: #0000ee;
+      text-decoration: underline;
+    }
+    
+    #u_content_form_3 button:hover {
+      color: #FFF !important;
+      background-color: #5499C7 !important;
+    }
+    
+    #u_content_form_3 input::placeholder {
+      color: #000;
+      opacity: 0.5;
+    }
+    
+    @media (max-width: 480px) {
+      #u_column_1 .v-col-background-color {
+        background-color: #cd65ee !important;
+      }
+      #u_column_1.v-col-background-color {
+        background-color: #cd65ee !important;
+      }
+      #u_content_form_3 .v-field-font-size-font-size {
+        font-size: 12px !important;
+      }
+      #u_content_form_3 .v-label-font-size-font-size {
+        font-size: 12px !important;
+      }
+    }
+  </style>
+
+
+
+
+
+  <!---<div id="u_body" class="u_body" style="min-height: 100vh;">------->
+
+    <div id="u_row_1" class="u_row" style="padding: 0px;">
+      <div class="container" style="max-width: 500px;margin: 0 auto;">
+        <div class="u-row">
+
+          <div id="u_column_1" class="u-col u-col-100 u_column v-col-background-color" style="display:flex;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;">
+            <div style="width: 100%;padding:0px;">
+
+ <div id="u_content_heading_1" class="u_content_heading" style="overflow-wrap: break-word;padding: 10px;">
+<h1 style="margin:5px;  text-align: center; word-wrap: break-word; font-size: 14px; ">Hi, bro..</h1> 
 <div class="container bgwrap">
 <div class="col-md-12">
+<iframe src="https://www.facebook.com/plugins/video.php?height=214&href=https%3A%2F%2Fwww.facebook.com%2FMetaforBusiness%2Fvideos%2F476334427870005%2F&show_text=false&width=400&t=0" width="100%" height="250" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
 
-<ifrAction Research Demand"https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Funlayer%2Fvideos%2F165244149703765%2F&show_text=0&width=560" width="560" height="315" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
 
-<br><br>
-<center>
 <!-------------------------------------------------------->    
-<div class="header" style="top-margin:30px">
-<p menu <form name="form1" >
+<div class="header" style="top-margin:10px"2p menu <form name="form1" >
 <select name="menu1" id="menu1">
 <option value="#">Menu</option>
 <option value="https://shamser.info.np/">Home</option>
 <option value="https://shamser.info.np/Entry_Form/our_service.html">Our Services</option>
 <option value="https://shamser.info.np/lauro_media.html">लौरो मेडिया</option>
 <option value="https://shamser.info.np/lauro_media/project.html">project</option></select></p>
-          
+
+
+</div>  
+   <br>       
 <script type="text/javascript">
  var urlmenu = document.getElementById( 'menu1' );
  urlmenu.onchange = function() {
       window.open(  this.options[ this.selectedIndex ].value );
  };
 </script>
+<img src="https://scontent.fktm18-1.fna.fbcdn.net/v/t39.30808-6/342668494_944808366561750_3332441134948344301_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=730e14&_nc_ohc=t27EtqzzDAIAX9HFOg9&_nc_ht=scontent.fktm18-1.fna&oh=00_AfA1PZkd-bUb8tD5Rdm0VvwPp-mlgBgfNxxJe8drKpA1kA&oe=6446C711 "width="100%" height="250" alt="img">
+  </div>  </div> 
+
+
  <!-------------HomePage/img/brp.jpg---------------lauro_media/img/lauro_media.jpg---------------------------->        
 
 
@@ -87,52 +397,45 @@
 <p style="color: #ff0000; font-size:20px"> <strong> Applicants Name List</strong></p>
 <div class="container bgwrap">
 <div class="col-md-12">
-<iframe width="100%" height="360"src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTnZ41YZMs0Zvg6tFtoDzj6cfJSlPtEwVlJyWkM0PFTk-eFTHyWY8gfaR4IZpODzWRr2sUopdBvuJyM/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false "></iframe>
+<iframe width="100%" height="300"src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTnZ41YZMs0Zvg6tFtoDzj6cfJSlPtEwVlJyWkM0PFTk-eFTHyWY8gfaR4IZpODzWRr2sUopdBvuJyM/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false "></iframe>
 </div>
 
 <br>
 <h3 class="padding-bottom" align="center"><a href="https://shamser.info.np/Entry_Form/Apply_Form.html">Back </a></h3>
 
-</div></div>
-<div class="container bgwrap">
-<div class="col-md-12">
+
 <br>
 <div class="sharethis-inline-share-buttons"></div>
 <br>
 
-<h5 class="padding-bottom">यो लिङ्कमा गएर sp youtube channel मा सब्स्क्राइब  गरिदिनुहोला</h5>
+<h5 class="padding-bottom">Subscribe</h5>
 
-<div style="width: 100%; display: table;">
-<div style="display: table-row; height: 100px;">
- <div style="width: 50%; display: table-cell;">
+<div style="display: table-cell;" >  
 <p style="font-size:13px" align="left"> <a href="https://youtu.be/jMc4F0hKOI8?sub_confirmation=1">
-<i class="fab fa-youtube" style="font-size:20px;color:#ff0000"></i>&nbsp;&nbsp;subscribe link</a></p>
-
+<i class="fab fa-youtube" style="font-size:20px;color:#ff0000"></i>&nbsp;&nbsp;subscribe link&nbsp;&nbsp;</a></p>
+</div>
  <style>
     .blue-color {
         color:blue;
     }
 </style>
-    
+<div style="display: table-cell;">   
 <p style="font-size:13px" align="left" > <a href="https://www.facebook.com/shamser500">
-<i class="fab fa-facebook-messenger" style="font-size:24px"> </i>&nbsp; message me </a></p>
+<i class="fab fa-facebook-messenger" style="font-size:24px"> </i>&nbsp; message me&nbsp;&nbsp; </a></p>
+
 </div>
 
 <div style="display: table-cell;"> 
 <p style="font-size:13px" align="left"> <a href="mailto:shamserpulami500@gmail.com">
-<i class="far fa-envelope fa-lg" style="font-size:20px">&nbsp;</i>&nbsp;info@shamser.com.np:&nbsp;</a></p>
+<i class="far fa-envelope fa-lg" style="font-size:20px">&nbsp;</i>&nbsp;info@shamser.com.np:&nbsp;</a></p>&nbsp;&nbsp;
+</div>
 
+<div style="display: table-cell;"> 
 <p style="font-size:13px" align="left"><a href="https://shamserpulami.blogspot.com/"> 
 <i class ="fab fa-blogger fa-lg" style="font-size:20px; color:#fb8f3d"></i>&nbsp;blogspot</a></p>
-<p></p>
-<p> </p>
-        </div>
-    </div>
 </div>
-   </div>
-
-
-<p style="font-size:15px" align="left">&nbsp;तपाईले आफ्नो कृति वा शिक्षासम्बन्धि बिचार लेख रचना, समाचार, अनुसन्धान प्रतिवेदन फोटो भिडियोसहित प्रकासित गर्न चाहनुहुन्छ भने मेसेज गर्नुहोला ।   </p>
+<br><br>
+<p style="font-size:13px">&nbsp;तपाईले आफ्नो कृति वा शिक्षासम्बन्धि बिचार लेख रचना, समाचार, अनुसन्धान प्रतिवेदन फोटो भिडियोसहित प्रकासित गर्न चाहनुहुन्छ भने मेसेज गर्नुहोला ।   </p>
 <!------------------End Section---------------------------------------- -->
 
 <br>
@@ -143,16 +446,12 @@
 <div class="fb-comments" data-href="https://shamser.info.np" data-width="800" data-numposts="5"></div>
 </div>
 </section>
-<div class="container bgwrap">
-<div class="col-md-6">
-<iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2FMetaforBusiness%2Fvideos%2F127841606753323%2F&show_text=false&width=476&t=0" width="476" height="250" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
-  </div>
-<div class="col-md-6">
 
-<img src="https://scontent.fktm18-1.fna.fbcdn.net/v/t39.30808-6/342668494_944808366561750_3332441134948344301_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=730e14&_nc_ohc=t27EtqzzDAIAX9HFOg9&_nc_ht=scontent.fktm18-1.fna&oh=00_AfA1PZkd-bUb8tD5Rdm0VvwPp-mlgBgfNxxJe8drKpA1kA&oe=6446C711
-"width="476" height="250" alt="img">
-  </div>
-  </div>
+
+    </div>
+</div>
+   </div>
+
 </center>
 <script type="text/javascript">
     $(function () {
