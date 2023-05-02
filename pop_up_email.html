@@ -45,7 +45,11 @@
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
                                                      
                                                   
-                                                  
+    FB.Event.subscribe('edge.create',
+    function(response) {
+        alert('You liked the URL: ' + response);
+    }
+);                                              
                                                   
                                                   
                                                   
