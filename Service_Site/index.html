@@ -174,44 +174,33 @@ Conclusion:
     <!-- BEGIN sidebar -->
     <div id="sidebar">
       <!-- begin search -->
- <form action="search" method="GET">
-        <input required type="search" name="q" />
-        <button type="submit">Search</button>
-    </form>
+<form id="searchForm" action="javascript:search();">
+   <div class="input-group">
+      <button id="go" class="btn btn-default" type="button" 
+              onclick="document.getElementById('searchForm').submit(); return false;">
+      </button>
+      <input type="text" id="searchItem" class="form-control" placeholder="type here">
+   </div>
+</form>
       <!-- end search -->
 <script>
-function getQueryVariable(variable) {
-  var query = window.location.search.substring(1);
-  var vars = query.split("&");
-  for (var i = 0; i < vars.length; i++) {
-      var pair = vars[i].split("=");
-      if (pair[0] === variable) {
-          return decodeURIComponent(pair[1].replace(/\+/g, "%20"));
+function search() {
+ 
+   var name = document.getElementById("searchForm").elements["searchItem"].value;
+   var pattern = name.toLowerCase();
+   var targetId = "";
+ 
+   var divs = document.getElementsByClassName("col-md-2");
+   for (var i = 0; i < divs.length; i++) {
+      var para = divs[i].getElementsByTagName("p");
+      var index = para[0].innerText.toLowerCase().indexOf(pattern);
+      if (index != -1) {
+         targetId = divs[i].parentNode.id;
+         document.getElementById(targetId).scrollIntoView();
+         break;
       }
-  }
+   }  
 }
-
-var searchTerm = getQueryVariable("q");
-// creation of searchIndex from earlier example
-var results = searchIndex.search(searchTerm);
-var resultPages = results.map(function (match) {
-  return pages[match.ref];
-});
-
-</script>
-
-<script>
-
-// resultPages from previous example
-resultsString = "";
-resultPages.forEach(function (r) {
-    resultsString += "<li>";
-    resultsString +=   "<a class='result' href='" + r.url + "?q=" + searchTerm + "'><h3>" + r.title + "</h3></a>";
-    resultsString +=   "<div class='snippet'>" + r.content.substring(0, 200) + "</div>";
-    resultsString += "</li>"
-});
-document.querySelector("#search-results").innerHTML = resultsString;
-
 </script>
       <!-- begin popular posts -->
       <h2>Popular Posts</h2>
@@ -225,21 +214,22 @@ document.querySelector("#search-results").innerHTML = resultsString;
       <!-- end popular posts -->
       <!-- begin flickr photos -->
       <h2>Flickr Photos</h2>
-      <div class="photos"> <a href="#"><img src="../images/_thumb6.jpg" alt="" /></a> 
-<a href="#"><img src="../images/_thumb7.jpg" alt="" /></a> 
-<a href="#"><img src="../images/_thumb8.jpg" alt="" /></a> 
-<a href="#"><img src="../images/_thumb9.jpg" alt="" /></a>
-<a href="#"><img src="../images/_thumba.jpg" alt="" /></a> 
-<a href="#"><img src="./images/_thumbb.jpg" alt="" /></a> 
+      <div class="photos"> <a href="#"><img src="Service_Site/images/_thumb6.jpg" alt="" /></a> 
+<a href="#"><img src="images/_thumb7.jpg" alt="" /></a> 
+<a href="#"><img src="images/_thumb8.jpg" alt="" /></a> 
+<a href="#"><img src="images/_thumb9.jpg" alt="" /></a>
+<a href="#"><img src="images/_thumba.jpg" alt="" /></a> 
+<a href="#"><img src="images/_thumbb.jpg" alt="" /></a> 
 </div>
       <!-- end flickr photos -->
       <!-- begin featured video -->
       <h2>Featured Video</h2>
 
-      <div class="video"> 
+<div class="video"> 
 <video controls autoplay  align="center" width="93%" height="auto">
 <source src="https://shamser.info.np/lauro_media/baby.mp4" type="video/mp4"/>
 Your browser does not support the video tag.</video></div>
+
 <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fscript.google.com%2Fmacros%2Fs%2FAKfycbyicllHJELHxW1DDQ25vUF5icUJlNLe87XxCnmVFp_PmH5xxIUfkFK4TFaTINCSZkIr%2Fexec&width=450&layout&action&size&share=false&height=35&appId=5825015304292841" width="450" height="35" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
 
 <p style="font-size: 14px; color:blue;line-height:160%;">घर परिवार बालकको पहिलो स्कुल हो । उपयुक्त वातावरण पाउन सके जुनसुकै बच्चाले जे कुरा पनि सिक्न सक्छ
