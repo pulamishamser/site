@@ -8,13 +8,7 @@
     <body>
 <button onclick="ExportToExcel('xlsx')">Export table to excel</button>
 
-function ExportToExcel(type, fn, dl) {
-       var elt = document.getElementById('tbl_exporttable_to_xls');
-       var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
-       return dl ?
-         XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }):
-         XLSX.writeFile(wb, fn || ('MySheetName.' + (type || 'xlsx')));
-    }
+
 
         
         <table align="center">
@@ -681,45 +675,18 @@ function ExportToExcel(type, fn, dl) {
         </table>
     </body>
 <button id="export">Export Now</button>
-</html>
+
 <script>
-$(function(){
-  $("td").click(function(event){
-    if($(this).children("input").length > 0)
-          return false;
+function ExportToExcel(type, fn, dl) {
+       var elt = document.getElementById('tbl_exporttable_to_xls');
+       var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
+       return dl ?
+         XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }):
+         XLSX.writeFile(wb, fn || ('MySheetName.' + (type || 'xlsx')));
+    }
 
-    var tdObj = $(this);
-    var preText = tdObj.html();
-    var inputObj = $("<input type='text' />");
-    tdObj.html("");
 
-    inputObj.width(tdObj.width())
-            .height(tdObj.height())
-            .css({border:"0px",fontSize:"17px"})
-            .val(preText)
-            .appendTo(tdObj)
-            .trigger("focus")
-            .trigger("select");
-
-    inputObj.keyup(function(event){
-      if(13 == event.which) { // press ENTER-key
-        var text = $(this).val();
-        tdObj.html(text);
-      }
-      else if(27 == event.which) {  // press ESC-key
-        tdObj.html(preText);
-      }
-    });
-
-    inputObj.click(function(){
-      return false;
-    });
-  });
-});
 </script>
-
-
-   
 <script src="custom.js" type="text/javascript"></script>
 
 
