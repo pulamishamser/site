@@ -119,6 +119,95 @@ window.location="https://shamser.info.np/LoginPage/Login_school.html";
     </div>
 </div>  
 
+
+    <div class="container">
+        <div class="header"> 
+          <h2 style="color:blue; font-size:24px;"><b>UANTO Member Name Entry_Form</b></h2>
+        </div>
+
+   <h1 id="msg"></h1>
+    <form>      
+          <div class="form-control ">
+          <label for="सदस्यको नाम" > &nbsp;&nbsp;&nbsp;<b>सदस्यको नाम :  </b></label>
+          <input id="सदस्यकोनाम" name="सदस्यको नाम" type= "Name" placeholder="Enter Your  Name *"value="" required=""/>
+          </div>
+
+          <div class="form-control ">
+          <label for="कार्यरत विद्यालयको नाम" > &nbsp;&nbsp;&nbsp;<b>कार्यरत विद्यालयको नाम : </b></label>
+          <input id="कार्यरतविद्यालयको नाम" name="कार्यरत विद्यालयको नाम" type= "कार्यरत विद्यालयको नाम" placeholder="Enter Your School Name *"value="" required=""/>
+	  </div>
+          
+          <div class="form-control ">
+          <label for="Email"> &nbsp;&nbsp;&nbsp;<b>इमेल :</b></label>
+          <input id="Email" name="इमेल" type= "email" placeholder="name@gmail.com"/>   
+          </div>
+		
+          <div class="form-control">
+            <label for="पद( UANTO)"> &nbsp;&nbsp;&nbsp;<b>पद( UANTO) :</b></label>
+            <input id ="पद( UANTO)"name="पद( UANTO)" type= "पद( UANTO)" placeholder="Enter Your UANTO Post*" value="" />    
+          </div>
+          <div class="form-control">
+            <label for="सम्पर्क नं"> &nbsp;&nbsp;&nbsp;<b>सम्पर्क नं : </b></label>
+            <input id ="सम्पर्कनं."name="सम्पर्क नं" type= "Contact No." placeholder="Enter Your Contact Number*" value="" required=""/>    
+	     </div>
+
+ <div class="form-control">
+            <label for="प्रदेश"> &nbsp;&nbsp;&nbsp;<b>प्रदेश :</b></label>
+            <input id ="प्रदेश"name="प्रदेश" type= "प्रदेश" placeholder="Enter Your Prades Name*" value="" required=""/>    
+          </div>
+ <div class="form-control">
+            <label for="जिल्ला"> &nbsp;&nbsp;&nbsp;<b>जिल्ला :</b></label>
+            <input id ="जिल्ला"name="जिल्ला" type= "जिल्ला" placeholder="Enter Your District Name*" value="" required=""/>    
+          </div>
+ <div class="form-control">
+            <label for="पालिका"> &nbsp;&nbsp;&nbsp;<b>पालिका :</b></label>
+            <input id ="पालिका"name="पालिका" type= "पालिका" placeholder="Enter Your Palika Name*" value="" required=""/>    
+          </div>
+
+ <div class="form-control">
+            <label for="वडा नं"> &nbsp;&nbsp;&nbsp;<b><b>वडा नं : </b></label>
+            <input id ="वडानं"name="वडा नं" type= "वडा नं" placeholder="Enter Your Ward No*" value="" required=""/>    
+          </div>
+        <input type="submit" id="sub">
+<button type="button" onClick="window.location.reload()">
+   <a href="#">Reload Page
+</button>
+<button type="button" onClick="">
+<a href="https://script.google.com/macros/s/AKfycbwMPqV4wsfW9WoRKC6mrdcVMpBoK7-g6OMH3CyTZx_PK7ki8xX51-ZkB1XEKP0rGoKG/exec">Check your details 
+</button>
+
+    </form>
+    <script>
+        let form = document.querySelector("form");
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            document.querySelector("#sub").value = "Submiting..";
+            let data = new FormData(form);
+            fetch('https://script.google.com/macros/s/AKfycbwK03-grocsViTKJ5uTBbJ1T0WGExnQNCWSDjSpxHdyQTC1McgyYuah20fqpx-QCKTVow/exec', {
+                    method: "POST",
+                    body: data
+                })
+                .then(res => res.text())
+                .then(data => {
+                    document.querySelector("#msg").innerHTML = data;
+                    document.querySelector("#sub").value = "Submit"
+               });
+        })
+    </script>
+      </div>
+
+      <script src="/app.js"></script>
+
+
+
+
+
+
+
+
+
+
+	
 <header align="center">
 <div class="title">सामान्य ज्ञानसम्बन्धि २५ प्रश्नहरु</div>
 <div class="title">Total Questions: <span id="tque"></span></div>
