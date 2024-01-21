@@ -11,6 +11,30 @@
     });
   });
 </script>
+
+
+
+<script>	
+$("#mylink").click(function(e) {
+  e.preventDefault();
+  var link = $(this);
+  bootbox.confirm("Are you sure?", function(result) {
+    if (result == true) {
+      window.location = link.attr("href");
+    }
+  });
+});
+
+</script>
+
+
+
+
+
+
+
+
+	
 <link href="online/assets/images/favicon-1.png" type="image/x-icon" rel="icon">
 <!--social button show -->
 <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet" type="text/css">
