@@ -21,6 +21,14 @@
 <script charset="UTF-8" src="//web.webpushs.com/js/push/795a9fc7a8420042c4f9d94ca24afdb4_1.js" async></script>
 
 
+
+
+
+
+
+
+
+
 <!------------marquee------------------------------------------>
 <script type="text/javascript" src="https://shamser.info.np/Shaikshik Khabakhaabar/cssjs/js/jquery.js"></script>
 <script type="text/javascript" src="https://shamser.info.np/Shaikshik Khabakhaabar/cssjs/js/acmeticker.js"></script>
@@ -453,6 +461,13 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0&appId=5825015304292841" nonce="bTroHMrj"></script>
 <div class="fb-comments" data-href="https://shamser.info.np/Lauro-Khabar/Editorial.html" data-width="" data-numposts="25"></div>
 
+
+
+
+function my_post_time_ago_function() {
+return sprintf( esc_html__( '%s ago', 'textdomain' ), human_time_diff(get_the_time ( 'U' ), current_time( 'timestamp' ) ) );
+}
+add_filter( 'the_time', 'my_post_time_ago_function' );
 
 <!----------show time as x-minute ago in your website------------------------------------------>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> 
