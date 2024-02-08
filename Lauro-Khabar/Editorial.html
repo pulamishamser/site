@@ -463,22 +463,13 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
 
 
 
-
+<script>
 function my_post_time_ago_function() {
 return sprintf( esc_html__( '%s ago', 'textdomain' ), human_time_diff(get_the_time ( 'U' ), current_time( 'timestamp' ) ) );
 }
 add_filter( 'the_time', 'my_post_time_ago_function' );
-
+</script>   
 <!----------show time as x-minute ago in your website------------------------------------------>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment.min.js"></script> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/livestamp/1.1.2/livestamp.min.js"></script>
- 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
-<script>
-  $('#eventExample').on('change.livestamp', function() {
-   $.notify("Time Updated", "success");
-  }).livestamp();
-</script>     
+
 </body>
 </html>
