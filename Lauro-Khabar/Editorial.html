@@ -308,12 +308,13 @@ Your browser does not support the video tag.</video>
       <p>माननीयहरूको औँठाछाप लिइयो, फागुन ६ गतेदेखि प्रतिनिधिसभामा ई–हाजिरी</p></a>
     </div>
   </div>
-  <span id="datetimenw"></span> 
-<script> 
-      $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
-</script> 
-<span data-livestamp="2024-02-08, 8:53:25 PM"></span>
-
+<span id="eventExample"></span>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
+<script>
+  $('#eventExample').on('change.livestamp', function() {
+   $.notify("Time Updated", "success");
+  }).livestamp();
+</script>
   <div class="column">
     <div class="content">
        <a href="https://lauro-media.blogspot.com/2024/02/blog-post_4.html">
