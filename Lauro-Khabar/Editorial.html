@@ -456,12 +456,11 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
 
 
 <script>
-function my_post_time_ago_function() {
-return sprintf( esc_html__( '%s ago', 'textdomain' ), human_time_diff(get_the_time ( 'U' ), current_time( 'timestamp' ) ) );
-}
-add_filter( 'the_time', 'my_post_time_ago_function' );
 </script>   
 <!----------show time as x-minute ago in your website------------------------------------------>
-
+jQuery.timeago(new Date());             //=> "less than a minute ago"
+jQuery.timeago("2008-07-17");           //=> "5 years ago"
+jQuery.timeago(jQuery("abbr#some_id")); //=> "5 years ago"     // [title="2008-07-20"]
+Solut
 </body>
 </html>
