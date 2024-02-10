@@ -619,49 +619,7 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
 <span id="eventExample"></span> 
 
 
-<p>
-    <label>To Date: </label>
-    <input type="text" value="" name="date" id="to-picker">
-</p>
-<script>        
-var currentDate = new Date();
-var currentNepaliDate = calendarFunctions.getBsDateByAdDate(currentDate.getFullYear(), currentDate.getMonth() + 1, currentDate.getDate());
-var formatedNepaliDate = calendarFunctions.bsDateFormat("%y-%m-%d", currentNepaliDate.bsYear, currentNepaliDate.bsMonth, currentNepaliDate.bsDate);
-$("#from-picker").nepaliDatePicker({
-    dateFormat: "%y-%m-%d",
-    closeOnDateSelect: true,
-    minDate: "२०७०-१-२०",
-    maxDate: formatedNepaliDate
-});
 
-$("#to-picker").val(formatedNepaliDate);
-$("#to-picker").nepaliDatePicker({
-    dateFormat: "%y-%m-%d",
-    closeOnDateSelect: true,
-    minDate: "२०७०-१-२०",
-    maxDate: formatedNepaliDate
-});                
-</script>  
-
-
-
-
-
-
-  
 </body>
-
-  Usage
-HTML Code
-<p>
-    <label>DOB: </label>
-    <input type="text" value="" name="date" class="bod-picker" placeholder="Select Date of Birth">
-    <button id="clear-bth" onclick="">Clear</button>
-</p>
-
-<!-- this should go after your </body> -->
-<script src="//code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="dist/nepaliDatePicker.min.js"></script>
-<link rel="stylesheet" href="dist/nepaliDatePicker.min.css">
-                
+       
 </html>
