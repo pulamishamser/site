@@ -16,18 +16,18 @@
           <h2 style="color:blue; font-size:18px;">Name Entry_Form</h2>
         </div>
 
-   <h1 id="msg"></h1>
+    <h1 id="msg"></h1>
  <form>      
-          <div class="form-control ">
-          <label for="सदस्यको नाम" > &nbsp;&nbsp;&nbsp;<b>सदस्यको नाम :  </b></label>
-          <input id="सदस्यकोनाम" name="सदस्यको नाम" type= "Name" placeholder="Enter Your  Name *"value="" required=""/>
-          </div>
 
           <div class="form-control ">
           <label for="कार्यरत विद्यालयको नाम" > &nbsp;&nbsp;&nbsp;<b>कार्यरत विद्यालयको नाम : </b></label>
-          <input id="कार्यरतविद्यालयको नाम" name="कार्यरत विद्यालयको नाम" type= "कार्यरत विद्यालयको नाम" placeholder="Enter Your School Name *"value="" required=""/>
+          <input id="कार्यरतविद्यालयको नाम" name="कार्यरत विद्यालयको नाम" type= "text" placeholder="Enter Your School Name *"value="" required=""/>
 	  </div>
-          
+                    <div class="form-control ">
+          <label for="शिक्षकको नाम">&nbsp;&nbsp;<b>शिक्षकको नाम : </b></label>
+          <input id="शिक्षकको नाम" name="शिक्षकको नाम" type= "text" placeholder="Enter Your  Name *"value="" required=""/>
+          </div>
+
           <div class="form-control ">
           <label for="Email"> &nbsp;&nbsp;&nbsp;<b>इमेल :</b></label>
           <input id="Email" name="इमेल" type= "email" placeholder="name@gmail.com"/>   
@@ -66,7 +66,7 @@
 
 
 <button type="button" onClick="">
-<a href="https://script.google.com/macros/s/AKfycbz7Ax5xUU2BuqkKZ4LcjtogtF5gUA8Bihu9CxV9gVhlqzLVOf1mgflqDZA8pRKnxmvGkw/exec">Check your details 
+<a href="https://script.google.com/macros/s/AKfycbyo52Jtw86SR5CKxJDdHNPAtzMC4ZM_xOdninWdgaVqhoH85wt9vRZdUAx9EKoCVVOdhw/exec">Check your details 
 </button>
 
 
@@ -82,7 +82,7 @@
             e.preventDefault();
             document.querySelector("#sub").value = "Submiting..";
             let data = new FormData(form);
-            fetch('https://script.google.com/macros/s/AKfycbz7Ax5xUU2BuqkKZ4LcjtogtF5gUA8Bihu9CxV9gVhlqzLVOf1mgflqDZA8pRKnxmvGkw/exec', {
+            fetch('https://script.google.com/macros/s/AKfycbxvo4Qhn7DkfDVpOYPA40ZWYCLt9Gwu9KhNBkKSCxoqZotSHi9jUJdcSibYyKsR1kLcTg/exec', {
                     method: "POST",
                     body: data
                 })
