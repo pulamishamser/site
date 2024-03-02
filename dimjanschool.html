@@ -1382,8 +1382,15 @@ frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypt
               });
             }); 
          </script> 
+	  <!---------update---------------------------------------->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
+<script>
+  $('#eventExample').on('change.livestamp', function() {
+   $.notify("Time Updated", "success");
+  }).livestamp();
+</script>  
 
-</body>
+
 
 <!----------show time as x-minute ago in your website------------------------------------------>
 <span id="datetimenw"></span> 
@@ -1392,6 +1399,7 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
 </script> 
 <span data-livestamp="2024-02-09, 2:53:25 PM"></span>
 <span id="eventExample"></span> 
+</body>
 </html
 
 
