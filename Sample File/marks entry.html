@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+        function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- //custom-theme -->
+<!-- js -->
+ <script src="js/jquery.min.js"></script>
+<!-- //js --> 
+<!-- font-awesome-icons -->
+<link href="css/bootstrap.min.css" rel="stylesheet"> 
+<link href="style.css" rel="stylesheet"> 
+<!-- //font-awesome-icons -->
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;subset=latin-ext" rel="stylesheet">
+</head>
+<body>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+    </style>
+<title>Class-6 Marks Entry_Form</title>
+</head>
+<body>
+		
+
+    <div class="container">
+        <div class="header"> 
+          <h2 style="color:blue; font-size:18px;"><b>Class-6 Marks Entry_Form</b></h2>
+        </div>
+
+      <fieldset>
+    <form>      
+          <div class="form-control ">
+          <label for="rgd" > &nbsp;&nbsp;&nbsp;<b>Reg No</b></label>
+           <input id="rgd" name="rgd" type= "number" placeholder="Enter Reg No"value="" />
+          </div>
+
+          <div class="form-control ">
+          <label for="sbl" > &nbsp;&nbsp;&nbsp;<b>Symbol/Roll No</b></label>
+          <input id="sbl" name="sbl" type= "text" placeholder="Enter Symbol/Roll No*"value="" required=""/>
+	  </div>
+
+          <div class="form-control ">
+          <label for="db"> &nbsp;&nbsp;&nbsp;<b>Date of birth</b></label>
+          <input id="db" name="db" type= "date" placeholder="Enter exact date of birth"/>   
+          </div>
+		
+          <div class="form-control">
+            <label for="name"> &nbsp;&nbsp;&nbsp;<b>Student's name</b></label>
+            <input id ="name"name="name" type= "text" placeholder="Enter student's name*" value="" />    
+          </div>
+          <div class="form-control">
+            <label for="cdt"> &nbsp;&nbsp;&nbsp;<b> Credit hour</b></label>
+            <input id ="cdt."name="cdt" type= "number" placeholder="Enter credit hour*" value="" required=""/>    
+	     </div>
+
+ <div class="form-control">
+            <label for="cod"> &nbsp;&nbsp;&nbsp;<b>Subject code</b></label>
+            <input id ="cod"name="cod" type= "text" placeholder="Enter subject code*" value=""/>    
+          </div>
+ <div class="form-control">
+            <label for="sub"> &nbsp;&nbsp;&nbsp;<b>Subject</b></label>
+            <input id ="sub"name="sub" type= "text" placeholder="Choose a subject*" value="" required=""/>    
+          </div>
+ <div class="form-control">
+            <label for="fm"> &nbsp;&nbsp;&nbsp;<b>Full mark</b></label>
+            <input id ="fm"name="fm" type= "text" placeholder="Enter full mark*" value="" required=""/>    
+          </div>
+
+ <div class="form-control">
+            <label for="mrk"> &nbsp;&nbsp;&nbsp;<b>Obtaied marks<b> </b></label>
+            <input id ="mrk"name="om" type= "text" placeholder="Enter obtaied marks*" value="" required=""/>    
+          </div>
+                    <div class="clear"> </div>
+                </fieldset>
+
+        <input type="submit" id="sub">
+<button type="button" onClick="window.location.reload()">
+   <a href="#">Reload Page
+</button>
+<button type="button" onClick="">
+<a href="https://script.google.com/macros/s/AKfycbxJafNWkfP0nAfHXzpON47qfGvAAeNowM6BsG0QddwjwuVC6NW8Ko-LWDDtFs3CiJSA/exec">Check your details 
+</button>
+
+    </form>
+    <script>
+        let form = document.querySelector("form");
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            document.querySelector("#sub").value = "Submiting..";
+            let data = new FormData(form);
+            fetch('https://script.google.com/macros/s/AKfycbxJafNWkfP0nAfHXzpON47qfGvAAeNowM6BsG0QddwjwuVC6NW8Ko-LWDDtFs3CiJSA/exec', {
+                    method: "POST",
+                    body: data
+                })
+                .then(res => res.text())
+                .then(data => {
+                    document.querySelector("#msg").innerHTML = data;
+                    document.querySelector("#sub").value = "Submit"
+               });
+        })
+    </script>
+      </div>
+
+      <script src="/app.js"></script>
+        <script src="js/jquery.validate.min.js"></script>
+    <script src="js/jquery.formtowizard.js"></script>
+</body>
+
+</html>
+
+
+
