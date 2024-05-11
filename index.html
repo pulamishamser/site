@@ -389,17 +389,32 @@ window.scrollTo(0, 0);
         </div>
     </div>
 </div>
-<script type="text/javascript">
-function validate(form_id,email) {
 
-   var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-   var address = document.forms[form_id].elements[email].value;
-   if(reg.test(address) == false) {
+	
+	<script>
+// fetch the DOM elements
+const modal = document.getElementById(“modal”);
+const overlay = document.getElementById(“overlay”);
+const openModalBtn = document.getElementById(“btn-open”);
+const closeModalBtn = document.getElementById(“btn-close”);
 
-      alert('Invalid Email Address');
-      return false;
-   }
-}
+
+//write function to open the modal
+function openModal() {
+ modal.classList.remove(“hidden”);
+ overlay.classList.remove(“hidden”);
+};
+
+//call function on button click
+openModalBtn.addEventListener(“click”, openModal);
+
+//write function to close the modal
+function closeModal() {
+ modal.classList.add(“hidden”);
+ overlay.classList.add(“hidden”);
+};
+
+closeModalBtn.addEventListener(“click”, closeModal);
 </script>
 
 
