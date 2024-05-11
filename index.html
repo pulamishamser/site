@@ -402,7 +402,8 @@ window.scrollTo(0, 0);
                     <div class="form-group">
                         <input type="email" class="form-control" name="Email" placeholder="Email Address">
                     </div>
-                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                    <button type="submit" id="sub" class="btn btn-primary">Subscribe</button>
+			     <div class="submitting"></div>
                 </form>
 
             </div>
@@ -410,6 +411,30 @@ window.scrollTo(0, 0);
     </div>
 </div>
 
+                         <script>
+                      let form = document.querySelector("form");
+                      form.addEventListener('submit', (e) => {
+                          e.preventDefault();
+                         document.querySelector("#sub").value = "Data Submitted..refresh for new entry";
+                          let data = new FormData(form);
+                          fetch('https://script.google.com/macros/s/AKfycbwEIyDgrCTbnglpb2UHMajsvjSQb2QuTJdhUVui7Z8KU5LwURpPhFa5vixuvFkSYUw/exec', {
+                                method: "POST",
+                                body: data
+                            })
+                          .then(response => alert("Thanks for submitting your subject, please wait sometimes!"))
+                        .then(res => res.text())
+                        .then(data => {
+                           document.querySelector("#msg").innerHTML = data;
+                           document.querySelector("#sub").value = "Submit"
+                                 .then(error => {
+                            btn.disabled = false
+            btn.innerHTML = "Submit"
+                      alert('Error!', error.message)})
+                         });
+                  })
+                 </script>
+                   </div>
+                  <script src="/app.js"></script>
 
 
 
@@ -419,13 +444,8 @@ window.scrollTo(0, 0);
 
 
 
+		    
 
-
-
-
-
-	
-	
   <!-- Flash -->
 <section id="flash" class="wow fadeInUp">
   <div class="container">
