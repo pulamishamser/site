@@ -1863,150 +1863,59 @@ Xa0u6mJoSa176e2afT5VIiOO22vCGlbKMfIkjt8Fe9rgkigGnflTHVfQCw1X0TDToEKJaVCo8sOvOMic
   </div>
 </footer>    
 <!-----------------------popup--------------------------------------------->
- <style>
-.popup{
-	width: 400px;
-	height: 430px;
-	background:#powderblue;
-    padding: 12px 10px;
-    position: absolute;
-    transform: translate(-50%,-50%);
-    left: 45%;
-    top: 65%;
-    border-radius: 5px;
-    font-family: "Poppins",sans-serif;
-    display: none; 
-    text-align: center;
-z-index: 1001;
-}
-.popup button{
-    display: block;
-    margin:  0 0 20px auto;
-    background-color: transparent;
-    font-size: 25px;
-    color: #FF0099;
-		background:#powderblue;
-		border-radius: 100%;
-		width: 25px;
-		height:25px;
-		margin top: 28px;
-    border: none;
-    outline: none;
-    cursor: pointer;
- </style>
-   
-<div class="popup">
- <button type="button" class="close" data-dismiss="modal" >
-<button id="close">&times;</button></div> 
-  <style>
-body{
-	margin: 0px;
-	padding: 0px;
-	background: #f1f1f1;
-	font-family: arial;
-	box-sizing: border-box;
-}
-.card-container{
-	width: 300px;
-	height: 460px;
-	background: #FFF;
-	border-radius: 6px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%,-50%);
-	box-shadow: 0px 1px 10px 1px #000;
-	overflow: hidden;
-	display: inline-block;
-}
-.upper-container{
-	height: 150px;
-	background: #7F00FF;
-}
-.image-container{
-	background: white;
-	width: 80px;
-	height: 80px;
-	border-radius: 50%;
-	padding: 5px;
-	transform: translate(100px,100px);
-}
-.image-container img{
-	width: 80px;
-	height: 80px;
-	border-radius: 50%;
-}
-.lower-container{
-	height: 280px;
-	background: #FFF;
-	padding: 20px;
-	padding-top: 40px;
-	text-align: center;
-}
-.lower-container h3, h4{
-	box-sizing: border-box;
-	line-height: .6;
-	font-weight: lighter;
-}
-.lower-container h4{
-	color: #7F00FF;
-	opacity: .6;
-	font-weight: bold;
-}
-.lower-container p{
-	font-size: 12px;
-	color: gray;
-	margin-bottom: 30px;
-}
-.lower-container .btn{
-	padding: 12px 20px;
-	background: #7F00FF;
-	border: none;
-	color: white;
-	border-radius: 30px;
-	font-size: 12px;
-	text-decoration: none;
-	font-weight: bold;
-	transition: all .3s ease-in;
-}
-.lower-container .btn:hover{
-	background: transparent;
-	color: #7F00FF;
-	border: 2px solid #7F00FF;
-}
+<div class="container py-4">
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Bootstrap 4 Open Modal on Page Load</h4>
+            <h5>Wait for it...</h5>
+            <p class="lead">Here is the page content.
+           .</p>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">My Modal</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5>Add content here.</h5>
+                <p>This is a vertically centered modal. Modal body text goes here. .</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary mx-auto" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 
-</style>
-
-<div class="card-container">
-<img src="https://shamser.info.np/HomePage/img/brp.jpg" />
-			</div>	</div>
-
-		<div class="lower-container">
-				<h3>Shamser Pulami</h3>
-				<h4>Editor: lauro_media</h4>
-
-
-<img src="https://www.iitms.co.in/products/img/Fees-collection-revamp-banner.webp" width="200" height="110">
-<a href="profile/profile-2.html" class="btn">🌐Connect with &nbsp;&nbsp; 🌏</a>
-<marquee bgcolor=white direction=right><font size=2 color=red><a href="https://forms.gle/8pyBMNzYhZjVw27v7">Apply form Our services like Gradesheet Software, Fee mgt Softaware, Entrance-Card, Progress-Card, Certificate Software, Online result, sms services, Question Bank, intellectual services & other many services are avialable</font></a></marquee> 
-</div> </div>
-<br>
- <br>
-    <!--Script-->
-    <script type="text/javascript">
-window.addEventListener("load", function(){
-    setTimeout(
-        function open(event){
-            document.querySelector(".popup").style.display = "block";
-        },
-      1500
-    )
+$(window).on('load',function(){
+    var delayMs = 1500; // delay in milliseconds
+    
+    setTimeout(function(){
+        $('#myModal').modal('show');
+    }, delayMs);
 });
 
-document.querySelector("#close").addEventListener("click", function(){
-    document.querySelector(".popup").style.display = "none";
-});
-    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
 <!-----<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>	------------------popup---->										    
 
 <!-- JavaScript Libraries -->
