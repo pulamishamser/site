@@ -409,12 +409,6 @@ window.scrollTo(0, 0);
                       </div>
                     </div>
 
-     <div color="#000" class="sc-breuTD kXAKDv">
-                      <div style="padding-bottom:10px">
-                        <div class="v-label-font-size-font-size" style="text-align:left;color:#444;font-size:14px;padding:0px 0px 3px"><label>सिटरोल न‌</label></div>
-                        <div style="position:relative"><textarea name="Token No‌" id="tkn" placeholder="Enter token no" class="v-field-font-size-font-size" style="border-top-width:1px;border-top-style:solid;border-top-color:#CCC;border-left-width:1px;border-left-style:solid;border-left-color:#CCC;border-right-width:1px;border-right-style:solid;border-right-color:#CCC;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#CCC;border-radius:0px;padding:10px;color:#000;background-color:#FFF;font-size:12px;width:100%"></textarea></div>
-                      </div>
-                    </div>
 			  
                     <div color="#000" class="sc-breuTD kXAKDv">
                       <div style="padding-bottom:10px">
@@ -514,14 +508,32 @@ window.scrollTo(0, 0);
             <button type="button"  class="" onClick="window.location.reload()">
               <a href="#">Refresh
             </button>
-		   <button type="button"  class="" onClick="our_service" >
-              <a href="Action._Name_list.html">Review your details
-            </button></a>
-		   <button type="button"  class="" onClick="our_service" >
-              <a href="https://script.google.com/macros/s/AKfycbzCl1X0tHCrACGHx4OcZF-3rdmJ_XU2njQumjk57xyfPXO7cMUOtc5ThDGqPJxyDwsb/exec">Edit & delete
-            </button></a>
 
 
+ <script>
+                      let form = document.querySelector("form");
+                      form.addEventListener('submit', (e) => {
+                          e.preventDefault();
+                         document.querySelector("#sub").value = "Data Submitted..refresh for new entry";
+                          let data = new FormData(form);
+                          fetch('https://script.google.com/macros/s/AKfycbwEIyDgrCTbnglpb2UHMajsvjSQb2QuTJdhUVui7Z8KU5LwURpPhFa5vixuvFkSYUw/exec', {
+                                method: "POST",
+                                body: data
+                            })
+                          .then(response => alert("Thanks for submitting your demsnd!"))
+                        .then(res => res.text())
+                        .then(data => {
+                           document.querySelector("#msg").innerHTML = data;
+                           document.querySelector("#sub").value = "Submit"
+                                 .then(error => {
+                            btn.disabled = false
+            btn.innerHTML = "Submit"
+                      alert('Error!', error.message)})
+                         });
+                  })
+                 </script>
+                   </div>
+                  <script src="/app.js"></script>
 
 
 
@@ -976,12 +988,12 @@ RRB NBL NEPAL RASHTRA
 </div>
 <div class="col-sm-6">
   <div class="e-box">
-  <i class="icon-arrow-graph-up-right fa-lg"></i> <a href="https://www.ilovepdf.com/pdf_to_excel" target="_banner">Convert pdf to excel</a>
+  <i class="fas fa-anchor"></i></i> <a href="https://www.ilovepdf.com/pdf_to_excel" target="_banner">Convert pdf to excel</a>
   </div>
 </div>
 <div class="col-sm-6">
   <div class="e-box">
-  <i class="icon-arrow-graph-up-right fa-lg"></i> <a href="https://shamser.info.np/quiz_App3/quiz_app.html" target="_banner">TSC GK App</a>
+ <i class="fab fa-accusoft"></i><a href="https://shamser.info.np/quiz_App3/quiz_app.html" target="_banner">TSC GK App</a>
   </div>
 </div>
 
