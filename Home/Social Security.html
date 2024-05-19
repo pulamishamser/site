@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -547,6 +546,61 @@ myModal{
     <a data-content-id="$page.id" style="display: none;"></a>
     <span></span>
 </div>
+
+
+$(document).ready(function () {
+    var username = $('meta[name=username]').attr('content')
+    var contextPath = $('meta[name=context-path]').attr('content')
+    if (username !== "") {
+        var likeElements = $('.like-container')
+        likeElements.find('a').show()
+        likeElements.find('a').on('click', function(e) {
+            e.preventDefault()
+            var linkElement = $(e.target)
+            if ($(e.target).data('content-id')) {
+                pageId = $(e.target).data('content-id')
+            }
+            $.ajax({
+                url: contextPath + '/rest/likes/1.0/content/' + pageId + '/likes',
+                type: linkElement.is('.liked') ? 'DELETE' : 'POST',
+                contentType: 'application/json'
+            }).done(function(data, textStatus, jqXHR) {
+                linkElement.toggleClass('liked')
+                linkElement.text(linkElement.is('.liked') ? 'Unlike' : 'Like')
+            })
+            return false
+        })
+        likeElements.each(function(index, likeElement) {
+            var likeElementLink = $(likeElement).find('a')
+            var likeElementText = $(likeElement).find('span')
+            pageId = likeElementLink.data('content-id') || pageId
+            $.get(contextPath + '/rest/likes/1.0/content/' + pageId + '/likes').done(function(data) {
+                var isLiked = false
+                $.each(data.likes, function(index, like) {
+                    if (like.user && like.user.name === username) {
+                        isLiked = true
+                        return false
+                    }
+                })
+                if (isLiked) {
+                    likeElementLink.addClass('liked')
+                    likeElementLink.text('Unlike')
+                } else {
+                    likeElementLink.text('Like')
+                }
+                likeElementText.text(data.likes.length +' people like this content')
+            })
+        })
+    }
+});
+
+
+
+
+
+
+
+
     
 <marquee bgcolor=white direction=right><font size=2 color=red><a href="#">यस वेभसाईटमा बिज्ञापन दिएर व्यापार, व्यवसाय, पेशा, स्कुल आदिको प्रचारप्रसार गर्नुहोस्  ।</font></a></marquee> 
 <marquee bgcolor=white direction=left><font size=2 color=red>तपाईसँग कुनै सामाचार अनुसन्धान तथा लेख रचनाहरु छन् भने यस साइटमा प्रकासन गर्नुहोला । </font></marquee> 
