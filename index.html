@@ -10,6 +10,20 @@
 
 
 
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="popbox/js/popbox.js" defer></script><!--requires jQuery
+
+
+
+
+
+
+
+
+	
+
+
 <!-- BEGIN SHAREAHOLIC CODE -->
 <link rel="preload" href="https://cdn.shareaholic.net/assets/pub/shareaholic.js" as="script" />
 <meta name="shareaholic:site_id" content="2415f1635269c166f2725f6cc07ac97f" />
@@ -579,6 +593,36 @@ Add your record in portfolio.</a>
 
     </div>
 </hr>
+
+
+
+
+<script>
+// <![CDATA[
+doInit(function() {
+  if (typeof $=="undefined") return 1;
+
+  PopBox.init({
+    auto_show: 5000,         // in milliseconds. 15000 milliseconds = 15 seconds. 0 = disabled.
+    auto_close: 60000,        // in milliseconds. 60000 = 60 seconds. 0 = disabled.
+    show_on_scroll_start: 48, // starting scroll position in percents, between 0% and 100%. Both 0 = disabled.
+    show_on_scroll_end: 52,   // ending scroll position. Eg 40..60 means that popbox will appear when any part of page between 40% and 60% is appeared in the viewport.
+    closeable_on_dimmer: true,
+    auto_start_disabled: false,
+  });
+}, 1);
+// ]]>
+</script>
+
+
+
+
+
+
+
+
+
+	 
 <hr>
 <div class="container cmspage">
  <div class="row">
