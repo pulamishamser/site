@@ -149,9 +149,15 @@ Get blank markslip file</a>
         </button>  </div>
 	          <div class="modal-body">
 
-<input type="button" value="Reload Page" onClick="document.location.reload(true)">
+<script>
+export const App = () => {
+    const refresh = () => window.location.reload(true)
 
-			  
+    return (
+        <button onClick={refresh}> Refresh <img src="index/images/reload.png"></button>
+    )
+}
+</script>			  
  <ul>
  <li>
                            
