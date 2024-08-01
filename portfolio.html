@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!----------
+Project Name: Modern Portfolio Website
+Description: A complete responsive modern portfolio website design
+             by using HTML CSS and Vanilla JavaScript from scratch.
+Author: Md Al Amin Hossen
+Github: https://github.com/MdRasen
+License: MIT License
+Copyright: 2023 ©MdRasen 
+---------->
+
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+  <!-- Custom CSS -->
+    <!-- popup -->
+<link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
+
+
+<!----share button---->
+<script type='text/javascript' src='../platform-api.sharethis.com/js/sharethis.js#property=5b5b234df5aa6d001130d104&product=inline-share-buttons' async='async'></script>
+<div id="fb-root"></div>
+<script>
+      (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = '../connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    </script>            
+
+
+
+
+<!----<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" defer></script>--->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-163260228-1"></script>
+<script>
+  window.OneSignal = window.OneSignal || [];
+  OneSignal.push(function() {
+    OneSignal.init({
+      appId: "2dcf0fae-27c7-4c6e-a29e-f9a9ffb3a9e5",
+    });
+  });
+</script>
+
+
+  <link rel="stylesheet" href="index/css/style.css" />
+  <link rel="stylesheet" href="index/css/blog-single.css">
+  <link rel="stylesheet" href="index/css/skins/color-1.css" />
+  <link rel="stylesheet" type="text/css" href="index/popbox/css/popbox.css" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+  <!-- Style Switcher -->
+  <link rel="stylesheet" href="css/skins/color-1.css" class="alternate-style" title="color-1" disabled />
+  <link rel="stylesheet" href="css/skins/color-2.css" class="alternate-style" title="color-2" disabled />
+  <link rel="stylesheet" href="css/skins/color-3.css" class="alternate-style" title="color-3" disabled />
+  <link rel="stylesheet" href="css/skins/color-4.css" class="alternate-style" title="color-4" disabled />
+  <link rel="stylesheet" href="css/skins/color-5.css" class="alternate-style" title="color-5" disabled />
+
+  <link rel="stylesheet" href="index/css/style-switcher.css" />
+  <!-- Favicon -->
+<!---Vertical Share button---->
+<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=618f78d6f2438b001a7e8872&product=image-share-buttons' async='async'></script>
+
+
+  <link rel="icon" type="image/ico" href="https://shamser.info.np/HomePage/favicon.ico"/>
+
+
+
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta property="og:title" content="कुन गाडीमा चढ्यो होला ?कुन घुम्ती काट्यो होला ? ढाट राखिदेऊ न ! "/>
+<meta property="fb:app_id" content="337689599425397" />
+<meta property="Ads:app_id" content="1194171395285810" />
+  
+<!----API--->
+<script src="https://unpkg.com/@lyket/widget@latest/dist/lyket.js?apiKey=[6d579ba8-7a04-4c3b-8b2e-c1cb72c2c015:eab7be6e-6163-4712-b228-1484a5b08353]"></script>
+<meta property="og:url" content="https://shamser.info.np/"/>
+<meta property="og:description" content=" शिरमा ढाका टोपी, कुममा काने झोला ,गोलो चिम्सो आँखा, खुकुरी नि होला, नाम सोधे उसलाई, फूलझैँ हाँसिदेला :लिजेन्ड कवि श्रवण मुकारुङ :"/>
+<meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhw3Ei2TPM7aB4FSYOfT3Dj_HxH0z2Rjm5Gxmj1pz7RGFPQGvnFsP9dfPL96KjAI9sSHaRLY0jbCj5MB5hllAW_91e7V59cdJK5gp7XGwO-QJBmOT4UkxPBCtGZlOpWfNg5FBuwzqSDyoTEZirgWn6OV0LBpmRMvtcULzUuGWhuHNZiXwEziaKhH48TreE/w572-h379/rai1.JPG"/>
+  
+<title>राई माइलाले गाउँ किन छाडेछ</title>
+</head>
+
+
+<script>
+  $(document).ready(function(){
+    $("#myModal").modal('show');
+  });
+</script>
+
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="popbox/js/popbox.js" defer></script><!--requires jQuery-->
+
+<!-- see https://github.com/utilmind/on-ready-js -->
+<script>
+// <![CDATA[
+wReady=function(f,w){var r=document.readyState;w||r!="loading"?r!="complete"?window.addEventListener("load",function(){f(3)}):f(3):document.addEventListener("DOMContentLoaded",function(){f(2)&&wReady(f)})}
+doInit=function(f,w){(w>1||(w&&document.readyState=="loading")||f(1))&&wReady(f,w>1)}
+// ]]>
+</script>
+<style>
+  body { font-family: 'Quicksand'; padding: 2em; }
+</style>
+</head>
+
+
+
+
+<body>
+
+<p><a href="#" onClick="PopBox.show(); return false;">Open popup "manually"</a> <a href="#" onClick="PopBox.enable_auto(); return false;">Enable auto-popups</a> (works if started disabled)</p>
+
+
+
+
+<div class="popbox">
+  <div class="dimmer"></div>
+
+  <div class="modal">
+    <div class="outgap">
+
+      <div class="workarea">
+        <div class="close_button">&times;</div>
+        
+
+        <form>
+
+          <input type="submit" style="position: absolute; left: -9999px" />
+<div style="text-align: center;">
+ <h1>हामी नयाँ फिचरकासाथ आएका छौं ।</h1>
+  तपाईले अौषति खानु भयो ? अति आवश्यक कुरा बिर्सरहनु भएको त छैन? 
+<video width="100%" height="200" controls autoplay>
+  <source src="https://shamser.info.np/Home/About.mp4" type="video/mp4">
+  <source src="https://shamser.info.np/Home/About.ogg" type="video/ogg">
+  Your browser does not support the video tag.
+</video>  </div>
+
+<!---CodeHim.com----------->
+            <h1 style="text-align: center;"></h1>
+ <a href="Get free service.html" >Get Free Service</a>&nbsp;&nbsp;/&nbsp;&nbsp;  
+<a href="https://shamser.info.np/Entry_Form/Service_Demand.html" >Get Payable Service</a>  
+
+        </form>
+        <div style="text-align: center;"><a role="button" href="#" onClick="PopBox.hide(); return false;">Close</a></div>
+
+        <div class="close_msg" style="text-align: center;">Popup will be auto closed in <b class="close_countdown"></b> seconds.</div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// <![CDATA[
+doInit(function() {
+  if (typeof $=="undefined") return 1;
+
+  PopBox.init({
+    auto_show: 5000,         // in milliseconds. 15000 milliseconds = 15 seconds. 0 = disabled.
+    auto_close: 60000,        // in milliseconds. 60000 = 60 seconds. 0 = disabled.
+    show_on_scroll_start: 48, // starting scroll position in percents, between 0% and 100%. Both 0 = disabled.
+    show_on_scroll_end: 52,   // ending scroll position. Eg 40..60 means that popbox will appear when any part of page between 40% and 60% is appeared in the viewport.
+    closeable_on_dimmer: true,
+    auto_start_disabled: false,
+  });
+}, 1);
+// ]]>
+</script>
+<body class="dark">
+  <!-- Main Container Start -->
+  <div class="main-container">
+    <!-- Aside Start -->
+    <div class="aside">
+        <div class="logo">
+        
+      </div>
+      <div class="nav-toggler">
+        <span></span>
+      </div>
+
+      <ul class="nav">
+        <li>
+          <a href="index.html#home" class="active"><i class="fa fa-home"></i>Home</a>
+        </li>
+        <li>
+          <a href="#about"><i class="fa fa-user"></i> About</a>
+        </li>
+        <li>
+          <a href="#service"><i class="fa fa-list"></i> Services</a>
+        </li>
+        <li>
+          <a href="#portfolio"><i class="fa fa-briefcase"></i> Portfolio</a>
+        </li>
+        <li>
+          <a href="#blog"><i class="fa-brands fa-readme"></i> Blog</a>
+        </li>
+        <li>
+          <a href="#contact"><i class="fa fa-comments"></i> Contact</a>
+        </li>
+
+      </ul>
+    </div>
+    <!-- Aside End -->
+    <!-- Main Content Start -->
+    <div class="main-content">
+
+      <!-- Home Section Start -->
+      <section class="home active section" id="home">
+        <div class="container">
+          <div class="row">
+
+            <div class="home-info padd-15">
+              <h3 class="hello">
+             Welcome to you in our website <span class="name">shamser.info.np</span>
+              </h3>
+
+ <div class="row">
+            <div class="about-content padd-15">
+
+
+            <h3 class="my-profession">
+                I'm a <span class="typing">Government Teacher</span>
+              </h3>
+              <p>
+                I'm a Community school teacher with experience for over 21 ears.
+                My expertise is to support educational and technical to my students and school.</p>
+
+                </div>
+              </div>
+              
+            </div>
+
+            <div class="home-img padd-15">
+              <img src="index/images/hero.png" alt="hero" />
+            </div>
+
+          </div>
+
+
+<h5 class="padding-bottom">केही भन्नु छ भने कृपाय यहाँ कमेन्टबक्समा लेखिदिनुहोला </h5>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0&appId=5825015304292841" nonce="zyVr3meA"></script>
+<div class="fb-comments" data-href="https://shamser.info.np/" data-width="" data-numposts="25"></div>
+        </div>
+
+      </section>
+      <!-- Home Section End -->
+
+      <!-- About Section Start -->
+      <section class="about section" id="about">
+        <div class="container">
+          <div class="row">
+            <div class="section-title padd-15">
+              <h2>About Me</h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="about-content padd-15">
+              <div class="row">
+                <div class="about-text padd-15">
+
+            <h3 class="my-profession">
+                I'm a <span class="typing">Government Teacher</span>
+              </h3>
+              <p>
+                I'm a Community school teacher with experience for over 21 ears.
+                My expertise is to support educational and technical to my students and school.</p>
+
+                </div>
+              </div>
+              <div class="row">
+                <div class="personal-info padd-15">
+                  <div class="row">
+                    <div class="info-item padd-15">
+                      <p>Developed in : <span>1-january, 2000</span></p>
+                    </div>
+
+                    <div class="info-item padd-15">
+                      <p>Website : <span>shamser.info.np</span></p>
+                    </div>
+                    <div class="info-item padd-15">
+                      <p>Email : <span>shamserinfo_np@gmail.com</span></p>
+                    </div>
+                    <div class="info-item padd-15">
+                      <p>Master Degree : <span> in EPM & Pol-Sci.</span></p>
+                    </div>
+                    <div class="info-item padd-15">
+                      <p>Phone : <span>+977-1234567890</span></p>
+                    </div>
+                    <div class="info-item padd-15">
+                      <p>Residence : <span>Lalbandi-7</span></p>
+                    </div>
+                    <div class="info-item padd-15">
+                      <p>Services : <span>Available</span></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="buttons padd-15">
+                      <a href="#" class="btn">Download CV</a>
+                      <a href="#contact" class="btn hire-me">Contact Me</a>
+                    </div>
+                  </div>
+                </div>
+
+
+                        </div>
+                      </div>
+
+
+      </section>
+      <!-- About Section End -->
+
+      <!-- Services Section Start -->
+      <section class="service section" id="service">
+        <div class="container">
+          <div class="row">
+            <div class="section-title padd-15">
+              <h2>Services</h2>
+            </div>
+          </div>
+          <div class="row">
+
+
+ <!-- Services item -->
+            <div class="service-item padd-15">
+              <div class="service-item-inner">
+                <div class="icon">
+                  <i class="fa fa-laptop-code"></i>
+                </div>
+                <h4>अनलाइन रिजल्ट डेमो</h4>
+                <p>
+                   <a href="https://shamser.info.np/response_pop.html" target="अनलाइन रिजल्ट ">
+         <img src="index/portfolio/portfolio-3.png" alt="font Converter" width ="200" height="90"></a>
+                </p>
+
+              </div>
+            </div>
+            <!-- Services item -->
+            <div class="service-item padd-15">
+              <div class="service-item-inner">
+                <div class="icon">
+                  <i class="fa fa-pencil fa-fw"></i>
+                </div>
+                <h4>Service Entry_Form</h4>
+                <p>
+                   <a href="https://shamser.info.np/Entry_Form/our_service.html" target="our_service">
+                         <img src="index/portfolio/portfolio-details-3.png" alt="portfolio" width ="200" height="90"></a>
+       
+                </p>
+              </div>
+            </div>
+
+     <!-- Services item -->
+            <div class="service-item padd-15">
+              <div class="service-item-inner">
+                <div class="icon">
+                  <i class="fa fa-font"></i>
+                </div>
+                <h4> Apply_Form</h4>
+                <p>
+                   <a href="https://shamser.info.np/Entry_Form/Apply_Form.html" target="Apply_Form">
+
+        <img src="index/portfolio/portfolio-5.png" alt="font Converter" width ="200" height="90"></a>
+                </p>
+              </div>
+            </div>
+            <!-- Services item -->
+            <div class="service-item padd-15">
+              <div class="service-item-inner">
+                <div class="icon">
+                  <i class="fa fa-laptop-code"></i>
+                </div>
+                <h4>Font Converter</h4>
+                <p>
+                   <a href="https://shamser.info.np/Shaikshik_Sansar/sobiztrend.com/preeti_to_unicode.html" 
+                   target="Preeti to unicode">
+
+                      <img src="https://tse2.mm.bing.net/th?id=OIP.jBflrP4HbijiRaITw1pGygAAAA&pid=Api&P=0&h=220" alt="font Converter" width ="200" height="90"></a>
+                </p>
+              </div>
+            </div>
+            <!-- Services item -->
+            <div class="service-item padd-15">
+              <div class="service-item-inner">
+                <div class="icon">
+                  <i class="fa fa-pencil fa-fw"></i>
+                </div>
+                <h4>Number to Words</h4>
+                <p>
+                   <a href=" https://shamser.info.np/Number_to_Text.html" 
+                   target="Preeti to unicode">
+
+                         <img src="https://www.techyv.com/sites/default/users/Images-Folder/words-to-number-converter.png" alt="font Converter" width ="200" height="90"></a>
+       
+                </p>
+              </div>
+            </div>
+            <!-- Services item -->
+            <div class="service-item padd-15">
+              <div class="service-item-inner">
+                <div class="icon">
+                  <i class="fa fa-book"></i>
+                </div>
+                <h4>Act & Regulation</h4>
+                <p>
+        <a href="https://shamser.info.np/Act&Rules.html"> </a>
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREf0S-Qjh-OvX19gsai_eklOtcz__nfMLGiA&s" alt="font Converter" width ="200" height="90"></a>
+
+                </p>
+              </div>
+            </div>
+            <!-- Services item -->
+            <div class="service-item padd-15">
+              <div class="service-item-inner">
+                <div class="icon">
+                  <i class="fa fa-accusoft"></i>
+                </div>
+                <h4>Date converter</h4>
+
+                <p>
+<iframe src="https://www.hamropatro.com/widgets/dateconverter.php" frameborder="0" scrolling="no" marginwidth="0" marginheight="0" style="border:none; padding="0";overflow:hidden; width:220px; height:90px;" allowtransparency="true">Convert date</iframe>
+
+                </p>
+              </div>
+            </div>
+            <!-- Services item -->
+            <div class="service-item padd-15">
+              <div class="service-item-inner">
+                <div class="icon">
+                  <i class="fa fa-bullhorn"></i>
+                </div>
+                <h4>Quiz App</h4>
+                <p>
+  <a href="https://shamser.info.np/quiz_App3/quiz_app.html"></a>
+<img src="ndex/portfolio/portfolio-details-1.png" alt="Quiz" width ="200" height="90"></a>
+                </p>
+              </div>
+            </div>
+
+
+            <!-- Services item -->
+            <div class="service-item padd-15">
+              <div class="service-item-inner">
+                <div class="icon">
+                  <i class="fa fa-bullhorn"></i>
+                </div>
+                <h4>Quiz App</h4>
+                <p>
+  <a href="https://shamser.info.np/quiz_App3/quiz_app.html"></a>
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBeVz1aaV8tn6-7Maz-rz6GoJKH8iswIKXvQ&s" alt="Quiz" width ="200" height="90"></a>
+                </p>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </section>
+      <!-- Services Section End -->
+
+      <!-- Portfolio Section Start -->
+      <section class="portfolio section" id="portfolio">
+        <div class="container">
+          <div class="row">
+            <div class="section-title padd-15">
+              <h2>Portfolio</h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="portfolio-heading padd-15">
+              <h2>My Projects :</h2>
+            </div>
+          </div>
+          <div class="row">
+            <!-- Portfolio item -->
+            <div class="portfolio-item padd-15">
+              <div class="portfolio-item-innner shadow-dark">
+                <div class="portfolio-img">Online Result
+                  <img src="index/portfolio/portfolio-1.png" alt="portfolio-1" />
+                </div>
+              </div>
+            </div>
+            <!-- Portfolio item -->
+            <div class="portfolio-item padd-15">
+              <div class="portfolio-item-innner shadow-dark">
+                <div class="portfolio-img">Gradesheet
+                  <img src="index/portfolio/portfolio-2.png" alt="portfolio-2"/>
+                </div>
+              </div>
+            </div>
+            <!-- Portfolio item -->
+            <div class="portfolio-item padd-15">
+              <div class="portfolio-item-innner shadow-dark">
+                <div class="portfolio-img"> Online Result
+                  <img src="index/portfolio/portfolio-3.png" alt="portfolio-3" />
+                </div>
+              </div>
+            </div>
+            <!-- Portfolio item -->
+            <div class="portfolio-item padd-15">
+              <div class="portfolio-item-innner shadow-dark">
+                <div class="portfolio-img">Marks Entry
+                  <img src="index/portfolio/portfolio-4.png" alt="portfolio-4" />
+                </div>
+              </div>
+            </div>
+            <!-- Portfolio item -->
+            <div class="portfolio-item padd-15">
+              <div class="portfolio-item-innner shadow-dark">
+                <div class="portfolio-img">Action Research
+                  <img src="index/portfolio/portfolio-5.png" alt="portfolio-5" />
+                </div>
+              </div>
+            </div>
+            <!-- Portfolio item -->
+            <div class="portfolio-item padd-15">
+              <div class="portfolio-item-innner shadow-dark">
+                <div class="portfolio-img">Markslip
+                  <img src="index/portfolio/portfolio-6.png" alt="portfolio-6" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Portfolio Section End -->
+
+      <!-- Blog Section Start -->
+      <section class="blog section" id="blog">
+        <div class="container">
+          <div class="row">
+            <div class="section-title padd-15">
+              <h2>Blog</h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="blog-heading padd-15">
+              <h2>Welcome in our Blogs :</h2>
+            </div>
+          </div>
+          <div class="row">
+            <!-- Blog item -->
+            <div class="blog-item padd-15">
+              <div class="blog-item-inner">
+                <div class="image">
+                  <img src="https://www.webtvkhabar.com/media-file/images/2022/02/1645340543-UjYEW.jpg" alt="">
+                </div>
+                <div class="blog-info">
+                  <div class="category">
+                    <a href="https://lauro-media.blogspot.com/2022/04/blog-post_30.html">
+                      <p><i class="fa-sharp fa-solid fa-book-open-reader"></i> सामुदायिक विद्यालयमा शैक्षिक गुणस्तर वृद्धि</p>
+                    </a>
+                  </div>
+                  <div class="date">
+                    <p><i class="fa-solid fa-calendar-days"></i> May 23, 2024</p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+
+
+            <!-- Blog item -->
+            <div class="blog-item padd-15">
+              <div class="blog-item-inner">
+                <div class="image">
+                   <a href="https://lauro-media.blogspot.com/2024/05/10th-zero-plus-international-film.html">
+                  <img src="https://nawalpurtoday.com/wp-content/uploads/2023/09/photo_2023-09-30_15-54-01.jpg" alt="">
+                </div>
+                <div class="blog-info">
+                  <div class="category">
+                   
+                      <p><i class="fa-sharp fa-solid fa-book-open-reader"></i> प्रभावशाली महिला’ को सूचीमा मधेशकी छोरी कलादुत सरिता साह</p>
+                    </a>
+                  </div>
+                  <div class="date">
+                    <p><i class="fa-solid fa-calendar-days"></i> May 23, 2024</p>
+                  </div>
+                </div>
+               
+              </div>
+            </div>
+            <!-- Blog item -->
+            <div class="blog-item padd-15">
+              <div class="blog-item-inner">
+                <div class="image">
+             <a href="https://lauro-media.blogspot.com/2024/07/blog-post.html">
+                  <img src="https://i9.ytimg.com/vi_webp/HKKhKKtCvJE/mqdefault.webp?v=66a26352&sqp=CMD7mbUG&rs=AOn4CLD9vW7VBZivkmkuLpsxbtyFZG8RwA" alt="">
+                </div>
+                <div class="blog-info">
+                  <div class="category">
+                  
+                      <p><i class="fa-sharp fa-solid fa-book-open-reader"></i> संसदलाई खसीबोका बेच्ने , टाउकोको मूल्य तोक्ने, गणतन्त्रलाई नरिवल बनाउने सुत्केरीदेखि.  #सुदनकिराँती</p>
+                    </a>
+                  </div>
+                  <div class="date">
+                    <p><i class="fa-solid fa-calendar-days"></i>  July 24, 2024</p>
+                  </div>
+                </div>
+         
+              </div>
+            </div>
+            <!-- Blog item -->
+            <div class="blog-item padd-15">
+              <div class="blog-item-inner">
+                <div class="image">
+                  <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjHYVfsAizX4TrsCLT_rZ3zQlp64XqIk8tdzL7reF0LPT_fVeC3-gu8rEGISblwuKK1S7Uo1gcHyJaTK16YJmcVv5ZpbON-kLZk99L-UHhKMdm6u9hSYPKuJo0bqfB8IiSS2qR6khxw0SI/s1600/Abacus.jpg" alt="">
+                </div>
+                <div class="blog-info">
+                  <div class="category">
+                    <a href="https://shamser-tech.blogspot.com/2024/05/blog-post_35.html">
+                      <p><i class="fa-sharp fa-solid fa-book-open-reader"></i> History Of Computer </p>
+                    </a>
+                  </div>
+                  <div class="date">
+                    <p><i class="fa-solid fa-calendar-days"></i>Saturday, May 18, 2024</p>
+                  </div>
+                </div>
+        
+              </div>
+            </div>
+            <!-- Blog item -->
+            <div class="blog-item padd-15">
+              <div class="blog-item-inner">
+                <div class="image">
+                  <a href="https://lauro-media.blogspot.com/2023/01/blog-post_14.html">
+                  <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgGWp54d6ZZcOBKYOdKTJb0TCWmRZ_GnktfFXXu73TbljoSAL6MelkOswtxIDcxN6H_VBY5UqqNWqKd5waBG-3Ga6TqCxSOQGE6uzQSb5EsJqR2yaYLOQbxNTjiisVMdkyze2rVJ3hLajeLpbIddBfMGeaHvZGkeXghNfv68zk-qUkub2tLe8T3sBG1/w524-h415/dhan%20bdr.jpg" alt="">
+                </div>
+                <div class="blog-info">
+                  <div class="category">
+                    
+                      <p><i class="fa-sharp fa-solid fa-book-open-reader"></i> रित्तो हात लिएर जागरिबाट अवकाश पाएका</p>
+                    </a>
+                  </div>
+                  <div class="date">
+                    <p><i class="fa-solid fa-calendar-days"></i> January 14, 2023</p>
+                  </div>
+                </div>
+>
+              </div>
+            </div>
+            <!-- Blog item -->
+            <div class="blog-item padd-15">
+              <div class="blog-item-inner">
+                <div class="image">
+                  <a href="https://lauro-media.blogspot.com/2024/07/youtube-video-player.html">
+                  <img src="images/emis.jpg" alt="">
+                </div>
+                <div class="blog-info">
+                  <div class="category">
+                    
+                      <p><i class="fa-sharp fa-solid fa-book-open-reader"></i> IEMIS सम्बन्धी Virtual Meeting मा EMIS मा नाम छुटेका र कक्षा ११  १२ को कक्षा अपडेटको िवषयमा पालिकाहरुलाई निर्देशन दिँदै CEHRD का निर्देशक </p>
+                    </a>
+                  </div>
+                  <div class="date">
+                    <p><i class="fa-solid fa-calendar-days"></i> 25 July, 2024</p>
+                  </div>
+                </div>
+       
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+       <!-- Blog Section End -->
+      <h3 class="contact-title padd-15">Do You Have Any Questions?</h3>
+          <h4 class="contact-sub-title padd-15">I'M AT YOUR SERVICE</h4>
+      <!-- Contact Section Start -->
+      <section class="contact section" id="contact">
+        <div class="container">
+          <div class="row">
+            <div class="section-title padd-15">
+              <a href="https://www.jotform.com/form/231287552368463">
+              <h2>Contact us</h2></a> 
+
+            </div>
+          </div>
+    
+          <div class="row">
+            <!-- Contact info item-->
+            <div class="contact-info-item padd-15">
+              <div class="icon"><i class="fa fa-phone"></i></div>
+              <h4>Call Us On</h4>
+              <p>+977-9817826200</p>
+            </div>
+            <!-- Contact info item-->
+            <div class="contact-info-item padd-15">
+              <div class="icon"><i class="fa fa-map-marker-alt"></i></div>
+              <h4>Office</h4>
+           <a href="https://goo.gl/maps/ZmaMJm6GniE3aNmz5">
+              <p>Dim Janta Secondary School</p></a>
+            </div>
+            <!-- Contact info item-->
+            <div class="contact-info-item padd-15">
+              <div class="icon"><i class="fa fa-envelope"></i></div>
+              <h4>Email</h4>
+              <a href="mailto:shamserpulami500@gmail.com">
+              <p>info@shamser.com.np</p></a>
+            </div>
+            <!-- Contact info item-->
+            <div class="contact-info-item padd-15">
+              <div class="icon"><i class="fa fa-globe-europe"></i></div>
+              <h4>Website</h4>
+              <a href="https://shamser.info.np/">
+              <p>shamser.info.np</p></a>
+            </div>
+          </div>
+          <i class="fa fa-envelope">
+            <a href="https://www.jotform.com/form/231287552368463">
+          <h3 class="contact-title padd-15">Send me message</h3> </a></i>
+          <h4 class="contact-sub-title padd-15">
+            I'M VERY RESPONSIVE TO MESSAGES
+          </h4>
+         
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Contact Section End -->
+
+
+
+      <!-- Contact Section End -->
+
+
+
+
+
+
+
+    </div>
+    <!-- Main Content End -->
+  </div>
+  <!-- Main Container End -->
+  <!-- Style Switcher Start -->
+  <div class="style-switcher">
+    <div class="style-switcher-toggler s-icon">
+      <i class="fas fa-cog fa-spin"></i>
+    </div>
+    <div class="day-night s-icon">
+      <i class="fas"></i>
+    </div>
+    <h4>Theme Colors</h4>
+    <div class="colors">
+      <span class="color-1" onclick="setActiveStyle('color-1')"></span>
+      <span class="color-2" onclick="setActiveStyle('color-2')"></span>
+      <span class="color-3" onclick="setActiveStyle('color-3')"></span>
+      <span class="color-4" onclick="setActiveStyle('color-4')"></span>
+      <span class="color-5" onclick="setActiveStyle('color-5')"></span>
+    </div>
+  </div>
+  <!-- Style Switcher End -->
+  <!-- Custom JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"
+    referrerpolicy="no-referrer"></script>
+  <script src="index/js/script.js"></script>
+  <script src="index/js/style-switcher.js"></script>
+</body>
+
+</html>
