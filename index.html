@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html xmlns="http://www.w3.org/1999/xhtml">
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -140,38 +140,34 @@ var cid = 9492;
     </div>
   </header>
 
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"></script>
+<script type="text/javascript">
+$(function() {
+setTimeout(function() { $("#testdiv").fadeOut(1500); }, 5000)
+$('#btnclick').click(function() {
+$('#testdiv').show();
+setTimeout(function() { $("#testdiv").fadeOut(1500); }, 5000)
+})
+})
+</script>
+<style type="text/css">
+.content
+{
+border: 2px solid Red;
+color: #008000;
+width: 100%;
+font-family:Calibri;
+font-size:16pt
+}
+</style>
+</head>
+<body>
+<input type="button" id="btnclick" value="Show " />
+<div class="content" id="testdiv" class="">
 
- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="http://www.jacklmoore.com/colorbox/jquery.colorbox.js"></script>
-    <script>
-      function openColorBox(){
-        $.colorbox({
-          iframe:true,
-          width:"80%",
-          height:"80%",
-          href: "http://shamser.info.np",
-          onLoad: function() {
-            $('#cboxClose').remove();
-            setTimeout(function(){
-              $(window).colorbox.close();
-            }, 3000)
-          }
-        });
-      }
+   <img src="https://shamser.info.np/Append/img/hero-bg.jpg" width="100%" alt="" data-aos="fade-in"> </div>
 
-      function countDown(){
-        seconds--
-        $("#seconds").text(seconds);
-        if (seconds === 0){
-          openColorBox();
-          clearInterval(i);
-        }
-      }
-
-      var seconds = 5,
-          i = setInterval(countDown, 2000);
-    </script>
-
+</div>
 	
   <main class="main">
 
