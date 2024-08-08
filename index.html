@@ -21,10 +21,35 @@
   <?!= HtmlService.createHtmlOutputFromFile('css').getContent(); ?>
   
 </head>  
-  
+ <script type="text/javascript">
+$(function() {
+setTimeout(function() { $("#testdiv").fadeOut(1500); }, 5000)
+$('#btnclick').click(function() {
+$('#testdiv').show();
+setTimeout(function() { $("#testdiv").fadeOut(1500); }, 5000)
+})
+})
+</script>
+<style type="text/css">
+.content
+{
+border: 2px solid Red;
+color: #008000;
+width: 100%;
+font-family:Calibri;
+font-size:16pt
+}
+</style>
+
+<input type="button" id="btnclick" value="Show " />
+<div class="content" id="testdiv" class="">
+
+   <img src="https://shamser.info.np/Append/img/hero-bg.jpg" width="100%" alt="" data-aos="fade-in"> </div>
+
+</div>
+ 
 
 <body class="animated fadeIn">
-
   <div class="d-flex flex-column min-vh-100">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container">
@@ -141,58 +166,7 @@
         <h1>Contact Page</h1>
       </div>
     </div>
-<script type="text/javascript">
-$(function() {
-setTimeout(function() { $("#testdiv").fadeOut(1500); }, 5000)
-$('#btnclick').click(function() {
-$('#testdiv').show();
-setTimeout(function() { $("#testdiv").fadeOut(1500); }, 5000)
-})
-})
-</script>
-<style type="text/css">
-.content
-{
-border: 2px solid Red;
-color: #008000;
-width: 100%;
-font-family:Calibri;
-font-size:16pt
-}
-</style>
-
-<input type="button" id="btnclick" value="Show " />
-<div class="content" id="testdiv" class="">
-
-   <img src="https://shamser.info.np/Append/img/hero-bg.jpg" width="100%" alt="" data-aos="fade-in"> </div>
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Recent Posts Section -->
+   <!-- Recent Posts Section -->
     <section id="recent-posts" class="recent-posts section">
  <small class="float-right" style="padding-top: 4px">
 <iframe scrolling="no" border="0" frameborder="0" marginwidth="0" marginheight="2" allowtransparency="true" src="https://www.ashesh.com.np/linknepali-time.php? time_only=no&font_color=333333&aj_time=yes&font_size=14&line_brake=1&api=282198l193" width="190" height="43"></iframe> 
@@ -267,18 +241,6 @@ font-size:16pt
 
       </div>
     </div>
-
-  </footer>
-
-
-
-
-
-
-
-
-
-    </footer>
   </div>
 
   <!-- Scripts -->
