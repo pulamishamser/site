@@ -46,8 +46,31 @@
   ======================================================== -->
 </head>
 
-<body class="index-page">
 
+<script type="text/javascript">
+$(function() {
+setTimeout(function() { $("#testdiv").fadeOut(1500); }, 5000)
+$('#btnclick').click(function() {
+$('#testdiv').show();
+setTimeout(function() { $("#testdiv").fadeOut(1500); }, 5000)
+})
+})
+</script>
+<style type="text/css">
+.content
+{
+border: 2px solid Red;
+color: #008000;
+width: 100%;
+font-family:Calibri;
+font-size:16pt
+}
+</style>
+
+<input type="button" id="btnclick" value="show" />
+<div class="content" id="testdiv" class="">
+ <img src="https://media.istockphoto.com/id/597959396/photo/students-sit-facing-camera-in-a-modern-university-classroom.jpg?s=1024x1024&w=is&k=20&c=rGNUZtYQdzqM4nkTSo1dhswP7T9o81X_UKay1xecEXI=" width="10%" alt="" data-aos="fade-in"> </div>  
+<body class="index-page">
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
 
