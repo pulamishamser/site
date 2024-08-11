@@ -24,14 +24,40 @@
   <?!= HtmlService.createHtmlOutputFromFile('css').getContent(); ?>
   
 </head>  
+<script type="text/javascript">
+$(function() {
+setTimeout(function() { $("#testdiv").fadeOut(1500); }, 5000)
+$('#btnclick').click(function() {
+$('#testdiv').show();
+setTimeout(function() { $("#testdiv").fadeOut(1500); }, 5000)
+})
+})
+</script>
+<style type="text/css">
+.content
+{
+border: 2px solid Red;
+color: #008000;
+width: 100%;
+font-family:Calibri;
+font-size:16pt
+}
+</style>
+</head>
+<body>
+<input type="button" id="btnclick" value="Show " />
+<div class="content" id="testdiv" class="">
 
-	
-	<body class="animated fadeIn">
+   <img src="https://shamser.info.np/Append/img/hero-bg.jpg" width="100%" alt="" data-aos="fade-in"> </div>
+
+</div>
+<body class="animated fadeIn">
+  <div class="d-flex flex-column min-vh-100">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container">
         <img src="Home/images/np_flag.gif" width="60" height="70"  class="img-fluid float-right" style="margin-bottom: 6px">
        <div id="overlay" style="cursor:not allowed;position: fixed; z-index: 2; background-color: rgba(0,0,0,0.5);"></div>
-           <a class="navbar-brand" href="https://shamser.info.np"><i class="fas fa-book-open"></i> <b>DASHBOARD</b></a>
+           <a class="navbar-brand" href="https://shamser.info.np"><i class="fas fa-book-open"></i> <b>shamser.info.np</b></a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -98,27 +124,10 @@
 
 	        <a href="Markslip_Form.html" class="btn btn-danger" >1.Online Form</a>
 	          <a href="Markslip.html" class="btn btn-primary" >2.Excel Form</a>
-<li class="nav-item dropdown mx-2">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown5" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-           Markslip
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown5">
-                <a class="dropdown-item" href="https://script.google.com/macros/s/AKfycbxXQtaBEhaeeIfLnW_PV-Zaw3WknUiKkZd5SNUdFhcgdMMIWmBSNiAXTobzCXkPo5i9/exec" data-id="more1">6NM Nepali</a>
-                <a class="dropdown-item" href="https://script.google.com/macros/s/AKfycbz0Hms3j5HM5sy00MftmXoA-NvnQHUldQmfO00hL6KTHUfr7MMOfMNJ5oBvODOHhkmf/exec" data-id="more2">6NM English</a>
-                <a class="dropdown-item" href="https://script.google.com/macros/s/AKfycbywbbtgEMpuLer4vbp7Uaz7qVg1ceODOqZLPfaHUkKcw2UVOO0kPs9DT9SzlrWppgmC/exec" data-id="more3">6NM Maths</a>
-    <a class="dropdown-item" href="https://script.google.com/macros/s/AKfycbzyUJvLn5SjWj2dqd70nCngRPjAWvZofWEz5YK5k5A-RN5CP1tdfhE1FgACzOURg31X/exec" data-id="more3">6NM-Science</a>
-    <a class="dropdown-item" href="https://script.google.com/macros/s/AKfycbyTIaVNKNyFiPUkm9_m0okkEGu8kpXZcdZkwGY0KWWGG2QmuNJGpuVnUyfhJKj80gkd/exec" data-id="more3">6NM-Social</a>
-
-    <a class="dropdown-item" href="https://script.google.com/macros/s/AKfycby0oG4FN2ziokok7V89f-bAj9wboGF_RdfXltpFfrEwJWRGZ-b9sQDnAs3F8xmOi8C4/exec" data-id="more3">6NM Health</a>
-
-    <a class="dropdown-item" href="https://script.google.com/macros/s/AKfycbwK-9p-ea0dlt1BJsk141B7DsQrSqSHqWIAKl0fC_3HEquMyjsPKiLrJmunCs5AqnJS/exec" data-id="more3">6NM Computer</a>
-
         </div>
       </div>
     </div>
-
-
-
+  </div>
     <!-- Content Section -->
     <div class="container my-5 flex-grow-1 d-flex flex-column justify-content-center align-items-center text-center text-white" id="main-content">
 
@@ -154,33 +163,7 @@
         <h1>Contact Page</h1>
       </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Recent Posts Section -->
+	  <!-- Recent Posts Section -->
     <section id="recent-posts" class="recent-posts section">
  <small class="float-right" style="padding-top: 4px">
 <iframe scrolling="no" border="0" frameborder="0" marginwidth="0" marginheight="2" allowtransparency="true" src="https://www.ashesh.com.np/linknepali-time.php? time_only=no&font_color=333333&aj_time=yes&font_size=14&line_brake=1&api=282198l193" width="190" height="43"></iframe> 
@@ -257,14 +240,6 @@
     </div>
 
   </footer>
-
-
-
-
-
-
-
-
 
     </footer>
   </div>
