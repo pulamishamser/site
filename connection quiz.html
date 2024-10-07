@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=utf-8 />
+    <title>glamour</title>
+    <link rel="stylesheet" href="http://www.jacklmoore.com/colorbox/example1/colorbox.css" />
+  </head>
+  <body>
+
+
+    <p>wait for <span id="seconds">5</span> seconds</p>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://www.jacklmoore.com/colorbox/jquery.colorbox.js"></script>
+    <script>
+      function openColorBox(){
+        $.colorbox({
+          iframe:true,
+          width:"100%",
+          height:"100%",
+          href: "https://script.google.com/macros/s/AKfycbwCDax2XiMMpb2Ag1NHWtwlUCjoA5cRXpCXr7BLzgFMr-IT6GM76VJXznLhuF0Mq9aD/exec",
+       
+
+          onLoad: function() {
+            $('#cboxClose').remove();
+            setTimeout(function(){
+              $(window).colorbox.close();
+            }, 15000)
+          }
+        });
+      }
+
+      function countDown(){
+        seconds--
+        $("#seconds").text(seconds);
+        if (seconds === 0){
+          openColorBox();
+          clearInterval(i);
+        }
+      }
+
+      var seconds = 5,
+          i = setInterval(countDown, 1000);
+    </script>
+  </body>
+</html>
