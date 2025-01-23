@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Sheets Data Management</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Google Sheets Data Management</h1>
+  <div class="form">
+    <label for="searchId">Enter ID to Search:</label>
+    <input type="text" id="searchId" placeholder="Enter ID">
+    <button id="searchBtn">Search</button>
+  </div>
+  
+  <div class="data">
+    <h2>Data Details</h2>
+    <div id="dataOutput">No data found</div>
+    <label for="updateValue">Update Value:</label>
+    <input type="text" id="updateValue" placeholder="Enter new value">
+    <button id="updateBtn">Update</button>
+  </div>
+
+  <script src="script.js"></script>
+
+
+  <script>
+// Configuration
+const SHEET_ID = 'YOUR_SHEET_ID';
+const API_KEY = 'YOUR_API_KEY';
+const RANGE = 'Sheet1'; // Adjust to your sheet name
+
+// DOM Elements
+const searchIdInput = document.getElementById('searchId');
+const searchBtn = document.getElementById('searchBtn');
+const dataOutput = document.getElementById('dataOutput');
+const updateValueInput = document.getElementById('updateValue');
+const updateBtn = document.getElementById('updateBtn');
+
+// Search for data by ID
+searchBtn.addEventListener('click', async () => {
+  const id = searchIdInput.value.trim();
+  if (!id) {
+    alert('Please enter an ID');
+    return;
+  }
+
+  try {
+    const response = await fetch(
+      `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${API_KEY}`
+    );
+    const data = await response.json();
+
+    // Find row with matching ID
+    const rows = data.values;
+    const header = rows[0];
+    const idIndex = header.indexOf('ID'); // Replace with your column name
+    const row = rows.find(r => r[idIndex] === id);
+
+    if (row) {
+      dataOutput.innerHTML = row.map((val, idx) => `<p>${header[idx]}: ${val}</p>`).join('');
+      updateBtn.dataset.rowIndex = rows.indexOf(row);
+    } else {
+      dataOutput.textContent = 'No data found for the given ID.';
+    }
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    dataOutput.textContent = 'Error fetching data. Check the console for details.';
+  }
+});
+
+// Update data
+updateBtn.addEventListener('click', async () => {
+  const newValue = updateValueInput.value.trim();
+  const rowIndex = updateBtn.dataset.rowIndex;
+
+  if (!newValue || !rowIndex) {
+    alert('No valid row selected or value to update.');
+    return;
+  }
+
+  try {
+    const range = `${RANGE}!A${parseInt(rowIndex) + 1}`; // Adjust based on your structure
+    const response = await fetch(
+      `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${range}?valueInputOption=USER_ENTERED&key=${API_KEY}`,
+      {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ values: [[newValue]] }),
+      }
+    );
+
+    if (response.ok) {
+      alert('Data updated successfully');
+    } else {
+      const error = await response.json();
+      console.error('Error updating data:', error);
+      alert('Error updating data. Check the console for details.');
+    }
+  } catch (error) {
+    console.error('Error updating data:', error);
+    alert('Error updating data. Check the console for details.');
+  }
+});
+
+</script>
+
+
+
+
+
+
+</body>
+</html>

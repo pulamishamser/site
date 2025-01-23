@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Google Sheet CRUD</title>
+    <script>
+      // Add data
+      function addData() {
+        const data = {
+          id: document.getElementById('id').value,
+          name: document.getElementById('name').value,
+          email: document.getElementById('email').value,
+          phone: document.getElementById('phone').value
+        };
+        google.script.run.addData(data);
+        alert('Data added successfully!');
+      }
+
+      // Fetch and display data
+      function fetchData() {
+        google.script.run.withSuccessHandler(displayData).getData();
+      }
+
+      function displayData(data) {
+        const table = document.getElementById('dataTable');
+        table.innerHTML = '<tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th></tr>';
+        data.forEach(row => {
+          table.innerHTML += `<tr><td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td><td>${row[3]}</td></tr>`;
+        });
+      }
+
+      // Update data
+      function updateData() {
+        const data = {
+          id: document.getElementById('id').value,
+          name: document.getElementById('name').value,
+          email: document.getElementById('email').value,
+          phone: document.getElementById('phone').value
+        };
+        google.script.run.withSuccessHandler(alert).updateData(data);
+      }
+
+      // Delete data
+      function deleteData() {
+        const id = document.getElementById('id').value;
+        google.script.run.withSuccessHandler(alert).deleteData(id);
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Google Sheet CRUD</h1>
+    <form>
+      <label>ID:</label><br>
+      <input type="text" id="id"><br>
+      <label>Name:</label><br>
+      <input type="text" id="name"><br>
+      <label>Email:</label><br>
+      <input type="email" id="email"><br>
+      <label>Phone:</label><br>
+      <input type="text" id="phone"><br><br>
+      <button type="button" onclick="addData()">Add</button>
+      <button type="button" onclick="updateData()">Update</button>
+      <button type="button" onclick="deleteData()">Delete</button>
+    </form>
+    <button onclick="fetchData()">Fetch Data</button>
+    <table id="dataTable" border="1"></table>
+  </body>
+</html>

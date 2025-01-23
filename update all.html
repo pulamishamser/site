@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit and Update Data</title>
+  <style>
+    table {
+      width: 50%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: center;
+    }
+
+    button {
+      padding: 5px 10px;
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Edit and Update Data Example</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="table-body">
+      <tr>
+        <td>John Doe</td>
+        <td>john.doe@example.com</td>
+        <td>
+          <button onclick="editRow(this)">Edit</button>
+        </td>
+      </tr>
+      <tr>
+        <td>Jane Smith</td>
+        <td>jane.smith@example.com</td>
+        <td>
+          <button onclick="editRow(this)">Edit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    function editRow(button) {
+      const row = button.parentElement.parentElement; // Get the current row
+      const cells = row.querySelectorAll('td'); // Get all cells in the row
+
+      // If the button says "Edit", switch to edit mode
+      if (button.textContent === "Edit") {
+        cells.forEach((cell, index) => {
+          if (index < cells.length - 1) { // Skip the action cell
+            const currentValue = cell.textContent;
+            cell.innerHTML = `<input type="text" value="${currentValue}">`;
+          }
+        });
+        button.textContent = "Update";
+      } else {
+        // If the button says "Update", save the new data
+        cells.forEach((cell, index) => {
+          if (index < cells.length - 1) { // Skip the action cell
+            const input = cell.querySelector('input');
+            if (input) {
+              cell.textContent = input.value; // Save the input value back to the cell
+            }
+          }
+        });
+        button.textContent = "Edit";
+      }
+    }
+  </script>
+</body>
+</html>
