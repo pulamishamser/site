@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+      <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="styles.css">
+  <title>Data Entry</title>
+  <script>
+    // Function to submit form data to Google Sheets
+    function submitForm() {
+      var formData = new FormData(document.getElementById("dataEntryForm"));
+      
+      // Create an object to map the form fields to their corresponding values
+      var data = {};
+      formData.forEach(function(value, key) {
+        data[key] = value;
+      });
+
+      // Make a POST request to the Apps Script endpoint
+      fetch("https://script.google.com/macros/s/AKfycbzTK_Gpo41q19DKQegdGIVP288XLVDpTlo97y1AMvFmN5BF7Orr4SaXgJRL_VUFN-4PoA/exec", {
+        method: "POST",
+        body: new URLSearchParams(data)
+      })
+      .then(response => response.text())
+      .then(result => {
+        alert(result); // Show response from the Apps Script
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+    }
+  </script>
+</head>
+
+<body>
+
+  
+
+
+<form id="dataEntryForm" onsubmit="event.preventDefault(); submitForm();">
+  <h2>Data Entry</h2>
+    <div class="form-group">
+  <label for="SYMBOL NUMBER">Symbol No:</label>
+  <input type="text" id="SYMBOL" name="SYMBOL" required><br><br>
+    <div class="form-group">
+<label for="DATE OF BIRTH">Date of birth:</label>
+  <input type="text" id="DOB" name="DOB" required><br><br>
+ </div>
+
+    <div class="form-group">
+  <label for="Emai ">Email:</label>
+  <input type="email" id="email" name="email" value="shamsr@123gmail.com"><br><br>
+   </div>
+    <div class="form-group">
+  <label for="DATE OF BIRTH">School Name:</label>
+ <input type="text" id="SCHOOL" name="SCHOOL" required><br><br>
+  </div>
+     <div class="form-group">
+  <label for="Class">Class:</label>
+  <input type="text" id="CLASS" name="CLASS" required><br><br>
+ </div>
+      <div class="form-group">
+  <label for="Registration No">Registration No:</label>
+  <input type="text" id="RGD" name="RGD" required><br><br>
+   </div>
+    <div class="form-group">
+    <label for="Registration No">School Address:</label>
+  <input type="text" id="SCHOOL ADDRESS" name="SCHOOL ADDRESS" required><br><br>
+ </div>
+    <div class="form-group">
+    <label for="Student's name">Student's name:</label>
+  <input type="text" id="SNAME" name="SNAME" required><br><br>
+ </div>
+
+          
+
+
+    <label for="Registration No">School Code:</label>
+  <input type="text" id="SCHOOL CODE" name="SCHOOL CODE" required><br><br>
+    <div class="form-group">
+            <label for="Exam year" class="form-label">Exam year</label>
+            <select type="text" id="EXAM YEAR" name="EXAM YEAR" class="form-control" required><br><br>
+        
+              <option>2081</option>       
+              <option>2082</option>
+              <option>2083</option>
+              <option>...............</option>
+              </select>
+            
+<br><br>
+
+            <label for="Term" class="form-label">Term</label>
+            <select type="text" id="TERM" name="TERM" class="form-control" required><br><br>
+             <option>1st</option>       
+              <option>2nd</option>
+              <option>3rd</option>
+                <option>Yearly</option>
+                   <option>...........</option>
+                 </select><br><br>
+  <label for="Exam type" class="form-label">Exam type:</label>
+            <select type="text" id="EXAM YEAR" name="EXAM YEAR" class="form-control" required><br><br>
+          <option>Choose an exam. type</option>
+              <option>SECONDARY EDUCATION EXAMINATION</option>       
+              <option>BASIC LEVEL EXAMINATION</option>
+               <option>NATIONAL EXAMINATION BOARD</option>
+             <option>MUNICIPALITY LEVEL EXAMINATION </option>
+            
+              </select>
+  <input type="submit" value="Submit">
+      <button type="button" class="clear-btn" onclick="clearForm()">Clear All</button>
+
+ <td>
+          <button onclick="editRow(this)">Edit</button>
+        </td>
+      </tr>
+
+ <td>
+          <button onclick="editRow(this)">Edit</button>
+        </td>
+      </tr>
+      <tr>
+      
+</form>
+
+ <script>
+    function clearForm() {
+      // Clear all inputs in the form
+      document.getElementById('dataEntryForm').reset();
+    }
+  </script>
+
+
+
+
+ <style>
+  body {
+    font-family: Arial, sans-serif;
+
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+   
+
+     </style>
+
+
+
+
+
+
+      <style>
+    /* Set margin for the whole form */
+    form {
+      margin: 10px; /* Adjust the value as needed */
+    }
+
+    /* Optionally, you can set margins for input fields, textareas, etc. */
+    input, textarea {
+      margin-bottom: 10px; /* Add space between form elements */
+      padding: 5px; /* Optional: add padding inside the fields */
+      margin: 10px; /* Adjust the margin as needed */
+  border: 2px solid #ccc; /* Optional: Add a border */
+  width:150px; /* Adjust the width as needed */
+
+    }
+
+  </style>
+ <style>
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    function editRow(button) {
+      const row = button.parentElement.parentElement; // Get the current row
+      const cells = row.querySelectorAll('td'); // Get all cells in the row
+
+      // If the button says "Edit", switch to edit mode
+      if (button.textContent === "Edit") {
+        cells.forEach((cell, index) => {
+          if (index < cells.length - 1) { // Skip the action cell
+            const currentValue = cell.textContent;
+            cell.innerHTML = `<input type="text" value="${currentValue}">`;
+          }
+        });
+        button.textContent = "Update";
+      } else {
+        // If the button says "Update", save the new data
+        cells.forEach((cell, index) => {
+          if (index < cells.length - 1) { // Skip the action cell
+            const input = cell.querySelector('input');
+            if (input) {
+              cell.textContent = input.value; // Save the input value back to the cell
+            }
+          }
+        });
+        button.textContent = "Edit";
+      }
+    }
+  </script>
+</body>
+</html>
