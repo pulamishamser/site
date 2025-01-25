@@ -46,6 +46,7 @@
 <label for="DATE OF BIRTH">Date of birth:</label>
   <input type="text" id="DOB" name="DOB" required><br><br>
  </div>
+ 
 
     <div class="form-group">
   <label for="Emai ">Email:</label>
@@ -55,10 +56,20 @@
   <label for="DATE OF BIRTH">School Name:</label>
  <input type="text" id="SCHOOL" name="SCHOOL" required><br><br>
   </div>
-     <div class="form-group">
-  <label for="Class">Class:</label>
-  <input type="text" id="CLASS" name="CLASS" required><br><br>
- </div>
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
       <div class="form-group">
   <label for="Registration No">Registration No:</label>
   <input type="text" id="RGD" name="RGD" required><br><br>
@@ -71,12 +82,10 @@
     <label for="Student's name">Student's name:</label>
   <input type="text" id="SNAME" name="SNAME" required><br><br>
  </div>
-
-          
-
-
+     <div class="form-group"> 
     <label for="Registration No">School Code:</label>
   <input type="text" id="SCHOOL CODE" name="SCHOOL CODE" required><br><br>
+
     <div class="form-group">
             <label for="Exam year" class="form-label">Exam year</label>
             <select type="text" id="EXAM YEAR" name="EXAM YEAR" class="form-control" required><br><br>
@@ -98,7 +107,7 @@
                    <option>...........</option>
                  </select><br><br>
   <label for="Exam type" class="form-label">Exam type:</label>
-            <select type="text" id="EXAM YEAR" name="EXAM YEAR" class="form-control" required><br><br>
+            <select type="text" id="EXAM TYPE" name="EXAM TYPE" class="form-control" required><br><br>
           <option>Choose an exam. type</option>
               <option>SECONDARY EDUCATION EXAMINATION</option>       
               <option>BASIC LEVEL EXAMINATION</option>
@@ -106,14 +115,123 @@
              <option>MUNICIPALITY LEVEL EXAMINATION </option>
             
               </select>
-  <input type="submit" value="Submit">
+
+<br><br>.
+ 
+
+<select id="CLASS" name="CLASS" onchange="fillInputs()">
+        <option value="">--Class--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+    </select>
+
+
+
+    <div id="inputContainer">
+        <input type="text" id="SCODE(EXT)NP" name="SCODE(EXT)NP" class="medium-input" placeholder="SCODE">
+        <input type="text" id="NEPALI(EXT)" name="NEPALI(EXT)" class="big-input" placeholder="Subject 1">
+
+        <input type="text" id="CTR(EXT)NP" name="CTR(EXT)NP" class="small-input"  placeholder="Credithr" >
+        <input type="text" id="FM(EXT)NP" name="FM(EXT)NP" class="small-input"  placeholder="FM" >
+        <input type="text" id="MARKS(EXT)NP" name="MARKS(EXT)NP" class="small-input"  placeholder="OM" ><br>
+   <input type="text" id="SCODE(EXT)EN" name="SCODE(EXT)EN" class="medium-input" placeholder="SCODE">
+        <input type="text" id="ENGLISH(EXT)" name="ENGLISH(EXT)" class="big-input" placeholder="Subject 2">
+
+        <input type="text" id="CTR(EXT)EN" name="CTR(EXT)EN" class="small-input"  placeholder="Credithr" >
+        <input type="text" id="FM(EXT)EN" name="FM(EXT)EN" class="small-input"  placeholder="FM" >
+        <input type="text" id="MARKS(EXT)EN" name="MARKS(EXT)EN" class="small-input"  placeholder="OM" ><br>
+<input type="text" id="SCODE(EXT)MATH" name="SCODE(EXT)MATH" class="medium-input" placeholder="SCODE">
+     <input type="text" id="MATHS(EXT)" name="MATHS(EXT)" class="big-input" placeholder="Subject 3">
+
+        <input type="text" id="CTR(INT)MATH" name="CTR(INT)MATH" class="small-input"  placeholder="Credithr" >
+        <input type="text" id="FM(EXT)MATH" name="FM(EXT)MATH" class="small-input"  placeholder="FM" >
+        <input type="text" id="MARKS(EXT)MATH" name="MARKS(EXT)MATH" class="small-input"  placeholder="OM" ><br>
+<input type="text" id="SCODE(EXT)SCI" name="SCODE(EXT)SCI" class="medium-input" placeholder="SCODE">
+<input type="text" id="SCIENCE(EXT)" name="SCIENCE(EXT)" class="big-input" placeholder= "Subject 4">
+
+        <input type="text" id="CTR(INT)SCI" name="CTR(INT)SCI" class="small-input" placeholder="Credithr">
+        <input type="text" id="FM(EXT)SCI" name="FM(EXT)SCI" class="small-input"  placeholder="FM" >
+        <input type="text" id="MARKS(EXT)SCI" name="MARKS(EXT)SCI" class="small-input" placeholder="OM" ><br>
+<input type="text" id="SCODE(EXT)SOC" name="SCODE(EXT)SOC" class="medium-input" placeholder="SCODE">
+<input type="text" id="SOCIAL(EXT)" name="SOCIAL(EXT)" class="big-input" placeholder= "Subject 5">
+
+        <input type="text" id="CTR(INT)SOC" name="CTR(INT)SOC" class="small-input" placeholder="Credithr">
+        <input type="text" id="FM(EXT)SOC" name="FM(EXT)SOC" class="small-input"  placeholder="FM" >
+        <input type="text" id="MARKS(EXT)SOC" name="MARKS(EXT)SOC" class="small-input" placeholder="OM" ><br>
+<input type="text" id="SCODE(EXT)OPT1" name="SCODE(EXT)OPT1" class="medium-input" placeholder="SCODE">
+<input type="text" id="HP/OPT1(EXT)" name="HP/OPT1(EXT)" class="big-input" placeholder= "Subject 6">
+
+        <input type="text" id="CTR(INT)OPT1" name="CTR(INT)OPT1" class="small-input" placeholder="Credithr">
+        <input type="text" id="FM(EXT)OPT1" name="FM(EXT)OPT1" class="small-input"  placeholder="FM" >
+        <input type="text" id="MARKS(EXT)OPT1" name="MARKS(EXT)OPT1" class="small-input" placeholder="OM" ><br>
+
+ <input type="text" id="SCODE(EXT)OPT2" name="SCODE(EXT)OPT2" class="medium-input" placeholder="SCODE">
+<input type="text" id="COMP /OPT2(EXT)" name="COMP /OPT2(EXT)" class="big-input" placeholder= "Subject 7">
+
+        <input type="text" id="CTR(EXT)OPT2" name="CTR(EXT)OPT2" class="small-input" placeholder="Credithr">
+        <input type="text" id="FM(EXT)OPT2" name="FM(EXT)OPT2" class="small-input"  placeholder="FM" >
+        <input type="text" id="MARKS(EXT)OPT2" name="MARKS(EXT)OPT2" class="small-input" placeholder="OM" >
+
+<br>
+
+<!----------------Internal------>
+ <input type="text" id="SCODE(INT)NP" name="SCODE(INT)NP" class="medium-input" placeholder="SCODE">
+<input type="text" id="NEPALI(INT)" name="NEPALI(INT)" class="big-input" placeholder="Subject PR1">
+
+        <input type="text" id="CTR(INT)NP" name="CTR(INT)NP" class="small-input"  placeholder="Credithr" >
+        <input type="text" id="FM(INT)NP" name="FM(INT)NP" class="small-input"  placeholder="FM" >
+        <input type="text" id="MARKS(INT)NP" name="MARKS(INT)NP" class="small-input"  placeholder="OM" ><br>
+ <input type="text" id="SCODE(INT)EN" name="SCODE(INT)EN" class="medium-input" placeholder="SCODE">
+        <input type="text" id="ENGLISH(INT)" name="ENGLISH(INT)" class="big-input" placeholder="Subject PR2">
+
+        <input type="text" id="CTR(INT)EN" name="CTR(INT)EN" class="small-input"  placeholder="Credithr" >
+        <input type="text" id="FM(INT)EN" name="FM(INT)EN" class="small-input"  placeholder="FM" >
+        <input type="text" id="MARKS(INT)EN" name="MARKS(INT)EN" class="small-input"  placeholder="OM" ><br>
+<input type="text" id="SCODE(INT)MATH" name="SCODE(INT)MATH" class="medium-input" placeholder="SCODE">
+     <input type="text" id="MATHS(INT)" name="MATHS(INT)" class="big-input" placeholder="Subject PR3">
+        <input type="text" id="CTR(INT)MATH" name="CTR(INT)MATH" class="small-input"  placeholder="Credithr" >
+        <input type="text" id="FM(INT)MATH" name="FM(INT)MATH" class="small-input"  placeholder="FM" >
+        <input type="text" id="MARKS(INT)MATH" name="MARKS(INT)MATH" class="small-input"  placeholder="OM" ><br>
+<input type="text" id="SCODE(INT)SCI" name="SCODE(INT)SCI" class="medium-input" placeholder="SCODE">
+<input type="text" id="SCIENCE(INT)" name="SCIENCE(INT)" class="big-input" placeholder= "Subject PR4">
+
+        <input type="text" id="CTR(INT)SCI" name="CTR(INT)SCI" class="small-input" placeholder="Credithr">
+        <input type="text" id="FM(INT)SCI" name="FM(INT)SCI" class="small-input"  placeholder="FM" >
+        <input type="text" id="MARKS(INT)SCI" name="MARKS(INT)SCI" class="small-input" placeholder="OM" ><br>
+ <input type="text" id="SCODE(INT)SOC" name="SCODE(INT)SOC" class="medium-input" placeholder="SCODE">
+<input type="text" id="SOCIAL(INT)" name="SOCIAL(INT)" class="big-input" placeholder= "Subject PR5">
+
+        <input type="text" id="CTR(INT)SOC" name="CTR(INT)SOC" class="small-input" placeholder="Credithr">
+        <input type="text" id="FM(INT)SOC" name="FM(INT)SOC" class="small-input"  placeholder="FM" >
+        <input type="text" id="MARKS(INT)SOC" name="MARKS(INT)SOC" class="small-input" placeholder="OM" ><br>
+<input type="text" id="SCODE(INT)OPT1" name="SCODE(INT)OPT1" class="medium-input" placeholder="SCODE">
+<input type="text" id="HP/OPT1(INT)" name="HP/OPT1(INT)" class="big-input" placeholder= "Subject PR6">
+
+        <input type="text" id="CTR(INT)OPT1" name="CTR(INT)OPT1" class="small-input" placeholder="Credithr">
+        <input type="text" id="FM(INT)OPT1" name="FM(INT)OPT1" class="small-input"  placeholder="FM" >
+        <input type="text" id="MARKS(INT)OPT1" name="MARKS(INT)OPT1" class="small-input" placeholder="OM" ><br>
+<input type="text" id="SCODE(INT)OPT2" name="SCODE(INT)OPT2" class="medium-input" placeholder="SCODE">
+<input type="text" id="COMP /OPT2(INT)" name="COMP /OPT2(INT)" class="big-input" placeholder= "Subject PR7">
+
+        <input type="text" id="CTR(INT)OPT2" name="CTR(INT)OPT2" class="small-input" placeholder="Credithr">
+        <input type="text" id="FM(INT)OPT2" name="FM(INT)OPT2" class="small-input"  placeholder="FM" >
+        <input type="text" id="MARKS(INT)OPT2" name="MARKS(INT)OPT2" class="small-input" placeholder="OM" >
+
+
+  
+
+    </div>
+
+  <input type="submit" value="Submit" >
       <button type="button" class="clear-btn" onclick="clearForm()">Clear All</button>
-
- <td>
-          <button onclick="editRow(this)">Edit</button>
-        </td>
-      </tr>
-
  <td>
           <button onclick="editRow(this)">Edit</button>
         </td>
@@ -121,6 +239,107 @@
       <tr>
       
 </form>
+
+<script src="script.js"></script>
+
+    <script>function fillInputs() {
+    const selectedOption = document.getElementById('CLASS').value;
+    const inputs = document.querySelectorAll('#inputContainer input');
+
+   const data = {
+   1: ["1", "NEPALI", "5", "100"," ", "2","ENGLISH","4", "100", " ", "3","MATHS", "4",  "100", " ", "4","SEROFERO", "8",  "100", " ", "5","LOCAL SUB", "5", "100", " "],
+   2: ["1", "NEPALI", "5", "100"," ", "2","ENGLISH","4", "100", " ", "3","MATHS", "4",  "100", " ", "4","SEROFERO", "8",  "100", " ", "5","LOCAL SUB", "5", "100", " "],
+   3: ["1", "NEPALI", "5", "100"," ", "2","ENGLISH","4", "100", " ", "3","MATHS", "4",  "100", " ", "4","SEROFERO", "8",  "100", " ", "5","LOCAL SUB", "5", "100", " "],
+   4: ["1", "C.NEPALI (EXT)", "2.5", "50"," ", "2", "C.ENGLISH(EXT)", "2.5", "50"," ", "3", "C.MATHS(EXT)", "2.5","50"," ", "4", "C.SCIENCE(EXT)","2.5","50"," ", "5", "C.SOCIAL(EXT)", "2.5","50"," ",
+   "6", "C.HP(EXT)","1.5", "50"," ","7", 
+   "LOCAL SUB-(EXT)", "2","50"," ", "1","NEPALI-(INT)", "2.5","50"," ", "2", "C.ENGLISH(INT)", "2.5", "50", " ",
+   "3", "C.MATHS(INT)", "2.5","50"," ", "4","C.SCIENCE(INT)","2.5", "50", " ", "5","C.SOCIAL(INT)", "2.5","50", " ", "6","C.HP(INT)","1.5","50", " ", "7","LOCAL SUB-(INT)", "2","50"," "],
+
+
+
+  5: ["1", "C.NEPALI (EXT)", "2.5", "50"," ", "2", "C.ENGLISH(EXT)", "2.5", "50"," ", "3", "C.MATHS(EXT)", "2.5","50"," ", "4", "C.SCIENCE(EXT)","2.5","50"," ", "5", "C.SOCIAL(EXT)", "2.5","50"," ",
+   "6", "C.HP(EXT)","1.5", "50"," ","7", 
+   "LOCAL SUB-(EXT)", "2","50"," ", "1","NEPALI-(INT)", "2.5","50"," ", "2", "C.ENGLISH(INT)", "2.5", "50", " ",
+   "3", "C.MATHS(INT)", "2.5","50"," ", "4","C.SCIENCE(INT)","2.5", "50", " ", "5","C.SOCIAL(INT)", "2.5","50", " ", "6","C.HP(INT)","1.5","50", " ", "7","LOCAL SUB-(INT)", "2","50"," "],
+
+  
+ 6: ["1", "C.NEPALI (EXT)", "2.5", "50"," ", "2", "C.ENGLISH(EXT)", "2.5", "50"," ", "3", "C.MATHS(EXT)", "2.5","50"," ", "4", "C.SCIENCE(EXT)","2.5","50"," ", "5", "C.SOCIAL(EXT)", "2.5","50"," ",
+   "6", "C.HP(EXT)","1.5", "50"," ","7", 
+   "LOCAL SUB-(EXT)", "2","50"," ", "1","NEPALI-(INT)", "2.5","50"," ", "2", "C.ENGLISH(INT)", "2.5", "50", " ",
+   "3", "C.MATHS(INT)", "2.5","50"," ", "4","C.SCIENCE(INT)","2.5", "50", " ", "5","C.SOCIAL(INT)", "2.5","50", " ", "6","C.HP(INT)","1.5","50", " ", "7","LOCAL SUB-(INT)", "2","50"," "],
+
+
+
+  7: ["1", "C.NEPALI (EXT)", "2.5", "50"," ", "2", "C.ENGLISH(EXT)", "2.5", "50"," ", "3", "C.MATHS(EXT)", "2.5","50"," ", "4", "C.SCIENCE(EXT)","2.5","50"," ", "5", "C.SOCIAL(EXT)", "2.5","50"," ",
+   "6", "C.HP(EXT)","1.5", "50"," ","7", 
+   "LOCAL SUB-(EXT)", "2","50"," ", "1","NEPALI-(INT)", "2.5","50"," ", "2", "C.ENGLISH(INT)", "2.5", "50", " ",
+   "3", "C.MATHS(INT)", "2.5","50"," ", "4","C.SCIENCE(INT)","2.5", "50", " ", "5","C.SOCIAL(INT)", "2.5","50", " ", "6","C.HP(INT)","1.5","50", " ", "7","LOCAL SUB-(INT)", "2","50"," "],
+
+
+  8: ["1", "C.NEPALI (EXT)", "2.5", "50"," ", "2", "C.ENGLISH(EXT)", "2.5", "50"," ", "3", "C.MATHS(EXT)", "2.5","50"," ", "4", "C.SCIENCE(EXT)","2.5","50"," ", "5", "C.SOCIAL(EXT)", "2.5","50"," ",
+   "6", "C.HP(EXT)","1.5", "50"," ","7", 
+   "LOCAL SUB-(EXT)", "2","50"," ", "1","NEPALI-(INT)", "2.5","50"," ", "2", "C.ENGLISH(INT)", "2.5", "50", " ",
+   "3", "C.MATHS(INT)", "2.5","50"," ", "4","C.SCIENCE(INT)","2.5", "50", " ", "5","C.SOCIAL(INT)", "2.5","50", " ", "6","C.HP(INT)","1.5","50", " ", "7","LOCAL SUB-(INT)", "2","50"," "],
+
+
+
+
+  9: ["C.NEPALI (EXT)", "3.75", "75"," ", "C.ENGLISH(EXT)", "3.75", "50"," ", "C.MATHS(EXT)", "3.75","75",
+  " ","C.SCIENCE(EXT)","3.75","75"," ","C.SOCIAL(EXT)", "3","75"," ","OPT1(EXT)","3", "75", " ",
+  "OPT2(EXT)", "3","75"," ","C.NEPALI (INT)", "1.25","25"," ", "C.ENGLISH(INT)", "1.25","25", " ",
+   "C.MATHS(INT)", "1.25","25"," ","C.SCIENCE(INT)", "1.25","25", " ","C.SOCIAL(INT)", "1","25", " ",
+   "OPT1(INT)","1","25", " ","OPT2(INT)", "1","25"," "],
+ 10: ["C.NEPALI (EXT)", "3.75", "75"," ", "C.ENGLISH(EXT)", "3.75", "50"," ", "C.MATHS(EXT)", "3.75","75",
+  " ","C.SCIENCE(EXT)","3.75","75"," ","C.SOCIAL(EXT)", "3","75"," ","OPT1(EXT)","3", "75", " ",
+  "OPT2(EXT)", "3","75"," ","C.NEPALI (INT)", "1.25","25"," ", "C.ENGLISH(INT)", "1.25","25", " ",
+   "C.MATHS(INT)", "1.25","25"," ","C.SCIENCE(INT)", "1.25","25", " ","C.SOCIAL(INT)", "1","25", " ",
+   "OPT1(INT)","1","25", " ","OPT2(INT)", "1","25"," "],
+ 
+    };
+  
+
+    // Clear previous input values
+    inputs.forEach(input => input.value = '');
+
+    if (selectedOption) {
+        const values = data[selectedOption];
+        for (let i = 0; i < inputs.length; i++) {
+            if (values[i]) {
+                inputs[i].value = values[i];
+            }
+        }
+    }
+}
+
+</script>
+<style>
+
+</style>
+
+
+
+
+
+
+
+
+
+<style>
+
+.small-input {
+  width: 30px;
+   border: 2px solid #aaa;
+
+}
+
+.medium-input {
+  width: 45px;
+}
+.big-input {
+  width: 100px;
+}
+</style>
+
 
  <script>
     function clearForm() {
