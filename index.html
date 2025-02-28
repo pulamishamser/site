@@ -841,22 +841,23 @@ Find SEE Result-2080 Grade Ledger also.</a>---->
 
 
 </font></marquee>
-  <!-- Message Box -->
-    <p id="likeMessage" style="display: none; color: green; font-weight: bold;">
-        Thank you for liking our website! Keep it up! 😊
-    </p>
+ <!-- Message Box (Initially Hidden) -->
+    <div id="thankYouMessage" style="display: none; margin-top: 10px; color: green; font-weight: bold;">
+        ✅ Thank you for liking our website! Keep it up! 😊
+    </div>
 
     <script>
         // Initialize Facebook SDK and Listen for Like Events
         window.fbAsyncInit = function() {
             FB.init({
-                appId : '', // Optional if not using an app
-                xfbml : true,
-                version : 'v17.0'
+                appId      : 'YOUR_APP_ID', // Optional
+                xfbml      : true,
+                version    : 'v17.0'
             });
 
+            // Show message when the Like button is clicked
             FB.Event.subscribe('edge.create', function(response) {
-                document.getElementById('likeMessage').style.display = 'block';
+                document.getElementById('thankYouMessage').style.display = 'block';
             });
         };
     </script>
