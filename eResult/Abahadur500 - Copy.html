@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.js"></script>
+
+
+  <title>Data Entry Forme</title>
+  <script src="login.js" defer></script>
+</head>
+<body>
+
+
+  <div id="login-form">
+       <h1>Login form</h1>
+            <h2>Refresh data before getting result.Refresh take time 1-5 minute.</h2>
+        <form id="updateForm">
+      <button type="submit">Refresh Data</button>
+    </form>
+    <p>Username & password will be changed after free offer time finished.</p>
+
+    <input type="text" id="username"  value="shamser.info.np" placeholder="Username" required><br>
+
+    <input type="password" id="password"  value="9817826200"  placeholder="Password" required>
+    Show Password
+
+         <input type="checkbox"  onclick="togglePassword()">
+    <button onclick="login()">Login</button><br>
+
+      <p><b>Contact us</b> <br>Mobile No :9817826200<br><a href="https://shamser.info.np/Email%20Contact%20Form.html">Email Newsletter</a></p>
+
+          <p><a href="https://shamser.info.np/Email%20Contact%20Form.html">Demo</a></p>
+  </div>
+
+  <div id="protected-content" style="display: none;">
+
+
+<script>
+    function togglePassword() {
+        var passwordField = document.getElementById('password');
+        passwordField.type = passwordField.type === 'password' ? 'text' : 'password';
+    }
+</script>
+<script>
+  
+  const validUsername = "shamser.info.np"; // Set your username
+const validPassword = "9817826200"; // Set your password
+
+function login() {
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+
+  // Check if the entered username and password match
+  if (username === validUsername && password === validPassword) {
+    document.getElementById('login-form').style.display = 'none';
+    document.getElementById('protected-content').style.display = 'block';
+  } else {
+    alert('Invalid username or password!');
+  }
+}
+</script>
+<style>
+
+#login-form {
+    width: 320px;
+    padding: 25px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+#login-form h2 {
+    margin-bottom: 20px;
+    font-size: 22px;
+    color: #333;
+}
+
+#login-form input {
+  background: #f6ddcc;
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s;
+}
+
+#login-form input:focus {
+    border-color: #6a11cb;
+    box-shadow: 0 0 5px rgba(106, 17, 203, 0.5);
+}
+
+#login-form button {
+    width: 100%;
+    padding: 12px;
+    background: #6a11cb;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#login-form button:hover {
+    background: #2575fc;
+}
+</style>
+    
+<!DOCTYPE html>
+<html>
+<head>
+      <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="styles.css">
+  <title>Data Entry</title>
+ <script>
+    // Function to submit form data to Google Sheets
+    function submitForm() {
+      var formData = new FormData(document.getElementById("myForm"));
+      
+      // Create an object to map the form fields to their corresponding values
+      var data = {};
+      formData.forEach(function(value, key) {
+        data[key] = value;
+      });
+
+      // Make a POST request to the Apps Script endpoint
+      fetch("https://script.google.com/macros/s/AKfycbw6_tdOpPafZOVfX1qYlF7SYHMZqCWhGZa5_Mc5XlGtTd-nUTrlBvY9W0yPsPLORfN8/exec", {
+        method: "POST",
+        body: new URLSearchParams(data)
+      })
+      .then(response => response.text())
+      .then(result => {
+        alert(result); // Show response from the Apps Script
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+    }
+  </script>
+</head>
+<!----Next----->
+<script> 
+function incrementID() {
+    let inputField = document.getElementById("searchKey");
+    let currentValue = parseInt(inputField.value) || 0;
+    inputField.value = currentValue + 1;
+}
+</script>
+<body>
+    <script>
+      document.getElementById("updateForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+        google.script.run.updateFormulas();
+        alert("Data Refreshing! wait 1 minute !");
+      });
+    </script>
+
+
+
+  <!---<form id="myForm" onsubmit="handleFormSubmit()">--------->
+ <form id="myForm" onsubmit="event.preventDefault(); submitForm();">
+
+
+ <!--- <form id="dataEntryForm" onsubmit="return preventDoubleSubmit(event)">---------->
+  <h2>Data Entry Form</h2>
+
+
+  <p>  school/MIS code can be included in ID number <br>such as student's sbl no is 6301 and school code is 22024=220246301</p>
+    <div class="form-group">
+  <label for="SYMBOL NUMBER">Symbol No:</label>
+  <!---------<button onclick="incrementID()">Next</button>--------->
+
+  <input type="number" id="SYMBOL" name="SYMBOL" placeholder="Enter ID Number here" required><br><br>
+    <div class="form-group">
+            <div class="form-group">
+    <label for="Student's name">Student's name:</label>
+  <input type="text" id="SNAME" value="Sal bdr" name="SNAME" required><br><br>
+ </div>
+
+
+
+
+ <div class="form-group">
+            <div class="form-group">
+    <label for="Father's name">Father's name:</label>
+  <input type="text" id="FNAME" name="FNAME" value="Bal bdr"required><br><br>
+ </div>
+
+ <div class="form-group">
+            <div class="form-group">
+    <label for="Mother's name">Mother's name:</label>
+  <input type="text" id="FNAME" name="MNAME" value="mamata"required><br><br>
+ </div>
+
+
+
+
+
+
+
+
+
+
+<label for="DATE OF BIRTH">Date of birth:</label>
+  <input type="text" id="DOB" name="DOB" value="2056-01-01" placeholder="Enter Date of birth here" required><br><br>
+ </div>
+ 
+    
+    <div class="form-group">
+  <label for="DATE OF BIRTH">School Name:</label>
+ <input type="text" id="SCHOOL" name="SCHOOL" value="JanJyoti" required><br><br>
+  </div>
+      <div class="form-group">
+  <label for="Registration No">Registration No:</label>
+  <input type="text" id="RGD" name="RGD" value="221224" required><br><br>
+   </div>
+
+ 
+  <label for="Exam type" class="form-label">Class & marks fillup:</label>
+<select id="CLASS" name="CLASS" onchange="fillInputs()" class="form-control" required>
+
+    
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+          <!---  <option value=""></option>-------->
+    </select>
+    <br><br>
+   <p>Full marks can be changed :</p>
+
+        <div id="inputContainer">
+        <input type="text" id="SCODE_EXT_NP" name="SCODE_EXT_NP" class="medium-input" placeholder="SCODE">
+        <input type="text" id="NEPALI_EXT" name="NEPALI_EXT" class="big-input" placeholder="Subject 1">
+
+        <input type="text" id="CTR_EXT_NP" name="CTR_EXT_NP" class="small-input"  placeholder="Credithr" >
+        <input type="text" id="FM_EXT_NP" name="FM_EXT_NP" class="small-input"  placeholder="FM" >
+        <input type="number" id="MARKS_EXT_NP" name="MARKS_EXT_NP" class="small-input" placeholder="OM" ><br>
+
+
+        <input type="text" id="SCODE_EXT_EN" name="SCODE_EXT_EN" class="medium-input" placeholder="SCODE">
+        <input type="text" id="ENGLISH_EXT" name="ENGLISH_EXT" class="big-input" placeholder="Subject 2">
+
+        <input type="text" id="CTR_EXT_EN" name="CTR_EXT_EN" class="small-input"  placeholder="Credithr" >
+        <input type="text" id="FM_EXT_EN" name="FM_EXT_EN" class="small-input"  placeholder="FM" >
+        <input type="number" id="MARKS_EXT_EN" name="MARKS_EXT_EN" class="small-input"  placeholder="OM"><br>
+        <input type="text" id="SCODE_EXT_MATH" name="SCODE_EXT_MATH" class="medium-input" placeholder="SCODE">
+        <input type="text" id="MATHS_EXT" name="MATHS_EXT" class="big-input" placeholder="Subject 3">
+
+        <input type="text" id="CTR_EXT_MATH" name="CTR_EXT_MATH" class="small-input"  placeholder="Credithr" >
+        <input type="text" id="FM_EXT_MATH" name="FM_EXT_MATH" class="small-input"  placeholder="FM" >
+        <input type="number" id="MARKS_EXT_MATH" name="MARKS_EXT_MATH" class="small-input"  placeholder="OM" ><br>
+<input type="text" id="SCODE_EXT_SCI" name="SCODE_EXT_SCI" class="medium-input" placeholder="SCODE">
+<input type="text" id="SCIENCE_EXT" name="SCIENCE_EXT" class="big-input" placeholder= "Subject 4">
+
+        <input type="text" id="CTR_EXT_SCI" name="CTR_EXT_SCI" class="small-input" placeholder="Credithr">
+        <input type="text" id="FM_EXT_SCI" name="FM_EXT_SCI" class="small-input"  placeholder="FM" >
+        <input type="number" id="MARKS_EXT_SCI" name="MARKS_EXT_SCI" class="small-input" placeholder="OM" ><br>
+<input type="text" id="SCODE_EXT_SOC" name="SCODE_EXT_SOC" class="medium-input" placeholder="SCODE">
+<input type="text" id="SOCIAL_EXT" name="SOCIAL_EXT" class="big-input" placeholder= "Subject 5">
+
+        <input type="text" id="CTR_EXT_SOC" name="CTR_EXT_SOC" class="small-input" placeholder="Credithr">
+        <input type="text" id="FM_EXT_SOC" name="FM_EXT_SOC" class="small-input"  placeholder="FM" >
+        <input type="number" id="MARKS_EXT_SOC" name="MARKS_EXT_SOC" class="small-input" placeholder="OM" ><br>
+<input type="text" id="SCODE_EXT_OPT1" name="SCODE_EXT_OPT1" class="medium-input" placeholder="SCODE">
+<input type="text" id="HP/OPT1_EXT" name="HP/OPT1_EXT" class="big-input" placeholder= "Subject 6">
+
+        <input type="text" id="CTR_EXT_OPT1" name="CTR_EXT_OPT1" class="small-input" placeholder="Credithr">
+        <input type="text" id="FM_EXT_OPT1" name="FM_EXT_OPT1" class="small-input"  placeholder="FM" >
+        <input type="number" id="MARKS_EXT_OPT1" name="MARKS_EXT_OPT1" class="small-input" placeholder="OM" >
+        <br>
+
+ <input type="text" id="SCODE_EXT_OPT2" name="SCODE_EXT_OPT2" class="medium-input" placeholder="SCODE">
+<input type="text" id="COMP/OPT2_EXT" name="COMP/OPT2_EXT" class="big-input" placeholder= "Subject 7">
+
+        <input type="text" id="CTR_EXT_OPT2" name="CTR_EXT_OPT2" class="small-input" placeholder="Credithr">
+        <input type="text" id="FM_EXT_OPT2" name="FM_EXT_OPT2" class="small-input"  placeholder="FM" >
+        <input type="number" id="MARKS_EXT_OPT2" name="MARKS_EXT_OPT2" class="small-input" placeholder="OM">
+
+<br>
+
+
+
+
+
+<!----------------Internal------>
+
+ <input type="text" id="SCODE_INT_NP" name="SCODE_INT_NP" class="medium-input" placeholder="SCODE"  background-color= "lightblue">
+<input type="text" id="NEPALI_INT" name="NEPALI_INT" class="big-input" placeholder="Subject PR1">
+
+        <input type="text" id="CTR_INT_NP" name="CTR_INT_NP" class="small-input"  placeholder="Credithr" >
+        <input type="text" id="FM_INT_NP" name="FM_INT_NP" class="small-input"  placeholder="FM" >
+        <input type="number" id="MARKS_INT_NP" name="MARKS_INT_NP" class="small-input"  placeholder="OM" ><br>
+
+ <input type="text" id="SCODE_INT_EN" name="SCODE_INT_EN" class="medium-input" placeholder="SCODE">
+        <input type="text" id="ENGLISH_INT" name="ENGLISH_INT" class="big-input" placeholder="Subject PR2">
+        <input type="text" id="CTR_INT_EN" name="CTR_INT_EN" class="small-input"  placeholder="Credithr" >
+        <input type="text" id="FM_INT_EN" name="FM_INT_EN" class="small-input"  placeholder="FM" >
+        <input type="number" id="MARKS_INT_EN" name="MARKS_INT_EN" class="small-input"  placeholder="OM" ><br>
+
+<input type="text" id="SCODE_INT_MATH" name="SCODE_INT_MATH" class="medium-input" placeholder="SCODE">
+     <input type="text" id="MATHS_INT" name="MATHS_INT" class="big-input" placeholder="Subject PR3">
+        <input type="text" id="CTR_INT_MATH" name="CTR_INT_MATH" class="small-input"  placeholder="Credithr" >
+        <input type="text" id="FM_INT_MATH" name="FM_INT_MATH" class="small-input"  placeholder="FM" >
+        <input type="number" id="MARKS_INT_" name="MARKS_INT_" class="small-input"  placeholder="OM" ><br>
+<input type="text" id="SCODE_INT_SCI" name="SCODE_INT_SCI" class="medium-input" placeholder="SCODE">
+<input type="text" id="SCIENCE_INT" name="SCIENCE_INT" class="big-input" placeholder= "Subject PR4">
+
+        <input type="text" id="CTR_INT_SCI" name="CTR_INT_SCI" class="small-input" placeholder="Credithr">
+        <input type="text" id="FM_INT_SCI" name="FM_INT_SCI" class="small-input"  placeholder="FM" >
+        <input type="number" id="MARKS_INT_SCI" name="MARKS_INT_SCI" class="small-input" placeholder="OM" ><br>
+ <input type="text" id="SCODE_INT_SOC" name="SCODE_INT_SOC" class="medium-input" placeholder="SCODE">
+<input type="text" id="SOCIAL_INT" name="SOCIAL_INT" class="big-input" placeholder= "Subject PR5">
+
+        <input type="text" id="CTR_INT_SOC" name="CTR_INT_SOC" class="small-input" placeholder="Credithr">
+        <input type="text" id="FM_INT_SOC" name="FM_INT_SOC" class="small-input"  placeholder="FM" >
+        <input type="number" id="MARKS_INT_SOC" name="MARKS_INT_SOC" class="small-input" placeholder="OM" ><br>
+<input type="text" id="SCODE_INT_OPT1" name="SCODE_INT_OPT1" class="medium-input" placeholder="SCODE">
+<input type="text" id="HP/OPT1_INT" name="HP/OPT1_INT" class="big-input" placeholder= "Subject PR6">
+
+        <input type="text" id="CTR_INT_OPT1" name="CTR_INT_OPT1" class="small-input" placeholder="Credithr">
+        <input type="text" id="FM_INT_OPT1" name="FM_INT_OPT1" class="small-input"  placeholder="FM" >
+        <input type="number" id="MARKS_INT_OPT1" name="MARKS_INT_OPT1" class="small-input" placeholder="OM" ><br>
+<input type="text" id="SCODE_INT_OPT2" name="SCODE_INT_OPT2" class="medium-input" placeholder="SCODE">
+<input type="text" id="COMP/OPT2_INT" name="COMP/OPT2_INT" class="big-input" placeholder= "Subject PR7">
+        <input type="text" id="CTR_INT_OPT2" name="CTR_INT_OPT2" class="small-input" placeholder="Credithr">
+        <input type="text" id="FM_INT_OPT2" name="FM_INT_OPT2" class="small-input"  placeholder="FM" >
+        <input type="number" id="MARKS_INT_OPT2" name="MARKS_INT_OPT2" class="small-input" placeholder="OM" >
+    </div>
+    </div>
+        <br>
+          <p>Don't use comma(,) or semicolon(;) hyphen (-) .You can use underscore (_)</p>
+    <div class="form-group">
+      
+    <label for="Registration No">School Address:</label>
+  <input type="text" id="SCHOOL_ADDRESS" name="SCHOOL ADDRESS" value="Lalbandi" required><br><br>
+
+ </div>
+
+     <div class="form-group"> 
+    <label for="Registration No">School Code:</label>
+  <input type="text" id="SCHOOL_CODE" name="SCHOOL CODE" value="22024" required><br><br>
+
+    <div class="form-group">
+            <label for="Exam year" class="form-label">Exam year</label>
+            <select type="text" id="EXAM_YEAR" name="EXAM YEAR" class="form-control" required><br><br>
+         <option>EXAM YEAR</option> 
+              <option>2080</option>       
+              <option>2081</option>
+              <option>2082</option>
+              <option>...............</option>
+              </select>
+            
+<br><br>
+
+            <label for="Term" class="form-label">Term</label>
+            <select type="text" id="TERM" name="TERM" class="form-control" required><br><br>
+             <option>TERM</option>
+             <option>1st term</option>       
+              <option>2nd term</option>
+              <option>3rd term</option>
+                <option>Yearly</option>
+                <option>Supplimentary</option>
+                <option>Internal</option>
+                   <option>...........</option>
+                 </select><br><br>
+  <label for="Exam type" class="form-label">Exam type:</label>
+        <select type="text" id="EXAM_TYPE" name="EXAM TYPE" class="form-control" required><br><br>
+        <option>EXAM TYPE</option> 
+        <option>SECONDARY EDUCATION EXAMINATION</option>       
+        <option>BASIC LEVEL EXAMINATION</option>
+        <option>NATIONAL EXAMINATION BOARD</option>
+        <option>MUNICIPALITY LEVEL EXAMINATION </option>
+        </select>
+<br><br>
+
+<div class="form-group">
+  <label for="file">Paste Image URL</label>
+  <input 
+    type="url" 
+    class="form-control" 
+    name="Photo" 
+    id="file" 
+    placeholder="Paste img link*" 
+    required 
+    onchange="previewImage()">
+</div>
+<img id="preview" style="display:none; margin-top: 10px; max-width: 100%; height: auto;" alt="Image Preview"/>
+
+<script>
+  function previewImage() {
+    const url = document.getElementById('file').value;
+    const preview = document.getElementById('preview');
+    
+    if (url) {
+      // Check if URL is valid and set the image source
+      preview.src = url;
+      preview.style.display = 'block'; // Show the image
+    } else {
+      preview.style.display = ''; // Hide the image if URL is empty
+    }
+  }
+</script>
+
+<br>
+  <input type="submit" value="Submit">
+
+    <script>
+    function fillInputs() {
+    const selectedOption = document.getElementById('CLASS').value;
+    const inputs = document.querySelectorAll('#inputContainer input');
+
+   const data = {
+   1: ["1", "NEPALI", "5", "100"," 0", "2","ENGLISH","4", "100", "0 ", "3","MATHS", "4",  "100", " 0", "4","SEROFERO", "8",  "100", " 0", "5","LOCAL SUB", "5", "100", " 0"],
+   2: ["1", "NEPALI", "5", "100"," 0", "2","ENGLISH","4", "100", " 0", "3","MATHS", "4",  "100", " 0", "4","SEROFERO", "8",  "100", "0 ", "5","LOCAL SUB", "5", "100", " 0"],
+   3: ["1", "NEPALI", "5", "100"," 0", "2","ENGLISH","4", "100", " 0", "3","MATHS", "4",  "100", "0 ", "4","SEROFERO", "8",  "100", "0 ", "5","LOCAL SUB", "5", "100", "0 "],
+
+
+   4: ["1", "C.NEPALI (EXT)", "2.5", "50","0 ", "2", "C.ENGLISH(EXT)", "2.5", "50"," 0", "3", "C.MATHS(EXT)", "2.5","50"," 0", "4", "C.SCIENCE(EXT)","2.5","50","0 ", "5", "C.SOCIAL(EXT)", "2.5","50"," ",
+   "6", "C.HP(EXT)","1.5", "50"," 0","7", 
+   "LOCAL SUB-(EXT)", "2","50"," 0", "1","NEPALI-(INT)", "2.5","50","0 ", "2", "C.ENGLISH(INT)", "2.5", "50", "0 ",
+   "3", "C.MATHS(INT)", "2.5","50","0 ", "4","C.SCIENCE(INT)","2.5", "50", " 0", "5","C.SOCIAL(INT)", "2.5","50", " 0", "6","C.HP(INT)","1.5","50", " 0", "7","LOCAL SUB-(INT)", "2","50"," 0"],
+
+
+
+  5: ["1", "C.NEPALI (EXT)", "2.5", "50","0 ", "2", "C.ENGLISH(EXT)", "2.5", "50","0 ", "3", "C.MATHS(EXT)", "2.5","50"," 0", "4", "C.SCIENCE(EXT)","2.5","50"," ", "5", "C.SOCIAL(EXT)", "2.5","50"," ",
+   "6", "C.HP(EXT)","1.5", "50"," ","7", 
+   "LOCAL SUB-(EXT)", "2","50","0 ", "1","NEPALI-(INT)", "2.5","50"," 0", "2", "C.ENGLISH(INT)", "2.5", "50", " 0",
+   "3", "C.MATHS(INT)", "2.5","50"," ", "4","C.SCIENCE(INT)","2.5", "50", " ", "5","C.SOCIAL(INT)", "2.5","50", " ", "6","C.HP(INT)","1.5","50", " ", "7","LOCAL SUB-(INT)", "2","50"," "],
+
+  
+ 6: ["1", "C.NEPALI (EXT)", "2.5", "50"," 0", "2", "C.ENGLISH(EXT)", "2.5", "50"," 0", "3", "C.MATHS(EXT)", "2.5","50"," ", "4", "C.SCIENCE(EXT)","2.5","50"," 0", "5", "C.SOCIAL(EXT)", "2.5","50"," 0",
+   "6", "C.HP(EXT)","1.5", "50"," 0","7", 
+   "LOCAL SUB-(EXT)", "2","50"," 0", "1","NEPALI-(INT)", "2.5","50","0 ", "2", "C.ENGLISH(INT)", "2.5", "50", " 0",
+   "3", "C.MATHS(INT)", "2.5","50","0 ", "4","C.SCIENCE(INT)","2.5", "50", " 0", "5","C.SOCIAL(INT)", "2.5","50", " 0", "6","C.HP(INT)","1.5","50", "0 ", "7","LOCAL SUB-(INT)", "2","50"," 0"],
+
+
+
+  7: ["1", "C.NEPALI (EXT)", "2.5", "50"," 0", "2", "C.ENGLISH(EXT)", "2.5", "50"," 0", "3", "C.MATHS(EXT)", "2.5","50"," 0", "4", "C.SCIENCE(EXT)","2.5","50","0 ", "5", "C.SOCIAL(EXT)", "2.5","50"," ",
+   "6", "C.HP(EXT)","1.5", "50"," ","7", 
+   "LOCAL SUB-(EXT)", "2","50"," ", "1","NEPALI-(INT)", "2.5","50"," ", "2", "C.ENGLISH(INT)", "2.5", "50", "0 ",
+   "3", "C.MATHS(INT)", "2.5","50"," 0", "4","C.SCIENCE(INT)","2.5", "50", " 0", "5","C.SOCIAL(INT)", "2.5","50", "0 ", "6","C.HP(INT)","1.5","50", " 0", "7","LOCAL SUB-(INT)", "2","50","0 "],
+
+
+  8: ["1", "C.NEPALI (EXT)", "2.5", "50"," 0", "2", "C.ENGLISH(EXT)", "2.5", "50"," 0", "3", "C.MATHS(EXT)", "2.5","50"," 0", "4", "C.SCIENCE(EXT)","2.5","50","0 ", "5", "C.SOCIAL(EXT)", "2.5","50"," ",
+   "6", "C.HP(EXT)","1.5", "50"," 0","7", 
+   "LOCAL SUB-(EXT)", "2","50"," 0", "1","NEPALI-(INT)", "2.5","50"," 0", "2", "C.ENGLISH(INT)", "2.5", "50", " ",
+   "3", "C.MATHS(INT)", "2.5","50"," 0", "4","C.SCIENCE(INT)","2.5", "50", " 0", "5","C.SOCIAL(INT)", "2.5","50", " 0", "6","C.HP(INT)","1.5","50", "0 ", "7","LOCAL SUB-(INT)", "2","50"," 0"],
+
+
+
+
+  9: ["1", "C.NEPALI", "3.75", "75"," ", "2", "C.ENGLISH", "3.75", "75"," ", "3", "C.MATHS", "3.75","75"," ","4", "C.SCIENCE","3.75","75"," ","5", "C.SOCIAL", "3","75"," ","6", "OPT1","3", "75", " ", "7", "OPT2", "3","75"," ",
+  "1", "C.NEPALI (INT)", "1.25","25"," ", "2", "C.ENGLISH(INT)", "1.25","25", " ","3", "C.MATHS(INT)", "1.25","25"," ","4", "C.SCIENCE(INT)", "1.25","25", " ","5", "C.SOCIAL(INT)", "1","25", " ",
+  "6","OPT1(INT)","1","25", " ","7", "OPT2(INT)", "1","25"," "],
+
+
+  10: ["1", "C.NEPALI", "3.75", "75"," ", "2", "C.ENGLISH", "3.75", "75"," ", "3", "C.MATHS", "3.75","75"," ","4", "C.SCIENCE","3.75","75"," ","5", "C.SOCIAL", "3","75"," ","6", "OPT1","3", "75", " ", "7", "OPT2", "3","75"," ",
+  "1", "C.NEPALI (INT)", "1.25","25"," ", "2", "C.ENGLISH(INT)", "1.25","25", " ","3", "C.MATHS(INT)", "1.25","25"," ","4", "C.SCIENCE(INT)", "1.25","25", " ","5", "C.SOCIAL(INT)", "1","25", " ",
+  "6","OPT1(INT)","1","25", " ","7", "OPT2(INT)", "1","25"," "],
+
+
+  11: ["1", "C.NEPALI (EXT)", "2.25", "75"," ", "2", "C.ENGLISH(EXT)", "3", "75"," ", "3", "C.SOCIAL(EXT)", "3.75","75"," ","4", "OPT1(EXT)","3.75","75"," ","5", "OPT2(EXT)", "3.75","75"," ","6", "OPT3(EXT)","3.75", "75", " "," "," ", " "," ", " ", "1", "C.NEPALI (INT)", "0.75", "25"," ", "2", "C.ENGLISH(INT)", "1", "25"," ", "3", "C.SOCIAL(INT)", "1.25","25"," ","4", "OPT1(INT)","1.25","25"," ","5", "OPT2(INT)", "1.25","25"," ","6", "OPT3(INT)","1.25", "25"," "," "," ", " "," ", " "],
+
+
+  12: ["1", "C.NEPALI (EXT)", "2.25", "75"," ", "2", "C.ENGLISH(EXT)", "3", "75"," ", "3", "C.SOCIAL(EXT)", "3.75","75"," ","4", "OPT1(EXT)","3.75","75"," ","5", "OPT2(EXT)", "3.75","75"," ","6", "OPT3(EXT)","3.75", "75", " "," "," ", " "," ", " ", "1", "C.NEPALI (INT)", "0.75", "25"," ", "2", "C.ENGLISH(INT)", "1", "25"," ", "3", "C.SOCIAL(INT)", "1.25","25"," ","4", "OPT1(INT)","1.25","25"," ","5", "OPT2(INT)", "1.25","25"," ","6", "OPT3(INT)","1.25", "25"," "," "," ", " "," ", " "],
+
+
+
+
+
+  
+
+  13: ["0011", "C.NEPALI (EXT)", "2.25", "75"," ", "0031", "C.ENGLISH(EXT)", "3", "75"," ", "0051", "C.SOCIAL(EXT)", "3.75","75"," ","4", "OPT1(EXT)","3.75","75"," ","5", "OPT2(EXT)", "3.75","75"," ","6", "OPT3(EXT)","3.75", "75", " ", "0012", "C.NEPALI(INT)", "0.75", "25"," ", "0032", "C.ENGLISH(INT)", "1", "25"," ", "0052", "C.SOCIAL(INT)", "1.25","25"," ","4", "OPT1(INT)","1.25","25"," ","5", "OPT2(INT)", "1.25","25"," ","6", "OPT3(INT)","1.25", "25"," "],
+
+
+   14: ["0011", "C.NEPALI (EXT)", "2.25", "75"," ", "0031", "C.ENGLISH(EXT)", "3", "75"," ", "0051", "C.SOCIAL(EXT)", "3.75","75"," ","4", "OPT1(EXT)","3.75","75"," ","5", "OPT2(EXT)", "3.75","75"," ","6", "OPT3(EXT)","3.75", "75", " ", "0012", "C.NEPALI(INT)", "0.75", "25"," ", "0032", "C.ENGLISH(INT)", "1", "25"," ", "0052", "C.SOCIAL(INT)", "1.25","25"," ","4", "OPT1(INT)","1.25","25"," ","5", "OPT2(INT)", "1.25","25"," ","6", "OPT3(INT)","1.25", "25"," "],
+
+   
+  
+    };
+  
+
+    // Clear previous input values
+    inputs.forEach(input => input.value = '');
+
+    if (selectedOption) {
+        const values = data[selectedOption];
+        for (let i = 0; i < inputs.length; i++) {
+            if (values[i]) {
+                inputs[i].value = values[i];
+            }
+        }
+    }
+}
+
+</script>
+<style>
+
+</style>
+
+
+
+<script>
+    document.getElementById("uploadedPhoto").addEventListener("change", function(event) {
+        const file = event.target.files[0]; // Get the first selected file
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.getElementById("previewImage");
+                img.src = e.target.result;
+                img.style.display = "block"; // Show the image
+            };
+            reader.readAsDataURL(file); // Convert file to Base64 URL
+        }
+    });
+</script>
+
+
+
+<style>
+
+.small-input {
+  width: 40px;
+   border: 2px solid #aaa;
+
+}
+
+.medium-input {
+  width:46px;
+}
+.big-input {
+  width: 120px;
+}
+</style>
+
+
+ <script>
+    function clearForm() {
+      // Clear all inputs in the form
+      document.getElementById('dataEntryForm').reset();
+    }
+  </script>
+
+
+
+
+ <style>
+  body {
+    font-family: Arial, sans-serif;
+
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+   
+
+     </style>
+
+
+</body>
+</html>
