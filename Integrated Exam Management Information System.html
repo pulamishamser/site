@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>IEMAS Dashboard</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+	<!-- Core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+     <!-- Core Scripts -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+	<style>
+		:root {
+			--primary-color: #3498db;
+			--secondary-color: #2980b9;
+			--sidebar-width: 250px;
+			--header-height: 60px;
+			--card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+			--transition: all 0.3s ease;
+		}
+
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		}
+
+		body {
+			background-color: #f5f7fa;
+			color: #333;
+		}
+
+		.dashboard-container {
+			display: flex;
+			flex-direction: column;
+			min-height: 100vh;
+		}
+
+		.header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 0 20px;
+			height: var(--header-height);
+			background-color: #0e1072;
+			box-shadow: var(--card-shadow);
+			position: fixed;
+			width: 100%;
+			z-index: 100;
+				color: #fff;
+		}
+
+		.logo {
+			font-size: 1.5rem;
+			font-weight: bold;
+			color: var(--primary-color);
+				color: #fff;
+		}
+
+		.user-info {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			position: relative;
+			cursor: pointer;
+		}
+
+		.profile-icon {
+			font-size: 1.8rem;
+			color: var(--primary-color);
+		}
+
+		.user-dropdown {
+			position: absolute;
+			top: 100%;
+			right: 0;
+			background: white;
+			box-shadow: var(--card-shadow);
+			border-radius: 5px;
+			padding: 10px 0;
+			width: 200px;
+			display: none;
+		}
+
+		.user-dropdown a {
+			display: block;
+			padding: 8px 15px;
+			color: #333;
+			text-decoration: none;
+			transition: var(--transition);
+		}
+
+		.user-dropdown a:hover {
+			background-color: #f0f0f0;
+			color: var(--primary-color);
+		}
+
+		.user-info:hover .user-dropdown {
+			display: block;
+		}
+
+		.content-wrapper {
+			display: flex;
+			margin-top: var(--header-height);
+			flex: 1;
+		}
+
+		.sidebar {
+			width: var(--sidebar-width);
+			background-color: white;
+			box-shadow: var(--card-shadow);
+			transition: var(--transition);
+			height: calc(100vh - var(--header-height));
+			overflow-y: auto;
+			position: fixed;
+		}
+
+		.sidebar nav ul {
+			list-style: none;
+		}
+
+		.sidebar nav > ul > li {
+			border-bottom: 1px solid #eee;
+		}
+
+		.sidebar nav a {
+			display: flex;
+			align-items: center;
+			padding: 15px 20px;
+			color: #555;
+			text-decoration: none;
+			transition: var(--transition);
+		}
+
+		.sidebar nav a:hover {
+			background-color: #f0f7ff;
+			color: var(--primary-color);
+		}
+
+		.sidebar nav a i {
+			margin-right: 10px;
+			width: 30px;
+			text-align: center;
+		}
+
+		.sidebar nav .active a {
+			background-color: #e1f0ff;
+			color: var(--primary-color);
+			font-weight: 500;
+		}
+
+		.toggle-submenu {
+			justify-content: space-between;
+		}
+
+		.arrow {
+			transition: var(--transition);
+		}
+
+		.submenu {
+			max-height: 0;
+			overflow: hidden;
+			transition: max-height 0.3s ease;
+			background-color: #f9f9f9;
+		}
+
+		.submenu li a {
+			padding-center: 80px;
+		}
+
+		.submenu.expanded {
+			max-height: 1000px;
+		}
+
+		.arrow.rotated {
+			transform: rotate(180deg);
+		}
+
+		.main-content {
+			flex: 1;
+			padding: 20px;
+			margin-left: var(--sidebar-width);
+			transition: var(--transition);
+		}
+
+		.stats-cards {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+			gap: 20px;
+			margin-bottom: 20px;
+		}
+
+		.card{
+			background-color: #fafafa;
+			border-radius: 8px;
+			box-shadow: var(--card-shadow);
+			padding: 20px;
+			
+		}
+.card h5{
+font-size: 14px;
+	}
+		.card h3{
+			margin-bottom: 15px;
+			color: var(--primary-color);
+		font-size: 1.1rem;;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			margin: 10px 0;
+		}
+
+		th, td {
+			padding: 8px;
+			text-align: left;
+			border-bottom: 1px solid #eee;
+		}
+
+		th {
+			background-color: #f5f5f5;
+			font-weight: 500;
+		}
+
+		tr:hover {
+			background-color: #f9f9f9;
+		}
+
+		.card ul, .card ol {
+			padding-left: 20px;
+			margin: 10px 0;
+			font-size: 11px;
+		}
+
+		.card li {
+			margin-bottom: 8px;
+			line-height: 1.4;
+		}
+
+		.card li span {
+			float: right;
+			font-weight: bold;
+		}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .stats-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+
+
+
+
+
+		.pagination {
+			display: flex;
+			justify-content: center;
+			margin-top: 15px;
+			gap: 10px;
+		}
+
+		.pagination button {
+			padding: 5px 10px;
+			background-color: #f0f0f0;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			transition: var(--transition);
+		}
+
+		.pagination button:hover {
+			background-color: #e0e0e0;
+		}
+
+		.charts-section {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+			gap: 20px;
+			margin-bottom: 20px;
+		}
+
+		.chart-card {
+			height: 300px;
+		}
+
+		canvas {
+			width: 100%;
+			height: 100%;
+		}
+
+		.detailed-stats table {
+			font-size: 0.9rem;
+		}
+
+		.detailed-stats th, .detailed-stats td {
+			padding: 5px;
+			text-align: center;
+		}
+
+		.menu-toggle {
+			display: none;
+			font-size: 1.5rem;
+			cursor: pointer;
+			color: var(--primary-color);
+		}
+
+		/* New styles for content area */
+		.content-area {
+			width: 100%;
+			height: calc(100vh - var(--header-height) - 40px);
+			border: none;
+			background: white;
+			border-radius: 8px;
+			box-shadow: var(--card-shadow);
+		}
+
+		.content-container {
+			display: none;
+			flex-direction: column;
+			gap: 20px;
+		}
+
+		.content-container.active {
+			display: flex;
+		}
+
+		.back-button {
+			display: none;
+			padding: 8px 15px;
+			background-color: var(--primary-color);
+			color: white;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			width: fit-content;
+		}
+
+		.back-button:hover {
+			background-color: var(--secondary-color);
+		}
+
+		@media (max-width: 992px) {
+			.sidebar {
+				transform: translateX(-100%);
+				z-index: 90;
+			}
+
+			.sidebar.active {
+				transform: translateX(0);
+			}
+
+			.main-content {
+				margin-left: 0;
+			}
+
+			.menu-toggle {
+				display: block;
+			}
+
+			.content-wrapper {
+				position: relative;
+			}
+		}
+
+		@media (max-width: 768px) {
+			.stats-cards, .charts-section {
+				grid-template-columns: 1fr;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="dashboard-container">
+		<header class="header">
+			<div class="menu-toggle">
+				<i class="fas fa-bars"></i>
+			</div>
+
+			<div class="logo">IEMIS</div>
+
+			<div class="user-info">
+				<span>Hi, ...user! </span>
+				<i class="fas fa-user-circle profile-icon"></i>
+				<div class="user-dropdown">
+					<a href="#"><i class="fas fa-user"></i> Profile</a>
+					<a href="#"><i class="fas fa-key"></i> Change Password</a>
+					<a href="#"><i class="fas fa-download"></i> Downloads</a>
+					<a href="https://script.google.com/macros/s/AKfycbx6UEV1qQsWCLM671HojQpuYVCbtAzdfKEf4A9R3RqKx0qj36YiekVc2riRjwScPwOTWA/exec"><i class="fas fa-sign-out-alt"></i> log out</a>
+				</div>
+			</div>
+		</header>
+
+		<div class="content-wrapper">
+			<aside class="sidebar">
+
+				<nav>
+					<ul>
+					
+						<li class="active"><a href="#" class="dashboard-link">  <i class="fas fa-tachometer-alt"></i> 	Dashboard</a></li>
+						
+						<li><a href="#"><i class="fas fa-address-card"></i> School Report Card</a></li>
+						<li>
+							<a href="#" class="toggle-submenu"><i class="fas fa-users"></i> Student Record <i class="fas fa-chevron-down arrow"></i></a>
+							<ul class="submenu">
+								<li><a href="#">Student Information</a></li>
+								<li><a href="#">Scholarship</a></li>
+
+								<li><a href="#">Student Transfer</a></li>
+								<li><a href="#">Student Accept</a></li>
+								<li><a href="#">Undo Upgrade</a></li>
+							</ul>
+						</li>
+
+
+	<li><a href="#" data-link="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Data%20Entry2.html">  <i class="fas fa-pencil-alt"></i>Student Data Entry (1-12)</a></li>
+	<li><a href="#" data-link="https://shamser.info.np/Integrated Exam Management Information System/Upgrade in new class or next term.html"><i class="fas fa-level-up-alt"></i> Upgrade</a></li>
+
+
+
+
+
+
+
+	<li><a href="#" class="toggle-submenu"><i class="fas fa-edit"></i> Update Data<i class="fas fa-chevron-down arrow"></i></a>
+					<ul class="submenu">
+					<li><a href="#" data-link="https://shamser.info.np/Integrated Exam Management Information System/Update All Subject Marks.html">Update All  </a></li>
+					<li><a href="#" data-link="https://shamser.info.np/Integrated Exam Management Information System/Student's ID Profile Update.html.html">Update profile with ID </a></li>
+							<li><a href="#" data-link="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Update%20Manually.html">Update manually </a></li>
+
+	<li><a href="#" class="toggle-submenu">Subjectwise Marks Update<i class="fas fa-chevron-down arrow"></i></a>
+					<ol class="submenu">
+			
+					<li><a href="#" data-link="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Nepali.html">Nepali</a></li>
+					<li><a href="#" data-link="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/English.html">English</a></li>
+					<li><a href="#" data-link="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Math%20&%20Social.html">Maths/Social(11-12)</a></li>
+				<li><a href="#" data-link="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Science.html">Science/Serofero/OPTI(11-12)</a></li>
+					<li><a href="#" data-link="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Social.html">Social/Local Sub(1-3)/OPTI(11-12)</a></li>
+					<li><a href="#" data-link="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/OPT1-HPC-OPT3.html">OPT1/HPC//OPT3(11-12)</a></li>
+					<li><a href="#" data-link="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/OPT2%20(9-10)%20Local-Sub(4-8).html">OPT2/Local Sub(4-8)</a></li>
+					</ol>
+					</li>
+					</ul>
+					</li>
+
+
+						<li>
+							<a href="#" class="toggle-submenu"><i class="fas fa-edit"></i> Manage Exam <i class="fas fa-chevron-down arrow"></i></a>
+							<ul class="submenu">
+
+					<li><a href="#" data-link="https://script.google.com/macros/s/AKfycbxybWBsd4PrmHzLmvTR0XIa4i9yV8fSvZzT1mbusl4QUpztqjlURKnuCvlxK_M2wACz/exec"><i class="fas fa-file-alt"></i>Result-Sheet</a></li>
+					<li><a href="#" data-link="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Entrance%20Card.html"><i class="fas fa-id-card"></i>Admit Card</a></li>
+					<li><a href="#" data-link="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Data%20Entry2.html"> Mark Entry (1-12)</a></li>
+					<li><a href="#">Marks Entry (8) Final</a></li>
+				
+		
+	
+
+
+					<li><a href="#" class="toggle-submenu"> Mark wise ledger <i class="fas fa-chevron-down arrow"></i></a>
+					<ol class="submenu">
+					<li><a href="#" data-link="https://shamser.info.np/Integrated Exam Management Information System/Mark Ledger4-10NoSorting.html">Mark ledger4-10 No sorting</a></li>
+					<li><a href="#" data-link="https://shamser.info.np/Integrated Exam Management Information System/Mark Ledger4-10Sorting.html">Mark ledger4-10 sorting</a></li>
+					<li><a href="#" data-link="https://shamser.info.np/Integrated Exam Management Information System/Mark Ledger1-3NoSorting.html">Mark ledger1-3 No sorting</a></li>
+					<li><a href="#" data-link="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/All%20Ledger(AllDetails).html">All Ledger</a></li>
+					
+					</ol>
+					</li>
+					
+					<li><a href="#" class="toggle-submenu">Grade wise ledger <i class="fas fa-chevron-down arrow"></i></a>
+					<ol class="submenu">
+					<li><a href="#" data-link="https://shamser.info.np/Integrated Exam Management Information System/Grade Ledger 4-10.html">Grade ledger4-10 sorting</a></li>
+					<li><a href="#" data-link="https://shamser.info.np/Integrated Exam Management Information System/Grade Ledger1-3.html">Grade ledger1-3 sorting</a></li>
+					</Ol>
+					</li>
+				</ol>
+
+				
+					</li>
+					<li><a href="#" class="toggle-submenu"><i class="fas fa-address-card"></i>Grade Sheet <i class="fas fa-chevron-down arrow"></i></a>
+					<ol class="submenu">
+					<li><a href="https://shamser.info.np/Integrated Exam Management Information System/Single Grade Sheet(9-10).html">Single  Grade Sheet for 9-10 </a></li>
+					<li><a href="https://shamser.info.np/Integrated Exam Management Information System/Grade sheet  All for 9-10.html">Multi Grade Sheet for 9-10</a></li>
+					<li><a href="https://shamser.info.np/Integrated Exam Management Information System/Grade-sheet(1-8 & 11-12).html">Single  Grade Sheet for 4-12 </a></li>
+					<li><a href="https://shamser.info.np/Integrated Exam Management Information System/Gradesheet for class 1-8 & 11-12.html">Multi Grade Sheet for 4-12</a></li>
+					</uo>
+					</li>
+				</ul>
+					</li>
+					
+<li><a href="#" data-link="https://shamser.info.np/Contact_Form.html"><i class="fas fa-envelope"></i> Contact</a></li>
+
+
+					</ul>
+				</nav>
+			</aside>
+
+			<main class="main-content">
+		  <h5> <img  width= "30"  height="30" src="https://media.tenor.com/dhfraztxBo8AAAAj/globe-joypixels.gif" alt="Logo">
+                  <a href="https://shamser.info.np">shamser.info.np</a>
+                    <script type="text/javascript" src="https://free-hit-counters.net/count/gd0n" width="200" height="100"></script></h5>
+				<!-- Dashboard Content -->
+				<div class="content-container active" id="dashboard-content">
+					<section class="stats-cards">
+						<div class="card schools-card">
+							<h3>TOTAL SCHOOLS</h3>
+							<table>
+							 <!-- Charts -->
+            <div class="charts">
+                <div class="chart-container">
+                    <canvas id="schoolChart"></canvas>
+                </div>
+									<div class="card chart-card">
+							<h3>Boys</h3>
+							<canvas id="boysChart"></canvas>
+						</div>
+							</table>
+						</div>
+
+						<div class="card teachers-card"><h3>TEACHER COUNT</h3>
+							         <div class="chart-container">
+                    <canvas id="studentChart"></canvas>
+                </div>
+										<div class="card chart-card">
+							<h3>Girls</h3>
+							<canvas id="girlsChart"></canvas>
+						</div>
+						</div>
+
+<style></style>
+
+
+
+
+
+
+
+
+						<div class="card notices-card">
+							<h3>Important Notices & Updates</h3>
+              
+        <h5 class="modal-title"><b>एकीकृत परीक्षा व्यवस्थापन सूचना प्रणाली (IEMIS) को प्रयोग र विशेषताहरू</b></h5>
+       
+
+   <ul> <li> &nbsp; CEHRD द्वारा निर्धारित निर्देशिका र नीति (पत्र ग्रेडिङ प्रणाली र पाठ्यक्रम रूपरेखा) अपनाइएको</li> 
+     <li> &nbsp; अनलाइन रूपमा अंक प्रविष्ट गर्न सकिन्छ, र रिपोर्ट ५ मिनेटभित्र प्राप्त गर्न सकिन्छ</li> 
+     <li> &nbsp; एकल तथा बहु-ग्रेड शीट खाता र प्रवेश पत्रहरू प्राप्त गर्न सकिन्छ</li> 
+     <li> &nbsp; नतिजा पत्र छाप्न सकिन्छ र सूचना पर्खालमा टाँस्न सकिन्छ</li> 
+     <li> &nbsp; विद्यार्थीहरूले अनलाइन ग्रेड शीट डाउनलोड गर्न सक्ने</li> 
+     <li> &nbsp; कुनै पनि वर्षको त्रैमासिक वा वार्षिक परीक्षाको अभिलेख राख्न सजिलो</li> 
+     <li> &nbsp; प्रयोगकर्ता आईडी र पासवर्डद्वारा सुरक्षित</li>
+     <li> &nbsp; कुनै पनि विद्यालयले नतिजा तयार गर्न प्रयोग गर्न सक्ने</li>
+   </ul> 
+   <h5><b>IEMIS सफ्टवेयर प्रयोग गर्दा ध्यान दिनुपर्ने मुख्य बुँदाहरू...</b></h5>
+   <ul> 
+     <li> &nbsp; सर्च ब्राउजर खोल्नुहोस्</li> 
+       <li> &nbsp; टाइप गर्नुहोस्: shamser.info.np</li>
+     <li> &nbsp; मोबाइल प्रयोगकर्ताका लागि 3 line (≡) मा जानुहोस्</li> 
+     <li> &nbsp; IEMIS छान्नुहोस् त्यहाँ LOGIN र REGISTER NOW भन्ने option आउँछ </li> 
+       <li> &nbsp;नयाँ युजरले REGISTER NOW छान्नुहोस र एकाउन्ट बनाउनुहोस यसपछि LOGIN गर्नुहोस</li>
+
+       <li> &nbsp;अब Data entry Form मा गएर डेटा भर्नुहोस</li>
+     <li> &nbsp; Marks बिना पनि डेटा गर्न सकिन्छ</li> 
+       <li> &nbsp; डेटा प्रविष्टि कार्य पूरा गर्नुहोस्</li> 
+     <li> &nbsp; डेटा प्रविष्टि र अद्यावधिकपछि रिफ्रेस बटन थिचेर रिफ्रेस गर्नुहोस्</li>
+       <li> &nbsp; मेनुबार हेर्नुहोस्</li>
+     <li> &nbsp; तपाईंलाई चाहिएको खोज्नुहोस</li> 
+       <li> &nbsp; Symbol no.or Id Number नै Class हो Symbol no.or Id Number राख्दा कक्षालाई आधारमान्नुहोला जस्तै 827100यहाँ 7 चाही कक्षाा हो ।</li> 
+     <li> &nbsp; विद्यार्थीहरूलाई नतिजा हेर्नको लागि लिङ्क प्रतिलिपि उपलब्ध गराइन्छ</li> 
+  <li> &nbsp;आन्तरिक अंक बाहेकको नतिजाको लागि Credit hour and FM खाली गरेर अंक चढाउनुहोला  </li> 
+  <li> &nbsp;जति FM मा परीक्षा लिएको हो त्यति नै चढाउँदा पनि हुन्छ ।</li> 
+    </ul>
+
+     
+
+
+
+							<div class="pagination">
+								<button>&lt; Prev</button>
+								<span>1</span>
+								<button>Next &gt;</button>
+							</div>
+						</div>
+					</section>
+
+      <footer>
+            © 2023 shamser.info.np. All rights reserved.
+        </footer>
+  
+
+ <script>// Initialize Charts
+document.addEventListener('DOMContentLoaded', function() {
+    // School Chart (Bar)
+    const schoolCtx = document.getElementById('schoolChart').getContext('2d');
+    const schoolChart = new Chart(schoolCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Kathmandu', 'Pokhara', 'Lalitpur', 'Bhaktapur', 'Biratnagar'],
+            datasets: [{
+                label: 'Number of Schools',
+                data: [1200, 800, 600, 400, 300],
+                backgroundColor: '#3498db',
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+        }
+    });
+
+    // Student Chart (Line)
+    const studentCtx = document.getElementById('studentChart').getContext('2d');
+    const studentChart = new Chart(studentCtx, {
+        type: 'line',
+        data: {
+            labels: ['2019', '2020', '2021', '2022', '2023'],
+            datasets: [{
+                label: 'Student Enrollment',
+                data: [1000000, 1050000, 1100000, 1150000, 1200000],
+                borderColor: '#e74c3c',
+                fill: false,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+        }
+    });
+});</script>
+
+
+
+				</div>
+
+				<!-- External Content Area -->
+				<div class="content-container" id="external-content">
+					<button class="back-button"><i class="fas fa-arrow-left"></i> Back to Dashboard</button>
+					<iframe class="content-area" id="content-frame" allowfullscreen></iframe>
+				</div>
+			</main>
+		</div>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			// Toggle sidebar on mobile
+			const menuToggle = document.querySelector('.menu-toggle');
+			const sidebar = document.querySelector('.sidebar');
+			
+			menuToggle.addEventListener('click', function() {
+				sidebar.classList.toggle('active');
+			});
+
+			// Toggle submenus
+			const toggleSubmenus = document.querySelectorAll('.toggle-submenu');
+			
+			toggleSubmenus.forEach(item => {
+				item.addEventListener('click', function(e) {
+					e.preventDefault();
+					const submenu = this.nextElementSibling;
+					const arrow = this.querySelector('.arrow');
+					
+					submenu.classList.toggle('expanded');
+					arrow.classList.toggle('rotated');
+				});
+			});
+
+			// Initialize charts
+			const boysCtx = document.getElementById('boysChart').getContext('2d');
+			const girlsCtx = document.getElementById('girlsChart').getContext('2d');
+			
+			new Chart(boysCtx, {
+				type: 'bar',
+				data: {
+					labels: ['ECD', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5'],
+					datasets: [{
+						label: 'Boys',
+						data: [11, 9, 6, 11, 10, 10],
+						backgroundColor: 'rgba(54, 162, 235, 0.7)',
+						borderColor: 'rgba(54, 162, 235, 1)',
+						borderWidth: 1
+					}]
+				},
+				options: {
+					responsive: true,
+					maintainAspectRatio: false,
+					scales: {
+						y: {
+							beginAtZero: true
+						}
+					}
+				}
+			});
+
+			new Chart(girlsCtx, {
+				type: 'bar',
+				data: {
+					labels: ['ECD', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5'],
+					datasets: [{
+						label: 'Girls',
+						data: [14, 8, 7, 9, 8, 12],
+						backgroundColor: 'rgba(255, 99, 132, 0.7)',
+						borderColor: 'rgba(255, 99, 132, 1)',
+						borderWidth: 1
+					}]
+				},
+				options: {
+					responsive: true,
+					maintainAspectRatio: false,
+					scales: {
+						y: {
+							beginAtZero: true
+						}
+					}
+				}
+			});
+
+			// Handle external content links
+			const externalLinks = document.querySelectorAll('[data-link]');
+			const dashboardContent = document.getElementById('dashboard-content');
+			const externalContent = document.getElementById('external-content');
+			const contentFrame = document.getElementById('content-frame');
+			const backButton = document.querySelector('.back-button');
+			const dashboardLink = document.querySelector('.dashboard-link');
+
+			externalLinks.forEach(link => {
+				link.addEventListener('click', function(e) {
+					e.preventDefault();
+					const url = this.getAttribute('data-link');
+					contentFrame.src = url;
+					dashboardContent.classList.remove('active');
+					externalContent.classList.add('active');
+					backButton.style.display = 'block';
+				});
+			});
+
+			backButton.addEventListener('click', function() {
+				externalContent.classList.remove('active');
+				dashboardContent.classList.add('active');
+				contentFrame.src = '';
+				this.style.display = 'none';
+			});
+
+			dashboardLink.addEventListener('click', function(e) {
+				e.preventDefault();
+				externalContent.classList.remove('active');
+				dashboardContent.classList.add('active');
+				contentFrame.src = '';
+				backButton.style.display = 'none';
+			});
+		});
+	</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
