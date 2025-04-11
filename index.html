@@ -725,75 +725,88 @@ body,
   </marquee>  
 <p style="font-size:10px;"> <span class="float-left pt-1" style= "text-transform: lowercase;font-size:12px;" data-livestamp="2024-9-28, 11:03:25 AM"></span></p>
 
-<div class="container">
-  
-<div class="emis-header">
-    <img src="https://shamser.info.np/HomePage/IEMIS%20SHAMSER.jpg" alt="IEMIS System" class="emis-logo">
-    
-    <div class="emis-auth-links">
-        <a href="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/IEMIS.v2.html" class="login-link">
-            <i class="fas fa-sign-in-alt"></i> LOGIN
+<div class="emis-login-container">
+    <div class="emis-background">
+        <img src="IEMIS SHAMSER.jpg" alt="IEMIS Background" class="emis-bg-image">
+    </div>
+    <div class="emis-auth-buttons">
+        <a href="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/IEMIS.v2.html" class="emis-login-btn">
+            EMIS LOGIN
         </a>
-        
-        <a href="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/New%20User%20Register.html" class="register-link">
-            <i class="fas fa-user-plus"></i> REGISTER NOW
+        <a href="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/New%20User%20Register.html" class="emis-register-btn">
+            REGISTER NOW
         </a>
     </div>
 </div>
 
 <style>
-    .emis-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px;
-        background-color: #f8f9fa;
-        border-bottom: 1px solid #e1e1e1;
+    .emis-login-container {
+        position: relative;
+        width: 100%;
+        max-width: 800px;
+        height: 300px;
+        margin: 0 auto;
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
     
-    .emis-logo {
-        height: 50px;
-        width: auto;
-        object-fit: contain;
+    .emis-background {
+        position: absolute;
+        width: 100%;
+        height: 100%;
     }
     
-    .emis-auth-links {
+    .emis-bg-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.7);
+    }
+    
+    .emis-auth-buttons {
+        position: absolute;
+        bottom: 40px;
+        right: 40px;
         display: flex;
+        flex-direction: column;
         gap: 15px;
     }
     
-    .login-link, .register-link {
-        padding: 8px 15px;
-        border-radius: 4px;
+    .emis-login-btn, .emis-register-btn {
+        padding: 12px 30px;
+        border-radius: 5px;
         text-decoration: none;
         font-weight: bold;
+        font-size: 16px;
+        text-align: center;
         transition: all 0.3s ease;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
+        width: 180px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
     
-    .login-link {
+    .emis-login-btn {
+        background-color: rgba(255,255,255,0.9);
         color: #333;
-        border: 1px solid #6c757d;
+        border: 2px solid #fff;
     }
     
-    .login-link:hover {
-        background-color: #e9ecef;
+    .emis-login-btn:hover {
+        background-color: rgba(255,255,255,1);
+        transform: translateY(-2px);
     }
     
-    .register-link {
-        background-color: #007bff;
+    .emis-register-btn {
+        background-color: rgba(76, 175, 80, 0.9);
         color: white;
-        border: 1px solid #007bff;
+        border: 2px solid #4CAF50;
     }
     
-    .register-link:hover {
-        background-color: #0069d9;
-        border-color: #0062cc;
+    .emis-register-btn:hover {
+        background-color: rgba(76, 175, 80, 1);
+        transform: translateY(-2px);
     }
 </style>
-
 <!-- Include Font Awesome for icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <style>
