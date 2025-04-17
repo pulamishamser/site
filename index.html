@@ -203,120 +203,217 @@ window.scrollTo(0, 0);
 <!-----------Go to top----------End------------------>
 <!-----------https://my.pingdom.com/app/3/visitor-insights-----<script src="//rum-static.pingdom.net/pa-66bb9da9eff3250012000e4c.js" async></script>----------->
 
-<!-- Bottom Navigation Widgets -->
-<div class="widget-container">
-  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Preeti', 'Arial', sans-serif;
+      margin: 0;
+      padding-bottom: 60px;
+    }
+    
+    .widget-container {
+      display: none;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      margin: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .widget {
+      display: none;
+    }
+    
+    .widget.active {
+      display: block;
+    }
+    
+    .widget h3 {
+      color: #2c3e50;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 8px;
+      margin-top: 0;
+    }
+    
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: #3498db;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+    
+    .bottom-nav a {
+      color: white;
+      text-decoration: none;
+      text-align: center;
+      font-size: 14px;
+      padding: 5px;
+      flex: 1;
+    }
+    
+    .bottom-nav i {
+      display: block;
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+    
+    /* Widget specific styles */
+    .calendar-content {
+      height: 300px;
+      overflow-y: auto;
+    }
+    
+    .games-list a {
+      display: block;
+      padding: 8px;
+      background: #eee;
+      margin: 5px 0;
+      border-radius: 4px;
+      text-decoration: none;
+      color: #2c3e50;
+    }
+    
+    .radio-player audio {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    
+    .radio-stations button {
+      background: #3498db;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      margin: 5px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    .date-converter input, 
+    .date-converter select {
+      width: 100%;
+      padding: 8px;
+      margin: 5px 0;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    
+    .date-converter button,
+    .unicode-converter button {
+      width: 100%;
+      padding: 10px;
+      background: #2ecc71;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    
+    .unicode-converter textarea {
+      width: 100%;
+      height: 100px;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    
+    .unicode-output {
+      margin-top: 10px;
+      padding: 10px;
+      background: #f0f0f0;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Widget Container -->
+<div class="widget-container" id="widget-container">
   <!-- Calendar Widget -->
   <div id="calendar-widget" class="widget">
-    <h3><i class="fa fa-calendar-alt"></i> पात्रो</h3>
+    <h3><i class="fas fa-calendar-alt"></i> पात्रो</h3>
     <div class="calendar-content">
-      <!-- Calendar content will be loaded here -->
+      <!-- Nepali calendar will be loaded here -->
+      <p>नेपाली पात्रो सामग्री यहाँ प्रदर्शित हुनेछ...</p>
     </div>
   </div>
 
   <!-- Games Widget -->
   <div id="games-widget" class="widget">
-    <h3><i class="fa fa-gamepad"></i> गेम्स</h3>
+    <h3><i class="fas fa-gamepad"></i> गेम्स</h3>
     <div class="games-list">
       <a href="#">स्नेक गेम</a>
       <a href="#">पजल गेम</a>
       <a href="#">क्विज गेम</a>
+      <a href="#">कार रेसिङ</a>
+      <a href="#">तास गेम</a>
     </div>
   </div>
 
   <!-- Radio Widget -->
   <div id="radio-widget" class="widget">
-    <h3><i class="fa fa-broadcast-tower"></i> रेडियो</h3>
+    <h3><i class="fas fa-broadcast-tower"></i> रेडियो</h3>
     <div class="radio-player">
       <audio controls>
         <source src="radio-stream.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
+        तपाईंको ब्राउजरले audio element लाई सपोर्ट गर्दैन।
       </audio>
       <div class="radio-stations">
-        <button>रेडियो नेपाल</button>
-        <button>कान्तिपुर FM</button>
+        <button onclick="playRadio('radio-nepal')">रेडियो नेपाल</button>
+        <button onclick="playRadio('kantipur-fm')">कान्तिपुर FM</button>
+        <button onclick="playRadio('metro-fm')">मेट्रो FM</button>
       </div>
     </div>
   </div>
 
   <!-- Date Conversion Widget -->
   <div id="date-conversion-widget" class="widget">
-    <h3><i class="fa fa-calendar-day"></i> मिति रूपान्तरण</h3>
+    <h3><i class="fas fa-calendar-day"></i> मिति रूपान्तरण</h3>
     <div class="date-converter">
       <select id="from-calendar">
         <option value="AD">ईस्वी (AD)</option>
         <option value="BS">बिक्रम सम्बत (BS)</option>
       </select>
       <input type="text" id="date-input" placeholder="YYYY-MM-DD">
-      <button id="convert-date">रूपान्तरण गर्नुहोस्</button>
+      <select id="to-calendar">
+        <option value="BS">बिक्रम सम्बत (BS)</option>
+        <option value="AD">ईस्वी (AD)</option>
+      </select>
+      <button onclick="convertDate()">रूपान्तरण गर्नुहोस्</button>
       <div id="conversion-result"></div>
     </div>
   </div>
 
   <!-- Unicode Widget -->
   <div id="unicode-widget" class="widget">
-    <h3><i class="fa fa-keyboard"></i> युनिकोड</h3>
+    <h3><i class="fas fa-keyboard"></i> युनिकोड</h3>
     <div class="unicode-converter">
-      <textarea placeholder="Preeti/Roman text here..."></textarea>
-      <button>युनिकोडमा रूपान्तरण गर्नुहोस्</button>
-      <div class="unicode-output"></div>
+      <textarea id="preeti-input" placeholder="प्रीटी/Roman text यहाँ टाइप गर्नुहोस्..."></textarea>
+      <button onclick="convertToUnicode()">युनिकोडमा रूपान्तरण गर्नुहोस्</button>
+      <div class="unicode-output" id="unicode-output"></div>
     </div>
   </div>
 </div>
 
 <!-- Bottom Navigation -->
 <div class="bottom-nav">
-  <a href="#" onclick="showWidget('calendar-widget')"><i class="fa fa-calendar-alt"></i>पात्रो</a>
-  <a href="#" onclick="showWidget('games-widget')"><i class="fa fa-gamepad"></i>गेम्स</a>
-  <a href="#" onclick="showWidget('radio-widget')"><i class="fa fa-broadcast-tower"></i>रेडियो</a>
-  <a href="#" onclick="showWidget('date-conversion-widget')"><i class="fa fa-calendar-day"></i>मिति रूपान्तरण</a>
-  <a href="#" onclick="showWidget('unicode-widget')"><i class="fa fa-keyboard"></i>युनिकोड</a>
+  <a href="#" onclick="showWidget('calendar-widget')"><i class="fas fa-calendar-alt"></i>पात्रो</a>
+  <a href="#" onclick="showWidget('games-widget')"><i class="fas fa-gamepad"></i>गेम्स</a>
+  <a href="#" onclick="showWidget('radio-widget')"><i class="fas fa-broadcast-tower"></i>रेडियो</a>
+  <a href="#" onclick="showWidget('date-conversion-widget')"><i class="fas fa-calendar-day"></i>मिति रूपान्तरण</a>
+  <a href="#" onclick="showWidget('unicode-widget')"><i class="fas fa-keyboard"></i>युनिकोड</a>
 </div>
 
-<style>
-  .widget-container {
-    display: none;
-    padding: 15px;
-    background: #f5f5f5;
-    border-radius: 5px;
-    margin: 10px 0;
-  }
-  
-  .widget {
-    display: none;
-  }
-  
-  .widget.active {
-    display: block;
-  }
-  
-  .bottom-nav {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: #333;
-    display: flex;
-    justify-content: space-around;
-    padding: 10px 0;
-  }
-  
-  .bottom-nav a {
-    color: white;
-    text-decoration: none;
-    text-align: center;
-  }
-  
-  .bottom-nav i {
-    display: block;
-    font-size: 20px;
-    margin-bottom: 5px;
-  }
-</style>
-
 <script>
+  // Show the selected widget
   function showWidget(widgetId) {
-    // First show the widget container if hidden
-    document.querySelector('.widget-container').style.display = 'block';
+    const container = document.getElementById('widget-container');
+    container.style.display = 'block';
     
     // Hide all widgets
     document.querySelectorAll('.widget').forEach(widget => {
@@ -326,15 +423,56 @@ window.scrollTo(0, 0);
     // Show the selected widget
     document.getElementById(widgetId).classList.add('active');
     
-    // Prevent default anchor behavior
+    // Scroll to the widget container
+    container.scrollIntoView({ behavior: 'smooth' });
+    
     return false;
   }
-  
-  // Optional: Add functionality for each widget
+
+  // Radio player function
+  function playRadio(station) {
+    const audioPlayer = document.querySelector('.radio-player audio');
+    switch(station) {
+      case 'radio-nepal':
+        audioPlayer.src = 'http://radio-nepal-stream-url.mp3';
+        break;
+      case 'kantipur-fm':
+        audioPlayer.src = 'http://kantipur-fm-stream-url.mp3';
+        break;
+      case 'metro-fm':
+        audioPlayer.src = 'http://metro-fm-stream-url.mp3';
+        break;
+    }
+    audioPlayer.play();
+  }
+
+  // Date conversion function
+  function convertDate() {
+    const from = document.getElementById('from-calendar').value;
+    const to = document.getElementById('to-calendar').value;
+    const date = document.getElementById('date-input').value;
+    const resultDiv = document.getElementById('conversion-result');
+    
+    // This is just a placeholder - you'll need real conversion logic
+    resultDiv.innerHTML = `<p>${from}: ${date} → ${to}: रूपान्तरित मिति यहाँ देखिने</p>`;
+  }
+
+  // Unicode conversion function (placeholder)
+  function convertToUnicode() {
+    const preetiText = document.getElementById('preeti-input').value;
+    const outputDiv = document.getElementById('unicode-output');
+    
+    // This should be replaced with actual Preeti to Unicode conversion
+    outputDiv.textContent = "युनिकोड रूपान्तरण परिणाम यहाँ देखिने: " + preetiText;
+  }
+
+  // Initialize with first widget visible
   document.addEventListener('DOMContentLoaded', function() {
-    // You can add initialization code for each widget here
+    showWidget('calendar-widget');
   });
 </script>
+
+
 
 
 
