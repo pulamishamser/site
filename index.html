@@ -144,9 +144,9 @@ var cid = 9492;
     }(document, 'script', 'facebook-jssdk'));
     </script>            
 <!------------  <SDK>------------>      
-<!---Vertical Share button---->
+<!---Vertical Share button-------
 <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=618f78d6f2438b001a7e8872&product=image-share-buttons' async='async'></script>
-
+------------->
 <script>
   window.fbAsyncInit = function() {
     FB.init({
@@ -930,9 +930,416 @@ data-size="small" >
 
    
        <!---Integrated Exam Management Information System/Dashboard Login.html---- <li><a href="https://script.google.com/macros/s/AKfycbyqIS_mm6ScGewXNZ7JJfUjlWut6rKuflwH1vdS2QZtFDCbtEkIuN1LFYx5fUaIGGB69Q/exec" class="emis-login-link">LOGIN</a></li>-------------->
-    
-    
 
+<!--------Widgets------------------------------------------->
+
+<style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding-bottom: 70px;
+      background-color: #f5f5f5;
+    }
+    
+    .widget-container {
+      display: none;
+      padding: 15px;
+      background: #ffffff;
+      border-radius: 10px;
+      margin: 15px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    
+    .widget {
+      display: none;
+    }
+    
+    .widget.active {
+      display: block;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    .widget h3 {
+      color: #2c3e50;
+      border-bottom: 2px solid #3498db;
+      padding-bottom: 10px;
+      margin-top: 0;
+    }
+    
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: #3498db;
+      display: flex;
+      justify-content: space-around;
+      padding: 12px 0;
+      box-shadow: 0 -3px 10px rgba(0,0,0,0.2);
+      z-index: 1000;
+    }
+    
+    .bottom-nav a {
+      color: white;
+      text-decoration: none;
+      text-align: center;
+      font-size: 14px;
+      padding: 8px 5px;
+      flex: 1;
+      transition: all 0.3s;
+    }
+    
+    .bottom-nav a:hover {
+      background-color: #2980b9;
+    }
+    
+    .bottom-nav i {
+      display: block;
+      font-size: 22px;
+      margin-bottom: 5px;
+    }
+    
+    /* Widget specific styles */
+    .calendar-content {
+      height: 400px;
+      overflow-y: auto;
+      padding: 10px;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+    }
+    
+    .games-list a {
+      display: block;
+      padding: 10px;
+      background: #eee;
+      margin: 8px 0;
+      border-radius: 5px;
+      text-decoration: none;
+      color: #2c3e50;
+      transition: all 0.2s;
+    }
+    
+    .games-list a:hover {
+      background: #3498db;
+      color: white;
+    }
+    
+    .radio-player {
+      text-align: center;
+    }
+    
+    .radio-player audio {
+      width: 100%;
+      margin-bottom: 15px;
+    }
+    
+    .radio-stations {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+    
+    .radio-stations button {
+      background: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .radio-stations button:hover {
+      background: #2980b9;
+    }
+    
+    .date-converter input, 
+    .date-converter select {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    
+    .date-converter button,
+    .unicode-converter button {
+      width: 100%;
+      padding: 12px;
+      background: #2ecc71;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      margin-top: 15px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.2s;
+    }
+    
+    .date-converter button:hover,
+    .unicode-converter button:hover {
+      background: #27ae60;
+    }
+    
+    #conversion-result {
+      margin-top: 15px;
+      padding: 12px;
+      background: #e8f8f5;
+      border-radius: 5px;
+      border-left: 4px solid #2ecc71;
+    }
+    
+    .unicode-converter textarea {
+      width: 100%;
+      height: 120px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+      resize: vertical;
+    }
+    
+    .unicode-output {
+      margin-top: 15px;
+      padding: 12px;
+      background: #f0f0f0;
+      border-radius: 5px;
+      min-height: 50px;
+      border-left: 4px solid #3498db;
+    }
+    
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #e74c3c;
+      color: white;
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .external-links {
+      margin-top: 15px;
+    }
+    
+    .external-links a {
+      display: inline-block;
+      padding: 8px 15px;
+      background: #3498db;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      transition: all 0.2s;
+    }
+    
+    .external-links a:hover {
+      background: #2980b9;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Widget Container -->
+<div class="widget-container" id="widget-container">
+  <button class="close-btn" onclick="hideWidgets()">×</button>
+  
+  <!-- Calendar Widget -->
+  <div id="calendar-widget" class="widget">
+    <h3><i class="fas fa-calendar-alt"></i> पात्रो</h3>
+    <div class="calendar-content">
+      <iframe src="https://www.hamropatro.com/widgets/calender-medium.php" 
+              frameborder="0" scrolling="no" marginwidth="0" marginheight="0" 
+              style="border:none; overflow:hidden; width:100%; height:385px;" 
+              allowtransparency="true"></iframe>
+    </div>
+  </div>
+
+  <!-- Games Widget -->
+  <div id="games-widget" class="widget">
+    <h3><i class="fas fa-gamepad"></i> गेम्स</h3>
+    <div class="games-list">
+      <a href="snake-game.html">स्नेक गेम</a>
+      <a href="puzzle-game.html">पजल गेम</a>
+      <a href="quiz-game.html">क्विज गेम</a>
+      <a href="car-racing.html">कार रेसिङ</a>
+      <a href="card-game.html">तास गेम</a>
+    </div>
+  </div>
+
+  <!-- Radio Widget -->
+  <div id="radio-widget" class="widget">
+    <h3><i class="fas fa-broadcast-tower"></i> रेडियो</h3>
+    <div class="radio-player">
+      <audio id="radio-player" controls>
+        <source src="" type="audio/mpeg">
+        तपाईंको ब्राउजरले audio element लाई सपोर्ट गर्दैन।
+      </audio>
+      <div class="radio-stations">
+        <a href='https://radionp.com/#synergy-fm'><button> अनलाइन रेडियो स्टेशनहरू</button></a>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Date Conversion Widget -->
+  <div id="date-conversion-widget" class="widget">
+    <h3><i class="fas fa-calendar-day"></i> मिति रूपान्तरण</h3>
+    <div class="date-converter">
+      <iframe src="https://www.hamropatro.com/widgets/dateconverter.php" 
+              frameborder="0" scrolling="no" marginwidth="0" marginheight="0" 
+              style="border:none; padding: 0; overflow:hidden; width:100%; height:70px;" 
+              allowtransparency="true"></iframe>
+    </div>
+  </div>
+
+  <!-- Unicode Widget -->
+  <div id="unicode-widget" class="widget">
+    <h3><i class="fas fa-keyboard"></i> युनिकोड</h3>
+    <div class="unicode-converter">
+      <textarea id="preeti-input" placeholder="प्रीटी/Roman text यहाँ टाइप गर्नुहोस्..."></textarea>
+      <button onclick="convertToUnicode()">युनिकोडमा रूपान्तरण गर्नुहोस्</button>
+      <div class="unicode-output" id="unicode-output"></div>
+      
+      <div class="external-links">
+        <strong>अन्य रूपान्तरण उपकरणहरू:</strong><br>
+        <a href="https://shamser.info.np/Shaikshik_Sansar/sobiztrend.com/preeti_to_unicode.html" target="_blank">प्रीतिबाट युनिकोड</a>
+        <a href="https://shamser.info.np/Shaikshik_Sansar/sobiztrend/unicode_to_preeti.html" target="_blank">युनिकोडबाट प्रीति</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bottom Navigation -->
+<div class="bottom-nav">
+  <a href="#" onclick="showWidget('calendar-widget')"><i class="fas fa-calendar-alt"></i>पात्रो</a>
+  <a href="#" onclick="showWidget('games-widget')"><i class="fas fa-gamepad"></i>गेम्स</a>
+  <a href="#" onclick="showWidget('radio-widget')"><i class="fas fa-broadcast-tower"></i>रेडियो</a>
+  <a href="#" onclick="showWidget('date-conversion-widget')"><i class="fas fa-calendar-day"></i>मिति रूपान्तरण</a>
+  <a href="#" onclick="showWidget('unicode-widget')"><i class="fas fa-keyboard"></i>युनिकोड</a>
+</div>
+
+<script>
+  // Current visible widget
+  let currentWidget = null;
+
+  // Show the selected widget
+  function showWidget(widgetId) {
+    const container = document.getElementById('widget-container');
+    
+    // If clicking the same widget, toggle it
+    if (currentWidget === widgetId) {
+      container.style.display = container.style.display === 'block' ? 'none' : 'block';
+      return false;
+    }
+    
+    container.style.display = 'block';
+    
+    // Hide all widgets
+    document.querySelectorAll('.widget').forEach(widget => {
+      widget.classList.remove('active');
+    });
+    
+    // Show the selected widget
+    document.getElementById(widgetId).classList.add('active');
+    currentWidget = widgetId;
+    
+    // Scroll to the widget container
+    container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    
+    return false;
+  }
+
+  // Hide all widgets
+  function hideWidgets() {
+    document.getElementById('widget-container').style.display = 'none';
+    currentWidget = null;
+  }
+
+  // Radio player function with real streams
+  function playRadio(streamUrl) {
+    const audioPlayer = document.getElementById('radio-player');
+    audioPlayer.src = streamUrl;
+    audioPlayer.play()
+      .then(() => console.log("Radio is playing"))
+      .catch(e => console.error("Error playing radio:", e));
+  }
+
+  // Basic Preeti to Unicode conversion (demo)
+  function convertToUnicode() {
+    const preetiText = document.getElementById('preeti-input').value;
+    const outputDiv = document.getElementById('unicode-output');
+    
+    if (!preetiText) {
+      outputDiv.textContent = "कृपया प्रीटी/Roman टेक्स्ट प्रविष्ट गर्नुहोस्!";
+      return;
+    }
+    
+    // This is a simplified demo - in production use a proper conversion library
+    const conversions = {
+      "laal": "लाल",
+      "Namaste": "नमस्ते",
+      "Nepal": "नेपाल",
+      "kasto": "कस्तो",
+      "cha": "छ",
+      "hajur": "हजुर",
+      "ma": "म",
+      "timro": "तिम्रो",
+      "naam": "नाम",
+      "ke": "के",
+      "ho": "हो"
+    };
+    
+    let convertedText = preetiText;
+    for (const [preeti, unicode] of Object.entries(conversions)) {
+      convertedText = convertedText.replace(new RegExp(preeti, 'gi'), unicode);
+    }
+    
+    outputDiv.textContent = convertedText || "रूपान्तरण परिणाम यहाँ देखिने";
+    
+    // Suggest using external tools for full conversion
+    if (convertedText === preetiText) {
+      outputDiv.innerHTML += `<p style="margin-top:10px;color:#666;">पूर्ण रूपान्तरणका लागि माथिको "प्रीटी देखि युनिकोड" लिंक प्रयोग गर्नुहोस्।</p>`;
+    }
+  }
+
+  // Close widgets when clicking outside
+  document.addEventListener('click', function(event) {
+    const widgetContainer = document.getElementById('widget-container');
+    const bottomNav = document.querySelector('.bottom-nav');
+    
+    if (widgetContainer.style.display === 'block' && 
+        !widgetContainer.contains(event.target) && 
+        !bottomNav.contains(event.target)) {
+      hideWidgets();
+    }
+  });
+
+  // Initialize with no widget shown
+  document.addEventListener('DOMContentLoaded', function() {
+    // You can show a default widget if you want:
+    // showWidget('calendar-widget');
+  });
+</script>
+
+<!--------Widgets--------END----------------------------------->
+
+ 
+    
+<!-------START PAGE-------------------------------->
 <style>
 #more {display: none;}
 </style>
