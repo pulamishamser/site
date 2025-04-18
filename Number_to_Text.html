@@ -3,17 +3,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!--social button show -->
-<link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet" type="text/css">
-<!--circle fb -->
-<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
-<!-- patro unicode dolor--> 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"> 
-
-
+    <!-- Social icons -->
+    <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet" type="text/css">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
     <meta name="description" content="Convert numbers to words in English and Nepali up to 21 digits">
     <title>Number to Words Converter - English & Nepali</title>
-     <style>
+    <style>
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
@@ -87,121 +84,82 @@
             resize: vertical;
         }
         
+        .social-links {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+        
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-3px);
+        }
+        
+        .facebook { background-color: #3b5998; }
+        .twitter { background-color: #1da1f2; }
+        .blogspot { background-color: #ff5722; }
+        .email { background-color: #d44638; }
+        .map { background-color: #34a853; }
+        
+        .social-icon i {
+            font-size: 16px;
+        }
+        
         @media (max-width: 600px) {
             .container {
                 padding: 15px;
+            }
+            button {
+                width: 100%;
+                margin: 5px 0;
             }
         }
     </style>
 </head>
 <body>
-
-
-
-
-
-
-
-
-
-
-<!--------Social Link----------->
-<div class="social-links">
-  <a href="https://www.facebook.com/" target="_blank" class="social-icon facebook">
-    <i class="fab fa-facebook-f"></i>
-  </a>
-  <a href="https://twitter.com/" target="_blank" class="social-icon twitter">
-    <i class="fab fa-twitter"></i>
-  </a>
-  <a href="https://lauro-media.blogspot.com/" target="_blank" class="social-icon blogspot">
-    <i class="fab fa-blogger-b"></i>
-  </a>
-  <a href="mailto:shamserpulami500@gmail.com" target="_blank" class="social-icon email">
-    <i class="fas fa-envelope"></i>
-  </a>
-  <a href="https://maps.app.goo.gl/CQG8KiSPvofKn5RB7" target="_blank" class="social-icon map">
-    <i class="fas fa-map-marker-alt"></i>
-  </a>
-</div>
-
-<style>
-.social-links {
-  display: flex;
-  gap: 12px;
-  justify-content: flex-end;
-}
-
-.social-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  color: white;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.social-icon:hover {
-  transform: translateY(-3px);
-}
-
-.facebook { background-color: #3b5998; }
-.twitter { background-color: #1da1f2; }
-.blogspot { background-color: #ff5722; }
-.email { background-color: #d44638; }
-.map { background-color: #34a853; }
-
-.social-icon i {
-  font-size: 16px;
-}
-</style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <!-- Facebook SDK (required for like button) -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v12.0" nonce="YOUR_NONCE_VALUE"></script>
 
     <div class="container">
-  
+        <!-- Social Links -->
+        <div class="social-links">
+            <a href="https://www.facebook.com/" target="_blank" class="social-icon facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://twitter.com/" target="_blank" class="social-icon twitter">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://lauro-media.blogspot.com/" target="_blank" class="social-icon blogspot">
+                <i class="fab fa-blogger-b"></i>
+            </a>
+            <a href="mailto:shamserpulami500@gmail.com" target="_blank" class="social-icon email">
+                <i class="fas fa-envelope"></i>
+            </a>
+            <a href="https://maps.app.goo.gl/CQG8KiSPvofKn5RB7" target="_blank" class="social-icon map">
+                <i class="fas fa-map-marker-alt"></i>
+            </a>
+        </div>
+
         <h2>Convert Number into English & Nepali Words</h2>
-
-
-
-
-
-<!-- Your like button -->
-<div class="fb-like"
-data-href="https://shamser.info.np"
-data-width="30"
-data-layout="standard"
-data-action="like"
-data-size="small" >
-</div>
-
-
-
-
-
-
-
-
-
-           <p style="text-align: center;">This converter supports numbers up to 21 digits in length.</p>
- <p style="text-align: center; color:red;">shamser.info.np</p>
+        
+        <!-- Facebook Like Button -->
+        <div class="fb-like" data-href="https://shamser.info.np" data-width="" data-layout="button_count" data-action="like" data-size="small" data-share="true"></div>
+        
+        <p style="text-align: center;">This converter supports numbers up to 21 digits in length.</p>
+        <p style="text-align: center; color:red;">shamser.info.np</p>
        
         <div class="converter-box">
             <p><strong>Enter Number:</strong></p>
@@ -402,15 +360,5 @@ data-size="small" >
             alert('Copied to clipboard!');
         }
     </script>
-
-
-
-
-
-
-
-
-
-
 </body>
 </html>
