@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shamser.info.np - Live Nepali News</title>
+  <style>
+    :root {
+      --primary-color: #1e88e5;
+      --secondary-color: #d52b1e;
+      --text-color: #333;
+      --light-text: #555;
+      --bg-color: #f4f4f4;
+      --card-bg: white;
+      --border-color: #ddd;
+    }
+
+    body {
+      font-family: 'Arial', 'Poppins', sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary-color), #0d47a1);
+      color: white;
+      padding: 25px 20px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2.2rem;
+    }
+
+    header p {
+      margin: 5px 0 0;
+      font-size: 1.1rem;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .news-section {
+      background: var(--card-bg);
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+
+    .news-source-title {
+      display: flex;
+      align-items: center;
+      margin-top: 0;
+      margin-bottom: 20px;
+      color: var(--primary-color);
+      font-size: 1.5rem;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 10px;
+    }
+
+    .news-source-title img {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+      border-radius: 50%;
+    }
+
+    .news-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--border-color);
+      transition: transform 0.2s;
+    }
+
+    .news-item:hover {
+      transform: translateX(5px);
+    }
+
+    .news-item img {
+      width: 140px;
+      height: 90px;
+      object-fit: cover;
+      margin-right: 15px;
+      border-radius: 5px;
+      border: 1px solid var(--border-color);
+    }
+
+    .news-content {
+      flex: 1;
+    }
+
+    .news-content a {
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: var(--text-color);
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .news-content a:hover {
+      color: var(--secondary-color);
+    }
+
+    .news-description {
+      font-size: 0.95rem;
+      color: var(--light-text);
+      margin-bottom: 8px;
+    }
+
+    .news-meta {
+      display: flex;
+      font-size: 0.8rem;
+      color: var(--light-text);
+    }
+
+    .news-date {
+      margin-right: 15px;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 20px;
+      color: var(--light-text);
+    }
+
+    .error-message {
+      color: var(--secondary-color);
+      padding: 10px;
+      text-align: center;
+    }
+
+    .refresh-btn {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      margin-top: 10px;
+      transition: background-color 0.3s;
+    }
+
+    .refresh-btn:hover {
+      background-color: #1565c0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #2c3e50;
+      color: white;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 768px) {
+      .news-item {
+        flex-direction: column;
+      }
+      
+      .news-item img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+        margin-right: 0;
+      }
+      
+      header h1 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Live Nepali Online News</h1>
+   
+  </header>
+
+  <div class="container">
+    <div id="news-container">
+      <div class="loading">Loading news... Please wait</div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; <span id="current-year"></span> Shamser.info.np | Powered by Nepali News RSS
+  </footer>
+
+  <script>
+    // News sources with multiple fallback options
+    const newsSources = [
+      {
+        name: "OnlineKhabar",
+        rss: "https://www.onlinekhabar.com/rss",
+        logo: "https://www.onlinekhabar.com/wp-content/themes/onlinekhabar-20/img/logo.png",
+        fallbacks: [
+          "https://api.rss2json.com/v1/api.json?rss_url=https://www.onlinekhabar.com/rss",
+          "https://cors-anywhere.herokuapp.com/https://www.onlinekhabar.com/rss",
+          "https://api.allorigins.win/get?url=https://www.onlinekhabar.com/rss"
+        ]
+      },
+      {
+        name: "Setopati",
+        rss: "https://setopati.com/rss",
+        logo: "https://setopati.com/images/logo.png",
+        fallbacks: [
+          "https://api.rss2json.com/v1/api.json?rss_url=https://setopati.com/rss",
+          "https://cors-anywhere.herokuapp.com/https://setopati.com/rss"
+        ]
+      },
+      {
+        name: "Ratopati",
+        rss: "https://ratopati.com/rss",
+        logo: "https://ratopati.com/static/media/ratopati-logo.6b7d1b3f.png",
+        fallbacks: [
+          "https://api.rss2json.com/v1/api.json?rss_url=https://ratopati.com/rss",
+          "https://cors-anywhere.herokuapp.com/https://ratopati.com/rss"
+        ]
+      },
+      {
+        name: "EduKhabar",
+        rss: "https://edukhabar.com/feed",
+        logo: "https://edukhabar.com/wp-content/uploads/2020/05/cropped-edukhabar-logo-32x32.png",
+        fallbacks: [
+          "https://api.rss2json.com/v1/api.json?rss_url=https://edukhabar.com/feed",
+          "https://cors-anywhere.herokuapp.com/https://edukhabar.com/feed"
+        ]
+      },
+      {
+        name: "Himalayan Times",
+        rss: "https://thehimalayantimes.com/feed",
+        logo: "https://thehimalayantimes.com/wp-content/uploads/2019/01/cropped-himalayan-times-logo-32x32.png",
+        fallbacks: [
+          "https://api.rss2json.com/v1/api.json?rss_url=https://thehimalayantimes.com/feed",
+          "https://cors-anywhere.herokuapp.com/https://thehimalayantimes.com/feed"
+        ]
+      }
+    ];
+
+    // Set current year in footer
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Main function to fetch and display news
+    async function fetchAndDisplayNews() {
+      const container = document.getElementById('news-container');
+      
+      try {
+        container.innerHTML = '<div class="loading">Loading latest news updates...</div>';
+        
+        // Fetch all news sources in parallel with retries
+        const newsPromises = newsSources.map(source => fetchWithRetries(source));
+        const results = await Promise.allSettled(newsPromises);
+        
+        container.innerHTML = '';
+        
+        results.forEach((result, index) => {
+          const source = newsSources[index];
+          const section = document.createElement('div');
+          section.className = 'news-section';
+          
+          const logoImg = source.logo ? `<img src="${source.logo}" alt="${source.name} logo" onerror="this.style.display='none'">` : '';
+          section.innerHTML = `
+            <h2 class="news-source-title">
+              ${logoImg}
+              ${source.name}
+            </h2>
+            <div class="news-list" id="${source.name.toLowerCase().replace(/\s+/g, '-')}-news"></div>
+          `;
+          
+          const listDiv = section.querySelector('.news-list');
+          
+          if (result.status === 'fulfilled' && result.value.length > 0) {
+            result.value.forEach(item => {
+              const newsItem = createNewsItem(item);
+              listDiv.appendChild(newsItem);
+            });
+          } else {
+            listDiv.innerHTML = `
+              <div class="error-message">
+                Could not load news from ${source.name}. 
+                <button class="refresh-btn" onclick="fetchSingleSource('${source.name.toLowerCase().replace(/\s+/g, '-')}')">
+                  Try Again
+                </button>
+              </div>
+            `;
+          }
+          
+          container.appendChild(section);
+        });
+      } catch (error) {
+        console.error('Error loading news:', error);
+        container.innerHTML = `
+          <div class="error-message">
+            Failed to load news. Please check your internet connection and try again.
+            <button class="refresh-btn" onclick="fetchAndDisplayNews()">
+              Refresh
+            </button>
+          </div>
+        `;
+      }
+    }
+
+    // Fetch with retry logic
+    async function fetchWithRetries(source, retries = 3) {
+      for (let i = 0; i < retries; i++) {
+        try {
+          const items = await fetchNewsSource(source);
+          if (items.length > 0) return items;
+        } catch (error) {
+          if (i === retries - 1) throw error;
+          await new Promise(resolve => setTimeout(resolve, 1000 * (i + 1))); // Exponential backoff
+        }
+      }
+      return [];
+    }
+
+    // Fetch news from a source using multiple methods
+    async function fetchNewsSource(source) {
+      // Try all available endpoints in order
+      const endpoints = [source.rss, ...source.fallbacks];
+      
+      for (const endpoint of endpoints) {
+        try {
+          let data;
+          
+          if (endpoint.includes('rss2json.com')) {
+            // RSS2JSON API
+            const response = await fetch(endpoint);
+            if (!response.ok) continue;
+            const json = await response.json();
+            return json.items || [];
+          } else if (endpoint.includes('allorigins.win')) {
+            // AllOrigins proxy
+            const response = await fetch(`${endpoint}`);
+            if (!response.ok) continue;
+            const json = await response.json();
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(json.contents, "text/xml");
+            return parseRSSItems(xmlDoc);
+          } else {
+            // Direct or CORS proxy fetch
+            const response = await fetch(endpoint);
+            if (!response.ok) continue;
+            const text = await response.text();
+            
+            if (text.startsWith('<')) {
+              // XML response
+              const parser = new DOMParser();
+              const xmlDoc = parser.parseFromString(text, "text/xml");
+              return parseRSSItems(xmlDoc);
+            } else {
+              // JSON response
+              const json = JSON.parse(text);
+              return json.items || [];
+            }
+          }
+        } catch (error) {
+          console.log(`Failed with endpoint ${endpoint} for ${source.name}:`, error);
+          continue;
+        }
+      }
+      
+      throw new Error(`All fetch methods failed for ${source.name}`);
+    }
+
+    // Parse RSS XML items
+    function parseRSSItems(xmlDoc) {
+      const items = xmlDoc.querySelectorAll('item');
+      return Array.from(items).slice(0, 5).map(item => ({
+        title: item.querySelector('title')?.textContent || 'No title',
+        link: item.querySelector('link')?.textContent || '#',
+        description: item.querySelector('description')?.textContent || '',
+        pubDate: item.querySelector('pubDate')?.textContent || new Date().toISOString(),
+        thumbnail: extractImageFromDescription(item.querySelector('description')?.textContent)
+      }));
+    }
+
+    // Create a news item DOM element
+    function createNewsItem(item) {
+      const newsItem = document.createElement('div');
+      newsItem.className = 'news-item';
+      
+      const imageUrl = item.thumbnail || 'https://via.placeholder.com/140x90?text=News+Image';
+      
+      const descriptionText = truncateText(stripHTML(item.description), 120);
+      const pubDate = formatDate(item.pubDate);
+      
+      newsItem.innerHTML = `
+        <img src="${imageUrl}" alt="News Image" loading="lazy" onerror="this.src='https://via.placeholder.com/140x90?text=Image+Not+Available'" />
+        <div class="news-content">
+          <a href="${item.link}" target="_blank" rel="noopener noreferrer">${item.title}</a>
+          <div class="news-description">${descriptionText}</div>
+          <div class="news-meta">
+            <span class="news-date">${pubDate}</span>
+          </div>
+        </div>
+      `;
+      
+      return newsItem;
+    }
+
+    // Helper function to extract image from description
+    function extractImageFromDescription(description) {
+      if (!description) return null;
+      const imgRegex = /<img[^>]+src="([^">]+)"/;
+      const match = description.match(imgRegex);
+      return match ? match[1] : null;
+    }
+
+    // Helper function to strip HTML tags
+    function stripHTML(html) {
+      if (!html) return '';
+      return html.replace(/<[^>]*>?/gm, '');
+    }
+
+    // Helper function to truncate text
+    function truncateText(text, maxLength) {
+      if (!text) return '';
+      return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+    }
+
+    // Helper function to format date
+    function formatDate(dateString) {
+      try {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('ne-NP', { 
+          year: 'numeric', 
+          month: 'short', 
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+      } catch {
+        return '';
+      }
+    }
+
+    // Fetch a single news source
+    async function fetchSingleSource(sourceId) {
+      const source = newsSources.find(s => s.name.toLowerCase().replace(/\s+/g, '-') === sourceId);
+      if (!source) return;
+      
+      const listDiv = document.getElementById(`${sourceId}-news`);
+      if (!listDiv) return;
+      
+      listDiv.innerHTML = '<div class="loading">Loading...</div>';
+      
+      try {
+        const items = await fetchWithRetries(source);
+        listDiv.innerHTML = '';
+        
+        if (items.length > 0) {
+          items.forEach(item => {
+            const newsItem = createNewsItem(item);
+            listDiv.appendChild(newsItem);
+          });
+        } else {
+          listDiv.innerHTML = `
+            <div class="error-message">
+              Still unable to load news from ${source.name}.
+              <button class="refresh-btn" onclick="fetchSingleSource('${sourceId}')">
+                Try Again
+              </button>
+            </div>
+          `;
+        }
+      } catch (error) {
+        console.error(`Error loading ${source.name}:`, error);
+        listDiv.innerHTML = `
+          <div class="error-message">
+            Error loading ${source.name}.
+            <button class="refresh-btn" onclick="fetchSingleSource('${sourceId}')">
+              Try Again
+            </button>
+          </div>
+        `;
+      }
+    }
+
+    // Initialize with retry logic
+    async function initializeWithRetry(retries = 3) {
+      try {
+        await fetchAndDisplayNews();
+      } catch (error) {
+        if (retries > 0) {
+          console.log(`Retrying... ${retries} attempts left`);
+          setTimeout(() => initializeWithRetry(retries - 1), 2000);
+        } else {
+          document.getElementById('news-container').innerHTML = `
+            <div class="error-message">
+              Failed to load news after multiple attempts. Please check your connection.
+              <button class="refresh-btn" onclick="initializeWithRetry(3)">
+                Try Again
+              </button>
+            </div>
+          `;
+        }
+      }
+    }
+
+    // Initial load
+    document.addEventListener('DOMContentLoaded', () => {
+      initializeWithRetry();
+      setInterval(() => initializeWithRetry(1), 15 * 60 * 1000); // Refresh every 15 minutes
+    });
+  </script>
+</body>
+</html>
