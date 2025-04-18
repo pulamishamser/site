@@ -1132,38 +1132,82 @@ myModal{
 
 <!---------myModal----------->   
 
-<!-- Required scripts -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        .modal-header {
+            background-color: #f8f9fa;
+            padding: 10px 15px;
+        }
+        .modal-body {
+            padding: 20px;
+        }
+        .marquee-text {
+            font-size: 14px;
+            color: red;
+        }
+    </style>
+
+
+<!-- Modal Popup -->
 <div id="myModal" class="modal fade">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-		
-         <p><i class="fa fa-bell" aria-hidden="true"></i>&nbsp;&nbsp;<a href="https://script.google.com/macros/s/AKfycbzuZUMOcHAS_pB3-3mSQPUlU8wqz0QnUmxaNrsnYQ3YbK2XzrTd7x9aWvsoY5G9xS0p/exec">Subscribe our website</a> </p>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <p class="mb-0"><i class="fas fa-bell"></i>&nbsp;&nbsp;<a href="https://script.google.com/macros/s/AKfycbzuZUMOcHAS_pB3-3mSQPUlU8wqz0QnUmxaNrsnYQ3YbK2XzrTd7x9aWvsoY5G9xS0p/exec">Subscribe our website to get the latest updates</a></p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-    <center>
-
-   <video width="100%" height="200" controls autoplay align="right"> 
-  <source src="Home/About.mp4" type="video/mp4">
-  <source src="Home/About.mp4" type="video/ogg">
-  Your browser does not support the video tag.>	
- </video>	
- <h5><a href="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/IEMIS.v2.html">IEMIS-कक्षा १देखि १२ सम्मको रिजल्ट तयार पार्ने Fast Tool </a></h5>	
-<img src="https://shamser.info.np/HomePage/img/brp2.jpg" width="90" height="90"/>   
-<a href="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/IEMIS.v2.html"><img src="https://www.iitms.co.in/products/img/Fees-collection-revamp-banner.webp" width="180" height="100"></a>
-<a href="https://shamser.info.np/profile/connect with social media.html" class="btn">🌐Connect with &nbsp;🌏</a>
-
- <p>विद्यालय तहको पाठ्यक्रम, पापु, शिक्षक निर्देशिका, शिक्षण सिकाइ, अडियो, भिडियो, शिक्षा एेन, नियम, शैक्षिक समाचार, सुचना प्रविधि, शिक्षक सेवा आयोग लोक सेवा आयोग बिज्ञापन सूचना लगायत शैक्षिक जगतका अन्य जानकारीमूलक सामाग्रीहरुका लागि shamser.info.np  खोल्नुहोला ।  </p>
- <marquee bgcolor=white direction=right><font size=2 color=red><a href="https://forms.gle/8pyBMNzYhZjVw27v7">Apply form Our services like Gradesheet Software, Fee mgt Softaware, Entrance-Card, Progress-Card, Certificate Software, Online result, sms services, Question Bank, intellectual services & other many services are avialable</font></a></marquee> 	    
-     <img src="https://www.onlinekhabar.com/wp-content/uploads/2024/03/Digital-Fraud-900X100-px.gif" width="95%" height="70"/>
-	    	<!-- Modal footer -->
-	  <button type="button" class="btn btn-danger" data-dismiss="modal">&nbsp;Close</button>    </a>
+            <div class="modal-body">
+                <div class="text-center">
+                    <video width="100%" height="200" controls autoplay>
+                        <source src="Home/About.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    
+                    <h5 class="mt-3"><a href="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/IEMIS.v2.html">कक्षा १देखि १२ सम्मको रिजल्ट तयार पार्ने Fast Tool-IEMIS</a></h5>
+                    
+                    <div class="d-flex justify-content-center align-items-center my-3">
+                        <img src="https://shamser.info.np/HomePage/img/brp2.jpg" width="100" height="95" class="mr-3"/>
+                        <a href="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/IEMIS.v2.html">
+                            <img src="https://www.iitms.co.in/products/img/Fees-collection-revamp-banner.webp" width="180" height="100">
+                        </a>
+                    </div>
+                    
+                    <a href="https://shamser.info.np/profile/connect%20with%20social%20media.html" class="btn btn-primary mb-3">🌐 Connect with 🌏</a>
+                    
+                    <p class="text-justify">विद्यालय तहको पाठ्यक्रम, पापु, शिक्षक निर्देशिका, शिक्षण सिकाइ, अडियो, भिडियो, शिक्षा एेन, नियम, शैक्षिक समाचार, सुचना प्रविधि, शिक्षक सेवा आयोग लोक सेवा आयोग बिज्ञापन सूचना लगायत शैक्षिक जगतका अन्य जानकारीमूलक सामाग्रीहरुका लागि shamser.info.np खोल्नुहोला ।</p>
+                    
+                    <div class="marquee-container mb-3">
+                        <marquee behavior="scroll" direction="right" class="marquee-text">
+                            <a href="https://forms.gle/8pyBMNzYhZjVw27v7">Apply form Our services like Gradesheet Software, Fee mgt Softaware, Entrance-Card, Progress-Card, Certificate Software, Online result, sms services, Question Bank, intellectual services & other many services are avialable</a>
+                        </marquee>
+                    </div>
+			 <img src="https://www.onlinekhabar.com/wp-content/uploads/2024/03/Digital-Fraud-900X100-px.gif" width="95%" height="70"/>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
         </div>
-
     </div>
+</div>
+
+<!-- jQuery, Popper.js, Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+
+<!-- Auto-show modal on page load -->
+<script>
+$(document).ready(function(){
+    $('#myModal').modal('show');
+});
+</script>
+
 <!----End-----myModal----------->   
 
 
