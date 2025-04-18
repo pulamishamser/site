@@ -1292,166 +1292,6 @@ myModal{
                     <p class="text-justify">
 
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      color: #333;
-      margin: 0;
-      padding: 0;
-    }
-
-    header {
-      background-color: #1e88e5;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-
-    h1 {
-      margin: 0;
-    }
-
-    #nepali-news {
-      max-width: 900px;
-      margin: 30px auto;
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    #nepali-news h2 {
-      margin-top: 0;
-      color: #1e88e5;
-    }
-
-    .news-item {
-      display: flex;
-      align-items: flex-start;
-      margin-bottom: 20px;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 15px;
-    }
-
-    .news-item img {
-      width: 120px;
-      height: 80px;
-      object-fit: cover;
-      margin-right: 15px;
-      border-radius: 5px;
-    }
-
-    .news-content {
-      flex: 1;
-    }
-
-    .news-content a {
-      text-decoration: none;
-      font-size: 18px;
-      font-weight: bold;
-      color: #333;
-    }
-
-    .news-content a:hover {
-      color: #1e88e5;
-    }
-
-    .news-description {
-      margin-top: 5px;
-      font-size: 14px;
-      color: #555;
-    }
-
-    iframe {
-      width: 100%;
-      max-height: 300px;
-      margin-top: 10px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 15px;
-      background: #eee;
-      margin-top: 30px;
-    }
-  </style>
-</head>
-<body>
-
-  <header>
-    <h1>Shamser.info.np</h1>
-    <p>Live Nepali News with Images and Videos</p>
-  </header>
-
-  <div id="nepali-news">
-    <h2>📰 Latest Nepali News</h2>
-    <div id="news-list">
-      <p>Loading news...</p>
-    </div>
-  </div>
-
-  <footer>
-    &copy; 2025 Shamser.info.np | Powered by OnlineKhabar RSS
-  </footer>
-
-  <script>
-    async function fetchNepaliNews() {
-      const rss_url = 'https://www.onlinekhabar.com/rss';
-      const api_url = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rss_url)}`;
-
-      try {
-        const response = await fetch(api_url);
-        const data = await response.json();
-
-        const newsContainer = document.getElementById('news-list');
-        newsContainer.innerHTML = '';
-
-        data.items.slice(0, 7).forEach(item => {
-          const newsDiv = document.createElement('div');
-          newsDiv.className = 'news-item';
-
-          const thumbnail = item.thumbnail || extractImageFromDescription(item.description);
-
-          newsDiv.innerHTML = `
-            <img src="${thumbnail}" alt="News Thumbnail">
-            <div class="news-content">
-              <a href="${item.link}" target="_blank">${item.title}</a>
-              <div class="news-description">${truncateText(stripHTML(item.description), 150)}</div>
-              ${extractVideoEmbed(item.description)}
-            </div>
-          `;
-
-          newsContainer.appendChild(newsDiv);
-        });
-
-      } catch (error) {
-        document.getElementById('news-list').innerHTML = '<p>Failed to load news.</p>';
-        console.error('Error fetching news:', error);
-      }
-    }
-
-    function extractImageFromDescription(description) {
-      const imgMatch = description.match(/<img.*?src=["'](.*?)["']/);
-      return imgMatch ? imgMatch[1] : 'https://via.placeholder.com/120x80?text=No+Image';
-    }
-
-    function extractVideoEmbed(description) {
-      const iframeMatch = description.match(/<iframe.*?<\/iframe>/);
-      return iframeMatch ? iframeMatch[0] : '';
-    }
-
-    function stripHTML(html) {
-      return html.replace(/<[^>]*>?/gm, '');
-    }
-
-    function truncateText(text, maxLength) {
-      return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
-    }
-
-    fetchNepaliNews();
-    setInterval(fetchNepaliNews, 5 * 60 * 1000);
-  </script>
  </p>
 
                     <div class="marquee-container mb-3">
@@ -1532,7 +1372,187 @@ $(document).ready(function(){
  <div class="col-md-9" col-sm-12 style="padding:0px; margin:0px;">
 <script type="text/javascript" src="https://free-hit-counters.net/count/gd0n" width="30" height="20"></script>
 
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
 
+    header {
+      background-color: #1e88e5;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    .news-section {
+      max-width: 950px;
+      margin: 30px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-bottom: 40px;
+    }
+
+    .news-source-title {
+      margin-top: 0;
+      margin-bottom: 20px;
+      color: #1e88e5;
+    }
+
+    .news-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 15px;
+    }
+
+    .news-item img {
+      width: 120px;
+      height: 80px;
+      object-fit: cover;
+      margin-right: 15px;
+      border-radius: 5px;
+    }
+
+    .news-content {
+      flex: 1;
+    }
+
+    .news-content a {
+      text-decoration: none;
+      font-size: 17px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .news-content a:hover {
+      color: #1e88e5;
+    }
+
+    .news-description {
+      font-size: 14px;
+      margin-top: 5px;
+      color: #555;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #eee;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Shamser.info.np</h1>
+    <p>Live Nepali News from Multiple Sources 🇳🇵</p>
+  </header>
+
+  <div id="news-container">
+    <!-- News sections will load here -->
+  </div>
+
+  <footer>
+    &copy; 2025 Shamser.info.np | Powered by Nepali News RSS
+  </footer>
+
+  <script>
+    const newsSources = [
+      {
+        name: "OnlineKhabar",
+        rss: "https://www.onlinekhabar.com/rss"
+      },
+      {
+        name: "Setopati",
+        rss: "https://setopati.com/rss"
+      },
+      {
+        name: "Ratopati",
+        rss: "https://ratopati.com/rss"
+      },
+      {
+        name: "Ratopati",
+        rss: "https://www.bbc.com/nepali/rss"
+      },
+      {
+
+        name: "EduKhabar",
+        rss: "https://edukhabar.com/feed"
+      }
+    ];
+
+
+    async function fetchAndDisplayNews() {
+      const container = document.getElementById('news-container');
+      container.innerHTML = '';
+
+      for (const source of newsSources) {
+        const section = document.createElement('div');
+        section.className = 'news-section';
+        section.innerHTML = `<h2 class="news-source-title">📰 ${source.name}</h2>`;
+
+        const listDiv = document.createElement('div');
+
+        const api_url = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(source.rss)}`;
+
+        try {
+          const res = await fetch(api_url);
+          const data = await res.json();
+
+          data.items.slice(0, 5).forEach(item => {
+            const newsItem = document.createElement('div');
+            newsItem.className = 'news-item';
+
+            const image = item.thumbnail || extractImage(item.description);
+
+            newsItem.innerHTML = `
+              <img src="${image}" alt="News Image" />
+              <div class="news-content">
+                <a href="${item.link}" target="_blank">${item.title}</a>
+                <div class="news-description">${truncateText(stripHTML(item.description), 120)}</div>
+              </div>
+            `;
+
+            listDiv.appendChild(newsItem);
+          });
+        } catch (e) {
+          listDiv.innerHTML = `<p>Could not load news from ${source.name}.</p>`;
+          console.error(e);
+        }
+
+        section.appendChild(listDiv);
+        container.appendChild(section);
+      }
+    }
+
+    function extractImage(description) {
+      const match = description.match(/<img[^>]+src=["']([^"']+)["']/);
+      return match ? match[1] : 'https://via.placeholder.com/120x80?text=No+Image';
+    }
+
+    function stripHTML(html) {
+      return html.replace(/<[^>]*>?/gm, '');
+    }
+
+    function truncateText(text, maxLength) {
+      return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+    }
+
+    fetchAndDisplayNews();
+    setInterval(fetchAndDisplayNews, 5 * 60 * 1000); // refresh every 5 min
+  </script>
 
   <h2 class="header3"><i class="fa fa-pencil-square-o"></i> <b>एकिकृत परीक्षा तथा सूचना प्रणाली  Integrated Exam Management Information System-IEMIS बारे जानकारी </b> </h2>
 
