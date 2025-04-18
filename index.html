@@ -1265,6 +1265,39 @@ myModal{
                             <img src="https://www.iitms.co.in/products/img/Fees-collection-revamp-banner.webp" width="180" height="100">
                         </a>
                     </div>
+<div id="nepali-news">
+  <h2>📰 Nepali News</h2>
+  <ul id="news-list"></ul>
+</div>
+
+<script>
+  async function fetchNepaliNews() {
+    const rss_url = 'https://www.onlinekhabar.com/rss';
+    const api_url = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rss_url)}`;
+
+    try {
+      const response = await fetch(api_url);
+      const data = await response.json();
+
+      const newsList = document.getElementById('news-list');
+      newsList.innerHTML = ''; // Clear old news
+
+      data.items.slice(0, 5).forEach(item => {
+        const li = document.createElement('li');
+        li.innerHTML = `<a href="${item.link}" target="_blank">${item.title}</a>`;
+        newsList.appendChild(li);
+      });
+    } catch (error) {
+      console.error('Failed to fetch news:', error);
+    }
+  }
+
+  // Fetch news on load
+  fetchNepaliNews();
+
+  // Auto-update every 5 minutes
+  setInterval(fetchNepaliNews, 5 * 60 * 1000);
+</script>
 
                     <a href="https://shamser.info.np/profile/connect%20with%20social%20media.html" class="btn btn-primary mb-3" target="_blank">🌐 Connect with 🌏</a>
 
