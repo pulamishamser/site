@@ -1,9 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ne" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shamser.info.np - Live Nepali News</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta name="description" content="ताजा नेपाली समाचार - Onlinekhabar, Setopati, Ratopati र अन्य प्रमुख समाचार स्रोतहरूबाट एकै ठाउँमा">
+  <title>Shamser.info.np - Live Nepali News Aggregator</title>
+  
+  <!-- Preload critical resources -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" as="style">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://www.onlinekhabar.com" crossorigin>
+  <link rel="preconnect" href="https://setopati.com" crossorigin>
+  <link rel="dns-prefetch" href="https://api.rss2json.com">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  <!-- Web App Manifest -->
+  <link rel="manifest" href="/manifest.webmanifest">
+  
+  <!-- Inline critical CSS -->
   <style>
     :root {
       --primary-color: #1e88e5;
@@ -13,87 +30,81 @@
       --bg-color: #f4f4f4;
       --card-bg: white;
       --border-color: #ddd;
+      --shadow: 0 2px 8px rgba(0,0,0,0.1);
+      --nepali-font: 'Preeti', 'Arial', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      font-family: 'Arial', 'Poppins', sans-serif;
+      font-family: 'Poppins', var(--nepali-font), sans-serif;
       background: var(--bg-color);
       color: var(--text-color);
-      margin: 0;
-      padding: 0;
       line-height: 1.6;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
     }
 
     header {
       background: linear-gradient(135deg, var(--primary-color), #0d47a1);
       color: white;
-      padding: 25px 20px;
+      padding: 1.5rem 1rem;
       text-align: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      box-shadow: var(--shadow);
+      position: relative;
+      z-index: 10;
     }
 
     h1 {
       margin: 0;
-      font-size: 2.2rem;
-    }
-
-    header p {
-      margin: 5px 0 0;
-      font-size: 1.1rem;
+      font-size: 2rem;
+      font-weight: 600;
     }
 
     .container {
       max-width: 1000px;
-      margin: 30px auto;
-      padding: 0 20px;
+      margin: 2rem auto;
+      padding: 0 1rem;
     }
 
     .news-section {
       background: var(--card-bg);
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
-      margin-bottom: 30px;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      box-shadow: var(--shadow);
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
     }
 
     .news-source-title {
-      display: flex;
-      align-items: center;
-      margin-top: 0;
-      margin-bottom: 20px;
+      margin: 0 0 1.25rem 0;
       color: var(--primary-color);
-      font-size: 1.5rem;
+      font-size: 1.4rem;
+      font-weight: 600;
+      padding-bottom: 0.75rem;
       border-bottom: 2px solid var(--border-color);
-      padding-bottom: 10px;
-    }
-
-    .news-source-title img {
-      width: 30px;
-      height: 30px;
-      margin-right: 10px;
-      border-radius: 50%;
     }
 
     .news-item {
-      display: flex;
-      align-items: flex-start;
-      margin-bottom: 20px;
-      padding-bottom: 15px;
+      margin-bottom: 1.25rem;
+      padding-bottom: 1rem;
       border-bottom: 1px solid var(--border-color);
-      transition: transform 0.2s;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .news-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
     }
 
     .news-item:hover {
-      transform: translateX(5px);
-    }
-
-    .news-item img {
-      width: 140px;
-      height: 90px;
-      object-fit: cover;
-      margin-right: 15px;
-      border-radius: 5px;
-      border: 1px solid var(--border-color);
+      transform: translateY(-2px);
     }
 
     .news-content {
@@ -103,164 +114,347 @@
     .news-content a {
       text-decoration: none;
       font-size: 1.1rem;
-      font-weight: bold;
+      font-weight: 600;
       color: var(--text-color);
       display: block;
-      margin-bottom: 5px;
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+      transition: color 0.2s ease;
     }
 
     .news-content a:hover {
       color: var(--secondary-color);
+      text-decoration: underline;
     }
 
     .news-description {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       color: var(--light-text);
-      margin-bottom: 8px;
+      margin-bottom: 0.5rem;
+      line-height: 1.5;
     }
 
     .news-meta {
       display: flex;
+      align-items: center;
       font-size: 0.8rem;
       color: var(--light-text);
     }
 
     .news-date {
-      margin-right: 15px;
+      display: flex;
+      align-items: center;
+      margin-right: 1rem;
+    }
+
+    .news-date::before {
+      content: "🕒";
+      margin-right: 0.3rem;
+      font-size: 0.7rem;
     }
 
     .loading {
       text-align: center;
-      padding: 20px;
+      padding: 2rem;
       color: var(--light-text);
+      font-size: 1.1rem;
+    }
+
+    .loading::after {
+      content: "...";
+      animation: dots 1.5s infinite steps(3);
+      display: inline-block;
+      width: 1em;
+      text-align: left;
+    }
+
+    @keyframes dots {
+      0%, 20% { content: "."; }
+      40% { content: ".."; }
+      60%, 100% { content: "..."; }
     }
 
     .error-message {
       color: var(--secondary-color);
-      padding: 10px;
+      padding: 1rem;
       text-align: center;
+      background: rgba(213, 43, 30, 0.05);
+      border-radius: 0.25rem;
+      margin: 1rem 0;
     }
 
     .refresh-btn {
       background-color: var(--primary-color);
       color: white;
       border: none;
-      padding: 8px 15px;
-      border-radius: 4px;
+      padding: 0.5rem 1rem;
+      border-radius: 0.25rem;
       cursor: pointer;
       font-size: 0.9rem;
-      margin-top: 10px;
-      transition: background-color 0.3s;
+      margin-top: 0.75rem;
+      transition: all 0.3s ease;
+      font-family: inherit;
     }
 
     .refresh-btn:hover {
       background-color: #1565c0;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
     footer {
       text-align: center;
-      padding: 20px;
+      padding: 1.5rem;
       background: #2c3e50;
       color: white;
-      margin-top: 40px;
+      margin-top: 3rem;
+      font-size: 0.9rem;
     }
 
+    .nepali-text {
+      font-family: var(--nepali-font);
+      line-height: 1.7;
+    }
+
+    .skeleton {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite linear;
+      border-radius: 0.25rem;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .skeleton-news-item {
+      margin-bottom: 1.25rem;
+      padding-bottom: 1rem;
+    }
+
+    .skeleton-text {
+      flex: 1;
+    }
+
+    .skeleton-line {
+      height: 1rem;
+      margin-bottom: 0.75rem;
+      border-radius: 0.25rem;
+    }
+
+    .skeleton-line.short {
+      width: 80%;
+    }
+
+    .skeleton-line.medium {
+      width: 90%;
+    }
+
+    .skeleton-line.long {
+      width: 60%;
+    }
+
+    /* Dark mode support */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary-color: #64b5f6;
+        --secondary-color: #ff8a80;
+        --text-color: #f5f5f5;
+        --light-text: #b0b0b0;
+        --bg-color: #121212;
+        --card-bg: #1e1e1e;
+        --border-color: #333;
+      }
+    }
+
+    /* Responsive adjustments */
     @media (max-width: 768px) {
-      .news-item {
-        flex-direction: column;
+      header {
+        padding: 1.25rem 1rem;
       }
       
-      .news-item img {
-        width: 100%;
-        height: auto;
-        margin-bottom: 10px;
-        margin-right: 0;
+      h1 {
+        font-size: 1.6rem;
       }
       
-      header h1 {
-        font-size: 1.8rem;
+      .container {
+        margin: 1.5rem auto;
+        padding: 0 1rem;
+      }
+      
+      .news-section {
+        padding: 1.25rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 1rem;
+      }
+      
+      h1 {
+        font-size: 1.4rem;
+      }
+      
+      .news-source-title {
+        font-size: 1.2rem;
+      }
+      
+      .news-content a {
+        font-size: 1rem;
+      }
+      
+      .news-description {
+        font-size: 0.85rem;
       }
     }
   </style>
+  
+  <!-- Load non-critical CSS async -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" media="print" onload="this.media='all'">
 </head>
 <body>
 
   <header>
-    <h1>Live Nepali Online News</h1>
-   
+    <h1 class="nepali-text">ताजा नेपाली समाचार</h1>
+    <p class="nepali-text">एकै ठाउँमा सबै प्रमुख समाचार</p>
   </header>
 
   <div class="container">
     <div id="news-container">
-      <div class="loading">Loading news... Please wait</div>
+      <!-- Skeleton loading screen -->
+      <div id="skeleton-loading">
+        <div class="news-section">
+          <h2 class="news-source-title skeleton" style="width: 40%; height: 1.8rem;"></h2>
+          <div class="skeleton-news-item">
+            <div class="skeleton-text">
+              <div class="skeleton-line short skeleton"></div>
+              <div class="skeleton-line medium skeleton"></div>
+              <div class="skeleton-line long skeleton"></div>
+            </div>
+          </div>
+          <div class="skeleton-news-item">
+            <div class="skeleton-text">
+              <div class="skeleton-line short skeleton"></div>
+              <div class="skeleton-line medium skeleton"></div>
+              <div class="skeleton-line long skeleton"></div>
+            </div>
+          </div>
+        </div>
+        <div class="news-section">
+          <h2 class="news-source-title skeleton" style="width: 35%; height: 1.8rem;"></h2>
+          <div class="skeleton-news-item">
+            <div class="skeleton-text">
+              <div class="skeleton-line short skeleton"></div>
+              <div class="skeleton-line medium skeleton"></div>
+              <div class="skeleton-line long skeleton"></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <footer>
-    &copy; <span id="current-year"></span> Shamser.info.np | Powered by Nepali News RSS
+  <footer class="nepali-text">
+    &copy; <span id="current-year"></span> Shamser.info.np | सबै समाचार स्रोतहरूको सम्मान गर्दै
   </footer>
 
   <script>
-    // News sources with multiple fallback options
+    // Enhanced news sources with multiple fallback options
     const newsSources = [
       {
         name: "OnlineKhabar",
         rss: "https://www.onlinekhabar.com/rss",
         fallbacks: [
           "https://api.rss2json.com/v1/api.json?rss_url=https://www.onlinekhabar.com/rss",
-          "https://cors-anywhere.herokuapp.com/https://www.onlinekhabar.com/rss",
+          "https://corsproxy.io/?https://www.onlinekhabar.com/rss",
           "https://api.allorigins.win/get?url=https://www.onlinekhabar.com/rss"
-        ]
+        ],
+        maxItems: 5
       },
       {
         name: "Setopati",
         rss: "https://setopati.com/rss",
-        logo: "https://setopati.com/images/logo.png",
         fallbacks: [
           "https://api.rss2json.com/v1/api.json?rss_url=https://setopati.com/rss",
-          "https://cors-anywhere.herokuapp.com/https://setopati.com/rss"
-        ]
+          "https://corsproxy.io/?https://setopati.com/rss"
+        ],
+        maxItems: 5
       },
       {
         name: "Ratopati",
         rss: "https://ratopati.com/rss",
         fallbacks: [
           "https://api.rss2json.com/v1/api.json?rss_url=https://ratopati.com/rss",
-          "https://cors-anywhere.herokuapp.com/https://ratopati.com/rss"
-        ]
+          "https://corsproxy.io/?https://ratopati.com/rss"
+        ],
+        maxItems: 5
       },
       {
         name: "EduKhabar",
-        rss: "https://edukhabar.com/rss",
+        rss: "https://edukhabar.com/feed",
         fallbacks: [
-          "https://api.rss2json.com/v1/api.json?rss_url=https://edukhabar.com/rss",
-          "https://cors-anywhere.herokuapp.com/https://edukhabar.com/rss"
-        ]
+          "https://api.rss2json.com/v1/api.json?rss_url=https://edukhabar.com/feed",
+          "https://corsproxy.io/?https://edukhabar.com/feed"
+        ],
+        maxItems: 4
       },
       {
         name: "Himalayan Times",
-        rss: "https://thehimalayantimes.com/feed",,
+        rss: "https://thehimalayantimes.com/feed",
         fallbacks: [
           "https://api.rss2json.com/v1/api.json?rss_url=https://thehimalayantimes.com/feed",
-          "https://cors-anywhere.herokuapp.com/https://thehimalayantimes.com/feed"
-        ]
+          "https://corsproxy.io/?https://thehimalayantimes.com/feed"
+        ],
+        maxItems: 4
       }
     ];
 
     // Set current year in footer
     document.getElementById('current-year').textContent = new Date().getFullYear();
 
+    // Cache for storing fetched news
+    const newsCache = {
+      data: {},
+      lastUpdated: null,
+      set: function(source, items) {
+        this.data[source] = {
+          items: items,
+          timestamp: new Date().getTime()
+        };
+      },
+      get: function(source) {
+        const cache = this.data[source];
+        if (!cache) return null;
+        
+        // Cache valid for 15 minutes
+        const isFresh = (new Date().getTime() - cache.timestamp) < (15 * 60 * 1000);
+        return isFresh ? cache.items : null;
+      }
+    };
+
     // Main function to fetch and display news
     async function fetchAndDisplayNews() {
       const container = document.getElementById('news-container');
       
       try {
-        container.innerHTML = '<div class="loading">Loading latest news updates...</div>';
+        // Show skeleton loading state
+        document.getElementById('skeleton-loading').style.display = 'block';
         
         // Fetch all news sources in parallel with retries
-        const newsPromises = newsSources.map(source => fetchWithRetries(source));
+        const newsPromises = newsSources.map(source => {
+          const cached = newsCache.get(source.name);
+          if (cached) return Promise.resolve(cached);
+          return fetchWithRetries(source);
+        });
+        
         const results = await Promise.allSettled(newsPromises);
         
+        // Hide skeleton loading
+        document.getElementById('skeleton-loading').style.display = 'none';
+        
+        // Clear container and build news sections
         container.innerHTML = '';
         
         results.forEach((result, index) => {
@@ -268,10 +462,8 @@
           const section = document.createElement('div');
           section.className = 'news-section';
           
-          const logoImg = source.logo ? `<img src="${source.logo}" alt="${source.name} logo" onerror="this.style.display='none'">` : '';
           section.innerHTML = `
             <h2 class="news-source-title">
-              ${logoImg}
               ${source.name}
             </h2>
             <div class="news-list" id="${source.name.toLowerCase().replace(/\s+/g, '-')}-news"></div>
@@ -279,26 +471,50 @@
           
           const listDiv = section.querySelector('.news-list');
           
-          if (result.status === 'fulfilled' && result.value.length > 0) {
-            result.value.forEach(item => {
+          if (result.status === 'fulfilled' && result.value && result.value.length > 0) {
+            // Cache the successful fetch
+            newsCache.set(source.name, result.value);
+            
+            // Limit items based on source configuration
+            const itemsToShow = result.value.slice(0, source.maxItems || 5);
+            
+            itemsToShow.forEach(item => {
               const newsItem = createNewsItem(item);
               listDiv.appendChild(newsItem);
             });
           } else {
-            listDiv.innerHTML = `
-              <div class="error-message">
-                Could not load news from ${source.name}. 
-                <button class="refresh-btn" onclick="fetchSingleSource('${source.name.toLowerCase().replace(/\s+/g, '-')}')">
-                  Try Again
-                </button>
-              </div>
-            `;
+            // Try to show cached data if available
+            const cached = newsCache.get(source.name);
+            if (cached && cached.length > 0) {
+              cached.slice(0, source.maxItems || 5).forEach(item => {
+                const newsItem = createNewsItem(item);
+                listDiv.appendChild(newsItem);
+              });
+              
+              // Add a note that this is cached data
+              const cachedNote = document.createElement('div');
+              cachedNote.className = 'news-meta';
+              cachedNote.style.marginTop = '0.5rem';
+              cachedNote.textContent = 'Last updated: ' + formatDate(newsCache.data[source.name].timestamp);
+              listDiv.appendChild(cachedNote);
+            } else {
+              // Show error message if no data available
+              listDiv.innerHTML = `
+                <div class="error-message">
+                  Could not load news from ${source.name}. 
+                  <button class="refresh-btn" onclick="fetchSingleSource('${source.name.toLowerCase().replace(/\s+/g, '-')}')">
+                    Try Again
+                  </button>
+                </div>
+              `;
+            }
           }
           
           container.appendChild(section);
         });
       } catch (error) {
         console.error('Error loading news:', error);
+        document.getElementById('skeleton-loading').style.display = 'none';
         container.innerHTML = `
           <div class="error-message">
             Failed to load news. Please check your internet connection and try again.
@@ -310,12 +526,18 @@
       }
     }
 
-    // Fetch with retry logic
+    // Fetch with retry logic and timeout
     async function fetchWithRetries(source, retries = 3) {
       for (let i = 0; i < retries; i++) {
         try {
-          const items = await fetchNewsSource(source);
-          if (items.length > 0) return items;
+          // Add timeout to prevent hanging
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 8000);
+          
+          const items = await fetchNewsSource(source, controller.signal);
+          clearTimeout(timeoutId);
+          
+          if (items && items.length > 0) return items;
         } catch (error) {
           if (i === retries - 1) throw error;
           await new Promise(resolve => setTimeout(resolve, 1000 * (i + 1))); // Exponential backoff
@@ -325,7 +547,7 @@
     }
 
     // Fetch news from a source using multiple methods
-    async function fetchNewsSource(source) {
+    async function fetchNewsSource(source, signal) {
       // Try all available endpoints in order
       const endpoints = [source.rss, ...source.fallbacks];
       
@@ -335,13 +557,13 @@
           
           if (endpoint.includes('rss2json.com')) {
             // RSS2JSON API
-            const response = await fetch(endpoint);
+            const response = await fetch(endpoint, { signal });
             if (!response.ok) continue;
             const json = await response.json();
             return json.items || [];
           } else if (endpoint.includes('allorigins.win')) {
             // AllOrigins proxy
-            const response = await fetch(`${endpoint}`);
+            const response = await fetch(endpoint, { signal });
             if (!response.ok) continue;
             const json = await response.json();
             const parser = new DOMParser();
@@ -349,7 +571,7 @@
             return parseRSSItems(xmlDoc);
           } else {
             // Direct or CORS proxy fetch
-            const response = await fetch(endpoint);
+            const response = await fetch(endpoint, { signal });
             if (!response.ok) continue;
             const text = await response.text();
             
@@ -373,16 +595,26 @@
       throw new Error(`All fetch methods failed for ${source.name}`);
     }
 
-    // Parse RSS XML items
+    // Parse RSS XML items with better error handling
     function parseRSSItems(xmlDoc) {
-      const items = xmlDoc.querySelectorAll('item');
-      return Array.from(items).slice(0, 5).map(item => ({
-        title: item.querySelector('title')?.textContent || 'No title',
-        link: item.querySelector('link')?.textContent || '#',
-        description: item.querySelector('description')?.textContent || '',
-        pubDate: item.querySelector('pubDate')?.textContent || new Date().toISOString(),
-        thumbnail: extractImageFromDescription(item.querySelector('description')?.textContent)
-      }));
+      try {
+        const items = xmlDoc.querySelectorAll('item, entry');
+        return Array.from(items).slice(0, 10).map(item => ({
+          title: item.querySelector('title')?.textContent?.trim() || 'No title',
+          link: item.querySelector('link')?.textContent?.trim() || 
+               item.querySelector('link')?.getAttribute('href')?.trim() || '#',
+          description: item.querySelector('description')?.textContent?.trim() || 
+                      item.querySelector('content')?.textContent?.trim() || 
+                      item.querySelector('summary')?.textContent?.trim() || '',
+          pubDate: item.querySelector('pubDate')?.textContent?.trim() || 
+                  item.querySelector('published')?.textContent?.trim() || 
+                  item.querySelector('date')?.textContent?.trim() || 
+                  new Date().toISOString()
+        }));
+      } catch (error) {
+        console.error('Error parsing RSS items:', error);
+        return [];
+      }
     }
 
     // Create a news item DOM element
@@ -390,16 +622,16 @@
       const newsItem = document.createElement('div');
       newsItem.className = 'news-item';
       
-      const imageUrl = item.thumbnail || 'https://via.placeholder.com/140x90?text=News+Image';
-      
-      const descriptionText = truncateText(stripHTML(item.description), 120);
+      // Clean and prepare data
+      const cleanTitle = sanitizeHTML(item.title);
+      const cleanLink = encodeURI(item.link);
+      const cleanDescription = truncateText(stripHTML(item.description), 120);
       const pubDate = formatDate(item.pubDate);
       
       newsItem.innerHTML = `
-        <img src="${imageUrl}" alt="News Image" loading="lazy" onerror="this.src='https://via.placeholder.com/140x90?text=Image+Not+Available'" />
         <div class="news-content">
-          <a href="${item.link}" target="_blank" rel="noopener noreferrer">${item.title}</a>
-          <div class="news-description">${descriptionText}</div>
+          <a href="${cleanLink}" target="_blank" rel="noopener noreferrer">${cleanTitle}</a>
+          <div class="news-description">${cleanDescription}</div>
           <div class="news-meta">
             <span class="news-date">${pubDate}</span>
           </div>
@@ -409,18 +641,16 @@
       return newsItem;
     }
 
-    // Helper function to extract image from description
-    function extractImageFromDescription(description) {
-      if (!description) return null;
-      const imgRegex = /<img[^>]+src="([^">]+)"/;
-      const match = description.match(imgRegex);
-      return match ? match[1] : null;
-    }
-
     // Helper function to strip HTML tags
     function stripHTML(html) {
       if (!html) return '';
-      return html.replace(/<[^>]*>?/gm, '');
+      return html.replace(/<[^>]*>?/gm, '').replace(/\s+/g, ' ').trim();
+    }
+
+    // Helper function to sanitize HTML
+    function sanitizeHTML(str) {
+      if (!str) return '';
+      return str.replace(/</g, '&lt;').replace(/>/g, '&gt;');
     }
 
     // Helper function to truncate text
@@ -429,23 +659,33 @@
       return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
     }
 
-    // Helper function to format date
+    // Helper function to format date in Nepali style
     function formatDate(dateString) {
       try {
+        // Handle Unix timestamps (in milliseconds)
+        if (/^\d+$/.test(dateString)) {
+          dateString = parseInt(dateString);
+        }
+        
         const date = new Date(dateString);
-        return date.toLocaleDateString('ne-NP', { 
-          year: 'numeric', 
-          month: 'short', 
-          day: 'numeric',
-          hour: '2-digit',
-          minute: '2-digit'
-        });
+        if (isNaN(date.getTime())) return '';
+        
+        // Nepali date format: YYYY-MM-DD HH:MM
+        const pad = num => num.toString().padStart(2, '0');
+        
+        const year = date.getFullYear();
+        const month = pad(date.getMonth() + 1);
+        const day = pad(date.getDate());
+        const hours = pad(date.getHours());
+        const minutes = pad(date.getMinutes());
+        
+        return `${year}-${month}-${day} ${hours}:${minutes}`;
       } catch {
         return '';
       }
     }
 
-    // Fetch a single news source
+    // Fetch a single news source with loading state
     async function fetchSingleSource(sourceId) {
       const source = newsSources.find(s => s.name.toLowerCase().replace(/\s+/g, '-') === sourceId);
       if (!source) return;
@@ -453,26 +693,31 @@
       const listDiv = document.getElementById(`${sourceId}-news`);
       if (!listDiv) return;
       
+      // Show loading state
+      const originalContent = listDiv.innerHTML;
       listDiv.innerHTML = '<div class="loading">Loading...</div>';
       
       try {
         const items = await fetchWithRetries(source);
+        
+        // Clear and rebuild content
         listDiv.innerHTML = '';
         
-        if (items.length > 0) {
-          items.forEach(item => {
+        if (items && items.length > 0) {
+          // Cache the successful fetch
+          newsCache.set(source.name, items);
+          
+          // Limit items based on source configuration
+          const itemsToShow = items.slice(0, source.maxItems || 5);
+          
+          itemsToShow.forEach(item => {
             const newsItem = createNewsItem(item);
             listDiv.appendChild(newsItem);
           });
         } else {
-          listDiv.innerHTML = `
-            <div class="error-message">
-              Still unable to load news from ${source.name}.
-              <button class="refresh-btn" onclick="fetchSingleSource('${sourceId}')">
-                Try Again
-              </button>
-            </div>
-          `;
+          // Restore original content if fetch failed
+          listDiv.innerHTML = originalContent;
+          throw new Error('No items returned');
         }
       } catch (error) {
         console.error(`Error loading ${source.name}:`, error);
@@ -487,32 +732,117 @@
       }
     }
 
-    // Initialize with retry logic
+    // Initialize with retry logic and offline detection
     async function initializeWithRetry(retries = 3) {
+      // Check online status first
+      if (!navigator.onLine) {
+        showOfflineMessage();
+        return;
+      }
+      
       try {
         await fetchAndDisplayNews();
+        
+        // Schedule background refresh
+        if ('serviceWorker' in navigator && 'SyncManager' in window) {
+          navigator.serviceWorker.ready.then(registration => {
+            registration.sync.register('refresh-news');
+          });
+        }
       } catch (error) {
         if (retries > 0) {
           console.log(`Retrying... ${retries} attempts left`);
-          setTimeout(() => initializeWithRetry(retries - 1), 2000);
+          await new Promise(resolve => setTimeout(resolve, 2000));
+          return initializeWithRetry(retries - 1);
         } else {
-          document.getElementById('news-container').innerHTML = `
-            <div class="error-message">
-              Failed to load news after multiple attempts. Please check your connection.
-              <button class="refresh-btn" onclick="initializeWithRetry(3)">
-                Try Again
-              </button>
-            </div>
-          `;
+          showErrorMessage();
         }
       }
     }
 
+    // Show offline message
+    function showOfflineMessage() {
+      const container = document.getElementById('news-container');
+      document.getElementById('skeleton-loading').style.display = 'none';
+      
+      container.innerHTML = `
+        <div class="error-message">
+          You are currently offline. Showing cached news.
+          <button class="refresh-btn" onclick="initializeWithRetry()">
+            Retry
+          </button>
+        </div>
+      `;
+      
+      // Try to show cached data
+      newsSources.forEach(source => {
+        const cached = newsCache.get(source.name);
+        if (cached && cached.length > 0) {
+          const section = document.createElement('div');
+          section.className = 'news-section';
+          
+          section.innerHTML = `
+            <h2 class="news-source-title">
+              ${source.name} (Cached)
+            </h2>
+            <div class="news-list" id="${source.name.toLowerCase().replace(/\s+/g, '-')}-news"></div>
+          `;
+          
+          const listDiv = section.querySelector('.news-list');
+          cached.slice(0, source.maxItems || 5).forEach(item => {
+            const newsItem = createNewsItem(item);
+            listDiv.appendChild(newsItem);
+          });
+          
+          container.appendChild(section);
+        }
+      });
+    }
+
+    // Show error message
+    function showErrorMessage() {
+      const container = document.getElementById('news-container');
+      document.getElementById('skeleton-loading').style.display = 'none';
+      
+      container.innerHTML = `
+        <div class="error-message">
+          Failed to load news after multiple attempts. Please check your connection.
+          <button class="refresh-btn" onclick="initializeWithRetry(3)">
+            Try Again
+          </button>
+        </div>
+      `;
+    }
+
     // Initial load
     document.addEventListener('DOMContentLoaded', () => {
+      // Set up online/offline detection
+      window.addEventListener('online', () => initializeWithRetry());
+      window.addEventListener('offline', showOfflineMessage);
+      
+      // Initial load
       initializeWithRetry();
-      setInterval(() => initializeWithRetry(1), 15 * 60 * 1000); // Refresh every 15 minutes
+      
+      // Refresh every 15 minutes
+      setInterval(() => {
+        if (navigator.onLine) {
+          initializeWithRetry(1);
+        }
+      }, 15 * 60 * 1000);
     });
+
+    // Register service worker for offline support
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(registration => {
+            console.log('ServiceWorker registration successful');
+            // Check for updates periodically
+            setInterval(() => registration.update(), 60 * 60 * 1000); // Every hour
+          })
+          .catch(error => console.log('ServiceWorker registration failed:', error));
+      });
+    }
   </script>
 </body>
 </html>
