@@ -172,8 +172,22 @@ var cid = 9492;
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v20.0" nonce="2vA4OymM"></script>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163260228-1"></script>
+<!----------------Nepali News------------------>
+ <!-- Preload critical resources -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" as="style">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://www.onlinekhabar.com" crossorigin>
+  <link rel="preconnect" href="https://setopati.com" crossorigin>
+  <link rel="dns-prefetch" href="https://api.rss2json.com">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  <!-- Web App Manifest -->
+  <link rel="manifest" href="/manifest.webmanifest">
+  <!----------End------Nepali News------------------>
 
-   
  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 <!------html---code--Go to top---- ------------------------>
  <button type="button" class="scroll-top" onclick="goToTop();">
@@ -1541,13 +1555,60 @@ $(document).ready(function(){
 
 
 <!-----Online News---Section-->
+  <!-- Load non-critical CSS async -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" media="print" onload="this.media='all'">
+</head>
+<body>
 
+  <header>
+    <h1 class="nepali-text">ताजा नेपाली समाचार</h1>
+    <p class="nepali-text">एकै ठाउँमा सबै प्रमुख समाचार</p>
+  </header>
 
+  <div class="container">
+    <div id="news-container">
+      <!-- Skeleton loading screen -->
+      <div id="skeleton-loading">
+        <div class="news-section">
+          <h2 class="news-source-title skeleton" style="width: 40%; height: 1.8rem;"></h2>
+          <div class="skeleton-news-item">
+            <div class="skeleton-text">
+              <div class="skeleton-line short skeleton"></div>
+              <div class="skeleton-line medium skeleton"></div>
+              <div class="skeleton-line long skeleton"></div>
+            </div>
+          </div>
+          <div class="skeleton-news-item">
+            <div class="skeleton-text">
+              <div class="skeleton-line short skeleton"></div>
+              <div class="skeleton-line medium skeleton"></div>
+              <div class="skeleton-line long skeleton"></div>
+            </div>
+          </div>
+        </div>
+        <div class="news-section">
+          <h2 class="news-source-title skeleton" style="width: 35%; height: 1.8rem;"></h2>
+          <div class="skeleton-news-item">
+            <div class="skeleton-text">
+              <div class="skeleton-line short skeleton"></div>
+              <div class="skeleton-line medium skeleton"></div>
+              <div class="skeleton-line long skeleton"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="nepali-text">
+    &copy; <span id="current-year"></span> Shamser.info.np | समाचार 
+  </footer>
+<!-----------------
  <iframe src="https://shamser.info.np/OnlineNewsAutoUpdate.html" 
                 width="100%" 
                 height="600" 
                 frameborder="0">
-        </iframe>
+        </iframe>-------------------->
 
 
 
