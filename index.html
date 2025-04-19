@@ -1258,70 +1258,11 @@ myModal{
       <div class="modal-header">
 
 
-          <!-----   <p class="mb-0"><i class="fas fa-bell"></i>&nbsp;&nbsp;
-                    <a href="https://script.google.com/macros/s/AKfycbzuZUMOcHAS_pB3-3mSQPUlU8wqz0QnUmxaNrsnYQ3YbK2XzrTd7x9aWvsoY5G9xS0p/exec" target="_blank">
-                        Subscribe our website to get the latest updates
+<p class="mb-0"><i class="fas fa-bell"></i>&nbsp;&nbsp;
+ <a href="https://script.google.com/macros/s/AKfycbzuZUMOcHAS_pB3-3mSQPUlU8wqz0QnUmxaNrsnYQ3YbK2XzrTd7x9aWvsoY5G9xS0p/exec" target="_blank">
+Subscribe our website to get the latest updates
                     </a>
-                </p>---------------->
-
-
-<p>Get notified about new content on shamser.info.np</p>
-
-  <button id="subscribeBtn">
-    <span class="bell-icon">🔔</span>
-    <span>Subscribe</span>
-    <span id="badge" class="badge" style="display: none;">0</span>
-  </button>
-  
-  <p id="statusText"></p>
-  
-  <div class="counter-container">
-    <p>Total Subscribers: <span class="counter-value" id="counter">0</span></p>
-  </div>
-
-  <script>
-    const btn = document.getElementById('subscribeBtn');
-    const status = document.getElementById('statusText');
-    const counter = document.getElementById('counter');
-    const badge = document.getElementById('badge');
-    const subscribed = localStorage.getItem('subscribed');
-    
-    // Initialize counter from localStorage or set to 0
-    let subscriberCount = parseInt(localStorage.getItem('subscriberCount')) || 0;
-    counter.textContent = subscriberCount;
-    
-    // Show badge if there are subscribers
-    if (subscriberCount > 0) {
-      badge.style.display = 'flex';
-      badge.textContent = subscriberCount > 9 ? '9+' : subscriberCount;
-    }
-
-    if (subscribed) {
-      btn.disabled = true;
-      btn.innerHTML = '<span class="bell-icon">🔔</span> <span>Subscribed</span> <span class="badge">' + (subscriberCount > 9 ? '9+' : subscriberCount) + '</span>';
-      status.textContent = 'Thank you for subscribing!';
-    }
-
-    btn.addEventListener('click', () => {
-      localStorage.setItem('subscribed', 'true');
-      btn.disabled = true;
-      btn.innerHTML = '<span class="bell-icon">🔔</span> <span>Subscribed</span> <span class="badge">' + (subscriberCount > 9 ? '9+' : subscriberCount) + '</span>';
-      status.textContent = 'Thank you for subscribing!';
-      
-      // Increment counter
-      subscriberCount++;
-      localStorage.setItem('subscriberCount', subscriberCount);
-      counter.textContent = subscriberCount;
-      
-      // Update badge
-      badge.style.display = 'flex';
-      badge.textContent = subscriberCount > 9 ? '9+' : subscriberCount;
-      
-      // Here you would typically send data to your backend
-      // For shamser.info.np, you might want to add:
-      // fetch('https://shamser.info.np/api/subscribe', { method: 'POST' });
-    });
-  </script>
+                </p>
 
          
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
