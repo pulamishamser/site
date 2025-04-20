@@ -3878,10 +3878,9 @@ clear: both;
 <div class="fb-comments" data-href="https://shamser.info.np" data-width="" data-numposts="25"></div>
 
 
-<!--------------------नेपाली ताजा समाचार-------------------------------------->
-
- <script>
-    // Updated news sources with BBC Nepali, Nayapatrika, Ekantipur, Bahrakhari, and Gorkhapatra
+<!------------script-----Online News---Section-->------नेपाली ताजा समाचार-------------------------------------->
+<script>
+    // Updated news sources with all requested sources
     const newsSources = [
       {
         name: "OnlineKhabar",
@@ -3898,13 +3897,11 @@ clear: both;
         fallbacks: [
           "https://api.rss2json.com/v1/api.json?rss_url=https://ratopati.com/rss",
           "https://corsproxy.io/?https://ratopati.com/rss"
- 
         ],
         maxItems: 5
       },
       {
-
-  name: "Gorkhapatra",
+        name: "Gorkhapatra",
         rss: "https://gorkhapatraonline.com/rss",
         fallbacks: [
           "https://api.rss2json.com/v1/api.json?rss_url=https://gorkhapatraonline.com/rss",
@@ -3922,11 +3919,9 @@ clear: both;
         maxItems: 5
       },
       {
-
-  name: "Setopati",
+        name: "Setopati",
         rss: "https://setopati.com/rss",
-        fallbacks: [
-      ],
+        fallbacks: [],
         maxItems: 5
       },
       {
@@ -3953,6 +3948,78 @@ clear: both;
         fallbacks: [
           "https://api.rss2json.com/v1/api.json?rss_url=https://nayapatrikadaily.com/rss",
           "https://corsproxy.io/?https://nayapatrikadaily.com/rss"
+        ],
+        maxItems: 5
+      },
+      {
+        name: "Nagrik News",
+        rss: "https://nagriknews.com/feed/",
+        fallbacks: [
+          "https://api.rss2json.com/v1/api.json?rss_url=https://nagriknews.com/feed/",
+          "https://corsproxy.io/?https://nagriknews.com/feed/"
+        ],
+        maxItems: 5
+      },
+      {
+        name: "Annapurna Post",
+        rss: "https://www.annapurnapost.com/rss",
+        fallbacks: [
+          "https://api.rss2json.com/v1/api.json?rss_url=https://www.annapurnapost.com/rss",
+          "https://corsproxy.io/?https://www.annapurnapost.com/rss"
+        ],
+        maxItems: 5
+      },
+      {
+        name: "Hamro Patro",
+        rss: "https://www.hamropatro.com/news/rss",
+        fallbacks: [
+          "https://api.rss2json.com/v1/api.json?rss_url=https://www.hamropatro.com/news/rss",
+          "https://corsproxy.io/?https://www.hamropatro.com/news/rss"
+        ],
+        maxItems: 5
+      },
+      {
+        name: "Ujyaalo Online",
+        rss: "https://ujyaaloonline.com/rss",
+        fallbacks: [
+          "https://api.rss2json.com/v1/api.json?rss_url=https://ujyaaloonline.com/rss",
+          "https://corsproxy.io/?https://ujyaaloonline.com/rss"
+        ],
+        maxItems: 5
+      },
+      {
+        name: "Nepal Live",
+        rss: "https://nepallive.com/feed",
+        fallbacks: [
+          "https://api.rss2json.com/v1/api.json?rss_url=https://nepallive.com/feed",
+          "https://corsproxy.io/?https://nepallive.com/feed"
+        ],
+        maxItems: 5
+      },
+      {
+        name: "Rising Nepal",
+        rss: "https://risingnepaldaily.com/rss",
+        fallbacks: [
+          "https://api.rss2json.com/v1/api.json?rss_url=https://risingnepaldaily.com/rss",
+          "https://corsproxy.io/?https://risingnepaldaily.com/rss"
+        ],
+        maxItems: 5
+      },
+      {
+        name: "Ejanakpur Today",
+        rss: "https://ejanakpurtoday.com/feed",
+        fallbacks: [
+          "https://api.rss2json.com/v1/api.json?rss_url=https://ejanakpurtoday.com/feed",
+          "https://corsproxy.io/?https://ejanakpurtoday.com/feed"
+        ],
+        maxItems: 5
+      },
+      {
+        name: "Himal Khabar",
+        rss: "https://www.himalkhabar.com/feed",
+        fallbacks: [
+          "https://api.rss2json.com/v1/api.json?rss_url=https://www.himalkhabar.com/feed",
+          "https://corsproxy.io/?https://www.himalkhabar.com/feed"
         ],
         maxItems: 5
       }
