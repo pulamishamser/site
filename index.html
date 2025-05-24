@@ -1599,7 +1599,297 @@ style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscre
     
 <div class="container">
 <body>
+<h6>File Upload & Social Sharing</h6>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .upload-container {
+            border: 2px dashed #ccc;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .preview-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .preview-item {
+            position: relative;
+            width: 150px;
+            height: 150px;
+        }
+        .preview-item img, .preview-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .remove-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: red;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        .share-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+        .share-btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .facebook { background-color: #3b5998; }
+        .twitter { background-color: #1da1f2; }
+        .linkedin { background-color: #0077b5; }
+        .whatsapp { background-color: #25d366; }
+        .progress-bar {
+            width: 100%;
+            background-color: #f3f3f3;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .progress {
+            height: 20px;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            width: 0%;
+            text-align: center;
+            line-height: 20px;
+            color: white;
+        }
+    </style>
 
+<body>
+    <h1>Upload & Share Media Files</h1>
+    
+    <div class="upload-container">
+        <h3>Drag & Drop files here or click to browse</h3>
+        <input type="file" id="fileInput" accept="image/*,video/*" multiple style="display: none;">
+        <button onclick="document.getElementById('fileInput').click()">Select Files</button>
+        
+        <div class="progress-bar" id="progressContainer" style="display: none;">
+            <div class="progress" id="progressBar">0%</div>
+        </div>
+    </div>
+    
+    <div class="preview-container" id="previewContainer"></div>
+    
+    <div class="share-buttons" id="shareButtons" style="display: none;">
+        <button class="share-btn facebook" onclick="shareOnSocial('facebook')">
+            <i>FB</i> Facebook
+        </button>
+        <button class="share-btn twitter" onclick="shareOnSocial('twitter')">
+            <i>TW</i> Twitter
+        </button>
+        <button class="share-btn linkedin" onclick="shareOnSocial('linkedin')">
+            <i>IN</i> LinkedIn
+        </button>
+        <button class="share-btn whatsapp" onclick="shareOnSocial('whatsapp')">
+            <i>WA</i> WhatsApp
+        </button>
+    </div>
+    
+    <script>
+        // Global variable to store uploaded files
+        let uploadedFiles = [];
+        
+        // DOM elements
+        const fileInput = document.getElementById('fileInput');
+        const previewContainer = document.getElementById('previewContainer');
+        const shareButtons = document.getElementById('shareButtons');
+        const progressBar = document.getElementById('progressBar');
+        const progressContainer = document.getElementById('progressContainer');
+        
+        // Handle drag and drop
+        const uploadContainer = document.querySelector('.upload-container');
+        
+        uploadContainer.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadContainer.style.borderColor = '#666';
+        });
+        
+        uploadContainer.addEventListener('dragleave', () => {
+            uploadContainer.style.borderColor = '#ccc';
+        });
+        
+        uploadContainer.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadContainer.style.borderColor = '#ccc';
+            
+            if (e.dataTransfer.files.length) {
+                fileInput.files = e.dataTransfer.files;
+                handleFiles(fileInput.files);
+            }
+        });
+        
+        // Handle file selection
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length) {
+                handleFiles(fileInput.files);
+            }
+        });
+        
+        // Process selected files
+        function handleFiles(files) {
+            progressContainer.style.display = 'block';
+            progressBar.style.width = '0%';
+            progressBar.textContent = '0%';
+            
+            let processed = 0;
+            const total = files.length;
+            
+            Array.from(files).forEach((file, index) => {
+                // Check file type
+                if (!file.type.match('image.*') && !file.type.match('video.*')) {
+                    alert(`File ${file.name} is not an image or video. Skipping...`);
+                    processed++;
+                    updateProgress(processed, total);
+                    return;
+                }
+                
+                // Simulate upload (in a real app, you would upload to a server)
+                setTimeout(() => {
+                    const reader = new FileReader();
+                    
+                    reader.onload = (e) => {
+                        const fileUrl = e.target.result;
+                        uploadedFiles.push({
+                            file: file,
+                            url: fileUrl,
+                            type: file.type.split('/')[0] // 'image' or 'video'
+                        });
+                        
+                        createPreview(fileUrl, file.type, uploadedFiles.length - 1);
+                        
+                        processed++;
+                        updateProgress(processed, total);
+                        
+                        if (processed === total) {
+                            // All files processed
+                            setTimeout(() => {
+                                progressContainer.style.display = 'none';
+                                shareButtons.style.display = 'flex';
+                            }, 500);
+                        }
+                    };
+                    
+                    reader.readAsDataURL(file);
+                }, index * 300); // Simulate delay for demo
+            });
+        }
+        
+        // Update progress bar
+        function updateProgress(processed, total) {
+            const percent = Math.round((processed / total) * 100);
+            progressBar.style.width = percent + '%';
+            progressBar.textContent = percent + '%';
+        }
+        
+        // Create preview elements
+        function createPreview(url, type, index) {
+            const previewItem = document.createElement('div');
+            previewItem.className = 'preview-item';
+            
+            if (type.match('image.*')) {
+                const img = document.createElement('img');
+                img.src = url;
+                previewItem.appendChild(img);
+            } else if (type.match('video.*')) {
+                const video = document.createElement('video');
+                video.src = url;
+                video.controls = true;
+                previewItem.appendChild(video);
+            }
+            
+            const removeBtn = document.createElement('button');
+            removeBtn.className = 'remove-btn';
+            removeBtn.innerHTML = '×';
+            removeBtn.onclick = () => removeFile(index);
+            previewItem.appendChild(removeBtn);
+            
+            previewContainer.appendChild(previewItem);
+        }
+        
+        // Remove file from preview
+        function removeFile(index) {
+            uploadedFiles.splice(index, 1);
+            previewContainer.innerHTML = '';
+            
+            // Recreate previews with remaining files
+            uploadedFiles.forEach((file, i) => {
+                createPreview(file.url, file.type, i);
+            });
+            
+            if (uploadedFiles.length === 0) {
+                shareButtons.style.display = 'none';
+            }
+        }
+        
+        // Share on social media
+        function shareOnSocial(platform) {
+            if (uploadedFiles.length === 0) {
+                alert('No files to share!');
+                return;
+            }
+            
+            // In a real app, you would upload files to a server first
+            // For this demo, we'll just share the first file as a data URL (not practical for real use)
+            
+            const text = "Check out this media I uploaded!";
+            const url = uploadedFiles[0].url; // In reality, this would be a server URL
+            
+            let shareUrl;
+            
+            switch(platform) {
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(text)}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+                    break;
+                case 'linkedin':
+                    shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+                    break;
+                case 'whatsapp':
+                    shareUrl = `https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`;
+                    break;
+                default:
+                    return;
+            }
+            
+            // Open share window
+            window.open(shareUrl, '_blank', 'width=600,height=400');
+        }
+    </script>
+
+
+
+
+
+
+
+   
   <header>
     <h1 class="nepali-text">नेपालको प्रमुख अनलाइन खबरहरु अब शमसेर डट इन्फो डट एन्फीमा मा पढन सकिने</h1>
      <p style="font-size:10px;"> <span class="float-left pt-1" style= "text-transform: lowercase;font-size:12px;" data-livestamp="2025-04-19, 11:03:25 AM"></span></p>
