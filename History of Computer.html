@@ -3,43 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<meta name="keywords"  content="History of Computer"/>
-<meta property="og:type" content="website"/>
-<meta property="og:url" content="https://shamser.info.np/History of Computer.html"/>
-<meta property="og:title" content="History of Computers | Technology Blog"/>
-
-<meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjKNbkVOMqwRwzYp8cx1p4VVN56QZK5pK9SSh_FLo0LivNkT5YjY_QjuIUa9mTaUrNJaUqErS1a8uEO8oOMyPgdlbcYK3koDdzZ6N7hzl9tftPRnw3oh1lLkR9kWJo5mjb81awihiGrpcc/s640/Universal+Automatic+Computer+I.JPG" />
-<meta property="og:description" content="From Abacus to AI: The Fascinating Evolution of Computing Technology ">
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="800" />
-<meta property="fb:app_id" content="758915462507587" />
-<meta name="author" content="shamserpulami">
-<meta name="robots" content="index, follow">
-    <title>History of Computer</title>
-<!--social button show -->
-<link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet" type="text/css">
-<!--circle fb -->
-<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
-
-
-<!----share button---->
-<script type='text/javascript' src='../platform-api.sharethis.com/js/sharethis.js#property=5b5b234df5aa6d001130d104&product=inline-share-buttons' async='async'></script>
-<div id="fb-root"></div>
-<script>
-      (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = '../connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1';
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-    </script>            
-<!------------  <SDK>------------>      
-<!---Vertical Share button---->
-<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=618f78d6f2438b001a7e8872&product=image-share-buttons' async='async'></script>
-
-
+    <meta name="keywords" content="History of Computer"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://shamser.info.np/History of Computer.html"/>
+    <meta property="og:title" content="History of Computers | Technology Blog"/>
+    <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjKNbkVOMqwRwzYp8cx1p4VVN56QZK5pK9SSh_FLo0LivNkT5YjY_QjuIUa9mTaUrNJaUqErS1a8uEO8oOMyPgdlbcYK3koDdzZ6N7hzl9tftPRnw3oh1lLkR9kWJo5mjb81awihiGrpcc/s640/Universal+Automatic+Computer+I.JPG" />
+    <meta property="og:description" content="From Abacus to AI: The Fascinating Evolution of Computing Technology ">
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="800" />
+    <meta property="fb:app_id" content="758915462507587" />
+    <meta name="author" content="shamserpulami">
+    <meta name="robots" content="index, follow">
     <title>History of Computers | Technology Blog</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@300;400;600&display=swap" rel="stylesheet">
@@ -56,6 +30,7 @@
             color: #333;
             background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
             min-height: 100vh;
+            padding-top: 20px;
         }
         
         .container {
@@ -126,6 +101,7 @@
             padding: 30px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
             transition: transform 0.3s ease;
+            scroll-margin-top: 100px;
         }
         
         .intro-section:hover, .timeline-section:hover, .generations-section:hover, .future-section:hover {
@@ -422,6 +398,71 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
         
+        /* Floating "Jump to Section" Navigation */
+        .jump-nav {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            background: white;
+            border-radius: 50px;
+            padding: 15px 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .jump-nav a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1a3a8f 0%, #2c5cc5 100%);
+            color: white;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .jump-nav a:hover {
+            transform: scale(1.1) translateX(-10px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .jump-nav a:hover::after {
+            content: attr(data-title);
+            position: absolute;
+            right: 60px;
+            background: #1a3a8f;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+        
+        .jump-nav a.active {
+            background: linear-gradient(135deg, #ffcc00 0%, #ff9d00 100%);
+            color: #1a3a8f;
+            transform: scale(1.1);
+        }
+        
+        .jump-title {
+            background: #1a3a8f;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
             .blog-title {
@@ -453,6 +494,38 @@
             
             .generations-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .jump-nav {
+                top: auto;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                flex-direction: row;
+                padding: 10px 15px;
+                border-radius: 50px;
+                gap: 10px;
+                max-width: 90%;
+                overflow-x: auto;
+                scrollbar-width: none;
+            }
+            
+            .jump-nav::-webkit-scrollbar {
+                display: none;
+            }
+            
+            .jump-nav a {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            
+            .jump-nav a:hover::after {
+                display: none;
+            }
+            
+            .jump-title {
+                display: none;
             }
         }
         
@@ -509,31 +582,43 @@
     <header>
         <div class="header-content">
             <h1 class="blog-title">History of Computers</h1> 
-
-
+            
             <p class="blog-subtitle">From Abacus to AI: The Fascinating Evolution of Computing Technology</p>
             <div class="blog-meta">
-
-                <span><a href="https://shamser.info.np/"><i class="fa-solid fa-globe"></i></a> shamser.info.np</span>
+                <span><i class="fa-solid fa-globe"></i> shamser.info.np</span>
                 <span><i class="fas fa-calendar"></i> June 04, 2025</span>
                 <span><i class="fas fa-clock"></i> 10 min read</span>
             </div>
         </div>
     </header>
 
+    <!-- Jump to Section Navigation -->
+    <div class="jump-nav">
+        <div class="jump-title">Jump to Section</div>
+        <a href="#intro" data-title="Introduction" class="active">
+            <i class="fas fa-info-circle"></i>
+        </a>
+        <a href="#timeline" data-title="Timeline">
+            <i class="fas fa-history"></i>
+        </a>
+        <a href="#generations" data-title="Generations">
+            <i class="fas fa-microchip"></i>
+        </a>
+        <a href="#future" data-title="Future Tech">
+            <i class="fas fa-robot"></i>
+        </a>
+    </div>
+
     <div class="container">
         <div class="main-content">
-            <section class="intro-section">
+            <section class="intro-section" id="intro">
                 <h2>Introduction</h2>
                 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v23.0"></script>
 <div class="fb-like" data-href="https://shamser.info.np" data-width="" data-layout="button_count" data-action="like" data-size="small" data-share="true"></div>
                 
 <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fshamser.info.np%2FHistory%2520of%2520Computer.html&layout&size&width=77&height=20&appId" width="77" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>                
-              
-                
-                <p> <img src="https://pbs.twimg.com/profile_images/1579086841227059200/JyklJEUx_400x400.jpg" alt="Editor" style="float: left;width:px;height:60px;  border: 1px dotted black;  margin: 10px 10px 15px 20px;"> 
-            The history of computers is a fascinating journey that spans centuries, from simple counting devices to the incredibly powerful machines we use today. This evolution has transformed every aspect of human life, revolutionizing how we work, communicate, and solve complex problems.</p>
+                <p> <img src="https://pbs.twimg.com/profile_images/1579086841227059200/JyklJEUx_400x400.jpg" alt="Editor" style="float: left;width:px;height:60px;  border: 1px dotted black;  margin: 10px 10px 15px 20px;"> The history of computers is a fascinating journey that spans centuries, from simple counting devices to the incredibly powerful machines we use today. This evolution has transformed every aspect of human life, revolutionizing how we work, communicate, and solve complex problems.</p>
                 
                 <div class="highlight">
                     <p>Computers have progressed from room-sized machines with limited capabilities to devices that fit in our pockets yet possess more computing power than all the computers used in the Apollo moon missions combined.</p>
@@ -542,7 +627,7 @@
                 <p>The story of computing is marked by brilliant innovations, visionary thinkers, and groundbreaking technological advancements. Each generation of computers has built upon the achievements of the previous one, leading to exponential growth in processing power and capabilities.</p>
             </section>
 
-            <section class="timeline-section">
+            <section class="timeline-section" id="timeline">
                 <h2>Computer History Timeline</h2>
                 <p>Let's explore the key milestones in the development of computer technology:</p>
                 
@@ -592,7 +677,7 @@
                 </div>
             </section>
 
-            <section class="generations-section">
+            <section class="generations-section" id="generations">
                 <h2>Generations of Computers</h2>
                 <p>Computer technology has evolved through five distinct generations, each characterized by major technological developments:</p>
                 
@@ -719,7 +804,7 @@
                 </div>
             </section>
 
-            <section class="future-section">
+            <section class="future-section" id="future">
                 <h2>The Future of Computing</h2>
                 <p>As we look to the future, several emerging technologies promise to transform computing once again:</p>
                 
@@ -769,9 +854,6 @@
   </a>
   <a href="https://maps.app.goo.gl/CQG8KiSPvofKn5RB7" target="_blank" class="social-icon map">
     <i class="fas fa-map-marker-alt"></i>  </a>
-
-
-
                 </div>
             </div>
             
@@ -791,11 +873,11 @@
     </footer>
 
     <div class="floating-btn">
-  
+        <i class="fas fa-arrow-up"></i>
     </div>
 
     <script>
-        // Simple animation for timeline items
+        // Animation for timeline items
         document.addEventListener('DOMContentLoaded', function() {
             const timelineItems = document.querySelectorAll('.timeline-content');
             
@@ -829,6 +911,66 @@
                 }
             `;
             document.head.appendChild(style);
+            
+            // Jump to section functionality
+            const jumpLinks = document.querySelectorAll('.jump-nav a');
+            const sections = document.querySelectorAll('section');
+            
+            // Smooth scrolling for jump links
+            jumpLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    if (targetSection) {
+                        window.scrollTo({
+                            top: targetSection.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Highlight active section in jump nav
+            window.addEventListener('scroll', function() {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (scrollY >= (sectionTop - 150)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                jumpLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+            
+            // Back to top button
+            const floatingBtn = document.querySelector('.floating-btn');
+            
+            floatingBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Show/hide back to top button
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 500) {
+                    floatingBtn.style.display = 'flex';
+                } else {
+                    floatingBtn.style.display = 'none';
+                }
+            });
         });
     </script>
 </body>
