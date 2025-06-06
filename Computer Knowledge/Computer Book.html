@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>कम्प्युटरको आधारभूत ज्ञान | कक्षा ७</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans Devanagari', 'Poppins', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            padding: 0;
+            margin: 0;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(90deg, #1a3a8f 0%, #2c5cc5 100%);
+            color: white;
+            padding: 25px 20px;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            margin-bottom: 30px;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .lesson-number {
+            background-color: #ffcc00;
+            color: #1a3a8f;
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        
+        h2 {
+            font-size: 1.4rem;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        
+        .intro-section, .working-principle, .input-section, .processing-section, .output-section, .storage-section, .activities, .exercises {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .intro-section:hover, .working-principle:hover, .input-section:hover, .processing-section:hover, .output-section:hover, .storage-section:hover, .activities:hover, .exercises:hover {
+            transform: translateY(-5px);
+        }
+        
+        h3 {
+            color: #1a3a8f;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #ffcc00;
+            position: relative;
+        }
+        
+        h3:after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: #2c5cc5;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+        
+        .highlight {
+            background-color: #e3f2fd;
+            padding: 15px;
+            border-left: 4px solid #1a3a8f;
+            border-radius: 0 5px 5px 0;
+            margin: 20px 0;
+        }
+        
+        .ipo-diagram {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 25px 0;
+            border: 1px solid #90caf9;
+        }
+        
+        .ipo-diagram p {
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: #0d47a1;
+            margin-bottom: 15px;
+        }
+        
+        .process-flow {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1565c0;
+        }
+        
+        .process-flow span {
+            padding: 10px 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .device-cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            max-height: 200px;
+            object-fit: cover;
+        }
+        
+        .card h4 {
+            color: #1a3a8f;
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+        
+        .exercise-item {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed #90caf9;
+        }
+        
+        .exercise-item:last-child {
+            border-bottom: none;
+        }
+        
+        .answers {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            border-left: 3px solid #4caf50;
+        }
+        
+        .correct {
+            color: #4caf50;
+            font-weight: 700;
+        }
+        
+        .incorrect {
+            color: #f44336;
+            font-weight: 700;
+        }
+        
+        .explanation {
+            font-style: italic;
+            margin-top: 8px;
+            color: #555;
+        }
+        
+        .responsive-img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        footer {
+            background: linear-gradient(90deg, #1a3a8f 0%, #2c5cc5 100%);
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+            border-radius: 20px 20px 0 0;
+        }
+        
+        /* Mobile Responsiveness */
+        @media (min-width: 576px) {
+            .device-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            h2 {
+                font-size: 1.6rem;
+            }
+            
+            .main-content {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .intro-section, .working-principle {
+                grid-column: span 2;
+            }
+            
+            .activities, .exercises {
+                grid-column: span 2;
+            }
+            
+            .device-cards {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (min-width: 992px) {
+            .container {
+                padding: 30px;
+            }
+            
+            header {
+                padding: 30px;
+            }
+            
+            .main-content {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 35px;
+            }
+            
+            .intro-section, .working-principle, .activities, .exercises {
+                grid-column: span 3;
+            }
+            
+            .input-section, .processing-section, .output-section {
+                grid-column: span 1;
+            }
+            
+            .storage-section {
+                grid-column: span 3;
+            }
+            
+            .process-flow {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                padding: 0;
+            }
+            
+            .container {
+                padding: 15px;
+                max-width: 100%;
+            }
+            
+            header, footer, .card:hover, .intro-section:hover, .working-principle:hover, .input-section:hover, .processing-section:hover, .output-section:hover, .storage-section:hover, .activities:hover, .exercises:hover {
+                box-shadow: none;
+                transform: none;
+            }
+            
+            header {
+                background: white;
+                color: black;
+                border-bottom: 3px solid #1a3a8f;
+            }
+            
+            .lesson-number {
+                background: white;
+                color: black;
+                border: 1px solid black;
+            }
+            
+            footer {
+                background: white;
+                color: black;
+                border-top: 3px solid #1a3a8f;
+            }
+            
+            .highlight, .answers, .ipo-diagram {
+                border: 1px solid #ddd;
+            }
+            
+            .device-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .card {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="lesson-number">पाठ १</div>
+            <h1>कम्प्युटरको आधारभूत ज्ञान तथा सिप</h1>
+            <h2>कम्प्युटर शिक्षा कक्षा ७</h2>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="main-content">
+            <section class="intro-section">
+                <h3>परिचय</h3>
+                <p>कम्प्युटर एउटा विद्युतीय उपकरण हो । यसले हामीसँग हाम्रा अप्रशोधित डाटा लिई प्रशोधन (process) गरेर महत्त्वपूर्ण सूचना उपलब्ध गराउँछ । कम्प्युटर शब्द ल्याटिन (Latin) भाषाको कम्प्युटेयर (computare) बाट आएको हो । यसको अर्थ हिसाब (calculate) गर्नु हुन्छ । त्यसैले कम्प्युटरलाई सामान्यतया हिसाब गर्ने आधुनिक विद्युतीय उपकरणका रूपमा लिइन्छ ।</p>
+                
+                <div class="highlight">
+                    <p>यसले हरेक किसिमका गणितीय हिसाब (mathematical calculation) लगायत तार्किक (logical) कार्य सम्पादन पनि गर्छ । कम्प्युटरले हाम्रो जीवनमा ठुलो प्रभाव पारेको छ । यसले हाम्रो जीवन शैलीमा परिर्वतन ल्याएको छ । साधारण चिठी पत्र टाइप गर्न र भिडियो गेम खेल्न मात्र नभई वैज्ञानिक खोज, मौसमको अनुमान, मिसाइलहरूको नियन्त्रण, चिकित्सा सम्बन्धी अनुसन्धान र सञ्चार जगतमा पनि कम्प्युटरको प्रयोग भएको छ।</p>
+                </div>
+            </section>
+
+            <section class="working-principle">
+                <h3>कम्प्युटरको काम गर्ने सिद्धान्त</h3>
+                <p>कम्प्युटरले सामान्यतया इन्पुट, प्रोसेस र आउटपुट (input, process and output) को सिद्धान्तमा आधारित भएर काम गर्छ, जसलाई छोटकरीमा (IPO) को सिद्धान्त पनि भनिन्छ । तलको चित्रमा यसको काम गर्ने सिद्धान्त स्पस्ट पारिएको छ ।</p>
+                
+                <div class="ipo-diagram">
+                    <p>Computer Input, Process and Output</p>
+                    <div class="process-flow">
+                        <span>इन्पुट (Input)</span>
+                        <i class="fas fa-arrow-right"></i>
+                        <span>प्रोसेस (Process)</span>
+                        <i class="fas fa-arrow-right"></i>
+                        <span>आउटपुट (Output)</span>
+                    </div>
+                </div>
+                
+                <p>कम्प्युटरलाई यसको काम गर्ने सिद्धान्तका आधारमा पनि प्रस्तुत गर्न सकिन्छ । कम्प्युटर भनेको अप्रशोधित डाटाहरूलाई प्रशोधन गर्ने विद्युतीय उपकरण हो । जसले अप्रशोधित डाटालाई इन्पुट उपकरण (input device) मार्फत लिने, प्रशोधन उपकरण (processing device) मा प्रशोधन गर्ने र आउटपुट उपकरण (output device) मार्फत प्रशोधन भएको परिणाम (processing result) उपलब्ध गराउने काम गर्छ।</p>
+            </section>
+
+            <section class="input-section">
+                <h3>इन्पुट (Input)</h3>
+                <p>इन्पुट भनेको कम्प्युटरले अप्रशोधित डाटा लिने प्रक्रिया हो । यो कार्य कम्प्युटरको इन्पुट उपकरणमार्फत गरिन्छ । किबोर्ड, माउस, माइक्रोफोन, ज्वाइस्टिक (keyboard, mouse, microphone, joystick) हरू कम्प्युटरको इन्पुट उपकरण अन्तर्गत पर्दछन् । यसमध्ये किबोर्ड र माउसचाहिँ सबै कम्प्युटरमा हुने अनिवार्य इन्पुट उपकरण हुन् ।</p>
+                
+                <div class="device-cards">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1586436888759-9f4b0c0c8b0c?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=200&w=400" alt="Keyboard">
+                        <h4>किबोर्ड (Keyboard)</h4>
+                        <p>मुख्य इनपुट उपकरण, टाइप गर्न प्रयोग गरिन्छ</p>
+                    </div>
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=200&w=400" alt="Mouse">
+                        <h4>माउस (Mouse)</h4>
+                        <p>कर्सर नियन्त्रण गर्न प्रयोग गरिन्छ</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="processing-section">
+                <h3>प्रशोधन (Processing)</h3>
+                <p>प्रशोधन भनेको इन्पुट गरिएका अप्रशोधित डाटालाई हामीले दिएको निर्देशन (instruction) अनुसार प्रशोधन गर्ने प्रक्रिया हो । यो कार्य कम्प्युटरको प्रशोधन उपकरण अन्तर्गत हुन्छ । सिपियु (CPU - Central Processing Unit) कम्प्युटरको प्रशोधन उपकरण हो ।</p>
+                
+                <div class="device-cards">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1587202372775-e229f1723a0f?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=200&w=400" alt="Processor">
+                        <h4>सिपियु (CPU)</h4>
+                        <p>कम्प्युटरको दिमाग, सबै प्रशोधन कार्य गर्छ</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="output-section">
+                <h3>आउटपुट (Output)</h3>
+                <p>निष्कासन/उत्पादन (Output) भनेको प्रशोधन उपकरणमा प्रशोधन भएको परिणाम (Result) हामीलाई उपलब्ध गराउने प्रक्रिया हो । यो काम कम्प्युटरको आउटपुट उपकरण (Output Device) अन्तर्गत हुन्छ । मोनिटर, प्रिन्टर, स्पिकर (Monitor, Printer, Speaker) आदि कम्प्युटरका आउटपुट उपकरण हुन् ।</p>
+                
+                <div class="device-cards">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=200&w=400" alt="Monitor">
+                        <h4>मोनिटर (Monitor)</h4>
+                        <p>दृश्य आउटपुटका लागि प्रयोग हुन्छ</p>
+                    </div>
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1586611292717-f828b167508c?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=200&w=400" alt="Printer">
+                        <h4>प्रिन्टर (Printer)</h4>
+                        <p>कागजमा प्रिन्ट गर्न प्रयोग हुन्छ</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="storage-section">
+                <h3>भन्डारण (Storage)</h3>
+                <p>कम्प्यटर अरू विद्युतीय उपकरणभन्दा छुट्टै किसिमको शक्तिशाली विद्युतीय उपकरण हो । यसमा नयाँ नयाँ किसिमका विशेषता छन् । तीमध्ये भन्डारण गर्ने विशेषता महत्त्वपूर्ण छ । यसमा हामीले किबोर्डबाट टाइप गरेका डाटा र प्रशोधन उपकरणमा प्रशोधन भाएव परिणामलाई अस्थायी वा स्थायी रूपमा भन्डारण गर्न सकिन्छ । स्थायी रूपमा भन्डारण भएको डाटा वा प्रशोधन भएको परिणाम भविष्यमा पनि हामीले चाहेका बेला आवश्यकता अनुसार प्रयोग गर्न सकिन्छ ।</p>
+                
+                <div class="device-cards">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1591892150210-0a9b5e098dab?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=200&w=400" alt="RAM">
+                        <h4>र्याम (RAM)</h4>
+                        <p>अस्थायी भण्डारण उपकरण</p>
+                    </div>
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1600267175161-cfaa711b4a81?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=200&w=400" alt="Hard Disk">
+                        <h4>हार्डडिस्क (Hard Disk)</h4>
+                        <p>स्थायी भण्डारण उपकरण</p>
+                    </div>
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1594041680534-e8c8cdebd659?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=200&w=400" alt="Flash Drive">
+                        <h4>फ्ल्यास मेमोरी (Flash Drive)</h4>
+                        <p>स्थायी भण्डारण उपकरण</p>
+                    </div>
+                </div>
+                
+                <p class="highlight">कम्प्युटरले भन्डारण गर्ने कार्य भन्डारण उपकरणमा गर्छ । उदाहरणका लागि र्‍याम (RAM-Random Access Memory), हार्डडिस्क (Hard Disk), अप्टिकल डिस्क (Optical Disk), फ्ल्यास मेमोरी (Flash Memory/Pen Drive) आदी भन्डारण उपकरण हुन् । र्‍याम र हार्डडिस्क कम्प्युटरका अनिवार्य भन्डारण गर्ने उपकरण हुन् । र्‍याम (RAM) अस्थायी भण्डारण उपकरण हो भने हार्ड डिस्क, अप्टिकल डिस्क, फ्ल्यास मेमोरी स्थायी भन्डारण गर्ने उपकरण हुन् ।</p>
+            </section>
+
+            <section class="activities">
+                <h3>क्रियाकलाप</h3>
+                <p>कम्प्यूटर र यसमा प्रयोग भएका उपकरणका बारेमा छलफल गरेर कम्प्युटरका विभिन्न भाग बनाई कक्षा कोठामा टाँस ।</p>
+                <div class="answers">
+                    <p>आफ्नो कम्प्युटर ल्याबमा भएका कम्प्युटरहरुमा प्रयोग भएका विभिन्न डिभाइसहरु स्मरण गर्दै चित्र बनाउने । (उपकरण वा डिभाइसहरुमा मोनिटर, किबोर्ड, माउस, सिपियु, स्पिकर, आदी अनिवार्य समावेश हुनुपर्नेछ । उदाहरणको लागि तलको चित्रलाई लिन सकिन्छ ।)</p>
+                </div>
+            </section>
+
+            <section class="exercises">
+                <h3>अभ्यास</h3>
+                
+                <div class="exercise-item">
+                    <h4>१. तलका खाली ठाउँ भर :</h4>
+                    <p>(क) कम्प्युटर एक ........... उपकरण हो ।</p>
+                    <p>(ख) कम्प्युटर .................. शब्द .................. बाट आएको हो।</p>
+                    <p>(ग) कम्प्युटरको .............. भागमा अस्थायी रूपमा डाटा भन्डारण हुने गर्दछ।</p>
+                    <p>(घ) किबोर्ड कम्प्युटरको .......... उपकरण हो।</p>
+                    <p>(ङ) Hard disk मा आँकडा ........ रूपमा भन्डारण गरिन्छ।</p>
+                    
+                    <div class="answers">
+                        <p>उत्तर: खाली ठाउँको उत्तर यसप्रकार रहेको छ :</p>
+                        <p>(क) कम्प्युटर एक <span class="correct">विद्युतिय</span> उपकरण हो ।</p>
+                        <p>(ख) कम्प्युटर <span class="correct">ल्याटिन भाषाको</span> शब्द <span class="correct">कम्प्युटेयर</span> बाट आएको हो ।</p>
+                        <p>(ग) कम्प्युटरको <span class="correct">अस्थाई भण्डारण (र्याम)</span> भागमा अस्थायी रूपमा डाटा भन्डारण हुने गर्दछ ।</p>
+                        <p>(घ) किबोर्ड कम्प्युटरको <span class="correct">इन्पुट</span> उपकरण हो ।</p>
+                        <p>(ङ) Hard Disk मा आँकडा <span class="correct">स्थायी</span> रूपमा भन्डारण गरिन्छ ।</p>
+                    </div>
+                </div>
+                
+                <div class="exercise-item">
+                    <h4>२. ठिक र बेठिक छुट्याऊ :</h4>
+                    <p>(क) कम्प्युटरले तार्किक कार्य गर्छ ।</p>
+                    <p>(ख) हामीले निर्देशन दिएपछि मात्र कम्प्युटरले कार्य गर्छ ।</p>
+                    <p>(ग) प्रिन्टर प्रशोधन उपकरण हो ।</p>
+                    <p>(घ) फ्ल्यास मेमोरी अस्थायी भन्डारण यन्त्र हो ।</p>
+                    <p>(ङ) हार्ड डिस्क भन्डारण उपकरण हो ।</p>
+                    
+                    <div class="answers">
+                        <p>उत्तर: ठिक र बेठिकको उत्तर यसप्रकार रहेको छ :</p>
+                        <p>(क) कम्प्युटरले तार्किक कार्य गर्छ । <span class="incorrect">बेठिक</span></p>
+                        <div class="explanation">किनभने हामीले निर्देशन दिएपछि मात्र यसले काम गर्छ र आफ्नै विवेक वा तर्क प्रयोग गरेर काम गर्दैनँ ।</div>
+                        
+                        <p>(ख) हामीले निर्देशन दिएपछि मात्र कम्प्युटरले कार्य गर्छ । <span class="correct">ठिक</span></p>
+                        <div class="explanation">किनभने निर्देशन वा कमाण्ड बिना कम्प्युटर कहिल्यै आफै चल्न सक्दैनँ । तर भाइबहिनीहरु वैज्ञानिकहरु आर्टिफिसियल इन्टिलिजेन्सबाट आफै चल्ने कम्प्युटरहरुको निर्माण गर्न निकै पहल गरिरहेका छन जसलाई पाँचौं पुस्ताको कम्प्युटर भनिन्छ । यन्त्र मानव वा रोबट यसको एउटा उदाहरण हो ।</div>
+                        
+                        <p>(ग) प्रिन्टर प्रशोधन उपकरण हो। <span class="incorrect">बेठिक</span></p>
+                        <div class="explanation">किनकी प्रिन्टरले कम्प्युटरबाट निर्देशन दिएपछि लेखिएका कुरा वा चित्रहरुलाई प्रिन्ट गरेर बाहिर निकाल्छ ।</div>
+                        
+                        <p>(घ) फ्ल्यास मेमोरी अस्थायी भन्डारण यन्त्र हो । <span class="incorrect">बेठिक</span></p>
+                        <div class="explanation">किनकी फ्लास मेमोरी अर्थात पेन ड्राइभमा हामीले कुनै पनि डाटा वा फाइल आफैले डिलिट नगर्दासम्म धेरै समयसम्म बसिरहन्छ । यसमा RAM मा जसरी कम्प्युटर बन्द हुनसाथ डाटा आफै मेटिने हुँदैन ।</div>
+                        
+                        <p>(ङ) हार्ड डिस्क भन्डारण उपकरण हो । <span class="correct">ठिक</span></p>
+                        <div class="explanation">किनकी यसमा कम्प्युटरको विभिन्न प्रोगाम, फाइल र डाटाहरु भण्डारण भएर बसेको हुन्छ ।</div>
+                    </div>
+                </div>
+                
+                <div class="exercise-item">
+                    <h4>३. तलका प्रश्नको उत्तर लेख :</h4>
+                    <p>(क) कम्प्युटर भनेको के हो ? यो कहाँ कहाँ प्रयोग हुन्छ ?</p>
+                    <div class="answers">
+                        <p>उत्तर: कम्प्युटर भनेको अत्याधुनिक विद्युतीय यन्त्र हो । यसले इन्पुटको रुपमा डाटा र निर्देशनहरु लिइ प्रशोधन एकाइमा प्रशोधन गरि आउटपूट डिभाइसहरुबाट अर्थपूर्ण नतिजा दिने गर्छ ।</p>
+                    </div>
+                    
+                    <p>(ख) कम्प्युटरले कसरी काम गर्छ ?</p>
+                    <div class="answers">
+                        <p>उत्तर: कम्प्युटरले IPO (Input => Process => Output) सिद्धान्तमा आधारित भएर काम गर्छ । यसले इन्पुट डिभाइसहरु जस्तै: किबोर्ड, माउस, माइक्रोफोन, ज्वाइस्टिक आदि उपकरणहरुबाट निर्देशनहरु (commands) र कच्चा डाटाहरु लिएपछि प्रशोधन एकाइमा सिपियु वा प्रोसेसरमा डाटा प्रशोधन गरि आउटपूट डिभाइसहरु जस्तै: मोनिटर, प्रिन्टर, स्पिकर, प्रोजेक्ट आदिबाट स्वचालित रुपमा निरन्तर, छिटो, बहुउपयोगी र शुद्व तरिकाले अर्थपूर्ण नतिजा दिने गर्छ ।</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>कम्प्युटर शिक्षा - कक्षा ७ | पाठ १: कम्प्युटरको आधारभूत ज्ञान तथा सिप</p>
+            <p>© २०२३ कम्प्युटर शिक्षा | सबै अधिकार सुरक्षित</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add interactivity to exercise items
+        document.querySelectorAll('.exercise-item h4').forEach(header => {
+            header.addEventListener('click', function() {
+                const answers = this.nextElementSibling;
+                if (answers.style.display === 'none') {
+                    answers.style.display = 'block';
+                } else {
+                    answers.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
