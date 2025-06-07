@@ -600,11 +600,9 @@
         <div class="user-registration" id="user-registration">
             <h2>Enter Your Full Name and Id number</h2>
              <p class="subtitle"> Note :Students can enter Class and Roll No and others can use phone number as Id number</p>
-            <p class="subtitle"> 
+     
             <img src="https://pbs.twimg.com/profile_images/1579086841227059200/JyklJEUx_400x400.jpg" alt="Editor" style="float: left;width:px;height:60px;  border: 1px dotted black;  margin: 10px 10px 15px 20px;">
-            Start the quiz</p>
-            
-             <div class="fb-like" data-href="https://shamser.info.np" data-width="" data-layout="button_count" data-action="like" data-size="small" data-share="true"></div>
+ <div class="fb-like" data-href="https://shamser.info.np" data-width="" data-layout="button_count" data-action="like" data-size="small" data-share="true"></div>
             
             <form class="user-form" id="user-form">
                 <div class="form-group">
@@ -800,7 +798,7 @@
     </div>
 
     <script>
-        // Quiz data
+               // Quiz data
         const quizData = [
             {
                 question: "What is the full form of RAM?",
@@ -826,9 +824,283 @@
                 answer: "Microsoft Word",
                 explanation: "Microsoft Word is a word processing application, not a programming language."
             },
- 
+            {
+                question: "Which part of the computer is responsible for executing instructions?",
+                options: ["Hard Disk", "RAM", "CPU", "Motherboard"],
+                answer: "CPU",
+                explanation: "The CPU (Central Processing Unit) executes instructions and processes data."
+            },
+            {
+                question: "Which storage device has the largest capacity?",
+                options: ["DVD", "USB Flash Drive", "SSD", "Hard Disk Drive"],
+                answer: "Hard Disk Drive",
+                explanation: "Hard disk drives typically offer the largest storage capacity compared to DVDs, USB drives, and SSDs."
+            },
+            {
+                question: "What does GUI stand for?",
+                options: ["Graphical User Interface", "General User Interface", "Guided User Interface", "Graphical User Interaction"],
+                answer: "Graphical User Interface",
+                explanation: "GUI stands for Graphical User Interface, which allows users to interact with electronic devices through graphical icons."
+            },
+            {
+                question: "Which of the following is a volatile memory?",
+                options: ["SSD", "Hard Disk", "RAM", "ROM"],
+                answer: "RAM",
+                explanation: "RAM (Random Access Memory) is volatile, meaning it loses its data when the power is turned off."
+            },
+            {
+                question: "What is the main function of an operating system?",
+                options: ["Perform calculations", "Manage hardware and software resources", "Browse the internet", "Create documents"],
+                answer: "Manage hardware and software resources",
+                explanation: "The operating system manages hardware and software resources and provides services for computer programs."
+            },
+            {
+                question: "What does URL stand for?",
+                options: ["Uniform Resource Locator", "Uniform Resource Link", "Universal Resource Locator", "Universal Resource Link"],
+                answer: "Uniform Resource Locator",
+                explanation: "URL stands for Uniform Resource Locator, which is the address of a resource on the internet."
+            },
+            {
+                question: "What is the purpose of a firewall in a computer network?",
+                options: ["To speed up the internet", "To protect against unauthorized access", "To manage network traffic", "To boost Wi-Fi signal"],
+                answer: "To protect against unauthorized access",
+                explanation: "A firewall monitors and controls incoming and outgoing network traffic based on predetermined security rules."
+            },
+            {
+                question: "What type of software is used to surf the web?",
+                options: ["Operating system", "Web browser", "Database", "Text editor"],
+                answer: "Web browser",
+                explanation: "A web browser is used to access and navigate websites on the internet."
+            },
+            {
+                question: "What does 'HTTP' stand for?",
+                options: ["HyperText Transmission Protocol", "HyperText Transfer Protocol", "HyperTransfer Text Protocol", "Hyper Transmission Transfer Protocol"],
+                answer: "HyperText Transfer Protocol",
+                explanation: "HTTP stands for HyperText Transfer Protocol, which is used for transmitting web pages over the internet."
+            },
+            {
+                question: "Which of the following is an example of an input device?",
+                options: ["Printer", "Monitor", "Mouse", "Speaker"],
+                answer: "Mouse",
+                explanation: "A mouse is an input device used to interact with the computer's graphical user interface."
+            },
+            {
+                question: "What is the smallest unit of data in a computer?",
+                options: ["Byte", "Bit", "Nibble", "Kilobyte"],
+                answer: "Bit",
+                explanation: "A bit is the smallest unit of data in a computer, represented by a 0 or 1."
+            },
+            {
+                question: "What is the purpose of the ALU in a computer?",
+                options: ["To manage memory", "To perform arithmetic and logic operations", "To control input and output", "To manage storage"],
+                answer: "To perform arithmetic and logic operations",
+                explanation: "The ALU (Arithmetic Logic Unit) performs arithmetic and logical operations within the CPU."
+            },
+            {
+                question: "Which file format is used for images?",
+                options: [".docx", ".xlsx", ".jpg", ".pptx"],
+                answer: ".jpg",
+                explanation: ".jpg is a common file format used for images."
+            },
+            {
+                question: "Which key is used to delete the character to the left of the cursor?",
+                options: ["Enter", "Backspace", "Delete", "Shift"],
+                answer: "Backspace",
+                explanation: "The backspace key deletes the character to the left of the cursor."
+            },
+            {
+                question: "Which of the following is a search engine?",
+                options: ["Firefox", "Bing", "Outlook", "Skype"],
+                answer: "Bing",
+                explanation: "Bing is a search engine used to find information on the internet."
+            },
+            {
+                question: "What does the shortcut Ctrl + C do?",
+                options: ["Cuts the selected text", "Copies the selected text", "Pastes the copied text", "Saves the document"],
+                answer: "Copies the selected text",
+                explanation: "Ctrl + C is the shortcut for copying selected text or items."
+            },
+            {
+                question: "What is the function of the Control Panel in Windows?",
+                options: ["To access web browsers", "To change settings and control system configurations", "To edit documents", "To play media files"],
+                answer: "To change settings and control system configurations",
+                explanation: "The Control Panel is used to manage settings and configure system options in Windows."
+            },
+            {
+                question: "Which of the following is a popular spreadsheet application?",
+                options: ["Microsoft Word", "Microsoft Excel", "Microsoft Access", "Microsoft PowerPoint"],
+                answer: "Microsoft Excel",
+                explanation: "Microsoft Excel is a spreadsheet application used for organizing, formatting, and calculating data."
+            },
+            {
+                question: "Which of the following is a programming language?",
+                options: ["Chrome", "Python", "Windows", "Photoshop"],
+                answer: "Python",
+                explanation: "Python is a high-level programming language used for developing software applications."
+            },
+            {
+                question: "What does SSD stand for?",
+                options: ["Solid State Drive", "Standard Storage Disk", "Static State Disk", "Solid Storage Drive"],
+                answer: "Solid State Drive",
+                explanation: "SSD stands for Solid State Drive, which is a type of storage device that uses flash memory."
+            },
+            {
+                question: "Which of the following is an example of application software?",
+                options: ["Linux", "macOS", "Notepad", "BIOS"],
+                answer: "Notepad",
+                explanation: "Notepad is an application software used for text editing."
+            },
+            {
+                question: "Which key is used to refresh a webpage?",
+                options: ["F1", "F2", "F5", "F12"],
+                answer: "F5",
+                explanation: "The F5 key is commonly used to refresh the current webpage in most web browsers."
+            },
+            {
+                question: "Which of the following is a cloud storage service?",
+                options: ["OneDrive", "Windows Explorer", "File Manager", "Task Manager"],
+                answer: "OneDrive",
+                explanation: "OneDrive is a cloud storage service provided by Microsoft."
+            },
+            {
+                question: "What does LAN stand for?",
+                options: ["Local Access Network", "Large Area Network", "Local Area Network", "Long Area Network"],
+                answer: "Local Area Network",
+                explanation: "LAN stands for Local Area Network, which connects computers within a limited area like a home, school, or office."
+            },
+            {
+                question: "Which of the following can be used to protect a computer from viruses?",
+                options: ["File Explorer", "Antivirus software", "Task Manager", "Disk Cleanup"],
+                answer: "Antivirus software",
+                explanation: "Antivirus software is designed to detect and protect computers from malware and viruses."
+            },
+            {
+                question: "What does FTP stand for?",
+                options: ["File Transfer Protocol", "Fast Transfer Protocol", "File Transmission Process", "Fast Transmission Process"],
+                answer: "File Transfer Protocol",
+                explanation: "FTP stands for File Transfer Protocol, used for transferring files between computers on a network."
+            },
+            {
+                question: "Which of the following is an open-source operating system?",
+                options: ["Windows", "macOS", "Linux", "iOS"],
+                answer: "Linux",
+                explanation: "Linux is an open-source operating system that is free to use and modify."
+            },
+            {
+                question: "What is the main page of a website called?",
+                options: ["Bookmark", "Homepage", "Browser", "Tab"],
+                answer: "Homepage",
+                explanation: "The homepage is the main page of a website that serves as the starting point for navigation."
+            },
+            {
+                question: "Which of the following is used for video conferencing?",
+                options: ["Zoom", "Spotify", "iTunes", "Photoshop"],
+                answer: "Zoom",
+                explanation: "Zoom is a platform used for video conferencing, online meetings, and collaboration."
+            },
+            {
+                question: "Which of the following keys is used to enter the BIOS setup when starting a computer?",
+                options: ["Esc", "F2", "F8", "F10"],
+                answer: "F2",
+                explanation: "F2 is a common key used to enter the BIOS setup on many computers during startup."
+            },
+            {
+                question: "What does the shortcut Ctrl + V do?",
+                options: ["Copies the selected text", "Pastes the copied text", "Cuts the selected text", "Selects all text"],
+                answer: "Pastes the copied text",
+                explanation: "Ctrl + V is the shortcut for pasting copied text or items."
+            },
+            {
+                question: "Which of the following is a database management system?",
+                options: ["Microsoft Excel", "Microsoft Access", "Microsoft PowerPoint", "Microsoft Word"],
+                answer: "Microsoft Access",
+                explanation: "Microsoft Access is a database management system that allows users to create and manage databases."
+            },
+            {
+                question: "What is the function of a graphics card?",
+                options: ["To manage memory", "To improve visual output and graphics performance", "To store data", "To process audio"],
+                answer: "To improve visual output and graphics performance",
+                explanation: "A graphics card is used to render images, videos, and animations for display."
+            },
+            {
+                question: "What does CPU stand for?",
+                options: ["Central Processing Unit", "Central Performance Unit", "Central Programming Unit", "Central Protocol Unit"],
+                answer: "Central Processing Unit",
+                explanation: "CPU stands for Central Processing Unit, which is the main component that processes instructions in a computer."
+            },
+            {
+                question: "Which of the following is not a peripheral device?",
+                options: ["Mouse", "Keyboard", "Motherboard", "Printer"],
+                answer: "Motherboard",
+                explanation: "The motherboard is the main circuit board of the computer and not a peripheral device."
+            },
+            {
+                question: "Which of the following is a function of a router?",
+                options: ["To store data", "To direct network traffic between devices", "To display images", "To play audio"],
+                answer: "To direct network traffic between devices",
+                explanation: "A router manages the flow of data between network devices, directing traffic to the appropriate destinations."
+            },
+            {
+                question: "What is the main purpose of cache memory?",
+                options: ["To increase storage capacity", "To speed up data access from the main memory", "To backup data", "To display graphics"],
+                answer: "To speed up data access from the main memory",
+                explanation: "Cache memory is used to store frequently accessed data to speed up access time for the CPU."
+            },
+            {
+                question: "Which of the following is a type of malware?",
+                options: ["Virus", "Spreadsheet", "Presentation", "Email"],
+                answer: "Virus",
+                explanation: "A virus is a type of malware that can infect and spread through computer systems."
+            },
+            {
+                question: "Which of the following protocols is used for secure communication over a computer network?",
+                options: ["FTP", "HTTP", "HTTPS", "SMTP"],
+                answer: "HTTPS",
+                explanation: "HTTPS (HyperText Transfer Protocol Secure) is used for secure communication over the internet."
+            },
+            {
+                question: "Which of the following storage devices uses magnetic disks to store data?",
+                options: ["SSD", "Hard Disk Drive (HDD)", "USB Flash Drive", "CD-ROM"],
+                answer: "Hard Disk Drive (HDD)",
+                explanation: "HDDs use magnetic disks to store data."
+            },
+            {
+                question: "Which key combination is used to force quit an application in Windows?",
+                options: ["Ctrl + Alt + Delete", "Ctrl + Shift + Esc", "Ctrl + F4", "Alt + F4"],
+                answer: "Alt + F4",
+                explanation: "Alt + F4 is used to close or force quit an application in Windows."
+            },
+            {
+                question: "Which of the following is a widely used email protocol?",
+                options: ["FTP", "SMTP", "HTTP", "SSL"],
+                answer: "SMTP",
+                explanation: "SMTP (Simple Mail Transfer Protocol) is widely used for sending emails."
+            },
+            {
+                question: "What does the term 'booting' refer to?",
+                options: ["Shutting down the computer", "Starting up the computer", "Installing software", "Deleting files"],
+                answer: "Starting up the computer",
+                explanation: "Booting refers to the process of starting up the computer and loading the operating system."
+            },
+            {
+                question: "Which software allows users to create text documents?",
+                options: ["Microsoft PowerPoint", "Microsoft Word", "Microsoft Excel", "Microsoft Access"],
+                answer: "Microsoft Word",
+                explanation: "Microsoft Word is a word processing software used for creating text documents."
+            },
+            {
+                question: "Which of the following devices is used to connect to a wireless network?",
+                options: ["Graphics Card", "Network Interface Card (NIC)", "Sound Card", "Wi-Fi Adapter"],
+                answer: "Wi-Fi Adapter",
+                explanation: "A Wi-Fi adapter allows devices to connect to a wireless network."
+            },
+            {
+                question: "What does the term 'bit' stand for?",
+                options: ["Binary Information Test", "Binary Digit", "Basic Information Transfer", "Basic Input Terminal"],
+                answer: "Binary Digit",
+                explanation: "A bit is short for binary digit, the smallest unit of data in computing."
+            }
         ];
-
         // DOM elements
         const userRegistration = document.getElementById('user-registration');
         const quizContainer = document.getElementById('quiz-container');
