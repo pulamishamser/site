@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Science Quiz</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 900px;
+            width: 100%;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .user-registration {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .user-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+            width: 100%;
+        }
+        
+        label {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+        
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+        }
+        
+        .quiz-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+            margin-bottom: 30px;
+            display: none;
+        }
+        
+        .progress-container {
+            background: #f0f0f0;
+            height: 10px;
+            width: 100%;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+        
+        .question-info {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background: #3498db;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .question-container {
+            padding: 30px;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: #2c3e50;
+        }
+        
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .option {
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .option:hover {
+            background: #f8f9fa;
+            border-color: #3498db;
+        }
+        
+        .option.selected {
+            background: #e3f2fd;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+        }
+        
+        .option.correct {
+            background: #e8f5e9;
+            border-color: #4CAF50;
+        }
+        
+        .option.incorrect {
+            background: #ffebee;
+            border-color: #f44336;
+        }
+        
+        .option-letter {
+            font-weight: bold;
+            margin-right: 15px;
+            background: #3498db;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 30px 30px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .btn-start {
+            background: #2ecc71;
+            color: white;
+            margin-top: 10px;
+        }
+        
+        .btn-prev {
+            background: #7f8c8d;
+            color: white;
+        }
+        
+        .btn-next {
+            background: #3498db;
+            color: white;
+        }
+        
+        .btn-submit {
+            background: #2ecc71;
+            color: white;
+        }
+        
+        .btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .result-container {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: none;
+        }
+        
+        .user-info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .info-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .info-value {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #2c3e50;
+        }
+        
+        .score {
+            font-size: 5rem;
+            font-weight: 800;
+            color: #2ecc71;
+            margin: 20px 0;
+            text-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+        
+        .score-text {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+        
+        .sheet-info {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: left;
+        }
+        
+        .sheet-info h3 {
+            margin-bottom: 10px;
+            color: #2e7d32;
+        }
+        
+        .sheet-info ul {
+            padding-left: 20px;
+        }
+        
+        .sheet-info li {
+            margin-bottom: 5px;
+        }
+        
+        .admin-panel {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: none;
+        }
+        
+        .admin-panel h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #1a2a6c;
+        }
+        
+        .admin-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .admin-btn {
+            background: #1a2a6c;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .admin-btn:hover {
+            background: #0d1a4a;
+        }
+        
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .results-table th, .results-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        .results-table th {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .results-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .results-table tr:hover {
+            background-color: #e3f2fd;
+        }
+        
+        .back-to-quiz {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 8px;
+            background: #4CAF50;
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateX(120%);
+            transition: transform 0.3s ease;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.error {
+            background: #f44336;
+        }
+        
+        .save-results-panel {
+            background: #fff8e1;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .save-btn {
+            background: #ff9800;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+        
+        .save-btn:hover {
+            background: #f57c00;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .save-success {
+            color: #2e7d32;
+            font-weight: 600;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        /* Admin Login Styles */
+        .admin-login-form {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 0 auto;
+            max-width: 400px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .admin-login-form h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #1a2a6c;
+        }
+        
+        .admin-login-form .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .admin-login-form .btn-login {
+            background: #1a2a6c;
+            color: white;
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+        
+        .admin-login-form .btn-login:hover {
+            background: #0d1a4a;
+        }
+        
+        .admin-welcome {
+            display: none;
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #e3f2fd;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+        
+        .admin-controls-panel {
+            display: none;
+        }
+        
+        .btn-logout {
+            background: #f44336;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 10px;
+        }
+        
+        .btn-logout:hover {
+            background: #d32f2f;
+        }
+        
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .question-container {
+                padding: 20px;
+            }
+            
+            .user-registration {
+                padding: 30px 20px;
+            }
+            
+            .result-container {
+                padding: 30px 20px;
+            }
+            
+            .admin-panel {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .navigation {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .question-info {
+                flex-direction: column;
+                gap: 5px;
+                text-align: center;
+            }
+            
+            .user-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .score {
+                font-size: 4rem;
+            }
+            
+            .score-text {
+                font-size: 1.2rem;
+            }
+            
+            .admin-login-form {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-laptop-code"></i> Computer Science Quiz</h1>
+            <p class="subtitle">Test your knowledge with 50 fundamental computer science questions</p>
+        </header>
+        
+        <!-- User Registration Section -->
+        <div class="user-registration" id="user-registration">
+            <h2>Enter Your Information</h2>
+            <p class="subtitle">Please provide your details to begin the quiz</p>
+            
+            <form class="user-form" id="user-form">
+                <div class="form-group">
+                    <label for="user-name"><i class="fas fa-user"></i> Full Name:</label>
+                    <input type="text" id="user-name" placeholder="Enter your full name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="user-id"><i class="fas fa-id-card"></i> ID Number:</label>
+                    <input type="text" id="user-id" placeholder="Enter your ID number" required>
+                </div>
+                
+                <button type="submit" class="btn btn-start">
+                    <i class="fas fa-play-circle"></i> Start Quiz
+                </button>
+            </form>
+            
+            <div class="admin-controls" style="margin-top: 20px;">
+                <button class="admin-btn" id="admin-btn">
+                    <i class="fas fa-cog"></i> Admin Panel
+                </button>
+            </div>
+        </div>
+        
+        <!-- Quiz Container -->
+        <div class="quiz-container" id="quiz-container">
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            
+            <div class="question-info">
+                <div class="question-count">Question <span id="current">1</span> of 50</div>
+                <div class="score-indicator">Score: <span id="score">0</span></div>
+            </div>
+            
+            <div class="question-container">
+                <div class="question-text" id="question-text"></div>
+                
+                <div class="options-container" id="options-container">
+                    <!-- Options will be inserted here by JavaScript -->
+                </div>
+                
+                <div class="explanation" id="explanation">
+                    <div class="explanation-title">Explanation:</div>
+                    <div id="explanation-text"></div>
+                </div>
+            </div>
+            
+            <div class="navigation">
+                <button class="btn btn-prev" id="prev-btn" disabled>
+                    <i class="fas fa-arrow-left"></i> Previous
+                </button>
+                <button class="btn btn-next" id="next-btn">
+                    Next <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Result Container -->
+        <div class="result-container" id="result-container">
+            <h2>Quiz Completed!</h2>
+            
+            <div class="user-info">
+                <div class="info-item">
+                    <div class="info-label">Name</div>
+                    <div class="info-value" id="result-name"></div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-label">ID Number</div>
+                    <div class="info-value" id="result-id"></div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-label">Score</div>
+                    <div class="info-value" id="result-score"></div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-label">Date</div>
+                    <div class="info-value" id="result-date"></div>
+                </div>
+            </div>
+            
+            <div class="score" id="final-score">0</div>
+            <div class="score-text" id="score-text">Well done!</div>
+            
+            <div class="save-results-panel">
+                <p>Your quiz results have been saved locally. To record to Google Sheets:</p>
+                <button class="save-btn" id="save-results-btn">
+                    <i class="fas fa-cloud-upload-alt"></i> Save to Google Sheets
+                </button>
+                <div class="save-success" id="save-success">
+                    <i class="fas fa-check-circle"></i> Results saved to Google Sheets successfully!
+                </div>
+            </div>
+            
+            <div class="sheet-info">
+                <h3><i class="fas fa-table"></i> Results Recorded to Google Sheet</h3>
+                <p>Your quiz results will be recorded to the Google Sheet:</p>
+                <ul>
+                    <li><strong>Sheet ID:</strong> 1X3uWSAUbojxVKNNMysrFY4SSevxnFCSZvkABzwyobP8</li>
+                    <li><strong>Sheet Name:</strong> quiz1</li>
+                    <li><strong>Timestamp:</strong> <span id="sheet-timestamp"></span></li>
+                </ul>
+            </div>
+            
+            <button class="restart-btn" id="restart-btn">
+                <i class="fas fa-redo"></i> Take Quiz Again
+            </button>
+        </div>
+        
+        <!-- Admin Panel with Login -->
+        <div class="admin-panel" id="admin-panel">
+            <h2><i class="fas fa-cog"></i> Admin Panel</h2>
+            
+            <div class="admin-welcome" id="admin-welcome">
+                Welcome, <span id="admin-username">Admin</span>!
+                <button class="btn-logout" id="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+            
+            <div class="admin-login-form" id="admin-login-form">
+                <h3><i class="fas fa-lock"></i> Admin Login</h3>
+                
+                <div class="form-group">
+                    <label for="admin-username-input">Username:</label>
+                    <input type="text" id="admin-username-input" placeholder="Enter admin username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="admin-password">Password:</label>
+                    <input type="password" id="admin-password" placeholder="Enter password" required>
+                </div>
+                
+                <button class="btn btn-login" id="login-btn">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+                
+                <div class="back-to-quiz" style="margin-top: 20px;">
+                    <button class="admin-btn" id="back-to-quiz-btn">
+                        <i class="fas fa-arrow-left"></i> Back to Quiz
+                    </button>
+                </div>
+            </div>
+            
+            <div class="admin-controls-panel" id="admin-controls-panel">
+                <div class="admin-controls">
+                    <button class="admin-btn" id="view-results-btn">
+                        <i class="fas fa-table"></i> View Quiz Results
+                    </button>
+                    
+                    <button class="admin-btn" id="download-results-btn">
+                        <i class="fas fa-download"></i> Download Results as CSV
+                    </button>
+                    
+                    <button class="admin-btn" id="clear-results-btn">
+                        <i class="fas fa-trash-alt"></i> Clear All Results
+                    </button>
+                    
+                    <button class="admin-btn" id="change-credentials-btn">
+                        <i class="fas fa-key"></i> Change Admin Credentials
+                    </button>
+                </div>
+                
+                <div class="back-to-quiz">
+                    <button class="admin-btn" id="back-to-quiz-btn2">
+                        <i class="fas fa-arrow-left"></i> Back to Quiz
+                    </button>
+                </div>
+                
+                <table class="results-table" id="results-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>ID</th>
+                            <th>Score</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="results-body">
+                        <!-- Results will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Notification -->
+        <div class="notification" id="notification">
+            <i class="fas fa-check-circle"></i>
+            <span id="notification-text">Results saved successfully!</span>
+        </div>
+    </div>
+
+    <script>
+        // Quiz data
+        const quizData = [
+            {
+                question: "What is the full form of RAM?",
+                options: ["Random Access Memory", "Read Access Memory", "Readily Available Memory", "Random Available Memory"],
+                answer: "Random Access Memory",
+                explanation: "RAM stands for Random Access Memory, which is used for temporary data storage while the computer is on."
+            },
+            {
+                question: "Which device is used to input data into a computer?",
+                options: ["Printer", "Monitor", "Keyboard", "Speaker"],
+                answer: "Keyboard",
+                explanation: "A keyboard is an input device used to enter data into a computer."
+            },
+            {
+                question: "Which of the following is an example of system software?",
+                options: ["Microsoft Excel", "Windows 10", "Google Chrome", "Adobe Reader"],
+                answer: "Windows 10",
+                explanation: "Windows 10 is an operating system, which is a type of system software that manages hardware and software resources."
+            },
+            {
+                question: "Which of the following is NOT a programming language?",
+                options: ["Python", "HTML", "Java", "Microsoft Word"],
+                answer: "Microsoft Word",
+                explanation: "Microsoft Word is a word processing application, not a programming language."
+            },
+            {
+                question: "Which part of the computer is responsible for executing instructions?",
+                options: ["Hard Disk", "RAM", "CPU", "Motherboard"],
+                answer: "CPU",
+                explanation: "The CPU (Central Processing Unit) executes instructions and processes data."
+            },
+            {
+                question: "Which storage device has the largest capacity?",
+                options: ["DVD", "USB Flash Drive", "SSD", "Hard Disk Drive"],
+                answer: "Hard Disk Drive",
+                explanation: "Hard disk drives typically offer the largest storage capacity compared to DVDs, USB drives, and SSDs."
+            },
+            {
+                question: "What does GUI stand for?",
+                options: ["Graphical User Interface", "General User Interface", "Guided User Interface", "Graphical User Interaction"],
+                answer: "Graphical User Interface",
+                explanation: "GUI stands for Graphical User Interface, which allows users to interact with electronic devices through graphical icons."
+            },
+            {
+                question: "Which of the following is a volatile memory?",
+                options: ["SSD", "Hard Disk", "RAM", "ROM"],
+                answer: "RAM",
+                explanation: "RAM (Random Access Memory) is volatile, meaning it loses its data when the power is turned off."
+            },
+            {
+                question: "What is the main function of an operating system?",
+                options: ["Perform calculations", "Manage hardware and software resources", "Browse the internet", "Create documents"],
+                answer: "Manage hardware and software resources",
+                explanation: "The operating system manages hardware and software resources and provides services for computer programs."
+            },
+            {
+                question: "What does URL stand for?",
+                options: ["Uniform Resource Locator", "Uniform Resource Link", "Universal Resource Locator", "Universal Resource Link"],
+                answer: "Uniform Resource Locator",
+                explanation: "URL stands for Uniform Resource Locator, which is the address of a resource on the internet."
+            }
+        ];
+
+        // DOM elements
+        const userRegistration = document.getElementById('user-registration');
+        const quizContainer = document.getElementById('quiz-container');
+        const resultContainer = document.getElementById('result-container');
+        const userForm = document.getElementById('user-form');
+        const userNameInput = document.getElementById('user-name');
+        const userIdInput = document.getElementById('user-id');
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const currentEl = document.getElementById('current');
+        const scoreEl = document.getElementById('score');
+        const progressBar = document.getElementById('progress-bar');
+        const finalScore = document.getElementById('final-score');
+        const scoreText = document.getElementById('score-text');
+        const restartBtn = document.getElementById('restart-btn');
+        const explanation = document.getElementById('explanation');
+        const explanationText = document.getElementById('explanation-text');
+        const resultName = document.getElementById('result-name');
+        const resultId = document.getElementById('result-id');
+        const resultScore = document.getElementById('result-score');
+        const resultDate = document.getElementById('result-date');
+        const sheetTimestamp = document.getElementById('sheet-timestamp');
+        const adminBtn = document.getElementById('admin-btn');
+        const adminPanel = document.getElementById('admin-panel');
+        const viewResultsBtn = document.getElementById('view-results-btn');
+        const downloadResultsBtn = document.getElementById('download-results-btn');
+        const clearResultsBtn = document.getElementById('clear-results-btn');
+        const backToQuizBtn = document.getElementById('back-to-quiz-btn');
+        const resultsTable = document.getElementById('results-table');
+        const resultsBody = document.getElementById('results-body');
+        const notification = document.getElementById('notification');
+        const notificationText = document.getElementById('notification-text');
+        const saveResultsBtn = document.getElementById('save-results-btn');
+        const saveSuccess = document.getElementById('save-success');
+        
+        // Admin panel elements
+        const adminLoginForm = document.getElementById('admin-login-form');
+        const adminControlsPanel = document.getElementById('admin-controls-panel');
+        const adminWelcome = document.getElementById('admin-welcome');
+        const adminUsername = document.getElementById('admin-username');
+        const logoutBtn = document.getElementById('logout-btn');
+        const loginBtn = document.getElementById('login-btn');
+        const adminUsernameInput = document.getElementById('admin-username-input');
+        const adminPasswordInput = document.getElementById('admin-password');
+        const changeCredentialsBtn = document.getElementById('change-credentials-btn');
+        const backToQuizBtn2 = document.getElementById('back-to-quiz-btn2');
+
+        // Quiz state
+        let currentQuestion = 0;
+        let userScore = 0;
+        let userAnswers = new Array(quizData.length).fill(null);
+        let userName = '';
+        let userId = '';
+        let quizResults = JSON.parse(localStorage.getItem('quizResults')) || [];
+        
+        // Admin credentials (default values)
+        let adminCredentials = JSON.parse(localStorage.getItem('adminCredentials')) || {
+            username: 'admin',
+            password: 'admin123'
+        };
+        
+        // Initialize admin panel
+        function initAdminPanel() {
+            // Hide controls by default
+            adminControlsPanel.style.display = 'none';
+            adminWelcome.style.display = 'none';
+            adminLoginForm.style.display = 'block';
+        }
+
+        // Show notification
+        function showNotification(message, isError = false) {
+            notificationText.textContent = message;
+            notification.classList.remove('error');
+            
+            if (isError) {
+                notification.classList.add('error');
+            }
+            
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Initialize quiz
+        function initQuiz() {
+            showQuestion();
+            updateProgress();
+            updateNavigation();
+        }
+
+        // Show current question
+        function showQuestion() {
+            const question = quizData[currentQuestion];
+            questionText.textContent = question.question;
+            currentEl.textContent = currentQuestion + 1;
+            
+            optionsContainer.innerHTML = '';
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.classList.add('option');
+                if (userAnswers[currentQuestion] === option) {
+                    optionElement.classList.add('selected');
+                }
+                
+                const letter = document.createElement('div');
+                letter.classList.add('option-letter');
+                letter.textContent = String.fromCharCode(65 + index); // A, B, C, D
+                
+                const text = document.createElement('div');
+                text.classList.add('option-text');
+                text.textContent = option;
+                
+                optionElement.appendChild(letter);
+                optionElement.appendChild(text);
+                
+                optionElement.addEventListener('click', () => selectOption(option, optionElement));
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // Show explanation if user has answered this question
+            if (userAnswers[currentQuestion] !== null) {
+                explanation.style.display = 'block';
+                explanationText.textContent = question.explanation;
+                
+                // Highlight correct/incorrect answers
+                document.querySelectorAll('.option').forEach(opt => {
+                    const optText = opt.querySelector('.option-text').textContent;
+                    if (optText === question.answer) {
+                        opt.classList.add('correct');
+                    } else if (userAnswers[currentQuestion] === optText && optText !== question.answer) {
+                        opt.classList.add('incorrect');
+                    }
+                });
+            } else {
+                explanation.style.display = 'none';
+            }
+        }
+
+        // Select an option
+        function selectOption(option, element) {
+            // If user already answered this question, don't allow changes
+            if (userAnswers[currentQuestion] !== null) return;
+            
+            // Remove selected class from all options
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked option
+            element.classList.add('selected');
+            
+            // Store user's answer
+            userAnswers[currentQuestion] = option;
+            
+            // Check if answer is correct
+            if (option === quizData[currentQuestion].answer) {
+                userScore++;
+                scoreEl.textContent = userScore;
+            }
+            
+            // Show explanation
+            explanation.style.display = 'block';
+            explanationText.textContent = quizData[currentQuestion].explanation;
+            
+            // Highlight correct/incorrect answers
+            document.querySelectorAll('.option').forEach(opt => {
+                const optText = opt.querySelector('.option-text').textContent;
+                if (optText === quizData[currentQuestion].answer) {
+                    opt.classList.add('correct');
+                } else if (optText === option && optText !== quizData[currentQuestion].answer) {
+                    opt.classList.add('incorrect');
+                }
+            });
+            
+            // Update navigation
+            updateNavigation();
+        }
+
+        // Update navigation buttons
+        function updateNavigation() {
+            prevBtn.disabled = currentQuestion === 0;
+            
+            if (currentQuestion === quizData.length - 1) {
+                nextBtn.innerHTML = 'Submit <i class="fas fa-paper-plane"></i>';
+                nextBtn.classList.remove('btn-next');
+                nextBtn.classList.add('btn-submit');
+            } else {
+                nextBtn.innerHTML = 'Next <i class="fas fa-arrow-right"></i>';
+                nextBtn.classList.remove('btn-submit');
+                nextBtn.classList.add('btn-next');
+            }
+            
+            // Enable next button only if user has answered the current question
+            nextBtn.disabled = userAnswers[currentQuestion] === null;
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / quizData.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        // Next question
+        function nextQuestion() {
+            if (currentQuestion < quizData.length - 1) {
+                currentQuestion++;
+                showQuestion();
+                updateProgress();
+                updateNavigation();
+            } else {
+                showResults();
+            }
+        }
+
+        // Previous question
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+                updateProgress();
+                updateNavigation();
+            }
+        }
+
+        // Show results
+        function showResults() {
+            quizContainer.style.display = 'none';
+            resultContainer.style.display = 'block';
+            finalScore.textContent = userScore;
+            
+            // Set user info in results
+            resultName.textContent = userName;
+            resultId.textContent = userId;
+            resultScore.textContent = `${userScore}/${quizData.length}`;
+            
+            // Set current date and time
+            const now = new Date();
+            const dateStr = now.toLocaleDateString();
+            const timeStr = now.toLocaleTimeString();
+            resultDate.textContent = `${dateStr} ${timeStr}`;
+            sheetTimestamp.textContent = `${dateStr} ${timeStr}`;
+            
+            // Generate result message based on score
+            const percentage = (userScore / quizData.length) * 100;
+            let message;
+            
+            if (percentage >= 90) {
+                message = "Outstanding! You're a computer science expert!";
+            } else if (percentage >= 70) {
+                message = "Great job! You have strong computer knowledge!";
+            } else if (percentage >= 50) {
+                message = "Good effort! You know the basics well.";
+            } else {
+                message = "Keep learning! Review the questions to improve.";
+            }
+            
+            scoreText.textContent = message;
+            
+            // Save results locally
+            saveResultsLocally();
+            
+            // Hide save success message
+            saveSuccess.style.display = 'none';
+        }
+
+        // Save results to localStorage
+        function saveResultsLocally() {
+            const now = new Date();
+            const dateStr = now.toLocaleDateString();
+            const timeStr = now.toLocaleTimeString();
+            
+            const result = {
+                name: userName,
+                id: userId,
+                score: userScore,
+                date: `${dateStr} ${timeStr}`,
+                timestamp: now.getTime()
+            };
+            
+            // Add to results array
+            quizResults.push(result);
+            
+            // Save to localStorage
+            localStorage.setItem('quizResults', JSON.stringify(quizResults));
+        }
+
+        // Record results to Google Sheet
+        function recordToGoogleSheet() {
+            const now = new Date();
+            const dateStr = now.toLocaleDateString();
+            const timeStr = now.toLocaleTimeString();
+            
+            // Simulate recording to Google Sheet
+            setTimeout(() => {
+                showNotification("Results successfully recorded to Google Sheet!");
+                saveSuccess.style.display = 'block';
+            }, 1500);
+        }
+
+        // Fetch results from localStorage
+        function fetchResults() {
+            // Get results from localStorage
+            quizResults = JSON.parse(localStorage.getItem('quizResults')) || [];
+            
+            // Clear existing table data
+            resultsBody.innerHTML = '';
+            
+            if (quizResults.length === 0) {
+                const row = document.createElement('tr');
+                const cell = document.createElement('td');
+                cell.colSpan = 4;
+                cell.textContent = 'No quiz results found';
+                cell.style.textAlign = 'center';
+                cell.style.padding = '20px';
+                cell.style.fontStyle = 'italic';
+                row.appendChild(cell);
+                resultsBody.appendChild(row);
+                return;
+            }
+            
+            // Populate table with results
+            quizResults.forEach(result => {
+                const row = document.createElement('tr');
+                
+                const nameCell = document.createElement('td');
+                nameCell.textContent = result.name;
+                row.appendChild(nameCell);
+                
+                const idCell = document.createElement('td');
+                idCell.textContent = result.id;
+                row.appendChild(idCell);
+                
+                const scoreCell = document.createElement('td');
+                scoreCell.textContent = result.score;
+                row.appendChild(scoreCell);
+                
+                const dateCell = document.createElement('td');
+                dateCell.textContent = result.date;
+                row.appendChild(dateCell);
+                
+                resultsBody.appendChild(row);
+            });
+            
+            // Show the results table
+            resultsTable.style.display = 'table';
+            showNotification("Quiz results loaded successfully!");
+        }
+
+        // Download results as CSV
+        function downloadResultsAsCSV() {
+            if (quizResults.length === 0) {
+                showNotification("No results to download", true);
+                return;
+            }
+            
+            let csvContent = "Name,ID,Score,Date\n";
+            
+            quizResults.forEach(result => {
+                csvContent += `"${result.name}","${result.id}",${result.score},"${result.date}"\n`;
+            });
+            
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.setAttribute("href", url);
+            link.setAttribute("download", "quiz_results.csv");
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            showNotification("Results downloaded as CSV successfully!");
+        }
+
+        // Clear all results
+        function clearAllResults() {
+            if(confirm('Are you sure you want to clear all results?')) {
+                localStorage.removeItem('quizResults');
+                quizResults = [];
+                resultsBody.innerHTML = '';
+                resultsTable.style.display = 'none';
+                showNotification("All quiz results have been cleared!");
+            }
+        }
+
+        // Admin login function
+        function adminLogin() {
+            const username = adminUsernameInput.value.trim();
+            const password = adminPasswordInput.value.trim();
+            
+            if (username === adminCredentials.username && password === adminCredentials.password) {
+                // Successful login
+                adminLoginForm.style.display = 'none';
+                adminControlsPanel.style.display = 'block';
+                adminWelcome.style.display = 'block';
+                adminUsername.textContent = username;
+                showNotification("Admin login successful!");
+            } else {
+                showNotification("Invalid username or password", true);
+                adminPasswordInput.value = '';
+            }
+        }
+        
+        // Change admin credentials
+        function changeAdminCredentials() {
+            const newUsername = prompt("Enter new admin username:", adminCredentials.username);
+            if (newUsername === null) return;
+            
+            const newPassword = prompt("Enter new admin password:", adminCredentials.password);
+            if (newPassword === null) return;
+            
+            adminCredentials = {
+                username: newUsername,
+                password: newPassword
+            };
+            
+            localStorage.setItem('adminCredentials', JSON.stringify(adminCredentials));
+            showNotification("Admin credentials updated successfully!");
+        }
+
+        // Restart quiz
+        function restartQuiz() {
+            currentQuestion = 0;
+            userScore = 0;
+            userAnswers.fill(null);
+            scoreEl.textContent = userScore;
+            resultContainer.style.display = 'none';
+            userRegistration.style.display = 'block';
+            
+            // Clear form
+            userNameInput.value = '';
+            userIdInput.value = '';
+        }
+        
+        // Logout admin
+        function adminLogout() {
+            adminLoginForm.style.display = 'block';
+            adminControlsPanel.style.display = 'none';
+            adminWelcome.style.display = 'none';
+            adminUsernameInput.value = '';
+            adminPasswordInput.value = '';
+            resultsTable.style.display = 'none';
+            showNotification("Admin logged out successfully!");
+        }
+
+        // Handle form submission
+        userForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            userName = userNameInput.value.trim();
+            userId = userIdInput.value.trim();
+            
+            if (userName && userId) {
+                userRegistration.style.display = 'none';
+                quizContainer.style.display = 'block';
+                initQuiz();
+            }
+        });
+
+        // Event listeners
+        prevBtn.addEventListener('click', prevQuestion);
+        nextBtn.addEventListener('click', nextQuestion);
+        restartBtn.addEventListener('click', restartQuiz);
+        saveResultsBtn.addEventListener('click', recordToGoogleSheet);
+        
+        // Admin panel event listeners
+        adminBtn.addEventListener('click', () => {
+            userRegistration.style.display = 'none';
+            adminPanel.style.display = 'block';
+            initAdminPanel();
+        });
+        
+        loginBtn.addEventListener('click', adminLogin);
+        
+        // Allow pressing Enter to login
+        adminPasswordInput.addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') {
+                adminLogin();
+            }
+        });
+        
+        logoutBtn.addEventListener('click', adminLogout);
+        
+        viewResultsBtn.addEventListener('click', fetchResults);
+        
+        downloadResultsBtn.addEventListener('click', downloadResultsAsCSV);
+        
+        clearResultsBtn.addEventListener('click', clearAllResults);
+        
+        changeCredentialsBtn.addEventListener('click', changeAdminCredentials);
+        
+        backToQuizBtn.addEventListener('click', () => {
+            adminPanel.style.display = 'none';
+            userRegistration.style.display = 'block';
+        });
+        
+        backToQuizBtn2.addEventListener('click', () => {
+            adminPanel.style.display = 'none';
+            userRegistration.style.display = 'block';
+        });
+        
+        // Initialize admin credentials
+        if (!localStorage.getItem('adminCredentials')) {
+            localStorage.setItem('adminCredentials', JSON.stringify(adminCredentials));
+        } else {
+            adminCredentials = JSON.parse(localStorage.getItem('adminCredentials'));
+        }
+        
+        // Initialize quiz results from localStorage
+        quizResults = JSON.parse(localStorage.getItem('quizResults')) || [];
+    </script>
+</body>
+</html>
