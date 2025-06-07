@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Computer Science Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .quiz-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            color: #0056b3;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .question {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .question label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .question input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+        .question input[type="text"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        .submit-btn {
+            display: block;
+            width: 150px;
+            padding: 12px;
+            margin: 30px auto 0;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+        }
+        .submit-btn:hover {
+            background-color: #218838;
+        }
+        #results {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #e9ecef;
+            border-radius: 8px;
+            display: none; /* Hidden by default */
+        }
+        #results h2 {
+            color: #0056b3;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .result-item {
+            margin-bottom: 10px;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Computer Science Quiz</h1>
+        <h1>Fill in the blank </h1>
+        <form id="quizForm">
+            <div class="question">
+                <label for="q1">1. CPU is also called ________ of a computer.</label>
+                <input type="text" id="q1" name="q1" placeholder="Type your answer here">
+            </div>
+
+            <div class="question">
+                <label for="q2">2. A computer is a ........... machine among man-made devices.</label>
+                <input type="text" id="q2" name="q2" placeholder="Type your answer here">
+            </div>
+
+            <div class="question">
+                <label for="q3">3. A mouse is a ........... device of a computer .</label>
+                <input type="text" id="q3" name="q3" placeholder="Type your answer here">
+            </div>
+
+            <div class="question">
+                <label for="q4">4. The word computer comes from the Latin word .............</label>
+                <input type="text" id="q4" name="q4" placeholder="Type your answer here">
+            </div>
+
+            <div class="question">
+                <label for="q5">5. MS Excel has ..................... columns.</label>
+                <input type="text" id="q5" name="q5" placeholder="Type your answer here">
+            </div>
+
+            <div class="question">
+                <label for="q6">6. A collection of interconnected computers and devices is called a ________.</label>
+                <input type="text" id="q6" name="q6" placeholder="Type your answer here">
+            </div>
+
+            <div class="question">
+                <label for="q7">7. MS Excel has .................... rows.</label>
+                <input type="text" id="q7" name="q7" placeholder="Type your answer here">
+            </div>
+
+            <div class="question">
+                <label for="q8">8. To create an unordered list in HTML, you use the ________ tag.</label>
+                <input type="text" id="q8" name="q8" placeholder="Type your answer here">
+            </div>
+
+            <div class="question">
+                <label for="q9">9.Excel is made by ..................... company.</label>
+                <input type="text" id="q9" name="q9" placeholder="Type your answer here">
+            </div>
+
+            <div class="question">
+                <label for="q10">10. ............ is used to make the slides of the presentation attractive.</label>
+                <input type="text" id="q10" name="q10" placeholder="Type your answer here">
+            </div>
+
+            <div class="question">
+                <label for="q11">11.Presentations can be presented to a large group with the help of ..............</label>
+                <input type="text" id="q11" name="q11" placeholder="Type your answer here">
+            </div>
+
+            <div class="question">
+                <label for="q12">12.To make the slides of the presentation attractive, we can use the ............ feature in PowerPoint.</label>
+                <input type="text" id="q12" name="q12" placeholder="Type your answer here">
+            </div>
+
+            <div class="question">
+                <label for="q13">13.The extension of the presentation made in Microsoft Power Point 2007 is .............</label>
+                <input type="text" id="q13" name="q13" placeholder="Type your answer here">
+            </div>
+
+            <div class="question">
+                <label for="q14">14.To show the slide, the ............ key is pressed on the keyboard.</label>
+                <input type="text" id="q14" name="q14" placeholder="Type your answer here">
+            </div>
+
+            <div class="question">
+                <label for="q15">15.The .......... tag is used to underline letters.</label>
+                <input type="text" id="q15" name="q15" placeholder="Type your answer here">
+            </div>
+
+            <div class="question">
+                <label for="q16">16.The .......... tag is used to create paragraphs.</label>
+                <input type="text" id="q16" name="q16" placeholder="Type your answer here">
+            </div>
+
+            <div class="question">
+                <label for="q17">17.Heading tags have .......... levels.</label>
+                <input type="text" id="q17" name="q17" placeholder="Type your answer here">
+            </div>
+
+            <div class="question">
+                <label for="q18">18.Word Perfect, Microsoft Word 2007 etc. are ................</label>
+                <input type="text" id="q18" name="q18" placeholder="Type your answer here">
+            </div>
+
+            <div class="question">
+                <label for="q19">19.The ............ tag is used to make words or images move.</label>
+                <input type="text" id="q19" name="q19" placeholder="Type your answer here">
+            </div>
+
+            <div class="question">
+                <label for="q20">20. ................ can be used to prepare many similar but individual documents in a short time.</label>
+                <input type="text" id="q20" name="q20" placeholder="Type your answer here">
+            </div>
+
+            <button type="submit" class="submit-btn">Submit Quiz</button>
+        </form>
+
+        <div id="results">
+            <h2>Quiz Results</h2>
+            <div id="score"></div>
+            <div id="answers"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('quizForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const answers = {
+                q1: 'brain',
+                q2: 'electronic',
+                q3: 'input',
+                q4: 'computare',
+                q5: '16384',
+                q6: 'network',
+                q7: '1048576',
+                q8: 'ul',
+                q9: 'Microsoft',
+                q10: 'Animation', // Changed from Animation to refer to general attractive elements
+                q11: 'Projector', // Assuming this refers to a projector for large groups
+                q12: 'Layout', // Corrected answer for the new Q12 phrasing
+                q13: '.pptx',
+                q14: 'F5',
+                q15: 'u', // Corrected to just 'u' as that's the tag, not '<u>'
+                q16: 'p', // Corrected to just 'p'
+                q17: '6',
+                q18: 'Word processing softwares',
+                q19: 'marquee', // Corrected to just 'marquee'
+                q20: 'Mail merge'
+            };
+
+            let score = 0;
+            const totalQuestions = Object.keys(answers).length;
+            const resultsDiv = document.getElementById('answers');
+            resultsDiv.innerHTML = ''; // Clear previous results
+
+            for (const q in answers) {
+                const userAnswer = document.getElementById(q).value.trim().toLowerCase();
+                const correctAnswer = answers[q].toLowerCase();
+                const questionNumber = q.replace('q', '');
+
+                const resultItem = document.createElement('p');
+                resultItem.classList.add('result-item');
+
+                if (userAnswer === correctAnswer) {
+                    score++;
+                    resultItem.innerHTML = `Question ${questionNumber}: Your answer "<span class="correct">${userAnswer}</span>" is correct.`;
+                } else {
+                    resultItem.innerHTML = `Question ${questionNumber}: Your answer "<span class="incorrect">${userAnswer}</span>" is incorrect. The correct answer was "<span class="correct">${correctAnswer}</span>".`;
+                }
+                resultsDiv.appendChild(resultItem);
+            }
+
+            document.getElementById('score').innerHTML = `<p>You scored ${score} out of ${totalQuestions}!</p>`;
+            document.getElementById('results').style.display = 'block'; // Show results
+        });
+    </script>
+</body>
+</html>
