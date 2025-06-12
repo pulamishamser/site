@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shamser Social | Share Your Moments</title>
+    <title>Share Your Moments</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -305,7 +305,7 @@
     <div class="container">
         <header>
             <div class="logo">
-                <i class="fas fa-camera-retro"></i> Shamser<span>Social</span>
+                <i class="fas fa-camera-retro"></i>Share in social media  <span>Shamser.info.np</span>
             </div>
             <p class="tagline">Share your moments with the world</p>
         </header>
@@ -348,7 +348,7 @@
         </div>
         
         <footer>
-            <p>© 2023 Shamser Social | Share your moments with the world</p>
+            <p>© 2023 Shamser.info.np | Share your moments with the world</p>
         </footer>
     </div>
 
@@ -362,6 +362,9 @@
         const publishBtn = document.getElementById('publishBtn');
         const postFeed = document.getElementById('postFeed');
         
+        // Store posts in an array
+        let posts = [];
+        
         // Event Listeners
         uploadArea.addEventListener('click', () => imageUpload.click());
         imageUpload.addEventListener('change', handleImageUpload);
@@ -371,6 +374,12 @@
         function handleImageUpload(e) {
             const file = e.target.files[0];
             if (file) {
+                // Check file size (max 5MB)
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('File size exceeds 5MB limit. Please choose a smaller file.');
+                    return;
+                }
+                
                 const reader = new FileReader();
                 
                 reader.onload = function(event) {
@@ -397,38 +406,24 @@
                 return;
             }
             
-            // Create new post element
-            const postElement = document.createElement('div');
-            postElement.className = 'post-card';
-            postElement.innerHTML = `
-                <img src="${imageSrc}" alt="Post image" class="post-image">
-                <div class="post-content">
-                    <p class="post-caption">${caption}</p>
-                    <div class="post-meta">
-                        <div class="like-btn" onclick="toggleLike(this)">
-                            <i class="far fa-heart"></i>
-                        </div>
-                        <div class="share-options">
-                            <div class="share-icon facebook" onclick="shareToFacebook('${imageSrc}', '${caption}')">
-                                <i class="fab fa-facebook-f"></i>
-                            </div>
-                            <div class="share-icon twitter" onclick="shareToTwitter('${caption}')">
-                                <i class="fab fa-twitter"></i>
-                            </div>
-                            <div class="share-icon instagram">
-                                <i class="fab fa-instagram"></i>
-                            </div>
-                            <div class="share-icon whatsapp" onclick="shareToWhatsApp('${imageSrc}', '${caption}')">
-                                <i class="fab fa-whatsapp"></i>
-                            </div>
-                        </div>
-                        <span class="post-time">Just now</span>
-                    </div>
-                </div>
-            `;
+            // Create new post object
+            const newPost = {
+                id: Date.now(),
+                image: imageSrc,
+                caption: caption,
+                time: 'Just now',
+                likes: 0,
+                liked: false
+            };
             
-            // Add to the top of the feed
-            postFeed.insertBefore(postElement, postFeed.firstChild);
+            // Add to posts array
+            posts.unshift(newPost);
+            
+            // Save to localStorage
+            savePostsToStorage();
+            
+            // Update the feed
+            updateFeed();
             
             // Reset form
             imagePreview.src = '';
@@ -439,65 +434,38 @@
             alert('Your post has been published successfully!');
         }
         
-        // Toggle like button
-        function toggleLike(btn) {
-            const icon = btn.querySelector('i');
-            if (icon.classList.contains('far')) {
-                icon.classList.remove('far');
-                icon.classList.add('fas', 'liked');
-                btn.classList.add('liked');
-            } else {
-                icon.classList.remove('fas', 'liked');
-                icon.classList.add('far');
-                btn.classList.remove('liked');
+        // Save posts to localStorage
+        function savePostsToStorage() {
+            localStorage.setItem('socialMediaPosts', JSON.stringify(posts));
+        }
+        
+        // Load posts from localStorage
+        function loadPostsFromStorage() {
+            const savedPosts = localStorage.getItem('socialMediaPosts');
+            if (savedPosts) {
+                posts = JSON.parse(savedPosts);
+                updateFeed();
             }
         }
         
-        // Social sharing functions
-        function shareToFacebook(image, caption) {
-            const url = encodeURIComponent(window.location.href);
-            const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
-            window.open(shareUrl, '_blank', 'width=600,height=400');
-        }
-        
-        function shareToTwitter(caption) {
-            const text = encodeURIComponent(caption);
-            const url = encodeURIComponent(window.location.href);
-            const shareUrl = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
-            window.open(shareUrl, '_blank', 'width=600,height=400');
-        }
-        
-        function shareToWhatsApp(image, caption) {
-            const text = encodeURIComponent(`${caption} - Check out this post on Shamser!`);
-            const shareUrl = `https://wa.me/?text=${text}`;
-            window.open(shareUrl, '_blank', 'width=600,height=400');
-        }
-        
-        // Initialize with some sample posts
-        window.onload = function() {
-            const samplePosts = [
-                {
-                    image: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80',
-                    caption: 'Beautiful sunrise over the mountains today! Nature never ceases to amaze me.',
-                    time: '2 hours ago'
-                },
-                {
-                    image: 'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80',
-                    caption: 'Exploring new places and finding hidden gems in the city. Adventure awaits around every corner!',
-                    time: '5 hours ago'
-                }
-            ];
+        // Update the feed with current posts
+        function updateFeed() {
+            // Clear the feed
+            postFeed.innerHTML = '';
             
-            samplePosts.forEach(post => {
+            // Add each post to the feed
+            posts.forEach(post => {
                 const postElement = document.createElement('div');
                 postElement.className = 'post-card';
+                postElement.dataset.id = post.id;
                 postElement.innerHTML = `
                     <img src="${post.image}" alt="Post image" class="post-image">
                     <div class="post-content">
                         <p class="post-caption">${post.caption}</p>
                         <div class="post-meta">
-                            <div class="like-btn" onclick="toggleLike(this)">
-                                <i class="far fa-heart"></i>
+                            <div class="like-btn" onclick="toggleLike(${post.id})">
+                                <i class="${post.liked ? 'fas' : 'far'} fa-heart"></i>
+                                <span class="like-count">${post.likes}</span>
                             </div>
                             <div class="share-options">
                                 <div class="share-icon facebook" onclick="shareToFacebook('${post.image}', '${post.caption}')">
@@ -506,7 +474,7 @@
                                 <div class="share-icon twitter" onclick="shareToTwitter('${post.caption}')">
                                     <i class="fab fa-twitter"></i>
                                 </div>
-                                <div class="share-icon instagram">
+                                <div class="share-icon instagram" onclick="shareToInstagram('${post.image}', '${post.caption}')">
                                     <i class="fab fa-instagram"></i>
                                 </div>
                                 <div class="share-icon whatsapp" onclick="shareToWhatsApp('${post.image}', '${post.caption}')">
@@ -519,6 +487,110 @@
                 `;
                 postFeed.appendChild(postElement);
             });
+        }
+        
+        // Toggle like button
+        function toggleLike(postId) {
+            const post = posts.find(p => p.id === postId);
+            if (post) {
+                post.liked = !post.liked;
+                post.likes = post.liked ? post.likes + 1 : post.likes - 1;
+                savePostsToStorage();
+                updateFeed();
+            }
+        }
+        
+        // Social sharing functions
+        function shareToFacebook(image, caption) {
+            try {
+                // For web sharing
+                const url = encodeURIComponent(window.location.href);
+                const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${encodeURIComponent(caption)}`;
+                window.open(shareUrl, '_blank', 'width=600,height=400');
+            } catch (e) {
+                console.error('Error sharing to Facebook:', e);
+                alert('Could not share to Facebook. Please try again.');
+            }
+        }
+        
+        function shareToTwitter(caption) {
+            try {
+                const text = encodeURIComponent(caption);
+                const url = encodeURIComponent(window.location.href);
+                const shareUrl = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
+                window.open(shareUrl, '_blank', 'width=600,height=400');
+            } catch (e) {
+                console.error('Error sharing to Twitter:', e);
+                alert('Could not share to Twitter. Please try again.');
+            }
+        }
+        
+        function shareToInstagram(image, caption) {
+            try {
+                // Note: Instagram doesn't have a direct sharing API for web
+                // This would typically open the app if on mobile or direct to the website
+                alert('To share on Instagram, please save the image and share it through the Instagram app.');
+            } catch (e) {
+                console.error('Error sharing to Instagram:', e);
+                alert('Could not share to Instagram. Please try again.');
+            }
+        }
+        
+        function shareToWhatsApp(image, caption) {
+            try {
+                const text = encodeURIComponent(`${caption}\n\nCheck out this post on Shamser!`);
+                const shareUrl = `https://wa.me/?text=${text}`;
+                window.open(shareUrl, '_blank', 'width=600,height=400');
+            } catch (e) {
+                console.error('Error sharing to WhatsApp:', e);
+                alert('Could not share to WhatsApp. Please try again.');
+            }
+        }
+        
+        // Format time for posts
+        function formatTime(timestamp) {
+            const now = new Date();
+            const postTime = new Date(timestamp);
+            const diff = now - postTime;
+            
+            const seconds = Math.floor(diff / 1000);
+            const minutes = Math.floor(seconds / 60);
+            const hours = Math.floor(minutes / 60);
+            const days = Math.floor(hours / 24);
+            
+            if (days > 0) return `${days} day${days > 1 ? 's' : ''} ago`;
+            if (hours > 0) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+            if (minutes > 0) return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+            return 'Just now';
+        }
+        
+        // Initialize with sample posts if none exist
+        window.onload = function() {
+            loadPostsFromStorage();
+            
+            // If no posts in storage, add sample posts
+            if (posts.length === 0) {
+                posts = [
+                    {
+                        id: 1,
+                        image: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80',
+                        caption: 'Beautiful sunrise over the mountains today! Nature never ceases to amaze me.',
+                        time: '2 hours ago',
+                        likes: 24,
+                        liked: false
+                    },
+                    {
+                        id: 2,
+                        image: 'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80',
+                        caption: 'Exploring new places and finding hidden gems in the city. Adventure awaits around every corner!',
+                        time: '5 hours ago',
+                        likes: 15,
+                        liked: false
+                    }
+                ];
+                savePostsToStorage();
+                updateFeed();
+            }
         };
     </script>
 </body>
