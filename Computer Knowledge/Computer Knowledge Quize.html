@@ -70,13 +70,6 @@
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163260228-1"></script>
 
-
-
-
-
-
-
-
     
     <style>
         * {
@@ -583,6 +576,30 @@
             background: #d32f2f;
         }
         
+        .auto-save-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e3f2fd;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+        
+        .auto-save-indicator.saving {
+            color: #1a73e8;
+        }
+        
+        .auto-save-indicator.success {
+            color: #0f9d58;
+        }
+        
+        .auto-save-indicator.error {
+            color: #d93025;
+        }
+        
         @media (max-width: 768px) {
             .options-container {
                 grid-template-columns: 1fr;
@@ -654,7 +671,7 @@
     </style>
 </head>
 <body>
-    <div class="container">
+      <div class="container">
         <header>
             <h1><i class="fas fa-laptop-code"></i> Computer Science Quiz</h1>
                 <h1><span><i class="fa-solid fa-globe"></i> shamser.info.np</span></h1>
@@ -677,11 +694,6 @@
             
             
             
-            
-            
-            
-            
-            
             <form class="user-form" id="user-form">
                 <div class="form-group">
                     <label for="user-name"><i class="fas fa-user"></i> Full Name:</label>
@@ -697,7 +709,7 @@
                     <i class="fas fa-play-circle"></i> Start Quiz
                 </button>
             </form>
-                  <a href="https://shamser.info.np/Computer Knowledge/Computer Science Quiz Fill.html">fill in the blank Quiz</a>  
+            <a href="https://shamser.info.np/Computer Knowledge/Computer Science Quiz Fill.html">fill in the blank Quiz</a>  
             <div class="admin-controls" style="margin-top: 20px;">
                 <button class="admin-btn" id="admin-btn">
                     <i class="fas fa-cog"></i> Admin Panel
@@ -769,12 +781,10 @@
             <div class="score-text" id="score-text">Well done!</div>
             
             <div class="save-results-panel">
-                <p>Your quiz results have been saved locally. </p>
-                <button class="save-btn" id="save-results-btn">
-                    <i class="fas fa-cloud-upload-alt"></i> Save Records
-                </button>
-                <div class="save-success" id="save-success">
-                    <i class="fas fa-check-circle"></i> Results saved successfully!
+                <p>Your quiz results are being automatically saved to database.</p>
+                <div class="auto-save-indicator" id="auto-save-indicator">
+                    <i class="fas fa-sync-alt fa-spin"></i>
+                    <span>Saving results to DB...</span>
                 </div>
             </div>
             
@@ -782,7 +792,6 @@
                 <h3><i class="fas fa-table"></i> Results Recorded</h3>
                 <p>Your quiz results will be recorded:</p>
                 <ul>
-
                     <li><strong>Date & Time:</strong> <span id="sheet-timestamp"></span></li>
                 </ul>
             </div>
@@ -876,7 +885,7 @@
     </div>
 
     <script>
-               // Quiz data
+        // Quiz data
         const quizData = [
             {
                 question: "What is the full form of RAM?",
@@ -1179,6 +1188,7 @@
                 explanation: "A bit is short for binary digit, the smallest unit of data in computing."
             }
         ];
+        
         // DOM elements
         const userRegistration = document.getElementById('user-registration');
         const quizContainer = document.getElementById('quiz-container');
@@ -1213,8 +1223,7 @@
         const resultsBody = document.getElementById('results-body');
         const notification = document.getElementById('notification');
         const notificationText = document.getElementById('notification-text');
-        const saveResultsBtn = document.getElementById('save-results-btn');
-        const saveSuccess = document.getElementById('save-success');
+        const autoSaveIndicator = document.getElementById('auto-save-indicator');
         
         // Admin panel elements
         const adminLoginForm = document.getElementById('admin-login-form');
@@ -1444,8 +1453,8 @@
             // Save results locally
             saveResultsLocally();
             
-            // Hide save success message
-            saveSuccess.style.display = 'none';
+            // Automatically save to Google Sheet
+            saveToGoogleSheet();
         }
 
         // Save results to localStorage
@@ -1469,38 +1478,46 @@
             localStorage.setItem('quizResults', JSON.stringify(quizResults));
         }
 
-
-   // Record results to Google Sheet
-function recordToGoogleSheet() {
-    const now = new Date();
-    const dateStr = now.toLocaleDateString();
-    const timeStr = now.toLocaleTimeString();
-    
-    const data = {
-        name: userName,
-        id: userId,
-        score: userScore,
-        date: `${dateStr} ${timeStr}`
-    };
-    
-    // Send data to Google Apps Script web app
-    fetch('https://script.google.com/macros/s/AKfycbwzl78le-dWuY9KiA5yvleP1ViNF3R8AdOr3sCKo5JZO0PgED3xlFxpL3jUlMeI3yVG/exec', {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data)
-    })
-    .then(() => {
-        showNotification("Results successfully recorded!");
-        saveSuccess.style.display = 'block';
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        showNotification("Failed to save", true);
-    });
-}
+        // Save to Google Sheet
+        function saveToGoogleSheet() {
+            // Update auto-save indicator
+            autoSaveIndicator.className = 'auto-save-indicator saving';
+            autoSaveIndicator.innerHTML = '<i class="fas fa-sync-alt fa-spin"></i> Saving results to database...';
+            
+            const now = new Date();
+            const dateStr = now.toLocaleDateString();
+            const timeStr = now.toLocaleTimeString();
+            
+            const data = {
+                name: userName,
+                id: userId,
+                score: userScore,
+                date: `${dateStr} ${timeStr}`
+            };
+            
+            // Send data to Google Apps Script web app
+            fetch('https://script.google.com/macros/s/AKfycbwzl78le-dWuY9KiA5yvleP1ViNF3R8AdOr3sCKo5JZO0PgED3xlFxpL3jUlMeI3yVG/exec', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(() => {
+                // Update UI to show success
+                autoSaveIndicator.className = 'auto-save-indicator success';
+                autoSaveIndicator.innerHTML = '<i class="fas fa-check-circle"></i> Results saved to database!';
+                showNotification("Results successfully recorded!");
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Update UI to show error
+                autoSaveIndicator.className = 'auto-save-indicator error';
+                autoSaveIndicator.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Failed to save. Please try again later.';
+                showNotification("Failed to save", true);
+            });
+        }
 
         // Fetch results from localStorage
         function fetchResults() {
@@ -1666,7 +1683,6 @@ function recordToGoogleSheet() {
         prevBtn.addEventListener('click', prevQuestion);
         nextBtn.addEventListener('click', nextQuestion);
         restartBtn.addEventListener('click', restartQuiz);
-        saveResultsBtn.addEventListener('click', recordToGoogleSheet);
         
         // Admin panel event listeners
         adminBtn.addEventListener('click', () => {
