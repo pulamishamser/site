@@ -1,153 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
-  <!--====== Design by foolishdeveloper.com =====-->
-  
-  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Social Media</title>
     <!--Google Fonts-->
-<link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet" type="text/css" />	
+    <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet" type="text/css" />	
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-<!----------Close Button-------------->
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="style.css" />
-
     <!-- Boxicons CSS -->
-    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"  rel="stylesheet" />
- <!--Stylesheets-->
-<style media="screen">
- *,
-*:before,
-*:after{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-body{
-    background-color: #0855ae;
-}
-.popup{
-    padding: 30px 40px;
-    position: absolute;
-    transform: translate(-50%,-50%);
-    left: 50%;
-    top: 70%;
-    border-radius: 8px;
-    font-family: "Poppins",sans-serif;
-    display: none; 
-    text-align: center;
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+    <style>
+        *,
+        *:before,
+        *:after{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: #0855ae;
+            font-family: "Poppins", sans-serif;
+        }
+        .popup{
+            background-color: white;
+            padding: 20px;
+            position: fixed;
+            transform: translate(-50%, -50%);
+            left: 50%;
+            top: 50%;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            display: none; 
+            text-align: center;
+            z-index: 1000;
+        }
+        .popup button#close{
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            background-color: transparent;
+            font-size: 24px;
+            color: #0855ae;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+        .popup .image {
+            margin-top: 20px;
+        }
+        .popup .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #0855ae;
+        }
+        .popup .text-data {
+            margin: 15px 0;
+        }
+        .popup .name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        .popup .job {
+            font-size: 14px;
+            color: #666;
+            display: block;
+            margin-top: 5px;
+        }
+        .popup .media-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .popup .media-buttons .link {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            text-decoration: none;
+        }
+        .popup .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .popup .buttons .button {
+            background-color: #0855ae;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 15px;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .popup .buttons .button a {
+            color: white;
+            text-decoration: none;
+        }
+        .popup .analytics {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+            color: #666;
+            font-size: 14px;
+        }
+        .popup .analytics .data {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .fb-like {
+            margin: 15px 0;
+        }
 
-}
-.popup button{
-    display: block;
-    margin:  0 0 20px auto;
-    background-color: transparent;
-    font-size: 32px;
-    color: #ffffff;
-	
-		border-radius: 100%;
-		width: 90px;
-		height: 30px;
-    border: none;
-    outline: none;
-    cursor: pointer;
-
-}
-.popup p{
-    font-size: 10px;
-    text-align: justify;
-    margin: 10px 0;
-    line-height: 20px;
-     background-color: #0f72e5;
-}
-a{
-        font-size: 12px;
-    display: relative;
-    width: 140px;
-    position: relative;
-    margin: 8px auto;
-    text-align: center;
-   
-    border-radius: 20px;
-    color: #ffffff;
-    text-decoration: none;
-    padding: 8px 0;
-    }
+        @media (max-width: 480px) {
+            .popup {
+                width: 95%;
+                padding: 15px;
+            }
+            .popup .buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .popup .buttons .button {
+                width: 100%;
+                max-width: 200px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="popup">
- <div class="profile-card">
-      <div class="image">
-<button id="close">&times;</button>
-        <img src="https://shamser.info.np/profile/pic1.png" alt="" class="profile-img" />
-      </div>
-	 <br> <br>
-      <div class="text-data">
-        <span class="name"></span>
-	      <p></p>
-	     <span class="name">shamser pulami</span>     
-        <span class="job">Teacher, Web developer, Blogger</span>
-	      
-      </div>
+        <button id="close">&times;</button>
+        <div class="profile-card">
+            <div class="image">
+                <img src="https://shamser.info.np/profile/pic1.png" alt="" class="profile-img" />
+            </div>
+            
+            <div class="text-data">
+                <span class="name">shamser pulami</span>     
+                <span class="job">Teacher, Web developer, Blogger</span>
+            </div>
 
-
-
-      <div class="media-buttons">
-        <a href="https://www.facebook.com/share/p/16MJRRdfwv/" style="background: #4267b2" class="link">
-          <i class="bx bxl-facebook"></i>
-        </a>
-        <a href="https://twitter.com/shamser_info" style="background: #1da1f2" class="link">
-          <i class="bx bxl-twitter"></i>
-        </a>
-        <a href="https://lauro-media.blogspot.com/" style="background: #e1306c" class="link">
-          <i class="bx bxl-blogger"></i>
-        </a>
-        <a href="https://www.youtube.com/channel/UCfGP1pKJErzg10EjftyC3lg?sub_confirmation=1" style="background: #ff0000" class="link">
-          <i class="bx bxl-youtube"></i>
-        </a>
-      </div>
-   <div class="buttons">                                        
-<button class="button" style=" color:#fff;" ><a href="https://www.youtube.com/channel/UCfGP1pKJErzg10EjftyC3lg?sub_confirmation=1"> Subscribe</a></button>
- <button class="button" style="color:#fff;" ><a href="https://form.jotform.com/shamserpulami500/shamser"> Email Message</button></a>
-     </div> 
-      <div class="buttons">                                       
-<button class="button" style=" color:#fff;" >
-          <a href="https://shamser.info.np/Contact_Form.html">Email Contact</a></button>
-   <button class="button" style=" color:#fff;" ><i class="fa fa-phone"></i> <a href="tel:9817826200">Call Now</a></button>   
-    </div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v12.0&appId=549049902853450&autoLogAppEvents=1" nonce="D2dadsKQ"></script>
-<div class="fb-like" data-href="https://www.youtube.com/channel/UCfGP1pKJErzg10EjftyC3lg?sub_confirmation=1" data-width=" data-layout="button_count data-action="like" data-size="small" data-share="true" ></div>
-      <div class="analytics">
-        <div class="data">
-            <i class="fa fa-eye" aria-hidden="true"></i>
-          <span class="number">12k</span>
+            <div class="media-buttons">
+                <a href="https://www.facebook.com/share/p/16MJRRdfwv/" style="background: #4267b2" class="link">
+                    <i class="bx bxl-facebook"></i>
+                </a>
+                <a href="https://twitter.com/shamser_info" style="background: #1da1f2" class="link">
+                    <i class="bx bxl-twitter"></i>
+                </a>
+                <a href="https://lauro-media.blogspot.com/" style="background: #e1306c" class="link">
+                    <i class="bx bxl-blogger"></i>
+                </a>
+                <a href="https://www.youtube.com/channel/UCfGP1pKJErzg10EjftyC3lg?sub_confirmation=1" style="background: #ff0000" class="link">
+                    <i class="bx bxl-youtube"></i>
+                </a>
+            </div>
+            
+            <div class="buttons">                                        
+                <button class="button">
+                    <a href="https://www.youtube.com/channel/UCfGP1pKJErzg10EjftyC3lg?sub_confirmation=1">Subscribe</a>
+                </button>
+                <button class="button">
+                    <a href="mailto:shamserpulami500@gmail.com">Email Message</a>
+                </button>
+            </div> 
+            
+            <div class="buttons">                                       
+                <button class="button">
+                    <a href="https://shamser.info.np/Contact_Form.html">Email Contact</a>
+                </button>
+                <button class="button">
+                    <i class="fa fa-phone"></i> <a href="tel:9817826200">Call Now</a>
+                </button>   
+            </div>
+            
+            <div class="fb-like" data-href="https://www.youtube.com/channel/UCfGP1pKJErzg10EjftyC3lg?sub_confirmation=1" data-width="" data-layout="button_count" data-action="like" data-size="small" data-share="true"></div>
+            
+            <div class="analytics">
+                <div class="data">
+                    <i class="fa fa-eye" aria-hidden="true"></i>
+                    <span class="number">12k</span>
+                </div>
+                <div class="data">
+                    <i class="fa fa-bell" aria-hidden="true"></i>
+                    <span class="number">2k</span>
+                </div>
+            </div>
         </div>
+    </div>
 
-        <div class="data">
-             <i class="fa fa-bell" aria-hidden="true"></i>
-          <span class="number">2k</span>
-	      </div>
-          
-    <!--Script-->
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v12.0&appId=549049902853450&autoLogAppEvents=1" nonce="D2dadsKQ"></script>
+    
     <script type="text/javascript">
-window.addEventListener("load", function(){
-    setTimeout(
-        function open(event){
-            document.querySelector(".popup").style.display = "block";
-        },
-        1000 
-    )
-});
+        window.addEventListener("load", function(){
+            setTimeout(
+                function open(event){
+                    document.querySelector(".popup").style.display = "block";
+                },
+                1000 
+            )
+        });
 
-
-document.querySelector("#close").addEventListener("click", function(){
-    document.querySelector(".popup").style.display = "none";
-
-});
-
+        document.querySelector("#close").addEventListener("click", function(){
+            document.querySelector(".popup").style.display = "none";
+        });
     </script>
 </body>
 </html>
