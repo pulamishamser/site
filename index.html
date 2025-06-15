@@ -1815,16 +1815,17 @@ data-size="small" >
   <!-- Trigger the modal with a button 
   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal55">Share your contents</button>
 -->
-
-  <style>
+ <style>
     :root {
       --primary-color: #dc3545;
+      --primary-dark: #a71d2a;
       --secondary-color: #f8f9fa;
       --accent-color: #28a745;
       --text-dark: #212529;
       --text-light: #6c757d;
       --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       --border-radius: 10px;
+      --transition: all 0.3s ease;
     }
     
     * {
@@ -1839,6 +1840,7 @@ data-size="small" >
       color: var(--text-dark);
       background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
       min-height: 100vh;
+      padding-bottom: 40px;
     }
     
     .container {
@@ -1848,20 +1850,22 @@ data-size="small" >
     }
     
     header {
-      background: linear-gradient(135deg, var(--primary-color), #c82333);
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
       color: white;
-      padding: 1.5rem 0;
+      padding: 1.8rem 0;
       text-align: center;
       box-shadow: var(--shadow);
       position: relative;
       border-radius: 0 0 var(--border-radius) var(--border-radius);
+      margin-bottom: 30px;
     }
     
     .nepali-text {
       font-family: 'Preeti', 'Mangal', 'Kalimati', sans-serif;
-      font-size: 2.2rem;
-      margin-bottom: 0.5rem;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+      font-size: 2.4rem;
+      margin-bottom: 0.8rem;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+      letter-spacing: 1px;
     }
     
     .english-text {
@@ -1874,14 +1878,14 @@ data-size="small" >
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 15px;
-      font-size: 0.9rem;
-      opacity: 0.9;
+      font-size: 0.95rem;
+      opacity: 0.92;
     }
     
     .news-container {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 25px;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 28px;
       margin: 2rem 0;
     }
     
@@ -1890,41 +1894,47 @@ data-size="small" >
       border-radius: var(--border-radius);
       overflow: hidden;
       box-shadow: var(--shadow);
-      transition: transform 0.3s ease;
+      transition: var(--transition);
       border: 1px solid #eaeaea;
     }
     
     .news-section:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      transform: translateY(-7px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
     }
     
     .news-source-title {
       background: linear-gradient(to right, var(--primary-color), #e83e8c);
       color: white;
-      padding: 12px 15px;
+      padding: 14px 18px;
       margin: 0;
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       font-weight: 600;
       display: flex;
       align-items: center;
+      position: relative;
     }
     
     .news-source-title::before {
       content: "•";
-      margin-right: 10px;
-      font-size: 1.5rem;
+      margin-right: 12px;
+      font-size: 1.6rem;
     }
     
     .news-list {
-      padding: 15px;
+      padding: 18px;
     }
     
     .news-item {
       display: flex;
-      gap: 15px;
-      padding: 15px 0;
+      gap: 16px;
+      padding: 18px 0;
       border-bottom: 1px solid #f0f0f0;
+      transition: var(--transition);
+    }
+    
+    .news-item:hover {
+      background-color: #fcfcfc;
     }
     
     .news-item:last-child {
@@ -1932,17 +1942,19 @@ data-size="small" >
     }
     
     .news-item img {
-      width: 100px;
-      height: 70px;
+      width: 110px;
+      height: 80px;
       object-fit: cover;
-      border-radius: 5px;
+      border-radius: 6px;
       border: 1px solid #eee;
       background: linear-gradient(120deg, #f5f5f5 0%, #e0e0e0 100%);
-      transition: transform 0.3s ease;
+      transition: var(--transition);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
     
     .news-item:hover img {
-      transform: scale(1.05);
+      transform: scale(1.06);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
     
     .news-content {
@@ -1952,40 +1964,42 @@ data-size="small" >
     .news-content a {
       color: var(--text-dark);
       text-decoration: none;
-      font-weight: 600;
-      font-size: 1.05rem;
+      font-weight: 700;
+      font-size: 1.1rem;
       display: block;
-      margin-bottom: 5px;
+      margin-bottom: 8px;
       transition: color 0.2s;
+      line-height: 1.4;
     }
     
     .news-content a:hover {
       color: var(--primary-color);
+      text-decoration: underline;
     }
     
     .news-description {
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       color: var(--text-light);
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       line-height: 1.5;
     }
     
     .news-meta {
       display: flex;
       justify-content: space-between;
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       color: var(--text-light);
     }
     
     .news-date {
       font-style: italic;
-      color: #888;
+      color: #777;
     }
     
     .loading, .error-message {
       text-align: center;
       padding: 2rem;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       color: #666;
     }
     
@@ -1993,63 +2007,80 @@ data-size="small" >
       background: var(--primary-color);
       color: white;
       border: none;
-      padding: 8px 15px;
-      border-radius: 4px;
+      padding: 9px 16px;
+      border-radius: 5px;
       cursor: pointer;
-      margin-top: 10px;
+      margin-top: 12px;
       font-weight: 500;
-      transition: background 0.3s;
+      transition: var(--transition);
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      display: inline-block;
     }
     
     .refresh-btn:hover {
-      background: #c82333;
+      background: var(--primary-dark);
       transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
     }
     
     .language-toggle {
       position: absolute;
       top: 20px;
       right: 20px;
-      background: rgba(255, 255, 255, 0.2);
-      border: 1px solid rgba(255,255,255,0.3);
+      background: rgba(255, 255, 255, 0.25);
+      border: 1px solid rgba(255,255,255,0.35);
       color: white;
-      padding: 6px 12px;
-      border-radius: 4px;
+      padding: 7px 14px;
+      border-radius: 5px;
       cursor: pointer;
-      font-weight: 500;
-      transition: all 0.3s ease;
+      font-weight: 600;
+      transition: var(--transition);
+      font-size: 0.9rem;
     }
     
     .language-toggle:hover {
-      background: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.35);
+      transform: translateY(-2px);
     }
     
     footer {
       background: var(--text-dark);
       color: white;
       text-align: center;
-      padding: 1.5rem 0;
-      margin-top: 2rem;
-      font-size: 0.9rem;
+      padding: 2rem 0;
+      margin-top: 3rem;
+      font-size: 0.95rem;
       border-radius: var(--border-radius) var(--border-radius) 0 0;
     }
     
     .source-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-      gap: 10px;
-      max-width: 800px;
-      margin: 20px auto;
-      padding: 0 15px;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 12px;
+      max-width: 1000px;
+      margin: 25px auto;
+      padding: 0 20px;
     }
     
     .source-badge {
-      background: rgba(255,255,255,0.1);
-      padding: 8px;
-      border-radius: 4px;
+      background: rgba(255,255,255,0.12);
+      padding: 10px 8px;
+      border-radius: 6px;
       text-align: center;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
+      transition: var(--transition);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .source-badge:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-3px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .footer-text {
+      margin-top: 15px;
+      opacity: 0.85;
     }
     
     @media (max-width: 768px) {
@@ -2058,13 +2089,13 @@ data-size="small" >
       }
       
       .nepali-text {
-        font-size: 1.8rem;
+        font-size: 1.9rem;
       }
       
       .header-sub {
         flex-direction: column;
         align-items: center;
-        gap: 5px;
+        gap: 8px;
       }
       
       .news-item {
@@ -2073,11 +2104,30 @@ data-size="small" >
       
       .news-item img {
         width: 100%;
-        height: 180px;
+        height: 200px;
+      }
+      
+      .source-grid {
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
       }
     }
+    
+    /* Animation for news items */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .news-item {
+      animation: fadeIn 0.4s ease-out;
+    }
+    
+    .news-section {
+      animation: fadeIn 0.5s ease-out;
+    }
   </style>
-<!------------script-----Online News---Section------नेपाली ताजा समाचार-------------------------------------->
+</head>
+<body>
   <header>
     <button class="language-toggle english-text" id="language-toggle">नेपालीमा स्विच गर्नुहोस्</button>
     <div class="container">
@@ -2104,8 +2154,13 @@ data-size="small" >
       <div class="source-badge">Bahrakhari</div>
       <div class="source-badge">Nayapatrika</div>
       <div class="source-badge">Annapurna Post</div>
+      <div class="source-badge">Gorkhapatra</div>
+      <div class="source-badge">Education Pati</div>
+      <div class="source-badge">BBC Nepali</div>
+      <div class="source-badge">Ratopati</div>
+      <div class="source-badge">Edukhabar</div>
     </div>
-    <div>&copy; <span id="current-year"></span> Nepal News Aggregator | Shamser.info.np</div>
+    <div class="footer-text">&copy; <span id="current-year"></span> Nepal News Aggregator | Shamser.info.np</div>
   </footer>
 
   <script>
@@ -2160,6 +2215,36 @@ data-size="small" >
         rss: "https://www.annapurnapost.com/rss",
         maxItems: 4,
         logo: "https://www.annapurnapost.com/resources/images/svg/ap_logo.svg"
+      },
+      {
+        name: "Gorkhapatra",
+        rss: "https://gorkhapatraonline.com/rss",
+        maxItems: 4,
+        logo: "https://gorkhapatraonline.com/wp-content/uploads/2020/07/cropped-gorkhapatra_logo-1.png"
+      },
+      {
+        name: "Education Pati",
+        rss: "https://www.educationpati.com/feed",
+        maxItems: 4,
+        logo: "https://www.educationpati.com/wp-content/uploads/2023/03/education-pati-logo.png"
+      },
+      {
+        name: "BBC Nepali",
+        rss: "https://www.bbc.com/nepali/index.xml",
+        maxItems: 4,
+        logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/BBC_Nepali.png/320px-BBC_Nepali.png"
+      },
+      {
+        name: "Ratopati",
+        rss: "https://ratopati.com/rss",
+        maxItems: 4,
+        logo: "https://ratopati.com/static/media/ratopati-logo.f8c3c7b9.png"
+      },
+      {
+        name: "Edukhabar",
+        rss: "https://www.edukhabar.com/feed",
+        maxItems: 4,
+        logo: "https://www.edukhabar.com/wp-content/uploads/2020/06/cropped-edukhabar-logo-1.png"
       }
     ];
     
@@ -2280,6 +2365,76 @@ data-size="small" >
             image: "https://images.unsplash.com/photo-1599594201376-9f5d614b1c2a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
           }
         ]
+      },
+      {
+        source: "Gorkhapatra",
+        items: [
+          {
+            title: "गोरखापत्रको १२६औँ वार्षिकोत्सव मनाइयो",
+            englishTitle: "Gorkhapatra celebrates 126th anniversary",
+            description: "देशको पुरानो दैनिक गोरखापत्रले आफ्नो १२६औँ वार्षिकोत्सव धुमधामसँग मनाएको छ।",
+            englishDescription: "Gorkhapatra, the country's oldest daily, has celebrated its 126th anniversary with great enthusiasm.",
+            link: "#",
+            pubDate: "2025-06-09T10:45:00Z",
+            image: "https://images.unsplash.com/photo-1588681664899-f142ff2dc9b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          }
+        ]
+      },
+      {
+        source: "Education Pati",
+        items: [
+          {
+            title: "शैक्षिक संस्थाहरुमा नयाँ पाठ्यक्रम लागू हुने",
+            englishTitle: "New curriculum to be implemented in educational institutions",
+            description: "अगिल्लो शैक्षिक सत्रदेखि देशभरका शैक्षिक संस्थाहरुमा नयाँ पाठ्यक्रम लागू हुनेछ।",
+            englishDescription: "A new curriculum will be implemented in educational institutions across the country from the next academic session.",
+            link: "#",
+            pubDate: "2025-06-08T14:20:00Z",
+            image: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          }
+        ]
+      },
+      {
+        source: "BBC Nepali",
+        items: [
+          {
+            title: "नेपालमा डिजिटल पत्रकारिताको बढ्दो प्रभाव",
+            englishTitle: "Growing impact of digital journalism in Nepal",
+            description: "डिजिटल मिडियाले नेपालमा पत्रकारिताको परिदृश्य परिवर्तन गरिरहेको छ।",
+            englishDescription: "Digital media is transforming the journalism landscape in Nepal.",
+            link: "#",
+            pubDate: "2025-06-07T12:30:00Z",
+            image: "https://images.unsplash.com/photo-1468078809804-4c7b3e60a478?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          }
+        ]
+      },
+      {
+        source: "Ratopati",
+        items: [
+          {
+            title: "रातोपाटीले नयाँ मोबाइल एप सार्वजनिक गर्यो",
+            englishTitle: "Ratopati launches new mobile app",
+            description: "लोकप्रिय समाचार पोर्टल रातोपाटीले आफ्नो नयाँ मोबाइल एप्लिकेसन सार्वजनिक गरेको छ।",
+            englishDescription: "Popular news portal Ratopati has launched its new mobile application.",
+            link: "#",
+            pubDate: "2025-06-06T16:15:00Z",
+            image: "https://images.unsplash.com/photo-1586339949916-3e9457bef6d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          }
+        ]
+      },
+      {
+        source: "Edukhabar",
+        items: [
+          {
+            title: "शिक्षकहरुको क्षमता विकासका लागि तालिम कार्यक्रम",
+            englishTitle: "Training program for capacity building of teachers",
+            description: "शिक्षकहरुको क्षमता विकासका लागि राष्ट्रिय स्तरको तालिम कार्यक्रम सञ्चालन हुनेछ।",
+            englishDescription: "A national-level training program will be conducted for capacity building of teachers.",
+            link: "#",
+            pubDate: "2025-06-05T09:45:00Z",
+            image: "https://images.unsplash.com/photo-1532012197267-da84d127e765?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          }
+        ]
       }
     ];
     
@@ -2374,7 +2529,6 @@ data-size="small" >
     // Initial render
     document.addEventListener('DOMContentLoaded', renderNews);
   </script>
-
    <!-------- ------ ------ End News script------ ------ ------ ------>   
 <!--------Online News-------------------------------------------->
  
