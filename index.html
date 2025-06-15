@@ -1815,17 +1815,21 @@ data-size="small" >
   <!-- Trigger the modal with a button 
   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal55">Share your contents</button>
 -->
- <style>
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>नेपालको सम्पूर्ण अनलाइन खबरहरु | Nepal News Aggregator</title>
+  <style>
     :root {
       --primary-color: #0f74d9;
-      --primary-dark: #a71d2a;
       --secondary-color: #f8f9fa;
       --accent-color: #28a745;
       --text-dark: #212529;
       --text-light: #6c757d;
       --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       --border-radius: 10px;
-      --transition: all 0.3s ease;
     }
     
     * {
@@ -1840,7 +1844,6 @@ data-size="small" >
       color: var(--text-dark);
       background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
       min-height: 100vh;
-      padding-bottom: 40px;
     }
     
     .container {
@@ -1850,22 +1853,20 @@ data-size="small" >
     }
     
     header {
-      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      background: linear-gradient(135deg, var(--primary-color), #c82333);
       color: white;
-      padding: 1.8rem 0;
+      padding: 1.5rem 0;
       text-align: center;
       box-shadow: var(--shadow);
       position: relative;
       border-radius: 0 0 var(--border-radius) var(--border-radius);
-      margin-bottom: 30px;
     }
     
     .nepali-text {
-      font-family: 'Preeti', 'Mangal', 'Kalimati', sans-serif;
-      font-size: 2.4rem;
-      margin-bottom: 0.8rem;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
-      letter-spacing: 1px;
+      font-family: 'Mukta', 'Preeti', 'Mangal', 'Kalimati', sans-serif;
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
     }
     
     .english-text {
@@ -1878,14 +1879,14 @@ data-size="small" >
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 15px;
-      font-size: 0.95rem;
-      opacity: 0.92;
+      font-size: 0.9rem;
+      opacity: 0.9;
     }
     
     .news-container {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 28px;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
       margin: 2rem 0;
     }
     
@@ -1894,47 +1895,41 @@ data-size="small" >
       border-radius: var(--border-radius);
       overflow: hidden;
       box-shadow: var(--shadow);
-      transition: var(--transition);
+      transition: transform 0.3s ease;
       border: 1px solid #eaeaea;
     }
     
     .news-section:hover {
-      transform: translateY(-7px);
-      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     }
     
     .news-source-title {
       background: linear-gradient(to right, var(--primary-color), #e83e8c);
       color: white;
-      padding: 14px 18px;
+      padding: 12px 15px;
       margin: 0;
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-weight: 600;
       display: flex;
       align-items: center;
-      position: relative;
     }
     
     .news-source-title::before {
       content: "•";
-      margin-right: 12px;
-      font-size: 1.6rem;
+      margin-right: 10px;
+      font-size: 1.5rem;
     }
     
     .news-list {
-      padding: 18px;
+      padding: 15px;
     }
     
     .news-item {
       display: flex;
-      gap: 16px;
-      padding: 18px 0;
+      gap: 15px;
+      padding: 15px 0;
       border-bottom: 1px solid #f0f0f0;
-      transition: var(--transition);
-    }
-    
-    .news-item:hover {
-      background-color: #fcfcfc;
     }
     
     .news-item:last-child {
@@ -1942,19 +1937,17 @@ data-size="small" >
     }
     
     .news-item img {
-      width: 110px;
-      height: 80px;
+      width: 100px;
+      height: 70px;
       object-fit: cover;
-      border-radius: 6px;
+      border-radius: 5px;
       border: 1px solid #eee;
       background: linear-gradient(120deg, #f5f5f5 0%, #e0e0e0 100%);
-      transition: var(--transition);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
     }
     
     .news-item:hover img {
-      transform: scale(1.06);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transform: scale(1.05);
     }
     
     .news-content {
@@ -1964,42 +1957,40 @@ data-size="small" >
     .news-content a {
       color: var(--text-dark);
       text-decoration: none;
-      font-weight: 700;
-      font-size: 1.1rem;
+      font-weight: 600;
+      font-size: 1.05rem;
       display: block;
-      margin-bottom: 8px;
+      margin-bottom: 5px;
       transition: color 0.2s;
-      line-height: 1.4;
     }
     
     .news-content a:hover {
       color: var(--primary-color);
-      text-decoration: underline;
     }
     
     .news-description {
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       color: var(--text-light);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       line-height: 1.5;
     }
     
     .news-meta {
       display: flex;
       justify-content: space-between;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       color: var(--text-light);
     }
     
     .news-date {
       font-style: italic;
-      color: #777;
+      color: #888;
     }
     
     .loading, .error-message {
       text-align: center;
       padding: 2rem;
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       color: #666;
     }
     
@@ -2007,80 +1998,69 @@ data-size="small" >
       background: var(--primary-color);
       color: white;
       border: none;
-      padding: 9px 16px;
-      border-radius: 5px;
+      padding: 8px 15px;
+      border-radius: 4px;
       cursor: pointer;
-      margin-top: 12px;
+      margin-top: 10px;
       font-weight: 500;
-      transition: var(--transition);
+      transition: background 0.3s;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      display: inline-block;
     }
     
     .refresh-btn:hover {
-      background: var(--primary-dark);
+      background: #c82333;
       transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
     }
     
     .language-toggle {
       position: absolute;
       top: 20px;
       right: 20px;
-      background: rgba(255, 255, 255, 0.25);
-      border: 1px solid rgba(255,255,255,0.35);
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255,255,255,0.3);
       color: white;
-      padding: 7px 14px;
-      border-radius: 5px;
+      padding: 6px 12px;
+      border-radius: 4px;
       cursor: pointer;
-      font-weight: 600;
-      transition: var(--transition);
-      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
     }
     
     .language-toggle:hover {
-      background: rgba(255, 255, 255, 0.35);
-      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.3);
     }
     
     footer {
       background: var(--text-dark);
       color: white;
       text-align: center;
-      padding: 2rem 0;
-      margin-top: 3rem;
-      font-size: 0.95rem;
+      padding: 1.5rem 0;
+      margin-top: 2rem;
+      font-size: 0.9rem;
       border-radius: var(--border-radius) var(--border-radius) 0 0;
     }
     
     .source-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 10px;
       max-width: 1000px;
-      margin: 25px auto;
-      padding: 0 20px;
+      margin: 20px auto;
+      padding: 0 15px;
     }
     
     .source-badge {
-      background: rgba(255,255,255,0.12);
-      padding: 10px 8px;
-      border-radius: 6px;
+      background: rgba(255,255,255,0.1);
+      padding: 8px;
+      border-radius: 4px;
       text-align: center;
-      font-size: 0.85rem;
-      transition: var(--transition);
-      border: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.8rem;
+      transition: transform 0.3s;
     }
     
     .source-badge:hover {
-      background: rgba(255,255,255,0.2);
       transform: translateY(-3px);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-    
-    .footer-text {
-      margin-top: 15px;
-      opacity: 0.85;
+      background: rgba(255,255,255,0.2);
     }
     
     @media (max-width: 768px) {
@@ -2089,13 +2069,13 @@ data-size="small" >
       }
       
       .nepali-text {
-        font-size: 1.9rem;
+        font-size: 1.8rem;
       }
       
       .header-sub {
         flex-direction: column;
         align-items: center;
-        gap: 8px;
+        gap: 5px;
       }
       
       .news-item {
@@ -2104,36 +2084,23 @@ data-size="small" >
       
       .news-item img {
         width: 100%;
-        height: 200px;
+        height: 180px;
       }
       
       .source-grid {
-        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
       }
     }
-    
-    /* Animation for news items */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    .news-item {
-      animation: fadeIn 0.4s ease-out;
-    }
-    
-    .news-section {
-      animation: fadeIn 0.5s ease-out;
-    }
   </style>
+  <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
     <button class="language-toggle english-text" id="language-toggle">नेपालीमा स्विच गर्नुहोस्</button>
     <div class="container">
-      <h1 class="nepali-text">नेपालको प्रमुख अनलाइन खबरहरु</h1>
+      <h1 class="nepali-text">नेपालका समाचार स्रोतहरु</h1>
       <div class="header-sub">
-        <span class="english-text">Latest news from Nepal's top online sources</span>
+        <span class="english-text">Comprehensive news from Nepal's top sources</span>
         <span id="current-date" class="english-text">Sunday, June 15, 2025</span>
       </div>
     </div>
@@ -2155,12 +2122,12 @@ data-size="small" >
       <div class="source-badge">Nayapatrika</div>
       <div class="source-badge">Annapurna Post</div>
       <div class="source-badge">Gorkhapatra</div>
-      <div class="source-badge">Education Pati</div>
       <div class="source-badge">BBC Nepali</div>
       <div class="source-badge">Ratopati</div>
+      <div class="source-badge">Shikshapati</div>
       <div class="source-badge">Edukhabar</div>
     </div>
-    <div class="footer-text">&copy; <span id="current-year"></span> Nepal News Aggregator | Shamser.info.np</div>
+    <div>&copy; <span id="current-year"></span> Nepal News Aggregator | Shamser.info.np</div>
   </footer>
 
   <script>
@@ -2172,84 +2139,24 @@ data-size="small" >
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     document.getElementById('current-date').textContent = now.toLocaleDateString('en-US', options);
     
-    // News sources with all requested sources
+    // News sources
     const newsSources = [
-      {
-        name: "Himal Khabar",
-        rss: "https://www.himalkhabar.com/feed",
-        maxItems: 4,
-        logo: "https://www.himalkhabar.com/wp-content/uploads/2019/05/cropped-HK-Logo.png"
-      },
-      {
-        name: "Nepal Live",
-        rss: "https://nepallive.com/feed",
-        maxItems: 4,
-        logo: "https://nepallive.com/wp-content/uploads/2021/03/cropped-nepal_live_logo-1.png"
-      },
-      {
-        name: "Ejanakpur Today",
-        rss: "https://ejanakpurtoday.com/feed",
-        maxItems: 4,
-        logo: "https://ejanakpurtoday.com/wp-content/uploads/2021/01/ejt-logo.png"
-      },
-      {
-        name: "Ujyaalo Online",
-        rss: "https://ujyaaloonline.com/rss",
-        maxItems: 4,
-        logo: "https://ujyaaloonline.com/wp-content/uploads/2020/05/ujyaalo-online-logo.png"
-      },
-      {
-        name: "Bahrakhari",
-        rss: "https://baahrakhari.com/rss",
-        maxItems: 4,
-        logo: "https://baahrakhari.com/themes/bb/images/logo.png"
-      },
-      {
-        name: "Nayapatrika",
-        rss: "https://nayapatrikadaily.com/rss",
-        maxItems: 4,
-        logo: "https://nayapatrikadaily.com/storage/logo/nayapatrika-logo.png"
-      },
-      {
-        name: "Annapurna Post",
-        rss: "https://www.annapurnapost.com/rss",
-        maxItems: 4,
-        logo: "https://www.annapurnapost.com/resources/images/svg/ap_logo.svg"
-      },
-      {
-        name: "Gorkhapatra",
-        rss: "https://gorkhapatraonline.com/rss",
-        maxItems: 4,
-        logo: "https://gorkhapatraonline.com/wp-content/uploads/2020/07/cropped-gorkhapatra_logo-1.png"
-      },
-      {
-        name: "Education Pati",
-        rss: "https://www.educationpati.com/feed",
-        maxItems: 4,
-        logo: "https://www.educationpati.com/wp-content/uploads/2023/03/education-pati-logo.png"
-      },
-      {
-        name: "BBC Nepali",
-        rss: "https://www.bbc.com/nepali/index.xml",
-        maxItems: 4,
-        logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/BBC_Nepali.png/320px-BBC_Nepali.png"
-      },
-      {
-        name: "Ratopati",
-        rss: "https://ratopati.com/rss",
-        maxItems: 4,
-        logo: "https://ratopati.com/static/media/ratopati-logo.f8c3c7b9.png"
-      },
-      {
-        name: "Edukhabar",
-        rss: "https://www.edukhabar.com/feed",
-        maxItems: 4,
-        logo: "https://www.edukhabar.com/wp-content/uploads/2020/06/cropped-edukhabar-logo-1.png"
-      }
+      { name: "Himal Khabar", maxItems: 3 },
+      { name: "Nepal Live", maxItems: 3 },
+      { name: "Ejanakpur Today", maxItems: 3 },
+      { name: "Ujyaalo Online", maxItems: 3 },
+      { name: "Bahrakhari", maxItems: 3 },
+      { name: "Nayapatrika", maxItems: 3 },
+      { name: "Annapurna Post", maxItems: 3 },
+      { name: "Gorkhapatra", maxItems: 3 },
+      { name: "BBC Nepali", maxItems: 3 },
+      { name: "Ratopati", maxItems: 3 },
+      { name: "Shikshapati", maxItems: 3 },
+      { name: "Edukhabar", maxItems: 3 }
     ];
     
-    // Sample news data with images
-    const sampleNews = [
+    // Complete news data for all sources
+    const completeNewsData = [
       {
         source: "Himal Khabar",
         items: [
@@ -2270,6 +2177,15 @@ data-size="small" >
             link: "#",
             pubDate: "2025-06-14T14:45:00Z",
             image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          },
+          {
+            title: "हिमाली जीवनशैली संरक्षणका लागि नयाँ अभियान",
+            englishTitle: "New campaign to preserve Himalayan lifestyle",
+            description: "स्थानीय संस्कृति र जीवनशैली संरक्षणका लागि हिमाली क्षेत्रमा नयाँ अभियान सुरु भएको छ।",
+            englishDescription: "A new campaign has been launched in the Himalayan region to preserve local culture and lifestyle.",
+            link: "#",
+            pubDate: "2025-06-12T16:30:00Z",
+            image: "https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
           }
         ]
       },
@@ -2293,6 +2209,15 @@ data-size="small" >
             link: "#",
             pubDate: "2025-06-13T16:30:00Z",
             image: "https://images.unsplash.com/photo-1609710228159-0fa9bd7c0827?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          },
+          {
+            title: "राजधानीमा स्मार्ट सिटी परियोजना अगाडि बढ्यो",
+            englishTitle: "Smart City project progresses in capital",
+            description: "काठमाडौं उपत्यकामा स्मार्ट सिटी परियोजनाका लागि महत्वपूर्ण कदम चालिएको छ।",
+            englishDescription: "Significant steps have been taken for the Smart City project in Kathmandu Valley.",
+            link: "#",
+            pubDate: "2025-06-12T10:15:00Z",
+            image: "https://images.unsplash.com/photo-1593696140826-c58b021acf8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
           }
         ]
       },
@@ -2307,6 +2232,24 @@ data-size="small" >
             link: "#",
             pubDate: "2025-06-14T10:15:00Z",
             image: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          },
+          {
+            title: "मधेशमा नयाँ सडक निर्माण परियोजना सुरु",
+            englishTitle: "New road construction project begins in Madhesh",
+            description: "मधेश प्रदेशमा १०० किलोमिटर लामो नयाँ सडक निर्माण परियोजना सुरु भएको छ।",
+            englishDescription: "A new 100 km road construction project has begun in Madhesh Province.",
+            link: "#",
+            pubDate: "2025-06-13T14:30:00Z",
+            image: "https://images.unsplash.com/photo-1541625602330-2277a4c46182?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          },
+          {
+            title: "मधेशमा उच्च शिक्षा संस्थानको विस्तार",
+            englishTitle: "Expansion of higher education institution in Madhesh",
+            description: "मधेश प्रदेशमा नयाँ उच्च शिक्षा संस्थान खोल्ने योजना सार्वजनिक गरिएको छ।",
+            englishDescription: "Plans to open a new higher education institution in Madhesh Province have been announced.",
+            link: "#",
+            pubDate: "2025-06-12T11:45:00Z",
+            image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
           }
         ]
       },
@@ -2321,6 +2264,24 @@ data-size="small" >
             link: "#",
             pubDate: "2025-06-13T15:40:00Z",
             image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          },
+          {
+            title: "नेपालमा सौर्य ऊर्जा प्रयोग बढ्यो",
+            englishTitle: "Increase in solar energy usage in Nepal",
+            description: "पछिल्लो वर्षमा नेपालमा सौर्य ऊर्जा प्रयोगमा उल्लेख्य वृद्धि भएको छ।",
+            englishDescription: "Solar energy usage in Nepal has significantly increased in the past year.",
+            link: "#",
+            pubDate: "2025-06-12T13:20:00Z",
+            image: "https://images.unsplash.com/photo-1613665813446-82a78c468a1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          },
+          {
+            title: "नयाँ हाइड्रोपावर प्रोजेक्टले ५०,००० घरहरु लक्षित",
+            englishTitle: "New hydropower project targets 50,000 homes",
+            description: "पश्चिम नेपालमा निर्माणाधीन नयाँ जलविद्युत् आयोजनाले ५०,००० घरहरुलाई बिजुली उपलब्ध गराउनेछ।",
+            englishDescription: "A new hydropower project under construction in western Nepal will provide electricity to 50,000 homes.",
+            link: "#",
+            pubDate: "2025-06-11T10:55:00Z",
+            image: "https://images.unsplash.com/photo-1566837945700-30057527ade0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
           }
         ]
       },
@@ -2335,6 +2296,24 @@ data-size="small" >
             link: "#",
             pubDate: "2025-06-12T09:15:00Z",
             image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          },
+          {
+            title: "देशभरि सडक सुरक्षा अभियान सुरु",
+            englishTitle: "Road safety campaign launched nationwide",
+            description: "यातायात दुर्घटना घटाउने लक्ष्यका साथ देशभरि सडक सुरक्षा अभियान सुरु भएको छ।",
+            englishDescription: "A nationwide road safety campaign has been launched to reduce traffic accidents.",
+            link: "#",
+            pubDate: "2025-06-11T14:25:00Z",
+            image: "https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          },
+          {
+            title: "प्रदेश जोड्ने नयाँ राजमार्ग निर्माण",
+            englishTitle: "Construction of new highway connecting provinces",
+            description: "पूर्वी र पश्चिम प्रदेश जोड्ने २०० किलोमिटर लामो नयाँ राजमार्गको निर्माण सुरु भएको छ।",
+            englishDescription: "Construction has begun on a new 200 km highway connecting eastern and western provinces.",
+            link: "#",
+            pubDate: "2025-06-10T11:40:00Z",
+            image: "https://images.unsplash.com/photo-1541625602330-2277a4c46182?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
           }
         ]
       },
@@ -2349,6 +2328,24 @@ data-size="small" >
             link: "#",
             pubDate: "2025-06-11T14:20:00Z",
             image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          },
+          {
+            title: "नयाँ पाठ्यक्रम लागू गर्न तयारी",
+            englishTitle: "Preparations to implement new curriculum",
+            description: "अगामी शैक्षिक वर्षदेखि नयाँ पाठ्यक्रम लागू गर्ने तयारी भइरहेको छ।",
+            englishDescription: "Preparations are underway to implement a new curriculum starting from the next academic year.",
+            link: "#",
+            pubDate: "2025-06-10T10:30:00Z",
+            image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          },
+          {
+            title: "शिक्षकहरुको क्षमता अभिवृद्धि तालिम",
+            englishTitle: "Capacity building training for teachers",
+            description: "देशभरका शिक्षकहरुको क्षमता अभिवृद्धि गर्न विशेष तालिम कार्यक्रम सुरु भएको छ।",
+            englishDescription: "A special training program has been launched to build capacity of teachers nationwide.",
+            link: "#",
+            pubDate: "2025-06-09T13:45:00Z",
+            image: "https://images.unsplash.com/photo-1516549655169-df83a0774514?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
           }
         ]
       },
@@ -2363,6 +2360,24 @@ data-size="small" >
             link: "#",
             pubDate: "2025-06-10T11:30:00Z",
             image: "https://images.unsplash.com/photo-1599594201376-9f5d614b1c2a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          },
+          {
+            title: "पश्चिमाञ्चलमा नयाँ ट्रेकिङ मार्ग खुल्यो",
+            englishTitle: "New trekking route opens in western region",
+            description: "पश्चिम नेपालको हिमाली क्षेत्रमा नयाँ ट्रेकिङ मार्ग खुलिएको छ।",
+            englishDescription: "A new trekking route has opened in the Himalayan region of western Nepal.",
+            link: "#",
+            pubDate: "2025-06-09T14:15:00Z",
+            image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          },
+          {
+            title: "पर्यटन उद्योगमा नयाँ निवेशका सम्भावना",
+            englishTitle: "Potential for new investments in tourism industry",
+            description: "विदेशी निवेशकहरुले नेपालको पर्यटन उद्योगमा नयाँ लगानी गर्ने सम्भावना व्यक्त गरेका छन्।",
+            englishDescription: "Foreign investors have expressed interest in new investments in Nepal's tourism industry.",
+            link: "#",
+            pubDate: "2025-06-08T10:45:00Z",
+            image: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
           }
         ]
       },
@@ -2370,27 +2385,31 @@ data-size="small" >
         source: "Gorkhapatra",
         items: [
           {
-            title: "गोरखापत्रको १२६औँ वार्षिकोत्सव मनाइयो",
-            englishTitle: "Gorkhapatra celebrates 126th anniversary",
-            description: "देशको पुरानो दैनिक गोरखापत्रले आफ्नो १२६औँ वार्षिकोत्सव धुमधामसँग मनाएको छ।",
-            englishDescription: "Gorkhapatra, the country's oldest daily, has celebrated its 126th anniversary with great enthusiasm.",
+            title: "सरकारले नयाँ आर्थिक नीति घोषणा गर्ने",
+            englishTitle: "Government to announce new economic policy",
+            description: "अगामी महिनामा सरकारले नयाँ आर्थिक नीति घोषणा गर्ने तयारी गरेको छ।",
+            englishDescription: "The government is preparing to announce a new economic policy next month.",
             link: "#",
-            pubDate: "2025-06-09T10:45:00Z",
-            image: "https://images.unsplash.com/photo-1588681664899-f142ff2dc9b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
-          }
-        ]
-      },
-      {
-        source: "Education Pati",
-        items: [
+            pubDate: "2025-06-14T08:45:00Z",
+            image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          },
           {
-            title: "शैक्षिक संस्थाहरुमा नयाँ पाठ्यक्रम लागू हुने",
-            englishTitle: "New curriculum to be implemented in educational institutions",
-            description: "अगिल्लो शैक्षिक सत्रदेखि देशभरका शैक्षिक संस्थाहरुमा नयाँ पाठ्यक्रम लागू हुनेछ।",
-            englishDescription: "A new curriculum will be implemented in educational institutions across the country from the next academic session.",
+            title: "कृषि क्षेत्रमा नयाँ प्राविधिक प्रयोग",
+            englishTitle: "New technology application in agriculture sector",
+            description: "देशभर किसानहरुलाई नयाँ कृषि प्रविधि सम्बन्धी तालिम दिइनेछ।",
+            englishDescription: "Farmers across the country will receive training on new agricultural technologies.",
             link: "#",
-            pubDate: "2025-06-08T14:20:00Z",
-            image: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+            pubDate: "2025-06-12T11:20:00Z",
+            image: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          },
+          {
+            title: "सांस्कृतिक सम्पदा संरक्षणका लागि नयाँ योजना",
+            englishTitle: "New plan for cultural heritage preservation",
+            description: "देशका ऐतिहासिक सांस्कृतिक सम्पदाहरु संरक्षणका लागि नयाँ योजना सार्वजनिक।",
+            englishDescription: "New plan announced for preservation of historical cultural heritage sites across the country.",
+            link: "#",
+            pubDate: "2025-06-10T14:15:00Z",
+            image: "https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
           }
         ]
       },
@@ -2398,13 +2417,31 @@ data-size="small" >
         source: "BBC Nepali",
         items: [
           {
-            title: "नेपालमा डिजिटल पत्रकारिताको बढ्दो प्रभाव",
-            englishTitle: "Growing impact of digital journalism in Nepal",
-            description: "डिजिटल मिडियाले नेपालमा पत्रकारिताको परिदृश्य परिवर्तन गरिरहेको छ।",
-            englishDescription: "Digital media is transforming the journalism landscape in Nepal.",
+            title: "विश्व बैंकले नेपाललाई ऋण सहयोग दिने",
+            englishTitle: "World Bank to provide loan assistance to Nepal",
+            description: "विश्व बैंकले नेपाललाई ढिलो विकास क्षेत्रमा ऋण सहयोग दिने घोषणा गरेको छ।",
+            englishDescription: "World Bank announces loan assistance to Nepal for infrastructure development projects.",
             link: "#",
-            pubDate: "2025-06-07T12:30:00Z",
-            image: "https://images.unsplash.com/photo-1468078809804-4c7b3e60a478?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+            pubDate: "2025-06-14T12:30:00Z",
+            image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          },
+          {
+            title: "नेपाली कामदारहरुको विदेश जाने संख्या बढ्यो",
+            englishTitle: "Number of Nepali workers going abroad increases",
+            description: "पछिल्लो तथ्याङ्कले विदेश जाने नेपाली कामदारहरुको संख्या बढेको देखाएको छ।",
+            englishDescription: "Recent statistics show an increase in the number of Nepali workers going abroad.",
+            link: "#",
+            pubDate: "2025-06-13T09:15:00Z",
+            image: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          },
+          {
+            title: "नेपाली कला र संस्कृति विश्वभरि प्रदर्शन",
+            englishTitle: "Nepali art and culture showcased worldwide",
+            description: "विश्वभरि नेपाली कलाकारहरुले आफ्नो कला र संस्कृति प्रदर्शन गर्दै छन्।",
+            englishDescription: "Nepali artists are showcasing their art and culture worldwide.",
+            link: "#",
+            pubDate: "2025-06-11T16:45:00Z",
+            image: "https://images.unsplash.com/photo-1516549655169-df83a0774514?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
           }
         ]
       },
@@ -2412,13 +2449,63 @@ data-size="small" >
         source: "Ratopati",
         items: [
           {
-            title: "रातोपाटीले नयाँ मोबाइल एप सार्वजनिक गर्यो",
-            englishTitle: "Ratopati launches new mobile app",
-            description: "लोकप्रिय समाचार पोर्टल रातोपाटीले आफ्नो नयाँ मोबाइल एप्लिकेसन सार्वजनिक गरेको छ।",
-            englishDescription: "Popular news portal Ratopati has launched its new mobile application.",
+            title: "स्वास्थ्य सेवा सुधारका लागि नयाँ योजना",
+            englishTitle: "New plan for healthcare improvement",
+            description: "सरकारले ग्रामीण क्षेत्रमा स्वास्थ्य सेवा सुधारका लागि नयाँ योजना सार्वजनिक गरेको छ।",
+            englishDescription: "The government has announced a new plan to improve healthcare services in rural areas.",
             link: "#",
-            pubDate: "2025-06-06T16:15:00Z",
-            image: "https://images.unsplash.com/photo-1586339949916-3e9457bef6d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+            pubDate: "2025-06-15T10:20:00Z",
+            image: "https://images.unsplash.com/photo-1516549655169-df83a0774514?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          },
+          {
+            title: "राजनीतिक दलहरुबीच सहमतिमा पुग्ने उम्मेद",
+            englishTitle: "Hope for agreement among political parties",
+            description: "राजनीतिक दलहरुबीच सहमतिमा पुग्ने उम्मेद बढेको छ।",
+            englishDescription: "There is growing hope for agreement among political parties.",
+            link: "#",
+            pubDate: "2025-06-13T14:50:00Z",
+            image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          },
+          {
+            title: "स्थानीय तहमा विकास कार्यक्रम बढ्दो",
+            englishTitle: "Development programs increasing at local level",
+            description: "स्थानीय तहमा विकास कार्यक्रमहरु बढ्दो क्रममा रहेको छ।",
+            englishDescription: "Development programs at the local level are increasing.",
+            link: "#",
+            pubDate: "2025-06-11T11:35:00Z",
+            image: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          }
+        ]
+      },
+      {
+        source: "Shikshapati",
+        items: [
+          {
+            title: "शैक्षिक संस्थाहरुमा डिजिटल शिक्षा विस्तार",
+            englishTitle: "Expansion of digital education in institutions",
+            description: "देशभरका शैक्षिक संस्थाहरुमा डिजिटल शिक्षा विस्तार गरिँदैछ।",
+            englishDescription: "Digital education is being expanded in educational institutions across the country.",
+            link: "#",
+            pubDate: "2025-06-14T09:10:00Z",
+            image: "https://images.unsplash.com/photo-1584697964358-3e14ca57658b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          },
+          {
+            title: "विद्यार्थीहरुका लागि नयाँ छात्रवृत्ति कार्यक्रम",
+            englishTitle: "New scholarship program for students",
+            description: "आर्थिक रूपमा कमजोर विद्यार्थीहरुका लागि नयाँ छात्रवृत्ति कार्यक्रम सुरु।",
+            englishDescription: "New scholarship program launched for economically disadvantaged students.",
+            link: "#",
+            pubDate: "2025-06-12T13:40:00Z",
+            image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          },
+          {
+            title: "शिक्षक प्रशिक्षण कार्यक्रममा नवीनता",
+            englishTitle: "Innovation in teacher training programs",
+            description: "शिक्षक प्रशिक्षण कार्यक्रममा नवीनताको समावेश गरिएको छ।",
+            englishDescription: "Innovation has been incorporated into teacher training programs.",
+            link: "#",
+            pubDate: "2025-06-10T15:25:00Z",
+            image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
           }
         ]
       },
@@ -2426,13 +2513,31 @@ data-size="small" >
         source: "Edukhabar",
         items: [
           {
-            title: "शिक्षकहरुको क्षमता विकासका लागि तालिम कार्यक्रम",
-            englishTitle: "Training program for capacity building of teachers",
-            description: "शिक्षकहरुको क्षमता विकासका लागि राष्ट्रिय स्तरको तालिम कार्यक्रम सञ्चालन हुनेछ।",
-            englishDescription: "A national-level training program will be conducted for capacity building of teachers.",
+            title: "शैक्षिक अनुसन्धानमा नेपालको प्रगति",
+            englishTitle: "Nepal's progress in educational research",
+            description: "नेपालले शैक्षिक अनुसन्धान क्षेत्रमा महत्वपूर्ण प्रगति गरेको छ।",
+            englishDescription: "Nepal has made significant progress in the field of educational research.",
             link: "#",
-            pubDate: "2025-06-05T09:45:00Z",
-            image: "https://images.unsplash.com/photo-1532012197267-da84d127e765?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+            pubDate: "2025-06-13T11:15:00Z",
+            image: "https://images.unsplash.com/photo-1584697964358-3e14ca57658b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          },
+          {
+            title: "विश्वविद्यालयहरुमा नयाँ पाठ्यक्रम सुरु",
+            englishTitle: "New courses launched in universities",
+            description: "देशका विभिन्न विश्वविद्यालयहरुमा नयाँ पाठ्यक्रम सुरु गरिएको छ।",
+            englishDescription: "New courses have been launched in various universities across the country.",
+            link: "#",
+            pubDate: "2025-06-11T10:05:00Z",
+            image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          },
+          {
+            title: "शिक्षामा प्रविधिको प्रयोग बढाउने योजना",
+            englishTitle: "Plan to increase use of technology in education",
+            description: "सरकारले शिक्षा क्षेत्रमा प्रविधिको प्रयोग बढाउने योजना बनाएको छ।",
+            englishDescription: "The government has developed a plan to increase the use of technology in the education sector.",
+            link: "#",
+            pubDate: "2025-06-09T14:30:00Z",
+            image: "https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
           }
         ]
       }
@@ -2503,7 +2608,7 @@ data-size="small" >
       const container = document.getElementById('news-container');
       container.innerHTML = '';
       
-      sampleNews.forEach(sourceData => {
+      completeNewsData.forEach(sourceData => {
         const source = newsSources.find(s => s.name === sourceData.source);
         if (!source) return;
         
@@ -2529,6 +2634,7 @@ data-size="small" >
     // Initial render
     document.addEventListener('DOMContentLoaded', renderNews);
   </script>
+
    <!-------- ------ ------ End News script------ ------ ------ ------>   
 <!--------Online News-------------------------------------------->
  
