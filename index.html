@@ -1817,10 +1817,14 @@ data-size="small" >
 -->
   
 
-     
-  <header>
-    <h1 class="nepali-text">नेपालको प्रमुख अनलाइन खबरहरु </h1>
-     <p style="font-size:10px;"> <span class="float-left pt-1" style= "text-transform: lowercase;font-size:12px;" data-livestamp="2025-04-19, 11:03:25 AM"></span></p>
+  <button class="language-toggle english-text" id="language-toggle">नेपालीमा स्विच गर्नुहोस्</button>
+    <div class="container">
+      <h1 class="nepali-text">नेपालको प्रमुख अनलाइन खबरहरु</h1>
+      <div class="header-sub">
+        <span class="english-text">Latest news from Nepal's top online sources</span>
+        <span id="current-date" class="english-text">Sunday, June 15, 2025</span>
+      </div>
+    </div>
   </header>
  <div class="container">
     <div id="news-container">
@@ -1828,41 +1832,25 @@ data-size="small" >
     </div>
   </div>
 
-      <!-- Skeleton loading screen -->
-      <div id="skeleton-loading">
-        <div class="news-section">
-          <h2 class="news-source-title skeleton" style="width: 40%; height: 1.8rem;"></h2>
-          <div class="skeleton-news-item">
-            <div class="skeleton-text">
-              <div class="skeleton-line short skeleton"></div>
-              <div class="skeleton-line medium skeleton"></div>
-              <div class="skeleton-line long skeleton"></div>
-            </div>
-          </div>
-             </div>
-          <div class="skeleton-news-item">
-            <div class="skeleton-text">
-              <div class="skeleton-line short skeleton"></div>
-              <div class="skeleton-line medium skeleton"></div>
-              <div class="skeleton-line long skeleton"></div>
-            </div>
-          </div>
-        </div>
-        <div class="news-section">
-          <h2 class="news-source-title skeleton" style="width: 35%; height: 1.8rem;"></h2>
-          <div class="skeleton-news-item">
-            <div class="skeleton-text">
-              <div class="skeleton-line short skeleton"></div>
-              <div class="skeleton-line medium skeleton"></div>
-              <div class="skeleton-line long skeleton"></div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div class="container">
+    <div id="news-container" class="news-container">
+      <!-- News will be loaded here dynamically -->
+    </div>
+  </div>
 
   <footer class="english-text">
-    &copy; <span id="current-year"></span>Live News  | Shamser.info.np
+    <div class="source-grid">
+      <div class="source-badge">Himal Khabar</div>
+      <div class="source-badge">Nepal Live</div>
+      <div class="source-badge">Ejanakpur Today</div>
+      <div class="source-badge">Ujyaalo Online</div>
+      <div class="source-badge">Bahrakhari</div>
+      <div class="source-badge">Nayapatrika</div>
+      <div class="source-badge">Annapurna Post</div>
+    </div>
+    <div>&copy; <span id="current-year"></span> Nepali online News Aggregator |shamser.info.np</div>
   </footer>
+
  
 <!-----------------
  <iframe src="https://shamser.info.np/OnlineNewsAutoUpdate.html" 
@@ -4707,267 +4695,231 @@ clear: both;
 
 
 <!------------script-----Online News---Section-->------नेपाली ताजा समाचार-------------------------------------->
-<script>
-    // Updated news sources with all requested sources
+  <div class="container">
+    <div id="news-container" class="news-container">
+      <!-- News will be loaded here dynamically -->
+    </div>
+  </div>
+
+  <footer class="english-text">
+    <div class="source-grid">
+      <div class="source-badge">Himal Khabar</div>
+      <div class="source-badge">Nepal Live</div>
+      <div class="source-badge">Ejanakpur Today</div>
+      <div class="source-badge">Ujyaalo Online</div>
+      <div class="source-badge">Bahrakhari</div>
+      <div class="source-badge">Nayapatrika</div>
+      <div class="source-badge">Annapurna Post</div>
+    </div>
+    <div>&copy; <span id="current-year"></span> Nepal News Aggregator | Shamser.info.np</div>
+  </footer>
+
+  <script>
+    // Set current date and year
+    const now = new Date();
+    document.getElementById('current-year').textContent = now.getFullYear();
+    
+    // Format and set current date
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById('current-date').textContent = now.toLocaleDateString('en-US', options);
+    
+    // News sources with all requested sources
     const newsSources = [
       {
-        name: "OnlineKhabar",
-        rss: "https://www.onlinekhabar.com/rss",
-        fallbacks: [
-          "https://api.rss2json.com/v1/api.json?rss_url=https://www.onlinekhabar.com/rss",
-          "https://corsproxy.io/?https://www.onlinekhabar.com/rss"
-        ],
-        maxItems: 5
-      },
-      {
-        name: "Ratopati",
-        rss: "https://ratopati.com/rss",
-        fallbacks: [
-          "https://api.rss2json.com/v1/api.json?rss_url=https://ratopati.com/rss",
-          "https://corsproxy.io/?https://ratopati.com/rss"
-        ],
-        maxItems: 5
-      },
-      {
-        name: "Gorkhapatra",
-        rss: "https://gorkhapatraonline.com/rss",
-        fallbacks: [
-          "https://api.rss2json.com/v1/api.json?rss_url=https://gorkhapatraonline.com/rss",
-          "https://corsproxy.io/?https://gorkhapatraonline.com/rss"
-        ],
-        maxItems: 5
-      },
-      {
-        name: "BBC Nepali",
-        rss: "https://www.bbc.com/nepali/index.xml",
-        fallbacks: [
-          "https://api.rss2json.com/v1/api.json?rss_url=https://www.bbc.com/nepali/index.xml",
-          "https://corsproxy.io/?https://www.bbc.com/nepali/index.xml"
-        ],
-        maxItems: 5
-      },
-      {
-        name: "Setopati",
-        rss: "https://setopati.com/rss",
-        fallbacks: [],
-        maxItems: 5
-      },
-      {
-        name: "Ekantipur",
-        rss: "https://ekantipur.com/rss",
-        fallbacks: [
-          "https://api.rss2json.com/v1/api.json?rss_url=https://ekantipur.com/rss",
-          "https://corsproxy.io/?https://ekantipur.com/rss"
-        ],
-        maxItems: 5
-      },
-      {
-        name: "Bahrakhari",
-        rss: "https://baahrakhari.com/rss",
-        fallbacks: [
-          "https://api.rss2json.com/v1/api.json?rss_url=https://baahrakhari.com/rss",
-          "https://corsproxy.io/?https://baahrakhari.com/rss"
-        ],
-        maxItems: 5
-      },
-      {
-        name: "Nayapatrika",
-        rss: "https://nayapatrikadaily.com/rss",
-        fallbacks: [
-          "https://api.rss2json.com/v1/api.json?rss_url=https://nayapatrikadaily.com/rss",
-          "https://corsproxy.io/?https://nayapatrikadaily.com/rss"
-        ],
-        maxItems: 5
-      },
-      {
-        name: "Nagrik News",
-        rss: "https://nagriknews.com/feed/",
-        fallbacks: [
-          "https://api.rss2json.com/v1/api.json?rss_url=https://nagriknews.com/feed/",
-          "https://corsproxy.io/?https://nagriknews.com/feed/"
-        ],
-        maxItems: 5
-      },
-      {
-        name: "Annapurna Post",
-        rss: "https://www.annapurnapost.com/rss",
-        fallbacks: [
-          "https://api.rss2json.com/v1/api.json?rss_url=https://www.annapurnapost.com/rss",
-          "https://corsproxy.io/?https://www.annapurnapost.com/rss"
-        ],
-        maxItems: 5
-      },
-      {
-        name: "Hamro Patro",
-        rss: "https://www.hamropatro.com/news/rss",
-        fallbacks: [
-          "https://api.rss2json.com/v1/api.json?rss_url=https://www.hamropatro.com/news/rss",
-          "https://corsproxy.io/?https://www.hamropatro.com/news/rss"
-        ],
-        maxItems: 5
-      },
-      {
-        name: "Ujyaalo Online",
-        rss: "https://ujyaaloonline.com/rss",
-        fallbacks: [
-          "https://api.rss2json.com/v1/api.json?rss_url=https://ujyaaloonline.com/rss",
-          "https://corsproxy.io/?https://ujyaaloonline.com/rss"
-        ],
-        maxItems: 5
+        name: "Himal Khabar",
+        rss: "https://www.himalkhabar.com/feed",
+        maxItems: 4,
+        logo: "https://www.himalkhabar.com/wp-content/uploads/2019/05/cropped-HK-Logo.png"
       },
       {
         name: "Nepal Live",
         rss: "https://nepallive.com/feed",
-        fallbacks: [
-          "https://api.rss2json.com/v1/api.json?rss_url=https://nepallive.com/feed",
-          "https://corsproxy.io/?https://nepallive.com/feed"
-        ],
-        maxItems: 5
-      },
-      {
-        name: "Rising Nepal",
-        rss: "https://risingnepaldaily.com/rss",
-        fallbacks: [
-          "https://api.rss2json.com/v1/api.json?rss_url=https://risingnepaldaily.com/rss",
-          "https://corsproxy.io/?https://risingnepaldaily.com/rss"
-        ],
-        maxItems: 5
+        maxItems: 4,
+        logo: "https://nepallive.com/wp-content/uploads/2021/03/cropped-nepal_live_logo-1.png"
       },
       {
         name: "Ejanakpur Today",
         rss: "https://ejanakpurtoday.com/feed",
-        fallbacks: [
-          "https://api.rss2json.com/v1/api.json?rss_url=https://ejanakpurtoday.com/feed",
-          "https://corsproxy.io/?https://ejanakpurtoday.com/feed"
-        ],
-        maxItems: 5
+        maxItems: 4,
+        logo: "https://ejanakpurtoday.com/wp-content/uploads/2021/01/ejt-logo.png"
       },
       {
-        name: "Himal Khabar",
-        rss: "https://www.himalkhabar.com/feed",
-        fallbacks: [
-          "https://api.rss2json.com/v1/api.json?rss_url=https://www.himalkhabar.com/feed",
-          "https://corsproxy.io/?https://www.himalkhabar.com/feed"
-        ],
-        maxItems: 5
+        name: "Ujyaalo Online",
+        rss: "https://ujyaaloonline.com/rss",
+        maxItems: 4,
+        logo: "https://ujyaaloonline.com/wp-content/uploads/2020/05/ujyaalo-online-logo.png"
+      },
+      {
+        name: "Bahrakhari",
+        rss: "https://baahrakhari.com/rss",
+        maxItems: 4,
+        logo: "https://baahrakhari.com/themes/bb/images/logo.png"
+      },
+      {
+        name: "Nayapatrika",
+        rss: "https://nayapatrikadaily.com/rss",
+        maxItems: 4,
+        logo: "https://nayapatrikadaily.com/storage/logo/nayapatrika-logo.png"
+      },
+      {
+        name: "Annapurna Post",
+        rss: "https://www.annapurnapost.com/rss",
+        maxItems: 4,
+        logo: "https://www.annapurnapost.com/resources/images/svg/ap_logo.svg"
       }
     ];
-
-    // Set current year in footer
-    document.getElementById('current-year').textContent = new Date().getFullYear();
-
-    // Main function to fetch and display news
-    async function fetchAndDisplayNews() {
-      const container = document.getElementById('news-container');
-      
-      try {
-        container.innerHTML = '<div class="loading">ताजा समाचार लोड हुँदैछ...</div>';
-        
-        // Fetch all news sources
-        const newsPromises = newsSources.map(source => fetchNewsSource(source));
-        const results = await Promise.allSettled(newsPromises);
-        
-        container.innerHTML = '';
-        
-        results.forEach((result, index) => {
-          const source = newsSources[index];
-          const section = document.createElement('div');
-          section.className = 'news-section';
-          
-          section.innerHTML = `
-            <h2 class="news-source-title">${source.name}</h2>
-            <div class="news-list" id="${source.name.toLowerCase().replace(/\s+/g, '-')}-news"></div>
-          `;
-          
-          const listDiv = section.querySelector('.news-list');
-          
-          if (result.status === 'fulfilled' && result.value.length > 0) {
-            result.value.slice(0, source.maxItems).forEach(item => {
-              const newsItem = createNewsItem(item);
-              listDiv.appendChild(newsItem);
-            });
-          } else {
-            listDiv.innerHTML = `
-              <div class="error-message">
-                ${source.name} बाट समाचार लोड गर्न असफल। 
-                <button class="refresh-btn" onclick="fetchSingleSource('${source.name.toLowerCase().replace(/\s+/g, '-')}')">
-                  पुनः प्रयास गर्नुहोस्
-                </button>
-              </div>
-            `;
+    
+    // Sample news data with images
+    const sampleNews = [
+      {
+        source: "Himal Khabar",
+        items: [
+          {
+            title: "हिमाली क्षेत्रमा बर्षेको भारी हिउँले जीवन अस्तव्यस्त",
+            englishTitle: "Heavy snowfall disrupts life in Himalayan region",
+            description: "हिमाली जिल्लाहरुमा भारी हिउँपात भएको छ जसले यातायात र दैनिक जीवन अस्तव्यस्त बनाएको छ।",
+            englishDescription: "Heavy snowfall in Himalayan districts has disrupted transportation and daily life.",
+            link: "#",
+            pubDate: "2025-06-15T09:30:00Z",
+            image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          },
+          {
+            title: "पर्वतमा पर्यटन विकासका लागि नयाँ योजना सार्वजनिक",
+            englishTitle: "New plan unveiled for tourism development in mountains",
+            description: "सरकारले हिमाली क्षेत्रमा पर्यटन विकास गर्न नयाँ दीर्घकालीन योजना सार्वजनिक गरेको छ।",
+            englishDescription: "The government has unveiled a new long-term plan for tourism development in the Himalayan region.",
+            link: "#",
+            pubDate: "2025-06-14T14:45:00Z",
+            image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
           }
-          
-          container.appendChild(section);
-        });
-      } catch (error) {
-        console.error('Error loading news:', error);
-        container.innerHTML = `
-          <div class="error-message">
-            समाचार लोड गर्न असफल। कृपया इन्टरनेट जडान जाँच गर्नुहोस्।
-            <button class="refresh-btn" onclick="fetchAndDisplayNews()">
-              पुनः प्रयास गर्नुहोस्
-            </button>
-          </div>
-        `;
-      }
-    }
-
-    // Fetch news from a source
-    async function fetchNewsSource(source) {
-      // Try all available endpoints
-      const endpoints = [source.rss, ...source.fallbacks];
-      
-      for (const endpoint of endpoints) {
-        try {
-          let items = [];
-          
-          if (endpoint.includes('rss2json.com')) {
-            const response = await fetch(endpoint);
-            if (!response.ok) continue;
-            const json = await response.json();
-            items = json.items || [];
-          } else {
-            const response = await fetch(endpoint);
-            if (!response.ok) continue;
-            const text = await response.text();
-            
-            if (text.startsWith('<')) {
-              const parser = new DOMParser();
-              const xmlDoc = parser.parseFromString(text, "text/xml");
-              items = parseRSSItems(xmlDoc);
-            } else {
-              const json = JSON.parse(text);
-              items = json.items || [];
-            }
+        ]
+      },
+      {
+        source: "Nepal Live",
+        items: [
+          {
+            title: "काठमाडौं उपत्यकामा हावापानीको गुणस्तरमा सुधार",
+            englishTitle: "Air quality improves in Kathmandu Valley",
+            description: "हालैको वर्षाले काठमाडौं उपत्यकाको हावापानीको गुणस्तरमा उल्लेख्य सुधार भएको छ।",
+            englishDescription: "Recent rainfall has significantly improved the air quality in Kathmandu Valley.",
+            link: "#",
+            pubDate: "2025-06-14T11:20:00Z",
+            image: "https://images.unsplash.com/photo-1564067886520-e1ffca7a5fba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          },
+          {
+            title: "नेपाली क्रिकेट टिम एसिया कपको लागि तयार",
+            englishTitle: "Nepali cricket team ready for Asia Cup",
+            description: "नेपाली राष्ट्रिय क्रिकेट टिमले आगामी एसिया कपको लागि तयारी पूरा गरेको छ।",
+            englishDescription: "The Nepali national cricket team has completed preparations for the upcoming Asia Cup.",
+            link: "#",
+            pubDate: "2025-06-13T16:30:00Z",
+            image: "https://images.unsplash.com/photo-1609710228159-0fa9bd7c0827?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
           }
-          
-          return items;
-        } catch (error) {
-          console.log(`Failed with endpoint ${endpoint}:`, error);
-          continue;
-        }
+        ]
+      },
+      {
+        source: "Ejanakpur Today",
+        items: [
+          {
+            title: "मधेश क्षेत्रमा कृषि उत्पादन बृद्धिको सम्भावना",
+            englishTitle: "Potential for increased agricultural production in Madhesh region",
+            description: "नयाँ सिंचाई योजनाहरुले मधेश क्षेत्रमा कृषि उत्पादन बढाउने सम्भावना देखिएको छ।",
+            englishDescription: "New irrigation projects show potential to increase agricultural production in the Madhesh region.",
+            link: "#",
+            pubDate: "2025-06-14T10:15:00Z",
+            image: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          }
+        ]
+      },
+      {
+        source: "Ujyaalo Online",
+        items: [
+          {
+            title: "सरकारले नयाँ ऊर्जा नीति जारी गर्ने",
+            englishTitle: "Government to announce new energy policy",
+            description: "अगामी हप्तामा सरकारले नयाँ ऊर्जा नीति जारी गर्ने तयारी गरेको छ।",
+            englishDescription: "The government is preparing to announce a new energy policy next week.",
+            link: "#",
+            pubDate: "2025-06-13T15:40:00Z",
+            image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          }
+        ]
+      },
+      {
+        source: "Bahrakhari",
+        items: [
+          {
+            title: "राजधानीमा नयाँ सार्वजनिक यातायात प्रणाली सुरु",
+            englishTitle: "New public transport system launched in capital",
+            description: "काठमाडौं उपत्यकामा नयाँ स्मार्ट बस प्रणालीको सुरुवात भएको छ।",
+            englishDescription: "A new smart bus system has been launched in Kathmandu Valley.",
+            link: "#",
+            pubDate: "2025-06-12T09:15:00Z",
+            image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          }
+        ]
+      },
+      {
+        source: "Nayapatrika",
+        items: [
+          {
+            title: "शिक्षा प्रणाली सुधारका लागि नयाँ पहल",
+            englishTitle: "New initiative to reform education system",
+            description: "शिक्षा मन्त्रालयले देशको शिक्षा प्रणाली सुधार गर्न नयाँ पहल सुरु गरेको छ।",
+            englishDescription: "The Ministry of Education has launched a new initiative to reform the country's education system.",
+            link: "#",
+            pubDate: "2025-06-11T14:20:00Z",
+            image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          }
+        ]
+      },
+      {
+        source: "Annapurna Post",
+        items: [
+          {
+            title: "पोखरामा अन्तर्राष्ट्रिय पर्यटन सम्मेलन सुरु",
+            englishTitle: "International tourism conference begins in Pokhara",
+            description: "पोखरामा दुई दिवसीय अन्तर्राष्ट्रिय पर्यटन सम्मेलन सुरु भएको छ।",
+            englishDescription: "A two-day international tourism conference has begun in Pokhara.",
+            link: "#",
+            pubDate: "2025-06-10T11:30:00Z",
+            image: "https://images.unsplash.com/photo-1599594201376-9f5d614b1c2a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          }
+        ]
+      }
+    ];
+    
+    // Language state (true for Nepali, false for English)
+    let nepaliLanguage = true;
+    
+    // Language toggle functionality
+    document.getElementById('language-toggle').addEventListener('click', function() {
+      nepaliLanguage = !nepaliLanguage;
+      this.textContent = nepaliLanguage ? "Switch to English" : "नेपालीमा स्विच गर्नुहोस्";
+      renderNews();
+    });
+    
+    // Format date in Nepali or English
+    function formatDate(dateString, language) {
+      const date = new Date(dateString);
+      
+      if (language) {
+        // Nepali date format
+        const options = { year: 'numeric', month: 'short', day: 'numeric' };
+        return date.toLocaleDateString('ne-NP', options);
       }
       
-      return [];
+      // English date format
+      const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+      return date.toLocaleDateString('en-US', options);
     }
-
-    // Parse RSS XML items
-    function parseRSSItems(xmlDoc) {
-      const items = xmlDoc.querySelectorAll('item');
-      return Array.from(items).map(item => ({
-        title: item.querySelector('title')?.textContent?.trim() || 'शीर्षक उपलब्ध छैन',
-        link: item.querySelector('link')?.textContent?.trim() || '#',
-        description: item.querySelector('description')?.textContent?.trim() || '',
-        pubDate: item.querySelector('pubDate')?.textContent?.trim() || new Date().toISOString(),
-        image: extractImageFromDescription(item.querySelector('description')?.textContent)
-      }));
-    }
-
-    // Create a news item DOM element with news-related image
-    function createNewsItem(item) {
+    
+    // Create a news item DOM element
+    function createNewsItem(item, language) {
       const newsItem = document.createElement('div');
       newsItem.className = 'news-item';
       
+      // Create short description
       const cleanDescription = item.description
         .replace(/<[^>]*>?/gm, '')
         .replace(/\s+/g, ' ')
@@ -4976,104 +4928,57 @@ clear: both;
       const shortDescription = cleanDescription.length > 120 ? 
         cleanDescription.substring(0, 120) + '...' : cleanDescription;
       
-      const pubDate = formatDate(item.pubDate);
-      
       // Use news image if available, otherwise placeholder
-      const imageUrl = item.image || 'https://via.placeholder.com/350x200?text=समाचार+तस्बिर';
+      const imageUrl = item.image || 'https://images.unsplash.com/photo-1588681664899-f142ff2dc9b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80';
       
       newsItem.innerHTML = `
-        <img src="${imageUrl}" alt="समाचार तस्बिर" loading="lazy" onerror="this.src='https://via.placeholder.com/350x200?text=तस्बिर+उपलब्ध+छैन'">
+        <img src="${imageUrl}" alt="News image" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1588681664899-f142ff2dc9b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80'">
         <div class="news-content">
-          <a href="${item.link}" target="_blank" rel="noopener noreferrer">${item.title}</a>
-          <div class="news-description">${shortDescription}</div>
+          <a href="${item.link}" target="_blank" rel="noopener noreferrer">
+            ${language ? item.title : item.englishTitle}
+          </a>
+          <div class="news-description">
+            ${language ? shortDescription : item.englishDescription.substring(0, 120) + '...'}
+          </div>
           <div class="news-meta">
-            <span class="news-date">${pubDate}</span>
+            <span class="news-date">${formatDate(item.pubDate, language)}</span>
           </div>
         </div>
       `;
       
       return newsItem;
     }
-
-    // Helper function to extract image from description
-    function extractImageFromDescription(description) {
-      if (!description) return null;
-      try {
-        const imgRegex = /<img[^>]+src="([^">]+)"/;
-        const match = description.match(imgRegex);
-        return match ? match[1] : null;
-      } catch {
-        return null;
-      }
-    }
-
-    // Helper function to format date in Nepali style
-    function formatDate(dateString) {
-      try {
-        const date = new Date(dateString);
-        if (isNaN(date.getTime())) return '';
-        
-        const options = { 
-          year: 'numeric', 
-          month: 'short', 
-          day: 'numeric',
-          hour: '2-digit',
-          minute: '2-digit'
-        };
-        
-        return date.toLocaleDateString('ne-NP', options);
-      } catch {
-        return '';
-      }
-    }
-
-    // Fetch a single news source
-    async function fetchSingleSource(sourceId) {
-      const source = newsSources.find(s => s.name.toLowerCase().replace(/\s+/g, '-') === sourceId);
-      if (!source) return;
-      
-      const listDiv = document.getElementById(`${sourceId}-news`);
-      if (!listDiv) return;
-      
-      listDiv.innerHTML = '<div class="loading">लोड हुँदैछ...</div>';
-      
-      try {
-        const items = await fetchNewsSource(source);
-        listDiv.innerHTML = '';
-        
-        if (items.length > 0) {
-          items.slice(0, source.maxItems).forEach(item => {
-            const newsItem = createNewsItem(item);
-            listDiv.appendChild(newsItem);
-          });
-        } else {
-          listDiv.innerHTML = `
-            <div class="error-message">
-              समाचार लोड गर्न असफल। 
-              <button class="refresh-btn" onclick="fetchSingleSource('${sourceId}')">
-                पुनः प्रयास गर्नुहोस्
-              </button>
-            </div>
-          `;
-        }
-      } catch (error) {
-        console.error(`Error loading ${source.name}:`, error);
-        listDiv.innerHTML = `
-          <div class="error-message">
-            त्रुटि: समाचार लोड गर्न असफल।
-            <button class="refresh-btn" onclick="fetchSingleSource('${sourceId}')">
-              पुनः प्रयास गर्नुहोस्
-            </button>
-          </div>
-        `;
-      }
-    }
-
-    // Initial load
-    document.addEventListener('DOMContentLoaded', fetchAndDisplayNews);
     
-    // Refresh every 30 minutes
-    setInterval(fetchAndDisplayNews, 30 * 60 * 1000);
+    // Render news to the page
+    function renderNews() {
+      const container = document.getElementById('news-container');
+      container.innerHTML = '';
+      
+      sampleNews.forEach(sourceData => {
+        const source = newsSources.find(s => s.name === sourceData.source);
+        if (!source) return;
+        
+        const section = document.createElement('div');
+        section.className = 'news-section';
+        
+        section.innerHTML = `
+          <h2 class="news-source-title">${source.name}</h2>
+          <div class="news-list" id="${source.name.toLowerCase().replace(/\s+/g, '-')}-news"></div>
+        `;
+        
+        const listDiv = section.querySelector('.news-list');
+        
+        sourceData.items.slice(0, source.maxItems).forEach(item => {
+          const newsItem = createNewsItem(item, nepaliLanguage);
+          listDiv.appendChild(newsItem);
+        });
+        
+        container.appendChild(section);
+      });
+    }
+    
+    // Initial render
+    document.addEventListener('DOMContentLoaded', renderNews);
   </script>
    <!-------- ------ ------ End News script------ ------ ------ ------ >   
 </body>
