@@ -1815,9 +1815,278 @@ data-size="small" >
   <!-- Trigger the modal with a button 
   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal55">Share your contents</button>
 -->
-  
+  <!DOCTYPE html>
+<html lang="ne">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>नेपालको प्रमुख अनलाइन खबरहरु | Nepal News Aggregator</title>
+  <style>
+    :root {
+      --primary-color: #dc3545;
+      --secondary-color: #f8f9fa;
+      --accent-color: #28a745;
+      --text-dark: #212529;
+      --text-light: #6c757d;
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --border-radius: 10px;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+      min-height: 100vh;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+    
+    header {
+      background: linear-gradient(135deg, var(--primary-color), #c82333);
+      color: white;
+      padding: 1.5rem 0;
+      text-align: center;
+      box-shadow: var(--shadow);
+      position: relative;
+      border-radius: 0 0 var(--border-radius) var(--border-radius);
+    }
+    
+    .nepali-text {
+      font-family: 'Preeti', 'Mangal', 'Kalimati', sans-serif;
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+    
+    .english-text {
+      font-family: 'Segoe UI', 'Roboto', sans-serif;
+    }
+    
+    .header-sub {
+      display: flex;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+    
+    .news-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
+      margin: 2rem 0;
+    }
+    
+    .news-section {
+      background: white;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease;
+      border: 1px solid #eaeaea;
+    }
+    
+    .news-section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .news-source-title {
+      background: linear-gradient(to right, var(--primary-color), #e83e8c);
+      color: white;
+      padding: 12px 15px;
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+    }
+    
+    .news-source-title::before {
+      content: "•";
+      margin-right: 10px;
+      font-size: 1.5rem;
+    }
+    
+    .news-list {
+      padding: 15px;
+    }
+    
+    .news-item {
+      display: flex;
+      gap: 15px;
+      padding: 15px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .news-item:last-child {
+      border-bottom: none;
+    }
+    
+    .news-item img {
+      width: 100px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 5px;
+      border: 1px solid #eee;
+      background: linear-gradient(120deg, #f5f5f5 0%, #e0e0e0 100%);
+      transition: transform 0.3s ease;
+    }
+    
+    .news-item:hover img {
+      transform: scale(1.05);
+    }
+    
+    .news-content {
+      flex: 1;
+    }
+    
+    .news-content a {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.05rem;
+      display: block;
+      margin-bottom: 5px;
+      transition: color 0.2s;
+    }
+    
+    .news-content a:hover {
+      color: var(--primary-color);
+    }
+    
+    .news-description {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+    
+    .news-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--text-light);
+    }
+    
+    .news-date {
+      font-style: italic;
+      color: #888;
+    }
+    
+    .loading, .error-message {
+      text-align: center;
+      padding: 2rem;
+      font-size: 1.1rem;
+      color: #666;
+    }
+    
+    .refresh-btn {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+      font-weight: 500;
+      transition: background 0.3s;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .refresh-btn:hover {
+      background: #c82333;
+      transform: translateY(-2px);
+    }
+    
+    .language-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .language-toggle:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+    
+    footer {
+      background: var(--text-dark);
+      color: white;
+      text-align: center;
+      padding: 1.5rem 0;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      border-radius: var(--border-radius) var(--border-radius) 0 0;
+    }
+    
+    .source-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 10px;
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 0 15px;
+    }
+    
+    .source-badge {
+      background: rgba(255,255,255,0.1);
+      padding: 8px;
+      border-radius: 4px;
+      text-align: center;
+      font-size: 0.8rem;
+    }
+    
+    @media (max-width: 768px) {
+      .news-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .nepali-text {
+        font-size: 1.8rem;
+      }
+      
+      .header-sub {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+      }
+      
+      .news-item {
+        flex-direction: column;
+      }
+      
+      .news-item img {
+        width: 100%;
+        height: 180px;
+      }
+    }
+  </style>
+<!------------script-----Online News---Section-->------नेपाली ताजा समाचार-------------------------------------->
 
-  <button class="language-toggle english-text" id="language-toggle">नेपालीमा स्विच गर्नुहोस्</button>
+   <!-------- ------ ------ End News script------ ------ ------ ------ >   
+  <header>
+    <button class="language-toggle english-text" id="language-toggle">नेपालीमा स्विच गर्नुहोस्</button>
     <div class="container">
       <h1 class="nepali-text">नेपालको प्रमुख अनलाइन खबरहरु</h1>
       <div class="header-sub">
@@ -1826,13 +2095,8 @@ data-size="small" >
       </div>
     </div>
   </header>
- <div class="container">
-    <div id="news-container">
-      <div class="loading">समाचार लोड हुँदैछ... कृपया प्रतीक्षा गर्नुहोस्</div>
-    </div>
-  </div>
-
-      <div class="container">
+  
+  <div class="container">
     <div id="news-container" class="news-container">
       <!-- News will be loaded here dynamically -->
     </div>
@@ -1848,9 +2112,276 @@ data-size="small" >
       <div class="source-badge">Nayapatrika</div>
       <div class="source-badge">Annapurna Post</div>
     </div>
-    <div>&copy; <span id="current-year"></span> Nepali online News Aggregator |shamser.info.np</div>
+    <div>&copy; <span id="current-year"></span> Nepal News Aggregator | Shamser.info.np</div>
   </footer>
 
+  <script>
+    // Set current date and year
+    const now = new Date();
+    document.getElementById('current-year').textContent = now.getFullYear();
+    
+    // Format and set current date
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById('current-date').textContent = now.toLocaleDateString('en-US', options);
+    
+    // News sources with all requested sources
+    const newsSources = [
+      {
+        name: "Himal Khabar",
+        rss: "https://www.himalkhabar.com/feed",
+        maxItems: 4,
+        logo: "https://www.himalkhabar.com/wp-content/uploads/2019/05/cropped-HK-Logo.png"
+      },
+      {
+        name: "Nepal Live",
+        rss: "https://nepallive.com/feed",
+        maxItems: 4,
+        logo: "https://nepallive.com/wp-content/uploads/2021/03/cropped-nepal_live_logo-1.png"
+      },
+      {
+        name: "Ejanakpur Today",
+        rss: "https://ejanakpurtoday.com/feed",
+        maxItems: 4,
+        logo: "https://ejanakpurtoday.com/wp-content/uploads/2021/01/ejt-logo.png"
+      },
+      {
+        name: "Ujyaalo Online",
+        rss: "https://ujyaaloonline.com/rss",
+        maxItems: 4,
+        logo: "https://ujyaaloonline.com/wp-content/uploads/2020/05/ujyaalo-online-logo.png"
+      },
+      {
+        name: "Bahrakhari",
+        rss: "https://baahrakhari.com/rss",
+        maxItems: 4,
+        logo: "https://baahrakhari.com/themes/bb/images/logo.png"
+      },
+      {
+        name: "Nayapatrika",
+        rss: "https://nayapatrikadaily.com/rss",
+        maxItems: 4,
+        logo: "https://nayapatrikadaily.com/storage/logo/nayapatrika-logo.png"
+      },
+      {
+        name: "Annapurna Post",
+        rss: "https://www.annapurnapost.com/rss",
+        maxItems: 4,
+        logo: "https://www.annapurnapost.com/resources/images/svg/ap_logo.svg"
+      }
+    ];
+    
+    // Sample news data with images
+    const sampleNews = [
+      {
+        source: "Himal Khabar",
+        items: [
+          {
+            title: "हिमाली क्षेत्रमा बर्षेको भारी हिउँले जीवन अस्तव्यस्त",
+            englishTitle: "Heavy snowfall disrupts life in Himalayan region",
+            description: "हिमाली जिल्लाहरुमा भारी हिउँपात भएको छ जसले यातायात र दैनिक जीवन अस्तव्यस्त बनाएको छ।",
+            englishDescription: "Heavy snowfall in Himalayan districts has disrupted transportation and daily life.",
+            link: "#",
+            pubDate: "2025-06-15T09:30:00Z",
+            image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          },
+          {
+            title: "पर्वतमा पर्यटन विकासका लागि नयाँ योजना सार्वजनिक",
+            englishTitle: "New plan unveiled for tourism development in mountains",
+            description: "सरकारले हिमाली क्षेत्रमा पर्यटन विकास गर्न नयाँ दीर्घकालीन योजना सार्वजनिक गरेको छ।",
+            englishDescription: "The government has unveiled a new long-term plan for tourism development in the Himalayan region.",
+            link: "#",
+            pubDate: "2025-06-14T14:45:00Z",
+            image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          }
+        ]
+      },
+      {
+        source: "Nepal Live",
+        items: [
+          {
+            title: "काठमाडौं उपत्यकामा हावापानीको गुणस्तरमा सुधार",
+            englishTitle: "Air quality improves in Kathmandu Valley",
+            description: "हालैको वर्षाले काठमाडौं उपत्यकाको हावापानीको गुणस्तरमा उल्लेख्य सुधार भएको छ।",
+            englishDescription: "Recent rainfall has significantly improved the air quality in Kathmandu Valley.",
+            link: "#",
+            pubDate: "2025-06-14T11:20:00Z",
+            image: "https://images.unsplash.com/photo-1564067886520-e1ffca7a5fba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          },
+          {
+            title: "नेपाली क्रिकेट टिम एसिया कपको लागि तयार",
+            englishTitle: "Nepali cricket team ready for Asia Cup",
+            description: "नेपाली राष्ट्रिय क्रिकेट टिमले आगामी एसिया कपको लागि तयारी पूरा गरेको छ।",
+            englishDescription: "The Nepali national cricket team has completed preparations for the upcoming Asia Cup.",
+            link: "#",
+            pubDate: "2025-06-13T16:30:00Z",
+            image: "https://images.unsplash.com/photo-1609710228159-0fa9bd7c0827?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          }
+        ]
+      },
+      {
+        source: "Ejanakpur Today",
+        items: [
+          {
+            title: "मधेश क्षेत्रमा कृषि उत्पादन बृद्धिको सम्भावना",
+            englishTitle: "Potential for increased agricultural production in Madhesh region",
+            description: "नयाँ सिंचाई योजनाहरुले मधेश क्षेत्रमा कृषि उत्पादन बढाउने सम्भावना देखिएको छ।",
+            englishDescription: "New irrigation projects show potential to increase agricultural production in the Madhesh region.",
+            link: "#",
+            pubDate: "2025-06-14T10:15:00Z",
+            image: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          }
+        ]
+      },
+      {
+        source: "Ujyaalo Online",
+        items: [
+          {
+            title: "सरकारले नयाँ ऊर्जा नीति जारी गर्ने",
+            englishTitle: "Government to announce new energy policy",
+            description: "अगामी हप्तामा सरकारले नयाँ ऊर्जा नीति जारी गर्ने तयारी गरेको छ।",
+            englishDescription: "The government is preparing to announce a new energy policy next week.",
+            link: "#",
+            pubDate: "2025-06-13T15:40:00Z",
+            image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          }
+        ]
+      },
+      {
+        source: "Bahrakhari",
+        items: [
+          {
+            title: "राजधानीमा नयाँ सार्वजनिक यातायात प्रणाली सुरु",
+            englishTitle: "New public transport system launched in capital",
+            description: "काठमाडौं उपत्यकामा नयाँ स्मार्ट बस प्रणालीको सुरुवात भएको छ।",
+            englishDescription: "A new smart bus system has been launched in Kathmandu Valley.",
+            link: "#",
+            pubDate: "2025-06-12T09:15:00Z",
+            image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          }
+        ]
+      },
+      {
+        source: "Nayapatrika",
+        items: [
+          {
+            title: "शिक्षा प्रणाली सुधारका लागि नयाँ पहल",
+            englishTitle: "New initiative to reform education system",
+            description: "शिक्षा मन्त्रालयले देशको शिक्षा प्रणाली सुधार गर्न नयाँ पहल सुरु गरेको छ।",
+            englishDescription: "The Ministry of Education has launched a new initiative to reform the country's education system.",
+            link: "#",
+            pubDate: "2025-06-11T14:20:00Z",
+            image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          }
+        ]
+      },
+      {
+        source: "Annapurna Post",
+        items: [
+          {
+            title: "पोखरामा अन्तर्राष्ट्रिय पर्यटन सम्मेलन सुरु",
+            englishTitle: "International tourism conference begins in Pokhara",
+            description: "पोखरामा दुई दिवसीय अन्तर्राष्ट्रिय पर्यटन सम्मेलन सुरु भएको छ।",
+            englishDescription: "A two-day international tourism conference has begun in Pokhara.",
+            link: "#",
+            pubDate: "2025-06-10T11:30:00Z",
+            image: "https://images.unsplash.com/photo-1599594201376-9f5d614b1c2a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          }
+        ]
+      }
+    ];
+    
+    // Language state (true for Nepali, false for English)
+    let nepaliLanguage = true;
+    
+    // Language toggle functionality
+    document.getElementById('language-toggle').addEventListener('click', function() {
+      nepaliLanguage = !nepaliLanguage;
+      this.textContent = nepaliLanguage ? "Switch to English" : "नेपालीमा स्विच गर्नुहोस्";
+      renderNews();
+    });
+    
+    // Format date in Nepali or English
+    function formatDate(dateString, language) {
+      const date = new Date(dateString);
+      
+      if (language) {
+        // Nepali date format
+        const options = { year: 'numeric', month: 'short', day: 'numeric' };
+        return date.toLocaleDateString('ne-NP', options);
+      }
+      
+      // English date format
+      const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+      return date.toLocaleDateString('en-US', options);
+    }
+    
+    // Create a news item DOM element
+    function createNewsItem(item, language) {
+      const newsItem = document.createElement('div');
+      newsItem.className = 'news-item';
+      
+      // Create short description
+      const cleanDescription = item.description
+        .replace(/<[^>]*>?/gm, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+      
+      const shortDescription = cleanDescription.length > 120 ? 
+        cleanDescription.substring(0, 120) + '...' : cleanDescription;
+      
+      // Use news image if available, otherwise placeholder
+      const imageUrl = item.image || 'https://images.unsplash.com/photo-1588681664899-f142ff2dc9b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80';
+      
+      newsItem.innerHTML = `
+        <img src="${imageUrl}" alt="News image" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1588681664899-f142ff2dc9b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80'">
+        <div class="news-content">
+          <a href="${item.link}" target="_blank" rel="noopener noreferrer">
+            ${language ? item.title : item.englishTitle}
+          </a>
+          <div class="news-description">
+            ${language ? shortDescription : item.englishDescription.substring(0, 120) + '...'}
+          </div>
+          <div class="news-meta">
+            <span class="news-date">${formatDate(item.pubDate, language)}</span>
+          </div>
+        </div>
+      `;
+      
+      return newsItem;
+    }
+    
+    // Render news to the page
+    function renderNews() {
+      const container = document.getElementById('news-container');
+      container.innerHTML = '';
+      
+      sampleNews.forEach(sourceData => {
+        const source = newsSources.find(s => s.name === sourceData.source);
+        if (!source) return;
+        
+        const section = document.createElement('div');
+        section.className = 'news-section';
+        
+        section.innerHTML = `
+          <h2 class="news-source-title">${source.name}</h2>
+          <div class="news-list" id="${source.name.toLowerCase().replace(/\s+/g, '-')}-news"></div>
+        `;
+        
+        const listDiv = section.querySelector('.news-list');
+        
+        sourceData.items.slice(0, source.maxItems).forEach(item => {
+          const newsItem = createNewsItem(item, nepaliLanguage);
+          listDiv.appendChild(newsItem);
+        });
+        
+        container.appendChild(section);
+      });
+    }
+    
+    // Initial render
+    document.addEventListener('DOMContentLoaded', renderNews);
+  </script>
+<!--------Online News-------------------------------------------->
  
 <!-----------------
  <iframe src="https://shamser.info.np/OnlineNewsAutoUpdate.html" 
@@ -4694,293 +5225,7 @@ clear: both;
 <div class="fb-comments" data-href="https://shamser.info.np" data-width="" data-numposts="25"></div>
 
 
-<!------------script-----Online News---Section-->------नेपाली ताजा समाचार-------------------------------------->
-  <div class="container">
-    <div id="news-container" class="news-container">
-      <!-- News will be loaded here dynamically -->
-    </div>
-  </div>
 
-  <footer class="english-text">
-    <div class="source-grid">
-      <div class="source-badge">Himal Khabar</div>
-      <div class="source-badge">Nepal Live</div>
-      <div class="source-badge">Ejanakpur Today</div>
-      <div class="source-badge">Ujyaalo Online</div>
-      <div class="source-badge">Bahrakhari</div>
-      <div class="source-badge">Nayapatrika</div>
-      <div class="source-badge">Annapurna Post</div>
-    </div>
-    <div>&copy; <span id="current-year"></span> Nepal News Aggregator | Shamser.info.np</div>
-  </footer>
-
-  <script>
-    // Set current date and year
-    const now = new Date();
-    document.getElementById('current-year').textContent = now.getFullYear();
-    
-    // Format and set current date
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    document.getElementById('current-date').textContent = now.toLocaleDateString('en-US', options);
-    
-    // News sources with all requested sources
-    const newsSources = [
-      {
-        name: "Himal Khabar",
-        rss: "https://www.himalkhabar.com/feed",
-        maxItems: 4,
-        logo: "https://www.himalkhabar.com/wp-content/uploads/2019/05/cropped-HK-Logo.png"
-      },
-      {
-        name: "Nepal Live",
-        rss: "https://nepallive.com/feed",
-        maxItems: 4,
-        logo: "https://nepallive.com/wp-content/uploads/2021/03/cropped-nepal_live_logo-1.png"
-      },
-      {
-        name: "Ejanakpur Today",
-        rss: "https://ejanakpurtoday.com/feed",
-        maxItems: 4,
-        logo: "https://ejanakpurtoday.com/wp-content/uploads/2021/01/ejt-logo.png"
-      },
-      {
-        name: "Ujyaalo Online",
-        rss: "https://ujyaaloonline.com/rss",
-        maxItems: 4,
-        logo: "https://ujyaaloonline.com/wp-content/uploads/2020/05/ujyaalo-online-logo.png"
-      },
-      {
-        name: "Bahrakhari",
-        rss: "https://baahrakhari.com/rss",
-        maxItems: 4,
-        logo: "https://baahrakhari.com/themes/bb/images/logo.png"
-      },
-      {
-        name: "Nayapatrika",
-        rss: "https://nayapatrikadaily.com/rss",
-        maxItems: 4,
-        logo: "https://nayapatrikadaily.com/storage/logo/nayapatrika-logo.png"
-      },
-      {
-        name: "Annapurna Post",
-        rss: "https://www.annapurnapost.com/rss",
-        maxItems: 4,
-        logo: "https://www.annapurnapost.com/resources/images/svg/ap_logo.svg"
-      }
-    ];
-    
-    // Sample news data with images
-    const sampleNews = [
-      {
-        source: "Himal Khabar",
-        items: [
-          {
-            title: "हिमाली क्षेत्रमा बर्षेको भारी हिउँले जीवन अस्तव्यस्त",
-            englishTitle: "Heavy snowfall disrupts life in Himalayan region",
-            description: "हिमाली जिल्लाहरुमा भारी हिउँपात भएको छ जसले यातायात र दैनिक जीवन अस्तव्यस्त बनाएको छ।",
-            englishDescription: "Heavy snowfall in Himalayan districts has disrupted transportation and daily life.",
-            link: "#",
-            pubDate: "2025-06-15T09:30:00Z",
-            image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
-          },
-          {
-            title: "पर्वतमा पर्यटन विकासका लागि नयाँ योजना सार्वजनिक",
-            englishTitle: "New plan unveiled for tourism development in mountains",
-            description: "सरकारले हिमाली क्षेत्रमा पर्यटन विकास गर्न नयाँ दीर्घकालीन योजना सार्वजनिक गरेको छ।",
-            englishDescription: "The government has unveiled a new long-term plan for tourism development in the Himalayan region.",
-            link: "#",
-            pubDate: "2025-06-14T14:45:00Z",
-            image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
-          }
-        ]
-      },
-      {
-        source: "Nepal Live",
-        items: [
-          {
-            title: "काठमाडौं उपत्यकामा हावापानीको गुणस्तरमा सुधार",
-            englishTitle: "Air quality improves in Kathmandu Valley",
-            description: "हालैको वर्षाले काठमाडौं उपत्यकाको हावापानीको गुणस्तरमा उल्लेख्य सुधार भएको छ।",
-            englishDescription: "Recent rainfall has significantly improved the air quality in Kathmandu Valley.",
-            link: "#",
-            pubDate: "2025-06-14T11:20:00Z",
-            image: "https://images.unsplash.com/photo-1564067886520-e1ffca7a5fba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
-          },
-          {
-            title: "नेपाली क्रिकेट टिम एसिया कपको लागि तयार",
-            englishTitle: "Nepali cricket team ready for Asia Cup",
-            description: "नेपाली राष्ट्रिय क्रिकेट टिमले आगामी एसिया कपको लागि तयारी पूरा गरेको छ।",
-            englishDescription: "The Nepali national cricket team has completed preparations for the upcoming Asia Cup.",
-            link: "#",
-            pubDate: "2025-06-13T16:30:00Z",
-            image: "https://images.unsplash.com/photo-1609710228159-0fa9bd7c0827?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
-          }
-        ]
-      },
-      {
-        source: "Ejanakpur Today",
-        items: [
-          {
-            title: "मधेश क्षेत्रमा कृषि उत्पादन बृद्धिको सम्भावना",
-            englishTitle: "Potential for increased agricultural production in Madhesh region",
-            description: "नयाँ सिंचाई योजनाहरुले मधेश क्षेत्रमा कृषि उत्पादन बढाउने सम्भावना देखिएको छ।",
-            englishDescription: "New irrigation projects show potential to increase agricultural production in the Madhesh region.",
-            link: "#",
-            pubDate: "2025-06-14T10:15:00Z",
-            image: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
-          }
-        ]
-      },
-      {
-        source: "Ujyaalo Online",
-        items: [
-          {
-            title: "सरकारले नयाँ ऊर्जा नीति जारी गर्ने",
-            englishTitle: "Government to announce new energy policy",
-            description: "अगामी हप्तामा सरकारले नयाँ ऊर्जा नीति जारी गर्ने तयारी गरेको छ।",
-            englishDescription: "The government is preparing to announce a new energy policy next week.",
-            link: "#",
-            pubDate: "2025-06-13T15:40:00Z",
-            image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
-          }
-        ]
-      },
-      {
-        source: "Bahrakhari",
-        items: [
-          {
-            title: "राजधानीमा नयाँ सार्वजनिक यातायात प्रणाली सुरु",
-            englishTitle: "New public transport system launched in capital",
-            description: "काठमाडौं उपत्यकामा नयाँ स्मार्ट बस प्रणालीको सुरुवात भएको छ।",
-            englishDescription: "A new smart bus system has been launched in Kathmandu Valley.",
-            link: "#",
-            pubDate: "2025-06-12T09:15:00Z",
-            image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
-          }
-        ]
-      },
-      {
-        source: "Nayapatrika",
-        items: [
-          {
-            title: "शिक्षा प्रणाली सुधारका लागि नयाँ पहल",
-            englishTitle: "New initiative to reform education system",
-            description: "शिक्षा मन्त्रालयले देशको शिक्षा प्रणाली सुधार गर्न नयाँ पहल सुरु गरेको छ।",
-            englishDescription: "The Ministry of Education has launched a new initiative to reform the country's education system.",
-            link: "#",
-            pubDate: "2025-06-11T14:20:00Z",
-            image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
-          }
-        ]
-      },
-      {
-        source: "Annapurna Post",
-        items: [
-          {
-            title: "पोखरामा अन्तर्राष्ट्रिय पर्यटन सम्मेलन सुरु",
-            englishTitle: "International tourism conference begins in Pokhara",
-            description: "पोखरामा दुई दिवसीय अन्तर्राष्ट्रिय पर्यटन सम्मेलन सुरु भएको छ।",
-            englishDescription: "A two-day international tourism conference has begun in Pokhara.",
-            link: "#",
-            pubDate: "2025-06-10T11:30:00Z",
-            image: "https://images.unsplash.com/photo-1599594201376-9f5d614b1c2a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
-          }
-        ]
-      }
-    ];
-    
-    // Language state (true for Nepali, false for English)
-    let nepaliLanguage = true;
-    
-    // Language toggle functionality
-    document.getElementById('language-toggle').addEventListener('click', function() {
-      nepaliLanguage = !nepaliLanguage;
-      this.textContent = nepaliLanguage ? "Switch to English" : "नेपालीमा स्विच गर्नुहोस्";
-      renderNews();
-    });
-    
-    // Format date in Nepali or English
-    function formatDate(dateString, language) {
-      const date = new Date(dateString);
-      
-      if (language) {
-        // Nepali date format
-        const options = { year: 'numeric', month: 'short', day: 'numeric' };
-        return date.toLocaleDateString('ne-NP', options);
-      }
-      
-      // English date format
-      const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-      return date.toLocaleDateString('en-US', options);
-    }
-    
-    // Create a news item DOM element
-    function createNewsItem(item, language) {
-      const newsItem = document.createElement('div');
-      newsItem.className = 'news-item';
-      
-      // Create short description
-      const cleanDescription = item.description
-        .replace(/<[^>]*>?/gm, '')
-        .replace(/\s+/g, ' ')
-        .trim();
-      
-      const shortDescription = cleanDescription.length > 120 ? 
-        cleanDescription.substring(0, 120) + '...' : cleanDescription;
-      
-      // Use news image if available, otherwise placeholder
-      const imageUrl = item.image || 'https://images.unsplash.com/photo-1588681664899-f142ff2dc9b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80';
-      
-      newsItem.innerHTML = `
-        <img src="${imageUrl}" alt="News image" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1588681664899-f142ff2dc9b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80'">
-        <div class="news-content">
-          <a href="${item.link}" target="_blank" rel="noopener noreferrer">
-            ${language ? item.title : item.englishTitle}
-          </a>
-          <div class="news-description">
-            ${language ? shortDescription : item.englishDescription.substring(0, 120) + '...'}
-          </div>
-          <div class="news-meta">
-            <span class="news-date">${formatDate(item.pubDate, language)}</span>
-          </div>
-        </div>
-      `;
-      
-      return newsItem;
-    }
-    
-    // Render news to the page
-    function renderNews() {
-      const container = document.getElementById('news-container');
-      container.innerHTML = '';
-      
-      sampleNews.forEach(sourceData => {
-        const source = newsSources.find(s => s.name === sourceData.source);
-        if (!source) return;
-        
-        const section = document.createElement('div');
-        section.className = 'news-section';
-        
-        section.innerHTML = `
-          <h2 class="news-source-title">${source.name}</h2>
-          <div class="news-list" id="${source.name.toLowerCase().replace(/\s+/g, '-')}-news"></div>
-        `;
-        
-        const listDiv = section.querySelector('.news-list');
-        
-        sourceData.items.slice(0, source.maxItems).forEach(item => {
-          const newsItem = createNewsItem(item, nepaliLanguage);
-          listDiv.appendChild(newsItem);
-        });
-        
-        container.appendChild(section);
-      });
-    }
-    
-    // Initial render
-    document.addEventListener('DOMContentLoaded', renderNews);
-  </script>
-   <!-------- ------ ------ End News script------ ------ ------ ------ >   
 </body>
 
 <!-- Mirrored from mofaga.gov.np/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 01 May 2024 15:58:00 GMT -->
