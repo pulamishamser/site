@@ -1883,13 +1883,25 @@ data-size="small" >
             padding-bottom: 0;
         }
         
-        .news-item img {
+        .news-image-container {
             width: 200px;
             height: 120px;
-            object-fit: cover;
             margin-right: 15px;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+        
+        .news-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             border-radius: 4px;
             background-color: #f0f0f0;
+            transition: transform 0.3s ease;
+        }
+        
+        .news-item a:hover img {
+            transform: scale(1.03);
         }
         
         .news-content {
@@ -2017,7 +2029,7 @@ data-size="small" >
                 flex-direction: column;
             }
             
-            .news-item img {
+            .news-image-container {
                 width: 100%;
                 height: 180px;
                 margin-right: 0;
@@ -2351,7 +2363,7 @@ data-size="small" >
             }));
         }
 
-        // Create a news item DOM element with stable image handling
+        // Create a news item DOM element with image link
         function createNewsItem(item) {
             const newsItem = document.createElement('div');
             newsItem.className = 'news-item';
@@ -2366,15 +2378,18 @@ data-size="small" >
             
             const pubDate = formatDate(item.pubDate);
             
-            // Create image element with stable error handling
+            // Create image container with link
+            const imageContainer = document.createElement('div');
+            imageContainer.className = 'news-image-container';
+            
+            const imageLink = document.createElement('a');
+            imageLink.href = item.link;
+            imageLink.target = '_blank';
+            imageLink.rel = 'noopener noreferrer';
+            
             const img = document.createElement('img');
             img.alt = "समाचार तस्बिर";
             img.loading = "lazy";
-            img.style.objectFit = "cover";
-            img.style.width = "200px";
-            img.style.height = "120px";
-            img.style.borderRadius = "4px";
-            img.style.backgroundColor = "#f0f0f0";
             
             // Set up error handling before setting src
             img.onerror = function() {
@@ -2383,12 +2398,38 @@ data-size="small" >
             };
             
             // Set the source after setting up error handler
-            const imageUrl = item.image || item.enclosure?.url || '';
+            let imageUrl = item.image || item.enclosure?.url || '';
+            
+            // Fix common image URL issues
+            if (imageUrl) {
+                // Remove any URL-encoded quotes
+                imageUrl = imageUrl.replace(/^['"]|['"]$/g, '');
+                
+                // Handle relative URLs for some sources
+                if (imageUrl.startsWith('//')) {
+                    imageUrl = 'https:' + imageUrl;
+                } else if (imageUrl.startsWith('/')) {
+                    // Try to construct absolute URL from the news item link
+                    try {
+                        const urlObj = new URL(item.link);
+                        imageUrl = urlObj.protocol + '//' + urlObj.host + imageUrl;
+                    } catch (e) {
+                        console.log('Could not construct absolute URL for image');
+                    }
+                }
+                
+                // Add timestamp to prevent caching issues
+                imageUrl += (imageUrl.includes('?') ? '&' : '?') + 't=' + Date.now();
+            }
+            
             if (imageUrl && isValidImageUrl(imageUrl)) {
                 img.src = imageUrl;
             } else {
                 img.src = 'data:image/svg+xml;charset=UTF-8,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="120" viewBox="0 0 200 120"%3E%3Crect fill="%23f0f0f0" width="200" height="120"/%3E%3Ctext fill="%23666" font-family="Arial" font-size="12" dy=".5em" text-anchor="middle" x="100" y="60"%3ENews+Image%3C/text%3E%3C/svg%3E';
             }
+            
+            imageLink.appendChild(img);
+            imageContainer.appendChild(imageLink);
             
             // Create the HTML structure
             const newsContent = document.createElement('div');
@@ -2402,7 +2443,7 @@ data-size="small" >
             `;
             
             // Append elements
-            newsItem.appendChild(img);
+            newsItem.appendChild(imageContainer);
             newsItem.appendChild(newsContent);
             
             return newsItem;
@@ -2412,9 +2453,24 @@ data-size="small" >
         function extractImageFromDescription(description) {
             if (!description) return null;
             try {
+                // First try to find standard img tag
                 const imgRegex = /<img[^>]+src="([^">]+)"/;
                 const match = description.match(imgRegex);
-                return match ? match[1] : null;
+                if (match) return match[1];
+                
+                // Then try to find URL in the description text
+                const urlRegex = /(https?:\/\/[^\s]+?\.(?:jpg|jpeg|png|gif|webp|svg))/i;
+                const urlMatch = description.match(urlRegex);
+                if (urlMatch) return urlMatch[1];
+                
+                // Try to find base64 encoded images
+                const base64Regex = /src="data:image\/[^;]+;base64,[^"]+"/i;
+                const base64Match = description.match(base64Regex);
+                if (base64Match) {
+                    return base64Match[0].replace(/^src="/, '').replace(/"$/, '');
+                }
+                
+                return null;
             } catch {
                 return null;
             }
@@ -2423,9 +2479,15 @@ data-size="small" >
         // Helper function to validate image URLs
         function isValidImageUrl(url) {
             if (!url) return false;
+            
+            // Check for base64 encoded images
+            if (url.startsWith('data:image/')) {
+                return true;
+            }
+            
             try {
                 new URL(url);
-                return /\.(jpg|jpeg|png|webp|avif|gif|svg)$/i.test(url.split('?')[0]);
+                return /\.(jpg|jpeg|png|webp|avif|gif|svg)(\?.*)?$/i.test(url.split('?')[0]);
             } catch {
                 return false;
             }
@@ -2496,8 +2558,8 @@ data-size="small" >
         // Initial load
         document.addEventListener('DOMContentLoaded', fetchAndDisplayNews);
         
-        // Refresh every 30 minutes
-        setInterval(fetchAndDisplayNews, 30 * 60 * 1000);
+        // Refresh every 10 minutes (10 * 60 * 1000 milliseconds)
+        setInterval(fetchAndDisplayNews, 10 * 60 * 1000);
     </script>
 
    <!-------- ------ ------ End News script------ ------ ------ ------>   
