@@ -1819,7 +1819,7 @@ data-size="small" >
 
 
 <!----------------------------------------------------------->
-<style>
+ <style>
         * {
             margin: 0;
             padding: 0;
@@ -1828,18 +1828,19 @@ data-size="small" >
         }
         
         :root {
-            --primary: #157DEC;
+            --primary: #d32f2f;
             --primary-dark: #b71c1c;
+            --primary-light: #ffcdd2;
             --secondary: #1976d2;
             --text: #333;
             --text-light: #666;
             --bg: #f5f7fa;
             --card-bg: #ffffff;
-            --shadow: rgba(0, 0, 0, 0.1);
+            --border: #e0e0e0;
         }
         
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
+            background: linear-gradient(135deg, #f0f2f5 0%, #e4e7eb 100%);
             color: var(--text);
             line-height: 1.6;
             padding-bottom: 40px;
@@ -1954,66 +1955,64 @@ data-size="small" >
         
         .news-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 25px;
             margin-top: 20px;
         }
         
-        .news-card {
+        .news-section {
             background: var(--card-bg);
             border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-        
-        .news-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 20px rgba(0,0,0,0.15);
-        }
-        
-        .news-image {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-bottom: 3px solid var(--primary);
-        }
-        
-        .news-content {
             padding: 20px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--primary);
         }
         
-        .news-source {
+        .section-header {
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin-bottom: 12px;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-light);
         }
         
-        .source-name {
-            font-weight: 700;
+        .section-title {
+            font-size: 1.5rem;
             color: var(--primary);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            font-weight: 700;
         }
         
-        .source-icon {
-            width: 24px;
-            height: 24px;
+        .section-icon {
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
-            background: #f0f0f0;
+            background: var(--primary-light);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
+            font-size: 16px;
             color: var(--primary);
+        }
+        
+        .news-items {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .news-item {
+            padding: 15px;
+            border-radius: 8px;
+            background: #fff;
+            transition: all 0.3s ease;
+            border-left: 3px solid var(--primary);
+        }
+        
+        .news-item:hover {
+            background: #f9f9f9;
+            transform: translateX(5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
         }
         
         .news-title {
@@ -2021,15 +2020,21 @@ data-size="small" >
             font-weight: 700;
             text-decoration: none;
             font-size: 1.15rem;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             display: block;
             transition: color 0.2s ease;
             line-height: 1.4;
-            flex: 1;
         }
         
         .news-title:hover {
             color: var(--primary);
+        }
+        
+        .news-description {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+            line-height: 1.5;
         }
         
         .news-meta {
@@ -2038,8 +2043,8 @@ data-size="small" >
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 15px;
-            border-top: 1px solid #eee;
+            padding-top: 10px;
+            border-top: 1px solid var(--border);
         }
         
         .news-date {
@@ -2153,70 +2158,6 @@ data-size="small" >
             margin-top: 15px;
         }
         
-        /* Skeleton loading animation */
-        @keyframes shimmer {
-            0% { background-position: -468px 0 }
-            100% { background-position: 468px 0 }
-        }
-        
-        .skeleton {
-            animation: shimmer 1.5s infinite linear;
-            background: linear-gradient(to right, #f6f6f6 8%, #f0f0f0 18%, #f6f6f6 33%);
-            background-size: 800px 104px;
-            position: relative;
-        }
-        
-        .skeleton-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-            height: 350px;
-        }
-        
-        .skeleton-image {
-            width: 100%;
-            height: 180px;
-            background: #f0f0f0;
-            border-bottom: 3px solid #e0e0e0;
-        }
-        
-        .skeleton-content {
-            padding: 20px;
-        }
-        
-        .skeleton-line {
-            height: 15px;
-            margin-bottom: 12px;
-            background: #f0f0f0;
-            border-radius: 4px;
-        }
-        
-        .skeleton-line.short {
-            width: 40%;
-        }
-        
-        .skeleton-line.medium {
-            width: 70%;
-        }
-        
-        .skeleton-line.long {
-            width: 100%;
-        }
-        
-        .skeleton-meta {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-        
-        .skeleton-meta-line {
-            height: 12px;
-            width: 40%;
-            background: #f0f0f0;
-            border-radius: 4px;
-        }
-        
         /* Responsive styles */
         @media (max-width: 768px) {
             .header-content {
@@ -2232,17 +2173,16 @@ data-size="small" >
                 gap: 10px;
             }
             
-            .news-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
             .language-toggle {
                 position: relative;
                 top: auto;
                 right: auto;
                 margin-top: 10px;
                 background: rgba(255,255,255,0.3);
+            }
+            
+            .news-grid {
+                grid-template-columns: 1fr;
             }
         }
         
@@ -2255,21 +2195,25 @@ data-size="small" >
                 padding: 6px 12px;
                 font-size: 0.9rem;
             }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
         }
     </style>
 </head>
 <body>
-   <div id="notification" class="notification">
+    <div id="notification" class="notification">
         <i class="fas fa-check-circle"></i>
         <span>ताजा खबरहरु सफलतापूर्वक अद्यावधिक गरियो!</span>
     </div>
     
     <header>
         <div class="header-content">
-            <h1 class="nepali-text">नेपालको ताजा समाचार</h1>
+            <h1 class="nepali-text">नेपालको समाचार संग्रह</h1>
             <button class="language-toggle" id="language-toggle">
                 <i class="fas fa-globe"></i>
-                <span id="toggle-text">Switch to English</span>
+                <span id="toggle-text">नेपालीमा स्विच गर्नुहोस्</span>
             </button>
             <div class="header-info">
                 <div class="refresh-container">
@@ -2303,7 +2247,7 @@ data-size="small" >
 
     <footer>
         <div class="footer-content">
-            <h3>ताजा अनलाइन समाचार</h3>
+            <h3>नेपालको समाचार संग्रह</h3>
             <div class="footer-links">
                 <a href="#"><i class="fas fa-info-circle"></i> बारेमा</a>
                 <a href="#"><i class="fas fa-envelope"></i> सम्पर्क</a>
@@ -2322,7 +2266,7 @@ data-size="small" >
         // Language management
         const translations = {
             ne: {
-                headerTitle: "ताजा अनलाइन समाचार<",
+                headerTitle: "नेपालको समाचार संग्रह",
                 refreshText: "ताजा खबर लोड गर्नुहोस्",
                 lastRefreshed: "अन्तिम अद्यावधिक: ",
                 nextRefresh: "अर्को अद्यावधिक: ",
@@ -2331,27 +2275,19 @@ data-size="small" >
                 loadingText: "ताजा खबरहरु लोड हुँदैछ... कृपया प्रतीक्षा गर्नुहोस्",
                 notificationText: "ताजा खबरहरु सफलतापूर्वक अद्यावधिक गरियो!",
                 errorText: "समाचार लोड गर्न असफल। कृपया इन्टरनेट जडान जाँच गर्नुहोस्",
-                retryText: "पुनः प्रयास गर्नुहोस्",
-                footerTitle: "नेपालको ताजा समाचार",
-                about: "बारेमा",
-                contact: "सम्पर्क",
-                privacy: "गोपनीयता नीति"
+                retryText: "पुनः प्रयास गर्नुहोस्"
             },
             en: {
-                headerTitle: "Latest News from Nepal",
+                headerTitle: "Nepali News Aggregator",
                 refreshText: "Load Latest News",
                 lastRefreshed: "Last Updated: ",
                 nextRefresh: "Next Update: ",
                 minutesText: "minutes",
-                toggleText: "नेपालीमा स्विच गर्नुहोस्",
+                toggleText: "Switch to Nepali",
                 loadingText: "Loading latest news... Please wait",
                 notificationText: "News updated successfully!",
                 errorText: "Failed to load news. Please check your internet connection",
-                retryText: "Try Again",
-                footerTitle: "Latest News from Nepal",
-                about: "About",
-                contact: "Contact",
-                privacy: "Privacy Policy"
+                retryText: "Try Again"
             }
         };
 
@@ -2379,16 +2315,6 @@ data-size="small" >
             if (notificationText) {
                 notificationText.textContent = translations[lang].notificationText;
             }
-            
-            // Update footer content
-            document.querySelector('.footer-content h3').textContent = translations[lang].footerTitle;
-            const footerLinks = document.querySelectorAll('.footer-links a');
-            footerLinks[0].textContent = translations[lang].about;
-            footerLinks[1].textContent = translations[lang].contact;
-            footerLinks[2].textContent = translations[lang].privacy;
-            
-            // Refresh news to show in new language
-            fetchAndDisplayNews();
         }
 
         // Toggle language
@@ -2402,48 +2328,179 @@ data-size="small" >
             {
                 name: "OnlineKhabar",
                 rss: "https://www.onlinekhabar.com/rss",
+                fallbacks: [
+                    "https://api.rss2json.com/v1/api.json?rss_url=https://www.onlinekhabar.com/rss",
+                    "https://corsproxy.io/?https://www.onlinekhabar.com/rss"
+                ],
+                maxItems: 5,
                 icon: "fas fa-newspaper",
-                color: "#d32f2f",
-                maxItems: 4
+                color: "#d32f2f"
             },
             {
                 name: "Ratopati",
                 rss: "https://ratopati.com/rss",
+                fallbacks: [
+                    "https://api.rss2json.com/v1/api.json?rss_url=https://ratopati.com/rss",
+                    "https://corsproxy.io/?https://ratopati.com/rss"
+                ],
+                maxItems: 5,
                 icon: "fas fa-globe",
-                color: "#1976d2",
-                maxItems: 4
+                color: "#1976d2"
             },
             {
                 name: "Gorkhapatra",
                 rss: "https://gorkhapatraonline.com/rss",
+                fallbacks: [
+                    "https://api.rss2json.com/v1/api.json?rss_url=https://gorkhapatraonline.com/rss",
+                    "https://corsproxy.io/?https://gorkhapatraonline.com/rss"
+                ],
+                maxItems: 5,
                 icon: "fas fa-landmark",
-                color: "#388e3c",
-                maxItems: 4
+                color: "#388e3c"
             },
             {
                 name: "BBC Nepali",
                 rss: "https://www.bbc.com/nepali/index.xml",
+                fallbacks: [
+                    "https://api.rss2json.com/v1/api.json?rss_url=https://www.bbc.com/nepali/index.xml",
+                    "https://corsproxy.io/?https://www.bbc.com/nepali/index.xml"
+                ],
+                maxItems: 5,
                 icon: "fas fa-broadcast-tower",
-                color: "#c2185b",
-                maxItems: 4
+                color: "#c2185b"
             },
             {
                 name: "Setopati",
                 rss: "https://setopati.com/rss",
+                fallbacks: [],
+                maxItems: 5,
                 icon: "fas fa-desktop",
-                color: "#0288d1",
-                maxItems: 4
+                color: "#0288d1"
             },
             {
                 name: "Ekantipur",
                 rss: "https://ekantipur.com/rss",
+                fallbacks: [
+                    "https://api.rss2json.com/v1/api.json?rss_url=https://ekantipur.com/rss",
+                    "https://corsproxy.io/?https://ekantipur.com/rss"
+                ],
+                maxItems: 5,
                 icon: "fas fa-book-open",
-                color: "#7b1fa2",
-                maxItems: 4
+                color: "#7b1fa2"
+            },
+            {
+                name: "Bahrakhari",
+                rss: "https://baahrakhari.com/rss",
+                fallbacks: [
+                    "https://api.rss2json.com/v1/api.json?rss_url=https://baahrakhari.com/rss",
+                    "https://corsproxy.io/?https://baahrakhari.com/rss"
+                ],
+                maxItems: 5,
+                icon: "fas fa-microphone-alt",
+                color: "#ff9800"
+            },
+            {
+                name: "Nayapatrika",
+                rss: "https://nayapatrikadaily.com/rss",
+                fallbacks: [
+                    "https://api.rss2json.com/v1/api.json?rss_url=https://nayapatrikadaily.com/rss",
+                    "https://corsproxy.io/?https://nayapatrikadaily.com/rss"
+                ],
+                maxItems: 5,
+                icon: "fas fa-pen-nib",
+                color: "#009688"
+            },
+            {
+                name: "Nagrik News",
+                rss: "https://nagriknews.com/feed/",
+                fallbacks: [
+                    "https://api.rss2json.com/v1/api.json?rss_url=https://nagriknews.com/feed/",
+                    "https://corsproxy.io/?https://nagriknews.com/feed/"
+                ],
+                maxItems: 5,
+                icon: "fas fa-users",
+                color: "#795548"
+            },
+            {
+                name: "Annapurna Post",
+                rss: "https://www.annapurnapost.com/rss",
+                fallbacks: [
+                    "https://api.rss2json.com/v1/api.json?rss_url=https://www.annapurnapost.com/rss",
+                    "https://corsproxy.io/?https://www.annapurnapost.com/rss"
+                ],
+                maxItems: 5,
+                icon: "fas fa-mountain",
+                color: "#9c27b0"
+            },
+            {
+                name: "Hamro Patro",
+                rss: "https://www.hamropatro.com/news/rss",
+                fallbacks: [
+                    "https://api.rss2json.com/v1/api.json?rss_url=https://www.hamropatro.com/news/rss",
+                    "https://corsproxy.io/?https://www.hamropatro.com/news/rss"
+                ],
+                maxItems: 2,
+                icon: "fas fa-calendar-alt",
+                color: "#e91e63"
+            },
+            {
+                name: "Ujyaalo Online",
+                rss: "https://ujyaaloonline.com/rss",
+                fallbacks: [
+                    "https://api.rss2json.com/v1/api.json?rss_url=https://ujyaaloonline.com/rss",
+                    "https://corsproxy.io/?https://ujyaaloonline.com/rss"
+                ],
+                maxItems: 5,
+                icon: "fas fa-lightbulb",
+                color: "#ff5722"
+            },
+            {
+                name: "Nepal Live",
+                rss: "https://nepallive.com/feed",
+                fallbacks: [
+                    "https://api.rss2json.com/v1/api.json?rss_url=https://nepallive.com/feed",
+                    "https://corsproxy.io/?https://nepallive.com/feed"
+                ],
+                maxItems: 5,
+                icon: "fas fa-play-circle",
+                color: "#3f51b5"
+            },
+            {
+                name: "Rising Nepal",
+                rss: "https://risingnepaldaily.com/rss",
+                fallbacks: [
+                    "https://api.rss2json.com/v1/api.json?rss_url=https://risingnepaldaily.com/rss",
+                    "https://corsproxy.io/?https://risingnepaldaily.com/rss"
+                ],
+                maxItems: 5,
+                icon: "fas fa-chart-line",
+                color: "#4caf50"
+            },
+            {
+                name: "Ejanakpur Today",
+                rss: "https://ejanakpurtoday.com/feed",
+                fallbacks: [
+                    "https://api.rss2json.com/v1/api.json?rss_url=https://ejanakpurtoday.com/feed",
+                    "https://corsproxy.io/?https://ejanakpurtoday.com/feed"
+                ],
+                maxItems: 5,
+                icon: "fas fa-map-marker-alt",
+                color: "#f44336"
+            },
+            {
+                name: "Himal Khabar",
+                rss: "https://www.himalkhabar.com/feed",
+                fallbacks: [
+                    "https://api.rss2json.com/v1/api.json?rss_url=https://www.himalkhabar.com/feed",
+                    "https://corsproxy.io/?https://www.himalkhabar.com/feed"
+                ],
+                maxItems: 5,
+                icon: "fas fa-tree",
+                color: "#8bc34a"
             }
         ];
 
-        // Format date in Nepali or English style
+        // Format date in Nepali style
         function formatDate(dateString) {
             const date = new Date(dateString);
             if (isNaN(date.getTime())) return '';
@@ -2460,44 +2517,26 @@ data-size="small" >
             return date.toLocaleDateString(currentLanguage === 'ne' ? 'ne-NP' : 'en-US', options);
         }
 
-        // Create a news card DOM element
-        function createNewsCard(item, source) {
-            const newsCard = document.createElement('div');
-            newsCard.className = 'news-card';
+        // Create a news item DOM element
+        function createNewsItem(item, source) {
+            const newsItem = document.createElement('div');
+            newsItem.className = 'news-item';
             
             const pubDate = formatDate(item.pubDate);
             
-            // Extract image from enclosure or description
-            let imageUrl = item.enclosure?.url || '';
-            if (!imageUrl && item.description) {
-                const imgRegex = /<img[^>]+src="([^">]+)"/;
-                const match = item.description.match(imgRegex);
-                imageUrl = match ? match[1] : '';
-            }
+            // Clean up description
+            let description = item.description || '';
+            description = description.replace(/<[^>]*>/g, '');
             
-            // Fallback image if none found
-            if (!imageUrl) {
-                imageUrl = `https://source.unsplash.com/random/600x400/?nepal,${encodeURIComponent(item.title.substring(0, 10))}`;
-            }
-            
-            newsCard.innerHTML = `
-                <img src="${imageUrl}" alt="समाचार तस्बिर" class="news-image" loading="lazy" 
-                     onerror="this.src='https://source.unsplash.com/random/600x400/?news,nepal'">
-                <div class="news-content">
-                    <div class="news-source">
-                        <div class="source-icon" style="background-color: ${source.color}20; color: ${source.color};">
-                            <i class="${source.icon}"></i>
-                        </div>
-                        <div class="source-name">${source.name}</div>
-                    </div>
-                    <h3><a href="${item.link}" target="_blank" class="news-title">${item.title}</a></h3>
-                    <div class="news-meta">
-                        <span class="news-date"><i class="far fa-clock"></i> ${pubDate}</span>
-                    </div>
+            newsItem.innerHTML = `
+                <a href="${item.link}" target="_blank" class="news-title">${item.title}</a>
+                <div class="news-description">${description.substring(0, 200)}${description.length > 200 ? '...' : ''}</div>
+                <div class="news-meta">
+                    <span class="news-date"><i class="far fa-clock"></i> ${pubDate}</span>
                 </div>
             `;
             
-            return newsCard;
+            return newsItem;
         }
 
         // Show notification
@@ -2550,39 +2589,50 @@ data-size="small" >
         // Fetch news from RSS feed
         async function fetchNewsFromSource(source) {
             try {
-                // Using a CORS proxy to avoid CORS issues
-                const proxyUrl = 'https://api.allorigins.win/raw?url=';
-                const response = await fetch(`${proxyUrl}${encodeURIComponent(source.rss)}`);
-                if (!response.ok) throw new Error('Failed to fetch');
+                // Try all endpoints
+                const endpoints = [source.rss, ...source.fallbacks];
+                let items = [];
                 
-                const text = await response.text();
-                const parser = new DOMParser();
-                const xmlDoc = parser.parseFromString(text, "text/xml");
-                
-                const items = xmlDoc.querySelectorAll('item');
-                const newsItems = [];
-                
-                for (let i = 0; i < Math.min(items.length, source.maxItems); i++) {
-                    const item = items[i];
-                    const title = item.querySelector('title').textContent;
-                    const link = item.querySelector('link').textContent;
-                    const pubDate = item.querySelector('pubDate').textContent;
-                    const description = item.querySelector('description')?.textContent || '';
-                    const enclosure = item.querySelector('enclosure');
-                    
-                    newsItems.push({
-                        title,
-                        link,
-                        pubDate,
-                        description,
-                        enclosure: enclosure ? {
-                            url: enclosure.getAttribute('url'),
-                            type: enclosure.getAttribute('type')
-                        } : null
-                    });
+                for (const endpoint of endpoints) {
+                    try {
+                        let response;
+                        let data;
+                        
+                        if (endpoint.includes('rss2json.com')) {
+                            response = await fetch(endpoint);
+                            if (!response.ok) continue;
+                            data = await response.json();
+                            items = data.items || [];
+                        } else {
+                            response = await fetch(endpoint);
+                            if (!response.ok) continue;
+                            
+                            if (endpoint.endsWith('.xml') || endpoint.endsWith('.rss')) {
+                                const text = await response.text();
+                                const parser = new DOMParser();
+                                const xmlDoc = parser.parseFromString(text, "text/xml");
+                                
+                                items = Array.from(xmlDoc.querySelectorAll('item')).map(item => ({
+                                    title: item.querySelector('title')?.textContent || '',
+                                    link: item.querySelector('link')?.textContent || '#',
+                                    pubDate: item.querySelector('pubDate')?.textContent || new Date().toISOString(),
+                                    description: item.querySelector('description')?.textContent || ''
+                                }));
+                            } else {
+                                data = await response.json();
+                                items = data.items || [];
+                            }
+                        }
+                        
+                        // If we got items, break the loop
+                        if (items.length > 0) break;
+                    } catch (error) {
+                        console.log(`Failed with endpoint ${endpoint}:`, error);
+                        continue;
+                    }
                 }
                 
-                return newsItems;
+                return items.slice(0, source.maxItems);
             } catch (error) {
                 console.error(`Error fetching from ${source.name}:`, error);
                 return [];
@@ -2611,18 +2661,29 @@ data-size="small" >
                 // Process results
                 results.forEach((result, index) => {
                     const source = newsSources[index];
+                    
                     if (result.status === 'fulfilled' && result.value.length > 0) {
+                        const section = document.createElement('div');
+                        section.className = 'news-section';
+                        
+                        section.innerHTML = `
+                            <div class="section-header">
+                                <div class="section-icon" style="background: ${source.color}20; color: ${source.color}">
+                                    <i class="${source.icon}"></i>
+                                </div>
+                                <h2 class="section-title">${source.name}</h2>
+                            </div>
+                            <div class="news-items" id="${source.name.toLowerCase().replace(/\s+/g, '-')}-news"></div>
+                        `;
+                        
+                        const itemsContainer = section.querySelector('.news-items');
+                        
                         result.value.forEach(item => {
-                            const newsCard = createNewsCard(item, source);
-                            container.appendChild(newsCard);
+                            const newsItem = createNewsItem(item, source);
+                            itemsContainer.appendChild(newsItem);
                         });
-                    } else {
-                        // Fallback to mock data if fetch fails
-                        const mockItems = generateMockNews(source);
-                        mockItems.forEach(item => {
-                            const newsCard = createNewsCard(item, source);
-                            container.appendChild(newsCard);
-                        });
+                        
+                        container.appendChild(section);
                     }
                 });
                 
@@ -2635,43 +2696,15 @@ data-size="small" >
             } catch (error) {
                 console.error('Error loading news:', error);
                 container.innerHTML = `
-                    <div class="error-message" style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-light);">
-                        <i class="fas fa-exclamation-circle" style="font-size: 2rem; margin-bottom: 15px;"></i>
-                        <div style="margin-bottom: 20px;">${translations[currentLanguage].errorText}</div>
+                    <div class="error-message">
+                        <i class="fas fa-exclamation-circle"></i>
+                        ${translations[currentLanguage].errorText}
                         <button class="refresh-btn" onclick="fetchAndDisplayNews()">
                             <i class="fas fa-redo"></i> ${translations[currentLanguage].retryText}
                         </button>
                     </div>
                 `;
             }
-        }
-
-        // Generate mock news for fallback
-        function generateMockNews(source) {
-            const categories = currentLanguage === 'ne' 
-                ? ['राजनीति', 'अर्थतन्त्र', 'खेलकुद', 'मनोरञ्जन', 'विज्ञान', 'स्वास्थ्य']
-                : ['Politics', 'Economy', 'Sports', 'Entertainment', 'Science', 'Health'];
-            
-            const mockNews = [];
-            
-            for (let i = 0; i < source.maxItems; i++) {
-                const category = categories[Math.floor(Math.random() * categories.length)];
-                mockNews.push({
-                    title: currentLanguage === 'ne' 
-                        ? `${source.name} मा ताजा समाचार: ${category} सम्बन्धी महत्वपूर्ण खबर`
-                        : `${source.name} News: Important update on ${category}`,
-                    link: "#",
-                    pubDate: new Date(Date.now() - Math.floor(Math.random() * 48 * 60 * 60 * 1000)).toISOString(),
-                    description: currentLanguage === 'ne' 
-                        ? `यो ${source.name} बाट ${category} सम्बन्धी ताजा समाचार हो। यसले नेपाली समाजमा महत्वपूर्ण प्रभाव पार्ने अपेक्षा गरिएको छ।`
-                        : `This is a breaking news update from ${source.name} about ${category}. This news is expected to have significant impact.`,
-                    enclosure: {
-                        url: `https://source.unsplash.com/random/600x400/?nepal,${category}`
-                    }
-                });
-            }
-            
-            return mockNews;
         }
 
         // Initial load
