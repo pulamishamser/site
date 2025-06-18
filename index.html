@@ -1816,10 +1816,6 @@ data-size="small" >
 
 
 
-  <!-- Trigger the modal with a button 
-  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal55">Share your contents</button>
--->
-
    <!-- Trigger the modal with a button -->
   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal55">Share your contents</button>
 
@@ -3559,6 +3555,140 @@ function changeReadMore() {
                 color: var(--fb-blue);
             }
 
+            /* Modal styles for tag friends, feeling, etc */
+            .sub-modal {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.5);
+                z-index: 1000;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .sub-modal-content {
+                background: white;
+                border-radius: 8px;
+                width: 90%;
+                max-width: 500px;
+                max-height: 80vh;
+                overflow-y: auto;
+                padding: 20px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            }
+
+            .sub-modal-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 20px;
+                padding-bottom: 10px;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .sub-modal-title {
+                font-weight: 600;
+                font-size: 20px;
+            }
+
+            .close-sub-modal {
+                background: none;
+                border: none;
+                font-size: 24px;
+                cursor: pointer;
+                color: var(--fb-gray);
+            }
+
+            .friend-list, .location-list, .feeling-list {
+                margin-top: 15px;
+            }
+
+            .friend-item, .location-item, .feeling-item {
+                display: flex;
+                align-items: center;
+                padding: 10px;
+                border-radius: 8px;
+                cursor: pointer;
+                margin-bottom: 5px;
+            }
+
+            .friend-item:hover, .location-item:hover, .feeling-item:hover {
+                background: var(--fb-bg-gray);
+            }
+
+            .friend-avatar, .feeling-icon {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background-color: var(--fb-blue);
+                color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: 10px;
+                font-weight: bold;
+            }
+
+            .feeling-icon {
+                background-color: #f7b928;
+            }
+
+            .friend-name, .location-name, .feeling-name {
+                font-weight: 500;
+            }
+
+            .location-icon {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background-color: #f5533d;
+                color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: 10px;
+            }
+
+            .selected-tags {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 5px;
+                margin-top: 10px;
+            }
+
+            .tag {
+                background: var(--fb-bg-gray);
+                padding: 5px 10px;
+                border-radius: 20px;
+                font-size: 14px;
+                display: flex;
+                align-items: center;
+            }
+
+            .remove-tag {
+                margin-left: 5px;
+                cursor: pointer;
+            }
+
+            .save-button {
+                background: var(--fb-blue);
+                color: white;
+                border: none;
+                border-radius: 6px;
+                padding: 10px 20px;
+                font-weight: 600;
+                margin-top: 20px;
+                cursor: pointer;
+                float: right;
+            }
+
+            .save-button:hover {
+                background: var(--fb-hover-blue);
+            }
+
             /* Animations */
             @keyframes fadeIn {
                 from { opacity: 0; }
@@ -3589,10 +3719,13 @@ function changeReadMore() {
 
         <div class="fb-post-creator">
             <div class="creator-header">
-                <div class="user-avatar">Y</div>
-                <div class="privacy-selector">
-                    <span>Public</span>
-                    <i class="fas fa-chevron-down"></i>
+                <div class="user-avatar" id="creatorAvatar">U</div>
+                <div class="post-user-info">
+                    <div class="post-user-name" id="creatorName">You</div>
+                    <div class="privacy-selector" id="privacySelector">
+                        <span>Public</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
                 </div>
             </div>
 
@@ -3605,6 +3738,8 @@ function changeReadMore() {
                     </div>
                     <img id="mediaPreviewImage" alt="Preview">
                 </div>
+                
+                <div class="selected-tags" id="selectedTags"></div>
                 
                 <div class="progress-container" id="progressContainer">
                     <div class="progress-bar" id="progressBar"></div>
@@ -3619,25 +3754,25 @@ function changeReadMore() {
                             </div>
                             <div class="add-option-label">Photo/Video</div>
                         </div>
-                        <div class="add-option">
+                        <div class="add-option" id="tagFriendsOption">
                             <div class="add-option-icon tag-friends">
                                 <i class="fas fa-user-tag"></i>
                             </div>
                             <div class="add-option-label">Tag Friends</div>
                         </div>
-                        <div class="add-option">
+                        <div class="add-option" id="feelingOption">
                             <div class="add-option-icon feeling">
                                 <i class="fas fa-smile"></i>
                             </div>
                             <div class="add-option-label">Feeling/Activity</div>
                         </div>
-                        <div class="add-option">
+                        <div class="add-option" id="checkInOption">
                             <div class="add-option-icon check-in">
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
                             <div class="add-option-label">Check in</div>
                         </div>
-                        <div class="add-option">
+                        <div class="add-option" id="moreOptions">
                             <div class="add-option-icon more-options">
                                 <i class="fas fa-ellipsis-h"></i>
                             </div>
@@ -3658,6 +3793,79 @@ function changeReadMore() {
             </div>
         </div>
 
+        <!-- Tag Friends Modal -->
+        <div class="sub-modal" id="tagFriendsModal">
+            <div class="sub-modal-content">
+                <div class="sub-modal-header">
+                    <div class="sub-modal-title">Tag Friends</div>
+                    <button class="close-sub-modal" id="closeTagFriendsModal">&times;</button>
+                </div>
+                <div class="friend-list" id="friendList">
+                    <!-- Friends will be added here -->
+                </div>
+                <div class="selected-tags" id="modalSelectedTags"></div>
+                <button class="save-button" id="saveTagFriends">Save</button>
+            </div>
+        </div>
+
+        <!-- Feeling/Activity Modal -->
+        <div class="sub-modal" id="feelingModal">
+            <div class="sub-modal-content">
+                <div class="sub-modal-header">
+                    <div class="sub-modal-title">How are you feeling?</div>
+                    <button class="close-sub-modal" id="closeFeelingModal">&times;</button>
+                </div>
+                <div class="feeling-list" id="feelingList">
+                    <!-- Feelings will be added here -->
+                </div>
+                <button class="save-button" id="saveFeeling">Save</button>
+            </div>
+        </div>
+
+        <!-- Check In Modal -->
+        <div class="sub-modal" id="checkInModal">
+            <div class="sub-modal-content">
+                <div class="sub-modal-header">
+                    <div class="sub-modal-title">Where are you?</div>
+                    <button class="close-sub-modal" id="closeCheckInModal">&times;</button>
+                </div>
+                <div class="location-list" id="locationList">
+                    <!-- Locations will be added here -->
+                </div>
+                <button class="save-button" id="saveCheckIn">Save</button>
+            </div>
+        </div>
+
+        <!-- More Options Modal -->
+        <div class="sub-modal" id="moreOptionsModal">
+            <div class="sub-modal-content">
+                <div class="sub-modal-header">
+                    <div class="sub-modal-title">More Options</div>
+                    <button class="close-sub-modal" id="closeMoreOptionsModal">&times;</button>
+                </div>
+                <div class="friend-list">
+                    <div class="friend-item" id="savePostOption">
+                        <div class="friend-avatar" style="background-color: #9360f7;">
+                            <i class="fas fa-bookmark"></i>
+                        </div>
+                        <div class="friend-name">Save Post</div>
+                    </div>
+                    <div class="friend-item" id="backgroundOption">
+                        <div class="friend-avatar" style="background-color: #45bd62;">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <div class="friend-name">Background Color</div>
+                    </div>
+                    <div class="friend-item" id="gifOption">
+                        <div class="friend-avatar" style="background-color: #f7b928;">
+                            <i class="fas fa-photo-video"></i>
+                        </div>
+                        <div class="friend-name">GIF</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <script>
             // DOM Elements
             const postText = document.getElementById('postText');
@@ -3667,9 +3875,41 @@ function changeReadMore() {
             const removeMedia = document.getElementById('removeMedia');
             const postButton = document.getElementById('postButton');
             const photoVideoOption = document.getElementById('photoVideoOption');
+            const tagFriendsOption = document.getElementById('tagFriendsOption');
+            const feelingOption = document.getElementById('feelingOption');
+            const checkInOption = document.getElementById('checkInOption');
+            const moreOptions = document.getElementById('moreOptions');
             const progressContainer = document.getElementById('progressContainer');
             const progressBar = document.getElementById('progressBar');
             const postFeed = document.getElementById('postFeed');
+            const selectedTags = document.getElementById('selectedTags');
+            const creatorName = document.getElementById('creatorName');
+            const creatorAvatar = document.getElementById('creatorAvatar');
+
+            // Modal elements
+            const tagFriendsModal = document.getElementById('tagFriendsModal');
+            const feelingModal = document.getElementById('feelingModal');
+            const checkInModal = document.getElementById('checkInModal');
+            const moreOptionsModal = document.getElementById('moreOptionsModal');
+            const closeTagFriendsModal = document.getElementById('closeTagFriendsModal');
+            const closeFeelingModal = document.getElementById('closeFeelingModal');
+            const closeCheckInModal = document.getElementById('closeCheckInModal');
+            const closeMoreOptionsModal = document.getElementById('closeMoreOptionsModal');
+            const friendList = document.getElementById('friendList');
+            const feelingList = document.getElementById('feelingList');
+            const locationList = document.getElementById('locationList');
+            const modalSelectedTags = document.getElementById('modalSelectedTags');
+            const saveTagFriends = document.getElementById('saveTagFriends');
+            const saveFeeling = document.getElementById('saveFeeling');
+            const saveCheckIn = document.getElementById('saveCheckIn');
+            const savePostOption = document.getElementById('savePostOption');
+
+            // Data
+            let taggedFriends = [];
+            let currentFeeling = null;
+            let currentLocation = null;
+            let savedPosts = [];
+            let currentUser = { name: "You", color: "#1877f2", initials: "Y" };
 
             // Event Listeners
             postText.addEventListener('input', validatePost);
@@ -3677,12 +3917,122 @@ function changeReadMore() {
             mediaUpload.addEventListener('change', handleMediaUpload);
             removeMedia.addEventListener('click', removeUploadedMedia);
             postButton.addEventListener('click', createPost);
+            
+            // Modal openers
+            tagFriendsOption.addEventListener('click', () => tagFriendsModal.style.display = 'flex');
+            feelingOption.addEventListener('click', () => feelingModal.style.display = 'flex');
+            checkInOption.addEventListener('click', () => checkInModal.style.display = 'flex');
+            moreOptions.addEventListener('click', () => moreOptionsModal.style.display = 'flex');
+            
+            // Modal closers
+            closeTagFriendsModal.addEventListener('click', () => tagFriendsModal.style.display = 'none');
+            closeFeelingModal.addEventListener('click', () => feelingModal.style.display = 'none');
+            closeCheckInModal.addEventListener('click', () => checkInModal.style.display = 'none');
+            closeMoreOptionsModal.addEventListener('click', () => moreOptionsModal.style.display = 'none');
+            
+            // Save buttons
+            saveTagFriends.addEventListener('click', saveTaggedFriends);
+            saveFeeling.addEventListener('click', saveFeelingSelection);
+            saveCheckIn.addEventListener('click', saveCheckInSelection);
+            savePostOption.addEventListener('click', toggleSavePost);
+
+            // Close modals when clicking outside
+            window.addEventListener('click', (e) => {
+                if (e.target === tagFriendsModal) tagFriendsModal.style.display = 'none';
+                if (e.target === feelingModal) feelingModal.style.display = 'none';
+                if (e.target === checkInModal) checkInModal.style.display = 'none';
+                if (e.target === moreOptionsModal) moreOptionsModal.style.display = 'none';
+            });
+
+            // Initialize data
+            function initializeData() {
+                // Set creator info
+                creatorName.textContent = currentUser.name;
+                creatorAvatar.textContent = currentUser.initials;
+                creatorAvatar.style.backgroundColor = currentUser.color;
+                
+                // Sample friends
+                const friends = [
+                    { id: 1, name: "Alex Johnson", initials: "AJ", color: "#45bd62" },
+                    { id: 2, name: "Sam Wilson", initials: "SW", color: "#f7b928" },
+                    { id: 3, name: "Taylor Smith", initials: "TS", color: "#f5533d" },
+                    { id: 4, name: "Jordan Lee", initials: "JL", color: "#9360f7" },
+                    { id: 5, name: "Casey Brown", initials: "CB", color: "#45bd62" }
+                ];
+                
+                // Populate friend list
+                friendList.innerHTML = '';
+                friends.forEach(friend => {
+                    const friendItem = document.createElement('div');
+                    friendItem.className = 'friend-item';
+                    friendItem.dataset.id = friend.id;
+                    friendItem.innerHTML = `
+                        <div class="friend-avatar" style="background-color: ${friend.color}">
+                            ${friend.initials}
+                        </div>
+                        <div class="friend-name">${friend.name}</div>
+                    `;
+                    friendItem.addEventListener('click', () => toggleTagFriend(friend));
+                    friendList.appendChild(friendItem);
+                });
+                
+                // Sample feelings
+                const feelings = [
+                    { icon: 'fa-smile', name: 'Happy', color: '#f7b928' },
+                    { icon: 'fa-laugh-squint', name: 'LOL', color: '#45bd62' },
+                    { icon: 'fa-surprise', name: 'Surprised', color: '#1877f2' },
+                    { icon: 'fa-sad-tear', name: 'Sad', color: '#f5533d' },
+                    { icon: 'fa-angry', name: 'Angry', color: '#9360f7' }
+                ];
+                
+                // Populate feeling list
+                feelingList.innerHTML = '';
+                feelings.forEach(feeling => {
+                    const feelingItem = document.createElement('div');
+                    feelingItem.className = 'feeling-item';
+                    feelingItem.dataset.name = feeling.name;
+                    feelingItem.innerHTML = `
+                        <div class="feeling-icon" style="background-color: ${feeling.color}">
+                            <i class="fas ${feeling.icon}"></i>
+                        </div>
+                        <div class="feeling-name">${feeling.name}</div>
+                    `;
+                    feelingItem.addEventListener('click', () => selectFeeling(feeling));
+                    feelingList.appendChild(feelingItem);
+                });
+                
+                // Sample locations
+                const locations = [
+                    { name: 'Central Park', icon: 'fa-tree' },
+                    { name: 'Starbucks', icon: 'fa-coffee' },
+                    { name: 'Gym', icon: 'fa-dumbbell' },
+                    { name: 'Home', icon: 'fa-home' },
+                    { name: 'Work', icon: 'fa-briefcase' }
+                ];
+                
+                // Populate location list
+                locationList.innerHTML = '';
+                locations.forEach(location => {
+                    const locationItem = document.createElement('div');
+                    locationItem.className = 'location-item';
+                    locationItem.dataset.name = location.name;
+                    locationItem.innerHTML = `
+                        <div class="location-icon">
+                            <i class="fas ${location.icon}"></i>
+                        </div>
+                        <div class="location-name">${location.name}</div>
+                    `;
+                    locationItem.addEventListener('click', () => selectLocation(location));
+                    locationList.appendChild(locationItem);
+                });
+            }
 
             // Validate post (enable/disable post button)
             function validatePost() {
                 const hasText = postText.value.trim().length > 0;
                 const hasMedia = mediaPreview.style.display === 'block';
-                postButton.disabled = !(hasText || hasMedia);
+                const hasTags = taggedFriends.length > 0 || currentFeeling || currentLocation;
+                postButton.disabled = !(hasText || hasMedia || hasTags);
             }
 
             // Handle media upload
@@ -3741,13 +4091,178 @@ function changeReadMore() {
                 validatePost();
             }
 
+            // Toggle friend tagging
+            function toggleTagFriend(friend) {
+                const index = taggedFriends.findIndex(f => f.id === friend.id);
+                if (index === -1) {
+                    taggedFriends.push(friend);
+                } else {
+                    taggedFriends.splice(index, 1);
+                }
+                updateTaggedFriendsDisplay();
+            }
+
+            // Update tagged friends display
+            function updateTaggedFriendsDisplay() {
+                modalSelectedTags.innerHTML = '';
+                taggedFriends.forEach(friend => {
+                    const tag = document.createElement('div');
+                    tag.className = 'tag';
+                    tag.innerHTML = `
+                        ${friend.name}
+                        <span class="remove-tag" data-id="${friend.id}">&times;</span>
+                    `;
+                    modalSelectedTags.appendChild(tag);
+                });
+
+                // Add event listeners to remove buttons
+                document.querySelectorAll('.remove-tag').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const id = parseInt(btn.dataset.id);
+                        taggedFriends = taggedFriends.filter(f => f.id !== id);
+                        updateTaggedFriendsDisplay();
+                    });
+                });
+            }
+
+            // Save tagged friends
+            function saveTaggedFriends() {
+                updateSelectedTagsDisplay();
+                tagFriendsModal.style.display = 'none';
+                validatePost();
+            }
+
+            // Update selected tags display in main composer
+            function updateSelectedTagsDisplay() {
+                selectedTags.innerHTML = '';
+                
+                // Add tagged friends
+                taggedFriends.forEach(friend => {
+                    const tag = document.createElement('div');
+                    tag.className = 'tag';
+                    tag.innerHTML = `
+                        <i class="fas fa-user-tag"></i> ${friend.name}
+                        <span class="remove-tag" data-id="${friend.id}" data-type="friend">&times;</span>
+                    `;
+                    selectedTags.appendChild(tag);
+                });
+                
+                // Add feeling if selected
+                if (currentFeeling) {
+                    const tag = document.createElement('div');
+                    tag.className = 'tag';
+                    tag.innerHTML = `
+                        <i class="fas fa-smile"></i> ${currentFeeling.name}
+                        <span class="remove-tag" data-type="feeling">&times;</span>
+                    `;
+                    selectedTags.appendChild(tag);
+                }
+                
+                // Add location if selected
+                if (currentLocation) {
+                    const tag = document.createElement('div');
+                    tag.className = 'tag';
+                    tag.innerHTML = `
+                        <i class="fas fa-map-marker-alt"></i> ${currentLocation.name}
+                        <span class="remove-tag" data-type="location">&times;</span>
+                    `;
+                    selectedTags.appendChild(tag);
+                }
+                
+                // Add event listeners to remove buttons
+                document.querySelectorAll('.remove-tag').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const type = btn.dataset.type;
+                        
+                        if (type === 'friend') {
+                            const id = parseInt(btn.dataset.id);
+                            taggedFriends = taggedFriends.filter(f => f.id !== id);
+                        } else if (type === 'feeling') {
+                            currentFeeling = null;
+                        } else if (type === 'location') {
+                            currentLocation = null;
+                        }
+                        
+                        updateSelectedTagsDisplay();
+                        validatePost();
+                    });
+                });
+            }
+
+            // Select feeling
+            function selectFeeling(feeling) {
+                currentFeeling = feeling;
+                // Highlight selected feeling
+                document.querySelectorAll('.feeling-item').forEach(item => {
+                    item.style.backgroundColor = item.dataset.name === feeling.name ? '#f0f2f5' : 'transparent';
+                });
+            }
+
+            // Save feeling selection
+            function saveFeelingSelection() {
+                updateSelectedTagsDisplay();
+                feelingModal.style.display = 'none';
+                validatePost();
+            }
+
+            // Select location
+            function selectLocation(location) {
+                currentLocation = location;
+                // Highlight selected location
+                document.querySelectorAll('.location-item').forEach(item => {
+                    item.style.backgroundColor = item.dataset.name === location.name ? '#f0f2f5' : 'transparent';
+                });
+            }
+
+            // Save check-in selection
+            function saveCheckInSelection() {
+                updateSelectedTagsDisplay();
+                checkInModal.style.display = 'none';
+                validatePost();
+            }
+
+            // Toggle save post
+            function toggleSavePost() {
+                const postContent = postText.value.trim();
+                const mediaSrc = mediaPreviewImage.src;
+                
+                if (!postContent && !mediaSrc) {
+                    alert('Please create a post first!');
+                    return;
+                }
+                
+                const post = {
+                    text: postContent,
+                    media: mediaSrc,
+                    tags: {
+                        friends: [...taggedFriends],
+                        feeling: currentFeeling,
+                        location: currentLocation
+                    },
+                    timestamp: new Date().toISOString()
+                };
+                
+                const index = savedPosts.findIndex(p => p.timestamp === post.timestamp);
+                if (index === -1) {
+                    savedPosts.push(post);
+                    alert('Post saved to your collection!');
+                } else {
+                    savedPosts.splice(index, 1);
+                    alert('Post removed from your collection!');
+                }
+                
+                moreOptionsModal.style.display = 'none';
+            }
+
             // Create new post
             function createPost() {
                 const text = postText.value.trim();
                 const mediaSrc = mediaPreviewImage.src;
                 
-                if (!text && !mediaSrc) {
-                    alert('Please add text or media to your post!');
+                if (!text && !mediaSrc && taggedFriends.length === 0 && !currentFeeling && !currentLocation) {
+                    alert('Please add text, media, or tags to your post!');
                     return;
                 }
 
@@ -3761,11 +4276,11 @@ function changeReadMore() {
 
                 postElement.innerHTML = `
                     <div class="post-header">
-                        <div class="post-user-avatar" style="background-color: ${randomUser.color}">
-                            ${randomUser.initials}
+                        <div class="post-user-avatar" style="background-color: ${currentUser.color}">
+                            ${currentUser.initials}
                         </div>
                         <div class="post-user-info">
-                            <div class="post-user-name">${randomUser.name}</div>
+                            <div class="post-user-name">${currentUser.name}</div>
                             <div class="post-time">
                                 ${currentTime} · <i class="fas fa-globe-americas"></i>
                             </div>
@@ -3773,6 +4288,13 @@ function changeReadMore() {
                     </div>
                     <div class="post-content">
                         ${text ? `<div class="post-text">${text}</div>` : ''}
+                        ${taggedFriends.length > 0 || currentFeeling || currentLocation ? `
+                        <div class="post-text" style="color: var(--fb-blue); font-size: 15px; margin-bottom: 12px;">
+                            ${taggedFriends.length > 0 ? `With ${taggedFriends.map(f => f.name).join(', ')} ` : ''}
+                            ${currentFeeling ? `Feeling ${currentFeeling.name} ` : ''}
+                            ${currentLocation ? `At ${currentLocation.name}` : ''}
+                        </div>
+                        ` : ''}
                         ${mediaSrc ? `
                         <div class="post-media">
                             <img src="${mediaSrc}" alt="Post media">
@@ -3809,6 +4331,10 @@ function changeReadMore() {
                 // Reset form
                 postText.value = '';
                 removeUploadedMedia();
+                taggedFriends = [];
+                currentFeeling = null;
+                currentLocation = null;
+                selectedTags.innerHTML = '';
                 postButton.disabled = true;
 
                 // Show success animation
@@ -3837,18 +4363,43 @@ function changeReadMore() {
 
             // Initialize with sample posts
             window.onload = function() {
+                initializeData();
+                
                 const samplePosts = [
                     {
+                        user: { name: "Alex Johnson", initials: "AJ", color: "#45bd62" },
                         text: "Enjoying a beautiful day at the park! 🌳☀️ #outdoors #nature",
-                        media: "https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
+                        media: "https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
+                        tags: {
+                            friends: [],
+                            feeling: { name: "Happy", icon: "fa-smile", color: "#f7b928" },
+                            location: null
+                        },
+                        time: "2:45 PM"
                     },
                     {
+                        user: { name: "Sam Wilson", initials: "SW", color: "#f7b928" },
                         text: "Just finished reading an amazing book. Highly recommend!",
-                        media: ""
+                        media: "",
+                        tags: {
+                            friends: [
+                                { id: 3, name: "Taylor Smith", initials: "TS", color: "#f5533d" }
+                            ],
+                            feeling: null,
+                            location: { name: "Library", icon: "fa-book" }
+                        },
+                        time: "11:30 AM"
                     },
                     {
+                        user: { name: "Taylor Smith", initials: "TS", color: "#f5533d" },
                         text: "",
-                        media: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
+                        media: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
+                        tags: {
+                            friends: [],
+                            feeling: null,
+                            location: null
+                        },
+                        time: "Yesterday"
                     }
                 ];
 
@@ -3856,23 +4407,27 @@ function changeReadMore() {
                     const postElement = document.createElement('div');
                     postElement.className = 'post-card';
                     
-                    const randomUser = generateRandomUser();
-                    const currentTime = getCurrentTime();
-
                     postElement.innerHTML = `
                         <div class="post-header">
-                            <div class="post-user-avatar" style="background-color: ${randomUser.color}">
-                                ${randomUser.initials}
+                            <div class="post-user-avatar" style="background-color: ${post.user.color}">
+                                ${post.user.initials}
                             </div>
                             <div class="post-user-info">
-                                <div class="post-user-name">${randomUser.name}</div>
+                                <div class="post-user-name">${post.user.name}</div>
                                 <div class="post-time">
-                                    ${currentTime} · <i class="fas fa-globe-americas"></i>
+                                    ${post.time} · <i class="fas fa-globe-americas"></i>
                                 </div>
                             </div>
                         </div>
                         <div class="post-content">
                             ${post.text ? `<div class="post-text">${post.text}</div>` : ''}
+                            ${post.tags.friends.length > 0 || post.tags.feeling || post.tags.location ? `
+                            <div class="post-text" style="color: var(--fb-blue); font-size: 15px; margin-bottom: 12px;">
+                                ${post.tags.friends.length > 0 ? `With ${post.tags.friends.map(f => f.name).join(', ')} ` : ''}
+                                ${post.tags.feeling ? `Feeling ${post.tags.feeling.name} ` : ''}
+                                ${post.tags.location ? `At ${post.tags.location.name}` : ''}
+                            </div>
+                            ` : ''}
                             ${post.media ? `
                             <div class="post-media">
                                 <img src="${post.media}" alt="Post media">
@@ -3909,7 +4464,6 @@ function changeReadMore() {
     </div>
   </div>
 </div>
-
 
 
     <!--==========================
