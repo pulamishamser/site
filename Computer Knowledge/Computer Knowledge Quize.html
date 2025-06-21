@@ -3,653 +3,890 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="Computer Science Quiz"/>
+<meta name="keywords"  content="Computer Science Quiz"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://shamser.info.np/Computer Knowledge/Computer Knowledge Quize.html"/>
+<meta property="og:title" content="Computer Science Quiz"/>
+<meta property="og:description" content="Test your knowledge with 50 fundamental computer science questions">
+<meta property="og:image:width" content="1200" />
+<meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh8qi2zS0CAtfY4wtfa77jhrxCptdZ9fxej3yEY5zPc71y_agBjVfXdeg83KEqTnTK47pPaPI7hljUusoGvJjrcTC4Qt7w3nz70EDkrSTEjnbMMKCQtN_JbzBc8wZKTbLq9XeyWkvuotaBX/s1600/computercomponent.jpg">
+    
     <title>Computer Science Quiz</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "2dcf0fae-27c7-4c6e-a29e-f9a9ffb3a9e5",
+    });
+  });
+</script>
+
+
+<!----share button---->
+<script type='text/javascript' src='../platform-api.sharethis.com/js/sharethis.js#property=5b5b234df5aa6d001130d104&product=inline-share-buttons' async='async'></script>
+<div id="fb-root"></div>
+<script>
+      (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = '../connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    </script>            
+<!------------  <SDK>------------>      
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '{758915462507587}',
+      cookie     : true,
+      xfbml      : true,
+      version    : '{api-version}'
+    });
+      
+    FB.AppEvents.logPageView();   
+      
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script> 
+
+<!---------Save to facebook----  
+<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" defer></script>--->
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v20.0" nonce="2vA4OymM"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-163260228-1"></script>
+
+    
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', 'Arial', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
             color: #333;
             min-height: 100vh;
+            padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-        }
-        
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
         }
         
         .container {
-            max-width: 800px;
+            max-width: 900px;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
         }
         
-        .header {
-            background: #1a2a6c;
-            color: white;
-            padding: 25px 30px;
+        header {
             text-align: center;
-            position: relative;
+            padding: 30px 0;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
         
-        .header h1 {
-            font-size: 2.2rem;
+        h1 {
+            font-size: 2.8rem;
             margin-bottom: 10px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
         
-        .header p {
-            font-size: 1.1rem;
+        .subtitle {
+            font-size: 1.2rem;
             opacity: 0.9;
+            margin-bottom: 20px;
         }
         
-        .header::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, #1a2a6c, #b21f1f, #fdbb2d);
+        .user-registration {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
         }
         
-        .content {
-            padding: 30px;
-        }
-        
-        .section {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .active {
-            display: block;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .user-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 500px;
+            margin: 0 auto;
         }
         
         .form-group {
-            margin-bottom: 25px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            color: #1a2a6c;
-        }
-        
-        .form-group input {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-        }
-        
-        .form-group input:focus {
-            border-color: #1a2a6c;
-            box-shadow: 0 0 0 3px rgba(26, 42, 108, 0.2);
-            outline: none;
-        }
-        
-        .btn {
-            display: inline-block;
-            background: linear-gradient(to right, #1a2a6c, #b21f1f);
-            color: white;
-            padding: 15px 35px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            margin: 10px 5px;
-        }
-        
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .btn:active {
-            transform: translateY(1px);
-        }
-        
-        .btn-block {
-            display: block;
-            width: 100%;
-            text-align: center;
-        }
-        
-        .timer-container {
-            background: #1a2a6c;
-            color: white;
-            padding: 15px;
-            border-radius: 10px;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+            width: 100%;
         }
         
-        .timer {
-            font-size: 1.8rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 10px 20px;
-            border-radius: 10px;
+        label {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 1.1rem;
         }
         
-        .progress {
-            height: 12px;
-            background: #e0e0e0;
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
             border-radius: 10px;
-            margin-bottom: 25px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+        }
+        
+        .quiz-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             overflow: hidden;
+            margin-bottom: 30px;
+            display: none;
+        }
+        
+        .progress-container {
+            background: #f0f0f0;
+            height: 10px;
+            width: 100%;
         }
         
         .progress-bar {
             height: 100%;
-            background: linear-gradient(to right, #1a2a6c, #b21f1f);
+            background: linear-gradient(90deg, #3498db, #2ecc71);
             width: 0%;
-            transition: width 0.5s ease;
+            transition: width 0.4s ease;
         }
         
-        .question-counter {
-            font-size: 1.2rem;
+        .question-info {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background: #3498db;
+            color: white;
             font-weight: 600;
-            color: #1a2a6c;
-            margin-bottom: 15px;
-            text-align: center;
         }
         
-        .question {
-            font-size: 1.3rem;
+        .question-container {
+            padding: 30px;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .question-text {
+            font-size: 1.4rem;
             margin-bottom: 25px;
-            line-height: 1.6;
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 15px;
-            border-left: 5px solid #1a2a6c;
+            line-height: 1.5;
+            color: #2c3e50;
         }
         
-        .options {
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
             margin-bottom: 25px;
         }
         
         .option {
-            padding: 18px 20px;
-            background: #f1f3f5;
-            border: 2px solid transparent;
-            border-radius: 12px;
-            margin-bottom: 15px;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 1.1rem;
             display: flex;
             align-items: center;
         }
         
         .option:hover {
-            background: #e9ecef;
-            transform: translateX(5px);
+            background: #f8f9fa;
+            border-color: #3498db;
         }
         
         .option.selected {
-            border-color: #1a2a6c;
-            background: #e7f3fe;
+            background: #e3f2fd;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
         }
         
-        .option-prefix {
-            background: #1a2a6c;
+        .option.correct {
+            background: #e8f5e9;
+            border-color: #4CAF50;
+        }
+        
+        .option.incorrect {
+            background: #ffebee;
+            border-color: #f44336;
+        }
+        
+        .option-letter {
+            font-weight: bold;
+            margin-right: 15px;
+            background: #3498db;
             color: white;
-            width: 36px;
-            height: 36px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             display: flex;
-            justify-content: center;
             align-items: center;
-            margin-right: 15px;
-            font-weight: bold;
+            justify-content: center;
             flex-shrink: 0;
         }
         
-        .explanation {
-            padding: 20px;
-            background: #e7f3fe;
-            border-radius: 15px;
-            margin-top: 20px;
-            border-left: 5px solid #1a2a6c;
-            display: none;
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 30px 30px;
         }
         
-        .explanation-title {
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: #1a2a6c;
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .btn-start {
+            background: #2ecc71;
+            color: white;
+            margin-top: 10px;
+        }
+        
+        .btn-prev {
+            background: #7f8c8d;
+            color: white;
+        }
+        
+        .btn-next {
+            background: #3498db;
+            color: white;
+        }
+        
+        .btn-submit {
+            background: #2ecc71;
+            color: white;
+        }
+        
+        .btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
         
         .result-container {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
             text-align: center;
-            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: none;
         }
         
-        .result-container h2 {
-            font-size: 2.2rem;
-            color: #1a2a6c;
+        .user-info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 10px;
             margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .info-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .info-value {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #2c3e50;
         }
         
         .score {
-            font-size: 4rem;
-            font-weight: 700;
-            color: #b21f1f;
+            font-size: 5rem;
+            font-weight: 800;
+            color: #2ecc71;
             margin: 20px 0;
-            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            text-shadow: 0 3px 6px rgba(0,0,0,0.1);
         }
         
         .score-text {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             margin-bottom: 30px;
-            color: #333;
+            color: #2c3e50;
         }
         
-        .user-details {
-            margin: 30px 0;
-            text-align: left;
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 15px;
-        }
-        
-        .user-details h3 {
-            color: #1a2a6c;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        
-        .user-details p {
-            margin: 10px 0;
-            font-size: 1.1rem;
-        }
-        
-        .footer {
-            text-align: center;
-            padding: 20px;
-            background: #f8f9fa;
-            color: #6c757d;
-            font-size: 0.9rem;
-            border-top: 1px solid #e9ecef;
-        }
-        
-        .btn-container {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
+        .sheet-info {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 10px;
             margin-top: 20px;
+            text-align: left;
+        }
+        
+        .sheet-info h3 {
+            margin-bottom: 10px;
+            color: #2e7d32;
+        }
+        
+        .sheet-info ul {
+            padding-left: 20px;
+        }
+        
+        .sheet-info li {
+            margin-bottom: 5px;
+        }
+        
+        .admin-panel {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: none;
+        }
+        
+        .admin-panel h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #1a2a6c;
+        }
+        
+        .admin-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .admin-btn {
+            background: #1a2a6c;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .admin-btn:hover {
+            background: #0d1a4a;
+        }
+        
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .results-table th, .results-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        .results-table th {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .results-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .results-table tr:hover {
+            background-color: #e3f2fd;
+        }
+        
+        .back-to-quiz {
+            margin-top: 20px;
+            text-align: center;
         }
         
         .notification {
             position: fixed;
             top: 20px;
             right: 20px;
-            padding: 20px 30px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            padding: 15px 25px;
+            border-radius: 8px;
+            background: #4CAF50;
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
             display: flex;
             align-items: center;
-            transform: translateX(200%);
-            transition: transform 0.5s ease;
-            z-index: 1000;
-            max-width: 90%;
+            gap: 10px;
+            transform: translateX(120%);
+            transition: transform 0.3s ease;
         }
         
-        .notification.active {
+        .notification.show {
             transform: translateX(0);
         }
         
-        .notification.success {
-            border-left: 5px solid #28a745;
-        }
-        
         .notification.error {
-            border-left: 5px solid #dc3545;
+            background: #f44336;
         }
         
-        .notification i {
-            font-size: 24px;
-            margin-right: 15px;
-        }
-        
-        .notification.success i {
-            color: #28a745;
-        }
-        
-        .notification.error i {
-            color: #dc3545;
-        }
-
-        /* Detailed Results Styles */
-        .result-details {
-            margin-top: 30px;
-            text-align: left;
-        }
-        
-        .result-item {
-            margin-bottom: 20px;
-            padding: 15px;
+        .save-results-panel {
+            background: #fff8e1;
+            padding: 20px;
             border-radius: 10px;
-            background: #f8f9fa;
+            margin-top: 20px;
+            text-align: center;
         }
         
-        .result-item.correct {
-            border-left: 5px solid #28a745;
-        }
-        
-        .result-item.incorrect {
-            border-left: 5px solid #dc3545;
-        }
-        
-        .result-question {
+        .save-btn {
+            background: #ff9800;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
             font-weight: 600;
-            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            margin-top: 10px;
         }
         
-        .result-answer {
+        .save-btn:hover {
+            background: #f57c00;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .save-success {
+            color: #2e7d32;
+            font-weight: 600;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        /* Admin Login Styles */
+        .admin-login-form {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 0 auto;
+            max-width: 400px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .admin-login-form h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #1a2a6c;
+        }
+        
+        .admin-login-form .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .admin-login-form .btn-login {
+            background: #1a2a6c;
+            color: white;
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+        
+        .admin-login-form .btn-login:hover {
+            background: #0d1a4a;
+        }
+        
+        .admin-welcome {
+            display: none;
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #e3f2fd;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+        
+        .admin-controls-panel {
+            display: none;
+        }
+        
+        .btn-logout {
+            background: #f44336;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
             display: flex;
             align-items: center;
-            margin: 5px 0;
-            padding: 8px;
-            border-radius: 5px;
-        }
-        
-        .result-answer.correct-answer {
-            background: #d4edda;
-        }
-        
-        .result-answer.user-answer.correct {
-            background: #d4edda;
-        }
-        
-        .result-answer.user-answer.incorrect {
-            background: #f8d7da;
-        }
-        
-        .result-answer-label {
-            font-weight: bold;
-            margin-right: 10px;
-            min-width: 20px;
-        }
-        
-        .result-explanation {
+            gap: 5px;
             margin-top: 10px;
+        }
+        
+        .btn-logout:hover {
+            background: #d32f2f;
+        }
+        
+        .auto-save-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
             padding: 10px;
-            background: #e7f3fe;
-            border-radius: 5px;
-            font-size: 0.9em;
+            background-color: #e3f2fd;
+            border-radius: 8px;
+            font-weight: 500;
         }
         
-        .result-status {
-            display: inline-block;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-weight: bold;
-            margin-bottom: 8px;
+        .auto-save-indicator.saving {
+            color: #1a73e8;
         }
         
-        .status-correct {
-            background: #28a745;
-            color: white;
+        .auto-save-indicator.success {
+            color: #0f9d58;
         }
         
-        .status-incorrect {
-            background: #dc3545;
-            color: white;
+        .auto-save-indicator.error {
+            color: #d93025;
         }
         
-        @media (max-width: 600px) {
-            .header h1 {
-                font-size: 1.8rem;
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
             }
             
-            .btn {
-                padding: 12px 25px;
-                font-size: 1.1rem;
+            h1 {
+                font-size: 2.2rem;
             }
             
-            .question {
-                font-size: 1.1rem;
+            .question-text {
+                font-size: 1.2rem;
             }
             
-            .option {
-                padding: 15px;
-                font-size: 1rem;
+            .question-container {
+                padding: 20px;
             }
             
-            .timer {
-                font-size: 1.5rem;
+            .user-registration {
+                padding: 30px 20px;
             }
             
-            .btn-container {
+            .result-container {
+                padding: 30px 20px;
+            }
+            
+            .admin-panel {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .navigation {
                 flex-direction: column;
                 gap: 10px;
             }
             
-            .notification {
-                padding: 15px;
-                width: 90%;
-                left: 5%;
-                right: 5%;
-                top: 10px;
+            .btn {
+                width: 100%;
+                justify-content: center;
             }
-        }
-
-        .editor-info {
-            display: flex;
-            align-items: center;
-            margin: 15px 0;
-            padding: 10px;
-            background: #f1f3f5;
-            border-radius: 10px;
-        }
-        
-        .editor-info img {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            margin-right: 15px;
-            border: 2px solid #1a2a6c;
-        }
-        
-        .editor-details {
-            flex: 1;
-        }
-        
-        .social-share {
-            margin: 15px 0;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .quiz-links {
-            margin: 20px 0;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        .quiz-links a {
-            display: block;
-            padding: 10px;
-            background: #f1f3f5;
-            border-radius: 8px;
-            color: #1a2a6c;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .quiz-links a:hover {
-            background: #1a2a6c;
-            color: white;
-            transform: translateX(5px);
+            
+            .question-info {
+                flex-direction: column;
+                gap: 5px;
+                text-align: center;
+            }
+            
+            .user-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .score {
+                font-size: 4rem;
+            }
+            
+            .score-text {
+                font-size: 1.2rem;
+            }
+            
+            .admin-login-form {
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
+      <div class="container">
+        <header>
             <h1><i class="fas fa-laptop-code"></i> Computer Science Quiz</h1>
-            <h1><span><i class="fa-solid fa-globe"></i> shamser.info.np</span></h1>
+                <h1><span><i class="fa-solid fa-globe"></i> shamser.info.np</span></h1>
             <p class="subtitle">Test your knowledge with 50 fundamental computer science questions</p>
-        </div>
+        </header>
 
-        <div class="content">
-            <!-- User Registration Section -->
-            <div id="registrationSection" class="section active">
-                <h2>Enter Your Details</h2>
-                
-                <div class="editor-info">
-                    <img src="https://pbs.twimg.com/profile_images/1579086841227059200/JyklJEUx_400x400.jpg" alt="Editor">
-                    <div class="editor-details">
-                        <p><strong>Note:</strong> Students can enter Class, Roll No, school name and address. Others can use phone number as ID.</p>
-                    </div>
-                </div>
-                
-                <div class="social-share">
+        <!-- User Registration Section -->
+        <div class="user-registration" id="user-registration">
+            <h2>Enter Your Full Name and Id number</h2>
+            <img src="https://pbs.twimg.com/profile_images/1579086841227059200/JyklJEUx_400x400.jpg" alt="Editor" style="float: left;width:px;height:60px;  border: 1px dotted black;  margin: 10px 10px 15px 20px;">
                     <div id="fb-root"></div>
-                    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v23.0"></script>
-                    <div class="fb-like" data-href="https://shamser.info.np" data-width="" data-layout="button_count" data-action="like" data-size="small" data-share="true"></div>
-                </div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v23.0"></script>
+<div class="fb-like" data-href="https://shamser.info.np" data-width="" data-layout="button_count" data-action="like" data-size="small" data-share="true"></div>
+             <p class="subtitle"> Note :Students can enter Class,Roll No.school's name and address and others can use phone number as Id number</p>
 
-                <form id="user-form">
-                    <div class="form-group">
-                        <label for="userName"><i class="fas fa-user"></i> Full Name:</label>
-                        <input type="text" id="userName" placeholder="Enter your full name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="userAddress"><i class="fas fa-map-marker-alt"></i> Address</label>
-                        <input type="text" id="userAddress" placeholder="District/Municipality, Ward No" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="userContact"><i class="fas fa-phone"></i> Contact Number or ID</label>
-                        <input type="text" id="userContact" placeholder="98XXXXXXX or Class/Roll No" required>
-                    </div>
-                    
-                    <button type="button" id="startBtn" class="btn btn-block">
-                        <i class="fas fa-play-circle"></i> Start Quiz
-                    </button>
-                </form>
-                
-                <div class="quiz-links">
-                    <a href="https://shamser.info.np/Computer Knowledge/Computer Science Quiz Fill.html">Fill in the Blank Quiz</a>
-                    <a href="https://shamser.info.np/Quiz_Show/quiz3.html">General Knowledge Quiz (Nepali)</a>
-                    <a href="https://shamser.info.np/quiz_App5/quiz_app.html">Educational Questions Quiz (Nepali)</a>
-                    <a href="https://shamser.info.np/Computer Knowledge/Computer Knowledge Quize.html">Computer Knowledge Quiz</a>
-                </div>
-            </div>
+
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v23.0"></script>
+<div class="fb-like" data-href="https://shamser.info.np/Computer Knowledge/Computer Knowledge Quize.html" data-width="40" data-layout="" data-action="" data-size="" data-share="true"></div>           
             
-            <!-- Quiz Section -->
-            <div id="quizSection" class="section">
-                <div class="timer-container">
-                    <div><i class="fas fa-clock"></i> Time Remaining:</div>
-                    <div class="timer" id="timer">30:00</div>
-                </div>
-                
-                <div class="progress">
-                    <div class="progress-bar" id="progressBar"></div>
-                </div>
-                
-                <div class="question-counter" id="questionCounter"></div>
-                
-                <div class="question" id="question"></div>
-                
-                <div class="options" id="options"></div>
-                
-                <div class="explanation" id="explanation">
-                    <div class="explanation-title"><i class="fas fa-lightbulb"></i> Explanation:</div>
-                    <div id="explanationText"></div>
-                </div>
-                
-                <div class="btn-container">
-                    <button id="nextBtn" class="btn" style="display: none;">Next Question <i class="fas fa-arrow-right"></i></button>
-                    <button id="submitBtn" class="btn" style="display: none; background: linear-gradient(to right, #28a745, #0d8b2d);">Submit Quiz</button>
-                </div>
-            </div>
             
-            <!-- Result Section -->
-            <div id="resultSection" class="section">
-                <div class="result-container">
-                    <h2><i class="fas fa-trophy"></i> Quiz Completed!</h2>
-                    <div class="score" id="finalScore">0/0</div>
-                    <div class="score-text" id="scoreText"></div>
-                    
-                    <div class="user-details">
-                        <h3><i class="fas fa-user-circle"></i> Your Details</h3>
-                        <p><strong>Name:</strong> <span id="resultName"></span></p>
-                        <p><strong>Address:</strong> <span id="resultAddress"></span></p>
-                        <p><strong>Contact/ID:</strong> <span id="resultContact"></span></p>
-                        <p><strong>Time Taken:</strong> <span id="resultTime"></span></p>
-                    </div>
-                    
-                    <!-- Detailed Results Section -->
-                    <div class="result-details" id="detailedResults">
-                        <h3><i class="fas fa-list-ol"></i> Detailed Question Review</h3>
-                        <!-- Results will be inserted here by JavaScript -->
-                    </div>
-                    
-                    <div class="btn-container">
-                        <button id="restartBtn" class="btn"><i class="fas fa-redo"></i> Restart Quiz</button>
-                        <button id="shareBtn" class="btn" style="background: linear-gradient(to right, #4267B2, #3b5998);">
-                            <i class="fab fa-facebook"></i> Share on Facebook
-                        </button>
-                    </div>
+            
+            <form class="user-form" id="user-form">
+                <div class="form-group">
+                    <label for="user-name"><i class="fas fa-user"></i> Full Name:</label>
+                    <input type="text" id="user-name" placeholder="Enter your full name" required>
                 </div>
+                
+                <div class="form-group">
+                    <label for="user-id"><i class="fas fa-id-card"></i> ID Number:</label>
+                    <input type="text" id="user-id" placeholder="Enter your ID number" required>
+                </div>
+                
+                <button type="submit" class="btn btn-start">
+                    <i class="fas fa-play-circle"></i> Start Quiz
+                </button>
+            </form>
+            <a href="https://shamser.info.np/Computer Knowledge/Computer Science Quiz Fill.html">fill in the blank Quiz</a>  
+            <div class="admin-controls" style="margin-top: 20px;">
+                <button class="admin-btn" id="admin-btn">
+                    <i class="fas fa-cog"></i> Admin Panel
+                </button>
             </div>
         </div>
         
-        <div class="footer">
-            <p>Contact us at info@shamser.com.np <i class="fas fa-envelope"></i></p>
-            <p>You can also contact us through <a href="https://www.jotform.com/form/231287552368463">this form</a></p>
-            <p>© shamser.info.np | Computer Knowledge</p>
+        <!-- Quiz Container -->
+        <div class="quiz-container" id="quiz-container">
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            
+            <div class="question-info">
+                <div class="question-count">Question <span id="current">1</span> of 50</div>
+                <div class="score-indicator">Score: <span id="score">0</span></div>
+            </div>
+            
+            <div class="question-container">
+                <div class="question-text" id="question-text"></div>
+                
+                <div class="options-container" id="options-container">
+                    <!-- Options will be inserted here by JavaScript -->
+                </div>
+                
+                <div class="explanation" id="explanation">
+                    <div class="explanation-title">Explanation:</div>
+                    <div id="explanation-text"></div>
+                </div>
+            </div>
+            
+            <div class="navigation">
+                <button class="btn btn-prev" id="prev-btn" disabled>
+                    <i class="fas fa-arrow-left"></i> Previous
+                </button>
+                <button class="btn btn-next" id="next-btn">
+                    Next <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
         </div>
-    </div>
+        
+        <!-- Result Container -->
+        <div class="result-container" id="result-container">
+            <h2>Quiz Completed!</h2>
+            
+            <div class="user-info">
+                <div class="info-item">
+                    <div class="info-label">Name</div>
+                    <div class="info-value" id="result-name"></div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-label">ID Number</div>
+                    <div class="info-value" id="result-id"></div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-label">Score</div>
+                    <div class="info-value" id="result-score"></div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-label">Date</div>
+                    <div class="info-value" id="result-date"></div>
+                </div>
+            </div>
+            
+            <div class="score" id="final-score">0</div>
+            <div class="score-text" id="score-text">Well done!</div>
+            
+            <div class="save-results-panel">
+                <p>Your quiz results are being automatically saved to database.</p>
+                <div class="auto-save-indicator" id="auto-save-indicator">
+                    <i class="fas fa-sync-alt fa-spin"></i>
+                    <span>Saving results to DB...</span>
+                </div>
+            </div>
+            
+            <div class="sheet-info">
+                <h3><i class="fas fa-table"></i> Results Recorded</h3>
+                <p>Your quiz results will be recorded:</p>
+                <ul>
+                    <li><strong>Date & Time:</strong> <span id="sheet-timestamp"></span></li>
+                </ul>
+            </div>
+            
+            <button class="restart-btn" id="restart-btn">
+                <i class="fas fa-redo"></i> Take Quiz Again
+            </button>
+        </div>
     
-    <div class="notification" id="notification">
-        <i class="fas fa-check-circle"></i>
-        <div id="notificationMessage"></div>
+        <!-- Admin Panel with Login -->
+        <div class="admin-panel" id="admin-panel">
+            <h2><i class="fas fa-cog"></i> Admin Panel</h2>
+            
+            <div class="admin-welcome" id="admin-welcome">
+                Welcome, <span id="admin-username">Admin</span>!
+                <button class="btn-logout" id="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+            
+            <div class="admin-login-form" id="admin-login-form">
+                <h3><i class="fas fa-lock"></i> Admin Login</h3>
+                
+                <div class="form-group">
+                    <label for="admin-username-input">Username:</label>
+                    <input type="text" id="admin-username-input" placeholder="Enter admin username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="admin-password">Password:</label>
+                    <input type="password" id="admin-password" placeholder="Enter password" required>
+                </div>
+                
+                <button class="btn btn-login" id="login-btn">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+                
+                <div class="back-to-quiz" style="margin-top: 20px;">
+                    <button class="admin-btn" id="back-to-quiz-btn">
+                        <i class="fas fa-arrow-left"></i> Back to Quiz
+                    </button>
+                </div>
+            </div>
+            
+            <div class="admin-controls-panel" id="admin-controls-panel">
+                <div class="admin-controls">
+                    <button class="admin-btn" id="view-results-btn">
+                        <i class="fas fa-table"></i> View Quiz Results
+                    </button>
+                    
+                    <button class="admin-btn" id="download-results-btn">
+                        <i class="fas fa-download"></i> Download Results as CSV
+                    </button>
+                    
+                    <button class="admin-btn" id="clear-results-btn">
+                        <i class="fas fa-trash-alt"></i> Clear All Results
+                    </button>
+                    
+                    <button class="admin-btn" id="change-credentials-btn">
+                        <i class="fas fa-key"></i> Change Admin Credentials
+                    </button>
+                </div>
+                
+                <div class="back-to-quiz">
+                    <button class="admin-btn" id="back-to-quiz-btn2">
+                        <i class="fas fa-arrow-left"></i> Back to Quiz
+                    </button>
+                </div>
+                
+                <table class="results-table" id="results-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>ID</th>
+                            <th>Score</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="results-body">
+                        <!-- Results will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Notification -->
+        <div class="notification" id="notification">
+            <i class="fas fa-check-circle"></i>
+            <span id="notification-text">Results saved successfully!</span>
+        </div>
     </div>
 
     <script>
         // Quiz data
-        const questions = [
+        const quizData = [
             {
                 question: "What is the full form of RAM?",
                 options: ["Random Access Memory", "Read Access Memory", "Readily Available Memory", "Random Available Memory"],
@@ -951,362 +1188,547 @@
                 explanation: "A bit is short for binary digit, the smallest unit of data in computing."
             }
         ];
-
+        
         // DOM elements
-        const registrationSection = document.getElementById('registrationSection');
-        const quizSection = document.getElementById('quizSection');
-        const resultSection = document.getElementById('resultSection');
-        const startBtn = document.getElementById('startBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const submitBtn = document.getElementById('submitBtn');
-        const restartBtn = document.getElementById('restartBtn');
-        const shareBtn = document.getElementById('shareBtn');
-        const timerElement = document.getElementById('timer');
-        const progressBar = document.getElementById('progressBar');
-        const questionCounter = document.getElementById('questionCounter');
-        const questionElement = document.getElementById('question');
-        const optionsElement = document.getElementById('options');
-        const explanationElement = document.getElementById('explanation');
-        const explanationText = document.getElementById('explanationText');
-        const finalScore = document.getElementById('finalScore');
-        const scoreText = document.getElementById('scoreText');
-        const resultName = document.getElementById('resultName');
-        const resultAddress = document.getElementById('resultAddress');
-        const resultContact = document.getElementById('resultContact');
-        const resultTime = document.getElementById('resultTime');
-        const notification = document.getElementById('notification');
-        const notificationMessage = document.getElementById('notificationMessage');
-        const detailedResults = document.getElementById('detailedResults');
+        const userRegistration = document.getElementById('user-registration');
+        const quizContainer = document.getElementById('quiz-container');
+        const resultContainer = document.getElementById('result-container');
         const userForm = document.getElementById('user-form');
+        const userNameInput = document.getElementById('user-name');
+        const userIdInput = document.getElementById('user-id');
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const currentEl = document.getElementById('current');
+        const scoreEl = document.getElementById('score');
+        const progressBar = document.getElementById('progress-bar');
+        const finalScore = document.getElementById('final-score');
+        const scoreText = document.getElementById('score-text');
+        const restartBtn = document.getElementById('restart-btn');
+        const explanation = document.getElementById('explanation');
+        const explanationText = document.getElementById('explanation-text');
+        const resultName = document.getElementById('result-name');
+        const resultId = document.getElementById('result-id');
+        const resultScore = document.getElementById('result-score');
+        const resultDate = document.getElementById('result-date');
+        const sheetTimestamp = document.getElementById('sheet-timestamp');
+        const adminBtn = document.getElementById('admin-btn');
+        const adminPanel = document.getElementById('admin-panel');
+        const viewResultsBtn = document.getElementById('view-results-btn');
+        const downloadResultsBtn = document.getElementById('download-results-btn');
+        const clearResultsBtn = document.getElementById('clear-results-btn');
+        const backToQuizBtn = document.getElementById('back-to-quiz-btn');
+        const resultsTable = document.getElementById('results-table');
+        const resultsBody = document.getElementById('results-body');
+        const notification = document.getElementById('notification');
+        const notificationText = document.getElementById('notification-text');
+        const autoSaveIndicator = document.getElementById('auto-save-indicator');
+        
+        // Admin panel elements
+        const adminLoginForm = document.getElementById('admin-login-form');
+        const adminControlsPanel = document.getElementById('admin-controls-panel');
+        const adminWelcome = document.getElementById('admin-welcome');
+        const adminUsername = document.getElementById('admin-username');
+        const logoutBtn = document.getElementById('logout-btn');
+        const loginBtn = document.getElementById('login-btn');
+        const adminUsernameInput = document.getElementById('admin-username-input');
+        const adminPasswordInput = document.getElementById('admin-password');
+        const changeCredentialsBtn = document.getElementById('change-credentials-btn');
+        const backToQuizBtn2 = document.getElementById('back-to-quiz-btn2');
 
-        // Quiz variables
+        // Quiz state
         let currentQuestion = 0;
-        let score = 0;
-        let timeLeft = 1800; // 30 minutes in seconds
-        let timer;
-        let quizCompleted = false;
-        const totalQuestions = questions.length;
-        let userName, userAddress, userContact;
-        let startTime;
-        let userAnswers = [];
+        let userScore = 0;
+        let userAnswers = new Array(quizData.length).fill(null);
+        let userName = '';
+        let userId = '';
+        let quizResults = JSON.parse(localStorage.getItem('quizResults')) || [];
+        
+        // Admin credentials (default values)
+        let adminCredentials = JSON.parse(localStorage.getItem('adminCredentials')) || {
+            username: 'admin',
+            password: 'admin123'
+        };
+        
+        // Initialize admin panel
+        function initAdminPanel() {
+            // Hide controls by default
+            adminControlsPanel.style.display = 'none';
+            adminWelcome.style.display = 'none';
+            adminLoginForm.style.display = 'block';
+        }
 
-        // Event listeners
-        startBtn.addEventListener('click', startQuiz);
-        nextBtn.addEventListener('click', nextQuestion);
-        submitBtn.addEventListener('click', endQuiz);
-        restartBtn.addEventListener('click', () => location.reload());
-        shareBtn.addEventListener('click', shareResults);
+        // Show notification
+        function showNotification(message, isError = false) {
+            notificationText.textContent = message;
+            notification.classList.remove('error');
+            
+            if (isError) {
+                notification.classList.add('error');
+            }
+            
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Initialize quiz
+        function initQuiz() {
+            showQuestion();
+            updateProgress();
+            updateNavigation();
+        }
+
+        // Show current question
+        function showQuestion() {
+            const question = quizData[currentQuestion];
+            questionText.textContent = question.question;
+            currentEl.textContent = currentQuestion + 1;
+            
+            optionsContainer.innerHTML = '';
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.classList.add('option');
+                if (userAnswers[currentQuestion] === option) {
+                    optionElement.classList.add('selected');
+                }
+                
+                const letter = document.createElement('div');
+                letter.classList.add('option-letter');
+                letter.textContent = String.fromCharCode(65 + index); // A, B, C, D
+                
+                const text = document.createElement('div');
+                text.classList.add('option-text');
+                text.textContent = option;
+                
+                optionElement.appendChild(letter);
+                optionElement.appendChild(text);
+                
+                optionElement.addEventListener('click', () => selectOption(option, optionElement));
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // Show explanation if user has answered this question
+            if (userAnswers[currentQuestion] !== null) {
+                explanation.style.display = 'block';
+                explanationText.textContent = question.explanation;
+                
+                // Highlight correct/incorrect answers
+                document.querySelectorAll('.option').forEach(opt => {
+                    const optText = opt.querySelector('.option-text').textContent;
+                    if (optText === question.answer) {
+                        opt.classList.add('correct');
+                    } else if (userAnswers[currentQuestion] === optText && optText !== question.answer) {
+                        opt.classList.add('incorrect');
+                    }
+                });
+            } else {
+                explanation.style.display = 'none';
+            }
+        }
+
+        // Select an option
+        function selectOption(option, element) {
+            // If user already answered this question, don't allow changes
+            if (userAnswers[currentQuestion] !== null) return;
+            
+            // Remove selected class from all options
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked option
+            element.classList.add('selected');
+            
+            // Store user's answer
+            userAnswers[currentQuestion] = option;
+            
+            // Check if answer is correct
+            if (option === quizData[currentQuestion].answer) {
+                userScore++;
+                scoreEl.textContent = userScore;
+            }
+            
+            // Show explanation
+            explanation.style.display = 'block';
+            explanationText.textContent = quizData[currentQuestion].explanation;
+            
+            // Highlight correct/incorrect answers
+            document.querySelectorAll('.option').forEach(opt => {
+                const optText = opt.querySelector('.option-text').textContent;
+                if (optText === quizData[currentQuestion].answer) {
+                    opt.classList.add('correct');
+                } else if (optText === option && optText !== quizData[currentQuestion].answer) {
+                    opt.classList.add('incorrect');
+                }
+            });
+            
+            // Update navigation
+            updateNavigation();
+        }
+
+        // Update navigation buttons
+        function updateNavigation() {
+            prevBtn.disabled = currentQuestion === 0;
+            
+            if (currentQuestion === quizData.length - 1) {
+                nextBtn.innerHTML = 'Submit <i class="fas fa-paper-plane"></i>';
+                nextBtn.classList.remove('btn-next');
+                nextBtn.classList.add('btn-submit');
+            } else {
+                nextBtn.innerHTML = 'Next <i class="fas fa-arrow-right"></i>';
+                nextBtn.classList.remove('btn-submit');
+                nextBtn.classList.add('btn-next');
+            }
+            
+            // Enable next button only if user has answered the current question
+            nextBtn.disabled = userAnswers[currentQuestion] === null;
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / quizData.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        // Next question
+        function nextQuestion() {
+            if (currentQuestion < quizData.length - 1) {
+                currentQuestion++;
+                showQuestion();
+                updateProgress();
+                updateNavigation();
+            } else {
+                showResults();
+            }
+        }
+
+        // Previous question
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+                updateProgress();
+                updateNavigation();
+            }
+        }
+
+        // Show results
+        function showResults() {
+            quizContainer.style.display = 'none';
+            resultContainer.style.display = 'block';
+            finalScore.textContent = userScore;
+            
+            // Set user info in results
+            resultName.textContent = userName;
+            resultId.textContent = userId;
+            resultScore.textContent = `${userScore}/${quizData.length}`;
+            
+            // Set current date and time
+            const now = new Date();
+            const dateStr = now.toLocaleDateString();
+            const timeStr = now.toLocaleTimeString();
+            resultDate.textContent = `${dateStr} ${timeStr}`;
+            sheetTimestamp.textContent = `${dateStr} ${timeStr}`;
+            
+            // Generate result message based on score
+            const percentage = (userScore / quizData.length) * 100;
+            let message;
+            
+            if (percentage >= 90) {
+                message = "Outstanding! You're a computer science expert!";
+            } else if (percentage >= 70) {
+                message = "Great job! You have strong computer knowledge!";
+            } else if (percentage >= 50) {
+                message = "Good effort! You know the basics well.";
+            } else {
+                message = "Keep learning! Review the questions to improve.";
+            }
+            
+            scoreText.textContent = message;
+            
+            // Save results locally
+            saveResultsLocally();
+            
+            // Automatically save to Google Sheet
+            saveToGoogleSheet();
+        }
+
+        // Save results to localStorage
+        function saveResultsLocally() {
+            const now = new Date();
+            const dateStr = now.toLocaleDateString();
+            const timeStr = now.toLocaleTimeString();
+            
+            const result = {
+                name: userName,
+                id: userId,
+                score: userScore,
+                date: `${dateStr} ${timeStr}`,
+                timestamp: now.getTime()
+            };
+            
+            // Add to results array
+            quizResults.push(result);
+            
+            // Save to localStorage
+            localStorage.setItem('quizResults', JSON.stringify(quizResults));
+        }
+
+        // Save to Google Sheet
+        function saveToGoogleSheet() {
+            // Update auto-save indicator
+            autoSaveIndicator.className = 'auto-save-indicator saving';
+            autoSaveIndicator.innerHTML = '<i class="fas fa-sync-alt fa-spin"></i> Saving results to database...';
+            
+            const now = new Date();
+            const dateStr = now.toLocaleDateString();
+            const timeStr = now.toLocaleTimeString();
+            
+            const data = {
+                name: userName,
+                id: userId,
+                score: userScore,
+                date: `${dateStr} ${timeStr}`
+            };
+            
+            // Send data to Google Apps Script web app
+            fetch('https://script.google.com/macros/s/AKfycbwzl78le-dWuY9KiA5yvleP1ViNF3R8AdOr3sCKo5JZO0PgED3xlFxpL3jUlMeI3yVG/exec', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(() => {
+                // Update UI to show success
+                autoSaveIndicator.className = 'auto-save-indicator success';
+                autoSaveIndicator.innerHTML = '<i class="fas fa-check-circle"></i> Results saved to database!';
+                showNotification("Results successfully recorded!");
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Update UI to show error
+                autoSaveIndicator.className = 'auto-save-indicator error';
+                autoSaveIndicator.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Failed to save. Please try again later.';
+                showNotification("Failed to save", true);
+            });
+        }
+
+        // Fetch results from localStorage
+        function fetchResults() {
+            // Get results from localStorage
+            quizResults = JSON.parse(localStorage.getItem('quizResults')) || [];
+            
+            // Clear existing table data
+            resultsBody.innerHTML = '';
+            
+            if (quizResults.length === 0) {
+                const row = document.createElement('tr');
+                const cell = document.createElement('td');
+                cell.colSpan = 4;
+                cell.textContent = 'No quiz results found';
+                cell.style.textAlign = 'center';
+                cell.style.padding = '20px';
+                cell.style.fontStyle = 'italic';
+                row.appendChild(cell);
+                resultsBody.appendChild(row);
+                return;
+            }
+            
+            // Populate table with results
+            quizResults.forEach(result => {
+                const row = document.createElement('tr');
+                
+                const nameCell = document.createElement('td');
+                nameCell.textContent = result.name;
+                row.appendChild(nameCell);
+                
+                const idCell = document.createElement('td');
+                idCell.textContent = result.id;
+                row.appendChild(idCell);
+                
+                const scoreCell = document.createElement('td');
+                scoreCell.textContent = result.score;
+                row.appendChild(scoreCell);
+                
+                const dateCell = document.createElement('td');
+                dateCell.textContent = result.date;
+                row.appendChild(dateCell);
+                
+                resultsBody.appendChild(row);
+            });
+            
+            // Show the results table
+            resultsTable.style.display = 'table';
+            showNotification("Quiz results loaded successfully!");
+        }
+
+        // Download results as CSV
+        function downloadResultsAsCSV() {
+            if (quizResults.length === 0) {
+                showNotification("No results to download", true);
+                return;
+            }
+            
+            let csvContent = "Name,ID,Score,Date\n";
+            
+            quizResults.forEach(result => {
+                csvContent += `"${result.name}","${result.id}",${result.score},"${result.date}"\n`;
+            });
+            
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.setAttribute("href", url);
+            link.setAttribute("download", "quiz_results.csv");
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            showNotification("Results downloaded as CSV successfully!");
+        }
+
+        // Clear all results
+        function clearAllResults() {
+            if(confirm('Are you sure you want to clear all results?')) {
+                localStorage.removeItem('quizResults');
+                quizResults = [];
+                resultsBody.innerHTML = '';
+                resultsTable.style.display = 'none';
+                showNotification("All quiz results have been cleared!");
+            }
+        }
+
+        // Admin login function
+        function adminLogin() {
+            const username = adminUsernameInput.value.trim();
+            const password = adminPasswordInput.value.trim();
+            
+            if (username === adminCredentials.username && password === adminCredentials.password) {
+                // Successful login
+                adminLoginForm.style.display = 'none';
+                adminControlsPanel.style.display = 'block';
+                adminWelcome.style.display = 'block';
+                adminUsername.textContent = username;
+                showNotification("Admin login successful!");
+            } else {
+                showNotification("Invalid username or password", true);
+                adminPasswordInput.value = '';
+            }
+        }
+        
+        // Change admin credentials
+        function changeAdminCredentials() {
+            const newUsername = prompt("Enter new admin username:", adminCredentials.username);
+            if (newUsername === null) return;
+            
+            const newPassword = prompt("Enter new admin password:", adminCredentials.password);
+            if (newPassword === null) return;
+            
+            adminCredentials = {
+                username: newUsername,
+                password: newPassword
+            };
+            
+            localStorage.setItem('adminCredentials', JSON.stringify(adminCredentials));
+            showNotification("Admin credentials updated successfully!");
+        }
+
+        // Restart quiz
+        function restartQuiz() {
+            currentQuestion = 0;
+            userScore = 0;
+            userAnswers.fill(null);
+            scoreEl.textContent = userScore;
+            resultContainer.style.display = 'none';
+            userRegistration.style.display = 'block';
+            
+            // Clear form
+            userNameInput.value = '';
+            userIdInput.value = '';
+        }
+        
+        // Logout admin
+        function adminLogout() {
+            adminLoginForm.style.display = 'block';
+            adminControlsPanel.style.display = 'none';
+            adminWelcome.style.display = 'none';
+            adminUsernameInput.value = '';
+            adminPasswordInput.value = '';
+            resultsTable.style.display = 'none';
+            showNotification("Admin logged out successfully!");
+        }
 
         // Handle form submission
         userForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            startQuiz();
+            
+            userName = userNameInput.value.trim();
+            userId = userIdInput.value.trim();
+            
+            if (userName && userId) {
+                userRegistration.style.display = 'none';
+                quizContainer.style.display = 'block';
+                initQuiz();
+            }
         });
 
-        // Start quiz function
-        function startQuiz() {
-            userName = document.getElementById('userName').value.trim();
-            userAddress = document.getElementById('userAddress').value.trim();
-            userContact = document.getElementById('userContact').value.trim();
-            
-            if (!userName || !userAddress || !userContact) {
-                showNotification("Please fill in all personal details", "error");
-                return;
+        // Event listeners
+        prevBtn.addEventListener('click', prevQuestion);
+        nextBtn.addEventListener('click', nextQuestion);
+        restartBtn.addEventListener('click', restartQuiz);
+        
+        // Admin panel event listeners
+        adminBtn.addEventListener('click', () => {
+            userRegistration.style.display = 'none';
+            adminPanel.style.display = 'block';
+            initAdminPanel();
+        });
+        
+        loginBtn.addEventListener('click', adminLogin);
+        
+        // Allow pressing Enter to login
+        adminPasswordInput.addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') {
+                adminLogin();
             }
-            
-            startTime = new Date();
-            userAnswers = [];
-            currentQuestion = 0;
-            score = 0;
-            timeLeft = 1800;
-            quizCompleted = false;
-            
-            registrationSection.classList.remove('active');
-            quizSection.classList.add('active');
-            
-            // Start timer
-            clearInterval(timer);
-            timer = setInterval(updateTimer, 1000);
-            
-            showQuestion();
-        }
-
-        // Update timer function
-        function updateTimer() {
-            const minutes = Math.floor(timeLeft / 60);
-            const seconds = timeLeft % 60;
-            timerElement.textContent = `${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
-            
-            // Update progress bar
-            const progressPercent = ((1800 - timeLeft) / 1800) * 100;
-            progressBar.style.width = `${progressPercent}%`;
-            
-            if (timeLeft <= 0) {
-                clearInterval(timer);
-                endQuiz();
-            } else {
-                timeLeft--;
-            }
-        }
-
-        // Show question function
-        function showQuestion() {
-            const question = questions[currentQuestion];
-            questionCounter.textContent = `Question ${currentQuestion + 1}/${totalQuestions}`;
-            questionElement.textContent = question.question;
-            
-            optionsElement.innerHTML = '';
-            question.options.forEach((option, index) => {
-                const optionElement = document.createElement('div');
-                optionElement.classList.add('option');
-                optionElement.innerHTML = `
-                    <div class="option-prefix">${String.fromCharCode(65 + index)}</div>
-                    <div class="option-text">${option}</div>
-                `;
-                optionElement.addEventListener('click', () => selectAnswer(option));
-                optionsElement.appendChild(optionElement);
-            });
-            
-            explanationElement.style.display = 'none';
-            nextBtn.style.display = 'none';
-            submitBtn.style.display = 'none';
-        }
-
-        // Select answer function - NO IMMEDIATE FEEDBACK
-        function selectAnswer(selected) {
-            if (quizCompleted) return;
-            
-            const options = document.querySelectorAll('.option');
-            const currentQuestionData = questions[currentQuestion];
-            
-            // Store user's answer
-            userAnswers[currentQuestion] = selected;
-            
-            // Mark selected option without showing correctness
-            options.forEach(option => {
-                const optionText = option.querySelector('.option-text').textContent;
-                
-                // Disable all options
-                option.style.pointerEvents = 'none';
-                
-                // Highlight selected option neutrally
-                if (optionText === selected) {
-                    option.classList.add('selected');
-                }
-            });
-
-            // Show explanation without revealing correctness
-            explanationText.textContent = currentQuestionData.explanation;
-            explanationElement.style.display = 'block';
-            
-            // Show next button or submit button
-            if (currentQuestion < totalQuestions - 1) {
-                nextBtn.style.display = 'inline-block';
-            } else {
-                submitBtn.style.display = 'inline-block';
-            }
-        }
-
-        // Next question function
-        function nextQuestion() {
-            currentQuestion++;
-            showQuestion();
-        }
-
-        // End quiz function
-        function endQuiz() {
-            quizCompleted = true;
-            clearInterval(timer);
-            
-            // Calculate score
-            score = 0;
-            questions.forEach((question, index) => {
-                if (userAnswers[index] === question.answer) {
-                    score++;
-                }
-            });
-            
-            const endTime = new Date();
-            const timeTaken = Math.floor((endTime - startTime) / 1000);
-            const minutesTaken = Math.floor(timeTaken / 60);
-            const secondsTaken = timeTaken % 60;
-            
-            // Save results to Google Sheets BEFORE showing results
-            saveResultsToGoogleSheets(minutesTaken, secondsTaken, () => {
-                // Show results after saving
-                showResults(minutesTaken, secondsTaken);
-            });
+        });
+        
+        logoutBtn.addEventListener('click', adminLogout);
+        
+        viewResultsBtn.addEventListener('click', fetchResults);
+        
+        downloadResultsBtn.addEventListener('click', downloadResultsAsCSV);
+        
+        clearResultsBtn.addEventListener('click', clearAllResults);
+        
+        changeCredentialsBtn.addEventListener('click', changeAdminCredentials);
+        
+        backToQuizBtn.addEventListener('click', () => {
+            adminPanel.style.display = 'none';
+            userRegistration.style.display = 'block';
+        });
+        
+        backToQuizBtn2.addEventListener('click', () => {
+            adminPanel.style.display = 'none';
+            userRegistration.style.display = 'block';
+        });
+        
+        // Initialize admin credentials
+        if (!localStorage.getItem('adminCredentials')) {
+            localStorage.setItem('adminCredentials', JSON.stringify(adminCredentials));
+        } else {
+            adminCredentials = JSON.parse(localStorage.getItem('adminCredentials'));
         }
         
-        // Show results after saving
-        function showResults(minutesTaken, secondsTaken) {
-            // Update result section
-            finalScore.textContent = `${score}/${totalQuestions}`;
-            
-            // Custom score message based on performance
-            const percentage = (score / totalQuestions) * 100;
-            let message;
-            if (percentage >= 90) {
-                message = "Excellent! You have exceptional computer knowledge!";
-            } else if (percentage >= 70) {
-                message = "Great job! You have good computer knowledge!";
-            } else if (percentage >= 50) {
-                message = "Good effort! You have basic computer knowledge.";
-            } else {
-                message = "Keep learning! You can improve your computer knowledge.";
-            }
-            
-            scoreText.textContent = message;
-            resultName.textContent = userName;
-            resultAddress.textContent = userAddress;
-            resultContact.textContent = userContact;
-            resultTime.textContent = `${minutesTaken} minutes ${secondsTaken} seconds`;
-            
-            // Show detailed results
-            showDetailedResults();
-            
-            // Show result section
-            quizSection.classList.remove('active');
-            resultSection.classList.add('active');
-        }
-
-        // Show detailed results function
-        function showDetailedResults() {
-            detailedResults.innerHTML = '<h3><i class="fas fa-list-ol"></i> Detailed Question Review</h3>';
-            
-            questions.forEach((question, index) => {
-                const userAnswer = userAnswers[index];
-                const isCorrect = userAnswer === question.answer;
-                
-                const resultItem = document.createElement('div');
-                resultItem.className = `result-item ${isCorrect ? 'correct' : 'incorrect'}`;
-                
-                const status = document.createElement('div');
-                status.className = `result-status ${isCorrect ? 'status-correct' : 'status-incorrect'}`;
-                status.textContent = isCorrect ? 'Correct' : 'Incorrect';
-                
-                const questionText = document.createElement('div');
-                questionText.className = 'result-question';
-                questionText.textContent = `${index + 1}. ${question.question}`;
-                
-                resultItem.appendChild(status);
-                resultItem.appendChild(questionText);
-                
-                // Show all options with highlighting
-                question.options.forEach((option, optionIndex) => {
-                    const optionElement = document.createElement('div');
-                    const isUserAnswer = option === userAnswer;
-                    const isCorrectAnswer = option === question.answer;
-                    
-                    let className = 'result-answer';
-                    if (isCorrectAnswer) {
-                        className += ' correct-answer';
-                    }
-                    if (isUserAnswer) {
-                        className += ' user-answer';
-                        className += isCorrect ? ' correct' : ' incorrect';
-                    }
-                    
-                    optionElement.className = className;
-                    
-                    const optionLabel = document.createElement('div');
-                    optionLabel.className = 'result-answer-label';
-                    optionLabel.textContent = String.fromCharCode(65 + optionIndex) + '.';
-                    
-                    const optionText = document.createElement('div');
-                    optionText.textContent = option;
-                    
-                    optionElement.appendChild(optionLabel);
-                    optionElement.appendChild(optionText);
-                    resultItem.appendChild(optionElement);
-                });
-                
-                // Add explanation
-                const explanation = document.createElement('div');
-                explanation.className = 'result-explanation';
-                explanation.innerHTML = `<strong>Explanation:</strong> ${question.explanation}`;
-                resultItem.appendChild(explanation);
-                
-                detailedResults.appendChild(resultItem);
-            });
-        }
-
-        // Save results to Google Sheets with proper headers
-        function saveResultsToGoogleSheets(minutes, seconds, callback) {
-            // Use the provided Google Apps Script URL
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbwzl78le-dWuY9KiA5yvleP1ViNF3R8AdOr3sCKo5JZO0PgED3xlFxpL3jUlMeI3yVG/exec';
-            
-            // Prepare data with proper header names
-            const data = {
-                'Name': userName,
-                'Address': userAddress,
-                'Contact': userContact,
-                'Score': `${score}/${totalQuestions}`,
-                'Time Taken': `${minutes} minutes ${seconds} seconds`,
-                'Timestamp': new Date().toLocaleString()
-            };
-            
-            // Create form data
-            const formData = new FormData();
-            for (const key in data) {
-                formData.append(key, data[key]);
-            }
-            
-            // Send request
-            fetch(scriptURL, {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                }
-                throw new Error('Network response was not ok.');
-            })
-            .then(data => {
-                showNotification("Your results have been saved successfully!", "success");
-                if (callback) callback(); // Execute callback after save
-            })
-            .catch(error => {
-                console.error('Error saving results:', error);
-                showNotification("Error saving results: " + error.message, "error");
-                if (callback) callback(); // Still show results even if save fails
-            });
-        }
-
-        // Share results on Facebook
-        function shareResults() {
-            const scoreText = `I scored ${score}/${totalQuestions} on the Computer Science Quiz! Test your knowledge at ${window.location.href}`;
-            const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent(scoreText)}`;
-            window.open(shareUrl, '_blank', 'width=600,height=400');
-        }
-
-        // Show notification function
-        function showNotification(message, type) {
-            // Clear previous content
-            notification.innerHTML = '';
-            
-            // Create icon
-            const icon = document.createElement('i');
-            icon.className = type === 'success' ? 'fas fa-check-circle' : 'fas fa-exclamation-circle';
-            
-            // Create message div
-            const messageDiv = document.createElement('div');
-            messageDiv.id = 'notificationMessage';
-            messageDiv.textContent = message;
-            
-            // Append elements
-            notification.appendChild(icon);
-            notification.appendChild(messageDiv);
-            
-            // Set notification type
-            notification.className = 'notification active ' + type;
-            
-            // Auto hide after 5 seconds
-            setTimeout(() => {
-                notification.classList.remove('active');
-            }, 5000);
-        }
+        // Initialize quiz results from localStorage
+        quizResults = JSON.parse(localStorage.getItem('quizResults')) || [];
     </script>
 </body>
 </html>
