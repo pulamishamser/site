@@ -3,74 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="keywords"  content="Computer Science Quiz"/>
-<meta property="og:type" content="website"/>
-<meta property="og:url" content="https://shamser.info.np/Computer Knowledge/Computer Knowledge Quize.html"/>
-<meta property="og:title" content="Computer Science Quiz"/>
-<meta property="og:description" content="Test your knowledge with 50 fundamental computer science questions">
-<meta property="og:image:width" content="1200" />
-<meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh8qi2zS0CAtfY4wtfa77jhrxCptdZ9fxej3yEY5zPc71y_agBjVfXdeg83KEqTnTK47pPaPI7hljUusoGvJjrcTC4Qt7w3nz70EDkrSTEjnbMMKCQtN_JbzBc8wZKTbLq9XeyWkvuotaBX/s1600/computercomponent.jpg">
+    <meta name="keywords" content="Computer Science Quiz"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://shamser.info.np/Computer Knowledge/Computer Knowledge Quize.html"/>
+    <meta property="og:title" content="Computer Science Quiz"/>
+    <meta property="og:description" content="Test your knowledge with 50 fundamental computer science questions">
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh8qi2zS0CAtfY4wtfa77jhrxCptdZ9fxej3yEY5zPc71y_agBjVfXdeg83KEqTnTK47pPaPI7hljUusoGvJjrcTC4Qt7w3nz70EDkrSTEjnbMMKCQtN_JbzBc8wZKTbLq9XeyWkvuotaBX/s1600/computercomponent.jpg">
     
     <title>Computer Science Quiz</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
-
-
-<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-<script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(async function(OneSignal) {
-    await OneSignal.init({
-      appId: "2dcf0fae-27c7-4c6e-a29e-f9a9ffb3a9e5",
-    });
-  });
-</script>
-
-
-<!----share button---->
-<script type='text/javascript' src='../platform-api.sharethis.com/js/sharethis.js#property=5b5b234df5aa6d001130d104&product=inline-share-buttons' async='async'></script>
-<div id="fb-root"></div>
-<script>
-      (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = '../connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1';
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-    </script>            
-<!------------  <SDK>------------>      
-
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '{758915462507587}',
-      cookie     : true,
-      xfbml      : true,
-      version    : '{api-version}'
-    });
-      
-    FB.AppEvents.logPageView();   
-      
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script> 
-
-<!---------Save to facebook----  
-<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" defer></script>--->
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v20.0" nonce="2vA4OymM"></script>
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-163260228-1"></script>
-
-    
     <style>
         * {
             margin: 0;
@@ -180,6 +125,43 @@
             transition: width 0.4s ease;
         }
         
+        /* Timer styles */
+        .timer-container {
+            height: 8px;
+            width: 100%;
+            background: #f0f0f0;
+            margin-top: 5px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .timer-bar {
+            height: 100%;
+            background: #3498db;
+            width: 100%;
+            transition: width 1s linear;
+        }
+        
+        .timer-bar.warning {
+            background: #ff9800;
+        }
+        
+        .timer-bar.danger {
+            background: #f44336;
+        }
+        
+        .timer-display {
+            position: absolute;
+            right: 20px;
+            top: 5px;
+            font-weight: bold;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+        }
+        
         .question-info {
             display: flex;
             justify-content: space-between;
@@ -187,6 +169,7 @@
             background: #3498db;
             color: white;
             font-weight: 600;
+            position: relative;
         }
         
         .question-container {
@@ -229,16 +212,6 @@
             background: #e3f2fd;
             border-color: #3498db;
             box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
-        }
-        
-        .option.correct {
-            background: #e8f5e9;
-            border-color: #4CAF50;
-        }
-        
-        .option.incorrect {
-            background: #ffebee;
-            border-color: #f44336;
         }
         
         .option-letter {
@@ -600,6 +573,109 @@
             color: #d93025;
         }
         
+        /* Results Review Styles */
+        .results-review {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .results-review h3 {
+            margin-bottom: 15px;
+            color: #1a2a6c;
+        }
+        
+        .results-review .question-review {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .results-review .question-text {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .results-review .options-list {
+            margin-top: 10px;
+        }
+        
+        .results-review .correct-answer {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4CAF50;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            position: relative;
+        }
+        
+        .results-review .correct-answer::after {
+            content: "✓";
+            color: #4CAF50;
+            font-weight: bold;
+            position: absolute;
+            right: 10px;
+        }
+        
+        .results-review .incorrect-answer {
+            background-color: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            position: relative;
+        }
+        
+        .results-review .incorrect-answer::after {
+            content: "✗";
+            color: #f44336;
+            font-weight: bold;
+            position: absolute;
+            right: 10px;
+        }
+        
+        .results-review .neutral-answer {
+            background-color: #f5f5f5;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+        
+        .results-review .explanation {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #e3f2fd;
+            border-radius: 5px;
+            font-style: italic;
+            color: #1a2a6c;
+        }
+        
+        .download-pdf-btn {
+            background: #f44336;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            margin-top: 20px;
+        }
+        
+        .download-pdf-btn:hover {
+            background: #d32f2f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
         @media (max-width: 768px) {
             .options-container {
                 grid-template-columns: 1fr;
@@ -693,7 +769,6 @@
 <div class="fb-like" data-href="https://shamser.info.np/Computer Knowledge/Computer Knowledge Quize.html" data-width="40" data-layout="" data-action="" data-size="" data-share="true"></div>           
             
             
-            
             <form class="user-form" id="user-form">
                 <div class="form-group">
                     <label for="user-name"><i class="fas fa-user"></i> Full Name:</label>
@@ -726,6 +801,12 @@
             <div class="question-info">
                 <div class="question-count">Question <span id="current">1</span> of 50</div>
                 <div class="score-indicator">Score: <span id="score">0</span></div>
+                <div class="timer-display" id="timer-display">30s</div>
+            </div>
+            
+            <!-- Timer bar container -->
+            <div class="timer-container">
+                <div class="timer-bar" id="timer-bar"></div>
             </div>
             
             <div class="question-container">
@@ -733,11 +814,6 @@
                 
                 <div class="options-container" id="options-container">
                     <!-- Options will be inserted here by JavaScript -->
-                </div>
-                
-                <div class="explanation" id="explanation">
-                    <div class="explanation-title">Explanation:</div>
-                    <div id="explanation-text"></div>
                 </div>
             </div>
             
@@ -795,6 +871,12 @@
                     <li><strong>Date & Time:</strong> <span id="sheet-timestamp"></span></li>
                 </ul>
             </div>
+            
+            <div id="quiz-review-container"></div>
+            
+            <button class="download-pdf-btn" id="download-pdf-btn">
+                <i class="fas fa-file-pdf"></i> Download Results as PDF
+            </button>
             
             <button class="restart-btn" id="restart-btn">
                 <i class="fas fa-redo"></i> Take Quiz Again
@@ -891,303 +973,304 @@
                 question: "What is the full form of RAM?",
                 options: ["Random Access Memory", "Read Access Memory", "Readily Available Memory", "Random Available Memory"],
                 answer: "Random Access Memory",
-                explanation: "RAM stands for Random Access Memory, which is used for temporary data storage while the computer is on."
-            },
-            {
-                question: "Which device is used to input data into a computer?",
-                options: ["Printer", "Monitor", "Keyboard", "Speaker"],
-                answer: "Keyboard",
-                explanation: "A keyboard is an input device used to enter data into a computer."
-            },
-            {
-                question: "Which of the following is an example of system software?",
-                options: ["Microsoft Excel", "Windows 10", "Google Chrome", "Adobe Reader"],
-                answer: "Windows 10",
-                explanation: "Windows 10 is an operating system, which is a type of system software that manages hardware and software resources."
-            },
-            {
-                question: "Which of the following is NOT a programming language?",
-                options: ["Python", "HTML", "Java", "Microsoft Word"],
-                answer: "Microsoft Word",
-                explanation: "Microsoft Word is a word processing application, not a programming language."
-            },
-            {
-                question: "Which part of the computer is responsible for executing instructions?",
-                options: ["Hard Disk", "RAM", "CPU", "Motherboard"],
-                answer: "CPU",
-                explanation: "The CPU (Central Processing Unit) executes instructions and processes data."
-            },
-            {
-                question: "Which storage device has the largest capacity?",
-                options: ["DVD", "USB Flash Drive", "SSD", "Hard Disk Drive"],
-                answer: "Hard Disk Drive",
-                explanation: "Hard disk drives typically offer the largest storage capacity compared to DVDs, USB drives, and SSDs."
-            },
-            {
-                question: "What does GUI stand for?",
-                options: ["Graphical User Interface", "General User Interface", "Guided User Interface", "Graphical User Interaction"],
-                answer: "Graphical User Interface",
-                explanation: "GUI stands for Graphical User Interface, which allows users to interact with electronic devices through graphical icons."
-            },
-            {
-                question: "Which of the following is a volatile memory?",
-                options: ["SSD", "Hard Disk", "RAM", "ROM"],
-                answer: "RAM",
-                explanation: "RAM (Random Access Memory) is volatile, meaning it loses its data when the power is turned off."
-            },
-            {
-                question: "What is the main function of an operating system?",
-                options: ["Perform calculations", "Manage hardware and software resources", "Browse the internet", "Create documents"],
-                answer: "Manage hardware and software resources",
-                explanation: "The operating system manages hardware and software resources and provides services for computer programs."
-            },
-            {
-                question: "What does URL stand for?",
-                options: ["Uniform Resource Locator", "Uniform Resource Link", "Universal Resource Locator", "Universal Resource Link"],
-                answer: "Uniform Resource Locator",
-                explanation: "URL stands for Uniform Resource Locator, which is the address of a resource on the internet."
-            },
-            {
-                question: "What is the purpose of a firewall in a computer network?",
-                options: ["To speed up the internet", "To protect against unauthorized access", "To manage network traffic", "To boost Wi-Fi signal"],
-                answer: "To protect against unauthorized access",
-                explanation: "A firewall monitors and controls incoming and outgoing network traffic based on predetermined security rules."
-            },
-            {
-                question: "What type of software is used to surf the web?",
-                options: ["Operating system", "Web browser", "Database", "Text editor"],
-                answer: "Web browser",
-                explanation: "A web browser is used to access and navigate websites on the internet."
-            },
-            {
-                question: "What does 'HTTP' stand for?",
-                options: ["HyperText Transmission Protocol", "HyperText Transfer Protocol", "HyperTransfer Text Protocol", "Hyper Transmission Transfer Protocol"],
-                answer: "HyperText Transfer Protocol",
-                explanation: "HTTP stands for HyperText Transfer Protocol, which is used for transmitting web pages over the internet."
-            },
-            {
-                question: "Which of the following is an example of an input device?",
-                options: ["Printer", "Monitor", "Mouse", "Speaker"],
-                answer: "Mouse",
-                explanation: "A mouse is an input device used to interact with the computer's graphical user interface."
-            },
-            {
-                question: "What is the smallest unit of data in a computer?",
-                options: ["Byte", "Bit", "Nibble", "Kilobyte"],
-                answer: "Bit",
-                explanation: "A bit is the smallest unit of data in a computer, represented by a 0 or 1."
-            },
-            {
-                question: "What is the purpose of the ALU in a computer?",
-                options: ["To manage memory", "To perform arithmetic and logic operations", "To control input and output", "To manage storage"],
-                answer: "To perform arithmetic and logic operations",
-                explanation: "The ALU (Arithmetic Logic Unit) performs arithmetic and logical operations within the CPU."
-            },
-            {
-                question: "Which file format is used for images?",
-                options: [".docx", ".xlsx", ".jpg", ".pptx"],
-                answer: ".jpg",
-                explanation: ".jpg is a common file format used for images."
-            },
-            {
-                question: "Which key is used to delete the character to the left of the cursor?",
-                options: ["Enter", "Backspace", "Delete", "Shift"],
-                answer: "Backspace",
-                explanation: "The backspace key deletes the character to the left of the cursor."
-            },
-            {
-                question: "Which of the following is a search engine?",
-                options: ["Firefox", "Bing", "Outlook", "Skype"],
-                answer: "Bing",
-                explanation: "Bing is a search engine used to find information on the internet."
-            },
-            {
-                question: "What does the shortcut Ctrl + C do?",
-                options: ["Cuts the selected text", "Copies the selected text", "Pastes the copied text", "Saves the document"],
-                answer: "Copies the selected text",
-                explanation: "Ctrl + C is the shortcut for copying selected text or items."
-            },
-            {
-                question: "What is the function of the Control Panel in Windows?",
-                options: ["To access web browsers", "To change settings and control system configurations", "To edit documents", "To play media files"],
-                answer: "To change settings and control system configurations",
-                explanation: "The Control Panel is used to manage settings and configure system options in Windows."
-            },
-            {
-                question: "Which of the following is a popular spreadsheet application?",
-                options: ["Microsoft Word", "Microsoft Excel", "Microsoft Access", "Microsoft PowerPoint"],
-                answer: "Microsoft Excel",
-                explanation: "Microsoft Excel is a spreadsheet application used for organizing, formatting, and calculating data."
-            },
-            {
-                question: "Which of the following is a programming language?",
-                options: ["Chrome", "Python", "Windows", "Photoshop"],
-                answer: "Python",
-                explanation: "Python is a high-level programming language used for developing software applications."
-            },
-            {
-                question: "What does SSD stand for?",
-                options: ["Solid State Drive", "Standard Storage Disk", "Static State Disk", "Solid Storage Drive"],
-                answer: "Solid State Drive",
-                explanation: "SSD stands for Solid State Drive, which is a type of storage device that uses flash memory."
-            },
-            {
-                question: "Which of the following is an example of application software?",
-                options: ["Linux", "macOS", "Notepad", "BIOS"],
-                answer: "Notepad",
-                explanation: "Notepad is an application software used for text editing."
-            },
-            {
-                question: "Which key is used to refresh a webpage?",
-                options: ["F1", "F2", "F5", "F12"],
-                answer: "F5",
-                explanation: "The F5 key is commonly used to refresh the current webpage in most web browsers."
-            },
-            {
-                question: "Which of the following is a cloud storage service?",
-                options: ["OneDrive", "Windows Explorer", "File Manager", "Task Manager"],
-                answer: "OneDrive",
-                explanation: "OneDrive is a cloud storage service provided by Microsoft."
-            },
-            {
-                question: "What does LAN stand for?",
-                options: ["Local Access Network", "Large Area Network", "Local Area Network", "Long Area Network"],
-                answer: "Local Area Network",
-                explanation: "LAN stands for Local Area Network, which connects computers within a limited area like a home, school, or office."
-            },
-            {
-                question: "Which of the following can be used to protect a computer from viruses?",
-                options: ["File Explorer", "Antivirus software", "Task Manager", "Disk Cleanup"],
-                answer: "Antivirus software",
-                explanation: "Antivirus software is designed to detect and protect computers from malware and viruses."
-            },
-            {
-                question: "What does FTP stand for?",
-                options: ["File Transfer Protocol", "Fast Transfer Protocol", "File Transmission Process", "Fast Transmission Process"],
-                answer: "File Transfer Protocol",
-                explanation: "FTP stands for File Transfer Protocol, used for transferring files between computers on a network."
-            },
-            {
-                question: "Which of the following is an open-source operating system?",
-                options: ["Windows", "macOS", "Linux", "iOS"],
-                answer: "Linux",
-                explanation: "Linux is an open-source operating system that is free to use and modify."
-            },
-            {
-                question: "What is the main page of a website called?",
-                options: ["Bookmark", "Homepage", "Browser", "Tab"],
-                answer: "Homepage",
-                explanation: "The homepage is the main page of a website that serves as the starting point for navigation."
-            },
-            {
-                question: "Which of the following is used for video conferencing?",
-                options: ["Zoom", "Spotify", "iTunes", "Photoshop"],
-                answer: "Zoom",
-                explanation: "Zoom is a platform used for video conferencing, online meetings, and collaboration."
-            },
-            {
-                question: "Which of the following keys is used to enter the BIOS setup when starting a computer?",
-                options: ["Esc", "F2", "F8", "F10"],
-                answer: "F2",
-                explanation: "F2 is a common key used to enter the BIOS setup on many computers during startup."
-            },
-            {
-                question: "What does the shortcut Ctrl + V do?",
-                options: ["Copies the selected text", "Pastes the copied text", "Cuts the selected text", "Selects all text"],
-                answer: "Pastes the copied text",
-                explanation: "Ctrl + V is the shortcut for pasting copied text or items."
-            },
-            {
-                question: "Which of the following is a database management system?",
-                options: ["Microsoft Excel", "Microsoft Access", "Microsoft PowerPoint", "Microsoft Word"],
-                answer: "Microsoft Access",
-                explanation: "Microsoft Access is a database management system that allows users to create and manage databases."
-            },
-            {
-                question: "What is the function of a graphics card?",
-                options: ["To manage memory", "To improve visual output and graphics performance", "To store data", "To process audio"],
-                answer: "To improve visual output and graphics performance",
-                explanation: "A graphics card is used to render images, videos, and animations for display."
+                explanation: "RAM stands for Random Access Memory, which is a type of computer memory that can be accessed randomly. It is volatile memory, meaning it loses its contents when the power is turned off. RAM is used to store data that is actively being worked on by the CPU."
             },
             {
                 question: "What does CPU stand for?",
-                options: ["Central Processing Unit", "Central Performance Unit", "Central Programming Unit", "Central Protocol Unit"],
-                answer: "Central Processing Unit",
-                explanation: "CPU stands for Central Processing Unit, which is the main component that processes instructions in a computer."
-            },
-            {
-                question: "Which of the following is not a peripheral device?",
-                options: ["Mouse", "Keyboard", "Motherboard", "Printer"],
-                answer: "Motherboard",
-                explanation: "The motherboard is the main circuit board of the computer and not a peripheral device."
-            },
-            {
-                question: "Which of the following is a function of a router?",
-                options: ["To store data", "To direct network traffic between devices", "To display images", "To play audio"],
-                answer: "To direct network traffic between devices",
-                explanation: "A router manages the flow of data between network devices, directing traffic to the appropriate destinations."
-            },
-            {
-                question: "What is the main purpose of cache memory?",
-                options: ["To increase storage capacity", "To speed up data access from the main memory", "To backup data", "To display graphics"],
-                answer: "To speed up data access from the main memory",
-                explanation: "Cache memory is used to store frequently accessed data to speed up access time for the CPU."
-            },
-            {
-                question: "Which of the following is a type of malware?",
-                options: ["Virus", "Spreadsheet", "Presentation", "Email"],
-                answer: "Virus",
-                explanation: "A virus is a type of malware that can infect and spread through computer systems."
-            },
-            {
-                question: "Which of the following protocols is used for secure communication over a computer network?",
-                options: ["FTP", "HTTP", "HTTPS", "SMTP"],
-                answer: "HTTPS",
-                explanation: "HTTPS (HyperText Transfer Protocol Secure) is used for secure communication over the internet."
-            },
-            {
-                question: "Which of the following storage devices uses magnetic disks to store data?",
-                options: ["SSD", "Hard Disk Drive (HDD)", "USB Flash Drive", "CD-ROM"],
-                answer: "Hard Disk Drive (HDD)",
-                explanation: "HDDs use magnetic disks to store data."
-            },
-            {
-                question: "Which key combination is used to force quit an application in Windows?",
-                options: ["Ctrl + Alt + Delete", "Ctrl + Shift + Esc", "Ctrl + F4", "Alt + F4"],
-                answer: "Alt + F4",
-                explanation: "Alt + F4 is used to close or force quit an application in Windows."
-            },
-            {
-                question: "Which of the following is a widely used email protocol?",
-                options: ["FTP", "SMTP", "HTTP", "SSL"],
-                answer: "SMTP",
-                explanation: "SMTP (Simple Mail Transfer Protocol) is widely used for sending emails."
-            },
-            {
-                question: "What does the term 'booting' refer to?",
-                options: ["Shutting down the computer", "Starting up the computer", "Installing software", "Deleting files"],
-                answer: "Starting up the computer",
-                explanation: "Booting refers to the process of starting up the computer and loading the operating system."
-            },
-            {
-                question: "Which software allows users to create text documents?",
-                options: ["Microsoft PowerPoint", "Microsoft Word", "Microsoft Excel", "Microsoft Access"],
-                answer: "Microsoft Word",
-                explanation: "Microsoft Word is a word processing software used for creating text documents."
-            },
-            {
-                question: "Which of the following devices is used to connect to a wireless network?",
-                options: ["Graphics Card", "Network Interface Card (NIC)", "Sound Card", "Wi-Fi Adapter"],
-                answer: "Wi-Fi Adapter",
-                explanation: "A Wi-Fi adapter allows devices to connect to a wireless network."
-            },
-            {
-                question: "What does the term 'bit' stand for?",
-                options: ["Binary Information Test", "Binary Digit", "Basic Information Transfer", "Basic Input Terminal"],
-                answer: "Binary Digit",
-                explanation: "A bit is short for binary digit, the smallest unit of data in computing."
-            }
-        ];
+            options: ["Central Processing Unit", "Computer Personal Unit", "Central Process Unit", "Central Processor Unit"],
+            answer: "Central Processing Unit",
+            explanation: "CPU stands for Central Processing Unit, the primary component that executes instructions in a computer."
+        },
+        {
+            question: "What is the main function of RAM?",
+            options: ["Permanent storage", "Display graphics", "Temporary data storage", "Internet connection"],
+            answer: "Temporary data storage",
+            explanation: "RAM (Random Access Memory) provides short-term volatile storage for active data and programs."
+        },
+        {
+            question: "Which device is used to input text into a computer?",
+            options: ["Monitor", "Printer", "Keyboard", "Mouse"],
+            answer: "Keyboard",
+            explanation: "Keyboards are primary input devices for entering text and commands into computers."
+        },
+        {
+            question: "What does 'www' stand for in websites?",
+            options: ["World Wide Web", "Web World Wide", "Wide World Web", "World Web Wide"],
+            answer: "World Wide Web",
+            explanation: "WWW stands for World Wide Web, the system of internet-connected hypertext documents."
+        },
+        {
+            question: "Which key deletes characters to the left of the cursor?",
+            options: ["Delete", "Backspace", "Enter", "Shift"],
+            answer: "Backspace",
+            explanation: "The Backspace key deletes characters before the cursor position."
+        },
+        {
+            question: "What is the primary purpose of an operating system?",
+            options: ["Run applications", "Manage hardware", "Browse internet", "Both A and B"],
+            answer: "Both A and B",
+            explanation: "Operating systems manage hardware resources and provide a platform for applications to run."
+        },
+        {
+            question: "Which of these is NOT an operating system?",
+            options: ["Windows", "Linux", "Photoshop", "macOS"],
+            answer: "Photoshop",
+            explanation: "Photoshop is image editing software, not an operating system."
+        },
+        {
+            question: "What does URL stand for?",
+            options: ["Uniform Resource Locator", "Universal Resource Link", "Uniform Reference Locator", "Universal Reference Link"],
+            answer: "Uniform Resource Locator",
+            explanation: "URL is the address system used to locate resources on the web."
+        },
+    
+        {
+            question: "What is the default file extension for Word documents?",
+            options: [".txt", ".pdf", ".docx", ".xlsx"],
+            answer: ".docx",
+            explanation: "Microsoft Word uses .docx as its default file extension since Word 2007."
+        },
+        {
+            question: "Which component stores data permanently?",
+            options: ["RAM", "CPU", "Hard Drive", "Motherboard"],
+            answer: "Hard Drive",
+            explanation: "Hard drives provide non-volatile long-term data storage."
+        },
+        {
+            question: "What does 'HTTP' stand for?",
+            options: ["HyperText Transfer Protocol", "High Transfer Text Protocol", "Hyper Transfer Text Protocol", "HyperText Transmission Protocol"],
+            answer: "HyperText Transfer Protocol",
+            explanation: "HTTP is the foundation of data communication for the World Wide Web."
+        },
+        {
+            question: "Which shortcut copies selected text?",
+            options: ["Ctrl+X", "Ctrl+V", "Ctrl+C", "Ctrl+Z"],
+            answer: "Ctrl+C",
+            explanation: "Ctrl+C is the standard keyboard shortcut for copying selected content."
+        },
+        {
+            question: "What does GUI stand for?",
+            options: ["Graphical User Interface", "General User Interaction", "Graphical Utility Interface", "General Utility Interaction"],
+            answer: "Graphical User Interface",
+            explanation: "GUI allows users to interact with electronic devices through graphical icons."
+        },
+        {
+            question: "Which device converts physical documents to digital?",
+            options: ["Printer", "Monitor", "Scanner", "Modem"],
+            answer: "Scanner",
+            explanation: "Scanners create digital images from physical documents or photos."
+        },
+        {
+            question: "What is the smallest unit of digital data?",
+            options: ["Byte", "Kilobyte", "Bit", "Megabyte"],
+            answer: "Bit",
+            explanation: "A bit (binary digit) is the most basic unit of information in computing (0 or 1)."
+        },
+        {
+            question: "Which key is used to refresh a webpage?",
+            options: ["F1", "F5", "F10", "F12"],
+            answer: "F5",
+            explanation: "F5 is the standard function key for refreshing/reloading web pages."
+        },
+        {
+            question: "What does 'PDF' stand for?",
+            options: ["Printable Document Format", "Portable Document Format", "Personal Document File", "Published Document Format"],
+            answer: "Portable Document Format",
+            explanation: "PDF preserves document formatting across different devices and platforms."
+        },
+        {
+            question: "Which software protects against viruses?",
+            options: ["Firewall", "Antivirus", "Compiler", "Browser"],
+            answer: "Antivirus",
+            explanation: "Antivirus software detects and removes malicious software."
+        },
+        {
+            question: "What does 'OS' stand for?",
+            options: ["Operating System", "Output Source", "Open Software", "Operation Security"],
+            answer: "Operating System",
+            explanation: "OS manages computer hardware and software resources."
+        },
+        {
+            question: "Which of these is a web browser?",
+            options: ["Windows", "Excel", "Chrome", "Photoshop"],
+            answer: "Chrome",
+            explanation: "Google Chrome is a program used to access websites."
+        },
+        {
+            question: "What does ISP stand for?",
+            options: ["Internet Service Provider", "Internet System Protocol", "Internal Service Provider", "Integrated System Package"],
+            answer: "Internet Service Provider",
+            explanation: "ISPs provide users access to the internet."
+        },
+        {
+            question: "Which shortcut pastes copied content?",
+            options: ["Ctrl+C", "Ctrl+X", "Ctrl+V", "Ctrl+P"],
+            answer: "Ctrl+V",
+            explanation: "Ctrl+V is used to paste content from the clipboard."
+        },
+        {
+            question: "What is the brain of the computer?",
+            options: ["RAM", "Hard Drive", "CPU", "Motherboard"],
+            answer: "CPU",
+            explanation: "The CPU processes instructions and performs calculations."
+        },
+        {
+            question: "Which connector provides internet via cable?",
+            options: ["HDMI", "VGA", "USB", "Ethernet"],
+            answer: "Ethernet",
+            explanation: "Ethernet ports are used for wired network connections."
+        },
+        {
+            question: "What does 'GB' stand for in memory?",
+            options: ["GigaBit", "GigaByte", "Giga Binary", "Graphic Byte"],
+            answer: "GigaByte",
+            explanation: "GB represents approximately 1 billion bytes of storage."
+        },
+        {
+            question: "Which function key opens help?",
+            options: ["F1", "F2", "F5", "F8"],
+            answer: "F1",
+            explanation: "F1 is universally used as the help key in most software."
+        },
+        {
+            question: "What does 'Wi-Fi' stand for?",
+            options: ["Wireless Fidelity", "Wired Fidelity", "Wireless Fiber", "Wired Fiber"],
+            answer: "Wireless Fidelity",
+            explanation: "Wi-Fi is a wireless networking technology using radio waves."
+        },
+        {
+            question: "Which component displays visual output?",
+            options: ["CPU", "Printer", "Monitor", "Keyboard"],
+            answer: "Monitor",
+            explanation: "Monitors show visual information from the computer."
+        },
+        {
+            question: "What is the default port for HTTPS?",
+            options: ["80", "21", "25", "443"],
+            answer: "443",
+            explanation: "HTTPS uses port 443 for secure encrypted web traffic."
+        },
+        {
+            question: "Which file format is used for images?",
+            options: [".mp3", ".jpg", ".docx", ".xlsx"],
+            answer: ".jpg",
+            explanation: "JPG/JPEG is a common compressed image format."
+        },
+        {
+            question: "What does 'LAN' stand for?",
+            options: ["Long Area Network", "Local Access Network", "Local Area Network", "Long Access Network"],
+            answer: "Local Area Network",
+            explanation: "LAN connects devices within a limited physical area."
+        },
+        {
+            question: "Which shortcut selects all content?",
+            options: ["Ctrl+A", "Ctrl+S", "Ctrl+D", "Ctrl+F"],
+            answer: "Ctrl+A",
+            explanation: "Ctrl+A selects all items in the active window or document."
+        },
+        {
+            question: "What does 'BIOS' stand for?",
+            options: ["Basic Input Output System", "Binary Input Output Service", "Basic Integrated Operating System", "Binary Integrated Output System"],
+            answer: "Basic Input Output System",
+            explanation: "BIOS initializes hardware during computer startup."
+        },
+        {
+            question: "Which device connects computers over telephone lines?",
+            options: ["Router", "Hub", "Modem", "Switch"],
+            answer: "Modem",
+            explanation: "Modems convert digital data for transmission over analog phone lines."
+        },
+        {
+            question: "What is cloud computing?",
+            options: ["Weather forecasting", "Local storage", "Internet-based services", "Computer hardware"],
+            answer: "Internet-based services",
+            explanation: "Cloud computing delivers computing services over the internet."
+        },
+        {
+            question: "Which key opens the Start menu in Windows?",
+            options: ["Alt", "Ctrl", "Windows", "Shift"],
+            answer: "Windows",
+            explanation: "The Windows key opens the Start menu in Windows OS."
+        },
+        {
+            question: "What does 'SSD' stand for?",
+            options: ["Solid State Drive", "Super Speed Drive", "System Storage Device", "Secure Storage Disk"],
+            answer: "Solid State Drive",
+            explanation: "SSDs use flash memory for faster data access than traditional hard drives."
+        },
+        {
+            question: "Which programming language creates web pages?",
+            options: ["Java", "C++", "HTML", "Python"],
+            answer: "HTML",
+            explanation: "HTML (HyperText Markup Language) structures web page content."
+        },
+        {
+            question: "What does 'VPN' stand for?",
+            options: ["Virtual Private Network", "Verified Public Network", "Virtual Public Node", "Verified Private Node"],
+            answer: "Virtual Private Network",
+            explanation: "VPNs create secure encrypted connections over public networks."
+        },
+        {
+            question: "Which software creates spreadsheets?",
+            options: ["Word", "PowerPoint", "Excel", "Photoshop"],
+            answer: "Excel",
+            explanation: "Microsoft Excel is used for spreadsheet calculations and data organization."
+        },
+        {
+            question: "What is a 'byte'?",
+            options: ["4 bits", "8 bits", "16 bits", "32 bits"],
+            answer: "8 bits",
+            explanation: "A byte consists of 8 bits and represents a single character."
+        },
+        {
+            question: "Which connector transmits audio and video?",
+            options: ["USB", "Ethernet", "HDMI", "VGA"],
+            answer: "HDMI",
+            explanation: "HDMI carries high-definition video and audio through a single cable."
+        },
+        {
+            question: "What does 'ROM' stand for?",
+            options: ["Read-Only Memory", "Random Output Memory", "Read Output Module", "Random Operation Memory"],
+            answer: "Read-Only Memory",
+            explanation: "ROM stores permanent data that cannot be modified."
+        },
+        {
+            question: "Which key opens 'Save As'?",
+            options: ["Ctrl+S", "F12", "Ctrl+P", "F1"],
+            answer: "F12",
+            explanation: "F12 often opens the 'Save As' dialog in many applications."
+        },
+        {
+            question: "What is the main circuit board called?",
+            options: ["CPU", "RAM", "Hard Drive", "Motherboard"],
+            answer: "Motherboard",
+            explanation: "The motherboard connects all computer components."
+        },
+        {
+            question: "Which protocol sends email?",
+            options: ["HTTP", "FTP", "SMTP", "TCP"],
+            answer: "SMTP",
+            explanation: "SMTP (Simple Mail Transfer Protocol) routes emails between servers."
+        },
+        {
+            question: "What does 'I/O' stand for?",
+            options: ["Input/Output", "Internet/Online", "Internal/Operation", "Integrated/Open"],
+            answer: "Input/Output",
+            explanation: "I/O refers to communication between a computer and external devices."
+        },
+        {
+            question: "Which port transmits video only?",
+            options: ["USB", "HDMI", "VGA", "Ethernet"],
+            answer: "VGA",
+            explanation: "VGA ports transmit analog video signals (no audio)."
+        },
+        {
+            question: "What does 'CD' stand for in computing?",
+            options: ["Computer Disk", "Compact Disk", "Central Drive", "Coded Disk"],
+            answer: "Compact Disk",
+            explanation: "CDs store digital data using optical technology."
+        }
+    ];
         
         // DOM elements
         const userRegistration = document.getElementById('user-registration');
@@ -1206,8 +1289,6 @@
         const finalScore = document.getElementById('final-score');
         const scoreText = document.getElementById('score-text');
         const restartBtn = document.getElementById('restart-btn');
-        const explanation = document.getElementById('explanation');
-        const explanationText = document.getElementById('explanation-text');
         const resultName = document.getElementById('result-name');
         const resultId = document.getElementById('result-id');
         const resultScore = document.getElementById('result-score');
@@ -1224,6 +1305,10 @@
         const notification = document.getElementById('notification');
         const notificationText = document.getElementById('notification-text');
         const autoSaveIndicator = document.getElementById('auto-save-indicator');
+        const quizReviewContainer = document.getElementById('quiz-review-container');
+        const downloadPdfBtn = document.getElementById('download-pdf-btn');
+        const timerBar = document.getElementById('timer-bar');
+        const timerDisplay = document.getElementById('timer-display');
         
         // Admin panel elements
         const adminLoginForm = document.getElementById('admin-login-form');
@@ -1244,6 +1329,8 @@
         let userName = '';
         let userId = '';
         let quizResults = JSON.parse(localStorage.getItem('quizResults')) || [];
+        let timer;
+        let timeLeft = 30;
         
         // Admin credentials (default values)
         let adminCredentials = JSON.parse(localStorage.getItem('adminCredentials')) || {
@@ -1280,6 +1367,54 @@
             showQuestion();
             updateProgress();
             updateNavigation();
+            startTimer();
+        }
+
+        // Start timer for current question
+        function startTimer() {
+            // Reset timer state
+            clearInterval(timer);
+            timeLeft = 30;
+            timerBar.style.width = '100%';
+            timerBar.classList.remove('warning', 'danger');
+            timerDisplay.textContent = '30s';
+            
+            // Start countdown
+            timer = setInterval(() => {
+                timeLeft--;
+                timerDisplay.textContent = timeLeft + 's';
+                
+                // Update timer bar width
+                const percentLeft = (timeLeft / 30) * 100;
+                timerBar.style.width = percentLeft + '%';
+                
+                // Change color based on time left
+                if (timeLeft <= 10) {
+                    timerBar.classList.add('danger');
+                    timerBar.classList.remove('warning');
+                } else if (timeLeft <= 20) {
+                    timerBar.classList.add('warning');
+                    timerBar.classList.remove('danger');
+                }
+                
+                // If time runs out
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    
+                    // Skip question if not answered
+                    if (userAnswers[currentQuestion] === null) {
+                        userAnswers[currentQuestion] = 'skipped';
+                        
+                        // Show notification
+                        showNotification("Time's up! Moving to next question...");
+                        
+                        // Move to next question after a delay
+                        setTimeout(() => {
+                            nextQuestion();
+                        }, 1500);
+                    }
+                }
+            }, 1000);
         }
 
         // Show current question
@@ -1310,24 +1445,6 @@
                 optionElement.addEventListener('click', () => selectOption(option, optionElement));
                 optionsContainer.appendChild(optionElement);
             });
-            
-            // Show explanation if user has answered this question
-            if (userAnswers[currentQuestion] !== null) {
-                explanation.style.display = 'block';
-                explanationText.textContent = question.explanation;
-                
-                // Highlight correct/incorrect answers
-                document.querySelectorAll('.option').forEach(opt => {
-                    const optText = opt.querySelector('.option-text').textContent;
-                    if (optText === question.answer) {
-                        opt.classList.add('correct');
-                    } else if (userAnswers[currentQuestion] === optText && optText !== question.answer) {
-                        opt.classList.add('incorrect');
-                    }
-                });
-            } else {
-                explanation.style.display = 'none';
-            }
         }
 
         // Select an option
@@ -1346,25 +1463,16 @@
             // Store user's answer
             userAnswers[currentQuestion] = option;
             
+            // Stop timer for this question
+            clearInterval(timer);
+            timerBar.style.width = '0%';
+            timerDisplay.textContent = '';
+            
             // Check if answer is correct
             if (option === quizData[currentQuestion].answer) {
                 userScore++;
                 scoreEl.textContent = userScore;
             }
-            
-            // Show explanation
-            explanation.style.display = 'block';
-            explanationText.textContent = quizData[currentQuestion].explanation;
-            
-            // Highlight correct/incorrect answers
-            document.querySelectorAll('.option').forEach(opt => {
-                const optText = opt.querySelector('.option-text').textContent;
-                if (optText === quizData[currentQuestion].answer) {
-                    opt.classList.add('correct');
-                } else if (optText === option && optText !== quizData[currentQuestion].answer) {
-                    opt.classList.add('incorrect');
-                }
-            });
             
             // Update navigation
             updateNavigation();
@@ -1401,6 +1509,7 @@
                 showQuestion();
                 updateProgress();
                 updateNavigation();
+                startTimer();
             } else {
                 showResults();
             }
@@ -1413,11 +1522,13 @@
                 showQuestion();
                 updateProgress();
                 updateNavigation();
+                startTimer();
             }
         }
 
         // Show results
         function showResults() {
+            clearInterval(timer); // Stop any running timer
             quizContainer.style.display = 'none';
             resultContainer.style.display = 'block';
             finalScore.textContent = userScore;
@@ -1450,11 +1561,161 @@
             
             scoreText.textContent = message;
             
+            // Now show all questions with correct/incorrect indicators
+            showAllQuestionsWithResults();
+            
             // Save results locally
             saveResultsLocally();
             
             // Automatically save to Google Sheet
             saveToGoogleSheet();
+        }
+
+        // Show all questions with correct/incorrect answers
+        function showAllQuestionsWithResults() {
+            quizReviewContainer.innerHTML = '';
+            
+            const resultsReview = document.createElement('div');
+            resultsReview.className = 'results-review';
+            
+            const reviewTitle = document.createElement('h3');
+            reviewTitle.textContent = 'Quiz Review - Detailed Results';
+            resultsReview.appendChild(reviewTitle);
+            
+            quizData.forEach((question, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question-review';
+                
+                const questionText = document.createElement('div');
+                questionText.className = 'question-text';
+                questionText.textContent = `${index + 1}. ${question.question}`;
+                questionDiv.appendChild(questionText);
+                
+                const optionsList = document.createElement('div');
+                optionsList.className = 'options-list';
+                
+                question.options.forEach(option => {
+                    const optionDiv = document.createElement('div');
+                    
+                    if (option === question.answer) {
+                        optionDiv.className = 'correct-answer';
+                    } else if (option === userAnswers[index]) {
+                        optionDiv.className = 'incorrect-answer';
+                    } else {
+                        optionDiv.className = 'neutral-answer';
+                    }
+                    
+                    optionDiv.textContent = option;
+                    optionsList.appendChild(optionDiv);
+                });
+                
+                questionDiv.appendChild(optionsList);
+                
+                // Add explanation
+                const explanationDiv = document.createElement('div');
+                explanationDiv.className = 'explanation';
+                explanationDiv.textContent = question.explanation;
+                questionDiv.appendChild(explanationDiv);
+                
+                // Add time status if skipped
+                if (userAnswers[index] === 'skipped') {
+                    const skippedDiv = document.createElement('div');
+                    skippedDiv.className = 'explanation';
+                    skippedDiv.style.color = '#e74c3c';
+                    skippedDiv.innerHTML = '<i class="fas fa-clock"></i> This question was skipped due to time running out';
+                    questionDiv.appendChild(skippedDiv);
+                }
+                
+                resultsReview.appendChild(questionDiv);
+            });
+            
+            quizReviewContainer.appendChild(resultsReview);
+        }
+
+        // Generate PDF of results
+        function generatePDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // Add title
+            doc.setFontSize(20);
+            doc.text('Computer Science Quiz Results', 105, 15, { align: 'center' });
+            
+            // Add user info
+            doc.setFontSize(12);
+            doc.text(`Name: ${userName}`, 20, 30);
+            doc.text(`ID: ${userId}`, 20, 40);
+            doc.text(`Score: ${userScore}/${quizData.length}`, 20, 50);
+            doc.text(`Date: ${new Date().toLocaleString()}`, 20, 60);
+            
+            // Add score summary
+            doc.setFontSize(16);
+            doc.text('Score Summary', 105, 80, { align: 'center' });
+            doc.setFontSize(14);
+            doc.text(scoreText.textContent, 105, 90, { align: 'center' });
+            
+            // Add questions and answers
+            doc.setFontSize(14);
+            let yPosition = 110;
+            
+            quizData.forEach((question, index) => {
+                // Add question
+                if (yPosition > 280) {
+                    doc.addPage();
+                    yPosition = 20;
+                }
+                
+                doc.setFontSize(12);
+                doc.setFont(undefined, 'bold');
+                doc.text(`${index + 1}. ${question.question}`, 20, yPosition);
+                yPosition += 10;
+                
+                // Add options
+                doc.setFont(undefined, 'normal');
+                question.options.forEach(option => {
+                    if (yPosition > 280) {
+                        doc.addPage();
+                        yPosition = 20;
+                    }
+                    
+                    let prefix = '';
+                    if (option === question.answer) {
+                        prefix = '✓ ';
+                        doc.setTextColor(0, 128, 0); // Green for correct
+                    } else if (option === userAnswers[index]) {
+                        prefix = '✗ ';
+                        doc.setTextColor(255, 0, 0); // Red for incorrect
+                    }
+                    
+                    doc.text(`${prefix}${option}`, 25, yPosition);
+                    yPosition += 7;
+                });
+                
+                // Add explanation
+                if (yPosition > 280) {
+                    doc.addPage();
+                    yPosition = 20;
+                }
+                
+                doc.setTextColor(0, 0, 0); // Black
+                doc.setFont(undefined, 'italic');
+                doc.text(`Explanation: ${question.explanation}`, 20, yPosition);
+                yPosition += 15;
+                
+                // Add skipped status if applicable
+                if (userAnswers[index] === 'skipped') {
+                    doc.setTextColor(231, 76, 60); // Red
+                    doc.text('⚠️ This question was skipped due to time running out', 20, yPosition);
+                    doc.setTextColor(0, 0, 0); // Reset to black
+                    yPosition += 10;
+                }
+                
+                // Add some space between questions
+                yPosition += 5;
+            });
+            
+            // Save the PDF
+            doc.save(`Computer_Science_Quiz_Results_${userName.replace(/\s+/g, '_')}.pdf`);
         }
 
         // Save results to localStorage
@@ -1683,6 +1944,7 @@
         prevBtn.addEventListener('click', prevQuestion);
         nextBtn.addEventListener('click', nextQuestion);
         restartBtn.addEventListener('click', restartQuiz);
+        downloadPdfBtn.addEventListener('click', generatePDF);
         
         // Admin panel event listeners
         adminBtn.addEventListener('click', () => {
