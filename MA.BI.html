@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>माध्यमिक शिक्षक प्रश्नोत्तरी</title>
+    <meta name="keywords" content="Computer Science Quiz"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content=""/>
+    <meta property="og:title" content="माध्यमिक शिक्षक प्रश्नोत्तरी"/>
+    <meta property="og:description" content="शिक्षक सेवा आयोगको तयारीका लागि प्रश्नोत्तरी">
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image" content="">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: #1a2a6c;
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .header::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #1a2a6c, #b21f1f, #fdbb2d);
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #1a2a6c;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            border-color: #1a2a6c;
+            box-shadow: 0 0 0 3px rgba(26, 42, 108, 0.2);
+            outline: none;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
+            color: white;
+            padding: 15px 35px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            margin: 10px 5px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .btn-block {
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .timer-container {
+            background: #1a2a6c;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .timer {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+        
+        .progress {
+            height: 12px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .question-counter {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1a2a6c;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .question {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 5px solid #1a2a6c;
+        }
+        
+        .options {
+            margin-bottom: 25px;
+        }
+        
+        .option {
+            padding: 18px 20px;
+            background: #f1f3f5;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .option:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+        
+        .option.selected {
+            border-color: #1a2a6c;
+            background: #e7f3fe;
+        }
+        
+        .option-prefix {
+            background: #1a2a6c;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .explanation {
+            padding: 20px;
+            background: #e7f3fe;
+            border-radius: 15px;
+            margin-top: 20px;
+            border-left: 5px solid #1a2a6c;
+            display: none;
+        }
+        
+        .explanation-title {
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #1a2a6c;
+        }
+        
+        .result-container {
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .result-container h2 {
+            font-size: 2.2rem;
+            color: #1a2a6c;
+            margin-bottom: 20px;
+        }
+        
+        .score {
+            font-size: 4rem;
+            font-weight: 700;
+            color: #b21f1f;
+            margin: 20px 0;
+            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .score-text {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        
+        .user-details {
+            margin: 30px 0;
+            text-align: left;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        
+        .user-details h3 {
+            color: #1a2a6c;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .user-details p {
+            margin: 10px 0;
+            font-size: 1.1rem;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            color: #6c757d;
+            font-size: 0.9rem;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 20px 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            transform: translateX(200%);
+            transition: transform 0.5s ease;
+            z-index: 1000;
+            max-width: 90%;
+        }
+        
+        .notification.active {
+            transform: translateX(0);
+        }
+        
+        .notification.success {
+            border-left: 5px solid #28a745;
+        }
+        
+        .notification.error {
+            border-left: 5px solid #dc3545;
+        }
+        
+        .notification i {
+            font-size: 24px;
+            margin-right: 15px;
+        }
+        
+        .notification.success i {
+            color: #28a745;
+        }
+        
+        .notification.error i {
+            color: #dc3545;
+        }
+
+        /* Detailed Results Styles */
+        .result-details {
+            margin-top: 30px;
+            text-align: left;
+        }
+        
+        .result-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            background: #f8f9fa;
+        }
+        
+        .result-item.correct {
+            border-left: 5px solid #28a745;
+        }
+        
+        .result-item.incorrect {
+            border-left: 5px solid #dc3545;
+        }
+        
+        .result-question {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .result-answer {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+            padding: 8px;
+            border-radius: 5px;
+        }
+        
+        .result-answer.correct-answer {
+            background: #d4edda;
+        }
+        
+        .result-answer.user-answer.correct {
+            background: #d4edda;
+        }
+        
+        .result-answer.user-answer.incorrect {
+            background: #f8d7da;
+        }
+        
+        .result-answer-label {
+            font-weight: bold;
+            margin-right: 10px;
+            min-width: 20px;
+        }
+        
+        .result-explanation {
+            margin-top: 10px;
+            padding: 10px;
+            background: #e7f3fe;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        
+        .result-status {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .status-correct {
+            background: #28a745;
+            color: white;
+        }
+        
+        .status-incorrect {
+            background: #dc3545;
+            color: white;
+        }
+        
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                font-size: 1.1rem;
+            }
+            
+            .question {
+                font-size: 1.1rem;
+            }
+            
+            .option {
+                padding: 15px;
+                font-size: 1rem;
+            }
+            
+            .timer {
+                font-size: 1.5rem;
+            }
+            
+            .btn-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .notification {
+                padding: 15px;
+                width: 90%;
+                left: 5%;
+                right: 5%;
+                top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fa-solid fa-globe"></i> माध्यमिक शिक्षक प्रश्नोत्तरी</h1>
+            <p>शिक्षक सेवा आयोगको तयारीका लागि प्रश्नोत्तरी</p>
+        </div>
+        
+        <div class="content">
+            <!-- Registration Section -->
+            <div id="registrationSection" class="section active">
+                <h2 style="text-align: center; color: #1a2a6c; margin-bottom: 30px;"><i class="fas fa-user-edit"></i> व्यक्तिगत विवरण</h2>
+                
+                <div class="form-group">
+                    <label for="userName"><i class="fas fa-user"></i> नाम</label>
+                    <input type="text" id="userName" placeholder="तपाईंको पुरा नाम लेख्नुहोस्">
+                </div>
+                
+                <div class="form-group">
+                    <label for="userAddress"><i class="fas fa-map-marker-alt"></i> ठेगाना</label>
+                    <input type="text" id="userAddress" placeholder="जिल्ला, गाउँ/नगरपालिका वडा नं ">
+                </div>
+                
+                <div class="form-group">
+                    <label for="userContact"><i class="fas fa-phone"></i> सम्पर्क नम्बर</label>
+                    <input type="text" id="userContact" placeholder="९८०XXXXXXX">
+                </div>
+                
+                <button id="startBtn" class="btn btn-block">सुरु गर्नुहोस् <i class="fas fa-play-circle"></i></button>
+            </div>
+
+            <!-- Quiz Section -->
+            <div id="quizSection" class="section">
+                <div class="timer-container">
+                    <div><i class="fas fa-clock"></i> बाँकी समय:</div>
+                    <div class="timer" id="timer">३०:००</div>
+                </div>
+                
+                <div class="progress">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+                
+                <div class="question-counter" id="questionCounter"></div>
+                
+                <div class="question" id="question"></div>
+                
+                <div class="options" id="options"></div>
+                
+                <div class="explanation" id="explanation">
+                    <div class="explanation-title"><i class="fas fa-lightbulb"></i> संक्षिप्त व्याख्या:</div>
+                    <div id="explanationText"></div>
+                </div>
+                
+                <div class="btn-container">
+                    <button id="nextBtn" class="btn" style="display: none;">अर्को प्रश्न <i class="fas fa-arrow-right"></i></button>
+                    <button id="submitBtn" class="btn" style="display: none; background: linear-gradient(to right, #28a745, #0d8b2d);">सम्पन्न गर्नुहोस्</button>
+                </div>
+            </div>
+            
+            <!-- Result Section -->
+            <div id="resultSection" class="section">
+                <div class="result-container">
+                    <h2><i class="fas fa-trophy"></i> प्रश्नोत्तरी सम्पन्न!</h2>
+                    <div class="score" id="finalScore">०/०</div>
+                    <div class="score-text" id="scoreText"></div>
+                    
+                    <div class="user-details">
+                        <h3><i class="fas fa-user-circle"></i> तपाईंको विवरण</h3>
+                        <p><strong>नाम:</strong> <span id="resultName"></span></p>
+                        <p><strong>ठेगाना:</strong> <span id="resultAddress"></span></p>
+                        <p><strong>सम्पर्क नम्बर:</strong> <span id="resultContact"></span></p>
+                        <p><strong>समय:</strong> <span id="resultTime"></span></p>
+                    </div>
+                    
+                    <!-- Detailed Results Section -->
+                    <div class="result-details" id="detailedResults">
+                        <h3><i class="fas fa-list-ol"></i> प्रश्नहरूको विस्तृत विवरण</h3>
+                        <!-- Results will be inserted here by JavaScript -->
+                    </div>
+                    
+                    <button id="restartBtn" class="btn"><i class="fas fa-redo"></i> फेरि खेल्नुहोस्</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© २०२३ माध्यमिक शिक्षक प्रश्नोत्तर | शिक्षक सेवा आयोग तयारी</p>
+        </div>
+    </div>
+    
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <div id="notificationMessage"></div>
+    </div>
+    <script>
+        // Questions for Secondary Level Teacher Exam (50 questions)
+        const questions = [
+            {
+                question: "डोल्मा जिल्लामा अवस्थित नेपालको सबभन्दा गहिरो ताल शे फोक्सुण्डो तालको स्थानीय नाम के हो?",
+                options: [
+                    "रिग्म",
+                    "सुलिगढ़", 
+                    "फाक्चे",
+                    "तिरिचो"
+                ],
+                answer: "फाक्चे",
+                explanation: "शे फोक्सुण्डो तालको स्थानीय नाम फाक्चे हो। यो डोल्पा जिल्लामा अवस्थित छ र नेपालको सबभन्दा गहिरो ताल हो।"
+            },
+            {
+                question: "बस्तीको तहगत वर्गीकरण (Hierarchical Classification) का आधारमा तराई क्षेत्रका ग्रामीण बस्तीमा बसोवास गर्ने जनसङ्ख्याको लागि केलाई 'सेवा केन्द्र' (Service Center) मानिन्छ ?",
+                options: [
+                    "प्रदेश राजधानी",
+                    "गाउँपालिका",
+                    "नगरपालिका",
+                    "बजार केन्द्र"
+                ],
+                answer: "नगरपालिका",
+                explanation: "तराई क्षेत्रका ग्रामीण बस्तीमा बसोवास गर्ने जनसङ्ख्याको लागि नगरपालिकालाई 'सेवा केन्द्र' मानिन्छ।"
+            },
+            {
+                question: "'कुमारी' को रथजात्रा आरम्भ गर्ने मल्ल राजा को हुन् ?",
+                options: [
+                    "प्रताप मल्ल",
+                    "जयप्रकारा मन्ल",
+                    "भूपतीन्द्र मल्ल",
+                    "जयस्थिति मल्ल"
+                ],
+                answer: "प्रताप मल्ल",
+                explanation: "कुमारीको रथजात्रा आरम्भ गर्ने मल्ल राजा प्रताप मल्ल हुन्।"
+            },
+            {
+                question: "तल दिइएकामध्ये अन्य भन्दा फरक छान्नुहोस् ।",
+                options: [
+                    "ल्हफेव धार्मिक पर्व थकाली जातिको पर्व हो ।",
+                    "किसान जातिले विवाहमा बेहुलावेहुलीलाई आँपको पात, धान र खुर्सानी बाँधेर बनाएको टोपी लगाइदिने गर्दछन् ।",
+                    "घेवा तामाङ् जातिको मृत्यु संस्कार क्रिया हो।",
+                    "प्रेम विवाहका गर्न मन पराएकी केटीलाई 'साइमाला' दिई पठाउने चलन थारु जातिमा प्रचलित छ ।"
+                ],
+                answer: "घेवा तामाङ् जातिको मृत्यु संस्कार क्रिया हो।",
+                explanation: "घेवा तामाङ् जातिको मृत्यु संस्कार क्रिया हो भन्ने कुरा मात्र सही हो, अन्य विकल्पहरूमा उल्लेखित जाति र पर्वहरू मिल्दैनन्।"
+            },
+            {
+                question: "तलकामध्ये कुन नेपालको मध्यकालसँग सम्बन्धित छैन ?",
+                options: [
+                    "नेवारी र मैथिली भाषा लोकप्रिय थियो ।",
+                    "वि.सं. ९३६ देखि वि.सं. १८२५ सम्मको अवधि थियो ।",
+                    "सिम्रौनगढलाई केन्द्र बनाई वरिपरिको क्षेत्रमा राज्य स्थापना गरिएको थियो ।",
+                    "वर्णाधममा आधारित जाति अनुसारको पेसा व्यवसाय अपनाउने व्यवस्था थियो ।"
+                ],
+                answer: "सिम्रौनगढलाई केन्द्र बनाई वरिपरिको क्षेत्रमा राज्य स्थापना गरिएको थियो ।",
+                explanation: "सिम्रौनगढलाई केन्द्र बनाई वरिपरिको क्षेत्रमा राज्य स्थापना गरिएको कुरा नेपालको मध्यकालसँग सम्बन्धित छैन।"
+            },
+            {
+                question: "Slide show गुरू गर्न कुन Shortcut Key प्रयोग गरिन्छ?",
+                options: [
+                    "Shift+F1",
+                    "F5",
+                    "Ctrl+D",
+                    "Shift+F5"
+                ],
+                answer: "F5",
+                explanation: "Slide show गुरू गर्न F5 key प्रयोग गरिन्छ।"
+            },
+            {
+                question: "संयुक्त राष्ट्रसङ्घको साधारण सभाले कुन निकायको सिफारिसमा कुनै राष्ट्रको सदस्यता निलम्बन गर्न सक्ने प्रावधान रहेको छ ?",
+                options: [
+                    "सुरक्षा परिषद्",
+                    "आर्थिक तथा सामाजिक परिषद्",
+                    "अन्तर्राष्ट्रिय न्यायालय",
+                    "सचिवालय"
+                ],
+                answer: "सुरक्षा परिषद्",
+                explanation: "संयुक्त राष्ट्रसङ्घको साधारण सभाले सुरक्षा परिषद्को सिफारिसमा कुनै राष्ट्रको सदस्यता निलम्बन गर्न सक्ने प्रावधान रहेको छ।"
+            },
+            {
+                question: "बिद्यालय तहको कक्षा १-३ मा एकीकृत पाठ्कम कार्यान्वयनमा आएको छ। यसलाई कार्यान्वयनमा ल्याउनका लागि तलकामध्ये कुन दस्तावेजले मार्गनिर्देश गरेको छ ?",
+                options: [
+                    "राष्ट्रिय शिक्षा नीति, २०७६",
+                    "शिक्षाको सोचपत्र, २०७९",
+                    "आधारभूत शिक्षा पाठ्यक्रम (कक्षा १-३), २०७६",
+                    "राष्ट्रिय पाठ्यक्रम प्रारूप, २०७६"
+                ],
+                answer: "आधारभूत शिक्षा पाठ्यक्रम (कक्षा १-३), २०७६",
+                explanation: "कक्षा १-३ मा एकीकृत पाठ्कम कार्यान्वयनमा ल्याउन 'आधारभूत शिक्षा पाठ्यक्रम (कक्षा १-३), २०७६' ले मार्गनिर्देश गरेको छ।"
+            },
+            {
+                question: "किशोरावस्थामा प्रवेश गरेपछि व्यक्ति सामाजिक रूपमा सचेत र आफ्ना साथीहरूको धारणाप्रति पनि बढी नै संवेदनशील भई आफुलाई समाजमा कसरी प्रस्तुत गर्ने भनी ध्यान दिन थाल्छ भने यस्तो परिवर्तन कुन मनोवैज्ञानिक विकास सिद्धान्तसँग बढी सम्बन्धित छ?",
+                options: [
+                    "संज्ञानात्मक विकास सिद्धान्त",
+                    "मनोवैज्ञानिक सिद्धान्त",
+                    "व्यावहारिक सिद्धान्त",
+                    "मनोसामाजिक विकास सिद्धान्त"
+                ],
+                answer: "मनोसामाजिक विकास सिद्धान्त",
+                explanation: "यस्तो परिवर्तन मनोसामाजिक विकास सिद्धान्तसँग बढी सम्बन्धित छ।"
+            },
+            {
+                question: "विश्वमा पहिलोपटक कोभिड १९ विरूद्धको खोप कुन देशले विकास गरेको थियो ?",
+                options: [
+                    "अमेरिका",
+                    "रूस",
+                    "चीन",
+                    "बेलायत"
+                ],
+                answer: "रूस",
+                explanation: "विश्वमा पहिलोपटक कोभिड १९ विरूद्धको खोप रूसले विकास गरेको थियो।"
+            },
+            {
+                question: "दक्षिण पूर्वी एशियाली राष्ट्रहरुविच आर्थिक, सांस्कृतिक सहयोगलाई प्रवर्द्धन गर्ने उद्देश्यले कुन संस्थाकी स्थापना गरिएको थियो?",
+                options: [
+                    "SAARC",
+                    "SAFTA",
+                    "UNESCAP",
+                    "ASEAN"
+                ],
+                answer: "ASEAN",
+                explanation: "दक्षिण पूर्वी एशियाली राष्ट्रहरुविच आर्थिक, सांस्कृतिक सहयोगलाई प्रवर्द्धन गर्ने उद्देश्यले ASEAN को स्थापना गरिएको थियो।"
+            },
+            {
+                question: "विद्यालयको पठनपाठनको क्रममा शिक्षण सिकाइ भन्नाले के बुझिन्छ ?",
+                options: [
+                    "कक्षाकोठामा शिक्षकले तोकिएको विषयवस्तु पठाउनु",
+                    "शिक्षक र विद्यार्थी छलफल गर्नु",
+                    "विद्यार्थीले पढेर, सोधेर मोवाइल हेरेर सिक्ने काम",
+                    "शिक्षक र विद्यार्थी विषयवस्तुबीचको अन्तर्क्रिया"
+                ],
+                answer: "शिक्षक र विद्यार्थी विषयवस्तुबीचको अन्तर्क्रिया",
+                explanation: "विद्यालयको पठनपाठनको क्रममा शिक्षण सिकाइ भन्नाले शिक्षक र विद्यार्थी विषयवस्तुबीचको अन्तर्क्रिया बुझिन्छ।"
+            },
+            {
+                question: "शिक्षक सेवा आयोग नियमावली २०५७ को नियम ११ क. बमोजिम समावेशी प्रतिशत निर्धारणका लागि निर्धारणका लागि पिछडिएको क्षेत्रमा नपर्ने जिल्ला कुन हो ?",
+                options: [
+                    "अछाम",
+                    "कालिकोट",
+                    "जाजरकोट",
+                    "दार्चुला"
+                ],
+                answer: "दार्चुला",
+                explanation: "शिक्षक सेवा आयोग नियमावली २०५७ को नियम ११ क. बमोजिम समावेशी प्रतिशत निर्धारणका लागि दार्चुला जिल्ला पिछडिएको क्षेत्रमा नपर्ने जिल्ला हो।"
+            },
+            {
+                question: "Which of the following is a free and open-source software for creating and delivering online course?",
+                options: [
+                    "Udemy",
+                    "edx",
+                    "Moodle",
+                    "Coursera"
+                ],
+                answer: "Moodle",
+                explanation: "Moodle is a free and open-source software for creating and delivering online courses."
+            },
+            {
+                question: "कक्षाकोठामा देखिने विविधताको व्यवस्थापनलाई कामध्ये कुनाले समेट्छ ?",
+                options: [
+                    "समसामयिक शिक्षा",
+                    "समावेशी शिक्षा",
+                    "विशेष शिक्षा",
+                    "एकीकृत शिक्षा"
+                ],
+                answer: "समावेशी शिक्षा",
+                explanation: "कक्षाकोठामा देखिने विविधताको व्यवस्थापनलाई समावेशी शिक्षाले समेट्छ।"
+            },
+            {
+                question: "पृथ्वीको भूमध्यरेखीय व्यासको लम्बाइ कति रहेको छ?",
+                options: [
+                    "२२.७१४ कि.मी.",
+                    "१२.७५६ किमी",
+                    "२०.७१४ कि.मी",
+                    "३२,७५६ कि.मी."
+                ],
+                answer: "१२.७५६ किमी",
+                explanation: "पृथ्वीको भूमध्यरेखीय व्यासको लम्बाइ १२,७५६ किलोमिटर रहेको छ।"
+            },
+            {
+                question: "हवलको नियमानुसार कुनै ग्यालेक्सीको पृथ्वीचबाट टाढिने कसरी परिवर्तन हुन्छ ?",
+                options: [
+                    "दूरी बढेसँगै गति बढ्छ ।",
+                    "दूरी बढेसँगै गति घट्छ ।",
+                    "दूरी बढेसँगै गति स्थिर रहन्छ",
+                    "दूरी घट्ने तथा बढ्ने पक्रियाको कुनै असर हुदैन।"
+                ],
+                answer: "दूरी बढेसँगै गति बढ्छ ।",
+                explanation: "हवलको नियमानुसार कुनै ग्यालेक्सीको पृथ्वीबाट टाढिने गति दूरी बढेसँगै बढ्छ।"
+            },
+            {
+                question: "युरोप महादेशमा पर्ने पर्वत श्रृङ्गला कुन हो ?",
+                options: [
+                    "एन्डिज (Andes)",
+                    "एटलस (Atlas)",
+                    "एल्पस् (Alps)",
+                    "काराकोरम (Karakoram)"
+                ],
+                answer: "एल्पस् (Alps)",
+                explanation: "एल्पस् (Alps) पर्वत श्रृङ्गला युरोप महादेशमा पर्छ।"
+            },
+            {
+                question: "तल दिइएका देश र सो देशको पुरानो नामको जोडीबाट नमिल्ने जोडी छान्नुहोस् ।",
+                options: [
+                    "बुर्किनाफासो- अपरभील्टा",
+                    "इराक- मेसोपोटामिया",
+                    "स्वाटिनी स्वाजीलैण्ड",
+                    "तान्जानिया-जायर"
+                ],
+                answer: "तान्जानिया-जायर",
+                explanation: "तान्जानिया-जायर जोडी मिल्दैन किनभने जायर तान्जानियाको पुरानो नाम होइन।"
+            },
+            {
+                question: "तलकामध्ये कुन नेपालको पहाडी प्रदेशसँग सम्बन्धित वाक्य होइन ?",
+                options: [
+                    "नेपालको कुल क्षेत्रफलको ६८% भूभाग ओगटेकोछ",
+                    "यो क्षेत्र अल्पाइन र आर्कटिक जलवायु क्षेत्र अन्तर्गत पर्छ ।",
+                    "६०१ मी देखि ३३०० मी सम्म उचाइमा छ ।",
+                    "८० देखि १२८ कि.मी. सम्मको चौडाइमा फैलिएको छ ।"
+                ],
+                answer: "यो क्षेत्र अल्पाइन र आर्कटिक जलवायु क्षेत्र अन्तर्गत पर्छ ।",
+                explanation: "नेपालको पहाडी प्रदेश अल्पाइन र आर्कटिक जलवायु क्षेत्र अन्तर्गत नपर्ने कुरा सही होइन।"
+            },
+            {
+                question: "नेपालको संविधानमा आधारभूत तहको शिक्षाका सम्बन्धमा के व्यवस्था गरिएको छ ?",
+                options: [
+                    "आधारभूत तहसम्मको शिक्षा अनिवार्य र निः शुल्क हुनेछ ।",
+                    "आधारभूत तहसम्मको शिक्षा अनिवार्य हुनेछ ।",
+                    "आधारभूत तहसम्मको शिक्षा निः शुल्क हुनेछ ।",
+                    "आधारभूत तहसम्मको शिक्षा सशुल्क हुनेछ ।"
+                ],
+                answer: "आधारभूत तहसम्मको शिक्षा अनिवार्य र निः शुल्क हुनेछ ।",
+                explanation: "नेपालको संविधानमा आधारभूत तहसम्मको शिक्षा अनिवार्य र निः शुल्क हुनेछ भन्ने व्यवस्था गरिएको छ।"
+            },
+            {
+                question: "दिइएका यत्वहरूमध्ये सौर्य किरण नाप्न कुन यन्त्र प्रयोग गरिन्छ ?",
+                options: [
+                    "Monometer",
+                    "Photometer",
+                    "Pyrheliometer",
+                    "Colorimeter"
+                ],
+                answer: "Pyrheliometer",
+                explanation: "सौर्य किरण नाप्न Pyrheliometer यन्त्र प्रयोग गरिन्छ।"
+            },
+            {
+                question: "What is the primary function of the Central Processing Unit (CPU) in a computer system?",
+                options: [
+                    "To manage and store data permanently",
+                    "To provide network connectivity",
+                    "To display information to the user",
+                    "To perform calculations and execute instructions"
+                ],
+                answer: "To perform calculations and execute instructions",
+                explanation: "The primary function of the CPU is to perform calculations and execute instructions."
+            },
+            {
+                question: "मूल्याङ्कनका प्रक्रियामा विद्यार्थीको आचरण तथा व्यवहारको समेत अवलोकन गरी अभिलेख कायम गर्दा उसको सिकाइको कठिनाइ र सहजता थाहा पाई सहजीकरण गर्न सहज हुन्छ । यस्तो महत्त्वपूर्ण व्यवहार र कामको अभिलेखलाई के भनिन्छ ?",
+                options: [
+                    "वृत्तिमार्ग अभिलेख",
+                    "घटनावृत्त अभिलेख",
+                    "व्यक्तिगत अभिलेख",
+                    "सचित अभिलेख"
+                ],
+                answer: "व्यक्तिगत अभिलेख",
+                explanation: "यस्तो अभिलेखलाई व्यक्तिगत अभिलेख भनिन्छ।"
+            },
+            {
+                question: "शिक्षा नियमावली, २०५९ (संशोधन सहित) ले प्राथमिक विद्यालयमा महिला शिक्षकको पद रहने व्यवस्था गरेअनुसार तल दिइएकामध्ये कुन विकल्प सही हो ?",
+                options: [
+                    "सात जनासम्म शिक्षक दरवन्दी भए कम्तीमा तीन जना महिला शिक्षक",
+                    "तीन जनासम्म शिक्षक दरवन्दी भए कम्तीमा एक जना महिला शिक्षक",
+                    "सात जनाभन्दा बढी शिक्षक दरवन्दी भए कम्तीमा चारजना महिला शिक्षक",
+                    "पाँच जनासम्म शिक्षक दरवन्दी भए कम्तीमा दुई जना महिला शिक्षक"
+                ],
+                answer: "तीन जनासम्म शिक्षक दरवन्दी भए कम्तीमा एक जना महिला शिक्षक",
+                explanation: "शिक्षा नियमावली, २०५९ अनुसार तीन जनासम्म शिक्षक दरवन्दी भए कम्तीमा एक जना महिला शिक्षक रहने व्यवस्था छ।"
+            },
+            {
+                question: "बालविकासको सिद्धान्तअनुसार कुन उमेर समूहका विद्यार्थीहरूमा सांस्कृतिक पूर्वाग्रहसम्बन्धी द्वन्द बढी देखापर्छ ?",
+                options: [
+                    "किशोरावस्था",
+                    "यौन परिपक्वताको अवस्था",
+                    "उत्तर बाल्यावस्था",
+                    "पूर्व बाल्यावस्था"
+                ],
+                answer: "किशोरावस्था",
+                explanation: "बालविकासको सिद्धान्तअनुसार किशोरावस्थाका विद्यार्थीहरूमा सांस्कृतिक पूर्वाग्रहसम्बन्धी द्वन्द बढी देखापर्छ।"
+            },
+            {
+                question: "Choose the word which is different from the rest.",
+                options: [
+                    "Elephant",
+                    "Deer",
+                    "Lion",
+                    "Zebra"
+                ],
+                answer: "Lion",
+                explanation: "Lion is different from the rest as it's a carnivore while others are herbivores."
+            },
+            {
+                question: "स्थानीय सरकार संचालन ऐन, २०७४ (संशोधनसहित) को दफा ११/२) को खण्ड (ज) अनुसार स्थानीय तहको काम, कर्तव्य र अधिकारभित्र नपर्ने विषय देहायमध्ये कुन हो ?",
+                options: [
+                    "विद्यार्थी सिकाइ उपलब्धिको परीक्षण र व्यवस्थापन,",
+                    "विद्यालयको गुणस्तर अभिवृद्धि पाठ्यसामाग्री वितरण,",
+                    "शैक्षिक परामर्श सेवा संचालन गर्ने संस्थाको अनुमति स्वीकृति र नियमन,",
+                    "शिक्षण सिकाइ शिक्षक र कर्मचारीको तालिम तथा क्षमता विकास"
+                ],
+                answer: "शैक्षिक परामर्श सेवा संचालन गर्ने संस्थाको अनुमति स्वीकृति र नियमन,",
+                explanation: "स्थानीय सरकार संचालन ऐन, २०७४ अनुसार शैक्षिक परामर्श सेवा संचालन गर्ने संस्थाको अनुमति स्वीकृति र नियमन स्थानीय तहको काम, कर्तव्य र अधिकारभित्र नपर्ने विषय हो।"
+            },
+            {
+                question: "पाँचवर्षअघि बाबुको उमेर छोराको उमेरको ५ गुना थियो अबको १० बर्षमा बाबुको उमेर छोराको उमेरको २.५ गुना हुनेछ भने अहिले उनीहरूको उमेरको योग र अन्तरको अनुपात कति छ ?",
+                options: [
+                    "२१.९",
+                    "१६.९",
+                    "१४.९",
+                    "११.९"
+                ],
+                answer: "१४.९",
+                explanation: "गणितीय समाधान गर्दा उनीहरूको अहिलेको उमेरको योग र अन्तरको अनुपात १४.९ छ।"
+            },
+            {
+                question: "Two students appeared at an examination. One of them secured 9 marks more than the other and his marks was 56% of the sum of their marks. The marks obtained by them are:",
+                options: [
+                    "39.30",
+                    "41.32",
+                    "42.33",
+                    "43.34"
+                ],
+                answer: "42.33",
+                explanation: "Let one student's marks be x, then the other's is x+9. Given x+9 = 0.56(2x+9). Solving gives x=33 and x+9=42."
+            },
+            {
+                question: "राष्ट्रिय शिक्षा नीति २०७४ अनुसार सबै तहको शिक्षालाई तल दिइएकामध्ये कस्तो बनाउने लक्ष्य लिइएको छ ?",
+                options: [
+                    "बालमैत्री प्रतिस्पर्धी जीवनोपयोगी र रोजगारमूलक",
+                    "प्रविधिमैत्री, प्रतिस्पधी, रोजगारमूलक र उत्पादनमूलक",
+                    "बालमैत्री प्रतिस्पर्धी जीवनोपयोगी र खोजमूलक",
+                    "प्रविधिमैत्री, खोजमुलक, जीवनोपयोगी र समतामूलक"
+                ],
+                answer: "बालमैत्री प्रतिस्पर्धी जीवनोपयोगी र रोजगारमूलक",
+                explanation: "राष्ट्रिय शिक्षा नीति २०७४ अनुसार सबै तहको शिक्षालाई बालमैत्री प्रतिस्पर्धी जीवनोपयोगी र रोजगारमूलक बनाउने लक्ष्य लिइएको छ।"
+            },
+            {
+                question: "अजरबैजानको बाकुमा सन् २०२४ नोभेम्बर ११-१२ सम्म भएको जलवायु परिवर्तनसम्बन्धी पक्षहरुको सम्मेलनकोष २९ (COP29) मा उठान भएका विषयमा नपर्ने विषय कुन हो ?",
+                options: [
+                    "तापक्रम बुद्धिको लक्ष्य 1.5 डिग्री कायम गर्ने विषयलाई निरन्तरता दिने।",
+                    "दिगो विकासलाई पुनः परिभाषित गर्ने।",
+                    "हरित ऊर्जा प्रसारण संरचना विकास गर्ने ।",
+                    "जलवायु वित्तलाई स्थापित गर्ने ।"
+                ],
+                answer: "दिगो विकासलाई पुनः परिभाषित गर्ने।",
+                explanation: "COP29 मा दिगो विकासलाई पुनः परिभाषित गर्ने विषय उठान भएको थिएन।"
+            },
+            {
+                question: "सिकारुले सामाजिक परिवेश र व्यवहारलाई सामाजिक परिवेश र व्यवहारलाई अनुकरण गरी सिक्ने प्रकियाको अर्थमा तत्तकामध्ये कुन सिकाइ सिद्धान्त पर्दछ।",
+                options: [
+                    "व्यावहारिक सिकाइ सिद्धान्त",
+                    "सामाजिक सिकाइ सिद्धान्त",
+                    "रचनात्मक सिकाइ सिद्धान्त",
+                    "संज्ञानात्मक सिकाइ सिद्धाना"
+                ],
+                answer: "सामाजिक सिकाइ सिद्धान्त",
+                explanation: "सामाजिक सिकाइ सिद्धान्तले सिकारुले सामाजिक परिवेश र व्यवहारलाई अनुकरण गरी सिक्ने प्रकियालाई बुझाउँछ।"
+            },
+            {
+                question: "Which of the following is known as malicious software?",
+                options: [
+                    "legal war",
+                    "Badware",
+                    "Malicious ware",
+                    "Malware"
+                ],
+                answer: "Malware",
+                explanation: "Malware is the term for malicious software."
+            },
+            {
+                question: "पाठ्यक्रमको व्यापक अर्थ तलका मध्ये कुन हो ?",
+                options: [
+                    "उद्देश्य प्राप्त गर्न बनाइएको शैक्षिक योजना",
+                    "उद्देश्य प्राप्तिका लागि गरिने विशेष प्रयास",
+                    "विद्यालयमा पठनपाठन गरिने विषयवस्तुको क्रमबद्ध सूची",
+                    "शिक्षकले विद्यालयमा प्रदान गरिने ज्ञान"
+                ],
+                answer: "उद्देश्य प्राप्त गर्न बनाइएको शैक्षिक योजना",
+                explanation: "पाठ्यक्रमको व्यापक अर्थ उद्देश्य प्राप्त गर्न बनाइएको शैक्षिक योजना हो।"
+            },
+            {
+                question: "Choose the word which is synonym to the given word. 'MORAL'",
+                options: [
+                    "Ethical",
+                    "Divine",
+                    "Spintual",
+                    "Eternal"
+                ],
+                answer: "Ethical",
+                explanation: "Moral and ethical are synonyms."
+            },
+            {
+                question: "शिक्षा ऐन २०२८ (संशोधनसहित) अनुसार आधारभूत शिक्षाको परिभाषा तल दिइएकामध्ये कुन हो ?",
+                options: [
+                    "प्रारम्भिक बाल शिक्षादेखि कक्षा ३ सम्मको शिक्षा",
+                    "प्रारम्भिक चाल शिक्षादेखि कक्षा ८ सम्मको शिक्षा",
+                    "कक्षा १ देखि कक्षा ३ सम्मको शिक्षा",
+                    "कक्षा १ देखि कक्षा ८ सम्मको शिक्षा"
+                ],
+                answer: "कक्षा १ देखि कक्षा ८ सम्मको शिक्षा",
+                explanation: "शिक्षा ऐन २०२८ अनुसार आधारभूत शिक्षाको परिभाषा कक्षा १ देखि कक्षा ८ सम्मको शिक्षा हो।"
+            },
+            {
+                question: "CBT stands for.....",
+                options: [
+                    "Central Basic Training",
+                    "Computer Basic Test",
+                    "Computer Based Training",
+                    "None of the above"
+                ],
+                answer: "Computer Based Training",
+                explanation: "CBT stands for Computer Based Training."
+            },
+            {
+                question: "परीक्षामा विद्यार्थीले प्राप्त गरेको प्रासमा एकरूपता कायम रहने गरी उसको भाषा-शैली समेतको लेखाजोखा गर्ने कुन प्रकारको प्रत्र प्रयोग गर्नु पर्दछ",
+                options: [
+                    "छोटो उत्तर आउने",
+                    "खाली ठाउँ भने",
+                    "निवन्द्वात्मक",
+                    "बहुबैकल्पिक"
+                ],
+                answer: "निवन्द्वात्मक",
+                explanation: "निवन्द्वात्मक प्रकारको प्रत्रले विद्यार्थीको भाषा-शैली समेतको लेखाजोखा गर्न सहयोग गर्छ।"
+            },
+            {
+                question: "मानव विकासमा आनुपातिक परिवर्तन भन्नाले तलकामध्ये कुन कुरा बुझाउँछ ?",
+                options: [
+                    "पुरानी स्वरूप हराउँदै जाने र नयाँ स्वरूपले स्थान लिने परिवर्तन,",
+                    "शारीरिक पक्षहरूको अनुपातमा आउने परिवर्तन,",
+                    "शारीरिक र मानसिक दुवै पक्षको अनुपातमा आउने परिवर्तन,",
+                    "मानसिक र संवेगात्मजः दुवै पक्षको अनुपातमा आउने परिवर्तन ।"
+                ],
+                answer: "शारीरिक पक्षहरूको अनुपातमा आउने परिवर्तन,",
+                explanation: "मानव विकासमा आनुपातिक परिवर्तन भन्नाले शारीरिक पक्षहरूको अनुपातमा आउने परिवर्तन बुझाउँछ।"
+            },
+            {
+                question: "किलोग्रामको भाग बराबर कति ग्राम हुन्छ ?",
+                options: [
+                    "250ग्राम",
+                    "200ग्राम",
+                    "500ग्राम",
+                    "450ग्राम"
+                ],
+                answer: "500ग्राम",
+                explanation: "किलोग्रामको भाग बराबर 500 ग्राम हुन्छ।"
+            },
+            {
+                question: "Which one will replace the question mark? A2 C4 E6 G3 I5 ? M5 O9 Q14",
+                options: [
+                    "L0",
+                    "K15",
+                    "I15",
+                    "GK8"
+                ],
+                answer: "K15",
+                explanation: "The pattern alternates between letters (A,C,E,G,I,K,M,O,Q) and numbers (2,4,6,3,5,15,9,14)."
+            },
+            {
+                question: "सामान्यीकरण गर्न सकिने सिद्धान्तको विकास गर्न कुन अनुसन्धान सबैभन्दा बढी उपयुक्त हुन्छ ?",
+                options: [
+                    "प्रायोगिक अनुसन्धान",
+                    "आधारभूत अनुसन्धान",
+                    "घटना अध्ययन",
+                    "कार्यमूलक अनुसन्धान"
+                ],
+                answer: "प्रायोगिक अनुसन्धान",
+                explanation: "सामान्यीकरण गर्न सकिने सिद्धान्तको विकास गर्न प्रायोगिक अनुसन्धान सबैभन्दा बढी उपयुक्त हुन्छ।"
+            },
+            {
+                question: "तल दिइएकामध्ये अन्य भन्दा फरक छान्नुहोस् । मकै, फापर, तोरी, गहुँ",
+                options: [
+                    "तोरी",
+                    "मकै",
+                    "फापर",
+                    "गहुँ"
+                ],
+                answer: "तोरी",
+                explanation: "तोरी अन्य भन्दा फरक हो किनभने यो तेलहन हो भने अन्य अन्नहरू हुन्।"
+            },
+            {
+                question: "एउटा घनाकार बस्तुको सबै सतहमा रङ लगाएर २७ वटा उबै साइजका घनाकार टुका बनाउँदा तीनवटा सतहमा रङ लागेका घनाकार टुक्राहरू कतिवटा हुन्छन् ?",
+                options: [
+                    "१ वटा",
+                    "४ बटा",
+                    "८ वटा",
+                    "१२ वटा"
+                ],
+                answer: "८ वटा",
+                explanation: "२७ वटा घनाकार टुक्राहरू बनाउँदा तीनवटा सतहमा रङ लागेका घनाकार टुक्राहरू ८ वटा हुन्छन्।"
+            },
+            {
+                question: "नेपालको संविधानमा राज्यको आर्थिक उद्देश्य अन्तर्गत के उल्लेख गरिएको छ ?",
+                options: [
+                    "श्रमको सम्मान तथा उद्यमशीलता",
+                    "स्थानीय स्वायत्तता र विकेन्द्रीकरण",
+                    "सार्वजनिक, निजी र सहकारी क्षेत्रको सहभागिता तथा विकास",
+                    "जनताको सर्वोत्तम हित र समुन्नति"
+                ],
+                answer: "सार्वजनिक, निजी र सहकारी क्षेत्रको सहभागिता तथा विकास",
+                explanation: "नेपालको संविधानमा राज्यको आर्थिक उद्देश्य अन्तर्गत सार्वजनिक, निजी र सहकारी क्षेत्रको सहभागिता तथा विकास उल्लेख गरिएको छ।"
+            },
+            {
+                question: "सुशासन, सामाजिक न्याय र समृद्धि लाई चालु सोह्रौं योजनाले राखेको सोच, लक्ष्य, उद्देश्य र रणनीतिमध्ये कुन रूपमा अङ्गीकार गरिएको छ ?",
+                options: [
+                    "सोच",
+                    "उद्देश्य",
+                    "रणनीति",
+                    "लक्ष्य"
+                ],
+                answer: "सोच",
+                explanation: "सुशासन, सामाजिक न्याय र समृद्धि लाई चालु सोह्रौं योजनाले सोचको रूपमा अङ्गीकार गरिएको छ।"
+            },
+            {
+                question: "नेपालले आफ्नो वैदेशिक आयस्रोत बढाउन र विप्रेषण माथिको निर्भरता कम गर्न तलकामध्ये कुन रणनीति अङ्गीकार गर्नु सबैभन्दा उपयुक्त हुनसक्छ ?",
+                options: [
+                    "घरेलु बजारमा उत्पादन वृद्धि गर्नु",
+                    "वैदेशिक सहायतामा निर्भरता बढाउनु",
+                    "कृषि उत्पादनमः वृद्धि र त्यसची निर्यात प्रवर्द्धन गर्नु",
+                    "सबै क्षेत्रमा आयात बढाउनु"
+                ],
+                answer: "कृषि उत्पादनमः वृद्धि र त्यसची निर्यात प्रवर्द्धन गर्नु",
+                explanation: "नेपालले आफ्नो वैदेशिक आयस्रोत बढाउन कृषि उत्पादनमः वृद्धि र त्यसची निर्यात प्रवर्द्धन गर्ने रणनीति अङ्गीकार गर्नु सबैभन्दा उपयुक्त हुनसक्छ।"
+            },
+            {
+                question: "देहायकामध्ये कुन दिगो विकासको लक्ष्यहरू अन्तर्गत पर्दैन ?",
+                options: [
+                    "देशभित्र तथा देशहरूबिचको असमानता हटाउने,",
+                    "दिगो उत्पादन र उपभोगका ढाँचाहरू सुनिश्चित गर्ने,",
+                    "सहर र मानव वस्तीलाई समावेशी, सुरक्षित, उत्वानशील र दिगो बनाउने,",
+                    "अतिकम विकसित देशबाट स्तरोन्नति गर्ने ।"
+                ],
+                answer: "अतिकम विकसित देशबाट स्तरोन्नति गर्ने ।",
+                explanation: "अतिकम विकसित देशबाट स्तरोन्नति गर्ने कुरा दिगो विकासको लक्ष्यहरू अन्तर्गत पर्दैन।"
+            },
+            {
+                question: "नेपालको राष्ट्रिय बजेटमा जलबायु सङ्केत (Climate Code) को अभ्यास कुन आर्थिक वर्षदेखि हुँदै आएको छ ?",
+                options: [
+                    "आ.व. २०६८/२०६९",
+                    "आ.व. २०७०/२०७१",
+                    "आ.व. २०७२/२०७३",
+                    "आ.व. २०७४/२०७५"
+                ],
+                answer: "आ.व. २०७२/२०७३",
+                explanation: "नेपालको राष्ट्रिय बजेटमा जलबायु सङ्केत (Climate Code) को अभ्यास आ.व. २०७२/२०७३ देखि हुँदै आएको छ।"
+            }
+        ];
+
+          // DOM elements
+        const registrationSection = document.getElementById('registrationSection');
+        const quizSection = document.getElementById('quizSection');
+        const resultSection = document.getElementById('resultSection');
+        const startBtn = document.getElementById('startBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const submitBtn = document.getElementById('submitBtn');
+        const restartBtn = document.getElementById('restartBtn');
+        const timerElement = document.getElementById('timer');
+        const progressBar = document.getElementById('progressBar');
+        const questionCounter = document.getElementById('questionCounter');
+        const questionElement = document.getElementById('question');
+        const optionsElement = document.getElementById('options');
+        const explanationElement = document.getElementById('explanation');
+        const explanationText = document.getElementById('explanationText');
+        const finalScore = document.getElementById('finalScore');
+        const scoreText = document.getElementById('scoreText');
+        const resultName = document.getElementById('resultName');
+        const resultAddress = document.getElementById('resultAddress');
+        const resultContact = document.getElementById('resultContact');
+        const resultTime = document.getElementById('resultTime');
+        const notification = document.getElementById('notification');
+        const notificationMessage = document.getElementById('notificationMessage');
+        const detailedResults = document.getElementById('detailedResults');
+
+        // Quiz variables
+        let currentQuestion = 0;
+        let score = 0;
+        let timeLeft = 1800; // 30 minutes in seconds
+        let timer;
+        let quizCompleted = false;
+        const totalQuestions = questions.length;
+        let userName, userAddress, userContact;
+        let startTime;
+        let userAnswers = [];
+
+        // Event listeners
+        startBtn.addEventListener('click', startQuiz);
+        nextBtn.addEventListener('click', nextQuestion);
+        submitBtn.addEventListener('click', endQuiz);
+        restartBtn.addEventListener('click', () => location.reload());
+
+        // Start quiz function
+        function startQuiz() {
+            userName = document.getElementById('userName').value;
+            userAddress = document.getElementById('userAddress').value;
+            userContact = document.getElementById('userContact').value;
+            
+            if (!userName || !userAddress || !userContact) {
+                showNotification("कृपया सबै व्यक्तिगत विवरणहरू भर्नुहोस्", "error");
+                return;
+            }
+            
+            startTime = new Date();
+            userAnswers = [];
+            
+            registrationSection.classList.remove('active');
+            quizSection.classList.add('active');
+            
+            // Start timer
+            timer = setInterval(updateTimer, 1000);
+            
+            showQuestion();
+        }
+
+        // Update timer function
+        function updateTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerElement.textContent = `${minutes < 10 ? '०' + minutes : minutes}:${seconds < 10 ? '०' + seconds : seconds}`;
+            
+            // Update progress bar
+            const progressPercent = ((1800 - timeLeft) / 1800) * 100;
+            progressBar.style.width = `${progressPercent}%`;
+            
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                endQuiz();
+            } else {
+                timeLeft--;
+            }
+        }
+
+        // Show question function
+        function showQuestion() {
+            const question = questions[currentQuestion];
+            questionCounter.textContent = `प्रश्न ${currentQuestion + 1}/${totalQuestions}`;
+            questionElement.textContent = question.question;
+            
+            optionsElement.innerHTML = '';
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.classList.add('option');
+                optionElement.innerHTML = `
+                    <div class="option-prefix">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                optionElement.addEventListener('click', () => selectAnswer(option));
+                optionsElement.appendChild(optionElement);
+            });
+            
+            explanationElement.style.display = 'none';
+            nextBtn.style.display = 'none';
+            submitBtn.style.display = 'none';
+        }
+
+        // Select answer function
+        function selectAnswer(selected) {
+            if (quizCompleted) return;
+            
+            const options = document.querySelectorAll('.option');
+            
+            // Store user's answer
+            userAnswers[currentQuestion] = selected;
+            
+            // Mark selected option
+            options.forEach(option => {
+                const optionText = option.querySelector('.option-text').textContent;
+                if (optionText === selected) {
+                    option.classList.add('selected');
+                }
+                option.style.pointerEvents = 'none';
+            });
+
+            // Show next button or submit button
+            if (currentQuestion < totalQuestions - 1) {
+                nextBtn.style.display = 'inline-block';
+            } else {
+                submitBtn.style.display = 'inline-block';
+            }
+        }
+
+        // Next question function
+        function nextQuestion() {
+            currentQuestion++;
+            showQuestion();
+        }
+
+        // End quiz function
+        function endQuiz() {
+            quizCompleted = true;
+            clearInterval(timer);
+            
+            // Calculate score
+            score = 0;
+            questions.forEach((question, index) => {
+                if (userAnswers[index] === question.answer) {
+                    score++;
+                }
+            });
+            
+            const endTime = new Date();
+            const timeTaken = Math.floor((endTime - startTime) / 1000);
+            const minutesTaken = Math.floor(timeTaken / 60);
+            const secondsTaken = timeTaken % 60;
+            
+            // Update result section
+            finalScore.textContent = `${score}/${totalQuestions}`;
+            scoreText.textContent = `तपाईंले ${totalQuestions} मध्ये ${score} प्रश्नहरूको सही उत्तर दिनुभयो!`;
+            resultName.textContent = userName;
+            resultAddress.textContent = userAddress;
+            resultContact.textContent = userContact;
+            resultTime.textContent = `${minutesTaken} मिनेट ${secondsTaken} सेकेण्ड`;
+            
+            // Show detailed results
+            showDetailedResults();
+            
+            // Show result section
+            quizSection.classList.remove('active');
+            resultSection.classList.add('active');
+            
+            // Save results to Google Sheets
+            saveResultsToGoogleSheets(minutesTaken, secondsTaken);
+        }
+
+        // Show detailed results function
+        function showDetailedResults() {
+            detailedResults.innerHTML = '<h3><i class="fas fa-list-ol"></i> प्रश्नहरूको विस्तृत विवरण</h3>';
+            
+            questions.forEach((question, index) => {
+                const userAnswer = userAnswers[index];
+                const isCorrect = userAnswer === question.answer;
+                
+                const resultItem = document.createElement('div');
+                resultItem.className = `result-item ${isCorrect ? 'correct' : 'incorrect'}`;
+                
+                const status = document.createElement('div');
+                status.className = `result-status ${isCorrect ? 'status-correct' : 'status-incorrect'}`;
+                status.textContent = isCorrect ? 'सही उत्तर' : 'गलत उत्तर';
+                
+                const questionText = document.createElement('div');
+                questionText.className = 'result-question';
+                questionText.textContent = `${index + 1}. ${question.question}`;
+                
+                resultItem.appendChild(status);
+                resultItem.appendChild(questionText);
+                
+                // Show all options with highlighting
+                question.options.forEach((option, optionIndex) => {
+                    const optionElement = document.createElement('div');
+                    const isUserAnswer = option === userAnswer;
+                    const isCorrectAnswer = option === question.answer;
+                    
+                    let className = 'result-answer';
+                    if (isCorrectAnswer) {
+                        className += ' correct-answer';
+                    }
+                    if (isUserAnswer) {
+                        className += ' user-answer';
+                        className += isCorrect ? ' correct' : ' incorrect';
+                    }
+                    
+                    optionElement.className = className;
+                    
+                    const optionLabel = document.createElement('div');
+                    optionLabel.className = 'result-answer-label';
+                    optionLabel.textContent = String.fromCharCode(65 + optionIndex) + '.';
+                    
+                    const optionText = document.createElement('div');
+                    optionText.textContent = option;
+                    
+                    optionElement.appendChild(optionLabel);
+                    optionElement.appendChild(optionText);
+                    resultItem.appendChild(optionElement);
+                });
+                
+                // Add explanation
+                const explanation = document.createElement('div');
+                explanation.className = 'result-explanation';
+                explanation.innerHTML = `<strong>व्याख्या:</strong> ${question.explanation}`;
+                resultItem.appendChild(explanation);
+                
+                detailedResults.appendChild(resultItem);
+            });
+        }
+
+        // Save results to Google Sheets with proper headers
+        function saveResultsToGoogleSheets(minutes, seconds) {
+            // Use the provided Google Apps Script URL
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbzxN-pLWX22nVudPcT0egxvPslmckS13Kq8O5MI4XD5NL6zxpaLUVV2ybcu5o2taorU/exec';
+            
+            // Prepare data with proper header names
+            const data = {
+                'नाम': userName,
+                'ठेगाना': userAddress,
+                'सम्पर्क नम्बर': userContact,
+                'Score': `${score}/${totalQuestions}`,
+                'Timestamp': new Date().toLocaleString('ne-NP')
+            };
+            
+            // Create form data
+            const formData = new FormData();
+            formData.append('नाम', data['नाम']);
+            formData.append('ठेगाना', data['ठेगाना']);
+            formData.append('सम्पर्क नम्बर', data['सम्पर्क नम्बर']);
+            formData.append('Score', data['Score']);
+            formData.append('Timestamp', data['Timestamp']);
+            
+            // Send request
+            fetch(scriptURL, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error('Network response was not ok.');
+            })
+            .then(data => {
+                showNotification("तपाईंको परिणाम सफलतापूर्वक बचत गरियो!", "success");
+            })
+            .catch(error => {
+                console.error('Error saving results:', error);
+                showNotification("परिणाम बचत गर्दा त्रुटि भयो: " + error.message, "error");
+            });
+        }
+
+        // Show notification function
+        function showNotification(message, type) {
+            // Clear previous content
+            notification.innerHTML = '';
+            
+            // Create icon
+            const icon = document.createElement('i');
+            icon.className = type === 'success' ? 'fas fa-check-circle' : 'fas fa-exclamation-circle';
+            
+            // Create message div
+            const messageDiv = document.createElement('div');
+            messageDiv.id = 'notificationMessage';
+            messageDiv.textContent = message;
+            
+            // Append elements
+            notification.appendChild(icon);
+            notification.appendChild(messageDiv);
+            
+            // Set notification type
+            notification.className = 'notification active ' + type;
+            
+            // Auto hide after 5 seconds
+            setTimeout(() => {
+                notification.classList.remove('active');
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
