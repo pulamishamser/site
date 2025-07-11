@@ -1655,53 +1655,32 @@ Subscribe our website to get the latest updates
   .copy-btn {
     background: transparent;
     border: none;
-    color: inherit; /* This will make the text color same as parent element */
+    color: #0066cc; /* Making text blue for better visibility */
     cursor: pointer;
-    padding: 0;
+    padding: 2px 6px;
     margin-left: 8px;
-    font: inherit; /* This will make the font same as parent element */
+    font: inherit;
+    font-size: 0.9em;
+    border-radius: 3px;
+    transition: all 0.2s;
   }
   
-  .copy-btn:hover {
-    text-decoration: underline; /* Optional: add hover effect */
+  .copy-btn:hover, .copy-btn:focus {
+    background-color: rgba(0, 102, 204, 0.1); /* Light blue background on hover */
+    text-decoration: none;
+    outline: none;
+  }
+  
+  /* Mobile-specific styling */
+  @media (max-width: 768px) {
+    .copy-btn {
+      color: #0066cc;
+      padding: 3px 8px;
+      font-size: 0.95em;
+      border: 1px solid rgba(0, 102, 204, 0.3); /* Light border for mobile */
+    }
   }
 </style>
-
-<script>
-document.querySelectorAll('.copy-btn').forEach(button => {
-  button.addEventListener('click', async function() {
-    const url = this.getAttribute('data-url');
-    
-    try {
-      await navigator.clipboard.writeText(url);
-      
-      // Visual feedback
-      const originalText = this.textContent;
-      this.textContent = 'Copied!';
-      setTimeout(() => {
-        this.textContent = originalText;
-      }, 1500);
-    } catch (err) {
-      console.error('Failed to copy: ', err);
-      
-      // Fallback for browsers that don't support Clipboard API
-      const tempInput = document.createElement('input');
-      tempInput.value = url;
-      document.body.appendChild(tempInput);
-      tempInput.select();
-      document.execCommand('copy');
-      document.body.removeChild(tempInput);
-      
-      // Visual feedback
-      const originalText = this.textContent;
-      this.textContent = 'Copied!';
-      setTimeout(() => {
-        this.textContent = originalText;
-      }, 1500);
-    }
-  });
-});
-</script>
 
 <ul>
   <li>
@@ -1718,6 +1697,45 @@ document.querySelectorAll('.copy-btn').forEach(button => {
   </li>
 </ul>
 
+<script>
+document.querySelectorAll('.copy-btn').forEach(button => {
+  button.addEventListener('click', async function() {
+    const url = this.getAttribute('data-url');
+    
+    try {
+      await navigator.clipboard.writeText(url);
+      
+      // Visual feedback
+      const originalText = this.textContent;
+      this.textContent = '✓ Copied!';
+      this.style.color = '#28a745'; /* Green color for success feedback */
+      setTimeout(() => {
+        this.textContent = originalText;
+        this.style.color = '#0066cc'; /* Revert to original color */
+      }, 1500);
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+      
+      // Fallback for browsers that don't support Clipboard API
+      const tempInput = document.createElement('input');
+      tempInput.value = url;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+      
+      // Visual feedback
+      const originalText = this.textContent;
+      this.textContent = '✓ Copied!';
+      this.style.color = '#28a745';
+      setTimeout(() => {
+        this.textContent = originalText;
+        this.style.color = '#0066cc';
+      }, 1500);
+    }
+  });
+});
+</script>
  <li><a href="  https://shamser.info.np/Computer%20Knowledge/Computer%20Knowledge%20Quize.html " >Computer Knowledge Quize</a></li>
  <li><a href="https://shamser.info.np/Computer Knowledge/History of Computer.html" >History of Computer</a></li>
                 <li><a href="https://shamser.info.np/Computer Knowledge/Types of Computer.html">Types of Computer</a></li>
