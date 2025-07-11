@@ -3348,31 +3348,39 @@ function changeReadMore() {
 
 <script>
 document.querySelectorAll('.copy-btn').forEach(button => {
-  button.addEventListener('click', function() {
+  button.addEventListener('click', async function() {
     const url = this.getAttribute('data-url');
     
-    // Create temporary input element
-    const tempInput = document.createElement('input');
-    tempInput.value = url;
-    document.body.appendChild(tempInput);
-    
-    // Select and copy URL
-    tempInput.select();
-    document.execCommand('copy');
-    
-    // Clean up
-    document.body.removeChild(tempInput);
-    
-    // Visual feedback
-    const originalText = this.textContent;
-    this.textContent = 'Copied!';
-    setTimeout(() => {
-      this.textContent = originalText;
-    }, 1500);
+    try {
+      await navigator.clipboard.writeText(url);
+      
+      // Visual feedback
+      const originalText = this.textContent;
+      this.textContent = 'Copied!';
+      setTimeout(() => {
+        this.textContent = originalText;
+      }, 1500);
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+      
+      // Fallback for browsers that don't support Clipboard API
+      const tempInput = document.createElement('input');
+      tempInput.value = url;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+      
+      // Visual feedback
+      const originalText = this.textContent;
+      this.textContent = 'Copied!';
+      setTimeout(() => {
+        this.textContent = originalText;
+      }, 1500);
+    }
   });
 });
 </script>
-     
  
  </ul>  
   details
