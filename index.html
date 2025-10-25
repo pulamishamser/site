@@ -10,647 +10,11 @@
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Add this CSS for the comment system -->
-<style>
-.comment-section {
-    margin-top: 30px;
-    padding: 20px;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-}
-
-.comment-form {
-    margin-bottom: 30px;
-}
-
-.comment-form textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    resize: vertical;
-    min-height: 100px;
-    margin-bottom: 10px;
-}
-
-.comment-form button {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.comment-form button:hover {
-    background-color: var(--secondary-color);
-}
-
-.comment {
-    border-bottom: 1px solid #eee;
-    padding: 15px 0;
-}
-
-.comment:last-child {
-    border-bottom: none;
-}
-
-.comment-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 8px;
-}
-
-.comment-author {
-    font-weight: bold;
-    color: var(--primary-color);
-}
-
-.comment-date {
-    color: #666;
-    font-size: 0.9em;
-}
-
-.comment-content {
-    line-height: 1.5;
-}
-
-.comment-actions {
-    margin-top: 10px;
-}
-
-.comment-actions button {
-    background: none;
-    border: none;
-    color: #666;
-    cursor: pointer;
-    margin-right: 15px;
-    font-size: 0.9em;
-}
-
-.comment-actions button:hover {
-    color: var(--primary-color);
-}
-
-.comment-reply {
-    margin-left: 30px;
-    border-left: 2px solid #eee;
-    padding-left: 15px;
-    margin-top: 15px;
-}
-
-.no-comments {
-    text-align: center;
-    color: #666;
-    padding: 20px;
-}
-
-/* Flash news section styles */
-#flash {
-    background-color: #f8f9fa;
-    padding: 10px 0;
-    border-bottom: 1px solid #e9ecef;
-}
-
-.news-tag {
-    font-weight: bold;
-    color: var(--primary-color);
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-}
-
-.owl-carousel.flash-caresol a {
-    color: #333;
-    text-decoration: none;
-    padding: 5px 10px;
-    display: block;
-}
-
-.owl-carousel.flash-caresol a:hover {
-    color: var(--primary-color);
-}
-
-/* Navigation menu styles */
-#header {
-    background-color: white;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.nav-menu {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-}
-
-.nav-menu > li {
-    position: relative;
-}
-
-.nav-menu > li > a {
-    display: block;
-    padding: 15px 20px;
-    color: #333;
-    text-decoration: none;
-    transition: all 0.3s;
-}
-
-.nav-menu > li > a:hover {
-    background-color: #f8f9fa;
-    color: var(--primary-color);
-}
-
-.nav-menu > li.menu-active > a {
-    color: var(--primary-color);
-    background-color: #f8f9fa;
-}
-
-.nav-menu ul {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: white;
-    min-width: 250px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    display: none;
-    z-index: 1000;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.nav-menu ul ul {
-    top: 0;
-    left: 100%;
-}
-
-.nav-menu li:hover > ul {
-    display: block;
-}
-
-.nav-menu ul li {
-    position: relative;
-}
-
-.nav-menu ul li a {
-    display: block;
-    padding: 12px 20px;
-    color: #333;
-    text-decoration: none;
-    border-bottom: 1px solid #f8f9fa;
-    transition: all 0.3s;
-}
-
-.nav-menu ul li a:hover {
-    background-color: #f8f9fa;
-    color: var(--primary-color);
-}
-
-.menu-has-children > a:after {
-    content: '▾';
-    margin-left: 5px;
-    font-size: 0.8em;
-}
-
-/* Mobile responsive styles */
-@media (max-width: 768px) {
-    .nav-menu {
-        flex-direction: column;
-    }
     
-    .nav-menu ul {
-        position: static;
-        box-shadow: none;
-        width: 100%;
-    }
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
     
-    .nav-menu ul ul {
-        position: static;
-    }
-    
-    .menu-has-children > a:after {
-        content: '▸';
-    }
-}
-</style>
-
-<!-- Add this JavaScript for comment functionality -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Comment system functionality
-    const commentForm = document.getElementById('commentForm');
-    const commentsContainer = document.getElementById('commentsContainer');
-    const commentCount = document.getElementById('commentCount');
-    
-    // Load comments from localStorage
-    loadComments();
-    
-    commentForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const nameInput = document.getElementById('commentName');
-        const emailInput = document.getElementById('commentEmail');
-        const contentInput = document.getElementById('commentContent');
-        
-        const comment = {
-            id: Date.now(),
-            name: nameInput.value.trim(),
-            email: emailInput.value.trim(),
-            content: contentInput.value.trim(),
-            date: new Date().toISOString(),
-            likes: 0,
-            replies: []
-        };
-        
-        if (comment.name && comment.content) {
-            saveComment(comment);
-            addCommentToDOM(comment);
-            
-            // Reset form
-            nameInput.value = '';
-            emailInput.value = '';
-            contentInput.value = '';
-            
-            // Update comment count
-            updateCommentCount();
-        }
-    });
-    
-    function saveComment(comment) {
-        let comments = JSON.parse(localStorage.getItem('websiteComments')) || [];
-        comments.unshift(comment); // Add new comment at beginning
-        localStorage.setItem('websiteComments', JSON.stringify(comments));
-    }
-    
-    function loadComments() {
-        const comments = JSON.parse(localStorage.getItem('websiteComments')) || [];
-        commentsContainer.innerHTML = '';
-        
-        if (comments.length === 0) {
-            commentsContainer.innerHTML = '<div class="no-comments">पहिलो टिप्पणी गर्नुहोस्!</div>';
-        } else {
-            comments.forEach(comment => addCommentToDOM(comment));
-        }
-        
-        updateCommentCount();
-    }
-    
-    function addCommentToDOM(comment) {
-        const commentElement = document.createElement('div');
-        commentElement.className = 'comment';
-        commentElement.dataset.id = comment.id;
-        
-        const date = new Date(comment.date).toLocaleDateString('ne-NP', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-        });
-        
-        commentElement.innerHTML = `
-            <div class="comment-header">
-                <span class="comment-author">${escapeHtml(comment.name)}</span>
-                <span class="comment-date">${date}</span>
-            </div>
-            <div class="comment-content">${escapeHtml(comment.content)}</div>
-            <div class="comment-actions">
-                <button class="like-btn" onclick="likeComment(${comment.id})">
-                    <i class="far fa-thumbs-up"></i> मनपर्यो (${comment.likes})
-                </button>
-                <button class="reply-btn" onclick="showReplyForm(${comment.id})">
-                    <i class="fas fa-reply"></i> जवाफ दिनुहोस्
-                </button>
-            </div>
-            <div class="comment-replies" id="replies-${comment.id}">
-                ${comment.replies.map(reply => `
-                    <div class="comment-reply">
-                        <div class="comment-header">
-                            <span class="comment-author">${escapeHtml(reply.name)}</span>
-                            <span class="comment-date">${new Date(reply.date).toLocaleDateString('ne-NP')}</span>
-                        </div>
-                        <div class="comment-content">${escapeHtml(reply.content)}</div>
-                    </div>
-                `).join('')}
-            </div>
-            <div class="reply-form" id="reply-form-${comment.id}" style="display: none;">
-                <form onsubmit="submitReply(event, ${comment.id})">
-                    <input type="text" placeholder="तपाईंको नाम" required>
-                    <input type="email" placeholder="तपाईंको इमेल">
-                    <textarea placeholder="जवाफ लेख्नुहोस्..." required></textarea>
-                    <button type="submit">जवाफ पठाउनुहोस्</button>
-                    <button type="button" onclick="hideReplyForm(${comment.id})">रद्द गर्नुहोस्</button>
-                </form>
-            </div>
-        `;
-        
-        if (commentsContainer.querySelector('.no-comments')) {
-            commentsContainer.innerHTML = '';
-        }
-        
-        commentsContainer.appendChild(commentElement);
-    }
-    
-    function updateCommentCount() {
-        const comments = JSON.parse(localStorage.getItem('websiteComments')) || [];
-        commentCount.textContent = comments.length;
-    }
-    
-    // Utility function to escape HTML
-    function escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-    }
-    
-    // Initialize Owl Carousel for flash news
-    if (typeof jQuery !== 'undefined' && jQuery.fn.owlCarousel) {
-        $('.owl-carousel.flash-caresol').owlCarousel({
-            items: 1,
-            loop: true,
-            margin: 10,
-            autoplay: true,
-            autoplayTimeout: 4000,
-            autoplayHoverPause: true,
-            dots: false,
-            nav: false
-        });
-    }
-});
-
-// Global functions for comment actions
-function likeComment(commentId) {
-    let comments = JSON.parse(localStorage.getItem('websiteComments')) || [];
-    const commentIndex = comments.findIndex(c => c.id === commentId);
-    
-    if (commentIndex !== -1) {
-        comments[commentIndex].likes++;
-        localStorage.setItem('websiteComments', JSON.stringify(comments));
-        
-        // Update the like count in DOM
-        const likeBtn = document.querySelector(`[data-id="${commentId}"] .like-btn`);
-        likeBtn.innerHTML = `<i class="far fa-thumbs-up"></i> मनपर्यो (${comments[commentIndex].likes})`;
-    }
-}
-
-function showReplyForm(commentId) {
-    const replyForm = document.getElementById(`reply-form-${commentId}`);
-    replyForm.style.display = 'block';
-}
-
-function hideReplyForm(commentId) {
-    const replyForm = document.getElementById(`reply-form-${commentId}`);
-    replyForm.style.display = 'none';
-}
-
-function submitReply(event, commentId) {
-    event.preventDefault();
-    
-    const form = event.target;
-    const name = form.querySelector('input[type="text"]').value.trim();
-    const email = form.querySelector('input[type="email"]').value.trim();
-    const content = form.querySelector('textarea').value.trim();
-    
-    if (name && content) {
-        const reply = {
-            id: Date.now(),
-            name: name,
-            email: email,
-            content: content,
-            date: new Date().toISOString()
-        };
-        
-        let comments = JSON.parse(localStorage.getItem('websiteComments')) || [];
-        const commentIndex = comments.findIndex(c => c.id === commentId);
-        
-        if (commentIndex !== -1) {
-            if (!comments[commentIndex].replies) {
-                comments[commentIndex].replies = [];
-            }
-            comments[commentIndex].replies.push(reply);
-            localStorage.setItem('websiteComments', JSON.stringify(comments));
-            
-            // Add reply to DOM
-            const repliesContainer = document.getElementById(`replies-${commentId}`);
-            const replyElement = document.createElement('div');
-            replyElement.className = 'comment-reply';
-            replyElement.innerHTML = `
-                <div class="comment-header">
-                    <span class="comment-author">${reply.name}</span>
-                    <span class="comment-date">${new Date(reply.date).toLocaleDateString('ne-NP')}</span>
-                </div>
-                <div class="comment-content">${reply.content}</div>
-            `;
-            repliesContainer.appendChild(replyElement);
-            
-            // Clear and hide form
-            form.reset();
-            hideReplyForm(commentId);
-        }
-    }
-}
-</script>
-
-<!-- Flash News Section -->
-<section id="flash" class="wow fadeInUp">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12 col-md-2 col-lg-1 news-tag">Highlight:</div>
-      <div class="col-sm-12 col-md-10 col-lg-10 news">
-        <div class="owl-carousel flash-caresol">
-          <a href="https://shamser.info.np/Service_Site/index.html">
-            lauro media/shamser.info.np बाट उपलब्ध हुने सेवा सुविधा प्राप्त गरी फाइदा लिन अनुरोध
-          </a>
-          <a href="https://shamser.info.np/Home/Get%20free%20service.html">
-            निःशुल्क सेवाहरू: ग्रेडशिट, रिजल्ट, प्रवेशपत्र निर्माण
-          </a>
-          <a href="https://shamser.info.np/Entry_Form/our_service.html">
-            भुक्तानी सेवाहरू: कस्टम सफ्टवेयर, वेबसाइट डिजाइन
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Navigation Menu -->
-<header id="header">
-  <div class="container">
-    <div id="logo" class="pull-left">
-      <nav id="nav-menu-container">
-        <ul class="nav-menu">
-          <li class="menu-active"><a href="https://shamser.info.np/"><i class="fa fa-home fa-lg"></i></a></li>
-          <li class="menu-has-children"><a href="https://shamser.info.np/Home/About.html">About</a></li>
-          
-          <li class="menu-has-children"><a href="javascript:;">Our Services</a>
-            <ul>
-              <li><a href="https://shamser.info.np/Home/Get free service.html">Free Service</a></li> 
-              <li><a href="https://shamser.info.np/Entry_Form/our_service.html">Payable Service</a></li>
-            </ul>
-          </li>
-          
-          <li class="menu-has-children"><a href="javascript:;">Teacher-guides</a>
-            <ul>   
-              <li class="menu-has-children"><a href="javascript:;">Grade-1</a>
-                <ul>
-                  <li><a href="http://moecdc.gov.np/storage/gallery/1704094092.pdf">Nepali</a></li>
-                  <li><a href="http://moecdc.gov.np/storage/gallery/1672217211.pdf">English</a></li>
-                  <li><a href="http://moecdc.gov.np/storage/gallery/1672217481.pdf">Maths</a></li>
-                  <li><a href="http://moecdc.gov.np/storage/gallery/1672217425.pdf">Serofero</a></li>
-                </ul>
-              </li>
-              
-              <!-- Add other grade levels similarly -->
-              <li><a href="https://moecdc.gov.np/">More Teacher Guides</a></li>
-            </ul>
-          </li>
-          
-          <li class="menu-has-children"><a href="javascript:;">Text book</a>
-            <ul>   
-              <li class="menu-has-children"><a href="javascript:;">Class 6</a>
-                <ul>
-                  <li><a href="https://shamserinfo.blogspot.com/2024/04/lesson-1-fundamental-knowledge-of.html">Computer</a></li>
-                  <li><a href="https://moecdc.gov.np/storage/gallery/1672799804.pdf">English</a></li>
-                  <li><a href="https://moecdc.gov.np/storage/gallery/1672799879.pdf">Maths</a></li>
-                  <li><a href="https://moecdc.gov.np/storage/gallery/1672799965.pdf">Science</a></li>
-                </ul>
-              </li>
-              
-              <!-- Add other classes similarly -->
-              <li><a href="https://moecdc.gov.np/">More Textbooks</a></li>
-            </ul>
-          </li>
-          
-          <!-- Add other main menu items similarly -->
-          <li class="menu-has-children"><a href="javascript:;">Tech.Support</a>
-            <ul>   
-              <li class="menu-has-children"><a href="javascript:;">Computer Knowledge</a>
-                <ul> 
-                  <li><a href="https://shamser.info.np/Computer Knowledge/Computer Knowledge Quize.html">Computer Science Quiz</a></li>
-                  <li><a href="https://shamser.info.np/Computer Knowledge/History of Computer.html">History of Computer</a></li>
-                  <li><a href="https://shamser.info.np/Computer Knowledge/Types of Computer.html">Types of Computer</a></li>
-                </ul>
-              </li>
-              
-              <li class="menu-has-children"><a href="javascript:;">EMIS</a>
-                <ul>
-                  <li><a href="https://youtu.be/NVl4Mb8A68A">Video</a></li>
-                  <li><a href="#">Notice</a></li>
-                  <li><a href="https://emis.cehrd.gov.np/">Website</a></li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          
-          <li class="menu-has-children"><a href="javascript:;">SitePages</a>
-            <ul>
-              <li><a href="https://www.jotform.com/form/231287552368463">Contact</a></li> 
-              <li><a href="https://shamser.info.np/lauro_media/project.html">Our projects</a></li>
-              <li><a href="https://shamser.info.np/dimjanschool/download document.html">download</a></li>
-              <li><a href="https://bit.ly/m/Teacher-Kosh-Lalbandi">Lalbandi Teacher Kosh</a></li>
-              <li><a href="Service_Site/index.html">Service_Site</a></li>
-              <li><a href='student_support.html'>student_support</a></li>
-              <li><a href="https://shamser-tech.blogspot.com/">Computer Blog</a></li>
-              <li><a href="https://lauro-media.blogspot.com/">Blog</a></li>
-              <li><a href="https://shamser.info.np/Folio/index.html#">PortFolio</a></li>
-            </ul>
-          </li>
-          
-          <li class="menu-has-children">
-            <a href="javascript:;">IEMIS</a>
-            <ul>
-              <li><a href="https://shamser.info.np/Integrated Exam Management Information System/IEMIS.v2.html" class="emis-login-link">LOGIN</a></li>
-              <li><a href="https://script.google.com/macros/s/AKfycbx6s5dmBRetAI_h9bf1TAKZTLYJE-RlZEToNnimNyeaXUF0qGrH_QOAHNLR4uhY3V09wA/exec" class="emis-register-link">Change Password</a></li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-</header>
-
-<!-- Comment Section -->
-<div class="comment-section">
-    <h3 class="section-title">
-        <i class="fas fa-comments"></i> टिप्पणीहरू 
-        <span class="badge bg-primary" id="commentCount">0</span>
-    </h3>
-    
-    <div class="comment-form">
-        <h5>आफ्नो टिप्पणी थप्नुहोस्</h5>
-        <form id="commentForm">
-            <div class="row">
-                <div class="col-md-6">
-                    <input type="text" id="commentName" class="form-control" placeholder="तपाईंको नाम *" required>
-                </div>
-                <div class="col-md-6">
-                    <input type="email" id="commentEmail" class="form-control" placeholder="तपाईंको इमेल (वैकल्पिक)">
-                </div>
-            </div>
-            <textarea id="commentContent" class="form-control mt-3" placeholder="तपाईंको टिप्पणी लेख्नुहोस्... *" required></textarea>
-            <button type="submit" class="btn btn-primary mt-2">
-                <i class="fas fa-paper-plane"></i> टिप्पणी पठाउनुहोस्
-            </button>
-        </form>
-    </div>
-    
-    <div id="commentsContainer">
-        <div class="no-comments">पहिलो टिप्पणी गर्नुहोस्!</div>
-    </div>
-</div>
-
-<!-- Add these scripts for Owl Carousel -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-
-<script>
-// Initialize Owl Carousel if jQuery is available
-if (typeof jQuery !== 'undefined') {
-    $(document).ready(function(){
-        $('.owl-carousel.flash-caresol').owlCarousel({
-            items: 1,
-            loop: true,
-            margin: 10,
-            autoplay: true,
-            autoplayTimeout: 4000,
-            autoplayHoverPause: true,
-            dots: false,
-            nav: false,
-            responsive:{
-                0:{
-                    items:1
-                },
-                600:{
-                    items:1
-                },
-                1000:{
-                    items:1
-                }
-            }
-        });
-    });
-}
-
-// Mobile menu toggle functionality
-document.addEventListener('DOMContentLoaded', function() {
-    const menuItems = document.querySelectorAll('.nav-menu > li > a');
-    
-    menuItems.forEach(item => {
-        item.addEventListener('click', function(e) {
-            if (window.innerWidth <= 768) {
-                e.preventDefault();
-                const submenu = this.nextElementSibling;
-                if (submenu && submenu.tagName === 'UL') {
-                    submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
-                }
-            }
-        });
-    });
-});
-</script>
     <!-- Custom CSS -->
     <style>
         :root {
@@ -696,6 +60,24 @@ document.addEventListener('DOMContentLoaded', function() {
         
         .main-nav .navbar-nav .nav-link:hover {
             background-color: rgba(255,255,255,0.1);
+        }
+        
+        .dropdown-menu {
+            background-color: var(--primary-color);
+        }
+        
+        .dropdown-item {
+            color: white;
+        }
+        
+        .dropdown-item:hover {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .dropdown-menu .dropdown-menu {
+            margin-left: 100%;
+            margin-top: -40px;
         }
         
         .hero-section {
@@ -877,6 +259,48 @@ document.addEventListener('DOMContentLoaded', function() {
             font-style: italic;
         }
         
+        .comment-section {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        
+        .comment {
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+        }
+        
+        .comment:last-child {
+            border-bottom: none;
+        }
+        
+        .comment-author {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .comment-date {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+        
+        .comment-form {
+            margin-top: 20px;
+        }
+        
+        .flash-news {
+            background-color: #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .flash-news .news-tag {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
         @media (max-width: 768px) {
             .hero-section {
                 padding: 30px 0;
@@ -888,6 +312,11 @@ document.addEventListener('DOMContentLoaded', function() {
             
             .carousel-item img {
                 height: 250px;
+            }
+            
+            .dropdown-menu .dropdown-menu {
+                margin-left: 0;
+                margin-top: 0;
             }
         }
     </style>
@@ -969,56 +398,168 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         </div>
     </div>
-    
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark main-nav">
+
+    <!-- Flash News Section -->
+    <section id="flash" class="wow fadeInUp">
         <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="mainNavbar">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link" href="https://shamser.info.np/"><i class="fas fa-home"></i> गृहपृष्ठ</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                            शिक्षक सामग्री
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">शिक्षक निर्देशिका</a></li>
-                            <li><a class="dropdown-item" href="#">पाठ्यपुस्तक</a></li>
-                            <li><a class="dropdown-item" href="#">शिक्षण सामग्री</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                            परीक्षा प्रणाली
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/IEMIS.v2.html">IEMIS लगइन</a></li>
-                            <li><a class="dropdown-item" href="#">नतिजा प्रकाशन</a></li>
-                            <li><a class="dropdown-item" href="#">प्रश्नपत्र</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                            कानून र नीति
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">शिक्षा ऐन</a></li>
-                            <li><a class="dropdown-item" href="#">नियमावली</a></li>
-                            <li><a class="dropdown-item" href="#">पाठ्यक्रम</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="https://shamser.info.np/Home/About.html">बारेमा</a></li>
-                    <li class="nav-item"><a class="nav-link" href="https://shamser.info.np/profile/connect%20with%20social%20media.html">सम्पर्क</a></li>
-                </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="खोज्नुहोस्...">
-                    <button class="btn btn-outline-light" type="submit">खोज</button>
-                </form>
+            <div class="row flash-news">
+                <div class="col-sm-12 col-md-2 col-lg-1 news-tag">Highlight:</div>
+                <div class="col-sm-12 col-md-10 col-lg-10 news">
+                    <div class="owl-carousel flash-carousel">
+                        <div><a href="https://shamser.info.np/Service_Site/index.html">lauro media/shamser.info.np बाट उपलब्ध हुने सेवा सुविधा प्राप्त गरी फाइदा लिन अनुरोध</a></div>
+                        <div><a href="#">एसईई २०८१ को नतिजा सार्वजनिक भएको छ</a></div>
+                        <div><a href="#">शिक्षक दरबन्दी मिलानको लागि कार्यदल गठन गरिँदै</a></div>
+                    </div>
+                </div>
             </div>
         </div>
-    </nav>
+    </section>
+    
+    <!-- Navigation Menu -->
+    <header id="header">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-dark main-nav">
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="https://shamser.info.np/"><i class="fa fa-home fa-lg"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://shamser.info.np/Home/About.html">About</a>
+                            </li>
+                            
+                            <!-- Our Services Dropdown -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                    Our Services
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="https://shamser.info.np/Home/Get free service.html">Free Service</a></li>
+                                    <li><a class="dropdown-item" href="https://shamser.info.np/Entry_Form/our_service.html">Payable Service</a></li>
+                                </ul>
+                            </li>
+                            
+                            <!-- Teacher-guides Dropdown -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                    Teacher-guides
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <!-- Grade 1 -->
+                                    <li class="dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="#">Grade-1</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="http://moecdc.gov.np/storage/gallery/1704094092.pdf">Nepali</a></li>
+                                            <li><a class="dropdown-item" href="http://moecdc.gov.np/storage/gallery/1672217211.pdf">English</a></li>
+                                            <li><a class="dropdown-item" href="http://moecdc.gov.np/storage/gallery/1672217481.pdf">Maths</a></li>
+                                            <li><a class="dropdown-item" href="http://moecdc.gov.np/storage/gallery/1672217425.pdf">Serofero</a></li>
+                                        </ul>
+                                    </li>
+                                    
+                                    <!-- Grade 2 -->
+                                    <li class="dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="#">Grade-2</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="http://moecdc.gov.np/storage/gallery/1672813233.pdf">Nepali</a></li>
+                                            <li><a class="dropdown-item" href="http://moecdc.gov.np/storage/gallery/1672217645.pdf">English</a></li>
+                                            <li><a class="dropdown-item" href="http://moecdc.gov.np/storage/gallery/1686566355.pdf">Maths</a></li>
+                                            <li><a class="dropdown-item" href="http://moecdc.gov.np/storage/gallery/1672218837.pdf">Serofero</a></li>
+                                        </ul>
+                                    </li>
+                                    
+                                    <!-- Grade 3 -->
+                                    <li class="dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="#">Grade-3</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="http://moecdc.gov.np/storage/gallery/1672223512.pdf">Nepali</a></li>
+                                            <li><a class="dropdown-item" href="http://moecdc.gov.np/storage/gallery/1672223512.pdf">English</a></li>
+                                            <li><a class="dropdown-item" href="http://moecdc.gov.np/storage/gallery/1686566541.pdf">Maths</a></li>
+                                            <li><a class="dropdown-item" href="http://moecdc.gov.np/storage/gallery/1672219097.pdf">Serofero</a></li>
+                                        </ul>
+                                    </li>
+                                    
+                                    <!-- More grades would continue here -->
+                                    <li><a class="dropdown-item" href="#">View All Guides</a></li>
+                                </ul>
+                            </li>
+                            
+                            <!-- Text book Dropdown -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                    Text book
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="#">Class 6</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="https://shamserinfo.blogspot.com/2024/04/lesson-1-fundamental-knowledge-of.html">Computer</a></li>
+                                            <li><a class="dropdown-item" href="https://moecdc.gov.np/storage/gallery/1672799804.pdf">English</a></li>
+                                            <li><a class="dropdown-item" href="https://moecdc.gov.np/storage/gallery/1672799879.pdf">Maths</a></li>
+                                            <li><a class="dropdown-item" href="https://moecdc.gov.np/storage/gallery/1672799965.pdf">Science</a></li>
+                                        </ul>
+                                    </li>
+                                    
+                                    <li class="dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="#">Class 7</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="https://online.anyflip.com/hhfss/optj/mobile/index.html">कम्प्युटर शिक्षा कक्षा ७ (नेपाली माध्यम)</a></li>
+                                            <li><a class="dropdown-item" href="https://moecdc.gov.np/storage/gallery/1672800575.pdf">Nepali</a></li>
+                                            <li><a class="dropdown-item" href="https://moecdc.gov.np/storage/gallery/1672800534.pdf">English</a></li>
+                                            <li><a class="dropdown-item" href="https://moecdc.gov.np/storage/gallery/1672800575.pdf">Maths</a></li>
+                                            <li><a class="dropdown-item" href="https://moecdc.gov.np/storage/gallery/1684481476.pdf">Science</a></li>
+                                        </ul>
+                                    </li>
+                                    
+                                    <!-- More classes would continue here -->
+                                    <li><a class="dropdown-item" href="#">View All Textbooks</a></li>
+                                </ul>
+                            </li>
+                            
+                            <!-- Tech.Support Dropdown -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                    Tech.Support
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="#">Computer Knowledge</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="https://shamser.info.np/Computer Knowledge/Computer Knowledge Quize.html">Computer Science Quiz</a></li>
+                                            <li><a class="dropdown-item" href="https://shamser.info.np/Computer Knowledge/History of Computer.html">History of Computer</a></li>
+                                            <li><a class="dropdown-item" href="https://shamser.info.np/Computer Knowledge/Types of Computer.html">Types of Computer</a></li>
+                                        </ul>
+                                    </li>
+                                    
+                                    <li class="dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="#">EMIS</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="https://youtu.be/NVl4Mb8A68A">Video</a></li>
+                                            <li><a class="dropdown-item" href="#">Notice</a></li>
+                                            <li><a class="dropdown-item" href="https://emis.cehrd.gov.np/">Website</a></li>
+                                        </ul>
+                                    </li>
+                                    
+                                    <!-- More tech support options would continue here -->
+                                </ul>
+                            </li>
+                            
+                            <!-- More navigation items would continue here -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://shamser.info.np/Home/About.html">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://shamser.info.np/profile/connect%20with%20social%20media.html">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
     
     <!-- Hero Section -->
     <div class="hero-section">
@@ -1067,41 +608,8 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         </div>
         
-        <!-- Advertisement Section -->
-        <div class="ad-section">
-            <marquee bgcolor=white behavior="alternate" direction="left">
-                <font size="2" color="red"> 
-                    <a href="https://www.youtube.com/watch?v=-tgB1bM-Mck">
-                        <img src="https://shamser.info.np/HomePage/img/brp.jpg" width="23" height="20" alt="img">
-                        २०८१ को लागि विद्यालय भर्ना अभियान सम्बन्धी प्रचार प्रसार गर्न 9844087012 >>>visit : https://Shamser.info.np/
-                    </a>
-                </font>
-            </marquee>
-            
-            <h1> बिज्ञापन खण्ड </h1> 
-            <img src="https://shamser.info.np/HomePage/gif/cantact-us.gif" width="100%" height="100"/>
-            
-            <div class="ad-marquee">
-                <marquee direction="left">
-                    <img src="https://shamser.info.np/HomePage/gif/ad.gif" width="auto" height="200"> 
-                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj0Doh44-KgCoWgeylnyu86LEoS8kLFRYrnCNDGU5Xm_hSNNzmTzV3pFktIY802cIwc0IGPcEk0rsa8VUG3IEkeUtlRd5Y6qmje_aGhYG5NKGGnK66JlcI7544QBv6LIFtL_DLnlM4TXM76MuZHLci30wpVRs6SL-tC3JRqC5vI5T_wmahRnIMF1Kfr/w483-h291/ezgif.com-video-to-gif.gif" width="auto" height="200">
-                    <img src="https://shamser.info.np/HomePage/gif/NAVASHISHU MONTESSORI.gif" width="auto" height="200">
-                    <img src="https://shamser.info.np/HomePage/img/Dashain5.png" width="auto" height="200">
-                    <img src="https://shamser.info.np/HomePage/img/Dashain4.png" width="auto" height="200" alt="notice">
-                    <img src="https://shamser.info.np/HomePage/img/Dashain2.png" width="auto" height="200"> 
-                    <img src="https://shamser.info.np/HomePage/img/Dashain.png" width="auto" height="200">
-                </marquee>
-            </div>
-            
-            <marquee bgcolor=white direction=right>
-                <font size=2 color=red>
-                    <a href="#">यस वेभसाईटमार्फत शुभकामना सन्देश प्रेषित गर्न 9844087012 मा सम्पर्क गर्नुहोला ।</a>
-                </font>
-            </marquee>
-        </div>
-        
+        <!-- Main Content Area -->
         <div class="row">
-            <!-- Main Content Area -->
             <div class="col-lg-8">
                 <!-- Featured News -->
                 <div class="card mb-4">
@@ -1142,175 +650,42 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
                 
-                <!-- Inspirational Thoughts -->
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <h3 class="mb-0"><i class="fas fa-quote-left"></i> प्रेरक बिचारहरु (Inspirational Thoughts)</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="inspirational-quote">
-                            <p>"शिक्षा यस्तो शक्तिशाली हतियार हो, जसको प्रयोगले संसार बदल्न सक्छौ ।"</p>
-                            <footer class="blockquote-footer">नेल्सन मन्डेला</footer>
+                <!-- Comment Section -->
+                <div class="comment-section">
+                    <h3 class="section-title"><i class="fas fa-comments"></i> टिप्पणीहरू</h3>
+                    
+                    <div id="commentsContainer">
+                        <!-- Comments will be loaded here -->
+                        <div class="comment">
+                            <div class="comment-author">राम बहादुर</div>
+                            <div class="comment-date">२ दिन अघि</div>
+                            <div class="comment-text">यो वेबसाइटले शिक्षकहरूलाई धेरै मद्दत गरेको छ। धन्यवाद!</div>
                         </div>
-                        <div class="inspirational-quote">
-                            <p>"शिक्षा भनेको भविष्यको लागि पासपोर्ट हो । आज राम्रो गर्नेहरुको नै भविष्य राम्रो हुन्छ ।"</p>
-                            <footer class="blockquote-footer">माल्कोम एक्स</footer>
-                        </div>
-                        <div class="inspirational-quote">
-                            <p>"एक असल शिक्षक मैनबत्ती जस्तै हो - यसले अरूको लागि बाटो उज्यालो गर्न आफैलाई खपत गर्दछ।"</p>
-                            <footer class="blockquote-footer">मुस्तफा केमल अतातुर्क</footer>
-                        </div>
-                        <div class="text-center">
-                            <button class="btn btn-outline-primary" id="loadMoreQuotes">थप प्रेरक बिचारहरु</button>
+                        
+                        <div class="comment">
+                            <div class="comment-author">सीता कुमारी</div>
+                            <div class="comment-date">५ दिन अघि</div>
+                            <div class="comment-text">एसईई को नतिजा यहाँबाट धेरै छिटो पाइयो। राम्रो सेवा।</div>
                         </div>
                     </div>
-                </div>
-                
-                <!-- Student Testimonials -->
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <h3 class="mb-0"><i class="fas fa-user-graduate"></i> विद्यार्थीहरूको समीक्षा</h3>
-                    </div>
-                    <div class="card-body">
-                        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <div class="testimonial-card">
-                                        <p>"श्री डिम जनता माद्यमिक विद्यालयमा हामीलाई पढाउनु हुने शिक्षक शमसेर पुलामीसरको प्रविधिमैत्री पढाउने तरीकाले म ज्यादै प्रभावित र उत्साहित भएको छु ।"</p>
-                                        <footer class="blockquote-footer">सनीमाया थोकर, कक्षा ११</footer>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="testimonial-card">
-                                        <p>"I can positively say that It has helped me develop a positive attitude towards my studies and discover more about myself. We are excited."</p>
-                                        <footer class="blockquote-footer">Gagan Budhathoki, Class 9</footer>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="testimonial-card">
-                                        <p>"School is my Second House, Really i feel Teachers of this school like Father, Mother, friends, Brother's & sisters. So i feel like own House in Shree Dim janta Sec.School."</p>
-                                        <footer class="blockquote-footer">Shyam Hari B.K., Class 9</footer>
-                                    </div>
-                                </div>
+                    
+                    <div class="comment-form">
+                        <h5>आफ्नो टिप्पणी थप्नुहोस्</h5>
+                        <form id="commentForm">
+                            <div class="mb-3">
+                                <label for="commentName" class="form-label">नाम</label>
+                                <input type="text" class="form-control" id="commentName" required>
                             </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Photo Gallery Carousel -->
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <h3 class="mb-0"><i class="fas fa-images"></i> विद्यालयका गतिविधिहरू</h3>
-                    </div>
-                    <div class="card-body">
-                        <div id="galleryCarousel" class="carousel slide" data-bs-ride="carousel">
-                            <div class="carousel-indicators">
-                                <button type="button" data-bs-target="#galleryCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                <button type="button" data-bs-target="#galleryCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                <button type="button" data-bs-target="#galleryCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            <div class="mb-3">
+                                <label for="commentEmail" class="form-label">इमेल (वैकल्पिक)</label>
+                                <input type="email" class="form-control" id="commentEmail">
                             </div>
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhIlQY-Hkl7gEX2dSAUaQdRKarICWRQ8OsG0LceRSb8uP9NNbPA5I3qWyPrHoRGkDBmCnJ50wktPgc77VdeKLN8gGFvk3RtYfRmrXX6Pi4qfb8-70KUG137vSncSN68BKQixabuSuukzGtbCY7kGwsaVv2GpPBue4ju4cFMJh9StIsxl7Mz7uF4ShWMOtg/s16000/IMG20220420130802.jpg" class="d-block w-100" alt="परीक्षा">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5>वार्षिक परीक्षा</h5>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgU5nRAIx4tbmOCZ1WgufP-fX-E8Nu-O3m5MkcdHsgAOG-VE4B7amO2AocKRIPJc0j2ahWIy6TJNnfB-ulU6ATi1fjD99PvhiyjrN6mUWTG-4yHrv6-obOzy0ER517uZNwESPtmkJcQTGr5VzoF81nQ7wooVqJse_mCckDL26u-h925lzyBdeI1PemASKg/s16000/IMG20220923081259.jpg" class="d-block w-100" alt="एनएमबी बैंकबाट विद्यार्थीलाई प्रशिक्षण">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5>एनएमबी बैंकबाट प्रशिक्षण</h5>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjMfs_2WZfDuDMbFRorDJU15QW_yK5K42UItjr6yUwTw_aOAYD3yo8DVgh147aKSSsRs0Z01BfqpoZwbtYlzJQsDfSzwBQ8NFAu9haU75OcZoww7tZpWFDQMDgTY9M8qvewwma9-bBw1qEY8SdNTPF_3P4xxkRrJqWTrTgqHt3PPgeC8dwnU1sTIXO7ZtQ/s16000/2023-02-25%20(5).jpg" class="d-block w-100" alt="हलेसी मन्दिर भ्रमण">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5>हलेसी मन्दिर भ्रमण</h5>
-                                    </div>
-                                </div>
+                            <div class="mb-3">
+                                <label for="commentText" class="form-label">टिप्पणी</label>
+                                <textarea class="form-control" id="commentText" rows="3" required></textarea>
                             </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#galleryCarousel" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#galleryCarousel" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Latest News -->
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <h3 class="mb-0"><i class="fas fa-list-alt"></i> ताजा खबरहरू</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="news-item">
-                            <h5><a href="#" class="read-more">एसईई रिटोटलिङको लागि अनलाइन आवेदन दिने तरिका</a></h5>
-                            <p class="text-muted"><small><i class="far fa-clock"></i> <span class="time-ago" data-time="2024-06-20T10:30:00"></span></small></p>
-                        </div>
-                        <div class="news-item">
-                            <h5><a href="#" class="read-more">शिक्षक सरुवाको प्रक्रिया अघि बढ्दै</a></h5>
-                            <p class="text-muted"><small><i class="far fa-clock"></i> <span class="time-ago" data-time="2024-06-19T14:45:00"></span></small></p>
-                        </div>
-                        <div class="news-item">
-                            <h5><a href="#" class="read-more">२०८१ को एसईई नतिजा सार्वजनिक</a></h5>
-                            <p class="text-muted"><small><i class="far fa-clock"></i> <span class="time-ago" data-time="2024-06-18T09:15:00"></span></small></p>
-                        </div>
-                        <div class="text-center mt-3">
-                            <a href="#" class="btn btn-outline-primary">थप समाचार हेर्नुहोस्</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Educational Resources -->
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <h3 class="mb-0"><i class="fas fa-book"></i> शैक्षिक स्रोतहरू</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-4 mb-3">
-                                <div class="card h-100 text-center">
-                                    <div class="card-body">
-                                        <i class="fas fa-chalkboard-teacher fa-3x text-primary mb-3"></i>
-                                        <h5 class="card-title">शिक्षक निर्देशिका</h5>
-                                        <p class="card-text">कक्षा १-१२ सम्मका शिक्षक निर्देशिकाहरू</p>
-                                        <a href="#" class="btn btn-sm btn-outline-primary read-more">अध्ययन गर्नुहोस्</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <div class="card h-100 text-center">
-                                    <div class="card-body">
-                                        <i class="fas fa-book-open fa-3x text-success mb-3"></i>
-                                        <h5 class="card-title">पाठ्यपुस्तक</h5>
-                                        <p class="card-text">सबै कक्षाका पाठ्यपुस्तकहरू डाउनलोड गर्नुहोस्</p>
-                                        <a href="#" class="btn btn-sm btn-outline-success read-more">डाउनलोड</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <div class="card h-100 text-center">
-                                    <div class="card-body">
-                                        <i class="fas fa-file-alt fa-3x text-warning mb-3"></i>
-                                        <h5 class="card-title">प्रश्नपत्र</h5>
-                                        <p class="card-text">विगतका परीक्षाका प्रश्नपत्रहरू</p>
-                                        <a href="#" class="btn btn-sm btn-outline-warning read-more">अध्ययन गर्नुहोस्</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            <button type="submit" class="btn btn-primary">टिप्पणी पेश गर्नुहोस्</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -1365,90 +740,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     <h5><i class="fas fa-calendar"></i> नेपाली पात्रो</h5>
                     <iframe src="https://www.hamropatro.com/widgets/calender-medium.php" frameborder="0" scrolling="no" marginwidth="0" marginheight="0" style="border:none; overflow:hidden; width:100%; height:385px;" allowtransparency="true"></iframe>
                 </div>
-                
-                <div class="widget-container">
-                    <h5><i class="fas fa-star"></i> राशिफल</h5>
-                    <iframe src="https://www.ashesh.com.np/rashifal/widget.php" height="300" width="100%"></iframe>
-                </div>
-                
-                <!-- Teacher Segment -->
-                <div class="teacher-segment">
-                    <h5 class="text-center"><i class="fas fa-chalkboard-teacher"></i> शिक्षक कर्मचारी Segment</h5>
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <a href="#" class="read-more">शिक्षक सेवा आयोग प्रश्नोत्तरी</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#" class="read-more">शिक्षक सरुवा सम्बन्धी जानकारी</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#" class="read-more">दरबन्दी मिलान अपडेट</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#" class="read-more">शिक्षक प्रशिक्षण सामग्री</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#" class="read-more">कर्मचारी संचय कोष जानकारी</a>
-                        </li>
-                    </ul>
-                </div>
-                
-                <!-- Our Team -->
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <h3 class="mb-0"><i class="fas fa-users"></i> हाम्रो टिम</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="team-member">
-                            <img src="https://shamser.info.np/HomePage/img/brp.jpg" alt="शमसेर पुलामी">
-                            <h5>शमसेर पुलामी</h5>
-                            <p class="text-muted">वेब निर्माता</p>
-                            <p>१५-१६ वर्षसम्म शिक्षण क्षेत्रमा कार्यरत, प्रविधिमैत्री शिक्षणमा विशेषज्ञ</p>
-                        </div>
-                        <div class="team-member">
-                            <img src="https://shamser.info.np/HomePage/team_img/team2.png" alt="Rosie Meg">
-                            <h5>Rosie Meg</h5>
-                            <p class="text-muted">सल्लाहकार</p>
-                            <p>शैक्षिक सामग्री र प्रविधिको समन्वयमा विशेषज्ञ</p>
-                        </div>
-                        <div class="text-center">
-                            <a href="#" class="btn btn-outline-primary btn-sm">थप टिम सदस्यहरू</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Subscription -->
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <h3 class="mb-0"><i class="fas fa-envelope"></i> सदस्यता लिनुहोस्</h3>
-                    </div>
-                    <div class="card-body">
-                        <p>ताजा अपडेट र समाचारहरू इमेलमा प्राप्त गर्नुहोस्</p>
-                        <form id="subscriptionForm">
-                            <div class="mb-3">
-                                <input type="email" class="form-control" id="emailInput" placeholder="तपाईंको इमेल ठेगाना" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100">सदस्यता लिनुहोस्</button>
-                        </form>
-                    </div>
-                </div>
-                
-                <!-- Facebook Page -->
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <h3 class="mb-0"><i class="fab fa-facebook"></i> फेसबुक पृष्ठ</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="text-center p-3 bg-light">
-                            <p>हाम्रो फेसबुक पृष्ठमा जडान गर्नुहोस्</p>
-                            <a href="https://www.facebook.com/profile.php?id=61560080980728" class="btn btn-primary">पृष्ठ हेर्नुहोस्</a>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
     
+     
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -1641,4 +937,5 @@ document.addEventListener('DOMContentLoaded', function() {
     </script>
 </body>
 </html>
+
 
