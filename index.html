@@ -237,6 +237,106 @@
             font-style: italic;
         }
         
+        /* New Navigation Styles */
+        #header {
+            background: var(--primary-color);
+            padding: 0;
+            height: 70px;
+            z-index: 997;
+            transition: all 0.5s;
+        }
+        
+        #logo {
+            float: left;
+            padding: 10px 0;
+        }
+        
+        #nav-menu-container {
+            float: right;
+            margin: 0;
+        }
+        
+        .nav-menu, .nav-menu * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        .nav-menu ul {
+            position: absolute;
+            display: none;
+            top: 100%;
+            left: 0;
+            z-index: 99;
+            background: #fff;
+            box-shadow: 0 0 30px rgba(127, 137, 161, 0.25);
+        }
+        
+        .nav-menu li {
+            position: relative;
+            white-space: nowrap;
+        }
+        
+        .nav-menu > li {
+            float: left;
+        }
+        
+        .nav-menu li:hover > ul,
+        .nav-menu li.sfHover > ul {
+            display: block;
+        }
+        
+        .nav-menu a {
+            padding: 18px;
+            text-decoration: none;
+            display: block;
+            color: white;
+            font-weight: 500;
+            font-size: 14px;
+            text-transform: uppercase;
+            outline: none;
+        }
+        
+        .nav-menu a:hover, .nav-menu .menu-active > a, .nav-menu li:hover > a {
+            color: var(--accent-color);
+        }
+        
+        .nav-menu ul {
+            margin: 0;
+            padding: 10px 0;
+            background: var(--primary-color);
+            border-radius: 0 0 4px 4px;
+        }
+        
+        .nav-menu ul li {
+            min-width: 180px;
+        }
+        
+        .nav-menu ul a {
+            padding: 10px 20px;
+            color: white;
+            font-size: 13px;
+            text-transform: none;
+        }
+        
+        .nav-menu ul a:hover {
+            color: var(--accent-color);
+        }
+        
+        .nav-menu ul ul {
+            top: 0;
+            left: 100%;
+        }
+        
+        /* Date/Time Display */
+        .datetime-display {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 5px 0;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        
         @media (max-width: 768px) {
             .hero-section {
                 padding: 30px 0;
@@ -248,6 +348,10 @@
             
             .carousel-item img {
                 height: 250px;
+            }
+            
+            #nav-menu-container {
+                display: none;
             }
         }
     </style>
@@ -286,6 +390,20 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बन्द गर्नुहोस्</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Date/Time Display -->
+    <div class="datetime-display">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <span id="nepali-date-time"></span>
+                </div>
+                <div class="col-md-6">
+                    <span id="english-date-time"></span>
                 </div>
             </div>
         </div>
@@ -330,55 +448,134 @@
         </div>
     </div>
     
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark main-nav">
+    <!-- New Navigation Menu -->
+    <header id="header">
         <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="mainNavbar">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link" href="https://shamser.info.np/"><i class="fas fa-home"></i> गृहपृष्ठ</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                            शिक्षक सामग्री
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">शिक्षक निर्देशिका</a></li>
-                            <li><a class="dropdown-item" href="#">पाठ्यपुस्तक</a></li>
-                            <li><a class="dropdown-item" href="#">शिक्षण सामग्री</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                            परीक्षा प्रणाली
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/IEMIS.v2.html">IEMIS लगइन</a></li>
-                            <li><a class="dropdown-item" href="#">नतिजा प्रकाशन</a></li>
-                            <li><a class="dropdown-item" href="#">प्रश्नपत्र</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                            कानून र नीति
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">शिक्षा ऐन</a></li>
-                            <li><a class="dropdown-item" href="#">नियमावली</a></li>
-                            <li><a class="dropdown-item" href="#">पाठ्यक्रम</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="https://shamser.info.np/Home/About.html">बारेमा</a></li>
-                    <li class="nav-item"><a class="nav-link" href="https://shamser.info.np/profile/connect%20with%20social%20media.html">सम्पर्क</a></li>
-                </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="खोज्नुहोस्...">
-                    <button class="btn btn-outline-light" type="submit">खोज</button>
-                </form>
+            <div id="logo" class="pull-left">
+                <a href="https://shamser.info.np/"><i class="fas fa-graduation-cap"></i> shamser.info.np</a>
             </div>
+            <nav id="nav-menu-container">
+                <ul class="nav-menu">
+                    <li class="menu-active"><a href="https://shamser.info.np/"><i class="fa fa-home fa-lg"></i></a></li>
+                    <li class="menu-has-children"><a href="https://shamser.info.np/Home/About.html">About</a></li>
+                    <li class="menu-has-children"><a href="javascript:;">Our Services</a>
+                        <ul>
+                            <li><a href="https://shamser.info.np/Home/Get free service.html">Free Service</a></li> 
+                            <li><a href="https://shamser.info.np/Entry_Form/our_service.html">Payable Service</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-has-children"><a href="javascript:;">Teacher-guides</a>
+                        <ul>   
+                            <li class="menu-has-children"><a href="javascript:;">Grade-1</a>
+                                <ul>
+                                    <li><a href="http://moecdc.gov.np/storage/gallery/1704094092.pdf">Nepali</a></li>
+                                    <li><a href="http://moecdc.gov.np/storage/gallery/1672217211.pdf">English</a></li>
+                                    <li><a href="http://moecdc.gov.np/storage/gallery/1672217481.pdf">Maths</a></li>
+                                    <li><a href="http://moecdc.gov.np/storage/gallery/1672217425.pdf">Serofero</a></li>
+                                </ul>
+                            </li>
+                            <li class="menu-has-children"><a href="javascript:;">Grade-2</a>
+                                <ul>
+                                    <li><a href="http://moecdc.gov.np/storage/gallery/1672813233.pdf">Nepali</a></li>
+                                    <li><a href="http://moecdc.gov.np/storage/gallery/1672217645.pdf">English</a></li>
+                                    <li><a href="http://moecdc.gov.np/storage/gallery/1686566355.pdf">Maths</a></li>
+                                    <li><a href="http://moecdc.gov.np/storage/gallery/1672218837.pdf">Serofero</a></li>
+                                </ul>
+                            </li>
+                            <li class="menu-has-children"><a href="javascript:;">Grade-3</a>
+                                <ul>
+                                    <li><a href="http://moecdc.gov.np/storage/gallery/1672223512.pdf">Nepali</a></li>
+                                    <li><a href="http://moecdc.gov.np/storage/gallery/1672223512.pdf">English</a></li>
+                                    <li><a href="http://moecdc.gov.np/storage/gallery/1686566541.pdf">Maths</a></li>
+                                    <li><a href="http://moecdc.gov.np/storage/gallery/1672219097.pdf">Serofero</a></li>
+                                </ul>
+                            </li>
+                            <li class="menu-has-children"><a href="javascript:;">Grade-4</a>
+                                <ul>
+                                    <li><a href="http://moecdc.gov.np/storage/gallery/1693983142.pdf">Nepali</a></li>
+                                    <li><a href="http://moecdc.gov.np/storage/gallery/1693880023.pdf">English</a></li>
+                                    <li><a href="https://moecdc.gov.np/storage/gallery/1698905900.pdf">Maths</a></li>
+                                    <li><a href="https://moecdc.gov.np/storage/gallery/1727852015.pdf">Science & Technology</a></li>
+                                    <li><a href="https://moecdc.gov.np/storage/gallery/1708585729.pdf">Social</a></li>
+                                    <li><a href="https://moecdc.gov.np/storage/gallery/1706786511.pdf">Health</a></li>
+                                </ul>
+                            </li>
+                            <li class="menu-has-children"><a href="javascript:;">Act & Rules</a>
+                                <ul>   
+                                    <li><a href="https://www.moljpa.gov.np/wp-content/uploads/2020/06/नेपालको-संविधान.pdf">संबिधान</a></li>
+                                    <li class="menu-has-children"><a href="javascript:;">एेन</a>
+                                        <ul>
+                                            <li><a href="https://hr.parliament.gov.np/uploads/attachments/kpkjoxrppjm1y2jt.pdf">शिक्षा ऐन २०२८</a></li>
+                                            <li><a href="https://mofaga.gov.np/news-notice/1697">स्थानीय सरकार संचालन ०७४ ऐन</a></li>
+                                            <li><a href="https://shamser.info.np/dimjanschool/download/Lalbandidownload/Edu Act Lal-075.pdf">लालबन्दी नपाको शिक्षा ऐन, २०७५</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-has-children"><a href="javascript:;">नियमावली</a>
+                                        <ul>
+                                            <li><a href="https://aathraitribenimun.gov.np/sites/default/files/शिक्षा%20नियमावली%2C%20२०७९.pdf">शिक्षा नियम २०५९</a></li>
+                                            <li><a href="https://shamser.info.np/dimjanschool/download/Lalbandidownload/sikchya-niyamwali.pdf">लालबन्दी नपाको शिक्षा नियमावली</a></li>
+                                            <li><a href="https://drive.google.com/file/d/1-XC00FkOUiDAXslpK4yA8qnuea3dnLK7/view?usp=sharing">प्रअ व्यवस्थापन कार्यबिधि २०७९</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-has-children"><a href="javascript:;">Policy/Curriculum</a>
+                                        <ul>
+                                            <li><a href="https://drive.google.com/file/d/1O8UgrFmwjsq8U8xZMBYW5zBBOGfvD8Ps/view?usp=sharing">विद्यालय शिक्षाको राष्ट्रिय पाठ्यक्रम प्रारूप, २०७६</a></li>
+                                            <li><a href="https://drive.google.com/file/d/1f1gw6IuElLeXwu_tcf5ww5coLZf6Fshv/view?usp=sharing">स्थानीय_पाठ्यक्रम_निर्माण_तथा_कार्यान्वयन_मार्गदर्शन,२०७६</a></li>
+                                            <li><a href="https://moecdc.gov.np/storage/gallery/1704953156.pdf">बालविकास शिक्षाको पाठ्यक्रम २०७७</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-has-children"><a href="javascript:;">Research</a>
+                                <ul>   
+                                    <li class="menu-has-children"><a href="javascript:;">Project work</a>
+                                        <ul> 
+                                            <li><a href="https://educationalresearchreport.blogspot.com/2024/08/blog-post_12.html">Project work Report</a></li>
+                                            <li><a href="https://shamser.info.np/TPD.html#">TPD Project work</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-has-children"><a href="javascript:;">Thesis</a>
+                                        <ul> 
+                                            <li><a href="https://docs.google.com/document/d/1Suzt5C7MACb08ce-vTZMJN0OsHoPQoMagzZVMBVfRcE/edit?usp=sharing">Thesis१</a></li>
+                                            <li><a href="https://drive.google.com/drive/folders/1K9w9Enl4RNICnNHx0ODAVYt7zhpcxvXW?usp=sharing">Seminar Paper</a></li>
+                                            <li><a href="https://lauro-media.blogspot.com/2024/08/proposal-for-thesis.html">Proposal</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-has-children"><a href="javascript:;">विद्यालय विकास / सुधार योजना</a>
+                                        <ul>
+                                            <li><a href="#">विद्यालय सुधार योजना SIP</a></li>
+                                            <li><a href="#">विद्यालय विकास प्रस्ताव SDP</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-has-children"><a href="javascript:;">Research Report</a>                    
+                                        <ul>
+                                            <li><a href="https://docs.google.com/document/d/1FRgmP3h4pxOeukbTaRElUdlZ6AtG8mMYxBaUPT-HeWw/edit?usp=sharing">Action Research</a></li>
+                                            <li><a href="#">School Report</a></li>
+                                            <li><a href="https://shamser.info.np/articles.html#">Article</a></li>
+                                            <li><a href="#">Case study</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-has-children"><a href="javascript:;">SitePages</a>
+                        <ul>
+                            <li><a href="https://www.jotform.com/form/231287552368463">Contact</a></li> 
+                            <li><a href="https://shamser.info.np/lauro_media/project.html">Our projects</a></li>
+                            <li><a href="https://shamser.info.np/dimjanschool/download document.html">download</a></li>
+                            <li><a href="https://bit.ly/m/Teacher-Kosh-Lalbandi">Lalbandi Teacher Kosh</a></li>
+                            <li><a href="Service_Site/index.html">Service_Site</a></li>
+                            <li><a href='student_support.html'>student_support</a></li>
+                            <li><a href="https://shamser-tech.blogspot.com/">Computer Blog</a></li>
+                            <li><a href="https://lauro-media.blogspot.com/">Blog</a></li>
+                            <li><a href="https://shamser.info.np/Folio/index.html#">PortFolio</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
         </div>
-    </nav>
+    </header>
     
     <!-- Hero Section -->
     <div class="hero-section">
@@ -863,8 +1060,45 @@
             var welcomeModal = new bootstrap.Modal(document.getElementById('welcomeModal'));
             welcomeModal.show();
             
-            // Update current date and time
+            // Update Nepali and English date and time
             function updateDateTime() {
+                var now = new Date();
+                
+                // English date and time
+                var englishOptions = { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: true 
+                };
+                document.getElementById('english-date-time').textContent = "English: " + now.toLocaleDateString('en-US', englishOptions);
+                
+                // Nepali date and time (simulated - in a real implementation, you would use a Nepali calendar library)
+                var nepaliMonths = ['बैशाख', 'जेठ', 'असार', 'श्रावण', 'भाद्र', 'आश्विन', 'कार्तिक', 'मंसिर', 'पौष', 'माघ', 'फागुन', 'चैत्र'];
+                var nepaliDays = ['आइतबार', 'सोमबार', 'मंगलबार', 'बुधबार', 'बिहिबार', 'शुक्रबार', 'शनिबार'];
+                
+                var day = nepaliDays[now.getDay()];
+                var date = now.getDate();
+                var month = nepaliMonths[now.getMonth()];
+                var year = now.getFullYear() - 57; // Convert to Bikram Sambat
+                
+                var hours = now.getHours();
+                var minutes = now.getMinutes();
+                var ampm = hours >= 12 ? 'बजे बिहान' : 'बजे दिउँसो';
+                hours = hours % 12;
+                hours = hours ? hours : 12; // 0 should be 12
+                minutes = minutes < 10 ? '0' + minutes : minutes;
+                
+                var nepaliDateTime = "नेपाली: " + day + ", " + date + " " + month + " " + year + ", " + hours + ":" + minutes + " " + ampm;
+                document.getElementById('nepali-date-time').textContent = nepaliDateTime;
+            }
+            updateDateTime();
+            setInterval(updateDateTime, 60000); // Update every minute
+            
+            // Update current date and time in footer
+            function updateFooterDateTime() {
                 var now = new Date();
                 var options = { 
                     year: 'numeric', 
@@ -876,8 +1110,8 @@
                 };
                 document.getElementById('currentDateTime').textContent = now.toLocaleDateString('ne-NP', options);
             }
-            updateDateTime();
-            setInterval(updateDateTime, 60000); // Update every minute
+            updateFooterDateTime();
+            setInterval(updateFooterDateTime, 60000); // Update every minute
             
             // Update time ago for news items
             function updateTimeAgo() {
@@ -1000,4 +1234,4 @@
         });
     </script>
 </body>
-</html> 
+</html>
