@@ -1644,10 +1644,13 @@ Grid </a>
             
 
             // Update Nepali and English date and time
+<script src="https://cdn.jsdelivr.net/npm/nepali-date@1.0.0/dist/nepaliDate.min.js"></script>
+
+<script>
 function updateDateTime() {
     var now = new Date();
     
-    // English date and time
+    // English date
     var englishOptions = { 
         year: 'numeric', 
         month: 'long', 
@@ -1658,19 +1661,19 @@ function updateDateTime() {
     };
     document.getElementById('english-date-time').textContent = "English: " + now.toLocaleDateString('en-US', englishOptions);
     
-    // Nepali date and time (approximation)
-    var nepaliMonths = ['बैशाख', 'जेठ', 'असार', 'श्रावण', 'भाद्र', 'आश्विन', 'कार्तिक', 'मंसिर', 'पौष', 'माघ', 'फागुन', 'चैत्र'];
-    var nepaliDays = ['आइतबार', 'सोमबार', 'मंगलबार', 'बुधबार', 'बिहिबार', 'शुक्रबार', 'शनिबार'];
+    // Accurate Nepali date
+    var nepaliDate = new NepaliDate(now);
+    var nepaliDateTime = "नेपाली: " + 
+        nepaliDate.getDayName() + ", " +
+        nepaliDate.getDate() + " " +
+        nepaliDate.getMonthName() + " " +
+        nepaliDate.getYear() + ", " +
+        formatNepaliTime(nepaliDate.getHours(), nepaliDate.getMinutes());
     
-    var day = nepaliDays[now.getDay()];
-    var date = now.getDate();
-    var month = nepaliMonths[now.getMonth()];
-    var year = now.getFullYear() + 57; // Convert to Bikram Sambat (AD + 57 = BS)
-    
-    var hours = now.getHours();
-    var minutes = now.getMinutes();
-    
-    // Better time period handling for Nepali
+    document.getElementById('nepali-date-time').textContent = nepaliDateTime;
+}
+
+function formatNepaliTime(hours, minutes) {
     var period = '';
     if (hours < 12) {
         period = 'बिहान';
@@ -1680,33 +1683,13 @@ function updateDateTime() {
         period = 'बेलुका';
     }
     
-    // Convert to 12-hour format
     hours = hours % 12;
-    hours = hours ? hours : 12; // 0 should be 12
+    hours = hours ? hours : 12;
     minutes = minutes < 10 ? '0' + minutes : minutes;
     
-    var nepaliDateTime = "नेपाली: " + day + ", " + date + " " + month + " " + year + ", " + hours + ":" + minutes + " " + period;
-    document.getElementById('nepali-date-time').textContent = nepaliDateTime;
+    return hours + ":" + minutes + " " + period;
 }
-
-// Initialize and update every minute
-updateDateTime();
-setInterval(updateDateTime, 60000);
-            // Update current date and time in footer
-            function updateFooterDateTime() {
-                var now = new Date();
-                var options = { 
-                    year: 'numeric', 
-                    month: 'long', 
-                    day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    hour12: true 
-                };
-                document.getElementById('currentDateTime').textContent = now.toLocaleDateString('ne-NP', options);
-            }
-            updateFooterDateTime();
-            setInterval(updateFooterDateTime, 60000); // Update every minute
+</script> // Update every minute
             
             // Update time ago for news items
             function updateTimeAgo() {
@@ -1926,6 +1909,7 @@ setInterval(updateDateTime, 60000);
     </script>
 </body>
 </html>
+
 
 
 
