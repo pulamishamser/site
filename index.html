@@ -11,10 +11,6 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Owl Carousel -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-    
     <!-- Custom CSS -->
     <style>
         :root {
@@ -29,10 +25,40 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #333;
             line-height: 1.6;
+            padding-bottom: 70px; /* Space for bottom navigation */
         }
         
         .nepali-font {
             font-family: 'Preeti', 'Mangal', Arial, sans-serif;
+        }
+        
+        /* Dual Date Display */
+        .dual-date-display {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 8px 0;
+            font-size: 0.9rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .dual-date-display .date-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .dual-date-display .date-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .dual-date-display .date-separator {
+            color: var(--accent-color);
+            font-weight: bold;
         }
         
         .header-top {
@@ -192,9 +218,17 @@
             margin-bottom: 20px;
         }
         
+        .stats-counter img {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 10px;
+            filter: brightness(0) invert(1);
+        }
+        
         .stats-counter .counter {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: bold;
+            margin: 5px 0;
         }
         
         .testimonial-card {
@@ -301,6 +335,186 @@
             color: var(--primary-color);
         }
         
+        /* Widget Styles */
+        #widget-container {
+            display: none;
+            position: relative;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        #widget-container .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        #widget-container .close-btn:hover {
+            color: #000;
+        }
+        
+        .widget {
+            display: none;
+        }
+        
+        .widget.active {
+            display: block;
+        }
+        
+        .widget h3 {
+            color: var(--primary-color);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--primary-color);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 1000;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .bottom-nav a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.8rem;
+        }
+        
+        .bottom-nav a i {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .bottom-nav a:hover {
+            color: var(--accent-color);
+        }
+        
+        /* Unicode Converter Styles */
+        .unicode-converter textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            resize: vertical;
+        }
+        
+        .unicode-converter button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+        
+        .unicode-converter button:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .unicode-output {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            min-height: 50px;
+            margin-top: 10px;
+            border: 1px dashed #ddd;
+        }
+        
+        .external-links {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .external-links a {
+            display: inline-block;
+            background-color: var(--light-color);
+            color: var(--primary-color);
+            padding: 5px 10px;
+            border-radius: 4px;
+            margin-right: 10px;
+            margin-bottom: 5px;
+            text-decoration: none;
+        }
+        
+        .external-links a:hover {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        /* Radio Player Styles */
+        .radio-stations {
+            margin-top: 10px;
+        }
+        
+        .radio-stations button {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        .radio-stations button:hover {
+            background-color: #e67e22;
+        }
+        
+        /* Number Converter Styles */
+        .number-converter input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        
+        .number-converter button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        
+        .number-converter button:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .number-result {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            min-height: 50px;
+            margin-top: 10px;
+            border: 1px dashed #ddd;
+        }
+        
         @media (max-width: 768px) {
             .hero-section {
                 padding: 30px 0;
@@ -317,6 +531,15 @@
             .dropdown-menu .dropdown-menu {
                 margin-left: 0;
                 margin-top: 0;
+            }
+            
+            .dual-date-display .date-container {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .dual-date-display .date-separator {
+                display: none;
             }
         }
     </style>
@@ -340,16 +563,16 @@
                             <p>छिटो र सजिलो तरिकाले नतिजा प्रकाशन गर्ने डिजिटल समाधान</p>
                             <div class="d-grid gap-2">
                                 <a href="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/IEMIS.v2.html" class="btn btn-primary">लगइन गर्नुहोस्</a>
-                                <a href="https://shamser.info.np/Home/About.html" class="btn btn-outline-primary">हाम्रो बारेमा</a>
+                                <a href="#" class="btn btn-outline-primary">हाम्रो बारेमा</a>
                             </div>
                         </div>
                     </div>
                     <div class="mt-4">
                         <h5>ताजा अपडेटहरू</h5>
                         <ul>
-                            <li>एसईई २०८१ को नतिजा सार्वजनिक भएको छ</li>
-                            <li>शिक्षक दरबन्दी मिलानको लागि कार्यदल गठन गरिँदै</li>
-                            <li>विद्यार्थीबाट शुल्क लिनु गैरकानूनी हो - विद्या भट्टराई</li>
+                            <li>शैक्षिक समाचार र अपडेटहरू</li>
+                            <li>शिक्षकहरूका लागि उपयोगी स्रोतहरू</li>
+                            <li>विद्यार्थीहरूका लागि शैक्षिक सामग्री</li>
                         </ul>
                     </div>
                 </div>
@@ -360,21 +583,38 @@
         </div>
     </div>
 
+    <!-- Dual Date Display -->
+    <div class="dual-date-display">
+        <div class="container">
+            <div class="date-container">
+                <div class="date-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span id="nepali-date">२०८२ कार्तिक १० गते</span>
+                </div>
+                <span class="date-separator">|</span>
+                <div class="date-item">
+                    <i class="fas fa-calendar-day"></i>
+                    <span id="english-date">English Date: Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Top Header -->
     <div class="header-top">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <i class="fas fa-map-marker-alt"></i> <a href="https://maps.app.goo.gl/jVmhRZi3Em8abMSV8" class="text-white">Site Map</a> | 
+                    <i class="fas fa-map-marker-alt"></i> <a href="#" class="text-white">Site Map</a> | 
                     <i class="fas fa-phone"></i> <a href="tel:9817826200" class="text-white">Call Now</a> | 
-                    <i class="fas fa-file-text"></i> <a href="https://docs.google.com/forms/d/e/1FAIpQLSfuwHgJ0hH9X5h4j7L1LTWQArfojFetLhuFtSbyDdCphqqoxQ/viewform" class="text-white">Admission</a>
+                    <i class="fas fa-file-text"></i> <a href="#" class="text-white">Contact</a>
                 </div>
                 <div class="col-md-6 text-end">
                     <div class="social-icons">
-                        <a href="https://www.facebook.com/" target="_blank" class="text-white"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://twitter.com/" target="_blank" class="text-white"><i class="fab fa-twitter"></i></a>
-                        <a href="https://lauro-media.blogspot.com/" target="_blank" class="text-white"><i class="fab fa-blogger"></i></a>
-                        <a href="mailto:shamserpulami500@gmail.com" target="_blank" class="text-white"><i class="fas fa-envelope"></i></a>
+                        <a href="#" target="_blank" class="text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" target="_blank" class="text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" target="_blank" class="text-white"><i class="fab fa-blogger"></i></a>
+                        <a href="mailto:example@example.com" target="_blank" class="text-white"><i class="fas fa-envelope"></i></a>
                     </div>
                 </div>
             </div>
@@ -391,6 +631,7 @@
                 </div>
                 <div class="col-md-4 text-end">
                     <div class="stats-counter">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNMjU2IDhDMTE5IDggOCAxMTkgOCAyNTZzMTExIDI0OCAyNDggMjQ4czI0OC0xMTEgMjQ4LTI0OFMzOTMgOCAyNTYgOHptMCA0NDhjLTExMC41IDAtMjAwLTg5LjUtMjAwLTIwMFMxNDUuNSA1NiAyNTYgNTZzMjAwIDg5LjUgMjAwIDIwMHMtODkuNSAyMDAtMjAwIDIwMHptOTYtMzEyaC02NHYxMjhoLTY0VjE0NGgtNjR2LTY0aDE5MnY2NHoiLz48L3N2Zz4=" alt="Visitors">
                         <div class="counter" id="visitorCount">12,458</div>
                         <div>आगन्तुकहरू</div>
                     </div>
@@ -405,10 +646,8 @@
             <div class="row flash-news">
                 <div class="col-sm-12 col-md-2 col-lg-1 news-tag">Highlight:</div>
                 <div class="col-sm-12 col-md-10 col-lg-10 news">
-                    <div class="owl-carousel flash-carousel">
-                        <div><a href="https://shamser.info.np/Service_Site/index.html">lauro media/shamser.info.np बाट उपलब्ध हुने सेवा सुविधा प्राप्त गरी फाइदा लिन अनुरोध</a></div>
-                        <div><a href="#">एसईई २०८१ को नतिजा सार्वजनिक भएको छ</a></div>
-                        <div><a href="#">शिक्षक दरबन्दी मिलानको लागि कार्यदल गठन गरिँदै</a></div>
+                    <div class="flash-carousel">
+                        <div><a href="#">शैक्षिक समाचार र अपडेटहरू</a></div>
                     </div>
                 </div>
             </div>
@@ -426,10 +665,10 @@
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link active" href="https://shamser.info.np/"><i class="fa fa-home fa-lg"></i></a>
+                                <a class="nav-link active" href="#"><i class="fa fa-home fa-lg"></i></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="https://shamser.info.np/Home/About.html">About</a>
+                                <a class="nav-link" href="#">About</a>
                             </li>
                             
                             <!-- Our Services Dropdown -->
@@ -438,121 +677,41 @@
                                     Our Services
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="https://shamser.info.np/Home/Get free service.html">Free Service</a></li>
-                                    <li><a class="dropdown-item" href="https://shamser.info.np/Entry_Form/our_service.html">Payable Service</a></li>
+                                    <li><a class="dropdown-item" href="#">Educational Resources</a></li>
+                                    <li><a class="dropdown-item" href="#">Learning Tools</a></li>
                                 </ul>
                             </li>
                             
-                            <!-- Teacher-guides Dropdown -->
+                            <!-- Educational Resources -->
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                                    Teacher-guides
+                                    Educational Resources
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <!-- Grade 1 -->
-                                    <li class="dropdown-submenu">
-                                        <a class="dropdown-item dropdown-toggle" href="#">Grade-1</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="http://moecdc.gov.np/storage/gallery/1704094092.pdf">Nepali</a></li>
-                                            <li><a class="dropdown-item" href="http://moecdc.gov.np/storage/gallery/1672217211.pdf">English</a></li>
-                                            <li><a class="dropdown-item" href="http://moecdc.gov.np/storage/gallery/1672217481.pdf">Maths</a></li>
-                                            <li><a class="dropdown-item" href="http://moecdc.gov.np/storage/gallery/1672217425.pdf">Serofero</a></li>
-                                        </ul>
-                                    </li>
-                                    
-                                    <!-- Grade 2 -->
-                                    <li class="dropdown-submenu">
-                                        <a class="dropdown-item dropdown-toggle" href="#">Grade-2</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="http://moecdc.gov.np/storage/gallery/1672813233.pdf">Nepali</a></li>
-                                            <li><a class="dropdown-item" href="http://moecdc.gov.np/storage/gallery/1672217645.pdf">English</a></li>
-                                            <li><a class="dropdown-item" href="http://moecdc.gov.np/storage/gallery/1686566355.pdf">Maths</a></li>
-                                            <li><a class="dropdown-item" href="http://moecdc.gov.np/storage/gallery/1672218837.pdf">Serofero</a></li>
-                                        </ul>
-                                    </li>
-                                    
-                                    <!-- Grade 3 -->
-                                    <li class="dropdown-submenu">
-                                        <a class="dropdown-item dropdown-toggle" href="#">Grade-3</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="http://moecdc.gov.np/storage/gallery/1672223512.pdf">Nepali</a></li>
-                                            <li><a class="dropdown-item" href="http://moecdc.gov.np/storage/gallery/1672223512.pdf">English</a></li>
-                                            <li><a class="dropdown-item" href="http://moecdc.gov.np/storage/gallery/1686566541.pdf">Maths</a></li>
-                                            <li><a class="dropdown-item" href="http://moecdc.gov.np/storage/gallery/1672219097.pdf">Serofero</a></li>
-                                        </ul>
-                                    </li>
-                                    
-                                    <!-- More grades would continue here -->
-                                    <li><a class="dropdown-item" href="#">View All Guides</a></li>
+                                    <li><a class="dropdown-item" href="#">Study Materials</a></li>
+                                    <li><a class="dropdown-item" href="#">Learning Guides</a></li>
+                                    <li><a class="dropdown-item" href="#">Educational Articles</a></li>
                                 </ul>
                             </li>
                             
-                            <!-- Text book Dropdown -->
+                            <!-- Learning Tools -->
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                                    Text book
+                                    Learning Tools
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li class="dropdown-submenu">
-                                        <a class="dropdown-item dropdown-toggle" href="#">Class 6</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="https://shamserinfo.blogspot.com/2024/04/lesson-1-fundamental-knowledge-of.html">Computer</a></li>
-                                            <li><a class="dropdown-item" href="https://moecdc.gov.np/storage/gallery/1672799804.pdf">English</a></li>
-                                            <li><a class="dropdown-item" href="https://moecdc.gov.np/storage/gallery/1672799879.pdf">Maths</a></li>
-                                            <li><a class="dropdown-item" href="https://moecdc.gov.np/storage/gallery/1672799965.pdf">Science</a></li>
-                                        </ul>
-                                    </li>
-                                    
-                                    <li class="dropdown-submenu">
-                                        <a class="dropdown-item dropdown-toggle" href="#">Class 7</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="https://online.anyflip.com/hhfss/optj/mobile/index.html">कम्प्युटर शिक्षा कक्षा ७ (नेपाली माध्यम)</a></li>
-                                            <li><a class="dropdown-item" href="https://moecdc.gov.np/storage/gallery/1672800575.pdf">Nepali</a></li>
-                                            <li><a class="dropdown-item" href="https://moecdc.gov.np/storage/gallery/1672800534.pdf">English</a></li>
-                                            <li><a class="dropdown-item" href="https://moecdc.gov.np/storage/gallery/1672800575.pdf">Maths</a></li>
-                                            <li><a class="dropdown-item" href="https://moecdc.gov.np/storage/gallery/1684481476.pdf">Science</a></li>
-                                        </ul>
-                                    </li>
-                                    
-                                    <!-- More classes would continue here -->
-                                    <li><a class="dropdown-item" href="#">View All Textbooks</a></li>
-                                </ul>
-                            </li>
-                            
-                            <!-- Tech.Support Dropdown -->
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                                    Tech.Support
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="dropdown-submenu">
-                                        <a class="dropdown-item dropdown-toggle" href="#">Computer Knowledge</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="https://shamser.info.np/Computer Knowledge/Computer Knowledge Quize.html">Computer Science Quiz</a></li>
-                                            <li><a class="dropdown-item" href="https://shamser.info.np/Computer Knowledge/History of Computer.html">History of Computer</a></li>
-                                            <li><a class="dropdown-item" href="https://shamser.info.np/Computer Knowledge/Types of Computer.html">Types of Computer</a></li>
-                                        </ul>
-                                    </li>
-                                    
-                                    <li class="dropdown-submenu">
-                                        <a class="dropdown-item dropdown-toggle" href="#">EMIS</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="https://youtu.be/NVl4Mb8A68A">Video</a></li>
-                                            <li><a class="dropdown-item" href="#">Notice</a></li>
-                                            <li><a class="dropdown-item" href="https://emis.cehrd.gov.np/">Website</a></li>
-                                        </ul>
-                                    </li>
-                                    
-                                    <!-- More tech support options would continue here -->
+                                    <li><a class="dropdown-item" href="#">Educational Calculators</a></li>
+                                    <li><a class="dropdown-item" href="#">Study Planners</a></li>
+                                    <li><a class="dropdown-item" href="#">Learning Apps</a></li>
                                 </ul>
                             </li>
                             
                             <!-- More navigation items would continue here -->
                             <li class="nav-item">
-                                <a class="nav-link" href="https://shamser.info.np/Home/About.html">About</a>
+                                <a class="nav-link" href="#">Blog</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="https://shamser.info.np/profile/connect%20with%20social%20media.html">Contact</a>
+                                <a class="nav-link" href="#">Contact</a>
                             </li>
                         </ul>
                     </div>
@@ -575,8 +734,7 @@
         <!-- Breaking News -->
         <div class="marquee-container">
             <marquee behavior="scroll" direction="left">
-                <strong>ताजा खबर:</strong> एसईई २०८१ को नतिजा सार्वजनिक भएको छ | शिक्षक दरबन्दी मिलानको लागि कार्यदल गठन गरिँदै | 
-                विद्यार्थीबाट शुल्क लिनु गैरकानूनी हो; शिक्षा उद्योग होइन - विद्या भट्टराई
+                <strong>ताजा खबर:</strong> शैक्षिक समाचार र अपडेटहरू | नयाँ शैक्षिक सामग्री उपलब्ध | शिक्षा सम्बन्धी लेखहरू
             </marquee>
         </div>
         
@@ -584,26 +742,91 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="stats-counter">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNNDA1IDMzNmMtNDEuOCAwLTc3LjQgMjYuNy05MC41IDY0SDE5Ny41Yy0xMy4xLTM3LjMtNDguNy02NC05MC41LTY0QzUzLjEgMzM2IDAgMzg5LjEgMCA0NTJzNTMuMSAxMTYgMTE3IDExNmMyOC4zIDAgNTQuNS05LjcgNzUuOC0yNi4ybDQ3LjEtNDcuMWMtMi4yLS43LTQuNC0xLjYtNi42LTIuNWgtOC43Yy0zLjcgMC03LjQgMS0xMC45IDEuNGMtNy42IDcuMS0yMCA5LjctMzAuOSA5LjdzLTIzLjItMi42LTMwLjktOS43Yy0zLjUtLjQtNy4yLTEuNC0xMC45LTEuNEgxNDR2LTMyaDMydi0zMmgtMzJ2LTMyaDMydi0zMmgtMzJ2LTMyaDMydi0zMmgtMzJ2LTMyaDMydi0zMmgtMzJ2LTMyaDMydi0zMmgtMzJ2LTMyaDMyVjY0aC0zMlYzMmgyMjR2MzJoLTMydjMyaDMydjMyaC0zMnYzMmgzMnYzMmgtMzJ2MzJoMzJ2MzJoLTMydjMyaDMydjMyaC0zMnYzMmgzMnYzMmgtMzJ2MzJoMzJ2MzJoLTMydjMyaDMydjMyaC0zMnYzMmgzMnYzMmgtMzJ2MzJoMzJ2MzJoLTMydjMyaDMyYzI4LjMgMCA1NC41LTkuNyA3NS44LTI2LjJsNDcuMSA0Ny4xYy0yLjIuNy00LjQgMS42LTYuNiAyLjVoLTguN2MtMy43IDAtNy40LTEtMTAuOS0xLjRjLTcuNi03LjEtMjAtOS43LTMwLjktOS43cy0yMy4yIDIuNi0zMC45IDkuN2MtMy41LjQtNy4yIDEuNC0xMC45IDEuNGgtOC43Yy0yLjItLjktNC40LTEuOC02LjYtMi41bDQ3LjEtNDcuMWMyMS4zIDE2LjUgNDcuNSA2Mi4yIDc1LjggNjIuMkM0NTguOSA1NjggNTEyIDUxNC45IDUxMiA0NTJzLTUzLjEtMTE2LTExNy0xMTZ6Ii8+PC9zdmc+" alt="Members">
                     <div class="counter" id="subscriberCount">1,245</div>
                     <div>सदस्यहरू</div>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="stats-counter">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNNDY2LjIgMTI1LjJjLTMwLjUtMjYuOC03MS41LTQ0LjItMTE2LjItNTAuNkMzMjEuNSA0Ni42IDI4NiA2NCAyNTYgNjRzLTY1LjUtMTcuNC05NC0xMS40Yy00NC43IDYuNC04NS43IDIzLjgtMTE2LjIgNTAuNkMxNS4yIDE1MS42IDAgMTk3LjkgMCAyNDUuMlY0MTZjMCAzNS4zIDI4LjcgNjQgNjQgNjRoMTI4VjMyMEgxOTJ2LTY0aDEyOHYtNjRIMTkydi02NGgxMjh2LTY0SDE5MnYtNjRoMTI4VjY0aDY0djY0aDEyOHY2NEgzMjB2NjRoMTI4djY0SDMyMHY2NGgxMjh2NjRIMzIwdjY0aDEyOHY2NEgzMjB2NjRoMTI4YzM1LjMgMCA2NC0yOC43IDY0LTY0VjI0NS4yYzAtNDcuMy0xNS4yLTkzLjYtNDUuOC0xMjB6Ii8+PC9zdmc+" alt="Likes">
                     <div class="counter" id="likeCount">8,752</div>
                     <div>लाइकहरू</div>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="stats-counter">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNNDA4IDY0SDEwNkM3OS40IDY0IDU2IDgxLjIgNDkuMiAxMDQuMkwxOC4xIDI0NC4yQzUuOCAyNzcuOSAyOS40IDMxMiA2NCAzMTJoMTQ0djE0NGMwIDI2LjUgMjEuNSA0OCA0OCA0OGg5NmMyNi41IDAgNDgtMjEuNSA0OC00OFYxMTJjMC0yNi41LTIxLjUtNDgtNDgtNDh6bS00OCAyODhIMjU2VjI1NmgxMDR2OTZ6bTAtMTQ0SDI1NlYxMTJoMTA0djk2eiIvPjwvc3ZnPg==" alt="Shares">
                     <div class="counter" id="shareCount">3,421</div>
                     <div>सेयरहरू</div>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="stats-counter">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNNDMyIDBjLTMwLjkgMC01NiAyNS4xLTU2IDU2djEwNEgxMzZ2LTEwNGMwLTMwLjktMjUuMS01Ni01Ni01NkMyNS4xIDAgMCAyNS4xIDAgNTZ2NDAwYzAgMzAuOSAyNS4xIDU2IDU2IDU2czU2LTI1LjEgNTYtNTZWMjU2aDI0MHYyMDBjMCAzMC45IDI1LjEgNTYgNTYgNTZzNTYtMjUuMSA1Ni01NlY1NmMwLTMwLjktMjUuMS01Ni01Ni01NnoiLz48L3N2Zz4=" alt="Read">
                     <div class="counter" id="readMoreCount">15,689</div>
                     <div>पढ्नुभएका</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Widget Container -->
+        <div class="widget-container" id="widget-container">
+            <button class="close-btn" onclick="hideWidgets()">×</button>
+            
+            <!-- Calendar Widget -->
+            <div id="calendar-widget" class="widget">
+                <h3><i class="fas fa-calendar-alt"></i> पात्रो</h3>
+                <div class="calendar-content">
+                    <iframe src="https://www.hamropatro.com/widgets/calender-medium.php" 
+                            frameborder="0" scrolling="no" marginwidth="0" marginheight="0" 
+                            style="border:none; overflow:hidden; width:100%; height:385px;" 
+                            allowtransparency="true"></iframe>
+                </div>
+            </div>
+
+            <!-- Number Converter Widget -->
+            <div id="number-converter-widget" class="widget">
+                <h3><i class="fas fa-calculator"></i> संख्या रुपान्तरण</h3>
+                <div class="number-converter">
+                    <input type="number" id="number-input" placeholder="संख्या प्रविष्ट गर्नुहोस्...">
+                    <button onclick="convertNumberToWords()">रुपान्तरण गर्नुहोस्</button>
+                    <div class="number-result" id="number-result"></div>
+                </div>
+            </div>
+
+            <!-- Radio Widget -->
+            <div id="radio-widget" class="widget">
+                <h3><i class="fas fa-broadcast-tower"></i> रेडियो</h3>
+                <div class="radio-player">
+                    <audio id="radio-player" controls>
+                        <source src="" type="audio/mpeg">
+                        तपाईंको ब्राउजरले audio element लाई सपोर्ट गर्दैन।
+                    </audio>
+                    <div class="radio-stations">
+                        <button onclick="playRadio()">रेडियो सुन्नुहोस्</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Date Conversion Widget -->
+            <div id="date-conversion-widget" class="widget">
+                <h3><i class="fas fa-calendar-day"></i> मिति रूपान्तरण</h3>
+                <div class="date-converter">
+                    <iframe src="https://www.hamropatro.com/widgets/dateconverter.php" 
+                            frameborder="0" scrolling="no" marginwidth="0" marginheight="0" 
+                            style="border:none; padding: 0; overflow:hidden; width:100%; height:100px;" 
+                            allowtransparency="true"></iframe>
+                </div>
+            </div>
+
+            <!-- Unicode Widget -->
+            <div id="unicode-widget" class="widget">
+                <h3><i class="fas fa-keyboard"></i> युनिकोड</h3>
+                <div class="unicode-converter">
+                    <textarea id="preeti-input" placeholder="टेक्स्ट यहाँ टाइप गर्नुहोस्..."></textarea>
+                    <button onclick="convertToUnicode()">रूपान्तरण गर्नुहोस्</button>
+                    <div class="unicode-output" id="unicode-output"></div>
                 </div>
             </div>
         </div>
@@ -620,10 +843,10 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <div class="card h-100">
-                                    <img src="https://shamser.info.np/HomePage/Sumana%20Shreshtha.jpg" class="card-img-top" alt="शिक्षामा जुत्ता बेचेजस्तो मुनाफा गर्न हुँदैन">
+                                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="शैक्षिक समाचार">
                                     <div class="card-body">
-                                        <h5 class="card-title">शिक्षामा जुत्ता बेचेजस्तो मुनाफा गर्न हुँदैन</h5>
-                                        <p class="card-text">रास्वपा सांसद सुमना श्रेष्ठले शिक्षामा व्यावसायिकरणको विरोध गर्दै भनिन्</p>
+                                        <h5 class="card-title">शिक्षाको महत्व</h5>
+                                        <p class="card-text">शिक्षा मानव जीवनको आधारभूत आवश्यकता हो। यसले व्यक्तिको विकासमा महत्वपूर्ण भूमिका खेल्छ।</p>
                                         <a href="#" class="btn btn-sm btn-primary read-more">पढ्नुहोस्</a>
                                         <div class="mt-2">
                                             <button class="btn btn-sm btn-outline-primary like-btn"><i class="far fa-thumbs-up"></i> लाइक</button>
@@ -634,15 +857,56 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <div class="card h-100">
-                                    <img src="https://shamser.info.np/HomePage/Bidhya-Bhattarai-Banner.png" class="card-img-top" alt="विद्यार्थीबाट शुल्क लिनु गैरकानूनी">
+                                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="शैक्षिक सामग्री">
                                     <div class="card-body">
-                                        <h5 class="card-title">विद्यार्थीबाट शुल्क लिनु गैरकानूनी</h5>
-                                        <p class="card-text">शिक्षामन्त्री विद्या भट्टराईले अनिवार्य र निःशुल्क शिक्षाको कार्यान्वयनमा जोड दिँदै</p>
+                                        <h5 class="card-title">नयाँ शैक्षिक सामग्री</h5>
+                                        <p class="card-text">विद्यार्थीहरूका लागि उपयोगी शैक्षिक सामग्रीहरू यस पोर्टलमा उपलब्ध छन्।</p>
                                         <a href="#" class="btn btn-sm btn-primary read-more">पढ्नुहोस्</a>
                                         <div class="mt-2">
                                             <button class="btn btn-sm btn-outline-primary like-btn"><i class="far fa-thumbs-up"></i> लाइक</button>
                                             <button class="btn btn-sm btn-outline-success share-btn"><i class="fas fa-share"></i> सेयर</button>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Educational Content -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h3 class="mb-0"><i class="fas fa-book"></i> शैक्षिक सामग्री</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body text-center">
+                                        <i class="fas fa-graduation-cap fa-3x text-primary mb-3"></i>
+                                        <h5 class="card-title">शिक्षण सामग्री</h5>
+                                        <p class="card-text">शिक्षकहरूका लागि उपयोगी शिक्षण सामग्रीहरू</p>
+                                        <a href="#" class="btn btn-sm btn-outline-primary">अवलोकन गर्नुहोस्</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body text-center">
+                                        <i class="fas fa-laptop-code fa-3x text-success mb-3"></i>
+                                        <h5 class="card-title">डिजिटल सिकाइ</h5>
+                                        <p class="card-text">आधुनिक तरिकाले सिक्नका लागि डिजिटल सामग्रीहरू</p>
+                                        <a href="#" class="btn btn-sm btn-outline-success">अवलोकन गर्नुहोस्</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body text-center">
+                                        <i class="fas fa-chalkboard-teacher fa-3x text-warning mb-3"></i>
+                                        <h5 class="card-title">शिक्षक सहयोग</h5>
+                                        <p class="card-text">शिक्षकहरूका लागि सहयोगी सामग्री र स्रोतहरू</p>
+                                        <a href="#" class="btn btn-sm btn-outline-warning">अवलोकन गर्नुहोस्</a>
                                     </div>
                                 </div>
                             </div>
@@ -665,7 +929,7 @@
                         <div class="comment">
                             <div class="comment-author">सीता कुमारी</div>
                             <div class="comment-date">५ दिन अघि</div>
-                            <div class="comment-text">एसईई को नतिजा यहाँबाट धेरै छिटो पाइयो। राम्रो सेवा।</div>
+                            <div class="comment-text">शैक्षिक सामग्रीहरू धेरै उपयोगी छन्। राम्रो सेवा।</div>
                         </div>
                     </div>
                     
@@ -698,12 +962,12 @@
                         <h3 class="mb-0"><i class="fas fa-link"></i> द्रुत लिङ्कहरू</h3>
                     </div>
                     <div class="card-body quick-links">
-                        <a href="https://shamser.info.np/Computer%20Knowledge/Computer%20Knowledge%20Quize.html">कम्प्युटर ज्ञान प्रश्नोत्तरी</a>
-                        <a href="https://shamser.info.np/Computer%20Knowledge/History%20of%20Computer.html">कम्प्युटरको इतिहास</a>
-                        <a href="https://shamser.info.np/Computer%20Knowledge/Types%20of%20Computer.html">कम्प्युटरका प्रकारहरू</a>
-                        <a href="https://shamser.info.np/Number_to_Text.html">संख्या रुपान्तरण</a>
-                        <a href="https://shamser.info.np/Shaikshik_Sansar/sobiztrend.com/preeti_to_unicode.html">प्रीति देखि युनिकोड</a>
-                        <a href="https://shamser.info.np/Shaikshik_Sansar/sobiztrend/unicode_to_preeti.html">युनिकोड देखि प्रीति</a>
+                        <a href="#">शैक्षिक समाचार</a>
+                        <a href="#">शिक्षण सामग्री</a>
+                        <a href="#">शिक्षक सहयोग</a>
+                        <a href="#">विद्यार्थी सामग्री</a>
+                        <a href="#">शैक्षिक लेखहरू</a>
+                        <a href="#">शैक्षिक उपकरणहरू</a>
                     </div>
                 </div>
                 
@@ -715,15 +979,15 @@
                     <div class="card-body">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                एसईई नतिजा
+                                शैक्षिक कार्यक्रम
                                 <span class="badge bg-primary">२०८१ असार</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                शिक्षक सरुवा
+                                शिक्षक प्रशिक्षण
                                 <span class="badge bg-primary">२०८१ श्रावण</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                दरबन्दी मिलान
+                                शैक्षिक सेमिनार
                                 <span class="badge bg-primary">चलिरहेको</span>
                             </li>
                         </ul>
@@ -733,7 +997,9 @@
                 <!-- Useful Widgets -->
                 <div class="widget-container">
                     <h5><i class="fas fa-cloud-sun"></i> मौसम विवरण</h5>
-                    <iframe src="https://www.ashesh.com.np/weather/widget.php" height="200" width="100%" title="Weather Forecast"></iframe>
+                    <div class="weather-placeholder">
+                        <p>मौसम जानकारी यहाँ देखाइनेछ</p>
+                    </div>
                 </div>
                 
                 <div class="widget-container">
@@ -744,6 +1010,14 @@
         </div>
     </div>
     
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <a href="#" onclick="showWidget('calendar-widget')"><i class="fas fa-calendar-alt"></i>पात्रो</a>
+        <a href="#" onclick="showWidget('number-converter-widget')"><i class="fas fa-calculator"></i>संख्या रुपान्तरण</a>
+        <a href="#" onclick="showWidget('radio-widget')"><i class="fas fa-broadcast-tower"></i>रेडियो</a>
+        <a href="#" onclick="showWidget('date-conversion-widget')"><i class="fas fa-calendar-day"></i>मिति रूपान्तरण</a>
+        <a href="#" onclick="showWidget('unicode-widget')"><i class="fas fa-keyboard"></i>युनिकोड</a>
+    </div>
      
     <!-- Footer -->
     <footer class="footer">
@@ -753,20 +1027,20 @@
                     <h5>shamser.info.np</h5>
                     <p>नेपालको शैक्षिक सूचना, समाचार र स्रोतहरूको सम्पूर्ण पोर्टल</p>
                     <div class="social-icons">
-                        <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
-                        <a href="https://lauro-media.blogspot.com/" target="_blank"><i class="fab fa-blogger"></i></a>
-                        <a href="mailto:shamserpulami500@gmail.com"><i class="fas fa-envelope"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-blogger"></i></a>
+                        <a href="mailto:example@example.com"><i class="fas fa-envelope"></i></a>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
                     <h5>द्रुत लिङ्कहरू</h5>
                     <ul class="list-unstyled">
-                        <li><a href="https://shamser.info.np/">गृहपृष्ठ</a></li>
-                        <li><a href="https://shamser.info.np/Home/About.html">बारेमा</a></li>
-                        <li><a href="https://shamser.info.np/Home/Get%20free%20service.html">निःशुल्क सेवा</a></li>
-                        <li><a href="https://shamser.info.np/Entry_Form/our_service.html">भुक्तानी सेवा</a></li>
-                        <li><a href="https://shamser.info.np/profile/connect%20with%20social%20media.html">सम्पर्क</a></li>
+                        <li><a href="#">गृहपृष्ठ</a></li>
+                        <li><a href="#">बारेमा</a></li>
+                        <li><a href="#">शैक्षिक सामग्री</a></li>
+                        <li><a href="#">शिक्षक सहयोग</a></li>
+                        <li><a href="#">सम्पर्क</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4 mb-4">
@@ -774,8 +1048,8 @@
                     <ul class="list-unstyled">
                         <li><i class="fas fa-map-marker-alt"></i> सर्लाही, नेपाल</li>
                         <li><i class="fas fa-phone"></i> ९८१७८२६२००</li>
-                        <li><i class="fas fa-envelope"></i> info@shamser.com.np</li>
-                        <li><i class="fab fa-youtube"></i> lauro_media</li>
+                        <li><i class="fas fa-envelope"></i> info@example.com</li>
+                        <li><i class="fab fa-youtube"></i> Educational Channel</li>
                     </ul>
                 </div>
             </div>
@@ -811,33 +1085,22 @@
                     hour12: true 
                 };
                 document.getElementById('currentDateTime').textContent = now.toLocaleDateString('ne-NP', options);
+                
+                // Update dual date display
+                document.getElementById('english-date').textContent = 'English Date: ' + now.toLocaleDateString('en-US', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+                
+                // For Nepali date, we would typically use a library like "nepali-date"
+                // This is a simplified version for demonstration
+                const nepaliDate = '२०८२ कार्तिक १० गते';
+                document.getElementById('nepali-date').textContent = nepaliDate;
             }
             updateDateTime();
             setInterval(updateDateTime, 60000); // Update every minute
-            
-            // Update time ago for news items
-            function updateTimeAgo() {
-                var timeElements = document.querySelectorAll('.time-ago');
-                timeElements.forEach(function(element) {
-                    var timeString = element.getAttribute('data-time');
-                    var time = new Date(timeString);
-                    var now = new Date();
-                    var diff = now - time;
-                    
-                    var minutes = Math.floor(diff / 60000);
-                    var hours = Math.floor(diff / 3600000);
-                    var days = Math.floor(diff / 86400000);
-                    
-                    if (minutes < 60) {
-                        element.textContent = minutes + ' मिनेट अघि';
-                    } else if (hours < 24) {
-                        element.textContent = hours + ' घण्टा अघि';
-                    } else {
-                        element.textContent = days + ' दिन अघि';
-                    }
-                });
-            }
-            updateTimeAgo();
             
             // Like button functionality
             var likeButtons = document.querySelectorAll('.like-btn');
@@ -869,11 +1132,11 @@
                         navigator.share({
                             title: 'shamser.info.np',
                             text: 'नेपालको शैक्षिक सूचना पोर्टल',
-                            url: 'https://shamser.info.np'
+                            url: window.location.href
                         });
                     } else {
                         // Fallback for browsers that don't support Web Share API
-                        alert('यो सामग्री सेयर गर्नुहोस्: https://shamser.info.np');
+                        alert('यो सामग्री सेयर गर्नुहोस्: ' + window.location.href);
                     }
                 });
             });
@@ -888,53 +1151,125 @@
                     readMoreCount.textContent = (currentCount + 1).toLocaleString();
                     
                     // In a real implementation, this would navigate to the full article
-                    alert('यो लेख पूरा पढ्नुहोस्: ' + this.textContent);
+                    alert('यो लेख पूरा पढ्नुहोस्');
                 });
             });
             
-            // Subscription form
-            document.getElementById('subscriptionForm').addEventListener('submit', function(e) {
+            // Comment form submission
+            document.getElementById('commentForm').addEventListener('submit', function(e) {
                 e.preventDefault();
-                var email = document.getElementById('emailInput').value;
+                var name = document.getElementById('commentName').value;
+                var comment = document.getElementById('commentText').value;
                 
-                // In a real implementation, this would send the email to a server
-                var subscriberCount = document.getElementById('subscriberCount');
-                var currentCount = parseInt(subscriberCount.textContent.replace(/,/g, ''));
-                subscriberCount.textContent = (currentCount + 1).toLocaleString();
+                // Create new comment element
+                var commentElement = document.createElement('div');
+                commentElement.className = 'comment';
+                commentElement.innerHTML = `
+                    <div class="comment-author">${name}</div>
+                    <div class="comment-date">अहिले</div>
+                    <div class="comment-text">${comment}</div>
+                `;
                 
-                alert('धन्यवाद! तपाईं सदस्यता लिनुभयो। तपाईंको इमेल: ' + email);
-                document.getElementById('emailInput').value = '';
+                // Add to comments container
+                document.getElementById('commentsContainer').prepend(commentElement);
+                
+                // Reset form
+                document.getElementById('commentForm').reset();
+                
+                alert('तपाईंको टिप्पणी सफलतापूर्वक पेश गरियो। धन्यवाद!');
+            });
+        });
+
+        // Widget functionality
+        let currentWidget = null;
+
+        function showWidget(widgetId) {
+            const container = document.getElementById('widget-container');
+            
+            // If clicking the same widget, toggle it
+            if (currentWidget === widgetId) {
+                container.style.display = container.style.display === 'block' ? 'none' : 'block';
+                return false;
+            }
+            
+            container.style.display = 'block';
+            
+            // Hide all widgets
+            document.querySelectorAll('.widget').forEach(widget => {
+                widget.classList.remove('active');
             });
             
-            // Load more quotes
-            document.getElementById('loadMoreQuotes').addEventListener('click', function() {
-                var quotesContainer = document.querySelector('.card-body');
-                var newQuotes = [
-                    {
-                        quote: "शिक्षाको जरा तितो हुन्छ, तर, फल सबैभन्दा मिठो हुन्छ ।",
-                        author: "एरिसटोटल"
-                    },
-                    {
-                        quote: "शिक्षा जीवनको लागि तयारी होइन, शिक्षा स्वयम् जीवन हो ।",
-                        author: "जोन डिवे"
-                    },
-                    {
-                        quote: "आफ्नो बच्चालाई आफूले सिकेको ज्ञान मात्र दिन नखोज । ऊ तिमीभन्दा फरक समयमा जन्मिएको छ ।",
-                        author: "रविन्द्रनाथ टैगोर"
-                    }
-                ];
-                
-                newQuotes.forEach(function(quoteObj) {
-                    var quoteElement = document.createElement('div');
-                    quoteElement.className = 'inspirational-quote';
-                    quoteElement.innerHTML = '<p>"' + quoteObj.quote + '"</p><footer class="blockquote-footer">' + quoteObj.author + '</footer>';
-                    quotesContainer.insertBefore(quoteElement, this);
-                }.bind(this));
-                
-                this.style.display = 'none';
-            });
+            // Show the selected widget
+            document.getElementById(widgetId).classList.add('active');
+            currentWidget = widgetId;
+            
+            // Scroll to the widget container
+            container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            return false;
+        }
+
+        function hideWidgets() {
+            document.getElementById('widget-container').style.display = 'none';
+            currentWidget = null;
+        }
+
+        function playRadio() {
+            const audioPlayer = document.getElementById('radio-player');
+            // In a real implementation, this would play an actual radio stream
+            alert('रेडियो स्ट्रीम सुरु हुँदैछ...');
+        }
+
+        function convertNumberToWords() {
+            const numberInput = document.getElementById('number-input').value;
+            const resultDiv = document.getElementById('number-result');
+            
+            if (!numberInput) {
+                resultDiv.textContent = "कृपया संख्या प्रविष्ट गर्नुहोस्!";
+                return;
+            }
+            
+            const number = parseInt(numberInput);
+            
+            if (isNaN(number)) {
+                resultDiv.textContent = "कृपया वैध संख्या प्रविष्ट गर्नुहोस्!";
+                return;
+            }
+            
+            // Simple conversion for demo
+            const smallNumbers = ["शुन्य", "एक", "दुई", "तीन", "चार", "पाँच", "छ", "सात", "आठ", "नौ", "दश"];
+            
+            if (number <= 10) {
+                resultDiv.textContent = smallNumbers[number];
+            } else {
+                resultDiv.textContent = "संख्या: " + number + "\n\nयो प्रदर्शन मात्र हो। पूर्ण रूपान्तरणका लागि थप विकास आवश्यक छ।";
+            }
+        }
+
+        function convertToUnicode() {
+            const text = document.getElementById('preeti-input').value;
+            const outputDiv = document.getElementById('unicode-output');
+            
+            if (!text) {
+                outputDiv.textContent = "कृपया टेक्स्ट प्रविष्ट गर्नुहोस्!";
+                return;
+            }
+            
+            // This is a simplified demo
+            outputDiv.textContent = "रूपान्तरण परिणाम: " + text;
+        }
+
+        // Close widgets when clicking outside
+        document.addEventListener('click', function(event) {
+            const widgetContainer = document.getElementById('widget-container');
+            const bottomNav = document.querySelector('.bottom-nav');
+            
+            if (widgetContainer.style.display === 'block' && 
+                !widgetContainer.contains(event.target) && 
+                !bottomNav.contains(event.target)) {
+                hideWidgets();
+            }
         });
     </script>
 </body>
 </html>
-
