@@ -646,7 +646,122 @@
             </div>
         </div>
     </div>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
 
+    .post-stats {
+      background: #fff;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      text-align: center;
+    }
+
+    .view-counter {
+      font-size: 18px;
+      margin-bottom: 16px;
+      color: #444;
+    }
+
+    .like-share {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .like-share button {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 10px;
+      background-color: #007bff;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .like-share button:hover {
+      background-color: #0056b3;
+    }
+
+    #likeBtn.liked {
+      background-color: #28a745;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="post-stats">
+    <div class="view-counter">
+      👁️ <span id="viewCount">0</span> Views
+    </div>
+
+    <div class="like-share">
+      <button id="likeBtn">👍 Like <span id="likeCount">0</span></button>
+      <button id="shareBtn">🔗 Share</button>
+    </div>
+  </div>
+
+  <script>
+    // Unique key based on the current page path
+    const pageKey = window.location.pathname;
+
+    // --- VIEW COUNTER ---
+    const viewKey = `views_${pageKey}`;
+    let views = localStorage.getItem(viewKey);
+    views = views ? parseInt(views) + 1 : 1;
+    localStorage.setItem(viewKey, views);
+    document.getElementById("viewCount").textContent = views;
+
+    // --- LIKE COUNTER ---
+    const likeKey = `likes_${pageKey}`;
+    let likes = localStorage.getItem(likeKey) || 0;
+    let liked = localStorage.getItem(likeKey + "_liked") === "true";
+
+    const likeBtn = document.getElementById("likeBtn");
+    const likeCount = document.getElementById("likeCount");
+
+    likeCount.textContent = likes;
+    if (liked) likeBtn.classList.add("liked");
+
+    likeBtn.addEventListener("click", () => {
+      if (!liked) {
+        likes++;
+        liked = true;
+        localStorage.setItem(likeKey, likes);
+        localStorage.setItem(likeKey + "_liked", true);
+        likeBtn.classList.add("liked");
+        likeCount.textContent = likes;
+      } else {
+        alert("You already liked this post 👍");
+      }
+    });
+
+    // --- SHARE BUTTON ---
+    document.getElementById("shareBtn").addEventListener("click", async () => {
+      const shareData = {
+        title: document.title,
+        text: "Check this out on Shamser Info!",
+        url: window.location.href
+      };
+
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else {
+        // Fallback: copy link to clipboard
+        navigator.clipboard.writeText(window.location.href);
+        alert("Link copied to clipboard ✅");
+      }
+    });
+  </script>
     <!-- Main Content -->
     <div class="container my-5">
         <!-- Ad Container -->
@@ -1376,5 +1491,6 @@
     </script>
 </body>
 </html>
+
 
 
