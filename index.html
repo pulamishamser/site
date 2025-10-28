@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="ne">
 <head>
@@ -450,6 +448,118 @@
             overflow-y: auto;
         }
         
+        /* Subscribe Button Styles */
+        #subscribeBtn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        #subscribeBtn:hover {
+            background-color: #0d5bb5;
+            transform: translateY(-2px);
+        }
+        
+        #subscribeBtn:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .badge {
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            position: absolute;
+            top: -5px;
+            right: -5px;
+        }
+        
+        .counter-container {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* Like/Share Button Styles */
+        .post-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .view-counter {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .like-share {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .like-share button {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .like-share button:hover {
+            background-color: #e9ecef;
+        }
+        
+        .like-share button.liked {
+            background-color: #e7f3ff;
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        /* Enhanced Number Converter Styles */
+        .number-converter-container {
+            padding: 15px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .number-converter-result {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+            font-size: 18px;
+            min-height: 60px;
+        }
+        
         @media (max-width: 768px) {
             .hero-section {
                 padding: 50px 0;
@@ -474,6 +584,17 @@
             .widget-icon span {
                 font-size: 10px;
             }
+            
+            .post-stats {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .like-share {
+                width: 100%;
+                justify-content: space-between;
+            }
         }
     </style>
 </head>
@@ -492,11 +613,25 @@
                     <a href="tel:9817826200" class="text-white text-decoration-none">कल गर्नुस</a> |
                     <i class="fas fa-file-text"></i> 
                     <a href="https://docs.google.com/forms/d/e/1FAIpQLSfuwHgJ0hH9X5h4j7L1LTWQArfojFetLhuFtSbyDdCphqqoxQ/viewform" class="text-white text-decoration-none">भर्ना</a>
+                    
+                    <!-- Subscribe Button -->
+                    <button id="subscribeBtn" class="ms-3">
+                        <span class="bell-icon">🔔</span>
+                        <span>सदस्यता लिनुहोस्</span>
+                        <span id="badge" class="badge" style="display: none;">0</span>
+                    </button>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-12 text-center">
+                    <p id="statusText" class="mb-0"></p>
+                    <div class="counter-container">
+                        <p>कुल सदस्यहरू: <span class="counter-value" id="counter">0</span></p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
 
    <!-- Welcome Modal -->
     <div class="modal fade" id="welcomeModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true">
@@ -536,9 +671,46 @@
         </div>
     </div>
 
-
-
-
+    <!-- IEMIS Login Modal -->
+    <div class="modal fade modal-nepali" id="iemisModal" tabindex="-1" aria-labelledby="iemisModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="iemisModalLabel">IEMIS लगइन</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <img src="https://shamser.info.np/HomePage/IEMIS%20SHAMSER.jpg" alt="IEMIS Logo" class="img-fluid rounded" style="max-height: 100px;">
+                        <h4 class="mt-2">एकीकृत परीक्षा प्रणाली</h4>
+                    </div>
+                    <form>
+                        <div class="mb-3">
+                            <label for="username" class="form-label">प्रयोगकर्ता नाम</label>
+                            <input type="text" class="form-control" id="username" placeholder="प्रयोगकर्ता नाम प्रविष्ट गर्नुहोस्">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">पासवर्ड</label>
+                            <input type="password" class="form-control" id="password" placeholder="पासवर्ड प्रविष्ट गर्नुहोस्">
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">मलाई सम्झनुहोस्</label>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">लगइन गर्नुहोस्</button>
+                        </div>
+                    </form>
+                    <div class="mt-3 text-center">
+                        <a href="#" class="text-decoration-none">पासवर्ड बिर्सनुभयो?</a>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <p class="mb-0">नयाँ प्रयोगकर्ता? <a href="#" class="text-decoration-none">खाता सिर्जना गर्नुहोस्</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <!-- Logo Section -->
     <div class="logo-section">
@@ -631,9 +803,6 @@
         </div>
     </nav>
 
-
-
-    
     <!-- Hero Section -->
     <div class="hero-section">
         <div class="container">
@@ -642,126 +811,12 @@
                     <h1 class="display-4 fw-bold">नेपालको शैक्षिक सूचना केन्द्र</h1>
                     <p class="lead">शिक्षा, परीक्षा, शिक्षक सामग्री र शैक्षिक समाचारहरूको एकमात्र विश्वसनीय स्रोत</p>
                     <a href="/about" class="btn btn-primary btn-lg mt-3">थप जानकारी</a>
+                    <a href="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/IEMIS.v2.html" class="btn btn-warning btn-lg mt-3">लगइन गर्नुहोस्</a>
                 </div>
             </div>
         </div>
     </div>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f2f2f2;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
 
-    .post-stats {
-      background: #fff;
-      padding: 20px;
-      border-radius: 16px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      width: 300px;
-      text-align: center;
-    }
-
-    .view-counter {
-      font-size: 18px;
-      margin-bottom: 16px;
-      color: #444;
-    }
-
-    .like-share {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-    }
-
-    .like-share button {
-      padding: 10px 16px;
-      border: none;
-      border-radius: 10px;
-      background-color: #007bff;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    .like-share button:hover {
-      background-color: #0056b3;
-    }
-
-    #likeBtn.liked {
-      background-color: #28a745;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="post-stats">
-    <div class="view-counter">
-      👁️ <span id="viewCount">0</span> Views
-    </div>
-
-    <div class="like-share">
-      <button id="likeBtn">👍 Like <span id="likeCount">0</span></button>
-      <button id="shareBtn">🔗 Share</button>
-    </div>
-  </div>
-
-  <script>
-    // Unique key based on the current page path
-    const pageKey = window.location.pathname;
-
-    // --- VIEW COUNTER ---
-    const viewKey = `views_${pageKey}`;
-    let views = localStorage.getItem(viewKey);
-    views = views ? parseInt(views) + 1 : 1;
-    localStorage.setItem(viewKey, views);
-    document.getElementById("viewCount").textContent = views;
-
-    // --- LIKE COUNTER ---
-    const likeKey = `likes_${pageKey}`;
-    let likes = localStorage.getItem(likeKey) || 0;
-    let liked = localStorage.getItem(likeKey + "_liked") === "true";
-
-    const likeBtn = document.getElementById("likeBtn");
-    const likeCount = document.getElementById("likeCount");
-
-    likeCount.textContent = likes;
-    if (liked) likeBtn.classList.add("liked");
-
-    likeBtn.addEventListener("click", () => {
-      if (!liked) {
-        likes++;
-        liked = true;
-        localStorage.setItem(likeKey, likes);
-        localStorage.setItem(likeKey + "_liked", true);
-        likeBtn.classList.add("liked");
-        likeCount.textContent = likes;
-      } else {
-        alert("You already liked this post 👍");
-      }
-    });
-
-    // --- SHARE BUTTON ---
-    document.getElementById("shareBtn").addEventListener("click", async () => {
-      const shareData = {
-        title: document.title,
-        text: "Check this out on Shamser Info!",
-        url: window.location.href
-      };
-
-      if (navigator.share) {
-        await navigator.share(shareData);
-      } else {
-        // Fallback: copy link to clipboard
-        navigator.clipboard.writeText(window.location.href);
-        alert("Link copied to clipboard ✅");
-      }
-    });
-  </script>
     <!-- Main Content -->
     <div class="container my-5">
         <!-- Ad Container -->
@@ -797,6 +852,18 @@
                                 </div>
                             </div>
                         </div>
+                        
+                        <!-- Like/Share Buttons -->
+                        <div class="post-stats">
+                            <div class="view-counter">
+                                👁️ <span id="viewCount1">0</span> पटक हेरिएको
+                            </div>
+
+                            <div class="like-share">
+                                <button id="likeBtn1">👍 मनपराउनुहोस् <span id="likeCount1">0</span></button>
+                                <button id="shareBtn1">🔗 सेयर गर्नुहोस्</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
@@ -819,6 +886,18 @@
                                 </div>
                             </div>
                         </div>
+                        
+                        <!-- Like/Share Buttons -->
+                        <div class="post-stats">
+                            <div class="view-counter">
+                                👁️ <span id="viewCount2">0</span> पटक हेरिएको
+                            </div>
+
+                            <div class="like-share">
+                                <button id="likeBtn2">👍 मनपराउनुहोस् <span id="likeCount2">0</span></button>
+                                <button id="shareBtn2">🔗 सेयर गर्नुहोस्</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
@@ -839,6 +918,18 @@
                                 <div class="social-stat">
                                     <i class="far fa-eye"></i> <span>२,१०९</span>
                                 </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Like/Share Buttons -->
+                        <div class="post-stats">
+                            <div class="view-counter">
+                                👁️ <span id="viewCount3">0</span> पटक हेरिएको
+                            </div>
+
+                            <div class="like-share">
+                                <button id="likeBtn3">👍 मनपराउनुहोस् <span id="likeCount3">0</span></button>
+                                <button id="shareBtn3">🔗 सेयर गर्नुहोस्</button>
                             </div>
                         </div>
                     </div>
@@ -1005,9 +1096,9 @@
     </div>
 
     <!-- Widgets Section -->
-    <div class="widgets-container">
-        <div class="container">
-            <h2 class="section-title text-center">उपयोगी उपकरणहरू</h2>
+    <div class="container">
+        <div class="widgets-container">
+            <h3 class="section-title">उपयोगी उपकरणहरू</h3>
             
             <div class="widget-tabs">
                 <div class="widget-tab active" data-widget="patro">पात्रो</div>
@@ -1028,13 +1119,13 @@
                 </div>
                 
                 <div class="widget" id="number-converter-widget">
-                    <div class="p-3">
+                    <div class="number-converter-container">
                         <h5>संख्या रूपान्तरण (अङ्ग्रेजी देखि नेपाली)</h5>
                         <div class="mb-3">
                             <input type="number" id="numberInput" class="form-control" placeholder="अङ्कमा लेख्नुहोस्">
                         </div>
                         <button class="btn btn-primary" onclick="convertNumber()">रूपान्तरण गर्नुहोस्</button>
-                        <div id="numberResult" class="mt-3 p-2 bg-light rounded"></div>
+                        <div id="numberResult" class="number-converter-result"></div>
                     </div>
                 </div>
                 
@@ -1155,43 +1246,6 @@
             <i class="fas fa-language"></i>
             <span>युनिकोड कन्भर्टर</span>
         </div>
-        <div class="widget-icon" data-bs-toggle="modal" data-bs-target="#iemisModal">
-            <i class="fas fa-sign-in-alt"></i>
-            <span>IEMIS लगइन</span>
-        </div>
-    </div>
-
-    <!-- IEMIS Login Modal -->
-    <div class="modal fade modal-nepali" id="iemisModal" tabindex="-1" aria-labelledby="iemisModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="iemisModalLabel">IEMIS लगइन</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="username" class="form-label">प्रयोगकर्ता नाम</label>
-                            <input type="text" class="form-control" id="username" placeholder="प्रयोगकर्ता नाम प्रविष्ट गर्नुहोस्">
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">पासवर्ड</label>
-                            <input type="password" class="form-control" id="password" placeholder="पासवर्ड प्रविष्ट गर्नुहोस्">
-                        </div>
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="rememberMe">
-                            <label class="form-check-label" for="rememberMe">मलाई सम्झनुहोस्</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">लगइन गर्नुहोस्</button>
-                    </form>
-                    <div class="text-center mt-3">
-                        <a href="#">पासवर्ड बिर्सनुभयो?</a> | 
-                        <a href="#">खाता दर्ता गर्नुहोस्</a>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
     <!-- Patro Modal -->
@@ -1265,12 +1319,21 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> 
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
+        // Show welcome modal on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            const welcomeModal = new bootstrap.Modal(document.getElementById('welcomeModal'));
+            welcomeModal.show();
+            
+            // Initialize like/share buttons for each news article
+            initializePostStats();
+        });
+        
         // Current Date and Time in Nepali
         function updateDateTime() {
             const now = new Date();
@@ -1340,7 +1403,7 @@
             });
         });
         
-        // Number Converter
+        // Enhanced Number Converter
         function convertNumber() {
             const numberInput = document.getElementById('numberInput').value;
             const numberResult = document.getElementById('numberResult');
@@ -1357,14 +1420,72 @@
                 return;
             }
             
-            // Simple conversion for demo
+            // Enhanced conversion for numbers up to 100,000
             const smallNumbers = ["शुन्य", "एक", "दुई", "तीन", "चार", "पाँच", "छ", "सात", "आठ", "नौ", "दश"];
+            const tens = ["", "एघार", "बाह्र", "तेह्र", "चौध", "पन्ध्र", "सोह्र", "सत्र", "अठार", "उन्नाइस"];
+            const multiplesOfTen = ["", "दश", "बीस", "तीस", "चालीस", "पचास", "साठी", "सत्तरी", "असी", "नब्बे"];
             
             if (number <= 10) {
                 numberResult.textContent = smallNumbers[number];
+            } else if (number < 20) {
+                numberResult.textContent = tens[number - 10];
+            } else if (number < 100) {
+                const tensDigit = Math.floor(number / 10);
+                const onesDigit = number % 10;
+                if (onesDigit === 0) {
+                    numberResult.textContent = multiplesOfTen[tensDigit];
+                } else {
+                    numberResult.textContent = multiplesOfTen[tensDigit] + " " + smallNumbers[onesDigit];
+                }
+            } else if (number < 1000) {
+                const hundredsDigit = Math.floor(number / 100);
+                const remainder = number % 100;
+                if (remainder === 0) {
+                    numberResult.textContent = smallNumbers[hundredsDigit] + " सय";
+                } else {
+                    numberResult.textContent = smallNumbers[hundredsDigit] + " सय " + convertNumberHelper(remainder);
+                }
+            } else if (number < 100000) {
+                const thousands = Math.floor(number / 1000);
+                const remainder = number % 1000;
+                if (remainder === 0) {
+                    numberResult.textContent = convertNumberHelper(thousands) + " हजार";
+                } else {
+                    numberResult.textContent = convertNumberHelper(thousands) + " हजार " + convertNumberHelper(remainder);
+                }
             } else {
-                numberResult.textContent = "संख्या: " + number + "\n\nपूर्ण रूपान्तरणका लागि थप विकास गरिँदैछ।";
+                numberResult.textContent = "संख्या: " + number + "\n\nथप ठूला संख्याका लागि विकास गरिँदैछ।";
             }
+        }
+        
+        // Helper function for number conversion
+        function convertNumberHelper(num) {
+            const smallNumbers = ["शुन्य", "एक", "दुई", "तीन", "चार", "पाँच", "छ", "सात", "आठ", "नौ", "दश"];
+            const tens = ["", "एघार", "बाह्र", "तेह्र", "चौध", "पन्ध्र", "सोह्र", "सत्र", "अठार", "उन्नाइस"];
+            const multiplesOfTen = ["", "दश", "बीस", "तीस", "चालीस", "पचास", "साठी", "सत्तरी", "असी", "नब्बे"];
+            
+            if (num <= 10) {
+                return smallNumbers[num];
+            } else if (num < 20) {
+                return tens[num - 10];
+            } else if (num < 100) {
+                const tensDigit = Math.floor(num / 10);
+                const onesDigit = num % 10;
+                if (onesDigit === 0) {
+                    return multiplesOfTen[tensDigit];
+                } else {
+                    return multiplesOfTen[tensDigit] + " " + smallNumbers[onesDigit];
+                }
+            } else if (num < 1000) {
+                const hundredsDigit = Math.floor(num / 100);
+                const remainder = num % 100;
+                if (remainder === 0) {
+                    return smallNumbers[hundredsDigit] + " सय";
+                } else {
+                    return smallNumbers[hundredsDigit] + " सय " + convertNumberHelper(remainder);
+                }
+            }
+            return num.toString();
         }
         
         // Radio Player
@@ -1404,7 +1525,12 @@
                 "school": "विद्यालय",
                 "book": "किताब",
                 "exam": "परीक्षा",
-                "result": "नतिजा"
+                "result": "नतिजा",
+                "good": "राम्रो",
+                "morning": "बिहान",
+                "evening": "साँझ",
+                "thank you": "धन्यवाद",
+                "welcome": "स्वागत छ"
             };
             
             let translatedText = englishText;
@@ -1437,7 +1563,10 @@
                 "timro": "तिम्रो",
                 "naam": "नाम",
                 "ke": "के",
-                "ho": "हो"
+                "ho": "हो",
+                "shiksha": "शिक्षा",
+                "vidhyarthi": "विद्यार्थी",
+                "shikshak": "शिक्षक"
             };
             
             let convertedText = preetiText;
@@ -1470,7 +1599,10 @@
                 "timro": "तिम्रो",
                 "naam": "नाम",
                 "ke": "के",
-                "ho": "हो"
+                "ho": "हो",
+                "shiksha": "शिक्षा",
+                "vidhyarthi": "विद्यार्थी",
+                "shikshak": "शिक्षक"
             };
             
             let convertedText = preetiText;
@@ -1479,6 +1611,106 @@
             }
             
             unicodeResult.textContent = convertedText || "रूपान्तरण परिणाम यहाँ देखिने";
+        }
+        
+        // Subscribe Button Functionality
+        const subscribeBtn = document.getElementById('subscribeBtn');
+        const status = document.getElementById('statusText');
+        const counter = document.getElementById('counter');
+        const badge = document.getElementById('badge');
+        const subscribed = localStorage.getItem('subscribed');
+        
+        // Initialize counter from localStorage or set to 0
+        let subscriberCount = parseInt(localStorage.getItem('subscriberCount')) || 0;
+        counter.textContent = subscriberCount;
+        
+        // Show badge if there are subscribers
+        if (subscriberCount > 0) {
+            badge.style.display = 'flex';
+            badge.textContent = subscriberCount > 9 ? '9+' : subscriberCount;
+        }
+
+        if (subscribed) {
+            subscribeBtn.disabled = true;
+            subscribeBtn.innerHTML = '<span class="bell-icon">🔔</span> <span>सदस्यता लिइसकेको</span> <span class="badge">' + (subscriberCount > 9 ? '9+' : subscriberCount) + '</span>';
+            status.textContent = 'सदस्यता लिनुभएकोमा धन्यवाद!';
+        }
+
+        subscribeBtn.addEventListener('click', () => {
+            localStorage.setItem('subscribed', 'true');
+            subscribeBtn.disabled = true;
+            subscribeBtn.innerHTML = '<span class="bell-icon">🔔</span> <span>सदस्यता लिइसकेको</span> <span class="badge">' + (subscriberCount > 9 ? '9+' : subscriberCount) + '</span>';
+            status.textContent = 'सदस्यता लिनुभएकोमा धन्यवाद!';
+            
+            // Increment counter
+            subscriberCount++;
+            localStorage.setItem('subscriberCount', subscriberCount);
+            counter.textContent = subscriberCount;
+            
+            // Update badge
+            badge.style.display = 'flex';
+            badge.textContent = subscriberCount > 9 ? '9+' : subscriberCount;
+            
+            // Here you would typically send data to your backend
+            // For shamser.info.np, you might want to add:
+            // fetch('https://shamser.info.np/api/subscribe', { method: 'POST' });
+        });
+        
+        // Like/Share Functionality for News Articles
+        function initializePostStats() {
+            // Initialize for each news article
+            for (let i = 1; i <= 3; i++) {
+                // Unique key based on the news article
+                const articleKey = `article_${i}`;
+
+                // --- VIEW COUNTER ---
+                const viewKey = `views_${articleKey}`;
+                let views = localStorage.getItem(viewKey);
+                views = views ? parseInt(views) + 1 : 1;
+                localStorage.setItem(viewKey, views);
+                document.getElementById(`viewCount${i}`).textContent = views;
+
+                // --- LIKE COUNTER ---
+                const likeKey = `likes_${articleKey}`;
+                let likes = localStorage.getItem(likeKey) || 0;
+                let liked = localStorage.getItem(likeKey + "_liked") === "true";
+
+                const likeBtn = document.getElementById(`likeBtn${i}`);
+                const likeCount = document.getElementById(`likeCount${i}`);
+
+                likeCount.textContent = likes;
+                if (liked) likeBtn.classList.add("liked");
+
+                likeBtn.addEventListener("click", () => {
+                    if (!liked) {
+                        likes++;
+                        liked = true;
+                        localStorage.setItem(likeKey, likes);
+                        localStorage.setItem(likeKey + "_liked", true);
+                        likeBtn.classList.add("liked");
+                        likeCount.textContent = likes;
+                    } else {
+                        alert("तपाईंले यो समाचार पहिले नै मनपराउनुभएको छ 👍");
+                    }
+                });
+
+                // --- SHARE BUTTON ---
+                document.getElementById(`shareBtn${i}`).addEventListener("click", async () => {
+                    const shareData = {
+                        title: document.title,
+                        text: "शैक्षिक सूचना केन्द्रबाट यो समाचार हेर्नुहोस्!",
+                        url: window.location.href
+                    };
+
+                    if (navigator.share) {
+                        await navigator.share(shareData);
+                    } else {
+                        // Fallback: copy link to clipboard
+                        navigator.clipboard.writeText(window.location.href);
+                        alert("लिंक क्लिपबोर्डमा प्रतिलिपि गरियो ✅");
+                    }
+                });
+            }
         }
         
         // Simple page view counter (for demo purposes)
@@ -1491,6 +1723,3 @@
     </script>
 </body>
 </html>
-
-
-
