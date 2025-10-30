@@ -1975,7 +1975,14 @@ data-size="small" >
   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal55">Share your contents</button>
 
 <!----------------------------------------------------------->
- <style>
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>नेपालको प्रमुख अनलाइन खबरहरु</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
         * {
             margin: 0;
             padding: 0;
@@ -2163,6 +2170,7 @@ data-size="small" >
             background: #fff;
             transition: all 0.3s ease;
             border-left: 3px solid var(--primary);
+            cursor: pointer;
         }
         
         .news-item:hover {
@@ -2314,6 +2322,135 @@ data-size="small" >
             margin-top: 15px;
         }
         
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 40px auto;
+            max-width: 900px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+            animation: modalFadeIn 0.3s ease;
+        }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .modal-header {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .close-modal:hover {
+            transform: scale(1.2);
+        }
+        
+        .modal-body {
+            padding: 25px;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        
+        .modal-news-item {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            transition: background-color 0.2s;
+        }
+        
+        .modal-news-item:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .modal-news-item:last-child {
+            border-bottom: none;
+        }
+        
+        .modal-news-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text);
+            text-decoration: none;
+            display: block;
+        }
+        
+        .modal-news-title:hover {
+            color: var(--primary);
+        }
+        
+        .modal-news-description {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .modal-news-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        .modal-news-source {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .view-all-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 20px auto;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .view-all-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
         /* Responsive styles */
         @media (max-width: 768px) {
             .header-content {
@@ -2340,6 +2477,15 @@ data-size="small" >
             .news-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .modal-content {
+                margin: 20px auto;
+                width: 95%;
+            }
+            
+            .modal-body {
+                padding: 15px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -2355,13 +2501,33 @@ data-size="small" >
             .section-title {
                 font-size: 1.3rem;
             }
+            
+            .modal-header {
+                padding: 15px;
+            }
+            
+            .modal-title {
+                font-size: 1.3rem;
+            }
         }
     </style>
-</head>
-<body>
+
     <div id="notification" class="notification">
         <i class="fas fa-check-circle"></i>
         <span>ताजा खबरहरु सफलतापूर्वक अद्यावधिक गरियो!</span>
+    </div>
+    
+    <!-- Modal for all news -->
+    <div id="news-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modal-title">सबै खबरहरु</h2>
+                <button class="close-modal" id="close-modal">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-news-container">
+                <!-- Modal content will be populated here -->
+            </div>
+        </div>
     </div>
     
     <header>
@@ -2393,6 +2559,11 @@ data-size="small" >
     </header>
     
     <div class="container">
+        <button id="view-all-btn" class="view-all-btn">
+            <i class="fas fa-list"></i>
+            <span id="view-all-text">सबै खबरहरु हेर्नुहोस्</span>
+        </button>
+        
         <div id="news-container" class="news-grid">
             <div class="loading">
                 <div class="loading-spinner"></div>
@@ -2431,7 +2602,9 @@ data-size="small" >
                 loadingText: "ताजा खबरहरु लोड हुँदैछ... कृपया प्रतीक्षा गर्नुहोस्",
                 notificationText: "ताजा खबरहरु सफलतापूर्वक अद्यावधिक गरियो!",
                 errorText: "समाचार लोड गर्न असफल। कृपया इन्टरनेट जडान जाँच गर्नुहोस्",
-                retryText: "पुनः प्रयास गर्नुहोस्"
+                retryText: "पुनः प्रयास गर्नुहोस्",
+                viewAllText: "सबै खबरहरु हेर्नुहोस्",
+                modalTitle: "सबै खबरहरु"
             },
             en: {
                 headerTitle: "Nepali News Aggregator",
@@ -2443,11 +2616,14 @@ data-size="small" >
                 loadingText: "Loading latest news... Please wait",
                 notificationText: "News updated successfully!",
                 errorText: "Failed to load news. Please check your internet connection",
-                retryText: "Try Again"
+                retryText: "Try Again",
+                viewAllText: "View All News",
+                modalTitle: "All News"
             }
         };
 
         let currentLanguage = 'ne';
+        let allNewsItems = []; // Store all news items for modal
 
         function setLanguage(lang) {
             currentLanguage = lang;
@@ -2459,6 +2635,8 @@ data-size="small" >
             document.getElementById('next-refresh-text').textContent = translations[lang].nextRefresh;
             document.getElementById('minutes-text').textContent = translations[lang].minutesText;
             document.getElementById('toggle-text').textContent = translations[lang].toggleText;
+            document.getElementById('view-all-text').textContent = translations[lang].viewAllText;
+            document.getElementById('modal-title').textContent = translations[lang].modalTitle;
             
             // Update loading text if visible
             const loadingElement = document.querySelector('.loading > div:last-child');
@@ -2695,6 +2873,29 @@ data-size="small" >
             return newsItem;
         }
 
+        // Create a modal news item
+        function createModalNewsItem(item, source) {
+            const modalItem = document.createElement('div');
+            modalItem.className = 'modal-news-item';
+            
+            const pubDate = formatDate(item.pubDate);
+            
+            // Clean up description
+            let description = item.description || '';
+            description = description.replace(/<[^>]*>/g, '');
+            
+            modalItem.innerHTML = `
+                <a href="${item.link}" target="_blank" class="modal-news-title">${item.title}</a>
+                <div class="modal-news-description">${description}</div>
+                <div class="modal-news-meta">
+                    <span class="modal-news-source">${source.name}</span>
+                    <span class="modal-news-date"><i class="far fa-clock"></i> ${pubDate}</span>
+                </div>
+            `;
+            
+            return modalItem;
+        }
+
         // Show notification
         function showNotification(message) {
             const notification = document.getElementById('notification');
@@ -2795,6 +2996,35 @@ data-size="small" >
             }
         }
 
+        // Show modal with all news
+        function showAllNewsModal() {
+            const modal = document.getElementById('news-modal');
+            const modalContainer = document.getElementById('modal-news-container');
+            
+            // Clear previous content
+            modalContainer.innerHTML = '';
+            
+            // Sort news by date (newest first)
+            const sortedNews = [...allNewsItems].sort((a, b) => {
+                return new Date(b.pubDate) - new Date(a.pubDate);
+            });
+            
+            // Add news items to modal
+            sortedNews.forEach(item => {
+                const modalItem = createModalNewsItem(item.news, item.source);
+                modalContainer.appendChild(modalItem);
+            });
+            
+            // Show modal
+            modal.style.display = 'block';
+        }
+
+        // Close modal
+        function closeModal() {
+            const modal = document.getElementById('news-modal');
+            modal.style.display = 'none';
+        }
+
         // Fetch and display news
         async function fetchAndDisplayNews() {
             const container = document.getElementById('news-container');
@@ -2813,6 +3043,9 @@ data-size="small" >
                 // Fetch news from all sources
                 const newsPromises = newsSources.map(source => fetchNewsFromSource(source));
                 const results = await Promise.allSettled(newsPromises);
+                
+                // Reset all news items
+                allNewsItems = [];
                 
                 // Process results
                 results.forEach((result, index) => {
@@ -2837,6 +3070,12 @@ data-size="small" >
                         result.value.forEach(item => {
                             const newsItem = createNewsItem(item, source);
                             itemsContainer.appendChild(newsItem);
+                            
+                            // Store for modal
+                            allNewsItems.push({
+                                news: item,
+                                source: source
+                            });
                         });
                         
                         container.appendChild(section);
@@ -2872,9 +3111,23 @@ data-size="small" >
                 fetchAndDisplayNews();
                 showNotification(translations[currentLanguage].notificationText);
             });
+            
+            // Add event listener for view all button
+            document.getElementById('view-all-btn').addEventListener('click', showAllNewsModal);
+            
+            // Add event listener for close modal button
+            document.getElementById('close-modal').addEventListener('click', closeModal);
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', (event) => {
+                const modal = document.getElementById('news-modal');
+                if (event.target === modal) {
+                    closeModal();
+                }
+            });
         });
     </script>
-   <!-------- ------ ------ End News script------ ------ ------ ------>   
+<!----------------------------->
 <!--------Online News-------------------------------------------->
  
 <!-----------------
@@ -5700,6 +5953,7 @@ clear: both;
  <!--------- <span><iframe scrolling="no" border="0" frameborder="0" marginwidth="0" marginheight="0" allowtransparency="true" src="https://www.ashesh.com.np/linknepali-time.php?dwn=only&font_color=333333&font_size=14&api=292151o025" width="165" height="22"></iframe> 
 </span>
     </small>GMT -->
+
 
 
 
