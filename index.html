@@ -1974,13 +1974,8 @@ data-size="small" >
 <br>   <!-- Trigger the modal with a button -->
   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal55">Share your contents</button>
 
-<!----------------------------------------------------------->
-<!DOCTYPE html>
-<html lang="ne">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>नेपालको प्रमुख अनलाइन खबरहरु</title>
+<!------------------------------नेपालको प्रमुख अनलाइन खबरहरु----------------------------->
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -2006,13 +2001,20 @@ data-size="small" >
             background: linear-gradient(135deg, #f0f2f5 0%, #e4e7eb 100%);
             color: var(--text);
             line-height: 1.6;
-            padding-bottom: 40px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
         
         header {
@@ -2020,11 +2022,7 @@ data-size="small" >
             color: white;
             padding: 15px 0;
             text-align: center;
-            margin-bottom: 25px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            position: sticky;
-            top: 0;
-            z-index: 100;
         }
         
         .header-content {
@@ -2116,105 +2114,67 @@ data-size="small" >
             transform: translateY(-2px);
         }
         
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
+        .main-content {
+            text-align: center;
+            padding: 40px 20px;
+            max-width: 700px;
         }
         
-        .news-section {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            border-left: 4px solid var(--primary);
+        .welcome-text {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--text);
+            font-weight: 600;
         }
         
-        .section-header {
+        .description {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+        
+        .open-news-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.2rem;
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--primary-light);
+            gap: 12px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            margin: 0 auto;
         }
         
-        .section-title {
-            font-size: 1.5rem;
-            color: var(--primary);
-            font-weight: 700;
+        .open-news-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.25);
         }
         
-        .section-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: var(--primary-light);
+        .open-news-btn i {
+            font-size: 1.4rem;
+        }
+        
+        .news-count {
+            margin-top: 25px;
+            font-size: 1rem;
+            color: var(--text-light);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
-            color: var(--primary);
+            gap: 8px;
         }
         
-        .news-items {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .news-item {
-            padding: 15px;
-            border-radius: 8px;
-            background: #fff;
-            transition: all 0.3s ease;
-            border-left: 3px solid var(--primary);
-            cursor: pointer;
-        }
-        
-        .news-item:hover {
-            background: #f9f9f9;
-            transform: translateX(5px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-        }
-        
-        .news-title {
-            color: var(--text);
+        .news-count-number {
             font-weight: 700;
-            text-decoration: none;
-            font-size: 1.15rem;
-            margin-bottom: 8px;
-            display: block;
-            transition: color 0.2s ease;
-            line-height: 1.4;
-        }
-        
-        .news-title:hover {
             color: var(--primary);
-        }
-        
-        .news-description {
-            color: var(--text-light);
-            font-size: 0.95rem;
-            margin-bottom: 12px;
-            line-height: 1.5;
-        }
-        
-        .news-meta {
-            color: var(--text-light);
-            font-size: 0.85rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 10px;
-            border-top: 1px solid var(--border);
-        }
-        
-        .news-date {
-            display: flex;
-            align-items: center;
-            gap: 5px;
+            font-size: 1.2rem;
         }
         
         .loading {
@@ -2226,7 +2186,6 @@ data-size="small" >
             flex-direction: column;
             align-items: center;
             gap: 20px;
-            grid-column: 1 / -1;
         }
         
         .loading-spinner {
@@ -2290,7 +2249,7 @@ data-size="small" >
             padding: 25px;
             background: linear-gradient(to right, #222, #333);
             color: #eee;
-            margin-top: 50px;
+            margin-top: auto;
             border-top: 4px solid var(--primary);
         }
         
@@ -2339,7 +2298,7 @@ data-size="small" >
         .modal-content {
             background-color: white;
             margin: 40px auto;
-            max-width: 900px;
+            max-width: 1000px;
             border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             overflow: hidden;
@@ -2384,52 +2343,114 @@ data-size="small" >
             overflow-y: auto;
         }
         
-        .modal-news-item {
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .news-section {
+            background: var(--card-bg);
+            border-radius: 12px;
             padding: 20px;
-            border-bottom: 1px solid var(--border);
-            transition: background-color 0.2s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--primary);
         }
         
-        .modal-news-item:hover {
-            background-color: #f9f9f9;
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-light);
         }
         
-        .modal-news-item:last-child {
-            border-bottom: none;
-        }
-        
-        .modal-news-title {
+        .section-title {
             font-size: 1.3rem;
+            color: var(--primary);
             font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--text);
-            text-decoration: none;
-            display: block;
         }
         
-        .modal-news-title:hover {
+        .section-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
             color: var(--primary);
         }
         
-        .modal-news-description {
-            color: var(--text-light);
-            line-height: 1.6;
-            margin-bottom: 15px;
+        .news-items {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
         
-        .modal-news-meta {
-            display: flex;
-            justify-content: space-between;
+        .news-item {
+            padding: 15px;
+            border-radius: 8px;
+            background: #fff;
+            transition: all 0.3s ease;
+            border-left: 3px solid var(--primary);
+            cursor: pointer;
+        }
+        
+        .news-item:hover {
+            background: #f9f9f9;
+            transform: translateX(5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+        
+        .news-title {
+            color: var(--text);
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            display: block;
+            transition: color 0.2s ease;
+            line-height: 1.4;
+        }
+        
+        .news-title:hover {
+            color: var(--primary);
+        }
+        
+        .news-description {
             color: var(--text-light);
             font-size: 0.9rem;
+            margin-bottom: 12px;
+            line-height: 1.5;
         }
         
-        .modal-news-source {
-            font-weight: 600;
-            color: var(--primary);
+        .news-meta {
+            color: var(--text-light);
+            font-size: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 10px;
+            border-top: 1px solid var(--border);
         }
         
-        .view-all-btn {
+        .news-date {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .modal-actions {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .modal-action-btn {
             background: var(--primary);
             color: white;
             border: none;
@@ -2440,15 +2461,21 @@ data-size="small" >
             display: flex;
             align-items: center;
             gap: 8px;
-            margin: 20px auto;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         
-        .view-all-btn:hover {
+        .modal-action-btn:hover {
             background: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .modal-action-btn.secondary {
+            background: #f0f0f0;
+            color: var(--text);
+        }
+        
+        .modal-action-btn.secondary:hover {
+            background: #e0e0e0;
         }
         
         /* Responsive styles */
@@ -2486,6 +2513,16 @@ data-size="small" >
             .modal-body {
                 padding: 15px;
             }
+            
+            .modal-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .modal-action-btn {
+                width: 100%;
+                justify-content: center;
+            }
         }
         
         @media (max-width: 480px) {
@@ -2499,7 +2536,7 @@ data-size="small" >
             }
             
             .section-title {
-                font-size: 1.3rem;
+                font-size: 1.1rem;
             }
             
             .modal-header {
@@ -2509,6 +2546,11 @@ data-size="small" >
             .modal-title {
                 font-size: 1.3rem;
             }
+            
+            .open-news-btn {
+                padding: 12px 30px;
+                font-size: 1.1rem;
+            }
         }
     </style>
 
@@ -2517,15 +2559,23 @@ data-size="small" >
         <span>ताजा खबरहरु सफलतापूर्वक अद्यावधिक गरियो!</span>
     </div>
     
-    <!-- Modal for all news -->
+    <!-- Modal for news -->
     <div id="news-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title" id="modal-title">सबै खबरहरु</h2>
+                <h2 class="modal-title" id="modal-title">नेपालका ताजा खबरहरु</h2>
                 <button class="close-modal" id="close-modal">&times;</button>
             </div>
-            <div class="modal-body" id="modal-news-container">
-                <!-- Modal content will be populated here -->
+            <div class="modal-body" id="modal-body">
+                <!-- News content will be populated here -->
+            </div>
+            <div class="modal-actions">
+                <button class="modal-action-btn secondary" id="close-modal-btn">
+                    <i class="fas fa-times"></i> <span id="close-modal-text">बन्द गर्नुहोस्</span>
+                </button>
+                <button class="modal-action-btn" id="refresh-modal-btn">
+                    <i class="fas fa-sync-alt"></i> <span id="refresh-modal-text">ताजा खबर लोड गर्नुहोस्</span>
+                </button>
             </div>
         </div>
     </div>
@@ -2559,15 +2609,20 @@ data-size="small" >
     </header>
     
     <div class="container">
-        <button id="view-all-btn" class="view-all-btn">
-            <i class="fas fa-list"></i>
-            <span id="view-all-text">सबै खबरहरु हेर्नुहोस्</span>
-        </button>
-        
-        <div id="news-container" class="news-grid">
-            <div class="loading">
-                <div class="loading-spinner"></div>
-                <div>ताजा खबरहरु लोड हुँदैछ... कृपया प्रतीक्षा गर्नुहोस्</div>
+        <div class="main-content">
+            <h2 class="welcome-text" id="welcome-text">नेपालका प्रमुख समाचारहरु एकै ठाउँमा</h2>
+            <p class="description" id="description-text">
+                यस एप्लिकेसनमा तपाईंले नेपालका प्रमुख अनलाइन समाचार स्रोतहरुबाट ताजा खबरहरु एकै ठाउँमा हेर्न सक्नुहुन्छ। 
+                तलको बटनमा क्लिक गरेर ताजा खबरहरु हेर्नुहोस्।
+            </p>
+            <button class="open-news-btn" id="open-news-btn">
+                <i class="fas fa-newspaper"></i>
+                <span id="open-news-text">खबरहरु हेर्नुहोस्</span>
+            </button>
+            <div class="news-count">
+                <i class="fas fa-database"></i>
+                <span id="news-count-text">कुल खबरहरु: </span>
+                <span class="news-count-number" id="news-count">0</span>
             </div>
         </div>
     </div>
@@ -2603,8 +2658,13 @@ data-size="small" >
                 notificationText: "ताजा खबरहरु सफलतापूर्वक अद्यावधिक गरियो!",
                 errorText: "समाचार लोड गर्न असफल। कृपया इन्टरनेट जडान जाँच गर्नुहोस्",
                 retryText: "पुनः प्रयास गर्नुहोस्",
-                viewAllText: "सबै खबरहरु हेर्नुहोस्",
-                modalTitle: "सबै खबरहरु"
+                welcomeText: "नेपालका प्रमुख समाचारहरु एकै ठाउँमा",
+                descriptionText: "यस एप्लिकेसनमा तपाईंले नेपालका प्रमुख अनलाइन समाचार स्रोतहरुबाट ताजा खबरहरु एकै ठाउँमा हेर्न सक्नुहुन्छ। तलको बटनमा क्लिक गरेर ताजा खबरहरु हेर्नुहोस्।",
+                openNewsText: "खबरहरु हेर्नुहोस्",
+                newsCountText: "कुल खबरहरु: ",
+                modalTitle: "नेपालका ताजा खबरहरु",
+                closeModalText: "बन्द गर्नुहोस्",
+                refreshModalText: "ताजा खबर लोड गर्नुहोस्"
             },
             en: {
                 headerTitle: "Nepali News Aggregator",
@@ -2617,13 +2677,18 @@ data-size="small" >
                 notificationText: "News updated successfully!",
                 errorText: "Failed to load news. Please check your internet connection",
                 retryText: "Try Again",
-                viewAllText: "View All News",
-                modalTitle: "All News"
+                welcomeText: "Nepal's Top News in One Place",
+                descriptionText: "This application allows you to view the latest news from Nepal's major online news sources in one place. Click the button below to view the latest news.",
+                openNewsText: "View News",
+                newsCountText: "Total News: ",
+                modalTitle: "Latest News from Nepal",
+                closeModalText: "Close",
+                refreshModalText: "Load Latest News"
             }
         };
 
         let currentLanguage = 'ne';
-        let allNewsItems = []; // Store all news items for modal
+        let allNewsItems = [];
 
         function setLanguage(lang) {
             currentLanguage = lang;
@@ -2635,14 +2700,13 @@ data-size="small" >
             document.getElementById('next-refresh-text').textContent = translations[lang].nextRefresh;
             document.getElementById('minutes-text').textContent = translations[lang].minutesText;
             document.getElementById('toggle-text').textContent = translations[lang].toggleText;
-            document.getElementById('view-all-text').textContent = translations[lang].viewAllText;
+            document.getElementById('welcome-text').textContent = translations[lang].welcomeText;
+            document.getElementById('description-text').textContent = translations[lang].descriptionText;
+            document.getElementById('open-news-text').textContent = translations[lang].openNewsText;
+            document.getElementById('news-count-text').textContent = translations[lang].newsCountText;
             document.getElementById('modal-title').textContent = translations[lang].modalTitle;
-            
-            // Update loading text if visible
-            const loadingElement = document.querySelector('.loading > div:last-child');
-            if (loadingElement) {
-                loadingElement.textContent = translations[lang].loadingText;
-            }
+            document.getElementById('close-modal-text').textContent = translations[lang].closeModalText;
+            document.getElementById('refresh-modal-text').textContent = translations[lang].refreshModalText;
             
             // Update notification text if visible
             const notificationText = document.querySelector('#notification span');
@@ -2710,127 +2774,6 @@ data-size="small" >
                 maxItems: 5,
                 icon: "fas fa-desktop",
                 color: "#0288d1"
-            },
-            {
-                name: "Ekantipur",
-                rss: "https://ekantipur.com/rss",
-                fallbacks: [
-                    "https://api.rss2json.com/v1/api.json?rss_url=https://ekantipur.com/rss",
-                    "https://corsproxy.io/?https://ekantipur.com/rss"
-                ],
-                maxItems: 5,
-                icon: "fas fa-book-open",
-                color: "#7b1fa2"
-            },
-            {
-                name: "Bahrakhari",
-                rss: "https://baahrakhari.com/rss",
-                fallbacks: [
-                    "https://api.rss2json.com/v1/api.json?rss_url=https://baahrakhari.com/rss",
-                    "https://corsproxy.io/?https://baahrakhari.com/rss"
-                ],
-                maxItems: 5,
-                icon: "fas fa-microphone-alt",
-                color: "#ff9800"
-            },
-            {
-                name: "Nayapatrika",
-                rss: "https://nayapatrikadaily.com/rss",
-                fallbacks: [
-                    "https://api.rss2json.com/v1/api.json?rss_url=https://nayapatrikadaily.com/rss",
-                    "https://corsproxy.io/?https://nayapatrikadaily.com/rss"
-                ],
-                maxItems: 5,
-                icon: "fas fa-pen-nib",
-                color: "#009688"
-            },
-            {
-                name: "Nagrik News",
-                rss: "https://nagriknews.com/feed/",
-                fallbacks: [
-                    "https://api.rss2json.com/v1/api.json?rss_url=https://nagriknews.com/feed/",
-                    "https://corsproxy.io/?https://nagriknews.com/feed/"
-                ],
-                maxItems: 5,
-                icon: "fas fa-users",
-                color: "#795548"
-            },
-            {
-                name: "Annapurna Post",
-                rss: "https://www.annapurnapost.com/rss",
-                fallbacks: [
-                    "https://api.rss2json.com/v1/api.json?rss_url=https://www.annapurnapost.com/rss",
-                    "https://corsproxy.io/?https://www.annapurnapost.com/rss"
-                ],
-                maxItems: 5,
-                icon: "fas fa-mountain",
-                color: "#9c27b0"
-            },
-            {
-                name: "Hamro Patro",
-                rss: "https://www.hamropatro.com/news/rss",
-                fallbacks: [
-                    "https://api.rss2json.com/v1/api.json?rss_url=https://www.hamropatro.com/news/rss",
-                    "https://corsproxy.io/?https://www.hamropatro.com/news/rss"
-                ],
-                maxItems: 2,
-                icon: "fas fa-calendar-alt",
-                color: "#e91e63"
-            },
-            {
-                name: "Ujyaalo Online",
-                rss: "https://ujyaaloonline.com/rss",
-                fallbacks: [
-                    "https://api.rss2json.com/v1/api.json?rss_url=https://ujyaaloonline.com/rss",
-                    "https://corsproxy.io/?https://ujyaaloonline.com/rss"
-                ],
-                maxItems: 5,
-                icon: "fas fa-lightbulb",
-                color: "#ff5722"
-            },
-            {
-                name: "Nepal Live",
-                rss: "https://nepallive.com/feed",
-                fallbacks: [
-                    "https://api.rss2json.com/v1/api.json?rss_url=https://nepallive.com/feed",
-                    "https://corsproxy.io/?https://nepallive.com/feed"
-                ],
-                maxItems: 5,
-                icon: "fas fa-play-circle",
-                color: "#3f51b5"
-            },
-            {
-                name: "Rising Nepal",
-                rss: "https://risingnepaldaily.com/rss",
-                fallbacks: [
-                    "https://api.rss2json.com/v1/api.json?rss_url=https://risingnepaldaily.com/rss",
-                    "https://corsproxy.io/?https://risingnepaldaily.com/rss"
-                ],
-                maxItems: 5,
-                icon: "fas fa-chart-line",
-                color: "#4caf50"
-            },
-            {
-                name: "Ejanakpur Today",
-                rss: "https://ejanakpurtoday.com/feed",
-                fallbacks: [
-                    "https://api.rss2json.com/v1/api.json?rss_url=https://ejanakpurtoday.com/feed",
-                    "https://corsproxy.io/?https://ejanakpurtoday.com/feed"
-                ],
-                maxItems: 5,
-                icon: "fas fa-map-marker-alt",
-                color: "#f44336"
-            },
-            {
-                name: "Himal Khabar",
-                rss: "https://www.himalkhabar.com/feed",
-                fallbacks: [
-                    "https://api.rss2json.com/v1/api.json?rss_url=https://www.himalkhabar.com/feed",
-                    "https://corsproxy.io/?https://www.himalkhabar.com/feed"
-                ],
-                maxItems: 5,
-                icon: "fas fa-tree",
-                color: "#8bc34a"
             }
         ];
 
@@ -2864,7 +2807,7 @@ data-size="small" >
             
             newsItem.innerHTML = `
                 <a href="${item.link}" target="_blank" class="news-title">${item.title}</a>
-                <div class="news-description">${description.substring(0, 200)}${description.length > 200 ? '...' : ''}</div>
+                <div class="news-description">${description.substring(0, 150)}${description.length > 150 ? '...' : ''}</div>
                 <div class="news-meta">
                     <span class="news-date"><i class="far fa-clock"></i> ${pubDate}</span>
                 </div>
@@ -2873,27 +2816,80 @@ data-size="small" >
             return newsItem;
         }
 
-        // Create a modal news item
-        function createModalNewsItem(item, source) {
-            const modalItem = document.createElement('div');
-            modalItem.className = 'modal-news-item';
+        // Open modal with news
+        function openNewsModal() {
+            const modal = document.getElementById('news-modal');
+            const modalBody = document.getElementById('modal-body');
             
-            const pubDate = formatDate(item.pubDate);
-            
-            // Clean up description
-            let description = item.description || '';
-            description = description.replace(/<[^>]*>/g, '');
-            
-            modalItem.innerHTML = `
-                <a href="${item.link}" target="_blank" class="modal-news-title">${item.title}</a>
-                <div class="modal-news-description">${description}</div>
-                <div class="modal-news-meta">
-                    <span class="modal-news-source">${source.name}</span>
-                    <span class="modal-news-date"><i class="far fa-clock"></i> ${pubDate}</span>
+            // Show loading state
+            modalBody.innerHTML = `
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <div>${translations[currentLanguage].loadingText}</div>
                 </div>
             `;
             
-            return modalItem;
+            // Show modal
+            modal.style.display = 'block';
+            
+            // Load news if not already loaded
+            if (allNewsItems.length === 0) {
+                fetchAndDisplayNews();
+            } else {
+                displayNewsInModal();
+            }
+        }
+
+        // Display news in modal
+        function displayNewsInModal() {
+            const modalBody = document.getElementById('modal-body');
+            
+            // Clear previous content
+            modalBody.innerHTML = '';
+            
+            // Create news grid
+            const newsGrid = document.createElement('div');
+            newsGrid.className = 'news-grid';
+            
+            // Process news sources
+            newsSources.forEach(source => {
+                const sourceNews = allNewsItems.filter(item => item.source === source.name);
+                
+                if (sourceNews.length > 0) {
+                    const section = document.createElement('div');
+                    section.className = 'news-section';
+                    
+                    section.innerHTML = `
+                        <div class="section-header">
+                            <div class="section-icon" style="background: ${source.color}20; color: ${source.color}">
+                                <i class="${source.icon}"></i>
+                            </div>
+                            <h2 class="section-title">${source.name}</h2>
+                        </div>
+                        <div class="news-items" id="${source.name.toLowerCase().replace(/\s+/g, '-')}-news"></div>
+                    `;
+                    
+                    const itemsContainer = section.querySelector('.news-items');
+                    
+                    sourceNews.forEach(item => {
+                        const newsItem = createNewsItem(item.news, source);
+                        itemsContainer.appendChild(newsItem);
+                    });
+                    
+                    newsGrid.appendChild(section);
+                }
+            });
+            
+            modalBody.appendChild(newsGrid);
+            
+            // Update news count
+            document.getElementById('news-count').textContent = allNewsItems.length;
+        }
+
+        // Close modal
+        function closeModal() {
+            const modal = document.getElementById('news-modal');
+            modal.style.display = 'none';
         }
 
         // Show notification
@@ -2996,50 +2992,9 @@ data-size="small" >
             }
         }
 
-        // Show modal with all news
-        function showAllNewsModal() {
-            const modal = document.getElementById('news-modal');
-            const modalContainer = document.getElementById('modal-news-container');
-            
-            // Clear previous content
-            modalContainer.innerHTML = '';
-            
-            // Sort news by date (newest first)
-            const sortedNews = [...allNewsItems].sort((a, b) => {
-                return new Date(b.pubDate) - new Date(a.pubDate);
-            });
-            
-            // Add news items to modal
-            sortedNews.forEach(item => {
-                const modalItem = createModalNewsItem(item.news, item.source);
-                modalContainer.appendChild(modalItem);
-            });
-            
-            // Show modal
-            modal.style.display = 'block';
-        }
-
-        // Close modal
-        function closeModal() {
-            const modal = document.getElementById('news-modal');
-            modal.style.display = 'none';
-        }
-
         // Fetch and display news
         async function fetchAndDisplayNews() {
-            const container = document.getElementById('news-container');
-            
             try {
-                container.innerHTML = `
-                    <div class="loading">
-                        <div class="loading-spinner"></div>
-                        <div>${translations[currentLanguage].loadingText}</div>
-                    </div>
-                `;
-                
-                // Clear existing news
-                container.innerHTML = '';
-                
                 // Fetch news from all sources
                 const newsPromises = newsSources.map(source => fetchNewsFromSource(source));
                 const results = await Promise.allSettled(newsPromises);
@@ -3052,33 +3007,13 @@ data-size="small" >
                     const source = newsSources[index];
                     
                     if (result.status === 'fulfilled' && result.value.length > 0) {
-                        const section = document.createElement('div');
-                        section.className = 'news-section';
-                        
-                        section.innerHTML = `
-                            <div class="section-header">
-                                <div class="section-icon" style="background: ${source.color}20; color: ${source.color}">
-                                    <i class="${source.icon}"></i>
-                                </div>
-                                <h2 class="section-title">${source.name}</h2>
-                            </div>
-                            <div class="news-items" id="${source.name.toLowerCase().replace(/\s+/g, '-')}-news"></div>
-                        `;
-                        
-                        const itemsContainer = section.querySelector('.news-items');
-                        
                         result.value.forEach(item => {
-                            const newsItem = createNewsItem(item, source);
-                            itemsContainer.appendChild(newsItem);
-                            
                             // Store for modal
                             allNewsItems.push({
                                 news: item,
-                                source: source
+                                source: source.name
                             });
                         });
-                        
-                        container.appendChild(section);
                     }
                 });
                 
@@ -3086,25 +3021,38 @@ data-size="small" >
                 updateRefreshTime();
                 showNotification(translations[currentLanguage].notificationText);
                 
+                // Update news count
+                document.getElementById('news-count').textContent = allNewsItems.length;
+                
+                // Display news in modal if it's open
+                const modal = document.getElementById('news-modal');
+                if (modal.style.display === 'block') {
+                    displayNewsInModal();
+                }
+                
                 // Start countdown for next refresh
                 startCountdown(10);
             } catch (error) {
                 console.error('Error loading news:', error);
-                container.innerHTML = `
-                    <div class="error-message">
-                        <i class="fas fa-exclamation-circle"></i>
-                        ${translations[currentLanguage].errorText}
-                        <button class="refresh-btn" onclick="fetchAndDisplayNews()">
-                            <i class="fas fa-redo"></i> ${translations[currentLanguage].retryText}
-                        </button>
-                    </div>
-                `;
+                const modalBody = document.getElementById('modal-body');
+                if (modalBody) {
+                    modalBody.innerHTML = `
+                        <div class="error-message">
+                            <i class="fas fa-exclamation-circle"></i>
+                            ${translations[currentLanguage].errorText}
+                            <button class="refresh-btn" onclick="fetchAndDisplayNews()">
+                                <i class="fas fa-redo"></i> ${translations[currentLanguage].retryText}
+                            </button>
+                        </div>
+                    `;
+                }
             }
         }
 
         // Initial load
         document.addEventListener('DOMContentLoaded', () => {
-            fetchAndDisplayNews();
+            // Add event listener for open news button
+            document.getElementById('open-news-btn').addEventListener('click', openNewsModal);
             
             // Add event listener for refresh button
             document.getElementById('refresh-all-btn').addEventListener('click', () => {
@@ -3112,11 +3060,15 @@ data-size="small" >
                 showNotification(translations[currentLanguage].notificationText);
             });
             
-            // Add event listener for view all button
-            document.getElementById('view-all-btn').addEventListener('click', showAllNewsModal);
+            // Add event listener for refresh modal button
+            document.getElementById('refresh-modal-btn').addEventListener('click', () => {
+                fetchAndDisplayNews();
+                showNotification(translations[currentLanguage].notificationText);
+            });
             
             // Add event listener for close modal button
             document.getElementById('close-modal').addEventListener('click', closeModal);
+            document.getElementById('close-modal-btn').addEventListener('click', closeModal);
             
             // Close modal when clicking outside
             window.addEventListener('click', (event) => {
@@ -3125,9 +3077,12 @@ data-size="small" >
                     closeModal();
                 }
             });
+            
+            // Load initial news data
+            fetchAndDisplayNews();
         });
     </script>
-<!----------------------------->
+
 <!--------Online News-------------------------------------------->
  
 <!-----------------
@@ -5953,6 +5908,7 @@ clear: both;
  <!--------- <span><iframe scrolling="no" border="0" frameborder="0" marginwidth="0" marginheight="0" allowtransparency="true" src="https://www.ashesh.com.np/linknepali-time.php?dwn=only&font_color=333333&font_size=14&api=292151o025" width="165" height="22"></iframe> 
 </span>
     </small>GMT -->
+
 
 
 
