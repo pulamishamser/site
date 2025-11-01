@@ -94,17 +94,8 @@
 
 
 <!-- Google Translate Script -->
-<script type="text/javascript">
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({
-    pageLanguage: 'en', // Set the default page language (e.g., English)
-    includedLanguages: 'en,ne', // Customize this list for included languages (English, Nepali)
-    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-    autoDisplay: false // Set to true if you want the widget to display automatically
-  }, 'google_translate_element');
-}
-</script>
-<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
 
 
    
@@ -267,7 +258,48 @@ body,
 }
 </style>
 
-<div id="google_translate_element"></div>
+
+  <style>
+    /* small styling for the widget */
+    #translate-wrap { margin: 12px; display:flex; gap:10px; align-items:center; }
+    #google_translate_element { display:inline-block; }
+  </style>
+
+  <header id="translate-wrap">
+    <span>Language:</span>
+    <div id="google_translate_element"></div>
+    <!-- optional quick links that open Google Translate in a new tab (fallback) -->
+    <a id="gt-ne-en" href="#" target="_blank" rel="noopener" style="margin-left:8px;">Nepali → English (new tab)</a>
+    <a id="gt-en-ne" href="#" target="_blank" rel="noopener" style="margin-left:6px;">English → Nepali (new tab)</a>
+  </header>
+
+
+  <!-- Google Translate element script (hosted by Google) -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'ne',                // original language of your page
+        includedLanguages: 'ne,en',       // only show Nepali and English in dropdown
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript"
+    src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+  </script>
+
+  <script>
+    // Optional: quick links that open the site translated in a new tab (fallback)
+    // Replace location.href if needed (here uses current page URL)
+    const currentUrl = encodeURIComponent(window.location.href);
+    document.getElementById('gt-ne-en').href =
+      'https://translate.google.com/translate?sl=ne&tl=en&u=' + currentUrl;
+    document.getElementById('gt-en-ne').href =
+      'https://translate.google.com/translate?sl=en&tl=ne&u=' + currentUrl;
+  </script>
+
+
 
 
 
@@ -4889,6 +4921,7 @@ clear: both;
   function translatePage(lang) {
     const frame = document.querySelector('.goog-te-menu-frame');
     if (!frame) return alert('Please wait, load
+
 
 
 
