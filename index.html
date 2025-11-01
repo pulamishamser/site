@@ -271,72 +271,135 @@ body,
 }
 </style>
 <!-- Google Translate Script -->
+
+<!-- ========== GOOGLE TRANSLATE ========== -->
+<div id="google_translate_element" style="display:none;"></div>
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'ne',
+      includedLanguages: 'ne,en',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+  }
+</script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<!-- ========== STYLE ========== -->
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    background: #fafafa;
+  }
+
+  .lang-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    padding: 10px 20px;
+    border-bottom: 1px solid #eee;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    z-index: 9999;
+  }
+
+  .g-icon {
+    background: #4285F4;
+    color: white;
+    font-weight: bold;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+
+  .lang-btns {
+    display: flex;
+    align-items: center;
+  }
+
+  .lang {
+    background: none;
+    border: none;
+    color: #1565c0;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 0 10px;
+  }
+
+  .lang.active {
+    border-bottom: 2px solid #1565c0;
+  }
+
+  .dots {
+    font-size: 20px;
+    color: #222;
+  }
+
+  .done {
+    background: none;
+    border: none;
+    color: #1565c0;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .content {
+    padding: 80px 20px;
+    font-size: 20px;
+    line-height: 1.6;
+  }
+</style>
+</head>
+
+<body>
+
+<!-- ========== LANGUAGE SWITCH BAR ========== -->
 <div class="lang-bar">
   <div class="g-icon">G</div>
-  <button class="lang active">NEPALI</button>
-  <button class="lang">ENGLISH</button>
+  <div class="lang-btns">
+    <button class="lang active" onclick="changeLang('ne')">NEPALI</button>
+    <button class="lang" onclick="changeLang('en')">ENGLISH</button>
+  </div>
   <div class="dots">•••</div>
   <button class="done">Done</button>
 </div>
+
+
+
+<!-- ========== SCRIPT ========== -->
 <script>
-   const buttons = document.querySelectorAll('.lang');
-
-buttons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    buttons.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+  const langBtns = document.querySelectorAll('.lang');
+  langBtns.forEach(b => {
+    b.addEventListener('click', () => {
+      langBtns.forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+    });
   });
-});
 
+  function changeLang(lang) {
+    const interval = setInterval(() => {
+      const iframe = document.querySelector('.goog-te-menu-frame');
+      if (iframe) {
+        const select = iframe.contentDocument.querySelector('.goog-te-combo');
+        if (select) {
+          select.value = lang;
+          select.dispatchEvent(new Event('change'));
+          clearInterval(interval);
+        }
+      }
+    }, 500);
+  }
 </script>
-<style>
-   .lang-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #fff;
-  padding: 10px 20px;
-  font-family: 'Segoe UI', sans-serif;
-  border-bottom: 1px solid #eee;
-}
 
-.g-icon {
-  background: #4285F4;
-  color: white;
-  font-weight: bold;
-  padding: 6px 10px;
-  border-radius: 4px;
-  margin-right: 10px;
-}
 
-.lang {
-  background: none;
-  border: none;
-  color: #1565c0;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-  margin: 0 10px;
-}
 
-.lang.active {
-  border-bottom: 2px solid #1565c0;
-}
-
-.dots {
-  font-size: 20px;
-  color: #222;
-}
-
-.done {
-  background: none;
-  border: none;
-  color: #1565c0;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-}
-</style>
 
 
 
@@ -4965,6 +5028,7 @@ clear: both;
   function translatePage(lang) {
     const frame = document.querySelector('.goog-te-menu-frame');
     if (!frame) return alert('Please wait, load
+
 
 
 
