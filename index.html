@@ -850,9 +850,82 @@ Grid </a>
 
 
  
+<!-----Nep Eng Translate at top---->
+<div class="lang-bar">
+  <div class="g-icon">G</div>
+  <div>
+    <button class="lang active" onclick="translatePage('ne')">NEPALI</button>
+    <button class="lang" onclick="translatePage('en')">ENGLISH</button>
+  </div>
+  <div class="dots">•••</div>
+  <button class="done">Done</button>
+</div>
 
+<!-- Google Translate Script -->
+<div id="google_translate_element" style="display:none;"></div>
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'ne',
+      includedLanguages: 'ne,en',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+  }
+</script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+  }
 
+  .lang-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    padding: 10px 20px;
+    border-bottom: 1px solid #eee;
+  }
 
+  .g-icon {
+    background: #4285F4;
+    color: white;
+    font-weight: bold;
+    padding: 6px 10px;
+    border-radius: 4px;
+    margin-right: 10px;
+    font-size: 16px;
+  }
+
+  .lang {
+    background: none;
+    border: none;
+    color: #1565c0;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 0 10px;
+  }
+
+  .lang.active {
+    border-bottom: 2px solid #1565c0;
+  }
+
+  .dots {
+    font-size: 20px;
+    color: #222;
+  }
+
+  .done {
+    background: none;
+    border: none;
+    color: #1565c0;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+</style>
 
 
 
@@ -4874,92 +4947,8 @@ clear: both;
 
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Language Switch Example</title>
 
-<!-- Google Translate Script -->
-<div id="google_translate_element" style="display:none;"></div>
-<script type="text/javascript">
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement({
-      pageLanguage: 'ne',
-      includedLanguages: 'ne,en',
-      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-    }, 'google_translate_element');
-  }
-</script>
-<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-<style>
-  body {
-    font-family: 'Segoe UI', sans-serif;
-    margin: 0;
-  }
-
-  .lang-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #fff;
-    padding: 10px 20px;
-    border-bottom: 1px solid #eee;
-  }
-
-  .g-icon {
-    background: #4285F4;
-    color: white;
-    font-weight: bold;
-    padding: 6px 10px;
-    border-radius: 4px;
-    margin-right: 10px;
-    font-size: 16px;
-  }
-
-  .lang {
-    background: none;
-    border: none;
-    color: #1565c0;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    margin: 0 10px;
-  }
-
-  .lang.active {
-    border-bottom: 2px solid #1565c0;
-  }
-
-  .dots {
-    font-size: 20px;
-    color: #222;
-  }
-
-  .done {
-    background: none;
-    border: none;
-    color: #1565c0;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-</style>
-</head>
-
-<body>
-
-<div class="lang-bar">
-  <div class="g-icon">G</div>
-  <div>
-    <button class="lang active" onclick="translatePage('ne')">NEPALI</button>
-    <button class="lang" onclick="translatePage('en')">ENGLISH</button>
-  </div>
-  <div class="dots">•••</div>
-  <button class="done">Done</button>
-</div>
 
 <h2 style="padding:20px;">यो एक परीक्षण लेख हो। This is a sample text.</h2>
 
@@ -4975,6 +4964,7 @@ clear: both;
   function translatePage(lang) {
     const frame = document.querySelector('.goog-te-menu-frame');
     if (!frame) return alert('Please wait, load
+
 
 
 
