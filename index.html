@@ -274,104 +274,6 @@ body,
 </style>
 <!-- Google Translate Script -->
 
-<!-- ===== LANGUAGE SWITCHER BAR ===== -->
-<div class="language-switcher">
-  <button class="lang-btn active" id="nepali">NEPALI</button>
-  <button class="lang-btn" id="english">ENGLISH</button>
-  <div class="dots">•••</div>
-  <button class="done-btn" id="done">Done</button>
-</div>
-
-<style>
-.language-switcher {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
-  background: #fff;
-  padding: 12px 0;
-  border-bottom: 1px solid #e5e5e5;
-  font-family: 'Segoe UI', Tahoma, sans-serif;
-  position: sticky;
-  top: 0;
-  z-index: 999;
-}
-
-.lang-btn {
-  background: none;
-  border: none;
-  color: #0b57d0;
-  font-size: 18px;
-  font-weight: 600;
-  cursor: pointer;
-  padding: 6px 12px;
-  transition: all 0.2s ease-in-out;
-}
-
-.lang-btn.active {
-  border-bottom: 3px solid #0b57d0;
-}
-
-.lang-btn:hover {
-  color: #0039a6;
-}
-
-.dots {
-  font-size: 20px;
-  color: #555;
-}
-
-.done-btn {
-  background: none;
-  border: none;
-  color: #0b57d0;
-  font-size: 18px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-.done-btn:hover {
-  text-decoration: underline;
-  color: #0039a6;
-}
-
-/* 📱 Responsive */
-@media (max-width: 600px) {
-  .language-switcher {
-    gap: 16px;
-    font-size: 16px;
-  }
-  .lang-btn, .done-btn {
-    font-size: 16px;
-  }
-}
-</style>
-
-<script>
-const nepaliBtn = document.getElementById("nepali");
-const englishBtn = document.getElementById("english");
-const doneBtn = document.getElementById("done");
-
-nepaliBtn.addEventListener("click", () => {
-  nepaliBtn.classList.add("active");
-  englishBtn.classList.remove("active");
-  console.log("Selected: Nepali");
-  // यहाँ तपाईं translateToNepali() वा Google Translate code राख्न सक्नुहुन्छ
-});
-
-englishBtn.addEventListener("click", () => {
-  englishBtn.classList.add("active");
-  nepaliBtn.classList.remove("active");
-  console.log("Selected: English");
-  // यहाँ translateToEnglish() वा Google Translate code राख्न सक्नुहुन्छ
-});
-
-doneBtn.addEventListener("click", () => {
-  alert("Language preference saved!");
-});
-</script>
-
 
 
 
@@ -5003,6 +4905,7 @@ clear: both;
   function translatePage(lang) {
     const frame = document.querySelector('.goog-te-menu-frame');
     if (!frame) return alert('Please wait, load
+
 
 
 
