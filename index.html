@@ -270,46 +270,107 @@ body,
   overflow-x: hidden;
 }
 </style>
+<!-- Google Translate Script -->
+<div id="google_translate_element" style="display:none;"></div>
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'ne',
+      includedLanguages: 'ne,en',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+  }
+</script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+  }
 
-   
-  <!-- Custom CSS -->
+  .lang-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    padding: 10px 20px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .g-icon {
+    background: #4285F4;
+    color: white;
+    font-weight: bold;
+    padding: 6px 10px;
+    border-radius: 4px;
+    margin-right: 10px;
+    font-size: 16px;
+  }
+
+  .lang {
+    background: none;
+    border: none;
+    color: #1565c0;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 0 10px;
+  }
+
+  .lang.active {
+    border-bottom: 2px solid #1565c0;
+  }
+
+  .dots {
+    font-size: 20px;
+    color: #222;
+  }
+
+  .done {
+    background: none;
+    border: none;
+    color: #1565c0;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="lang-bar">
+  <div class="g-icon">G</div>
+  <div>
+    <button class="lang active" onclick="translatePage('ne')">NEPALI</button>
+    <button class="lang" onclick="translatePage('en')">ENGLISH</button>
+  </div>
+  <div class="dots">•••</div>
+  <button class="done">Done</button>
+</div>
+
 
 
 <script>
-  const nepaliBtn = document.getElementById('nepaliBtn');
-  const englishBtn = document.getElementById('englishBtn');
-  const content = document.getElementById('content');
-
-  nepaliBtn.addEventListener('click', () => {
-    content.textContent = 'यो नेपाली भाषाको सामग्री हो।';
-    nepaliBtn.classList.add('active');
-    englishBtn.classList.remove('active');
+  const langs = document.querySelectorAll('.lang');
+  langs.forEach(b => {
+    b.addEventListener('click', () => {
+      langs.forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+    });
   });
 
-  englishBtn.addEventListener('click', () => {
-    content.textContent = 'This is content in English.';
-    englishBtn.classList.add('active');
-    nepaliBtn.classList.remove('active');
-  });
+  function translatePage(lang) {
+    const frame = document.querySelector('.goog-te-menu-frame');
+    if (!frame) return alert('Please wait, loading translator...');
+    const select = frame.contentDocument.querySelector('.goog-te-combo');
+    if (select) {
+      select.value = lang;
+      select.dispatchEvent(new Event('change'));
+    }
+  }
 </script>
-
-
-
-
-
-  
-<body>
-
-<div class="language-switch">
-  <span id="nepaliBtn" class="lang-btn active">NEPALI</span>
-  <span id="englishBtn" class="lang-btn">ENGLISH</span>
-</div>
-
-<div class="content" id="content">
-  यो नेपाली भाषाको सामग्री हो।
-</div>
-
 <!--==========================
     Top Bar
   ============================-->
@@ -4926,6 +4987,7 @@ clear: both;
   function translatePage(lang) {
     const frame = document.querySelector('.goog-te-menu-frame');
     if (!frame) return alert('Please wait, load
+
 
 
 
