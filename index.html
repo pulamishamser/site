@@ -274,29 +274,25 @@ body,
 
    
   <!-- Custom CSS -->
-  <style>
-      :root {
-          --primary-color: #1a5276;
-          --secondary-color: #2e86c1;
-          --accent-color: #f39c12;
-          --light-color: #f8f9fa;
-          --dark-color: #2c3e50;
-      }
-
-      body {
-          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-          color: #333;
-          line-height: 1.6;
-          padding-bottom: 70px; /* Space for bottom navigation */
-          background-color: var(--light-color);
-      }
-
-      .nepali-font {
-          font-family: 'Preeti', 'Mangal', Arial, sans-serif;
-      }
-  </style>
 
 
+<script>
+  const nepaliBtn = document.getElementById('nepaliBtn');
+  const englishBtn = document.getElementById('englishBtn');
+  const content = document.getElementById('content');
+
+  nepaliBtn.addEventListener('click', () => {
+    content.textContent = 'यो नेपाली भाषाको सामग्री हो।';
+    nepaliBtn.classList.add('active');
+    englishBtn.classList.remove('active');
+  });
+
+  englishBtn.addEventListener('click', () => {
+    content.textContent = 'This is content in English.';
+    englishBtn.classList.add('active');
+    nepaliBtn.classList.remove('active');
+  });
+</script>
 
 
 
@@ -305,11 +301,14 @@ body,
   
 <body>
 
+<div class="language-switch">
+  <span id="nepaliBtn" class="lang-btn active">NEPALI</span>
+  <span id="englishBtn" class="lang-btn">ENGLISH</span>
+</div>
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-   
+<div class="content" id="content">
+  यो नेपाली भाषाको सामग्री हो।
+</div>
 
 <!--==========================
     Top Bar
@@ -4927,6 +4926,7 @@ clear: both;
   function translatePage(lang) {
     const frame = document.querySelector('.goog-te-menu-frame');
     if (!frame) return alert('Please wait, load
+
 
 
 
