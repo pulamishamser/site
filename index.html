@@ -266,6 +266,79 @@ body,
 </style>
 
 
+<div class="language-switcher">
+  <button class="lang-btn active" id="nepali">NEPALI</button>
+  <button class="lang-btn" id="english">ENGLISH</button>
+  <div class="dots">•••</div>
+  <button class="done-btn">Done</button>
+</div>
+   <style>
+.language-switcher {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  font-family: 'Segoe UI', sans-serif;
+  padding: 20px;
+  background: #fff;
+}
+
+.lang-btn {
+  background: none;
+  border: none;
+  color: #0b57d0;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s, border-bottom 0.2s;
+}
+
+.lang-btn.active {
+  border-bottom: 3px solid #0b57d0;
+}
+
+.lang-btn:hover {
+  color: #0039a6;
+}
+
+.dots {
+  font-size: 22px;
+  color: #333;
+}
+
+.done-btn {
+  background: none;
+  border: none;
+  color: #0b57d0;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.done-btn:hover {
+  text-decoration: underline;
+}
+
+</style>
+<script>
+const nepaliBtn = document.getElementById("nepali");
+const englishBtn = document.getElementById("english");
+
+nepaliBtn.addEventListener("click", () => {
+  nepaliBtn.classList.add("active");
+  englishBtn.classList.remove("active");
+  console.log("Language: Nepali");
+});
+
+englishBtn.addEventListener("click", () => {
+  englishBtn.classList.add("active");
+  nepaliBtn.classList.remove("active");
+  console.log("Language: English");
+});
+
+</script>
+
+   
 <body id="body" class="nepali-font">  
 <!--==========================
     Top Bar
@@ -850,87 +923,6 @@ Grid </a>
 
 
  
-<!-----Nep Eng Translate at top---->
-<div class="lang-bar">
-  <div class="g-icon">G</div>
-  <div>
-    <button class="lang active" onclick="translatePage('ne')">NEPALI</button>
-    <button class="lang" onclick="translatePage('en')">ENGLISH</button>
-  </div>
-  <div class="dots">•••</div>
-  <button class="done">Done</button>
-</div>
-
-<!-- Google Translate Script -->
-<div id="google_translate_element" style="display:none;"></div>
-<script type="text/javascript">
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement({
-      pageLanguage: 'ne',
-      includedLanguages: 'ne,en',
-      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-    }, 'google_translate_element');
-  }
-</script>
-<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-<style>
-  body {
-    font-family: 'Segoe UI', sans-serif;
-    margin: 0;
-  }
-
-  .lang-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #fff;
-    padding: 10px 20px;
-    border-bottom: 1px solid #eee;
-  }
-
-  .g-icon {
-    background: #4285F4;
-    color: white;
-    font-weight: bold;
-    padding: 6px 10px;
-    border-radius: 4px;
-    margin-right: 10px;
-    font-size: 16px;
-  }
-
-  .lang {
-    background: none;
-    border: none;
-    color: #1565c0;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    margin: 0 10px;
-  }
-
-  .lang.active {
-    border-bottom: 2px solid #1565c0;
-  }
-
-  .dots {
-    font-size: 20px;
-    color: #222;
-  }
-
-  .done {
-    background: none;
-    border: none;
-    color: #1565c0;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-</style>
-
-
-
-
-  
 <li class="menu-has-children">
     <a href="javascript:;">IEMIS</a>
     <ul>
@@ -4964,6 +4956,7 @@ clear: both;
   function translatePage(lang) {
     const frame = document.querySelector('.goog-te-menu-frame');
     if (!frame) return alert('Please wait, load
+
 
 
 
