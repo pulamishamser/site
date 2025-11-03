@@ -2019,34 +2019,46 @@ data-size="small" >
         }
 
 
-
-.category-news-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+   .news-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
         }
         
-        .category-news-item {
+        .news-item {
+            display: flex;
+            gap: 15px;
             padding-bottom: 15px;
             border-bottom: 1px solid var(--light-gray);
         }
         
-        .category-news-item:last-child {
+        .news-item:last-child {
             border-bottom: none;
-            padding-bottom: 0;
         }
         
-        .category-news-item h4 {
-            font-size: 15px;
+        .news-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        
+        .news-info .title {
+            font-weight: 500;
             margin-bottom: 5px;
             line-height: 1.4;
         }
         
-        .category-news-item .meta {
+        .news-info .source {
+            font-size: 12px;
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .news-info .date {
             font-size: 12px;
             color: var(--gray);
-        }
-                  
+        }                        
            }
       </style>
 
@@ -2192,7 +2204,7 @@ function changeReadMore() {
     <font size="5" color="white">एउटा भोको पेट, रित्तो गोजी र टुक्रिएको हृदयले जिन्दगीमा धेरैथोक सिकाएर जान्छ : रोविन विलियम
 </font></marquee>
    
- <h1 id="P2"class="header3"><i class="fa fa-pencil-square-o"></i> <b>महावीर पुनद्वारा पुस्तक बिक्री </b> </h2>
+ <h2 id="P2"class="header3"><i class="fa fa-pencil-square-o"></i> <b>महावीर पुनद्वारा पुस्तक बिक्री </b> </h2>
 
 <div class="container">
 <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj-UHKZ0j1bTr27Qiln7gUBB2BhtbDl3NDU8FeGSxsUZv8xeCT7g9ih1Rm0P6yvVziXv8_tUS-SGS-WOz6FJgjtFWGUGccCRNpPzeqo9PmUuBry4wQwMxfrsvMAgTsVZRfRAa5aXMKghG2JH_Nv-3wKyJfDT4lVCV-gUSgUb3jo8e69MS03kXUj5swQUQE/w545-h363/Nepali%20Hami%20Rahula%20Kaha%20With%20Lyrics%20Nepali.jpg" width="100%" height="315">
@@ -2221,8 +2233,8 @@ function changeReadMore() {
  <!-- News Section -->
         <section class="news-section">
             <div class="news-header">
-                <h2>राष्ट्रिय समाचार</h2>
-                <a href="#">सबै हेर्नुहोस्</a>
+
+                <h2 id="P2"class="header3"><i class="fa fa-pencil-square-o"></i> <b>राष्ट्रिय समाचार </b> </h2>
             </div>
             <div class="news-list">
                 <div class="news-item">
@@ -5061,6 +5073,7 @@ clear: both;
         ------------->        
   </div>  
 <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fshamser.info.np&layout&size&width=89&height=20&appId" width="89" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+
 
 
 
