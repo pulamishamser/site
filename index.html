@@ -1248,122 +1248,18 @@
                                     <i class="fas fa-id-card"></i> ID Card Generator Software
                                 </button> 
                                 <!------------------------------------------------------------------->
-    <!-- Computer Quiz Modal -->
-    <div class="modal fade modal-nepali" id="quizModal" tabindex="-1" aria-labelledby="quizModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title" id="quizModalLabel">
-                        <i class="fas fa-laptop-code me-2"></i>Computer Quiz
-                    </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body p-4">
-                    <div class="text-center mb-4">
-                        <img src="https://shamser.info.np/HomePage/quiz-icon.png" alt="Quiz Icon" class="img-fluid" style="max-height: 100px;">
-                        <h3 class="mt-3">Computer Knowledge Test</h3>
-                        <p class="text-muted">Test your computer knowledge with this interactive quiz</p>
+         <!-- Quiz Section -->
+
+            <div class="col-12">
+                <div class="quiz-container">
+                    <div id="quiz"></div>
+                    <div style="text-align: center; margin-top: 25px;">
+                        <button type="button" class="btn btn-success ms-2" data-bs-toggle="modal" data-bs-target="#quizModal">
+                            <i class="fas fa-play-circle me-2"></i>Start Interactive Quiz
+                        </button>
                     </div>
-                    
-                    <!-- Quiz Instructions -->
-                    <div class="alert alert-info mb-4">
-                        <h5><i class="fas fa-info-circle me-2"></i>निर्देशनहरू:</h5>
-                        <ul class="mb-0">
-                            <li>कुल ५ वटा प्रश्नहरू छन्</li>
-                            <li>प्रत्येक प्रश्नको लागि एक मात्र सही उत्तर छ</li>
-                            <li>सबै प्रश्नहरूको उत्तर दिएपछि "Submit Quiz" बटन थिच्नुहोस्</li>
-                            <li>पुनः प्रयास गर्न "Reset Quiz" बटन प्रयोग गर्नुहोस्</li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Timer Section -->
-                    <div class="timer-section mb-4 p-3 bg-light rounded">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <h5 class="mb-0">समय:</h5>
-                                <div id="quizTimer" class="display-6 text-primary">05:00</div>
-                            </div>
-                            <div class="text-end">
-                                <div class="badge bg-success fs-6 p-2">
-                                    <i class="fas fa-question-circle me-1"></i>
-                                    <span id="currentQuestion">1</span>/<span id="totalQuestions">5</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="progress mt-2" style="height: 8px;">
-                            <div id="quizProgress" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    
-                    <!-- Quiz Content -->
-                    <div id="modalQuiz" class="mb-4"></div>
-                    
-                    <!-- Quiz Controls -->
-                    <div class="quiz-controls mt-4">
-                        <div class="d-flex justify-content-between">
-                            <div>
-                                <button id="prevBtn" class="btn btn-outline-secondary" onclick="prevQuestion()">
-                                    <i class="fas fa-arrow-left me-1"></i>अघिल्लो
-                                </button>
-                            </div>
-                            <div>
-                                <button id="nextBtn" class="btn btn-outline-primary" onclick="nextQuestion()">
-                                    अर्को <i class="fas fa-arrow-right ms-1"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Quiz Results -->
-                    <div id="modalQuizResult" class="mt-4" style="display: none;">
-                        <div class="card">
-                            <div class="card-header bg-success text-white">
-                                <h5 class="mb-0"><i class="fas fa-trophy me-2"></i>Quiz Result</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="row text-center">
-                                    <div class="col-md-4">
-                                        <div class="display-6 text-primary" id="modalScore">0</div>
-                                        <small>Score</small>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="display-6 text-success" id="modalCorrect">0</div>
-                                        <small>Correct Answers</small>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="display-6 text-warning" id="modalPercentage">0%</div>
-                                        <small>Percentage</small>
-                                    </div>
-                                </div>
-                                <div class="mt-3" id="modalMessage"></div>
-                                
-                                <!-- Share Results -->
-                                <div class="share-results mt-4">
-                                    <button class="btn btn-outline-primary" onclick="shareQuizResult()">
-                                        <i class="fas fa-share-alt me-2"></i>Share Your Score
-                                    </button>
-                                    <button class="btn btn-outline-secondary ms-2" onclick="downloadCertificate()">
-                                        <i class="fas fa-download me-2"></i>Download Certificate
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                        <i class="fas fa-times me-1"></i>बन्द गर्नुहोस्
-                    </button>
-                    <button type="button" class="btn btn-outline-primary" onclick="resetModalQuiz()">
-                        <i class="fas fa-redo me-1"></i>Reset Quiz
-                    </button>
-                    <button type="button" class="btn btn-primary" onclick="submitModalQuiz()" id="submitQuizBtn">
-                        <i class="fas fa-paper-plane me-1"></i>Submit Quiz
-                    </button>
-                </div>
             </div>
         </div>
-    </div>
           <!------------------------------------------------------------------->                                   
                             </div>
                         </div>
@@ -1801,19 +1697,134 @@
             <p>यो विज्ञापन क्षेत्र हो । यस वेभसाइटमा विज्ञापन दिएर आफ्नो ब्यापार ब्यवसाय कृति प्रकाशन आदिको प्रचार प्रसार गर्नुहोस् ।</p>
         </div>
 
-        <!-- Quiz Section -->
 
-            <div class="col-12">
-                <div class="quiz-container">
-                    <div id="quiz"></div>
-                    <div style="text-align: center; margin-top: 25px;">
-                        <button type="button" class="btn btn-success ms-2" data-bs-toggle="modal" data-bs-target="#quizModal">
-                            <i class="fas fa-play-circle me-2"></i>Start Interactive Quiz
-                        </button>
+
+
+   <!-- Computer Quiz Modal -->
+    <div class="modal fade modal-nepali" id="quizModal" tabindex="-1" aria-labelledby="quizModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="quizModalLabel">
+                        <i class="fas fa-laptop-code me-2"></i>Computer Quiz
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="text-center mb-4">
+                        <img src="https://shamser.info.np/HomePage/quiz-icon.png" alt="Quiz Icon" class="img-fluid" style="max-height: 100px;">
+                        <h3 class="mt-3">Computer Knowledge Test</h3>
+                        <p class="text-muted">Test your computer knowledge with this interactive quiz</p>
                     </div>
+                    
+                    <!-- Quiz Instructions -->
+                    <div class="alert alert-info mb-4">
+                        <h5><i class="fas fa-info-circle me-2"></i>निर्देशनहरू:</h5>
+                        <ul class="mb-0">
+                            <li>कुल ५ वटा प्रश्नहरू छन्</li>
+                            <li>प्रत्येक प्रश्नको लागि एक मात्र सही उत्तर छ</li>
+                            <li>सबै प्रश्नहरूको उत्तर दिएपछि "Submit Quiz" बटन थिच्नुहोस्</li>
+                            <li>पुनः प्रयास गर्न "Reset Quiz" बटन प्रयोग गर्नुहोस्</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Timer Section -->
+                    <div class="timer-section mb-4 p-3 bg-light rounded">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="mb-0">समय:</h5>
+                                <div id="quizTimer" class="display-6 text-primary">05:00</div>
+                            </div>
+                            <div class="text-end">
+                                <div class="badge bg-success fs-6 p-2">
+                                    <i class="fas fa-question-circle me-1"></i>
+                                    <span id="currentQuestion">1</span>/<span id="totalQuestions">5</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="progress mt-2" style="height: 8px;">
+                            <div id="quizProgress" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Quiz Content -->
+                    <div id="modalQuiz" class="mb-4"></div>
+                    
+                    <!-- Quiz Controls -->
+                    <div class="quiz-controls mt-4">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <button id="prevBtn" class="btn btn-outline-secondary" onclick="prevQuestion()">
+                                    <i class="fas fa-arrow-left me-1"></i>अघिल्लो
+                                </button>
+                            </div>
+                            <div>
+                                <button id="nextBtn" class="btn btn-outline-primary" onclick="nextQuestion()">
+                                    अर्को <i class="fas fa-arrow-right ms-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Quiz Results -->
+                    <div id="modalQuizResult" class="mt-4" style="display: none;">
+                        <div class="card">
+                            <div class="card-header bg-success text-white">
+                                <h5 class="mb-0"><i class="fas fa-trophy me-2"></i>Quiz Result</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row text-center">
+                                    <div class="col-md-4">
+                                        <div class="display-6 text-primary" id="modalScore">0</div>
+                                        <small>Score</small>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="display-6 text-success" id="modalCorrect">0</div>
+                                        <small>Correct Answers</small>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="display-6 text-warning" id="modalPercentage">0%</div>
+                                        <small>Percentage</small>
+                                    </div>
+                                </div>
+                                <div class="mt-3" id="modalMessage"></div>
+                                
+                                <!-- Share Results -->
+                                <div class="share-results mt-4">
+                                    <button class="btn btn-outline-primary" onclick="shareQuizResult()">
+                                        <i class="fas fa-share-alt me-2"></i>Share Your Score
+                                    </button>
+                                    <button class="btn btn-outline-secondary ms-2" onclick="downloadCertificate()">
+                                        <i class="fas fa-download me-2"></i>Download Certificate
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-1"></i>बन्द गर्नुहोस्
+                    </button>
+                    <button type="button" class="btn btn-outline-primary" onclick="resetModalQuiz()">
+                        <i class="fas fa-redo me-1"></i>Reset Quiz
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="submitModalQuiz()" id="submitQuizBtn">
+                        <i class="fas fa-paper-plane me-1"></i>Submit Quiz
+                    </button>
+                </div>
             </div>
         </div>
+    </div>
 
+
+
+
+
+
+
+
+        
         <!-- Our Team Section -->
         <div class="row my-5">
             <div class="col-12">
@@ -2895,6 +2906,7 @@
     </script>
 </body>
 </html>
+
 
 
 
