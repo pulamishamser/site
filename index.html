@@ -2027,7 +2027,7 @@
                 <div class="col-lg-3 col-md-6 mb-4">
                     <h5>सम्पर्क</h5>
                     <ul>
-                        <li><i class="fas fa-map-marker-alt me-2"></i> सर्लाही, नेपाल</li>
+                        <li><i class="fas fa-map-marker-alt me-2"></i>लालबन्दी नपा-११, सर्लाही</li>
                         <li><i class="fas fa-phone me-2"></i> +९७७ ९८१७८२६२००</li>
                         <li><i class="fas fa-envelope me-2"></i> info@shamser.com.np</li>
                         <li><i class="fas fa-globe me-2"></i> shamser.info.np</li>
@@ -2062,11 +2062,14 @@
         </div>
 
         <div class="widget-icon" data-bs-toggle="modal" data-bs-target="#numberconverterModal">
-       <i class="fa-solid fa-calculator-alt"></i>
+       <i class="fa-solid fa-calculator"></i>
             <span>संख्या रूपान्तरण</span>
         </div>
-
-        
+        <div class="widget-icon" data-bs-toggle="modal" data-bs-target="#translateTextModal">
+       <i class="fa-solid fas fa-language"></i>
+            <span>Translator</span>
+        </div>
+  
         <div class="widget-icon" data-bs-toggle="modal" data-bs-target="#unicodeModal">
             <i class="fas fa-language"></i>
             <span>युनिकोड</span>
@@ -2154,7 +2157,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <iframe src="https://shamser.info.np/Number_to_Text.html" frameborder="0" scrolling="no" marginwidth="0" marginheight="0" style="border:none; padding: 0; overflow:hidden; width:100%; height:100px;" allowtransparency="true"></iframe>
+                    <iframe src="https://shamser.info.np/Number_to_Text.html" frameborder="0" scrolling="no" marginwidth="0" marginheight="0" style="border:none; padding: 0; overflow:hidden; width:100%; height:400px;" allowtransparency="true"></iframe>
                 </div>
             </div>
         </div>
@@ -2162,6 +2165,43 @@
 
 
 
+
+<!-- translateText Modal -->
+    <div class="modal fade modal-nepali" id="translateTextModal" tabindex="-1" aria-labelledby="translateTextrModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="translateTextModalLabel">अनुवाद</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    
+
+    <div class="widget" id="translator-widget">
+                    <div class="p-3">
+                        <h5>अनुवादक (अङ्ग्रेजी देखि नेपाली)</h5>
+                        <div class="mb-3">
+                            <textarea id="englishText" class="form-control" rows="3" placeholder="अङ्ग्रेजीमा लेख्नुहोस्"></textarea>
+                        </div>
+                        <button class="btn btn-primary" onclick="translateText()">अनुवाद गर्नुहोस्</button>
+                        <div id="translationResult" class="mt-3 p-2 bg-light rounded"></div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+                    
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
@@ -2952,6 +2992,7 @@
     </script>
 </body>
 </html>
+
 
 
 
