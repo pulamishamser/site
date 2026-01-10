@@ -2776,60 +2776,6 @@
             });
         }
         
-        // Quiz functions (simplified for brevity)
-        function initializeQuiz() {
-            // Basic quiz initialization
-            const quizDiv = document.getElementById("quiz");
-            const questions = [
-                {
-                    q: "What is word processing software?",
-                    options: [
-                        "A software used for calculations",
-                        "A computer program used to create and edit documents",
-                        "A game software",
-                        "Operating system"
-                    ],
-                    answer: 1
-                },
-                {
-                    q: "What does CPU stand for?",
-                    options: [
-                        "Central Processing Unit",
-                        "Computer Personal Unit",
-                        "Central Program Utility",
-                        "Control Processing Unit"
-                    ],
-                    answer: 0
-                }
-            ];
-            
-            let quizHTML = "";
-            questions.forEach((question, index) => {
-                quizHTML += `
-                    <div class="quiz-question">${index + 1}. ${question.q}</div>
-                    <div class="quiz-options">
-                        ${question.options.map((option, i) => `
-                            <label>
-                                <input type="radio" name="question${index}" value="${i}">
-                                ${option}
-                            </label>
-                        `).join('')}
-                    </div>
-                `;
-            });
-            
-            quizDiv.innerHTML = quizHTML;
-        }
-        
-        function submitQuiz() {
-            // Basic quiz submission
-            alert("क्विज सबमिट गरियो!");
-        }
-        
-        function resetQuiz() {
-            // Basic quiz reset
-            document.querySelectorAll('input[type="radio"]').forEach(input => input.checked = false);
-        }
         
         // Modal Quiz functions (simplified)
         const modalQuizData = [
@@ -2922,4 +2868,5 @@
     </script>
 </body>
 </html>
+
 
