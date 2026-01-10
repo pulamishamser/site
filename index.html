@@ -3188,9 +3188,31 @@
             }
             return key;
         }
+
+
+
+
+  // Cookie Consent Functions
+        function acceptCookies() {
+            localStorage.setItem('cookiesAccepted', 'true');
+            document.getElementById('cookieConsent').style.display = 'none';
+            
+            // Load ads after accepting cookies (GDPR compliance)
+            loadAdsWithDelay();
+        }
+        
+        function showCookieSettings() {
+            alert("कुकी सेटिङ्ग:\n\nहामीले तपाईंको अनुभवलाई राम्रो बनाउन आवश्यक कुकीहरू मात्र प्रयोग गर्दछौं।\n\nतपाईंले ब्राउजर सेटिङ्गबाट कुकीहरू नियन्त्रण गर्न सक्नुहुन्छ।");
+        }
+        
+
+
+
+        
     </script>
 </body>
 </html>
+
 
 
 
