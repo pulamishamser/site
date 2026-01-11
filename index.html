@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta name='viewport' content='width=576' />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#027f7f">
 
     <meta property="og:type" content="website"/>
@@ -14,27 +13,8 @@
     <meta name="keywords" content="विद्यालय स्मारिका भनेको विद्यालयको पहिचान, इतिहास, उपलब्धि र गतिविधिहरूलाई समेटेर तयार गरिने स्मरणीय प्रकाशन (बुक/पत्रिका) हो।">
     <meta name="author" content="shamserpulami">
 
-    <meta property="og:image:wth" content="1200" />
-    <meta property="og:image:height" content="800" />
-    <meta property="fb:app_" content="758915462507587" />
-    <meta name="author" content="shamserpulami">
-    <meta name="robots" content="index, follow">
-    
-    <!----share button---->
-    <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5b5b234df5aa6d001130d104&product=inline-share-buttons' async='async'></script>
-    <div id="fb-root"></div>
-    <script>
-      (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1';
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-    </script>        
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/ico" href="https://shamser.info.np/HomePage/favicon.ico"/>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -44,840 +24,26 @@
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!--social button show -->
-    <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet" type="text/css">
-
-    <title>shamser.info.np</title>
     
-    <style>
-        :root {
-            --primary-color: #1a73e8;
-            --secondary-color: #34a853;
-            --accent-color: #fbbc04;
-            --text-color: #333;
-            --light-bg: #f8f9fa;
-            --dark-bg: #202124;
-        }
-        
-        body {
-            font-family: 'Hind Siliguri', sans-serif;
-            color: var(--text-color);
-            line-height: 1.6;
-            background-color: #fff;
-            padding-bottom: 70px;
-            padding-top: 56px;
-            overflow-x: hidden;
-        }
-        
-   .nepali-font {
-            font-family: 'Hind Siliguri', sans-serif;
-        }
-        
-        /* Header Styles */
-        .header-top {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 8px 0;
-            font-size: 14px;
-        }
-        
-        .logo-section {
-            padding: 15px 0;
-            border-bottom: 1px solid #eaeaea;
-        }
-        
-        .main-nav {
-            background-color: var(--dark-bg);
-            position: sticky;
-            top: 0;
-            z-index: 1030;
-        }
-        
-        .main-nav .nav-link {
-            color: white !important;
-            font-weight: 500;
-            padding: 12px 20px;
-        }
-        
-        .main-nav .nav-link:hover {
-            background-color: rgba(255,255,255,0.1);
-        }
-        
-        /* Carousel Styling */
-        #headerCarousel {
-            margin-top: 56px;
-        }
-        
-        #headerCarousel .carousel-item {
-            height: 400px;
-            overflow: hidden;
-        }
-        
-        #headerCarousel .carousel-item img {
-            object-fit: cover;
-            height: 100%;
-            width: 100%;
-        }
-        
-        #headerCarousel .carousel-caption {
-            background: rgba(0, 0, 0, 0.6);
-            padding: 20px;
-            border-radius: 10px;
-            bottom: 50px;
-        }
-        
-        #headerCarousel .carousel-caption h2 {
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        
-        .section-title {
-            position: relative;
-            margin-bottom: 30px;
-            padding-bottom: 10px;
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-        
-        .section-title:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background-color: var(--accent-color);
-        }
-        
-        .news-card {
-            border: none;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-            margin-bottom: 25px;
-            height: 100%;
-        }
-        
-        .news-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .news-card img {
-            height: 200px;
-            object-fit: cover;
-            width: 100%;
-        }
-        
-        .news-card .card-body {
-            padding: 20px;
-        }
-        
-        .news-card .card-title {
-            font-weight: 600;
-            font-size: 18px;
-            line-height: 1.4;
-            margin-bottom: 10px;
-        }
-        
-        .news-card .card-text {
-            color: #666;
-            font-size: 14px;
-        }
-        
-        .news-card .news-date {
-            font-size: 12px;
-            color: #999;
-        }
-        
-        .feature-box {
-            background-color: var(--light-bg);
-            border-radius: 8px;
-            padding: 25px;
-            text-align: center;
-            height: 100%;
-            transition: all 0.3s ease;
-            border: 1px solid #eaeaea;
-        }
-        
-        .feature-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        
-        .feature-box i {
-            font-size: 40px;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-        
-        .feature-box h4 {
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: var(--text-color);
-        }
-        
-        .footer {
-            background-color: #00008B;
-            color: white;
-            padding: 50px 0 20px;
-            margin-top: 50px;
-        }
-        
-        .footer h5 {
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: var(--accent-color);
-        }
-        
-        .footer ul {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .footer ul li {
-            margin-bottom: 10px;
-        }
-        
-        .footer ul li a {
-            color: #ddd;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer ul li a:hover {
-            color: white;
-        }
-        
-        .copyright {
-            border-top: 1px solid #444;
-            padding-top: 20px;
-            margin-top: 30px;
-            text-align: center;
-            color: #aaa;
-            font-size: 14px;
-        }
-        
-        .ad-container {
-            background-color: var(--light-bg);
-            border-radius: 8px;
-            padding: 20px;
-            text-align: center;
-            margin: 20px 0;
-            border: 1px dashed #ccc;
-        }
-        
-        .ad-label {
-            font-size: 12px;
-            color: #999;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-        
-        .breaking-news {
-            background-color: #f8d7da;
-            color: #721c24;
-            padding: 10px 0;
-            font-weight: 500;
-        }
-        
-        .social-stats {
-            display: flex;
-            gap: 15px;
-            margin-top: 10px;
-        }
-        
-        .social-stat {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 14px;
-        }
-        
-        .social-stat i {
-            color: var(--primary-color);
-        }
-        
-        .testimonial-card {
-            background-color: var(--light-bg);
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-left: 4px solid var(--primary-color);
-        }
-        
-        .testimonial-text {
-            font-style: italic;
-            margin-bottom: 15px;
-        }
-        
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-        }
-        
-        .testimonial-author img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: 15px;
-        }
-        
-        .team-member {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        
-        .team-member img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 15px;
-            border: 3px solid var(--primary-color);
-        }
-        
-        .school-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .school-item {
-            text-align: center;
-        }
-        
-        .school-item img {
-            width: 100%;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
-        
-        .widgets-container {
-            background-color: var(--light-bg);
-            border-radius: 8px;
-            padding: 20px;
-            margin-top: 30px;
-        }
-        
-        .widget-tabs {
-            display: flex;
-            border-bottom: 1px solid #ddd;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-        }
-        
-        .widget-tab {
-            padding: 10px 15px;
-            cursor: pointer;
-            border-bottom: 2px solid transparent;
-        }
-        
-        .widget-tab.active {
-            border-bottom: 2px solid var(--primary-color);
-            font-weight: 600;
-        }
-        
-        .widget-content {
-            min-height: 200px;
-        }
-        
-        .widget {
-            display: none;
-        }
-        
-        .widget.active {
-            display: block;
-        }
-        
-        .glamour-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 50px 0;
-            border-radius: 8px;
-            margin: 30px 0;
-            text-align: center;
-        }
-        
-        .news-with-small-image {
-            display: flex;
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .news-with-small-image img {
-            width: 100px;
-            height: 70px;
-            object-fit: cover;
-            border-radius: 4px;
-            margin-right: 15px;
-        }
-        
-        .news-with-small-image-content {
-            flex: 1;
-        }
-        
-        .news-with-small-image-title {
-            font-weight: 600;
-            font-size: 16px;
-            margin-bottom: 5px;
-        }
-        
-        .news-with-small-image-date {
-            font-size: 12px;
-            color: #999;
-        }
-        
-        .carousel-item img {
-            height: 400px;
-            object-fit: cover;
-        }
-        
-        /* Bottom Widget Bar Styles */
-        .widget-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: #FF0000;
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-            z-index: 1000;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .widget-icon {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            padding: 5px 10px;
-            border-radius: 5px;
-        }
-        
-        .widget-icon:hover {
-            background-color: rgba(255,255,255,0.1);
-            transform: translateY(-3px);
-        }
-        
-        .widget-icon i {
-            font-size: 20px;
-            margin-bottom: 5px;
-        }
-        
-        .widget-icon span {
-            font-size: 12px;
-        }
-        
-        /* Modal Styles */
-        .modal-nepali .modal-header {
-            background-color: var(--primary-color);
-            color: white;
-        }
-        
-        .modal-nepali .modal-title {
-            font-weight: 600;
-        }
-        
-        .modal-nepali .btn-primary {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-        }
-        
-        .modal-nepali .btn-primary:hover {
-            background-color: #0d5bb5;
-            border-color: #0d5bb5;
-        }
-        
-        .modal-nepali .modal-body {
-            max-height: 70vh;
-            overflow-y: auto;
-        }
-        
-        /* Subscribe Button Styles */
-        #subscribeBtn {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        #subscribeBtn:hover {
-            background-color: #0d5bb5;
-            transform: translateY(-2px);
-        }
-        
-        #subscribeBtn:disabled {
-            background-color: #6c757d;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        .badge {
-            background-color: var(--accent-color);
-            color: white;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
-            position: absolute;
-            top: -5px;
-            right: -5px;
-        }
-        
-        .counter-container {
-            margin-top: 10px;
-            font-size: 14px;
-            color: #666;
-        }
-        
-        /* Like/Share Button Styles */
-        .post-stats {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #eee;
-        }
-        
-        .view-counter {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 14px;
-            color: #666;
-        }
-        
-        .like-share {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .like-share button {
-            background-color: #f8f9fa;
-            border: 1px solid #ddd;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .like-share button:hover {
-            background-color: #e9ecef;
-        }
-        
-        .like-share button.liked {
-            background-color: #e7f3ff;
-            border-color: var(--primary-color);
-            color: var(--primary-color);
-        }
-        
-        /* Enhanced Number Converter Styles */
-        .number-converter-container {
-            padding: 15px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        
-        .number-converter-result {
-            margin-top: 15px;
-            padding: 15px;
-            background-color: var(--light-bg);
-            border-radius: 8px;
-            border-left: 4px solid var(--primary-color);
-            font-size: 18px;
-            min-height: 60px;
-        }
-        
-        /* Quiz App Styles */
-        .quiz-container {
-            background: #f9fafc;
-            padding: 20px;
-            border-radius: 8px;
-            border-left: 5px solid #2a5298;
-        }
-        
-        .quiz-question {
-            font-weight: bold;
-            font-size: 18px;
-            margin-bottom: 15px;
-            color: #1e3c72;
-        }
-        
-        .quiz-options label {
-            display: block;
-            margin: 10px 0;
-            padding: 10px;
-            background: #f0f4ff;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.2s ease;
-        }
-        
-        .quiz-options label:hover {
-            background: #e1e8ff;
-        }
-        
-        .quiz-options input[type="radio"] {
-            margin-right: 10px;
-        }
-        
-        .score {
-            font-size: 20px;
-            font-weight: bold;
-            margin-top: 20px;
-            padding: 15px;
-            text-align: center;
-            border-radius: 8px;
-            background: #e8f5e9;
-            color: #2e7d32;
-        }
-        
-        .score.low {
-            background: #ffebee;
-            color: #c62828;
-        }
-        
-        /* Smritika Section */
-        .smritika-section {
-            background-color: #f0f8ff;
-            border-radius: 10px;
-            padding: 25px;
-            margin: 30px 0;
-            border: 2px solid #1e3c72;
-        }
-        
-        .smritika-section h2 {
-            color: #1e3c72;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        
-        .smritika-section ul {
-            padding-left: 20px;
-        }
-        
-        .smritika-section li {
-            margin-bottom: 8px;
-        }
-        
-        /* Quiz Modal Styles */
-        .question-card {
-            background: #ffffff;
-            border-left: 5px solid #1a73e8 !important;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-        }
-        
-        .question-card:hover {
-            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
-        }
-        
-        .form-check-input:checked {
-            background-color: #1a73e8;
-            border-color: #1a73e8;
-        }
-        
-        .form-check-label {
-            cursor: pointer;
-            padding-left: 10px;
-            font-size: 16px;
-            line-height: 1.5;
-        }
-        
-        .form-check:hover {
-            background-color: #f8f9fa;
-            border-radius: 5px;
-        }
-        
-        .timer-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-        
-        .timer-section .progress {
-            background-color: rgba(255,255,255,0.3);
-        }
-        
-        .progress-bar-animated {
-            animation: progress-bar-stripes 1s linear infinite;
-        }
-        
-        @keyframes progress-bar-stripes {
-            0% { background-position: 1rem 0; }
-            100% { background-position: 0 0; }
-        }
-        
-        /* Quiz Controls */
-        .quiz-controls .btn {
-            min-width: 120px;
-            padding: 10px 20px;
-            font-weight: 600;
-        }
-        
-        /* Share Results */
-        .share-results .btn {
-            padding: 10px 20px;
-            border-radius: 25px;
-        }
-        
-        /* Pricing Card Styles */
-        .pricing-card {
-            transition: transform 0.3s ease;
-            border: 2px solid transparent;
-        }
-        
-        .pricing-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        
-        .pricing-card .card-header {
-            font-weight: bold;
-            padding: 15px;
-        }
-        
-        .pricing-card .card-body {
-            padding: 30px 20px;
-        }
-        
-        .pricing-card .card-footer {
-            background: transparent;
-            border-top: none;
-            padding: 20px;
-        }
-        
-        .pricing-card ul li {
-            padding: 5px 0;
-            border-bottom: 1px dashed #eee;
-        }
-        
-        .pricing-card ul li:last-child {
-            border-bottom: none;
-        }
-        
-        .trial-section {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border: 2px solid #dee2e6;
-        }
-        
-        @media (max-width: 768px) {
-            body {
-                padding-top: 120px;
-            }
-            
-            #headerCarousel {
-                margin-top: 120px;
-            }
-            
-            #headerCarousel .carousel-item {
-                height: 300px;
-            }
-            
-            #headerCarousel .carousel-caption {
-                bottom: 20px;
-                padding: 10px;
-            }
-            
-            #headerCarousel .carousel-caption h2 {
-                font-size: 1.5rem;
-            }
-            
-            .hero-section {
-                padding: 50px 0;
-            }
-            
-            .hero-section h1 {
-                font-size: 24px;
-            }
-            
-            .school-grid {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            }
-            
-            .widget-bar {
-                padding: 8px 0;
-            }
-            
-            .widget-icon i {
-                font-size: 18px;
-            }
-            
-            .widget-icon span {
-                font-size: 10px;
-            }
-            
-            .post-stats {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-            
-            .like-share {
-                width: 100%;
-                justify-content: space-between;
-            }
-            
-            .news-with-small-image {
-                flex-direction: column;
-            }
-            
-            .news-with-small-image img {
-                width: 100%;
-                height: 150px;
-                margin-right: 0;
-                margin-bottom: 15px;
-            }
-            
-            .widget-tabs {
-                overflow-x: auto;
-                white-space: nowrap;
-            }
-            
-            .modal-dialog {
-                margin: 10px;
-            }
-            
-            .question-text h6 {
-                font-size: 16px;
-            }
-            
-            .form-check-label {
-                font-size: 14px;
-            }
-            
-            .quiz-controls .btn {
-                min-width: 100px;
-                padding: 8px 15px;
-            }
-        }
-    </style>
+    <!-- ShareThis -->
+    <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5b5b234df5aa6d001130d104&product=inline-share-buttons' async='async'></script>
+    
+    <!-- Facebook SDK -->
+    <div id="fb-root"></div>
+    <script>
+      (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/ico" href="https://shamser.info.np/HomePage/favicon.ico"/>
+    
+    <title>shamser.info.np</title>
 </head>
 <body class="nepali-font">
     <!-- Header Top with Nepali Date & Time -->
@@ -898,7 +64,7 @@
             </div>
         </div>
     </div>
-                   
+    
     <!-- ID Card Generator Software Modal -->
     <div class="modal fade" id="demoModal" tabindex="-1" aria-labelledby="demoModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
@@ -1100,172 +266,68 @@
                                 <source src="Home/About.mp4" type="video/mp4">
                                 Your browser does not support the video tag.
                             </video>
-                            <img src="https://shamser.info.np/HomePage/smarika.png" class="img-fluid rounded" alt="SMARIKA">
+                            <img src="https://shamser.info.np/HomePage/smarika.png" class="img-fluid rounded mt-3" alt="SMARIKA">
                         </div>
                         <div class="col-md-6">
                             <h4>एकीकृत परीक्षा प्रणाली (IEMIS)</h4>
                             <p>छिटो र सजिलो तरिकाले नतिजा प्रकाशन गर्ने डिजिटल समाधान</p>
                             <div class="d-grid gap-2">
-       <div class="emis-header-container">
-    <img width="100%" height="400" src="https://shamser.info.np/HomePage/IEMIS SHAMSER.jpg" alt="IEMIS Background" class="emis-bg-image">
-    
-  <div class="emis-dropdown">
-        <button class="emis-dropbtn">
-           
-            <i class="fas fa-user-circle"></i> IEMIS LOGIN
-            <i class="fas fa-caret-down"></i>
-        </button>
-        <ul class="emis-dropdown-content">
-              
-            <li><a href="https://shamser.info.np/Integrated Exam Management Information System/IEMIS.v2.html" class="emis-login-link">
-                <i class="fas fa-sign-in-alt"></i> EMIS LOGIN
-            </a></li>
-<!----https://script.google.com/macros/s/AKfycbzjGs-ew2dp0aiP0h-cQr4k1EF7ASCgnzHHkyNy8Ic5dub_uar6djlvrCJqQdER8nVc0Q/exec--->
-          
-            <li><a href="https://shamser.info.np/profile/connect with social media.htm" class="emis-register-link">
-                <i class="fas fa-user-plus"></i> Contact
-            </a></li>
-        </ul>
-    </div>
-</div>
+                                <div class="emis-header-container">
+                                    <img width="100%" height="400" src="https://shamser.info.np/HomePage/IEMIS SHAMSER.jpg" alt="IEMIS Background" class="emis-bg-image">
+                                    
+                                    <div class="emis-dropdown">
+                                        <button class="emis-dropbtn">
+                                            <i class="fas fa-user-circle"></i> IEMIS LOGIN
+                                            <i class="fas fa-caret-down"></i>
+                                        </button>
+                                        <ul class="emis-dropdown-content">
+                                            <li><a href="https://shamser.info.np/Integrated Exam Management Information System/IEMIS.v2.html" class="emis-login-link">
+                                                <i class="fas fa-sign-in-alt"></i> EMIS LOGIN
+                                            </a></li>
+                                            <li><a href="https://shamser.info.np/profile/connect with social media.htm" class="emis-register-link">
+                                                <i class="fas fa-user-plus"></i> Contact
+                                            </a></li>
+                                        </ul>
+                                    </div>
+                                </div>
 
-<style>
-    .emis-header-container {
-        position: relative;
-        width: 100%;
-        max-height: 400px;
-        overflow: hidden;
-    }
-    
-    .emis-bg-image {
-        width: 100%;
-        height: auto;
-        display: block;
-        filter: brightness(0.9);
-    }
-    
-    .emis-dropdown {
-        background: #004d40; /* Dark Blue background */
-        position: absolute;
-        top: 26px;
-        right:26px;
-        display: inline-block;
-        z-index: 100;
-    }
-    
-    .emis-dropbtn {
-      background: #004d40; /*background */
-        color: #fff; 
-        padding: 12px 20px;
-        font-size: 16px;
-        border: none;
-        border-color: #fff;
-        border-radius: 4px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        transition: all 0.3s ease;
-
-    }
-    
-    .emis-dropbtn:hover {
-        background-color: #004d40;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    }
-    
-    .emis-dropdown-content {
-        display: none;
-        position: absolute;
-        right: 0;
-        background-color: #004d40;
-        min-width: 200px;
-        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-        border-radius: 4px;
-        z-index: 1;
-        list-style: none;
-        padding: 0;
-        margin: 5px 0 0 0;
-          font-size: 14px;
-    }
-    
-    .emis-dropdown-content li {
-        border-bottom: 1px solid #FFA500;
-    }
-    
-    .emis-dropdown-content li:last-child {
-        border-bottom: none;
-    }
-    
-    .emis-dropdown-content a {
-        color: #fff;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        transition: all 0.2s ease;
-    }
-    
-    .emis-login-link:hover {
-        background-color: #FFA500;
-        color: #fff;
-    }
-    
-    .emis-register-link:hover {
-        background-color: #FFA500;
-        color: #fff;
-    }
-    
-    .emis-dropdown:hover .emis-dropdown-content {
-        display: block;
-    }
-    
-    .emis-dropdown:hover .emis-dropbtn {
-        background-color:#004d40; 
-    }
-    
-    /* Font Awesome for icons */
-    @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
-</style>
-
-
-                                <a href="#" class="btn btn-outline-primary"> एकीकृत परीक्षा प्रणाली (IEMIS  New version) : Coming soon !!! </a>
+                                <a href="#" class="btn btn-outline-primary"> एकीकृत परीक्षा प्रणाली (IEMIS New version) : Coming soon !!! </a>
                                 <a href="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/IEMIS.v2.html" class="btn btn-primary">लगइन गर्नुहोस्</a>
-                                <a href="https://forms.gle/LVm68DdiXN5Ep1Mb6"  class="btn btn-success mb-3" target="_blank">💁🏻‍♀️About Service charge⛶</a>
+                                <a href="https://forms.gle/LVm68DdiXN5Ep1Mb6" class="btn btn-success mb-3" target="_blank">💁🏻‍♀️About Service charge⛶</a>
 
                                 <!-- ID Card Generator Software Button -->
                                 <button type="button" class="btn btn-info mt-3" data-bs-toggle="modal" data-bs-target="#demoModal">
                                     <i class="fas fa-id-card"></i> ID Card Generator Software
                                 </button> 
-                                <!------------------------------------------------------------------->
-         <!-- Quiz Section -->
-
-            <div class="col-12">
-                <div class="quiz-container">
-                    <div id="quiz"></div>
-                    <div style="text-align: center; margin-top: 25px;">
-                        <button type="button" class="btn btn-success ms-2" data-bs-toggle="modal" data-bs-target="#quizModal">
-                            <i class="fas fa-play-circle me-2"></i>Start Interactive Quiz
-                        </button>
-                    </div>
-            </div>
-        </div>
-          <!------------------------------------------------------------------->                                   
+                                
+                                <!-- Quiz Section -->
+                                <div class="quiz-container mt-3">
+                                    <div id="quiz"></div>
+                                    <div style="text-align: center; margin-top: 25px;">
+                                        <button type="button" class="btn btn-success ms-2" data-bs-toggle="modal" data-bs-target="#quizModal">
+                                            <i class="fas fa-play-circle me-2"></i>Start Interactive Quiz
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-          <!------------------------------------------------------------------->
-                    <a href="https://shamser.info.np/profile/connect%20with%20social%20media.html" class="btn btn-primary mb-3" target="_blank">🌐 Connect with 🌏</a>
-
-                    <!-- Subscribe Button -->
-                    <button id="subscribeBtn" class="ms-3">
-                        <span class="bell-icon">🔔</span>
-                        <span>Subscribe</span>
-                        <span id="badge" class="badge" style="display: none;">0</span>
-                    </button>
-                    <div class="row mt-2">
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <a href="https://shamser.info.np/profile/connect%20with%20social%20media.html" class="btn btn-primary mb-3" target="_blank">🌐 Connect with 🌏</a>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            <!-- Subscribe Button -->
+                            <button id="subscribeBtn" class="mb-3">
+                                <span class="bell-icon">🔔</span>
+                                <span>Subscribe</span>
+                                <span id="badge" class="badge" style="display: none;">0</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
                         <div class="col-12 text-center">
                             <p id="statusText" class="mb-0"></p>
                             <div class="counter-container">
@@ -1273,7 +335,7 @@
                             </div>
                         </div>
                     </div>
-                          <!------------------------------------------------------------------->
+                    
                     <div class="mt-4">
                         <h5>ताजा अपडेटहरू</h5>
                         <ul>
@@ -1286,6 +348,7 @@
                         </ul>
                     </div>
                 </div>
+                
                 <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2F&width=450&layout&action&size&share=true&height=35&appId" width="450" height="35" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
 
                 <div class="modal-footer">
@@ -1335,9 +398,7 @@
             </div>
         </div>
     </div>
-    
 
-    
     <!-- Logo Section -->
     <div class="logo-section">
         <div class="container">
@@ -1406,7 +467,6 @@
                         </ul>
                     </li>
 
-                    
                     <li class="nav-item">
                         <a class="nav-link" href="#news-section"> शैक्षिक समाचार</a>
                     </li>
@@ -1422,7 +482,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="Service_Site/contact.html"> सम्पर्क</a>
                     </li>
-                                        <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link" href="https://shamser.info.np/dimjanschool/download%20document.html"> Download</a>
                     </li>
                     <li class="nav-item">
@@ -1454,7 +514,7 @@
             <div class="carousel-item active">
                 <img src="HomePage/Simarika.jpg" class="d-block w-100" alt="स्मारिका">
                 <div class="carousel-caption d-none d-md-block">
-                    <h2">स्मारिका</h2>
+                    <h2>स्मारिका</h2>
                     <p>विद्यालयको हिरक जयन्तीको अवसरमा प्रकाशन हुन गैरहेको स्मारिका </p>
                     <a href="https://shamser.info.np/Home/About.html" class="btn btn-primary">थप जानकारी</a>
                 </div>
@@ -1499,9 +559,20 @@
 
     <!-- Main Content -->
     <div class="container my-5">
-        <!-- Ad Container -->
-        <div class="ad-container">
-            <div class="ad-label">यो विज्ञापन क्षेत्र हो । यस वेभसाइटमा विज्ञापन दिएर आफ्नो ब्यापार ब्यवसाय कृति प्रकाशन आदिको प्रचार प्रसार गर्नुहोस् । </div>
+        <!-- Ad Container in two columns -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="ad-container">
+                    <div class="ad-label">विज्ञापन क्षेत्र १</div>
+                    <p>यो विज्ञापन क्षेत्र हो । यस वेभसाइटमा विज्ञापन दिएर आफ्नो ब्यापार ब्यवसाय कृति प्रकाशन आदिको प्रचार प्रसार गर्नुहोस् ।</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="ad-container">
+                    <div class="ad-label">विज्ञापन क्षेत्र २</div>
+                    <p>यो विज्ञापन क्षेत्र हो । यस वेभसाइटमा विज्ञापन दिएर आफ्नो ब्यापार ब्यवसाय कृति प्रकाशन आदिको प्रचार प्रसार गर्नुहोस् ।</p>
+                </div>
+            </div>
         </div>
 
         <!-- विद्यालय स्मारिका सेक्सन -->
@@ -1510,28 +581,33 @@
             <p>
                विद्यालय स्मारिका भनेको विद्यालयको पहिचान, इतिहास, उपलब्धि र गतिविधिहरूलाई समेटेर तयार गरिने स्मरणीय प्रकाशन (बुक/पत्रिका) हो।
             </p>
-            <p><strong>विद्यालय स्मारिकामा सामान्यतया समेटिने विषयहरू</strong></p>
-            <ul>
-                <li> विद्यालयको परिचय र इतिहास</li>
-                <li> विब्यस समिति अध्यक्ष र प्रधानाध्यापकको सन्देश</li>
-                <li>शिक्षक तथा कर्मचारी परिचय</li>
-                <li> शैक्षिक गतिविधि र उपलब्धि</li>
-                <li>शैक्षिक तथा अतिरिक्त क्रियाकलाप</li>
-                <li>तस्बिरहरू (कार्यक्रम, भ्रमण, पुरस्कार आदि)</li>
-                <li>लेख, कविता, रचनाहरू</li>
-                <li>समर्थक/दाताको विवरण</li>
-                <li>महत्त्वपूर्ण मिति र कार्यक्रम सूची</li>
-            </ul>
-        <img src="https://shamser.info.np/HomePage/smarika.png" class="img-fluid rounded" alt="SMARIKA">
-
-            
-            <p><strong>विद्यालय स्मारिकाको उद्देश्य</strong></p>
-            <ul>
-                <li>विद्यालयको इतिहास सुरक्षित राख्नु</li>
-                <li>विद्यार्थी र शिक्षकको उत्साह बढाउनु</li>
-                <li>विद्यालयको पहिचान र प्रतिष्ठा बढाउनु</li>
-                <li>भविष्यका पुस्तालाई स्मरणीय दस्तावेज प्रदान गर्नु</li>
-            </ul>
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>विद्यालय स्मारिकामा सामान्यतया समेटिने विषयहरू</strong></p>
+                    <ul>
+                        <li> विद्यालयको परिचय र इतिहास</li>
+                        <li> विब्यस समिति अध्यक्ष र प्रधानाध्यापकको सन्देश</li>
+                        <li>शिक्षक तथा कर्मचारी परिचय</li>
+                        <li> शैक्षिक गतिविधि र उपलब्धि</li>
+                        <li>शैक्षिक तथा अतिरिक्त क्रियाकलाप</li>
+                        <li>तस्बिरहरू (कार्यक्रम, भ्रमण, पुरस्कार आदि)</li>
+                        <li>लेख, कविता, रचनाहरू</li>
+                        <li>समर्थक/दाताको विवरण</li>
+                        <li>महत्त्वपूर्ण मिति र कार्यक्रम सूची</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <img src="https://shamser.info.np/HomePage/smarika.png" class="img-fluid rounded" alt="SMARIKA">
+                    
+                    <p class="mt-3"><strong>विद्यालय स्मारिकाको उद्देश्य</strong></p>
+                    <ul>
+                        <li>विद्यालयको इतिहास सुरक्षित राख्नु</li>
+                        <li>विद्यार्थी र शिक्षकको उत्साह बढाउनु</li>
+                        <li>विद्यालयको पहिचान र प्रतिष्ठा बढाउनु</li>
+                        <li>भविष्यका पुस्तालाई स्मरणीय दस्तावेज प्रदान गर्नु</li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
         <!-- Featured News with Small Images -->
@@ -1644,8 +720,6 @@
                 </div>
             </div>
 
-
-
             <div class="col-lg-4" id="testimonials">
                 <!-- Testimonials -->
                 <h4 class="section-title">विद्यार्थीहरूको प्रतिक्रिया</h4>
@@ -1688,191 +762,189 @@
             </div>
         </div>
 
-        <!-- Ad Container -->
-
-            <div class="col-12">
-                  <div class="col-lg-6">      
-        <div class="ad-container">
-            <div class="ad-label">विज्ञापन</div>
-            <p>यो विज्ञापन क्षेत्र हो । यस वेभसाइटमा विज्ञापन दिएर आफ्नो ब्यापार ब्यवसाय कृति प्रकाशन आदिको प्रचार प्रसार गर्नुहोस् ।</p>
-        </div>
-            </div>
-
-                   <div class="col-lg-6">         
-        <p style="font-size:20px; text-align: justify; padding:5px; margin: 0px; line-height: 26px;">कमेन्ट गर्नुहोस्</p>
-            <div id="fb-root"></div>
-            <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v20.0" nonce="vWuanTA1"></script>
-            <div class="fb-comments" data-href="https://shamser.info.np" data-width="" data-numposts="25"></div> 
-            <div width="100%"><script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0" nonce="2EAd6wOK"></script></div>
-
-                   </div>
-            </div>
-
-
-   <!-- Computer Quiz Modal -->
-    <div class="modal fade modal-nepali" id="quizModal" tabindex="-1" aria-labelledby="quizModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title" id="quizModalLabel">
-                        <i class="fas fa-laptop-code me-2"></i>Computer Quiz
-                    </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        <!-- Ad Container in two columns -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="ad-container">
+                    <div class="ad-label">विज्ञापन क्षेत्र ३</div>
+                    <p>यो विज्ञापन क्षेत्र हो । यस वेभसाइटमा विज्ञापन दिएर आफ्नो ब्यापार ब्यवसाय कृति प्रकाशन आदिको प्रचार प्रसार गर्नुहोस् ।</p>
                 </div>
-                <div class="modal-body p-4">
-                    <div class="text-center mb-4">
-                        <img src="https://shamser.info.np/HomePage/quiz-icon.png" alt="Quiz Icon" class="img-fluid" style="max-height: 100px;">
-                        <h3 class="mt-3">Computer Knowledge Test</h3>
-                        <p class="text-muted">Test your computer knowledge with this interactive quiz</p>
+            </div>
+            <div class="col-md-6">
+                <p style="font-size:20px; text-align: justify; padding:5px; margin: 0px; line-height: 26px;">कमेन्ट गर्नुहोस्</p>
+                <div id="fb-root"></div>
+                <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v20.0" nonce="vWuanTA1"></script>
+                <div class="fb-comments" data-href="https://shamser.info.np" data-width="" data-numposts="25"></div> 
+                <div width="100%"><script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0" nonce="2EAd6wOK"></script></div>
+            </div>
+        </div>
+
+        <!-- Computer Quiz Modal -->
+        <div class="modal fade modal-nepali" id="quizModal" tabindex="-1" aria-labelledby="quizModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary text-white">
+                        <h5 class="modal-title" id="quizModalLabel">
+                            <i class="fas fa-laptop-code me-2"></i>Computer Quiz
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    
-                    <!-- Quiz Instructions -->
-                    <div class="alert alert-info mb-4">
-                        <h5><i class="fas fa-info-circle me-2"></i>निर्देशनहरू:</h5>
-                        <ul class="mb-0">
-                            <li>कुल ५ वटा प्रश्नहरू छन्</li>
-                            <li>प्रत्येक प्रश्नको लागि एक मात्र सही उत्तर छ</li>
-                            <li>सबै प्रश्नहरूको उत्तर दिएपछि "Submit Quiz" बटन थिच्नुहोस्</li>
-                            <li>पुनः प्रयास गर्न "Reset Quiz" बटन प्रयोग गर्नुहोस्</li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Timer Section -->
-                    <div class="timer-section mb-4 p-3 bg-light rounded">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <h5 class="mb-0">समय:</h5>
-                                <div id="quizTimer" class="display-6 text-primary">05:00</div>
-                            </div>
-                            <div class="text-end">
-                                <div class="badge bg-success fs-6 p-2">
-                                    <i class="fas fa-question-circle me-1"></i>
-                                    <span id="currentQuestion">1</span>/<span id="totalQuestions">5</span>
+                    <div class="modal-body p-4">
+                        <div class="text-center mb-4">
+                            <img src="https://shamser.info.np/HomePage/quiz-icon.png" alt="Quiz Icon" class="img-fluid" style="max-height: 100px;">
+                            <h3 class="mt-3">Computer Knowledge Test</h3>
+                            <p class="text-muted">Test your computer knowledge with this interactive quiz</p>
+                        </div>
+                        
+                        <!-- Quiz Instructions -->
+                        <div class="alert alert-info mb-4">
+                            <h5><i class="fas fa-info-circle me-2"></i>निर्देशनहरू:</h5>
+                            <ul class="mb-0">
+                                <li>कुल ५ वटा प्रश्नहरू छन्</li>
+                                <li>प्रत्येक प्रश्नको लागि एक मात्र सही उत्तर छ</li>
+                                <li>सबै प्रश्नहरूको उत्तर दिएपछि "Submit Quiz" बटन थिच्नुहोस्</li>
+                                <li>पुनः प्रयास गर्न "Reset Quiz" बटन प्रयोग गर्नुहोस्</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Timer Section -->
+                        <div class="timer-section mb-4 p-3 bg-light rounded">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h5 class="mb-0">समय:</h5>
+                                    <div id="quizTimer" class="display-6 text-primary">05:00</div>
+                                </div>
+                                <div class="text-end">
+                                    <div class="badge bg-success fs-6 p-2">
+                                        <i class="fas fa-question-circle me-1"></i>
+                                        <span id="currentQuestion">1</span>/<span id="totalQuestions">5</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="progress mt-2" style="height: 8px;">
-                            <div id="quizProgress" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    
-                    <!-- Quiz Content -->
-                    <div id="modalQuiz" class="mb-4"></div>
-                    
-                    <!-- Quiz Controls -->
-                    <div class="quiz-controls mt-4">
-                        <div class="d-flex justify-content-between">
-                            <div>
-                                <button id="prevBtn" class="btn btn-outline-secondary" onclick="prevQuestion()">
-                                    <i class="fas fa-arrow-left me-1"></i>अघिल्लो
-                                </button>
-                            </div>
-                            <div>
-                                <button id="nextBtn" class="btn btn-outline-primary" onclick="nextQuestion()">
-                                    अर्को <i class="fas fa-arrow-right ms-1"></i>
-                                </button>
+                            <div class="progress mt-2" style="height: 8px;">
+                                <div id="quizProgress" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%"></div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- Quiz Results -->
-                    <div id="modalQuizResult" class="mt-4" style="display: none;">
-                        <div class="card">
-                            <div class="card-header bg-success text-white">
-                                <h5 class="mb-0"><i class="fas fa-trophy me-2"></i>Quiz Result</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="row text-center">
-                                    <div class="col-md-4">
-                                        <div class="display-6 text-primary" id="modalScore">0</div>
-                                        <small>Score</small>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="display-6 text-success" id="modalCorrect">0</div>
-                                        <small>Correct Answers</small>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="display-6 text-warning" id="modalPercentage">0%</div>
-                                        <small>Percentage</small>
-                                    </div>
-                                </div>
-                                <div class="mt-3" id="modalMessage"></div>
-                                
-                                <!-- Share Results -->
-                                <div class="share-results mt-4">
-                                    <button class="btn btn-outline-primary" onclick="shareQuizResult()">
-                                        <i class="fas fa-share-alt me-2"></i>Share Your Score
+                        
+                        <!-- Quiz Content -->
+                        <div id="modalQuiz" class="mb-4"></div>
+                        
+                        <!-- Quiz Controls -->
+                        <div class="quiz-controls mt-4">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <button id="prevBtn" class="btn btn-outline-secondary" onclick="prevQuestion()">
+                                        <i class="fas fa-arrow-left me-1"></i>अघिल्लो
                                     </button>
-                                    <button class="btn btn-outline-secondary ms-2" onclick="downloadCertificate()">
-                                        <i class="fas fa-download me-2"></i>Download Certificate
+                                </div>
+                                <div>
+                                    <button id="nextBtn" class="btn btn-outline-primary" onclick="nextQuestion()">
+                                        अर्को <i class="fas fa-arrow-right ms-1"></i>
                                     </button>
                                 </div>
                             </div>
                         </div>
+                        
+                        <!-- Quiz Results -->
+                        <div id="modalQuizResult" class="mt-4" style="display: none;">
+                            <div class="card">
+                                <div class="card-header bg-success text-white">
+                                    <h5 class="mb-0"><i class="fas fa-trophy me-2"></i>Quiz Result</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row text-center">
+                                        <div class="col-md-4">
+                                            <div class="display-6 text-primary" id="modalScore">0</div>
+                                            <small>Score</small>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="display-6 text-success" id="modalCorrect">0</div>
+                                            <small>Correct Answers</small>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="display-6 text-warning" id="modalPercentage">0%</div>
+                                            <small>Percentage</small>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3" id="modalMessage"></div>
+                                    
+                                    <!-- Share Results -->
+                                    <div class="share-results mt-4">
+                                        <button class="btn btn-outline-primary" onclick="shareQuizResult()">
+                                            <i class="fas fa-share-alt me-2"></i>Share Your Score
+                                        </button>
+                                        <button class="btn btn-outline-secondary ms-2" onclick="downloadCertificate()">
+                                            <i class="fas fa-download me-2"></i>Download Certificate
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                        <i class="fas fa-times me-1"></i>बन्द गर्नुहोस्
-                    </button>
-                    <button type="button" class="btn btn-outline-primary" onclick="resetModalQuiz()">
-                        <i class="fas fa-redo me-1"></i>Reset Quiz
-                    </button>
-                    <button type="button" class="btn btn-primary" onclick="submitModalQuiz()" id="submitQuizBtn">
-                        <i class="fas fa-paper-plane me-1"></i>Submit Quiz
-                    </button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            <i class="fas fa-times me-1"></i>बन्द गर्नुहोस्
+                        </button>
+                        <button type="button" class="btn btn-outline-primary" onclick="resetModalQuiz()">
+                            <i class="fas fa-redo me-1"></i>Reset Quiz
+                        </button>
+                        <button type="button" class="btn btn-primary" onclick="submitModalQuiz()" id="submitQuizBtn">
+                            <i class="fas fa-paper-plane me-1"></i>Submit Quiz
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-
-
-
-
-
-
-
-        
-        <!-- Our Team Section -->
+        <!-- Our Team Section in two columns -->
         <div class="row my-5">
             <div class="col-12">
                 <h2 class="section-title">Our Team</h2>
             </div>
             
-            <div class="col-lg-3 col-md-6">
-                <div class="team-member">
-                    <img src="https://shamser.info.np/HomePage/img/brp.jpg" alt="शमसेर पुलामी">
-                    <h5>शमसेर पुलामी</h5>
-                    <p class="text-muted">वेब निर्माता</p>
-                    <p>१५ वर्षको शिक्षण अनुभव, प्रविधिमैत्री शिक्षण विधिमा संलग्न</p>
+            <!-- First column with two team members -->
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 mb-4">
+                        <div class="team-member">
+                            <img src="https://shamser.info.np/HomePage/img/brp.jpg" alt="शमसेर पुलामी">
+                            <h5>शमसेर पुलामी</h5>
+                            <p class="text-muted">वेब निर्माता</p>
+                            <p>१५ वर्षको शिक्षण अनुभव, प्रविधिमैत्री शिक्षण विधिमा संलग्न</p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6 col-md-12 mb-4">
+                        <div class="team-member">
+                            <img src="https://shamser.info.np/HomePage/team_img/team2.png" alt="रोजी मेग">
+                            <h5>रोजी मेग</h5>
+                            <p class="text-muted">Advisor</p>
+                            <p>शैक्षिक सामग्री विकास र प्रशिक्षणमा विशेषज्ञ</p>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="col-lg-3 col-md-6">
-                <div class="team-member">
-                    <img src="https://shamser.info.np/HomePage/team_img/team2.png" alt="रोजी मेग">
-                    <h5>रोजी मेग</h5>
-                    <p class="text-muted">Advisor</p>
-                    <p>शैक्षिक सामग्री विकास र प्रशिक्षणमा विशेषज्ञ</p>
-                </div>
-            </div>
-            
-            <div class="col-lg-3 col-md-6">
-                <div class="team-member">
-                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgx211Sp-HZTbjs9cVTutTPAexEAR6EDzUCKffHEuoXzJwY7xGTxgvshEjk6xMgWKgCckXdUY4oHYoGVvjXnZHGaVNTDLmvOlL8xtNXbR_Bpvw2WbZpLvBIzlnonhg2eljjvp8Ow75XbrzYqrj7OSQiBRS_scjTIUiv1QS4WMe0RL8f7koMAU2Acq5t6JA/w594-h554/big.jpg" alt="लौरो मिडिया">
-                    <h5>लौरो मिडिया</h5>
-                    <p class="text-muted">Official Youtube Channel</p>
-                    <p>शैक्षिक सामग्री प्रसारण र प्रचारप्रसार</p>
-                </div>
-            </div>
-            
-            <div class="col-lg-3 col-md-6">
-                <div class="team-member">
-                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgF1dn0QKBSD0_YpbYY7wTwWOCz4vNdLdYPeXiCGFjvA8ajWwxmnGfaSi8f-LspH7sUguKY_jJYeEHECms2AovLiNHyyhFsU-v4SfzhPdnuZ70vEfeJyqU2FPLhyXXuzdrsfWQrmxb0ecjzZF5hOXnQzNKGQ49KQrMBZ-79bpPJ9-1kmsdcuLkeiryoIxI/w720-h148/Screenshot_2022-05-07-07-01-53-50_40deb401b9ffe8e1df2f1cc5ba480b12.jpg" alt="डिम जनता मा.वि.">
-                    <h5>डिम जनता मा.वि.</h5>
-                    <p class="text-muted">सहयोगी विद्यालय</p>
-                    <p>परवानीपुर, सर्लाहीको प्रतिष्ठित शैक्षिक संस्था</p>
+            <!-- Second column with two team members -->
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 mb-4">
+                        <div class="team-member">
+                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgx211Sp-HZTbjs9cVTutTPAexEAR6EDzUCKffHEuoXzJwY7xGTxgvshEjk6xMgWKgCckXdUY4oHYoGVvjXnZHGaVNTDLmvOlL8xtNXbR_Bpvw2WbZpLvBIzlnonhg2eljjvp8Ow75XbrzYqrj7OSQiBRS_scjTIUiv1QS4WMe0RL8f7koMAU2Acq5t6JA/w594-h554/big.jpg" alt="लौरो मिडिया">
+                            <h5>लौरो मिडिया</h5>
+                            <p class="text-muted">Official Youtube Channel</p>
+                            <p>शैक्षिक सामग्री प्रसारण र प्रचारप्रसार</p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6 col-md-12 mb-4">
+                        <div class="team-member">
+                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgF1dn0QKBSD0_YpbYY7wTwWOCz4vNdLdYPeXiCGFjvA8ajWwxmnGfaSi8f-LspH7sUguKY_jJYeEHECms2AovLiNHyyhFsU-v4SfzhPdnuZ70vEfeJyqU2FPLhyXXuzdrsfWQrmxb0ecjzZF5hOXnQzNKGQ49KQrMBZ-79bpPJ9-1kmsdcuLkeiryoIxI/w720-h148/Screenshot_2022-05-07-07-01-53-50_40deb401b9ffe8e1df2f1cc5ba480b12.jpg" alt="डिम जनता मा.वि.">
+                            <h5>डिम जनता मा.वि.</h5>
+                            <p class="text-muted">सहयोगी विद्यालय</p>
+                            <p>परवानीपुर, सर्लाहीको प्रतिष्ठित शैक्षिक संस्था</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1907,12 +979,8 @@
                 </div>
             </div>
         </div>
-    </div>
-   
-                    
 
-    <!-- Widgets Section -->
-    <div class="container">
+        <!-- Widgets Section -->
         <div class="widgets-container">
             <h3 class="section-title">उपयोगी उपकरणहरू</h3>
             
@@ -1925,10 +993,10 @@
                 <div class="widget-tab" data-widget="unicode">युनिकोड कन्भर्टर</div>
             </div>
 
-
-
-        
-          
+            <div class="widget-content">
+                <div class="widget" id="patro-widget">
+                    <iframe src="https://www.hamropatro.com/widgets/calender-medium.php" frameborder="0" scrolling="no" marginwidth="0" marginheight="0" style="border:none; overflow:hidden; width:100%; height:385px;" allowtransparency="true"></iframe>
+                </div>
                 
                 <div class="widget" id="date-converter-widget">
                     <iframe src="https://www.hamropatro.com/widgets/dateconverter.php" frameborder="0" scrolling="no" marginwidth="0" marginheight="0" style="border:none; padding: 0; overflow:hidden; width:100%; height:100px;" allowtransparency="true"></iframe>
@@ -2062,11 +1130,11 @@
         </div>
 
         <div class="widget-icon" data-bs-toggle="modal" data-bs-target="#numberconverterModal">
-       <i class="fa-solid fa-calculator"></i>
+            <i class="fa-solid fa-calculator"></i>
             <span>संख्या रूपान्तरण</span>
         </div>
         <div class="widget-icon" data-bs-toggle="modal" data-bs-target="#translateTextModal">
-       <i class="fa-solid fas fa-language"></i>
+            <i class="fa-solid fas fa-language"></i>
             <span>Translator</span>
         </div>
   
@@ -2079,16 +1147,10 @@
             <span>क्विज</span>
         </div>
 
-
- <div class="widget-icon" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <div class="widget-icon" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
             <i class="fas fa-arrow-up"></i>
             <span>माथि</span>
         </div>
-
-
-
-
-        
     </div>
 
     <!-- Patro Modal -->
@@ -2144,128 +1206,61 @@
         </div>
     </div>
 
+    <!-- Number Converter Modal -->
+    <div class="modal fade modal-nepali" id="numberconverterModal" tabindex="-1" aria-labelledby="numberconverterModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen-sm-down">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="numberconverterModalLabel">संख्या रूपान्तरण</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
 
-
-
-<!-- number Converter Modal -->
-<div class="modal fade modal-nepali" id="numberconverterModal" tabindex="-1"
-     aria-labelledby="numberconverterModalLabel" aria-hidden="true">
-     
-    <div class="modal-dialog modal-fullscreen-sm-down">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="numberconverterModalLabel">संख्या रूपान्तरण</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-
-            <div class="modal-body p-0">
-                <iframe src="https://shamser.info.np/Number_to_Text.html"
-                        frameborder="0"
-                        style="width:100%; height:700px; border:0;"
-                        scrolling="auto">
-                </iframe>
+                <div class="modal-body p-0">
+                    <iframe src="https://shamser.info.np/Number_to_Text.html"
+                            frameborder="0"
+                            style="width:100%; height:700px; border:0;"
+                            scrolling="auto">
+                    </iframe>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<style>
-    @media (max-width: 576px) {
-    #numberconverterModal .modal-content {
-        height: 100vh;
-    }
 
-    #numberconverterModal .modal-body {
-        height: calc(100vh - 56px); /* header height */
-    }
-.modal-body {
-    height: calc(100vh - 56px); /* subtract header height */
-}
+    <!-- Translate Text Modal -->
+    <div class="modal fade modal-nepali" id="translateTextModal" tabindex="-1" aria-labelledby="translateTextModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen-sm-down">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="translateTextModalLabel">अनुवाद</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
 
-.modal-content {
-    height: 100vh;
-}
+                <div class="modal-body p-0">
+                    <div class="widget h-100" id="translator-widget">
+                        <div class="p-3 h-100 d-flex flex-column">
+                            <h5>अनुवादक (अङ्ग्रेजी देखि नेपाली)</h5>
 
+                            <div class="mb-3 flex-grow-1">
+                                <textarea id="englishText"
+                                          class="form-control h-100"
+                                          placeholder="अङ्ग्रेजीमा लेख्नुहोस्"></textarea>
+                            </div>
 
+                            <button class="btn btn-primary mb-3"
+                                    onclick="translateText()">
+                                अनुवाद गर्नुहोस्
+                            </button>
 
-
-
-
-        
-@media (max-width: 576px) {
-    #translateTextModal .modal-content {
-        height: 100vh;
-    }
-
-    #translateTextModal .modal-body {
-        height: calc(100vh - 56px); /* header height */
-        overflow-y: auto;
-    }
-}
-
-
-
-</style>
-
-
-
-<!-- translateText Modal -->
-<!-- translateText Modal -->
-<div class="modal fade modal-nepali" id="translateTextModal" tabindex="-1"
-     aria-labelledby="translateTextModalLabel" aria-hidden="true">
-
-    <!-- Fullscreen on mobile only -->
-    <div class="modal-dialog modal-fullscreen-sm-down">
-        <div class="modal-content">
-
-            <div class="modal-header">
-                <h5 class="modal-title" id="translateTextModalLabel">अनुवाद</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-
-            <div class="modal-body p-0">
-                <div class="widget h-100" id="translator-widget">
-                    <div class="p-3 h-100 d-flex flex-column">
-                        <h5>अनुवादक (अङ्ग्रेजी देखि नेपाली)</h5>
-
-                        <div class="mb-3 flex-grow-1">
-                            <textarea id="englishText"
-                                      class="form-control h-100"
-                                      placeholder="अङ्ग्रेजीमा लेख्नुहोस्"></textarea>
-                        </div>
-
-                        <button class="btn btn-primary mb-3"
-                                onclick="translateText()">
-                            अनुवाद गर्नुहोस्
-                        </button>
-
-                        <div id="translationResult"
-                             class="p-2 bg-light rounded"
-                             style="min-height:80px;">
+                            <div id="translationResult"
+                                 class="p-2 bg-light rounded"
+                                 style="min-height:80px;">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
-</div>
-
-
-
-
-
-
-
-
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-
     
     <!-- Unicode Converter Modal -->
     <div class="modal fade modal-nepali" id="unicodeModal" tabindex="-1" aria-labelledby="unicodeModalLabel" aria-hidden="true">
@@ -2287,810 +1282,10 @@
         </div>
     </div>
 
-
-
-
-
-
-    
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     
-    <script>
-        // Database Storage System using localStorage
-        class SocialStatsDB {
-            constructor() {
-                this.dbName = 'shamser_social_stats';
-                this.initDB();
-            }
-
-            initDB() {
-                if (!localStorage.getItem(this.dbName)) {
-                    const initialData = {
-                        subscribers: 0,
-                        subscribersList: [],
-                        articleStats: {
-                            'article1': { views: 0, likes: 0, shares: 0, userLikes: [] },
-                            'article2': { views: 0, likes: 0, shares: 0, userLikes: [] },
-                            'article3': { views: 0, likes: 0, shares: 0, userLikes: [] }
-                        },
-                        socialStats: {
-                            'article1': { likes: 125, shares: 34, views: 1234 },
-                            'article2': { likes: 98, shares: 21, views: 987 },
-                            'article3': { likes: 210, shares: 45, views: 2109 }
-                        }
-                    };
-                    localStorage.setItem(this.dbName, JSON.stringify(initialData));
-                }
-            }
-
-            getDB() {
-                return JSON.parse(localStorage.getItem(this.dbName));
-            }
-
-            saveDB(data) {
-                localStorage.setItem(this.dbName, JSON.stringify(data));
-            }
-
-            incrementViews(articleId) {
-                const db = this.getDB();
-                if (db.articleStats[articleId]) {
-                    db.articleStats[articleId].views++;
-                    this.saveDB(db);
-                }
-                return db.articleStats[articleId]?.views || 0;
-            }
-
-            toggleLike(articleId, userId) {
-                const db = this.getDB();
-                const article = db.articleStats[articleId];
-                
-                if (article) {
-                    const userIndex = article.userLikes.indexOf(userId);
-                    
-                    if (userIndex === -1) {
-                        // Like
-                        article.userLikes.push(userId);
-                        article.likes++;
-                    } else {
-                        // Unlike
-                        article.userLikes.splice(userIndex, 1);
-                        article.likes--;
-                    }
-                    
-                    this.saveDB(db);
-                    return {
-                        likes: article.likes,
-                        isLiked: userIndex === -1
-                    };
-                }
-                return null;
-            }
-
-            incrementShares(articleId) {
-                const db = this.getDB();
-                if (db.articleStats[articleId]) {
-                    db.articleStats[articleId].shares++;
-                    this.saveDB(db);
-                }
-                return db.articleStats[articleId]?.shares || 0;
-            }
-
-            addSubscriber(userId) {
-                const db = this.getDB();
-                if (!db.subscribersList.includes(userId)) {
-                    db.subscribersList.push(userId);
-                    db.subscribers = db.subscribersList.length;
-                    this.saveDB(db);
-                    return true;
-                }
-                return false;
-            }
-
-            getSubscriberCount() {
-                const db = this.getDB();
-                return db.subscribers;
-            }
-
-            getArticleStats(articleId) {
-                const db = this.getDB();
-                return db.articleStats[articleId] || { views: 0, likes: 0, shares: 0 };
-            }
-
-            getSocialStats(articleId) {
-                const db = this.getDB();
-                return db.socialStats[articleId] || { likes: 0, shares: 0, views: 0 };
-            }
-        }
-
-        // Initialize database
-        const socialDB = new SocialStatsDB();
-
-        // Generate unique user ID
-        function getUserId() {
-            let userId = localStorage.getItem('shamser_user_id');
-            if (!userId) {
-                userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-                localStorage.setItem('shamser_user_id', userId);
-            }
-            return userId;
-        }
-
-        const userId = getUserId();
-
-        // Show welcome modal on page load
-        window.addEventListener('DOMContentLoaded', function() {
-            const welcomeModal = new bootstrap.Modal(document.getElementById('welcomeModal'));
-            welcomeModal.show();
-            
-            // Initialize like/share buttons for each news article
-            initializePostStats();
-            
-            // Initialize quiz
-            initializeQuiz();
-            
-            // Initialize Nepali DateTime
-            updateNepaliDateTime();
-            
-            // Fixed Navbar on Scroll
-            const navbar = document.querySelector('.main-nav');
-            const navOffsetTop = navbar.offsetTop;
-            
-            function handleScroll() {
-                if (window.scrollY > navOffsetTop) {
-                    navbar.classList.add('fixed-navbar');
-                } else {
-                    navbar.classList.remove('fixed-navbar');
-                }
-            }
-            
-            window.addEventListener('scroll', handleScroll);
-            
-            // Auto-slide carousel
-            const carousel = new bootstrap.Carousel(document.getElementById('headerCarousel'), {
-                interval: 5000,
-                wrap: true,
-                pause: 'hover'
-            });
-            
-            // Smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 100,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-            
-            // Initialize software carousel when modal opens
-            document.getElementById('demoModal').addEventListener('shown.bs.modal', function () {
-                const softwareCarousel = new bootstrap.Carousel(document.getElementById('softwareCarousel'));
-            });
-        });
-        
-        // Nepali Date and Time Function
-        function updateNepaliDateTime() {
-            const nepaliMonths = [
-                "बैशाख", "जेठ", "असार", "श्रावण", "भदौ", "असोज",
-                "कार्तिक", "मंसिर", "पुष", "माघ", "फागुन", "चैत"
-            ];
-            
-            const nepaliDays = [
-                "आइतबार", "सोमबार", "मंगलबार", "बुधबार", 
-                "बिहिबार", "शुक्रबार", "शनिबार"
-            ];
-            
-            const now = new Date();
-            
-            // Mock Nepali date for demo (should use actual conversion library in production)
-            // For real implementation, use a library like "nepali-date-converter"
-            const nepaliDate = {
-                year: 2080,
-                month: 9, // Poush
-                day: 26,
-                hour: now.getHours(),
-                minute: now.getMinutes(),
-                second: now.getSeconds(),
-                dayOfWeek: now.getDay()
-            };
-            
-            // Format time with AM/PM in Nepali
-            let hour = nepaliDate.hour;
-            let ampm = hour >= 12 ? "अपरान्ह" : "पूर्वान्ह";
-            if (hour > 12) hour -= 12;
-            if (hour === 0) hour = 12;
-            
-            // Format minutes and seconds with leading zeros
-            const minute = String(nepaliDate.minute).padStart(2, '0');
-            const second = String(nepaliDate.second).padStart(2, '0');
-            
-            const nepaliDateTimeStr = 
-                `${nepaliMonths[nepaliDate.month - 1]} ${nepaliDate.day} गते ` +
-                `${nepaliDays[nepaliDate.dayOfWeek]} ${ampm} ${hour}बजे ` +
-                `${minute} मिनेट ${second} सेकेण्ड`;
-            
-            document.getElementById('nepaliDateTime').textContent = nepaliDateTimeStr;
-        }
-        
-        // Update Nepali time every second
-        setInterval(updateNepaliDateTime, 1000);
-        
-        // Time Ago Function
-        function updateTimeAgo() {
-            const timeAgoElements = document.querySelectorAll('.time-ago');
-            timeAgoElements.forEach(element => {
-                const timeString = element.getAttribute('data-time');
-                const time = new Date(timeString);
-                const now = new Date();
-                const diffMs = now - time;
-                const diffMins = Math.floor(diffMs / 60000);
-                const diffHours = Math.floor(diffMins / 60);
-                const diffDays = Math.floor(diffHours / 24);
-                
-                if (diffMins < 1) {
-                    element.textContent = 'भर्खरै';
-                } else if (diffMins < 60) {
-                    element.textContent = `${diffMins} मिनेट अघि`;
-                } else if (diffHours < 24) {
-                    element.textContent = `${diffHours} घण्टा अघि`;
-                } else {
-                    element.textContent = `${diffDays} दिन अघि`;
-                }
-            });
-        }
-        
-        // Update time ago every minute
-        updateTimeAgo();
-        setInterval(updateTimeAgo, 60000);
-        
-        // Widget Tabs
-        document.querySelectorAll('.widget-tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                // Remove active class from all tabs
-                document.querySelectorAll('.widget-tab').forEach(t => {
-                    t.classList.remove('active');
-                });
-                
-                // Add active class to clicked tab
-                this.classList.add('active');
-                
-                // Hide all widgets
-                document.querySelectorAll('.widget').forEach(widget => {
-                    widget.classList.remove('active');
-                });
-                
-                // Show selected widget
-                const widgetId = this.getAttribute('data-widget') + '-widget';
-                document.getElementById(widgetId).classList.add('active');
-            });
-        });
-        
-        // Enhanced Number Converter
-        function convertNumber() {
-            const numberInput = document.getElementById('numberInput').value;
-            const numberResult = document.getElementById('numberResult');
-            
-            if (!numberInput) {
-                numberResult.textContent = "कृपया संख्या प्रविष्ट गर्नुहोस्!";
-                return;
-            }
-            
-            const number = parseInt(numberInput);
-            
-            if (isNaN(number)) {
-                numberResult.textContent = "कृपया वैध संख्या प्रविष्ट गर्नुहोस्!";
-                return;
-            }
-            
-            // Enhanced conversion for numbers up to 100,000
-            const smallNumbers = ["शुन्य", "एक", "दुई", "तीन", "चार", "पाँच", "छ", "सात", "आठ", "नौ", "दश"];
-            const tens = ["", "एघार", "बाह्र", "तेह्र", "चौध", "पन्ध्र", "सोह्र", "सत्र", "अठार", "उन्नाइस"];
-            const multiplesOfTen = ["", "दश", "बीस", "तीस", "चालीस", "पचास", "साठी", "सत्तरी", "असी", "नब्बे"];
-            
-            if (number <= 10) {
-                numberResult.textContent = smallNumbers[number];
-            } else if (number < 20) {
-                numberResult.textContent = tens[number - 10];
-            } else if (number < 100) {
-                const tensDigit = Math.floor(number / 10);
-                const onesDigit = number % 10;
-                if (onesDigit === 0) {
-                    numberResult.textContent = multiplesOfTen[tensDigit];
-                } else {
-                    numberResult.textContent = multiplesOfTen[tensDigit] + " " + smallNumbers[onesDigit];
-                }
-            } else if (number < 1000) {
-                const hundredsDigit = Math.floor(number / 100);
-                const remainder = number % 100;
-                if (remainder === 0) {
-                    numberResult.textContent = smallNumbers[hundredsDigit] + " सय";
-                } else {
-                    numberResult.textContent = smallNumbers[hundredsDigit] + " सय " + convertNumberHelper(remainder);
-                }
-            } else if (number < 100000) {
-                const thousands = Math.floor(number / 1000);
-                const remainder = number % 1000;
-                if (remainder === 0) {
-                    numberResult.textContent = convertNumberHelper(thousands) + " हजार";
-                } else {
-                    numberResult.textContent = convertNumberHelper(thousands) + " हजार " + convertNumberHelper(remainder);
-                }
-            } else {
-                numberResult.textContent = "संख्या: " + number + "\n\nथप ठूला संख्याका लागि विकास गरिँदैछ।";
-            }
-        }
-        
-        // Helper function for number conversion
-        function convertNumberHelper(num) {
-            const smallNumbers = ["शुन्य", "एक", "दुई", "तीन", "चार", "पाँच", "छ", "सात", "आठ", "नौ", "दश"];
-            const tens = ["", "एघार", "बाह्र", "तेह्र", "चौध", "पन्ध्र", "सोह्र", "सत्र", "अठार", "उन्नाइस"];
-            const multiplesOfTen = ["", "दश", "बीस", "तीस", "चालीस", "पचास", "साठी", "सत्तरी", "असी", "नब्बे"];
-            
-            if (num <= 10) {
-                return smallNumbers[num];
-            } else if (num < 20) {
-                return tens[num - 10];
-            } else if (num < 100) {
-                const tensDigit = Math.floor(num / 10);
-                const onesDigit = num % 10;
-                if (onesDigit === 0) {
-                    return multiplesOfTen[tensDigit];
-                } else {
-                    return multiplesOfTen[tensDigit] + " " + smallNumbers[onesDigit];
-                }
-            } else if (num < 1000) {
-                const hundredsDigit = Math.floor(num / 100);
-                const remainder = num % 100;
-                if (remainder === 0) {
-                    return smallNumbers[hundredsDigit] + " सय";
-                } else {
-                    return smallNumbers[hundredsDigit] + " सय " + convertNumberHelper(remainder);
-                }
-            }
-            return num.toString();
-        }
-        
-        // Radio Player
-        function playRadio(streamUrl) {
-            const audioPlayer = document.getElementById('radioPlayer');
-            audioPlayer.src = streamUrl;
-            audioPlayer.play()
-                .then(() => console.log("Radio is playing"))
-                .catch(e => console.error("Error playing radio:", e));
-        }
-        
-        // Modal Radio Player
-        function playModalRadio(streamUrl) {
-            const audioPlayer = document.getElementById('modalRadioPlayer');
-            audioPlayer.src = streamUrl;
-            audioPlayer.play()
-                .then(() => console.log("Modal Radio is playing"))
-                .catch(e => console.error("Error playing modal radio:", e));
-        }
-        
-        // Text Translator
-        function translateText() {
-            const englishText = document.getElementById('englishText').value;
-            const translationResult = document.getElementById('translationResult');
-            
-            if (!englishText) {
-                translationResult.textContent = "कृपया अङ्ग्रेजी टेक्स्ट प्रविष्ट गर्नुहोस्!";
-                return;
-            }
-            
-            // Simple translation for demo
-            const translations = {
-                "hello": "नमस्ते",
-                "education": "शिक्षा",
-                "teacher": "शिक्षक",
-                "student": "विद्यार्थी",
-                "school": "विद्यालय",
-                "book": "किताब",
-                "exam": "परीक्षा",
-                "result": "नतिजा",
-                "good": "राम्रो",
-                "morning": "बिहान",
-                "evening": "साँझ",
-                "thank you": "धन्यवाद",
-                "welcome": "स्वागत छ"
-            };
-            
-            let translatedText = englishText;
-            for (const [english, nepali] of Object.entries(translations)) {
-                translatedText = translatedText.replace(new RegExp(english, 'gi'), nepali);
-            }
-            
-            translationResult.textContent = translatedText;
-        }
-        
-        // Unicode Converter
-        function convertToUnicode() {
-            const preetiText = document.getElementById('preetiText').value;
-            const unicodeResult = document.getElementById('unicodeResult');
-            
-            if (!preetiText) {
-                unicodeResult.textContent = "कृपया प्रीटी टेक्स्ट प्रविष्ट गर्नुहोस्!";
-                return;
-            }
-            
-            // Simple conversion for demo
-            const conversions = {
-                "laal": "लाल",
-                "Namaste": "नमस्ते",
-                "Nepal": "नेपाल",
-                "kasto": "कस्तो",
-                "cha": "छ",
-                "hajur": "हजुर",
-                "ma": "म",
-                "timro": "तिम्रो",
-                "naam": "नाम",
-                "ke": "के",
-                "ho": "हो",
-                "shiksha": "शिक्षा",
-                "vidhyarthi": "विद्यार्थी",
-                "shikshak": "शिक्षक"
-            };
-            
-            let convertedText = preetiText;
-            for (const [preeti, unicode] of Object.entries(conversions)) {
-                convertedText = convertedText.replace(new RegExp(preeti, 'gi'), unicode);
-            }
-            
-            unicodeResult.textContent = convertedText || "रूपान्तरण परिणाम यहाँ देखिने";
-        }
-        
-        // Modal Unicode Converter
-        function convertModalToUnicode() {
-            const preetiText = document.getElementById('modalPreetiText').value;
-            const unicodeResult = document.getElementById('modalUnicodeResult');
-            
-            if (!preetiText) {
-                unicodeResult.textContent = "कृपया प्रीटी फोन्ट प्रविष्ट गर्नुहोस्!";
-                return;
-            }
-            
-            // Simple conversion for demo
-            const conversions = {
-                "laal": "लाल",
-                "Namaste": "नमस्ते",
-                "Nepal": "नेपाल",
-                "kasto": "कस्तो",
-                "cha": "छ",
-                "hajur": "हजुर",
-                "ma": "म",
-                "timro": "तिम्रो",
-                "naam": "नाम",
-                "ke": "के",
-                "ho": "हो",
-                "shiksha": "शिक्षा",
-                "vidhyarthi": "विद्यार्थी",
-                "shikshak": "शिक्षक"
-            };
-            
-            let convertedText = preetiText;
-            for (const [preeti, unicode] of Object.entries(conversions)) {
-                convertedText = convertedText.replace(new RegExp(preeti, 'gi'), unicode);
-            }
-            
-            unicodeResult.textContent = convertedText || "रूपान्तरण परिणाम यहाँ देखिने";
-        }
-        
-        // Like/Share Functionality for News Articles
-        function initializePostStats() {
-            // Initialize for each news article
-            for (let i = 1; i <= 3; i++) {
-                const articleId = `article${i}`;
-                
-                // Load social stats from database
-                const socialStats = socialDB.getSocialStats(articleId);
-                const articleStats = socialDB.getArticleStats(articleId);
-                
-                // Update social stats display
-                document.getElementById(`socialLikes${i}`).textContent = socialStats.likes.toLocaleString('ne-NP');
-                document.getElementById(`socialShares${i}`).textContent = socialStats.shares.toLocaleString('ne-NP');
-                document.getElementById(`socialViews${i}`).textContent = socialStats.views.toLocaleString('ne-NP');
-                
-                // Track view for current user
-                const userViewedKey = `${articleId}_viewed_${userId}`;
-                if (!localStorage.getItem(userViewedKey)) {
-                    // Increment view count in database
-                    socialDB.incrementViews(articleId);
-                    localStorage.setItem(userViewedKey, 'true');
-                }
-                
-                // Load article stats
-                const stats = socialDB.getArticleStats(articleId);
-                
-                // Update view count display
-                document.getElementById(`viewCount${i}`).textContent = stats.views.toLocaleString('ne-NP');
-                document.getElementById(`likeCount${i}`).textContent = stats.likes.toLocaleString('ne-NP');
-                
-                // Check if user already liked this article
-                const userLikedKey = `${articleId}_liked_${userId}`;
-                const isLiked = localStorage.getItem(userLikedKey) === 'true';
-                if (isLiked) {
-                    document.getElementById(`likeBtn${i}`).classList.add('liked');
-                }
-                
-                // Like Button Event
-                document.getElementById(`likeBtn${i}`).addEventListener("click", () => {
-                    const result = socialDB.toggleLike(articleId, userId);
-                    if (result) {
-                        document.getElementById(`likeCount${i}`).textContent = result.likes.toLocaleString('ne-NP');
-                        
-                        if (result.isLiked) {
-                            document.getElementById(`likeBtn${i}`).classList.add("liked");
-                            localStorage.setItem(userLikedKey, 'true');
-                            showNotification('धन्यवाद! तपाईंले यो समाचार मनपराउनुभयो।');
-                        } else {
-                            document.getElementById(`likeBtn${i}`).classList.remove("liked");
-                            localStorage.removeItem(userLikedKey);
-                        }
-                    }
-                });
-                
-                // Share Button Event
-                document.getElementById(`shareBtn${i}`).addEventListener("click", async () => {
-                    const shareData = {
-                        title: document.querySelector(`#news-section .news-with-small-image:nth-child(${i}) .news-with-small-image-title`).textContent,
-                        text: "shamser.info.np बाट यो समाचार हेर्नुहोस्!",
-                        url: window.location.href + `#article${i}`
-                    };
-                    
-                    if (navigator.share) {
-                        try {
-                            await navigator.share(shareData);
-                            // Increment share count
-                            socialDB.incrementShares(articleId);
-                            const updatedStats = socialDB.getArticleStats(articleId);
-                            document.getElementById(`likeCount${i}`).textContent = updatedStats.likes.toLocaleString('ne-NP');
-                            showNotification('धन्यवाद! तपाईंले यो समाचार सेयर गर्नुभयो।');
-                        } catch (err) {
-                            console.log('Error sharing:', err);
-                        }
-                    } else {
-                        // Fallback: copy link to clipboard
-                        navigator.clipboard.writeText(shareData.url);
-                        showNotification('लिंक क्लिपबोर्डमा प्रतिलिपि गरियो! ✅');
-                        // Increment share count
-                        socialDB.incrementShares(articleId);
-                    }
-                });
-            }
-            
-            // Initialize Subscribe Button
-            initializeSubscribeButton();
-        }
-        
-        // Notification function
-        function showNotification(message) {
-            // Create notification element
-            const notification = document.createElement('div');
-            notification.className = 'alert alert-success position-fixed';
-            notification.style.cssText = `
-                top: 20px;
-                right: 20px;
-                z-index: 9999;
-                min-width: 300px;
-                animation: slideIn 0.3s ease;
-            `;
-            notification.textContent = message;
-            
-            // Add animation styles
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes slideIn {
-                    from { transform: translateX(100%); opacity: 0; }
-                    to { transform: translateX(0); opacity: 1; }
-                }
-            `;
-            document.head.appendChild(style);
-            
-            document.body.appendChild(notification);
-            
-            // Remove notification after 3 seconds
-            setTimeout(() => {
-                notification.style.animation = 'slideOut 0.3s ease';
-                setTimeout(() => notification.remove(), 300);
-            }, 3000);
-        }
-        
-        // Subscribe Button Functionality
-        function initializeSubscribeButton() {
-            const subscribeBtn = document.getElementById('subscribeBtn');
-            const status = document.getElementById('statusText');
-            const counter = document.getElementById('counter');
-            const badge = document.getElementById('badge');
-            
-            // Get current subscriber count
-            const subscriberCount = socialDB.getSubscriberCount();
-            counter.textContent = subscriberCount.toLocaleString('ne-NP');
-            
-            // Check if current user is subscribed
-            const userSubscribedKey = `subscribed_${userId}`;
-            const isSubscribed = localStorage.getItem(userSubscribedKey) === 'true';
-            
-            if (isSubscribed) {
-                subscribeBtn.disabled = true;
-                subscribeBtn.innerHTML = '<span class="bell-icon">🔔</span> <span>सदस्यता लिइसकेको</span>';
-                if (subscriberCount > 0) {
-                    badge.style.display = 'flex';
-                    badge.textContent = subscriberCount > 9 ? '9+' : subscriberCount;
-                }
-                status.textContent = 'सदस्यता लिनुभएकोमा धन्यवाद!';
-            }
-            
-            subscribeBtn.addEventListener('click', () => {
-                if (socialDB.addSubscriber(userId)) {
-                    localStorage.setItem(userSubscribedKey, 'true');
-                    subscribeBtn.disabled = true;
-                    subscribeBtn.innerHTML = '<span class="bell-icon">🔔</span> <span>सदस्यता लिइसकेको</span>';
-                    
-                    const newCount = socialDB.getSubscriberCount();
-                    counter.textContent = newCount.toLocaleString('ne-NP');
-                    
-                    badge.style.display = 'flex';
-                    badge.textContent = newCount > 9 ? '9+' : newCount;
-                    status.textContent = 'सदस्यता लिनुभएकोमा धन्यवाद!';
-                    
-                    showNotification('धन्यवाद! तपाईंले सदस्यता लिनुभयो।');
-                }
-            });
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-        
-        // Modal Quiz functions (simplified)
-        const modalQuizData = [
-            {
-                q: "What is word processing software?",
-                options: [
-                    "A software used for calculations",
-                    "A computer program used to create and edit documents",
-                    "A game software",
-                    "Operating system"
-                ],
-                answer: 1
-            }
-        ];
-        
-        let currentQuestionIndex = 0;
-        let userAnswers = [];
-        
-        function displayQuestion(index) {
-            // Display modal question
-            const question = modalQuizData[index];
-            const quizDiv = document.getElementById("modalQuiz");
-            quizDiv.innerHTML = `
-                <div class="question-card p-4 border rounded">
-                    <h5>प्रश्न ${index + 1}: ${question.q}</h5>
-                    ${question.options.map((opt, i) => `
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="question" value="${i}">
-                            <label class="form-check-label">${opt}</label>
-                        </div>
-                    `).join('')}
-                </div>
-            `;
-        }
-        
-        function submitModalQuiz() {
-            // Submit modal quiz
-            alert("मोडल क्विज सबमिट गरियो!");
-        }
-        
-        function resetModalQuiz() {
-            // Reset modal quiz
-            currentQuestionIndex = 0;
-            userAnswers = [];
-            displayQuestion(0);
-        }
-        
-        // Software purchase functions
-        function purchaseSoftware(plan, amount) {
-            const confirmation = confirm(`तपाईं ${plan} को प्याकेज (रु ${amount}) खरिद गर्न चाहनुहुन्छ?`);
-            if (confirmation) {
-                showNotification(`रु ${amount} को भुक्तानीको लागि eSewa QR कोड देखाइएको छ।`);
-            }
-        }
-        
-        function requestTrial() {
-            showNotification("ट्रायल अनुरोध प्राप्त भयो। तपाईंको ईमेलमा ट्रायल लाइसेन्स पठाइनेछ।");
-        }
-        
-        function downloadTrialVersion() {
-            showNotification("ट्रायल संस्करण डाउनलोड सुरु भयो।");
-        }
-        
-        // Initialize everything when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            updateNepaliDateTime();
-            updateTimeAgo();
-            initializePostStats();
-        });
-
-
-
-
-
-        
-
-  // Cookie Consent Functions
-        function acceptCookies() {
-            localStorage.setItem('cookiesAccepted', 'true');
-            document.getElementById('cookieConsent').style.display = 'none';
-            
-            // Load ads after accepting cookies (GDPR compliance)
-            loadAdsWithDelay();
-        }
-        
-        function showCookieSettings() {
-            alert("कुकी सेटिङ्ग:\n\nहामीले तपाईंको अनुभवलाई राम्रो बनाउन आवश्यक कुकीहरू मात्र प्रयोग गर्दछौं।\n\nतपाईंले ब्राउजर सेटिङ्गबाट कुकीहरू नियन्त्रण गर्न सक्नुहुन्छ।");
-        }
-
-
-
-
-
-
-document.getElementById('translateTextModal')
-    .addEventListener('shown.bs.modal', () => {
-        document.getElementById('englishText').focus();
-    });
-
-
-
-        
-        
-    </script>
+    <!-- External JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
