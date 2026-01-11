@@ -922,6 +922,113 @@ function convertModalToUnicode() {
 
 
 
+// UPDATED JavaScript - fix modal issues
 
+// Initialize everything when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize all components first
+    initializePostStats();
+    initializeQuiz();
+    updateNepaliDateTime();
+    updateTimeAgo();
+    initializeWidgets();
+    initializeTranslator();
+    
+    // Show welcome modal with delay (after everything is initialized)
+    setTimeout(() => {
+        const welcomeModalElement = document.getElementById('welcomeModal');
+        if (welcomeModalElement) {
+            const welcomeModal = new bootstrap.Modal(welcomeModalElement, {
+                backdrop: 'static',
+                keyboard: false
+            });
+            welcomeModal.show();
+        }
+    }, 1000);
+    
+    // Update time every second
+    setInterval(updateNepaliDateTime, 1000);
+    setInterval(updateTimeAgo, 60000);
+    
+    // Make navbar sticky
+    const navbar = document.querySelector('.main-nav');
+    if (navbar) {
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                navbar.classList.add('sticky-top');
+                navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            } else {
+                navbar.classList.remove('sticky-top');
+                navbar.style.boxShadow = 'none';
+            }
+        });
+    }
+    
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href === '#') return;
+            
+            if (href.startsWith('#')) {
+                e.preventDefault();
+                const targetId = href.substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
+    
+    // Initialize carousel
+    const carouselElement = document.getElementById('headerCarousel');
+    if (carouselElement) {
+        const carousel = new bootstrap.Carousel(carouselElement, {
+            interval: 5000,
+            wrap: true,
+            pause: 'hover',
+            ride: 'carousel'
+        });
+    }
+    
+    // Initialize all modals
+    initializeModals();
+});
+
+// Initialize all Bootstrap modals
+function initializeModals() {
+    const modalElements = document.querySelectorAll('.modal');
+    modalElements.forEach(modalEl => {
+        // Initialize each modal
+        new bootstrap.Modal(modalEl);
+    });
+}
+
+// Tour function
+function showTour() {
+    const welcomeModal = bootstrap.Modal.getInstance(document.getElementById('welcomeModal'));
+    if (welcomeModal) {
+        welcomeModal.hide();
+    }
+    
+    showNotification("Welcome to shamser.info.np! Let's explore the site...");
+    
+    // Scroll to features section
+    setTimeout(() => {
+        const featuresSection = document.getElementById('news-section');
+        if (featuresSection) {
+            window.scrollTo({
+                top: featuresSection.offsetTop - 100,
+                behavior: 'smooth'
+            });
+            showNotification("This is our news section with latest educational updates!");
+        }
+    }, 1000);
+}
 
 
