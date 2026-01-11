@@ -938,4 +938,86 @@ body {
         grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
         gap: 10px;
     }
+
+
+
+
+
+
+
+
+
+
+
+    /* Modal fixes */
+.modal {
+    backdrop-filter: blur(3px);
+}
+
+.modal-content {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.modal-header {
+    padding: 1rem 1.5rem;
+}
+
+.modal-body {
+    padding: 1.5rem;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.modal-footer {
+    padding: 1rem 1.5rem;
+}
+
+/* Fix for video in modal */
+.modal-body video {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    background: #000;
+}
+
+/* Make sure modals are properly centered */
+.modal-dialog-centered {
+    display: flex;
+    align-items: center;
+    min-height: calc(100% - 1rem);
+}
+
+/* Fix for backdrop */
+.modal-backdrop {
+    background-color: rgba(0,0,0,0.7);
+}
+
+.modal-backdrop.show {
+    opacity: 0.8;
+}
+
+/* Fix for small screens */
+@media (max-width: 768px) {
+    .modal-dialog {
+        margin: 0.5rem;
+    }
+    
+    .modal-body {
+        max-height: 60vh;
+    }
+}
+
+/* Fix for navbar sticky behavior */
+.sticky-top {
+    position: sticky !important;
+    top: 0;
+    z-index: 1020;
+}
+
+.main-nav.sticky-top {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
 }
