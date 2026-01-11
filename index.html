@@ -55,19 +55,7 @@
             margin-top: 0;
         }
         
-        /* EIMIS dropdown in welcome modal fix */
-        #welcomeModal .emis-dropdown {
-            margin-top: 20px;
-            position: relative;
-            top: 0;
-            right: 0;
-            display: block;
-        }
-        
-        #welcomeModal .emis-dropbtn {
-            width: 100%;
-            justify-content: center;
-        }
+       
         
         /* Fix for welcome modal layout */
         #welcomeModal .modal-body {
@@ -307,26 +295,130 @@
                         <div class="col-md-6">
                             <h4>एकीकृत परीक्षा प्रणाली (IEMIS)</h4>
                             <p>छिटो र सजिलो तरिकाले नतिजा प्रकाशन गर्ने डिजिटल समाधान</p>
-                           
- <div class="emis-header-container">
+  <div class="emis-header-container">
     <img width="100%" height="400" src="https://shamser.info.np/HomePage/IEMIS SHAMSER.jpg" alt="IEMIS Background" class="emis-bg-image">
-     
-                            <!-- EIMIS Dropdown -->
-                            <div class="emis-dropdown">
-                                <button class="emis-dropbtn">
-                                    <i class="fas fa-user-circle"></i> IEMIS LOGIN
-                                    <i class="fas fa-caret-down"></i>
-                                </button>
-                                <ul class="emis-dropdown-content">
-                                    <li><a href="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/IEMIS.v2.html" class="emis-login-link">
-                                        <i class="fas fa-sign-in-alt"></i> EMIS LOGIN
-                                    </a></li>
-                                    <li><a href="https://shamser.info.np/profile/connect%20with%20social%20media.htm" class="emis-register-link">
-                                        <i class="fas fa-user-plus"></i> Contact
-                                    </a></li>
-                                </ul>
-                            </div>
+    
+  <div class="emis-dropdown">
+        <button class="emis-dropbtn">
+           
+            <i class="fas fa-user-circle"></i> IEMIS LOGIN
+            <i class="fas fa-caret-down"></i>
+        </button>
+        <ul class="emis-dropdown-content">
+              
+            <li><a href="https://shamser.info.np/Integrated Exam Management Information System/IEMIS.v2.html" class="emis-login-link">
+                <i class="fas fa-sign-in-alt"></i> EMIS LOGIN
+            </a></li>
+<!----https://script.google.com/macros/s/AKfycbzjGs-ew2dp0aiP0h-cQr4k1EF7ASCgnzHHkyNy8Ic5dub_uar6djlvrCJqQdER8nVc0Q/exec--->
+          
+            <li><a href="https://shamser.info.np/profile/connect with social media.htm" class="emis-register-link">
+                <i class="fas fa-user-plus"></i> Contact
+            </a></li>
+        </ul>
+    </div>
 </div>
+
+<style>
+    .emis-header-container {
+        position: relative;
+        width: 100%;
+        max-height: 400px;
+        overflow: hidden;
+    }
+    
+    .emis-bg-image {
+        width: 100%;
+        height: auto;
+        display: block;
+        filter: brightness(0.9);
+    }
+    
+    .emis-dropdown {
+        background: #004d40; /* Dark Blue background */
+        position: absolute;
+        top: 26px;
+        right:26px;
+        display: inline-block;
+        z-index: 100;
+    }
+    
+    .emis-dropbtn {
+      background: #004d40; /*background */
+        color: #fff; 
+        padding: 12px 20px;
+        font-size: 16px;
+        border: none;
+        border-color: #fff;
+        border-radius: 4px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        transition: all 0.3s ease;
+
+    }
+    
+    .emis-dropbtn:hover {
+        background-color: #004d40;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+    
+    .emis-dropdown-content {
+        display: none;
+        position: absolute;
+        right: 0;
+        background-color: #004d40;
+        min-width: 200px;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        border-radius: 4px;
+        z-index: 1;
+        list-style: none;
+        padding: 0;
+        margin: 5px 0 0 0;
+          font-size: 14px;
+    }
+    
+    .emis-dropdown-content li {
+        border-bottom: 1px solid #FFA500;
+    }
+    
+    .emis-dropdown-content li:last-child {
+        border-bottom: none;
+    }
+    
+    .emis-dropdown-content a {
+        color: #fff;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.2s ease;
+    }
+    
+    .emis-login-link:hover {
+        background-color: #FFA500;
+        color: #fff;
+    }
+    
+    .emis-register-link:hover {
+        background-color: #FFA500;
+        color: #fff;
+    }
+    
+    .emis-dropdown:hover .emis-dropdown-content {
+        display: block;
+    }
+    
+    .emis-dropdown:hover .emis-dropbtn {
+        background-color:#004d40; 
+    }
+    
+    /* Font Awesome for icons */
+    @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+</style>
+
 
 
                             
@@ -1463,5 +1555,6 @@
     <script src="shamser/script.js"></script>
 </body>
 </html>
+
 
 
