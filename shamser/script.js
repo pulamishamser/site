@@ -8,7 +8,7 @@ class SocialStatsDB {
     initDB() {
         if (!localStorage.getItem(this.dbName)) {
             const initialData = {
-                subscribers: 1542, // Starting with some subscribers
+                subscribers: 1542,
                 subscribersList: [],
                 articleStats: {
                     'article1': { views: 1234, likes: 125, shares: 34, userLikes: [] },
@@ -45,11 +45,9 @@ class SocialStatsDB {
             const userIndex = article.userLikes.indexOf(userId);
             
             if (userIndex === -1) {
-                // Like
                 article.userLikes.push(userId);
                 article.likes++;
             } else {
-                // Unlike
                 article.userLikes.splice(userIndex, 1);
                 article.likes--;
             }
@@ -109,7 +107,7 @@ function getUserId() {
 
 const userId = getUserId();
 
-// Enhanced Quiz Questions with Nepali support
+// Quiz Questions
 const quizData = [
     {
         q: "What is the full form of CPU?",
@@ -160,56 +158,6 @@ const quizData = [
             "Universal Resource Link"
         ],
         answer: 0
-    },
-    {
-        q: "Which key is used to refresh a webpage?",
-        options: [
-            "F1",
-            "F5",
-            "F11",
-            "ESC"
-        ],
-        answer: 1
-    },
-    {
-        q: "What is the extension of a Word document?",
-        options: [
-            ".txt",
-            ".docx",
-            ".pdf",
-            ".xlsx"
-        ],
-        answer: 1
-    },
-    {
-        q: "Which company developed Windows OS?",
-        options: [
-            "Apple",
-            "Microsoft",
-            "Google",
-            "IBM"
-        ],
-        answer: 1
-    },
-    {
-        q: "What does HTTP stand for?",
-        options: [
-            "HyperText Transfer Protocol",
-            "Hyper Transfer Text Protocol",
-            "High Transfer Text Protocol",
-            "HyperText Transmission Protocol"
-        ],
-        answer: 0
-    },
-    {
-        q: "Which device is used to input data into a computer?",
-        options: [
-            "Monitor",
-            "Printer",
-            "Keyboard",
-            "Speaker"
-        ],
-        answer: 2
     }
 ];
 
@@ -218,7 +166,7 @@ let currentQuizQuestion = 0;
 let quizScore = 0;
 let userQuizAnswers = Array(quizData.length).fill(null);
 let quizTimer;
-let timeLeft = 300; // 5 minutes in seconds
+let timeLeft = 300;
 
 // DOMContentLoaded event
 document.addEventListener('DOMContentLoaded', function() {
@@ -232,11 +180,9 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeWidgets();
     initializeTranslator();
     
-    // Start time update intervals
     setInterval(updateNepaliDateTime, 1000);
     setInterval(updateTimeAgo, 60000);
     
-    // Fixed Navbar on Scroll
     const navbar = document.querySelector('.main-nav');
     const navOffsetTop = navbar.offsetTop;
     
@@ -250,14 +196,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     window.addEventListener('scroll', handleScroll);
     
-    // Auto-slide carousel
     const carousel = new bootstrap.Carousel(document.getElementById('headerCarousel'), {
         interval: 5000,
         wrap: true,
         pause: 'hover'
     });
     
-    // Smooth scrolling
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
@@ -274,7 +218,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Initialize software carousel
     document.getElementById('demoModal').addEventListener('shown.bs.modal', function () {
         const softwareCarousel = new bootstrap.Carousel(document.getElementById('softwareCarousel'));
     });
@@ -294,7 +237,6 @@ function updateNepaliDateTime() {
     
     const now = new Date();
     
-    // Mock Nepali date (replace with actual conversion library)
     const nepaliDate = {
         year: 2080,
         month: 9,
@@ -347,20 +289,29 @@ function updateTimeAgo() {
 
 // Initialize Widgets
 function initializeWidgets() {
-    document.querySelectorAll('.widget-tab').forEach(tab => {
-        tab.addEventListener('click', function() {
-            document.querySelectorAll('.widget-tab').forEach(t => {
-                t.classList.remove('active');
+    // Initialize both widget containers
+    document.querySelectorAll('.widgets-container').forEach(container => {
+        const tabs = container.querySelectorAll('.widget-tab');
+        const widgets = container.querySelectorAll('.widget');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs in this container
+                tabs.forEach(t => t.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Hide all widgets in this container
+                widgets.forEach(widget => widget.classList.remove('active'));
+                
+                // Show selected widget
+                const widgetId = this.getAttribute('data-widget') + '-widget';
+                const targetWidget = container.querySelector(`#${widgetId}`);
+                if (targetWidget) {
+                    targetWidget.classList.add('active');
+                }
             });
-            
-            this.classList.add('active');
-            
-            document.querySelectorAll('.widget').forEach(widget => {
-                widget.classList.remove('active');
-            });
-            
-            const widgetId = this.getAttribute('data-widget') + '-widget';
-            document.getElementById(widgetId).classList.add('active');
         });
     });
 }
@@ -384,7 +335,6 @@ function convertNumber() {
     
     const nepaliNumbers = ["०", "१", "२", "३", "४", "५", "६", "७", "८", "९"];
     
-    // Convert to Nepali digits
     const nepaliNumber = number.toString().split('').map(digit => {
         return nepaliNumbers[parseInt(digit)] || digit;
     }).join('');
@@ -452,7 +402,7 @@ function initializeTranslator() {
     }
 }
 
-// Google Translate API (Free tier)
+// Google Translate API
 async function translateText() {
     const englishText = document.getElementById('englishText').value;
     const translationResult = document.getElementById('translationResult');
@@ -465,7 +415,6 @@ async function translateText() {
     translationResult.innerHTML = '<div class="text-center"><div class="spinner-border text-primary" role="status"></div><p>अनुवाद गर्दै...</p></div>';
     
     try {
-        // Using Google Translate API (free version)
         const response = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=ne&dt=t&q=${encodeURIComponent(englishText)}`);
         const data = await response.json();
         
@@ -492,7 +441,6 @@ async function translateText() {
         console.error("Translation error:", error);
         translationResult.textContent = "अनुवाद सेवा अस्थायी रूपमा अनुपलब्ध छ।";
         
-        // Fallback to simple translation
         const simpleTranslations = {
             "hello": "नमस्ते",
             "education": "शिक्षा",
@@ -545,28 +493,23 @@ function initializePostStats() {
     for (let i = 1; i <= 3; i++) {
         const articleId = `article${i}`;
         
-        // Load stats from database
         const articleStats = socialDB.getArticleStats(articleId);
         
-        // Update view count
         document.getElementById(`viewCount${i}`).textContent = articleStats.views.toLocaleString('ne-NP');
         document.getElementById(`likeCount${i}`).textContent = articleStats.likes.toLocaleString('ne-NP');
         
-        // Track view for current user
         const userViewedKey = `${articleId}_viewed_${userId}`;
         if (!localStorage.getItem(userViewedKey)) {
             socialDB.incrementViews(articleId);
             localStorage.setItem(userViewedKey, 'true');
         }
         
-        // Check if user already liked
         const userLikedKey = `${articleId}_liked_${userId}`;
         const isLiked = localStorage.getItem(userLikedKey) === 'true';
         if (isLiked) {
             document.getElementById(`likeBtn${i}`).classList.add('liked');
         }
         
-        // Like Button Event
         document.getElementById(`likeBtn${i}`).addEventListener("click", () => {
             const result = socialDB.toggleLike(articleId, userId);
             if (result) {
@@ -583,7 +526,6 @@ function initializePostStats() {
             }
         });
         
-        // Share Button Event
         document.getElementById(`shareBtn${i}`).addEventListener("click", async () => {
             const shareData = {
                 title: document.querySelector(`#news-section .news-with-small-image:nth-child(${i}) .news-with-small-image-title`).textContent,
@@ -676,7 +618,6 @@ function showNotification(message) {
 
 // Quiz Functions
 function initializeQuiz() {
-    // Load saved quiz progress
     const savedProgress = localStorage.getItem('quizProgress');
     if (savedProgress) {
         const progress = JSON.parse(savedProgress);
@@ -685,7 +626,6 @@ function initializeQuiz() {
         userQuizAnswers = progress.answers || Array(quizData.length).fill(null);
     }
     
-    // Display quiz on page
     displayQuiz();
 }
 
@@ -693,7 +633,6 @@ function displayQuiz() {
     const quizDiv = document.getElementById("quiz");
     quizDiv.innerHTML = "";
     
-    // Show only first 3 questions on main page
     const questionsToShow = quizData.slice(0, 3);
     
     questionsToShow.forEach((q, index) => {
@@ -719,20 +658,12 @@ function displayQuiz() {
 function saveAnswer(questionIndex, answerIndex) {
     userQuizAnswers[questionIndex] = answerIndex;
     
-    // Save progress
     const progress = {
         currentQuestion: currentQuizQuestion,
         score: quizScore,
         answers: userQuizAnswers
     };
     localStorage.setItem('quizProgress', JSON.stringify(progress));
-}
-
-function startQuizModal() {
-    const quizModal = new bootstrap.Modal(document.getElementById('quizModal'));
-    displayModalQuiz();
-    startQuizTimer();
-    quizModal.show();
 }
 
 function displayModalQuiz() {
@@ -759,7 +690,6 @@ function displayModalQuiz() {
     const progressPercent = ((currentQuizQuestion + 1) / quizData.length) * 100;
     document.getElementById('quizProgress').style.width = `${progressPercent}%`;
     
-    // Update button states
     document.getElementById('prevBtn').disabled = currentQuizQuestion === 0;
     document.getElementById('nextBtn').style.display = currentQuizQuestion < quizData.length - 1 ? 'block' : 'none';
     document.getElementById('submitQuizBtn').style.display = currentQuizQuestion === quizData.length - 1 ? 'block' : 'none';
@@ -768,7 +698,6 @@ function displayModalQuiz() {
 function saveModalAnswer(answerIndex) {
     userQuizAnswers[currentQuizQuestion] = answerIndex;
     
-    // Save progress
     const progress = {
         currentQuestion: currentQuizQuestion,
         score: quizScore,
@@ -793,7 +722,7 @@ function prevQuestion() {
 
 function startQuizTimer() {
     clearInterval(quizTimer);
-    timeLeft = 300; // 5 minutes
+    timeLeft = 300;
     
     quizTimer = setInterval(() => {
         timeLeft--;
@@ -817,7 +746,6 @@ function startQuizTimer() {
 function submitModalQuiz() {
     clearInterval(quizTimer);
     
-    // Calculate score
     quizScore = 0;
     quizData.forEach((q, index) => {
         if (userQuizAnswers[index] === q.answer) {
@@ -827,7 +755,6 @@ function submitModalQuiz() {
     
     const percentage = Math.round((quizScore / quizData.length) * 100);
     
-    // Display results
     document.getElementById('modalQuiz').style.display = 'none';
     document.getElementById('modalQuizResult').style.display = 'block';
     document.getElementById('modalScore').textContent = quizScore;
@@ -920,4 +847,73 @@ function requestTrial() {
 
 function downloadTrialVersion() {
     showNotification("ट्रायल संस्करण डाउनलोड सुरु भयो।");
+}
+
+// Unicode Converter
+function convertToUnicode() {
+    const preetiText = document.getElementById('preetiText').value;
+    const unicodeResult = document.getElementById('unicodeResult');
+    
+    if (!preetiText) {
+        unicodeResult.textContent = "कृपया प्रीटी टेक्स्ट प्रविष्ट गर्नुहोस्!";
+        return;
+    }
+    
+    const conversions = {
+        "laal": "लाल",
+        "Namaste": "नमस्ते",
+        "Nepal": "नेपाल",
+        "kasto": "कस्तो",
+        "cha": "छ",
+        "hajur": "हजुर",
+        "ma": "म",
+        "timro": "तिम्रो",
+        "naam": "नाम",
+        "ke": "के",
+        "ho": "हो",
+        "shiksha": "शिक्षा",
+        "vidhyarthi": "विद्यार्थी",
+        "shikshak": "शिक्षक"
+    };
+    
+    let convertedText = preetiText;
+    for (const [preeti, unicode] of Object.entries(conversions)) {
+        convertedText = convertedText.replace(new RegExp(preeti, 'gi'), unicode);
+    }
+    
+    unicodeResult.textContent = convertedText || "रूपान्तरण परिणाम यहाँ देखिने";
+}
+
+function convertModalToUnicode() {
+    const preetiText = document.getElementById('modalPreetiText').value;
+    const unicodeResult = document.getElementById('modalUnicodeResult');
+    
+    if (!preetiText) {
+        unicodeResult.textContent = "कृपया प्रीटी फोन्ट प्रविष्ट गर्नुहोस्!";
+        return;
+    }
+    
+    const conversions = {
+        "laal": "लाल",
+        "Namaste": "नमस्ते",
+        "Nepal": "नेपाल",
+        "kasto": "कस्तो",
+        "cha": "छ",
+        "hajur": "हजुर",
+        "ma": "म",
+        "timro": "तिम्रो",
+        "naam": "नाम",
+        "ke": "के",
+        "ho": "हो",
+        "shiksha": "शिक्षा",
+        "vidhyarthi": "विद्यार्थी",
+        "shikshak": "शिक्षक"
+    };
+    
+    let convertedText = preetiText;
+    for (const [preeti, unicode] of Object.entries(conversions)) {
+        convertedText = convertedText.replace(new RegExp(preeti, 'gi'), unicode);
+    }
+    
+    unicodeResult.textContent = convertedText || "रूपान्तरण परिणाम यहाँ देखिने";
 }
