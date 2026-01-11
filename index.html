@@ -44,6 +44,1030 @@
     <link rel="icon" type="image/ico" href="https://shamser.info.np/HomePage/favicon.ico"/>
     
     <title>shamser.info.np</title>
+    
+    <style>
+        :root {
+            --primary-color: #1a73e8;
+            --secondary-color: #34a853;
+            --accent-color: #fbbc04;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --dark-bg: #202124;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: #fff;
+            padding-bottom: 70px;
+            margin: 0;
+            padding-top: 0;
+            overflow-x: hidden;
+        }
+
+        .nepali-font {
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+
+        /* Fix header top gap */
+        .header-top {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
+            margin-top: 0 !important;
+            position: relative;
+            top: 0;
+        }
+        
+        .logo-section {
+            padding: 15px 0;
+            border-bottom: 1px solid #eaeaea;
+            margin-top: 0 !important;
+        }
+        
+        /* Make main navigation sticky */
+        .main-nav {
+            background-color: var(--dark-bg);
+            position: sticky;
+            top: 0;
+            z-index: 1030;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            animation: none !important;
+        }
+
+        .main-nav .nav-link {
+            color: white !important;
+            font-weight: 500;
+            padding: 12px 20px;
+        }
+        
+        .main-nav .nav-link:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        /* Carousel Styling */
+        #headerCarousel {
+            margin-top: 0;
+        }
+        
+        #headerCarousel .carousel-item {
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        #headerCarousel .carousel-item img {
+            object-fit: cover;
+            height: 100%;
+            width: 100%;
+        }
+        
+        #headerCarousel .carousel-caption {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            bottom: 50px;
+        }
+        
+        #headerCarousel .carousel-caption h2 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+
+        .section-title {
+            position: relative;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        .news-card {
+            border: none;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            margin-bottom: 25px;
+            height: 100%;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .news-card img {
+            height: 200px;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        .news-card .card-body {
+            padding: 20px;
+        }
+
+        .news-card .card-title {
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 1.4;
+            margin-bottom: 10px;
+        }
+
+        .news-card .card-text {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .news-card .news-date {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .feature-box {
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+            height: 100%;
+            transition: all 0.3s ease;
+            border: 1px solid #eaeaea;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .feature-box i {
+            font-size: 40px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .feature-box h4 {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .footer {
+            background-color: #00008B;
+            color: white;
+            padding: 50px 0 20px;
+            margin-top: 50px;
+        }
+
+        .footer h5 {
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .footer ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer ul li a:hover {
+            color: white;
+        }
+
+        .copyright {
+            border-top: 1px solid #444;
+            padding-top: 20px;
+            margin-top: 30px;
+            text-align: center;
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        .ad-container {
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+            border: 1px dashed #ccc;
+            height: 100%;
+        }
+
+        .ad-label {
+            font-size: 12px;
+            color: #999;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .breaking-news {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px 0;
+            font-weight: 500;
+        }
+
+        .social-stats {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .social-stat {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+        }
+
+        .social-stat i {
+            color: var(--primary-color);
+        }
+
+        .testimonial-card {
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .testimonial-author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        .team-member {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 3px solid var(--primary-color);
+        }
+
+        .school-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .school-item {
+            text-align: center;
+            padding: 15px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .school-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .school-item img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .widgets-container {
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            height: 100%;
+        }
+
+        .widget-tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .widget-tab {
+            padding: 10px 15px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            font-size: 14px;
+        }
+
+        .widget-tab.active {
+            border-bottom: 2px solid var(--primary-color);
+            font-weight: 600;
+        }
+
+        .widget-content {
+            min-height: 200px;
+        }
+
+        .widget {
+            display: none;
+        }
+
+        .widget.active {
+            display: block;
+        }
+
+        .glamour-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px 0;
+            border-radius: 8px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .news-with-small-image {
+            display: flex;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .news-with-small-image img {
+            width: 100px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-right: 15px;
+        }
+
+        .news-with-small-image-content {
+            flex: 1;
+        }
+
+        .news-with-small-image-title {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .news-with-small-image-date {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .carousel-item img {
+            height: 400px;
+            object-fit: cover;
+        }
+
+        /* Bottom Widget Bar Styles */
+        .widget-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #FF0000;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 1000;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+
+        .widget-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .widget-icon:hover {
+            background-color: rgba(255,255,255,0.1);
+            transform: translateY(-3px);
+        }
+
+        .widget-icon i {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .widget-icon span {
+            font-size: 12px;
+        }
+
+        /* Modal Styles */
+        .modal-nepali .modal-header {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .modal-nepali .modal-title {
+            font-weight: 600;
+        }
+
+        .modal-nepali .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .modal-nepali .btn-primary:hover {
+            background-color: #0d5bb5;
+            border-color: #0d5bb5;
+        }
+
+        .modal-nepali .modal-body {
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        /* Subscribe Button Styles */
+        #subscribeBtn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        #subscribeBtn:hover {
+            background-color: #0d5bb5;
+            transform: translateY(-2px);
+        }
+
+        #subscribeBtn:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .badge {
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            position: absolute;
+            top: -5px;
+            right: -5px;
+        }
+
+        .counter-container {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Like/Share Button Styles */
+        .post-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .view-counter {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .like-share {
+            display: flex;
+            gap: 10px;
+        }
+
+        .like-share button {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .like-share button:hover {
+            background-color: #e9ecef;
+        }
+
+        .like-share button.liked {
+            background-color: #e7f3ff;
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        /* Enhanced Number Converter Styles */
+        .number-converter-container {
+            padding: 15px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .number-converter-result {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+            font-size: 18px;
+            min-height: 60px;
+        }
+
+        /* Quiz App Styles */
+        .quiz-container {
+            background: #f9fafc;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 5px solid #2a5298;
+        }
+
+        .quiz-question {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #1e3c72;
+        }
+
+        .quiz-options label {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            background: #f0f4ff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .quiz-options label:hover {
+            background: #e1e8ff;
+        }
+
+        .quiz-options input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .score {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px;
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .score.low {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        /* Smritika Section */
+        .smritika-section {
+            background-color: #f0f8ff;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            border: 2px solid #1e3c72;
+        }
+
+        .smritika-section h2 {
+            color: #1e3c72;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .smritika-section ul {
+            padding-left: 20px;
+        }
+
+        .smritika-section li {
+            margin-bottom: 8px;
+        }
+
+        /* Quiz Modal Styles */
+        .question-card {
+            background: #ffffff;
+            border-left: 5px solid #1a73e8 !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .question-card:hover {
+            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+        }
+
+        .form-check-input:checked {
+            background-color: #1a73e8;
+            border-color: #1a73e8;
+        }
+
+        .form-check-label {
+            cursor: pointer;
+            padding-left: 10px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .form-check:hover {
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+
+        .timer-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .timer-section .progress {
+            background-color: rgba(255,255,255,0.3);
+        }
+
+        .progress-bar-animated {
+            animation: progress-bar-stripes 1s linear infinite;
+        }
+
+        @keyframes progress-bar-stripes {
+            0% { background-position: 1rem 0; }
+            100% { background-position: 0 0; }
+        }
+
+        /* Quiz Controls */
+        .quiz-controls .btn {
+            min-width: 120px;
+            padding: 10px 20px;
+            font-weight: 600;
+        }
+
+        /* Share Results */
+        .share-results .btn {
+            padding: 10px 20px;
+            border-radius: 25px;
+        }
+
+        /* Pricing Card Styles */
+        .pricing-card {
+            transition: transform 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .pricing-card .card-header {
+            font-weight: bold;
+            padding: 15px;
+        }
+
+        .pricing-card .card-body {
+            padding: 30px 20px;
+        }
+
+        .pricing-card .card-footer {
+            background: transparent;
+            border-top: none;
+            padding: 20px;
+        }
+
+        .pricing-card ul li {
+            padding: 5px 0;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .pricing-card ul li:last-child {
+            border-bottom: none;
+        }
+
+        .trial-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 2px solid #dee2e6;
+        }
+
+        /* Notification Styles */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            min-width: 300px;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+
+        /* EMIS Dropdown Styles for Welcome Modal */
+        .emis-dropdown-container {
+            position: relative;
+        }
+
+        .emis-dropdown {
+            position: relative;
+            width: 100%;
+        }
+
+        .emis-dropbtn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .emis-dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            z-index: 1000;
+            list-style: none;
+            padding: 8px 0;
+            margin: 4px 0 0 0;
+        }
+
+        .emis-dropdown-content li {
+            width: 100%;
+        }
+
+        .emis-dropdown-content a {
+            display: flex;
+            align-items: center;
+            padding: 10px 16px;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .emis-dropdown-content a:hover {
+            background-color: #f8f9fa;
+            color: #004d40;
+            border-left: 3px solid #FFA500;
+        }
+
+        .emis-dropdown:hover .emis-dropdown-content {
+            display: block;
+        }
+
+        .emis-dropdown:hover .emis-dropbtn {
+            background-color: #0d5bb5;
+            border-color: #0d5bb5;
+        }
+
+        /* Video container styles */
+        .ratio-16x9 {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+        }
+
+        .ratio-16x9 > * {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 0;
+            }
+            
+            #headerCarousel {
+                margin-top: 0;
+            }
+            
+            #headerCarousel .carousel-item {
+                height: 300px;
+            }
+            
+            #headerCarousel .carousel-caption {
+                bottom: 20px;
+                padding: 10px;
+            }
+            
+            #headerCarousel .carousel-caption h2 {
+                font-size: 1.5rem;
+            }
+            
+            .hero-section {
+                padding: 50px 0;
+            }
+            
+            .hero-section h1 {
+                font-size: 24px;
+            }
+            
+            .school-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            .widget-bar {
+                padding: 8px 0;
+            }
+            
+            .widget-icon i {
+                font-size: 18px;
+            }
+            
+            .widget-icon span {
+                font-size: 10px;
+            }
+            
+            .post-stats {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .like-share {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .news-with-small-image {
+                flex-direction: column;
+            }
+            
+            .news-with-small-image img {
+                width: 100%;
+                height: 150px;
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .widget-tabs {
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            
+            .modal-dialog {
+                margin: 10px;
+            }
+            
+            .question-text h6 {
+                font-size: 16px;
+            }
+            
+            .form-check-label {
+                font-size: 14px;
+            }
+            
+            .quiz-controls .btn {
+                min-width: 100px;
+                padding: 8px 15px;
+            }
+            
+            .team-member img {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .ad-container {
+                margin-bottom: 20px;
+            }
+            
+            .smritika-section .row {
+                flex-direction: column;
+            }
+            
+            .widgets-container {
+                margin-bottom: 20px;
+            }
+            
+            /* Make nav sticky on mobile too */
+            .main-nav {
+                position: sticky;
+                top: 0;
+            }
+        }
+
+        /* Mobile modal adjustments */
+        @media (max-width: 576px) {
+            #numberconverterModal .modal-content,
+            #translateTextModal .modal-content {
+                height: 100vh;
+            }
+
+            #numberconverterModal .modal-body,
+            #translateTextModal .modal-body {
+                height: calc(100vh - 56px);
+                overflow-y: auto;
+            }
+            
+            .widget-bar {
+                flex-wrap: wrap;
+            }
+            
+            .widget-icon {
+                flex: 0 0 25%;
+                padding: 5px;
+            }
+            
+            .widget-icon span {
+                font-size: 10px;
+            }
+            
+            .widget-tab {
+                padding: 8px 10px;
+                font-size: 12px;
+            }
+            
+            .school-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 10px;
+            }
+        }
+    </style>
 </head>
 <body class="nepali-font">
     <!-- Header Top with Nepali Date & Time -->
@@ -64,7 +1088,96 @@
             </div>
         </div>
     </div>
-    
+
+    <!-- Welcome Modal -->
+    <div class="modal fade" id="welcomeModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="welcomeModalLabel">shamser.info.np मा स्वागत छ!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <!-- Video -->
+                            <div class="ratio ratio-16x9 mb-3">
+                                <video controls autoplay muted>
+                                    <source src="Home/About.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            
+                            <!-- Image -->
+                            <img src="https://shamser.info.np/HomePage/smarika.png" 
+                                 class="img-fluid rounded" 
+                                 alt="SMARIKA">
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <h4>एकीकृत परीक्षा प्रणाली (IEMIS)</h4>
+                            <p class="mb-4">छिटो र सजिलो तरिकाले नतिजा प्रकाशन गर्ने डिजिटल समाधान</p>
+                            
+                            <!-- EMIS Login Dropdown -->
+                            <div class="emis-dropdown-container mb-4">
+                                <div class="emis-header-container mb-3">
+                                    <img src="https://shamser.info.np/HomePage/IEMIS SHAMSER.jpg" 
+                                         alt="IEMIS Background" 
+                                         class="img-fluid rounded">
+                                </div>
+                                
+                                <div class="emis-dropdown">
+                                    <button class="emis-dropbtn btn btn-primary w-100">
+                                        <i class="fas fa-user-circle me-2"></i> 
+                                        IEMIS LOGIN
+                                        <i class="fas fa-caret-down ms-2"></i>
+                                    </button>
+                                    
+                                    <ul class="emis-dropdown-content w-100">
+                                        <li>
+                                            <a href="https://shamser.info.np/Integrated Exam Management Information System/IEMIS.v2.html" 
+                                               class="emis-login-link" 
+                                               target="_blank">
+                                                <i class="fas fa-sign-in-alt me-2"></i> 
+                                                EMIS LOGIN
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://shamser.info.np/profile/connect with social media.htm" 
+                                               class="emis-register-link" 
+                                               target="_blank">
+                                                <i class="fas fa-user-plus me-2"></i> 
+                                                Contact
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-primary" onclick="window.open('https://shamser.info.np/Home/About.html', '_blank')">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    About Us
+                                </button>
+                                <button class="btn btn-outline-success" data-bs-dismiss="modal">
+                                    <i class="fas fa-play-circle me-2"></i>
+                                    Explore Website
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        बन्द गर्नुहोस्
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- ID Card Generator Software Modal -->
     <div class="modal fade" id="demoModal" tabindex="-1" aria-labelledby="demoModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
@@ -245,195 +1358,6 @@
                     <button type="button" class="btn btn-outline-primary" onclick="downloadTrialVersion()">
                         <i class="fas fa-download me-2"></i>free trial डाउनलोड
                     </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Welcome Modal -->
-    <div class="modal fade" id="welcomeModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="welcomeModalLabel">shamser.info.np मा स्वागत छ!</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <video width="100%" height="220" controls autoplay muted>
-                                <source src="Home/About.mp4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                            <img src="https://shamser.info.np/HomePage/smarika.png" class="img-fluid rounded" alt="SMARIKA">
-                        </div>
-                        <div class="col-md-6">
-                            <h4>एकीकृत परीक्षा प्रणाली (IEMIS)</h4>
-                            <p>छिटो र सजिलो तरिकाले नतिजा प्रकाशन गर्ने डिजिटल समाधान</p>
-                            <div class="d-grid gap-2">
-       <div class="emis-header-container">
-    <img width="100%" height="400" src="https://shamser.info.np/HomePage/IEMIS SHAMSER.jpg" alt="IEMIS Background" class="emis-bg-image">
-    
-  <div class="emis-dropdown">
-        <button class="emis-dropbtn">
-           
-            <i class="fas fa-user-circle"></i> IEMIS LOGIN
-            <i class="fas fa-caret-down"></i>
-        </button>
-        <ul class="emis-dropdown-content">
-              
-            <li><a href="https://shamser.info.np/Integrated Exam Management Information System/IEMIS.v2.html" class="emis-login-link">
-                <i class="fas fa-sign-in-alt"></i> EMIS LOGIN
-            </a></li>
-<!----https://script.google.com/macros/s/AKfycbzjGs-ew2dp0aiP0h-cQr4k1EF7ASCgnzHHkyNy8Ic5dub_uar6djlvrCJqQdER8nVc0Q/exec--->
-          
-            <li><a href="https://shamser.info.np/profile/connect with social media.htm" class="emis-register-link">
-                <i class="fas fa-user-plus"></i> Contact
-            </a></li>
-        </ul>
-    </div>
-</div>
-
-<style>
-    .emis-header-container {
-        position: relative;
-        width: 100%;
-        max-height: 400px;
-        overflow: hidden;
-    }
-    
-    .emis-bg-image {
-        width: 100%;
-        height: auto;
-        display: block;
-        filter: brightness(0.9);
-    }
-    
-    .emis-dropdown {
-        background: #004d40; /* Dark Blue background */
-        position: absolute;
-        top: 26px;
-        right:26px;
-        display: inline-block;
-        z-index: 100;
-    }
-    
-    .emis-dropbtn {
-      background: #004d40; /*background */
-        color: #fff; 
-        padding: 12px 20px;
-        font-size: 16px;
-        border: none;
-        border-color: #fff;
-        border-radius: 4px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        transition: all 0.3s ease;
-
-    }
-    
-    .emis-dropbtn:hover {
-        background-color: #004d40;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    }
-    
-    .emis-dropdown-content {
-        display: none;
-        position: absolute;
-        right: 0;
-        background-color: #004d40;
-        min-width: 200px;
-        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-        border-radius: 4px;
-        z-index: 1;
-        list-style: none;
-        padding: 0;
-        margin: 5px 0 0 0;
-          font-size: 14px;
-    }
-    
-    .emis-dropdown-content li {
-        border-bottom: 1px solid #FFA500;
-    }
-    
-    .emis-dropdown-content li:last-child {
-        border-bottom: none;
-    }
-    
-    .emis-dropdown-content a {
-        color: #fff;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        transition: all 0.2s ease;
-    }
-    
-    .emis-login-link:hover {
-        background-color: #FFA500;
-        color: #fff;
-    }
-    
-    .emis-register-link:hover {
-        background-color: #FFA500;
-        color: #fff;
-    }
-    
-    .emis-dropdown:hover .emis-dropdown-content {
-        display: block;
-    }
-    
-    .emis-dropdown:hover .emis-dropbtn {
-        background-color:#004d40; 
-    }
-    
-    /* Font Awesome for icons */
-    @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
-</style>
-
-
-
-    <!-- IEMIS Login Modal (Original Version) -->
-    <div class="modal fade modal-nepali" id="iemisModal" tabindex="-1" aria-labelledby="iemisModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="iemisModalLabel">IEMIS लगइन</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="text-center mb-4">
-                        <img src="https://shamser.info.np/HomePage/IEMIS%20SHAMSER.jpg" alt="IEMIS Logo" class="img-fluid rounded" style="max-height: 100px;">
-                        <h4 class="mt-2">एकीकृत परीक्षा प्रणाली</h4>
-                    </div>
-                    <form>
-                        <div class="mb-3">
-                            <label for="username" class="form-label">प्रयोगकर्ता नाम</label>
-                            <input type="text" class="form-control" id="username" placeholder="प्रयोगकर्ता नाम प्रविष्ट गर्नुहोस्">
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">पासवर्ड</label>
-                            <input type="password" class="form-control" id="password" placeholder="पासवर्ड प्रविष्ट गर्नुहोस्">
-                        </div>
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="rememberMe">
-                            <label class="form-check-label" for="rememberMe">मलाई सम्झनुहोस्</label>
-                        </div>
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-primary">लगइन गर्नुहोस्</button>
-                        </div>
-                    </form>
-                    <div class="mt-3 text-center">
-                        <a href="#" class="text-decoration-none">पासवर्ड बिर्सनुभयो?</a>
-                    </div>
-                </div>
-                <div class="modal-footer justify-content-center">
-                    <p class="mb-0">नयाँ प्रयोगकर्ता? <a href="#" class="text-decoration-none">खाता सिर्जना गर्नुहोस्</a></p>
                 </div>
             </div>
         </div>
@@ -1345,12 +2269,214 @@
         </div>
     </div>
 
+    <!-- IEMIS Login Modal -->
+    <div class="modal fade modal-nepali" id="iemisModal" tabindex="-1" aria-labelledby="iemisModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="iemisModalLabel">IEMIS लगइन</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <img src="https://shamser.info.np/HomePage/IEMIS%20SHAMSER.jpg" alt="IEMIS Logo" class="img-fluid rounded" style="max-height: 100px;">
+                        <h4 class="mt-2">एकीकृत परीक्षा प्रणाली</h4>
+                    </div>
+                    <form>
+                        <div class="mb-3">
+                            <label for="username" class="form-label">प्रयोगकर्ता नाम</label>
+                            <input type="text" class="form-control" id="username" placeholder="प्रयोगकर्ता नाम प्रविष्ट गर्नुहोस्">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">पासवर्ड</label>
+                            <input type="password" class="form-control" id="password" placeholder="पासवर्ड प्रविष्ट गर्नुहोस्">
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">मलाई सम्झनुहोस्</label>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">लगइन गर्नुहोस्</button>
+                        </div>
+                    </form>
+                    <div class="mt-3 text-center">
+                        <a href="#" class="text-decoration-none">पासवर्ड बिर्सनुभयो?</a>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <p class="mb-0">नयाँ प्रयोगकर्ता? <a href="#" class="text-decoration-none">खाता सिर्जना गर्नुहोस्</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     
-    <!-- External JavaScript -->
-    <script src="shamser/script.js"></script>
+    <!-- JavaScript for fixes -->
+    <script>
+        // Auto-show welcome modal on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show welcome modal after 2 seconds
+            setTimeout(function() {
+                const welcomeModal = new bootstrap.Modal(document.getElementById('welcomeModal'));
+                welcomeModal.show();
+            }, 2000);
+            
+            // Fix any initial gaps
+            fixHeaderGaps();
+            
+            // Initialize EMIS dropdown functionality
+            initEmisDropdowns();
+        });
+
+        function fixHeaderGaps() {
+            // Remove any unwanted margins/padding
+            document.body.style.marginTop = '0';
+            document.body.style.paddingTop = '0';
+            
+            const headerTop = document.querySelector('.header-top');
+            if (headerTop) {
+                headerTop.style.marginTop = '0';
+                headerTop.style.paddingTop = '8px';
+            }
+        }
+
+        function initEmisDropdowns() {
+            const emisDropdowns = document.querySelectorAll('.emis-dropdown');
+            
+            emisDropdowns.forEach(dropdown => {
+                const button = dropdown.querySelector('.emis-dropbtn');
+                const content = dropdown.querySelector('.emis-dropdown-content');
+                
+                if (button && content) {
+                    button.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        content.style.display = content.style.display === 'block' ? 'none' : 'block';
+                    });
+                    
+                    // Close dropdown when clicking outside
+                    document.addEventListener('click', function(e) {
+                        if (!dropdown.contains(e.target)) {
+                            content.style.display = 'none';
+                        }
+                    });
+                    
+                    // Close dropdown when clicking on links
+                    const links = content.querySelectorAll('a');
+                    links.forEach(link => {
+                        link.addEventListener('click', function() {
+                            content.style.display = 'none';
+                        });
+                    });
+                }
+            });
+        }
+
+        // Make navbar sticky on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('mainNavbar');
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > 100) {
+                navbar.classList.add('navbar-sticky');
+            } else {
+                navbar.classList.remove('navbar-sticky');
+            }
+        });
+
+        // Widget tabs functionality
+        document.querySelectorAll('.widget-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const widgetId = this.getAttribute('data-widget');
+                
+                // Remove active class from all tabs
+                this.parentElement.querySelectorAll('.widget-tab').forEach(t => {
+                    t.classList.remove('active');
+                });
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Hide all widgets
+                const widgetContent = this.closest('.widgets-container').querySelector('.widget-content');
+                widgetContent.querySelectorAll('.widget').forEach(widget => {
+                    widget.classList.remove('active');
+                });
+                
+                // Show selected widget
+                const selectedWidget = widgetContent.querySelector(`#${widgetId}-widget`);
+                if (selectedWidget) {
+                    selectedWidget.classList.add('active');
+                }
+            });
+        });
+
+        // Radio player functions
+        function playRadio(url) {
+            const radioPlayer = document.getElementById('radioPlayer');
+            radioPlayer.src = url;
+            radioPlayer.play();
+        }
+
+        function playModalRadio(url) {
+            const modalRadioPlayer = document.getElementById('modalRadioPlayer');
+            modalRadioPlayer.src = url;
+            modalRadioPlayer.play();
+        }
+
+        // Simple number converter
+        function convertNumber() {
+            const numberInput = document.getElementById('numberInput').value;
+            const nepaliNumbers = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'];
+            let result = '';
+            
+            for (let i = 0; i < numberInput.length; i++) {
+                const digit = numberInput.charAt(i);
+                if (digit >= '0' && digit <= '9') {
+                    result += nepaliNumbers[parseInt(digit)];
+                } else {
+                    result += digit;
+                }
+            }
+            
+            document.getElementById('numberResult').textContent = result || 'कृपया अंक प्रविष्ट गर्नुहोस्';
+        }
+
+        // Simple text translator
+        function translateText() {
+            const englishText = document.getElementById('englishText').value;
+            // This is a very basic translation example
+            // In a real application, you would use a proper translation API
+            const translations = {
+                'hello': 'नमस्ते',
+                'good morning': 'शुभ प्रभात',
+                'thank you': 'धन्यवाद',
+                'school': 'विद्यालय',
+                'teacher': 'शिक्षक',
+                'student': 'विद्यार्थी'
+            };
+            
+            let translated = englishText.toLowerCase();
+            for (const [key, value] of Object.entries(translations)) {
+                translated = translated.replace(new RegExp(key, 'gi'), value);
+            }
+            
+            document.getElementById('translationResult').textContent = translated || 'कृपया अंग्रेजी पाठ प्रविष्ट गर्नुहोस्';
+        }
+
+        // Simple unicode converter (mock)
+        function convertToUnicode() {
+            const preetiText = document.getElementById('preetiText').value;
+            // This is a mock conversion
+            // In reality, you would need a proper Preeti to Unicode conversion library
+            document.getElementById('unicodeResult').textContent = 'युनिकोड रूपान्तरण: ' + preetiText + ' (यो मात्र प्रदर्शन हो, वास्तविक रूपान्तरणको लागि लाइब्रेरी आवश्यक छ)';
+        }
+
+        function convertModalToUnicode() {
+            const modalPreetiText = document.getElementById('modalPreetiText').value;
+            document.getElementById('modalUnicodeResult').textContent = 'युनिकोड रूपान्तरण: ' + modalPreetiText + ' (यो मात्र प्रदर्शन हो)';
+        }
+    </script>
 </body>
 </html>
-
-
