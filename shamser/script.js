@@ -917,3 +917,26 @@ function convertModalToUnicode() {
     
     unicodeResult.textContent = convertedText || "रूपान्तरण परिणाम यहाँ देखिने";
 }
+
+
+
+
+
+
+
+
+
+
+
+
+// Add this check after showing the modal
+setTimeout(() => {
+    const modal = document.getElementById('welcomeModal');
+    const modalInstance = bootstrap.Modal.getInstance(modal);
+    
+    // If modal is not open, try to open it
+    if (!modal.classList.contains('show')) {
+        const welcomeModal = new bootstrap.Modal(modal);
+        welcomeModal.show();
+    }
+}, 100);
