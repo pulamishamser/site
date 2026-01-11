@@ -214,6 +214,7 @@ body {
     text-align: center;
     margin: 20px 0;
     border: 1px dashed #ccc;
+    height: 100%;
 }
 
 .ad-label {
@@ -276,6 +277,17 @@ body {
 .team-member {
     text-align: center;
     margin-bottom: 30px;
+    padding: 15px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    height: 100%;
+}
+
+.team-member:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 .team-member img {
@@ -296,6 +308,15 @@ body {
 
 .school-item {
     text-align: center;
+    padding: 15px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.school-item:hover {
+    transform: translateY(-5px);
 }
 
 .school-item img {
@@ -755,6 +776,102 @@ body {
     to { transform: translateX(100%); opacity: 0; }
 }
 
+/* Emis Dropdown Styles */
+.emis-header-container {
+    position: relative;
+    width: 100%;
+    max-height: 400px;
+    overflow: hidden;
+}
+
+.emis-bg-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: brightness(0.9);
+}
+
+.emis-dropdown {
+    background: #004d40;
+    position: absolute;
+    top: 26px;
+    right:26px;
+    display: inline-block;
+    z-index: 100;
+}
+
+.emis-dropbtn {
+    background: #004d40;
+    color: #fff;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.emis-dropbtn:hover {
+    background-color: #004d40;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.emis-dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #004d40;
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    border-radius: 4px;
+    z-index: 1;
+    list-style: none;
+    padding: 0;
+    margin: 5px 0 0 0;
+    font-size: 14px;
+}
+
+.emis-dropdown-content li {
+    border-bottom: 1px solid #FFA500;
+}
+
+.emis-dropdown-content li:last-child {
+    border-bottom: none;
+}
+
+.emis-dropdown-content a {
+    color: #fff;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.2s ease;
+}
+
+.emis-login-link:hover {
+    background-color: #FFA500;
+    color: #fff;
+}
+
+.emis-register-link:hover {
+    background-color: #FFA500;
+    color: #fff;
+}
+
+.emis-dropdown:hover .emis-dropdown-content {
+    display: block;
+}
+
+.emis-dropdown:hover .emis-dropbtn {
+    background-color:#004d40; 
+}
+
 /* Responsive Styles */
 @media (max-width: 768px) {
     body {
@@ -844,5 +961,45 @@ body {
     .quiz-controls .btn {
         min-width: 100px;
         padding: 8px 15px;
+    }
+    
+    .team-member img {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .ad-container {
+        margin-bottom: 20px;
+    }
+    
+    .smritika-section .row {
+        flex-direction: column;
+    }
+}
+
+/* Mobile modal adjustments */
+@media (max-width: 576px) {
+    #numberconverterModal .modal-content,
+    #translateTextModal .modal-content {
+        height: 100vh;
+    }
+
+    #numberconverterModal .modal-body,
+    #translateTextModal .modal-body {
+        height: calc(100vh - 56px);
+        overflow-y: auto;
+    }
+    
+    .widget-bar {
+        flex-wrap: wrap;
+    }
+    
+    .widget-icon {
+        flex: 0 0 25%;
+        padding: 5px;
+    }
+    
+    .widget-icon span {
+        font-size: 10px;
     }
 }
