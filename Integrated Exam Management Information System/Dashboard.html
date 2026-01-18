@@ -816,6 +816,20 @@ function logout() {
                             <button type="button" class="btn btn-link" onclick="OpenRegisterPage()" style="width: 100%; text-align: left;"> <i class="fas fa-user-plus"></i> Register Account</button>
                             <a href="https://script.google.com/macros/s/AKfycbxUs8Nn3kl1P_eGD6A7zR-sBfNT6kIksBxpIiPvJAE8jg6qilPQ1Thq_kLgabk6rKqvhw/exec" style="display: block; padding: 15px 20px;"><i class='fas fa-key'></i>Change Password</a>
                             <button class="btn btn-link" type="button" onclick="logout()" style="width: 100%; text-align: left;">    <i class="fas fa-sign-out-alt"></i> Log Out</button>
+
+
+
+<script>
+function logout() {
+    localStorage.removeItem("iemisUser");
+    sessionStorage.removeItem("iemisUser");
+    window.location.href = "https://shamser.info.np";
+}
+</script>
+
+
+
+                            
                             <a href="#" onclick="openModal('https://shamser.info.np/Contact_Form.html', 'Contact Us')" style="display: block; padding: 15px 20px;">
                                 <i class="fas fa-envelope"></i>Contact</a>
                         </li>
@@ -1257,3 +1271,4 @@ function logout() {
 </body>
 
 </html>
+
