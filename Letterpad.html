@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multi Receiver Letterpad Generator</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    :root {
+        --primary-color: #2c3e50;
+        --secondary-color: #3498db;
+        --accent-color: #2980b9;
+        --light-bg: #f8f9fa;
+        --border-color: #dee2e6;
+        --text-color: #333;
+        --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        color: var(--text-color);
+        line-height: 1.6;
+        padding: 20px;
+        min-height: 100vh;
+    }
+    
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    header {
+        text-align: center;
+        margin-bottom: 30px;
+        padding: 20px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: var(--shadow);
+    }
+    
+    h1 {
+        color: var(--primary-color);
+        margin-bottom: 10px;
+    }
+    
+    .subtitle {
+        color: var(--secondary-color);
+        font-weight: 300;
+    }
+    
+    .app-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        margin-bottom: 30px;
+    }
+    
+    .controls-panel {
+        flex: 1;
+        min-width: 300px;
+        background-color: white;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: var(--shadow);
+    }
+    
+    .preview-panel {
+        flex: 1;
+        min-width: 300px;
+        background-color: white;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: var(--shadow);
+        display: flex;
+        flex-direction: column;
+    }
+    
+    h2 {
+        color: var(--primary-color);
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--border-color);
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: var(--primary-color);
+    }
+    
+    input, textarea {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid var(--border-color);
+        border-radius: 5px;
+        font-family: inherit;
+        font-size: 16px;
+        transition: border-color 0.3s;
+    }
+    
+    input:focus, textarea:focus {
+        outline: none;
+        border-color: var(--secondary-color);
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    }
+    
+    textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+    
+    .btn-group {
+        display: flex;
+        gap: 15px;
+        margin-top: 30px;
+        flex-wrap: wrap;
+    }
+    
+    button {
+        padding: 12px 25px;
+        background-color: var(--secondary-color);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        transition: background-color 0.3s, transform 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        flex: 1;
+        min-width: 150px;
+    }
+    
+    button:hover {
+        background-color: var(--accent-color);
+        transform: translateY(-2px);
+    }
+    
+    button:active {
+        transform: translateY(0);
+    }
+    
+    #generateBtn {
+        background-color: #27ae60;
+    }
+    
+    #generateBtn:hover {
+        background-color: #219955;
+    }
+    
+    #printBtn {
+        background-color: #e74c3c;
+    }
+    
+    #printBtn:hover {
+        background-color: #c0392b;
+    }
+    
+    #clearBtn {
+        background-color: #95a5a6;
+    }
+    
+    #clearBtn:hover {
+        background-color: #7f8c8d;
+    }
+    
+    .preview-container {
+        flex: 1;
+        overflow-y: auto;
+        padding: 15px;
+        border: 1px solid var(--border-color);
+        border-radius: 5px;
+        background-color: var(--light-bg);
+        margin-bottom: 20px;
+    }
+    
+    .counter {
+        text-align: center;
+        font-size: 14px;
+        color: #666;
+        margin-top: 10px;
+    }
+    
+    /* Logo upload area */
+    .logo-upload {
+        border: 2px dashed var(--border-color);
+        border-radius: 5px;
+        padding: 20px;
+        text-align: center;
+        margin-bottom: 20px;
+        cursor: pointer;
+        transition: border-color 0.3s;
+    }
+    
+    .logo-upload:hover {
+        border-color: var(--secondary-color);
+    }
+    
+    .logo-upload i {
+        font-size: 40px;
+        color: var(--secondary-color);
+        margin-bottom: 10px;
+    }
+    
+    .logo-preview {
+        max-width: 150px;
+        max-height: 100px;
+        margin: 0 auto 15px;
+        display: none;
+    }
+    
+    .logo-preview img {
+        max-width: 100%;
+        max-height: 100px;
+        object-fit: contain;
+    }
+    
+    .logo-upload span {
+        display: block;
+        color: #666;
+        font-size: 14px;
+    }
+    
+    #logoUrl {
+        margin-top: 10px;
+    }
+    
+    /* Letter page */
+    .page {
+        width: 210mm;
+        min-height: 297mm;
+        background: white;
+        margin: 0 auto 20px;
+        padding: 30mm;
+        box-sizing: border-box;
+        position: relative;
+        page-break-after: always;
+        box-shadow: var(--shadow);
+        border-radius: 2px;
+        font-family: 'Times New Roman', serif;
+    }
+    
+    .content {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .letter-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 5px;
+    }
+    
+    .org-logo {
+        max-height: 80px;
+        max-width: 200px;
+        margin-right: 15px;
+        object-fit: contain;
+    }
+    
+    .org-name {
+        font-weight: bold;
+        font-size: 22px;
+        color: #000;
+    }
+    
+    .letter-subheader {
+        text-align: center;
+        font-size: 14px;
+        color: #555;
+        margin-bottom: 40px;
+    }
+    
+    .date {
+        margin-top: 20px;
+        margin-bottom: 40px;
+        text-align: right;
+    }
+    
+    .recipient {
+        margin-bottom: 20px;
+    }
+    
+    .letter-body {
+        white-space: pre-line;
+        margin-top: 20px;
+        line-height: 1.8;
+    }
+    
+    .letter-footer {
+        margin-top: 60px;
+    }
+    
+    .sender-details {
+        margin-top: 40px;
+    }
+    
+    .contact-footer {
+        margin-top: 80px;
+        padding-top: 20px;
+        border-top: 1px solid #ddd;
+        text-align: center;
+        font-size: 12px;
+        color: #555;
+    }
+    
+    .contact-info {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        flex-wrap: wrap;
+        margin-top: 10px;
+    }
+    
+    .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .contact-item i {
+        color: var(--secondary-color);
+    }
+    
+    .output-container {
+        background-color: white;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: var(--shadow);
+        margin-top: 30px;
+    }
+    
+    #output {
+        margin-top: 20px;
+    }
+    
+    .page-count {
+        text-align: center;
+        margin-top: 15px;
+        font-style: italic;
+        color: #666;
+    }
+    
+    .instructions {
+        background-color: #f8f9fa;
+        border-left: 4px solid var(--secondary-color);
+        padding: 15px;
+        margin-top: 25px;
+        border-radius: 0 5px 5px 0;
+    }
+    
+    .instructions h3 {
+        margin-bottom: 10px;
+        color: var(--primary-color);
+    }
+    
+    .instructions ul {
+        padding-left: 20px;
+    }
+    
+    .instructions li {
+        margin-bottom: 8px;
+    }
+    
+    @media print {
+        body {
+            background: none;
+        }
+        
+        header, .controls-panel, .preview-panel, .output-container, .btn-group {
+            display: none;
+        }
+        
+        .page {
+            box-shadow: none;
+            margin: 0;
+            padding: 30mm;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .app-wrapper {
+            flex-direction: column;
+        }
+        
+        .btn-group {
+            flex-direction: column;
+        }
+        
+        button {
+            width: 100%;
+        }
+        
+        .page {
+            width: 100%;
+            padding: 20mm;
+        }
+        
+        .letter-header {
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .org-logo {
+            margin-right: 0;
+            margin-bottom: 10px;
+        }
+        
+        .contact-info {
+            flex-direction: column;
+            gap: 10px;
+        }
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-envelope-open-text"></i> Multi Receiver Letterpad Generator</h1>
+            <p class="subtitle">Generate professional letters for multiple recipients in one go</p>
+        </header>
+        
+        <div class="app-wrapper">
+            <div class="controls-panel">
+                <h2><i class="fas fa-edit"></i> Letter Details</h2>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-image"></i> Organization Logo</label>
+                    <div class="logo-upload" onclick="document.getElementById('logoFile').click()">
+                        <div class="logo-preview" id="logoPreview"></div>
+                        <i class="fas fa-upload"></i>
+                        <span>Click to upload logo (Max: 200x80px)</span>
+                        <input type="file" id="logoFile" accept="image/*" style="display: none;" onchange="uploadLogo()">
+                    </div>
+                    <input type="text" id="logoUrl" placeholder="Or enter logo image URL">
+                </div>
+                
+                <div class="form-group">
+                    <label for="org"><i class="fas fa-building"></i> Organization Name</label>
+                    <input type="text" id="org" placeholder="e.g., ABC Corporation Ltd.">
+                </div>
+                
+                <div class="form-group">
+                    <label for="address"><i class="fas fa-map-marker-alt"></i> Organization Address</label>
+                    <textarea id="address" placeholder="Enter complete address of your organization"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> Organization Email</label>
+                    <input type="text" id="email" placeholder="e.g., info@company.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone"><i class="fas fa-phone"></i> Contact Number</label>
+                    <input type="text" id="phone" placeholder="e.g., +1 (555) 123-4567">
+                </div>
+                
+                <div class="form-group">
+                    <label for="receivers"><i class="fas fa-users"></i> Recipients (one per line)</label>
+                    <textarea id="receivers" placeholder="Mr. John Doe, CEO&#10;Ms. Jane Smith, Director&#10;Dr. Robert Johnson, Principal"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="letterBody"><i class="fas fa-file-alt"></i> Letter Body</label>
+                    <textarea id="letterBody" placeholder="Dear [Recipient],&#10;&#10;Write your letter content here...&#10;&#10;You can use placeholders like [Recipient] which will be replaced with the actual recipient name."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="sender"><i class="fas fa-user-tie"></i> Sender Name & Designation</label>
+                    <input type="text" id="sender" placeholder="e.g., Alex Johnson, Marketing Manager">
+                </div>
+                
+                <div class="instructions">
+                    <h3><i class="fas fa-info-circle"></i> Instructions</h3>
+                    <ul>
+                        <li>Enter each recipient on a separate line</li>
+                        <li>Use [Recipient] in the letter body to insert recipient names</li>
+                        <li>Click "Generate Letters" to create letters for all recipients</li>
+                        <li>Use "Print All Letters" to print all generated letters</li>
+                    </ul>
+                </div>
+                
+                <div class="btn-group">
+                    <button id="generateBtn" onclick="generateLetters()">
+                        <i class="fas fa-magic"></i> Generate Letters
+                    </button>
+                    <button id="printBtn" onclick="printLetters()">
+                        <i class="fas fa-print"></i> Print All Letters
+                    </button>
+                    <button id="clearBtn" onclick="clearForm()">
+                        <i class="fas fa-broom"></i> Clear Form
+                    </button>
+                </div>
+            </div>
+            
+            <div class="preview-panel">
+                <h2><i class="fas fa-eye"></i> Letter Preview</h2>
+                <div class="preview-container" id="preview">
+                    <p style="text-align: center; color: #666; margin-top: 50px;">
+                        Generated letters will appear here<br>
+                        <i class="fas fa-envelope" style="font-size: 48px; margin-top: 20px; color: #ddd;"></i>
+                    </p>
+                </div>
+                <div class="counter" id="previewCounter">0 letters generated</div>
+            </div>
+        </div>
+        
+        <div class="output-container">
+            <h2><i class="fas fa-copy"></i> Generated Letters</h2>
+            <div id="output">
+                <p style="text-align: center; color: #999; padding: 30px;">
+                    No letters generated yet. Fill out the form and click "Generate Letters" to create letters.
+                </p>
+            </div>
+            <div class="page-count" id="pageCount"></div>
+        </div>
+    </div>
+
+<script>
+    let logoDataUrl = '';
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        // Update preview when inputs change
+        document.getElementById('letterBody').addEventListener('input', updatePreview);
+        document.getElementById('sender').addEventListener('input', updatePreview);
+        document.getElementById('org').addEventListener('input', updatePreview);
+        document.getElementById('address').addEventListener('input', updatePreview);
+        document.getElementById('email').addEventListener('input', updatePreview);
+        document.getElementById('phone').addEventListener('input', updatePreview);
+        document.getElementById('logoUrl').addEventListener('input', updateLogoFromUrl);
+        
+        // Add sample data for demonstration
+        if(!localStorage.getItem('letterDemoShown')) {
+            loadSampleData();
+            localStorage.setItem('letterDemoShown', 'true');
+        }
+    });
+    
+    function uploadLogo() {
+        const file = document.getElementById('logoFile').files[0];
+        if (!file) return;
+        
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            logoDataUrl = e.target.result;
+            document.getElementById('logoPreview').innerHTML = `<img src="${logoDataUrl}" alt="Logo">`;
+            document.getElementById('logoPreview').style.display = 'block';
+            updatePreview();
+        };
+        reader.readAsDataURL(file);
+    }
+    
+    function updateLogoFromUrl() {
+        const url = document.getElementById('logoUrl').value;
+        if (url) {
+            logoDataUrl = url;
+            document.getElementById('logoPreview').innerHTML = `<img src="${url}" alt="Logo" onerror="this.style.display='none'">`;
+            document.getElementById('logoPreview').style.display = 'block';
+            updatePreview();
+        }
+    }
+    
+    function loadSampleData() {
+        document.getElementById('org').value = 'Global Solutions Inc.';
+        document.getElementById('address').value = '123 Business Avenue, Suite 400\nNew York, NY 10001';
+        document.getElementById('email').value = 'info@globalsolutions.com';
+        document.getElementById('phone').value = '+1 (555) 123-4567';
+        document.getElementById('receivers').value = 'Mr. James Wilson, CEO\nMs. Sarah Johnson, Director\nDr. Michael Chen, Head of Department';
+        document.getElementById('letterBody').value = 'Dear [Recipient],\n\nWe are pleased to inform you about our upcoming corporate event scheduled for next month. This event will bring together industry leaders to discuss emerging trends and opportunities for collaboration.\n\nYour presence at this event would be highly valuable, and we believe your insights would greatly contribute to the discussions.\n\nPlease confirm your availability at your earliest convenience. We have attached the event agenda for your reference.\n\nLooking forward to your positive response.';
+        document.getElementById('sender').value = 'Alexandra Parker, Events Coordinator';
+        
+        // Load a sample logo from placeholder
+        logoDataUrl = 'https://via.placeholder.com/200x80/3498db/ffffff?text=LOGO';
+        document.getElementById('logoPreview').innerHTML = `<img src="${logoDataUrl}" alt="Logo">`;
+        document.getElementById('logoPreview').style.display = 'block';
+        document.getElementById('logoUrl').value = logoDataUrl;
+        
+        updatePreview();
+    }
+    
+    function updatePreview() {
+        const org = document.getElementById('org').value || '[Organization Name]';
+        const address = document.getElementById('address').value || '[Organization Address]';
+        const email = document.getElementById('email').value || 'email@organization.com';
+        const phone = document.getElementById('phone').value || '+1 (555) 123-4567';
+        const body = document.getElementById('letterBody').value || '[Letter body will appear here]';
+        const sender = document.getElementById('sender').value || '[Sender Name & Designation]';
+        
+        const preview = document.getElementById('preview');
+        
+        // Create a single letter preview with sample recipient
+        preview.innerHTML = `
+            <div class="page">
+                <div class="content">
+                    <div class="letter-header">
+                        ${logoDataUrl ? `<img src="${logoDataUrl}" class="org-logo" alt="Organization Logo">` : ''}
+                        <div class="org-name">${org}</div>
+                    </div>
+                    <div class="letter-subheader">${address.replace(/\n/g, '<br>')}</div>
+                    
+                    <div class="date">${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
+                    
+                    <div class="recipient">
+                        To,<br>
+                        <strong>Mr. John Doe, Sample Recipient</strong>
+                    </div>
+                    
+                    <div class="letter-body">${body.replace(/\[Recipient\]/g, 'Mr. John Doe').replace(/\n/g, '<br>')}</div>
+                    
+                    <div class="letter-footer">
+                        Sincerely,<br><br>
+                        <div class="sender-details">
+                            <strong>${sender}</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-footer">
+                        <hr>
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <span>${email}</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone"></i>
+                                <span>${phone}</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>${address.split('\n')[0] || 'Organization Address'}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+    
+    function generateLetters() {
+        const org = document.getElementById('org').value;
+        const address = document.getElementById('address').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+        const receivers = document.getElementById('receivers').value.split("\n");
+        let body = document.getElementById('letterBody').value;
+        const sender = document.getElementById('sender').value;
+        
+        // Validation
+        if (!org.trim() || !address.trim() || receivers.length === 0 || !body.trim() || !sender.trim()) {
+            alert('Please fill in all required fields before generating letters.');
+            return;
+        }
+        
+        const output = document.getElementById('output');
+        const previewCounter = document.getElementById('previewCounter');
+        const pageCount = document.getElementById('pageCount');
+        
+        output.innerHTML = "";
+        
+        let validReceivers = 0;
+        const today = new Date().toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+        
+        receivers.forEach(name => {
+            if (name.trim() === "") return;
+            
+            validReceivers++;
+            
+            // Replace [Recipient] placeholder with actual name
+            const personalizedBody = body.replace(/\[Recipient\]/g, name.trim());
+            
+            output.innerHTML += `
+            <div class="page">
+                <div class="content">
+                    <div class="letter-header">
+                        ${logoDataUrl ? `<img src="${logoDataUrl}" class="org-logo" alt="Organization Logo">` : ''}
+                        <div class="org-name">${org}</div>
+                    </div>
+                    <div class="letter-subheader">${address.replace(/\n/g, '<br>')}</div>
+                    
+                    <div class="date">${today}</div>
+                    
+                    <div class="recipient">
+                        To,<br>
+                        <strong>${name.trim()}</strong>
+                    </div>
+                    
+                    <div class="letter-body">${personalizedBody.replace(/\n/g, '<br>')}</div>
+                    
+                    <div class="letter-footer">
+                        Sincerely,<br><br>
+                        <div class="sender-details">
+                            <strong>${sender}</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-footer">
+                        <hr>
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <span>${email || 'email@organization.com'}</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone"></i>
+                                <span>${phone || '+1 (555) 123-4567'}</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>${address.split('\n')[0] || 'Organization Address'}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+        });
+        
+        // Update counters
+        previewCounter.textContent = `${validReceivers} letter${validReceivers !== 1 ? 's' : ''} generated`;
+        pageCount.textContent = `Total: ${validReceivers} page${validReceivers !== 1 ? 's' : ''}`;
+        
+        // Scroll to output
+        document.querySelector('.output-container').scrollIntoView({ behavior: 'smooth' });
+        
+        // Update preview with the first generated letter
+        if (validReceivers > 0) {
+            const firstReceiver = receivers.find(name => name.trim() !== "");
+            const personalizedBody = body.replace(/\[Recipient\]/g, firstReceiver.trim());
+            
+            document.getElementById('preview').innerHTML = `
+            <div class="page">
+                <div class="content">
+                    <div class="letter-header">
+                        ${logoDataUrl ? `<img src="${logoDataUrl}" class="org-logo" alt="Organization Logo">` : ''}
+                        <div class="org-name">${org}</div>
+                    </div>
+                    <div class="letter-subheader">${address.replace(/\n/g, '<br>')}</div>
+                    
+                    <div class="date">${today}</div>
+                    
+                    <div class="recipient">
+                        To,<br>
+                        <strong>${firstReceiver.trim()}</strong>
+                    </div>
+                    
+                    <div class="letter-body">${personalizedBody.replace(/\n/g, '<br>')}</div>
+                    
+                    <div class="letter-footer">
+                        Sincerely,<br><br>
+                        <div class="sender-details">
+                            <strong>${sender}</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-footer">
+                        <hr>
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <span>${email || 'email@organization.com'}</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone"></i>
+                                <span>${phone || '+1 (555) 123-4567'}</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>${address.split('\n')[0] || 'Organization Address'}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `;
+        }
+    }
+    
+    function printLetters() {
+        const output = document.getElementById('output').innerHTML;
+        
+        if (output.trim() === "") {
+            alert('Please generate letters first before printing.');
+            return;
+        }
+        
+        // Create a new window for printing
+        const printWindow = window.open('', '_blank');
+        printWindow.document.write(`
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>Print Letters</title>
+                <style>
+                    @media print {
+                        body { margin: 0; }
+                        .page {
+                            width: 210mm;
+                            min-height: 297mm;
+                            background: white;
+                            margin: 0;
+                            padding: 30mm;
+                            box-sizing: border-box;
+                            page-break-after: always;
+                            font-family: 'Times New Roman', serif;
+                        }
+                        .content { position: relative; z-index: 1; }
+                        .letter-header { 
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            margin-bottom: 5px;
+                        }
+                        .org-logo { 
+                            max-height: 80px;
+                            max-width: 200px;
+                            margin-right: 15px;
+                            object-fit: contain;
+                        }
+                        .org-name { 
+                            font-weight: bold; 
+                            font-size: 22px; 
+                            color: #000; 
+                        }
+                        .letter-subheader { text-align: center; font-size: 14px; color: #555; margin-bottom: 40px; }
+                        .date { margin-top: 20px; margin-bottom: 40px; text-align: right; }
+                        .recipient { margin-bottom: 20px; }
+                        .letter-body { white-space: pre-line; margin-top: 20px; line-height: 1.8; }
+                        .letter-footer { margin-top: 60px; }
+                        .sender-details { margin-top: 40px; }
+                        .contact-footer { 
+                            margin-top: 80px; 
+                            padding-top: 20px; 
+                            border-top: 1px solid #ddd; 
+                            text-align: center; 
+                            font-size: 12px; 
+                            color: #555; 
+                        }
+                        .contact-info { 
+                            display: flex; 
+                            justify-content: center; 
+                            gap: 30px; 
+                            flex-wrap: wrap; 
+                            margin-top: 10px; 
+                        }
+                        .contact-item { 
+                            display: flex; 
+                            align-items: center; 
+                            gap: 8px; 
+                        }
+                    }
+                </style>
+            </head>
+            <body>
+                ${output}
+                <script>
+                    window.onload = function() {
+                        window.print();
+                        setTimeout(function() {
+                            window.close();
+                        }, 500);
+                    };
+                <\/script>
+            </body>
+            </html>
+        `);
+        printWindow.document.close();
+    }
+    
+    function clearForm() {
+        if (confirm('Are you sure you want to clear all form fields?')) {
+            document.getElementById('org').value = '';
+            document.getElementById('address').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('phone').value = '';
+            document.getElementById('receivers').value = '';
+            document.getElementById('letterBody').value = '';
+            document.getElementById('sender').value = '';
+            document.getElementById('logoUrl').value = '';
+            
+            logoDataUrl = '';
+            document.getElementById('logoPreview').innerHTML = '';
+            document.getElementById('logoPreview').style.display = 'none';
+            document.getElementById('logoFile').value = '';
+            
+            document.getElementById('output').innerHTML = '<p style="text-align: center; color: #999; padding: 30px;">No letters generated yet. Fill out the form and click "Generate Letters" to create letters.</p>';
+            document.getElementById('preview').innerHTML = '<p style="text-align: center; color: #666; margin-top: 50px;">Generated letters will appear here<br><i class="fas fa-envelope" style="font-size: 48px; margin-top: 20px; color: #ddd;"></i></p>';
+            document.getElementById('previewCounter').textContent = '0 letters generated';
+            document.getElementById('pageCount').textContent = '';
+        }
+    }
+</script>
+</body>
+</html>
