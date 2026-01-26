@@ -962,13 +962,19 @@
     }
     
     async function downloadAsPDF() {
-        const output = document.getElementById('output');
-        
-        if (output.innerHTML.trim() === "" || output.innerHTML.includes('No letters generated')) {
-            alert('Please generate letters first before downloading as PDF.');
-            return;
-        }
-        
+    const output = document.getElementById('output');
+    
+    if (output.innerHTML.trim() === "" || output.innerHTML.includes('No letters generated')) {
+        alert('Please generate letters first before downloading as PDF.');
+        return;
+    }
+    
+    // Show loading indicator for mobile
+    const originalText = document.getElementById('downloadBtn').innerHTML;
+    document.getElementById('downloadBtn').innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+    document.getElementById('downloadBtn').disabled = true;
+    
+    try {
         const { jsPDF } = window.jspdf;
         const pdf = new jsPDF('p', 'mm', 'a4');
         
@@ -978,14 +984,31 @@
         for (let i = 0; i < pages.length; i++) {
             const page = pages[i];
             
-            // Use html2canvas to capture the page as image
+            // Add a small delay between pages to prevent mobile browser crashes
+            if (i > 0) {
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+            
+            // Use html2canvas with optimized settings for mobile
             await html2canvas(page, {
-                scale: 2,
+                scale: 1.5, // Reduced from 2 for mobile performance
                 useCORS: true,
                 logging: false,
-                backgroundColor: '#ffffff'
+                backgroundColor: '#ffffff',
+                removeContainer: true, // Helps with memory
+                allowTaint: false,
+                imageTimeout: 0, // No timeout
+                onclone: function(clonedDoc) {
+                    // Optimize cloned document for mobile
+                    const clonedPage = clonedDoc.querySelector('.page');
+                    if (clonedPage) {
+                        clonedPage.style.width = '210mm';
+                        clonedPage.style.height = '297mm';
+                        clonedPage.style.overflow = 'hidden';
+                    }
+                }
             }).then(canvas => {
-                const imgData = canvas.toDataURL('image/png');
+                const imgData = canvas.toDataURL('image/jpeg', 0.85); // Use JPEG with compression for smaller size
                 const imgWidth = 210; // A4 width in mm
                 const imgHeight = (canvas.height * imgWidth) / canvas.width;
                 
@@ -993,15 +1016,92 @@
                     pdf.addPage();
                 }
                 
-                // Add image to PDF
-                pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+                // Add image to PDF with proper dimensions
+                pdf.addImage(imgData, 'JPEG', 0, 0, imgWidth, imgHeight, '', 'FAST');
+                
+                // Clear canvas to free memory (important for mobile)
+                canvas.width = 0;
+                canvas.height = 0;
+            }).catch(error => {
+                console.error('Error capturing page:', error);
+                alert(`Error capturing page ${i + 1}. Please try again.`);
             });
         }
         
         // Save the PDF
         const orgName = document.getElementById('org').value || 'letters';
-        pdf.save(`${orgName.replace(/\s+/g, '_')}_${new Date().toISOString().slice(0,10)}.pdf`);
+        const fileName = `${orgName.replace(/\s+/g, '_')}_${new Date().toISOString().slice(0,10)}.pdf`;
+        
+        // For mobile, use different approach
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            // For mobile devices, open in new tab
+            const pdfBlob = pdf.output('blob');
+            const pdfUrl = URL.createObjectURL(pdfBlob);
+            
+            // Create a download link
+            const downloadLink = document.createElement('a');
+            downloadLink.href = pdfUrl;
+            downloadLink.download = fileName;
+            downloadLink.style.display = 'none';
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            
+            // Cleanup
+            setTimeout(() => {
+                document.body.removeChild(downloadLink);
+                URL.revokeObjectURL(pdfUrl);
+            }, 100);
+        } else {
+            // For desktop, use standard approach
+            pdf.save(fileName);
+        }
+        
+    } catch (error) {
+        console.error('PDF generation error:', error);
+        alert('Failed to generate PDF. The file might be too large for mobile. Try generating fewer letters at once.');
+        
+        // Alternative: Create individual PDFs
+        if (confirm('Try creating individual PDFs instead?')) {
+            generateIndividualPDFs();
+        }
+    } finally {
+        // Restore button state
+        document.getElementById('downloadBtn').innerHTML = originalText;
+        document.getElementById('downloadBtn').disabled = false;
     }
+}
+
+// Alternative function for individual PDFs
+async function generateIndividualPDFs() {
+    const pages = document.querySelectorAll('.page');
+    const orgName = document.getElementById('org').value || 'letter';
+    
+    for (let i = 0; i < pages.length; i++) {
+        const page = pages[i];
+        
+        await html2canvas(page, {
+            scale: 1.5,
+            useCORS: true,
+            backgroundColor: '#ffffff'
+        }).then(canvas => {
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            
+            const imgData = canvas.toDataURL('image/jpeg', 0.9);
+            const imgWidth = 210;
+            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+            
+            pdf.addImage(imgData, 'JPEG', 0, 0, imgWidth, imgHeight);
+            pdf.save(`${orgName}_letter_${i + 1}.pdf`);
+        });
+    }
+}
+
+<!---------->
+
+
+
+    
     
     function printLetters() {
         const output = document.getElementById('output').innerHTML;
