@@ -100,7 +100,7 @@
         color: var(--primary-color);
     }
     
-    input, textarea {
+    input, textarea, select {
         width: 100%;
         padding: 12px 15px;
         border: 1px solid var(--border-color);
@@ -110,7 +110,7 @@
         transition: border-color 0.3s;
     }
     
-    input:focus, textarea:focus {
+    input:focus, textarea:focus, select:focus {
         outline: none;
         border-color: var(--secondary-color);
         box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
@@ -161,6 +161,14 @@
     
     #generateBtn:hover {
         background-color: #219955;
+    }
+    
+    #downloadBtn {
+        background-color: #9b59b6;
+    }
+    
+    #downloadBtn:hover {
+        background-color: #8e44ad;
     }
     
     #printBtn {
@@ -240,22 +248,29 @@
         margin-top: 10px;
     }
     
-    /* Letter page */
+    /* Letter page - A4 with 1 inch margins */
     .page {
-        width: 210mm;
-        min-height: 297mm;
+        width: 210mm; /* A4 width */
+        min-height: 297mm; /* A4 height */
+        max-height: 297mm; /* Fixed height for A4 */
         background: white;
         margin: 0 auto 20px;
-        padding: 30mm;
+        padding: 25.4mm; /* 1 inch = 25.4mm */
         box-sizing: border-box;
         position: relative;
         page-break-after: always;
         box-shadow: var(--shadow);
         border-radius: 2px;
         font-family: 'Times New Roman', serif;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
     }
     
-    .content {
+    .page-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
         position: relative;
         z-index: 1;
     }
@@ -264,78 +279,103 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 5px;
+        margin-bottom: 10mm;
+        flex-shrink: 0;
     }
     
     .org-logo {
-        max-height: 80px;
-        max-width: 200px;
+        max-height: 70px;
+        max-width: 150px;
         margin-right: 15px;
         object-fit: contain;
     }
     
     .org-name {
         font-weight: bold;
-        font-size: 22px;
+        font-size: 20px;
         color: #000;
     }
     
     .letter-subheader {
         text-align: center;
-        font-size: 14px;
+        font-size: 12px;
         color: #555;
-        margin-bottom: 40px;
+        margin-bottom: 15mm;
+        line-height: 1.4;
+        flex-shrink: 0;
     }
     
     .date {
-        margin-top: 20px;
-        margin-bottom: 40px;
+        margin-bottom: 10mm;
         text-align: right;
+        flex-shrink: 0;
     }
     
     .recipient {
-        margin-bottom: 20px;
+        margin-bottom: 8mm;
+        flex-shrink: 0;
+    }
+    
+    .letter-body-container {
+        flex: 1;
+        min-height: 100mm; /* Minimum space for body */
+        max-height: 150mm; /* Maximum space for body */
+        overflow: hidden;
     }
     
     .letter-body {
         white-space: pre-line;
-        margin-top: 20px;
-        line-height: 1.8;
+        line-height: 1.6;
+        text-align: justify;
+        font-size: 11pt;
+        overflow-wrap: break-word;
+    }
+    
+    .letter-body.nepali {
+        font-size: 14px !important;
+        font-family: 'Preeti', 'Mangal', 'Arial Unicode MS', sans-serif;
+    }
+    
+    .letter-body.english {
+        font-size: 11pt !important;
     }
     
     .letter-footer {
-        margin-top: 60px;
+        margin-top: 10mm;
+        flex-shrink: 0;
     }
     
     .sender-details {
-        margin-top: 40px;
+        margin-top: 15mm;
     }
     
     .contact-footer {
-        margin-top: 80px;
-        padding-top: 20px;
+        margin-top: 15mm;
+        padding-top: 5mm;
         border-top: 1px solid #ddd;
         text-align: center;
-        font-size: 12px;
+        font-size: 11px;
         color: #555;
+        flex-shrink: 0;
     }
     
     .contact-info {
         display: flex;
         justify-content: center;
-        gap: 30px;
+        gap: 20px;
         flex-wrap: wrap;
-        margin-top: 10px;
+        margin-top: 5px;
     }
     
     .contact-item {
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 5px;
     }
     
     .contact-item i {
         color: var(--secondary-color);
+        font-size: 12px;
     }
     
     .output-container {
@@ -378,6 +418,59 @@
         margin-bottom: 8px;
     }
     
+    .language-selector {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+    
+    .lang-btn {
+        padding: 8px 15px;
+        background: #f1f1f1;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+    
+    .lang-btn.active {
+        background: var(--secondary-color);
+        color: white;
+        border-color: var(--secondary-color);
+    }
+    
+    .subject-line {
+        font-weight: bold;
+        margin: 5mm 0;
+        padding-bottom: 2mm;
+        border-bottom: 1px solid #ddd;
+        flex-shrink: 0;
+    }
+    
+    .date-input-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .date-input-group input {
+        flex: 1;
+    }
+    
+    .today-btn {
+        padding: 10px 15px;
+        background: #f1f1f1;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        white-space: nowrap;
+    }
+    
+    .today-btn:hover {
+        background: #e1e1e1;
+    }
+    
     @media print {
         body {
             background: none;
@@ -389,8 +482,9 @@
         
         .page {
             box-shadow: none;
-            margin: 0;
-            padding: 30mm;
+            margin: 0 !important;
+            padding: 25.4mm !important;
+            page-break-after: always;
         }
     }
     
@@ -409,7 +503,7 @@
         
         .page {
             width: 100%;
-            padding: 20mm;
+            padding: 15mm;
         }
         
         .letter-header {
@@ -426,8 +520,19 @@
             flex-direction: column;
             gap: 10px;
         }
+        
+        .date-input-group {
+            flex-direction: column;
+        }
+        
+        .today-btn {
+            width: 100%;
+        }
     }
 </style>
+<!-- Include jsPDF library for PDF generation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -445,7 +550,7 @@
                     <div class="logo-upload" onclick="document.getElementById('logoFile').click()">
                         <div class="logo-preview" id="logoPreview"></div>
                         <i class="fas fa-upload"></i>
-                        <span>Click to upload logo (Max: 200x80px)</span>
+                        <span>Click to upload logo (Max: 150x70px)</span>
                         <input type="file" id="logoFile" accept="image/*" style="display: none;" onchange="uploadLogo()">
                     </div>
                     <input type="text" id="logoUrl" placeholder="Or enter logo image URL">
@@ -472,12 +577,29 @@
                 </div>
                 
                 <div class="form-group">
+                    <label for="letterDate"><i class="fas fa-calendar-alt"></i> Letter Date</label>
+                    <div class="date-input-group">
+                        <input type="text" id="letterDate" placeholder="e.g., January 15, 2024 or custom date format">
+                        <button type="button" class="today-btn" onclick="setTodayDate()">Today</button>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject"><i class="fas fa-heading"></i> Subject</label>
+                    <input type="text" id="subject" placeholder="e.g., Regarding Annual Conference Invitation">
+                </div>
+                
+                <div class="form-group">
                     <label for="receivers"><i class="fas fa-users"></i> Recipients (one per line)</label>
                     <textarea id="receivers" placeholder="Mr. John Doe, CEO&#10;Ms. Jane Smith, Director&#10;Dr. Robert Johnson, Principal"></textarea>
                 </div>
                 
                 <div class="form-group">
                     <label for="letterBody"><i class="fas fa-file-alt"></i> Letter Body</label>
+                    <div class="language-selector">
+                        <span class="lang-btn active" onclick="setLanguage('english')">English</span>
+                        <span class="lang-btn" onclick="setLanguage('nepali')">Nepali</span>
+                    </div>
                     <textarea id="letterBody" placeholder="Dear [Recipient],&#10;&#10;Write your letter content here...&#10;&#10;You can use placeholders like [Recipient] which will be replaced with the actual recipient name."></textarea>
                 </div>
                 
@@ -491,14 +613,20 @@
                     <ul>
                         <li>Enter each recipient on a separate line</li>
                         <li>Use [Recipient] in the letter body to insert recipient names</li>
+                        <li>Customize the date or click "Today" for current date</li>
                         <li>Click "Generate Letters" to create letters for all recipients</li>
+                        <li>Use "Download as PDF" to save all letters as PDF</li>
                         <li>Use "Print All Letters" to print all generated letters</li>
+                        <li>Letter content will automatically adjust to fit one A4 page</li>
                     </ul>
                 </div>
                 
                 <div class="btn-group">
                     <button id="generateBtn" onclick="generateLetters()">
                         <i class="fas fa-magic"></i> Generate Letters
+                    </button>
+                    <button id="downloadBtn" onclick="downloadAsPDF()">
+                        <i class="fas fa-download"></i> Download as PDF
                     </button>
                     <button id="printBtn" onclick="printLetters()">
                         <i class="fas fa-print"></i> Print All Letters
@@ -534,15 +662,21 @@
 
 <script>
     let logoDataUrl = '';
+    let currentLanguage = 'english';
     
     document.addEventListener('DOMContentLoaded', function() {
+        // Set today's date initially
+        setTodayDate();
+        
         // Update preview when inputs change
         document.getElementById('letterBody').addEventListener('input', updatePreview);
+        document.getElementById('subject').addEventListener('input', updatePreview);
         document.getElementById('sender').addEventListener('input', updatePreview);
         document.getElementById('org').addEventListener('input', updatePreview);
         document.getElementById('address').addEventListener('input', updatePreview);
         document.getElementById('email').addEventListener('input', updatePreview);
         document.getElementById('phone').addEventListener('input', updatePreview);
+        document.getElementById('letterDate').addEventListener('input', updatePreview);
         document.getElementById('logoUrl').addEventListener('input', updateLogoFromUrl);
         
         // Add sample data for demonstration
@@ -551,6 +685,26 @@
             localStorage.setItem('letterDemoShown', 'true');
         }
     });
+    
+    function setLanguage(lang) {
+        currentLanguage = lang;
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        event.target.classList.add('active');
+        updatePreview();
+    }
+    
+    function setTodayDate() {
+        const today = new Date();
+        const formattedDate = today.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+        document.getElementById('letterDate').value = formattedDate;
+        updatePreview();
+    }
     
     function uploadLogo() {
         const file = document.getElementById('logoFile').files[0];
@@ -581,12 +735,13 @@
         document.getElementById('address').value = '123 Business Avenue, Suite 400\nNew York, NY 10001';
         document.getElementById('email').value = 'info@globalsolutions.com';
         document.getElementById('phone').value = '+1 (555) 123-4567';
+        document.getElementById('subject').value = 'Regarding Annual Business Conference Invitation';
         document.getElementById('receivers').value = 'Mr. James Wilson, CEO\nMs. Sarah Johnson, Director\nDr. Michael Chen, Head of Department';
         document.getElementById('letterBody').value = 'Dear [Recipient],\n\nWe are pleased to inform you about our upcoming corporate event scheduled for next month. This event will bring together industry leaders to discuss emerging trends and opportunities for collaboration.\n\nYour presence at this event would be highly valuable, and we believe your insights would greatly contribute to the discussions.\n\nPlease confirm your availability at your earliest convenience. We have attached the event agenda for your reference.\n\nLooking forward to your positive response.';
         document.getElementById('sender').value = 'Alexandra Parker, Events Coordinator';
         
         // Load a sample logo from placeholder
-        logoDataUrl = 'https://via.placeholder.com/200x80/3498db/ffffff?text=LOGO';
+        logoDataUrl = 'https://via.placeholder.com/150x70/3498db/ffffff?text=LOGO';
         document.getElementById('logoPreview').innerHTML = `<img src="${logoDataUrl}" alt="Logo">`;
         document.getElementById('logoPreview').style.display = 'block';
         document.getElementById('logoUrl').value = logoDataUrl;
@@ -599,29 +754,35 @@
         const address = document.getElementById('address').value || '[Organization Address]';
         const email = document.getElementById('email').value || 'email@organization.com';
         const phone = document.getElementById('phone').value || '+1 (555) 123-4567';
+        const subject = document.getElementById('subject').value || '[Subject of the letter]';
         const body = document.getElementById('letterBody').value || '[Letter body will appear here]';
         const sender = document.getElementById('sender').value || '[Sender Name & Designation]';
+        const letterDate = document.getElementById('letterDate').value || '[Date]';
         
         const preview = document.getElementById('preview');
         
         // Create a single letter preview with sample recipient
         preview.innerHTML = `
             <div class="page">
-                <div class="content">
+                <div class="page-content">
                     <div class="letter-header">
                         ${logoDataUrl ? `<img src="${logoDataUrl}" class="org-logo" alt="Organization Logo">` : ''}
                         <div class="org-name">${org}</div>
                     </div>
                     <div class="letter-subheader">${address.replace(/\n/g, '<br>')}</div>
                     
-                    <div class="date">${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
+                    <div class="date">${letterDate}</div>
                     
                     <div class="recipient">
                         To,<br>
                         <strong>Mr. John Doe, Sample Recipient</strong>
                     </div>
                     
-                    <div class="letter-body">${body.replace(/\[Recipient\]/g, 'Mr. John Doe').replace(/\n/g, '<br>')}</div>
+                    <div class="subject-line">Subject: ${subject}</div>
+                    
+                    <div class="letter-body-container">
+                        <div class="letter-body ${currentLanguage}">${body.replace(/\[Recipient\]/g, 'Mr. John Doe').replace(/\n/g, '<br>')}</div>
+                    </div>
                     
                     <div class="letter-footer">
                         Sincerely,<br><br>
@@ -657,12 +818,14 @@
         const address = document.getElementById('address').value;
         const email = document.getElementById('email').value;
         const phone = document.getElementById('phone').value;
+        const subject = document.getElementById('subject').value;
         const receivers = document.getElementById('receivers').value.split("\n");
         let body = document.getElementById('letterBody').value;
         const sender = document.getElementById('sender').value;
+        const letterDate = document.getElementById('letterDate').value;
         
         // Validation
-        if (!org.trim() || !address.trim() || receivers.length === 0 || !body.trim() || !sender.trim()) {
+        if (!org.trim() || !address.trim() || receivers.length === 0 || !body.trim() || !sender.trim() || !letterDate.trim()) {
             alert('Please fill in all required fields before generating letters.');
             return;
         }
@@ -674,11 +837,6 @@
         output.innerHTML = "";
         
         let validReceivers = 0;
-        const today = new Date().toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
         
         receivers.forEach(name => {
             if (name.trim() === "") return;
@@ -690,21 +848,25 @@
             
             output.innerHTML += `
             <div class="page">
-                <div class="content">
+                <div class="page-content">
                     <div class="letter-header">
                         ${logoDataUrl ? `<img src="${logoDataUrl}" class="org-logo" alt="Organization Logo">` : ''}
                         <div class="org-name">${org}</div>
                     </div>
                     <div class="letter-subheader">${address.replace(/\n/g, '<br>')}</div>
                     
-                    <div class="date">${today}</div>
+                    <div class="date">${letterDate}</div>
                     
                     <div class="recipient">
                         To,<br>
                         <strong>${name.trim()}</strong>
                     </div>
                     
-                    <div class="letter-body">${personalizedBody.replace(/\n/g, '<br>')}</div>
+                    <div class="subject-line">Subject: ${subject}</div>
+                    
+                    <div class="letter-body-container">
+                        <div class="letter-body ${currentLanguage}">${personalizedBody.replace(/\n/g, '<br>')}</div>
+                    </div>
                     
                     <div class="letter-footer">
                         Sincerely,<br><br>
@@ -748,21 +910,25 @@
             
             document.getElementById('preview').innerHTML = `
             <div class="page">
-                <div class="content">
+                <div class="page-content">
                     <div class="letter-header">
                         ${logoDataUrl ? `<img src="${logoDataUrl}" class="org-logo" alt="Organization Logo">` : ''}
                         <div class="org-name">${org}</div>
                     </div>
                     <div class="letter-subheader">${address.replace(/\n/g, '<br>')}</div>
                     
-                    <div class="date">${today}</div>
+                    <div class="date">${letterDate}</div>
                     
                     <div class="recipient">
                         To,<br>
                         <strong>${firstReceiver.trim()}</strong>
                     </div>
                     
-                    <div class="letter-body">${personalizedBody.replace(/\n/g, '<br>')}</div>
+                    <div class="subject-line">Subject: ${subject}</div>
+                    
+                    <div class="letter-body-container">
+                        <div class="letter-body ${currentLanguage}">${personalizedBody.replace(/\n/g, '<br>')}</div>
+                    </div>
                     
                     <div class="letter-footer">
                         Sincerely,<br><br>
@@ -794,6 +960,48 @@
         }
     }
     
+    async function downloadAsPDF() {
+        const output = document.getElementById('output');
+        
+        if (output.innerHTML.trim() === "" || output.innerHTML.includes('No letters generated')) {
+            alert('Please generate letters first before downloading as PDF.');
+            return;
+        }
+        
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        
+        // Get all letter pages
+        const pages = output.querySelectorAll('.page');
+        
+        for (let i = 0; i < pages.length; i++) {
+            const page = pages[i];
+            
+            // Use html2canvas to capture the page as image
+            await html2canvas(page, {
+                scale: 2,
+                useCORS: true,
+                logging: false,
+                backgroundColor: '#ffffff'
+            }).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const imgWidth = 210; // A4 width in mm
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                
+                if (i > 0) {
+                    pdf.addPage();
+                }
+                
+                // Add image to PDF
+                pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+            });
+        }
+        
+        // Save the PDF
+        const orgName = document.getElementById('org').value || 'letters';
+        pdf.save(`${orgName.replace(/\s+/g, '_')}_${new Date().toISOString().slice(0,10)}.pdf`);
+    }
+    
     function printLetters() {
         const output = document.getElementById('output').innerHTML;
         
@@ -811,60 +1019,87 @@
                 <title>Print Letters</title>
                 <style>
                     @media print {
-                        body { margin: 0; }
+                        body { margin: 0; padding: 0; }
                         .page {
-                            width: 210mm;
-                            min-height: 297mm;
+                            width: 210mm !important;
+                            min-height: 297mm !important;
+                            max-height: 297mm !important;
                             background: white;
-                            margin: 0;
-                            padding: 30mm;
+                            margin: 0 !important;
+                            padding: 25.4mm !important;
                             box-sizing: border-box;
                             page-break-after: always;
                             font-family: 'Times New Roman', serif;
+                            overflow: hidden;
+                            display: flex;
+                            flex-direction: column;
                         }
-                        .content { position: relative; z-index: 1; }
+                        .page-content {
+                            flex: 1;
+                            display: flex;
+                            flex-direction: column;
+                            position: relative;
+                            z-index: 1;
+                        }
                         .letter-header { 
                             display: flex;
                             align-items: center;
                             justify-content: center;
-                            margin-bottom: 5px;
+                            margin-bottom: 10mm;
+                            flex-shrink: 0;
                         }
                         .org-logo { 
-                            max-height: 80px;
-                            max-width: 200px;
+                            max-height: 70px;
+                            max-width: 150px;
                             margin-right: 15px;
                             object-fit: contain;
                         }
                         .org-name { 
                             font-weight: bold; 
-                            font-size: 22px; 
+                            font-size: 20px; 
                             color: #000; 
                         }
-                        .letter-subheader { text-align: center; font-size: 14px; color: #555; margin-bottom: 40px; }
-                        .date { margin-top: 20px; margin-bottom: 40px; text-align: right; }
-                        .recipient { margin-bottom: 20px; }
-                        .letter-body { white-space: pre-line; margin-top: 20px; line-height: 1.8; }
-                        .letter-footer { margin-top: 60px; }
-                        .sender-details { margin-top: 40px; }
+                        .letter-subheader { text-align: center; font-size: 12px; color: #555; margin-bottom: 15mm; line-height: 1.4; flex-shrink: 0; }
+                        .date { margin-bottom: 10mm; text-align: right; flex-shrink: 0; }
+                        .recipient { margin-bottom: 8mm; flex-shrink: 0; }
+                        .letter-body-container { 
+                            flex: 1;
+                            min-height: 100mm;
+                            max-height: 150mm;
+                            overflow: hidden;
+                        }
+                        .letter-body { 
+                            white-space: pre-line; 
+                            line-height: 1.6; 
+                            text-align: justify; 
+                            font-size: 11pt;
+                            overflow-wrap: break-word;
+                        }
+                        .letter-body.nepali { font-size: 14px !important; }
+                        .letter-body.english { font-size: 11pt !important; }
+                        .subject-line { font-weight: bold; margin: 5mm 0; padding-bottom: 2mm; border-bottom: 1px solid #ddd; flex-shrink: 0; }
+                        .letter-footer { margin-top: 10mm; flex-shrink: 0; }
+                        .sender-details { margin-top: 15mm; }
                         .contact-footer { 
-                            margin-top: 80px; 
-                            padding-top: 20px; 
+                            margin-top: 15mm;
+                            padding-top: 5mm; 
                             border-top: 1px solid #ddd; 
                             text-align: center; 
-                            font-size: 12px; 
+                            font-size: 11px; 
                             color: #555; 
+                            flex-shrink: 0;
                         }
                         .contact-info { 
                             display: flex; 
                             justify-content: center; 
-                            gap: 30px; 
+                            gap: 20px; 
                             flex-wrap: wrap; 
-                            margin-top: 10px; 
+                            margin-top: 5px; 
                         }
                         .contact-item { 
                             display: flex; 
                             align-items: center; 
-                            gap: 8px; 
+                            gap: 5px; 
                         }
                     }
                 </style>
@@ -891,10 +1126,12 @@
             document.getElementById('address').value = '';
             document.getElementById('email').value = '';
             document.getElementById('phone').value = '';
+            document.getElementById('subject').value = '';
             document.getElementById('receivers').value = '';
             document.getElementById('letterBody').value = '';
             document.getElementById('sender').value = '';
             document.getElementById('logoUrl').value = '';
+            document.getElementById('letterDate').value = '';
             
             logoDataUrl = '';
             document.getElementById('logoPreview').innerHTML = '';
@@ -905,6 +1142,9 @@
             document.getElementById('preview').innerHTML = '<p style="text-align: center; color: #666; margin-top: 50px;">Generated letters will appear here<br><i class="fas fa-envelope" style="font-size: 48px; margin-top: 20px; color: #ddd;"></i></p>';
             document.getElementById('previewCounter').textContent = '0 letters generated';
             document.getElementById('pageCount').textContent = '';
+            
+            // Reset date to today
+            setTodayDate();
         }
     }
 </script>
