@@ -537,8 +537,9 @@
 <body>
     <div class="container">
         <header>
-            <h1><i class="fas fa-envelope-open-text"></i> Multi Receiver Letterpad Generator</h1>
-            <p class="subtitle">Generate professional letters for multiple recipients in one go</p>
+            <h1><i class="fas fa-envelope-open-text"></i> Multi-Letterpad Generator</h1>
+            <p class="subtitle">यसमा लेखेर वा बोलेर वनि एउटै बिषयमा धेरैजनालाई पत्र लेख्न वा कुनै सिफारिसपत्र बनाउन सकिन्छ ।
+            </p>
         </header>
         
         <div class="app-wrapper">
@@ -550,7 +551,7 @@
                     <div class="logo-upload" onclick="document.getElementById('logoFile').click()">
                         <div class="logo-preview" id="logoPreview"></div>
                         <i class="fas fa-upload"></i>
-                        <span>Click to upload logo (Max: 150x70px)</span>
+                        <span>Upload logo (Max: 150x70px)</span>
                         <input type="file" id="logoFile" accept="image/*" style="display: none;" onchange="uploadLogo()">
                     </div>
                     <input type="text" id="logoUrl" placeholder="Or enter logo image URL">
@@ -731,14 +732,14 @@
     }
     
     function loadSampleData() {
-        document.getElementById('org').value = 'Global Solutions Inc.';
-        document.getElementById('address').value = '123 Business Avenue, Suite 400\nNew York, NY 10001';
-        document.getElementById('email').value = 'info@globalsolutions.com';
-        document.getElementById('phone').value = '+1 (555) 123-4567';
-        document.getElementById('subject').value = 'Regarding Annual Business Conference Invitation';
-        document.getElementById('receivers').value = 'Mr. James Wilson, CEO\nMs. Sarah Johnson, Director\nDr. Michael Chen, Head of Department';
-        document.getElementById('letterBody').value = 'Dear [Recipient],\n\nWe are pleased to inform you about our upcoming corporate event scheduled for next month. This event will bring together industry leaders to discuss emerging trends and opportunities for collaboration.\n\nYour presence at this event would be highly valuable, and we believe your insights would greatly contribute to the discussions.\n\nPlease confirm your availability at your earliest convenience. We have attached the event agenda for your reference.\n\nLooking forward to your positive response.';
-        document.getElementById('sender').value = 'Alexandra Parker, Events Coordinator';
+        document.getElementById('org').value = 'श्री डिम जनता माध्यमिक बिद्यालय';
+        document.getElementById('address').value = 'लालबन्दी नपा -१६, परवानीपुर, सर्लाही';
+        document.getElementById('email').value = 'shamser.info@np.com';
+        document.getElementById('phone').value = '+977-9844087012';
+        document.getElementById('subject').value = 'उपस्थित भइदिन हुन ';
+        document.getElementById('receivers').value = 'लालबहादुर कठायत अध्यक्ष विव्यस';
+        document.getElementById('letterBody').value = ' [Recipient],\n\nWe are pleased to inform you about our upcoming corporate event scheduled for next month. This event will bring together industry leaders to discuss emerging trends and opportunities for collaboration.\n\nYour presence at this event would be highly valuable, and we believe your insights would greatly contribute to the discussions.\n\nPlease confirm your availability at your earliest convenience. We have attached the event agenda for your reference.\n\nLooking forward to your positive response.';
+        document.getElementById('sender').value = 'प्रधानाध्यापक';
         
         // Load a sample logo from placeholder
         logoDataUrl = 'https://via.placeholder.com/150x70/3498db/ffffff?text=LOGO';
@@ -785,7 +786,7 @@
                     </div>
                     
                     <div class="letter-footer">
-                        Sincerely,<br><br>
+                        <br>
                         <div class="sender-details">
                             <strong>${sender}</strong>
                         </div>
@@ -920,7 +921,7 @@
                     <div class="date">${letterDate}</div>
                     
                     <div class="recipient">
-                        To,<br>
+                        <br>
                         <strong>${firstReceiver.trim()}</strong>
                     </div>
                     
@@ -931,7 +932,7 @@
                     </div>
                     
                     <div class="letter-footer">
-                        Sincerely,<br><br>
+                        <br>
                         <div class="sender-details">
                             <strong>${sender}</strong>
                         </div>
