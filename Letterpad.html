@@ -251,8 +251,7 @@
     /* Letter page - A4 with 1 inch margins */
     .page {
         width: 210mm; /* A4 width */
-        min-height: 297mm; /* A4 height */
-        max-height: 297mm; /* Fixed height for A4 */
+        height: 297mm; /* A4 height - Fixed height */
         background: white;
         margin: 0 auto 20px;
         padding: 25.4mm; /* 1 inch = 25.4mm */
@@ -268,7 +267,7 @@
     }
     
     .page-content {
-        flex: 1;
+        height: 100%;
         display: flex;
         flex-direction: column;
         position: relative;
@@ -279,82 +278,86 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 10mm;
+        margin-bottom: 5mm;
         flex-shrink: 0;
     }
     
     .org-logo {
-        max-height: 70px;
-        max-width: 150px;
-        margin-right: 15px;
+        max-height: 60px;
+        max-width: 120px;
+        margin-right: 10px;
         object-fit: contain;
     }
     
     .org-name {
         font-weight: bold;
-        font-size: 20px;
+        font-size: 18px;
         color: #000;
     }
     
     .letter-subheader {
         text-align: center;
-        font-size: 12px;
+        font-size: 11px;
         color: #555;
-        margin-bottom: 15mm;
+        margin-bottom: 8mm;
         line-height: 1.4;
         flex-shrink: 0;
     }
     
     .date {
-        margin-bottom: 10mm;
+        margin-bottom: 5mm;
         text-align: right;
+        font-size: 12px;
         flex-shrink: 0;
     }
     
     .recipient {
-        margin-bottom: 8mm;
+        margin-bottom: 4mm;
+        font-size: 12px;
         flex-shrink: 0;
     }
     
     .letter-body-container {
         flex: 1;
-        min-height: 100mm; /* Minimum space for body */
-        max-height: 150mm; /* Maximum space for body */
         overflow: hidden;
+        margin-bottom: 5mm;
     }
     
     .letter-body {
         white-space: pre-line;
-        line-height: 1.6;
+        line-height: 1.5;
         text-align: justify;
-        font-size: 11pt;
+        font-size: 10.5pt;
         overflow-wrap: break-word;
+        height: 100%;
+        overflow-y: auto;
     }
     
     .letter-body.nepali {
-        font-size: 14px !important;
+        font-size: 12px !important;
         font-family: 'Preeti', 'Mangal', 'Arial Unicode MS', sans-serif;
     }
     
     .letter-body.english {
-        font-size: 11pt !important;
+        font-size: 10.5pt !important;
     }
     
     .letter-footer {
-        margin-top: 10mm;
+        margin-top: 5mm;
         flex-shrink: 0;
     }
     
     .sender-details {
-        margin-top: 15mm;
+        margin-top: 8mm;
+        font-size: 12px;
     }
     
     .contact-footer {
-        margin-top: 15mm;
-        padding-top: 5mm;
+        margin-top: 8mm;
+        padding-top: 3mm;
         border-top: 1px solid #ddd;
         text-align: center;
-        font-size: 11px;
+        font-size: 10px;
         color: #555;
         flex-shrink: 0;
     }
@@ -362,9 +365,9 @@
     .contact-info {
         display: flex;
         justify-content: center;
-        gap: 20px;
+        gap: 15px;
         flex-wrap: wrap;
-        margin-top: 5px;
+        margin-top: 3px;
     }
     
     .contact-item {
@@ -375,7 +378,7 @@
     
     .contact-item i {
         color: var(--secondary-color);
-        font-size: 12px;
+        font-size: 10px;
     }
     
     .output-container {
@@ -441,9 +444,10 @@
     
     .subject-line {
         font-weight: bold;
-        margin: 5mm 0;
+        margin: 3mm 0;
         padding-bottom: 2mm;
         border-bottom: 1px solid #ddd;
+        font-size: 11.5pt;
         flex-shrink: 0;
     }
     
@@ -471,13 +475,27 @@
         background: #e1e1e1;
     }
     
+    .content-warning {
+        background-color: #fff3cd;
+        border: 1px solid #ffeaa7;
+        border-radius: 4px;
+        padding: 10px;
+        margin: 10px 0;
+        font-size: 12px;
+        color: #856404;
+        display: none;
+    }
+    
     @media print {
         body {
             background: none;
+            padding: 0;
+            margin: 0;
         }
         
-        header, .controls-panel, .preview-panel, .output-container, .btn-group {
-            display: none;
+        header, .controls-panel, .preview-panel, .output-container, .btn-group,
+        .instructions, .counter, .page-count {
+            display: none !important;
         }
         
         .page {
@@ -485,6 +503,16 @@
             margin: 0 !important;
             padding: 25.4mm !important;
             page-break-after: always;
+            height: 297mm !important;
+            width: 210mm !important;
+        }
+        
+        #output {
+            display: block !important;
+        }
+        
+        #output .page {
+            display: block !important;
         }
     }
     
@@ -504,6 +532,8 @@
         .page {
             width: 100%;
             padding: 15mm;
+            height: auto;
+            min-height: 297mm;
         }
         
         .letter-header {
@@ -551,7 +581,7 @@
                     <div class="logo-upload" onclick="document.getElementById('logoFile').click()">
                         <div class="logo-preview" id="logoPreview"></div>
                         <i class="fas fa-upload"></i>
-                        <span>Upload logo (Max: 150x70px)</span>
+                        <span>Upload logo (Max: 120x60px)</span>
                         <input type="file" id="logoFile" accept="image/*" style="display: none;" onchange="uploadLogo()">
                     </div>
                     <input type="text" id="logoUrl" placeholder="Or enter logo image URL">
@@ -597,6 +627,9 @@
                 
                 <div class="form-group">
                     <label for="letterBody"><i class="fas fa-file-alt"></i> Letter Body</label>
+                    <div class="content-warning" id="contentWarning">
+                        <i class="fas fa-exclamation-triangle"></i> Content is too long for one page. Consider shortening the letter body.
+                    </div>
                     <div class="language-selector">
                         <span class="lang-btn active" onclick="setLanguage('english')">English</span>
                         <span class="lang-btn" onclick="setLanguage('nepali')">Nepali</span>
@@ -738,11 +771,11 @@
         document.getElementById('phone').value = '+977-9844087012';
         document.getElementById('subject').value = 'उपस्थित भइदिन हुन ';
         document.getElementById('receivers').value = 'लालबहादुर कठायत अध्यक्ष विव्यस';
-        document.getElementById('letterBody').value = ' [Recipient],\n\nWe are pleased to inform you about our upcoming corporate event scheduled for next month. This event will bring together industry leaders to discuss emerging trends and opportunities for collaboration.\n\nYour presence at this event would be highly valuable, and we believe your insights would greatly contribute to the discussions.\n\nPlease confirm your availability at your earliest convenience. We have attached the event agenda for your reference.\n\nLooking forward to your positive response.';
+        document.getElementById('letterBody').value = ' [Recipient],\n\nWe are pleased to inform you about our upcoming corporate event scheduled for next month. This event will bring together industry leaders to discuss emerging trends and opportunities for collaboration.\n\nYour presence at this event would be highly valuable, and we believe your insights would greatly contribute to the discussions.\n\nPlease confirm your availability at your earliest convenience.\n\nLooking forward to your positive response.';
         document.getElementById('sender').value = 'प्रधानाध्यापक';
         
         // Load a sample logo from placeholder
-        logoDataUrl = 'https://via.placeholder.com/150x70/3498db/ffffff?text=LOGO';
+        logoDataUrl = 'https://via.placeholder.com/120x60/3498db/ffffff?text=LOGO';
         document.getElementById('logoPreview').innerHTML = `<img src="${logoDataUrl}" alt="Logo">`;
         document.getElementById('logoPreview').style.display = 'block';
         document.getElementById('logoUrl').value = logoDataUrl;
@@ -812,6 +845,22 @@
                 </div>
             </div>
         `;
+        
+        // Check content length
+        checkContentLength(body);
+    }
+    
+    function checkContentLength(body) {
+        const warningElement = document.getElementById('contentWarning');
+        const lineCount = body.split('\n').length;
+        const charCount = body.length;
+        
+        // Show warning if content is too long
+        if (lineCount > 30 || charCount > 1500) {
+            warningElement.style.display = 'block';
+        } else {
+            warningElement.style.display = 'none';
+        }
     }
     
     function generateLetters() {
@@ -859,7 +908,7 @@
                     <div class="date">${letterDate}</div>
                     
                     <div class="recipient">
-                        ..<br>
+                        <br>
                         <strong>${name.trim()}</strong>
                     </div>
                     
@@ -870,7 +919,7 @@
                     </div>
                     
                     <div class="letter-footer">
-                        ...<br>
+                        <br>
                         <div class="sender-details">
                             <strong>${sender}</strong>
                         </div>
@@ -962,146 +1011,97 @@
     }
     
     async function downloadAsPDF() {
-    const output = document.getElementById('output');
-    
-    if (output.innerHTML.trim() === "" || output.innerHTML.includes('No letters generated')) {
-        alert('Please generate letters first before downloading as PDF.');
-        return;
-    }
-    
-    // Show loading indicator for mobile
-    const originalText = document.getElementById('downloadBtn').innerHTML;
-    document.getElementById('downloadBtn').innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-    document.getElementById('downloadBtn').disabled = true;
-    
-    try {
-        const { jsPDF } = window.jspdf;
-        const pdf = new jsPDF('p', 'mm', 'a4');
+        const output = document.getElementById('output');
         
-        // Get all letter pages
-        const pages = output.querySelectorAll('.page');
-        
-        for (let i = 0; i < pages.length; i++) {
-            const page = pages[i];
-            
-            // Add a small delay between pages to prevent mobile browser crashes
-            if (i > 0) {
-                await new Promise(resolve => setTimeout(resolve, 500));
-            }
-            
-            // Use html2canvas with optimized settings for mobile
-            await html2canvas(page, {
-                scale: 1.5, // Reduced from 2 for mobile performance
-                useCORS: true,
-                logging: false,
-                backgroundColor: '#ffffff',
-                removeContainer: true, // Helps with memory
-                allowTaint: false,
-                imageTimeout: 0, // No timeout
-                onclone: function(clonedDoc) {
-                    // Optimize cloned document for mobile
-                    const clonedPage = clonedDoc.querySelector('.page');
-                    if (clonedPage) {
-                        clonedPage.style.width = '210mm';
-                        clonedPage.style.height = '297mm';
-                        clonedPage.style.overflow = 'hidden';
-                    }
-                }
-            }).then(canvas => {
-                const imgData = canvas.toDataURL('image/jpeg', 0.85); // Use JPEG with compression for smaller size
-                const imgWidth = 210; // A4 width in mm
-                const imgHeight = (canvas.height * imgWidth) / canvas.width;
-                
-                if (i > 0) {
-                    pdf.addPage();
-                }
-                
-                // Add image to PDF with proper dimensions
-                pdf.addImage(imgData, 'JPEG', 0, 0, imgWidth, imgHeight, '', 'FAST');
-                
-                // Clear canvas to free memory (important for mobile)
-                canvas.width = 0;
-                canvas.height = 0;
-            }).catch(error => {
-                console.error('Error capturing page:', error);
-                alert(`Error capturing page ${i + 1}. Please try again.`);
-            });
+        if (output.innerHTML.trim() === "" || output.innerHTML.includes('No letters generated')) {
+            alert('Please generate letters first before downloading as PDF.');
+            return;
         }
         
-        // Save the PDF
-        const orgName = document.getElementById('org').value || 'letters';
-        const fileName = `${orgName.replace(/\s+/g, '_')}_${new Date().toISOString().slice(0,10)}.pdf`;
+        // Show loading indicator
+        const originalText = document.getElementById('downloadBtn').innerHTML;
+        document.getElementById('downloadBtn').innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+        document.getElementById('downloadBtn').disabled = true;
         
-        // For mobile, use different approach
-        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            // For mobile devices, open in new tab
-            const pdfBlob = pdf.output('blob');
-            const pdfUrl = URL.createObjectURL(pdfBlob);
-            
-            // Create a download link
-            const downloadLink = document.createElement('a');
-            downloadLink.href = pdfUrl;
-            downloadLink.download = fileName;
-            downloadLink.style.display = 'none';
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
-            
-            // Cleanup
-            setTimeout(() => {
-                document.body.removeChild(downloadLink);
-                URL.revokeObjectURL(pdfUrl);
-            }, 100);
-        } else {
-            // For desktop, use standard approach
-            pdf.save(fileName);
-        }
-        
-    } catch (error) {
-        console.error('PDF generation error:', error);
-        alert('Failed to generate PDF. The file might be too large for mobile. Try generating fewer letters at once.');
-        
-        // Alternative: Create individual PDFs
-        if (confirm('Try creating individual PDFs instead?')) {
-            generateIndividualPDFs();
-        }
-    } finally {
-        // Restore button state
-        document.getElementById('downloadBtn').innerHTML = originalText;
-        document.getElementById('downloadBtn').disabled = false;
-    }
-}
-
-// Alternative function for individual PDFs
-async function generateIndividualPDFs() {
-    const pages = document.querySelectorAll('.page');
-    const orgName = document.getElementById('org').value || 'letter';
-    
-    for (let i = 0; i < pages.length; i++) {
-        const page = pages[i];
-        
-        await html2canvas(page, {
-            scale: 1.5,
-            useCORS: true,
-            backgroundColor: '#ffffff'
-        }).then(canvas => {
+        try {
             const { jsPDF } = window.jspdf;
             const pdf = new jsPDF('p', 'mm', 'a4');
             
-            const imgData = canvas.toDataURL('image/jpeg', 0.9);
-            const imgWidth = 210;
-            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+            // Get all letter pages
+            const pages = output.querySelectorAll('.page');
             
-            pdf.addImage(imgData, 'JPEG', 0, 0, imgWidth, imgHeight);
-            pdf.save(`${orgName}_letter_${i + 1}.pdf`);
-        });
+            for (let i = 0; i < pages.length; i++) {
+                const page = pages[i];
+                
+                // Add a small delay between pages
+                if (i > 0) {
+                    await new Promise(resolve => setTimeout(resolve, 300));
+                }
+                
+                // Use html2canvas with optimized settings
+                await html2canvas(page, {
+                    scale: 2,
+                    useCORS: true,
+                    logging: false,
+                    backgroundColor: '#ffffff',
+                    width: 794, // A4 width in pixels at 96 DPI
+                    height: 1123, // A4 height in pixels at 96 DPI
+                    windowWidth: 794,
+                    windowHeight: 1123
+                }).then(canvas => {
+                    const imgData = canvas.toDataURL('image/jpeg', 0.9);
+                    const imgWidth = 210; // A4 width in mm
+                    const imgHeight = 297; // A4 height in mm
+                    
+                    if (i > 0) {
+                        pdf.addPage();
+                    }
+                    
+                    // Add image to PDF
+                    pdf.addImage(imgData, 'JPEG', 0, 0, imgWidth, imgHeight, '', 'FAST');
+                    
+                    // Clear canvas to free memory
+                    canvas.width = 0;
+                    canvas.height = 0;
+                }).catch(error => {
+                    console.error('Error capturing page:', error);
+                    alert(`Error capturing page ${i + 1}. Please try again.`);
+                });
+            }
+            
+            // Save the PDF
+            const orgName = document.getElementById('org').value || 'letters';
+            const fileName = `${orgName.replace(/\s+/g, '_')}_${new Date().toISOString().slice(0,10)}.pdf`;
+            
+            // For mobile devices
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                const pdfBlob = pdf.output('blob');
+                const pdfUrl = URL.createObjectURL(pdfBlob);
+                
+                const downloadLink = document.createElement('a');
+                downloadLink.href = pdfUrl;
+                downloadLink.download = fileName;
+                downloadLink.style.display = 'none';
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                
+                setTimeout(() => {
+                    document.body.removeChild(downloadLink);
+                    URL.revokeObjectURL(pdfUrl);
+                }, 100);
+            } else {
+                pdf.save(fileName);
+            }
+            
+        } catch (error) {
+            console.error('PDF generation error:', error);
+            alert('Failed to generate PDF. Please try generating fewer letters at once.');
+        } finally {
+            // Restore button state
+            document.getElementById('downloadBtn').innerHTML = originalText;
+            document.getElementById('downloadBtn').disabled = false;
+        }
     }
-}
-
-<!---------->
-
-
-
-    
     
     function printLetters() {
         const output = document.getElementById('output').innerHTML;
@@ -1119,89 +1119,114 @@ async function generateIndividualPDFs() {
             <head>
                 <title>Print Letters</title>
                 <style>
-                    @media print {
-                        body { margin: 0; padding: 0; }
-                        .page {
-                            width: 210mm !important;
-                            min-height: 297mm !important;
-                            max-height: 297mm !important;
-                            background: white;
-                            margin: 0 !important;
-                            padding: 25.4mm !important;
-                            box-sizing: border-box;
-                            page-break-after: always;
-                            font-family: 'Times New Roman', serif;
-                            overflow: hidden;
-                            display: flex;
-                            flex-direction: column;
-                        }
-                        .page-content {
-                            flex: 1;
-                            display: flex;
-                            flex-direction: column;
-                            position: relative;
-                            z-index: 1;
-                        }
-                        .letter-header { 
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            margin-bottom: 10mm;
-                            flex-shrink: 0;
-                        }
-                        .org-logo { 
-                            max-height: 70px;
-                            max-width: 150px;
-                            margin-right: 15px;
-                            object-fit: contain;
-                        }
-                        .org-name { 
-                            font-weight: bold; 
-                            font-size: 20px; 
-                            color: #000; 
-                        }
-                        .letter-subheader { text-align: center; font-size: 12px; color: #555; margin-bottom: 15mm; line-height: 1.4; flex-shrink: 0; }
-                        .date { margin-bottom: 10mm; text-align: right; flex-shrink: 0; }
-                        .recipient { margin-bottom: 8mm; flex-shrink: 0; }
-                        .letter-body-container { 
-                            flex: 1;
-                            min-height: 100mm;
-                            max-height: 150mm;
-                            overflow: hidden;
-                        }
-                        .letter-body { 
-                            white-space: pre-line; 
-                            line-height: 1.6; 
-                            text-align: justify; 
-                            font-size: 11pt;
-                            overflow-wrap: break-word;
-                        }
-                        .letter-body.nepali { font-size: 14px !important; }
-                        .letter-body.english { font-size: 11pt !important; }
-                        .subject-line { font-weight: bold; margin: 5mm 0; padding-bottom: 2mm; border-bottom: 1px solid #ddd; flex-shrink: 0; }
-                        .letter-footer { margin-top: 10mm; flex-shrink: 0; }
-                        .sender-details { margin-top: 15mm; }
-                        .contact-footer { 
-                            margin-top: 15mm;
-                            padding-top: 5mm; 
-                            border-top: 1px solid #ddd; 
-                            text-align: center; 
-                            font-size: 11px; 
-                            color: #555; 
-                            flex-shrink: 0;
-                        }
-                        .contact-info { 
-                            display: flex; 
-                            justify-content: center; 
-                            gap: 20px; 
-                            flex-wrap: wrap; 
-                            margin-top: 5px; 
-                        }
-                        .contact-item { 
-                            display: flex; 
-                            align-items: center; 
-                            gap: 5px; 
-                        }
+                    body { 
+                        margin: 0 !important; 
+                        padding: 0 !important; 
+                    }
+                    @page {
+                        size: A4;
+                        margin: 25.4mm;
+                    }
+                    .page {
+                        width: 210mm !important;
+                        height: 297mm !important;
+                        background: white;
+                        margin: 0 !important;
+                        padding: 25.4mm !important;
+                        box-sizing: border-box;
+                        page-break-after: always;
+                        font-family: 'Times New Roman', serif;
+                        overflow: hidden !important;
+                        display: flex !important;
+                        flex-direction: column !important;
+                    }
+                    .page-content {
+                        height: 100% !important;
+                        display: flex !important;
+                        flex-direction: column !important;
+                    }
+                    .letter-header { 
+                        display: flex !important;
+                        align-items: center !important;
+                        justify-content: center !important;
+                        margin-bottom: 5mm !important;
+                    }
+                    .org-logo { 
+                        max-height: 60px !important;
+                        max-width: 120px !important;
+                        margin-right: 10px !important;
+                        object-fit: contain !important;
+                    }
+                    .org-name { 
+                        font-weight: bold !important; 
+                        font-size: 18px !important; 
+                        color: #000 !important; 
+                    }
+                    .letter-subheader { 
+                        text-align: center !important; 
+                        font-size: 11px !important; 
+                        color: #555 !important; 
+                        margin-bottom: 8mm !important; 
+                        line-height: 1.4 !important; 
+                    }
+                    .date { 
+                        margin-bottom: 5mm !important; 
+                        text-align: right !important; 
+                        font-size: 12px !important; 
+                    }
+                    .recipient { 
+                        margin-bottom: 4mm !important; 
+                        font-size: 12px !important; 
+                    }
+                    .letter-body-container { 
+                        flex: 1 !important;
+                        overflow: hidden !important;
+                        margin-bottom: 5mm !important;
+                    }
+                    .letter-body { 
+                        white-space: pre-line !important;
+                        line-height: 1.5 !important;
+                        text-align: justify !important;
+                        font-size: 10.5pt !important;
+                        overflow-wrap: break-word !important;
+                        height: 100% !important;
+                    }
+                    .letter-body.nepali { 
+                        font-size: 12px !important; 
+                    }
+                    .subject-line { 
+                        font-weight: bold !important; 
+                        margin: 3mm 0 !important; 
+                        padding-bottom: 2mm !important; 
+                        border-bottom: 1px solid #ddd !important; 
+                        font-size: 11.5pt !important; 
+                    }
+                    .letter-footer { 
+                        margin-top: 5mm !important; 
+                    }
+                    .sender-details { 
+                        margin-top: 8mm !important; 
+                        font-size: 12px !important; 
+                    }
+                    .contact-footer { 
+                        margin-top: 8mm !important;
+                        padding-top: 3mm !important; 
+                        border-top: 1px solid #ddd !important; 
+                        text-align: center !important; 
+                        font-size: 10px !important; 
+                        color: #555 !important; 
+                    }
+                    .contact-info { 
+                        display: flex !important; 
+                        justify-content: center !important; 
+                        gap: 15px !important; 
+                        flex-wrap: wrap !important; 
+                        margin-top: 3px !important; 
+                    }
+                    .contact-item { 
+                        display: flex !important; 
+                        align-items: center !important; 
+                        gap: 5px !important; 
                     }
                 </style>
             </head>
@@ -1243,6 +1268,7 @@ async function generateIndividualPDFs() {
             document.getElementById('preview').innerHTML = '<p style="text-align: center; color: #666; margin-top: 50px;">Generated letters will appear here<br><i class="fas fa-envelope" style="font-size: 48px; margin-top: 20px; color: #ddd;"></i></p>';
             document.getElementById('previewCounter').textContent = '0 letters generated';
             document.getElementById('pageCount').textContent = '';
+            document.getElementById('contentWarning').style.display = 'none';
             
             // Reset date to today
             setTodayDate();
