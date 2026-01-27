@@ -311,6 +311,26 @@
         flex-shrink: 0;
     }
     
+    .letter-numbers {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 4mm;
+        font-size: 12px;
+        flex-shrink: 0;
+    }
+    
+    .letter-number, .ref-number {
+        flex: 1;
+    }
+    
+    .letter-number {
+        text-align: left;
+    }
+    
+    .ref-number {
+        text-align: right;
+    }
+    
     .recipient {
         margin-bottom: 4mm;
         font-size: 12px;
@@ -486,6 +506,17 @@
         display: none;
     }
     
+    .form-row {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .form-row .form-group {
+        flex: 1;
+        margin-bottom: 0;
+    }
+    
     @media print {
         body {
             background: none;
@@ -558,6 +589,19 @@
         .today-btn {
             width: 100%;
         }
+        
+        .form-row {
+            flex-direction: column;
+        }
+        
+        .letter-numbers {
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .letter-number, .ref-number {
+            text-align: left;
+        }
     }
 </style>
 <!-- Include jsPDF library for PDF generation -->
@@ -611,18 +655,32 @@
                     <input type="text" id="address" value= "लालबन्दी नपा-१६, परवानीपुर, सर्लाही, मधेशप्रदेश" placeholder="लालबन्दी नपा -१६, परवानीपुर, सर्लाही,मधेशप्रदेश"></input>
                 </div>
                 
-                <div class="form-group">
-                    <label for="email"><i class="fas fa-envelope"></i> Organization Email</label>
-                    <input type="text" id="email" value= "dimjanta998@gmail.com"   placeholder="">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email"><i class="fas fa-envelope"></i> Organization Email</label>
+                        <input type="text" id="email" value= "dimjanta998@gmail.com"   placeholder="">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone"><i class="fas fa-phone"></i> Contact Number</label>
+                        <input type="text" id="phone" value="9844047749">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="letterNo"><i class="fas fa-hashtag"></i> Letter No.</label>
+                        <input type="text" id="letterNo" placeholder="०५/०८१-०८२">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="refNo"><i class="fas fa-file-alt"></i> Ref. No.</label>
+                        <input type="text" id="refNo" placeholder=" श्री.डि.मा.वि.बि./...">
+                    </div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="phone"><i class="fas fa-phone"></i> Contact Number</label>
-                    <input type="text" id="phone" value="9844047749">
-                </div>
-                
-                <div class="form-group">
-                    <label for="letterDate"><i class="fas fa-calendar-alt"></i> Enter letter date</label>
+                    <label for="letterDate"><i class="fas fa-calendar-alt"></i> Letter date</label>
                     <div class="date-input-group">
                         <input type="text" id="letterDate" value= "२०८२-१०-१२">
                         <button type="button" class="today-btn" onclick="setTodayDate()">Today</button>
@@ -630,7 +688,7 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="subject"><i class="fas fa-pen"></i> Subject</label>
+                    <label for="subject"><i class="fas fa-pen"></i>Subject</label>
                     <input type="text" id="subject" value="आमण्त्रण बारे">
                 </div>
                 
@@ -640,7 +698,7 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="letterBody"><i class="fas fa-file-alt"></i>Choose font for letter body.</label>
+                    <label for="letterBody"><i class="fas fa-file-alt"></i>Choose a font for letter body.</label>
                     <div class="content-warning" id="contentWarning">
                         <i class="fas fa-exclamation-triangle"></i> Content is too long for one page. Consider shortening the letter body.
                     </div>
@@ -715,6 +773,8 @@
         document.getElementById('phone').addEventListener('input', updatePreview);
         document.getElementById('letterDate').addEventListener('input', updatePreview);
         document.getElementById('logoUrl').addEventListener('input', updateLogoFromUrl);
+        document.getElementById('letterNo').addEventListener('input', updatePreview);
+        document.getElementById('refNo').addEventListener('input', updatePreview);
         
         // Add sample data for demonstration
         if(!localStorage.getItem('letterDemoShown')) {
@@ -772,6 +832,8 @@
         document.getElementById('address').value = 'लालबन्दी नपा -१६, परवानीपुर, सर्लाही';
         document.getElementById('email').value = 'shamser.info@np.com';
         document.getElementById('phone').value = '+977-9844087012';
+        document.getElementById('letterNo').value = '०५/०८१-०८२';
+        document.getElementById('refNo').value = 'श्री.डि.मा.वि.बि./२०८२';
         document.getElementById('subject').value = 'उपस्थित भइदिन हुन ';
         document.getElementById('receivers').value = 'लालबहादुर कठायत अध्यक्ष विव्यस';
         document.getElementById('letterBody').value = ' [Recipient],\n\nWe are pleased to inform you about our upcoming corporate event scheduled for next month. This event will bring together industry leaders to discuss emerging trends and opportunities for collaboration.\n\nYour presence at this event would be highly valuable, and we believe your insights would greatly contribute to the discussions.\n\nPlease confirm your availability at your earliest convenience.\n\nLooking forward to your positive response.';
@@ -791,6 +853,8 @@
         const address = document.getElementById('address').value || '[Organization Address]';
         const email = document.getElementById('email').value || 'email@organization.com';
         const phone = document.getElementById('phone').value || '+1 (555) 123-4567';
+        const letterNo = document.getElementById('letterNo').value || '';
+        const refNo = document.getElementById('refNo').value || '';
         const subject = document.getElementById('subject').value || '[Subject of the letter]';
         const body = document.getElementById('letterBody').value || '[Letter body will appear here]';
         const sender = document.getElementById('sender').value || '[Sender Name & Designation]';
@@ -810,12 +874,17 @@
                     
                     <div class="date">${letterDate}</div>
                     
+                    <div class="letter-numbers">
+                        <div class="letter-number">${letterNo ? `पत्र नं.: ${letterNo}` : ''}</div>
+                        <div class="ref-number">${refNo ? `सन्दर्भ नं.: ${refNo}` : ''}</div>
+                    </div>
+                    
                     <div class="recipient">
                         <br>
                         <strong>Shamser Pulami, Sample Recipient</strong>
                     </div>
                     
-                    <div class="subject-line">Subject: ${subject}</div>
+                    <div class="subject-line">बिषय: ${subject}</div>
                     
                     <div class="letter-body-container">
                         <div class="letter-body ${currentLanguage}">${body.replace(/\[Recipient\]/g, 'Mr. John Doe').replace(/\n/g, '<br>')}</div>
@@ -871,6 +940,8 @@
         const address = document.getElementById('address').value;
         const email = document.getElementById('email').value;
         const phone = document.getElementById('phone').value;
+        const letterNo = document.getElementById('letterNo').value;
+        const refNo = document.getElementById('refNo').value;
         const subject = document.getElementById('subject').value;
         const receivers = document.getElementById('receivers').value.split("\n");
         let body = document.getElementById('letterBody').value;
@@ -910,12 +981,17 @@
                     
                     <div class="date">${letterDate}</div>
                     
+                    <div class="letter-numbers">
+                        <div class="letter-number">${letterNo ? `पत्र नं.: ${letterNo}` : ''}</div>
+                        <div class="ref-number">${refNo ? `सन्दर्भ नं.: ${refNo}` : ''}</div>
+                    </div>
+                    
                     <div class="recipient">
                         <br>
                         <strong>${name.trim()}</strong>
                     </div>
                     
-                    <div class="subject-line">Subject: ${subject}</div>
+                    <div class="subject-line">बिषय: ${subject}</div>
                     
                     <div class="letter-body-container">
                         <div class="letter-body ${currentLanguage}">${personalizedBody.replace(/\n/g, '<br>')}</div>
@@ -972,12 +1048,17 @@
                     
                     <div class="date">${letterDate}</div>
                     
+                    <div class="letter-numbers">
+                        <div class="letter-number">${letterNo ? `पत्र नं.: ${letterNo}` : ''}</div>
+                        <div class="ref-number">${refNo ? `सन्दर्भ नं.: ${refNo}` : ''}</div>
+                    </div>
+                    
                     <div class="recipient">
                         <br>
                         <strong>${firstReceiver.trim()}</strong>
                     </div>
                     
-                    <div class="subject-line">Subject: ${subject}</div>
+                    <div class="subject-line">बिषय: ${subject}</div>
                     
                     <div class="letter-body-container">
                         <div class="letter-body ${currentLanguage}">${personalizedBody.replace(/\n/g, '<br>')}</div>
@@ -1177,6 +1258,21 @@
                         text-align: right !important; 
                         font-size: 12px !important; 
                     }
+                    .letter-numbers {
+                        display: flex !important;
+                        justify-content: space-between !important;
+                        margin-bottom: 4mm !important;
+                        font-size: 12px !important;
+                    }
+                    .letter-number, .ref-number {
+                        flex: 1 !important;
+                    }
+                    .letter-number {
+                        text-align: left !important;
+                    }
+                    .ref-number {
+                        text-align: right !important;
+                    }
                     .recipient { 
                         margin-bottom: 4mm !important; 
                         font-size: 12px !important; 
@@ -1255,6 +1351,8 @@
             document.getElementById('address').value = '';
             document.getElementById('email').value = '';
             document.getElementById('phone').value = '';
+            document.getElementById('letterNo').value = '';
+            document.getElementById('refNo').value = '';
             document.getElementById('subject').value = '';
             document.getElementById('receivers').value = '';
             document.getElementById('letterBody').value = '';
