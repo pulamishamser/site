@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Multi Receiver Letterpad Generator</title>
+<title>Multi Letterpad Generator</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
     :root {
@@ -570,6 +570,21 @@
             <h1><i class="fas fa-envelope-open-text"></i> Multi-Letterpad Generator</h1>
             <p class="subtitle">यसमा लेखेर वा बोलेर एउटै बिषयमा धेरैजनालाई पत्र लेख्न वा कुनै सिफारिसपत्र बनाउन सकिन्छ ।
             </p>
+
+<div class="instructions">
+                    <h3><i class="fas fa-info-circle"></i> Instructions</h3>
+                    <ul>
+                        <li>Enter each recipient on a separate line</li>
+                        <li>Use [Recipient] in the letter body to insert recipient names</li>
+                        <li>Customize the date or click "Today" for current date</li>
+                        <li>Click "Generate Letters" to create letters for all recipients</li>
+                        <li>Use "Download as PDF" to save all letters as PDF</li>
+                        <li>Use "Print All Letters" to print all generated letters</li>
+                        <li>Letter content will automatically adjust to fit one A4 page</li>
+                    </ul>
+                </div>
+
+            
         </header>
         
         <div class="app-wrapper">
@@ -589,40 +604,40 @@
                 
                 <div class="form-group">
                     <label for="org"><i class="fas fa-building"></i> Organization Name</label>
-                    <input type="text" id="org" placeholder="श्री डिम जनता माध्यमिक बिद्यालय">
+                    <input type="text" id="org" value="श्री डिम जनता माध्यमिक बिद्यालय">
                 </div>
                 
                 <div class="form-group">
                     <label for="address"><i class="fas fa-map-marker-alt"></i> Address</label>
-                    <textarea id="address" placeholder="लालबन्दी नपा -१६, परवानीपुर, सर्लाही,मधेशप्रदेश"></textarea>
+                    <textarea id="address" value="लालबन्दी नपा -१६, परवानीपुर, सर्लाही,मधेशप्रदेश"></textarea>
                 </div>
                 
                 <div class="form-group">
                     <label for="email"><i class="fas fa-envelope"></i> Organization Email</label>
-                    <input type="text" id="email" placeholder="dimjanta998@gmail.com">
+                    <input type="text" id="email" value= "dimjanta998@gmail.com"   placeholder="">
                 </div>
                 
                 <div class="form-group">
                     <label for="phone"><i class="fas fa-phone"></i> Contact Number</label>
-                    <input type="text" id="phone" placeholder="e.g., 98440447749">
+                    <input type="text" id="phone" value="9844047749">
                 </div>
                 
                 <div class="form-group">
                     <label for="letterDate"><i class="fas fa-calendar-alt"></i> Letter Date</label>
                     <div class="date-input-group">
-                        <input type="text" id="letterDate" placeholder="२०८२-१०-१२">
+                        <input type="text" id="letterDate" placeholder= "२०८२-१०-१२" placeholder="">
                         <button type="button" class="today-btn" onclick="setTodayDate()">Today</button>
                     </div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="subject"><i class="fas fa-heading"></i> Subject</label>
-                    <input type="text" id="subject" placeholder="आमण्त्रण बारे">
+                    <label for="subject"><i class="fas fa-heading"></i> बिषय:</label>
+                    <input type="text" id="subject" value="आमण्त्रण बारे">
                 </div>
                 
                 <div class="form-group">
                     <label for="receivers"><i class="fas fa-users"></i> Recipients (one per line)</label>
-                    <textarea id="receivers" placeholder="धन बहादुर,सदस्य&#10;लालबहादुर, अध्यक्ष&#10;शम्भुलाल, मेयर"></textarea>
+                    <textarea id="receivers" value="गणेशबहादुर,वडाध्यक्ष#10;राजुबुढाथोकी, बिब्अयस ध्यक्ष&#10;बासुदेब अधिकारी, मेयर"></textarea>
                 </div>
                 
                 <div class="form-group">
@@ -642,18 +657,7 @@
                     <input type="text" id="sender" placeholder="प्रधानाध्यापक">
                 </div>
                 
-                <div class="instructions">
-                    <h3><i class="fas fa-info-circle"></i> Instructions</h3>
-                    <ul>
-                        <li>Enter each recipient on a separate line</li>
-                        <li>Use [Recipient] in the letter body to insert recipient names</li>
-                        <li>Customize the date or click "Today" for current date</li>
-                        <li>Click "Generate Letters" to create letters for all recipients</li>
-                        <li>Use "Download as PDF" to save all letters as PDF</li>
-                        <li>Use "Print All Letters" to print all generated letters</li>
-                        <li>Letter content will automatically adjust to fit one A4 page</li>
-                    </ul>
-                </div>
+                
                 
                 <div class="btn-group">
                     <button id="generateBtn" onclick="generateLetters()">
