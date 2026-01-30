@@ -706,7 +706,7 @@
                         <i class="fas fa-exclamation-triangle"></i> Content is too long for one page. Consider shortening the letter body.
                     </div>
                     <div class="language-selector">
-                        <span class="lang-btn active" onclick="setLanguage('english')">English</span>
+               <!-----     <span class="lang-btn active" onclick="setLanguage('english')">English</span>--->
                         <span class="lang-btn" onclick="setLanguage('nepali')">Nepali</span>
                     </div>
                     <textarea id="letterBody" placeholder=" [महोदय],&#10;&#10;उपर्युक्त बिषयमा...&#10;&#10;बिस्तृतरुमा आफ्नो ब्यहोरा उल्लेख गर्नुहोस् ......"></textarea>
@@ -714,9 +714,12 @@
                 
                 <div class="form-group">
                     <label for="sender"><i class="fas fa-user-tie"></i>Sender's name</label>
-                    <input type="text" id="sender" value=" ध्रुबबहादुर भण्डारी-प्रधानाध्यापक" >
+                    <input type="text" id="sender" value=" ध्रुबबहादुर भण्डारी" >
                 </div>
-                
+                          <div class="form-group">
+                    <label for="sender"><i class="fas fa-user-tie"></i>Sender's position</label>
+                    <input type="text" id="position" value=" प्रधानाध्यापक" >
+                </div>      
                 
                 
                 <div class="btn-group">
@@ -878,7 +881,7 @@
                     <div class="date">${letterDate}</div>
                     
                     <div class="letter-numbers">
-                        <div class="letter-number">${letterNo ? `प.सं.: ${letterNo}` : ''}</div>
+                        <div class="letter-number">${letterNo ? `प.सं.: ${letterNo}` : ''}</div><br>
                         <div class="ref-number">${refNo ? `च.नं.: ${refNo}` : ''}</div>
                     </div>
                     
