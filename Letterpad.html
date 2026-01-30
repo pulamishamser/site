@@ -313,7 +313,7 @@
     }
     
     .letter-numbers {
-                text-align: left;
+        text-align: left;
         display: flex;
         justify-content: space-between;
         margin-bottom: 4mm;
@@ -615,22 +615,18 @@
     <div class="container">
         <header>
             <h1><i class="fas fa-envelope-open-text"></i> Multi-Letterpad Generator</h1>
-            <p class="subtitle">यसमा लेखेर वा बोलेर एउटै बिषयमा धेरैजनालाई पत्र लेख्न वा कुनै सिफारिसपत्र बनाउन सकिन्छ ।
-            </p>
+            <p class="subtitle">यसमा लेखेर वा बोलेर एउटै बिषयमा धेरैजनालाई पत्र लेख्न वा कुनै सिफारिसपत्र बनाउन सकिन्छ ।</p>
 
-<div class="instructions">
-                    <h3><i class="fas fa-info-circle"></i> Instructions</h3>
-                    <ul>
-                        <li>प्रत्येक लाईनमा प्रत्येक प्रापकको नाम लेख्नुहोस ।</li>
-
-                        <li>आफुले चाहेको मिति राख्नुहोस  </li>
-                        <li>यसमा Data store भएर बस्दैन ।</li>
-                        <li>पत्रलाई pdf मा save गरेर राख्न सकिन्छ । </li>
-                        <li> Save गरिसकेपछिमात्र रिफ्रेश गर्नुहोला अन्यथा फेरि रिपिट लेख्नुपर्छ ।     </li>
-                        
-                    </ul>
-</div>
-            
+            <div class="instructions">
+                <h3><i class="fas fa-info-circle"></i> Instructions</h3>
+                <ul>
+                    <li>प्रत्येक लाईनमा प्रत्येक प्रापकको नाम लेख्नुहोस ।</li>
+                    <li>आफुले चाहेको मिति राख्नुहोस  </li>
+                    <li>यसमा Data store भएर बस्दैन ।</li>
+                    <li>पत्रलाई pdf मा save गरेर राख्न सकिन्छ । </li>
+                    <li> Save गरिसकेपछिमात्र रिफ्रेश गर्नुहोला अन्यथा फेरि रिपिट लेख्नुपर्छ ।     </li>
+                </ul>
+            </div>
         </header>
         
         <div class="app-wrapper">
@@ -655,13 +651,13 @@
                 
                 <div class="form-group">
                     <label for="address"><i class="fas fa-map-marker-alt"></i> Address</label>
-                    <input type="text" id="address" value= "लालबन्दी नपा-१६, परवानीपुर, सर्लाही, मधेशप्रदेश" placeholder="लालबन्दी नपा -१६, परवानीपुर, सर्लाही,मधेशप्रदेश"></input>
+                    <input type="text" id="address" value="लालबन्दी नपा-१६, परवानीपुर, सर्लाही, मधेशप्रदेश" placeholder="लालबन्दी नपा -१६, परवानीपुर, सर्लाही,मधेशप्रदेश">
                 </div>
                 
                 <div class="form-row">
                     <div class="form-group">
                         <label for="email"><i class="fas fa-envelope"></i> Organization Email</label>
-                        <input type="text" id="email" value= "dimjanta998@gmail.com"   placeholder="">
+                        <input type="text" id="email" value="dimjanta998@gmail.com" placeholder="">
                     </div>
                     
                     <div class="form-group">
@@ -685,7 +681,7 @@
                 <div class="form-group">
                     <label for="letterDate"><i class="fas fa-calendar-alt"></i> Letter date</label>
                     <div class="date-input-group">
-                        <input type="text" id="letterDate" value= "२०८२-१०-१२">
+                        <input type="text" id="letterDate" value="२०८२-१०-१२">
                         <button type="button" class="today-btn" onclick="setTodayDate()">Today</button>
                     </div>
                 </div>
@@ -697,7 +693,7 @@
                 
                 <div class="form-group">
                     <label for="receivers"><i class="fas fa-users"></i> Write Recipient's name</label>
-                    <textarea id="receivers" value= "गणेशबहादुर,वडाध्यक्ष&#10;राजुबुढाथोकी, बिब्यस अध्यक्ष&#10;बासुदेब अधिकारी, मेयर" placeholder= "गणेशबहादुर,वडाध्यक्ष&#10;राजुबुढाथोकी, बिब्यस अध्यक्ष&#10;बासुदेब अधिकारी, मेयर लालबन्दी नपा"></textarea>
+                    <textarea id="receivers" placeholder="गणेशबहादुर,वडाध्यक्ष&#10;राजुबुढाथोकी, बिब्यस अध्यक्ष&#10;बासुदेब अधिकारी, मेयर">गणेशबहादुर,वडाध्यक्ष&#10;राजुबुढाथोकी, बिब्यस अध्यक्ष&#10;बासुदेब अधिकारी, मेयर लालबन्दी नपा</textarea>
                 </div>
                 
                 <div class="form-group">
@@ -705,22 +701,18 @@
                     <div class="content-warning" id="contentWarning">
                         <i class="fas fa-exclamation-triangle"></i> Content is too long for one page. Consider shortening the letter body.
                     </div>
-                   <!-----       <div class="language-selector">
-              <span class="lang-btn active" onclick="setLanguage('english')">English</span>
-                        <span class="lang-btn" onclick="setLanguage('nepali')">Nepali</span>
-                    </div>--->
                     <textarea id="letterBody" placeholder=" [महोदय],&#10;&#10;उपर्युक्त बिषयमा...&#10;&#10;बिस्तृतरुमा आफ्नो ब्यहोरा उल्लेख गर्नुहोस् ......"></textarea>
                 </div>
                 
                 <div class="form-group">
                     <label for="sender"><i class="fas fa-user-tie"></i>Sender's name</label>
-                    <input type="text" id="sender" value=" ध्रुबबहादुर भण्डारी" >
+                    <input type="text" id="sender" value="ध्रुबबहादुर भण्डारी">
                 </div>
-                          <div class="form-group">
-                    <label for="sender"><i class="fas fa-user-tie"></i>Sender's position</label>
-                    <input type="text" id="position" value=" प्रधानाध्यापक" >
-                </div>      
                 
+                <div class="form-group">
+                    <label for="position"><i class="fas fa-user-tie"></i>Sender's position</label>
+                    <input type="text" id="position" value="प्रधानाध्यापक">
+                </div>
                 
                 <div class="btn-group">
                     <button id="generateBtn" onclick="generateLetters()">
@@ -773,6 +765,7 @@
         document.getElementById('letterBody').addEventListener('input', updatePreview);
         document.getElementById('subject').addEventListener('input', updatePreview);
         document.getElementById('sender').addEventListener('input', updatePreview);
+        document.getElementById('position').addEventListener('input', updatePreview);
         document.getElementById('org').addEventListener('input', updatePreview);
         document.getElementById('address').addEventListener('input', updatePreview);
         document.getElementById('email').addEventListener('input', updatePreview);
@@ -781,7 +774,7 @@
         document.getElementById('logoUrl').addEventListener('input', updateLogoFromUrl);
         document.getElementById('letterNo').addEventListener('input', updatePreview);
         document.getElementById('refNo').addEventListener('input', updatePreview);
-          document.getElementById('position').addEventListener('input', updatePreview);
+        
         // Add sample data for demonstration
         if(!localStorage.getItem('letterDemoShown')) {
             loadSampleData();
@@ -836,15 +829,16 @@
     function loadSampleData() {
         document.getElementById('org').value = 'श्री डिम जनता माध्यमिक बिद्यालय';
         document.getElementById('address').value = 'लालबन्दी नपा -१६, परवानीपुर, सर्लाही';
-        document.getElementById('email').value = 'shamser.info@np.com';
-        document.getElementById('phone').value = '+977-9844087012';
+        document.getElementById('email').value = 'dimjanta998@gmail.com';
+        document.getElementById('phone').value = '+977-9844047749';
         document.getElementById('letterNo').value = '०५/०८१-०८२';
         document.getElementById('refNo').value = 'श्री.डि.मा.वि.बि./२०८२';
         document.getElementById('subject').value = 'उपस्थित भइदिन हुन ';
         document.getElementById('receivers').value = 'लालबहादुर कठायत अध्यक्ष विव्यस';
-        document.getElementById('letterBody').value = ' [Recipient],\n\nWe are pleased to inform you about our upcoming corporate event scheduled for next month. This event will bring together industry leaders to discuss emerging trends and opportunities for collaboration.\n\nYour presence at this event would be highly valuable, and we believe your insights would greatly contribute to the discussions.\n\nPlease confirm your availability at your earliest convenience.\n\nLooking forward to your positive response.';
-        document.getElementById('sender').value = 'Dhruba Bdr';
-                document.getElementById('position').value = 'प्रधानाध्यापक';
+        document.getElementById('letterBody').value = ' [महोदय],\n\nउपर्युक्त बिषयमा आपस्को ध्यानाकर्षण गर्दछौ । यो कार्यक्रममा तपाईंको उपस्थिति हाम्रो लागि महत्वपूर्ण हुनेछ ।\n\nबिस्तृतरुमा आफ्नो ब्यहोरा उल्लेख गर्नुहोस् ।\n\nधन्यवाद ।';
+        document.getElementById('sender').value = 'ध्रुबबहादुर भण्डारी';
+        document.getElementById('position').value = 'प्रधानाध्यापक';
+        
         // Load a sample logo from placeholder
         logoDataUrl = 'https://via.placeholder.com/120x60/3498db/ffffff?text=LOGO';
         document.getElementById('logoPreview').innerHTML = `<img src="${logoDataUrl}" alt="Logo">`;
@@ -863,8 +857,8 @@
         const refNo = document.getElementById('refNo').value || '';
         const subject = document.getElementById('subject').value || '[Subject of the letter]';
         const body = document.getElementById('letterBody').value || '[Letter body will appear here]';
-        const sender = document.getElementById('sender').value || '[Sender Name & Designation]';
-            const sender = document.getElementById('position').value || '[Sender position & Designation]';
+        const sender = document.getElementById('sender').value || '[Sender Name]';
+        const position = document.getElementById('position').value || '[Sender Position]';
         const letterDate = document.getElementById('letterDate').value || '[Date]';
         
         const preview = document.getElementById('preview');
@@ -883,28 +877,29 @@
                     
                     <div class="letter-numbers">
                         <div class="letter-number">${letterNo ? `प.सं.(letter No): ${letterNo}` : ''}</div>
-                    </div>
-                    <div class="ref-number">
                         <div class="ref-number">${refNo ? `च.नं.: ${refNo} (ref-No)` : ''}</div>
                     </div>
+                    
                     <div class="recipient">
                         <br>
-                        <strong>Shamser Pulami, Sample Recipient</strong><br>
-                          <strong>Pawan Kumar , Sample Recipient</strong><br>
-                            <strong>Gyanendra , Sample Recipient</strong><br>
-                                    <strong>Sugam , Sample Recipient</strong>
+                        <strong>शमसरेर ब मगर ज्यू</strong><br>
+                        <strong>शिक्षा शाखा प्रमुख ज्यू</strong><br>
+                        <strong>ज्ञानेन्द्र बहादुर ज्यू </strong><br>
+                        <strong>केदार घिमिरे ज्यू, </strong>
+                           <strong>निरञ्जन झा ज्यू, </strong>
                     </div>
                     
                     <div class="subject-line">बिषय: ${subject}</div>
                     
                     <div class="letter-body-container">
-                        <div class="letter-body ${currentLanguage}">${body.replace(/\[Recipient\]/g, 'Mr. John Doe').replace(/\n/g, '<br>')}</div>
+                        <div class="letter-body ${currentLanguage}">${body.replace(/\[महोदय\]/g, 'श्रीमान').replace(/\n/g, '<br>')}</div>
                     </div>
                     
                     <div class="letter-footer">
                         <br>
-                        <div class="sender-details" >
-                            <strong>${sender}</strong>
+                        <div class="sender-details">
+                            <strong>${sender}</strong><br>
+                            <strong>${position}</strong>
                         </div>
                     </div>
                     
@@ -957,6 +952,7 @@
         const receivers = document.getElementById('receivers').value.split("\n");
         let body = document.getElementById('letterBody').value;
         const sender = document.getElementById('sender').value;
+        const position = document.getElementById('position').value;
         const letterDate = document.getElementById('letterDate').value;
         
         // Validation
@@ -978,8 +974,8 @@
             
             validReceivers++;
             
-            // Replace [Recipient] placeholder with actual name
-            const personalizedBody = body.replace(/\[Recipient\]/g, name.trim());
+            // Replace [महोदय] placeholder with actual name
+            const personalizedBody = body.replace(/\[महोदय\]/g, name.trim());
             
             output.innerHTML += `
             <div class="page">
@@ -1011,7 +1007,8 @@
                     <div class="letter-footer">
                         <br>
                         <div class="sender-details">
-                            <strong>${sender}</strong>
+                            <strong>${sender}</strong><br>
+                            <strong>${position}</strong>
                         </div>
                     </div>
                     
@@ -1046,7 +1043,7 @@
         // Update preview with the first generated letter
         if (validReceivers > 0) {
             const firstReceiver = receivers.find(name => name.trim() !== "");
-            const personalizedBody = body.replace(/\[Recipient\]/g, firstReceiver.trim());
+            const personalizedBody = body.replace(/\[महोदय\]/g, firstReceiver.trim());
             
             document.getElementById('preview').innerHTML = `
             <div class="page">
@@ -1078,7 +1075,8 @@
                     <div class="letter-footer">
                         <br>
                         <div class="sender-details">
-                            <strong>${sender}</strong>
+                            <strong>${sender}</strong><br>
+                            <strong>${position}</strong>
                         </div>
                     </div>
                     
@@ -1139,20 +1137,19 @@
                     useCORS: true,
                     logging: false,
                     backgroundColor: '#ffffff',
-                    width: 794, // A4 width in pixels at 96 DPI
-                    height: 1123, // A4 height in pixels at 96 DPI
+                    width: 794,
+                    height: 1123,
                     windowWidth: 794,
                     windowHeight: 1123
                 }).then(canvas => {
                     const imgData = canvas.toDataURL('image/jpeg', 0.9);
-                    const imgWidth = 210; // A4 width in mm
-                    const imgHeight = 297; // A4 height in mm
+                    const imgWidth = 210;
+                    const imgHeight = 297;
                     
                     if (i > 0) {
                         pdf.addPage();
                     }
                     
-                    // Add image to PDF
                     pdf.addImage(imgData, 'JPEG', 0, 0, imgWidth, imgHeight, '', 'FAST');
                     
                     // Clear canvas to free memory
@@ -1168,7 +1165,6 @@
             const orgName = document.getElementById('org').value || 'letters';
             const fileName = `${orgName.replace(/\s+/g, '_')}_${new Date().toISOString().slice(0,10)}.pdf`;
             
-            // For mobile devices
             if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
                 const pdfBlob = pdf.output('blob');
                 const pdfUrl = URL.createObjectURL(pdfBlob);
@@ -1192,7 +1188,6 @@
             console.error('PDF generation error:', error);
             alert('Failed to generate PDF. Please try generating fewer letters at once.');
         } finally {
-            // Restore button state
             document.getElementById('downloadBtn').innerHTML = originalText;
             document.getElementById('downloadBtn').disabled = false;
         }
@@ -1206,7 +1201,6 @@
             return;
         }
         
-        // Create a new window for printing
         const printWindow = window.open('', '_blank');
         printWindow.document.write(`
             <!DOCTYPE html>
@@ -1317,7 +1311,7 @@
                     .sender-details { 
                         margin-top:2mm !important; 
                         font-size: 12px !important; 
-                            text-align: left !important;
+                        text-align: right !important;
                     }
                     .contact-footer { 
                         margin-top: 8mm !important;
@@ -1369,6 +1363,7 @@
             document.getElementById('receivers').value = '';
             document.getElementById('letterBody').value = '';
             document.getElementById('sender').value = '';
+            document.getElementById('position').value = '';
             document.getElementById('logoUrl').value = '';
             document.getElementById('letterDate').value = '';
             
@@ -1383,7 +1378,6 @@
             document.getElementById('pageCount').textContent = '';
             document.getElementById('contentWarning').style.display = 'none';
             
-            // Reset date to today
             setTodayDate();
         }
     }
