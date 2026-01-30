@@ -792,12 +792,20 @@
     }
     
     function setTodayDate() {
+        // For Nepali date format (BS)
         const today = new Date();
-        const formattedDate = today.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
+        const year = today.getFullYear();
+        const month = today.getMonth() + 1;
+        const day = today.getDate();
+        
+        // Convert to BS (this is a simple approximation - for real conversion you'd need a library)
+        const bsYear = year + 57; // Approximate conversion AD to BS
+        const bsMonth = month;
+        const bsDay = day;
+        
+        // Format as Nepali date
+        const formattedDate = `${bsYear}-${bsMonth < 10 ? '0' + bsMonth : bsMonth}-${bsDay < 10 ? '0' + bsDay : bsDay}`;
+        
         document.getElementById('letterDate').value = formattedDate;
         updatePreview();
     }
@@ -874,10 +882,9 @@
                     <div class="letter-subheader">${address.replace(/\n/g, '<br>')}</div>
                     
                     <div class="date">${letterDate}</div>
-                      <div class="ref-number">${refNo ? `च.नं.: ${refNo} (ref-No)` : ''}</div>
+                    <div class="ref-number">${refNo ? `च.नं.: ${refNo} (ref-No)` : ''}</div>
                     <div class="letter-numbers">
                         <div class="letter-number">${letterNo ? `प.सं.(letter No): ${letterNo}` : ''}</div>
-                      
                     </div>
                     
                     <div class="recipient">
@@ -886,7 +893,7 @@
                         <strong>शिक्षा शाखा प्रमुख ज्यू</strong><br>
                         <strong>ज्ञानेन्द्र बहादुर ज्यू </strong><br>
                         <strong>केदार घिमिरे ज्यू, </strong><br>
-                           <strong>निरञ्जन झा ज्यू, </strong>
+                        <strong>निरञ्जन झा ज्यू, </strong>
                     </div>
                     
                     <div class="subject-line">बिषय: ${subject}</div>
@@ -986,11 +993,10 @@
                     </div>
                     <div class="letter-subheader">${address.replace(/\n/g, '<br>')}</div>
                     
-                    <div class="date">${letterDate ? `मिति' : ' '}</div>
-                        <div class="ref-number">${refNo ? `च.नं.: ${refNo}` : ''}</div>
+                    <div class="date">${letterDate ? `मिति: ${letterDate}` : ''}</div>
+                    <div class="ref-number">${refNo ? `च.नं.: ${refNo}` : ''}</div>
                     <div class="letter-numbers">
                         <div class="letter-number">${letterNo ? `प.सं.: ${letterNo}` : ''}</div>
-                    
                     </div>
                     
                     <div class="recipient">
@@ -1021,7 +1027,7 @@
                             </div>
                             <div class="contact-item">
                                 <i class="fas fa-phone"></i>
-                                <span>${phone || '9844087012'}</span>
+                                <span>${phone || '9844047749'}</span>
                             </div>
                             <div class="contact-item">
                                 <i class="fas fa-map-marker-alt"></i>
@@ -1089,7 +1095,7 @@
                             </div>
                             <div class="contact-item">
                                 <i class="fas fa-phone"></i>
-                                <span>${phone || '+977+123-4567'}</span>
+                                <span>${phone || '+977-123-4567'}</span>
                             </div>
                             <div class="contact-item">
                                 <i class="fas fa-map-marker-alt"></i>
