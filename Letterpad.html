@@ -705,10 +705,10 @@
                     <div class="content-warning" id="contentWarning">
                         <i class="fas fa-exclamation-triangle"></i> Content is too long for one page. Consider shortening the letter body.
                     </div>
-                    <div class="language-selector">
-               <!-----     <span class="lang-btn active" onclick="setLanguage('english')">English</span>--->
+                   <!-----       <div class="language-selector">
+              <span class="lang-btn active" onclick="setLanguage('english')">English</span>
                         <span class="lang-btn" onclick="setLanguage('nepali')">Nepali</span>
-                    </div>
+                    </div>--->
                     <textarea id="letterBody" placeholder=" [महोदय],&#10;&#10;उपर्युक्त बिषयमा...&#10;&#10;बिस्तृतरुमा आफ्नो ब्यहोरा उल्लेख गर्नुहोस् ......"></textarea>
                 </div>
                 
@@ -781,7 +781,7 @@
         document.getElementById('logoUrl').addEventListener('input', updateLogoFromUrl);
         document.getElementById('letterNo').addEventListener('input', updatePreview);
         document.getElementById('refNo').addEventListener('input', updatePreview);
-        
+          document.getElementById('position').addEventListener('input', updatePreview);
         // Add sample data for demonstration
         if(!localStorage.getItem('letterDemoShown')) {
             loadSampleData();
@@ -843,8 +843,8 @@
         document.getElementById('subject').value = 'उपस्थित भइदिन हुन ';
         document.getElementById('receivers').value = 'लालबहादुर कठायत अध्यक्ष विव्यस';
         document.getElementById('letterBody').value = ' [Recipient],\n\nWe are pleased to inform you about our upcoming corporate event scheduled for next month. This event will bring together industry leaders to discuss emerging trends and opportunities for collaboration.\n\nYour presence at this event would be highly valuable, and we believe your insights would greatly contribute to the discussions.\n\nPlease confirm your availability at your earliest convenience.\n\nLooking forward to your positive response.';
-        document.getElementById('sender').value = 'प्रधानाध्यापक';
-        
+        document.getElementById('sender').value = 'Dhruba Bdr';
+                document.getElementById('position').value = 'प्रधानाध्यापक';
         // Load a sample logo from placeholder
         logoDataUrl = 'https://via.placeholder.com/120x60/3498db/ffffff?text=LOGO';
         document.getElementById('logoPreview').innerHTML = `<img src="${logoDataUrl}" alt="Logo">`;
@@ -864,6 +864,7 @@
         const subject = document.getElementById('subject').value || '[Subject of the letter]';
         const body = document.getElementById('letterBody').value || '[Letter body will appear here]';
         const sender = document.getElementById('sender').value || '[Sender Name & Designation]';
+            const sender = document.getElementById('position').value || '[Sender position & Designation]';
         const letterDate = document.getElementById('letterDate').value || '[Date]';
         
         const preview = document.getElementById('preview');
@@ -881,15 +882,16 @@
                     <div class="date">${letterDate}</div>
                     
                     <div class="letter-numbers">
-                        <div class="letter-number">${letterNo ? `प.सं.: ${letterNo}` : ''}</div><br>
-                        <div class="ref-number">${refNo ? `च.नं.: ${refNo}` : ''}</div>
+                        <div class="letter-number">${letterNo ? `प.सं.(letter No): ${letterNo}` : ''}</div>
                     </div>
-                    
+                    <div class="ref-number">
+                        <div class="ref-number">${refNo ? `च.नं.: ${refNo} (ref-No)` : ''}</div>
+                    </div>
                     <div class="recipient">
                         <br>
                         <strong>Shamser Pulami, Sample Recipient</strong><br>
-                          <strong>Pawan Kumar , Sample Recipient</strong>
-                            <strong>Gyanendra , Sample Recipient</strong>
+                          <strong>Pawan Kumar , Sample Recipient</strong><br>
+                            <strong>Gyanendra , Sample Recipient</strong><br>
                                     <strong>Sugam , Sample Recipient</strong>
                     </div>
                     
