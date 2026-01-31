@@ -871,22 +871,21 @@
         
         const preview = document.getElementById('preview');
         
-        // Create a single letter preview with sample recipient
+ // Create a single letter preview with sample recipient
         preview.innerHTML = `
             <div class="page">
-             <div class="page-content">
+                <div class="page-content">
                     <div class="letter-header">
                         ${logoDataUrl ? `<img src="${logoDataUrl}" class="org-logo" alt="Organization Logo">` : ''}
                         <div class="org-name">${org}</div>
                     </div>
                     <div class="letter-subheader">${address.replace(/\n/g, '<br>')}</div>
+                    
                     <div class="date">${letterDate}</div>
-
-                     <div class="letter-numbers">
+                    <div class="ref-number">${refNo ? `च.नं.: ${refNo} (ref-No)` : ''}</div>
+                    <div class="letter-numbers">
                         <div class="letter-number">${letterNo ? `प.सं.(letter No): ${letterNo}` : ''}</div>
-                        <div class="ref-number">${refNo ? `च.नं.: ${refNo} (ref-No)` : ''}</div>
                     </div>
-
 
 
 
@@ -994,24 +993,20 @@
             // Replace [महोदय] placeholder with actual name
             const personalizedBody = body.replace(/\[महोदय\]/g, name.trim());
             
-            output.innerHTML += `
-            <div class="page">
-               
-<div class="page-content">
-                    <div class="letter-header">
-                        ${logoDataUrl ? `<img src="${logoDataUrl}" class="org-logo" alt="Organization Logo">` : ''}
-                        <div class="org-name">${org}</div>
-                    </div>
-                    <div class="letter-subheader">${address.replace(/\n/g, '<br>')}</div>
-                    
-                    <div class="date">${letterDate}</div>
-               <div class="letter-numbers">
-                        <div class="letter-number">${letterNo ? `प.सं.(letter No): ${letterNo}` : ''}</div>
-                        <div class="ref-number">${refNo ? `च.नं.: ${refNo} (ref-No)` : ''}</div>
-                    </div>
-
-
-
+          output.innerHTML += `
+        <div class="page">
+            <div class="page-content">
+                <div class="letter-header">
+                    ${logoDataUrl ? `<img src="${logoDataUrl}" class="org-logo" alt="Organization Logo">` : ''}
+                    <div class="org-name">${org}</div>
+                </div>
+                <div class="letter-subheader">${address.replace(/\n/g, '<br>')}</div>
+                
+                <div class="date">${letterDate ? `मिति: ${letterDate}` : ''}</div>
+                <div class="ref-number">${refNo ? `च.नं.: ${refNo}` : ''}</div>
+                <div class="letter-numbers">
+                    <div class="letter-number">${letterNo ? `प.सं.: ${letterNo}` : ''}</div>
+                </div>
 
 
 
@@ -1067,14 +1062,14 @@
         // Scroll to output
         document.querySelector('.output-container').scrollIntoView({ behavior: 'smooth' });
         
-        // Update preview with the first generated letter
+       // Update preview with the first generated letter
         if (validReceivers > 0) {
             const firstReceiver = receivers.find(name => name.trim() !== "");
             const personalizedBody = body.replace(/\[महोदय\]/g, firstReceiver.trim());
             
             document.getElementById('preview').innerHTML = `
             <div class="page">
-              <div class="page-content">
+                <div class="page-content">
                     <div class="letter-header">
                         ${logoDataUrl ? `<img src="${logoDataUrl}" class="org-logo" alt="Organization Logo">` : ''}
                         <div class="org-name">${org}</div>
@@ -1082,13 +1077,11 @@
                     <div class="letter-subheader">${address.replace(/\n/g, '<br>')}</div>
                     
                     <div class="date">${letterDate}</div>
-                   <div class="letter-numbers">
-                        <div class="letter-number">${letterNo ? `प.सं.(letter No): ${letterNo}` : ''}</div>
-                        <div class="ref-number">${refNo ? `च.नं.: ${refNo} (ref-No)` : ''}</div>
+                    
+                    <div class="letter-numbers">
+                        <div class="letter-number">${letterNo ? `प.सं.: ${letterNo}` : ''}</div>
+                        <div class="ref-number">${refNo ? `च.नं.: ${refNo}` : ''}</div>
                     </div>
-
-
-
 
 
 
