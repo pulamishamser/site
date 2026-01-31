@@ -874,18 +874,29 @@
         // Create a single letter preview with sample recipient
         preview.innerHTML = `
             <div class="page">
-                <div class="page-content">
+             <div class="page-content">
                     <div class="letter-header">
                         ${logoDataUrl ? `<img src="${logoDataUrl}" class="org-logo" alt="Organization Logo">` : ''}
                         <div class="org-name">${org}</div>
                     </div>
                     <div class="letter-subheader">${address.replace(/\n/g, '<br>')}</div>
-                          <div class="letter-numbers">
+                    
                     <div class="date">${letterDate}</div>
-                    <div class="ref-number">${refNo ? `च.नं.(ref-No): ${refNo} ` : ''}</div>
-              
+                    <div class="ref-number">${refNo ? `च.नं.: ${refNo} (ref-No)` : ''}</div>
+                    <div class="letter-numbers">
                         <div class="letter-number">${letterNo ? `प.सं.(letter No): ${letterNo}` : ''}</div>
                     </div>
+
+
+
+
+
+
+
+
+
+
+                
                     
                     <div class="recipient">
                         <br>
@@ -986,17 +997,29 @@
             
             output.innerHTML += `
             <div class="page">
-                <div class="page-content">
+               
+<div class="page-content">
                     <div class="letter-header">
                         ${logoDataUrl ? `<img src="${logoDataUrl}" class="org-logo" alt="Organization Logo">` : ''}
                         <div class="org-name">${org}</div>
                     </div>
                     <div class="letter-subheader">${address.replace(/\n/g, '<br>')}</div>
-                  <div class="letter-numbers">
-                    <div class="date">${letterDate ? `मिति: ${letterDate}` : ''}</div>
-                    <div class="ref-number">${refNo ? `च.नं.: ${refNo}` : ''}</div>
-                    <div class="letter-number">${letterNo ? `प.सं.: ${letterNo}` : ''}</div>
+                    
+                    <div class="date">${letterDate}</div>
+                    <div class="ref-number">${refNo ? `च.नं.: ${refNo} (ref-No)` : ''}</div>
+                    <div class="letter-numbers">
+                        <div class="letter-number">${letterNo ? `प.सं.(letter No): ${letterNo}` : ''}</div>
                     </div>
+
+
+
+
+
+
+
+
+
+                
                     
                     <div class="recipient">
                         <br>
@@ -1052,19 +1075,25 @@
             
             document.getElementById('preview').innerHTML = `
             <div class="page">
-                <div class="page-content">
+              <div class="page-content">
                     <div class="letter-header">
                         ${logoDataUrl ? `<img src="${logoDataUrl}" class="org-logo" alt="Organization Logo">` : ''}
                         <div class="org-name">${org}</div>
                     </div>
                     <div class="letter-subheader">${address.replace(/\n/g, '<br>')}</div>
-                             <div class="letter-numbers">
-                    <div class="date">${letterDate}</div>
-                             
-                        <div class="letter-number">${letterNo ? `प.सं.: ${letterNo}` : ''}</div>
-                        <div class="ref-number">${refNo ? `च.नं.: ${refNo}` : ''}</div>
-                    </div>
                     
+                    <div class="date">${letterDate}</div>
+                    <div class="ref-number">${refNo ? `च.नं.: ${refNo} (ref-No)` : ''}</div>
+                    <div class="letter-numbers">
+                        <div class="letter-number">${letterNo ? `प.सं.(letter No): ${letterNo}` : ''}</div>
+                    </div>
+
+
+
+
+
+
+                
                     <div class="recipient">
                         <br>
                         <strong>${firstReceiver.trim()}</strong>
