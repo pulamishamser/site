@@ -651,7 +651,8 @@
                 
                 <div class="form-group">
                     <label for="address"><i class="fas fa-map-marker-alt"></i> Address</label>
-                    <input type="text" id="address" value="लालबन्दी नपा-१६, परवानीपुर, सर्लाही, मधेशप्रदेश" placeholder="लालबन्दी नपा -१६, परवानीपुर, सर्लाही,मधेशप्रदेश">
+                    <input type="text" id="address" value="लालबन्दी नपा-१६, परवानीपुर, सर्लाही, मधेशप्रदेश">
+                    <small style="color: #666; font-size: 12px; display: block; margin-top: 5px;">Note: Use comma to separate address lines. Example: लालबन्दी नपा-१६, परवानीपुर, सर्लाही, मधेशप्रदेश</small>
                 </div>
                 
                 <div class="form-row">
@@ -665,29 +666,29 @@
                         <input type="text" id="phone" value="9844047749">
                     </div>
                 </div>
-                                <div class="form-group">
+                
+                <div class="form-group">
                     <label for="letterDate"><i class="fas fa-calendar-alt"></i> Letter date</label>
                     <div class="date-input-group">
                         <input type="text" id="letterDate" value="२०८२-१०-१२">
                         <button type="button" class="today-btn" onclick="setTodayDate()">Today</button>
                     </div>
                 </div>
-                    
-                    <div class="form-group">
-                                  <div class="refNo-input-group">
-                        <label for="refNo"><i class="fas fa-file-alt"></i> Ref.No</label>
-                        <input type="text" id="refNo" value="६/२०८२ शिक्षा शाखा, लालबन्दी नपाको कार्यालय">
-                       <label for="letterNo"><i class="fas fa-hashtag"></i>Letter No.</label>
+                
+                <div class="form-group">
+                    <div class="refNo-input-group">
+                        <label for="letterNo"><i class="fas fa-hashtag"></i> Letter No.</label>
                         <input type="text" id="letterNo" value="११/०८१-०८२">
                     </div>
                 </div>
-
-
-                
-
                 
                 <div class="form-group">
-                    <label for="subject"><i class="fas fa-pen"></i>Subject</label>
+                    <label for="refNo"><i class="fas fa-file-alt"></i> Ref.No</label>
+                    <input type="text" id="refNo" value="६/२०८२ शिक्षा शाखा, लालबन्दी नपाको कार्यालय">
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject"><i class="fas fa-pen"></i> Subject</label>
                     <input type="text" id="subject" value="आमण्त्रण बारे">
                 </div>
                 
@@ -697,7 +698,7 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="letterBody"><i class="fas fa-file-alt"></i>Choose a font for letter body.</label>
+                    <label for="letterBody"><i class="fas fa-file-alt"></i> Choose a font for letter body.</label>
                     <div class="content-warning" id="contentWarning">
                         <i class="fas fa-exclamation-triangle"></i> Content is too long for one page. Consider shortening the letter body.
                     </div>
@@ -705,12 +706,12 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="sender"><i class="fas fa-user-tie"></i>Sender's name</label>
+                    <label for="sender"><i class="fas fa-user-tie"></i> Sender's name</label>
                     <input type="text" id="sender" value="ध्रुबबहादुर भण्डारी">
                 </div>
                 
                 <div class="form-group">
-                    <label for="position"><i class="fas fa-user-tie"></i>Sender's position</label>
+                    <label for="position"><i class="fas fa-user-tie"></i> Sender's position</label>
                     <input type="text" id="position" value="प्रधानाध्यापक">
                 </div>
                 
@@ -836,10 +837,10 @@
     
     function loadSampleData() {
         document.getElementById('org').value = 'श्री डिम जनता माध्यमिक बिद्यालय';
-        document.getElementById('address').value = 'लालबन्दी नपा -१६, परवानीपुर, सर्लाही';
+        document.getElementById('address').value = 'लालबन्दी नपा-१६, परवानीपुर, सर्लाही, मधेशप्रदेश';
         document.getElementById('email').value = 'dimjanta998@gmail.com';
         document.getElementById('phone').value = '+977-9844047749';
-        document.getElementById('').value = '०५/०८१-०८२';
+        document.getElementById('letterNo').value = '०५/०८१-०८२';
         document.getElementById('refNo').value = 'श्री.डि.मा.वि.बि./२०८२';
         document.getElementById('subject').value = 'उपस्थित भइदिन हुन ';
         document.getElementById('receivers').value = 'लालबहादुर कठायत अध्यक्ष विव्यस';
@@ -856,12 +857,17 @@
         updatePreview();
     }
     
+    function formatAddress(address) {
+        // Split address by comma and create line breaks
+        return address.split(',').map(line => line.trim()).join('<br>');
+    }
+    
     function updatePreview() {
         const org = document.getElementById('org').value || '[Organization Name]';
         const address = document.getElementById('address').value || '[Organization Address]';
         const email = document.getElementById('email').value || 'email@organization.com';
         const phone = document.getElementById('phone').value || '+1 (555) 123-4567';
-        const  = document.getElementById('').value || '';
+        const letterNo = document.getElementById('letterNo').value || '';
         const refNo = document.getElementById('refNo').value || '';
         const subject = document.getElementById('subject').value || '[Subject of the letter]';
         const body = document.getElementById('letterBody').value || '[Letter body will appear here]';
@@ -871,7 +877,10 @@
         
         const preview = document.getElementById('preview');
         
- // Create a single letter preview with sample recipient
+        // Format address with line breaks
+        const formattedAddress = formatAddress(address);
+        
+        // Create a single letter preview with sample recipient
         preview.innerHTML = `
             <div class="page">
                 <div class="page-content">
@@ -879,22 +888,13 @@
                         ${logoDataUrl ? `<img src="${logoDataUrl}" class="org-logo" alt="Organization Logo">` : ''}
                         <div class="org-name">${org}</div>
                     </div>
-                    <div class="letter-subheader">${address.replace(/\n/g, '<br>')}</div>
+                    <div class="letter-subheader">${formattedAddress}</div>
                     
                     <div class="date">${letterDate}</div>
-                    <div class="ref-number">${refNo ? `च.नं.: ${refNo} (ref-No)` : ''}</div>
+                    <div class="ref-number">${refNo ? `च.नं.: ${refNo}` : ''}</div>
                     <div class="letter-numbers">
-                        <div class="letter-number">${letterNo ? `प.सं.(letter No): ${letterNo}` : ''}</div>
+                        <div class="letter-number">${letterNo ? `प.सं.: ${letterNo}` : ''}</div>
                     </div>
-
-
-
-
-
-
-
-
-                
                     
                     <div class="recipient">
                         <br>
@@ -932,7 +932,7 @@
                             </div>
                             <div class="contact-item">
                                 <i class="fas fa-map-marker-alt"></i>
-                                <span>${address.split('\n')[0] || 'Organization Address'}</span>
+                                <span>${address.split(',')[0] || 'Organization Address'}</span>
                             </div>
                         </div>
                     </div>
@@ -985,6 +985,9 @@
         
         let validReceivers = 0;
         
+        // Format address with line breaks
+        const formattedAddress = formatAddress(address);
+        
         receivers.forEach(name => {
             if (name.trim() === "") return;
             
@@ -993,66 +996,59 @@
             // Replace [महोदय] placeholder with actual name
             const personalizedBody = body.replace(/\[महोदय\]/g, name.trim());
             
-          output.innerHTML += `
-        <div class="page">
-            <div class="page-content">
-                <div class="letter-header">
-                    ${logoDataUrl ? `<img src="${logoDataUrl}" class="org-logo" alt="Organization Logo">` : ''}
-                    <div class="org-name">${org}</div>
-                </div>
-                <div class="letter-subheader">${address.replace(/\n/g, '<br>')}</div>
-                
-                <div class="date">${letterDate ? `मिति: ${letterDate}` : ''}</div>
-                <div class="ref-number">${refNo ? `च.नं.: ${refNo}` : ''}</div>
-                <div class="letter-numbers">
-                    <div class="letter-number">${letterNo ? `प.सं.: ${letterNo}` : ''}</div>
-                </div>
-
-
-
-
-
-
-                
-                    
-                    <div class="recipient">
-                        <br>
-                        <strong>${name.trim()}</strong>
-                    </div>
-                    
-                    <div class="subject-line">बिषय: ${subject}</div>
-                    
-                    <div class="letter-body-container">
-                        <div class="letter-body ${currentLanguage}">${personalizedBody.replace(/\n/g, '<br>')}</div>
-                    </div>
-                    
-                    <div class="letter-footer">
-                        <br>
-                        <div class="sender-details">
-                            <strong>${sender}</strong><br>
-                            <strong>${position}</strong>
+            output.innerHTML += `
+                <div class="page">
+                    <div class="page-content">
+                        <div class="letter-header">
+                            ${logoDataUrl ? `<img src="${logoDataUrl}" class="org-logo" alt="Organization Logo">` : ''}
+                            <div class="org-name">${org}</div>
                         </div>
-                    </div>
-                    
-                    <div class="contact-footer">
-                        <hr>
-                        <div class="contact-info">
-                            <div class="contact-item">
-                                <i class="fas fa-envelope"></i>
-                                <span>${email || 'email@organization.com'}</span>
+                        <div class="letter-subheader">${formattedAddress}</div>
+                        
+                        <div class="date">${letterDate ? `मिति: ${letterDate}` : ''}</div>
+                        <div class="ref-number">${refNo ? `च.नं.: ${refNo}` : ''}</div>
+                        <div class="letter-numbers">
+                            <div class="letter-number">${letterNo ? `प.सं.: ${letterNo}` : ''}</div>
+                        </div>
+                        
+                        <div class="recipient">
+                            <br>
+                            <strong>${name.trim()}</strong>
+                        </div>
+                        
+                        <div class="subject-line">बिषय: ${subject}</div>
+                        
+                        <div class="letter-body-container">
+                            <div class="letter-body ${currentLanguage}">${personalizedBody.replace(/\n/g, '<br>')}</div>
+                        </div>
+                        
+                        <div class="letter-footer">
+                            <br>
+                            <div class="sender-details">
+                                <strong>${sender}</strong><br>
+                                <strong>${position}</strong>
                             </div>
-                            <div class="contact-item">
-                                <i class="fas fa-phone"></i>
-                                <span>${phone || '9844047749'}</span>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>${address.split('\n')[0] || 'Organization Address'}</span>
+                        </div>
+                        
+                        <div class="contact-footer">
+                            <hr>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <i class="fas fa-envelope"></i>
+                                    <span>${email || 'email@organization.com'}</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-phone"></i>
+                                    <span>${phone || '9844047749'}</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>${address.split(',')[0] || 'Organization Address'}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>`;
+                </div>`;
         });
         
         // Update counters
@@ -1062,68 +1058,65 @@
         // Scroll to output
         document.querySelector('.output-container').scrollIntoView({ behavior: 'smooth' });
         
-       // Update preview with the first generated letter
+        // Update preview with the first generated letter
         if (validReceivers > 0) {
             const firstReceiver = receivers.find(name => name.trim() !== "");
             const personalizedBody = body.replace(/\[महोदय\]/g, firstReceiver.trim());
             
             document.getElementById('preview').innerHTML = `
-            <div class="page">
-                <div class="page-content">
-                    <div class="letter-header">
-                        ${logoDataUrl ? `<img src="${logoDataUrl}" class="org-logo" alt="Organization Logo">` : ''}
-                        <div class="org-name">${org}</div>
-                    </div>
-                    <div class="letter-subheader">${address.replace(/\n/g, '<br>')}</div>
-                    
-                    <div class="date">${letterDate}</div>
-                    
-                    <div class="letter-numbers">
-                        <div class="letter-number">${letterNo ? `प.सं.: ${letterNo}` : ''}</div>
-                        <div class="ref-number">${refNo ? `च.नं.: ${refNo}` : ''}</div>
-                    </div>
-
-
-
-                
-                    <div class="recipient">
-                        <br>
-                        <strong>${firstReceiver.trim()}</strong>
-                    </div>
-                    
-                    <div class="subject-line">बिषय: ${subject}</div>
-                    
-                    <div class="letter-body-container">
-                        <div class="letter-body ${currentLanguage}">${personalizedBody.replace(/\n/g, '<br>')}</div>
-                    </div>
-                    
-                    <div class="letter-footer">
-                        <br>
-                        <div class="sender-details">
-                            <strong>${sender}</strong><br>
-                            <strong>${position}</strong>
+                <div class="page">
+                    <div class="page-content">
+                        <div class="letter-header">
+                            ${logoDataUrl ? `<img src="${logoDataUrl}" class="org-logo" alt="Organization Logo">` : ''}
+                            <div class="org-name">${org}</div>
                         </div>
-                    </div>
-                    
-                    <div class="contact-footer">
-                        <hr>
-                        <div class="contact-info">
-                            <div class="contact-item">
-                                <i class="fas fa-envelope"></i>
-                                <span>${email || 'email@organization.com'}</span>
+                        <div class="letter-subheader">${formattedAddress}</div>
+                        
+                        <div class="date">${letterDate}</div>
+                        
+                        <div class="letter-numbers">
+                            <div class="letter-number">${letterNo ? `प.सं.: ${letterNo}` : ''}</div>
+                            <div class="ref-number">${refNo ? `च.नं.: ${refNo}` : ''}</div>
+                        </div>
+                        
+                        <div class="recipient">
+                            <br>
+                            <strong>${firstReceiver.trim()}</strong>
+                        </div>
+                        
+                        <div class="subject-line">बिषय: ${subject}</div>
+                        
+                        <div class="letter-body-container">
+                            <div class="letter-body ${currentLanguage}">${personalizedBody.replace(/\n/g, '<br>')}</div>
+                        </div>
+                        
+                        <div class="letter-footer">
+                            <br>
+                            <div class="sender-details">
+                                <strong>${sender}</strong><br>
+                                <strong>${position}</strong>
                             </div>
-                            <div class="contact-item">
-                                <i class="fas fa-phone"></i>
-                                <span>${phone || '+977-123-4567'}</span>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>${address.split('\n')[0] || 'Organization Address'}</span>
+                        </div>
+                        
+                        <div class="contact-footer">
+                            <hr>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <i class="fas fa-envelope"></i>
+                                    <span>${email || 'email@organization.com'}</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-phone"></i>
+                                    <span>${phone || '+977-123-4567'}</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>${address.split(',')[0] || 'Organization Address'}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
             `;
         }
     }
@@ -1264,7 +1257,7 @@
                         align-items: center !important;
                         justify-content: center !important;
                         margin-bottom: 5mm !important;
-                 border-bottom: 1.5px solid #333;
+                        border-bottom: 1.5px solid #333;
                     }
                     .org-logo { 
                         max-height: 60px !important;
