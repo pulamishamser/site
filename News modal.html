@@ -23,6 +23,9 @@
             --bg: #f5f7fa;
             --card-bg: #ffffff;
             --border: #e0e0e0;
+            --success: #4CAF50;
+            --warning: #ff9800;
+            --danger: #f44336;
         }
         
         body {
@@ -51,6 +54,9 @@
             padding: 15px 0;
             text-align: center;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         
         .header-content {
@@ -109,6 +115,15 @@
             font-size: 1.1rem;
         }
         
+        .refresh-btn.loading {
+            background: #f0f0f0;
+            cursor: not-allowed;
+        }
+        
+        .refresh-btn.loading i {
+            animation: spin 1s linear infinite;
+        }
+        
         .last-refreshed {
             font-size: 0.9rem;
             background: rgba(255,255,255,0.15);
@@ -145,7 +160,8 @@
         .main-content {
             text-align: center;
             padding: 40px 20px;
-            max-width: 700px;
+            max-width: 900px;
+            width: 100%;
         }
         
         .welcome-text {
@@ -187,6 +203,36 @@
         
         .open-news-btn i {
             font-size: 1.4rem;
+        }
+        
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-box {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            min-width: 180px;
+            text-align: center;
+            border-top: 4px solid var(--primary);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 10px 0;
+        }
+        
+        .stat-label {
+            color: var(--text-light);
+            font-size: 0.9rem;
         }
         
         .news-count {
@@ -234,7 +280,7 @@
             position: fixed;
             top: 20px;
             right: 20px;
-            background: #4CAF50;
+            background: var(--success);
             color: white;
             padding: 15px 25px;
             border-radius: 8px;
@@ -245,10 +291,19 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            max-width: 400px;
         }
         
         .notification.show {
             transform: translateX(0);
+        }
+        
+        .notification.error {
+            background: var(--danger);
+        }
+        
+        .notification.warning {
+            background: var(--warning);
         }
         
         .timer-container {
@@ -270,6 +325,64 @@
             font-size: 1.1rem;
             min-width: 30px;
             text-align: center;
+        }
+        
+        .search-container {
+            margin: 20px 0;
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid var(--border);
+            border-radius: 30px;
+            font-size: 1rem;
+            background: white;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(21, 137, 255, 0.1);
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+        
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .category-btn {
+            background: white;
+            border: 2px solid var(--border);
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .category-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .category-btn:hover:not(.active) {
+            border-color: var(--primary);
+            color: var(--primary);
         }
         
         footer {
@@ -326,7 +439,8 @@
         .modal-content {
             background-color: white;
             margin: 40px auto;
-            max-width: 1000px;
+            max-width: 1200px;
+            width: 95%;
             border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             overflow: hidden;
@@ -345,11 +459,33 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
         }
         
         .modal-title {
             font-size: 1.5rem;
             font-weight: 700;
+        }
+        
+        .modal-search {
+            flex: 1;
+            min-width: 250px;
+            max-width: 400px;
+        }
+        
+        .modal-search-input {
+            width: 100%;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            background: rgba(255,255,255,0.9);
+        }
+        
+        .modal-search-input:focus {
+            outline: none;
+            background: white;
         }
         
         .close-modal {
@@ -373,8 +509,8 @@
         
         .news-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
         }
         
         .news-section {
@@ -410,6 +546,15 @@
             justify-content: center;
             font-size: 16px;
             color: var(--primary);
+        }
+        
+        .section-status {
+            margin-left: auto;
+            font-size: 0.8rem;
+            padding: 3px 8px;
+            border-radius: 12px;
+            background: var(--success);
+            color: white;
         }
         
         .news-items {
@@ -476,6 +621,8 @@
             justify-content: space-between;
             padding: 20px;
             border-top: 1px solid var(--border);
+            flex-wrap: wrap;
+            gap: 10px;
         }
         
         .modal-action-btn {
@@ -506,7 +653,69 @@
             background: #e0e0e0;
         }
         
+        .modal-action-btn.loading {
+            background: #f0f0f0;
+            cursor: not-allowed;
+        }
+        
+        .modal-action-btn.loading i {
+            animation: spin 1s linear infinite;
+        }
+        
+        /* New: Featured news on homepage */
+        .featured-news {
+            margin-top: 50px;
+            width: 100%;
+        }
+        
+        .featured-title {
+            text-align: center;
+            font-size: 1.5rem;
+            color: var(--text);
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .featured-item {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .featured-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .featured-content {
+            padding: 20px;
+        }
+        
+        .featured-source {
+            display: inline-block;
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
         /* Responsive styles */
+        @media (max-width: 992px) {
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
         @media (max-width: 768px) {
             .header-content {
                 padding: 0 15px;
@@ -538,6 +747,15 @@
                 width: 95%;
             }
             
+            .modal-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .modal-search {
+                max-width: 100%;
+            }
+            
             .modal-body {
                 padding: 15px;
             }
@@ -550,6 +768,15 @@
             .modal-action-btn {
                 width: 100%;
                 justify-content: center;
+            }
+            
+            .stats-container {
+                gap: 15px;
+            }
+            
+            .stat-box {
+                min-width: 140px;
+                padding: 15px;
             }
         }
         
@@ -579,6 +806,10 @@
                 padding: 12px 30px;
                 font-size: 1.1rem;
             }
+            
+            .featured-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -593,6 +824,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title" id="modal-title">नेपालका ताजा खबरहरु</h2>
+                <div class="modal-search">
+                    <input type="text" class="modal-search-input" id="modal-search" placeholder="खबरहरु खोज्नुहोस्...">
+                </div>
                 <button class="close-modal" id="close-modal">&times;</button>
             </div>
             <div class="modal-body" id="modal-body">
@@ -604,6 +838,9 @@
                 </button>
                 <button class="modal-action-btn" id="refresh-modal-btn">
                     <i class="fas fa-sync-alt"></i> <span id="refresh-modal-text">ताजा खबर लोड गर्नुहोस्</span>
+                </button>
+                <button class="modal-action-btn secondary" id="clear-search-btn">
+                    <i class="fas fa-times-circle"></i> <span id="clear-search-text">खोजि खाली गर्नुहोस्</span>
                 </button>
             </div>
         </div>
@@ -648,10 +885,31 @@
                 <i class="fas fa-newspaper"></i>
                 <span id="open-news-text">खबरहरु हेर्नुहोस्</span>
             </button>
-            <div class="news-count">
-                <i class="fas fa-database"></i>
-                <span id="news-count-text">कुल खबरहरु: </span>
-                <span class="news-count-number" id="news-count">0</span>
+            
+            <div class="stats-container">
+                <div class="stat-box">
+                    <i class="fas fa-newspaper"></i>
+                    <div class="stat-number" id="total-news-count">0</div>
+                    <div class="stat-label" id="total-news-text">कुल खबरहरु</div>
+                </div>
+                <div class="stat-box">
+                    <i class="fas fa-rss"></i>
+                    <div class="stat-number" id="sources-count">5</div>
+                    <div class="stat-label" id="sources-text">समाचार स्रोत</div>
+                </div>
+                <div class="stat-box">
+                    <i class="fas fa-clock"></i>
+                    <div class="stat-number" id="update-frequency">10</div>
+                    <div class="stat-label" id="frequency-text">अद्यावधिक आवृत्ति (मिनेट)</div>
+                </div>
+            </div>
+            
+            <!-- Featured News Section -->
+            <div class="featured-news" id="featured-news-container" style="display: none;">
+                <h3 class="featured-title" id="featured-title">आजको महत्वपूर्ण खबरहरु</h3>
+                <div class="featured-grid" id="featured-news-grid">
+                    <!-- Featured news will be loaded here -->
+                </div>
             </div>
         </div>
     </div>
@@ -660,9 +918,9 @@
         <div class="footer-content">
             <h3>नेपालको समाचार संग्रह</h3>
             <div class="footer-links">
-                <a href="#"><i class="fas fa-info-circle"></i> बारेमा</a>
-                <a href="#"><i class="fas fa-envelope"></i> सम्पर्क</a>
-                <a href="#"><i class="fas fa-shield-alt"></i> गोपनीयता नीति</a>
+                <a href="#"><i class="fas fa-info-circle"></i> <span id="about-text">बारेमा</span></a>
+                <a href="#"><i class="fas fa-envelope"></i> <span id="contact-text">सम्पर्क</span></a>
+                <a href="#"><i class="fas fa-shield-alt"></i> <span id="privacy-text">गोपनीयता नीति</span></a>
             </div>
             <div class="copyright">
                 &copy; <span id="current-year"></span> Live News | Shamser.info.np
@@ -693,7 +951,18 @@
                 newsCountText: "कुल खबरहरु: ",
                 modalTitle: "नेपालका ताजा खबरहरु",
                 closeModalText: "बन्द गर्नुहोस्",
-                refreshModalText: "ताजा खबर लोड गर्नुहोस्"
+                refreshModalText: "ताजा खबर लोड गर्नुहोस्",
+                clearSearchText: "खोजि खाली गर्नुहोस्",
+                searchPlaceholder: "खबरहरु खोज्नुहोस्...",
+                totalNewsText: "कुल खबरहरु",
+                sourcesText: "समाचार स्रोत",
+                frequencyText: "अद्यावधिक आवृत्ति (मिनेट)",
+                aboutText: "बारेमा",
+                contactText: "सम्पर्क",
+                privacyText: "गोपनीयता नीति",
+                featuredTitle: "आजको महत्वपूर्ण खबरहरु",
+                noResultsText: "कुनै खबर फेला परेन",
+                allCategories: "सबै"
             },
             en: {
                 headerTitle: "Nepali News Aggregator",
@@ -712,30 +981,71 @@
                 newsCountText: "Total News: ",
                 modalTitle: "Latest News from Nepal",
                 closeModalText: "Close",
-                refreshModalText: "Load Latest News"
+                refreshModalText: "Load Latest News",
+                clearSearchText: "Clear Search",
+                searchPlaceholder: "Search news...",
+                totalNewsText: "Total News",
+                sourcesText: "News Sources",
+                frequencyText: "Update Frequency (minutes)",
+                aboutText: "About",
+                contactText: "Contact",
+                privacyText: "Privacy Policy",
+                featuredTitle: "Today's Top Stories",
+                noResultsText: "No news found",
+                allCategories: "All"
             }
         };
 
         let currentLanguage = 'ne';
         let allNewsItems = [];
+        let featuredNewsItems = [];
+        let currentSearchTerm = '';
+        let refreshInterval = null;
 
         function setLanguage(lang) {
             currentLanguage = lang;
             
             // Update UI elements
-            document.querySelector('.nepali-text').textContent = translations[lang].headerTitle;
-            document.getElementById('refresh-text').textContent = translations[lang].refreshText;
-            document.getElementById('last-refreshed-text').textContent = translations[lang].lastRefreshed;
-            document.getElementById('next-refresh-text').textContent = translations[lang].nextRefresh;
-            document.getElementById('minutes-text').textContent = translations[lang].minutesText;
-            document.getElementById('toggle-text').textContent = translations[lang].toggleText;
-            document.getElementById('welcome-text').textContent = translations[lang].welcomeText;
-            document.getElementById('description-text').textContent = translations[lang].descriptionText;
-            document.getElementById('open-news-text').textContent = translations[lang].openNewsText;
-            document.getElementById('news-count-text').textContent = translations[lang].newsCountText;
-            document.getElementById('modal-title').textContent = translations[lang].modalTitle;
-            document.getElementById('close-modal-text').textContent = translations[lang].closeModalText;
-            document.getElementById('refresh-modal-text').textContent = translations[lang].refreshModalText;
+            const elements = [
+                ['.nepali-text', 'headerTitle'],
+                ['#refresh-text', 'refreshText'],
+                ['#last-refreshed-text', 'lastRefreshed'],
+                ['#next-refresh-text', 'nextRefresh'],
+                ['#minutes-text', 'minutesText'],
+                ['#toggle-text', 'toggleText'],
+                ['#welcome-text', 'welcomeText'],
+                ['#description-text', 'descriptionText'],
+                ['#open-news-text', 'openNewsText'],
+                ['#modal-title', 'modalTitle'],
+                ['#close-modal-text', 'closeModalText'],
+                ['#refresh-modal-text', 'refreshModalText'],
+                ['#clear-search-text', 'clearSearchText'],
+                ['#total-news-text', 'totalNewsText'],
+                ['#sources-text', 'sourcesText'],
+                ['#frequency-text', 'frequencyText'],
+                ['#about-text', 'aboutText'],
+                ['#contact-text', 'contactText'],
+                ['#privacy-text', 'privacyText'],
+                ['#featured-title', 'featuredTitle']
+            ];
+            
+            elements.forEach(([selector, key]) => {
+                const element = document.querySelector(selector);
+                if (element) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+            
+            // Update search placeholder
+            const searchInput = document.querySelector('#modal-search');
+            if (searchInput) {
+                searchInput.placeholder = translations[lang].searchPlaceholder;
+            }
+            
+            // Update featured news if visible
+            if (featuredNewsItems.length > 0) {
+                displayFeaturedNews();
+            }
             
             // Update notification text if visible
             const notificationText = document.querySelector('#notification span');
@@ -761,7 +1071,8 @@
                 ],
                 maxItems: 5,
                 icon: "fas fa-newspaper",
-                color: "#d32f2f"
+                color: "#d32f2f",
+                category: ["general", "politics"]
             },
             {
                 name: "Ratopati",
@@ -772,7 +1083,8 @@
                 ],
                 maxItems: 5,
                 icon: "fas fa-globe",
-                color: "#1976d2"
+                color: "#1976d2",
+                category: ["politics", "entertainment"]
             },
             {
                 name: "Gorkhapatra",
@@ -783,7 +1095,8 @@
                 ],
                 maxItems: 5,
                 icon: "fas fa-landmark",
-                color: "#388e3c"
+                color: "#388e3c",
+                category: ["general", "national"]
             },
             {
                 name: "BBC Nepali",
@@ -794,7 +1107,8 @@
                 ],
                 maxItems: 5,
                 icon: "fas fa-broadcast-tower",
-                color: "#c2185b"
+                color: "#c2185b",
+                category: ["international", "general"]
             },
             {
                 name: "Setopati",
@@ -802,7 +1116,8 @@
                 fallbacks: [],
                 maxItems: 5,
                 icon: "fas fa-desktop",
-                color: "#0288d1"
+                color: "#0288d1",
+                category: ["politics", "entertainment"]
             }
         ];
 
@@ -824,9 +1139,12 @@
         }
 
         // Create a news item DOM element
-        function createNewsItem(item, source) {
+        function createNewsItem(item, source, isFeatured = false) {
             const newsItem = document.createElement('div');
-            newsItem.className = 'news-item';
+            newsItem.className = isFeatured ? 'featured-item' : 'news-item';
+            newsItem.dataset.source = source.name;
+            newsItem.dataset.category = source.category ? source.category[0] : 'general';
+            newsItem.dataset.title = item.title.toLowerCase();
             
             const pubDate = formatDate(item.pubDate);
             
@@ -834,15 +1152,48 @@
             let description = item.description || '';
             description = description.replace(/<[^>]*>/g, '');
             
-            newsItem.innerHTML = `
-                <a href="${item.link}" target="_blank" class="news-title">${item.title}</a>
-                <div class="news-description">${description.substring(0, 150)}${description.length > 150 ? '...' : ''}</div>
-                <div class="news-meta">
-                    <span class="news-date"><i class="far fa-clock"></i> ${pubDate}</span>
-                </div>
-            `;
+            if (isFeatured) {
+                newsItem.innerHTML = `
+                    <div class="featured-content">
+                        <div class="featured-source">${source.name}</div>
+                        <a href="${item.link}" target="_blank" class="news-title">${item.title}</a>
+                        <div class="news-description">${description.substring(0, 120)}${description.length > 120 ? '...' : ''}</div>
+                        <div class="news-meta">
+                            <span class="news-date"><i class="far fa-clock"></i> ${pubDate}</span>
+                        </div>
+                    </div>
+                `;
+            } else {
+                newsItem.innerHTML = `
+                    <a href="${item.link}" target="_blank" class="news-title">${item.title}</a>
+                    <div class="news-description">${description.substring(0, 150)}${description.length > 150 ? '...' : ''}</div>
+                    <div class="news-meta">
+                        <span class="news-date"><i class="far fa-clock"></i> ${pubDate}</span>
+                    </div>
+                `;
+            }
             
             return newsItem;
+        }
+
+        // Display featured news on homepage
+        function displayFeaturedNews() {
+            const container = document.getElementById('featured-news-container');
+            const grid = document.getElementById('featured-news-grid');
+            
+            if (featuredNewsItems.length === 0) {
+                container.style.display = 'none';
+                return;
+            }
+            
+            grid.innerHTML = '';
+            
+            featuredNewsItems.slice(0, 4).forEach(item => {
+                const newsElement = createNewsItem(item.news, {name: item.source, category: []}, true);
+                grid.appendChild(newsElement);
+            });
+            
+            container.style.display = 'block';
         }
 
         // Open modal with news
@@ -876,13 +1227,45 @@
             // Clear previous content
             modalBody.innerHTML = '';
             
+            // Filter news based on search term
+            let filteredNews = [...allNewsItems];
+            if (currentSearchTerm) {
+                const searchTerm = currentSearchTerm.toLowerCase();
+                filteredNews = allNewsItems.filter(item => 
+                    item.news.title.toLowerCase().includes(searchTerm) ||
+                    item.news.description.toLowerCase().includes(searchTerm) ||
+                    item.source.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            if (filteredNews.length === 0) {
+                modalBody.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search" style="font-size: 3rem; color: #ccc; margin-bottom: 15px;"></i>
+                        <h3>${translations[currentLanguage].noResultsText}</h3>
+                        <p>${currentSearchTerm ? `"${currentSearchTerm}"` : ''}</p>
+                    </div>
+                `;
+                return;
+            }
+            
             // Create news grid
             const newsGrid = document.createElement('div');
             newsGrid.className = 'news-grid';
             
-            // Process news sources
-            newsSources.forEach(source => {
-                const sourceNews = allNewsItems.filter(item => item.source === source.name);
+            // Group news by source
+            const newsBySource = {};
+            filteredNews.forEach(item => {
+                if (!newsBySource[item.source]) {
+                    newsBySource[item.source] = [];
+                }
+                newsBySource[item.source].push(item);
+            });
+            
+            // Process each news source
+            Object.keys(newsBySource).forEach(sourceName => {
+                const sourceNews = newsBySource[sourceName];
+                const source = newsSources.find(s => s.name === sourceName);
                 
                 if (sourceNews.length > 0) {
                     const section = document.createElement('div');
@@ -890,18 +1273,19 @@
                     
                     section.innerHTML = `
                         <div class="section-header">
-                            <div class="section-icon" style="background: ${source.color}20; color: ${source.color}">
-                                <i class="${source.icon}"></i>
+                            <div class="section-icon" style="background: ${source?.color || '#1589FF'}20; color: ${source?.color || '#1589FF'}">
+                                <i class="${source?.icon || 'fas fa-newspaper'}"></i>
                             </div>
-                            <h2 class="section-title">${source.name}</h2>
+                            <h2 class="section-title">${sourceName}</h2>
+                            <div class="section-status">${sourceNews.length} खबर</div>
                         </div>
-                        <div class="news-items" id="${source.name.toLowerCase().replace(/\s+/g, '-')}-news"></div>
+                        <div class="news-items"></div>
                     `;
                     
                     const itemsContainer = section.querySelector('.news-items');
                     
                     sourceNews.forEach(item => {
-                        const newsItem = createNewsItem(item.news, source);
+                        const newsItem = createNewsItem(item.news, source || {name: sourceName});
                         itemsContainer.appendChild(newsItem);
                     });
                     
@@ -911,20 +1295,24 @@
             
             modalBody.appendChild(newsGrid);
             
-            // Update news count
-            document.getElementById('news-count').textContent = allNewsItems.length;
+            // Update stats
+            updateStats();
         }
 
         // Close modal
         function closeModal() {
             const modal = document.getElementById('news-modal');
             modal.style.display = 'none';
+            // Clear search
+            currentSearchTerm = '';
+            document.getElementById('modal-search').value = '';
         }
 
         // Show notification
-        function showNotification(message) {
+        function showNotification(message, type = 'success') {
             const notification = document.getElementById('notification');
             notification.querySelector('span').textContent = message;
+            notification.className = `notification ${type}`;
             notification.classList.add('show');
             
             setTimeout(() => {
@@ -948,24 +1336,44 @@
             document.getElementById('refresh-time').textContent = formattedTime;
         }
 
+        // Update stats
+        function updateStats() {
+            document.getElementById('total-news-count').textContent = allNewsItems.length;
+            document.getElementById('sources-count').textContent = newsSources.length;
+            
+            // Count unique sources
+            const uniqueSources = new Set(allNewsItems.map(item => item.source));
+            document.getElementById('sources-count').textContent = uniqueSources.size;
+        }
+
         // Start countdown timer for next refresh
         function startCountdown(minutes) {
+            // Clear existing interval
+            if (refreshInterval) {
+                clearInterval(refreshInterval);
+            }
+            
             let seconds = minutes * 60;
             const countdownElement = document.getElementById('countdown');
             
-            const timer = setInterval(() => {
+            const updateCountdown = () => {
                 seconds--;
                 
                 if (seconds <= 0) {
-                    clearInterval(timer);
                     fetchAndDisplayNews();
-                    return;
+                    seconds = minutes * 60;
                 }
                 
                 const min = Math.floor(seconds / 60);
                 const sec = seconds % 60;
                 countdownElement.textContent = `${min}:${sec < 10 ? '0' : ''}${sec}`;
-            }, 1000);
+            };
+            
+            // Initial update
+            updateCountdown();
+            
+            // Set interval
+            refreshInterval = setInterval(updateCountdown, 1000);
         }
 
         // Fetch news from RSS feed
@@ -1021,37 +1429,62 @@
             }
         }
 
+        // Set loading state
+        function setLoading(isLoading) {
+            const buttons = document.querySelectorAll('.refresh-btn, #refresh-modal-btn');
+            buttons.forEach(btn => {
+                if (isLoading) {
+                    btn.classList.add('loading');
+                    btn.disabled = true;
+                } else {
+                    btn.classList.remove('loading');
+                    btn.disabled = false;
+                }
+            });
+        }
+
         // Fetch and display news
         async function fetchAndDisplayNews() {
             try {
+                setLoading(true);
+                
                 // Fetch news from all sources
                 const newsPromises = newsSources.map(source => fetchNewsFromSource(source));
                 const results = await Promise.allSettled(newsPromises);
                 
-                // Reset all news items
+                // Reset news items
                 allNewsItems = [];
+                featuredNewsItems = [];
                 
                 // Process results
                 results.forEach((result, index) => {
                     const source = newsSources[index];
                     
                     if (result.status === 'fulfilled' && result.value.length > 0) {
-                        result.value.forEach(item => {
-                            // Store for modal
-                            allNewsItems.push({
+                        result.value.forEach((item, itemIndex) => {
+                            const newsItem = {
                                 news: item,
                                 source: source.name
-                            });
+                            };
+                            
+                            // Store for modal
+                            allNewsItems.push(newsItem);
+                            
+                            // Select first 2 items from each source for featured news
+                            if (itemIndex < 2) {
+                                featuredNewsItems.push(newsItem);
+                            }
                         });
                     }
                 });
                 
                 // Update UI
                 updateRefreshTime();
+                updateStats();
                 showNotification(translations[currentLanguage].notificationText);
                 
-                // Update news count
-                document.getElementById('news-count').textContent = allNewsItems.length;
+                // Display featured news on homepage
+                displayFeaturedNews();
                 
                 // Display news in modal if it's open
                 const modal = document.getElementById('news-modal');
@@ -1061,49 +1494,88 @@
                 
                 // Start countdown for next refresh
                 startCountdown(10);
+                
             } catch (error) {
                 console.error('Error loading news:', error);
+                showNotification(translations[currentLanguage].errorText, 'error');
+                
                 const modalBody = document.getElementById('modal-body');
                 if (modalBody) {
                     modalBody.innerHTML = `
-                        <div class="error-message">
-                            <i class="fas fa-exclamation-circle"></i>
-                            ${translations[currentLanguage].errorText}
-                            <button class="refresh-btn" onclick="fetchAndDisplayNews()">
+                        <div class="error-message" style="text-align: center; padding: 40px;">
+                            <i class="fas fa-exclamation-circle" style="font-size: 3rem; color: var(--danger); margin-bottom: 20px;"></i>
+                            <h3>${translations[currentLanguage].errorText}</h3>
+                            <button class="refresh-btn" onclick="fetchAndDisplayNews()" style="margin-top: 20px;">
                                 <i class="fas fa-redo"></i> ${translations[currentLanguage].retryText}
                             </button>
                         </div>
                     `;
                 }
+            } finally {
+                setLoading(false);
             }
+        }
+
+        // Search functionality
+        function setupSearch() {
+            const searchInput = document.getElementById('modal-search');
+            const clearSearchBtn = document.getElementById('clear-search-btn');
+            
+            searchInput.addEventListener('input', (e) => {
+                currentSearchTerm = e.target.value.trim();
+                if (currentSearchTerm) {
+                    clearSearchBtn.style.display = 'flex';
+                } else {
+                    clearSearchBtn.style.display = 'none';
+                }
+                displayNewsInModal();
+            });
+            
+            clearSearchBtn.addEventListener('click', () => {
+                searchInput.value = '';
+                currentSearchTerm = '';
+                clearSearchBtn.style.display = 'none';
+                displayNewsInModal();
+            });
         }
 
         // Initial load
         document.addEventListener('DOMContentLoaded', () => {
-            // Add event listener for open news button
+            // Add event listeners
             document.getElementById('open-news-btn').addEventListener('click', openNewsModal);
-            
-            // Add event listener for refresh button
-            document.getElementById('refresh-all-btn').addEventListener('click', () => {
-                fetchAndDisplayNews();
-                showNotification(translations[currentLanguage].notificationText);
-            });
-            
-            // Add event listener for refresh modal button
-            document.getElementById('refresh-modal-btn').addEventListener('click', () => {
-                fetchAndDisplayNews();
-                showNotification(translations[currentLanguage].notificationText);
-            });
-            
-            // Add event listener for close modal button
+            document.getElementById('refresh-all-btn').addEventListener('click', fetchAndDisplayNews);
+            document.getElementById('refresh-modal-btn').addEventListener('click', fetchAndDisplayNews);
             document.getElementById('close-modal').addEventListener('click', closeModal);
             document.getElementById('close-modal-btn').addEventListener('click', closeModal);
+            
+            // Setup search
+            setupSearch();
             
             // Close modal when clicking outside
             window.addEventListener('click', (event) => {
                 const modal = document.getElementById('news-modal');
                 if (event.target === modal) {
                     closeModal();
+                }
+            });
+            
+            // Keyboard shortcuts
+            document.addEventListener('keydown', (e) => {
+                // Ctrl/Cmd + F to focus search in modal
+                if ((e.ctrlKey || e.metaKey) && e.key === 'f' && document.getElementById('news-modal').style.display === 'block') {
+                    e.preventDefault();
+                    document.getElementById('modal-search').focus();
+                }
+                
+                // Escape to close modal
+                if (e.key === 'Escape' && document.getElementById('news-modal').style.display === 'block') {
+                    closeModal();
+                }
+                
+                // R to refresh
+                if (e.key === 'r' && e.ctrlKey) {
+                    e.preventDefault();
+                    fetchAndDisplayNews();
                 }
             });
             
