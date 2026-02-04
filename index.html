@@ -1040,7 +1040,256 @@ Grid </a>
 
   </style
 
+<scipt>
+// IEMIS Login Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize IEMIS Login Form
+    const iemisLoginForm = document.getElementById('iemisLoginForm');
+    if (iemisLoginForm) {
+        initializeIemisLogin();
+    }
+    
+    // Add pulse animation to login button
+    const loginBtn = document.querySelector('.btn-outline-light[data-bs-target="#iemisModal"]');
+    if (loginBtn) {
+        setInterval(() => {
+            loginBtn.classList.add('animate-pulse');
+            setTimeout(() => {
+                loginBtn.classList.remove('animate-pulse');
+            }, 2000);
+        }, 10000);
+    }
+    
+    // Add password toggle functionality
+    setupPasswordToggle();
+});
 
+function initializeIemisLogin() {
+    document.getElementById("iemisLoginForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const username = document.getElementById("username").value.trim();
+        const password = document.getElementById("password").value.trim();
+        const remember = document.getElementById("rememberMe").checked;
+        const msg = document.getElementById("loginMsg");
+
+        // Clear previous messages
+        msg.innerHTML = "";
+        
+        // Validate inputs
+        if (!username || !password) {
+            msg.innerHTML = "<span class='text-danger'>कृपया प्रयोगकर्ता नाम र पासवर्ड प्रविष्ट गर्नुहोस्</span>";
+            return;
+        }
+
+        // Show loading state
+        msg.innerHTML = "<span class='text-primary'><i class='fas fa-spinner fa-spin me-2'></i>जाँच हुँदैछ...</span>";
+        
+        // Disable submit button
+        const submitBtn = this.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = "<i class='fas fa-spinner fa-spin me-2'></i>प्रक्रिया हुँदैछ";
+
+        // Prepare request data
+        const requestData = {
+            action: "login",
+            username: username,
+            password: password
+        };
+
+        // Make API call
+        fetch("https://script.google.com/macros/s/AKfycbw8aVDBPbix7346o647ZapCWJxUYqkNC4rCP9ZRoLFs4IT8EW_tuE3GD9BFjG4UpSPPBQ/exec", {
+            method: "POST",
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8"
+            },
+            body: JSON.stringify(requestData)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
+        .then(text => {
+            console.log("Response:", text); // Debug log
+            
+            try {
+                const data = JSON.parse(text);
+                
+                if (data.status === "success") {
+                    // Store user session
+                    if (remember) {
+                        localStorage.setItem("iemisUser", data.username);
+                        localStorage.setItem("iemisUserData", JSON.stringify(data));
+                    } else {
+                        sessionStorage.setItem("iemisUser", data.username);
+                        sessionStorage.setItem("iemisUserData", JSON.stringify(data));
+                    }
+                    
+                    msg.innerHTML = "<span class='text-success'><i class='fas fa-check-circle me-2'></i>लगइन सफल भयो...</span>";
+                    
+                    // Show success message and redirect
+                    setTimeout(() => {
+                        // Close modal
+                        const modal = bootstrap.Modal.getInstance(document.getElementById('iemisModal'));
+                        if (modal) modal.hide();
+                        
+                        // Redirect to dashboard
+                        window.location.href = "https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Dashboard.html";
+                    }, 1500);
+                    
+                } else {
+                    msg.innerHTML = "<span class='text-danger'><i class='fas fa-times-circle me-2'></i>गलत प्रयोगकर्ता नाम वा पासवर्ड</span>";
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = "लगइन गर्नुहोस्";
+                    
+                    // Add shake animation to form
+                    const form = document.getElementById('iemisLoginForm');
+                    form.classList.add('shake');
+                    setTimeout(() => {
+                        form.classList.remove('shake');
+                    }, 500);
+                }
+            } catch (error) {
+                console.error("Parsing error:", error);
+                msg.innerHTML = "<span class='text-danger'>सर्भरबाट गलत प्रतिक्रिया प्राप्त भयो</span>";
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = "लगइन गर्नुहोस्";
+            }
+        })
+        .catch(error => {
+            console.error("Fetch error:", error);
+            msg.innerHTML = "<span class='text-danger'><i class='fas fa-exclamation-triangle me-2'></i>सर्भर डाउन</span>";
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = "लगइन गर्नुहोस्";
+            
+            // Fallback to local validation for demo
+            if (username === "demo" && password === "demo123") {
+                msg.innerHTML = "<span class='text-success'><i class='fas fa-check-circle me-2'></i>डेमो लगइन सफल भयो</span>";
+                setTimeout(() => {
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('iemisModal'));
+                    if (modal) modal.hide();
+                    alert("डेमो लगइन सफल! वास्तविक प्रणालीमा यसले काम गर्दछ।");
+                }, 1000);
+            }
+        });
+    });
+}
+
+// Password toggle functionality
+function setupPasswordToggle() {
+    const passwordField = document.getElementById('password');
+    const passwordWrapper = document.querySelector('.password-wrapper');
+    
+    if (passwordField && !passwordWrapper) {
+        // Wrap password field with wrapper
+        const wrapper = document.createElement('div');
+        wrapper.className = 'password-wrapper position-relative';
+        passwordField.parentNode.insertBefore(wrapper, passwordField);
+        wrapper.appendChild(passwordField);
+        
+        // Create toggle button
+        const toggleBtn = document.createElement('button');
+        toggleBtn.type = 'button';
+        toggleBtn.className = 'password-toggle';
+        toggleBtn.innerHTML = '<i class="far fa-eye"></i>';
+        
+        toggleBtn.addEventListener('click', function() {
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+            this.innerHTML = type === 'password' ? '<i class="far fa-eye"></i>' : '<i class="far fa-eye-slash"></i>';
+        });
+        
+        wrapper.appendChild(toggleBtn);
+    }
+}
+
+// Check if user is already logged in
+function checkIemisLoginStatus() {
+    const user = localStorage.getItem("iemisUser") || sessionStorage.getItem("iemisUser");
+    const loginBtn = document.querySelector('.btn-outline-light[data-bs-target="#iemisModal"]');
+    
+    if (user && loginBtn) {
+        loginBtn.innerHTML = '<i class="fas fa-user-check me-1"></i>लगइन गरिएको';
+        loginBtn.classList.remove('btn-outline-light');
+        loginBtn.classList.add('btn-success');
+        loginBtn.disabled = true;
+        loginBtn.setAttribute('title', `लगइन गरिएको: ${user}`);
+        
+        // Add logout option
+        const logoutBtn = document.createElement('button');
+        logoutBtn.className = 'btn btn-sm btn-outline-danger ms-2';
+        logoutBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i>';
+        logoutBtn.title = 'लगआउट गर्नुहोस्';
+        logoutBtn.onclick = function() {
+            localStorage.removeItem("iemisUser");
+            localStorage.removeItem("iemisUserData");
+            sessionStorage.removeItem("iemisUser");
+            sessionStorage.removeItem("iemisUserData");
+            location.reload();
+        };
+        
+        loginBtn.parentNode.appendChild(logoutBtn);
+    }
+}
+
+// Auto-fill saved credentials
+function autoFillSavedCredentials() {
+    const savedUser = localStorage.getItem("iemisUser") || sessionStorage.getItem("iemisUser");
+    const savedData = localStorage.getItem("iemisUserData") || sessionStorage.getItem("iemisUserData");
+    
+    if (savedUser && document.getElementById('username')) {
+        document.getElementById('username').value = savedUser;
+        document.getElementById('rememberMe').checked = !!localStorage.getItem("iemisUser");
+    }
+}
+
+// Modal events
+document.addEventListener('DOMContentLoaded', function() {
+    const iemisModal = document.getElementById('iemisModal');
+    if (iemisModal) {
+        iemisModal.addEventListener('show.bs.modal', function() {
+            autoFillSavedCredentials();
+        });
+        
+        iemisModal.addEventListener('shown.bs.modal', function() {
+            const usernameField = document.getElementById('username');
+            if (usernameField && !usernameField.value) {
+                usernameField.focus();
+            }
+        });
+        
+        iemisModal.addEventListener('hidden.bs.modal', function() {
+            // Reset form
+            const form = document.getElementById('iemisLoginForm');
+            if (form) {
+                form.reset();
+                document.getElementById('loginMsg').innerHTML = '';
+            }
+        });
+    }
+    
+    // Check login status on page load
+    checkIemisLoginStatus();
+});
+
+// Add shake animation CSS
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+        20%, 40%, 60%, 80% { transform: translateX(5px); }
+    }
+    
+    .shake {
+        animation: shake 0.5s ease-in-out;
+    }
+`;
+document.head.appendChild(style);
+
+</scrip>
 
 
 <!-- IEMIS Login Modal -->
@@ -5043,6 +5292,7 @@ clear: both;
         ------------->        
   </div>  
 <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fshamser.info.np&layout&size&width=89&height=20&appId" width="89" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+
 
 
 
