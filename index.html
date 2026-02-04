@@ -877,26 +877,46 @@ Grid </a>
 </li>
 
 
- <!--- IEMIS Login Section --->
-<li class="menu-has-children">
-    <a href="javascript:;">IEMIS</a>
-    <ul>
-        <!-- Login Button in Navbar -->
-        <li class="nav-item">
-            <button type="button" class="btn btn-outline-light btn-sm ms-2" data-bs-toggle="modal" data-bs-target="#iemisModal">
-                <i class="fas fa-sign-in-alt"></i> IEMIS login
-            </button>
-        </li>
-        
-    </ul>
-</li>
-
-<!-- IEMIS Login Modal -->
+ <!-- IEMIS Login Modal -->
 <div class="modal fade modal-nepali" id="iemisModal" tabindex="-1" aria-labelledby="iemisModalLabel" aria-hidden="true">
-    <!-- Modal content remains the same -->
-    <!-- ... -->
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="iemisModalLabel">
+                    <i class="fas fa-sign-in-alt me-2"></i>IEMIS लगइन
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="iemisLoginForm">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">प्रयोगकर्ता नाम</label>
+                        <input type="text" class="form-control" id="username" placeholder="प्रयोगकर्ता नाम प्रविष्ट गर्नुहोस्">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">पासवर्ड</label>
+                        <input type="password" class="form-control" id="password" placeholder="पासवर्ड प्रविष्ट गर्नुहोस्">
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="rememberMe">
+                        <label class="form-check-label" for="rememberMe">मेरो लगइन सम्झनुहोस्</label>
+                    </div>
+                    <div id="loginMsg" class="mb-3"></div>
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-sign-in-alt me-2"></i>लगइन गर्नुहोस्
+                    </button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <small class="text-muted w-100 text-center">
+                    सहायता चाहियो? <a href="#" class="text-decoration-none">सम्पर्क गर्नुहोस्</a>
+                </small>
+            </div>
+        </div>
+    </div>
 </div>
 
+       
 <style>
 :root {
     --primary-color: #1a73e8;
@@ -907,32 +927,76 @@ Grid </a>
 
 /* IEMIS Login Modal Styles */
 .modal-nepali .modal-header {
-    background-color: var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-color) 0%, #0d47a1 100%);
     color: white;
+    border-bottom: none;
 }
 
 .modal-nepali .modal-title {
     font-weight: 600;
 }
 
-/* Corrected this line - removed space before .modal-nepali */
+/* CORRECTED LINE - Removed the typo */
 .modal-nepali .btn-close {
     filter: invert(1);
+    opacity: 0.8;
+}
+
+.modal-nepali .btn-close:hover {
+    opacity: 1;
 }
 
 .modal-nepali .btn-primary {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
+    padding: 0.75rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
 }
 
 .modal-nepali .btn-primary:hover {
     background-color: #0d5bb5;
     border-color: #0d5bb5;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(13, 91, 181, 0.3);
 }
 
-/* ... rest of your CSS remains the same ... */
+/* Password wrapper styling */
+.password-wrapper {
+    position: relative;
+}
 
-/* Shake animation for invalid login */
+.password-wrapper .password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+    background: none;
+    border: none;
+    padding: 5px;
+    z-index: 10;
+}
+
+.password-wrapper .password-toggle:hover {
+    color: var(--primary-color);
+}
+
+/* Pulse animation for login button */
+@keyframes pulse {
+    0%, 100% { 
+        box-shadow: 0 0 0 0 rgba(26, 115, 232, 0.7);
+    }
+    50% { 
+        box-shadow: 0 0 0 10px rgba(26, 115, 232, 0);
+    }
+}
+
+.animate-pulse {
+    animation: pulse 2s infinite;
+}
+
+/* Form shake animation */
 @keyframes shake {
     0%, 100% { transform: translateX(0); }
     10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
@@ -942,23 +1006,52 @@ Grid </a>
 .shake {
     animation: shake 0.5s ease-in-out;
 }
+
+/* Loading spinner */
+.fa-spin {
+    animation: fa-spin 2s infinite linear;
+}
+
+/* Success button state */
+.btn-success {
+    transition: all 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .modal-nepali .modal-dialog {
+        margin: 1rem;
+    }
+}
 </style>
 
-<script>
-// IEMIS Login Functionality - Improved version
+  <script>
+// IEMIS Login Functionality - Fixed version
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('IEMIS Login initializing...');
+    
+    // Check if Bootstrap is loaded
+    if (typeof bootstrap === 'undefined') {
+        console.error('Bootstrap not loaded!');
+        return;
+    }
+    
     // Initialize IEMIS Login Form
     const iemisLoginForm = document.getElementById('iemisLoginForm');
     if (iemisLoginForm) {
+        console.log('Login form found, initializing...');
         initializeIemisLogin();
+    } else {
+        console.warn('IEMIS login form not found!');
     }
     
     // Check login status on page load
     checkIemisLoginStatus();
     
-    // Add pulse animation to login button
-    const loginBtn = document.querySelector('.btn-outline-light[data-bs-target="#iemisModal"]');
-    if (loginBtn) {
+    // Add pulse animation to login button with safety check
+    const loginBtn = document.querySelector('[data-bs-target="#iemisModal"]');
+    if (loginBtn && !loginBtn.classList.contains('btn-success')) {
+        console.log('Adding pulse animation to login button');
         setInterval(() => {
             loginBtn.classList.add('animate-pulse');
             setTimeout(() => {
@@ -976,67 +1069,88 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function initializeIemisLogin() {
     const form = document.getElementById("iemisLoginForm");
-    if (!form) return;
+    if (!form) {
+        console.error('Login form not found in initializeIemisLogin');
+        return;
+    }
+    
+    console.log('Setting up login form submit handler');
     
     form.addEventListener("submit", async function(e) {
         e.preventDefault();
+        console.log('Login form submitted');
 
         const username = document.getElementById("username").value.trim();
         const password = document.getElementById("password").value.trim();
-        const remember = document.getElementById("rememberMe").checked;
+        const remember = document.getElementById("rememberMe")?.checked || false;
         const msg = document.getElementById("loginMsg");
 
         // Clear previous messages
-        msg.innerHTML = "";
+        if (msg) msg.innerHTML = "";
         
         // Validate inputs
         if (!username) {
-            msg.innerHTML = "<span class='text-danger'><i class='fas fa-exclamation-circle me-2'></i>कृपया प्रयोगकर्ता नाम प्रविष्ट गर्नुहोस्</span>";
+            showMessage("कृपया प्रयोगकर्ता नाम प्रविष्ट गर्नुहोस्", "error");
             document.getElementById('username').focus();
             return;
         }
         
         if (!password) {
-            msg.innerHTML = "<span class='text-danger'><i class='fas fa-exclamation-circle me-2'></i>कृपया पासवर्ड प्रविष्ट गर्नुहोस्</span>";
+            showMessage("कृपया पासवर्ड प्रविष्ट गर्नुहोस्", "error");
             document.getElementById('password').focus();
             return;
         }
 
         // Show loading state
-        msg.innerHTML = "<span class='text-primary'><i class='fas fa-spinner fa-spin me-2'></i>जाँच हुँदैछ...</span>";
+        showMessage("जाँच हुँदैछ...", "loading");
         
         // Disable submit button
         const submitBtn = this.querySelector('button[type="submit"]');
+        if (!submitBtn) {
+            console.error('Submit button not found');
+            return;
+        }
+        
         const originalBtnText = submitBtn.innerHTML;
         submitBtn.disabled = true;
-        submitBtn.innerHTML = "<i class='fas fa-spinner fa-spin me-2'></i>प्रक्रिया हुँदैछ";
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>प्रक्रिया हुँदैछ';
 
         try {
             // Prepare request data
             const requestData = {
                 action: "login",
                 username: username,
-                password: password
+                password: password,
+                timestamp: new Date().toISOString()
             };
 
-            // Make API call
+            console.log('Sending login request...');
+            
+            // Make API call with timeout
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
             const response = await fetch("https://script.google.com/macros/s/AKfycbw8aVDBPbix7346o647ZapCWJxUYqkNC4rCP9ZRoLFs4IT8EW_tuE3GD9BFjG4UpSPPBQ/exec", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "text/plain;charset=utf-8"
+                    "Content-Type": "application/json"
                 },
-                body: JSON.stringify(requestData)
+                body: JSON.stringify(requestData),
+                signal: controller.signal
             });
+            
+            clearTimeout(timeoutId);
             
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             
             const text = await response.text();
-            console.log("Response:", text);
+            console.log("Response received:", text.substring(0, 100) + "...");
             
             try {
                 const data = JSON.parse(text);
+                console.log("Parsed data:", data);
                 
                 if (data.status === "success") {
                     // Store user session
@@ -1044,13 +1158,21 @@ function initializeIemisLogin() {
                     storage.setItem("iemisUser", data.username);
                     storage.setItem("iemisUserData", JSON.stringify(data));
                     
-                    msg.innerHTML = "<span class='text-success'><i class='fas fa-check-circle me-2'></i>लगइन सफल भयो...</span>";
+                    showMessage("लगइन सफल भयो...", "success");
                     
                     // Show success message and redirect
                     setTimeout(() => {
                         // Close modal
-                        const modal = bootstrap.Modal.getInstance(document.getElementById('iemisModal'));
-                        if (modal) modal.hide();
+                        const modalElement = document.getElementById('iemisModal');
+                        if (modalElement) {
+                            const modal = bootstrap.Modal.getInstance(modalElement);
+                            if (modal) {
+                                modal.hide();
+                            }
+                        }
+                        
+                        // Update UI
+                        checkIemisLoginStatus();
                         
                         // Redirect to dashboard
                         window.location.href = "https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Dashboard.html";
@@ -1065,96 +1187,152 @@ function initializeIemisLogin() {
             }
         } catch (error) {
             console.error("Fetch error:", error);
-            showLoginError("सर्भर डाउन वा इन्टरनेट जडान", submitBtn, originalBtnText);
             
-            // Fallback to local validation for demo
-            if (username === "demo" && password === "demo123") {
-                msg.innerHTML = "<span class='text-success'><i class='fas fa-check-circle me-2'></i>डेमो लगइन सफल भयो</span>";
-                setTimeout(() => {
-                    const modal = bootstrap.Modal.getInstance(document.getElementById('iemisModal'));
-                    if (modal) modal.hide();
-                    alert("डेमो लगइन सफल! वास्तविक प्रणालीमा यसले काम गर्दछ।");
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = originalBtnText;
-                }, 1000);
+            if (error.name === 'AbortError') {
+                showLoginError("समय सकियो। पुन: प्रयास गर्नुहोस्", submitBtn, originalBtnText);
+            } else if (error.message.includes('Failed to fetch')) {
+                showLoginError("इन्टरनेट जडान जाँच गर्नुहोस्", submitBtn, originalBtnText);
+                
+                // Fallback to local validation for demo
+                if (username === "demo" && password === "demo123") {
+                    showMessage("डेमो लगइन सफल भयो", "success");
+                    setTimeout(() => {
+                        const modalElement = document.getElementById('iemisModal');
+                        if (modalElement) {
+                            const modal = bootstrap.Modal.getInstance(modalElement);
+                            if (modal) {
+                                modal.hide();
+                            }
+                        }
+                        alert("डेमो लगइन सफल! वास्तविक प्रणालीमा यसले काम गर्दछ।");
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalBtnText;
+                    }, 1000);
+                }
+            } else {
+                showLoginError("सर्भर त्रुटि", submitBtn, originalBtnText);
             }
         }
     });
 }
 
-function showLoginError(message, submitBtn, originalBtnText) {
+function showMessage(message, type = "info") {
     const msg = document.getElementById("loginMsg");
-    msg.innerHTML = `<span class='text-danger'><i class='fas fa-times-circle me-2'></i>${message}</span>`;
+    if (!msg) return;
     
-    submitBtn.disabled = false;
-    submitBtn.innerHTML = originalBtnText;
+    let icon, color;
+    switch(type) {
+        case "error":
+            icon = "fa-times-circle";
+            color = "danger";
+            break;
+        case "success":
+            icon = "fa-check-circle";
+            color = "success";
+            break;
+        case "loading":
+            icon = "fa-spinner fa-spin";
+            color = "primary";
+            break;
+        default:
+            icon = "fa-info-circle";
+            color = "info";
+    }
+    
+    msg.innerHTML = `<span class='text-${color}'><i class='fas ${icon} me-2'></i>${message}</span>`;
+}
+
+function showLoginError(message, submitBtn, originalBtnText) {
+    showMessage(message, "error");
+    
+    if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnText;
+    }
     
     // Add shake animation to form
     const form = document.getElementById('iemisLoginForm');
-    form.classList.add('shake');
-    setTimeout(() => {
-        form.classList.remove('shake');
-    }, 500);
+    if (form) {
+        form.classList.add('shake');
+        setTimeout(() => {
+            form.classList.remove('shake');
+        }, 500);
+    }
 }
 
 // Password toggle functionality
 function setupPasswordToggle() {
     const passwordField = document.getElementById('password');
-    if (!passwordField) return;
+    if (!passwordField) {
+        console.warn('Password field not found');
+        return;
+    }
     
-    const passwordWrapper = passwordField.closest('.password-wrapper');
+    // Create wrapper if it doesn't exist
+    let passwordWrapper = passwordField.closest('.password-wrapper');
     
     if (!passwordWrapper) {
-        // Wrap password field with wrapper
-        const wrapper = document.createElement('div');
-        wrapper.className = 'password-wrapper position-relative';
-        passwordField.parentNode.insertBefore(wrapper, passwordField);
-        wrapper.appendChild(passwordField);
+        passwordWrapper = document.createElement('div');
+        passwordWrapper.className = 'password-wrapper';
+        passwordField.parentNode.insertBefore(passwordWrapper, passwordField);
+        passwordWrapper.appendChild(passwordField);
         
         // Create toggle button
         const toggleBtn = document.createElement('button');
         toggleBtn.type = 'button';
-        toggleBtn.className = 'password-toggle btn btn-link';
+        toggleBtn.className = 'password-toggle btn btn-link position-absolute';
+        toggleBtn.style.right = '10px';
+        toggleBtn.style.top = '50%';
+        toggleBtn.style.transform = 'translateY(-50%)';
         toggleBtn.innerHTML = '<i class="far fa-eye"></i>';
         toggleBtn.title = 'पासवर्ड देखाउनुहोस्/लुकाउनुहोस्';
         
         toggleBtn.addEventListener('click', function() {
             const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
             passwordField.setAttribute('type', type);
-            this.innerHTML = type === 'password' ? '<i class="far fa-eye"></i>' : '<i class="far fa-eye-slash"></i>';
-            this.title = type === 'password' ? 'पासवर्ड देखाउनुहोस्' : 'पासवर्ड लुकाउनुहोस्';
+            this.innerHTML = type === 'password' 
+                ? '<i class="far fa-eye"></i>' 
+                : '<i class="far fa-eye-slash"></i>';
+            this.title = type === 'password' 
+                ? 'पासवर्ड देखाउनुहोस्' 
+                : 'पासवर्ड लुकाउनुहोस्';
         });
         
-        wrapper.appendChild(toggleBtn);
+        passwordWrapper.style.position = 'relative';
+        passwordWrapper.appendChild(toggleBtn);
     }
 }
 
 // Check if user is already logged in
 function checkIemisLoginStatus() {
     const user = localStorage.getItem("iemisUser") || sessionStorage.getItem("iemisUser");
-    const loginBtn = document.querySelector('.btn-outline-light[data-bs-target="#iemisModal"]');
+    const loginBtn = document.querySelector('[data-bs-target="#iemisModal"]');
     
     if (user && loginBtn) {
         loginBtn.innerHTML = '<i class="fas fa-user-check me-1"></i>लगइन गरिएको';
-        loginBtn.classList.remove('btn-outline-light');
+        loginBtn.classList.remove('btn-outline-light', 'animate-pulse');
         loginBtn.classList.add('btn-success');
         loginBtn.disabled = true;
         loginBtn.setAttribute('title', `लगइन गरिएको: ${user}`);
         
-        // Add logout option
-        const logoutBtn = document.createElement('button');
-        logoutBtn.className = 'btn btn-sm btn-outline-danger ms-2';
-        logoutBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i>';
-        logoutBtn.title = 'लगआउट गर्नुहोस्';
-        logoutBtn.onclick = function() {
-            localStorage.removeItem("iemisUser");
-            localStorage.removeItem("iemisUserData");
-            sessionStorage.removeItem("iemisUser");
-            sessionStorage.removeItem("iemisUserData");
-            location.reload();
-        };
-        
-        loginBtn.parentNode.appendChild(logoutBtn);
+        // Check if logout button already exists
+        if (!loginBtn.parentNode.querySelector('.logout-btn')) {
+            // Add logout option
+            const logoutBtn = document.createElement('button');
+            logoutBtn.className = 'logout-btn btn btn-sm btn-outline-danger ms-2';
+            logoutBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i>';
+            logoutBtn.title = 'लगआउट गर्नुहोस्';
+            logoutBtn.onclick = function(e) {
+                e.stopPropagation();
+                localStorage.removeItem("iemisUser");
+                localStorage.removeItem("iemisUserData");
+                sessionStorage.removeItem("iemisUser");
+                sessionStorage.removeItem("iemisUserData");
+                location.reload();
+            };
+            
+            loginBtn.parentNode.appendChild(logoutBtn);
+        }
     }
 }
 
@@ -1164,31 +1342,49 @@ function autoFillSavedCredentials() {
     
     if (savedUser && document.getElementById('username')) {
         document.getElementById('username').value = savedUser;
-        document.getElementById('rememberMe').checked = !!localStorage.getItem("iemisUser");
+        const rememberCheckbox = document.getElementById('rememberMe');
+        if (rememberCheckbox) {
+            rememberCheckbox.checked = !!localStorage.getItem("iemisUser");
+        }
     }
 }
 
 // Setup modal events
 function setupModalEvents() {
     const iemisModal = document.getElementById('iemisModal');
-    if (!iemisModal) return;
+    if (!iemisModal) {
+        console.warn('IEMIS modal not found');
+        return;
+    }
     
     iemisModal.addEventListener('show.bs.modal', function() {
+        console.log('Modal opening');
         autoFillSavedCredentials();
+        // Clear any previous messages
+        const msg = document.getElementById('loginMsg');
+        if (msg) msg.innerHTML = '';
     });
     
     iemisModal.addEventListener('shown.bs.modal', function() {
         const usernameField = document.getElementById('username');
-        if (usernameField && !usernameField.value) {
-            usernameField.focus();
+        if (usernameField) {
+            if (!usernameField.value) {
+                usernameField.focus();
+            }
         }
     });
     
     iemisModal.addEventListener('hidden.bs.modal', function() {
+        console.log('Modal closed');
         // Reset form
         const form = document.getElementById('iemisLoginForm');
         if (form) {
-            form.reset();
+            // Don't reset if user is logged in
+            const user = localStorage.getItem("iemisUser") || sessionStorage.getItem("iemisUser");
+            if (!user) {
+                form.reset();
+            }
+            
             const msg = document.getElementById('loginMsg');
             if (msg) msg.innerHTML = '';
             
@@ -1201,9 +1397,8 @@ function setupModalEvents() {
         }
     });
 }
-</script>
-
-
+</script>     
+    
 
 
 <!--------End ----login---->
@@ -5126,6 +5321,7 @@ clear: both;
         ------------->        
   </div>  
 <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fshamser.info.np&layout&size&width=89&height=20&appId" width="89" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+
 
 
 
