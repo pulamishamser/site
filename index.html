@@ -277,6 +277,39 @@ window.scrollTo(0, 0);
 
 
 </head>
+<!-----freeze header and bg image--->
+<style>
+/* Fix for sticky header with light background image */
+/* Make top header sticky */
+#topbar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1030;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Make main navigation sticky too */
+#header {
+    position: sticky;
+    top: 40px; /* Adjust based on topbar height */
+    z-index: 1029;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Ensure body has proper padding to prevent content jump */
+body {
+    padding-top: 120px; /* Adjust based on combined height of topbar + header */
+}
+<style>
+
+
+<!----End---->
+
+   
 <style>
 header,
 body,
@@ -4983,6 +5016,7 @@ clear: both;
         ------------->        
   </div>  
 <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fshamser.info.np&layout&size&width=89&height=20&appId" width="89" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+
 
 
 
