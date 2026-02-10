@@ -5,15 +5,14 @@
     <meta name='viewport' content='width=576' />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#027f7f">
-<meta property="og:title" content="विद्यालय स्मारिका,लेटरप्याड,आइडीकार्ड र परीक्षा व्यवस्थापन सफटवेर" />
+    <meta property="og:title" content="विद्यालय स्मारिका,लेटरप्याड,आइडीकार्ड र परीक्षा व्यवस्थापन सफटवेर" />
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="https://shamser.info.np"/>
     <meta property="og:image" content="https://shamser.info.np/HomePage/smarika.png" />
     <meta property="og:description" content="Generate professional student and staff ID cards with QR code, photo upload, and bulk Excel import.विद्यालय स्मारिका भनेको विद्यालयको पहिचान, इतिहास, उपलब्धि र गतिविधिहरूलाई समेटेर तयार गरिने स्मरणीय प्रकाशन (बुक/पत्रिका) हो।" />
-
     <meta name="keywords" content="">
     <meta name="author" content="shamserpulami">
-<meta property="fb:app_id" content="123456789012345" />
+    <meta property="fb:app_id" content="123456789012345" />
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -45,39 +44,51 @@
             color: var(--text-color);
             line-height: 1.6;
             background-color: #fff;
+            padding-top: 98px !important; /* header-top + navbar height */
             padding-bottom: 70px;
-            padding-top: 56px;
             overflow-x: hidden;
+            margin: 0;
         }
 
         .nepali-font {
             font-family: 'Hind Siliguri', sans-serif;
         }
 
-        /* Header Styles */
+        /* Header Top - Fixed at top */
         .header-top {
             background-color: var(--primary-color);
             color: white;
-            padding: 8px 0;
+            padding: 5px 0;
             font-size: 14px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1040;
+            height: 42px;
         }
         
         .logo-section {
             padding: 15px 0;
             border-bottom: 1px solid #eaeaea;
+            margin-top: 42px; /* Height of header-top */
         }
         
+        /* Fixed Navbar */
         .main-nav {
             background-color: var(--dark-bg);
-            position: sticky;
-            top: 0;
+            position: fixed;
+            top: 42px; /* Height of header-top */
+            left: 0;
+            right: 0;
             z-index: 1030;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         
         .main-nav .nav-link {
             color: white !important;
             font-weight: 500;
-            padding: 12px 20px;
+            padding: 8px 15px !important;
         }
         
         .main-nav .nav-link:hover {
@@ -86,7 +97,7 @@
         
         /* Carousel Styling */
         #headerCarousel {
-            margin-top: 56px;
+            margin-top: 42px;
         }
         
         #headerCarousel .carousel-item {
@@ -262,6 +273,7 @@
             color: #721c24;
             padding: 10px 0;
             font-weight: 500;
+            margin-top: 42px; /* Height of header-top */
         }
 
         .social-stats {
@@ -503,35 +515,43 @@
             overflow-y: auto;
         }
 
-        /* Subscribe Button Styles */
+        /* Subscription Button Styles */
+        .subscribe-container {
+            display: inline-block;
+            position: relative;
+        }
+        
         #subscribeBtn {
             display: flex;
             align-items: center;
             gap: 8px;
-            background-color: var(--primary-color);
+            background-color: #e74c3c;
             color: white;
             border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
+            padding: 10px 20px;
+            border-radius: 25px;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
+            box-shadow: 0 4px 6px rgba(231, 76, 60, 0.2);
         }
-
+        
         #subscribeBtn:hover {
-            background-color: #0d5bb5;
+            background-color: #c0392b;
             transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(231, 76, 60, 0.3);
         }
-
+        
         #subscribeBtn:disabled {
-            background-color: #6c757d;
+            background-color: #95a5a6;
             cursor: not-allowed;
             transform: none;
+            box-shadow: none;
         }
-
-        .badge {
-            background-color: var(--accent-color);
+        
+        #subscribeBtn .badge {
+            background-color: #f39c12;
             color: white;
             border-radius: 50%;
             width: 20px;
@@ -544,34 +564,107 @@
             top: -5px;
             right: -5px;
         }
-
+        
         .counter-container {
             margin-top: 10px;
             font-size: 14px;
             color: #666;
+            text-align: center;
         }
 
-        /* Like/Share Button Styles */
-        .post-stats {
+        /* Subscription Modal Styles */
+        .subscription-modal .modal-header {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            border-bottom: none;
+        }
+        
+        .subscription-modal .modal-title {
+            font-weight: 600;
+            font-size: 1.5rem;
+        }
+        
+        .subscription-modal .modal-body {
+            padding: 2rem;
+        }
+        
+        .subscription-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .subscription-form .form-control {
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .subscription-form .form-control:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+        }
+        
+        .subscription-form .submit-btn {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .subscription-form .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
+        }
+        
+        .subscription-form .submit-btn:disabled {
+            background: #95a5a6;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .benefits-list {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+        
+        .benefits-list li {
+            padding: 8px 0;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #eee;
-        }
-
-        .view-counter {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 14px;
-            color: #666;
-        }
-
-        .like-share {
-            display: flex;
             gap: 10px;
+        }
+        
+        .benefits-list li i {
+            color: #2ecc71;
+            font-size: 1.2rem;
+        }
+        
+        /* Success Message */
+        .success-message {
+            display: none;
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .success-message.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .like-share button {
@@ -903,42 +996,53 @@
             background-color: #004d40;
         }
 
-        /* Fix for gap at top */
-        body {
-            padding-top: 0 !important;
-            margin-top: 0 !important;
+        /* IEMIS Modal Styles */
+        #iemisModal .modal-header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
         }
-        
-        .header-top {
-            padding: 5px 0;
+
+        #iemisModal .modal-title {
+            font-weight: 600;
         }
-        
-        /* Fixed navbar */
-        .main-nav {
-            position: sticky;
-            top: 0;
-            z-index: 1030;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+        #iemisModal .form-control:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
         }
-        
-        /* Carousel adjustment */
-        #headerCarousel {
-            margin-top: 0;
+
+        #iemisModal .btn-primary {
+            background: linear-gradient(135deg, #2980b9, #3498db);
+            border: none;
+            padding: 12px;
+            font-weight: 600;
         }
-        
-        /* Remove extra padding from navbar */
-        .navbar-nav .nav-link {
-            padding: 8px 15px !important;
+
+        #iemisModal .btn-primary:hover {
+            background: linear-gradient(135deg, #1f6391, #2980b9);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
         }
 
         /* Responsive Styles */
         @media (max-width: 768px) {
             body {
-                padding-top: 120px;
+                padding-top: 120px !important;
+            }
+            
+            .header-top {
+                height: auto;
+                padding: 3px 0;
+            }
+            
+            .main-nav {
+                top: auto;
+                position: relative;
+                margin-top: 0;
             }
             
             #headerCarousel {
-                margin-top: 120px;
+                margin-top: 0;
             }
             
             #headerCarousel .carousel-item {
@@ -968,17 +1072,6 @@
             
             .widget-icon span {
                 font-size: 10px;
-            }
-            
-            .post-stats {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-            
-            .like-share {
-                width: 100%;
-                justify-content: space-between;
             }
             
             .news-with-small-image {
@@ -1030,21 +1123,17 @@
             .widgets-container {
                 margin-bottom: 20px;
             }
-        }
-
-        /* Mobile modal adjustments */
-        @media (max-width: 576px) {
-            #numberconverterModal .modal-content,
-            #translateTextModal .modal-content {
-                height: 100vh;
-            }
-
-            #numberconverterModal .modal-body,
-            #translateTextModal .modal-body {
-                height: calc(100vh - 56px);
-                overflow-y: auto;
+            
+            .logo-section {
+                margin-top: 0;
             }
             
+            .breaking-news {
+                margin-top: 0;
+            }
+        }
+
+        @media (max-width: 576px) {
             .widget-bar {
                 flex-wrap: wrap;
             }
@@ -1067,6 +1156,11 @@
                 grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
                 gap: 10px;
             }
+            
+            #subscribeBtn {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
         }
     </style>
 </head>
@@ -1076,7 +1170,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-4">
-                  <iframe scrolling="no" border="0" frameborder="0" marginwidth="0" marginheight="0" allowtransparency="true" src="https://www.ashesh.com.np/linknepali-time.php?time_only=no&font_color=ffffff&aj_time=yes&font_size=12&line_brake=1&api=003098o090" width="175" height="45"></iframe></span>
+                    <iframe scrolling="no" border="0" frameborder="0" marginwidth="0" marginheight="0" allowtransparency="true" src="https://www.ashesh.com.np/linknepali-time.php?time_only=no&font_color=ffffff&aj_time=yes&font_size=12&line_brake=1&api=003098o090" width="175" height="45"></iframe>
                 </div>
                 <div class="col-md-8 text-md-end">
                     <i class="fas fa-map-marker-alt"></i> 
@@ -1090,11 +1184,101 @@
         </div>
     </div>
 
+    <!-- Logo Section -->
+    <div class="logo-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h1 class="mb-0">
+                        <img src="https://media.tenor.com/dhfraztxBo8AAAAj/globe-joypixels.gif" width="45" height="45" alt="Logo">
+                        shamser.info.np &nbsp;&nbsp;&nbsp;  
+                        <script type="text/javascript" src="https://free-hit-counters.net/count/gd0n" width="30" height="20"></script>
+                    </h1>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/" target="_blank" class="text-decoration-none me-3">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://twitter.com/" target="_blank" class="text-decoration-none me-3">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://lauro-media.blogspot.com/" target="_blank" class="text-decoration-none me-3">
+                            <i class="fab fa-blogger-b"></i>
+                        </a>
+                        <a href="mailto:shamserpulami500@gmail.com" target="_blank" class="text-decoration-none">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- Breaking News -->
+    <div class="breaking-news">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <p class="mb-0 text-muted">  <strong>हाम्रो उद्देश्य:</strong></p>
+                    <marquee behavior="scroll" direction="left">
+                       सामुदायिक विद्यालयको शैक्षिक उन्नयनमा समर्पित खोजमूलक प्रस्तुति र निष्पक्ष विश्लेषणका साथमा सदैव पाठकलाई सुसुचित गराउने प्रविधिमैत्री, शैक्षिक सूचना संचारहरूको पोर्टल shamser.info.np । &nbsp;&nbsp;हामीलाई बिज्ञापन दिनुहोस आफ्नो ब्यापार व्यवसाय सँघसंस्था र दक्षताको प्रचारप्रसार गर्नुहोस्ठ
+                    </marquee>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    
-<!----End-------->
-<!-- Welcome Modal -->
+    <!-- Main Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark main-nav">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-home"></i> Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            शैक्षिक सामग्री
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">शिक्षक निर्देशिका</a></li>
+                            <li><a class="dropdown-item" href="#">पाठ्यपुस्तकहरू</a></li>
+                            <li><a class="dropdown-item" href="#">परीक्षा सामग्री</a></li>
+                            <li><a class="dropdown-item" href="#smritika-section">विद्यालय स्मारिका</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#news-section">शैक्षिक समाचार</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="quiz_App5/quiz_app.html">सामान्य ज्ञान</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://shamser.info.np/Entry_Form/Service_Demand.html">हाम्रा सेवाहरू</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://shamser.info.np/Home/About.html">हाम्रो बारेमा</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Service_Site/contact.html">सम्पर्क</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://shamser.info.np/dimjanschool/download%20document.html">Download</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="खोज्नुहोस्..." aria-label="Search">
+                    <button class="btn btn-outline-light" type="submit">खोज</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Welcome Modal -->
     <div class="modal fade" id="welcomeModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -1102,15 +1286,6 @@
                     <h5 class="modal-title" id="welcomeModalLabel">shamser.info.np मा स्वागत छ!</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-
-<!---Subscription---->
-<button class="subscribe-btn" id="openModalBtn">
-                <i class="fas fa-envelope"></i> Subscribe to Newsletter
-            </button>
-                
-
-
-
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-6">
@@ -1144,7 +1319,6 @@
                             </div>
                             
                             <div class="d-grid gap-2 mt-3">
-                                <!----<a href="#" class="btn btn-outline-primary">एकीकृत परीक्षा प्रणाली (IEMIS New version) : Coming soon !!!</a>----->
                                 <a href="https://shamser.info.np/Letterpad.html" class="btn btn-primary">🌐 Generate official letter</a>
                                 <a href="https://forms.gle/LVm68DdiXN5Ep1Mb6" class="btn btn-success mb-3" target="_blank">💁🏻‍♀️About Service charge⛶</a>
 
@@ -1166,30 +1340,22 @@
                         </div>
                     </div>
 
-                    
                     <div class="row mt-4">
                         <div class="col-12 text-center">
-                            <!-----<a href="" class="btn btn-primary mb-3" target="_blank">🌐 Connect with </a>---->
-                                <a href="http://janajyoticampus.edu.np/wp-content/uploads/2024/12/%E0%A4%B8%E0%A5%8D%E0%A4%AE%E0%A4%BE%E0%A4%B0%E0%A5%80%E0%A4%95%E0%A4%BE-%E0%A5%A8%E0%A5%A6%E0%A5%AE%E0%A5%A7.pdf" class="btn btn-primary mb-3" target="_blank">​👉जनज्योति क्याम्पसको ​​बिद्यालय स्मारिका​🚻 </a>
-
-                           <a href="http://shamser.info.np/News modal.html" class="btn btn-primary mb-3" target="_blank">🌐 ​ताजा अनलाईन समाचार​ </a>
+                            <a href="http://janajyoticampus.edu.np/wp-content/uploads/2024/12/%E0%A4%B8%E0%A5%8D%E0%A4%AE%E0%A4%BE%E0%A4%B0%E0%A5%80%E0%A4%95%E0%A4%BE-%E0%A5%A8%E0%A5%A6%E0%A5%AE%E0%A5%A7.pdf" class="btn btn-primary mb-3" target="_blank">​👉जनज्योति क्याम्पसको ​​बिद्यालय स्मारिका​🚻 </a>
+                            <a href="http://shamser.info.np/News modal.html" class="btn btn-primary mb-3" target="_blank">🌐 ​ताजा अनलाईन समाचार​ </a>
                             
-                        
-<!-- Subscribe Button---
-                            <button id="subscribeBtn" class="ms-3">
-                                <span class="bell-icon">🔔</span>
-                                <span>Subscribe</span>
-                                <span id="badge" class="badge" style="display: none;">0</span>
-                            </button>
-                            <div class="row mt-2">
-                                <div class="col-12 text-center">
-                                    <p id="statusText" class="mb-0"></p>
-                                    <div class="counter-container">
-                                        <p>Total Subscriber: <span class="counter-value" id="counter">0</span></p>
-                                    </div>
+                            <!-- Subscription Button -->
+                            <div class="subscribe-container">
+                                <button id="subscribeBtn">
+                                    <i class="fas fa-bell"></i>
+                                    <span>Subscribe</span>
+                                    <span id="badge" class="badge" style="display: none;">0</span>
+                                </button>
+                                <div class="counter-container">
+                                    <p>Total Subscribers: <span class="counter-value" id="counter">0</span></p>
                                 </div>
                             </div>
-                             -->
                         </div>
                     </div>
                    
@@ -1207,9 +1373,67 @@
                     
                     <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2F&width=450&layout&action&size&share=true&height=35&appId" width="100%" height="35" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
                 </div>
-
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Skip</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Subscription Modal -->
+    <div class="modal fade subscription-modal" id="subscriptionModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Subscribe to Our Newsletter</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Stay updated with the latest educational resources, news, and tools.</p>
+                    
+                    <form id="subscriptionForm" class="subscription-form">
+                        <div class="form-group">
+                            <label for="subscriberName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="subscriberName" 
+                                   placeholder="Enter your name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subscriberEmail" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="subscriberEmail" 
+                                   placeholder="Enter your email" required>
+                        </div>
+                        
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="newsletterUpdates" checked>
+                            <label class="form-check-label" for="newsletterUpdates">
+                                Send me weekly educational updates
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn" id="subscribeSubmitBtn">
+                            <i class="fas fa-paper-plane me-2"></i>Subscribe Now
+                        </button>
+                    </form>
+                    
+                    <div class="benefits-list">
+                        <h6>You'll receive:</h6>
+                        <li><i class="fas fa-check-circle"></i> Latest educational news</li>
+                        <li><i class="fas fa-check-circle"></i> Teaching resources</li>
+                        <li><i class="fas fa-check-circle"></i> Exam preparation materials</li>
+                        <li><i class="fas fa-check-circle"></i> School management tips</li>
+                    </div>
+                    
+                    <div id="subscriptionSuccess" class="success-message">
+                        <i class="fas fa-check-circle me-2"></i>
+                        <strong>Thank you for subscribing!</strong>
+                        <p class="mb-0">You'll receive a confirmation email shortly.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <p class="small text-muted mb-0">
+                        We respect your privacy. Unsubscribe at any time.
+                    </p>
                 </div>
             </div>
         </div>
@@ -1250,50 +1474,18 @@
                                 <li class="list-group-item">
                                     <i class="fas fa-palette text-primary me-2"></i> Time saving
                                 </li>
-
-                                            <!-- Added Nepali Features -->
-            <li class="list-group-item">
-                <i class="fas fa-file-alt text-success me-2"></i> एउटा A4 साइज पेपरमा ९ जनाको ID Card अट्छ
-            </li>
-            <li class="list-group-item">
-                <i class="fas fa-layer-group text-success me-2"></i> आवश्यक अनुसार जति पनि ID Card Generate गर्न सकिन्छ
-            </li>
-            <li class="list-group-item">
-                <i class="fas fa-qrcode text-success me-2"></i> QR Code Image आफै Generate हुन्छ
-            </li>
-            <li class="list-group-item">
-                <i class="fas fa-user-graduate text-success me-2"></i> विद्यार्थीको नाम फोटो फाइलको नामबाट स्वतः Generate हुन्छ
-            </li>
-            <li class="list-group-item">
-                <i class="fas fa-folder-open text-success me-2"></i> तोकिएको Folder मा फोटो राख्नुपर्छ
-            </li>
-            <li class="list-group-item">
-                <i class="fas fa-signature text-success me-2"></i> Signature र Logo छुट्टै Folder मा राख्नुपर्छ
-            </li>
-            <li class="list-group-item">
-                <i class="fas fa-mouse-pointer text-success me-2"></i> केवल ३ Step (३ Button) मा काम पुरा हुन्छ  
-                <br>
-                <small>1. Generate Photo Link → 2. Generate QR → 3. Generate</small>
-            </li>
-            <li class="list-group-item">
-                <i class="fas fa-file-pdf text-success me-2"></i> PDF र Word दुबैमा Print गर्न सकिन्छ
-            </li>
-            <li class="list-group-item">
-                <i class="fas fa-save text-success me-2"></i> चाहिएको मात्र Generate गरी छुट्टै Sheet मा Save गर्न सकिन्छ
-            </li>
-        </ul>
-
-        <h5 class="mt-4 text-danger">सीमितताहरु:</h5>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-                <i class="fas fa-desktop text-danger me-2"></i> Desktop Computer मा मात्र चल्छ
-            </li>
-            <li class="list-group-item">
-                <i class="fas fa-clock text-danger me-2"></i> Generate हुन केही समय लाग्छ
-            </li>
-            <li class="list-group-item">
-                <i class="fas fa-copy text-danger me-2"></i> एउटै Sheet मा Save गर्दा दोहोरिन सक्छ, छुट्टै Save गर्नुपर्छ
-            </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-file-alt text-success me-2"></i> एउटा A4 साइज पेपरमा ९ जनाको ID Card अट्छ
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-layer-group text-success me-2"></i> आवश्यक अनुसार जति पनि ID Card Generate गर्न सकिन्छ
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-qrcode text-success me-2"></i> QR Code Image आफै Generate हुन्छ
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-user-graduate text-success me-2"></i> विद्यार्थीको नाम फोटो फाइलको नामबाट स्वतः Generate हुन्छ
+                                </li>
                             </ul>
                         </div>
 
@@ -1444,108 +1636,6 @@
         </div>
     </div>
 
-    <!-- Logo Section -->
-    <div class="logo-section">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <h1 class="mb-0">
-                        <img src="https://media.tenor.com/dhfraztxBo8AAAAj/globe-joypixels.gif" width="45" height="45" alt="Logo">
-                        shamser.info.np &nbsp;&nbsp;&nbsp;  
-                        <script type="text/javascript" src="https://free-hit-counters.net/count/gd0n" width="30" height="20"></script>
-                    </h1>
-             
-                </div>
-
-                <div class="col-md-6 text-md-end">
-                    <div class="social-links">
-                        <a href="https://www.facebook.com/" target="_blank" class="text-decoration-none me-3">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="https://twitter.com/" target="_blank" class="text-decoration-none me-3">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="https://lauro-media.blogspot.com/" target="_blank" class="text-decoration-none me-3">
-                            <i class="fab fa-blogger-b"></i>
-                        </a>
-                        <a href="mailto:shamserpulami500@gmail.com" target="_blank" class="text-decoration-none">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Breaking News -->
-    <div class="breaking-news">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <p class="mb-0 text-muted">  <strong>हाम्रो उद्देश्य:</strong></p>
-                    <marquee behavior="scroll" direction="left">
-                       सामुदायिक विद्यालयको शैक्षिक उन्नयनमा समर्पित खोजमूलक प्रस्तुति र निष्पक्ष विश्लेषणका साथमा सदैव पाठकलाई सुसुचित गराउने प्रविधिमैत्री, शैक्षिक सूचना संचारहरूको पोर्टल shamser.info.np । &nbsp;&nbsp;हामीलाई बिज्ञापन दिनुहोस आफ्नो ब्यापार व्यवसाय सँघसंस्था र दक्षताको प्रचारप्रसार गर्नुहोस्ठ
-                    </marquee>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Main Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark main-nav" id="mainNavbar">
-        <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fas fa-home"></i></a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                            शैक्षिक सामग्री
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">शिक्षक निर्देशिका</a></li>
-                            <li><a class="dropdown-item" href="#">पाठ्यपुस्तकहरू</a></li>
-                            <li><a class="dropdown-item" href="#">परीक्षा सामग्री</a></li>
-                            <li><a class="dropdown-item" href="#smritika-section">विद्यालय स्मारिका</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#news-section"> शैक्षिक समाचार</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="quiz_App5/quiz_app.html">सामान्य ज्ञान </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://shamser.info.np/Entry_Form/Service_Demand.html">हाम्रा सेवाहरू</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://shamser.info.np/Home/About.html"> हाम्रो बारेमा</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Service_Site/contact.html"> सम्पर्क</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://shamser.info.np/dimjanschool/download%20document.html"> Download</a>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" class="btn btn-outline-light btn-sm ms-2" data-bs-toggle="modal" data-bs-target="#iemisModal">
-                            <i class="fas fa-sign-in-alt"></i> IEMIS लगइन
-                        </button>
-                    </li>
-                </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="खोज्नुहोस्...">
-                    <button class="btn btn-outline-light" type="submit">खोज</button>
-                </form>
-            </div>
-        </div>
-    </nav>
-
     <!-- Header Carousel (Dashboard Style) -->
     <div id="headerCarousel" class="carousel slide" data-bs-ride="carousel">
         <!-- Carousel Indicators -->
@@ -1559,7 +1649,6 @@
         <!-- Carousel Items -->
         <div class="carousel-inner">
             <div class="carousel-item active">
-
                 <a href="http://janajyoticampus.edu.np/wp-content/uploads/2024/12/%E0%A4%B8%E0%A5%8D%E0%A4%AE%E0%A4%BE%E0%A4%B0%E0%A5%80%E0%A4%95%E0%A4%BE-%E0%A5%A8%E0%A5%A6%E0%A5%AE%E0%A5%A7.pdf" class="btn btn-primary mb-3" target="_blank">​👉जनज्योति क्याम्पसको ​​बिद्यालय स्मारिका​🚻
                 <img src="https://shamser.info.np/HomePage/Simarika.jpg" class="d-block w-100" alt="स्मारिका"> </a>
                 <div class="carousel-caption d-none d-md-block">
@@ -1624,6 +1713,20 @@
             </div>
         </div>
 
+        <!-- IEMIS Login Section -->
+        <div class="row my-5">
+            <div class="col-12 text-center">
+                <h3 class="section-title">एकीकृत परीक्षा प्रणाली (IEMIS)</h3>
+                <p>विद्यालयको परीक्षा व्यवस्थापनको लागि सम्पूर्ण समाधान</p>
+                <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#iemisModal">
+                    <i class="fas fa-sign-in-alt me-2"></i>IEMIS लगइन गर्नुहोस्
+                </button>
+                <div class="mt-3">
+                    <small class="text-muted">विद्यालय प्रशासनद्वारा प्रदान गरिएको युजरनेम र पासवर्ड प्रयोग गर्नुहोस्</small>
+                </div>
+            </div>
+        </div>
+
         <!-- विद्यालय स्मारिका सेक्सन -->
         <div class="smritika-section" id="smritika-section">
             <h2>विद्यालय स्मारिका</h2>
@@ -1657,8 +1760,6 @@
                     </ul>
                     
                 <a href="http://janajyoticampus.edu.np/wp-content/uploads/2024/12/%E0%A4%B8%E0%A5%8D%E0%A4%AE%E0%A4%BE%E0%A4%B0%E0%A5%80%E0%A4%95%E0%A4%BE-%E0%A5%A8%E0%A5%A6%E0%A5%AE%E0%A5%A7.pdf" class="btn btn-primary mb-3" target="_blank">​👉बिद्यालय स्मारिका​ नमूना </a>
-                
-                
                 </div>
             </div>
         </div>
@@ -2092,12 +2193,7 @@
             <i class="fa-solid fa-calculator"></i>
             <span>संख्या रूपान्तरण</span>
         </div>
- <!---
-        <div class="widget-icon" data-bs-toggle="modal" data-bs-target="#translateTextModal">
-            <i class="fa-solid fas fa-language"></i>
-            <span>Translator</span>
-        </div>
------>
+
         <div class="widget-icon" data-bs-toggle="modal" data-bs-target="#unicodeModal">
             <i class="fas fa-language"></i>
             <span>युनिकोड</span>
@@ -2186,43 +2282,6 @@
         </div>
     </div>
 
-    <!-- Translate Text Modal
-    <div class="modal fade modal-nepali" id="translateTextModal" tabindex="-1" aria-labelledby="translateTextModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen-sm-down">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="translateTextModalLabel">अनुवाद</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-
-                <div class="modal-body p-0">
-                    <div class="widget h-100" id="translator-widget">
-                        <div class="p-3 h-100 d-flex flex-column">
-                            <h5>अनुवादक (अङ्ग्रेजी देखि नेपाली)</h5>
-
-                            <div class="mb-3 flex-grow-1">
-                                <textarea id="englishText"
-                                          class="form-control h-100"
-                                          placeholder="अङ्ग्रेजीमा लेख्नुहोस्"></textarea>
-                            </div>
-
-                            <button class="btn btn-primary mb-3"
-                                    onclick="translateText()">
-                                अनुवाद गर्नुहोस्
-                            </button>
-
-                            <div id="translationResult"
-                                 class="p-2 bg-light rounded"
-                                 style="min-height:80px;">
-                            </div>
-                        </div>
-                    </div>
-     -->
-                </div>
-            </div>
-        </div>
-    </div>
-    
     <!-- Unicode Converter Modal -->
     <div class="modal fade modal-nepali" id="unicodeModal" tabindex="-1" aria-labelledby="unicodeModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -2243,164 +2302,81 @@
         </div>
     </div>
 
-  
-
-
-
-
-
-<!-- Button to open modal -->
-<div class="text-center mt-5">
-    <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#iemisModal">
-        IEMIS Login
-    </button>
-</div>
-
-<!-- IEMIS Login Modal -->
-<div class="modal fade modal-nepali" id="iemisModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-            <div class="modal-header">
-                <h5 class="modal-title">IEMIS लगइन</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-            </div>
-
-            <div class="modal-body">
-
-                <div class="text-center mb-4">
-                    <img src="https://shamser.info.np/HomePage/IEMIS%20SHAMSER.jpg"
-                         class="img-fluid rounded" style="max-height:100px;">
-                    <h4 class="mt-2">एकीकृत परीक्षा प्रणाली</h4>
+    <!-- IEMIS Login Modal -->
+    <div class="modal fade modal-nepali" id="iemisModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">IEMIS लगइन</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
 
-                <form id="iemisLoginForm">
-
-                    <div class="mb-3">
-                        <label class="form-label">प्रयोगकर्ता नाम</label>
-                        <input type="text" class="form-control" id="username" required>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <img src="https://shamser.info.np/HomePage/IEMIS%20SHAMSER.jpg"
+                             class="img-fluid rounded" style="max-height:100px;">
+                        <h4 class="mt-2">एकीकृत परीक्षा प्रणाली</h4>
+                        <p class="text-muted">Integrated Exam Management Information System</p>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">पासवर्ड</label>
-                        <input type="password" class="form-control" id="password" required>
+                    <form id="iemisLoginForm">
+                        <div class="mb-3">
+                            <label class="form-label">प्रयोगकर्ता नाम</label>
+                            <input type="text" class="form-control" id="username" required 
+                                   placeholder="तपाईंको युजरनेम प्रविष्ट गर्नुहोस्">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">पासवर्ड</label>
+                            <input type="password" class="form-control" id="password" required 
+                                   placeholder="पासवर्ड प्रविष्ट गर्नुहोस्">
+                        </div>
+
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label">मलाई सम्झनुहोस्</label>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-sign-in-alt me-2"></i>लगइन गर्नुहोस्
+                            </button>
+                        </div>
+
+                        <div id="loginMsg" class="text-center mt-3"></div>
+                    </form>
+
+                    <div class="mt-3 text-center">
+                        <a href="https://script.google.com/macros/s/AKfycbxUs8Nn3kl1P_eGD6A7zR-sBfNT6kIksBxpIiPvJAE8jg6qilPQ1Thq_kLgabk6rKqvhw/exec" 
+                           class="text-decoration-none">
+                            <i class="fas fa-key me-1"></i>पासवर्ड बिर्सनुभयो?
+                        </a>
                     </div>
 
-                    <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="rememberMe">
-                        <label class="form-check-label">मलाई सम्झनुहोस्</label>
+                    <div class="mt-4 pt-3 border-top">
+                        <div class="alert alert-info">
+                            <h6><i class="fas fa-info-circle me-2"></i>महत्त्वपूर्ण जानकारी:</h6>
+                            <p class="small mb-0">
+                                IEMIS लगइन गर्न विद्यालयद्वारा प्रदान गरिएको युजरनेम र पासवर्ड प्रयोग गर्नुहोस्।
+                                नयाँ प्रयोगकर्ता विद्यालय प्रशासनसंग सम्पर्क गर्नुहोस्।
+                            </p>
+                        </div>
                     </div>
-
-                    <div class="d-grid">
-                        <button type="submit" class="btn btn-primary">
-                            लगइन गर्नुहोस्
-                        </button>
-                    </div>
-
-                    <div id="loginMsg" class="text-center mt-3"></div>
-
-                </form>
-
-                <div class="mt-3 text-center">
-                    <a href="https://script.google.com/macros/s/AKfycbxUs8Nn3kl1P_eGD6A7zR-sBfNT6kIksBxpIiPvJAE8jg6qilPQ1Thq_kLgabk6rKqvhw/exec">
-                        पासवर्ड बिर्सनुभयो?
-                    </a>
                 </div>
 
+                <div class="modal-footer justify-content-center">
+                    <p class="mb-0">
+                        नयाँ प्रयोगकर्ता?
+                        <a href="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/New%20User%20Register.html" 
+                           class="text-decoration-none fw-bold">
+                            खाता सिर्जना गर्नुहोस्
+                        </a>
+                    </p>
+                </div>
             </div>
-
-            <div class="modal-footer justify-content-center">
-                <p class="mb-0">
-                    नयाँ प्रयोगकर्ता?
-                    <a href="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/New%20User%20Register.html">
-                        खाता सिर्जना गर्नुहोस्
-                    </a>
-                </p>
-
-
-
-            </div>
-
         </div>
     </div>
-</div>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-document.getElementById("iemisLoginForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    const username = document.getElementById("username").value.trim();
-    const password = document.getElementById("password").value.trim();
-    const remember = document.getElementById("rememberMe").checked;
-    const msg = document.getElementById("loginMsg");
-
-    msg.innerHTML = "<span class='text-primary'>जाँच हुँदैछ...</span>";
-
-    fetch("https://script.google.com/macros/s/AKfycbw8aVDBPbix7346o647ZapCWJxUYqkNC4rCP9ZRoLFs4IT8EW_tuE3GD9BFjG4UpSPPBQ/exec", {
-        method: "POST",
-        headers: {
-            "Content-Type": "text/plain;charset=utf-8"
-        },
-        body: JSON.stringify({
-            action: "login",
-            username: username,
-            password: password
-        })
-    })
-    .then(response => response.text())
-    .then(text => {
-
-        console.log(text); // DEBUG
-
-        const data = JSON.parse(text);
-
-        if (data.status === "success") {
-
-            if (remember) {
-                localStorage.setItem("iemisUser", data.username);
-            } else {
-                sessionStorage.setItem("iemisUser", data.username);
-            }
-
-            msg.innerHTML = "<span class='text-success'>लगइन सफल भयो...</span>";
-
-            setTimeout(() => {
-                window.location.href =
-                  "https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Dashboard.html";
-            }, 800);
-
-        } else {
-            msg.innerHTML = "<span class='text-danger'>गलत प्रयोगकर्ता नाम वा पासवर्ड</span>";
-        }
-    })
-    .catch(err => {
-        console.error(err);
-        msg.innerHTML = "<span class='text-danger'>Server Error</span>";
-    });
-});
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
     <!-- Computer Quiz Modal -->
     <div class="modal fade modal-nepali" id="quizModal" tabindex="-1" aria-labelledby="quizModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
@@ -2704,26 +2680,11 @@ document.getElementById("iemisLoginForm").addEventListener("submit", function(e)
             updateTimeAgo();
             initializeWidgets();
             initializeTranslator();
+            initializeSubscription();
+            checkIEMISLoginStatus();
             
             setInterval(updateNepaliDateTime, 1000);
             setInterval(updateTimeAgo, 60000);
-            
-            // Make navbar sticky
-            const navbar = document.querySelector('.main-nav');
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 50) {
-                    navbar.classList.add('fixed-navbar');
-                } else {
-                    navbar.classList.remove('fixed-navbar');
-                }
-            });
-            
-            // Initialize carousel
-            const carousel = new bootstrap.Carousel(document.getElementById('headerCarousel'), {
-                interval: 5000,
-                wrap: true,
-                pause: 'hover'
-            });
             
             // Smooth scroll for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -2741,7 +2702,192 @@ document.getElementById("iemisLoginForm").addEventListener("submit", function(e)
                     }
                 });
             });
+            
+            // Initialize carousel
+            const carousel = new bootstrap.Carousel(document.getElementById('headerCarousel'), {
+                interval: 5000,
+                wrap: true,
+                pause: 'hover'
+            });
         });
+
+        // IEMIS Login Functions
+        function checkIEMISLoginStatus() {
+            const isLoggedIn = localStorage.getItem("iemisLoggedIn") || sessionStorage.getItem("iemisLoggedIn");
+            const username = localStorage.getItem("iemisUser") || sessionStorage.getItem("iemisUser");
+            
+            if (isLoggedIn && username) {
+                // Update login button text if user is logged in
+                const loginBtn = document.querySelector('[data-bs-target="#iemisModal"]');
+                if (loginBtn) {
+                    loginBtn.innerHTML = `<i class="fas fa-user-check me-2"></i>${username} (IEMIS)`;
+                    loginBtn.classList.add('btn-success');
+                    loginBtn.classList.remove('btn-primary');
+                }
+            }
+        }
+
+        function iemisLogout() {
+            localStorage.removeItem("iemisUser");
+            localStorage.removeItem("iemisLoggedIn");
+            sessionStorage.removeItem("iemisUser");
+            sessionStorage.removeItem("iemisLoggedIn");
+            
+            // Update button
+            const loginBtn = document.querySelector('[data-bs-target="#iemisModal"]');
+            if (loginBtn) {
+                loginBtn.innerHTML = `<i class="fas fa-sign-in-alt me-2"></i>IEMIS लगइन गर्नुहोस्`;
+                loginBtn.classList.remove('btn-success');
+                loginBtn.classList.add('btn-primary');
+            }
+            
+            showNotification("IEMIS बाट लगआउट भयो।");
+        }
+
+        // IEMIS Login Form
+        document.getElementById('iemisLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const remember = document.getElementById('rememberMe').checked;
+            const msg = document.getElementById('loginMsg');
+
+            msg.innerHTML = "<div class='spinner-border spinner-border-sm text-primary me-2'></div> जाँच हुँदैछ...";
+
+            // Simple validation
+            if (!username || !password) {
+                msg.innerHTML = "<span class='text-danger'><i class='fas fa-exclamation-circle me-2'></i>कृपया सबै फिल्डहरू भर्नुहोस्</span>";
+                return;
+            }
+
+            // Simulate API call (replace with actual API endpoint)
+            setTimeout(() => {
+                // This is a mock validation - replace with actual API call
+                if (username && password) {
+                    // Save login state
+                    if (remember) {
+                        localStorage.setItem("iemisUser", username);
+                        localStorage.setItem("iemisLoggedIn", "true");
+                    } else {
+                        sessionStorage.setItem("iemisUser", username);
+                        sessionStorage.setItem("iemisLoggedIn", "true");
+                    }
+
+                    msg.innerHTML = "<span class='text-success'><i class='fas fa-check-circle me-2'></i>लगइन सफल भयो...</span>";
+
+                    // Redirect after successful login
+                    setTimeout(() => {
+                        // Close modal
+                        const modal = bootstrap.Modal.getInstance(document.getElementById('iemisModal'));
+                        if (modal) modal.hide();
+                        
+                        // Redirect to dashboard
+                        window.location.href = "https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Dashboard.html";
+                    }, 1000);
+                } else {
+                    msg.innerHTML = "<span class='text-danger'><i class='fas fa-times-circle me-2'></i>गलत प्रयोगकर्ता नाम वा पासवर्ड</span>";
+                }
+            }, 1500);
+        });
+
+        // Subscription functionality
+        function initializeSubscription() {
+            const subscribeBtn = document.getElementById('subscribeBtn');
+            const subscriptionModal = new bootstrap.Modal(document.getElementById('subscriptionModal'));
+            const subscriptionForm = document.getElementById('subscriptionForm');
+            const subscriptionSuccess = document.getElementById('subscriptionSuccess');
+            const counterElement = document.getElementById('counter');
+            const badgeElement = document.getElementById('badge');
+            
+            // Check if user is already subscribed
+            const userSubscribedKey = `user_subscribed_${userId}`;
+            const isSubscribed = localStorage.getItem(userSubscribedKey) === 'true';
+            
+            // Update counter from database
+            const subscriberCount = socialDB.getSubscriberCount();
+            counterElement.textContent = subscriberCount.toLocaleString('ne-NP');
+            
+            if (isSubscribed) {
+                subscribeBtn.disabled = true;
+                subscribeBtn.innerHTML = '<i class="fas fa-check"></i> <span>Subscribed</span>';
+                if (subscriberCount > 0) {
+                    badgeElement.style.display = 'flex';
+                    badgeElement.textContent = subscriberCount > 9 ? '9+' : subscriberCount;
+                }
+            }
+            
+            // Open subscription modal
+            subscribeBtn.addEventListener('click', function() {
+                if (!isSubscribed) {
+                    subscriptionModal.show();
+                }
+            });
+            
+            // Handle form submission
+            subscriptionForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('subscriberName').value.trim();
+                const email = document.getElementById('subscriberEmail').value.trim();
+                const subscribeUpdates = document.getElementById('newsletterUpdates').checked;
+                
+                // Validate email
+                if (!validateEmail(email)) {
+                    alert('Please enter a valid email address!');
+                    return;
+                }
+                
+                // Show loading state
+                const submitBtn = document.getElementById('subscribeSubmitBtn');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Subscribing...';
+                submitBtn.disabled = true;
+                
+                // Simulate API call
+                setTimeout(() => {
+                    // Save to database
+                    socialDB.addSubscriber(userId);
+                    
+                    // Update UI
+                    subscribeBtn.disabled = true;
+                    subscribeBtn.innerHTML = '<i class="fas fa-check"></i> <span>Subscribed</span>';
+                    
+                    const newCount = socialDB.getSubscriberCount();
+                    counterElement.textContent = newCount.toLocaleString('ne-NP');
+                    
+                    badgeElement.style.display = 'flex';
+                    badgeElement.textContent = newCount > 9 ? '9+' : newCount;
+                    
+                    // Save subscription status
+                    localStorage.setItem(userSubscribedKey, 'true');
+                    
+                    // Show success message
+                    subscriptionSuccess.classList.add('show');
+                    
+                    // Reset form
+                    subscriptionForm.reset();
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    
+                    // Hide modal after 2 seconds
+                    setTimeout(() => {
+                        subscriptionModal.hide();
+                        subscriptionSuccess.classList.remove('show');
+                        
+                        // Show notification
+                        showNotification(`Thank you ${name}! You've successfully subscribed.`);
+                    }, 2000);
+                    
+                }, 1500);
+            });
+            
+            // Email validation function
+            function validateEmail(email) {
+                const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(String(email).toLowerCase());
+            }
+        }
 
         // Nepali Date and Time Function
         function updateNepaliDateTime() {
@@ -2781,7 +2927,11 @@ document.getElementById("iemisLoginForm").addEventListener("submit", function(e)
                 `${nepaliDays[nepaliDate.dayOfWeek]} ${ampm} ${hour}बजे ` +
                 `${minute} मिनेट ${second} सेकेण्ड`;
             
-            document.getElementById('nepaliDateTime').textContent = nepaliDateTimeStr;
+            // Update the time in header if needed
+            const timeElement = document.querySelector('.header-top iframe');
+            if (timeElement) {
+                // The time is already shown in the iframe
+            }
         }
 
         // Time Ago Function
@@ -3071,49 +3221,6 @@ document.getElementById("iemisLoginForm").addEventListener("submit", function(e)
                     }
                 });
             }
-            
-            initializeSubscribeButton();
-        }
-
-        // Subscribe Button
-        function initializeSubscribeButton() {
-            const subscribeBtn = document.getElementById('subscribeBtn');
-            const status = document.getElementById('statusText');
-            const counter = document.getElementById('counter');
-            const badge = document.getElementById('badge');
-            
-            const subscriberCount = socialDB.getSubscriberCount();
-            counter.textContent = subscriberCount.toLocaleString('ne-NP');
-            
-            const userSubscribedKey = `subscribed_${userId}`;
-            const isSubscribed = localStorage.getItem(userSubscribedKey) === 'true';
-            
-            if (isSubscribed) {
-                subscribeBtn.disabled = true;
-                subscribeBtn.innerHTML = '<span class="bell-icon">🔔</span> <span>सदस्यता लिइसकेको</span>';
-                if (subscriberCount > 0) {
-                    badge.style.display = 'flex';
-                    badge.textContent = subscriberCount > 9 ? '9+' : subscriberCount;
-                }
-                status.textContent = 'सदस्यता लिनुभएकोमा धन्यवाद!';
-            }
-            
-            subscribeBtn.addEventListener('click', () => {
-                if (socialDB.addSubscriber(userId)) {
-                    localStorage.setItem(userSubscribedKey, 'true');
-                    subscribeBtn.disabled = true;
-                    subscribeBtn.innerHTML = '<span class="bell-icon">🔔</span> <span>सदस्यता लिइसकेको</span>';
-                    
-                    const newCount = socialDB.getSubscriberCount();
-                    counter.textContent = newCount.toLocaleString('ne-NP');
-                    
-                    badge.style.display = 'flex';
-                    badge.textContent = newCount > 9 ? '9+' : newCount;
-                    status.textContent = 'सदस्यता लिनुभएकोमा धन्यवाद!';
-                    
-                    showNotification('धन्यवाद! तपाईंले सदस्यता लिनुभयो।');
-                }
-            });
         }
 
         // Notification function
@@ -3447,424 +3554,5 @@ document.getElementById("iemisLoginForm").addEventListener("submit", function(e)
             startQuizTimer();
         });
     </script>
-
-
-
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .container {
-            max-width: 1200px;
-            width: 100%;
-            margin: 0 auto;
-        }
-        
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding: 20px;
-            border-bottom: 1px solid #eaeaea;
-        }
-        
-        .logo {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-        
-        .logo span {
-            color: #3498db;
-        }
-        
-        .tagline {
-            font-size: 1.1rem;
-            color: #7f8c8d;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .content {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            padding: 40px;
-            margin-bottom: 40px;
-        }
-        
-        .content h1 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 2.2rem;
-        }
-        
-        .content p {
-            margin-bottom: 20px;
-            color: #555;
-            font-size: 1.1rem;
-        }
-        
-        /* Subscribe Button Styles */
-        .subscribe-btn {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 14px 28px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
-        }
-        
-        .subscribe-btn:hover {
-            background-color: #2980b9;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4);
-        }
-        
-        .subscribe-btn i {
-            margin-right: 10px;
-            font-size: 1.2rem;
-        }
-        
-        /* Modal Styles */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .modal {
-            background-color: white;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 500px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            transform: translateY(-20px);
-            transition: transform 0.3s ease;
-        }
-        
-        .modal-overlay.active .modal {
-            transform: translateY(0);
-        }
-        
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .modal-header h2 {
-            color: #2c3e50;
-            font-size: 1.8rem;
-        }
-        
-        .close-btn {
-            background: none;
-            border: none;
-            font-size: 1.8rem;
-            color: #95a5a6;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        
-        .close-btn:hover {
-            color: #e74c3c;
-        }
-        
-        .modal-body p {
-            color: #555;
-            margin-bottom: 25px;
-            font-size: 1.05rem;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #2c3e50;
-        }
-        
-        .form-group input {
-            width: 100%;
-            padding: 14px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-        
-        .form-group input:focus {
-            border-color: #3498db;
-            outline: none;
-        }
-        
-        .submit-btn {
-            background-color: #2ecc71;
-            color: white;
-            border: none;
-            width: 100%;
-            padding: 15px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-top: 10px;
-        }
-        
-        .submit-btn:hover {
-            background-color: #27ae60;
-        }
-        
-        .modal-footer {
-            margin-top: 20px;
-            text-align: center;
-            font-size: 0.9rem;
-            color: #7f8c8d;
-        }
-        
-        /* Success Message */
-        .success-message {
-            background-color: #d4edda;
-            color: #155724;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 20px;
-            display: none;
-            align-items: center;
-        }
-        
-        .success-message i {
-            margin-right: 10px;
-            font-size: 1.5rem;
-        }
-        
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: #7f8c8d;
-            font-size: 0.9rem;
-            margin-top: 20px;
-            border-top: 1px solid #eaeaea;
-            width: 100%;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .content {
-                padding: 25px;
-            }
-            
-            .content h1 {
-                font-size: 1.8rem;
-            }
-            
-            .modal {
-                padding: 20px;
-            }
-            
-            .modal-header h2 {
-                font-size: 1.5rem;
-            }
-        }
-    </style>
-
-    
-        
-        <main class="content">
-            <h1>Welcome to Shamser.info.np</h1>
-            <p>Thank you for visiting my tech blog! Here you'll find articles about web development, programming tutorials, tech news, and insights from the Nepali tech community.</p>
-            <p>Stay updated with the latest posts by subscribing to our newsletter. You'll receive:</p>
-            <ul>
-                <li>Weekly tech insights and tutorials</li>
-                <li>Exclusive coding tips and resources</li>
-                <li>Updates on Nepali tech ecosystem</li>
-                <li>Early access to new blog posts</li>
-            </ul>
-            
-            
-        </main>
-        
-        <!-- Modal -->
-        <div class="modal-overlay" id="modalOverlay">
-            <div class="modal">
-                <div class="modal-header">
-                    <h2>Subscribe to Our Newsletter</h2>
-                    <button class="close-btn" id="closeModalBtn">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <p>Join our community of tech enthusiasts and get the latest updates directly in your inbox.</p>
-                    
-                    <form id="subscribeForm">
-                        <div class="form-group">
-                            <label for="name">Full Name</label>
-                            <input type="text" id="name" placeholder="Enter your name" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" placeholder="Enter your email" required>
-                        </div>
-                        
-                        <button type="submit" class="submit-btn">
-                            <i class="fas fa-paper-plane"></i> Subscribe Now
-                        </button>
-                    </form>
-                    
-                    <div class="success-message" id="successMessage">
-                        <i class="fas fa-check-circle"></i>
-                        <div>
-                            <strong>Thank you for subscribing!</strong>
-                            <p>You'll receive a confirmation email shortly.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <p>We respect your privacy. Unsubscribe at any time.</p>
-                </div>
-            </div>
-        </div>
-        
-        
-    
-
-    <script>
-        // DOM Elements
-        const openModalBtn = document.getElementById('openModalBtn');
-        const closeModalBtn = document.getElementById('closeModalBtn');
-        const modalOverlay = document.getElementById('modalOverlay');
-        const subscribeForm = document.getElementById('subscribeForm');
-        const successMessage = document.getElementById('successMessage');
-        
-        // Set current year in footer
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
-        
-        // Open modal
-        openModalBtn.addEventListener('click', () => {
-            modalOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent scrolling
-        });
-        
-        // Close modal when clicking X or outside modal
-        closeModalBtn.addEventListener('click', closeModal);
-        modalOverlay.addEventListener('click', (e) => {
-            if (e.target === modalOverlay) {
-                closeModal();
-            }
-        });
-        
-        // Close modal with Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
-                closeModal();
-            }
-        });
-        
-        // Handle form submission
-        subscribeForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            // Get form values
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            
-            // In a real application, you would send this data to a server
-            // For this example, we'll just show a success message
-            console.log(`Subscription data: Name - ${name}, Email - ${email}`);
-            
-            // Show success message
-            successMessage.style.display = 'flex';
-            
-            // Reset form
-            subscribeForm.reset();
-            
-            // Close modal after 3 seconds
-            setTimeout(() => {
-                successMessage.style.display = 'none';
-                closeModal();
-                
-                // Show a thank you alert (optional)
-                alert(`Thank you, ${name}! You've successfully subscribed to shamser.info.np newsletter.`);
-            }, 3000);
-        });
-        
-        // Function to close modal
-        function closeModal() {
-            modalOverlay.classList.remove('active');
-            document.body.style.overflow = 'auto'; // Restore scrolling
-            
-            // Reset form and hide success message when closing
-            subscribeForm.reset();
-            successMessage.style.display = 'none';
-        }
-        
-        // Optional: Add some console styling for fun
-        console.log("%c Welcome to shamser.info.np! 👋", "color: #3498db; font-size: 18px; font-weight: bold;");
-        console.log("%c Thanks for checking out the subscription modal demo!", "color: #2c3e50; font-size: 14px;");
-    </script>
-
-
-
-
-
-
-
-
-
-
-    
 </body>
 </html>
-
-
-
-
