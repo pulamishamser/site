@@ -1101,8 +1101,10 @@
 
 
     
-
-
+<!---Subscription---->
+<button class="subscribe-btn" id="openModalBtn">
+                <i class="fas fa-envelope"></i> Subscribe to Newsletter
+            </button>
 
     
 
@@ -1125,7 +1127,7 @@
                             <img src="https://shamser.info.np/HomePage/smarika.png" class="img-fluid rounded mt-3" alt="SMARIKA">
                         </div>
                         <div class="col-md-6">
-                            <h4>एकीकृत परीक्षा प्रणाली (IEMIS)</h4>
+                            <h4>एकीकृत परीक्षा ब्यवस्थापन तथा सुचना प्रणाली (IEMIS)</h4>
                             <p>छिटो र सजिलो तरिकाले नतिजा प्रकाशन गर्ने डिजिटल टुल</p>
                             
                             <div class="emis-header-container">
@@ -3453,6 +3455,425 @@ document.getElementById("iemisLoginForm").addEventListener("submit", function(e)
             startQuizTimer();
         });
     </script>
+
+
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .logo span {
+            color: #3498db;
+        }
+        
+        .tagline {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .content {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .content h1 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 2.2rem;
+        }
+        
+        .content p {
+            margin-bottom: 20px;
+            color: #555;
+            font-size: 1.1rem;
+        }
+        
+        /* Subscribe Button Styles */
+        .subscribe-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+        }
+        
+        .subscribe-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4);
+        }
+        
+        .subscribe-btn i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal {
+            background-color: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+        
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .modal-header h2 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: #95a5a6;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        
+        .close-btn:hover {
+            color: #e74c3c;
+        }
+        
+        .modal-body p {
+            color: #555;
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        
+        .submit-btn {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+        
+        .submit-btn:hover {
+            background-color: #27ae60;
+        }
+        
+        .modal-footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+        
+        /* Success Message */
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: none;
+            align-items: center;
+        }
+        
+        .success-message i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-top: 20px;
+            border-top: 1px solid #eaeaea;
+            width: 100%;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .content {
+                padding: 25px;
+            }
+            
+            .content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .modal {
+                padding: 20px;
+            }
+            
+            .modal-header h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+
+    <div class="container">
+        <header>
+            <div class="logo">shamser<span>.info.np</span></div>
+            <p class="tagline">A tech blog exploring programming, web development, and technology insights from Nepal</p>
+        </header>
+        
+        <main class="content">
+            <h1>Welcome to Shamser.info.np</h1>
+            <p>Thank you for visiting my tech blog! Here you'll find articles about web development, programming tutorials, tech news, and insights from the Nepali tech community.</p>
+            <p>Stay updated with the latest posts by subscribing to our newsletter. You'll receive:</p>
+            <ul>
+                <li>Weekly tech insights and tutorials</li>
+                <li>Exclusive coding tips and resources</li>
+                <li>Updates on Nepali tech ecosystem</li>
+                <li>Early access to new blog posts</li>
+            </ul>
+            
+            
+        </main>
+        
+        <!-- Modal -->
+        <div class="modal-overlay" id="modalOverlay">
+            <div class="modal">
+                <div class="modal-header">
+                    <h2>Subscribe to Our Newsletter</h2>
+                    <button class="close-btn" id="closeModalBtn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Join our community of tech enthusiasts and get the latest updates directly in your inbox.</p>
+                    
+                    <form id="subscribeForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" placeholder="Enter your name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" placeholder="Enter your email" required>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i> Subscribe Now
+                        </button>
+                    </form>
+                    
+                    <div class="success-message" id="successMessage">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>Thank you for subscribing!</strong>
+                            <p>You'll receive a confirmation email shortly.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <p>We respect your privacy. Unsubscribe at any time.</p>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+
+    <script>
+        // DOM Elements
+        const openModalBtn = document.getElementById('openModalBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const modalOverlay = document.getElementById('modalOverlay');
+        const subscribeForm = document.getElementById('subscribeForm');
+        const successMessage = document.getElementById('successMessage');
+        
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
+        // Open modal
+        openModalBtn.addEventListener('click', () => {
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        });
+        
+        // Close modal when clicking X or outside modal
+        closeModalBtn.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                closeModal();
+            }
+        });
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+                closeModal();
+            }
+        });
+        
+        // Handle form submission
+        subscribeForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            
+            // In a real application, you would send this data to a server
+            // For this example, we'll just show a success message
+            console.log(`Subscription data: Name - ${name}, Email - ${email}`);
+            
+            // Show success message
+            successMessage.style.display = 'flex';
+            
+            // Reset form
+            subscribeForm.reset();
+            
+            // Close modal after 3 seconds
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+                closeModal();
+                
+                // Show a thank you alert (optional)
+                alert(`Thank you, ${name}! You've successfully subscribed to shamser.info.np newsletter.`);
+            }, 3000);
+        });
+        
+        // Function to close modal
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Restore scrolling
+            
+            // Reset form and hide success message when closing
+            subscribeForm.reset();
+            successMessage.style.display = 'none';
+        }
+        
+        // Optional: Add some console styling for fun
+        console.log("%c Welcome to shamser.info.np! 👋", "color: #3498db; font-size: 18px; font-weight: bold;");
+        console.log("%c Thanks for checking out the subscription modal demo!", "color: #2c3e50; font-size: 14px;");
+    </script>
+
+
+
+
+
+
+
+
+
+
+    
 </body>
 </html>
 
