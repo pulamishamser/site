@@ -523,7 +523,177 @@ body,
 <a href="News modal.html"><P style="font-size:14px">ताजा नेपाली समाचार Live News पढ्नुहोस्</a></p>
    
    <a href="https://www.facebook.com/share/p/f7NyJ5yHhtyUDS1c/">
-        <P style="font-size:14px">  विद्यालयहरुमा दशैं तिहारछठ विशेष कार्यक्रमको झलकहरु </a>    </p>
+        <P style="font-size:14px">  विद्यालयहरुमा दशैं तिहारछठ 
+<!-- ======= WIDGET BOTTOM NAV (popup) ======= -->
+<div class="widget-container" id="widget-container">
+  <button class="close-btn" onclick="hideWidgets()">×</button>
+  <!-- Calendar widget -->
+  <div id="calendar-widget" class="widget">
+    <h3><i class="fas fa-calendar-alt"></i> पात्रो</h3>
+    <iframe src="https://www.hamropatro.com/widgets/calender-medium.php" frameborder="0" style="width:100%; height:385px;"></iframe>
+  </div>
+  <!-- Number converter placeholder -->
+  <div id="number-converter-widget" class="widget">
+    <h3><i class="fas fa-calculator"></i> संख्या रुपान्तरण</h3>
+    <div class="external-links">
+      <a href="https://shamser.info.np/Number_to_Text.html" target="_blank">विस्तृत संख्या रुपान्तरण</a>
+    </div>
+  </div>
+  <!-- Radio -->
+  <div id="radio-widget" class="widget">
+    <h3><i class="fas fa-broadcast-tower"></i> रेडियो</h3>
+    <audio id="radio-player" controls style="width:100%;"><source src="" type="audio/mpeg"></audio>
+    <div class="mt-2"><a href="https://radionp.com/#synergy-fm" class="btn btn-primary btn-sm">अनलाइन रेडियो स्टेशनहरू</a></div>
+  </div>
+  <!-- Date conversion -->
+  <div id="date-conversion-widget" class="widget">
+    <h3><i class="fas fa-calendar-day"></i> मिति रूपान्तरण</h3>
+    <iframe src="https://www.hamropatro.com/widgets/dateconverter.php" style="width:100%; height:100px; border:none;"></iframe>
+  </div>
+  <!-- Unicode -->
+  <div id="unicode-widget" class="widget">
+    <h3><i class="fas fa-keyboard"></i> युनिकोड</h3>
+    <textarea id="preeti-input" class="form-control" placeholder="प्रीटी/Roman text"></textarea>
+    <button class="btn btn-success mt-2 w-100" onclick="convertToUnicode()">रूपान्तरण</button>
+    <div id="unicode-output" class="mt-2 p-2 bg-light"></div>
+    <div class="external-links mt-2">
+      <a href="https://shamser.info.np/Shaikshik_Sansar/sobiztrend.com/preeti_to_unicode.html" target="_blank">प्रीति→युनिकोड</a>
+      <a href="https://shamser.info.np/Shaikshik_Sansar/sobiztrend/unicode_to_preeti.html" target="_blank">युनिकोड→प्रीति</a>
+    </div>
+  </div>
+</div>
+<!-- bottom nav fixed -->
+<div class="bottom-nav">
+  <a href="#" onclick="return showWidget('calendar-widget')"><i class="fas fa-calendar-alt"></i>पात्रो</a>
+  <a href="#" onclick="return showWidget('number-converter-widget')"><i class="fas fa-calculator"></i>संख्या</a>
+  <a href="#" onclick="return showWidget('radio-widget')"><i class="fas fa-broadcast-tower"></i>रेडियो</a>
+  <a href="#" onclick="return showWidget('date-conversion-widget')"><i class="fas fa-calendar-day"></i>मिति</a>
+  <a href="#" onclick="return showWidget('unicode-widget')"><i class="fas fa-keyboard"></i>युनिकोड</a>
+</div>
+
+<!-- ======= MAIN MODAL : IEMIS & ID CARD ======= -->
+<!-- Modal IEMIS Login (trigger from menu) -->
+<div class="modal fade" id="iemisModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="fas fa-sign-in-alt"></i> एकिकृत परीक्षा तथा सूचना प्रणाली (IEMIS)</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- IEMIS header image and dropdown -->
+        <div class="emis-header-container mb-3">
+          <img src="https://shamser.info.np/HomePage/IEMIS%20SHAMSER.jpg" class="img-fluid" alt="IEMIS">
+          <div class="emis-dropdown">
+            <button class="emis-dropbtn"><i class="fas fa-user-circle"></i> IEMIS LOGIN <i class="fas fa-caret-down"></i></button>
+            <ul class="emis-dropdown-content">
+              <li><a href="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/IEMIS.v2.html"><i class="fas fa-sign-in-alt"></i> EMIS LOGIN</a></li>
+              <li><a href="https://shamser.info.np/profile/connect%20with%20social%20media.htm"><i class="fas fa-user-plus"></i> Contact</a></li>
+            </ul>
+          </div>
+        </div>
+        <h4 class="text-primary">एकिकृत परीक्षा तथा सूचना प्रणाली</h4>
+        <p style="text-align:justify;">
+          छिटोभन्दा छिटो नतिजा प्रकासन गरी मूल्याङ्कन अभिलेखीकरण कार्यमा चुस्त बनाउन मोबाइलबाटै अङ्क चढाई नतिजा हेर्न सकिने, विद्यार्थीले अनलाइन नतिजा हेरी ग्रेडशिट डाउनलोड गर्न सक्ने सफ्टवेयर Integrated Exam Management Information System (IEMIS) विकास गरिएको छ। 
+          <span id="dots">...</span>
+          <span id="more"> यसले विद्यार्थीको सिकाइ उपलब्धिलाई द्रुत रूपमा प्रमाणीकरण गर्न सहयोग पुर्याउँछ। विद्यालय, कलेज तथा तालिम केन्द्रहरूले नि:शुल्क प्रयोग गर्न सक्ने यो प्रणालीले परीक्षा व्यवस्थापनलाई डिजिटल र सहज बनाएको छ।</span>
+        </p>
+        <button onclick="myFunction()" id="myBtn" class="btn btn-link">थप पढ्नुहोस्</button>
+        <hr>
+        <div class="d-grid gap-2">
+          <a href="https://shamser.info.np/Letterpad.html" class="btn btn-primary"><i class="fas fa-file-alt"></i> Generate official letter</a>
+          <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#demoModal"><i class="fas fa-id-card"></i> ID Card Generator Software</button>
+          <a href="http://janajyoticampus.edu.np/wp-content/uploads/2024/12/स्मारिका-२०८१.pdf" class="btn btn-primary" target="_blank"><i class="fas fa-book"></i> जनज्योति क्याम्पस स्मारिका</a>
+        </div>
+        <img src="https://shamser.info.np/HomePage/smarika.png" class="img-fluid rounded mt-3" alt="smarika">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ID Card modal (demoModal) -->
+<div class="modal fade" id="demoModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="fas fa-id-card"></i> ID Card Generator</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Student/Staff ID card with QR, photo upload, bulk Excel import</strong> - यो सुविधा चाँडै उपलब्ध हुनेछ। हालको लागि सम्पर्क गर्नुहोस्।</p>
+        <img src="https://shamser.info.np/HomePage/IEMIS%20SHAMSER.jpg" class="img-fluid" alt="ID card demo">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Additional small modals (weather, calendar, forex, gold, horoscope) -->
+<!-- Weather Modal -->
+<div class="modal fade" id="weather1" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">मौसम</h5><button type="button" class="close" data-dismiss="modal">&times;</button></div><div class="modal-body"><iframe src="https://www.ashesh.com.np/weather/widget.php" height="550" width="100%"></iframe></div></div></div></div>
+<!-- Calendar Modal (patro) -->
+<div class="modal fade" id="calendar1" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">नेपाली पात्रो</h5><button type="button" class="close" data-dismiss="modal">&times;</button></div><div class="modal-body"><iframe src="https://www.hamropatro.com/widgets/calender-medium.php" style="width:295px; height:385px; border:none;"></iframe></div></div></div></div>
+<!-- Forex Modal -->
+<div class="modal fade" id="forex1" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">विनियमदर</h5><button type="button" class="close" data-dismiss="modal">&times;</button></div><div class="modal-body"><iframe src="https://www.ashesh.com.np/forex/widget2.php" style="width:100%; height:383px;"></iframe></div></div></div></div>
+<!-- Gold Modal -->
+<div class="modal fade" id="gold1" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">सुन चादी</h5><button type="button" class="close" data-dismiss="modal">&times;</button></div><div class="modal-body"><iframe src="https://www.ashesh.com.np/gold/widget.php" height="250" width="100%"></iframe></div></div></div></div>
+<!-- Horoscope Modal -->
+<div class="modal fade" id="hor1" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">राशिफल</h5><button type="button" class="close" data-dismiss="modal">&times;</button></div><div class="modal-body"><iframe src="https://www.ashesh.com.np/rashifal/widget.php" height="900" width="100%"></iframe></div></div></div></div>
+
+<!-- Back to top button -->
+<button type="button" class="scroll-top" onclick="goToTop()"><img src="https://ps.w.org/back-to-the-top-button/assets/icon-128x128.png?rev=2283756"></button>
+
+<!-- JavaScript: jQuery, Bootstrap, Owl Carousel, custom -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Owl carousel -->
+<script src="asset/sites/js/owl.carousel.min.js"></script>
+<script>
+  // Widget controller
+  let currentWidget = null;
+  function showWidget(widgetId) {
+    const container = document.getElementById('widget-container');
+    if (currentWidget === widgetId && container.style.display === 'block') {
+      container.style.display = 'none'; currentWidget = null; return false;
+    }
+    container.style.display = 'block';
+    document.querySelectorAll('.widget').forEach(w => w.classList.remove('active'));
+    document.getElementById(widgetId).classList.add('active');
+    currentWidget = widgetId;
+    container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return false;
+  }
+  function hideWidgets() { document.getElementById('widget-container').style.display = 'none'; currentWidget = null; }
+  function convertToUnicode() {
+    let txt = document.getElementById('preeti-input').value;
+    let out = txt ? "रूपान्तरण: " + txt.replace(/laal|Namaste|Nepal|kasto|cha|hajur/gi, function(m) {
+      return {laal:'लाल',Namaste:'नमस्ते',Nepal:'नेपाल',kasto:'कस्तो',cha:'छ',hajur:'हजुर'}[m.toLowerCase()] || m;
+    }) : "कृपया टेक्स्ट प्रविष्ट गर्नुहोस्";
+    document.getElementById('unicode-output').innerText = out;
+  }
+  function goToTop() { window.scrollTo(0,0); }
+  function myFunction() {
+    var dots = document.getElementById("dots");
+    var moreText = document.getElementById("more");
+    var btn = document.getElementById("myBtn");
+    if (dots.style.display === "none") {
+      dots.style.display = "inline"; btn.innerHTML = "Read more"; moreText.style.display = "none";
+    } else {
+      dots.style.display = "none"; btn.innerHTML = "Read less"; moreText.style.display = "inline";
+    }
+  }
+  // flash carousel init
+  $(document).ready(function(){
+    $(".flash-caresol").owlCarousel({ items:1, loop:true, autoplay:true, autoplayTimeout:5000, dots:false, nav:false });
+  });
+  // prevent contextmenu, selectstart (copy protection)
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  document.onselectstart = e => { e.preventDefault(); return false; };
+</script>
+<!-- Facebook SDK (optional) -->
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v20.0"></script>
+विशेष कार्यक्रमको झलकहरु </a>    </p>
               <a href="https://shamser.info.np/Service_Site/index.html'>Service_Site</a>">
              lauro media/shamser.info.np <P style="font-size:14px">बाट उपलब्ध हुने सेवा सुविधा प्राप्त गरी फाइदा लिन अनुरोध
             </a></p>
