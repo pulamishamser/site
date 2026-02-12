@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <base target="_top">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e2b4a 0%, #2d3e63 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1a2a4f 0%, #2a3f66 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            border-bottom: 4px solid #ff9800;
+        }
+        
+        .header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            text-decoration: none;
+            display: block;
+            height: 100%;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .card:focus {
+            outline: 3px solid #667eea;
+            outline-offset: 3px;
+        }
+        
+        .card i {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .card h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .card p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+        
+        .card.id {
+            border-color: #2196F3;
+        }
+        .card.id i { color: #2196F3; }
+        
+        .card.data {
+            border-color: #FF9800;
+        }
+        .card.data i { color: #FF9800; }
+        
+        .card.update {
+            border-color: #9C27B0;
+        }
+        .card.update i { color: #9C27B0; }
+        
+        .card.excel {
+            border-color: #4CAF50;
+        }
+        .card.excel i { color: #4CAF50; }
+        
+        .card.clear {
+            border-color: #f44336;
+        }
+        .card.clear i { color: #f44336; }
+        
+        .id-type-info {
+            margin-top: 10px;
+            font-size: 12px;
+        }
+        
+        /* ----- NEW PRICING & PURCHASE SECTION ----- */
+        .purchase-section {
+            margin-top: 50px;
+            border-top: 2px dashed #bbb;
+            padding-top: 40px;
+        }
+        
+        .section-badge {
+            background: #ff9800;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 40px;
+            display: inline-block;
+            font-weight: 600;
+            letter-spacing: 1px;
+            font-size: 14px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .pricing-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: 0.25s;
+            border: 1px solid #eaeef5;
+            position: relative;
+        }
+        
+        .pricing-card.popular {
+            border: 2px solid #ff9800;
+            transform: scale(1.02);
+            background: #fffbf5;
+        }
+        
+        .popular-tag {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ff9800;
+            color: white;
+            padding: 6px 20px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .pricing-card h4 {
+            font-size: 24px;
+            color: #1e2b4a;
+            margin-bottom: 15px;
+        }
+        
+        .price {
+            font-size: 44px;
+            font-weight: 800;
+            color: #1e2b4a;
+            margin-bottom: 10px;
+        }
+        
+        .price span {
+            font-size: 18px;
+            font-weight: 400;
+            color: #7f8c8d;
+        }
+        
+        .duration {
+            color: #6c757d;
+            margin-bottom: 25px;
+            font-size: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        
+        .features {
+            text-align: left;
+            list-style: none;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+        
+        .features li {
+            padding: 8px 0;
+            font-size: 15px;
+            color: #2c3e50;
+        }
+        
+        .features i {
+            color: #27ae60;
+            margin-right: 10px;
+            font-size: 16px;
+        }
+        
+        .btn-trial {
+            background: #ff9800;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 2px solid #ff9800;
+            margin-top: 5px;
+            display: inline-block;
+            text-decoration: none;
+            width: 100%;
+        }
+        
+        .btn-trial:hover {
+            background: #e68900;
+            border-color: #e68900;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #1e2b4a;
+            color: #1e2b4a;
+        }
+        
+        .btn-outline:hover {
+            background: #1e2b4a;
+            color: white;
+        }
+        
+        .esewa-payment-box {
+            background: linear-gradient(145deg, #f9fbfd, #ffffff);
+            border-radius: 28px;
+            padding: 35px 30px;
+            margin: 30px 0 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 1px solid #d4af37;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .qr-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            flex: 0 0 220px;
+        }
+        
+        .qr-code-sim {
+            width: 160px;
+            height: 160px;
+            background: repeating-linear-gradient(45deg, #000 0px, #000 4px, #fff 4px, #fff 10px);
+            border: 3px solid #1e2b4a;
+            border-radius: 16px;
+            margin-bottom: 15px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .qr-code-sim span {
+            background: white;
+            padding: 5px 8px;
+            border-radius: 30px;
+            border: 1px solid #000;
+        }
+        
+        .qr-caption {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1e2b4a;
+            text-align: center;
+        }
+        
+        .qr-caption small {
+            display: block;
+            color: #ff5722;
+            font-size: 15px;
+            margin-top: 5px;
+        }
+        
+        .contact-details {
+            flex: 1;
+            padding-left: 40px;
+        }
+        
+        .contact-details h5 {
+            font-size: 24px;
+            color: #1e2b4a;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #ff9800;
+            display: inline-block;
+            padding-bottom: 8px;
+        }
+        
+        .contact-details p {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .contact-details i {
+            margin-right: 15px;
+            color: #ff9800;
+            width: 25px;
+            text-align: center;
+        }
+        
+        .nepali-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: #b45f06;
+            margin-bottom: 15px;
+            background: #fff1e0;
+            padding: 10px 18px;
+            border-radius: 50px;
+            display: inline-block;
+        }
+        
+        .app-info {
+            margin-top: 40px;
+            padding: 20px 25px;
+            background: #f8f9fa;
+            border-radius: 16px;
+            font-size: 13px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 25px;
+            color: #666;
+            font-size: 14px;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .header { padding: 30px 20px; }
+            .header h1 { font-size: 28px; }
+            .content { padding: 25px; }
+            .dashboard { grid-template-columns: 1fr; }
+            .esewa-payment-box { flex-direction: column; }
+            .contact-details { padding-left: 0; margin-top: 30px; }
+            .qr-area { width: 100%; }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏫 ID Card Generator System</h1>
+            <p>Complete solution for generating and managing student & teacher ID cards</p>
+        </div>
+        
+        <div class="content">
+            <!-- ORIGINAL DASHBOARD CARDS (unchanged functionality) -->
+            <div class="dashboard">
+                <div class="card id" onclick="openIDCardGenerator()">
+                    <i class="fas fa-id-card"></i>
+                    <h3>Generate ID Cards</h3>
+                    <p>Create PDF with 9 ID cards per A4 page with photos and QR codes</p>
+                </div>
+                <div class="card data" onclick="openDataEntry()">
+                    <i class="fas fa-user-plus"></i>
+                    <h3>Data Entry Form</h3>
+                    <p>Add new student/teacher data with photo, logo, and signature upload</p>
+                </div>
+                <div class="card update" onclick="openUpdateForm()">
+                    <i class="fas fa-edit"></i>
+                    <h3>Update Data</h3>
+                    <p>Search and update existing student/teacher information</p>
+                </div>
+                <div class="card excel" onclick="openDownloadExcel()">
+                    <i class="fas fa-file-excel"></i>
+                    <h3>Download as Excel</h3>
+                    <p>Export all student and teacher records to Excel spreadsheet</p>
+                </div>
+                <div class="card clear" onclick="openClearData()">
+                    <i class="fas fa-trash-alt"></i>
+                    <h3>Clear All Data</h3>
+                    <h5 style="color:#f44336;">⚠️Attention !</h5>
+                    <p>Completely erase all student and teacher records from database</p>
+                    <div class="id-type-info">
+                        <span style="color: #f44336;"><i class="fas fa-exclamation-triangle"></i> This action cannot be undone</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- NEW: PURCHASE / DEMO TRIAL / PRICING SECTION with eSewa QR & Contact -->
+            <div class="purchase-section">
+                <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;">
+                    <span class="section-badge"><i class="fas fa-gem"></i> प्रिमियम पहुँच – Free trial & Pricing</span>
+                    <span style="background: #1e2b4a; color: white; padding: 5px 18px; border-radius: 30px; font-size: 14px;"><i class="fas fa-calendar-alt"></i> 14–दिन नि:शुल्क परीक्षण</span>
+                </div>
+                
+                <!-- Pricing Cards -->
+                <div class="pricing-grid">
+                    <!-- FREE TRIAL / DEMO CARD -->
+                    <div class="pricing-card">
+                        <h4><i class="fas fa-flask" style="color:#ff9800;"></i> Demo Trial</h4>
+                        <div class="price">रु 0 <span></span></div>
+                        <div class="duration">14 दिन • पूर्ण सुविधा</div>
+                        <ul class="features">
+                            <li><i class="fas fa-check-circle"></i> 50 ID cards generate</li>
+                            <li><i class="fas fa-check-circle"></i> Data entry (max 20 records)</li>
+                            <li><i class="fas fa-check-circle"></i> Excel export with watermark</li>
+                            <li><i class="fas fa-check-circle"></i> Email support (24h)</li>
+                        </ul>
+                        <button class="btn-trial btn-outline" onclick="startFreeTrial()" style="border-color:#ff9800; color:#ff9800; background:white;"><i class="fas fa-rocket"></i> सुरु गर्नुहोस् (नि:शुल्क)</button>
+                    </div>
+                    
+                    <!-- BASIC MONTHLY - POPULAR -->
+                    <div class="pricing-card popular">
+                        <div class="popular-tag">🔥 सर्वाधिक रोजाइ</div>
+                        <h4><i class="fas fa-id-card"></i> मासिक योजना</h4>
+                        <div class="price">रु 499 <span>/महिना</span></div>
+                        <div class="duration">बिलिङ मासिक, जुनसुकै बेला रद्द</div>
+                        <ul class="features">
+                            <li><i class="fas fa-check-circle"></i> असीमित ID कार्ड उत्पादन</li>
+                            <li><i class="fas fa-check-circle"></i> फोटो, लोगो, हस्ताक्षर सहित</li>
+                            <li><i class="fas fa-check-circle"></i> Excel डाउनलोड (पूर्ण)</li>
+                            <li><i class="fas fa-check-circle"></i> प्राथमिकता समर्थन</li>
+                        </ul>
+                        <button class="btn-trial" onclick="purchasePlan('monthly')"><i class="fas fa-shopping-cart"></i> खरिद गर्नुहोस्</button>
+                    </div>
+                    
+                    <!-- YEARLY PLAN -->
+                    <div class="pricing-card">
+                        <h4><i class="fas fa-calendar-alt"></i> वार्षिक योजना</h4>
+                        <div class="price">रु 4,999 <span>/वर्ष</span></div>
+                        <div class="duration">२ महिना निःशुल्क (साधारण मूल्य रु ৫,৯৮৮)</div>
+                        <ul class="features">
+                            <li><i class="fas fa-check-circle"></i> सबै मासिक सुविधाहरू</li>
+                            <li><i class="fas fa-check-circle"></i> प्रिमियम QR कोड</li>
+                            <li><i class="fas fa-check-circle"></i> समर्पित सहयोगी</li>
+                            <li><i class="fas fa-check-circle"></i> बल्क ID अपडेट</li>
+                        </ul>
+                        <button class="btn-trial" onclick="purchasePlan('yearly')"><i class="fas fa-crown"></i> वार्षिक खरिद</button>
+                    </div>
+                </div>
+                
+                <!-- eSewa QR & CONTACT INFO (exactly as requested) -->
+                <div class="esewa-payment-box">
+                    <div class="qr-area">
+                        <div class="qr-code-sim">
+                            <span><i class="fas fa-qrcode fa-2x"></i><br>eSewa QR</span>
+                        </div>
+                        <div class="qr-caption">
+                            <i class="fas fa-mobile-alt"></i> eSewa Scan & Pay
+                            <small>तत्काल भुक्तानी</small>
+                        </div>
+                        <!-- The exact Nepali text requested -->
+                        <p style="font-size: 16px; font-weight: 500; color: #1e2b4a; margin-top: 10px; background: #ffe5c4; padding: 8px 16px; border-radius: 40px;">
+                            ⚡ रकम भुक्तानीको लागि eSewa मा यो QR code स्क्यान गर्नुहोस्
+                        </p>
+                    </div>
+                    
+                    <div class="contact-details">
+                        <h5><i class="fas fa-address-book"></i> सम्पर्क जानकारी</h5>
+                        <!-- exact phone/email as requested -->
+                        <p><i class="fas fa-phone me-2"></i> 9844087012</p>
+                        <p><i class="fas fa-envelope me-2"></i> shamserpulami500@gmail.com</p>
+                        <p style="margin-top: 20px; background: #edf2fa; padding: 12px; border-radius: 12px;">
+                            <i class="fas fa-clock"></i> सेवा समय: ६:०० बजे – १०:०० बजे (सोम–शनि)
+                        </p>
+                        <!-- additional demo reminder -->
+                        <p style="color: #27ae60; font-weight: 500; margin-top: 15px;"><i class="fas fa-gift"></i> नि:शुल्क परीक्षण आजै सुरु गर्नुहोस् !</p>
+                    </div>
+                </div>
+                
+                <!-- small note: contact matches required fields -->
+                <p style="font-size: 14px; color: #4a5568; background: #ebf8ff; padding: 10px 20px; border-radius: 10px; margin-top: 20px;">
+                    <i class="fas fa-shield-alt"></i> भुक्तानी पुष्टि भएपछि तत्काल सक्रिय हुन्छ। परीक्षण संस्करण १४ दिनसम्म — क्रेडिट कार्ड आवश्यक छैन।
+                </p>
+            </div>
+            
+            <!-- DIRECT APP LINKS (unchanged) -->
+            <div class="app-info">
+                <h4><i class="fas fa-external-link-alt"></i> Direct App Links:</h4>
+                <a href="https://script.google.com/macros/s/AKfycbxC1Ky2usrbUH026lPRlthhANpgYBsRfq0Ot3gpd2Y6CZujk-KZKTTMHkHym1HtVilEOg/exec" target="_blank" class="app-link" style="display:block; padding:8px; background:white; border:1px solid #e0e0e0; border-radius:5px; margin-bottom:8px; color:#555; text-decoration:none;">
+                    <i class="fas fa-user-plus"></i> Data Entry Form
+                </a>
+                <a href="https://script.google.com/macros/s/AKfycbzqdyI8KpnvETDIKBUZiLUtGZoZFidaYORKcZdNpqwNBTxYHdIN_BHFGaKQAtaaKGU/exec" target="_blank" class="app-link" style="display:block; padding:8px; background:white; border:1px solid #e0e0e0; border-radius:5px; margin-bottom:8px; color:#555; text-decoration:none;">
+                    <i class="fas fa-edit"></i> Update Data Form
+                </a>
+                <a href="https://script.google.com/macros/s/AKfycbwPInPaZV7GfwgpDl0ujeX48V8eUlyri1fDT4e1enXyZ-ObOx-inNJBeeha9HLlR0GZrA/exec" target="_blank" class="app-link" style="display:block; padding:8px; background:white; border:1px solid #e0e0e0; border-radius:5px; margin-bottom:8px; color:#555; text-decoration:none;">
+                    <i class="fas fa-id-card"></i> ID Card Generator
+                </a>
+                <a href="https://script.google.com/macros/s/AKfycbyMxO_nLQ5HjY5YYLwm5nS1e11t4cfqP_Vd7Q4LFlvnnITEhyJ8i3FAfT_ZGwyHasdB2Q/exec" target="_blank" class="app-link" style="display:block; padding:8px; background:white; border:1px solid #4CAF50; border-radius:5px; margin-bottom:8px; color:#2e7d32;">
+                    <i class="fas fa-file-excel"></i> 📊 Download as Excel
+                </a>
+                <a href="https://script.google.com/macros/s/AKfycbzJRfvbcByu8Db5uKtikj2MU--XJDJPoiojEBuyMSDgIq6aNXJXtBc5d3pJyioHL8ktoA/exec" target="_blank" class="app-link" style="display:block; padding:8px; background:white; border:1px solid #f44336; border-radius:5px; margin-bottom:8px; color:#c62828;">
+                    <i class="fas fa-trash-alt"></i> ⚠️ Clear All Data (Destructive Action)
+                </a>
+            </div>
+            
+            <div class="footer">
+                <p>Click on any card or use the direct links above to access the features</p>
+                <p style="margin-top: 10px; color: #999; font-size: 12px;">
+                    <i class="fas fa-info-circle"></i> All apps open in new tabs for convenience
+                </p>
+                <p style="margin-top: 10px; color: #4CAF50; font-size: 12px;">
+                    <i class="fas fa-file-excel"></i> Download Excel: Export all records to spreadsheet format
+                </p>
+                <p style="margin-top: 10px; color: #f44336; font-size: 12px; font-weight: bold;">
+                    <i class="fas fa-exclamation-triangle"></i> WARNING: Clear All Data will permanently erase all records
+                </p>
+                <p style="margin-top: 20px; color: #ff9800; font-size: 14px; border-top: 1px solid #ddd; padding-top: 20px;">
+                    <i class="fas fa-credit-card"></i> सुरक्षित भुक्तानी: eSewa QR, वा बैंक ट्रान्सफर। <strong>प्रिमियम योजना: रु 499/महिना सुरु</strong>
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // ORIGINAL navigation functions
+        function openIDCardGenerator() {
+            window.open('https://script.google.com/macros/s/AKfycbwPInPaZV7GfwgpDl0ujeX48V8eUlyri1fDT4e1enXyZ-ObOx-inNJBeeha9HLlR0GZrA/exec', '_blank');
+        }
+        function openDataEntry() {
+            window.open('https://script.google.com/macros/s/AKfycbxC1Ky2usrbUH026lPRlthhANpgYBsRfq0Ot3gpd2Y6CZujk-KZKTTMHkHym1HtVilEOg/exec', '_blank');
+        }
+        function openUpdateForm() {
+            window.open('https://script.google.com/macros/s/AKfycbzqdyI8KpnvETDIKBUZiLUtGZoZFidaYORKcZdNpqwNBTxYHdIN_BHFGaKQAtaaKGU/exec', '_blank');
+        }
+        function openDownloadExcel() {
+            window.open('https://script.google.com/macros/s/AKfycbyMxO_nLQ5HjY5YYLwm5nS1e11t4cfqP_Vd7Q4LFlvnnITEhyJ8i3FAfT_ZGwyHasdB2Q/exec', '_blank');
+        }
+        function openClearData() {
+            if (confirm('⚠️ WARNING: This will permanently delete ALL student and teacher records. This action CANNOT be undone. Are you absolutely sure you want to continue?')) {
+                window.open('https://script.google.com/macros/s/AKfycbzJRfvbcByu8Db5uKtikj2MU--XJDJPoiojEBuyMSDgIq6aNXJXtBc5d3pJyioHL8ktoA/exec', '_blank');
+            }
+        }
+        
+        // NEW functions for demo / purchase buttons
+        function startFreeTrial() {
+            alert("🎓 14-दिने नि:शुल्क परीक्षण सुरु! तपाईंको ईमेल प्रविष्ट गर्नुहोस्।\n(डेमो मोड: तपाईंलाई परीक्षणको लागि पूर्ण सुविधा दिइनेछ।)");
+            // In real scenario, you'd redirect to signup or open a trial activation web app.
+            window.open('https://script.google.com/macros/s/AKfycbwPInPaZV7GfwgpDl0ujeX48V8eUlyri1fDT4e1enXyZ-ObOx-inNJBeeha9HLlR0GZrA/exec', '_blank'); // demo: go to ID generator
+        }
+        
+        function purchasePlan(planType) {
+            let planName = planType === 'monthly' ? 'मासिक योजना (रु 499/महिना)' : 'वार्षिक योजना (रु 4,999/वर्ष)';
+            alert("🧾 कृपया eSewa QR स्क्यान गरी भुक्तानी गर्नुहोस्।\nयोजना: " + planName + "\n\nभुक्तानी पछि तपाईंको खाता स्वचालित रूपमा सक्रिय हुनेछ।");
+            // you can also open a payment gateway page, but here we simulate with QR focus.
+            // Optional: highlight the QR area
+            document.querySelector('.qr-area').style.animation = "pulse 0.8s";
+            setTimeout(() => { document.querySelector('.qr-area').style.animation = ""; }, 800);
+        }
+        
+        // small pulse animation
+        const styleSheet = document.createElement("style");
+        styleSheet.innerHTML = `@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255,152,0,0.7); } 70% { box-shadow: 0 0 0 15px rgba(255,152,0,0); } 100% { box-shadow: 0 0 0 0 rgba(255,152,0,0); } }`;
+        document.head.appendChild(styleSheet);
+    </script>
+</body>
+</html>/script.google.com/macros/s/AKfycbzJRfvbcByu8Db5uKtikj2MU--XJDJPoiojEBuyMSDgIq6aNXJXtBc5d3pJyioHL8ktoA/exec
