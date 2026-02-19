@@ -1168,11 +1168,12 @@
 </head>
 <body>
     <!-- ##### DELAYED FULL‑SCREEN VIDEO CONTAINER ##### -->
-    <div id="fullscreenVideoContainer" class="video-fullscreen" style="display: none;">
-        <video id="delayedVideo" unmuted playsinline>
-            <source src="https://shamser.info.np/HomePage/adv1.MP4" type="video/mp4">
-        </video>
-    </div>
+    <!-- ##### DELAYED FULL‑SCREEN VIDEO CONTAINER ##### -->
+<div id="fullscreenVideoContainer" class="video-fullscreen" style="display: none;">
+    <video id="delayedVideo" playsinline>
+        <source src="https://shamser.info.np/HomePage/adv1.MP4" type="video/mp4">
+    </video>
+</div>
 
     <!-- ##### ORIGINAL PAGE CONTENT (unchanged) ##### -->
     <!-- Header Top with Nepali Date & Time -->
@@ -2842,48 +2843,60 @@
         function convertModalToUnicode(){ const preetiText=document.getElementById('modalPreetiText').value; const unicodeResult=document.getElementById('modalUnicodeResult'); if(!preetiText){ unicodeResult.textContent="कृपया प्रीटी फोन्ट प्रविष्ट गर्नुहोस्!"; return; } const conversions={"laal":"लाल","Namaste":"नमस्ते","Nepal":"नेपाल","kasto":"कस्तो","cha":"छ","hajur":"हजुर","ma":"म","timro":"तिम्रो","naam":"नाम","ke":"के","ho":"हो","shiksha":"शिक्षा","vidhyarthi":"विद्यार्थी","shikshak":"शिक्षक"}; let convertedText=preetiText; for(const [preeti,unicode] of Object.entries(conversions)){ convertedText=convertedText.replace(new RegExp(preeti,'gi'),unicode); } unicodeResult.textContent=convertedText||"रूपान्तरण परिणाम यहाँ देखिने"; }
         document.getElementById('quizModal').addEventListener('shown.bs.modal',function(){ displayModalQuiz(); startQuizTimer(); });
 
-        // ========== DELAYED FULL‑SCREEN VIDEO LOGIC ==========
-        (function() {
-            const container = document.getElementById('fullscreenVideoContainer');
-            const video = document.getElementById('delayedVideo');
+        // ========== DELAYED FULL‑SCREEN VIDEO 
+   // ========== DELAYED FULL‑SCREEN VIDEO LOGIC ==========
+(function() {
+    const container = document.getElementById('fullscreenVideoContainer');
+    const video = document.getElementById('delayedVideo');
 
-            const DELAY_MS = 30000;        // 30 seconds
-            const REPEAT_TIMES = 3;         // play 3 times total
+    const DELAY_MS = 30000;        // 30 seconds
+    const REPEAT_TIMES = 3;         // play 3 times total
 
-            let playCount = 0;
+    let playCount = 0;
 
-            // Mute to satisfy autoplay policies
-            video.muted = false;
+    // Remove the muted property - we want unmuted video
+    // video.muted = false;  <-- REMOVE THIS LINE
 
-            function startPlayback() {
-                if (playCount >= REPEAT_TIMES) return;
+    function startPlayback() {
+        if (playCount >= REPEAT_TIMES) return;
 
-                // Show container
-                container.style.display = 'flex';
+        // Show container
+        container.style.display = 'flex';
 
-                // First play
+        // First play
+        playCount++;
+        video.play().catch(e => { 
+            console.error("Video playback failed:", e);
+            // If autoplay with sound fails, try with muted first then unmute
+            video.muted = true;
+            video.play().then(() => {
+                // Once playing, unmute after a small delay
+                setTimeout(() => {
+                    video.muted = false;
+                }, 100);
+            }).catch(e => console.error("Even muted playback failed:", e));
+        });
+
+        // Handle repeat via ended event
+        video.addEventListener('ended', function onEnd() {
+            if (playCount < REPEAT_TIMES) {
                 playCount++;
-                video.play().catch(e => { /* ignore */ });
-
-                // Handle repeat via ended event
-                video.addEventListener('ended', function onEnd() {
-                    if (playCount < REPEAT_TIMES) {
-                        playCount++;
-                        video.currentTime = 0;
-                        video.play().catch(() => {});
-                    } else {
-                        // All repeats done → hide container completely
-                        video.removeEventListener('ended', onEnd);
-                        container.style.display = 'none';
-                        // Optionally remove video element to free memory
-                        // container.parentNode.removeChild(container); // if you want to delete it
-                    }
-                });
+                video.currentTime = 0;
+                video.play().catch(() => {});
+            } else {
+                // All repeats done → hide container completely
+                video.removeEventListener('ended', onEnd);
+                container.style.display = 'none';
+                // Optionally remove video element to free memory
+                // container.parentNode.removeChild(container); // if you want to delete it
             }
+        });
+    }
 
-            // Wait 30 seconds, then start
-            setTimeout(startPlayback, DELAY_MS);
-        })();
+    // Wait 30 seconds, then start
+    setTimeout(startPlayback, DELAY_MS);
+})();
+    
     </script>
 </body>
 </html>
