@@ -274,8 +274,8 @@ button i {
 }
 
 .org-name span {
-  font-size: 22px;
-  font-weight: 400;
+  font-size: 35px;
+  font-weight: 800;
   color: #2d5679;
   display: block;
   margin-top: 4px;
@@ -290,7 +290,7 @@ button i {
   border-bottom: 2px dashed #a4c2dd;
   font-size: 1.15rem;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 16px;
   color: #1e3a5f;
 }
 
@@ -325,7 +325,7 @@ button i {
   line-height: 1.9;
   text-align: justify;
   white-space: pre-line;
-  font-size: 1.2rem;
+  font-size: 16px;
   margin-bottom: 35px;
   color: #212529;
 }
@@ -435,11 +435,11 @@ button i {
   <!-- date, letter no, ref no (Today button removed) -->
   <div class="form-row">
     <div class="form-group">
-      <label for="letterDate"><i class="fas fa-calendar-alt"></i> पत्र मिति</label>
+      <label for="letterDate"> पत्र मिति</label>
       <input type="text" id="letterDate" value="२०८२-१०-१२" placeholder="जस्तै: २०८२-१०-१२">
     </div>
     <div class="form-group">
-      <label for="letterNo"><i class="fas fa-hashtag"></i> पत्र संख्या</label>
+      <label for="letterNo">पत्र संख्या</label>
       <input type="text" id="letterNo" value="११/०८१-०८२">
     </div>
     <div class="form-group">
@@ -594,7 +594,7 @@ async function downloadPDF() {
   const { jsPDF } = window.jspdf;
   let pdf = new jsPDF({ orientation: 'p', unit: 'mm', format: 'a4' });
   let pages = document.querySelectorAll("#output .page");
-  if (!pages.length) { alert("पहिला पत्र उत्पन्न गर्नुहोस्"); return; }
+  if (!pages.length) { alert("पहिला पत्र जेनेरेट गर्नुहोस्"); return; }
 
   for (let i = 0; i < pages.length; i++) {
     if (i > 0) pdf.addPage();
