@@ -3,14 +3,45 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>School Letterpad · परिष्कृत CSS</title>
+<title>Online multi Letterpad</title>
 <!-- Libraries -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <!-- Font Awesome 6 (free) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+<!------html---code--Go to top---- ------------------------>
+ <button type="button" class="scroll-top" onclick="goToTop();">
+<img src="https://ps.w.org/back-to-the-top-button/assets/icon-128x128.png?rev=2283756" style="height: 40px; width: 40px;"></button>
+<script>
+function goToTop(){
+window.scrollTo(0, 0);
+    }
+</script>
 <style>
+    /* Additional styles from second file */
+        .scroll-top {
+            position: fixed;
+            bottom: 90px;
+            right: 10px;
+            z-index: 99;
+            padding: 20px;
+            border: none;
+        }
+</style>
+<!-----------Go to top----------End------------------>
+  <style>
+header,
+body,
+{
+  overflow-x: hidden;
+}
+</style>
+
+
+  <style>
 /* -------------------- RESET & GLOBAL -------------------- */
 * {
   margin: 0;
@@ -20,13 +51,17 @@
 
 body {
   font-family: 'Nirmala UI', 'Segoe UI', 'Times New Roman', sans-serif;
-  background: #e6f0fa;  /* soft blue background */
-  padding: 24px 16px;
-  line-height: 1.5;
+  background: #eef2f7;
+  padding: 14px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+
 }
 
 .container {
-  max-width: 1300px;
+  max-width: 1280px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -223,7 +258,7 @@ button i {
 }
 
 .org-name {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 800;
   line-height: 1.3;
   color: #003057;
@@ -272,7 +307,7 @@ button i {
   border-bottom: 3px solid #2c74b3;
   margin: 24px 0 20px 0;
   padding-bottom: 8px;
-  font-size: 1.5rem;
+  font-size: 18px;
   color: #0d3b5c;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -492,11 +527,11 @@ function generate() {
       
       <div class="meta-line">
         <span><i class="far fa-calendar"></i> मिति: ${letterDate}</span>
-        <span><i class="fas fa-hashtag"></i> पत्र नं.: ${letterNo}</span>
-        <span><i class="fas fa-file-signature"></i> सन्दर्भ: ${refNo}</span>
+        <span><i class="fas fa-hashtag"></i>पत्र सं. ${letterNo}</span><br>
+        <span><i class="fas fa-file-signature"></i>चलानी नं.: ${refNo}</span>
       </div>
       
-      <div class="recipient-line"><i class="fas fa-user"></i> प्रति: ${rec}</div>
+      <div class="recipient-line"><i class="fas fa-user"></i> ${rec}</div>
       <div class="subject">विषय: ${subject}</div>
       
       <div class="body">${personalizedBody.replace(/\n/g, '<br>')}</div>
