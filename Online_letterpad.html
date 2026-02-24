@@ -3,283 +3,106 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Advanced Multi Letterpad</title>
+<title>School Letterpad System</title>
 
-<!-- Icons -->
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-<!-- PDF + Canvas -->
+<!-- Libraries -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
-<!-- QR -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --primary: #1e3c5c;
-  --accent: #2c74b3;
-  --soft-bg: #f4f7fc;
-  --border: #d0ddee;
-  --shadow: 0 8px 20px rgba(0,20,40,0.08);
+body{
+  font-family:'Nirmala UI',sans-serif;
+  background:#eef2f7;
+  margin:0;
+  padding:20px;
 }
-body {
-  font-family: 'Segoe UI', 'Nirmala UI', system-ui, sans-serif;
-  background: #eef2f7;
-  padding: 14px;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
+.container{
+  max-width:1200px;
+  margin:auto;
 }
-.container {
-  max-width: 1280px;
-  width: 100%;
+.card{
+  background:white;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+  margin-bottom:20px;
 }
-/* header & card */
-.header-card {
-  background: white;
-  border-radius: 30px 30px 30px 30px;
-  padding: 1.5rem 1.2rem;
-  margin-bottom: 1.8rem;
-  box-shadow: var(--shadow);
-  text-align: center;
+input,textarea{
+  width:100%;
+  padding:10px;
+  margin-top:5px;
+  border-radius:8px;
+  border:1px solid #ccc;
 }
-.header-card h1 {
-  color: var(--primary);
-  font-weight: 600;
-  font-size: 1.9rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
+button{
+  padding:10px 15px;
+  border:none;
+  border-radius:8px;
+  margin:5px 5px 0 0;
+  cursor:pointer;
 }
-.header-card h1 i { color: var(--accent); }
-.subtitle {
-  color: #2c3e50;
-  font-size: 1.1rem;
-  margin: 0.6rem 0 0.2rem;
-}
-.instructions {
-  background: #e8f0fe;
-  padding: 1.2rem;
-  border-radius: 24px;
-  text-align: left;
-  margin-top: 1rem;
-  font-size: 0.95rem;
-  border-left: 5px solid var(--accent);
-}
-.instructions ul { margin-left: 1.5rem; }
-.instructions li { margin: 6px 0; }
+.generate{background:#2c74b3;color:white;}
+.print{background:#2b7a4b;color:white;}
+.pdf{background:#7b4b9a;color:white;}
+.clear{background:#c44536;color:white;}
 
-/* main panel flex */
-.app-panels {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 22px;
+.page{
+  width:210mm;
+  min-height:297mm;
+  background:white;
+  padding:25mm;
+  margin:auto;
+  margin-top:20px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.1);
+  font-family:'Times New Roman',serif;
+  position:relative;
 }
-.control-panel, .preview-panel {
-  flex: 1 1 360px;
-  background: white;
-  border-radius: 36px;
-  padding: 1.6rem 1.4rem;
-  box-shadow: var(--shadow);
+.header{
+  display:flex;
+  align-items:center;
+  gap:15px;
 }
-.preview-panel { display: flex; flex-direction: column; }
-
-h2 {
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: var(--primary);
-  border-bottom: 3px solid #cbd6e9;
-  padding-bottom: 0.5rem;
-  margin-bottom: 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.logo{
+  max-height:70px;
 }
-/* form elements */
-.form-group { margin-bottom: 1.5rem; }
-label {
-  font-weight: 600;
-  display: block;
-  margin-bottom: 6px;
-  color: #1e3a5f;
-  font-size: 0.95rem;
+.org-name{
+  font-size:22px;
+  font-weight:bold;
 }
-input, textarea, select {
-  width: 100%;
-  padding: 14px 16px;
-  border: 1.5px solid var(--border);
-  border-radius: 30px;
-  font-size: 1rem;
-  background: white;
-  transition: 0.15s;
-  font-family: inherit;
+.date{text-align:right;margin-top:10px;}
+.subject{
+  font-weight:bold;
+  border-bottom:1px solid #000;
+  margin:15px 0;
 }
-input:focus, textarea:focus {
-  border-color: var(--accent);
-  outline: none;
-  box-shadow: 0 0 0 4px rgba(44,116,179,0.15);
+.body{
+  line-height:1.6;
+  text-align:justify;
+  white-space:pre-line;
 }
-textarea { min-height: 120px; border-radius: 24px; }
-
-.logo-zone {
-  border: 2px dashed var(--border);
-  border-radius: 40px;
-  padding: 20px 15px;
-  text-align: center;
-  background: #f9fcff;
-  cursor: pointer;
-  margin-bottom: 12px;
+.signature-img{
+  max-height:70px;
 }
-.logo-zone i { font-size: 38px; color: var(--accent); }
-.logo-preview {
-  max-width: 140px;
-  max-height: 70px;
-  margin: 8px auto;
-  display: none;
+.footer{
+  position:absolute;
+  bottom:20mm;
+  width:calc(100% - 50mm);
+  text-align:center;
+  border-top:1px solid #ccc;
+  padding-top:5px;
+  font-size:12px;
 }
-.logo-preview img { max-width: 100%; max-height: 70px; object-fit: contain; }
-
-.date-row {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  flex-wrap: wrap;
+.qr-box{
+  margin-top:5px;
+  display:flex;
+  justify-content:center;
 }
-.date-row input { flex: 3; min-width: 160px; }
-.today-btn {
-  background: #e2eaf6;
-  border: none;
-  border-radius: 40px;
-  padding: 14px 22px;
-  font-weight: 600;
-  color: #1e3c5c;
-  white-space: nowrap;
-  cursor: pointer;
-  flex: 1;
-  transition: 0.15s;
+@media print{
+  body *{visibility:hidden;}
+  #output, #output *{visibility:visible;}
+  #output{position:absolute;top:0;left:0;width:100%;}
 }
-.today-btn:hover { background: #c9d9ef; }
-
-.two-cols {
-  display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
-}
-.two-cols .form-group { flex: 1 1 160px; }
-
-/* buttons */
-.button-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 30px;
-}
-.btn {
-  flex: 1 1 140px;
-  background: white;
-  border: 2px solid var(--accent);
-  color: var(--accent);
-  padding: 16px 12px;
-  border-radius: 50px;
-  font-weight: 700;
-  font-size: 1rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  cursor: pointer;
-  transition: 0.15s;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.02);
-}
-.btn-primary { background: var(--accent); color: white; border-color: var(--accent); }
-.btn-primary:hover { background: #1a5a8c; border-color: #1a5a8c; }
-.btn-success { background: #2b7a4b; border-color: #2b7a4b; color: white; }
-.btn-purple { background: #7b4b9a; border-color: #7b4b9a; color: white; }
-.btn-danger { background: #c44536; border-color: #a33c2f; color: white; }
-.btn:hover { transform: translateY(-2px); box-shadow: 0 12px 20px -8px rgba(0,60,120,0.3); }
-
-/* preview box */
-.preview-box {
-  background: #f1f5fb;
-  border-radius: 28px;
-  padding: 20px 12px;
-  flex: 1;
-  overflow-y: auto;
-  min-height: 280px;
-  margin-bottom: 15px;
-}
-.preview-box .page {
-  transform: scale(0.95);
-  transform-origin: top center;
-  width: 100% !important;
-  height: auto !important;
-  min-height: 200px;
-  margin: 0 auto;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-}
-.counter-badge {
-  background: #1e3c5c;
-  color: white;
-  padding: 12px 18px;
-  border-radius: 60px;
-  text-align: center;
-  font-weight: 500;
-  font-size: 1rem;
-}
-
-/* letter page style – A4 like, responsive */
-.page {
-  background: white;
-  width: 100%;
-  max-width: 210mm;
-  margin: 20px auto;
-  padding: 15mm 12mm;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-  page-break-after: always;
-  position: relative;
-  font-family: 'Times New Roman', 'Nirmala UI', serif;
-  box-sizing: border-box;
-}
-.page-content { display: flex; flex-direction: column; }
-.letter-header { display: flex; align-items: center; gap: 15px; flex-wrap: wrap; margin-bottom: 4mm; }
-.org-logo { max-height: 55px; max-width: 110px; object-fit: contain; }
-.org-name { font-size: 24px; font-weight: bold; color: #000; }
-.letter-subheader { text-align: center; font-size: 13px; margin-bottom: 6mm; line-height: 1.4; }
-.date { text-align: right; font-size: 12px; margin-bottom: 3mm; }
-.letter-numbers { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 2mm; flex-wrap: wrap; }
-.ref-number { text-align: left; }
-.recipient { margin-bottom: 5mm; font-size: 13px; }
-.subject-line { font-weight: bold; font-size: 14px; border-bottom: 1px solid #aaa; padding-bottom: 2mm; margin: 3mm 0; }
-.letter-body-container { min-height: 100px; }
-.letter-body { white-space: pre-line; line-height: 1.6; text-align: justify; font-size: 12pt; }
-.sender-details { text-align: right; margin-top: 7mm; font-size: 13px; }
-.contact-footer { margin-top: 8mm; border-top: 1px solid #ccc; padding-top: 3mm; font-size: 10px; text-align: center; }
-.contact-info { display: flex; gap: 18px; flex-wrap: wrap; justify-content: center; }
-
-#output { margin-top: 40px; }
-.page-count { text-align: center; margin-top: 15px; font-weight: 600; }
-
-/* responsive */
-@media (max-width: 700px) {
-  .page { padding: 8mm 6mm; }
-  .org-name { font-size: 20px; }
-  .btn { padding: 14px 6px; font-size: 0.9rem; }
-  .header-card h1 { font-size: 1.6rem; }
-}
-@media print {
-  body * { visibility: hidden; }
-  #output, #output * { visibility: visible; }
-  #output { position: absolute; left: 0; top: 0; width: 100%; }
-  .page { box-shadow: none; margin: 0; padding: 25.4mm; border-radius: 0; }
-  .control-panel, .preview-panel, .header-card, .button-grid { display: none; }
-}
-
 </style>
 </head>
 <body>
@@ -287,43 +110,48 @@ textarea { min-height: 120px; border-radius: 24px; }
 <div class="container">
 
 <div class="card">
-<h2>मल्टी लेटरप्याड</h2>
+<h2>School Letterpad Generator</h2>
 
-<input id="org" value="श्री डिम जनता मा.वि.">
-<input id="address" value="लालबन्दी-१६, सर्लाही">
-<input id="email" value="school@gmail.com">
-<input id="phone" value="984xxxxxxx">
+<label>School Logo</label>
+<input type="file" id="logoFile" accept="image/*">
 
-<label>पत्र संख्या (Auto Increment)</label>
-<input id="letterNo" value="१">
+<label>School Name</label>
+<input type="text" id="org" value="श्री डिम जनता मा.वि.">
 
-<input id="refNo" placeholder="च.नं." value="६/२०८२">
+<label>Address</label>
+<input type="text" id="address" value="लालबन्दी-१६, सर्लाही">
 
-<input id="date" value="२०८२-१०-१२">
+<label>Letter Start Number</label>
+<input type="number" id="letterNo" value="1">
 
-<input id="subject" value="आमन्त्रण बारे">
+<label>Subject</label>
+<input type="text" id="subject" value="आमन्त्रण बारे">
 
-<label>प्रापक (प्रति लाइन एक)</label>
-<textarea id="receivers">राम वादी
-शिव शर्मा</textarea>
+<label>Receivers (one per line)</label>
+<textarea id="receivers">राम बहादुर
+श्याम अधिकारी</textarea>
 
-<label>पत्रको भाग</label>
-<textarea id="body">[महोदय],
+<label>Letter Body</label>
+<textarea id="body">[नाम] ज्यू,
 
-कार्यक्रममा उपस्थितिका लागि हार्दिक अनुरोध गर्दछौं।
+कार्यक्रममा उपस्थितिको लागि हार्दिक अनुरोध गर्दछौँ।
 
 धन्यवाद।</textarea>
 
-<input id="sender" value="ध्रुवबहादुर भण्डारी">
-<input id="position" value="प्रधानाध्यापक">
+<label>Sender Name</label>
+<input type="text" id="sender" value="ध्रुवबहादुर भण्डारी">
 
-<label>डिजिटल हस्ताक्षर</label>
-<input type="file" id="signatureFile">
+<label>Position</label>
+<input type="text" id="position" value="प्रधानाध्यापक">
+
+<label>Digital Signature</label>
+<input type="file" id="signatureFile" accept="image/*">
 
 <br>
-<button class="btn-success" onclick="generateLetters()">जेनरेट</button>
-<button class="btn-primary" onclick="downloadPDF()">PDF</button>
-<button class="btn-danger" onclick="window.print()">प्रिन्ट</button>
+<button class="generate" onclick="generate()">Generate</button>
+<button class="print" onclick="window.print()">Print</button>
+<button class="pdf" onclick="downloadPDF()">Download PDF</button>
+<button class="clear" onclick="location.reload()">Clear</button>
 
 </div>
 
@@ -332,108 +160,80 @@ textarea { min-height: 120px; border-radius: 24px; }
 </div>
 
 <script>
+let logoData="",signatureData="";
 
-let signatureData='';
+document.getElementById("logoFile").onchange=e=>{
+  let reader=new FileReader();
+  reader.onload=ev=>logoData=ev.target.result;
+  reader.readAsDataURL(e.target.files[0]);
+};
 
-document.getElementById('signatureFile').addEventListener('change',function(){
-  const reader=new FileReader();
-  reader.onload=e=>signatureData=e.target.result;
-  reader.readAsDataURL(this.files[0]);
-});
+document.getElementById("signatureFile").onchange=e=>{
+  let reader=new FileReader();
+  reader.onload=ev=>signatureData=ev.target.result;
+  reader.readAsDataURL(e.target.files[0]);
+};
 
-function generateLetters(){
+function generate(){
+  let org=document.getElementById("org").value;
+  let address=document.getElementById("address").value;
+  let subject=document.getElementById("subject").value;
+  let body=document.getElementById("body").value;
+  let sender=document.getElementById("sender").value;
+  let position=document.getElementById("position").value;
+  let receivers=document.getElementById("receivers").value.split("\n");
+  let letterNo=parseInt(document.getElementById("letterNo").value);
 
-  const org=orgInput('org');
-  const address=orgInput('address');
-  const email=orgInput('email');
-  const phone=orgInput('phone');
-  const baseNo=parseInt(orgInput('letterNo'))||1;
-  const refNo=orgInput('refNo');
-  const date=orgInput('date');
-  const subject=orgInput('subject');
-  const body=orgInput('body');
-  const sender=orgInput('sender');
-  const position=orgInput('position');
-
-  const receivers=document.getElementById('receivers')
-  .value.split('\n').filter(r=>r.trim()!='');
-
-  let html='';
-
-  receivers.forEach((rec,index)=>{
-
-    const currentNo=baseNo+index;
-
-    html+=`
+  let output="";
+  receivers.forEach((rec,i)=>{
+    let content=body.replace(/\[नाम\]/g,rec);
+    output+=`
     <div class="page">
-      <div class="org-name">${org}</div>
-      <div>${address}</div>
-      <div style="text-align:right;">मिति: ${date}</div>
-      <div>प.सं.: ${currentNo}</div>
-      <div>च.नं.: ${refNo}</div>
-
-      <p><strong>प्रति: ${rec}</strong></p>
-
-      <div class="subject">विषय: ${subject}</div>
-
-      <div>${body.replace(/\[महोदय\]/g,rec).replace(/\n/g,'<br>')}</div>
-
-      <div class="sender">
-        ${signatureData?`<img src="${signatureData}" class="signature-img"><br>`:''}
-        <strong>${sender}</strong><br>
-        ${position}
+      <div class="header">
+        ${logoData?`<img src="${logoData}" class="logo">`:''}
+        <div class="org-name">${org}<br><span style="font-size:14px;">${address}</span></div>
       </div>
-
-      <div class="qr-box" id="qr${index}"></div>
-
-      <hr>
-      <div style="text-align:center;font-size:12px;">
-        ${email} | ${phone}
+      <div class="date">पत्र संख्या: ${letterNo+i}</div>
+      <div><strong>प्रति: ${rec}</strong></div>
+      <div class="subject">विषय: ${subject}</div>
+      <div class="body">${content}</div>
+      <br><br>
+      <div style="text-align:right;">
+        ${signatureData?`<img src="${signatureData}" class="signature-img"><br>`:''}
+        <strong>${sender}</strong><br>${position}
+      </div>
+      <div class="footer">
+        ${org} | ${address}
+        <div class="qr-box" id="qr${i}"></div>
       </div>
     </div>`;
   });
 
-  document.getElementById('output').innerHTML=html;
+  document.getElementById("output").innerHTML=output;
 
-  // Generate QR
-  receivers.forEach((rec,index)=>{
-    new QRCode(document.getElementById("qr"+index),{
-      text: org+" | "+rec,
-      width:70,
-      height:70
+  setTimeout(()=>{
+    receivers.forEach((rec,i)=>{
+      new QRCode(document.getElementById("qr"+i),{
+        text:org+" | "+rec,
+        width:60,
+        height:60
+      });
     });
-  });
-}
-
-function orgInput(id){
-  return document.getElementById(id).value;
+  },300);
 }
 
 async function downloadPDF(){
-
-  const pages=document.querySelectorAll('.page');
-  if(!pages.length){alert("पहिला जेनरेट गर्नुहोस्");return;}
-
   const {jsPDF}=window.jspdf;
-  const pdf=new jsPDF('p','mm','a4');
-
+  let pdf=new jsPDF('p','mm','a4');
+  let pages=document.querySelectorAll(".page");
   for(let i=0;i<pages.length;i++){
-
     if(i>0)pdf.addPage();
-
-    const canvas=await html2canvas(pages[i],{
-      scale:1,
-      useCORS:true,
-      backgroundColor:'#fff'
-    });
-
-    const img=canvas.toDataURL('image/jpeg',0.9);
+    let canvas=await html2canvas(pages[i],{scale:1});
+    let img=canvas.toDataURL("image/jpeg",0.9);
     pdf.addImage(img,'JPEG',0,0,210,297);
   }
-
   pdf.save("letters.pdf");
 }
-
 </script>
 
 </body>
