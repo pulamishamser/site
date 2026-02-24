@@ -1,181 +1,228 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ne">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Official Multi Letterpad Pro</title>
+<title>Advanced Multi Letterpad</title>
 
+<!-- Icons -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- PDF + Canvas -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<!-- QR -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <style>
-body{font-family:Arial;padding:20px;background:#f4f6fb}
-.page{width:210mm;min-height:297mm;background:white;margin:20px auto;padding:20mm;box-shadow:0 0 10px rgba(0,0,0,0.1)}
-.sender-details{text-align:right;margin-top:20px}
-.contact-footer{text-align:center;margin-top:20px;font-size:12px}
-#output{margin-top:30px}
+body{
+  font-family:'Segoe UI','Nirmala UI',sans-serif;
+  background:#eef2f7;
+  padding:15px;
+}
+.container{max-width:1100px;margin:auto;}
+.card{
+  background:white;
+  padding:20px;
+  border-radius:20px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+  margin-bottom:20px;
+}
+input,textarea{
+  width:100%;
+  padding:10px;
+  border-radius:12px;
+  border:1px solid #ccc;
+  margin-bottom:10px;
+}
+button{
+  padding:10px 18px;
+  border-radius:25px;
+  border:none;
+  cursor:pointer;
+  margin:5px;
+  font-weight:bold;
+}
+.btn-primary{background:#2c74b3;color:white;}
+.btn-success{background:#2b7a4b;color:white;}
+.btn-danger{background:#c44536;color:white;}
+.preview{background:#f5f8fc;padding:15px;border-radius:15px;}
+.page{
+  width:210mm;
+  min-height:297mm;
+  padding:20mm;
+  background:white;
+  margin:auto;
+  margin-bottom:20px;
+  font-family:'Times New Roman','Nirmala UI',serif;
+}
+.org-name{font-size:22px;font-weight:bold;}
+.subject{font-weight:bold;border-bottom:1px solid #aaa;margin:10px 0;}
+.sender{text-align:right;margin-top:40px;}
+.signature-img{max-height:70px;}
+.qr-box{margin-top:10px;text-align:center;}
 @media print{
-body *{visibility:hidden}
-#output,#output *{visibility:visible}
-#output{position:absolute;left:0;top:0;width:100%}
-.page{box-shadow:none;margin:0}
+  body *{visibility:hidden;}
+  #output, #output *{visibility:visible;}
+  #output{position:absolute;left:0;top:0;}
 }
 </style>
 </head>
 <body>
 
-<h2>Official Multi Letterpad Pro</h2>
+<div class="container">
 
-<label>AD Date:</label>
-<input type="date" id="adDate" onchange="convertToBS()"><br><br>
+<div class="card">
+<h2>मल्टी लेटरप्याड</h2>
 
-<label>BS Date:</label>
-<input type="text" id="letterDate"><br><br>
+<input id="org" value="श्री डिम जनता मा.वि.">
+<input id="address" value="लालबन्दी-१६, सर्लाही">
+<input id="email" value="school@gmail.com">
+<input id="phone" value="984xxxxxxx">
 
-<label>Institution:</label>
-<input type="text" id="org" value="श्री डिम जनता मा.वि."><br><br>
+<label>पत्र संख्या (Auto Increment)</label>
+<input id="letterNo" value="१">
 
-<label>Address:</label>
-<input type="text" id="address" value="लालबन्दी-१६, सर्लाही"><br><br>
+<input id="refNo" placeholder="च.नं." value="६/२०८२">
 
-<label>Subject:</label>
-<input type="text" id="subject" value="आमन्त्रण बारे"><br><br>
+<input id="date" value="२०८२-१०-१२">
 
-<label>Receivers (one per line):</label><br>
-<textarea id="receivers" rows="4">गणेशबहादुर, अध्यक्ष
-राजु बुढाथोकी, व्यवसायी</textarea><br><br>
+<input id="subject" value="आमन्त्रण बारे">
 
-<label>Letter Body:</label><br>
-<textarea id="letterBody" rows="6">[महोदय],
+<label>प्रापक (प्रति लाइन एक)</label>
+<textarea id="receivers">राम वादी
+शिव शर्मा</textarea>
 
-कार्यक्रममा उपस्थित हुन हार्दिक अनुरोध गर्दछौं ।
+<label>पत्रको भाग</label>
+<textarea id="body">[महोदय],
 
-धन्यवाद ।</textarea><br><br>
+कार्यक्रममा उपस्थितिका लागि हार्दिक अनुरोध गर्दछौं।
 
-<label>Sender:</label>
-<input type="text" id="sender" value="ध्रुवबहादुर भण्डारी"><br><br>
+धन्यवाद।</textarea>
 
-<label>Position:</label>
-<input type="text" id="position" value="प्रधानाध्यापक"><br><br>
+<input id="sender" value="ध्रुवबहादुर भण्डारी">
+<input id="position" value="प्रधानाध्यापक">
 
-<label>Digital Signature:</label>
-<input type="file" id="signatureFile" accept="image/*" onchange="uploadSignature()"><br><br>
+<label>डिजिटल हस्ताक्षर</label>
+<input type="file" id="signatureFile">
 
-<button onclick="generateLetters()">Generate</button>
-<button onclick="downloadAsPDF()">Download PDF</button>
-<button onclick="printLetters()">Print</button>
+<br>
+<button class="btn-success" onclick="generateLetters()">जेनरेट</button>
+<button class="btn-primary" onclick="downloadPDF()">PDF</button>
+<button class="btn-danger" onclick="window.print()">प्रिन्ट</button>
+
+</div>
 
 <div id="output"></div>
 
+</div>
+
 <script>
 
-let signatureData = "";
+let signatureData='';
 
-// BS Converter
-function convertToBS(){
-const adDate=document.getElementById('adDate').value;
-if(!adDate)return;
-const ad=new Date(adDate);
-const adBase=new Date("2020-04-13");
-let bsYear=2077,bsMonth=1,bsDay=1;
-const diffDays=Math.floor((ad-adBase)/(1000*60*60*24));
-bsDay+=diffDays;
-const monthDays=[31,31,32,31,31,30,30,29,30,29,30,30];
-while(bsDay>monthDays[bsMonth-1]){
-bsDay-=monthDays[bsMonth-1];
-bsMonth++;
-if(bsMonth>12){bsMonth=1;bsYear++;}
-}
-document.getElementById('letterDate').value=
-`${bsYear}-${String(bsMonth).padStart(2,'0')}-${String(bsDay).padStart(2,'0')}`;
-}
+document.getElementById('signatureFile').addEventListener('change',function(){
+  const reader=new FileReader();
+  reader.onload=e=>signatureData=e.target.result;
+  reader.readAsDataURL(this.files[0]);
+});
 
-// Auto Increment Letter No
-function getNextLetterNo(){
-let last=localStorage.getItem("lastLetterNo");
-if(!last){last=1;}else{last=parseInt(last)+1;}
-localStorage.setItem("lastLetterNo",last);
-return last;
-}
-
-// Signature Upload
-function uploadSignature(){
-const file=document.getElementById("signatureFile").files[0];
-if(!file)return;
-const reader=new FileReader();
-reader.onload=function(e){signatureData=e.target.result;}
-reader.readAsDataURL(file);
-}
-
-// Generate Letters
 function generateLetters(){
 
-const org=document.getElementById('org').value;
-const address=document.getElementById('address').value;
-const subject=document.getElementById('subject').value;
-const receivers=document.getElementById('receivers').value.split('\n').filter(r=>r.trim());
-const body=document.getElementById('letterBody').value;
-const sender=document.getElementById('sender').value;
-const position=document.getElementById('position').value;
-const date=document.getElementById('letterDate').value;
-const letterNo=getNextLetterNo();
+  const org=orgInput('org');
+  const address=orgInput('address');
+  const email=orgInput('email');
+  const phone=orgInput('phone');
+  const baseNo=parseInt(orgInput('letterNo'))||1;
+  const refNo=orgInput('refNo');
+  const date=orgInput('date');
+  const subject=orgInput('subject');
+  const body=orgInput('body');
+  const sender=orgInput('sender');
+  const position=orgInput('position');
 
-let output="";
-receivers.forEach(rec=>{
-const personalized=body.replace(/\[महोदय\]/g,rec.trim()).replace(/\n/g,'<br>');
-output+=`
-<div class="page">
-<h3>${org}</h3>
-<p>${address}</p>
-<p style="text-align:right">मिति: ${date}</p>
-<p>पत्र नं: ${letterNo}</p>
-<p><strong>प्रति: ${rec}</strong></p>
-<hr>
-<p>${personalized}</p>
-<div class="sender-details">
-${signatureData?`<img src="${signatureData}" style="max-height:80px;"><br>`:''}
-<strong>${sender}</strong><br>${position}
-</div>
-<div class="contact-footer">
-<div id="qr_${rec.replace(/\s/g,'')}"></div>
-</div>
-</div>
-`;
-});
-document.getElementById('output').innerHTML=output;
+  const receivers=document.getElementById('receivers')
+  .value.split('\n').filter(r=>r.trim()!='');
 
-// Generate QR
-receivers.forEach(rec=>{
-new QRCode(document.getElementById(`qr_${rec.replace(/\s/g,'')}`),{
-text:`${org}|${subject}|${date}|${rec}`,
-width:70,height:70
-});
-});
+  let html='';
+
+  receivers.forEach((rec,index)=>{
+
+    const currentNo=baseNo+index;
+
+    html+=`
+    <div class="page">
+      <div class="org-name">${org}</div>
+      <div>${address}</div>
+      <div style="text-align:right;">मिति: ${date}</div>
+      <div>प.सं.: ${currentNo}</div>
+      <div>च.नं.: ${refNo}</div>
+
+      <p><strong>प्रति: ${rec}</strong></p>
+
+      <div class="subject">विषय: ${subject}</div>
+
+      <div>${body.replace(/\[महोदय\]/g,rec).replace(/\n/g,'<br>')}</div>
+
+      <div class="sender">
+        ${signatureData?`<img src="${signatureData}" class="signature-img"><br>`:''}
+        <strong>${sender}</strong><br>
+        ${position}
+      </div>
+
+      <div class="qr-box" id="qr${index}"></div>
+
+      <hr>
+      <div style="text-align:center;font-size:12px;">
+        ${email} | ${phone}
+      </div>
+    </div>`;
+  });
+
+  document.getElementById('output').innerHTML=html;
+
+  // Generate QR
+  receivers.forEach((rec,index)=>{
+    new QRCode(document.getElementById("qr"+index),{
+      text: org+" | "+rec,
+      width:70,
+      height:70
+    });
+  });
 }
 
-// Print
-function printLetters(){
-if(!document.getElementById('output').innerHTML.trim()){
-alert('पहिला Generate गर्नुहोस्');return;}
-window.print();
+function orgInput(id){
+  return document.getElementById(id).value;
 }
 
-// PDF Download
-async function downloadAsPDF(){
-const pages=document.querySelectorAll('.page');
-if(!pages.length){alert('पहिला Generate गर्नुहोस्');return;}
-const {jsPDF}=window.jspdf;
-const pdf=new jsPDF('p','mm','a4');
-for(let i=0;i<pages.length;i++){
-if(i>0)pdf.addPage();
-const canvas=await html2canvas(pages[i],{scale:1});
-const img=canvas.toDataURL('image/jpeg',0.9);
-pdf.addImage(img,'JPEG',0,0,210,297);
-}
-pdf.save("letters.pdf");
+async function downloadPDF(){
+
+  const pages=document.querySelectorAll('.page');
+  if(!pages.length){alert("पहिला जेनरेट गर्नुहोस्");return;}
+
+  const {jsPDF}=window.jspdf;
+  const pdf=new jsPDF('p','mm','a4');
+
+  for(let i=0;i<pages.length;i++){
+
+    if(i>0)pdf.addPage();
+
+    const canvas=await html2canvas(pages[i],{
+      scale:1,
+      useCORS:true,
+      backgroundColor:'#fff'
+    });
+
+    const img=canvas.toDataURL('image/jpeg',0.9);
+    pdf.addImage(img,'JPEG',0,0,210,297);
+  }
+
+  pdf.save("letters.pdf");
 }
 
 </script>
+
 </body>
 </html>
