@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="ne">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>मल्टी लेटरप्याड · डिजिटल हस्ताक्षर सहित</title>
+<title>Multi Letterpad · मोबाइल मैत्री</title>
 <!-- Font Awesome 6 (free) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<!-- html2canvas + jsPDF (specific versions that work reliably on shared hosting) -->
+<!-- Signature Pad -->
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+<!-- html2canvas + jsPDF -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
@@ -119,7 +121,7 @@ input:focus, textarea:focus {
 }
 textarea { min-height: 120px; border-radius: 24px; }
 
-.logo-zone {
+.logo-zone, .signature-zone {
   border: 2px dashed var(--border);
   border-radius: 40px;
   padding: 20px 15px;
@@ -128,33 +130,62 @@ textarea { min-height: 120px; border-radius: 24px; }
   cursor: pointer;
   margin-bottom: 12px;
 }
-.logo-zone i { font-size: 38px; color: var(--accent); }
-.logo-preview {
+.logo-zone i, .signature-zone i { font-size: 38px; color: var(--accent); }
+.logo-preview, .signature-preview {
   max-width: 140px;
   max-height: 70px;
   margin: 8px auto;
   display: none;
 }
-.logo-preview img { max-width: 100%; max-height: 70px; object-fit: contain; }
+.logo-preview img, .signature-preview img { max-width: 100%; max-height: 70px; object-fit: contain; }
 
-/* signature area */
-.signature-zone {
-  border: 2px dashed #b8c9e0;
-  border-radius: 40px;
-  padding: 16px 15px;
-  text-align: center;
-  background: #fcfdff;
-  cursor: pointer;
-  margin-bottom: 12px;
-}
-.signature-zone i { font-size: 32px; color: #6f42c1; }
-.signature-preview {
-  max-width: 160px;
-  max-height: 60px;
-  margin: 6px auto;
+/* Signature modal */
+.modal {
   display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  align-items: center;
+  justify-content: center;
 }
-.signature-preview img { max-width: 100%; max-height: 60px; object-fit: contain; }
+.modal-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 36px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: var(--shadow);
+}
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+.close-modal {
+  font-size: 2rem;
+  cursor: pointer;
+  color: #666;
+}
+.close-modal:hover { color: #000; }
+.signature-canvas {
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  width: 100%;
+  height: 200px;
+  background: white;
+  touch-action: none;
+}
+.signature-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
 
 .date-row {
   display: flex;
@@ -250,7 +281,7 @@ textarea { min-height: 120px; border-radius: 24px; }
   width: 100%;
   max-width: 210mm;
   margin: 20px auto;
-  padding: 12mm 10mm;
+  padding: 15mm 12mm;
   border-radius: 12px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.1);
   page-break-after: always;
@@ -270,9 +301,32 @@ textarea { min-height: 120px; border-radius: 24px; }
 .subject-line { font-weight: bold; font-size: 14px; border-bottom: 1px solid #aaa; padding-bottom: 2mm; margin: 3mm 0; }
 .letter-body-container { min-height: 100px; }
 .letter-body { white-space: pre-line; line-height: 1.6; text-align: justify; font-size: 12pt; }
-.sender-details { text-align: right; margin-top: 7mm; font-size: 13px; }
-.signature-block { margin-top: 2mm; font-size: 13px; display: flex; align-items: center; justify-content: flex-end; gap: 12px; flex-wrap: wrap; }
-.signature-img { max-height: 38px; max-width: 100px; object-fit: contain; }
+.sender-details { 
+  text-align: right; 
+  margin-top: 7mm; 
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.signature-area {
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.signature-img {
+  max-height: 50px;
+  max-width: 150px;
+  object-fit: contain;
+  margin-bottom: 5px;
+}
+.sender-name {
+  font-weight: bold;
+}
+.sender-position {
+  font-size: 12px;
+}
 .contact-footer { margin-top: 8mm; border-top: 1px solid #ccc; padding-top: 3mm; font-size: 10px; text-align: center; }
 .contact-info { display: flex; gap: 18px; flex-wrap: wrap; justify-content: center; }
 
@@ -300,14 +354,14 @@ textarea { min-height: 120px; border-radius: 24px; }
   <!-- header -->
   <div class="header-card">
     <h1><i class="fas fa-envelope-open-text"></i> मल्टी लेटरप्याड <span style="font-size: 0.7rem; background: #d4e2f0; padding: 5px 16px; border-radius: 40px;">मोबाइल / डेस्कटप</span></h1>
-    <div class="subtitle"><i class="fas fa-pen-fancy"></i> एउटै विषयमा धेरैलाई पत्र ÷ सिफारिस + डिजिटल हस्ताक्षर</div>
+    <div class="subtitle"><i class="fas fa-pen-fancy"></i> एउटै विषयमा धेरैलाई पत्र ÷ सिफारिस</div>
     <div class="instructions">
       <i class="fas fa-lightbulb"></i> <strong>निर्देशिका :</strong>
       <ul>
         <li>प्रापकको नाम प्रत्येक लाइनमा लेख्नुहोस् (जस्तै: राम वादी, अध्यक्ष)</li>
         <li>मिति आफै राख्नुहोस् वा <i class="fas fa-calendar"></i> Today बटन प्रयोग गर्नुहोस्</li>
-        <li><i class="fas fa-signature"></i> डिजिटल हस्ताक्षर (छवि वा URL) राख्न सकिन्छ – पत्रको पुछारमा देखिनेछ ।</li>
-        <li><strong>PDF/प्रिन्ट</strong> का लागि जेनरेट गरेपछि मात्र बटन थिच्नुहोस् । सबै ब्राउजरमा काम गर्दछ ।</li>
+        <li>हस्ताक्षर थप्न "हस्ताक्षर" बटन प्रयोग गर्नुहोस् - कोर्नुहोस् वा फोटो अपलोड गर्नुहोस्</li>
+        <li>जेनरेट गरेपछि PDF डाउनलोड वा प्रिन्ट गर्नुहोस् – सबै डिभाइसमा मिल्छ</li>
       </ul>
     </div>
   </div>
@@ -328,15 +382,15 @@ textarea { min-height: 120px; border-radius: 24px; }
         <input type="text" id="logoUrl" placeholder="वा लोगो URL राख्नुहोस्" oninput="updateLogoFromUrl()">
       </div>
 
-      <!-- DIGITAL SIGNATURE AREA -->
-      <div class="signature-zone" onclick="document.getElementById('signatureFile').click()">
+      <!-- Signature Section -->
+      <div class="signature-zone" onclick="openSignatureModal()">
         <div class="signature-preview" id="signaturePreview"></div>
-        <i class="fas fa-signature"></i>
-        <span>डिजिटल हस्ताक्षर (छवि) राख्नुहोस्</span>
-        <input type="file" id="signatureFile" accept="image/*" style="display: none;" onchange="uploadSignature()">
+        <i class="fas fa-pen-fancy"></i>
+        <span>हस्ताक्षर थप्नुहोस्</span>
       </div>
-      <div class="form-group">
-        <input type="text" id="signatureUrl" placeholder="वा हस्ताक्षर URL" oninput="updateSignatureFromUrl()">
+      <div style="display: flex; gap: 8px; margin-bottom: 15px;">
+        <button class="btn" style="flex: 1; padding: 10px;" onclick="openSignatureModal()"><i class="fas fa-draw-polygon"></i> हस्ताक्षर कोर्नुहोस्</button>
+        <button class="btn" style="flex: 1; padding: 10px;" onclick="clearSignature()"><i class="fas fa-trash-alt"></i> हटाउनुहोस्</button>
       </div>
 
       <div class="form-group">
@@ -385,17 +439,112 @@ textarea { min-height: 120px; border-radius: 24px; }
     </div>
   </div>
 
-  <!-- generated letters output -->
+  <!-- Signature Modal -->
+  <div id="signatureModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fas fa-pen-fancy"></i> हस्ताक्षर कोर्नुहोस्</h3>
+        <span class="close-modal" onclick="closeSignatureModal()">&times;</span>
+      </div>
+      <canvas id="signatureCanvas" class="signature-canvas"></canvas>
+      <div class="signature-buttons">
+        <button class="btn" style="flex: 1;" onclick="clearSignaturePad()"><i class="fas fa-eraser"></i> मेटाउनुहोस्</button>
+        <button class="btn btn-success" style="flex: 1;" onclick="saveSignature()"><i class="fas fa-check"></i> सुरक्षित गर्नुहोस्</button>
+      </div>
+      <div style="text-align: center; margin-top: 15px;">
+        <span>वा</span>
+      </div>
+      <div style="margin-top: 15px;">
+        <div class="signature-zone" onclick="document.getElementById('signatureFile').click()" style="margin-bottom: 0;">
+          <i class="fas fa-cloud-upload-alt"></i>
+          <span>हस्ताक्षर फोटो अपलोड गर्नुहोस्</span>
+          <input type="file" id="signatureFile" accept="image/*" style="display: none;" onchange="uploadSignature()">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- generated letters output (hidden until generate) -->
   <div id="output" style="margin-top: 30px; background: transparent;"></div>
   <div class="page-count" id="pageCount"></div>
 </div>
 
 <script>
-// --- shamser.info.np फिक्स : PDF र print सधैं काम गरोस् ---
-
 // global state
 let logoDataUrl = '';
 let signatureDataUrl = '';
+let signaturePad = null;
+
+// Initialize signature pad when modal opens
+function openSignatureModal() {
+  document.getElementById('signatureModal').style.display = 'flex';
+  setTimeout(() => {
+    const canvas = document.getElementById('signatureCanvas');
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+    signaturePad = new SignaturePad(canvas, {
+      backgroundColor: 'white',
+      penColor: 'black'
+    });
+    
+    // If signature exists, load it
+    if (signatureDataUrl) {
+      const img = new Image();
+      img.onload = () => {
+        signaturePad.clear();
+        signaturePad.fromDataURL(signatureDataUrl);
+      };
+      img.src = signatureDataUrl;
+    }
+  }, 100);
+}
+
+function closeSignatureModal() {
+  document.getElementById('signatureModal').style.display = 'none';
+  if (signaturePad) {
+    signaturePad.off();
+    signaturePad = null;
+  }
+}
+
+function clearSignaturePad() {
+  if (signaturePad) {
+    signaturePad.clear();
+  }
+}
+
+function saveSignature() {
+  if (signaturePad && !signaturePad.isEmpty()) {
+    signatureDataUrl = signaturePad.toDataURL('image/png');
+    document.getElementById('signaturePreview').innerHTML = `<img src="${signatureDataUrl}" alt="signature">`;
+    document.getElementById('signaturePreview').style.display = 'block';
+    updatePreviewOnly();
+  } else {
+    alert('कृपया हस्ताक्षर कोर्नुहोस्');
+  }
+  closeSignatureModal();
+}
+
+function uploadSignature() {
+  const file = document.getElementById('signatureFile').files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    signatureDataUrl = e.target.result;
+    document.getElementById('signaturePreview').innerHTML = `<img src="${signatureDataUrl}" alt="signature">`;
+    document.getElementById('signaturePreview').style.display = 'block';
+    updatePreviewOnly();
+    closeSignatureModal();
+  };
+  reader.readAsDataURL(file);
+}
+
+function clearSignature() {
+  signatureDataUrl = '';
+  document.getElementById('signaturePreview').innerHTML = '';
+  document.getElementById('signaturePreview').style.display = 'none';
+  updatePreviewOnly();
+}
 
 // helper: format address with <br>
 function formatAddress(addr) {
@@ -435,29 +584,6 @@ function updateLogoFromUrl() {
   }
 }
 
-// signature handlers
-function uploadSignature() {
-  const file = document.getElementById('signatureFile').files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    signatureDataUrl = e.target.result;
-    document.getElementById('signaturePreview').innerHTML = `<img src="${signatureDataUrl}" alt="signature">`;
-    document.getElementById('signaturePreview').style.display = 'block';
-    updatePreviewOnly();
-  };
-  reader.readAsDataURL(file);
-}
-function updateSignatureFromUrl() {
-  const url = document.getElementById('signatureUrl').value.trim();
-  if (url) {
-    signatureDataUrl = url;
-    document.getElementById('signaturePreview').innerHTML = `<img src="${url}" alt="signature" onerror="this.style.display='none'">`;
-    document.getElementById('signaturePreview').style.display = 'block';
-    updatePreviewOnly();
-  }
-}
-
 // preview update (single sample)
 function updatePreviewOnly() {
   const org = document.getElementById('org').value || 'संस्था';
@@ -476,8 +602,6 @@ function updatePreviewOnly() {
   // pick first receiver for preview
   const receivers = document.getElementById('receivers').value.split('\n').filter(r => r.trim() !== '');
   const sampleRec = receivers.length ? receivers[0].trim() : 'श्री मानव अधिकारी ज्यू';
-  
-  const signatureHtml = signatureDataUrl ? `<img src="${signatureDataUrl}" class="signature-img" alt="signature">` : '';
   
   const previewHtml = `
     <div class="page">
@@ -498,9 +622,14 @@ function updatePreviewOnly() {
           <div class="letter-body">${body.replace(/\[महोदय\]/g, sampleRec).replace(/\n/g, '<br>')}</div>
         </div>
         <div class="sender-details">
-          <strong>${sender}</strong><br>${position}
+          ${signatureDataUrl ? `
+            <div class="signature-area">
+              <img src="${signatureDataUrl}" class="signature-img" alt="signature">
+            </div>
+          ` : ''}
+          <div class="sender-name"><strong>${sender}</strong></div>
+          <div class="sender-position">${position}</div>
         </div>
-        ${signatureHtml ? `<div class="signature-block">हस्ताक्षर: ${signatureHtml}</div>` : ''}
         <div class="contact-footer">
           <hr>
           <div class="contact-info">
@@ -539,8 +668,6 @@ function generateLetters() {
   if (receivers.length === 0) { alert('कम्तीमा एउटा प्रापकको नाम राख्नुहोस्'); return; }
 
   const formattedAddr = formatAddress(address);
-  const signatureHtml = signatureDataUrl ? `<img src="${signatureDataUrl}" class="signature-img" alt="signature">` : '';
-  
   let outputHtml = '';
   receivers.forEach(rec => {
     const personalizedBody = body.replace(/\[महोदय\]/g, rec.trim()).replace(/\n/g, '<br>');
@@ -563,9 +690,14 @@ function generateLetters() {
             <div class="letter-body">${personalizedBody}</div>
           </div>
           <div class="sender-details">
-            <strong>${sender}</strong><br>${position}
+            ${signatureDataUrl ? `
+              <div class="signature-area">
+                <img src="${signatureDataUrl}" class="signature-img" alt="signature">
+              </div>
+            ` : ''}
+            <div class="sender-name"><strong>${sender}</strong></div>
+            <div class="sender-position">${position}</div>
           </div>
-          ${signatureHtml ? `<div class="signature-block">हस्ताक्षर: ${signatureHtml}</div>` : ''}
           <div class="contact-footer">
             <hr>
             <div class="contact-info">
@@ -583,18 +715,22 @@ function generateLetters() {
   document.getElementById('previewCounter').innerText = `${receivers.length} वटा पत्र`;
   document.getElementById('pageCount').innerText = `कुल पृष्ठ: ${receivers.length}`;
   
-  updatePreviewOnly();  // update preview with first receiver
+  // also update preview with first
+  updatePreviewOnly();
+  
+  // scroll to output
   document.getElementById('output').scrollIntoView({ behavior: 'smooth' });
 }
 
-// ---------- FIXED PDF DOWNLOAD (works on shamser & mobile) ----------
+// PDF download – mobile/desktop friendly
 async function downloadAsPDF() {
   const outputDiv = document.getElementById('output');
-  if (!outputDiv.children.length) {
-    alert('पहिला पत्र जेनरेट गर्नुहोस्'); 
-    return;
+  if (!outputDiv.children.length || outputDiv.innerText.includes('No letters')) {
+    alert('पहिला पत्र जेनरेट गर्नुहोस्'); return;
   }
-  
+  const pages = document.querySelectorAll('#output .page');
+  if (pages.length === 0) { alert('पत्र छैन'); return; }
+
   const btn = document.getElementById('downloadBtn');
   const originalHtml = btn.innerHTML;
   btn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> PDF बन्दै...';
@@ -602,88 +738,51 @@ async function downloadAsPDF() {
 
   try {
     const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF({
-      orientation: 'p',
-      unit: 'mm',
-      format: 'a4',
-      hotfixes: ['px_scaling']  // helps with scaling on some hosts
-    });
-    
-    const pages = document.querySelectorAll('#output .page');
+    const pdf = new jsPDF('p', 'mm', 'a4');
     
     for (let i = 0; i < pages.length; i++) {
       const page = pages[i];
-      
-      // force explicit background & dimensions for capture
-      page.style.background = 'white';
-      page.style.width = '800px';        // fixed width for consistent capture
-      page.style.margin = '0 auto';
-      page.style.padding = '15mm 12mm';
-      page.style.boxSizing = 'border-box';
-      
-      // use html2canvas with careful settings
-      const canvas = await html2canvas(page, {
-        scale: 1.8,                      // better quality, still fast
-        backgroundColor: '#ffffff',
-        logging: false,
-        allowTaint: true,
-        useCORS: true,
-        windowWidth: 800,
-        onclone: (clonedDoc) => {
-          // ensure cloned page has proper styles
-          const clonedPage = clonedDoc.querySelector('.page');
-          if (clonedPage) {
-            clonedPage.style.width = '800px';
-            clonedPage.style.background = 'white';
-          }
-        }
-      });
-      
-      const imgData = canvas.toDataURL('image/jpeg', 0.95);
-      
       if (i > 0) pdf.addPage();
       
-      // A4 dimensions: 210mm x 297mm
-      pdf.addImage(imgData, 'JPEG', 0, 0, 210, 297, undefined, 'FAST');
-      
-      // small delay to prevent memory issues
-      if (i < pages.length - 1) await new Promise(r => setTimeout(r, 50));
+      await html2canvas(page, {
+        scale: 2,
+        backgroundColor: '#ffffff',
+        logging: false,
+        allowTaint: false,
+        useCORS: true
+      }).then(canvas => {
+        const imgData = canvas.toDataURL('image/jpeg', 0.95);
+        pdf.addImage(imgData, 'JPEG', 0, 0, 210, 297, undefined, 'FAST');
+      });
+      // tiny delay
+      if (i < pages.length -1) await new Promise(r => setTimeout(r, 50));
     }
     
     const filename = (document.getElementById('org').value || 'letters').replace(/\s+/g,'_') + '.pdf';
     pdf.save(filename);
-    
-  } catch (error) {
-    console.error('PDF error:', error);
-    alert('PDF बनाउन समस्या भयो । तर प्रिन्ट बटन प्रयास गर्नुहोस् ।');
+  } catch (e) {
+    alert('PDF बनाउन समस्या भयो । थोरै पत्र बनाएर प्रयास गर्नुहोस् ।');
+    console.error(e);
   } finally {
     btn.innerHTML = originalHtml;
     btn.disabled = false;
   }
 }
 
-// ---------- FIXED PRINT (works everywhere, including shamser) ----------
+// print function – responsive
 function printLetters() {
-  const outputDiv = document.getElementById('output');
-  if (!outputDiv.children.length) {
-    alert('पहिला पत्र जेनरेट गर्नुहोस्'); 
-    return;
+  const output = document.getElementById('output').innerHTML;
+  if (!output || output.includes('No letters')) {
+    alert('पहिला पत्र जेनरेट गर्नुहोस्'); return;
   }
-
-  // Create a new window/iframe specifically for printing – most reliable method
-  const printWindow = window.open('', '_blank', 'width=800,height=600');
-  if (!printWindow) {
-    alert('पप-अप ब्लकर भए खोल्नुहोस् ।');
-    return;
-  }
-
-  const style = `
+  const printWindow = window.open('', '_blank');
+  printWindow.document.write(`
+    <html><head><title>पत्र प्रिन्ट</title>
     <style>
-      body { margin:0; padding:15mm; background:white; font-family:'Times New Roman','Nirmala UI',serif; }
-      .page { width:100%; max-width:210mm; min-height:297mm; margin:0 auto 20px; padding: 15mm 12mm; box-sizing:border-box; page-break-after:always; background:white; box-shadow:none; }
-      .page:last-child { page-break-after:auto; }
-      .letter-header{ display:flex; align-items:center; gap:15px; flex-wrap:wrap; }
-      .org-logo{ max-height:55px; max-width:110px; object-fit:contain; }
+      body { margin:0; padding:25.4mm; background:white; }
+      .page { width:210mm; height:297mm; margin:0 auto; padding: 25.4mm; box-sizing:border-box; page-break-after:always; background:white; font-family:'Times New Roman', 'Nirmala UI',serif; }
+      .letter-header{ display:flex; align-items:center; gap:15px; }
+      .org-logo{ max-height:60px; max-width:120px; }
       .org-name{ font-size:24px; font-weight:bold; }
       .letter-subheader{ text-align:center; margin-bottom:6mm; }
       .date{ text-align:right; }
@@ -691,38 +790,17 @@ function printLetters() {
       .recipient{ margin:4mm 0; }
       .subject-line{ font-weight:bold; border-bottom:1px solid #000; margin:3mm 0; }
       .letter-body{ white-space:pre-line; text-align:justify; }
-      .sender-details{ text-align:right; margin-top:8mm; }
-      .signature-block{ display:flex; justify-content:flex-end; align-items:center; gap:10px; margin-top:3mm; }
-      .signature-img{ max-height:38px; max-width:100px; object-fit:contain; }
+      .sender-details{ text-align:right; margin-top:8mm; display:flex; flex-direction:column; align-items:flex-end; }
+      .signature-area{ margin-bottom:5px; }
+      .signature-img{ max-height:50px; max-width:150px; object-fit:contain; }
       .contact-footer{ margin-top:8mm; border-top:1px solid #aaa; padding-top:3mm; font-size:10px; text-align:center; }
       .contact-info{ display:flex; flex-wrap:wrap; justify-content:center; gap:15px; }
-      @media print {
-        body { padding:0; }
-        .page { margin:0; padding: 25.4mm; box-shadow:none; page-break-after:always; }
-      }
     </style>
-  `;
-
-  // clone output content to avoid modifying original
-  const content = outputDiv.innerHTML;
-  printWindow.document.write(`
-    <!DOCTYPE html>
-    <html>
-    <head><title>पत्र प्रिन्ट</title>${style}</head>
-    <body>${content}</body>
-    </html>
+    </head><body>${output}</body></html>
   `);
   printWindow.document.close();
-
-  // wait for resources (images) to load
-  printWindow.onload = function() {
-    setTimeout(() => {
-      printWindow.focus();
-      printWindow.print();
-      // optionally close after print (user can cancel)
-      // printWindow.onafterprint = () => printWindow.close();
-    }, 500);
-  };
+  printWindow.focus();
+  setTimeout(() => { printWindow.print(); }, 300);
 }
 
 // clear form
@@ -740,7 +818,7 @@ function clearForm() {
   document.getElementById('sender').value = '';
   document.getElementById('position').value = '';
   document.getElementById('logoUrl').value = '';
-  document.getElementById('signatureUrl').value = '';
+  document.getElementById('letterDate').value = '२०८२-१०-१२';
   logoDataUrl = '';
   signatureDataUrl = '';
   document.getElementById('logoPreview').innerHTML = '';
@@ -761,6 +839,14 @@ window.addEventListener('load', () => {
   setTodayDate();
   updatePreviewOnly();
 });
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+  const modal = document.getElementById('signatureModal');
+  if (event.target == modal) {
+    closeSignatureModal();
+  }
+}
 </script>
 </body>
 </html>
