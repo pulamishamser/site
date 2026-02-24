@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ne">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Multi Letterpad · डिजिटल हस्ताक्षर सहित</title>
+<title>मल्टी लेटरप्याड · डिजिटल हस्ताक्षर सहित</title>
 <!-- Font Awesome 6 (free) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<!-- html2canvas + jsPDF -->
+<!-- html2canvas + jsPDF (specific versions that work reliably on shared hosting) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
@@ -137,7 +137,7 @@ textarea { min-height: 120px; border-radius: 24px; }
 }
 .logo-preview img { max-width: 100%; max-height: 70px; object-fit: contain; }
 
-/* signature area — new */
+/* signature area */
 .signature-zone {
   border: 2px dashed #b8c9e0;
   border-radius: 40px;
@@ -250,7 +250,7 @@ textarea { min-height: 120px; border-radius: 24px; }
   width: 100%;
   max-width: 210mm;
   margin: 20px auto;
-  padding: 15mm 12mm;
+  padding: 12mm 10mm;
   border-radius: 12px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.1);
   page-break-after: always;
@@ -307,7 +307,7 @@ textarea { min-height: 120px; border-radius: 24px; }
         <li>प्रापकको नाम प्रत्येक लाइनमा लेख्नुहोस् (जस्तै: राम वादी, अध्यक्ष)</li>
         <li>मिति आफै राख्नुहोस् वा <i class="fas fa-calendar"></i> Today बटन प्रयोग गर्नुहोस्</li>
         <li><i class="fas fa-signature"></i> डिजिटल हस्ताक्षर (छवि वा URL) राख्न सकिन्छ – पत्रको पुछारमा देखिनेछ ।</li>
-        <li>जेनरेट गरेपछि PDF डाउनलोड / प्रिन्ट राम्रोसँग काम गर्दछ ।</li>
+        <li><strong>PDF/प्रिन्ट</strong> का लागि जेनरेट गरेपछि मात्र बटन थिच्नुहोस् । सबै ब्राउजरमा काम गर्दछ ।</li>
       </ul>
     </div>
   </div>
@@ -328,7 +328,7 @@ textarea { min-height: 120px; border-radius: 24px; }
         <input type="text" id="logoUrl" placeholder="वा लोगो URL राख्नुहोस्" oninput="updateLogoFromUrl()">
       </div>
 
-      <!-- DIGITAL SIGNATURE AREA (new) -->
+      <!-- DIGITAL SIGNATURE AREA -->
       <div class="signature-zone" onclick="document.getElementById('signatureFile').click()">
         <div class="signature-preview" id="signaturePreview"></div>
         <i class="fas fa-signature"></i>
@@ -385,15 +385,17 @@ textarea { min-height: 120px; border-radius: 24px; }
     </div>
   </div>
 
-  <!-- generated letters output (hidden until generate) -->
+  <!-- generated letters output -->
   <div id="output" style="margin-top: 30px; background: transparent;"></div>
   <div class="page-count" id="pageCount"></div>
 </div>
 
 <script>
+// --- shamser.info.np फिक्स : PDF र print सधैं काम गरोस् ---
+
 // global state
 let logoDataUrl = '';
-let signatureDataUrl = '';   // new
+let signatureDataUrl = '';
 
 // helper: format address with <br>
 function formatAddress(addr) {
@@ -433,7 +435,7 @@ function updateLogoFromUrl() {
   }
 }
 
-// signature handlers (new)
+// signature handlers
 function uploadSignature() {
   const file = document.getElementById('signatureFile').files[0];
   if (!file) return;
@@ -475,7 +477,6 @@ function updatePreviewOnly() {
   const receivers = document.getElementById('receivers').value.split('\n').filter(r => r.trim() !== '');
   const sampleRec = receivers.length ? receivers[0].trim() : 'श्री मानव अधिकारी ज्यू';
   
-  // signature HTML if exists
   const signatureHtml = signatureDataUrl ? `<img src="${signatureDataUrl}" class="signature-img" alt="signature">` : '';
   
   const previewHtml = `
@@ -582,22 +583,18 @@ function generateLetters() {
   document.getElementById('previewCounter').innerText = `${receivers.length} वटा पत्र`;
   document.getElementById('pageCount').innerText = `कुल पृष्ठ: ${receivers.length}`;
   
-  // also update preview with first
-  updatePreviewOnly();
-  
-  // scroll to output
+  updatePreviewOnly();  // update preview with first receiver
   document.getElementById('output').scrollIntoView({ behavior: 'smooth' });
 }
 
-// PDF download – fixed to work on mobile/shamser server
+// ---------- FIXED PDF DOWNLOAD (works on shamser & mobile) ----------
 async function downloadAsPDF() {
   const outputDiv = document.getElementById('output');
-  if (!outputDiv.children.length || outputDiv.innerText.includes('No letters')) {
-    alert('पहिला पत्र जेनरेट गर्नुहोस्'); return;
+  if (!outputDiv.children.length) {
+    alert('पहिला पत्र जेनरेट गर्नुहोस्'); 
+    return;
   }
-  const pages = document.querySelectorAll('#output .page');
-  if (pages.length === 0) { alert('पत्र छैन'); return; }
-
+  
   const btn = document.getElementById('downloadBtn');
   const originalHtml = btn.innerHTML;
   btn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> PDF बन्दै...';
@@ -605,94 +602,127 @@ async function downloadAsPDF() {
 
   try {
     const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF('p', 'mm', 'a4');
+    const pdf = new jsPDF({
+      orientation: 'p',
+      unit: 'mm',
+      format: 'a4',
+      hotfixes: ['px_scaling']  // helps with scaling on some hosts
+    });
+    
+    const pages = document.querySelectorAll('#output .page');
     
     for (let i = 0; i < pages.length; i++) {
       const page = pages[i];
-      if (i > 0) pdf.addPage();
       
-      // Force page styles for capture
+      // force explicit background & dimensions for capture
       page.style.background = 'white';
-      page.style.width = '210mm';   // helps scale
+      page.style.width = '800px';        // fixed width for consistent capture
+      page.style.margin = '0 auto';
+      page.style.padding = '15mm 12mm';
+      page.style.boxSizing = 'border-box';
       
+      // use html2canvas with careful settings
       const canvas = await html2canvas(page, {
-        scale: 2,
+        scale: 1.8,                      // better quality, still fast
         backgroundColor: '#ffffff',
         logging: false,
         allowTaint: true,
         useCORS: true,
-        windowWidth: 800
+        windowWidth: 800,
+        onclone: (clonedDoc) => {
+          // ensure cloned page has proper styles
+          const clonedPage = clonedDoc.querySelector('.page');
+          if (clonedPage) {
+            clonedPage.style.width = '800px';
+            clonedPage.style.background = 'white';
+          }
+        }
       });
       
       const imgData = canvas.toDataURL('image/jpeg', 0.95);
+      
+      if (i > 0) pdf.addPage();
+      
+      // A4 dimensions: 210mm x 297mm
       pdf.addImage(imgData, 'JPEG', 0, 0, 210, 297, undefined, 'FAST');
       
-      // small delay to avoid overload
-      if (i < pages.length - 1) await new Promise(r => setTimeout(r, 30));
+      // small delay to prevent memory issues
+      if (i < pages.length - 1) await new Promise(r => setTimeout(r, 50));
     }
     
     const filename = (document.getElementById('org').value || 'letters').replace(/\s+/g,'_') + '.pdf';
     pdf.save(filename);
-  } catch (e) {
-    alert('PDF बनाउन समस्या भयो । कृपया पुन: प्रयास गर्नुहोस् ।');
-    console.error(e);
+    
+  } catch (error) {
+    console.error('PDF error:', error);
+    alert('PDF बनाउन समस्या भयो । तर प्रिन्ट बटन प्रयास गर्नुहोस् ।');
   } finally {
     btn.innerHTML = originalHtml;
     btn.disabled = false;
   }
 }
 
-// print function – fixed for mobile/site
+// ---------- FIXED PRINT (works everywhere, including shamser) ----------
 function printLetters() {
   const outputDiv = document.getElementById('output');
   if (!outputDiv.children.length) {
-    alert('पहिला पत्र जेनरेट गर्नुहोस्'); return;
+    alert('पहिला पत्र जेनरेट गर्नुहोस्'); 
+    return;
   }
-  
-  // Open print dialog directly using iframe method (works everywhere)
-  const iframe = document.createElement('iframe');
-  iframe.style.position = 'absolute';
-  iframe.style.width = '0';
-  iframe.style.height = '0';
-  iframe.style.border = 'none';
-  document.body.appendChild(iframe);
-  
-  const printDoc = iframe.contentWindow.document;
-  printDoc.open();
-  printDoc.write(`
+
+  // Create a new window/iframe specifically for printing – most reliable method
+  const printWindow = window.open('', '_blank', 'width=800,height=600');
+  if (!printWindow) {
+    alert('पप-अप ब्लकर भए खोल्नुहोस् ।');
+    return;
+  }
+
+  const style = `
+    <style>
+      body { margin:0; padding:15mm; background:white; font-family:'Times New Roman','Nirmala UI',serif; }
+      .page { width:100%; max-width:210mm; min-height:297mm; margin:0 auto 20px; padding: 15mm 12mm; box-sizing:border-box; page-break-after:always; background:white; box-shadow:none; }
+      .page:last-child { page-break-after:auto; }
+      .letter-header{ display:flex; align-items:center; gap:15px; flex-wrap:wrap; }
+      .org-logo{ max-height:55px; max-width:110px; object-fit:contain; }
+      .org-name{ font-size:24px; font-weight:bold; }
+      .letter-subheader{ text-align:center; margin-bottom:6mm; }
+      .date{ text-align:right; }
+      .letter-numbers{ display:flex; justify-content:space-between; }
+      .recipient{ margin:4mm 0; }
+      .subject-line{ font-weight:bold; border-bottom:1px solid #000; margin:3mm 0; }
+      .letter-body{ white-space:pre-line; text-align:justify; }
+      .sender-details{ text-align:right; margin-top:8mm; }
+      .signature-block{ display:flex; justify-content:flex-end; align-items:center; gap:10px; margin-top:3mm; }
+      .signature-img{ max-height:38px; max-width:100px; object-fit:contain; }
+      .contact-footer{ margin-top:8mm; border-top:1px solid #aaa; padding-top:3mm; font-size:10px; text-align:center; }
+      .contact-info{ display:flex; flex-wrap:wrap; justify-content:center; gap:15px; }
+      @media print {
+        body { padding:0; }
+        .page { margin:0; padding: 25.4mm; box-shadow:none; page-break-after:always; }
+      }
+    </style>
+  `;
+
+  // clone output content to avoid modifying original
+  const content = outputDiv.innerHTML;
+  printWindow.document.write(`
+    <!DOCTYPE html>
     <html>
-      <head>
-        <title>पत्र प्रिन्ट</title>
-        <style>
-          body { margin:0; padding:0; background:white; }
-          .page { width:210mm; min-height:297mm; margin:0 auto; padding: 25.4mm; box-sizing:border-box; page-break-after:always; background:white; font-family:'Times New Roman', 'Nirmala UI',serif; }
-          .letter-header{ display:flex; align-items:center; gap:15px; }
-          .org-logo{ max-height:60px; max-width:120px; object-fit:contain; }
-          .org-name{ font-size:24px; font-weight:bold; }
-          .letter-subheader{ text-align:center; margin-bottom:6mm; }
-          .date{ text-align:right; }
-          .letter-numbers{ display:flex; justify-content:space-between; }
-          .recipient{ margin:4mm 0; }
-          .subject-line{ font-weight:bold; border-bottom:1px solid #000; margin:3mm 0; }
-          .letter-body{ white-space:pre-line; text-align:justify; }
-          .sender-details{ text-align:right; margin-top:8mm; }
-          .signature-block{ display:flex; justify-content:flex-end; align-items:center; gap:10px; margin-top:3mm; }
-          .signature-img{ max-height:38px; max-width:100px; object-fit:contain; }
-          .contact-footer{ margin-top:8mm; border-top:1px solid #aaa; padding-top:3mm; font-size:10px; text-align:center; }
-          .contact-info{ display:flex; flex-wrap:wrap; justify-content:center; gap:15px; }
-        </style>
-      </head>
-      <body>${outputDiv.innerHTML}</body>
+    <head><title>पत्र प्रिन्ट</title>${style}</head>
+    <body>${content}</body>
     </html>
   `);
-  printDoc.close();
+  printWindow.document.close();
 
-  setTimeout(() => {
-    iframe.contentWindow.focus();
-    iframe.contentWindow.print();
-    // remove iframe after print (optional)
-    setTimeout(() => document.body.removeChild(iframe), 1000);
-  }, 300);
+  // wait for resources (images) to load
+  printWindow.onload = function() {
+    setTimeout(() => {
+      printWindow.focus();
+      printWindow.print();
+      // optionally close after print (user can cancel)
+      // printWindow.onafterprint = () => printWindow.close();
+    }, 500);
+  };
 }
 
 // clear form
