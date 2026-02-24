@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Online multi Letterpad</title>
+<title>Multi Letterpad</title>
 <!-- Libraries -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -64,6 +64,27 @@ body {
   width: 100%;
   margin: 0 auto;
 }
+
+header {
+        text-align: center;
+        margin-bottom: 30px;
+        padding: 10px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: var(--shadow);
+    }
+    
+    h1 {
+        color: var(--primary-color);
+        margin-bottom: 10px;
+    }
+    
+    .subtitle {
+        color: var(--secondary-color);
+        font-weight: 400;
+    }
+    
+    
 
 /* -------------------- FORM CARD (polished) -------------------- */
 .card {
@@ -394,10 +415,25 @@ button i {
 <body>
 
 <div class="container">
-
+<header>
 <div class="card">
-  <h2><i class="fas fa-feather-alt"></i> पत्र शीर्षक निर्माण</h2>
-  <p><i class="fas fa-check-circle" style="color:#2c74b3;"></i> मिति, सन्दर्भ, हस्ताक्षर सहित — सफा र व्यवस्थित CSS</p>
+  
+  <h2><i class="fas fa-feather-alt"></i>Generate multi letter </h2>
+      
+            <h1><i class="fas fa-envelope-open-text"></i> Multi-Letterpad Generator</h1>
+            <p class="subtitle">यसमा लेखेर वा बोलेर एउटै बिषयमा धेरैजनालाई पत्र लेख्न वा कुनै सिफारिसपत्र बनाउन सकिन्छ ।</p>
+
+            <div class="instructions">
+                <h3><i class="fas fa-info-circle"></i> Instructions</h3>
+                <ul>
+                    <li>प्रत्येक लाईनमा प्रत्येक प्रापकको नाम लेख्नुहोस ।</li>
+                    <li>आफुले चाहेको मिति राख्नुहोस  </li>
+                    <li>यसमा Data store भएर बस्दैन ।</li>
+                    <li>पत्रलाई pdf मा save गरेर राख्न सकिन्छ । </li>
+                    <li> Save गरिसकेपछिमात्र रिफ्रेश गर्नुहोला अन्यथा फेरि रिपिट लेख्नुपर्छ ।     </li>
+                </ul>
+            </div>
+        </header>
 
   <!-- Logo, school, address -->
   <div class="form-row">
@@ -406,12 +442,12 @@ button i {
       <input type="file" id="logoFile" accept="image/*">
     </div>
     <div class="form-group">
-      <label><i class="fas fa-school"></i> विद्यालय नाम</label>
-      <input type="text" id="org" value="श्री डिम जनता मा.वि.">
+      <label><i class="fas fa-school"></i> विद्यालय वा कार्यालयको नाम</label>
+      <input type="text" id="org" value="श्री डिम जनता माध्यमिक बिद्यालय">
     </div>
     <div class="form-group">
       <label><i class="fas fa-location-dot"></i> ठेगाना</label>
-      <input type="text" id="address" value="लालबन्दी-१६, सर्लाही">
+      <input type="text" id="address" value="लालबन्दी-१६, परवानीपुर, सर्लाही">
     </div>
   </div>
 
@@ -450,16 +486,19 @@ button i {
   <!-- receivers, body, signature upload -->
   <div class="form-row">
     <div class="form-group" style="flex: 1.5;">
-      <label><i class="fas fa-address-card"></i> प्राप्तकर्ता (प्रति line)</label>
-      <textarea id="receivers" rows="3">राम बहादुर
-श्याम अधिकारी
-कमला देवी</textarea>
+      <label><i class="fas fa-address-card"></i> प्रापकहरुको नाम</label>
+      <textarea id="receivers" rows="3">
+जिल्ला निर्वाचन कार्यालय सर्लाही
+शिक्षा शाखा प्रमुख
+राम बहादुर स्याङ्तान, सदस्य
+श्याम अधिकारी, प्रअ
+कमला देवी, महिला सदस्य</textarea>
     </div>
     <div class="form-group" style="flex: 2;">
       <label><i class="fas fa-pen"></i> पत्र मुख्य भाग</label>
       <textarea id="body" rows="3">[नाम] ज्यू,
-
-वार्षिकोत्सव कार्यक्रममा हार्दिक उपस्थितिको लागि अनुरोध।
+        
+यस संस्थाको यहि मिति २०८२-१२-१५ का दिन हुन गई रहेको वार्षिकोत्सव कार्यक्रममा यहाँको गरिमामय उपस्थितिको लागि हार्दिक अनुरोध गर्दछु ।
 मिति: २०८१ चैत १५, बिहान ११ बजे।
 
 धन्यवाद ।</textarea>
