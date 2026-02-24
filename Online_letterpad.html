@@ -3,641 +3,179 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Multi Letterpad · मोबाइल मैत्री</title>
-<!-- Font Awesome 6 (free) -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<!-- html2canvas + jsPDF -->
+<title>Official Multi Letterpad Pro</title>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --primary: #1e3c5c;
-  --accent: #2c74b3;
-  --soft-bg: #f4f7fc;
-  --border: #d0ddee;
-  --shadow: 0 8px 20px rgba(0,20,40,0.08);
-}
-body {
-  font-family: 'Segoe UI', 'Nirmala UI', system-ui, sans-serif;
-  background: #eef2f7;
-  padding: 14px;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-}
-.container {
-  max-width: 1280px;
-  width: 100%;
-}
-/* header & card */
-.header-card {
-  background: white;
-  border-radius: 30px 30px 30px 30px;
-  padding: 1.5rem 1.2rem;
-  margin-bottom: 1.8rem;
-  box-shadow: var(--shadow);
-  text-align: center;
-}
-.header-card h1 {
-  color: var(--primary);
-  font-weight: 600;
-  font-size: 1.9rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-.header-card h1 i { color: var(--accent); }
-.subtitle {
-  color: #2c3e50;
-  font-size: 1.1rem;
-  margin: 0.6rem 0 0.2rem;
-}
-.instructions {
-  background: #e8f0fe;
-  padding: 1.2rem;
-  border-radius: 24px;
-  text-align: left;
-  margin-top: 1rem;
-  font-size: 0.95rem;
-  border-left: 5px solid var(--accent);
-}
-.instructions ul { margin-left: 1.5rem; }
-.instructions li { margin: 6px 0; }
-
-/* main panel flex */
-.app-panels {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 22px;
-}
-.control-panel, .preview-panel {
-  flex: 1 1 360px;
-  background: white;
-  border-radius: 36px;
-  padding: 1.6rem 1.4rem;
-  box-shadow: var(--shadow);
-}
-.preview-panel { display: flex; flex-direction: column; }
-
-h2 {
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: var(--primary);
-  border-bottom: 3px solid #cbd6e9;
-  padding-bottom: 0.5rem;
-  margin-bottom: 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-/* form elements */
-.form-group { margin-bottom: 1.5rem; }
-label {
-  font-weight: 600;
-  display: block;
-  margin-bottom: 6px;
-  color: #1e3a5f;
-  font-size: 0.95rem;
-}
-input, textarea, select {
-  width: 100%;
-  padding: 14px 16px;
-  border: 1.5px solid var(--border);
-  border-radius: 30px;
-  font-size: 1rem;
-  background: white;
-  transition: 0.15s;
-  font-family: inherit;
-}
-input:focus, textarea:focus {
-  border-color: var(--accent);
-  outline: none;
-  box-shadow: 0 0 0 4px rgba(44,116,179,0.15);
-}
-textarea { min-height: 120px; border-radius: 24px; }
-
-.logo-zone {
-  border: 2px dashed var(--border);
-  border-radius: 40px;
-  padding: 20px 15px;
-  text-align: center;
-  background: #f9fcff;
-  cursor: pointer;
-  margin-bottom: 12px;
-}
-.logo-zone i { font-size: 38px; color: var(--accent); }
-.logo-preview {
-  max-width: 140px;
-  max-height: 70px;
-  margin: 8px auto;
-  display: none;
-}
-.logo-preview img { max-width: 100%; max-height: 70px; object-fit: contain; }
-
-.date-row {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-.date-row input { flex: 3; min-width: 160px; }
-.today-btn {
-  background: #e2eaf6;
-  border: none;
-  border-radius: 40px;
-  padding: 14px 22px;
-  font-weight: 600;
-  color: #1e3c5c;
-  white-space: nowrap;
-  cursor: pointer;
-  flex: 1;
-  transition: 0.15s;
-}
-.today-btn:hover { background: #c9d9ef; }
-
-.two-cols {
-  display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
-}
-.two-cols .form-group { flex: 1 1 160px; }
-
-/* buttons */
-.button-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 30px;
-}
-.btn {
-  flex: 1 1 140px;
-  background: white;
-  border: 2px solid var(--accent);
-  color: var(--accent);
-  padding: 16px 12px;
-  border-radius: 50px;
-  font-weight: 700;
-  font-size: 1rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  cursor: pointer;
-  transition: 0.15s;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.02);
-}
-.btn-primary { background: var(--accent); color: white; border-color: var(--accent); }
-.btn-primary:hover { background: #1a5a8c; border-color: #1a5a8c; }
-.btn-success { background: #2b7a4b; border-color: #2b7a4b; color: white; }
-.btn-purple { background: #7b4b9a; border-color: #7b4b9a; color: white; }
-.btn-danger { background: #c44536; border-color: #a33c2f; color: white; }
-.btn:hover { transform: translateY(-2px); box-shadow: 0 12px 20px -8px rgba(0,60,120,0.3); }
-
-/* preview box */
-.preview-box {
-  background: #f1f5fb;
-  border-radius: 28px;
-  padding: 20px 12px;
-  flex: 1;
-  overflow-y: auto;
-  min-height: 280px;
-  margin-bottom: 15px;
-}
-.preview-box .page {
-  transform: scale(0.95);
-  transform-origin: top center;
-  width: 100% !important;
-  height: auto !important;
-  min-height: 200px;
-  margin: 0 auto;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-}
-.counter-badge {
-  background: #1e3c5c;
-  color: white;
-  padding: 12px 18px;
-  border-radius: 60px;
-  text-align: center;
-  font-weight: 500;
-  font-size: 1rem;
-}
-
-/* letter page style – A4 like, responsive */
-.page {
-  background: white;
-  width: 100%;
-  max-width: 210mm;
-  margin: 20px auto;
-  padding: 15mm 12mm;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-  page-break-after: always;
-  position: relative;
-  font-family: 'Times New Roman', 'Nirmala UI', serif;
-  box-sizing: border-box;
-}
-.page-content { display: flex; flex-direction: column; }
-.letter-header { display: flex; align-items: center; gap: 15px; flex-wrap: wrap; margin-bottom: 4mm; }
-.org-logo { max-height: 55px; max-width: 110px; object-fit: contain; }
-.org-name { font-size: 24px; font-weight: bold; color: #000; }
-.letter-subheader { text-align: center; font-size: 13px; margin-bottom: 6mm; line-height: 1.4; }
-.date { text-align: right; font-size: 12px; margin-bottom: 3mm; }
-.letter-numbers { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 2mm; flex-wrap: wrap; }
-.ref-number { text-align: left; }
-.recipient { margin-bottom: 5mm; font-size: 13px; }
-.subject-line { font-weight: bold; font-size: 14px; border-bottom: 1px solid #aaa; padding-bottom: 2mm; margin: 3mm 0; }
-.letter-body-container { min-height: 100px; }
-.letter-body { white-space: pre-line; line-height: 1.6; text-align: justify; font-size: 12pt; }
-.sender-details { text-align: right; margin-top: 7mm; font-size: 13px; }
-.contact-footer { margin-top: 8mm; border-top: 1px solid #ccc; padding-top: 3mm; font-size: 10px; text-align: center; }
-.contact-info { display: flex; gap: 18px; flex-wrap: wrap; justify-content: center; }
-
-#output { margin-top: 40px; }
-.page-count { text-align: center; margin-top: 15px; font-weight: 600; }
-
-/* responsive */
-@media (max-width: 700px) {
-  .page { padding: 8mm 6mm; }
-  .org-name { font-size: 20px; }
-  .btn { padding: 14px 6px; font-size: 0.9rem; }
-  .header-card h1 { font-size: 1.6rem; }
-}
-@media print {
-  body * { visibility: hidden; }
-  #output, #output * { visibility: visible; }
-  #output { position: absolute; left: 0; top: 0; width: 100%; }
-  .page { box-shadow: none; margin: 0; padding: 25.4mm; border-radius: 0; }
-  .control-panel, .preview-panel, .header-card, .button-grid { display: none; }
+body{font-family:Arial;padding:20px;background:#f4f6fb}
+.page{width:210mm;min-height:297mm;background:white;margin:20px auto;padding:20mm;box-shadow:0 0 10px rgba(0,0,0,0.1)}
+.sender-details{text-align:right;margin-top:20px}
+.contact-footer{text-align:center;margin-top:20px;font-size:12px}
+#output{margin-top:30px}
+@media print{
+body *{visibility:hidden}
+#output,#output *{visibility:visible}
+#output{position:absolute;left:0;top:0;width:100%}
+.page{box-shadow:none;margin:0}
 }
 </style>
 </head>
 <body>
-<div class="container">
-  <!-- header -->
-  <div class="header-card">
-    <h1><i class="fas fa-envelope-open-text"></i> मल्टी लेटरप्याड <span style="font-size: 0.7rem; background: #d4e2f0; padding: 5px 16px; border-radius: 40px;">मोबाइल / डेस्कटप</span></h1>
-    <div class="subtitle"><i class="fas fa-pen-fancy"></i> एउटै विषयमा धेरैलाई पत्र ÷ सिफारिस</div>
-    <div class="instructions">
-      <i class="fas fa-lightbulb"></i> <strong>निर्देशिका :</strong>
-      <ul>
-        <li>प्रापकको नाम प्रत्येक लाइनमा लेख्नुहोस् (जस्तै: राम वादी, अध्यक्ष)</li>
-        <li>मिति आफै राख्नुहोस् वा <i class="fas fa-calendar"></i> Today बटन प्रयोग गर्नुहोस्</li>
-        <li>जेनरेट गरेपछि PDF डाउनलोड वा प्रिन्ट गर्नुहोस् – सबै डिभाइसमा मिल्छ</li>
-        <li>रिफ्रेस गर्नुअघि PDF सेभ गरिसकेको निश्चित गर्नुहोस् ।</li>
-      </ul>
-    </div>
-  </div>
 
-  <!-- main panels -->
-  <div class="app-panels">
-    <!-- left controls -->
-    <div class="control-panel">
-      <h2><i class="fas fa-sliders-h"></i> विवरणहरू</h2>
-      
-      <div class="logo-zone" onclick="document.getElementById('logoFile').click()">
-        <div class="logo-preview" id="logoPreview"></div>
-        <i class="fas fa-cloud-upload-alt"></i>
-        <span>लोगो अपलोड गर्नुहोस्</span>
-        <input type="file" id="logoFile" accept="image/*" style="display: none;" onchange="uploadLogo()">
-      </div>
-      <div class="form-group">
-        <input type="text" id="logoUrl" placeholder="वा लोगो URL राख्नुहोस्" oninput="updateLogoFromUrl()">
-      </div>
+<h2>Official Multi Letterpad Pro</h2>
 
-      <div class="form-group">
-        <label><i class="fas fa-building"></i> संस्थाको नाम</label>
-        <input type="text" id="org" value="श्री डिम जनता मा.वि.">
-      </div>
-      <div class="form-group">
-        <label><i class="fas fa-map-pin"></i> ठेगाना (कमा लगाएर छुट्याउनुहोस्)</label>
-        <input type="text" id="address" value="लालबन्दी नपा-१६ परवानीपुर, सर्लाही, मधेश प्रदेश">
-      </div>
-      <div class="two-cols">
-        <div class="form-group"><label><i class="fas fa-envelope"></i> इमेल</label><input type="text" id="email" value="dimjanta998@gmail.com"></div>
-        <div class="form-group"><label><i class="fas fa-phone-alt"></i> फोन</label><input type="text" id="phone" value="9844047749"></div>
-      </div>
-      <div class="date-row">
-        <input type="text" id="letterDate" value="२०८२-१०-१२">
-        <button class="today-btn" onclick="setTodayDate()"><i class="fas fa-calendar-check"></i> Today</button>
-      </div>
-      <div class="two-cols">
-        <div class="form-group"><label><i class="fas fa-hashtag"></i> पत्र संख्या</label><input type="text" id="letterNo" value="११/०८१-०८२"></div>
-        <div class="form-group"><label><i class="fas fa-file-signature"></i> च.नं.</label><input type="text" id="refNo" value="६/२०८२ शिक्षा शाखा"></div>
-      </div>
-      <div class="form-group"><label><i class="fas fa-heading"></i> विषय</label><input type="text" id="subject" value="आमन्त्रण बारे"></div>
-      <div class="form-group"><label><i class="fas fa-users"></i> प्रापकको नाम (प्रति लाइन एक)</label><textarea id="receivers" rows="3">गणेशबहादुर, वडाध्यक्ष&#10;राजु बुढाथोकी, व्यवसाय अध्यक्ष&#10;बासुदेव अधिकारी, मेयर लालबन्दी</textarea></div>
-      <div class="form-group"><label><i class="fas fa-paragraph"></i> पत्रको मुख्य भाग</label><textarea id="letterBody" rows="4">[महोदय],&#10;&#10;उपर्युक्त विषयमा तपाईंको उपस्थिति हाम्रो लागि अति आवश्यक छ । कार्यक्रम सफल बनाउन हार्दिक अनुरोध गर्दछौ ।&#10;&#10;धन्यवाद ।</textarea></div>
-      <div class="two-cols">
-        <div class="form-group"><label><i class="fas fa-user"></i> पठाउने व्यक्ति</label><input type="text" id="sender" value="ध्रुवबहादुर भण्डारी"></div>
-        <div class="form-group"><label><i class="fas fa-user-tie"></i> पद</label><input type="text" id="position" value="प्रधानाध्यापक"></div>
-      </div>
-      
-      <div class="button-grid">
-        <button class="btn btn-success" id="generateBtn" onclick="generateLetters()"><i class="fas fa-magic"></i> जेनरेट</button>
-        <button class="btn btn-purple" id="downloadBtn" onclick="downloadAsPDF()"><i class="fas fa-download"></i> PDF</button>
-        <button class="btn btn-danger" id="printBtn" onclick="printLetters()"><i class="fas fa-print"></i> प्रिन्ट</button>
-        <button class="btn" id="clearBtn" onclick="clearForm()"><i class="fas fa-broom"></i> खाली गर्नुहोस्</button>
-      </div>
-    </div>
+<label>AD Date:</label>
+<input type="date" id="adDate" onchange="convertToBS()"><br><br>
 
-    <!-- preview panel -->
-    <div class="preview-panel">
-      <h2><i class="fas fa-eye"></i> पूर्वावलोकन</h2>
-      <div class="preview-box" id="preview">
-        <div style="text-align: center; color: #809ab3; padding: 40px;"><i class="fas fa-file-alt fa-3x"></i><br>जेनरेट गरेपछि प्रति देखिनेछ</div>
-      </div>
-      <div class="counter-badge" id="previewCounter">० वटा पत्र</div>
-    </div>
-  </div>
+<label>BS Date:</label>
+<input type="text" id="letterDate"><br><br>
 
-  <!-- generated letters output (hidden until generate) -->
-  <div id="output" style="margin-top: 30px; background: transparent;"></div>
-  <div class="page-count" id="pageCount"></div>
-</div>
+<label>Institution:</label>
+<input type="text" id="org" value="श्री डिम जनता मा.वि."><br><br>
+
+<label>Address:</label>
+<input type="text" id="address" value="लालबन्दी-१६, सर्लाही"><br><br>
+
+<label>Subject:</label>
+<input type="text" id="subject" value="आमन्त्रण बारे"><br><br>
+
+<label>Receivers (one per line):</label><br>
+<textarea id="receivers" rows="4">गणेशबहादुर, अध्यक्ष
+राजु बुढाथोकी, व्यवसायी</textarea><br><br>
+
+<label>Letter Body:</label><br>
+<textarea id="letterBody" rows="6">[महोदय],
+
+कार्यक्रममा उपस्थित हुन हार्दिक अनुरोध गर्दछौं ।
+
+धन्यवाद ।</textarea><br><br>
+
+<label>Sender:</label>
+<input type="text" id="sender" value="ध्रुवबहादुर भण्डारी"><br><br>
+
+<label>Position:</label>
+<input type="text" id="position" value="प्रधानाध्यापक"><br><br>
+
+<label>Digital Signature:</label>
+<input type="file" id="signatureFile" accept="image/*" onchange="uploadSignature()"><br><br>
+
+<button onclick="generateLetters()">Generate</button>
+<button onclick="downloadAsPDF()">Download PDF</button>
+<button onclick="printLetters()">Print</button>
+
+<div id="output"></div>
 
 <script>
-// global state
-let logoDataUrl = '';
 
-// helper: format address with <br>
-function formatAddress(addr) {
-  return addr.split(',').map(s => s.trim()).join('<br>');
+let signatureData = "";
+
+// BS Converter
+function convertToBS(){
+const adDate=document.getElementById('adDate').value;
+if(!adDate)return;
+const ad=new Date(adDate);
+const adBase=new Date("2020-04-13");
+let bsYear=2077,bsMonth=1,bsDay=1;
+const diffDays=Math.floor((ad-adBase)/(1000*60*60*24));
+bsDay+=diffDays;
+const monthDays=[31,31,32,31,31,30,30,29,30,29,30,30];
+while(bsDay>monthDays[bsMonth-1]){
+bsDay-=monthDays[bsMonth-1];
+bsMonth++;
+if(bsMonth>12){bsMonth=1;bsYear++;}
+}
+document.getElementById('letterDate').value=
+`${bsYear}-${String(bsMonth).padStart(2,'0')}-${String(bsDay).padStart(2,'0')}`;
 }
 
-// set today's date (approx BS)
-function setTodayDate() {
-  const d = new Date();
-  let year = d.getFullYear() + 57;   // rough AD to BS
-  let month = d.getMonth() + 1;
-  let day = d.getDate();
-  document.getElementById('letterDate').value = `${year}-${month<10?'0'+month:month}-${day<10?'0'+day:day}`;
-  updatePreviewOnly();
+// Auto Increment Letter No
+function getNextLetterNo(){
+let last=localStorage.getItem("lastLetterNo");
+if(!last){last=1;}else{last=parseInt(last)+1;}
+localStorage.setItem("lastLetterNo",last);
+return last;
 }
 
-// logo handlers
-function uploadLogo() {
-  const file = document.getElementById('logoFile').files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    logoDataUrl = e.target.result;
-    document.getElementById('logoPreview').innerHTML = `<img src="${logoDataUrl}" alt="logo">`;
-    document.getElementById('logoPreview').style.display = 'block';
-    updatePreviewOnly();
-  };
-  reader.readAsDataURL(file);
-}
-function updateLogoFromUrl() {
-  const url = document.getElementById('logoUrl').value.trim();
-  if (url) {
-    logoDataUrl = url;
-    document.getElementById('logoPreview').innerHTML = `<img src="${url}" alt="logo" onerror="this.style.display='none'">`;
-    document.getElementById('logoPreview').style.display = 'block';
-    updatePreviewOnly();
-  }
+// Signature Upload
+function uploadSignature(){
+const file=document.getElementById("signatureFile").files[0];
+if(!file)return;
+const reader=new FileReader();
+reader.onload=function(e){signatureData=e.target.result;}
+reader.readAsDataURL(file);
 }
 
-// preview update (single sample)
-function updatePreviewOnly() {
-  const org = document.getElementById('org').value || 'संस्था';
-  const address = document.getElementById('address').value || 'ठेगाना';
-  const email = document.getElementById('email').value || 'email@org.com';
-  const phone = document.getElementById('phone').value || 'फोन';
-  const letterNo = document.getElementById('letterNo').value;
-  const refNo = document.getElementById('refNo').value;
-  const subject = document.getElementById('subject').value || 'विषय';
-  const body = document.getElementById('letterBody').value || 'पत्रको भाग';
-  const sender = document.getElementById('sender').value || 'पठाउने';
-  const position = document.getElementById('position').value || 'पद';
-  const letterDate = document.getElementById('letterDate').value || 'मिति';
-  const formattedAddr = formatAddress(address);
-  
-  // pick first receiver for preview
-  const receivers = document.getElementById('receivers').value.split('\n').filter(r => r.trim() !== '');
-  const sampleRec = receivers.length ? receivers[0].trim() : 'श्री मानव अधिकारी ज्यू';
-  
-  const previewHtml = `
-    <div class="page">
-      <div class="page-content">
-        <div class="letter-header">
-          ${logoDataUrl ? `<img src="${logoDataUrl}" class="org-logo">` : ''}
-          <span class="org-name">${org}</span>
-        </div>
-        <div class="letter-subheader">${formattedAddr}</div>
-        <div class="date">मिति: ${letterDate}</div>
-        <div class="letter-numbers">
-          <span>प.सं.: ${letterNo}</span>
-          <span>च.नं.: ${refNo}</span>
-        </div>
-        <div class="recipient"><strong>प्रति: ${sampleRec}</strong></div>
-        <div class="subject-line">विषय: ${subject}</div>
-        <div class="letter-body-container">
-          <div class="letter-body">${body.replace(/\[महोदय\]/g, sampleRec).replace(/\n/g, '<br>')}</div>
-        </div>
-        <div class="sender-details">
-          <strong>${sender}</strong><br>${position}
-        </div>
-        <div class="contact-footer">
-          <hr>
-          <div class="contact-info">
-            <span><i class="fas fa-envelope"></i> ${email}</span>
-            <span><i class="fas fa-phone"></i> ${phone}</span>
-            <span><i class="fas fa-map-marker-alt"></i> ${address.split(',')[0]}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
-  document.getElementById('preview').innerHTML = previewHtml;
-}
+// Generate Letters
+function generateLetters(){
 
-// generate all letters
-function generateLetters() {
-  const org = document.getElementById('org').value.trim();
-  const address = document.getElementById('address').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const phone = document.getElementById('phone').value.trim();
-  const letterNo = document.getElementById('letterNo').value.trim();
-  const refNo = document.getElementById('refNo').value.trim();
-  const subject = document.getElementById('subject').value.trim();
-  const receiversRaw = document.getElementById('receivers').value;
-  const body = document.getElementById('letterBody').value;
-  const sender = document.getElementById('sender').value.trim();
-  const position = document.getElementById('position').value.trim();
-  const letterDate = document.getElementById('letterDate').value.trim();
+const org=document.getElementById('org').value;
+const address=document.getElementById('address').value;
+const subject=document.getElementById('subject').value;
+const receivers=document.getElementById('receivers').value.split('\n').filter(r=>r.trim());
+const body=document.getElementById('letterBody').value;
+const sender=document.getElementById('sender').value;
+const position=document.getElementById('position').value;
+const date=document.getElementById('letterDate').value;
+const letterNo=getNextLetterNo();
 
-  if (!org || !address || !receiversRaw || !body || !sender) {
-    alert('कृपया आवश्यक सबै फिल्ड भर्नुहोस् (संस्था, ठेगाना, प्रापक, पत्र, पठाउने)');
-    return;
-  }
-
-  const receivers = receiversRaw.split('\n').filter(r => r.trim() !== '');
-  if (receivers.length === 0) { alert('कम्तीमा एउटा प्रापकको नाम राख्नुहोस्'); return; }
-
-  const formattedAddr = formatAddress(address);
-  let outputHtml = '';
-  receivers.forEach(rec => {
-    const personalizedBody = body.replace(/\[महोदय\]/g, rec.trim()).replace(/\n/g, '<br>');
-    outputHtml += `
-      <div class="page">
-        <div class="page-content">
-          <div class="letter-header">
-            ${logoDataUrl ? `<img src="${logoDataUrl}" class="org-logo">` : ''}
-            <span class="org-name">${org}</span>
-          </div>
-          <div class="letter-subheader">${formattedAddr}</div>
-          <div class="date">मिति: ${letterDate}</div>
-          <div class="letter-numbers">
-            <span>प.सं.: ${letterNo}</span>
-            <span>च.नं.: ${refNo}</span>
-          </div>
-          <div class="recipient"><strong>प्रति: ${rec.trim()}</strong></div>
-          <div class="subject-line">विषय: ${subject}</div>
-          <div class="letter-body-container">
-            <div class="letter-body">${personalizedBody}</div>
-          </div>
-          <div class="sender-details">
-            <strong>${sender}</strong><br>${position}
-          </div>
-          <div class="contact-footer">
-            <hr>
-            <div class="contact-info">
-              <span><i class="fas fa-envelope"></i> ${email || 'इमेल'}</span>
-              <span><i class="fas fa-phone"></i> ${phone || 'फोन'}</span>
-              <span><i class="fas fa-map-marker-alt"></i> ${address.split(',')[0]}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    `;
-  });
-
-  document.getElementById('output').innerHTML = outputHtml;
-  document.getElementById('previewCounter').innerText = `${receivers.length} वटा पत्र`;
-  document.getElementById('pageCount').innerText = `कुल पृष्ठ: ${receivers.length}`;
-  
-  // also update preview with first
-  updatePreviewOnly();
-  
-  // scroll to output
-  document.getElementById('output').scrollIntoView({ behavior: 'smooth' });
-}
-
-// PDF download – mobile/desktop friendly
-async function downloadAsPDF() {
-  const outputDiv = document.getElementById('output');
-  if (!outputDiv.children.length || outputDiv.innerText.includes('No letters')) {
-    alert('पहिला पत्र जेनरेट गर्नुहोस्'); return;
-  }
-  const pages = document.querySelectorAll('#output .page');
-  if (pages.length === 0) { alert('पत्र छैन'); return; }
-
-  const btn = document.getElementById('downloadBtn');
-  const originalHtml = btn.innerHTML;
-  btn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> PDF बन�ँदै...';
-  btn.disabled = true;
-
-  try {
-    const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF('p', 'mm', 'a4');
-    
-    for (let i = 0; i < pages.length; i++) {
-      const page = pages[i];
-      if (i > 0) pdf.addPage();
-      
-      await html2canvas(page, {
-        scale: 2,
-        backgroundColor: '#ffffff',
-        logging: false,
-        allowTaint: false,
-        useCORS: true
-      }).then(canvas => {
-        const imgData = canvas.toDataURL('image/jpeg', 0.95);
-        pdf.addImage(imgData, 'JPEG', 0, 0, 210, 297, undefined, 'FAST');
-      });
-      // tiny delay
-      if (i < pages.length -1) await new Promise(r => setTimeout(r, 50));
-    }
-    
-    const filename = (document.getElementById('org').value || 'letters').replace(/\s+/g,'_') + '.pdf';
-    pdf.save(filename);
-  } catch (e) {
-    alert('PDF बनाउन समस्या भयो । थोरै पत्र बनाएर试试 गर्नुहोस् ।');
-    console.error(e);
-  } finally {
-    btn.innerHTML = originalHtml;
-    btn.disabled = false;
-  }
-}
-
-// print function – responsive
-function printLetters() {
-  const output = document.getElementById('output').innerHTML;
-  if (!output || output.includes('No letters')) {
-    alert('पहिला पत्र जेनरेट गर्नुहोस्'); return;
-  }
-  const printWindow = window.open('', '_blank');
-  printWindow.document.write(`
-    <html><head><title>पत्र प्रिन्ट</title>
-    <style>
-      body { margin:0; padding:25.4mm; background:white; }
-      .page { width:210mm; height:297mm; margin:0 auto; padding: 25.4mm; box-sizing:border-box; page-break-after:always; background:white; font-family:'Times New Roman', 'Nirmala UI',serif; }
-      .letter-header{ display:flex; align-items:center; gap:15px; }
-      .org-logo{ max-height:60px; max-width:120px; }
-      .org-name{ font-size:24px; font-weight:bold; }
-      .letter-subheader{ text-align:center; margin-bottom:6mm; }
-      .date{ text-align:right; }
-      .letter-numbers{ display:flex; justify-content:space-between; }
-      .recipient{ margin:4mm 0; }
-      .subject-line{ font-weight:bold; border-bottom:1px solid #000; margin:3mm 0; }
-      .letter-body{ white-space:pre-line; text-align:justify; }
-      .sender-details{ text-align:right; margin-top:8mm; }
-      .contact-footer{ margin-top:8mm; border-top:1px solid #aaa; padding-top:3mm; font-size:10px; text-align:center; }
-      .contact-info{ display:flex; flex-wrap:wrap; justify-content:center; gap:15px; }
-    </style>
-    </head><body>${output}</body></html>
-  `);
-  printWindow.document.close();
-  printWindow.focus();
-  setTimeout(() => { printWindow.print(); }, 300);
-}
-
-// clear form
-function clearForm() {
-  if (!confirm('सबै फिल्ड खाली गर्ने हो ?')) return;
-  document.getElementById('org').value = '';
-  document.getElementById('address').value = '';
-  document.getElementById('email').value = '';
-  document.getElementById('phone').value = '';
-  document.getElementById('letterNo').value = '';
-  document.getElementById('refNo').value = '';
-  document.getElementById('subject').value = '';
-  document.getElementById('receivers').value = '';
-  document.getElementById('letterBody').value = '';
-  document.getElementById('sender').value = '';
-  document.getElementById('position').value = '';
-  document.getElementById('logoUrl').value = '';
-  document.getElementById('letterDate').value = '२०८२-१०-१२';
-  logoDataUrl = '';
-  document.getElementById('logoPreview').innerHTML = '';
-  document.getElementById('logoPreview').style.display = 'none';
-  document.getElementById('preview').innerHTML = '<div style="text-align: center; color: #809ab3; padding: 40px;"><i class="fas fa-file-alt fa-3x"></i><br>जेनरेट गरेपछि प्रति देखिनेछ</div>';
-  document.getElementById('output').innerHTML = '';
-  document.getElementById('previewCounter').innerText = '० वटा पत्र';
-  document.getElementById('pageCount').innerText = '';
-}
-
-// wire live preview update
-document.querySelectorAll('input, textarea').forEach(el => {
-  el.addEventListener('input', updatePreviewOnly);
+let output="";
+receivers.forEach(rec=>{
+const personalized=body.replace(/\[महोदय\]/g,rec.trim()).replace(/\n/g,'<br>');
+output+=`
+<div class="page">
+<h3>${org}</h3>
+<p>${address}</p>
+<p style="text-align:right">मिति: ${date}</p>
+<p>पत्र नं: ${letterNo}</p>
+<p><strong>प्रति: ${rec}</strong></p>
+<hr>
+<p>${personalized}</p>
+<div class="sender-details">
+${signatureData?`<img src="${signatureData}" style="max-height:80px;"><br>`:''}
+<strong>${sender}</strong><br>${position}
+</div>
+<div class="contact-footer">
+<div id="qr_${rec.replace(/\s/g,'')}"></div>
+</div>
+</div>
+`;
 });
-window.addEventListener('load', () => {
-  setTodayDate();
-  updatePreviewOnly();
+document.getElementById('output').innerHTML=output;
+
+// Generate QR
+receivers.forEach(rec=>{
+new QRCode(document.getElementById(`qr_${rec.replace(/\s/g,'')}`),{
+text:`${org}|${subject}|${date}|${rec}`,
+width:70,height:70
 });
+});
+}
+
+// Print
+function printLetters(){
+if(!document.getElementById('output').innerHTML.trim()){
+alert('पहिला Generate गर्नुहोस्');return;}
+window.print();
+}
+
+// PDF Download
+async function downloadAsPDF(){
+const pages=document.querySelectorAll('.page');
+if(!pages.length){alert('पहिला Generate गर्नुहोस्');return;}
+const {jsPDF}=window.jspdf;
+const pdf=new jsPDF('p','mm','a4');
+for(let i=0;i<pages.length;i++){
+if(i>0)pdf.addPage();
+const canvas=await html2canvas(pages[i],{scale:1});
+const img=canvas.toDataURL('image/jpeg',0.9);
+pdf.addImage(img,'JPEG',0,0,210,297);
+}
+pdf.save("letters.pdf");
+}
+
 </script>
 </body>
 </html>
