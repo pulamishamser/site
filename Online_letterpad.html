@@ -1,852 +1,556 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ne">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Multi Letterpad · मोबाइल मैत्री</title>
-<!-- Font Awesome 6 (free) -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<!-- Signature Pad -->
-<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
-<!-- html2canvas + jsPDF -->
+<title>School Letterpad · परिष्कृत CSS</title>
+<!-- Libraries -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<!-- Font Awesome 6 (free) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --primary: #1e3c5c;
-  --accent: #2c74b3;
-  --soft-bg: #f4f7fc;
-  --border: #d0ddee;
-  --shadow: 0 8px 20px rgba(0,20,40,0.08);
+/* -------------------- RESET & GLOBAL -------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
 body {
-  font-family: 'Segoe UI', 'Nirmala UI', system-ui, sans-serif;
-  background: #eef2f7;
-  padding: 14px;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
+  font-family: 'Nirmala UI', 'Segoe UI', 'Times New Roman', sans-serif;
+  background: #e6f0fa;  /* soft blue background */
+  padding: 24px 16px;
+  line-height: 1.5;
 }
+
 .container {
-  max-width: 1280px;
-  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
 }
-/* header & card */
-.header-card {
-  background: white;
-  border-radius: 30px 30px 30px 30px;
-  padding: 1.5rem 1.2rem;
-  margin-bottom: 1.8rem;
-  box-shadow: var(--shadow);
-  text-align: center;
+
+/* -------------------- FORM CARD (polished) -------------------- */
+.card {
+  background: #ffffff;
+  padding: 30px 32px;
+  border-radius: 32px;
+  box-shadow: 0 18px 40px -8px rgba(19, 50, 80, 0.25);
+  margin-bottom: 30px;
+  border: 1px solid rgba(44, 116, 179, 0.2);
+  transition: box-shadow 0.2s;
 }
-.header-card h1 {
-  color: var(--primary);
-  font-weight: 600;
+
+.card h2 {
   font-size: 1.9rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-.header-card h1 i { color: var(--accent); }
-.subtitle {
-  color: #2c3e50;
-  font-size: 1.1rem;
-  margin: 0.6rem 0 0.2rem;
-}
-.instructions {
-  background: #e8f0fe;
-  padding: 1.2rem;
-  border-radius: 24px;
-  text-align: left;
-  margin-top: 1rem;
-  font-size: 0.95rem;
-  border-left: 5px solid var(--accent);
-}
-.instructions ul { margin-left: 1.5rem; }
-.instructions li { margin: 6px 0; }
-
-/* main panel flex */
-.app-panels {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 22px;
-}
-.control-panel, .preview-panel {
-  flex: 1 1 360px;
-  background: white;
-  border-radius: 36px;
-  padding: 1.6rem 1.4rem;
-  box-shadow: var(--shadow);
-}
-.preview-panel { display: flex; flex-direction: column; }
-
-h2 {
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: var(--primary);
-  border-bottom: 3px solid #cbd6e9;
-  padding-bottom: 0.5rem;
-  margin-bottom: 1.5rem;
+  font-weight: 700;
+  color: #0b3552;
   display: flex;
   align-items: center;
   gap: 10px;
+  margin-bottom: 6px;
 }
-/* form elements */
-.form-group { margin-bottom: 1.5rem; }
-label {
+
+.card p {
+  color: #2c5a7a;
+  margin-bottom: 28px;
+  font-size: 1.05rem;
+  border-left: 4px solid #2c74b3;
+  padding-left: 18px;
+  background: #f0f7fe;
+  border-radius: 0 20px 20px 0;
+  line-height: 1.4;
+}
+
+/* form row layout */
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.form-group {
+  flex: 1 1 240px;
+  min-width: 210px;
+}
+
+.form-group label {
   font-weight: 600;
   display: block;
   margin-bottom: 6px;
   color: #1e3a5f;
   font-size: 0.95rem;
+  letter-spacing: 0.02rem;
 }
-input, textarea, select {
-  width: 100%;
-  padding: 14px 16px;
-  border: 1.5px solid var(--border);
-  border-radius: 30px;
+
+.form-group label i {
+  width: 22px;
+  color: #2c74b3;
   font-size: 1rem;
-  background: white;
-  transition: 0.15s;
-  font-family: inherit;
 }
+
+/* inputs & textareas */
+input, textarea {
+  width: 100%;
+  padding: 12px 18px;
+  border-radius: 22px;
+  border: 1.5px solid #d4e0ec;
+  background: #ffffff;
+  font-size: 1rem;
+  transition: all 0.15s;
+  font-family: 'Nirmala UI', sans-serif;
+}
+
 input:focus, textarea:focus {
-  border-color: var(--accent);
   outline: none;
-  box-shadow: 0 0 0 4px rgba(44,116,179,0.15);
-}
-textarea { min-height: 120px; border-radius: 24px; }
-
-.logo-zone, .signature-zone {
-  border: 2px dashed var(--border);
-  border-radius: 40px;
-  padding: 20px 15px;
-  text-align: center;
-  background: #f9fcff;
-  cursor: pointer;
-  margin-bottom: 12px;
-}
-.logo-zone i, .signature-zone i { font-size: 38px; color: var(--accent); }
-.logo-preview, .signature-preview {
-  max-width: 140px;
-  max-height: 70px;
-  margin: 8px auto;
-  display: none;
-}
-.logo-preview img, .signature-preview img { max-width: 100%; max-height: 70px; object-fit: contain; }
-
-/* Signature modal */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.5);
-  align-items: center;
-  justify-content: center;
-}
-.modal-content {
-  background-color: white;
-  padding: 2rem;
-  border-radius: 36px;
-  width: 90%;
-  max-width: 600px;
-  box-shadow: var(--shadow);
-}
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-}
-.close-modal {
-  font-size: 2rem;
-  cursor: pointer;
-  color: #666;
-}
-.close-modal:hover { color: #000; }
-.signature-canvas {
-  border: 2px solid var(--border);
-  border-radius: 20px;
-  width: 100%;
-  height: 200px;
-  background: white;
-  touch-action: none;
-}
-.signature-buttons {
-  display: flex;
-  gap: 10px;
-  margin-top: 1rem;
-  flex-wrap: wrap;
+  border-color: #2c74b3;
+  box-shadow: 0 0 0 4px rgba(44, 116, 179, 0.2);
+  background: #fcfdff;
 }
 
-.date-row {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  flex-wrap: wrap;
+textarea {
+  resize: vertical;
+  min-height: 100px;
+  border-radius: 24px;
 }
-.date-row input { flex: 3; min-width: 160px; }
-.today-btn {
-  background: #e2eaf6;
-  border: none;
-  border-radius: 40px;
-  padding: 14px 22px;
-  font-weight: 600;
-  color: #1e3c5c;
-  white-space: nowrap;
-  cursor: pointer;
-  flex: 1;
-  transition: 0.15s;
-}
-.today-btn:hover { background: #c9d9ef; }
 
-.two-cols {
-  display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
+/* small hint */
+small {
+  color: #4a627a;
+  margin-top: 5px;
+  display: inline-block;
+  font-size: 0.85rem;
 }
-.two-cols .form-group { flex: 1 1 160px; }
 
-/* buttons */
-.button-grid {
+/* button group */
+.actions {
+  margin-top: 28px;
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 30px;
 }
-.btn {
-  flex: 1 1 140px;
-  background: white;
-  border: 2px solid var(--accent);
-  color: var(--accent);
-  padding: 16px 12px;
-  border-radius: 50px;
+
+button {
+  padding: 14px 30px;
+  border: none;
+  border-radius: 60px;
   font-weight: 700;
   font-size: 1rem;
+  cursor: pointer;
+  transition: 0.2s;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: 8px;
-  cursor: pointer;
-  transition: 0.15s;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.02);
+  box-shadow: 0 8px 16px -8px rgba(0,35,60,0.2);
+  border: 1px solid rgba(255,255,255,0.3);
+  backdrop-filter: blur(2px);
 }
-.btn-primary { background: var(--accent); color: white; border-color: var(--accent); }
-.btn-primary:hover { background: #1a5a8c; border-color: #1a5a8c; }
-.btn-success { background: #2b7a4b; border-color: #2b7a4b; color: white; }
-.btn-purple { background: #7b4b9a; border-color: #7b4b9a; color: white; }
-.btn-danger { background: #c44536; border-color: #a33c2f; color: white; }
-.btn:hover { transform: translateY(-2px); box-shadow: 0 12px 20px -8px rgba(0,60,120,0.3); }
 
-/* preview box */
-.preview-box {
-  background: #f1f5fb;
-  border-radius: 28px;
-  padding: 20px 12px;
-  flex: 1;
-  overflow-y: auto;
-  min-height: 280px;
-  margin-bottom: 15px;
+button i {
+  font-size: 1.1rem;
 }
-.preview-box .page {
-  transform: scale(0.95);
-  transform-origin: top center;
-  width: 100% !important;
-  height: auto !important;
-  min-height: 200px;
-  margin: 0 auto;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-}
-.counter-badge {
-  background: #1e3c5c;
+
+.generate {
+  background: #1f6390;
   color: white;
-  padding: 12px 18px;
-  border-radius: 60px;
-  text-align: center;
-  font-weight: 500;
-  font-size: 1rem;
+}
+.generate:hover {
+  background: #124b73;
+  transform: translateY(-3px);
+  box-shadow: 0 16px 24px -8px #1f639055;
 }
 
-/* letter page style – A4 like, responsive */
+.print {
+  background: #1e7b4b;
+  color: white;
+}
+.print:hover {
+  background: #14633a;
+  transform: translateY(-3px);
+}
+
+.pdf {
+  background: #6a3e8a;
+  color: white;
+}
+.pdf:hover {
+  background: #522d6b;
+  transform: translateY(-3px);
+}
+
+.clear {
+  background: #b13e32;
+  color: white;
+}
+.clear:hover {
+  background: #8f2f24;
+  transform: translateY(-3px);
+}
+
+/* -------------------- A4 PAGE (perfect styling) -------------------- */
 .page {
+  width: 210mm;
+  min-height: 297mm;
   background: white;
-  width: 100%;
-  max-width: 210mm;
-  margin: 20px auto;
-  padding: 15mm 12mm;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-  page-break-after: always;
-  position: relative;
+  padding: 25mm 25mm 20mm 25mm;
+  margin: 32px auto;
+  box-shadow: 0 20px 45px rgba(0, 25, 45, 0.3);
   font-family: 'Times New Roman', 'Nirmala UI', serif;
+  position: relative;
+  page-break-after: always;
+  border-radius: 6px;
   box-sizing: border-box;
+  line-height: 1.5;
 }
-.page-content { display: flex; flex-direction: column; }
-.letter-header { display: flex; align-items: center; gap: 15px; flex-wrap: wrap; margin-bottom: 4mm; }
-.org-logo { max-height: 55px; max-width: 110px; object-fit: contain; }
-.org-name { font-size: 24px; font-weight: bold; color: #000; }
-.letter-subheader { text-align: center; font-size: 13px; margin-bottom: 6mm; line-height: 1.4; }
-.date { text-align: right; font-size: 12px; margin-bottom: 3mm; }
-.letter-numbers { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 2mm; flex-wrap: wrap; }
-.ref-number { text-align: left; }
-.recipient { margin-bottom: 5mm; font-size: 13px; }
-.subject-line { font-weight: bold; font-size: 14px; border-bottom: 1px solid #aaa; padding-bottom: 2mm; margin: 3mm 0; }
-.letter-body-container { min-height: 100px; }
-.letter-body { white-space: pre-line; line-height: 1.6; text-align: justify; font-size: 12pt; }
-.sender-details { 
-  text-align: right; 
-  margin-top: 7mm; 
-  font-size: 13px;
+
+/* header with logo and school name */
+.header {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #c3d7ec;
+  padding-bottom: 16px;
 }
-.signature-area {
-  margin-bottom: 5px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-.signature-img {
-  max-height: 50px;
-  max-width: 150px;
+
+.logo {
+  max-height: 85px;
+  max-width: 120px;
   object-fit: contain;
-  margin-bottom: 5px;
+  border-radius: 10px;
 }
+
+.org-name {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.3;
+  color: #003057;
+  letter-spacing: -0.01em;
+}
+
+.org-name span {
+  font-size: 18px;
+  font-weight: 400;
+  color: #2d5679;
+  display: block;
+  margin-top: 4px;
+}
+
+/* meta line : date, letter no, ref no */
+.meta-line {
+  display: flex;
+  justify-content: space-between;
+  margin: 16px 0 14px 0;
+  padding: 12px 0;
+  border-bottom: 2px dashed #a4c2dd;
+  font-size: 1.15rem;
+  flex-wrap: wrap;
+  gap: 12px;
+  color: #1e3a5f;
+}
+
+.meta-line i {
+  color: #2c74b3;
+  width: 24px;
+}
+
+/* recipient line */
+.recipient-line {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 18px 0 6px 0;
+  background: #f1f7fd;
+  padding: 8px 16px;
+  border-radius: 40px;
+  display: inline-block;
+}
+
+.subject {
+  font-weight: 800;
+  border-bottom: 3px solid #2c74b3;
+  margin: 24px 0 20px 0;
+  padding-bottom: 8px;
+  font-size: 1.5rem;
+  color: #0d3b5c;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.body {
+  line-height: 1.9;
+  text-align: justify;
+  white-space: pre-line;
+  font-size: 1.2rem;
+  margin-bottom: 35px;
+  color: #212529;
+}
+
+.signature-area {
+  text-align: right;
+  margin-top: 30px;
+  border-top: 2px dotted #7fa3c2;
+  padding-top: 24px;
+}
+
+.signature-img {
+  max-height: 80px;
+  max-width: 200px;
+  object-fit: contain;
+  margin-bottom: 8px;
+  filter: brightness(1.02) contrast(1.1);
+}
+
 .sender-name {
-  font-weight: bold;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0b2d4b;
 }
+
 .sender-position {
-  font-size: 12px;
+  font-size: 1.2rem;
+  color: #25597e;
 }
-.contact-footer { margin-top: 8mm; border-top: 1px solid #ccc; padding-top: 3mm; font-size: 10px; text-align: center; }
-.contact-info { display: flex; gap: 18px; flex-wrap: wrap; justify-content: center; }
 
-#output { margin-top: 40px; }
-.page-count { text-align: center; margin-top: 15px; font-weight: 600; }
-
-/* responsive */
-@media (max-width: 700px) {
-  .page { padding: 8mm 6mm; }
-  .org-name { font-size: 20px; }
-  .btn { padding: 14px 6px; font-size: 0.9rem; }
-  .header-card h1 { font-size: 1.6rem; }
+.footer {
+  position: absolute;
+  bottom: 18mm;
+  left: 25mm;
+  right: 25mm;
+  text-align: center;
+  border-top: 1px solid #6082a3;
+  padding-top: 8px;
+  font-size: 13px;
+  color: #1f405e;
+  font-weight: 500;
 }
+
+.qr-box {
+  margin-top: 8px;
+  display: flex;
+  justify-content: center;
+}
+
+.qr-box img {
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 20, 40, 0.25);
+  border: 2px solid white;
+}
+
+/* print media */
 @media print {
   body * { visibility: hidden; }
   #output, #output * { visibility: visible; }
-  #output { position: absolute; left: 0; top: 0; width: 100%; }
-  .page { box-shadow: none; margin: 0; padding: 25.4mm; border-radius: 0; }
-  .control-panel, .preview-panel, .header-card, .button-grid { display: none; }
+  #output { position: absolute; top: 0; left: 0; width: 100%; }
+  .page { box-shadow: none; margin: 0; border-radius: 0; padding: 20mm 20mm 15mm; }
+}
+
+/* responsive touches */
+@media (max-width: 700px) {
+  .card { padding: 20px; }
+  .form-row { gap: 16px; }
+  .actions button { width: 100%; justify-content: center; }
+  .org-name { font-size: 22px; }
 }
 </style>
 </head>
 <body>
+
 <div class="container">
-  <!-- header -->
-  <div class="header-card">
-    <h1><i class="fas fa-envelope-open-text"></i> मल्टी लेटरप्याड <span style="font-size: 0.7rem; background: #d4e2f0; padding: 5px 16px; border-radius: 40px;">मोबाइल / डेस्कटप</span></h1>
-    <div class="subtitle"><i class="fas fa-pen-fancy"></i> एउटै विषयमा धेरैलाई पत्र ÷ सिफारिस</div>
-    <div class="instructions">
-      <i class="fas fa-lightbulb"></i> <strong>निर्देशिका :</strong>
-      <ul>
-        <li>प्रापकको नाम प्रत्येक लाइनमा लेख्नुहोस् (जस्तै: राम वादी, अध्यक्ष)</li>
-        <li>मिति आफै राख्नुहोस् वा <i class="fas fa-calendar"></i> Today बटन प्रयोग गर्नुहोस्</li>
-        <li>हस्ताक्षर थप्न "हस्ताक्षर" बटन प्रयोग गर्नुहोस् - कोर्नुहोस् वा फोटो अपलोड गर्नुहोस्</li>
-        <li>जेनरेट गरेपछि PDF डाउनलोड वा प्रिन्ट गर्नुहोस् – सबै डिभाइसमा मिल्छ</li>
-      </ul>
+
+<div class="card">
+  <h2><i class="fas fa-feather-alt"></i> पत्र शीर्षक निर्माण</h2>
+  <p><i class="fas fa-check-circle" style="color:#2c74b3;"></i> मिति, सन्दर्भ, हस्ताक्षर सहित — सफा र व्यवस्थित CSS</p>
+
+  <!-- Logo, school, address -->
+  <div class="form-row">
+    <div class="form-group">
+      <label><i class="fas fa-cloud-upload-alt"></i> लोगो</label>
+      <input type="file" id="logoFile" accept="image/*">
+    </div>
+    <div class="form-group">
+      <label><i class="fas fa-school"></i> विद्यालय नाम</label>
+      <input type="text" id="org" value="श्री डिम जनता मा.वि.">
+    </div>
+    <div class="form-group">
+      <label><i class="fas fa-location-dot"></i> ठेगाना</label>
+      <input type="text" id="address" value="लालबन्दी-१६, सर्लाही">
     </div>
   </div>
 
-  <!-- main panels -->
-  <div class="app-panels">
-    <!-- left controls -->
-    <div class="control-panel">
-      <h2><i class="fas fa-sliders-h"></i> विवरणहरू</h2>
-      
-      <div class="logo-zone" onclick="document.getElementById('logoFile').click()">
-        <div class="logo-preview" id="logoPreview"></div>
-        <i class="fas fa-cloud-upload-alt"></i>
-        <span>लोगो अपलोड गर्नुहोस्</span>
-        <input type="file" id="logoFile" accept="image/*" style="display: none;" onchange="uploadLogo()">
-      </div>
-      <div class="form-group">
-        <input type="text" id="logoUrl" placeholder="वा लोगो URL राख्नुहोस्" oninput="updateLogoFromUrl()">
-      </div>
-
-      <!-- Signature Section -->
-      <div class="signature-zone" onclick="openSignatureModal()">
-        <div class="signature-preview" id="signaturePreview"></div>
-        <i class="fas fa-pen-fancy"></i>
-        <span>हस्ताक्षर थप्नुहोस्</span>
-      </div>
-      <div style="display: flex; gap: 8px; margin-bottom: 15px;">
-        <button class="btn" style="flex: 1; padding: 10px;" onclick="openSignatureModal()"><i class="fas fa-draw-polygon"></i> हस्ताक्षर कोर्नुहोस्</button>
-        <button class="btn" style="flex: 1; padding: 10px;" onclick="clearSignature()"><i class="fas fa-trash-alt"></i> हटाउनुहोस्</button>
-      </div>
-
-      <div class="form-group">
-        <label><i class="fas fa-building"></i> संस्थाको नाम</label>
-        <input type="text" id="org" value="श्री डिम जनता मा.वि.">
-      </div>
-      <div class="form-group">
-        <label><i class="fas fa-map-pin"></i> ठेगाना (कमा लगाएर छुट्याउनुहोस्)</label>
-        <input type="text" id="address" value="लालबन्दी नपा-१६ परवानीपुर, सर्लाही, मधेश प्रदेश">
-      </div>
-      <div class="two-cols">
-        <div class="form-group"><label><i class="fas fa-envelope"></i> इमेल</label><input type="text" id="email" value="dimjanta998@gmail.com"></div>
-        <div class="form-group"><label><i class="fas fa-phone-alt"></i> फोन</label><input type="text" id="phone" value="9844047749"></div>
-      </div>
-      <div class="date-row">
-        <input type="text" id="letterDate" value="२०८२-१०-१२">
-        <button class="today-btn" onclick="setTodayDate()"><i class="fas fa-calendar-check"></i> Today</button>
-      </div>
-      <div class="two-cols">
-        <div class="form-group"><label><i class="fas fa-hashtag"></i> पत्र संख्या</label><input type="text" id="letterNo" value="११/०८१-०८२"></div>
-        <div class="form-group"><label><i class="fas fa-file-signature"></i> च.नं.</label><input type="text" id="refNo" value="६/२०८२ शिक्षा शाखा"></div>
-      </div>
-      <div class="form-group"><label><i class="fas fa-heading"></i> विषय</label><input type="text" id="subject" value="आमन्त्रण बारे"></div>
-      <div class="form-group"><label><i class="fas fa-users"></i> प्रापकको नाम (प्रति लाइन एक)</label><textarea id="receivers" rows="3">गणेशबहादुर, वडाध्यक्ष&#10;राजु बुढाथोकी, व्यवसाय अध्यक्ष&#10;बासुदेव अधिकारी, मेयर लालबन्दी</textarea></div>
-      <div class="form-group"><label><i class="fas fa-paragraph"></i> पत्रको मुख्य भाग</label><textarea id="letterBody" rows="4">[महोदय],&#10;&#10;उपर्युक्त विषयमा तपाईंको उपस्थिति हाम्रो लागि अति आवश्यक छ । कार्यक्रम सफल बनाउन हार्दिक अनुरोध गर्दछौ ।&#10;&#10;धन्यवाद ।</textarea></div>
-      <div class="two-cols">
-        <div class="form-group"><label><i class="fas fa-user"></i> पठाउने व्यक्ति</label><input type="text" id="sender" value="ध्रुवबहादुर भण्डारी"></div>
-        <div class="form-group"><label><i class="fas fa-user-tie"></i> पद</label><input type="text" id="position" value="प्रधानाध्यापक"></div>
-      </div>
-      
-      <div class="button-grid">
-        <button class="btn btn-success" id="generateBtn" onclick="generateLetters()"><i class="fas fa-magic"></i> जेनरेट</button>
-        <button class="btn btn-purple" id="downloadBtn" onclick="downloadAsPDF()"><i class="fas fa-download"></i> PDF</button>
-        <button class="btn btn-danger" id="printBtn" onclick="printLetters()"><i class="fas fa-print"></i> प्रिन्ट</button>
-        <button class="btn" id="clearBtn" onclick="clearForm()"><i class="fas fa-broom"></i> खाली गर्नुहोस्</button>
-      </div>
+  <!-- date, letter no, ref no (Today button removed) -->
+  <div class="form-row">
+    <div class="form-group">
+      <label for="letterDate"><i class="fas fa-calendar-alt"></i> पत्र मिति</label>
+      <input type="text" id="letterDate" value="२०८२-१०-१२" placeholder="जस्तै: २०८२-१०-१२">
     </div>
-
-    <!-- preview panel -->
-    <div class="preview-panel">
-      <h2><i class="fas fa-eye"></i> पूर्वावलोकन</h2>
-      <div class="preview-box" id="preview">
-        <div style="text-align: center; color: #809ab3; padding: 40px;"><i class="fas fa-file-alt fa-3x"></i><br>जेनरेट गरेपछि प्रति देखिनेछ</div>
-      </div>
-      <div class="counter-badge" id="previewCounter">० वटा पत्र</div>
+    <div class="form-group">
+      <label for="letterNo"><i class="fas fa-hashtag"></i> पत्र नम्बर</label>
+      <input type="text" id="letterNo" value="११/०८१-०८२">
+    </div>
+    <div class="form-group">
+      <label for="refNo"><i class="fas fa-file-lines"></i> सन्दर्भ नम्बर</label>
+      <input type="text" id="refNo" value="६/२०८२ शिक्षा शाखा">
     </div>
   </div>
 
-  <!-- Signature Modal -->
-  <div id="signatureModal" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3><i class="fas fa-pen-fancy"></i> हस्ताक्षर कोर्नुहोस्</h3>
-        <span class="close-modal" onclick="closeSignatureModal()">&times;</span>
-      </div>
-      <canvas id="signatureCanvas" class="signature-canvas"></canvas>
-      <div class="signature-buttons">
-        <button class="btn" style="flex: 1;" onclick="clearSignaturePad()"><i class="fas fa-eraser"></i> मेटाउनुहोस्</button>
-        <button class="btn btn-success" style="flex: 1;" onclick="saveSignature()"><i class="fas fa-check"></i> सुरक्षित गर्नुहोस्</button>
-      </div>
-      <div style="text-align: center; margin-top: 15px;">
-        <span>वा</span>
-      </div>
-      <div style="margin-top: 15px;">
-        <div class="signature-zone" onclick="document.getElementById('signatureFile').click()" style="margin-bottom: 0;">
-          <i class="fas fa-cloud-upload-alt"></i>
-          <span>हस्ताक्षर फोटो अपलोड गर्नुहोस्</span>
-          <input type="file" id="signatureFile" accept="image/*" style="display: none;" onchange="uploadSignature()">
-        </div>
-      </div>
+  <!-- subject, sender, position -->
+  <div class="form-row">
+    <div class="form-group">
+      <label><i class="fas fa-tag"></i> विषय</label>
+      <input type="text" id="subject" value="आमन्त्रण बारे">
+    </div>
+    <div class="form-group">
+      <label><i class="fas fa-user-tie"></i> पठाउने व्यक्ति</label>
+      <input type="text" id="sender" value="ध्रुवबहादुर भण्डारी">
+    </div>
+    <div class="form-group">
+      <label><i class="fas fa-briefcase"></i> पद</label>
+      <input type="text" id="position" value="प्रधानाध्यापक">
     </div>
   </div>
 
-  <!-- generated letters output (hidden until generate) -->
-  <div id="output" style="margin-top: 30px; background: transparent;"></div>
-  <div class="page-count" id="pageCount"></div>
+  <!-- receivers, body, signature upload -->
+  <div class="form-row">
+    <div class="form-group" style="flex: 1.5;">
+      <label><i class="fas fa-address-card"></i> प्राप्तकर्ता (प्रति line)</label>
+      <textarea id="receivers" rows="3">राम बहादुर
+श्याम अधिकारी
+कमला देवी</textarea>
+    </div>
+    <div class="form-group" style="flex: 2;">
+      <label><i class="fas fa-pen"></i> पत्र मुख्य भाग</label>
+      <textarea id="body" rows="3">[नाम] ज्यू,
+
+वार्षिकोत्सव कार्यक्रममा हार्दिक उपस्थितिको लागि अनुरोध।
+मिति: २०८१ चैत १५, बिहान ११ बजे।
+
+धन्यवाद ।</textarea>
+    </div>
+    <div class="form-group">
+      <label><i class="fas fa-signature"></i> हस्ताक्षर छवि</label>
+      <input type="file" id="signatureFile" accept="image/*">
+      <small>रित्ता भए नाम/पद मात्र देखिन्छ</small>
+    </div>
+  </div>
+
+  <!-- action buttons -->
+  <div class="actions">
+    <button class="generate" onclick="generate()"><i class="fas fa-bolt"></i> पत्र उत्पन्न गर्नुहोस्</button>
+    <button class="print" onclick="window.print()"><i class="fas fa-print"></i> प्रिन्ट</button>
+    <button class="pdf" onclick="downloadPDF()"><i class="fas fa-file-pdf"></i> पीडीएफ डाउनलोड</button>
+    <button class="clear" onclick="location.reload()"><i class="fas fa-rotate-left"></i> सबै हटाउनुहोस्</button>
+  </div>
+</div>
+
+<!-- Generated letters output -->
+<div id="output"></div>
+
 </div>
 
 <script>
-// global state
-let logoDataUrl = '';
-let signatureDataUrl = '';
-let signaturePad = null;
+let logoData = "", signatureData = "";
 
-// Initialize signature pad when modal opens
-function openSignatureModal() {
-  document.getElementById('signatureModal').style.display = 'flex';
-  setTimeout(() => {
-    const canvas = document.getElementById('signatureCanvas');
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-    signaturePad = new SignaturePad(canvas, {
-      backgroundColor: 'white',
-      penColor: 'black'
-    });
-    
-    // If signature exists, load it
-    if (signatureDataUrl) {
-      const img = new Image();
-      img.onload = () => {
-        signaturePad.clear();
-        signaturePad.fromDataURL(signatureDataUrl);
-      };
-      img.src = signatureDataUrl;
-    }
-  }, 100);
-}
+document.getElementById("logoFile").onchange = function(e) {
+  let reader = new FileReader();
+  reader.onload = (ev) => { logoData = ev.target.result; };
+  if (e.target.files[0]) reader.readAsDataURL(e.target.files[0]);
+};
 
-function closeSignatureModal() {
-  document.getElementById('signatureModal').style.display = 'none';
-  if (signaturePad) {
-    signaturePad.off();
-    signaturePad = null;
-  }
-}
+document.getElementById("signatureFile").onchange = function(e) {
+  let reader = new FileReader();
+  reader.onload = (ev) => { signatureData = ev.target.result; };
+  if (e.target.files[0]) reader.readAsDataURL(e.target.files[0]);
+};
 
-function clearSignaturePad() {
-  if (signaturePad) {
-    signaturePad.clear();
-  }
-}
+function generate() {
+  let org = document.getElementById("org").value.trim() || "श्री डिम जनता मा.वि.";
+  let address = document.getElementById("address").value.trim() || "लालबन्दी-१६, सर्लाही";
+  let letterDate = document.getElementById("letterDate").value.trim() || "२०८२-१०-१२";
+  let letterNo = document.getElementById("letterNo").value.trim() || "११/०८१-०८२";
+  let refNo = document.getElementById("refNo").value.trim() || "६/२०८२ शिक्षा शाखा";
+  let subject = document.getElementById("subject").value.trim() || "आमन्त्रण बारे";
+  let sender = document.getElementById("sender").value.trim() || "ध्रुवबहादुर भण्डारी";
+  let position = document.getElementById("position").value.trim() || "प्रधानाध्यापक";
+  let bodyTemplate = document.getElementById("body").value || "[नाम] ज्यू, उपस्थित हुनुहोला ।";
+  let receiversRaw = document.getElementById("receivers").value;
+  let receivers = receiversRaw.split("\n").map(r => r.trim()).filter(r => r !== "");
+  if (receivers.length === 0) receivers = ["प्रापकको नाम"];
 
-function saveSignature() {
-  if (signaturePad && !signaturePad.isEmpty()) {
-    signatureDataUrl = signaturePad.toDataURL('image/png');
-    document.getElementById('signaturePreview').innerHTML = `<img src="${signatureDataUrl}" alt="signature">`;
-    document.getElementById('signaturePreview').style.display = 'block';
-    updatePreviewOnly();
-  } else {
-    alert('कृपया हस्ताक्षर कोर्नुहोस्');
-  }
-  closeSignatureModal();
-}
+  let outputHtml = "";
 
-function uploadSignature() {
-  const file = document.getElementById('signatureFile').files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    signatureDataUrl = e.target.result;
-    document.getElementById('signaturePreview').innerHTML = `<img src="${signatureDataUrl}" alt="signature">`;
-    document.getElementById('signaturePreview').style.display = 'block';
-    updatePreviewOnly();
-    closeSignatureModal();
-  };
-  reader.readAsDataURL(file);
-}
+  receivers.forEach((rec, idx) => {
+    let personalizedBody = bodyTemplate.replace(/\[नाम\]/g, rec);
 
-function clearSignature() {
-  signatureDataUrl = '';
-  document.getElementById('signaturePreview').innerHTML = '';
-  document.getElementById('signaturePreview').style.display = 'none';
-  updatePreviewOnly();
-}
-
-// helper: format address with <br>
-function formatAddress(addr) {
-  return addr.split(',').map(s => s.trim()).join('<br>');
-}
-
-// set today's date (approx BS)
-function setTodayDate() {
-  const d = new Date();
-  let year = d.getFullYear() + 57;   // rough AD to BS
-  let month = d.getMonth() + 1;
-  let day = d.getDate();
-  document.getElementById('letterDate').value = `${year}-${month<10?'0'+month:month}-${day<10?'0'+day:day}`;
-  updatePreviewOnly();
-}
-
-// logo handlers
-function uploadLogo() {
-  const file = document.getElementById('logoFile').files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    logoDataUrl = e.target.result;
-    document.getElementById('logoPreview').innerHTML = `<img src="${logoDataUrl}" alt="logo">`;
-    document.getElementById('logoPreview').style.display = 'block';
-    updatePreviewOnly();
-  };
-  reader.readAsDataURL(file);
-}
-function updateLogoFromUrl() {
-  const url = document.getElementById('logoUrl').value.trim();
-  if (url) {
-    logoDataUrl = url;
-    document.getElementById('logoPreview').innerHTML = `<img src="${url}" alt="logo" onerror="this.style.display='none'">`;
-    document.getElementById('logoPreview').style.display = 'block';
-    updatePreviewOnly();
-  }
-}
-
-// preview update (single sample)
-function updatePreviewOnly() {
-  const org = document.getElementById('org').value || 'संस्था';
-  const address = document.getElementById('address').value || 'ठेगाना';
-  const email = document.getElementById('email').value || 'email@org.com';
-  const phone = document.getElementById('phone').value || 'फोन';
-  const letterNo = document.getElementById('letterNo').value;
-  const refNo = document.getElementById('refNo').value;
-  const subject = document.getElementById('subject').value || 'विषय';
-  const body = document.getElementById('letterBody').value || 'पत्रको भाग';
-  const sender = document.getElementById('sender').value || 'पठाउने';
-  const position = document.getElementById('position').value || 'पद';
-  const letterDate = document.getElementById('letterDate').value || 'मिति';
-  const formattedAddr = formatAddress(address);
-  
-  // pick first receiver for preview
-  const receivers = document.getElementById('receivers').value.split('\n').filter(r => r.trim() !== '');
-  const sampleRec = receivers.length ? receivers[0].trim() : 'श्री मानव अधिकारी ज्यू';
-  
-  const previewHtml = `
-    <div class="page">
-      <div class="page-content">
-        <div class="letter-header">
-          ${logoDataUrl ? `<img src="${logoDataUrl}" class="org-logo">` : ''}
-          <span class="org-name">${org}</span>
-        </div>
-        <div class="letter-subheader">${formattedAddr}</div>
-        <div class="date">मिति: ${letterDate}</div>
-        <div class="letter-numbers">
-          <span>प.सं.: ${letterNo}</span>
-          <span>च.नं.: ${refNo}</span>
-        </div>
-        <div class="recipient"><strong>प्रति: ${sampleRec}</strong></div>
-        <div class="subject-line">विषय: ${subject}</div>
-        <div class="letter-body-container">
-          <div class="letter-body">${body.replace(/\[महोदय\]/g, sampleRec).replace(/\n/g, '<br>')}</div>
-        </div>
-        <div class="sender-details">
-          ${signatureDataUrl ? `
-            <div class="signature-area">
-              <img src="${signatureDataUrl}" class="signature-img" alt="signature">
-            </div>
-          ` : ''}
-          <div class="sender-name"><strong>${sender}</strong></div>
-          <div class="sender-position">${position}</div>
-        </div>
-        <div class="contact-footer">
-          <hr>
-          <div class="contact-info">
-            <span><i class="fas fa-envelope"></i> ${email}</span>
-            <span><i class="fas fa-phone"></i> ${phone}</span>
-            <span><i class="fas fa-map-marker-alt"></i> ${address.split(',')[0]}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
-  document.getElementById('preview').innerHTML = previewHtml;
-}
-
-// generate all letters
-function generateLetters() {
-  const org = document.getElementById('org').value.trim();
-  const address = document.getElementById('address').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const phone = document.getElementById('phone').value.trim();
-  const letterNo = document.getElementById('letterNo').value.trim();
-  const refNo = document.getElementById('refNo').value.trim();
-  const subject = document.getElementById('subject').value.trim();
-  const receiversRaw = document.getElementById('receivers').value;
-  const body = document.getElementById('letterBody').value;
-  const sender = document.getElementById('sender').value.trim();
-  const position = document.getElementById('position').value.trim();
-  const letterDate = document.getElementById('letterDate').value.trim();
-
-  if (!org || !address || !receiversRaw || !body || !sender) {
-    alert('कृपया आवश्यक सबै फिल्ड भर्नुहोस् (संस्था, ठेगाना, प्रापक, पत्र, पठाउने)');
-    return;
-  }
-
-  const receivers = receiversRaw.split('\n').filter(r => r.trim() !== '');
-  if (receivers.length === 0) { alert('कम्तीमा एउटा प्रापकको नाम राख्नुहोस्'); return; }
-
-  const formattedAddr = formatAddress(address);
-  let outputHtml = '';
-  receivers.forEach(rec => {
-    const personalizedBody = body.replace(/\[महोदय\]/g, rec.trim()).replace(/\n/g, '<br>');
     outputHtml += `
-      <div class="page">
-        <div class="page-content">
-          <div class="letter-header">
-            ${logoDataUrl ? `<img src="${logoDataUrl}" class="org-logo">` : ''}
-            <span class="org-name">${org}</span>
-          </div>
-          <div class="letter-subheader">${formattedAddr}</div>
-          <div class="date">मिति: ${letterDate}</div>
-          <div class="letter-numbers">
-            <span>प.सं.: ${letterNo}</span>
-            <span>च.नं.: ${refNo}</span>
-          </div>
-          <div class="recipient"><strong>प्रति: ${rec.trim()}</strong></div>
-          <div class="subject-line">विषय: ${subject}</div>
-          <div class="letter-body-container">
-            <div class="letter-body">${personalizedBody}</div>
-          </div>
-          <div class="sender-details">
-            ${signatureDataUrl ? `
-              <div class="signature-area">
-                <img src="${signatureDataUrl}" class="signature-img" alt="signature">
-              </div>
-            ` : ''}
-            <div class="sender-name"><strong>${sender}</strong></div>
-            <div class="sender-position">${position}</div>
-          </div>
-          <div class="contact-footer">
-            <hr>
-            <div class="contact-info">
-              <span><i class="fas fa-envelope"></i> ${email || 'इमेल'}</span>
-              <span><i class="fas fa-phone"></i> ${phone || 'फोन'}</span>
-              <span><i class="fas fa-map-marker-alt"></i> ${address.split(',')[0]}</span>
-            </div>
-          </div>
-        </div>
+    <div class="page" id="page-${idx}">
+      <div class="header">
+        ${logoData ? `<img src="${logoData}" class="logo" alt="logo">` : ''}
+        <div class="org-name">${org}<span>${address}</span></div>
       </div>
-    `;
+      
+      <div class="meta-line">
+        <span><i class="far fa-calendar"></i> मिति: ${letterDate}</span>
+        <span><i class="fas fa-hashtag"></i> पत्र नं.: ${letterNo}</span>
+        <span><i class="fas fa-file-signature"></i> सन्दर्भ: ${refNo}</span>
+      </div>
+      
+      <div class="recipient-line"><i class="fas fa-user"></i> प्रति: ${rec}</div>
+      <div class="subject">विषय: ${subject}</div>
+      
+      <div class="body">${personalizedBody.replace(/\n/g, '<br>')}</div>
+      
+      <div class="signature-area">
+        ${signatureData ? `<img src="${signatureData}" class="signature-img"><br>` : ''}
+        <div class="sender-name">${sender}</div>
+        <div class="sender-position">${position}</div>
+      </div>
+      
+      <div class="footer">
+        <span>${org}  •  ${address}</span>
+        <div class="qr-box" id="qr-${idx}"></div>
+      </div>
+    </div>`;
   });
 
-  document.getElementById('output').innerHTML = outputHtml;
-  document.getElementById('previewCounter').innerText = `${receivers.length} वटा पत्र`;
-  document.getElementById('pageCount').innerText = `कुल पृष्ठ: ${receivers.length}`;
-  
-  // also update preview with first
-  updatePreviewOnly();
-  
-  // scroll to output
-  document.getElementById('output').scrollIntoView({ behavior: 'smooth' });
+  document.getElementById("output").innerHTML = outputHtml;
+
+  // QR codes
+  setTimeout(() => {
+    let qrDivs = document.querySelectorAll("#output .qr-box");
+    receivers.forEach((rec, i) => {
+      if (qrDivs[i]) {
+        qrDivs[i].innerHTML = "";
+        try {
+          new QRCode(qrDivs[i], {
+            text: `${org} | ${rec} | पत्र: ${letterNo}`,
+            width: 70,
+            height: 70
+          });
+        } catch (e) {}
+      }
+    });
+  }, 300);
 }
 
-// PDF download – mobile/desktop friendly
-async function downloadAsPDF() {
-  const outputDiv = document.getElementById('output');
-  if (!outputDiv.children.length || outputDiv.innerText.includes('No letters')) {
-    alert('पहिला पत्र जेनरेट गर्नुहोस्'); return;
+async function downloadPDF() {
+  const { jsPDF } = window.jspdf;
+  let pdf = new jsPDF({ orientation: 'p', unit: 'mm', format: 'a4' });
+  let pages = document.querySelectorAll("#output .page");
+  if (!pages.length) { alert("पहिला पत्र उत्पन्न गर्नुहोस्"); return; }
+
+  for (let i = 0; i < pages.length; i++) {
+    if (i > 0) pdf.addPage();
+    try {
+      let canvas = await html2canvas(pages[i], { scale: 1.8, backgroundColor: '#ffffff' });
+      pdf.addImage(canvas.toDataURL('image/jpeg', 0.95), 'JPEG', 0, 0, 210, 297, undefined, 'FAST');
+    } catch (err) { console.error(err); }
   }
-  const pages = document.querySelectorAll('#output .page');
-  if (pages.length === 0) { alert('पत्र छैन'); return; }
-
-  const btn = document.getElementById('downloadBtn');
-  const originalHtml = btn.innerHTML;
-  btn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> PDF बन्दै...';
-  btn.disabled = true;
-
-  try {
-    const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF('p', 'mm', 'a4');
-    
-    for (let i = 0; i < pages.length; i++) {
-      const page = pages[i];
-      if (i > 0) pdf.addPage();
-      
-      await html2canvas(page, {
-        scale: 2,
-        backgroundColor: '#ffffff',
-        logging: false,
-        allowTaint: false,
-        useCORS: true
-      }).then(canvas => {
-        const imgData = canvas.toDataURL('image/jpeg', 0.95);
-        pdf.addImage(imgData, 'JPEG', 0, 0, 210, 297, undefined, 'FAST');
-      });
-      // tiny delay
-      if (i < pages.length -1) await new Promise(r => setTimeout(r, 50));
-    }
-    
-    const filename = (document.getElementById('org').value || 'letters').replace(/\s+/g,'_') + '.pdf';
-    pdf.save(filename);
-  } catch (e) {
-    alert('PDF बनाउन समस्या भयो । थोरै पत्र बनाएर प्रयास गर्नुहोस् ।');
-    console.error(e);
-  } finally {
-    btn.innerHTML = originalHtml;
-    btn.disabled = false;
-  }
-}
-
-// print function – responsive
-function printLetters() {
-  const output = document.getElementById('output').innerHTML;
-  if (!output || output.includes('No letters')) {
-    alert('पहिला पत्र जेनरेट गर्नुहोस्'); return;
-  }
-  const printWindow = window.open('', '_blank');
-  printWindow.document.write(`
-    <html><head><title>पत्र प्रिन्ट</title>
-    <style>
-      body { margin:0; padding:25.4mm; background:white; }
-      .page { width:210mm; height:297mm; margin:0 auto; padding: 25.4mm; box-sizing:border-box; page-break-after:always; background:white; font-family:'Times New Roman', 'Nirmala UI',serif; }
-      .letter-header{ display:flex; align-items:center; gap:15px; }
-      .org-logo{ max-height:60px; max-width:120px; }
-      .org-name{ font-size:24px; font-weight:bold; }
-      .letter-subheader{ text-align:center; margin-bottom:6mm; }
-      .date{ text-align:right; }
-      .letter-numbers{ display:flex; justify-content:space-between; }
-      .recipient{ margin:4mm 0; }
-      .subject-line{ font-weight:bold; border-bottom:1px solid #000; margin:3mm 0; }
-      .letter-body{ white-space:pre-line; text-align:justify; }
-      .sender-details{ text-align:right; margin-top:8mm; display:flex; flex-direction:column; align-items:flex-end; }
-      .signature-area{ margin-bottom:5px; }
-      .signature-img{ max-height:50px; max-width:150px; object-fit:contain; }
-      .contact-footer{ margin-top:8mm; border-top:1px solid #aaa; padding-top:3mm; font-size:10px; text-align:center; }
-      .contact-info{ display:flex; flex-wrap:wrap; justify-content:center; gap:15px; }
-    </style>
-    </head><body>${output}</body></html>
-  `);
-  printWindow.document.close();
-  printWindow.focus();
-  setTimeout(() => { printWindow.print(); }, 300);
-}
-
-// clear form
-function clearForm() {
-  if (!confirm('सबै फिल्ड खाली गर्ने हो ?')) return;
-  document.getElementById('org').value = '';
-  document.getElementById('address').value = '';
-  document.getElementById('email').value = '';
-  document.getElementById('phone').value = '';
-  document.getElementById('letterNo').value = '';
-  document.getElementById('refNo').value = '';
-  document.getElementById('subject').value = '';
-  document.getElementById('receivers').value = '';
-  document.getElementById('letterBody').value = '';
-  document.getElementById('sender').value = '';
-  document.getElementById('position').value = '';
-  document.getElementById('logoUrl').value = '';
-  document.getElementById('letterDate').value = '२०८२-१०-१२';
-  logoDataUrl = '';
-  signatureDataUrl = '';
-  document.getElementById('logoPreview').innerHTML = '';
-  document.getElementById('logoPreview').style.display = 'none';
-  document.getElementById('signaturePreview').innerHTML = '';
-  document.getElementById('signaturePreview').style.display = 'none';
-  document.getElementById('preview').innerHTML = '<div style="text-align: center; color: #809ab3; padding: 40px;"><i class="fas fa-file-alt fa-3x"></i><br>जेनरेट गरेपछि प्रति देखिनेछ</div>';
-  document.getElementById('output').innerHTML = '';
-  document.getElementById('previewCounter').innerText = '० वटा पत्र';
-  document.getElementById('pageCount').innerText = '';
-}
-
-// wire live preview update
-document.querySelectorAll('input, textarea').forEach(el => {
-  el.addEventListener('input', updatePreviewOnly);
-});
-window.addEventListener('load', () => {
-  setTodayDate();
-  updatePreviewOnly();
-});
-
-// Close modal when clicking outside
-window.onclick = function(event) {
-  const modal = document.getElementById('signatureModal');
-  if (event.target == modal) {
-    closeSignatureModal();
-  }
+  pdf.save("school_letters.pdf");
 }
 </script>
+
+<!-- Today button completely removed, signature placed above sender name -->
 </body>
 </html>
