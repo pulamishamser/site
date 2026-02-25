@@ -351,16 +351,32 @@ function goToTop(){ window.scrollTo(0,0); }
         color: #25597e;
     }
 
-    /* footer fixed at bottom within padding - QR removed */
+    /* footer fixed at bottom within padding - with email and mobile */
     .footer {
         text-align: center;
         border-top: 1px solid #6082a3;
         padding-top: 6px;
         margin-top: 8px;
-        font-size: 4pt;
+        font-size: 9pt;
         color: #1f405e;
         font-weight: 500;
         flex-shrink: 0;
+    }
+    .footer-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+    .footer-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .footer-item i {
+        color: #2c74b3;
+        font-size: 10pt;
     }
     /* QR box removed - no longer needed */
     .qr-box { display: none; }
@@ -381,6 +397,10 @@ function goToTop(){ window.scrollTo(0,0); }
         .address-line1 { font-size: 18px; }
         .address-line2 { font-size: 16px; }
         .page { padding: 15mm; }
+        .footer-content {
+            flex-direction: column;
+            gap: 8px;
+        }
     }
 </style>
 </head>
@@ -445,6 +465,18 @@ function goToTop(){ window.scrollTo(0,0); }
             <div class="form-group">
                 <label><i class="fas fa-tag"></i> विषय</label>
                 <input type="text" id="subject" value="आमन्त्रण बारे">
+            </div>
+        </div>
+
+        <!-- New row for Email and Mobile -->
+        <div class="form-row">
+            <div class="form-group">
+                <label><i class="fas fa-envelope"></i> इमेल ठेगाना</label>
+                <input type="email" id="email" value="info@djmav.edu.np" placeholder="office@school.edu.np">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-phone-alt"></i> सम्पर्क नम्बर</label>
+                <input type="text" id="mobile" value="९८४१२३४५६७" placeholder="९८४१२३४५६७">
             </div>
         </div>
 
@@ -537,6 +569,8 @@ function generateLetters() {
     let subject = document.getElementById("subject").value.trim() || "आमन्त्रण बारे";
     let sender = document.getElementById("sender").value.trim() || "ध्रुवबहादुर भण्डारी";
     let position = document.getElementById("position").value.trim() || "प्रधानाध्यापक";
+    let email = document.getElementById("email").value.trim() || "info@djmav.edu.np";
+    let mobile = document.getElementById("mobile").value.trim() || "९८४१२३४५६७";
     let bodyTemplate = document.getElementById("body").value || "[नाम] ज्यू, उपस्थित हुनुहोला ।";
     let receiversRaw = document.getElementById("receivers").value;
     let receivers = receiversRaw.split("\n").map(r => r.trim()).filter(r => r !== "");
@@ -607,7 +641,11 @@ function generateLetters() {
                 </div>
 
                 <div class="footer">
-                    <span>${org}  •  ${address1} • ${address2}</span>
+                    <div class="footer-content">
+                        <span class="footer-item"><i class="fas fa-envelope"></i> ${email}</span>
+                        <span class="footer-item"><i class="fas fa-phone-alt"></i> ${mobile}</span>
+                        <span class="footer-item"><i class="fas fa-map-marker-alt"></i> ${address1}</span>
+                    </div>
                     <!-- QR box removed -->
                 </div>
             </div>
