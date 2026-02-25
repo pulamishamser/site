@@ -269,7 +269,7 @@ function goToTop(){ window.scrollTo(0,0); }
         margin: 2mm 0 5mm;
         padding: 5px 0;
         border-bottom: 2px dashed #a4c2dd;
-        font-size: 1.1rem;
+        font-size: 0.8rem;
         color: #1e3a5f;
         flex-shrink: 0;
     }
@@ -277,11 +277,11 @@ function goToTop(){ window.scrollTo(0,0); }
         display: flex;
         flex-direction: column;
         gap: 4px;
-        line-height: 1.4;
+        line-height: 1.1;
     }
     .right-meta {
         white-space: nowrap;
-        padding-left: 20px;
+        padding-left: 15px;
     }
     .meta-line i { color: #2c74b3; width: 24px; }
 
@@ -460,10 +460,11 @@ function goToTop(){ window.scrollTo(0,0); }
             <div class="form-group" style="flex:1.5">
                 <label><i class="fas fa-address-card"></i> प्रापकहरुको नाम (प्रति लाइन एक)</label>
                 <textarea id="receivers" rows="3">जिल्ला निर्वाचन कार्यालय सर्लाही
-शिक्षा शाखा प्रमुख
-राम बहादुर स्याङ्तान, सदस्य
-श्याम अधिकारी, प्रअ
-कमला देवी, महिला सदस्य</textarea>
+शिक्षा शाखा प्रमुख, लालबन्दी नपाको कार्यालय
+बासु अधिकारी, प्रमुख लालबन्दी नपा
+राम बहादुर स्याङ्तान,बिब्यस सदस्य
+पुषेपराज पौडेल, प्रअ नारायण जनता माबि जियाजोर सर्लाही
+कमला देवी, बिब्यस महिला सदस्य</textarea>
             </div>
         </div>
 
@@ -525,12 +526,12 @@ document.getElementById("signatureFile").onchange = function(e) {
 
 function generateLetters() {
     // get all fields
-    let org = document.getElementById("org").value.trim() || "श्री डिम जनता मा.वि.";
+    let org = document.getElementById("org").value.trim() || "श्री डिम जनता माध्यमिक विद्यालय";
     let address1 = document.getElementById("address1").value.trim() || "लालबन्दी-१६, परवानीपुर";
-    let address2 = document.getElementById("address2").value.trim() || "सर्लाही, नेपाल";
+    let address2 = document.getElementById("address2").value.trim() || "सर्लाही,मधेश प्रदेश, नेपाल";
     let letterDate = document.getElementById("letterDate").value.trim() || "२०८२-१०-१२";
     let letterNo = document.getElementById("letterNo").value.trim() || "११/०८१-०८२";
-    let refNo = document.getElementById("refNo").value.trim() || "६/२०८२ शिक्षा शाखा";
+    let refNo = document.getElementById("refNo").value.trim() || "६/२०८२";
     let subject = document.getElementById("subject").value.trim() || "आमन्त्रण बारे";
     let sender = document.getElementById("sender").value.trim() || "ध्रुवबहादुर भण्डारी";
     let position = document.getElementById("position").value.trim() || "प्रधानाध्यापक";
