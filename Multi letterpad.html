@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Multi‑letter उन्नत पत्र निर्माता</title>
+<title>Multi‑letterpad</title>
 <!-- Libraries -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -218,7 +218,7 @@ function goToTop(){ window.scrollTo(0,0); }
         justify-content: flex-start;
         margin-bottom: 2mm;
         flex-shrink: 0;
-        gap: 8px;  /* REDUCED GAP from 15px to 8px */
+        gap: 5px;  /* REDUCED GAP from 15px to 8px */
         position: relative;
     }
     .org-logo {
@@ -287,12 +287,12 @@ function goToTop(){ window.scrollTo(0,0); }
 
     /* recipient — properly handles commas and breaks after each comma */
     .recipient-line {
-        font-size: 1.3rem;
+        font-size: 1.05rem;
         font-weight: 700;
         margin: 3mm 0 3mm;
-        background: #ebf3fa;
+        
         padding: 6px 18px;
-        border-radius: 40px;
+        
         display: inline-block;
         flex-shrink: 0;
         white-space: normal;
@@ -310,7 +310,7 @@ function goToTop(){ window.scrollTo(0,0); }
         border-bottom: 3px solid #2c74b3;
         margin: 12px 0 16px;
         padding-bottom: 6px;
-        font-size: 1.1rem;
+        font-size: 1.05rem;
         color: #0d3b5c;
         flex-shrink: 0;
     }
@@ -592,7 +592,7 @@ function generateLetters() {
                     </div>
                 </div>
 
-                <div class="recipient-line">प्रति, ${formattedRecipient}</div>
+                <div class="recipient-line">${formattedRecipient}</div>
                 <div class="subject">विषय: ${subject}</div>
 
                 <div class="body">${personalizedBody.replace(/\n/g, '<br>')}</div>
