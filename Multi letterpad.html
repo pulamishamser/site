@@ -185,6 +185,107 @@ function goToTop(){ window.scrollTo(0,0); }
     .clear { background: #b13e32; color: white; }
     .clear:hover { background: #8f2f24; transform: translateY(-3px); }
 
+    /* -------------------- MODAL STYLES -------------------- */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+        backdrop-filter: blur(5px);
+        align-items: center;
+        justify-content: center;
+    }
+    .modal-content {
+        background: linear-gradient(145deg, #ffffff, #f8fcff);
+        max-width: 700px;
+        width: 90%;
+        border-radius: 40px;
+        box-shadow: 0 40px 70px rgba(11,53,82,0.3);
+        border: 2px solid rgba(255,255,255,0.7);
+        animation: slideUp 0.4s ease;
+        max-height: 90vh;
+        overflow-y: auto;
+        margin: 20px;
+    }
+    @keyframes slideUp {
+        from { transform: translateY(60px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+    .modal-header {
+        background: #0b3552;
+        color: white;
+        padding: 20px 28px;
+        border-radius: 40px 40px 0 0;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    .modal-header i {
+        font-size: 2.2rem;
+        color: #f5c542;
+    }
+    .modal-header h2 {
+        font-size: 1.8rem;
+        font-weight: 600;
+        flex: 1;
+    }
+    .close-btn {
+        background: rgba(255,255,255,0.2);
+        border: none;
+        font-size: 2rem;
+        color: white;
+        padding: 0 12px;
+        border-radius: 60px;
+        cursor: pointer;
+        transition: 0.2s;
+        box-shadow: none;
+    }
+    .close-btn:hover {
+        background: #ffffff;
+        color: #0b3552;
+    }
+    .modal-body {
+        padding: 28px 30px;
+        line-height: 1.7;
+        color: #1d3a5c;
+        font-size: 1.1rem;
+    }
+    .modal-body img {
+        width: 100%;
+        max-height: 200px;
+        object-fit: cover;
+        border-radius: 28px;
+        margin-bottom: 20px;
+        border: 3px solid #dbeafe;
+    }
+    .modal-body p {
+        margin-bottom: 18px;
+        background: #ecf5fd;
+        padding: 18px 22px;
+        border-radius: 30px;
+        border-left: 8px solid #2c74b3;
+    }
+    .modal-footer {
+        padding: 10px 28px 28px;
+        text-align: right;
+    }
+    .modal-footer button {
+        background: #2c74b3;
+        color: white;
+        font-size: 1.2rem;
+        padding: 16px 40px;
+        border-radius: 60px;
+        border: none;
+    }
+    .modal-footer button:hover {
+        background: #1d5080;
+        transform: scale(1.02);
+    }
+
     /* -------------------- A4 PAGE with exactly 1 inch margins & fixed height 297mm -------------------- */
     .page {
         width: 210mm;
@@ -387,6 +488,7 @@ function goToTop(){ window.scrollTo(0,0); }
         #output, #output * { visibility: visible; }
         #output { position: absolute; top: 0; left: 0; width: 100%; }
         .page { box-shadow: none; margin: 0; border-radius: 0; page-break-after: always; height: 297mm; }
+        .modal { display: none !important; }
     }
 
     @media (max-width: 700px) {
@@ -401,10 +503,38 @@ function goToTop(){ window.scrollTo(0,0); }
             flex-direction: column;
             gap: 8px;
         }
+        .modal-header h2 { font-size: 1.3rem; }
     }
 </style>
 </head>
 <body>
+
+<!-- AUTO POP-UP MODAL (hidden by default, shown via JS) -->
+<div id="welcomeModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <i class="fas fa-hands-helping"></i>
+            <h2>स्वागतम् 🙏 Multi‑letterpad</h2>
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <!-- Image at top as requested -->
+            <img src="https://bidehamun.gov.np/sites/bidehamun.gov.np/files/Screenshot_2023-06-24-07-36-58-85_e2d5b3f32b79de1d45acd1fad96fbb0f.jpg" alt="letter head preview" style="width:100%; border-radius:28px;">
+            
+            <p><strong>Thank you opening multi letter generator tool!</strong></p>
+            
+            <p>आजको युग डिजिटल युग हो । फिजिकल चिट्ठीपत्र वा सिफारिसपत्र उपयोगी नहुन सक्छ फेसबुक ह्वाट्सएप भाइबरबाट सुचना सम्प्रेषण गर्नु मानिन्छ तर सबै बिद्यालयमा कम्प्युटर नहुन सक्छ । कम्प्युटर चलाउने कर्मचारी नहुन सक्छ ।  बिधुत लाइन गएको हुन सक्छ बिद्यालय र अफिस बन्द भएको हुन सक्छ । सामाजिक सञ्जाल मार्फत जानकारी दिन सबैसँग मोबाइल नहुन सक्छ सबै ब्यक्तिमा डिजिटल पहुँच नहुन सक्छ फोनबाट जानकारी गराउन  सबैको मोबाइल नम्बर सेभ नभएको पनि हुन सक्छ टावर गएको पनि हुन सक्छ । तर इमर्जेन्सी बैठक बोलाउन पर्यो वा जानकारी गराउन पर्यो अथवा सिफारिस पत्र बनाउनु पर्ने अवस्था पर्यो भने यस्तो अवस्थामा यो टुल एकदमै उपयोगी हुन सक्छ । घरमा वा बिश्वको कुनै कुनामा बसेर वा सुतेर आरामले मोबाइलमै बोलेर पाँच दश मिनेटमै धेरै चिट्ठीपत्र वा सिफारिसपत्र बनाउने यो डिजिटल टुल प्रयोग गर्न सकिन्छ । यो टुलमा धेरै चिट्ठीपत्र वा सिफारिसपत्र तयार पारी पिडिएफमा सेभ गरी प्रिन्टर सेन्टरमा पिडिएफ फाइल इमेलबाट पठाइ प्रिन्ट गर्न सकिन्छ ।</p>
+
+            <p style="background:#fbeec2; border-left-color:#b棕; "><i class="fas fa-exclamation-triangle" style="color:#b34f0a;"></i> 
+            <strong>सुझाब र चेतावनी :</strong> यो टुलमा अनाधिकृतरुपमा कुनै स‌स्थाको डिजिटल लोगो र सिग्नेचर प्रयोग नगर्नुहोला । यस्तो कार्य साईबर अपराध मानिन्छ । यस अपराधमा ५ लाख र ५ बर्ष सजाय समेत हुन सक्नेछ ।
+            </p>
+        </div>
+        <div class="modal-footer">
+            <button onclick="closeModal()"><i class="fas fa-check-circle"></i> बुझें / सुरु गरौं</button>
+        </div>
+    </div>
+</div>
+
 <div class="container">
     <!-- card header -->
     <div class="card">
@@ -530,6 +660,24 @@ function goToTop(){ window.scrollTo(0,0); }
 </div>
 
 <script>
+// auto show modal after page load
+window.onload = function() {
+    document.getElementById('welcomeModal').style.display = 'flex';
+};
+
+// close modal function
+function closeModal() {
+    document.getElementById('welcomeModal').style.display = 'none';
+}
+
+// close modal if user clicks outside (on background overlay)
+window.onclick = function(event) {
+    let modal = document.getElementById('welcomeModal');
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+};
+
 let logoData = "";
 let signatureData = "";
 
@@ -674,7 +822,7 @@ async function downloadPDF() {
             pdf.addImage(canvas.toDataURL('image/jpeg', 0.95), 'JPEG', 0, 0, 210, 297, undefined, 'FAST');
         } catch (err) { console.error(err); }
     }
-    pdf.save("school_letters.pdf");
+    pdf.save("letters.pdf");
 }
 </script>
 
