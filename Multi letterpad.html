@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ne">
 <head>
@@ -8,7 +7,6 @@
 <!-- Libraries -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <!-- Font Awesome 6 (free) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
@@ -213,14 +211,14 @@ function goToTop(){ window.scrollTo(0,0); }
         z-index: 1;
     }
 
-    /* letter header: logo left, org name centered */
+    /* letter header: logo left, org name centered - with reduced gap */
     .letter-header {
         display: flex;
         align-items: center;
         justify-content: flex-start;
         margin-bottom: 2mm;
         flex-shrink: 0;
-        gap: 15px;
+        gap: 8px;  /* REDUCED GAP from 15px to 8px */
         position: relative;
     }
     .org-logo {
@@ -287,7 +285,7 @@ function goToTop(){ window.scrollTo(0,0); }
     }
     .meta-line i { color: #2c74b3; width: 24px; }
 
-    /* recipient */
+    /* recipient — properly handles commas and breaks after each comma */
     .recipient-line {
         font-size: 1.3rem;
         font-weight: 700;
@@ -297,7 +295,16 @@ function goToTop(){ window.scrollTo(0,0); }
         border-radius: 40px;
         display: inline-block;
         flex-shrink: 0;
+        white-space: normal;
+        word-break: break-word;
+        max-width: 100%;
     }
+    
+    /* Style for comma-separated values to break after commas */
+    .recipient-line br.comma-break {
+        display: none; /* Hidden by default, will be used for line breaks */
+    }
+    
     .subject {
         font-weight: 700;
         border-bottom: 3px solid #2c74b3;
@@ -344,7 +351,7 @@ function goToTop(){ window.scrollTo(0,0); }
         color: #25597e;
     }
 
-    /* footer fixed at bottom within padding */
+    /* footer fixed at bottom within padding - QR removed */
     .footer {
         text-align: center;
         border-top: 1px solid #6082a3;
@@ -355,8 +362,8 @@ function goToTop(){ window.scrollTo(0,0); }
         font-weight: 500;
         flex-shrink: 0;
     }
-    .qr-box { margin-top: 6px; display: flex; justify-content: center; }
-    .qr-box img { border-radius: 12px; border: 2px solid white; box-shadow: 0 4px 12px rgba(0,0,0,0.2); width: 70px; height: 70px; }
+    /* QR box removed - no longer needed */
+    .qr-box { display: none; }
 
     /* print media */
     @media print {
@@ -370,7 +377,7 @@ function goToTop(){ window.scrollTo(0,0); }
         .card { padding: 18px; }
         .actions button { width: 100%; justify-content: center; }
         .org-name { font-size: 22px; }
-        .letter-header { flex-wrap: wrap; justify-content: center; }
+        .letter-header { flex-wrap: wrap; justify-content: center; gap: 5px; }
         .address-line1 { font-size: 18px; }
         .address-line2 { font-size: 16px; }
         .page { padding: 15mm; }
@@ -450,21 +457,13 @@ function goToTop(){ window.scrollTo(0,0); }
                 <label><i class="fas fa-briefcase"></i> पद</label>
                 <input type="text" id="position" value="प्रधानाध्यापक">
             </div>
-        </div>
-
-        <!-- NEW: Divided recipient fields -->
-        <div class="form-row">
-            <div class="form-group" style="flex:1">
-                <label><i class="fas fa-user"></i> प्रापक १ (पहिलो नाम)</label>
-                <textarea id="receivers1" rows="3" placeholder="प्रति लाइन एक नाम">जिल्ला निर्वाचन कार्यालय सर्लाही
+            <div class="form-group" style="flex:1.5">
+                <label><i class="fas fa-address-card"></i> प्रापकहरुको नाम (प्रति लाइन एक)</label>
+                <textarea id="receivers" rows="3">जिल्ला निर्वाचन कार्यालय सर्लाही
 शिक्षा शाखा प्रमुख
-राम बहादुर स्याङ्तान</textarea>
-            </div>
-            <div class="form-group" style="flex:1">
-                <label><i class="fas fa-user"></i> प्रापक २ (दोस्रो नाम)</label>
-                <textarea id="receivers2" rows="3" placeholder="प्रति लाइन एक नाम">सदस्य
-प्रअ
-महिला सदस्य</textarea>
+राम बहादुर स्याङ्तान, सदस्य
+श्याम अधिकारी, प्रअ
+कमला देवी, महिला सदस्य</textarea>
             </div>
         </div>
 
@@ -499,6 +498,19 @@ function goToTop(){ window.scrollTo(0,0); }
 let logoData = "";
 let signatureData = "";
 
+// Helper function to format recipient with line breaks after commas
+function formatRecipientWithBreaks(recipient) {
+    // If there's no comma, return as is
+    if (!recipient.includes(',')) {
+        return recipient;
+    }
+    
+    // Split by comma and join with comma + line break
+    // This will create a line break after each comma
+    let parts = recipient.split(',').map(part => part.trim());
+    return parts.join(',<br>');
+}
+
 // file uploads
 document.getElementById("logoFile").onchange = function(e) {
     let reader = new FileReader();
@@ -523,32 +535,9 @@ function generateLetters() {
     let sender = document.getElementById("sender").value.trim() || "ध्रुवबहादुर भण्डारी";
     let position = document.getElementById("position").value.trim() || "प्रधानाध्यापक";
     let bodyTemplate = document.getElementById("body").value || "[नाम] ज्यू, उपस्थित हुनुहोला ।";
-    
-    // Get recipients from both fields
-    let receivers1Raw = document.getElementById("receivers1").value;
-    let receivers2Raw = document.getElementById("receivers2").value;
-    
-    let receivers1 = receivers1Raw.split("\n").map(r => r.trim()).filter(r => r !== "");
-    let receivers2 = receivers2Raw.split("\n").map(r => r.trim()).filter(r => r !== "");
-    
-    // Combine recipients - pair them up
-    let combinedReceivers = [];
-    let maxLength = Math.max(receivers1.length, receivers2.length);
-    
-    for (let i = 0; i < maxLength; i++) {
-        let part1 = receivers1[i] || "";
-        let part2 = receivers2[i] || "";
-        
-        if (part1 && part2) {
-            combinedReceivers.push(`${part1}, ${part2}`);
-        } else if (part1) {
-            combinedReceivers.push(part1);
-        } else if (part2) {
-            combinedReceivers.push(part2);
-        }
-    }
-    
-    if (combinedReceivers.length === 0) combinedReceivers = ["प्रापकको नाम"];
+    let receiversRaw = document.getElementById("receivers").value;
+    let receivers = receiversRaw.split("\n").map(r => r.trim()).filter(r => r !== "");
+    if (receivers.length === 0) receivers = ["प्रापकको नाम"];
 
     // handle logo URL (if provided and no uploaded file)
     let logoUrlInput = document.getElementById("logoUrl").value.trim();
@@ -559,18 +548,35 @@ function generateLetters() {
 
     let outputHtml = "";
 
-    combinedReceivers.forEach((rec, idx) => {
-        // replace [नाम] placeholder in body
+    receivers.forEach((rec, idx) => {
+        // Format recipient with line breaks after commas
+        let formattedRecipient = formatRecipientWithBreaks(rec);
+        
+        // Replace [नाम] placeholder in body with the original recipient (not formatted)
+        // For the body, we keep the original text without HTML breaks
         let personalizedBody = bodyTemplate.replace(/\[नाम\]/g, rec);
 
+        // Build the header HTML: conditionally include logo and organization name side by side
+        let headerHtml = '';
+        if (finalLogo || org) {
+            headerHtml += '<div class="letter-header">';
+            if (finalLogo) {
+                headerHtml += `<img src="${finalLogo}" class="org-logo" alt="logo" onerror="this.style.display='none';">`;
+            }
+            if (org) {
+                headerHtml += `<div class="org-name">${org}</div>`;
+            }
+            headerHtml += '</div>';
+        }
+
+        // REMOVED the span with non-breaking spaces completely
+        // The page now starts directly with header or address container
+        
         outputHtml += `
         <div class="page" id="page-${idx}">
             <div class="page-content">
-                <div class="letter-header">
-                    ${finalLogo ? `<img src="${finalLogo}" class="org-logo" alt="logo">` : ''}
-                    <div class="org-name">${org}</div>
-                </div>
-                &nbsp;&nbsp;&nbsp;&nbsp;
+                ${headerHtml}
+                
                 <div class="address-container">
                     <div class="address-line1">${address1}</div>
                     <div class="address-line2">${address2}</div>
@@ -586,7 +592,7 @@ function generateLetters() {
                     </div>
                 </div>
 
-                <div class="recipient-line">प्रति, ${rec}</div>
+                <div class="recipient-line">प्रति, ${formattedRecipient}</div>
                 <div class="subject">विषय: ${subject}</div>
 
                 <div class="body">${personalizedBody.replace(/\n/g, '<br>')}</div>
@@ -599,30 +605,13 @@ function generateLetters() {
 
                 <div class="footer">
                     <span>${org}  •  ${address1} • ${address2}</span>
-                    <div class="qr-box" id="qr-${idx}"></div>
+                    <!-- QR box removed -->
                 </div>
             </div>
         </div>`;
     });
 
     document.getElementById("output").innerHTML = outputHtml;
-
-    // QR codes
-    setTimeout(() => {
-        let qrDivs = document.querySelectorAll("#output .qr-box");
-        combinedReceivers.forEach((rec, i) => {
-            if (qrDivs[i]) {
-                qrDivs[i].innerHTML = "";
-                try {
-                    new QRCode(qrDivs[i], {
-                        text: `${org} | ${rec} | पत्र: ${letterNo}`,
-                        width: 70,
-                        height: 70
-                    });
-                } catch (e) {}
-            }
-        });
-    }, 300);
 }
 
 async function downloadPDF() {
@@ -647,5 +636,6 @@ async function downloadPDF() {
     pdf.save("school_letters.pdf");
 }
 </script>
+
 </body>
 </html>
