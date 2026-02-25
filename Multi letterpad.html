@@ -1,0 +1,651 @@
+
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multi‑letter उन्नत पत्र निर्माता</title>
+<!-- Libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<!-- Font Awesome 6 (free) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<!-- back to top button (unchanged) -->
+<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+<button type="button" class="scroll-top" onclick="goToTop();">
+<img src="https://ps.w.org/back-to-the-top-button/assets/icon-128x128.png?rev=2283756" style="height: 40px; width: 40px;">
+</button>
+<script>
+function goToTop(){ window.scrollTo(0,0); }
+</script>
+
+<style>
+    /* scroll-top style */
+    .scroll-top {
+        position: fixed;
+        bottom: 90px;
+        right: 10px;
+        z-index: 99;
+        padding: 20px;
+        border: none;
+        background: transparent;
+    }
+    /* additional variable */
+    :root {
+        --primary-color: #0b3552;
+        --secondary-color: #2c5a7a;
+        --shadow: 0 8px 30px rgba(0,0,0,0.12);
+    }
+
+    /* -------------------- RESET & GLOBAL -------------------- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+        font-family: 'Nirmala UI', 'Segoe UI', 'Times New Roman', sans-serif;
+        background: #eef2f7;
+        padding: 10px;
+        min-height: 100vh;
+        justify-content: left;
+        overflow-x: hidden;
+    }
+    .container { width: 100%; margin: 0 auto; }
+    h1 {
+        color: var(--primary-color);
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    .subtitle {
+        color: var(--secondary-color);
+        font-weight: 400;
+        margin-bottom: 20px;
+    }
+
+    /* -------------------- FORM CARD -------------------- */
+    .card {
+        background: #ffffff;
+        box-shadow: 0 18px 40px -8px rgba(19, 50, 80, 0.25);
+        margin-bottom: 30px;
+        border: 1px solid rgba(44, 116, 179, 0.2);
+        transition: box-shadow 0.2s;
+        text-align: left;
+        padding: 24px;
+        border-radius: 24px;
+    }
+    .card h2 {
+        font-size: 30px;
+        font-weight: 700;
+        color: #0b3552;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 6px;
+    }
+    .instructions {
+        background: #f0f7fe;
+        border-radius: 28px;
+        padding: 16px 24px;
+        margin: 20px 0 28px;
+        border-left: 6px solid #2c74b3;
+    }
+    .instructions h3 {
+        color: #113855;
+        font-size: 1.3rem;
+        margin-bottom: 8px;
+    }
+    .instructions ul {
+        padding-left: 28px;
+        color: #1d486b;
+    }
+    .instructions li { margin: 6px 0; }
+
+    /* form row layout */
+    .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        margin-bottom: 24px;
+    }
+    .form-group {
+        flex: 1 1 240px;
+        min-width: 200px;
+    }
+    .form-group label {
+        font-weight: 600;
+        display: block;
+        margin-bottom: 6px;
+        color: #1e3a5f;
+        font-size: 0.95rem;
+        letter-spacing: 0.02rem;
+        text-align: left;
+    }
+    .form-group label i {
+        width: 22px;
+        color: #2c74b3;
+    }
+    input, textarea {
+        width: 100%;
+        padding: 12px 18px;
+        border-radius: 40px;
+        border: 1.5px solid #d4e0ec;
+        background: #ffffff;
+        font-size: 1rem;
+        transition: 0.15s;
+        font-family: 'Nirmala UI', sans-serif;
+    }
+    textarea {
+        border-radius: 28px;
+        resize: vertical;
+        min-height: 100px;
+    }
+    input:focus, textarea:focus {
+        outline: none;
+        border-color: #2c74b3;
+        box-shadow: 0 0 0 4px rgba(44,116,179,0.2);
+    }
+    small {
+        color: #4a627a;
+        margin-top: 5px;
+        display: inline-block;
+        font-size: 0.85rem;
+    }
+
+    /* ---- NEW logo url style ---- */
+    #logoUrl {
+        margin-top: 10px;
+    }
+
+    /* button group */
+    .actions {
+        margin-top: 28px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+    button {
+        padding: 14px 30px;
+        border: none;
+        border-radius: 60px;
+        font-weight: 700;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: 0.2s;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 8px 16px -8px rgba(0,35,60,0.2);
+        border: 1px solid rgba(255,255,255,0.3);
+    }
+    .generate { background: #1f6390; color: white; }
+    .generate:hover { background: #124b73; transform: translateY(-3px); }
+    .print { background: #1e7b4b; color: white; }
+    .print:hover { background: #14633a; transform: translateY(-3px); }
+    .pdf { background: #6a3e8a; color: white; }
+    .pdf:hover { background: #522d6b; transform: translateY(-3px); }
+    .clear { background: #b13e32; color: white; }
+    .clear:hover { background: #8f2f24; transform: translateY(-3px); }
+
+    /* -------------------- A4 PAGE with exactly 1 inch margins & fixed height 297mm -------------------- */
+    .page {
+        width: 210mm;
+        height: 297mm;          /* fixed A4 height */
+        background: white;
+        margin: 20px auto;
+        padding: 25.4mm;         /* 1 inch on all sides */
+        box-sizing: border-box;
+        position: relative;
+        page-break-after: always;
+        box-shadow: 0 20px 45px rgba(0,25,45,0.3);
+        border-radius: 2px;
+        font-family: 'Times New Roman', 'Nirmala UI', serif;
+        overflow: hidden;         /* keep content inside */
+        display: flex;
+        flex-direction: column;
+    }
+
+    .page-content {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* letter header: logo left, org name centered */
+    .letter-header {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-bottom: 2mm;
+        flex-shrink: 0;
+        gap: 15px;
+        position: relative;
+    }
+    .org-logo {
+        max-height: 70px;
+        max-width: 120px;
+        object-fit: contain;
+        border-radius: 10px;
+        flex-shrink: 0;
+    }
+    .org-name {
+        font-weight: 800;
+        font-size: 32px;
+        color: #003057;
+        line-height: 1.3;
+        text-align: center;
+        flex: 1;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    /* address container - centered with two lines */
+    .address-container {
+        text-align: center;
+        margin: 2mm 0 5mm 0;
+        flex-shrink: 0;
+        border-bottom: 1px dashed #9bb8da;
+        padding-bottom: 3mm;
+    }
+    .address-line1 {
+        font-size: 22px;
+        color: #25597e;
+        font-weight: 600;
+        line-height: 1.4;
+    }
+    .address-line2 {
+        font-size: 20px;
+        color: #2c5a7a;
+        font-weight: 500;
+        line-height: 1.4;
+        margin-top: 2px;
+    }
+
+    /* meta-line: letterNo+refNo left (stacked), date right */
+    .meta-line {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin: 2mm 0 5mm;
+        padding: 5px 0;
+        border-bottom: 2px dashed #a4c2dd;
+        font-size: 1.1rem;
+        color: #1e3a5f;
+        flex-shrink: 0;
+    }
+    .left-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        line-height: 1.4;
+    }
+    .right-meta {
+        white-space: nowrap;
+        padding-left: 20px;
+    }
+    .meta-line i { color: #2c74b3; width: 24px; }
+
+    /* recipient */
+    .recipient-line {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin: 3mm 0 3mm;
+        background: #ebf3fa;
+        padding: 6px 18px;
+        border-radius: 40px;
+        display: inline-block;
+        flex-shrink: 0;
+    }
+    .subject {
+        font-weight: 700;
+        border-bottom: 3px solid #2c74b3;
+        margin: 12px 0 16px;
+        padding-bottom: 6px;
+        font-size: 1.1rem;
+        color: #0d3b5c;
+        flex-shrink: 0;
+    }
+
+    /* main body — takes remaining space */
+    .body {
+        line-height: 1.9;
+        text-align: justify;
+        white-space: pre-line;
+        font-size: 1.05rem;
+        margin-bottom: 20px;
+        color: #212529;
+        flex: 1;
+        overflow-y: auto;
+        min-height: 0;
+    }
+
+    .signature-area {
+        text-align: right;
+        margin-top: 15px;
+        border-top: 2px dotted #7fa3c2;
+        padding-top: 15px;
+        flex-shrink: 0;
+    }
+    .signature-img {
+        max-height: 70px;
+        max-width: 160px;
+        object-fit: contain;
+        margin-bottom: 6px;
+    }
+    .sender-name {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #0b2d4b;
+    }
+    .sender-position {
+        font-size: 1.2rem;
+        color: #25597e;
+    }
+
+    /* footer fixed at bottom within padding */
+    .footer {
+        text-align: center;
+        border-top: 1px solid #6082a3;
+        padding-top: 6px;
+        margin-top: 8px;
+        font-size: 0.95rem;
+        color: #1f405e;
+        font-weight: 500;
+        flex-shrink: 0;
+    }
+    .qr-box { margin-top: 6px; display: flex; justify-content: center; }
+    .qr-box img { border-radius: 12px; border: 2px solid white; box-shadow: 0 4px 12px rgba(0,0,0,0.2); width: 70px; height: 70px; }
+
+    /* print media */
+    @media print {
+        body * { visibility: hidden; }
+        #output, #output * { visibility: visible; }
+        #output { position: absolute; top: 0; left: 0; width: 100%; }
+        .page { box-shadow: none; margin: 0; border-radius: 0; page-break-after: always; height: 297mm; }
+    }
+
+    @media (max-width: 700px) {
+        .card { padding: 18px; }
+        .actions button { width: 100%; justify-content: center; }
+        .org-name { font-size: 22px; }
+        .letter-header { flex-wrap: wrap; justify-content: center; }
+        .address-line1 { font-size: 18px; }
+        .address-line2 { font-size: 16px; }
+        .page { padding: 15mm; }
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <!-- card header -->
+    <div class="card">
+        <h1><i class="fas fa-envelope-open-text"></i> Generate multi letter</h1>
+        <p class="subtitle">यसमा लेखेर वा बोलेर एउटै बिषयमा धेरैजनालाई पत्र लेख्न वा कुनै सिफारिसपत्र बनाउन सकिन्छ ।</p>
+
+        <div class="instructions">
+            <h3><i class="fas fa-info-circle"></i> Instructions</h3>
+            <ul>
+                <li>प्रत्येक लाईनमा प्रत्येक प्रापकको नाम लेख्नुहोस ।</li>
+                <li>आफुले चाहेको मिति राख्नुहोस</li>
+                <li>यसमा Data store भएर बस्दैन ।</li>
+                <li>पत्रलाई pdf मा save गरेर राख्न सकिन्छ ।</li>
+                <li>Save गरिसकेपछिमात्र रिफ्रेश गर्नुहोला अन्यथा फेरि रिपिट लेख्नुपर्छ ।</li>
+            </ul>
+        </div>
+
+        <!-- Logo upload & logoUrl field -->
+        <div class="form-row">
+            <div class="form-group">
+                <label><i class="fas fa-cloud-upload-alt"></i> लोगो (फाइल)</label>
+                <input type="file" id="logoFile" accept="image/*">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-link"></i> लोगो URL (यदि छ भने)</label>
+                <input type="url" id="logoUrl" placeholder="https://example.com/logo.png">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-school"></i> विद्यालय / कार्यालय</label>
+                <input type="text" id="org" value="श्री डिम जनता माध्यमिक बिद्यालय">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label><i class="fas fa-location-dot"></i> ठेगाना (पहिलो भाग)</label>
+                <input type="text" id="address1" value="लालबन्दी-१६, परवानीपुर">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-location-dot"></i> ठेगाना (दोस्रो भाग)</label>
+                <input type="text" id="address2" value="सर्लाही, नेपाल">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-calendar"></i> पत्र मिति</label>
+                <input type="text" id="letterDate" value="२०८२-१०-१२">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label><i class="fas fa-hashtag"></i> पत्र संख्या</label>
+                <input type="text" id="letterNo" value="११/०८१-०८२">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-file-lines"></i> चलानी संख्या</label>
+                <input type="text" id="refNo" value="६/२०८२ शिक्षा शाखा">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-tag"></i> विषय</label>
+                <input type="text" id="subject" value="आमन्त्रण बारे">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label><i class="fas fa-user-tie"></i> पठाउने व्यक्ति</label>
+                <input type="text" id="sender" value="ध्रुवबहादुर भण्डारी">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-briefcase"></i> पद</label>
+                <input type="text" id="position" value="प्रधानाध्यापक">
+            </div>
+        </div>
+
+        <!-- NEW: Divided recipient fields -->
+        <div class="form-row">
+            <div class="form-group" style="flex:1">
+                <label><i class="fas fa-user"></i> प्रापक १ (पहिलो नाम)</label>
+                <textarea id="receivers1" rows="3" placeholder="प्रति लाइन एक नाम">जिल्ला निर्वाचन कार्यालय सर्लाही
+शिक्षा शाखा प्रमुख
+राम बहादुर स्याङ्तान</textarea>
+            </div>
+            <div class="form-group" style="flex:1">
+                <label><i class="fas fa-user"></i> प्रापक २ (दोस्रो नाम)</label>
+                <textarea id="receivers2" rows="3" placeholder="प्रति लाइन एक नाम">सदस्य
+प्रअ
+महिला सदस्य</textarea>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group" style="flex:2">
+                <label><i class="fas fa-pen"></i> पत्र मुख्य भाग</label>
+                <textarea id="body" rows="3">यस संस्थाको यहि मिति २०८२-१२-१५ का दिन हुन गई रहेको वार्षिकोत्सव कार्यक्रममा यहाँको गरिमामय उपस्थितिको लागि हार्दिक अनुरोध गर्दछु ।
+मिति: २०८१ चैत १५, बिहान ११ बजे।
+
+धन्यवाद ।</textarea>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-signature"></i> हस्ताक्षर छवि</label>
+                <input type="file" id="signatureFile" accept="image/*">
+                <small>सही खाली भए नाम/पद मात्र देखिन्छ</small>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="generate" onclick="generateLetters()"><i class="fas fa-bolt"></i> पत्र जेनेरेट गर्नुहोस्</button>
+            <button class="print" onclick="window.print()"><i class="fas fa-print"></i> प्रिन्ट</button>
+            <button class="pdf" onclick="downloadPDF()"><i class="fas fa-file-pdf"></i> पीडीएफ डाउनलोड</button>
+            <button class="clear" onclick="location.reload()"><i class="fas fa-rotate-left"></i> सबै हटाउनुहोस्</button>
+        </div>
+    </div>
+
+    <!-- Generated letters output -->
+    <div id="output"></div>
+</div>
+
+<script>
+let logoData = "";
+let signatureData = "";
+
+// file uploads
+document.getElementById("logoFile").onchange = function(e) {
+    let reader = new FileReader();
+    reader.onload = (ev) => { logoData = ev.target.result; };
+    if (e.target.files[0]) reader.readAsDataURL(e.target.files[0]);
+};
+document.getElementById("signatureFile").onchange = function(e) {
+    let reader = new FileReader();
+    reader.onload = (ev) => { signatureData = ev.target.result; };
+    if (e.target.files[0]) reader.readAsDataURL(e.target.files[0]);
+};
+
+function generateLetters() {
+    // get all fields
+    let org = document.getElementById("org").value.trim() || "श्री डिम जनता मा.वि.";
+    let address1 = document.getElementById("address1").value.trim() || "लालबन्दी-१६, परवानीपुर";
+    let address2 = document.getElementById("address2").value.trim() || "सर्लाही, नेपाल";
+    let letterDate = document.getElementById("letterDate").value.trim() || "२०८२-१०-१२";
+    let letterNo = document.getElementById("letterNo").value.trim() || "११/०८१-०८२";
+    let refNo = document.getElementById("refNo").value.trim() || "६/२०८२ शिक्षा शाखा";
+    let subject = document.getElementById("subject").value.trim() || "आमन्त्रण बारे";
+    let sender = document.getElementById("sender").value.trim() || "ध्रुवबहादुर भण्डारी";
+    let position = document.getElementById("position").value.trim() || "प्रधानाध्यापक";
+    let bodyTemplate = document.getElementById("body").value || "[नाम] ज्यू, उपस्थित हुनुहोला ।";
+    
+    // Get recipients from both fields
+    let receivers1Raw = document.getElementById("receivers1").value;
+    let receivers2Raw = document.getElementById("receivers2").value;
+    
+    let receivers1 = receivers1Raw.split("\n").map(r => r.trim()).filter(r => r !== "");
+    let receivers2 = receivers2Raw.split("\n").map(r => r.trim()).filter(r => r !== "");
+    
+    // Combine recipients - pair them up
+    let combinedReceivers = [];
+    let maxLength = Math.max(receivers1.length, receivers2.length);
+    
+    for (let i = 0; i < maxLength; i++) {
+        let part1 = receivers1[i] || "";
+        let part2 = receivers2[i] || "";
+        
+        if (part1 && part2) {
+            combinedReceivers.push(`${part1}, ${part2}`);
+        } else if (part1) {
+            combinedReceivers.push(part1);
+        } else if (part2) {
+            combinedReceivers.push(part2);
+        }
+    }
+    
+    if (combinedReceivers.length === 0) combinedReceivers = ["प्रापकको नाम"];
+
+    // handle logo URL (if provided and no uploaded file)
+    let logoUrlInput = document.getElementById("logoUrl").value.trim();
+    let finalLogo = logoData;  // uploaded file takes precedence
+    if (!finalLogo && logoUrlInput) {
+        finalLogo = logoUrlInput;  // use URL string directly
+    }
+
+    let outputHtml = "";
+
+    combinedReceivers.forEach((rec, idx) => {
+        // replace [नाम] placeholder in body
+        let personalizedBody = bodyTemplate.replace(/\[नाम\]/g, rec);
+
+        outputHtml += `
+        <div class="page" id="page-${idx}">
+            <div class="page-content">
+                <div class="letter-header">
+                    ${finalLogo ? `<img src="${finalLogo}" class="org-logo" alt="logo">` : ''}
+                    <div class="org-name">${org}</div>
+                </div>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="address-container">
+                    <div class="address-line1">${address1}</div>
+                    <div class="address-line2">${address2}</div>
+                </div>
+
+                <div class="meta-line">
+                    <div class="left-meta">
+                        <span><i class="fas fa-hashtag"></i> पत्र संख्या : ${letterNo}</span>
+                        <span><i class="fas fa-qrcode"></i> चलानी संख्या : ${refNo}</span>
+                    </div>
+                    <div class="right-meta">
+                        <span><i class="fas fa-calendar-alt"></i> मिति: ${letterDate}</span>
+                    </div>
+                </div>
+
+                <div class="recipient-line">प्रति, ${rec}</div>
+                <div class="subject">विषय: ${subject}</div>
+
+                <div class="body">${personalizedBody.replace(/\n/g, '<br>')}</div>
+
+                <div class="signature-area">
+                    ${signatureData ? `<img src="${signatureData}" class="signature-img"><br>` : ''}
+                    <div class="sender-name">${sender}</div>
+                    <div class="sender-position">${position}</div>
+                </div>
+
+                <div class="footer">
+                    <span>${org}  •  ${address1} • ${address2}</span>
+                    <div class="qr-box" id="qr-${idx}"></div>
+                </div>
+            </div>
+        </div>`;
+    });
+
+    document.getElementById("output").innerHTML = outputHtml;
+
+    // QR codes
+    setTimeout(() => {
+        let qrDivs = document.querySelectorAll("#output .qr-box");
+        combinedReceivers.forEach((rec, i) => {
+            if (qrDivs[i]) {
+                qrDivs[i].innerHTML = "";
+                try {
+                    new QRCode(qrDivs[i], {
+                        text: `${org} | ${rec} | पत्र: ${letterNo}`,
+                        width: 70,
+                        height: 70
+                    });
+                } catch (e) {}
+            }
+        });
+    }, 300);
+}
+
+async function downloadPDF() {
+    const { jsPDF } = window.jspdf;
+    let pdf = new jsPDF({ orientation: 'p', unit: 'mm', format: 'a4' });
+    let pages = document.querySelectorAll("#output .page");
+    if (!pages.length) { alert("पहिला पत्र जेनेरेट गर्नुहोस्"); return; }
+
+    for (let i = 0; i < pages.length; i++) {
+        if (i > 0) pdf.addPage();
+        try {
+            let canvas = await html2canvas(pages[i], { 
+                scale: 1.8, 
+                backgroundColor: '#ffffff',
+                logging: false,
+                allowTaint: false,
+                useCORS: true 
+            });
+            pdf.addImage(canvas.toDataURL('image/jpeg', 0.95), 'JPEG', 0, 0, 210, 297, undefined, 'FAST');
+        } catch (err) { console.error(err); }
+    }
+    pdf.save("school_letters.pdf");
+}
+</script>
+</body>
+</html>
