@@ -548,7 +548,15 @@ function goToTop(){ window.scrollTo(0,0); }
             <p style="background:#fbeec2; border-left-color:#b棕; "><i class="fas fa-exclamation-triangle" style="color:#b34f0a;"></i> 
             <strong>सुझाब र चेतावनी :</strong> यो टुलमा अनाधिकृतरुपमा कुनै स‌स्थाको डिजिटल लोगो र सिग्नेचर प्रयोग नगर्नुहोला । यस्तो कार्य साईबर अपराध मानिन्छ । यस अपराधमा ५ लाख र ५ बर्ष सजाय समेत हुन सक्नेछ ।
             </p>
-             
+
+<!-- Subscription Button -->
+                            <div class="subscribe-container">
+                                <button id="subscribeBtn">
+                                    <i class="fas fa-bell"></i>
+                                    <span>Subscribe</span>
+                                    <span id="badge" class="badge" style="display: none;">0</span>
+                                </button>
+         
         </div>
         <div class="modal-footer">
             <button onclick="closeModal()"><i class="fas fa-check-circle"></i> बुझें / ल सुरु गर्छु </button>
@@ -556,6 +564,76 @@ function goToTop(){ window.scrollTo(0,0); }
     </div>
 </div>
 
+
+
+
+
+
+  <!-- Subscription Modal -->
+    <div class="modal fade subscription-modal" id="subscriptionModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Subscribe to Our Newsletter</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Stay updated with the latest educational resources, news, and tools.</p>
+                    
+                    <form id="subscriptionForm" class="subscription-form">
+                        <div class="form-group">
+                            <label for="subscriberName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="subscriberName" 
+                                   placeholder="Enter your name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subscriberEmail" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="subscriberEmail" 
+                                   placeholder="Enter your email" required>
+                        </div>
+                        
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="newsletterUpdates" checked>
+                            <label class="form-check-label" for="newsletterUpdates">
+                                Send me weekly educational updates
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn" id="subscribeSubmitBtn">
+                            <i class="fas fa-paper-plane me-2"></i>Subscribe Now
+                        </button>
+                    </form>
+                    
+                    <div class="benefits-list">
+                        <h6>You'll receive:</h6>
+                        <li><i class="fas fa-check-circle"></i> Latest educational news</li>
+                        <li><i class="fas fa-check-circle"></i> Teaching resources</li>
+                        <li><i class="fas fa-check-circle"></i> Exam preparation materials</li>
+                        <li><i class="fas fa-check-circle"></i> School management tips</li>
+                    </div>
+                    
+                    <div id="subscriptionSuccess" class="success-message">
+                        <i class="fas fa-check-circle me-2"></i>
+                        <strong>Thank you for subscribing!</strong>
+                        <p class="mb-0">You'll receive a confirmation email shortly.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <p class="small text-muted mb-0">
+                        We respect your privacy. Unsubscribe at any time.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+ 
 <div class="container">
     <!-- card header -->
     <div class="card">
