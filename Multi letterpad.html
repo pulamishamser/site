@@ -4,16 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
- <meta property="og:title" content="Multi Letterpad" />
-    <meta property="og:type" content="website"/>
-    <meta property="og:url" content="https://shamser.info.np/Multi letterpad.html"/>
-    <meta property="og:image" content="https://shamser.info.np/HomePage/letter.jpg" />
-    <meta property="og:description" content="लेखेर वा बोलेर एउटै बिषयमा धेरैजनालाई पत्र लेख्न वा कुनै सिफारिसपत्र बनाउन सकिने मल्टी लेटरप्याड जेनेरेटर टुल ।" />
-    <meta name="keywords" content="">
-    <meta name="author" content="shamserpulami">
-    <meta property="fb:app_id" content="123456789012345" />
+<meta property="og:title" content="Multi Letterpad" />
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://shamser.info.np/Multi letterpad.html"/>
+<meta property="og:image" content="https://shamser.info.np/HomePage/letter.jpg" />
+<meta property="og:description" content="लेखेर वा बोलेर एउटै बिषयमा धेरैजनालाई पत्र लेख्न वा कुनै सिफारिसपत्र बनाउन सकिने मल्टी लेटरप्याड जेनेरेटर टुल ।" />
+<meta name="keywords" content="">
+<meta name="author" content="shamserpulami">
+<meta property="fb:app_id" content="123456789012345" />
 
-    
 <title>Multi‑letterpad</title>
 <!--social button show -->
 <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet" type="text/css">
@@ -21,11 +20,10 @@
 <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
 <!----share button---->
 <script type='text/javascript' src='../platform-api.sharethis.com/js/sharethis.js#property=5b5b234df5aa6d001130d104&product=inline-share-buttons' async='async'></script>
-              <div id="fb-root"></div>
+<div id="fb-root"></div>
 
- 
-     <!-- Favicon -->
-    <link rel="icon" type="image/ico" href="https://shamser.info.np/HomePage/favicon.ico"/>
+<!-- Favicon -->
+<link rel="icon" type="image/ico" href="https://shamser.info.np/HomePage/favicon.ico"/>
 <!-- Libraries -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -308,24 +306,146 @@ function goToTop(){ window.scrollTo(0,0); }
         transform: scale(1.02);
     }
 
-    /* -------------------- A4 PAGE with exactly 1 inch margins & fixed height 297mm -------------------- */
+    /* Subscription specific styles */
+    .subscribe-container {
+        text-align: center;
+        margin: 20px 0;
+    }
+    #subscribeBtn {
+        background: #e67e22;
+        color: white;
+        padding: 12px 30px;
+        font-size: 1.2rem;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    #subscribeBtn:hover {
+        background: #d35400;
+        transform: scale(1.05);
+    }
+    .badge {
+        background: #c0392b;
+        color: white;
+        border-radius: 50%;
+        padding: 2px 8px;
+        font-size: 0.8rem;
+        margin-left: 5px;
+    }
+    .subscription-modal .modal-content {
+        max-width: 500px;
+    }
+    .subscription-form .form-group {
+        margin-bottom: 20px;
+    }
+    .subscription-form .form-label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #2c3e50;
+    }
+    .subscription-form .form-control {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #dfe6e9;
+        border-radius: 30px;
+        font-size: 1rem;
+    }
+    .subscription-form .form-control:focus {
+        border-color: #2c74b3;
+        outline: none;
+    }
+    .form-check {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 15px 0;
+    }
+    .form-check-input {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+    }
+    .form-check-label {
+        color: #34495e;
+    }
+    .submit-btn {
+        background: #27ae60;
+        color: white;
+        width: 100%;
+        padding: 14px;
+        border: none;
+        border-radius: 30px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+        margin-top: 10px;
+    }
+    .submit-btn:hover {
+        background: #2ecc71;
+    }
+    .benefits-list {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 20px;
+        margin: 20px 0;
+    }
+    .benefits-list h6 {
+        color: #2c3e50;
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+    .benefits-list li {
+        list-style: none;
+        margin: 10px 0;
+        color: #27ae60;
+    }
+    .benefits-list li i {
+        margin-right: 10px;
+    }
+    .success-message {
+        display: none;
+        background: #d4edda;
+        color: #155724;
+        padding: 15px;
+        border-radius: 30px;
+        margin-top: 20px;
+        text-align: center;
+    }
+    .btn-close {
+        background: transparent;
+        border: 2px solid white;
+        color: white;
+        font-size: 1.2rem;
+        padding: 5px 12px;
+        border-radius: 30px;
+        cursor: pointer;
+    }
+    .btn-close:hover {
+        background: white;
+        color: #0b3552;
+    }
+    .text-muted { color: #7f8c8d; }
+
+    /* A4 page styles - unchanged */
     .page {
         width: 210mm;
-        height: 297mm;          /* fixed A4 height */
+        height: 297mm;
         background: white;
         margin: 20px auto;
-        padding: 25.4mm;         /* 1 inch on all sides */
+        padding: 25.4mm;
         box-sizing: border-box;
         position: relative;
         page-break-after: always;
         box-shadow: 0 20px 45px rgba(0,25,45,0.3);
         border-radius: 2px;
         font-family: 'Times New Roman', 'Nirmala UI', serif;
-        overflow: hidden;         /* keep content inside */
+        overflow: hidden;
         display: flex;
         flex-direction: column;
     }
-
     .page-content {
         height: 100%;
         display: flex;
@@ -333,15 +453,13 @@ function goToTop(){ window.scrollTo(0,0); }
         position: relative;
         z-index: 1;
     }
-
-    /* letter header: logo left, org name centered - with reduced gap */
     .letter-header {
         display: flex;
         align-items: center;
         justify-content: flex-start;
         margin-bottom: 2mm;
         flex-shrink: 0;
-        gap: 2px;  /* REDUCED GAP from 15px to 2px */
+        gap: 2px;
         position: relative;
     }
     .org-logo {
@@ -361,8 +479,6 @@ function goToTop(){ window.scrollTo(0,0); }
         margin: 0 auto;
         width: 100%;
     }
-
-    /* address container - centered with two lines */
     .address-container {
         text-align: center;
         margin: 2mm 0 5mm 0;
@@ -383,8 +499,6 @@ function goToTop(){ window.scrollTo(0,0); }
         line-height: 1.1;
         margin-top: 2px;
     }
-
-    /* meta-line: letterNo+refNo left (stacked), date right */
     .meta-line {
         display: flex;
         justify-content: space-between;
@@ -407,27 +521,17 @@ function goToTop(){ window.scrollTo(0,0); }
         padding-left: 15px;
     }
     .meta-line i { color: #2c74b3; width: 24px; }
-
-    /* recipient — properly handles commas and breaks after each comma */
     .recipient-line {
         font-size: 10pt;
         font-weight: 700;
         margin: 3mm 0 3mm;
-        
         padding: 6px 18px;
-        
         display: inline-block;
         flex-shrink: 0;
         white-space: normal;
         word-break: break-word;
         max-width: 100%;
     }
-    
-    /* Style for comma-separated values to break after commas */
-    .recipient-line br.comma-break {
-        display: none; /* Hidden by default, will be used for line breaks */
-    }
-    
     .subject {
         font-weight: 700;
         border-bottom: 3px solid #2c74b3;
@@ -437,8 +541,6 @@ function goToTop(){ window.scrollTo(0,0); }
         color: #0d3b5c;
         flex-shrink: 0;
     }
-
-    /* main body — takes remaining space */
     .body {
         line-height: 1.8;
         text-align: justify;
@@ -450,7 +552,6 @@ function goToTop(){ window.scrollTo(0,0); }
         overflow-y: auto;
         min-height: 0;
     }
-
     .signature-area {
         text-align: right;
         margin-top: 15px;
@@ -473,8 +574,6 @@ function goToTop(){ window.scrollTo(0,0); }
         font-size: 10pt;
         color: #25597e;
     }
-
-    /* footer fixed at bottom within padding - with email and mobile */
     .footer {
         text-align: center;
         border-top: 1px solid #6082a3;
@@ -501,10 +600,8 @@ function goToTop(){ window.scrollTo(0,0); }
         color: #2c74b3;
         font-size: 10pt;
     }
-    /* QR box removed - no longer needed */
     .qr-box { display: none; }
 
-    /* print media */
     @media print {
         body * { visibility: hidden; }
         #output, #output * { visibility: visible; }
@@ -521,119 +618,105 @@ function goToTop(){ window.scrollTo(0,0); }
         .address-line1 { font-size: 18px; }
         .address-line2 { font-size: 16px; }
         .page { padding: 15mm; }
-        .footer-content {
-            flex-direction: column;
-            gap: 8px;
-        }
+        .footer-content { flex-direction: column; gap: 8px; }
         .modal-header h2 { font-size: 1.3rem; }
     }
 </style>
 </head>
 <body>
 
-<!-- AUTO POP-UP MODAL (hidden by default, shown via JS) -->
+<!-- WELCOME MODAL (corrected structure) -->
 <div id="welcomeModal" class="modal" style="display: none;">
     <div class="modal-content">
         <div class="modal-header">
             <i class="fas fa-hands-helping"></i>
             <h2><strong>Thank you for opening multi letter generator tool!</strong></h2>
-            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <button class="close-btn" onclick="closeModal('welcomeModal')">&times;</button>
         </div>
         <div class="modal-body">
-            <!-- Image at top as requested -->
-            <img src="HomePage/team_img/team1.JPG" alt="letter head preview" style="width:20%; border-radius:10px;">    
+            <img src="HomePage/team_img/team1.JPG" alt="letter head preview" style="width:20%; border-radius:10px;" onerror="this.src='https://via.placeholder.com/150?text=Team';">    
             
             <p>आजको युग डिजिटल युग हो । फिजिकल चिट्ठीपत्र वा सिफारिसपत्र उपयोगी नहुन सक्छ, फेसबुक ह्वाट्सएप भाइबरजस्ता सामाजिक संजालबाट सुचना सम्प्रेषण गर्नुलाई यधपि सजिलो मानिन्छ तर सामाजिक सञ्जालमार्फत जानकारी दिन सबैसँग मोबाइल नहुन सक्छ, सबै ब्यक्तिमा डिजिटल पहुँच नहुन सक्छ साथै सबै बिद्यालयमा कम्प्युटर नहुन सक्छ, कम्प्युटर चलाउने कर्मचारी नहुन सक्छ, बिधुत लाइन गएको हुन सक्छ बिद्यालय र अफिस बन्द भएको हुन सक्छ, फोनबाट जानकारी गराउन सबैको मोबाइल नम्बर सेभ नभएको पनि हुन सक्छ, टावर गएको पनि हुन सक्छ । तर इमर्जेन्सी बैठक बोलाउनु पर्यो वा जानकारी गराउन पर्यो अथवा सिफारिस पत्र बनाउनु पर्ने अवस्था पर्यो भने यस्तो अवस्थामा यो टुल एकदमै उपयोगी हुन सक्छ । घरमा वा बिश्वको कुनै कुनामा बसेर वा सुतेर आरामले मोबाइलमै बोलेर पाँच दश मिनेटमै धेरै चिट्ठीपत्र वा सिफारिसपत्र बनाउने यो डिजिटल टुल प्रयोग गर्न सकिन्छ । यो टुलमा धेरै चिट्ठीपत्र वा सिफारिसपत्र तयार पारी पिडिएफमा सेभ गरी प्रिन्टर सेन्टरमा पिडिएफ फाइल इमेलबाट पठाइ प्रिन्ट गर्न गराउन सकिन्छ ।</p>
 
-            <p style="background:#fbeec2; border-left-color:#b棕; "><i class="fas fa-exclamation-triangle" style="color:#b34f0a;"></i> 
-            <strong>सुझाब र चेतावनी :</strong> यो टुलमा अनाधिकृतरुपमा कुनै स‌स्थाको डिजिटल लोगो र सिग्नेचर प्रयोग नगर्नुहोला । यस्तो कार्य साईबर अपराध मानिन्छ । यस अपराधमा ५ लाख र ५ बर्ष सजाय समेत हुन सक्नेछ ।
+            <p style="background:#fbeec2; border-left-color:#b87333; "><i class="fas fa-exclamation-triangle" style="color:#b34f0a;"></i> 
+            <strong>सुझाब र चेतावनी :</strong> यो टुलमा अनाधिकृतरुपमा कुनै स्थाको डिजिटल लोगो र सिग्नेचर प्रयोग नगर्नुहोला । यस्तो कार्य साईबर अपराध मानिन्छ । यस अपराधमा ५ लाख र ५ बर्ष सजाय समेत हुन सक्नेछ ।
             </p>
 
-<!-- Subscription Button -->
-                            <div class="subscribe-container">
-                                <button id="subscribeBtn">
-                                    <i class="fas fa-bell"></i>
-                                    <span>Subscribe</span>
-                                    <span id="badge" class="badge" style="display: none;">0</span>
-                                </button>
-         
+            <!-- Subscription Button -->
+            <div class="subscribe-container">
+                <button id="subscribeBtn" onclick="openSubscriptionModal()">
+                    <i class="fas fa-bell"></i>
+                    <span>Subscribe</span>
+                    <span id="badge" class="badge" style="display: none;">0</span>
+                </button>
+            </div>
         </div>
         <div class="modal-footer">
-            <button onclick="closeModal()"><i class="fas fa-check-circle"></i> बुझें / ल सुरु गर्छु </button>
+            <button onclick="closeModal('welcomeModal')"><i class="fas fa-check-circle"></i> बुझें / ल सुरु गर्छु</button>
         </div>
     </div>
 </div>
 
-
-
-
-
-
-  <!-- Subscription Modal -->
-    <div class="modal fade subscription-modal" id="subscriptionModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Subscribe to Our Newsletter</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+<!-- SUBSCRIPTION MODAL (corrected structure) -->
+<div id="subscriptionModal" class="modal subscription-modal" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <i class="fas fa-envelope-open-text"></i>
+            <h5 class="modal-title">Subscribe to Our Newsletter</h5>
+            <button class="close-btn" onclick="closeModal('subscriptionModal')">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p>Stay updated with the latest educational resources, news, and tools.</p>
+            
+            <form id="subscriptionForm" class="subscription-form" onsubmit="handleSubscribe(event)">
+                <div class="form-group">
+                    <label for="subscriberName" class="form-label">Full Name</label>
+                    <input type="text" class="form-control" id="subscriberName" 
+                           placeholder="Enter your name" required>
                 </div>
-                <div class="modal-body">
-                    <p>Stay updated with the latest educational resources, news, and tools.</p>
-                    
-                    <form id="subscriptionForm" class="subscription-form">
-                        <div class="form-group">
-                            <label for="subscriberName" class="form-label">Full Name</label>
-                            <input type="text" class="form-control" id="subscriberName" 
-                                   placeholder="Enter your name" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="subscriberEmail" class="form-label">Email Address</label>
-                            <input type="email" class="form-control" id="subscriberEmail" 
-                                   placeholder="Enter your email" required>
-                        </div>
-                        
-                        <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" id="newsletterUpdates" checked>
-                            <label class="form-check-label" for="newsletterUpdates">
-                                Send me weekly educational updates
-                            </label>
-                        </div>
-                        
-                        <button type="submit" class="submit-btn" id="subscribeSubmitBtn">
-                            <i class="fas fa-paper-plane me-2"></i>Subscribe Now
-                        </button>
-                    </form>
-                    
-                    <div class="benefits-list">
-                        <h6>You'll receive:</h6>
-                        <li><i class="fas fa-check-circle"></i> Latest educational news</li>
-                        <li><i class="fas fa-check-circle"></i> Teaching resources</li>
-                        <li><i class="fas fa-check-circle"></i> Exam preparation materials</li>
-                        <li><i class="fas fa-check-circle"></i> School management tips</li>
-                    </div>
-                    
-                    <div id="subscriptionSuccess" class="success-message">
-                        <i class="fas fa-check-circle me-2"></i>
-                        <strong>Thank you for subscribing!</strong>
-                        <p class="mb-0">You'll receive a confirmation email shortly.</p>
-                    </div>
+                
+                <div class="form-group">
+                    <label for="subscriberEmail" class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="subscriberEmail" 
+                           placeholder="Enter your email" required>
                 </div>
-                <div class="modal-footer">
-                    <p class="small text-muted mb-0">
-                        We respect your privacy. Unsubscribe at any time.
-                    </p>
+                
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="newsletterUpdates" checked>
+                    <label class="form-check-label" for="newsletterUpdates">
+                        Send me weekly educational updates
+                    </label>
                 </div>
+                
+                <button type="submit" class="submit-btn" id="subscribeSubmitBtn">
+                    <i class="fas fa-paper-plane"></i> Subscribe Now
+                </button>
+            </form>
+            
+            <div class="benefits-list">
+                <h6>You'll receive:</h6>
+                <ul style="list-style:none; padding-left:0;">
+                    <li><i class="fas fa-check-circle"></i> Latest educational news</li>
+                    <li><i class="fas fa-check-circle"></i> Teaching resources</li>
+                    <li><i class="fas fa-check-circle"></i> Exam preparation materials</li>
+                    <li><i class="fas fa-check-circle"></i> School management tips</li>
+                </ul>
+            </div>
+            
+            <div id="subscriptionSuccess" class="success-message">
+                <i class="fas fa-check-circle"></i>
+                <strong>Thank you for subscribing!</strong>
+                <p class="mb-0">You'll receive a confirmation email shortly.</p>
             </div>
         </div>
+        <div class="modal-footer">
+            <p class="small text-muted mb-0">
+                We respect your privacy. Unsubscribe at any time.
+            </p>
+        </div>
     </div>
+</div>
 
-
-
-
-
-
- 
 <div class="container">
     <!-- card header -->
     <div class="card">
@@ -650,8 +733,9 @@ function goToTop(){ window.scrollTo(0,0); }
                 <li>Save गरिसकेपछिमात्र रिफ्रेश गर्नुहोला अन्यथा फेरि रिपिट लेख्नुपर्छ ।</li>
             </ul>
         </div>
-            <h2><i class="fas fa-info-circle"></i> यसमा दिइएको सबै बिवरण नमुनामात्र हुन् । </h2>
-<iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2FMulti%20letterpad.html&width=0&layout&action&size&share=true&height=35&appId" width="0" height="35" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+        <h2><i class="fas fa-info-circle"></i> यसमा दिइएको सबै बिवरण नमुनामात्र हुन् । </h2>
+        <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2FMulti%20letterpad.html&width=0&layout&action&size&share=true&height=35&appId" width="0" height="35" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+        
         <!-- Logo upload & logoUrl field -->
         <div class="form-row">
             <div class="form-group">
@@ -760,36 +844,81 @@ function goToTop(){ window.scrollTo(0,0); }
 </div>
 
 <script>
-// auto show modal after page load
-window.onload = function() {
-    document.getElementById('welcomeModal').style.display = 'flex';
-};
-
-// close modal function
-function closeModal() {
-    document.getElementById('welcomeModal').style.display = 'none';
+// Modal control functions
+function openModal(modalId) {
+    document.getElementById(modalId).style.display = 'flex';
 }
 
-// close modal if user clicks outside (on background overlay)
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = 'none';
+}
+
+// Auto show welcome modal after page load
+window.onload = function() {
+    openModal('welcomeModal');
+};
+
+// Close modal if user clicks outside
 window.onclick = function(event) {
-    let modal = document.getElementById('welcomeModal');
-    if (event.target === modal) {
-        modal.style.display = 'none';
+    if (event.target.classList.contains('modal')) {
+        event.target.style.display = 'none';
     }
 };
+
+// Open subscription modal from welcome modal
+function openSubscriptionModal() {
+    closeModal('welcomeModal');
+    openModal('subscriptionModal');
+}
+
+// Handle subscription form submission
+function handleSubscribe(event) {
+    event.preventDefault();
+    
+    // Get form values
+    const name = document.getElementById('subscriberName').value;
+    const email = document.getElementById('subscriberEmail').value;
+    const updates = document.getElementById('newsletterUpdates').checked;
+    
+    // Simple validation
+    if (!name || !email) {
+        alert('कृपया नाम र इमेल भर्नुहोस्');
+        return;
+    }
+    
+    if (!email.includes('@') || !email.includes('.')) {
+        alert('कृपया मान्य इमेल ठेगाना भर्नुहोस्');
+        return;
+    }
+    
+    // Here you would typically send this to a server
+    // For demo, we'll just show success message
+    console.log('Subscription:', { name, email, updates });
+    
+    // Show success message
+    document.getElementById('subscriptionSuccess').style.display = 'block';
+    document.getElementById('subscriptionForm').reset();
+    
+    // Update badge count (demo)
+    const badge = document.getElementById('badge');
+    badge.style.display = 'inline-block';
+    badge.textContent = '1';
+    
+    // Auto close subscription modal after 2 seconds
+    setTimeout(() => {
+        closeModal('subscriptionModal');
+        document.getElementById('subscriptionSuccess').style.display = 'none';
+    }, 2000);
+}
 
 let logoData = "";
 let signatureData = "";
 
 // Helper function to format recipient with line breaks after commas
 function formatRecipientWithBreaks(recipient) {
-    // If there's no comma, return as is
     if (!recipient.includes(',')) {
         return recipient;
     }
-    
-    // Split by comma and join with comma + line break
-    // This will create a line break after each comma
     let parts = recipient.split(',').map(part => part.trim());
     return parts.join(',<br>');
 }
@@ -834,14 +963,9 @@ function generateLetters() {
     let outputHtml = "";
 
     receivers.forEach((rec, idx) => {
-        // Format recipient with line breaks after commas
         let formattedRecipient = formatRecipientWithBreaks(rec);
-        
-        // Replace [नाम] placeholder in body with the original recipient (not formatted)
-        // For the body, we keep the original text without HTML breaks
         let personalizedBody = bodyTemplate.replace(/\[नाम\]/g, rec);
 
-        // Build the header HTML: conditionally include logo and organization name side by side
         let headerHtml = '';
         if (finalLogo || org) {
             headerHtml += '<div class="letter-header">';
@@ -853,9 +977,6 @@ function generateLetters() {
             }
             headerHtml += '</div>';
         }
-
-        // REMOVED the span with non-breaking spaces completely
-        // The page now starts directly with header or address container
         
         outputHtml += `
         <div class="page" id="page-${idx}">
@@ -894,7 +1015,6 @@ function generateLetters() {
                         <span class="footer-item"><i class="fas fa-phone-alt"></i> ${mobile}</span>
                         <span class="footer-item"><i class="fas fa-map-marker-alt"></i> ${address1}</span>
                     </div>
-                    <!-- QR box removed -->
                 </div>
             </div>
         </div>`;
