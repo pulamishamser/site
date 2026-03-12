@@ -25,82 +25,20 @@
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
     
     <!-- Owl Carousel -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 
-
-<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-<script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(async function(OneSignal) {
-    await OneSignal.init({
-      appId: "2dcf0fae-27c7-4c6e-a29e-f9a9ffb3a9e5",
-    });
-  });
-
-
-
-
-<!----share button---->
-<script type='text/javascript' src='../platform-api.sharethis.com/js/sharethis.js#property=5b5b234df5aa6d001130d104&product=inline-share-buttons' async='async'></script>
-<div id="fb-root"></div>
-<script>
-      (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = '../connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1';
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-    </script>            
-<!------------  <SDK>------------>      
-<!---Vertical Share button-------
-<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=618f78d6f2438b001a7e8872&product=image-share-buttons' async='async'></script>
-------------->
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '{758915462507587}',
-      cookie     : true,
-      xfbml      : true,
-      version    : '{api-version}'
-    });
-      
-    FB.AppEvents.logPageView();   
-      
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script> 
-
-<!---------Save to facebook----  
-<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" defer></script>--->
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v20.0" nonce="2vA4OymM"></script>
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-163260228-1"></script>
-
-
-
-
-<script src="//code.tidio.co/r8phzeljmre0grdowyijlezvbbxc6egs.js" async></script>
-<!----<div class="powr-form-builder" id="4a308300_1716124616"></div><script src="https://www.powr.io/powr.js?platform=html"></script>-------->
-
-<!-- OneSignal Push Notifications -->
+    <!-- OneSignal -->
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
     <script>
         window.OneSignalDeferred = window.OneSignalDeferred || [];
@@ -111,6 +49,21 @@
         });
     </script>
     
+    <!-- ShareThis -->
+    <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5b5b234df5aa6d001130d104&product=inline-share-buttons' async='async'></script>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163260228-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-163260228-1');
+    </script>
+    
+    <!-- Tidio Chat -->
+    <script src="//code.tidio.co/r8phzeljmre0grdowyijlezvbbxc6egs.js" async></script>
+    
     <!-- Content Copy Protection -->
     <script>
         document.addEventListener('contextmenu', event => event.preventDefault());
@@ -119,22 +72,460 @@
     
     <!-- Custom CSS -->
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        /*
+            Created on : Jun 14, 2018, 9:59:03 AM
+            Author     : Suresh Khadka
+        */ 
         
+        html,
         body {
+            overflow-x: hidden;
+            padding: 0;
+            height: 100vh; /* fallback for Js load */
+            height: var(--doc-height);
+            display: block; 
+            margin: 10px auto;
+            background-color: #ebebeb !important;
             font-family: 'Hind Siliguri', sans-serif;
-            background-color: #f8f9fa;
             color: #333;
             line-height: 1.6;
-            padding-top: 130px;
-            overflow-x: hidden;
         }
         
-        /* Header Styles */
+        .container {
+            max-width: 100% !important;
+        }
+        
+        .bgwrap {
+            background-color: #ffffff;
+        }
+        
+        .bgwhite {
+            background-color: #FEFCFF;
+            margin-top: 2px;
+        }
+        
+        #wrap {
+            margin: 0px;
+            padding: 0px !important;
+        }
+        
+        .top_nav {
+            background-color: #2f506c;
+            position: fixed;
+        }
+        
+        .top_nav .navbar-light .navbar-nav .nav-link {
+            color: #FEFCFF;
+        }
+        
+        .navbar-dark .navbar-nav .nav-link:hover {
+            color: #FEFCFF;
+        }
+        
+        .tab-mar {
+            margin-right: 0px;
+            padding-right: 0px;
+        }
+        
+        @media screen and (min-width: 960px) {
+            .social li a {
+                padding: 4px 2px;
+                margin: 0px 2px;
+                border-radius: 16px;
+                background-color: #27435a;
+            }
+        }
+        
+        @media screen and (min-width: 400px) {
+            .tab-content {
+                height: 380px;
+            }
+        }
+        
+        @media screen and (min-width: 0px) {
+            .bgwrap {
+                background-color: #FEFCFF;
+                padding: 0px;
+            }
+        }
+        
+        /* logo */
+        .logo {
+            padding: 0.8rem 1rem 1rem 1rem;
+            color: #7b7f83;
+        }
+        
+        .logo a {
+            color: #7b7f83;
+        }
+        
+        .logo i {
+            color: #17a2b8;
+        }
+        
+        .logo span {
+            margin-right: 0.5rem;
+            display: inline-block;
+        }
+        
+        .logo a:hover {
+            text-decoration: none;
+            color: #17a2b8;
+        }
+        
+        .slider-bg {
+            padding: 12px 0px;
+        }
+        
+        .romargin {
+            margin-right: 1rem;
+            margin-left: 0px;
+        }
+        
+        /* tab */
+        #tab-bg {
+            background-color: silver;
+        }
+        
+        .nav-tabs .nav-link {
+            background-color: #004b8e;
+            color: #fff;
+            text-align: center;
+            border-radius: 0px !important;
+            width: 50% !important;
+            border: 0px !important;
+            padding: 8px;
+        }
+        
+        .nav-tabs .nav-link:hover {
+            background-color: #fff;
+            color: #fff;
+            transition: all 0.5s ease-in-out 0s;
+        }
+        
+        .nav-tabs .nav-item.show .nav-link, 
+        .nav-tabs .nav-link.active {
+            background-color: #004b8e;
+            color: #FEFCFF;
+            border-radius: 0px;
+        }
+        
+        .nav-tabs .nav-item.show .nav-link, 
+        .nav-tabs .nav-link.active:hover {
+            transition: all 0.5s ease-in-out 0s;
+            background-color: #FEFCFF;
+        }
+        
+        .tab-content .border-tab {
+            border: 1px solid #e5e5e5;
+            border-top: 0px;
+        }
+        
+        #nav-tabContent {
+            overflow: scroll;
+        }
+        
+        .news-mar {
+            padding: 0px;
+        }
+        
+        #nav-home ul, 
+        #nav-profile ul {
+            padding: 8px 14px;
+            list-style: none;
+        }
+        
+        #nav-home ul li, 
+        #nav-profile ul li {
+            font-size: 0.92rem;
+            padding: 8px 0px;
+        }
+        
+        #nav-home ul li, 
+        #nav-profile ul li {
+            border-bottom: 1px solid #e5e5e5;
+        }
+        
+        #nav-home ul li:last-child, 
+        #nav-profile ul li:last-child {
+            border-bottom: 0px;
+        }
+        
+        .intro_div {
+            margin-top: 5px;
+            padding-bottom: 4px;
+        }
+        
+        .intro_div h1 {
+            font-size: 1.7rem;
+            font-weight: bolder;
+            margin-top: 8px;
+            padding: 14px 8px 0px 0px;
+        }
+        
+        .intro_div h1 a {
+            color: #004b8e;
+        }
+        
+        .intro_div h1 a:hover {
+            color: #fff;
+            transition: all 0.4s ease-in-out 0s;
+            text-decoration: none;
+        }
+        
+        .intro_div p {
+            text-align: justify;
+            padding: 0px 6px 0px 4px;
+            margin: 8px 0px -7px 0px;
+        }
+        
+        .intro_div .more {
+            text-align: right;
+            margin: 0px;
+            padding: 0px 8px;
+            font-weight: bold;
+        }
+        
+        .intro_div .more a:hover {
+            transition: all 0.5s ease-in-out 0s;
+            color: #ee1d25;
+        }
+        
+        .read_more {
+            float: right;
+            display: inline-block;
+            background-color: #ee1d25;
+            border-radius: 4px;
+            padding: 4px 10px;
+            margin-top: 5px;
+        }
+        
+        .read_more a {
+            color: #fff;
+            font-weight: bold;
+        }
+        
+        .read_more:hover {
+            transition: all 0.5s ease-in-out 0s;
+            background-color: #008CBA;
+        }
+        
+        .read_more a:hover {
+            text-decoration: none;
+        }
+        
+        /* facility */
+        .facility h2 {
+            font-size: 12px;
+            color: red !important;
+        }
+        
+        .facility-item h4 {
+            text-align: center;
+            font-family: arial;
+            font-size: 18px;
+            font-weight: bold;
+            padding-top: 6px;
+        }
+        
+        .principal-msg {
+            margin-top: 8px;
+            margin-bottom: 2px;
+        }
+        
+        .principal-msg .pad {
+            padding-top: 0px;
+        }
+        
+        .principal-msg p {
+            font-size: 12px;
+            text-align: justify;
+        }
+        
+        .principal-msg img {
+            padding-top: 0px;
+        }
+        
+        .principal-msg span {
+            font-weight: bold;
+            display: block;
+        }
+        
+        .principal-msg h5 {
+            text-transform: uppercase;
+        }
+        
+        .line-res {
+            border-left: 0px solid silver;
+        }
+        
+        /* news event */
+        .principal-msg1 {
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .principal-msg1 .pad {
+            padding-top: 10px;
+        }
+        
+        .principal-msg1 p {
+            font-size: 14px;
+            text-align: justify;
+            padding: 0px;
+            margin: 0px;
+        }
+        
+        .principal-msg1 img {
+            padding-top: 4px;
+            float: left;
+            padding-right: 8px;
+        }
+        
+        .principal-msg1 span {
+            font-weight: bold;
+            display: block;
+            padding-bottom: 12px;
+        }
+        
+        .principal-msg1 .h5 {
+            text-transform: uppercase;
+            font-size: 1.5rem;
+            padding-bottom: 10px;
+        }
+        
+        .principal-msg1 h5 {
+            font-size: 16px;
+            font-weight: bolder;
+            line-height: 1.4rem;
+        }
+        
+        /* news event new */
+        .news {
+            margin-top: 0px;
+        }
+        
+        .news img {
+            padding-top: 4px;
+            float: left;
+            padding-right: 0px;
+            width: 100px;
+            height: 93px;
+        }
+        
+        .news h4 {
+            text-transform: uppercase;
+            font-weight: bold;
+            padding: 12px 0px;
+            border-bottom: 1px solid silver;
+        }
+        
+        .news h5 {
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 1rem;
+            line-height: 1.4rem;
+            color: #004b8e;
+        }
+        
+        .news .mo {
+            background-color: #4782b2;
+            padding: 4px;
+            margin: 0px;
+            color: #fff;
+            text-align: center;
+        }
+        
+        .news .da {
+            background-color: #f3f3f3;
+            padding: 6px 0px;
+            margin: 0px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .news p {
+            font-size: 14px;
+            text-align: justify;
+            padding: 0px;
+            margin: 0px;
+        }
+        
+        .news ul {
+            padding: 0px;
+            list-style: none;
+        }
+        
+        .news ul li {
+            border-bottom: 1px solid silver;
+            padding: 10px 0px;
+        }
+        
+        .news ul li:last-child {
+            border: none;
+            padding-bottom: 0px;
+        }
+        
+        .news .container {
+            padding-bottom: 0px;
+        }
+        
+        .news ul li a {
+            text-decoration: none;
+            color: #004b8e;
+        }
+        
+        .news ul li a:hover {
+            color: #007bff;
+            transition: all 0.5s ease-in-out 0s;
+        }
+        
+        @media screen and (max-width: 960px) {
+            .news-mar {
+                margin-top: 16px;
+            }
+            
+            .nav-tabs .nav-link {
+                width: 100% !important;
+            }
+            
+            .line-res {
+                border-top: 2px solid silver;
+                border-left: none;
+            }
+            
+            .principal-msg {
+                text-align: center;
+            }
+            
+            .official {
+                margin-left: 6px;
+            }
+            
+            .slider-mar {
+                margin-top: 6px;
+                margin-right: 0px;
+                padding-right: 0px;
+            }
+        }
+        
+        .gallery h5 {
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+        
+        .gallery a {
+            text-decoration: none;
+        }
+        
+        .logo-section {
+            margin-top: 57px;
+            padding-top: 6px;
+        }
+        
+        /* Enhanced Header with Background Image */
         .top-bar {
             background: linear-gradient(135deg, #1e3c72, #2a5298);
             color: white;
@@ -149,7 +540,10 @@
         }
         
         .logo-section {
-            background: white;
+            background: linear-gradient(rgba(255,255,255,0.95), rgba(255,255,255,0.95)), 
+                        url('https://shamser.info.np/HomePage/20260310014938_5921904.jpeg');
+            background-size: cover;
+            background-position: center;
             padding: 15px 0;
             border-bottom: 2px solid #1e3c72;
             position: fixed;
@@ -158,6 +552,13 @@
             right: 0;
             z-index: 1025;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .logo-section h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: #1e3c72;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
         
         .main-nav {
@@ -225,34 +626,6 @@
             padding: 20px;
         }
         
-        .news-card-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #2c3e50;
-        }
-        
-        .news-card-meta {
-            font-size: 13px;
-            color: #7f8c8d;
-            margin-bottom: 15px;
-        }
-        
-        .btn-primary-custom {
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 5px;
-            transition: all 0.3s;
-        }
-        
-        .btn-primary-custom:hover {
-            background: linear-gradient(135deg, #2a5298, #1e3c72);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(30,60,114,0.3);
-        }
-        
         /* Widget Bar */
         .widget-bar {
             position: fixed;
@@ -291,16 +664,6 @@
         
         .widget-item span {
             font-size: 11px;
-        }
-        
-        /* Modal Styles */
-        .modal-nepali .modal-header {
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            color: white;
-        }
-        
-        .modal-nepali .btn-close {
-            filter: brightness(0) invert(1);
         }
         
         /* IEMIS Dropdown */
@@ -370,39 +733,146 @@
             display: block;
         }
         
-        /* Social Stats */
-        .social-stats {
-            display: flex;
-            gap: 15px;
-            margin-top: 10px;
-        }
-        
-        .social-stat {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 14px;
-        }
-        
-        .like-share button {
-            background: #f8f9fa;
-            border: 1px solid #ddd;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 14px;
+        /* Copy Button */
+        .copy-btn {
+            background: transparent;
+            border: 1px solid #0066cc;
+            color: #0066cc;
             cursor: pointer;
+            padding: 2px 8px;
+            margin-left: 8px;
+            font-size: 0.9em;
+            border-radius: 3px;
+            transition: all 0.2s;
+        }
+        
+        .copy-btn:hover {
+            background-color: rgba(0, 102, 204, 0.1);
+        }
+        
+        /* Widget Container */
+        .widget-container {
+            display: none;
+            padding: 15px;
+            background: #ffffff;
+            border-radius: 10px;
+            margin: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            position: relative;
+            width: 100%;
+        }
+        
+        .widget {
+            display: none;
+        }
+        
+        .widget.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: #3498db;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            box-shadow: 0 -3px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+        
+        .bottom-nav a {
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            font-size: 14px;
+            padding: 8px 5px;
+            flex: 1;
             transition: all 0.3s;
         }
         
-        .like-share button:hover {
-            background: #e9ecef;
+        .bottom-nav a:hover {
+            background-color: #2980b9;
         }
         
-        .like-share button.liked {
-            background: #e7f3ff;
-            border-color: #1e3c72;
-            color: #1e3c72;
+        .bottom-nav i {
+            display: block;
+            font-size: 22px;
+            margin-bottom: 5px;
         }
+        
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            z-index: 10;
+        }
+        
+        .close-btn:hover {
+            background: #c0392b;
+        }
+        
+        .radio-stations button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            transition: all 0.2s;
+        }
+        
+        .radio-stations button:hover {
+            background: #2980b9;
+        }
+        
+        /* Social Links */
+        .social-links {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+        
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-3px);
+        }
+        
+        .facebook { background-color: #3b5998; }
+        .twitter { background-color: #1da1f2; }
+        .blogspot { background-color: #ff5722; }
+        .email { background-color: #d44638; }
+        .map { background-color: #34a853; }
         
         /* Team Member */
         .team-member {
@@ -426,6 +896,45 @@
             object-fit: cover;
             border: 3px solid #1e3c72;
             margin-bottom: 15px;
+        }
+        
+        /* School Grid */
+        .school-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        
+        .school-item {
+            text-align: center;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .school-item img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        
+        /* Scroll to top */
+        .scroll-top {
+            position: fixed;
+            bottom: 90px;
+            right: 10px;
+            z-index: 99;
+            padding: 10px;
+            border: none;
+            background: transparent;
+        }
+        
+        .scroll-top img {
+            height: 40px;
+            width: 40px;
         }
         
         /* Testimonial Card */
@@ -452,38 +961,6 @@
             margin-right: 15px;
         }
         
-        /* School Grid */
-        .school-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 15px;
-        }
-        
-        .school-item {
-            text-align: center;
-            padding: 10px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        
-        .school-item img {
-            width: 100%;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-        
-        /* Download Cards */
-        .download-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-        
         /* Utility Classes */
         .text-nepali {
             font-family: 'Hind Siliguri', sans-serif;
@@ -493,12 +970,138 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
         
-        .bg-gradient-success {
-            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        /* Feature Cards */
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            height: 100%;
         }
         
-        .bg-gradient-warning {
-            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            text-align: center;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            font-size: 32px;
+            margin: 0 auto 20px;
+        }
+        
+        .btn-feature {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            transition: all 0.3s;
+        }
+        
+        .btn-feature:hover {
+            background: linear-gradient(135deg, #2a5298, #1e3c72);
+            transform: scale(1.05);
+            color: white;
+        }
+        
+        /* Like/Share Buttons */
+        .like-share-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .btn-like, .btn-share {
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        
+        .btn-like {
+            background: #e1f5fe;
+            color: #0288d1;
+        }
+        
+        .btn-like:hover {
+            background: #0288d1;
+            color: white;
+        }
+        
+        .btn-like.liked {
+            background: #0288d1;
+            color: white;
+        }
+        
+        .btn-share {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+        
+        .btn-share:hover {
+            background: #7b1fa2;
+            color: white;
+        }
+        
+        /* Modal Enhancements */
+        .modal-feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .modal-feature-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .modal-feature-list li i {
+            color: #28a745;
+            font-size: 18px;
+        }
+        
+        .pricing-card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .pricing-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .pricing-card.popular {
+            border: 2px solid #ffc107;
+            position: relative;
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ffc107;
+            color: #000;
+            padding: 4px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
         }
         
         /* Responsive */
@@ -543,6 +1146,13 @@
             .school-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+            
+            .feature-icon {
+                width: 60px;
+                height: 60px;
+                line-height: 60px;
+                font-size: 24px;
+            }
         }
     </style>
 </head>
@@ -557,11 +1167,6 @@
                         src="https://www.ashesh.com.np/linknepali-time.php?time_only=no&font_color=ffffff&aj_time=yes&font_size=12&line_brake=1&api=003098o090" 
                         width="100%" height="40" style="border:none;"></iframe>
             </div>
-
-<script type="text/javascript" src="https://free-hit-counters.net/count/9hgu" width="30" height="20"></script>
-            
-
-
             <div class="col-md-8 text-md-end">
                 <a href="https://maps.app.goo.gl/jVmhRZi3Em8abMSV8" class="text-white text-decoration-none me-3">
                     <i class="fas fa-map-marker-alt"></i> Site Map
@@ -572,12 +1177,16 @@
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSfuwHgJ0hH9X5h4j7L1LTWQArfojFetLhuFtSbyDdCphqqoxQ/viewform" class="text-white text-decoration-none">
                     <i class="fas fa-file-text"></i> Admission
                 </a>
+                <!-- Social Icons in Top Bar -->
+                <a href="https://www.facebook.com/" class="text-white ms-2"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/" class="text-white ms-2"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.youtube.com/channel/UCfGP1pKJErzg10EjftyC3lg" class="text-white ms-2"><i class="fab fa-youtube"></i></a>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Logo Section -->
+<!-- Logo Section with Background Image -->
 <div class="logo-section">
     <div class="container">
         <div class="row align-items-center">
@@ -587,22 +1196,21 @@
                     shamser.info.np
                 </h1>
             </div>
-            <div class="col-md-6 text-md-end">
-                <a href="https://www.facebook.com/" target="_blank" class="text-dark me-3">
-                    <i class="fab fa-facebook-f fa-lg"></i>
-                </a>
-                <a href="https://twitter.com/" target="_blank" class="text-dark me-3">
-                    <i class="fab fa-twitter fa-lg"></i>
-                </a>
-                <a href="https://lauro-media.blogspot.com/" target="_blank" class="text-dark me-3">
-                    <i class="fab fa-blogger-b fa-lg"></i>
-                </a>
-                <a href="mailto:shamserpulami500@gmail.com" target="_blank" class="text-dark me-3">
-                    <i class="fas fa-envelope fa-lg"></i>
-                </a>
-                <a href="https://www.youtube.com/channel/UCfGP1pKJErzg10EjftyC3lg" target="_blank" class="text-dark">
-                    <i class="fab fa-youtube fa-lg text-danger"></i>
-                </a>
+            <div class="col-md-6">
+                <div class="d-flex justify-content-end align-items-center">
+                    <!-- Like/Share/Comment Buttons in Header -->
+                    <div class="like-share-wrapper me-3">
+                        <div class="fb-like" data-href="https://shamser.info.np" data-width="100" data-layout="button_count" data-action="like" data-size="small"></div>
+                    </div>
+                    <div class="like-share-wrapper me-3">
+                        <div class="fb-share-button" data-href="https://shamser.info.np" data-layout="button_count" data-size="small"></div>
+                    </div>
+                    <div class="like-share-wrapper">
+                        <a href="#comments" class="btn btn-sm btn-outline-primary">
+                            <i class="fas fa-comment"></i> कमेन्ट
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -655,7 +1263,7 @@
                     <a class="nav-link" href="#news">शैक्षिक समाचार</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#quizModal">सामान्य ज्ञान</a>
+                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#featuresModal">सुविधाहरू</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="https://shamser.info.np/Entry_Form/Service_Demand.html">सेवाहरू</a>
@@ -742,14 +1350,52 @@
         <strong>shamser.info.np</strong> मा तपाईंलाई स्वागत छ! यहाँ शैक्षिक सामग्री, समाचार र उपयोगी उपकरणहरू पाउन सक्नुहुन्छ।
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
-<!-- Your like button  -->
-  <div class="fb-like" 
-       data-href="https://shamser.info.np" 
-       data-width="30"
-       data-layout="standard" 
-       data-action="like" 
-       data-size="small" >
-  </div>
+
+    <!-- Feature Cards Section - New Useful Features -->
+    <h2 class="section-title">हाम्रा विशेष सुविधाहरू</h2>
+    <div class="row mb-5">
+        <div class="col-md-3 col-6 mb-4">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-id-card"></i>
+                </div>
+                <h5>ID Card Generator</h5>
+                <p>अफलाइन र अनलाइन संस्करण</p>
+                <button class="btn btn-feature btn-sm w-100" data-bs-toggle="modal" data-bs-target="#idCardModal">खोल्नुहोस्</button>
+            </div>
+        </div>
+        <div class="col-md-3 col-6 mb-4">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-keyboard"></i>
+                </div>
+                <h5>Letterpad</h5>
+                <p>मल्टी लेटरप्याड</p>
+                <a href="https://shamser.info.np/Multi%20letterpad.html" class="btn btn-feature btn-sm w-100">प्रयोग गर्नुहोस्</a>
+            </div>
+        </div>
+        <div class="col-md-3 col-6 mb-4">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-question-circle"></i>
+                </div>
+                <h5>Computer Quiz</h5>
+                <p>ज्ञान परीक्षण गर्नुहोस्</p>
+                <button class="btn btn-feature btn-sm w-100" data-bs-toggle="modal" data-bs-target="#quizModal">सुरू गर्नुहोस्</button>
+            </div>
+        </div>
+        <div class="col-md-3 col-6 mb-4">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-sign-in-alt"></i>
+                </div>
+                <h5>IEMIS Login</h5>
+                <p>परीक्षा प्रणालीमा जानुहोस्</p>
+                <button class="btn btn-feature btn-sm w-100" data-bs-toggle="modal" data-bs-target="#iemisModal">लगइन</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Quick Stats Row -->
     <div class="row mb-4">
         <div class="col-md-3 col-6 mb-3">
@@ -782,7 +1428,7 @@
         </div>
     </div>
 
-    <!-- IEMIS Login Card -->
+    <!-- IEMIS Login Card with Copy Feature -->
     <div class="card mb-5">
         <div class="row g-0">
             <div class="col-md-4">
@@ -792,6 +1438,7 @@
                 <div class="card-body">
                     <h3 class="card-title text-primary">एकीकृत परीक्षा प्रणाली (IEMIS)</h3>
                     <p class="card-text">छिटो र सजिलो तरिकाले नतिजा प्रकाशन गर्ने डिजिटल टुल। विद्यार्थीले अनलाइन नतिजा हेर्न सक्ने, ग्रेडशिट डाउनलोड गर्न सक्ने सुविधा। मोबाइलबाटै अङ्क चढाई नतिजा हेर्न सकिने।</p>
+                    
                     <div class="emis-dropdown d-inline-block">
                         <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
                             <i class="fas fa-user-circle"></i> IEMIS LOGIN
@@ -805,9 +1452,20 @@
                             </a></li>
                         </ul>
                     </div>
+                    
                     <button class="btn btn-outline-primary ms-2" data-bs-toggle="modal" data-bs-target="#iemisInfoModal">
                         <i class="fas fa-info-circle"></i> जानकारी
                     </button>
+                    
+                    <!-- Copy Link Feature -->
+                    <div class="mt-3">
+                        <span class="fw-bold">IEMIS Login Link: </span>
+                        <span id="iemisLink">https://script.google.com/macros/s/AKfycbyk4Q3O6Gygn1wTj2fZqE82CWKEEiK57VoLH6l-iWNZlcB26pCy1Bl5PJWp15V7OgCk7g/exec</span>
+                        <button class="copy-btn" data-url="https://script.google.com/macros/s/AKfycbyk4Q3O6Gygn1wTj2fZqE82CWKEEiK57VoLH6l-iWNZlcB26pCy1Bl5PJWp15V7OgCk7g/exec">
+                            <i class="far fa-copy"></i> प्रतिलिपि
+                        </button>
+                    </div>
+                    
                     <div class="mt-3">
                         <a href="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Download%20Sample%20File%2C%20Upload%20%26%20transfer%20data.html" class="btn btn-sm btn-success">
                             <i class="fas fa-download"></i> Sample File Download
@@ -818,10 +1476,10 @@
         </div>
     </div>
 
-    <!-- ID Card Generator Section -->
+    <!-- ID Card Generator Section - Enhanced -->
     <div class="row mb-5">
         <div class="col-12">
-            <div class="card bg-gradient-primary text-white p-4">
+            <div class="card bg-gradient-primary text-white p-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
                 <div class="row align-items-center">
                     <div class="col-md-8">
                         <h2><i class="fas fa-id-card me-2"></i>ID Card Generator Software</h2>
@@ -830,8 +1488,11 @@
                             <button class="btn btn-light me-2" data-bs-toggle="modal" data-bs-target="#idCardModal">
                                 <i class="fas fa-id-card me-2"></i>अफलाइन संस्करण
                             </button>
-                            <a href="IDCardDemo.html" class="btn btn-outline-light">
+                            <a href="https://shamser.info.np/IDCardDemo.html" class="btn btn-outline-light me-2">
                                 <i class="fas fa-globe me-2"></i>अनलाइन संस्करण
+                            </a>
+                            <a href="https://shamser.info.np/Multi%20letterpad.html" class="btn btn-warning">
+                                <i class="fas fa-pencil-alt me-2"></i>लेटरप्याड
                             </a>
                         </div>
                     </div>
@@ -972,84 +1633,7 @@
         </div>
     </div>
 
-    <!-- Acts & Rules Section -->
-    <h2 class="section-title" id="acts">ऐन तथा नियमावली (Acts & Rules)</h2>
-    <div class="row mb-5">
-        <div class="col-md-4 mb-3">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5><i class="fas fa-gavel text-primary me-2"></i>संविधान तथा ऐन</h5>
-                    <ul>
-                        <li><a href="https://www.moljpa.gov.np/wp-content/uploads/2020/06/नेपालको-संविधान.pdf">नेपालको संविधान</a></li>
-                        <li><a href="https://hr.parliament.gov.np/uploads/attachments/kpkjoxrppjm1y2jt.pdf">शिक्षा ऐन २०२८</a></li>
-                        <li><a href="https://mofaga.gov.np/news-notice/1697">स्थानीय सरकार संचालन ऐन २०७४</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-3">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5><i class="fas fa-file-alt text-success me-2"></i>नियमावली</h5>
-                    <ul>
-                        <li><a href="https://aathraitribenimun.gov.np/sites/default/files/शिक्षा%20नियमावली%2C%20२०७९.pdf">शिक्षा नियमावली २०५९</a></li>
-                        <li><a href="https://shamser.info.np/dimjanschool/download/Lalbandidownload/sikchya-niyamwali.pdf">लालबन्दी नगर शिक्षा नियमावली</a></li>
-                        <li><a href="https://drive.google.com/file/d/1-XC00FkOUiDAXslpK4yA8qnuea3dnLK7/view">प्रअ व्यवस्थापन कार्यविधि २०७९</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-3">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5><i class="fas fa-chart-line text-warning me-2"></i>नीति तथा पाठ्यक्रम</h5>
-                    <ul>
-                        <li><a href="https://drive.google.com/file/d/1O8UgrFmwjsq8U8xZMBYW5zBBOGfvD8Ps/view">राष्ट्रिय पाठ्यक्रम प्रारूप २०७६</a></li>
-                        <li><a href="https://drive.google.com/file/d/1f1gw6IuElLeXwu_tcf5ww5coLZf6Fshv/view">स्थानीय पाठ्यक्रम मार्गदर्शन</a></li>
-                        <li><a href="https://moecdc.gov.np/storage/gallery/1704953156.pdf">बालविकास शिक्षा पाठ्यक्रम २०७७</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Teacher Transfer News -->
-    <h2 class="section-title" id="transfer">शिक्षक सरुवा समाचार</h2>
-    <div class="card mb-5">
-        <div class="row g-0">
-            <div class="col-md-4">
-                <img src="https://shamser.info.np/HomePage/1708402451_changu-1200x560-1200x560.jpg" class="img-fluid rounded-start h-100" alt="Teacher Transfer" style="object-fit: cover;">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h4>लालबन्दी नगरपालिकामा शिक्षक सरुवाको हल्ला फेरि चल्न थाल्यो</h4>
-                    <p>लालबन्दी नगरपालिका भित्र संचालित सामुदायिक विद्यालयहरुमा कार्यरत शिक्षक सरुवाको विषयले पटकपटक हल्ला चल्दै आएको छ। विगत केही दिन देखि लालबन्दी नगरपालिका भित्र संचालित सामुदायिक विद्यालयहरुमा कार्यरत शिक्षक सरुवाको विषयले निकै चर्चा पायो।</p>
-                    <p>नगर प्रमुखको कार्यालयबाट जारी भएको प्रेस विज्ञप्तिमा दरबन्दी मिलानको विषय उठान भएकोले एकदिन पक्कै शिक्षक सरुवाको विषय उठ्ने निश्चित छ।</p>
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#transferModal">थप पढ्नुहोस्</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Education Minister Interview -->
-    <h2 class="section-title">शिक्षा मन्त्रीको अन्तर्वार्ता</h2>
-    <div class="card mb-5">
-        <div class="row g-0">
-            <div class="col-md-4">
-                <img src="https://www.onlinekhabar.com/wp-content/uploads/2025/06/Bidhya-Bhattarai-Banner.png" class="img-fluid rounded-start h-100" alt="Education Minister">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h4>‘विद्यार्थीबाट शुल्क लिनु गैरकानूनी हो; शिक्षा उद्योग होइन’</h4>
-                    <p class="text-muted">विद्या भट्टराई, निवर्तमान शिक्षा, विज्ञान तथा प्रविधि मन्त्री</p>
-                    <p>अनिवार्य तथा निःशुल्क शिक्षा ऐन २०७५ कार्यान्वयन गर्न निवर्तमान शिक्षा, विज्ञान तथा प्रविधि मन्त्री विद्या भट्टराईले २०८३ सालसम्मको कार्ययोजना बनाएकी थिइन्। उनले शिक्षामा व्यापार नगर्न चेतावनी दिएकी छिन्।</p>
-                    <a href="https://www.onlinekhabar.com/2025/06/1701879/it-is-illegal-to-charge-fees-from-students-education-is-not-an-industry" class="btn btn-primary">पूरा अन्तर्वार्ता पढ्नुहोस्</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Latest News Section -->
+    <!-- Latest News Section with Like/Share -->
     <h2 class="section-title" id="news">ताजा शैक्षिक समाचार</h2>
     <div class="row mb-5">
         <div class="col-lg-4 col-md-6 mb-4" id="article1">
@@ -1059,16 +1643,13 @@
                     <h5 class="news-card-title">शिक्षामा जुत्ता बेचेजस्तो मुनाफा गर्न हुँदैन : सुमना श्रेष्ठ</h5>
                     <p class="news-card-meta"><i class="far fa-clock me-1"></i> <span class="time-ago" data-time="2026-01-05T10:30:00">२ घण्टा अघि</span></p>
                     <p>रास्वपा सांसद सुमना श्रेष्ठले शिक्षामा जुत्ता बेचेजस्तो मुनाफा गर्न हुँदैन भनेकी छिन्। शिक्षा सेवा हो, व्यापार होइन।</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="social-stats">
-                            <span class="me-3"><i class="far fa-eye"></i> <span class="view-count">१,२३४</span></span>
-                            <span class="me-3"><i class="far fa-thumbs-up"></i> <span class="like-count">१२५</span></span>
-                            <span><i class="far fa-share-square"></i> <span class="share-count">३४</span></span>
-                        </div>
-                    </div>
-                    <div class="like-share mt-3">
-                        <button class="like-btn me-2" data-article="1">👍 मनपराउनुहोस्</button>
-                        <button class="share-btn" data-article="1">🔗 सेयर गर्नुहोस्</button>
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <button class="btn-like like-btn" data-article="1">
+                            <i class="far fa-thumbs-up me-1"></i> <span class="like-count">१२५</span>
+                        </button>
+                        <button class="btn-share share-btn" data-article="1">
+                            <i class="far fa-share-square me-1"></i> सेयर
+                        </button>
                     </div>
                 </div>
             </div>
@@ -1080,16 +1661,13 @@
                     <h5 class="news-card-title">विद्यार्थीबाट शुल्क लिनु गैरकानूनी हो; शिक्षा उद्योग होइन</h5>
                     <p class="news-card-meta"><i class="far fa-clock me-1"></i> <span class="time-ago" data-time="2026-01-04T15:45:00">१ दिन अघि</span></p>
                     <p>निवर्तमान शिक्षामन्त्री विद्या भट्टराईले विद्यार्थीबाट शुल्क लिनु गैरकानूनी रहेको र शिक्षा उद्योग नभएको बताएकी छिन्।</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="social-stats">
-                            <span class="me-3"><i class="far fa-eye"></i> <span class="view-count">९८७</span></span>
-                            <span class="me-3"><i class="far fa-thumbs-up"></i> <span class="like-count">९८</span></span>
-                            <span><i class="far fa-share-square"></i> <span class="share-count">२१</span></span>
-                        </div>
-                    </div>
-                    <div class="like-share mt-3">
-                        <button class="like-btn me-2" data-article="2">👍 मनपराउनुहोस्</button>
-                        <button class="share-btn" data-article="2">🔗 सेयर गर्नुहोस्</button>
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <button class="btn-like like-btn" data-article="2">
+                            <i class="far fa-thumbs-up me-1"></i> <span class="like-count">९८</span>
+                        </button>
+                        <button class="btn-share share-btn" data-article="2">
+                            <i class="far fa-share-square me-1"></i> सेयर
+                        </button>
                     </div>
                 </div>
             </div>
@@ -1101,73 +1679,14 @@
                     <h5 class="news-card-title">एसईई २०८१ को नतिजा सार्वजनिक</h5>
                     <p class="news-card-meta"><i class="far fa-clock me-1"></i> <span class="time-ago" data-time="2024-06-13T09:15:00">३ दिन अघि</span></p>
                     <p>२०८१ सालको माध्यमिक शिक्षा परीक्षा (एसईई) को नतिजा आज सार्वजनिक गरिएको छ। परीक्षा नियन्त्रक कार्यालयले नतिजा प्रकाशन गरेको हो।</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="social-stats">
-                            <span class="me-3"><i class="far fa-eye"></i> <span class="view-count">२,१०९</span></span>
-                            <span class="me-3"><i class="far fa-thumbs-up"></i> <span class="like-count">२१०</span></span>
-                            <span><i class="far fa-share-square"></i> <span class="share-count">४५</span></span>
-                        </div>
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <button class="btn-like like-btn" data-article="3">
+                            <i class="far fa-thumbs-up me-1"></i> <span class="like-count">२१०</span>
+                        </button>
+                        <button class="btn-share share-btn" data-article="3">
+                            <i class="far fa-share-square me-1"></i> सेयर
+                        </button>
                     </div>
-                    <div class="like-share mt-3">
-                        <button class="like-btn me-2" data-article="3">👍 मनपराउनुहोस्</button>
-                        <button class="share-btn" data-article="3">🔗 सेयर गर्नुहोस्</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Research Section -->
-    <h2 class="section-title" id="research">अनुसन्धान (Research)</h2>
-    <div class="row mb-5">
-        <div class="col-md-4 mb-3">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5><i class="fas fa-file-alt text-primary me-2"></i>Project Work</h5>
-                    <ul>
-                        <li><a href="https://educationalresearchreport.blogspot.com/2024/08/blog-post_12.html">Project Work Report</a></li>
-                        <li><a href="https://shamser.info.np/TPD.html#">TPD Project Work</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-3">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5><i class="fas fa-graduation-cap text-success me-2"></i>Thesis</h5>
-                    <ul>
-                        <li><a href="https://docs.google.com/document/d/1Suzt5C7MACb08ce-vTZMJN0OsHoPQoMagzZVMBVfRcE/edit">Thesis १</a></li>
-                        <li><a href="https://www.scribd.com/document/642378075/">Thesis २</a></li>
-                        <li><a href="https://drive.google.com/drive/folders/1K9w9Enl4RNICnNHx0ODAVYt7zhpcxvXW">Seminar Paper</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-3">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5><i class="fas fa-chart-bar text-warning me-2"></i>Action Research</h5>
-                    <ul>
-                        <li><a href="https://docs.google.com/document/d/1FRgmP3h4pxOeukbTaRElUdlZ6AtG8mMYxBaUPT-HeWw/edit">Action Research</a></li>
-                        <li><a href="https://shamser.info.np/articles.html">Articles</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Mahavir Pun Book Sale -->
-    <h2 class="section-title">महावीर पुनद्वारा पुस्तक बिक्री</h2>
-    <div class="card mb-5">
-        <div class="row g-0">
-            <div class="col-md-4">
-                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj-UHKZ0j1bTr27Qiln7gUBB2BhtbDl3NDU8FeGSxsUZv8xeCT7g9ih1Rm0P6yvVziXv8_tUS-SGS-WOz6FJgjtFWGUGccCRNpPzeqo9PmUuBry4wQwMxfrsvMAgTsVZRfRAa5aXMKghG2JH_Nv-3wKyJfDT4lVCV-gUSgUb3jo8e69MS03kXUj5swQUQE/w545-h363/Nepali%20Hami%20Rahula%20Kaha%20With%20Lyrics%20Nepali.jpg" class="img-fluid rounded-start h-100" alt="Mahavir Pun">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h4>बीरगंज कृषि औजार कारखाना संचालनार्थ महावीर पुनद्वारा पुस्तक बिक्री</h4>
-                    <p>बीरगंज कृषि औजार कारखानालाई ब्युँताउन किताब बिक्री गर्ने क्रममा सर्लाही आउनु भएका समाजसेवी तथा वैज्ञानिक महाबिर पुनले सर्लाहीको बागमति नपामा सबैभन्दा बढी पुस्तक बिक्री भएको जानकारी दिए। उनले लालबन्दी नपाले १०० थान पुस्तक खरिद गरेको बताए।</p>
-                    <p><strong>"सरकारी स्वामित्वमा रहेको बीरगंज कृषि औजार कारखाना मर्मतसंभार गरी पुन संचालनमा ल्याउने जिम्मेवारी सरकारले मलाई दिएको छ।" - महावीर पुन</strong></p>
                 </div>
             </div>
         </div>
@@ -1214,166 +1733,13 @@
         </div>
     </div>
 
-    <!-- Smritika Section -->
-    <div class="card mb-5 bg-light" id="smritika">
-        <div class="card-body">
-            <h3 class="text-center mb-4"><i class="fas fa-book-open text-primary me-2"></i>विद्यालय स्मारिका (School Smritika)</h3>
-            <div class="row">
-                <div class="col-md-6">
-                    <p><strong>विद्यालय स्मारिकामा सामान्यतया समेटिने विषयहरू:</strong></p>
-                    <ul>
-                        <li>विद्यालयको परिचय र इतिहास</li>
-                        <li>व्यवस्थापन समिति अध्यक्ष र प्रधानाध्यापकको सन्देश</li>
-                        <li>शिक्षक तथा कर्मचारी परिचय</li>
-                        <li>शैक्षिक गतिविधि र उपलब्धि</li>
-                        <li>तस्बिरहरू (कार्यक्रम, भ्रमण, पुरस्कार)</li>
-                        <li>लेख, कविता, रचनाहरू</li>
-                    </ul>
-                </div>
-                <div class="col-md-6">
-                    <img src="https://shamser.info.np/HomePage/smarika.png" class="img-fluid rounded" alt="Smarika">
-                    <div class="mt-3">
-                        <a href="http://janajyoticampus.edu.np/wp-content/uploads/2024/12/%E0%A4%B8%E0%A5%8D%E0%A4%AE%E0%A4%BE%E0%A4%B0%E0%A5%80%E0%A4%95%E0%A4%BE-%E0%A5%A8%E0%A5%A6%E0%A5%AE%E0%A5%A7.pdf" class="btn btn-primary" target="_blank">
-                            <i class="fas fa-download me-2"></i>नमूना स्मारिका डाउनलोड
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Utility Widgets -->
-    <h2 class="section-title">उपयोगी उपकरणहरू</h2>
-    <div class="row mb-5">
-        <div class="col-md-3 col-6 mb-3">
-            <div class="card text-center p-3 h-100">
-                <i class="fas fa-calendar-alt fa-3x text-primary mb-3"></i>
-                <h5>नेपाली पात्रो</h5>
-                <button class="btn btn-outline-primary mt-2" data-bs-toggle="modal" data-bs-target="#patroModal">
-                    हेर्नुहोस्
-                </button>
-            </div>
-        </div>
-        <div class="col-md-3 col-6 mb-3">
-            <div class="card text-center p-3 h-100">
-                <i class="fas fa-exchange-alt fa-3x text-success mb-3"></i>
-                <h5>मिति रूपान्तरण</h5>
-                <button class="btn btn-outline-success mt-2" data-bs-toggle="modal" data-bs-target="#dateConverterModal">
-                    प्रयोग गर्नुहोस्
-                </button>
-            </div>
-        </div>
-        <div class="col-md-3 col-6 mb-3">
-            <div class="card text-center p-3 h-100">
-                <i class="fas fa-calculator fa-3x text-warning mb-3"></i>
-                <h5>संख्या रूपान्तरण</h5>
-                <button class="btn btn-outline-warning mt-2" data-bs-toggle="modal" data-bs-target="#numberConverterModal">
-                    प्रयोग गर्नुहोस्
-                </button>
-            </div>
-        </div>
-        <div class="col-md-3 col-6 mb-3">
-            <div class="card text-center p-3 h-100">
-                <i class="fas fa-language fa-3x text-danger mb-3"></i>
-                <h5>युनिकोड कन्भर्टर</h5>
-                <button class="btn btn-outline-danger mt-2" data-bs-toggle="modal" data-bs-target="#unicodeModal">
-                    प्रयोग गर्नुहोस्
-                </button>
-            </div>
-        </div>
-        <div class="col-md-3 col-6 mb-3">
-            <div class="card text-center p-3 h-100">
-                <i class="fas fa-radio fa-3x text-info mb-3"></i>
-                <h5>एफएम रेडियो</h5>
-                <button class="btn btn-outline-info mt-2" data-bs-toggle="modal" data-bs-target="#radioModal">
-                    सुन्नुहोस्
-                </button>
-            </div>
-        </div>
-        <div class="col-md-3 col-6 mb-3">
-            <div class="card text-center p-3 h-100">
-                <i class="fas fa-cloud-sun fa-3x text-secondary mb-3"></i>
-                <h5>मौसम</h5>
-                <button class="btn btn-outline-secondary mt-2" data-bs-toggle="modal" data-bs-target="#weatherModal">
-                    हेर्नुहोस्
-                </button>
-            </div>
-        </div>
-        <div class="col-md-3 col-6 mb-3">
-            <div class="card text-center p-3 h-100">
-                <i class="fas fa-coins fa-3x text-warning mb-3"></i>
-                <h5>विनिमय दर</h5>
-                <button class="btn btn-outline-warning mt-2" data-bs-toggle="modal" data-bs-target="#forexModal">
-                    हेर्नुहोस्
-                </button>
-            </div>
-        </div>
-        <div class="col-md-3 col-6 mb-3">
-            <div class="card text-center p-3 h-100">
-                <i class="fas fa-star fa-3x text-purple mb-3"></i>
-                <h5>राशिफल</h5>
-                <button class="btn btn-outline-primary mt-2" data-bs-toggle="modal" data-bs-target="#horoscopeModal">
-                    हेर्नुहोस्
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Computer Knowledge Section -->
-    <h2 class="section-title">कम्प्युटर ज्ञान (Computer Knowledge)</h2>
-    <div class="row mb-5">
-        <div class="col-md-4 mb-3">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5><i class="fas fa-laptop text-primary me-2"></i>Computer Science Quiz</h5>
-                    <p>कम्प्युटर विज्ञानका प्रश्नोत्तरीहरू</p>
-                    <a href="https://shamser.info.np/Computer%20Knowledge/Computer%20Knowledge%20Quize.html" class="btn btn-primary">Start Quiz</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-3">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5><i class="fas fa-history text-success me-2"></i>History of Computer</h5>
-                    <p>कम्प्युटरको इतिहास बारे जानकारी</p>
-                    <a href="https://shamser.info.np/Computer%20Knowledge/History%20of%20Computer.html" class="btn btn-success">पढ्नुहोस्</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-3">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5><i class="fas fa-tags text-warning me-2"></i>Types of Computer</h5>
-                    <p>कम्प्युटरका प्रकारहरू</p>
-                    <a href="https://shamser.info.np/Computer%20Knowledge/Types%20of%20Computer.html" class="btn btn-warning">पढ्नुहोस्</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- TSC Section -->
-    <h2 class="section-title" id="tsc">शिक्षक सेवा आयोग (TSC)</h2>
-    <div class="row mb-5">
-        <div class="col-md-6 mb-3">
-            <div class="card">
-                <div class="card-body">
-                    <h5><i class="fas fa-question-circle text-primary me-2"></i>TSC प्रश्नोत्तर</h5>
-                    <iframe src="https://script.google.com/macros/s/AKfycbzjXq0uMKB0jaeryOiMzsbSg0NMQTa87AX0Fcaz-s1TapEOSIP9_-kvgTzRxHXlLZb2/exec" width="100%" height="300" frameborder="0"></iframe>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 mb-3">
-            <div class="card">
-                <div class="card-body">
-                    <h5><i class="fas fa-download text-success me-2"></i>TSC सामग्री डाउनलोड</h5>
-                    <ul>
-                        <li><a href="https://tsc.gov.np/download" target="_blank">TSC सूचना र विज्ञापन</a></li>
-                        <li><a href="https://shamser.info.np/quiz_App3/quiz_app.html" target="_blank">TSC GK App</a></li>
-                        <li><a href="GK/gk.jpg" target="_blank">TSC २५ प्रश्नहरू</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+    <!-- Gallery Section -->
+    <h2 class="section-title">फोटो ग्यालेरी</h2>
+    <div class="owl-carousel owl-theme mb-5" id="galleryCarousel">
+        <div class="item"><img src="https://www.onlinekhabar.com/wp-content/uploads/2024/03/Ranju-Yadav-1.jpg" class="img-fluid" alt="रञ्जु यादव"><p class="text-center">रञ्जु यादव</p></div>
+        <div class="item"><img src="https://www.onlinekhabar.com/wp-content/uploads/2024/03/Surakshya_Panta.jpg" class="img-fluid" alt="सुरक्षा पन्त"><p class="text-center">सुरक्षा पन्त</p></div>
+        <div class="item"><img src="https://www.onlinekhabar.com/wp-content/uploads/2024/03/Sonika-Manandhar-1.jpg" class="img-fluid" alt="सोनिका मानन्धर"><p class="text-center">सोनिका मानन्धर</p></div>
+        <div class="item"><img src="https://www.onlinekhabar.com/wp-content/uploads/2024/03/Goma-Karki-2.jpg" class="img-fluid" alt="गोमा कार्की"><p class="text-center">गोमा कार्की</p></div>
     </div>
 
     <!-- Partner Schools -->
@@ -1489,45 +1855,75 @@
         </div>
     </div>
 
-    <!-- Useful Government Links -->
-    <h2 class="section-title">उपयोगी लिंकहरू</h2>
-    <div class="row mb-5">
-        <div class="col-md-3 col-6 mb-2">
-            <a href="https://moest.gov.np/" target="_blank" class="btn btn-outline-primary w-100">शिक्षा मन्त्रालय</a>
-        </div>
-        <div class="col-md-3 col-6 mb-2">
-            <a href="https://cehrd.gov.np/" target="_blank" class="btn btn-outline-success w-100">CEHRD</a>
-        </div>
-        <div class="col-md-3 col-6 mb-2">
-            <a href="http://www.neb.gov.np/" target="_blank" class="btn btn-outline-warning w-100">राष्ट्रिय परीक्षा बोर्ड</a>
-        </div>
-        <div class="col-md-3 col-6 mb-2">
-            <a href="https://www.tsc.gov.np/" target="_blank" class="btn btn-outline-danger w-100">शिक्षक सेवा आयोग</a>
-        </div>
-        <div class="col-md-3 col-6 mb-2">
-            <a href="https://www.epfnepal.com.np/" target="_blank" class="btn btn-outline-secondary w-100">संचयकोष</a>
-        </div>
-        <div class="col-md-3 col-6 mb-2">
-            <a href="https://nlk.org.np/" target="_blank" class="btn btn-outline-info w-100">नागरिक लगानीकोष</a>
-        </div>
-        <div class="col-md-3 col-6 mb-2">
-            <a href="https://psc.gov.np/" target="_blank" class="btn btn-outline-dark w-100">लोकसेवा आयोग</a>
-        </div>
-        <div class="col-md-3 col-6 mb-2">
-            <a href="https://www.see.gov.np/" target="_blank" class="btn btn-outline-primary w-100">SEE परीक्षा</a>
-        </div>
-    </div>
-
     <!-- Facebook Comments -->
-    <div class="card mb-5">
+    <div class="card mb-5" id="comments">
         <div class="card-body">
             <h5><i class="fab fa-facebook me-2 text-primary"></i>कमेन्ट गर्नुहोस्</h5>
-            <div id="fb-root"></div>
-            <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v20.0"></script>
             <div class="fb-comments" data-href="https://shamser.info.np" data-width="100%" data-numposts="5"></div>
         </div>
     </div>
 </div>
+
+<!-- Widget Container -->
+<div class="widget-container" id="widget-container">
+    <button class="close-btn" onclick="hideWidgets()">×</button>
+    
+    <!-- Calendar Widget -->
+    <div id="calendar-widget" class="widget">
+        <h3><i class="fas fa-calendar-alt"></i> पात्रो</h3>
+        <iframe src="https://www.hamropatro.com/widgets/calender-medium.php" 
+                frameborder="0" style="width:100%; height:385px; border:none;"></iframe>
+    </div>
+
+    <!-- Number Converter Widget -->
+    <div id="number-converter-widget" class="widget">
+        <h3><i class="fas fa-calculator"></i> संख्या रुपान्तरण</h3>
+        <input type="number" id="number-input" class="form-control" placeholder="अङ्क लेख्नुहोस्">
+        <button class="btn btn-primary mt-2 w-100" onclick="convertNumberToWords()">रुपान्तरण गर्नुहोस्</button>
+        <div id="number-result" class="alert alert-info mt-2"></div>
+    </div>
+
+    <!-- Radio Widget -->
+    <div id="radio-widget" class="widget">
+        <h3><i class="fas fa-broadcast-tower"></i> रेडियो</h3>
+        <audio id="radio-player" controls class="w-100">
+            <source src="" type="audio/mpeg">
+        </audio>
+        <div class="radio-stations mt-2">
+            <button class="btn btn-sm btn-outline-primary" onclick="playRadio('https://radio.canstream.co.uk:8077/live.mp3')">रेडियो नेपाल</button>
+            <button class="btn btn-sm btn-outline-primary" onclick="playRadio('https://radio.kantipur.com.np/kantipur')">कान्तिपुर एफएम</button>
+        </div>
+    </div>
+
+    <!-- Date Conversion Widget -->
+    <div id="date-conversion-widget" class="widget">
+        <h3><i class="fas fa-calendar-day"></i> मिति रूपान्तरण</h3>
+        <iframe src="https://www.hamropatro.com/widgets/dateconverter.php" 
+                frameborder="0" style="width:100%; height:100px; border:none;"></iframe>
+    </div>
+
+    <!-- Unicode Widget -->
+    <div id="unicode-widget" class="widget">
+        <h3><i class="fas fa-keyboard"></i> युनिकोड</h3>
+        <textarea id="preeti-input" class="form-control" rows="4" placeholder="प्रीटी/Roman text..."></textarea>
+        <button class="btn btn-primary mt-2 w-100" onclick="convertToUnicode()">रूपान्तरण</button>
+        <div id="unicode-output" class="alert alert-secondary mt-2"></div>
+    </div>
+</div>
+
+<!-- Bottom Navigation -->
+<div class="bottom-nav">
+    <a href="#" onclick="showWidget('calendar-widget')"><i class="fas fa-calendar-alt"></i>पात्रो</a>
+    <a href="#" onclick="showWidget('number-converter-widget')"><i class="fas fa-calculator"></i>संख्या</a>
+    <a href="#" onclick="showWidget('radio-widget')"><i class="fas fa-broadcast-tower"></i>रेडियो</a>
+    <a href="#" onclick="showWidget('date-conversion-widget')"><i class="fas fa-calendar-day"></i>मिति</a>
+    <a href="#" onclick="showWidget('unicode-widget')"><i class="fas fa-keyboard"></i>युनिकोड</a>
+</div>
+
+<!-- Scroll to Top Button -->
+<button type="button" class="scroll-top" onclick="goToTop();">
+    <img src="https://ps.w.org/back-to-the-top-button/assets/icon-128x128.png?rev=2283756">
+</button>
 
 <!-- Footer -->
 <footer class="bg-dark text-white pt-5 pb-3" id="contact">
@@ -1535,22 +1931,18 @@
         <div class="row">
             <div class="col-lg-4 col-md-6 mb-4">
                 <h5>shamser.info.np</h5>
-                <p>नेपालको शैक्षिक सामग्री, समाचार र सेवाहरूको एकमात्र विश्वसनीय स्रोत। शिक्षक, विद्यार्थी र विद्यालयका लागि उपयोगी उपकरणहरू।</p>
-                <div>
-                    <a href="https://www.facebook.com/" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://twitter.com/" class="text-white me-3"><i class="fab fa-twitter"></i></a>
-                    <a href="https://lauro-media.blogspot.com/" class="text-white me-3"><i class="fab fa-blogger-b"></i></a>
-                    <a href="https://www.youtube.com/channel/UCfGP1pKJErzg10EjftyC3lg" class="text-white me-3"><i class="fab fa-youtube"></i></a>
-                    <a href="mailto:shamserpulami500@gmail.com" class="text-white"><i class="fas fa-envelope"></i></a>
+                <p>नेपालको शैक्षिक सामग्री, समाचार र सेवाहरूको विश्वसनीय स्रोत।</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/" class="social-icon twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://lauro-media.blogspot.com/" class="social-icon blogspot"><i class="fab fa-blogger-b"></i></a>
                 </div>
             </div>
             <div class="col-lg-2 col-md-6 mb-4">
                 <h5>लिंकहरू</h5>
                 <ul class="list-unstyled">
                     <li><a href="#" class="text-white-50">गृहपृष्ठ</a></li>
-                    <li><a href="#about" class="text-white-50">हाम्रो बारेमा</a></li>
                     <li><a href="#news" class="text-white-50">समाचार</a></li>
-                    <li><a href="https://shamser.info.np/Entry_Form/Service_Demand.html" class="text-white-50">सेवाहरू</a></li>
                     <li><a href="#contact" class="text-white-50">सम्पर्क</a></li>
                 </ul>
             </div>
@@ -1559,82 +1951,63 @@
                 <ul class="list-unstyled">
                     <li><a href="#teacher-guides" class="text-white-50">शिक्षक निर्देशिका</a></li>
                     <li><a href="#textbooks" class="text-white-50">पाठ्यपुस्तक</a></li>
-                    <li><a href="#tsc" class="text-white-50">TSC सामग्री</a></li>
                     <li><a href="#" data-bs-toggle="modal" data-bs-target="#iemisModal" class="text-white-50">IEMIS लगइन</a></li>
-                    <li><a href="#" data-bs-toggle="modal" data-bs-target="#idCardModal" class="text-white-50">ID Card Generator</a></li>
                 </ul>
             </div>
             <div class="col-lg-3 col-md-6 mb-4">
-                <h5>सम्पर्क जानकारी</h5>
+                <h5>सम्पर्क</h5>
                 <ul class="list-unstyled">
-                    <li><i class="fas fa-map-marker-alt me-2"></i> लालबन्दी नपा-११, सर्लाही</li>
+                    <li><i class="fas fa-map-marker-alt me-2"></i> लालबन्दी, सर्लाही</li>
                     <li><i class="fas fa-phone me-2"></i> +९७७ ९८१७८२६२००</li>
                     <li><i class="fas fa-envelope me-2"></i> info@shamser.com.np</li>
-                    <li><i class="fas fa-globe me-2"></i> shamser.info.np</li>
                 </ul>
             </div>
         </div>
-        <hr class="bg-secondary">
-        <div class="row">
-            <div class="col-md-6">
-                <p class="mb-0">&copy; २०२२ shamser.info.np. सर्वाधिकार सुरक्षित।</p>
-            </div>
-            <div class="col-md-6 text-md-end">
-                <a href="https://www.iubenda.com/privacy-policy/62935593" class="text-white-50 me-3">गोपनीयता नीति</a>
-                <a href="#" class="text-white-50">सर्तहरू</a>
-            </div>
-        </div>
+        <hr>
+        <p class="text-center mb-0">&copy; २०२२ shamser.info.np. सर्वाधिकार सुरक्षित।</p>
     </div>
 </footer>
 
-<!-- Bottom Widget Bar -->
-<div class="widget-bar">
-    <div class="widget-item" data-bs-toggle="modal" data-bs-target="#patroModal">
-        <i class="fas fa-calendar-alt"></i>
-        <span>पात्रो</span>
-    </div>
-    <div class="widget-item" data-bs-toggle="modal" data-bs-target="#radioModal">
-        <i class="fas fa-radio"></i>
-        <span>रेडियो</span>
-    </div>
-    <div class="widget-item" data-bs-toggle="modal" data-bs-target="#dateConverterModal">
-        <i class="fas fa-exchange-alt"></i>
-        <span>मिति</span>
-    </div>
-    <div class="widget-item" data-bs-toggle="modal" data-bs-target="#numberConverterModal">
-        <i class="fas fa-calculator"></i>
-        <span>संख्या</span>
-    </div>
-    <div class="widget-item" data-bs-toggle="modal" data-bs-target="#unicodeModal">
-        <i class="fas fa-language"></i>
-        <span>युनिकोड</span>
-    </div>
-    <div class="widget-item" data-bs-toggle="modal" data-bs-target="#quizModal">
-        <i class="fas fa-question-circle"></i>
-        <span>क्विज</span>
-    </div>
-    <div class="widget-item" data-bs-toggle="modal" data-bs-target="#weatherModal">
-        <i class="fas fa-cloud-sun"></i>
-        <span>मौसम</span>
-    </div>
-    <div class="widget-item" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-        <i class="fas fa-arrow-up"></i>
-        <span>माथि</span>
-    </div>
-</div>
-
 <!-- Modals -->
 
-<!-- IEMIS Login Modal -->
-<div class="modal fade modal-nepali" id="iemisModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
+<!-- Welcome Popup Modal -->
+<div class="modal fade" id="welcomePopupModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title"><i class="fas fa-sign-in-alt me-2"></i>IEMIS लगइन</h5>
+                <h5 class="modal-title">shamser.info.np मा स्वागत छ!</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form id="iemisLoginForm">
+                <video width="100%" controls autoplay muted>
+                    <source src="https://shamser.info.np/HomePage/Introduction%20to%20shamser.info.np.mp4" type="video/mp4">
+                </video>
+                <div class="row mt-3">
+                    <div class="col-4">
+                        <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#iemisModal">IEMIS</button>
+                    </div>
+                    <div class="col-4">
+                        <button class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#idCardModal">ID Card</button>
+                    </div>
+                    <div class="col-4">
+                        <button class="btn btn-warning w-100" data-bs-toggle="modal" data-bs-target="#quizModal">Quiz</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- IEMIS Login Modal -->
+<div class="modal fade" id="iemisModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title"><i class="fas fa-sign-in-alt me-2"></i>IEMIS लगइन</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form>
                     <div class="mb-3">
                         <label class="form-label">प्रयोगकर्ता नाम</label>
                         <input type="text" class="form-control" required>
@@ -1643,14 +2016,10 @@
                         <label class="form-label">पासवर्ड</label>
                         <input type="password" class="form-control" required>
                     </div>
-                    <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="rememberLogin">
-                        <label class="form-check-label">मलाई सम्झनुहोस्</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100">लगइन गर्नुहोस्</button>
+                    <button type="submit" class="btn btn-primary w-100">लगइन</button>
                 </form>
                 <div class="text-center mt-3">
-                    <a href="https://script.google.com/macros/s/AKfycbxUs8Nn3kl1P_eGD6A7zR-sBfNT6kIksBxpIiPvJAE8jg6qilPQ1Thq_kLgabk6rKqvhw/exec" class="text-decoration-none">पासवर्ड बिर्सनुभयो?</a>
+                    <a href="#" class="text-decoration-none">पासवर्ड बिर्सनुभयो?</a>
                 </div>
             </div>
         </div>
@@ -1658,239 +2027,63 @@
 </div>
 
 <!-- IEMIS Info Modal -->
-<div class="modal fade modal-nepali" id="iemisInfoModal" tabindex="-1">
+<div class="modal fade" id="iemisInfoModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title"><i class="fas fa-info-circle me-2"></i>IEMIS बारे जानकारी</h5>
+                <h5 class="modal-title"><i class="fas fa-info-circle me-2"></i>IEMIS जानकारी</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <p>एकीकृत परीक्षा तथा सूचना प्रणाली (IEMIS) बारे जानकारी:</p>
-                <ul>
-                    <li>छिटोभन्दा छिटो नतिजा प्रकाशन गर्ने</li>
-                    <li>मोबाइलबाटै अङ्क चढाउन सकिने</li>
-                    <li>विद्यार्थीले अनलाइनमै नतिजा हेर्न सक्ने</li>
-                    <li>ग्रेडशिट डाउनलोड गर्न सकिने</li>
-                    <li>एक्सेल फाइलबाट डाटा अपलोड गर्न सकिने</li>
+                <ul class="modal-feature-list">
+                    <li><i class="fas fa-check-circle text-success"></i> छिटो नतिजा प्रकाशन</li>
+                    <li><i class="fas fa-check-circle text-success"></i> मोबाइलबाट अङ्क चढाउने</li>
+                    <li><i class="fas fa-check-circle text-success"></i> अनलाइन ग्रेडशिट</li>
+                    <li><i class="fas fa-check-circle text-success"></i> एक्सेल डाटा इम्पोर्ट</li>
                 </ul>
-                <div class="alert alert-info">
-                    <strong>नयाँ प्रयोगकर्ता?</strong> Contact मा गएर फारम भर्नुहोस्। केही समयपछि इमेलमा युजरनेम र पासवर्ड आउँछ।
+                <div class="mt-3">
+                    <span class="fw-bold">लगइन लिङ्क: </span>
+                    <button class="copy-btn" data-url="https://script.google.com/macros/s/AKfycbyk4Q3O6Gygn1wTj2fZqE82CWKEEiK57VoLH6l-iWNZlcB26pCy1Bl5PJWp15V7OgCk7g/exec">
+                        <i class="far fa-copy"></i> प्रतिलिपि
+                    </button>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Patro Modal -->
-<div class="modal fade modal-nepali" id="patroModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"><i class="fas fa-calendar-alt me-2"></i>नेपाली पात्रो</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <iframe src="https://www.hamropatro.com/widgets/calender-medium.php" 
-                        frameborder="0" style="width:100%; height:400px; border:none;"></iframe>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Radio Modal -->
-<div class="modal fade modal-nepali" id="radioModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"><i class="fas fa-radio me-2"></i>एफएम रेडियो</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <audio id="radioPlayer" controls class="w-100 mb-3">
-                    <source src="" type="audio/mpeg">
-                </audio>
-                <div class="d-grid gap-2">
-                    <button class="btn btn-outline-primary" onclick="playRadio('https://radio.canstream.co.uk:8077/live.mp3')">रेडियो नेपाल</button>
-                    <button class="btn btn-outline-primary" onclick="playRadio('https://radio.kantipur.com.np/kantipur')">कान्तिपुर एफएम</button>
-                    <button class="btn btn-outline-primary" onclick="playRadio('https://radio.ujyaaloonline.com/ujyaalo')">उज्यालो एफएम</button>
-                    <button class="btn btn-outline-primary" onclick="playRadio('https://radionp.com/#synergy-fm')">अनलाइन रेडियो स्टेशनहरू</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Date Converter Modal -->
-<div class="modal fade modal-nepali" id="dateConverterModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"><i class="fas fa-exchange-alt me-2"></i>मिति रूपान्तरण</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <iframe src="https://www.hamropatro.com/widgets/dateconverter.php" 
-                        frameborder="0" style="width:100%; height:100px; border:none;"></iframe>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Number Converter Modal -->
-<div class="modal fade modal-nepali" id="numberConverterModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"><i class="fas fa-calculator me-2"></i>संख्या रूपान्तरण</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <div class="mb-3">
-                    <label class="form-label">अङ्कमा लेख्नुहोस्</label>
-                    <input type="number" id="numberInput" class="form-control" placeholder="जस्तै: 12345">
-                </div>
-                <button class="btn btn-primary w-100 mb-3" onclick="convertNumber()">रूपान्तरण गर्नुहोस्</button>
-                <div id="numberResult" class="alert alert-info"></div>
-                <div class="text-center">
-                    <a href="https://shamser.info.np/Number_to_Text.html" target="_blank" class="btn btn-sm btn-outline-primary">विस्तृत संख्या रूपान्तरण</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Unicode Modal -->
-<div class="modal fade modal-nepali" id="unicodeModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"><i class="fas fa-language me-2"></i>युनिकोड कन्भर्टर</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <div class="mb-3">
-                    <label class="form-label">प्रीती/रोमन टेक्स्ट</label>
-                    <textarea id="preetiText" class="form-control" rows="3" placeholder="यहाँ टाइप गर्नुहोस्..."></textarea>
-                </div>
-                <button class="btn btn-primary w-100 mb-3" onclick="convertToUnicode()">युनिकोडमा रूपान्तरण</button>
-                <div id="unicodeResult" class="alert alert-info"></div>
-                <div class="text-center">
-                    <a href="https://shamser.info.np/Shaikshik_Sansar/sobiztrend.com/preeti_to_unicode.html" target="_blank" class="btn btn-sm btn-outline-primary">प्रीति → युनिकोड</a>
-                    <a href="https://shamser.info.np/Shaikshik_Sansar/sobiztrend/unicode_to_preeti.html" target="_blank" class="btn btn-sm btn-outline-success">युनिकोड → प्रीति</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Weather Modal -->
-<div class="modal fade modal-nepali" id="weatherModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"><i class="fas fa-cloud-sun me-2"></i>मौसम विवरण</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <iframe src="https://www.ashesh.com.np/weather/widget.php" height="550" width="100%" frameborder="0"></iframe>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Forex Modal -->
-<div class="modal fade modal-nepali" id="forexModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"><i class="fas fa-coins me-2"></i>आजको विनियमदर</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <iframe src="https://www.ashesh.com.np/forex/widget2.php" style="width:100%; height:383px; border:none;"></iframe>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Horoscope Modal -->
-<div class="modal fade modal-nepali" id="horoscopeModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"><i class="fas fa-star me-2"></i>आजको राशिफल</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <iframe src="https://www.ashesh.com.np/rashifal/widget.php" height="900" width="100%" frameborder="0"></iframe>
             </div>
         </div>
     </div>
 </div>
 
 <!-- ID Card Modal -->
-<div class="modal fade modal-nepali" id="idCardModal" tabindex="-1">
+<div class="modal fade" id="idCardModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"><i class="fas fa-id-card me-2"></i>ID Card Generator Software</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            <div class="modal-header bg-gradient-primary text-white">
+                <h5 class="modal-title"><i class="fas fa-id-card me-2"></i>ID Card Generator</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-6">
-                        <h6>विशेषताहरू:</h6>
-                        <ul class="list-unstyled">
-                            <li><i class="fas fa-check-circle text-success me-2"></i>QR Code आफै Generate हुन्छ</li>
-                            <li><i class="fas fa-check-circle text-success me-2"></i>फोटो आफै लिंक हुन्छ</li>
-                            <li><i class="fas fa-check-circle text-success me-2"></i>एक्सेल फाइलबाट डाटा इम्पोर्ट</li>
-                            <li><i class="fas fa-check-circle text-success me-2"></i>एक पेपरमा ९ वटा ID Card</li>
-                            <li><i class="fas fa-check-circle text-success me-2"></i>विद्यार्थी/शिक्षक दुवैको लागि</li>
+                        <h6>अफलाइन संस्करण</h6>
+                        <ul class="modal-feature-list">
+                            <li><i class="fas fa-check-circle"></i> QR Code सहित</li>
+                            <li><i class="fas fa-check-circle"></i> एक्सेल इम्पोर्ट</li>
+                            <li><i class="fas fa-check-circle"></i> ९ कार्ड प्रति पेज</li>
                         </ul>
+                        <button class="btn btn-primary w-100" onclick="alert('खरिदको लागि सम्पर्क गर्नुहोस्')">खरिद गर्नुहोस्</button>
                     </div>
                     <div class="col-md-6">
-                        <img src="https://shamser.info.np/HomePage/Id_card%20Software.JPG" class="img-fluid rounded" alt="ID Card Software">
+                        <h6>अनलाइन संस्करण</h6>
+                        <ul class="modal-feature-list">
+                            <li><i class="fas fa-check-circle"></i> तुरुन्त बनाउनुहोस्</li>
+                            <li><i class="fas fa-check-circle"></i> क्लाउडमा सुरक्षित</li>
+                            <li><i class="fas fa-check-circle"></i> जहाँसुकै पहुँच</li>
+                        </ul>
+                        <a href="https://shamser.info.np/IDCardDemo.html" class="btn btn-success w-100">डेमो प्रयास गर्नुहोस्</a>
                     </div>
                 </div>
                 <hr>
-                <h6 class="text-center">खरिद विकल्पहरू</h6>
-                <div class="row mt-3">
-                    <div class="col-md-4 mb-2">
-                        <div class="card text-center p-2">
-                            <h6>१ बर्ष</h6>
-                            <h5>रु ५,०००</h5>
-                            <button class="btn btn-sm btn-primary" onclick="purchaseSoftware('1_year', 5000)">खरिद</button>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-2">
-                        <div class="card text-center p-2">
-                            <h6>५ बर्ष</h6>
-                            <h5>रु १५,०००</h5>
-                            <p class="text-muted"><small>बचत: रु १०,०००</small></p>
-                            <button class="btn btn-sm btn-success" onclick="purchaseSoftware('5_years', 15000)">खरिद</button>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-2">
-                        <div class="card text-center p-2">
-                            <h6>१० बर्ष</h6>
-                            <h5>रु ३५,०००</h5>
-                            <p class="text-muted"><small>बचत: रु १५,०००</small></p>
-                            <button class="btn btn-sm btn-warning" onclick="purchaseSoftware('10_years', 35000)">खरिद</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-center mt-3">
+                <div class="text-center">
                     <img src="https://shamser.info.np/HomePage/esewa.JPG" style="max-width:150px;" alt="eSewa QR">
-                    <p class="mt-2"><small>eSewa QR कोड स्क्यान गर्नुहोस्</small></p>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-6">
-                        <button class="btn btn-outline-primary w-100" onclick="requestTrial()">निःशुल्क ट्रायल</button>
-                    </div>
-                    <div class="col-6">
-                        <a href="https://shamser.info.np/ID.pdf" class="btn btn-outline-success w-100" target="_blank">डेमो PDF</a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -1898,87 +2091,109 @@
 </div>
 
 <!-- Quiz Modal -->
-<div class="modal fade modal-nepali" id="quizModal" tabindex="-1">
+<div class="modal fade" id="quizModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
+            <div class="modal-header bg-warning">
                 <h5 class="modal-title"><i class="fas fa-laptop-code me-2"></i>Computer Quiz</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <div class="alert alert-info">
-                    <i class="fas fa-info-circle me-2"></i>कुल ५ वटा प्रश्नहरू छन्। प्रत्येक प्रश्नको एक मात्र सही उत्तर छ।
-                </div>
-                <div id="quizContainer" class="mb-3">
-                    <!-- Quiz will be loaded here -->
-                </div>
+                <div id="quizContainer" class="mb-3"></div>
                 <div class="d-flex justify-content-between">
                     <button class="btn btn-outline-secondary" onclick="prevQuestion()">अघिल्लो</button>
                     <span id="quizProgress">प्रश्न १/५</span>
                     <button class="btn btn-outline-primary" onclick="nextQuestion()">अर्को</button>
                 </div>
-                <button class="btn btn-success w-100 mt-3" onclick="submitQuiz()">क्विज सबमिट गर्नुहोस्</button>
+                <button class="btn btn-success w-100 mt-3" onclick="submitQuiz()">उत्तर पेश गर्नुहोस्</button>
                 <div id="quizResult" class="mt-3"></div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Teacher Transfer Modal -->
-<div class="modal fade modal-nepali" id="transferModal" tabindex="-1">
+<!-- Features Modal -->
+<div class="modal fade" id="featuresModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">शिक्षक सरुवा सम्बन्धी विस्तृत समाचार</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title"><i class="fas fa-star me-2"></i>हाम्रा सुविधाहरू</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <p>लालबन्दी नगरपालिका भित्र संचालित सामुदायिक विद्यालयहरुमा कार्यरत शिक्षक सरुवाको विषयले पटकपटक हल्ला चल्दै आएको छ। विगत केही दिन देखि लालबन्दी नगरपालिका भित्र संचालित सामुदायिक विद्यालयहरुमा कार्यरत शिक्षक सरुवाको विषयले निकै चर्चा पायो।</p>
-                <p>नगर प्रमुखको कार्यालयबाट जारी भएको प्रेस विज्ञप्तिमा दरबन्दी मिलानको विषय उठान भएकोले एकदिन पक्कै शिक्षक सरुवाको विषय उठ्ने निश्चित छ। दशैं तिहारपछि शिक्षक सरुवाको प्रक्रिया अघि बढ्ने अनुमान गरिएको छ।</p>
-                <p>शिक्षक दरबन्दी मिलानको लागि कार्यदल गठन गर्ने तयारी भइरहेको छ। शिक्षा मन्त्रालयले पूर्वसचिव महाश्रम शर्माको संयोजकत्वमा कार्यदल गठन गरेको थियो जसको प्रतिवेदन अनुसार देशभर करिब ५७ हजार शिक्षक दरबन्दी अपुग छ।</p>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="pricing-card">
+                            <h6>IEMIS</h6>
+                            <p>परीक्षा प्रणाली</p>
+                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#iemisModal">लगइन</button>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="pricing-card popular">
+                            <span class="popular-badge">लोकप्रिय</span>
+                            <h6>ID Card</h6>
+                            <p>अफलाइन/अनलाइन</p>
+                            <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#idCardModal">खोल्नुहोस्</button>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="pricing-card">
+                            <h6>लेटरप्याड</h6>
+                            <p>मल्टी लेटर</p>
+                            <a href="https://shamser.info.np/Multi%20letterpad.html" class="btn btn-sm btn-warning">प्रयोग गर्नुहोस्</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Bootstrap JS -->
+<!-- Patro Modal -->
+<div class="modal fade" id="patroModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-calendar-alt me-2"></i>नेपाली पात्रो</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <iframe src="https://www.hamropatro.com/widgets/calender-medium.php" frameborder="0" style="width:100%; height:400px;"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- Owl Carousel -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-<!-- Moment.js for time ago -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
-<!-- Custom JavaScript -->
 <script>
     // Quiz Data
     const quizData = [
-        { q: "CPU को पूरा रूप के हो?", options: ["Computer Processing Unit", "Central Processing Unit", "Central Process Unit", "Computer Process Unit"], answer: 1 },
-        { q: "निम्न मध्ये कुन अपरेटिङ सिस्टम होइन?", options: ["Windows", "Linux", "Photoshop", "macOS"], answer: 2 },
-        { q: "RAM को पूरा रूप के हो?", options: ["Random Access Memory", "Read Access Memory", "Random Available Memory", "Read Available Memory"], answer: 0 },
-        { q: "वेब विकासको लागि कुन भाषा प्रयोग गरिन्छ?", options: ["Python", "Java", "HTML", "C++"], answer: 2 },
-        { q: "URL को पूरा रूप के हो?", options: ["Uniform Resource Locator", "Universal Resource Locator", "Uniform Resource Link", "Universal Resource Link"], answer: 0 }
+        { q: "CPU को पूरा रूप?", options: ["Computer Processing Unit", "Central Processing Unit", "Central Process Unit", "Computer Process Unit"], answer: 1 },
+        { q: "कुन अपरेटिङ सिस्टम होइन?", options: ["Windows", "Linux", "Photoshop", "macOS"], answer: 2 },
+        { q: "RAM को पूरा रूप?", options: ["Random Access Memory", "Read Access Memory", "Random Available Memory", "Read Available Memory"], answer: 0 },
+        { q: "वेब विकासको लागि कुन भाषा?", options: ["Python", "Java", "HTML", "C++"], answer: 2 },
+        { q: "URL को पूरा रूप?", options: ["Uniform Resource Locator", "Universal Resource Locator", "Uniform Resource Link", "Universal Resource Link"], answer: 0 }
     ];
     
     let currentQ = 0;
     let userAnswers = new Array(quizData.length).fill(null);
-    let viewCounts = {1: 1234, 2: 987, 3: 2109};
-    let likeCounts = {1: 125, 2: 98, 3: 210};
     let userLikes = JSON.parse(localStorage.getItem('userLikes')) || {};
+    let likeCounts = {1: 125, 2: 98, 3: 210};
     
-    // Display current question
     function displayQuestion() {
         const container = document.getElementById('quizContainer');
         if (!container) return;
-        
         const q = quizData[currentQ];
-        
-        let html = `<div class="card p-3 mb-3"><h6>प्रश्न ${currentQ + 1}: ${q.q}</h6>`;
+        let html = `<div class="card p-3"><h6>प्रश्न ${currentQ + 1}: ${q.q}</h6>`;
         q.options.forEach((opt, i) => {
             html += `<div class="form-check">
-                <input class="form-check-input" type="radio" name="quizQ" value="${i}" 
-                    ${userAnswers[currentQ] === i ? 'checked' : ''} onchange="saveAnswer(${i})">
+                <input class="form-check-input" type="radio" name="quizQ" value="${i}" ${userAnswers[currentQ] === i ? 'checked' : ''} onchange="saveAnswer(${i})">
                 <label class="form-check-label">${opt}</label>
             </div>`;
         });
@@ -1987,23 +2202,9 @@
         document.getElementById('quizProgress').textContent = `प्रश्न ${currentQ + 1}/${quizData.length}`;
     }
     
-    function saveAnswer(ans) {
-        userAnswers[currentQ] = ans;
-    }
-    
-    function nextQuestion() {
-        if (currentQ < quizData.length - 1) {
-            currentQ++;
-            displayQuestion();
-        }
-    }
-    
-    function prevQuestion() {
-        if (currentQ > 0) {
-            currentQ--;
-            displayQuestion();
-        }
-    }
+    function saveAnswer(ans) { userAnswers[currentQ] = ans; }
+    function nextQuestion() { if (currentQ < quizData.length - 1) { currentQ++; displayQuestion(); } }
+    function prevQuestion() { if (currentQ > 0) { currentQ--; displayQuestion(); } }
     
     function submitQuiz() {
         let score = 0;
@@ -2013,176 +2214,141 @@
         const percentage = Math.round((score / quizData.length) * 100);
         document.getElementById('quizResult').innerHTML = `
             <div class="alert alert-success">
-                <h5>तपाईंको स्कोर: ${score}/${quizData.length} (${percentage}%)</h5>
-                ${percentage >= 80 ? 'अत्युत्तम! 🏆' : percentage >= 60 ? 'राम्रो! 👍' : 'थप अभ्यास गर्नुहोस् 📚'}
-            </div>
-        `;
+                <h5>स्कोर: ${score}/${quizData.length} (${percentage}%)</h5>
+            </div>`;
     }
     
-    // Radio functions
+    // Widget functions
+    let currentWidget = null;
+    function showWidget(widgetId) {
+        const container = document.getElementById('widget-container');
+        if (currentWidget === widgetId) {
+            container.style.display = container.style.display === 'block' ? 'none' : 'block';
+            return false;
+        }
+        container.style.display = 'block';
+        document.querySelectorAll('.widget').forEach(w => w.classList.remove('active'));
+        document.getElementById(widgetId).classList.add('active');
+        currentWidget = widgetId;
+        return false;
+    }
+    
+    function hideWidgets() {
+        document.getElementById('widget-container').style.display = 'none';
+        currentWidget = null;
+    }
+    
     function playRadio(url) {
-        const player = document.getElementById('radioPlayer');
-        if (player) {
-            player.src = url;
-            player.play();
-        }
+        const player = document.getElementById('radio-player');
+        if (player) { player.src = url; player.play(); }
     }
     
-    // Number converter
-    function convertNumber() {
-        const num = document.getElementById('numberInput')?.value;
-        if (!num) {
-            document.getElementById('numberResult').textContent = 'कृपया संख्या प्रविष्ट गर्नुहोस्!';
-            return;
-        }
+    function convertNumberToWords() {
+        const num = document.getElementById('number-input')?.value;
+        const result = document.getElementById('number-result');
+        if (!num) { result.textContent = "संख्या लेख्नुहोस्!"; return; }
         const nepaliNums = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'];
         const nepali = num.toString().split('').map(d => nepaliNums[parseInt(d)] || d).join('');
-        document.getElementById('numberResult').innerHTML = `
-            <strong>अङ्कमा:</strong> ${num}<br>
-            <strong>नेपाली अङ्कमा:</strong> ${nepali}
-        `;
+        result.innerHTML = `<strong>अङ्कमा:</strong> ${num}<br><strong>नेपालीमा:</strong> ${nepali}`;
     }
     
-    // Unicode converter
     function convertToUnicode() {
-        const text = document.getElementById('preetiText')?.value;
-        if (!text) {
-            document.getElementById('unicodeResult').textContent = 'कृपया टेक्स्ट प्रविष्ट गर्नुहोस्!';
-            return;
-        }
+        const text = document.getElementById('preeti-input')?.value;
+        const output = document.getElementById('unicode-output');
+        if (!text) { output.textContent = "टेक्स्ट लेख्नुहोस्!"; return; }
         const conversions = {
-            'ka': 'क', 'kha': 'ख', 'ga': 'ग', 'gha': 'घ',
-            'na': 'न', 'ma': 'म', 'ta': 'त', 'tha': 'थ',
-            'da': 'द', 'dha': 'ध', 'pa': 'प', 'pha': 'फ',
-            'ba': 'ब', 'bha': 'भ', 'ra': 'र', 'la': 'ल',
-            'sa': 'स', 'ha': 'ह', 'a': 'अ', 'i': 'इ',
-            'ee': 'ई', 'u': 'उ', 'oo': 'ऊ', 'e': 'ए',
-            'ai': 'ऐ', 'o': 'ओ', 'au': 'औ'
+            'ka':'क', 'kha':'ख', 'ga':'ग', 'na':'न', 'ma':'म', 'ta':'त', 'tha':'थ',
+            'da':'द', 'dha':'ध', 'pa':'प', 'pha':'फ', 'ba':'ब', 'bha':'भ', 'ra':'र', 'la':'ल',
+            'sa':'स', 'ha':'ह', 'a':'अ', 'i':'इ', 'ee':'ई', 'u':'उ', 'oo':'ऊ', 'e':'ए'
         };
         let converted = text;
         for (let [eng, nep] of Object.entries(conversions)) {
             converted = converted.replace(new RegExp(eng, 'g'), nep);
         }
-        document.getElementById('unicodeResult').textContent = converted;
+        output.textContent = converted;
     }
     
-    // Software purchase
-    function purchaseSoftware(plan, amount) {
-        if (confirm(`रु ${amount} को ${plan} खरिद गर्न चाहनुहुन्छ?`)) {
-            alert('eSewa QR कोड स्क्यान गरी भुक्तानी गर्नुहोस्।');
-        }
-    }
-    
-    function requestTrial() {
-        alert('ट्रायल अनुरोध प्राप्त भयो। तपाईंको इमेलमा ट्रायल लाइसेन्स पठाइनेछ।');
-    }
+    // Copy button functionality
+    document.querySelectorAll('.copy-btn').forEach(button => {
+        button.addEventListener('click', async function() {
+            const url = this.getAttribute('data-url');
+            await navigator.clipboard.writeText(url);
+            const original = this.innerHTML;
+            this.innerHTML = '<i class="fas fa-check"></i> कपी!';
+            setTimeout(() => this.innerHTML = original, 1500);
+        });
+    });
     
     // Like/Share functionality
     document.querySelectorAll('.like-btn').forEach(btn => {
         btn.addEventListener('click', function() {
-            const articleId = this.dataset.article;
-            if (!userLikes[articleId]) {
-                likeCounts[articleId]++;
-                userLikes[articleId] = true;
+            const id = this.dataset.article;
+            if (!userLikes[id]) {
+                likeCounts[id]++;
+                userLikes[id] = true;
                 localStorage.setItem('userLikes', JSON.stringify(userLikes));
                 this.classList.add('liked');
-                this.parentElement.previousElementSibling.querySelector('.like-count').textContent = likeCounts[articleId];
-                alert('धन्यवाद! तपाईंले यो समाचार मनपराउनुभयो।');
-            } else {
-                alert('तपाईंले यो समाचार पहिले नै मनपराउनुभएको छ।');
+                this.querySelector('.like-count').textContent = likeCounts[id];
+                alert('धन्यवाद!');
             }
         });
     });
     
     document.querySelectorAll('.share-btn').forEach(btn => {
         btn.addEventListener('click', function() {
-            const articleId = this.dataset.article;
-            const shareUrl = window.location.href + '#article' + articleId;
+            const id = this.dataset.article;
+            const url = window.location.href + '#article' + id;
             if (navigator.share) {
-                navigator.share({
-                    title: 'shamser.info.np',
-                    text: 'शैक्षिक समाचार',
-                    url: shareUrl
-                });
+                navigator.share({ title: 'shamser.info.np', url: url });
             } else {
-                navigator.clipboard.writeText(shareUrl);
-                alert('लिंक क्लिपबोर्डमा प्रतिलिपि गरियो! ✅');
+                navigator.clipboard.writeText(url);
+                alert('लिङ्क कपी भयो!');
             }
         });
     });
     
-    // Time ago function
+    // Time ago
     function updateTimeAgo() {
         document.querySelectorAll('.time-ago').forEach(el => {
-            const timeStr = el.dataset.time;
-            if (timeStr) {
-                const time = moment(timeStr);
-                el.textContent = time.fromNow();
-            }
+            const time = moment(el.dataset.time);
+            el.textContent = time.fromNow();
         });
     }
     
-    // Show welcome modal on first visit
-    if (!localStorage.getItem('welcomeShown')) {
-        setTimeout(() => {
-            const welcomeModal = new bootstrap.Modal(document.getElementById('welcomeModal'));
-            if (welcomeModal) welcomeModal.show();
-            localStorage.setItem('welcomeShown', 'true');
-        }, 2000);
-    }
+    // Go to top
+    function goToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
     
-    // Initialize on page load
+    // Initialize
+    $(document).ready(function() {
+        $("#galleryCarousel").owlCarousel({ items: 4, loop: true, margin: 10, autoplay: true });
+    });
+    
     window.onload = function() {
         displayQuestion();
         updateTimeAgo();
         setInterval(updateTimeAgo, 60000);
         
-        // Initialize like button states
-        for (let id in userLikes) {
-            if (userLikes[id]) {
-                const btn = document.querySelector(`.like-btn[data-article="${id}"]`);
-                if (btn) btn.classList.add('liked');
-            }
+        // Show welcome modal on first visit
+        if (!localStorage.getItem('welcomeShown')) {
+            setTimeout(() => {
+                new bootstrap.Modal(document.getElementById('welcomePopupModal')).show();
+                localStorage.setItem('welcomeShown', 'true');
+            }, 2000);
         }
     };
+    
+    // Close widgets when clicking outside
+    document.addEventListener('click', function(e) {
+        const container = document.getElementById('widget-container');
+        const nav = document.querySelector('.bottom-nav');
+        if (container.style.display === 'block' && !container.contains(e.target) && !nav.contains(e.target)) {
+            hideWidgets();
+        }
+    });
 </script>
-
-<!-- Welcome Modal (Hidden by default, shown after 2 seconds) -->
-<div class="modal fade modal-nepali" id="welcomeModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">shamser.info.np मा स्वागत छ!</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <video width="100%" height="200" controls>
-                            <source src="Home/About.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                    <div class="col-md-6">
-                        <h4>एकीकृत परीक्षा प्रणाली (IEMIS)</h4>
-                        <p>छिटो र सजिलो तरिकाले नतिजा प्रकाशन गर्ने डिजिटल समाधान</p>
-                        <button class="btn btn-primary w-100 mb-2" data-bs-toggle="modal" data-bs-target="#iemisModal">IEMIS लगइन</button>
-                        <button class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#idCardModal">ID Card Generator</button>
-                    </div>
-                </div>
-                <hr>
-                <div class="text-center">
-                    <a href="https://shamser.info.np/Multi%20letterpad.html" class="btn btn-outline-primary">Generate Multi letters</a>
-                    <a href="https://forms.gle/LVm68DdiXN5Ep1Mb6" class="btn btn-outline-success">Service Charge</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Facebook SDK -->
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v20.0"></script>
-
 </body>
 </html>
