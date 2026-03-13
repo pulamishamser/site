@@ -27,7 +27,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     
-    <!-- Bootstrap 5 CSS (Only One Version) -->
+    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <!-- Font Awesome 6 -->
@@ -84,7 +84,7 @@
         body {
             overflow-x: hidden;
             padding: 0;
-            height: 100vh; /* fallback for Js load */
+            height: 100vh;
             height: var(--doc-height);
             display: block; 
             margin: 10px auto;
@@ -185,12 +185,17 @@
             margin-left: 0px;
         }
         
-        /* tab - Bootstrap 5 compatible */
+        /* tab */
+        #tab-bg {
+            background-color: silver;
+        }
+        
         .nav-tabs .nav-link {
             background-color: #004b8e;
             color: #fff;
             text-align: center;
             border-radius: 0px !important;
+            width: 50% !important;
             border: 0px !important;
             padding: 8px;
         }
@@ -219,8 +224,34 @@
             border-top: 0px;
         }
         
+        #nav-tabContent {
+            overflow: scroll;
+        }
+        
         .news-mar {
             padding: 0px;
+        }
+        
+        #nav-home ul, 
+        #nav-profile ul {
+            padding: 8px 14px;
+            list-style: none;
+        }
+        
+        #nav-home ul li, 
+        #nav-profile ul li {
+            font-size: 0.92rem;
+            padding: 8px 0px;
+        }
+        
+        #nav-home ul li, 
+        #nav-profile ul li {
+            border-bottom: 1px solid #e5e5e5;
+        }
+        
+        #nav-home ul li:last-child, 
+        #nav-profile ul li:last-child {
+            border-bottom: 0px;
         }
         
         .intro_div {
@@ -284,6 +315,172 @@
         
         .read_more a:hover {
             text-decoration: none;
+        }
+        
+        /* facility */
+        .facility h2 {
+            font-size: 12px;
+            color: red !important;
+        }
+        
+        .facility-item h4 {
+            text-align: center;
+            font-family: arial;
+            font-size: 18px;
+            font-weight: bold;
+            padding-top: 6px;
+        }
+        
+        .principal-msg {
+            margin-top: 8px;
+            margin-bottom: 2px;
+        }
+        
+        .principal-msg .pad {
+            padding-top: 0px;
+        }
+        
+        .principal-msg p {
+            font-size: 12px;
+            text-align: justify;
+        }
+        
+        .principal-msg img {
+            padding-top: 0px;
+        }
+        
+        .principal-msg span {
+            font-weight: bold;
+            display: block;
+        }
+        
+        .principal-msg h5 {
+            text-transform: uppercase;
+        }
+        
+        .line-res {
+            border-left: 0px solid silver;
+        }
+        
+        /* news event */
+        .principal-msg1 {
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .principal-msg1 .pad {
+            padding-top: 10px;
+        }
+        
+        .principal-msg1 p {
+            font-size: 14px;
+            text-align: justify;
+            padding: 0px;
+            margin: 0px;
+        }
+        
+        .principal-msg1 img {
+            padding-top: 4px;
+            float: left;
+            padding-right: 8px;
+        }
+        
+        .principal-msg1 span {
+            font-weight: bold;
+            display: block;
+            padding-bottom: 12px;
+        }
+        
+        .principal-msg1 .h5 {
+            text-transform: uppercase;
+            font-size: 1.5rem;
+            padding-bottom: 10px;
+        }
+        
+        .principal-msg1 h5 {
+            font-size: 16px;
+            font-weight: bolder;
+            line-height: 1.4rem;
+        }
+        
+        /* news event new */
+        .news {
+            margin-top: 0px;
+        }
+        
+        .news img {
+            padding-top: 4px;
+            float: left;
+            padding-right: 0px;
+            width: 100px;
+            height: 93px;
+        }
+        
+        .news h4 {
+            text-transform: uppercase;
+            font-weight: bold;
+            padding: 12px 0px;
+            border-bottom: 1px solid silver;
+        }
+        
+        .news h5 {
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 1rem;
+            line-height: 1.4rem;
+            color: #004b8e;
+        }
+        
+        .news .mo {
+            background-color: #4782b2;
+            padding: 4px;
+            margin: 0px;
+            color: #fff;
+            text-align: center;
+        }
+        
+        .news .da {
+            background-color: #f3f3f3;
+            padding: 6px 0px;
+            margin: 0px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .news p {
+            font-size: 14px;
+            text-align: justify;
+            padding: 0px;
+            margin: 0px;
+        }
+        
+        .news ul {
+            padding: 0px;
+            list-style: none;
+        }
+        
+        .news ul li {
+            border-bottom: 1px solid silver;
+            padding: 10px 0px;
+        }
+        
+        .news ul li:last-child {
+            border: none;
+            padding-bottom: 0px;
+        }
+        
+        .news .container {
+            padding-bottom: 0px;
+        }
+        
+        .news ul li a {
+            text-decoration: none;
+            color: #004b8e;
+        }
+        
+        .news ul li a:hover {
+            color: #007bff;
+            transition: all 0.5s ease-in-out 0s;
         }
         
         @media screen and (max-width: 960px) {
@@ -717,16 +914,37 @@
             background-color: rgba(0, 102, 204, 0.1);
         }
         
-        /* Widget Container */
+        /* Widget Container - Fixed */
         .widget-container {
             display: none;
+            position: fixed;
+            bottom: 70px;
+            left: 0;
+            right: 0;
+            z-index: 1090;
             padding: 15px;
             background: #ffffff;
-            border-radius: 10px;
-            margin: 15px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-            position: relative;
-            width: 100%;
+            border-radius: 10px 10px 0 0;
+            margin: 0 15px;
+            box-shadow: 0 -3px 15px rgba(0,0,0,0.2);
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        
+        .widget-container.show {
+            display: block;
+            animation: slideUp 0.3s ease-in-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
         
         .widget {
@@ -735,44 +953,6 @@
         
         .widget.active {
             display: block;
-            animation: fadeIn 0.3s ease-in-out;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background: #3498db;
-            display: flex;
-            justify-content: space-around;
-            padding: 12px 0;
-            box-shadow: 0 -3px 10px rgba(0,0,0,0.2);
-            z-index: 1000;
-        }
-        
-        .bottom-nav a {
-            color: white;
-            text-decoration: none;
-            text-align: center;
-            font-size: 14px;
-            padding: 8px 5px;
-            flex: 1;
-            transition: all 0.3s;
-        }
-        
-        .bottom-nav a:hover {
-            background-color: #2980b9;
-        }
-        
-        .bottom-nav i {
-            display: block;
-            font-size: 22px;
-            margin-bottom: 5px;
         }
         
         .close-btn {
@@ -791,10 +971,52 @@
             justify-content: center;
             font-size: 18px;
             z-index: 10;
+            transition: all 0.3s;
         }
         
         .close-btn:hover {
             background: #c0392b;
+            transform: scale(1.1);
+        }
+        
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: #3498db;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            box-shadow: 0 -3px 10px rgba(0,0,0,0.2);
+            z-index: 1080;
+        }
+        
+        .bottom-nav a {
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            font-size: 14px;
+            padding: 8px 5px;
+            flex: 1;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .bottom-nav a:hover {
+            background-color: #2980b9;
+        }
+        
+        .bottom-nav i {
+            display: block;
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+        
+        .radio-stations {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
         }
         
         .radio-stations button {
@@ -804,12 +1026,14 @@
             padding: 10px 15px;
             border-radius: 5px;
             cursor: pointer;
-            margin: 5px;
+            flex: 1;
+            min-width: 120px;
             transition: all 0.2s;
         }
         
         .radio-stations button:hover {
             background: #2980b9;
+            transform: scale(1.02);
         }
         
         /* Social Links */
@@ -893,10 +1117,11 @@
             position: fixed;
             bottom: 90px;
             right: 10px;
-            z-index: 99;
+            z-index: 1070;
             padding: 10px;
             border: none;
             background: transparent;
+            cursor: pointer;
         }
         
         .scroll-top img {
@@ -1346,6 +1571,10 @@
                 line-height: 60px;
                 font-size: 24px;
             }
+            
+            .widget-container {
+                margin: 0 10px;
+            }
         }
     </style>
 </head>
@@ -1419,7 +1648,7 @@
     <i class="fas fa-bars"></i> मेनु
 </button>
 
-<!-- Sidebar Navigation with Improved Submenu Handling -->
+<!-- Sidebar Navigation -->
 <div class="sidebar" id="sidebar">
     <div class="sidebar-header">
         <img src="https://shamser.info.np/HomePage/img/brp.jpg" alt="Profile">
@@ -1429,7 +1658,6 @@
     <ul class="sidebar-menu">
         <li><a href="#"><i class="fas fa-home"></i> गृहपृष्ठ</a></li>
         
-        <!-- शैक्षिक सामग्री Dropdown with improved handling -->
         <li class="has-submenu">
             <a class="submenu-toggle">
                 <i class="fas fa-book"></i> शैक्षिक सामग्री <i class="fas fa-chevron-right float-end chevron"></i>
@@ -1442,7 +1670,6 @@
             </ul>
         </li>
         
-        <!-- शिक्षक सेवा Dropdown -->
         <li class="has-submenu">
             <a class="submenu-toggle">
                 <i class="fas fa-user-tie"></i> शिक्षक सेवा <i class="fas fa-chevron-right float-end chevron"></i>
@@ -1455,7 +1682,6 @@
             </ul>
         </li>
         
-        <!-- अनुसन्धान Dropdown -->
         <li class="has-submenu">
             <a class="submenu-toggle">
                 <i class="fas fa-microscope"></i> अनुसन्धान <i class="fas fa-chevron-right float-end chevron"></i>
@@ -1469,28 +1695,27 @@
         
         <li><a href="#news"><i class="fas fa-newspaper"></i> शैक्षिक समाचार</a></li>
         
-        <!-- उपकरणहरू Dropdown -->
         <li class="has-submenu">
             <a class="submenu-toggle">
                 <i class="fas fa-tools"></i> उपकरणहरू <i class="fas fa-chevron-right float-end chevron"></i>
             </a>
             <ul class="sidebar-submenu">
-                <li><a href="#" data-bs-toggle="modal" data-bs-target="#idCardModal"><i class="fas fa-id-card"></i> ID Card Generator</a></li>
+                <li><a href="#" onclick="openModal('idCardModal')"><i class="fas fa-id-card"></i> ID Card Generator</a></li>
                 <li><a href="https://shamser.info.np/Multi%20letterpad.html"><i class="fas fa-pencil-alt"></i> लेटरप्याड</a></li>
-                <li><a href="#" data-bs-toggle="modal" data-bs-target="#quizModal"><i class="fas fa-question-circle"></i> Computer Quiz</a></li>
-                <li><a href="#" data-bs-toggle="modal" data-bs-target="#iemisModal"><i class="fas fa-sign-in-alt"></i> IEMIS Login</a></li>
+                <li><a href="#" onclick="openModal('quizModal')"><i class="fas fa-question-circle"></i> Computer Quiz</a></li>
+                <li><a href="#" onclick="openModal('iemisModal')"><i class="fas fa-sign-in-alt"></i> IEMIS Login</a></li>
                 <li><a href="#" onclick="showWidget('calendar-widget')"><i class="fas fa-calendar-alt"></i> पात्रो</a></li>
                 <li><a href="#" onclick="showWidget('number-converter-widget')"><i class="fas fa-calculator"></i> संख्या रुपान्तरण</a></li>
                 <li><a href="#" onclick="showWidget('date-conversion-widget')"><i class="fas fa-calendar-day"></i> मिति रूपान्तरण</a></li>
                 <li><a href="#" onclick="showWidget('unicode-widget')"><i class="fas fa-keyboard"></i> युनिकोड</a></li>
+                <li><a href="#" onclick="showWidget('radio-widget')"><i class="fas fa-broadcast-tower"></i> रेडियो</a></li>
             </ul>
         </li>
         
-        <li><a href="#" data-bs-toggle="modal" data-bs-target="#featuresModal"><i class="fas fa-star"></i> सुविधाहरू</a></li>
+        <li><a href="#" onclick="openModal('featuresModal')"><i class="fas fa-star"></i> सुविधाहरू</a></li>
         <li><a href="https://shamser.info.np/Entry_Form/Service_Demand.html"><i class="fas fa-cogs"></i> सेवाहरू</a></li>
         <li><a href="#contact"><i class="fas fa-envelope"></i> सम्पर्क</a></li>
         
-        <!-- ग्यालेरी Dropdown -->
         <li class="has-submenu">
             <a class="submenu-toggle">
                 <i class="fas fa-images"></i> ग्यालेरी <i class="fas fa-chevron-right float-end chevron"></i>
@@ -1588,7 +1813,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
 
-        <!-- Feature Cards Section - New Useful Features -->
+        <!-- Feature Cards Section -->
         <h2 class="section-title">हाम्रा विशेष सुविधाहरू</h2>
         <div class="row mb-5">
             <div class="col-md-3 col-6 mb-4">
@@ -1665,7 +1890,7 @@
             </div>
         </div>
 
-        <!-- IEMIS Login Card with Copy Feature -->
+        <!-- IEMIS Login Card -->
         <div class="card mb-5">
             <div class="row g-0">
                 <div class="col-md-4">
@@ -1694,7 +1919,6 @@
                             <i class="fas fa-info-circle"></i> जानकारी
                         </button>
                         
-                        <!-- Copy Link Feature -->
                         <div class="mt-3">
                             <span class="fw-bold">IEMIS Login Link: </span>
                             <span id="iemisLink">https://script.google.com/macros/s/AKfycbyk4Q3O6Gygn1wTj2fZqE82CWKEEiK57VoLH6l-iWNZlcB26pCy1Bl5PJWp15V7OgCk7g/exec</span>
@@ -1713,7 +1937,7 @@
             </div>
         </div>
 
-        <!-- ID Card Generator Section - Enhanced -->
+        <!-- ID Card Generator Section -->
         <div class="row mb-5">
             <div class="col-12">
                 <div class="card bg-gradient-primary text-white p-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
@@ -1876,7 +2100,7 @@
             <p>आफ्नो ज्ञान परीक्षण गर्नुहोस् र स्कोर हेर्नुहोस्</p>
         </div>
 
-        <!-- Useful Links Section (Other Office list) -->
+        <!-- Useful Links Section -->
         <div class="clear-both"></div>
         <h4 class="section-title">Useful Links</h4>
         <section id="office" class="wow fadeInUp">
@@ -1938,7 +2162,7 @@
             </div>
         </section>
 
-        <!-- News Tabs Section - Bootstrap 5 Version -->
+        <!-- News Tabs Section -->
         <section id="news" class="wow fadeInUp mt-5">
             <div class="container">
                 <div class="row">
@@ -2116,7 +2340,7 @@
             <div class="fb-comments" data-href="https://shamser.info.np" data-width="100%" data-numposts="25"></div> 
         </div>
 
-        <!-- Latest News Section with Like/Share -->
+        <!-- Latest News Section -->
         <h2 class="section-title" id="latest-news">ताजा शैक्षिक समाचार</h2>
         <div class="row mb-5">
             <div class="col-lg-4 col-md-6 mb-4" id="article1">
@@ -2340,12 +2564,12 @@
     </div>
 </div>
 
-<!-- Widget Container -->
+<!-- Widget Container - Fixed -->
 <div class="widget-container" id="widget-container">
     <button class="close-btn" onclick="hideWidgets()">×</button>
     
     <!-- Calendar Widget -->
-    <div id="calendar-widget" class="widget">
+    <div id="calendar-widget" class="widget active">
         <h3><i class="fas fa-calendar-alt"></i> पात्रो</h3>
         <iframe src="https://www.hamropatro.com/widgets/calender-medium.php" 
                 frameborder="0" style="width:100%; height:385px; border:none;"></iframe>
@@ -2354,20 +2578,22 @@
     <!-- Number Converter Widget -->
     <div id="number-converter-widget" class="widget">
         <h3><i class="fas fa-calculator"></i> संख्या रुपान्तरण</h3>
-        <input type="number" id="number-input" class="form-control" placeholder="अङ्क लेख्नुहोस्">
-        <button class="btn btn-primary mt-2 w-100" onclick="convertNumberToWords()">रुपान्तरण गर्नुहोस्</button>
-        <div id="number-result" class="alert alert-info mt-2"></div>
+        <div class="mb-3">
+            <input type="number" id="number-input" class="form-control" placeholder="अङ्क लेख्नुहोस्">
+        </div>
+        <button class="btn btn-primary w-100 mb-2" onclick="convertNumberToWords()">रुपान्तरण गर्नुहोस्</button>
+        <div id="number-result" class="alert alert-info mt-2" style="display: none;"></div>
     </div>
 
     <!-- Radio Widget -->
     <div id="radio-widget" class="widget">
         <h3><i class="fas fa-broadcast-tower"></i> रेडियो</h3>
-        <audio id="radio-player" controls class="w-100">
+        <audio id="radio-player" controls class="w-100 mb-3">
             <source src="" type="audio/mpeg">
         </audio>
-        <div class="radio-stations mt-2">
-            <button class="btn btn-sm btn-outline-primary" onclick="playRadio('https://radio.canstream.co.uk:8077/live.mp3')">रेडियो नेपाल</button>
-            <button class="btn btn-sm btn-outline-primary" onclick="playRadio('https://radio.kantipur.com.np/kantipur')">कान्तिपुर एफएम</button>
+        <div class="radio-stations">
+            <button class="btn btn-primary" onclick="playRadio('https://radio.canstream.co.uk:8077/live.mp3')">रेडियो नेपाल</button>
+            <button class="btn btn-primary" onclick="playRadio('https://radio.kantipur.com.np/kantipur')">कान्तिपुर एफएम</button>
         </div>
     </div>
 
@@ -2375,15 +2601,15 @@
     <div id="date-conversion-widget" class="widget">
         <h3><i class="fas fa-calendar-day"></i> मिति रूपान्तरण</h3>
         <iframe src="https://www.hamropatro.com/widgets/dateconverter.php" 
-                frameborder="0" style="width:100%; height:100px; border:none;"></iframe>
+                frameborder="0" style="width:100%; height:120px; border:none;"></iframe>
     </div>
 
     <!-- Unicode Widget -->
     <div id="unicode-widget" class="widget">
         <h3><i class="fas fa-keyboard"></i> युनिकोड</h3>
-        <textarea id="preeti-input" class="form-control" rows="4" placeholder="प्रीटी/Roman text..."></textarea>
-        <button class="btn btn-primary mt-2 w-100" onclick="convertToUnicode()">रूपान्तरण</button>
-        <div id="unicode-output" class="alert alert-secondary mt-2"></div>
+        <textarea id="preeti-input" class="form-control mb-2" rows="4" placeholder="प्रीटी/Roman text..."></textarea>
+        <button class="btn btn-primary w-100 mb-2" onclick="convertToUnicode()">रूपान्तरण</button>
+        <div id="unicode-output" class="alert alert-secondary mt-2" style="display: none;"></div>
     </div>
 </div>
 
@@ -2444,8 +2670,7 @@
     </div>
 </footer>
 
-<!-- Modals - Fixed with proper Bootstrap 5 structure -->
-
+<!-- Modals -->
 <!-- Welcome Popup Modal -->
 <div class="modal fade" id="welcomePopupModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -2684,7 +2909,7 @@
         document.getElementById('viewerCount').textContent = viewerCount.toLocaleString();
     }
     
-    // Modal Functions - Fixed for Bootstrap 5
+    // Modal Functions
     function openModal(modalId) {
         const modalElement = document.getElementById(modalId);
         if (modalElement) {
@@ -2703,6 +2928,89 @@
         }
     }
     
+    // Widget Functions - Fixed
+    let currentWidget = null;
+    
+    function showWidget(widgetId) {
+        const container = document.getElementById('widget-container');
+        const widget = document.getElementById(widgetId);
+        
+        if (!container || !widget) return false;
+        
+        // If clicking the same widget, toggle the container
+        if (currentWidget === widgetId) {
+            container.classList.toggle('show');
+            if (!container.classList.contains('show')) {
+                currentWidget = null;
+            }
+            return false;
+        }
+        
+        // Hide all widgets first
+        document.querySelectorAll('.widget').forEach(w => {
+            w.classList.remove('active');
+        });
+        
+        // Show the selected widget
+        widget.classList.add('active');
+        container.classList.add('show');
+        currentWidget = widgetId;
+        
+        return false;
+    }
+    
+    function hideWidgets() {
+        const container = document.getElementById('widget-container');
+        if (container) {
+            container.classList.remove('show');
+            currentWidget = null;
+        }
+    }
+    
+    function playRadio(url) {
+        const player = document.getElementById('radio-player');
+        if (player) { 
+            player.src = url; 
+            player.play().catch(e => console.log('Playback failed:', e));
+        }
+    }
+    
+    function convertNumberToWords() {
+        const num = document.getElementById('number-input')?.value;
+        const result = document.getElementById('number-result');
+        if (!num) { 
+            result.style.display = 'block';
+            result.textContent = "संख्या लेख्नुहोस्!"; 
+            return; 
+        }
+        const nepaliNums = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'];
+        const nepali = num.toString().split('').map(d => nepaliNums[parseInt(d)] || d).join('');
+        result.style.display = 'block';
+        result.innerHTML = `<strong>अङ्कमा:</strong> ${num}<br><strong>नेपालीमा:</strong> ${nepali}`;
+    }
+    
+    function convertToUnicode() {
+        const text = document.getElementById('preeti-input')?.value;
+        const output = document.getElementById('unicode-output');
+        if (!text) { 
+            output.style.display = 'block';
+            output.textContent = "टेक्स्ट लेख्नुहोस्!"; 
+            return; 
+        }
+        const conversions = {
+            'ka':'क', 'kha':'ख', 'ga':'ग', 'na':'न', 'ma':'म', 'ta':'त', 'tha':'थ',
+            'da':'द', 'dha':'ध', 'pa':'प', 'pha':'फ', 'ba':'ब', 'bha':'भ', 'ra':'र', 'la':'ल',
+            'sa':'स', 'ha':'ह', 'a':'अ', 'i':'इ', 'ee':'ई', 'u':'उ', 'oo':'ऊ', 'e':'ए'
+        };
+        let converted = text;
+        for (let [eng, nep] of Object.entries(conversions)) {
+            converted = converted.replace(new RegExp(eng, 'g'), nep);
+        }
+        output.style.display = 'block';
+        output.textContent = converted;
+    }
+    
+    // Quiz Functions
     function displayQuestion() {
         const container = document.getElementById('quizContainer');
         if (!container) return;
@@ -2733,56 +3041,6 @@
             <div class="alert alert-success">
                 <h5>स्कोर: ${score}/${quizData.length} (${percentage}%)</h5>
             </div>`;
-    }
-    
-    // Widget functions
-    let currentWidget = null;
-    function showWidget(widgetId) {
-        const container = document.getElementById('widget-container');
-        if (currentWidget === widgetId) {
-            container.style.display = container.style.display === 'block' ? 'none' : 'block';
-            return false;
-        }
-        container.style.display = 'block';
-        document.querySelectorAll('.widget').forEach(w => w.classList.remove('active'));
-        document.getElementById(widgetId).classList.add('active');
-        currentWidget = widgetId;
-        return false;
-    }
-    
-    function hideWidgets() {
-        document.getElementById('widget-container').style.display = 'none';
-        currentWidget = null;
-    }
-    
-    function playRadio(url) {
-        const player = document.getElementById('radio-player');
-        if (player) { player.src = url; player.play(); }
-    }
-    
-    function convertNumberToWords() {
-        const num = document.getElementById('number-input')?.value;
-        const result = document.getElementById('number-result');
-        if (!num) { result.textContent = "संख्या लेख्नुहोस्!"; return; }
-        const nepaliNums = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'];
-        const nepali = num.toString().split('').map(d => nepaliNums[parseInt(d)] || d).join('');
-        result.innerHTML = `<strong>अङ्कमा:</strong> ${num}<br><strong>नेपालीमा:</strong> ${nepali}`;
-    }
-    
-    function convertToUnicode() {
-        const text = document.getElementById('preeti-input')?.value;
-        const output = document.getElementById('unicode-output');
-        if (!text) { output.textContent = "टेक्स्ट लेख्नुहोस्!"; return; }
-        const conversions = {
-            'ka':'क', 'kha':'ख', 'ga':'ग', 'na':'न', 'ma':'म', 'ta':'त', 'tha':'थ',
-            'da':'द', 'dha':'ध', 'pa':'प', 'pha':'फ', 'ba':'ब', 'bha':'भ', 'ra':'र', 'la':'ल',
-            'sa':'स', 'ha':'ह', 'a':'अ', 'i':'इ', 'ee':'ई', 'u':'उ', 'oo':'ऊ', 'e':'ए'
-        };
-        let converted = text;
-        for (let [eng, nep] of Object.entries(conversions)) {
-            converted = converted.replace(new RegExp(eng, 'g'), nep);
-        }
-        output.textContent = converted;
     }
     
     // Copy button functionality
@@ -2891,7 +3149,7 @@
         }
     };
     
-    // Improved Sidebar functionality with submenu handling
+    // Sidebar functionality
     const menuToggle = document.getElementById('menuToggle');
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('sidebarOverlay');
@@ -2906,7 +3164,7 @@
     menuToggle.addEventListener('click', toggleSidebar);
     overlay.addEventListener('click', toggleSidebar);
     
-    // Improved submenu toggle functionality
+    // Submenu toggle functionality
     document.querySelectorAll('.has-submenu > a').forEach(toggle => {
         toggle.addEventListener('click', function(e) {
             e.preventDefault();
@@ -2942,7 +3200,7 @@
     document.addEventListener('click', function(e) {
         const container = document.getElementById('widget-container');
         const nav = document.querySelector('.bottom-nav');
-        if (container.style.display === 'block' && !container.contains(e.target) && !nav.contains(e.target)) {
+        if (container && container.classList.contains('show') && !container.contains(e.target) && !nav.contains(e.target)) {
             hideWidgets();
         }
     });
