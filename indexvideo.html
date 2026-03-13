@@ -1012,28 +1012,68 @@
             margin-bottom: 5px;
         }
         
+        /* Radio Stations - Enhanced */
         .radio-stations {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             gap: 10px;
-            margin-top: 10px;
+            margin-top: 15px;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 5px;
         }
         
         .radio-stations button {
-            background: #3498db;
+            background: linear-gradient(135deg, #3498db, #2980b9);
             color: white;
             border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
+            padding: 12px 10px;
+            border-radius: 8px;
             cursor: pointer;
-            flex: 1;
-            min-width: 120px;
-            transition: all 0.2s;
+            transition: all 0.3s;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         
         .radio-stations button:hover {
-            background: #2980b9;
-            transform: scale(1.02);
+            background: linear-gradient(135deg, #2980b9, #1c5a7a);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        
+        .radio-stations button i {
+            font-size: 16px;
+        }
+        
+        .radio-stations button.playing {
+            background: linear-gradient(135deg, #27ae60, #219a52);
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        
+        #radio-player {
+            width: 100%;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+        
+        .now-playing {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            text-align: center;
+            font-weight: bold;
+            color: #1e3c72;
+            border: 1px solid #dee2e6;
         }
         
         /* Social Links */
@@ -1461,6 +1501,98 @@
             opacity: 0.9;
         }
         
+        /* Student Result Search Styles */
+        .result-container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+        
+        .result-container h2 {
+            text-align: center;
+            color: #0b4da2;
+            margin-bottom: 30px;
+        }
+        
+        .result-container input,
+        .result-container select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            margin-bottom: 15px;
+            font-size: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .result-container button {
+            width: 100%;
+            padding: 12px;
+            background: #0b4da2;
+            color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        .result-container button:hover {
+            background: #083a7a;
+        }
+        
+        .result-display {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+        
+        /* Trending Section */
+        .trending-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        
+        .trending-section h2 {
+            color: #1e3c72;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        .trending-section h2 i {
+            color: #ff5722;
+            margin-right: 10px;
+        }
+        
+        .trending-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .trending-tags .badge {
+            font-size: 14px;
+            padding: 10px 15px !important;
+            border-radius: 25px !important;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 1px solid #dee2e6;
+        }
+        
+        .trending-tags .badge:hover {
+            background: #1e3c72 !important;
+            color: white !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
         /* Popup Modal Styles */
         .modal-content {
             border-radius: 15px;
@@ -1512,6 +1644,35 @@
             z-index: 1070 !important;
         }
         
+        /* Auto Popup Styles */
+        .auto-popup-trigger {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: #ff5722;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            z-index: 1060;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-20px);}
+            60% {transform: translateY(-10px);}
+        }
+
+        .auto-popup-trigger:hover {
+            background: #e64a19;
+            transform: scale(1.05);
+        }
+        
         /* Responsive */
         @media (max-width: 768px) {
             body {
@@ -1558,6 +1719,10 @@
             .bighag-list li {
                 min-width: 150px;
             }
+            
+            .radio-stations {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
         
         @media (max-width: 576px) {
@@ -1574,6 +1739,15 @@
             
             .widget-container {
                 margin: 0 10px;
+            }
+            
+            .radio-stations {
+                grid-template-columns: 1fr;
+            }
+            
+            .result-container {
+                margin: 20px 10px;
+                padding: 20px;
             }
         }
     </style>
@@ -1752,6 +1926,12 @@
     </div>
 </div>
 
+<!-- Auto Popup Trigger -->
+<div class="auto-popup-trigger" onclick="openModal('autoPopupModal')">
+    <i class="fas fa-bullhorn"></i>
+    <span>विशेष सूचना!</span>
+</div>
+
 <!-- Header Carousel -->
 <div id="headerCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
@@ -1811,6 +1991,22 @@
             <i class="fas fa-hand-peace me-2"></i>
             <strong>shamser.info.np</strong> मा तपाईंलाई स्वागत छ! यहाँ शैक्षिक सामग्री, समाचार र उपयोगी उपकरणहरू पाउन सक्नुहुन्छ।
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+
+        <!-- Trending Section -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="trending-section">
+                    <h2><i class="fas fa-fire"></i> ट्रेन्डिङ विषयहरू</h2>
+                    <div class="trending-tags">
+                        <a href="#P4" class="badge bg-light text-dark p-2 m-1">शिक्षामा जुत्ता बेचेजस्तो</a>
+                        <a href="https://shamser.info.np/tsc_questions.html" class="badge bg-light text-dark p-2 m-1">Quiz</a>
+                        <a href="#P1" class="badge bg-light text-dark p-2 m-1">शिक्षकको सरुवा</a>
+                        <a href="#P2" class="badge bg-light text-dark p-2 m-1">पुस्तक बिक्री</a>
+                        <a href="https://script.google.com/macros/s/AKfycbyk4Q3O6Gygn1wTj2fZqE82CWKEEiK57VoLH6l-iWNZlcB26pCy1Bl5PJWp15V7OgCk7g/exec" class="badge bg-light text-dark p-2 m-1">Login IEMIS</a>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Feature Cards Section -->
@@ -1963,6 +2159,39 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Student Result Search Section -->
+        <div class="result-container">
+            <h2>Check Your Result</h2>
+            
+            <label>Class</label>
+            <select id="class">
+                <option value="">Select Class</option>
+                <option value="10">Class 10</option>
+                <option value="9">Class 9</option>
+            </select>
+            
+            <label>Year</label>
+            <input type="text" id="year" placeholder="Exam Year">
+            
+            <label>Term</label>
+            <select id="term">
+                <option value="">Select Term</option>
+                <option value="1">First Term</option>
+                <option value="2">Second Term</option>
+                <option value="3">Final Term</option>
+            </select>
+            
+            <label>Date of Birth</label>
+            <input type="date" id="dob">
+            
+            <label>Symbol Number</label>
+            <input type="text" id="symbol">
+            
+            <button onclick="searchResult()">Search Result</button>
+            
+            <div id="resultDisplay" class="result-display"></div>
         </div>
 
         <!-- Teacher Guides Section -->
@@ -2564,7 +2793,7 @@
     </div>
 </div>
 
-<!-- Widget Container - Fixed -->
+<!-- Widget Container -->
 <div class="widget-container" id="widget-container">
     <button class="close-btn" onclick="hideWidgets()">×</button>
     
@@ -2585,15 +2814,43 @@
         <div id="number-result" class="alert alert-info mt-2" style="display: none;"></div>
     </div>
 
-    <!-- Radio Widget -->
+    <!-- Radio Widget - Enhanced with more stations -->
     <div id="radio-widget" class="widget">
-        <h3><i class="fas fa-broadcast-tower"></i> रेडियो</h3>
+        <h3><i class="fas fa-broadcast-tower"></i> रेडियो स्टेशनहरू</h3>
         <audio id="radio-player" controls class="w-100 mb-3">
             <source src="" type="audio/mpeg">
         </audio>
+        <div id="now-playing" class="now-playing">
+            <i class="fas fa-music"></i> कुनै स्टेशन चयन गरिएको छैन
+        </div>
         <div class="radio-stations">
-            <button class="btn btn-primary" onclick="playRadio('https://radio.canstream.co.uk:8077/live.mp3')">रेडियो नेपाल</button>
-            <button class="btn btn-primary" onclick="playRadio('https://radio.kantipur.com.np/kantipur')">कान्तिपुर एफएम</button>
+            <button onclick="playRadio('https://radio.canstream.co.uk:8077/live.mp3', 'रेडियो नेपाल')">
+                <i class="fas fa-radio"></i> रेडियो नेपाल
+            </button>
+            <button onclick="playRadio('https://radio.kantipur.com.np/kantipur', 'कान्तिपुर एफएम')">
+                <i class="fas fa-radio"></i> कान्तिपुर एफएम
+            </button>
+            <button onclick="playRadio('https://streaming.softnep.net:8097/stream.nsv', 'हिट्स एफएम')">
+                <i class="fas fa-radio"></i> हिट्स एफएम
+            </button>
+            <button onclick="playRadio('https://streaming.softnep.net:8075/stream.nsv', 'क्लासिक एफएम')">
+                <i class="fas fa-radio"></i> क्लासिक एफएम
+            </button>
+            <button onclick="playRadio('https://streaming.softnep.net:8023/stream.nsv', 'उज्यालो ९० एफएम')">
+                <i class="fas fa-radio"></i> उज्यालो ९० एफएम
+            </button>
+            <button onclick="playRadio('https://streaming.softnep.net:8037/stream.nsv', 'इमेजेज एफएम')">
+                <i class="fas fa-radio"></i> इमेजेज एफएम
+            </button>
+            <button onclick="playRadio('https://streaming.softnep.net:8011/stream.nsv', 'सगरमाथा एफएम')">
+                <i class="fas fa-radio"></i> सगरमाथा एफएम
+            </button>
+            <button onclick="playRadio('https://streaming.softnep.net:8083/stream.nsv', 'अन्नपूर्ण एफएम')">
+                <i class="fas fa-radio"></i> अन्नपूर्ण एफएम
+            </button>
+            <button onclick="window.open('https://radionp.com/#synergy-fm', '_blank')">
+                <i class="fas fa-external-link-alt"></i> Synergy FM
+            </button>
         </div>
     </div>
 
@@ -2721,6 +2978,27 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" data-bs-dismiss="modal">पछि हेर्ने</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Auto Popup Modal -->
+<div class="modal fade" id="autoPopupModal" tabindex="-1" aria-labelledby="autoPopupModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title" id="autoPopupModalLabel"><i class="fas fa-bullhorn me-2"></i>विशेष सूचना!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <i class="fas fa-newspaper fa-4x mb-3 text-info"></i>
+                <h4>नयाँ शैक्षिक सामग्रीहरू</h4>
+                <p>हाम्रो वेबसाइटमा नयाँ पाठ्यपुस्तक र शिक्षक निर्देशिकाहरू अपलोड गरिएको छ।</p>
+                <p>आजै हेर्नुहोस् र आफ्नो ज्ञान अद्यावधिक गर्नुहोस्।</p>
+                <div class="mt-3">
+                    <a href="#textbooks" class="btn btn-info text-white" onclick="closeModal('autoPopupModal')">पाठ्यपुस्तक हेर्नुहोस्</a>
+                </div>
             </div>
         </div>
     </div>
@@ -2886,6 +3164,58 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
 
 <script>
+    // Student Result Data
+    const students = [
+        {
+            symbol: "1001",
+            class: "10",
+            year: "2081",
+            term: "1",
+            dob: "2008-05-10",
+            name: "Ram Sharma",
+            gpa: "3.50",
+            result: "PASS"
+        },
+        {
+            symbol: "1002",
+            class: "10",
+            year: "2081",
+            term: "1",
+            dob: "2008-09-12",
+            name: "Sita Gurung",
+            gpa: "3.85",
+            result: "PASS"
+        }
+    ];
+
+    function searchResult() {
+        let c = document.getElementById("class").value;
+        let y = document.getElementById("year").value;
+        let t = document.getElementById("term").value;
+        let d = document.getElementById("dob").value;
+        let s = document.getElementById("symbol").value;
+
+        let student = students.find(st =>
+            st.class == c &&
+            st.year == y &&
+            st.term == t &&
+            st.dob == d &&
+            st.symbol == s
+        );
+
+        if (student) {
+            document.getElementById("resultDisplay").innerHTML =
+                "<h3>Result Found</h3>" +
+                "<p><b>Name:</b> " + student.name + "</p>" +
+                "<p><b>Symbol No:</b> " + student.symbol + "</p>" +
+                "<p><b>GPA:</b> " + student.gpa + "</p>" +
+                "<p><b>Status:</b> " + student.result + "</p>";
+        } else {
+            document.getElementById("resultDisplay").innerHTML =
+                "<p style='color:red'>Result Not Found</p>";
+        }
+    }
+
     // Quiz Data
     const quizData = [
         { q: "CPU को पूरा रूप?", options: ["Computer Processing Unit", "Central Processing Unit", "Central Process Unit", "Computer Process Unit"], answer: 1 },
@@ -2928,7 +3258,7 @@
         }
     }
     
-    // Widget Functions - Fixed
+    // Widget Functions
     let currentWidget = null;
     
     function showWidget(widgetId) {
@@ -2967,11 +3297,34 @@
         }
     }
     
-    function playRadio(url) {
+    // Radio Functions - Enhanced
+    let currentStation = null;
+    
+    function playRadio(url, stationName) {
         const player = document.getElementById('radio-player');
+        const nowPlaying = document.getElementById('now-playing');
+        
         if (player) { 
             player.src = url; 
-            player.play().catch(e => console.log('Playback failed:', e));
+            player.play().catch(e => {
+                console.log('Playback failed:', e);
+                nowPlaying.innerHTML = '<i class="fas fa-exclamation-triangle text-danger"></i> स्ट्रिमिङ गर्न सकिएन';
+            });
+            
+            // Update now playing display
+            if (nowPlaying) {
+                nowPlaying.innerHTML = `<i class="fas fa-play-circle text-success"></i> बजिरहेको: ${stationName}`;
+            }
+            
+            // Remove playing class from all buttons
+            document.querySelectorAll('.radio-stations button').forEach(btn => {
+                btn.classList.remove('playing');
+            });
+            
+            // Add playing class to clicked button
+            event.target.classList.add('playing');
+            
+            currentStation = stationName;
         }
     }
     
@@ -3146,6 +3499,14 @@
                 openModal('adPopupModal');
                 sessionStorage.setItem('adShown', 'true');
             }, 30000);
+        }
+        
+        // Show auto popup after 45 seconds (only once per session)
+        if (!sessionStorage.getItem('autoPopupShown')) {
+            setTimeout(() => {
+                openModal('autoPopupModal');
+                sessionStorage.setItem('autoPopupShown', 'true');
+            }, 45000);
         }
     };
     
