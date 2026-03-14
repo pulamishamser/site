@@ -1697,52 +1697,186 @@ function myFunction() {
 
 <!-- Quick Access Buttons -->
 <!-- Quick Access Buttons -->
-<div class="row mt-3 mb-3">
-    <div class="col-3">
-        <button class="btn btn-primary w-100" onclick="openModal('iemisModal');">
-            <i class="fas fa-graduation-cap me-2"></i>IEMIS
-        </button>
-    </div>
-    <div class="col-3">
-        <button class="btn btn-success w-100" onclick="openModal('idCardModal');">
-            <i class="fas fa-id-card me-2"></i>ID Card
-        </button>
-    </div>
-    <div class="col-3">
-        <button class="btn btn-warning w-100" onclick="openModal('quizModal');">
-            <i class="fas fa-laptop-code me-2"></i>Quiz
-        </button>
-    </div>
-    <div class="col-3">
-        <button class="btn btn-info w-100 text-white" onclick="openModal('resultModal');">
-            <i class="fas fa-search me-2"></i>Check Result
-        </button>
-    </div>
-</div>
 
-<!-- ID Card Software Buttons Section (Separate from Quick Access) -->
-<div class="row mt-4 mb-3">
-    <div class="col-12">
-        <div class="card bg-light p-3">
-            <div class="row align-items-center">
-                <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
-                    <h5 class="mb-0 text-primary"><i class="fas fa-id-card me-2"></i>ID Card Software</h5>
+
+
+
+
+
+    <!-- ID Card Generator Software Modal -->
+    <div class="modal fade" id="demoModal" tabindex="-1" aria-labelledby="demoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="demoModalLabel">ID Card Generator Software</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="col-md-8 text-center text-md-end">
-                    <button class="btn btn-success me-2 mb-2 mb-md-0" onclick="openModal('idCardModal')">
-                        <i class="fas fa-download me-2"></i>अफलाइन संस्करण
-                    </button>
-                    <a href="https://shamser.info.np/IDCardDemo.html" class="btn btn-outline-primary me-2 mb-2 mb-md-0" target="_blank">
-                        <i class="fas fa-globe me-2"></i>अनलाइन संस्करण
-                    </a>
-                    <a href="https://shamser.info.np/Multi%20letterpad.html" class="btn btn-warning mb-2 mb-md-0" target="_blank">
-                        <i class="fas fa-pencil-alt me-2"></i>लेटरप्याड
+                <h5 class="p-3">जानकारी: यो सफ्टवेयर शैक्षिक उद्देश्यका लागि मात्र हो।</h5>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <img src="https://shamser.info.np/HomePage/Id_card Software.JPG" class="img-fluid rounded" style="max-height:150px;" alt="ID Card Generator Logo">
+                        <h4 class="mt-2">ID Card Generator Software</h4>
+                        <p class="text-muted">Professional ID Card Creation Tool for Schools and Organizations</p>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h5>Features:</h5>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <i class="fas fa-qrcode text-primary me-2"></i> Auto QR code generation
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-camera text-primary me-2"></i> Auto photo path creation
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-database text-primary me-2"></i> Student/Teacher database
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-print text-primary me-2"></i> printing support
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-palette text-primary me-2"></i> Time saving
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-file-alt text-success me-2"></i> एउटा A4 साइज पेपरमा ९ जनाको ID Card अट्छ
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-layer-group text-success me-2"></i> आवश्यक अनुसार जति पनि ID Card Generate गर्न सकिन्छ
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-qrcode text-success me-2"></i> QR Code Image आफै Generate हुन्छ
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-user-graduate text-success me-2"></i> विद्यार्थीको नाम फोटो फाइलको नामब
+                                  पिछली लाइन से जारी रखते हुए - मैं HTML कोड के बाकी हिस्से दिखाता हूं:
+
+```html
+                                    <i class="fas fa-id-badge text-success me-2"></i> School logo can be uploaded
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-signature text-success me-2"></i> School Principal signature image can be uploaded
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-shield-alt text-success me-2"></i> Security hologram can be used
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-barcode text-success me-2"></i> QR Code स्क्यान गरेर नाम, कक्षा र रोल नम्बर पत्ता लगाउन सकिन्छ
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Demo Video:</h5>
+                            <div class="ratio ratio-16x9">
+                                <video controls class="rounded">
+                                    <source src="Home/ID Card Generator Software Demo video.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            
+                            <h5 class="mt-4">Supported Data Import:</h5>
+                            <div class="row text-center mt-3">
+                                <div class="col-6 mb-3">
+                                    <i class="fas fa-file-excel fa-3x text-success mb-2"></i>
+                                    <p>Excel File</p>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <i class="fas fa-database fa-3x text-primary mb-2"></i>
+                                    <p>Database</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row text-center">
+                        <div class="col-md-4 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <i class="fas fa-clock fa-2x text-primary mb-3"></i>
+                                    <h5>Time Saving</h5>
+                                    <p>Just 5-10 minutes to generate ID cards for whole school</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <i class="fas fa-mobile-alt fa-2x text-success mb-3"></i>
+                                    <h5>Mobile Compatible</h5>
+                                    <p>Works on both mobile and desktop devices</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <i class="fas fa-sync-alt fa-2x text-info mb-3"></i>
+                                    <h5>Automatic Update</h5>
+                                    <p>Auto update feature available</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-info mt-4">
+                        <h5><i class="fas fa-info-circle me-2"></i>Important Note:</h5>
+                        <p>यो सफ्टवेयर शैक्षिक उद्देश्यका लागि मात्र हो। यसलाई विद्यालय, क्याम्पस र अन्य शैक्षिक संस्थाहरूले निःशुल्क प्रयोग गर्न सक्छन्। यो सफ्टवेयर अझै Development अवस्थामा छ, त्यसैले कुनै समस्या आइपर्न सक्छ।</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="https://shamser.info.np/ID Card Software.zip" class="btn btn-primary">
+                        <i class="fas fa-download me-2"></i>Download Now
                     </a>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+    <!-- Quiz Modal -->
+    <div class="modal fade" id="quizModal" tabindex="-1" aria-labelledby="quizModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="quizModalLabel">कम्प्युटर इन्टरएक्टिभ क्विज</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="quiz-container">
+                        <h4 class="text-center mb-4">कम्प्युटर सम्बन्धी सामान्य ज्ञान क्विज</h4>
+                        
+                        <div id="quizQuestions">
+                            <!-- Questions will be loaded here -->
+                        </div>
+                        
+                        <div class="text-center mt-4">
+                            <button id="submitQuiz" class="btn btn-primary">Submit Answers</button>
+                            <button id="retakeQuiz" class="btn btn-secondary ms-2">Retake Quiz</button>
+                        </div>
+                        
+                        <div id="quizResult" class="score mt-4" style="display: none;">
+                            <!-- Result will be shown here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+       
 <!-- Modal footer -->
 <div class="modal-footer">
     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
@@ -4524,64 +4658,211 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
     </div>
 </div>
 
-<!-- ID Card Modal -->
-<div class="modal fade" id="idCardModal" tabindex="-1" aria-labelledby="idCardModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<!-- ID Card Generator Software Modal -->
+<div class="modal fade" id="idCardSoftwareModal" tabindex="-1" aria-labelledby="idCardSoftwareModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
-            <div class="modal-header bg-success text-white">
-                <h5 class="modal-title" id="idCardModalLabel"><i class="fas fa-id-card me-2"></i>ID Card Generator</h5>
+            <div class="modal-header bg-gradient" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                <h5 class="modal-title text-white" id="idCardSoftwareModalLabel">
+                    <i class="fas fa-id-card me-2"></i>ID Card Generator Software
+                </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="text-center">
-                    <img src="https://shamser.info.np/HomePage/Id_card%20Software.JPG" class="img-fluid mb-3" style="max-height: 150px;" alt="ID Card Software">
-                    <h6>अफलाइन संस्करण</h6>
-                    <ul class="list-unstyled">
-                        <li><i class="fas fa-check-circle text-success me-2"></i> QR Code सहित</li>
-                        <li><i class="fas fa-check-circle text-success me-2"></i> एक्सेल इम्पोर्ट</li>
-                        <li><i class="fas fa-check-circle text-success me-2"></i> ९ कार्ड प्रति पेज</li>
-                    </ul>
-                    <hr>
-                    <h6>अनलाइन संस्करण</h6>
-                    <ul class="list-unstyled">
-                        <li><i class="fas fa-check-circle text-success me-2"></i> तुरुन्त बनाउनुहोस्</li>
-                        <li><i class="fas fa-check-circle text-success me-2"></i> क्लाउडमा सुरक्षित</li>
-                    </ul>
-                    <a href="https://shamser.info.np/IDCardDemo.html" class="btn btn-success w-100 mb-2" target="_blank">डेमो प्रयास गर्नुहोस्</a>
-                    <button class="btn btn-primary w-100" onclick="alert('खरिदको लागि सम्पर्क गर्नुहोस्: 9844087012')">खरिद गर्नुहोस्</button>
-                    <hr>
-                    <img src="https://shamser.info.np/HomePage/esewa.JPG" style="max-width:150px;" alt="eSewa QR">
+                <div class="alert alert-warning">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <strong>जानकारी:</strong> यो सफ्टवेयर शैक्षिक उद्देश्यका लागि मात्र हो। यसलाई विद्यालय, क्याम्पस र अन्य शैक्षिक संस्थाहरूले निःशुल्क प्रयोग गर्न सक्छन्।
                 </div>
+                
+                <div class="text-center mb-4">
+                    <img src="https://shamser.info.np/HomePage/Id_card%20Software.JPG" class="img-fluid rounded shadow" style="max-height:200px;" alt="ID Card Generator Logo">
+                    <h4 class="mt-3 text-primary">ID Card Generator Software</h4>
+                    <p class="text-muted">Professional ID Card Creation Tool for Schools and Organizations</p>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-header bg-primary text-white">
+                                <h5 class="mb-0"><i class="fas fa-star me-2"></i>Features:</h5>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <i class="fas fa-qrcode text-success me-2"></i> Auto QR code generation
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="fas fa-camera text-success me-2"></i> Auto photo path creation
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="fas fa-database text-success me-2"></i> Student/Teacher database
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="fas fa-print text-success me-2"></i> Bulk printing support
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="fas fa-palette text-success me-2"></i> Time saving design
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="fas fa-file-alt text-primary me-2"></i> एउटा A4 साइज पेपरमा ९ जनाको ID Card अट्छ
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="fas fa-layer-group text-primary me-2"></i> आवश्यक अनुसार जति पनि ID Card Generate गर्न सकिन्छ
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="fas fa-qrcode text-primary me-2"></i> QR Code Image आफै Generate हुन्छ
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="fas fa-user-graduate text-primary me-2"></i> विद्यार्थीको नाम फोटो फाइलको नामबाट Auto Fill हुन्छ
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="fas fa-id-badge text-success me-2"></i> School logo can be uploaded
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="fas fa-signature text-success me-2"></i> School Principal signature can be added
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="fas fa-shield-alt text-success me-2"></i> Security hologram support
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="fas fa-barcode text-primary me-2"></i> QR Code स्क्यान गरेर नाम, कक्षा र रोल नम्बर पत्ता लगाउन सकिन्छ
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-header bg-info text-white">
+                                <h5 class="mb-0"><i class="fas fa-video me-2"></i>Demo Video:</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="ratio ratio-16x9">
+                                    <video controls class="rounded" poster="https://shamser.info.np/HomePage/Id_card%20Software.JPG">
+                                        <source src="Home/ID Card Generator Software Demo video.mp4" type="video/mp4">
+                                        <source src="https://shamser.info.np/HomePage/ID%20Card%20Generator%20Software%20Demo%20video.mp4" type="video/mp4">
+                                        Your browser does not support the video tag. 
+                                        <a href="https://shamser.info.np/HomePage/ID%20Card%20Generator%20Software%20Demo%20video.mp4" class="btn btn-primary">Click to download video</a>
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header bg-success text-white">
+                                <h5 class="mb-0"><i class="fas fa-database me-2"></i>Supported Data Import:</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row text-center">
+                                    <div class="col-6 mb-3">
+                                        <i class="fas fa-file-excel fa-4x text-success mb-2"></i>
+                                        <p class="fw-bold">Excel File</p>
+                                        <span class="badge bg-success">.xlsx, .xls</span>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <i class="fas fa-database fa-4x text-primary mb-2"></i>
+                                        <p class="fw-bold">Database</p>
+                                        <span class="badge bg-primary">MySQL, SQLite</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row text-center mb-4">
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100 border-primary">
+                            <div class="card-body">
+                                <i class="fas fa-clock fa-3x text-primary mb-3"></i>
+                                <h5>Time Saving</h5>
+                                <p>Just 5-10 minutes to generate ID cards for whole school</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100 border-success">
+                            <div class="card-body">
+                                <i class="fas fa-mobile-alt fa-3x text-success mb-3"></i>
+                                <h5>Mobile Compatible</h5>
+                                <p>Works on both mobile and desktop devices</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100 border-info">
+                            <div class="card-body">
+                                <i class="fas fa-sync-alt fa-3x text-info mb-3"></i>
+                                <h5>Automatic Update</h5>
+                                <p>Auto update feature available</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="alert alert-info">
+                    <h5><i class="fas fa-info-circle me-2"></i>Important Note:</h5>
+                    <p class="mb-0">यो सफ्टवेयर अझै Development अवस्थामा छ, त्यसैले कुनै समस्या आइपर्न सक्छ। कृपया समस्या आएमा shamserpulami500@gmail.com मा इमेल गर्नुहोस्।</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-2"></i>Close
+                </button>
+                <a href="https://shamser.info.np/ID%20Card%20Software.zip" class="btn btn-primary" download>
+                    <i class="fas fa-download me-2"></i>Download Now (Offline Version)
+                </a>
+                <a href="https://shamser.info.np/IDCardDemo.html" class="btn btn-success" target="_blank">
+                    <i class="fas fa-globe me-2"></i>Try Online Version
+                </a>
             </div>
         </div>
     </div>
 </div>
 
 <!-- Quiz Modal -->
+<!-- Quiz Modal -->
 <div class="modal fade" id="quizModal" tabindex="-1" aria-labelledby="quizModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header bg-warning">
-                <h5 class="modal-title" id="quizModalLabel"><i class="fas fa-laptop-code me-2"></i>Computer Quiz</h5>
+                <h5 class="modal-title" id="quizModalLabel">
+                    <i class="fas fa-laptop-code me-2"></i>कम्प्युटर इन्टरएक्टिभ क्विज
+                </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div id="quizContainer" class="mb-3">
-                    <h5 id="quizQuestion"></h5>
-                    <div id="quizOptions" class="mt-3"></div>
+                <div class="quiz-container">
+                    <h4 class="text-center mb-4 text-primary">कम्प्युटर सम्बन्धी सामान्य ज्ञान क्विज</h4>
+                    
+                    <div id="quizQuestions" class="mb-4">
+                        <!-- Questions will be loaded here -->
+                    </div>
+                    
+                    <div class="text-center mt-4">
+                        <button id="submitQuiz" class="btn btn-primary px-4 py-2" onclick="submitQuiz()">
+                            <i class="fas fa-check-circle me-2"></i>Submit Answers
+                        </button>
+                        <button id="retakeQuiz" class="btn btn-secondary px-4 py-2 ms-2" onclick="resetQuiz()">
+                            <i class="fas fa-redo-alt me-2"></i>Retake Quiz
+                        </button>
+                    </div>
+                    
+                    <div id="quizResult" class="score mt-4" style="display: none;">
+                        <!-- Result will be shown here -->
+                    </div>
                 </div>
-                <div class="d-flex justify-content-between">
-                    <button class="btn btn-outline-secondary" onclick="prevQuestion()">अघिल्लो</button>
-                    <span id="quizProgress">प्रश्न १/५</span>
-                    <button class="btn btn-outline-primary" onclick="nextQuestion()">अर्को</button>
-                </div>
-                <button class="btn btn-success w-100 mt-3" onclick="submitQuiz()">उत्तर पेश गर्नुहोस्</button>
-                <div id="quizResult" class="mt-3"></div>
             </div>
         </div>
     </div>
 </div>
 
+
+
+
+
+ 
 <!-- Features Modal -->
 <div class="modal fade" id="featuresModal" tabindex="-1" aria-labelledby="featuresModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -4743,74 +5024,156 @@ function closeModal(modalId) {
 }
 
 // Quiz functions
-const quizData = [
-    { q: "CPU को पूरा रूप?", options: ["Computer Processing Unit", "Central Processing Unit", "Central Process Unit", "Computer Process Unit"], answer: 1 },
-    { q: "कुन अपरेटिङ सिस्टम होइन?", options: ["Windows", "Linux", "Photoshop", "macOS"], answer: 2 },
-    { q: "RAM को पूरा रूप?", options: ["Random Access Memory", "Read Access Memory", "Random Available Memory", "Read Available Memory"], answer: 0 },
-    { q: "वेब विकासको लागि कुन भाषा?", options: ["Python", "Java", "HTML", "C++"], answer: 2 },
-    { q: "URL को पूरा रूप?", options: ["Uniform Resource Locator", "Universal Resource Locator", "Uniform Resource Link", "Universal Resource Link"], answer: 0 }
+<script>
+// Quiz Data
+const quizQuestions = [
+    {
+        question: "CPU को पूरा रूप के हो?",
+        options: ["Central Processing Unit", "Computer Personal Unit", "Central Program Unit", "Computer Processing Unit"],
+        correct: 0
+    },
+    {
+        question: "कुन अपरेटिङ सिस्टम होइन?",
+        options: ["Windows", "Linux", "Photoshop", "macOS"],
+        correct: 2
+    },
+    {
+        question: "RAM को पूरा रूप के हो?",
+        options: ["Random Access Memory", "Read Access Memory", "Random Available Memory", "Read Available Memory"],
+        correct: 0
+    },
+    {
+        question: "URL को पूरा रूप के हो?",
+        options: ["Uniform Resource Locator", "Universal Resource Locator", "Uniform Resource Link", "Universal Resource Link"],
+        correct: 0
+    },
+    {
+        question: "HTML को पूरा रूप के हो?",
+        options: ["Hyper Text Markup Language", "High Text Markup Language", "Hyper Transfer Markup Language", "High Transfer Markup Language"],
+        correct: 0
+    }
 ];
 
-let currentQ = 0;
-let userAnswers = new Array(quizData.length).fill(null);
+let currentAnswers = new Array(quizQuestions.length).fill(null);
 
-function loadQuizQuestion() {
-    if (!document.getElementById('quizQuestion')) return;
-    
-    document.getElementById('quizQuestion').innerHTML = quizData[currentQ].q;
-    let optionsHtml = '';
-    quizData[currentQ].options.forEach((option, index) => {
-        optionsHtml += `
-            <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="quizOption" id="option${index}" value="${index}" ${userAnswers[currentQ] === index ? 'checked' : ''}>
-                <label class="form-check-label" for="option${index}">${option}</label>
+function loadQuiz() {
+    let quizHtml = '';
+    for (let i = 0; i < quizQuestions.length; i++) {
+        quizHtml += `
+            <div class="card mb-3">
+                <div class="card-header bg-light">
+                    <strong>प्रश्न ${i + 1}:</strong> ${quizQuestions[i].question}
+                </div>
+                <div class="card-body">
+                    <div class="row">
+        `;
+        
+        for (let j = 0; j < quizQuestions[i].options.length; j++) {
+            quizHtml += `
+                <div class="col-md-6 mb-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q${i}" id="q${i}o${j}" value="${j}" onchange="saveAnswer(${i}, ${j})">
+                        <label class="form-check-label" for="q${i}o${j}">
+                            ${quizQuestions[i].options[j]}
+                        </label>
+                    </div>
+                </div>
+            `;
+        }
+        
+        quizHtml += `
+                    </div>
+                </div>
             </div>
         `;
-    });
-    document.getElementById('quizOptions').innerHTML = optionsHtml;
-    document.getElementById('quizProgress').innerHTML = `प्रश्न ${currentQ + 1}/${quizData.length}`;
+    }
+    
+    document.getElementById('quizQuestions').innerHTML = quizHtml;
 }
 
-function nextQuestion() {
-    saveCurrentAnswer();
-    if (currentQ < quizData.length - 1) {
-        currentQ++;
-        loadQuizQuestion();
-    }
-}
-
-function prevQuestion() {
-    saveCurrentAnswer();
-    if (currentQ > 0) {
-        currentQ--;
-        loadQuizQuestion();
-    }
-}
-
-function saveCurrentAnswer() {
-    let selected = document.querySelector('input[name="quizOption"]:checked');
-    if (selected) {
-        userAnswers[currentQ] = parseInt(selected.value);
-    }
+function saveAnswer(questionIndex, answerIndex) {
+    currentAnswers[questionIndex] = answerIndex;
 }
 
 function submitQuiz() {
-    saveCurrentAnswer();
     let score = 0;
-    userAnswers.forEach((answer, index) => {
-        if (answer === quizData[index].answer) {
-            score++;
+    let answered = 0;
+    
+    // Check if all questions are answered
+    for (let i = 0; i < quizQuestions.length; i++) {
+        if (currentAnswers[i] !== null) {
+            answered++;
+            if (currentAnswers[i] === quizQuestions[i].correct) {
+                score++;
+            }
         }
-    });
+    }
+    
+    if (answered < quizQuestions.length) {
+        alert(`कृपया सबै ${quizQuestions.length} प्रश्नहरूको उत्तर दिनुहोस्।`);
+        return;
+    }
+    
+    // Calculate percentage
+    let percentage = (score / quizQuestions.length) * 100;
+    let grade = '';
+    let message = '';
+    
+    if (percentage >= 80) {
+        grade = 'उत्कृष्ट';
+        message = 'तपाईंको ज्ञान साँच्चै राम्रो छ!';
+    } else if (percentage >= 60) {
+        grade = 'राम्रो';
+        message = 'राम्रो प्रयास, अझै सुधार गर्न सक्नुहुन्छ।';
+    } else if (percentage >= 40) {
+        grade = 'औसत';
+        message = 'थप अध्ययन आवश्यक छ।';
+    } else {
+        grade = 'सुधार आवश्यक';
+        message = 'कृपया पुन: अध्ययन गर्नुहोस्।';
+    }
+    
+    // Show result
+    document.getElementById('quizResult').style.display = 'block';
     document.getElementById('quizResult').innerHTML = `
-        <div class="alert alert-success">
-            <h5>तपाईंको नतिजा: ${score}/${quizData.length}</h5>
-            <p>तपाईंले ${score} प्रश्न सही उत्तर दिनुभयो।</p>
+        <div class="alert alert-${percentage >= 60 ? 'success' : 'warning'}">
+            <h4 class="alert-heading">तपाईंको नतिजा:</h4>
+            <p class="mb-2">सही उत्तर: ${score} / ${quizQuestions.length}</p>
+            <p class="mb-2">प्रतिशत: ${percentage}%</p>
+            <p class="mb-2">ग्रेड: <strong>${grade}</strong></p>
+            <hr>
+            <p class="mb-0">${message}</p>
         </div>
     `;
+    
+    // Disable radio buttons after submission
+    for (let i = 0; i < quizQuestions.length; i++) {
+        let radios = document.getElementsByName(`q${i}`);
+        radios.forEach(radio => radio.disabled = true);
+    }
 }
-</script>
 
+function resetQuiz() {
+    currentAnswers = new Array(quizQuestions.length).fill(null);
+    
+    // Clear all selections
+    for (let i = 0; i < quizQuestions.length; i++) {
+        let radios = document.getElementsByName(`q${i}`);
+        radios.forEach(radio => {
+            radio.checked = false;
+            radio.disabled = false;
+        });
+    }
+    
+    // Hide result
+    document.getElementById('quizResult').style.display = 'none';
+}
+
+// Load quiz when modal is shown
+document.getElementById('quizModal').addEventListener('show.bs.modal', function () {
+    loadQuiz();
+});
+</script>
 <script>
 // Student Data for Modal Search
 const modalStudents = [
