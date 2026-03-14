@@ -1696,24 +1696,53 @@ function myFunction() {
 
 
 <!-- Quick Access Buttons -->
+<!-- Quick Access Buttons -->
 <div class="row mt-3 mb-3">
-    <div class="col-4">
+    <div class="col-3">
         <button class="btn btn-primary w-100" onclick="openModal('iemisModal');">
             <i class="fas fa-graduation-cap me-2"></i>IEMIS
         </button>
     </div>
-    <div class="col-4">
+    <div class="col-3">
         <button class="btn btn-success w-100" onclick="openModal('idCardModal');">
             <i class="fas fa-id-card me-2"></i>ID Card
         </button>
     </div>
-    <div class="col-4">
+    <div class="col-3">
         <button class="btn btn-warning w-100" onclick="openModal('quizModal');">
             <i class="fas fa-laptop-code me-2"></i>Quiz
         </button>
     </div>
+    <div class="col-3">
+        <button class="btn btn-info w-100 text-white" onclick="openModal('resultModal');">
+            <i class="fas fa-search me-2"></i>Check Result
+        </button>
+    </div>
 </div>
 
+<!-- ID Card Software Buttons Section (Separate from Quick Access) -->
+<div class="row mt-4 mb-3">
+    <div class="col-12">
+        <div class="card bg-light p-3">
+            <div class="row align-items-center">
+                <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
+                    <h5 class="mb-0 text-primary"><i class="fas fa-id-card me-2"></i>ID Card Software</h5>
+                </div>
+                <div class="col-md-8 text-center text-md-end">
+                    <button class="btn btn-success me-2 mb-2 mb-md-0" onclick="openModal('idCardModal')">
+                        <i class="fas fa-download me-2"></i>अफलाइन संस्करण
+                    </button>
+                    <a href="https://shamser.info.np/IDCardDemo.html" class="btn btn-outline-primary me-2 mb-2 mb-md-0" target="_blank">
+                        <i class="fas fa-globe me-2"></i>अनलाइन संस्करण
+                    </a>
+                    <a href="https://shamser.info.np/Multi%20letterpad.html" class="btn btn-warning mb-2 mb-md-0" target="_blank">
+                        <i class="fas fa-pencil-alt me-2"></i>लेटरप्याड
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Modal footer -->
 <div class="modal-footer">
     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
@@ -1860,7 +1889,7 @@ style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscre
 <h1 class="header3"><i class="fa fa-pencil-square-o"></i> <b>  सुशीला कार्कीद्वारा लिखित नेपाली उपन्यास-कारा (Kara) </b> </h1>
 <p style="font-size:14px">जेल जीवन, महिला हिंसा र सामाजिक बन्धनको कथा। पुस्तक समीक्षा, कथावस्तु र पात्रहरूको विस्तृत विश्लेषण</p>
 
-<img src="https://media.thuprai.com/front_covers/Kara_by_Sushila_Karki_-_front.jpg" width="100%" height="315">
+<img src="https://media.thuprai.com/front_covers/Kara_by_Sushila_Karki_-_front.jpg" width="100%" height="455">
 <div class="clear-both"></div>
 
 <h1><img src="https://pbs.twimg.com/profile_images/1579086841227059200/JyklJEUx_400x400.jpg" alt="Editor" style="float: left;width:60px;height:60px;border: 1px dotted black;margin: 10px 10px 15px 20px;"> 
@@ -2299,19 +2328,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </div>
         </section>
-
-
-
-
-
-
-
-
-
-
-
-
-     
+    
 <h2 class="header3"><i class="fa fa-pencil-square-o"></i> <b>शिक्षक दरबन्दी मिलान गर्न कार्यदल गठन गर्दै शिक्षा मन्त्रालय</b> </h2>
 
 <div class="container">
@@ -4611,7 +4628,85 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
     </div>
 </div>
 
-
+<!-- Result Search Modal -->
+<div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title" id="resultModalLabel">
+                    <i class="fas fa-search me-2"></i>विद्यार्थी नतिजा खोज्नुहोस्
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Student Result Search Form -->
+                <div class="result-container p-3">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label fw-bold">कक्षा <span class="text-danger">*</span></label>
+                            <select id="modalClass" class="form-select">
+                                <option value="">कक्षा छान्नुहोस्</option>
+                                <option value="1">कक्षा १</option>
+                                <option value="2">कक्षा २</option>
+                                <option value="3">कक्षा ३</option>
+                                <option value="4">कक्षा ४</option>
+                                <option value="5">कक्षा ५</option>
+                                <option value="6">कक्षा ६</option>
+                                <option value="7">कक्षा ७</option>
+                                <option value="8">कक्षा ८</option>
+                                <option value="9">कक्षा ९</option>
+                                <option value="10">कक्षा १०</option>
+                                <option value="11">कक्षा ११</option>
+                                <option value="12">कक्षा १२</option>
+                            </select>
+                        </div>
+                        
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label fw-bold">परीक्षा वर्ष <span class="text-danger">*</span></label>
+                            <select id="modalYear" class="form-select">
+                                <option value="">वर्ष छान्नुहोस्</option>
+                                <option value="2080">२०८०</option>
+                                <option value="2081">२०८१</option>
+                                <option value="2082">२०८२</option>
+                            </select>
+                        </div>
+                        
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label fw-bold">टर्म <span class="text-danger">*</span></label>
+                            <select id="modalTerm" class="form-select">
+                                <option value="">टर्म छान्नुहोस्</option>
+                                <option value="1">प्रथम त्रैमासिक</option>
+                                <option value="2">द्वितीय त्रैमासिक</option>
+                                <option value="3">वार्षिक परीक्षा</option>
+                            </select>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">जन्म मिति <span class="text-danger">*</span></label>
+                            <input type="date" id="modalDob" class="form-control">
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">प्रतीक नम्बर <span class="text-danger">*</span></label>
+                            <input type="text" id="modalSymbol" class="form-control" placeholder="जस्तै: 2081001">
+                        </div>
+                        
+                        <div class="col-12">
+                            <button onclick="searchModalResult()" class="btn btn-info text-white w-100 py-2">
+                                <i class="fas fa-search me-2"></i>नतिजा खोज्नुहोस्
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div id="modalResultDisplay" class="result-display mt-4" style="display: none;"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बन्द गर्नुहोस्</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
 // Auto-show welcome popup when page loads
 document.addEventListener('DOMContentLoaded', function() {
@@ -4716,7 +4811,124 @@ function submitQuiz() {
 }
 </script>
 
+<script>
+// Student Data for Modal Search
+const modalStudents = [
+    // Class 10 Students
+    { symbol: "1001", class: "10", year: "2081", term: "1", dob: "2008-05-10", name: "राम शर्मा", gpa: "3.50", result: "PASS", percentage: "85%" },
+    { symbol: "1002", class: "10", year: "2081", term: "1", dob: "2008-09-12", name: "सीता गुरुङ", gpa: "3.85", result: "PASS", percentage: "92%" },
+    { symbol: "1003", class: "10", year: "2081", term: "1", dob: "2008-03-15", name: "हरि प्रसाद", gpa: "3.20", result: "PASS", percentage: "78%" },
+    { symbol: "1004", class: "10", year: "2081", term: "1", dob: "2008-11-20", name: "गीता थापा", gpa: "3.65", result: "PASS", percentage: "88%" },
+    { symbol: "1005", class: "10", year: "2081", term: "1", dob: "2008-07-08", name: "कृष्ण बस्नेत", gpa: "2.80", result: "PASS", percentage: "72%" },
+    
+    // Class 9 Students
+    { symbol: "9001", class: "9", year: "2081", term: "1", dob: "2009-06-15", name: "सुनिता राई", gpa: "3.60", result: "PASS", percentage: "87%" },
+    { symbol: "9002", class: "9", year: "2081", term: "1", dob: "2009-08-22", name: "विक्रम सिंह", gpa: "3.40", result: "PASS", percentage: "82%" },
+    { symbol: "9003", class: "9", year: "2081", term: "1", dob: "2009-12-10", name: "अञ्जली महर्जन", gpa: "3.75", result: "PASS", percentage: "90%" }
+];
 
+function searchModalResult() {
+    let classVal = document.getElementById("modalClass").value;
+    let yearVal = document.getElementById("modalYear").value;
+    let termVal = document.getElementById("modalTerm").value;
+    let dobVal = document.getElementById("modalDob").value;
+    let symbolVal = document.getElementById("modalSymbol").value;
+
+    // Validate inputs
+    if (!classVal || !yearVal || !termVal || !dobVal || !symbolVal) {
+        alert("कृपया सबै आवश्यक जानकारी भर्नुहोस्!");
+        return;
+    }
+
+    // Show loading state
+    let resultDiv = document.getElementById("modalResultDisplay");
+    resultDiv.style.display = "block";
+    resultDiv.innerHTML = '<div class="text-center"><i class="fas fa-spinner fa-spin fa-3x text-info"></i><p class="mt-2">खोजी हुँदैछ...</p></div>';
+
+    // Simulate search delay
+    setTimeout(() => {
+        let student = modalStudents.find(st =>
+            st.class == classVal &&
+            st.year == yearVal &&
+            st.term == termVal &&
+            st.dob == dobVal &&
+            st.symbol == symbolVal
+        );
+
+        if (student) {
+            resultDiv.innerHTML = `
+                <div class="card border-success">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0"><i class="fas fa-check-circle me-2"></i>नतिजा फेला पर्यो</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>नाम:</strong> ${student.name}</p>
+                                <p><strong>प्रतीक नम्बर:</strong> ${student.symbol}</p>
+                                <p><strong>कक्षा:</strong> ${student.class}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>वर्ष:</strong> ${student.year}</p>
+                                <p><strong>प्राप्तांक:</strong> ${student.percentage}</p>
+                                <p><strong>GPA:</strong> ${student.gpa}</p>
+                                <p><strong>नतिजा:</strong> <span class="badge bg-success">${student.result}</span></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="text-center">
+                            <button class="btn btn-primary me-2" onclick="window.print()">
+                                <i class="fas fa-print me-2"></i>प्रिन्ट
+                            </button>
+                            <button class="btn btn-success" onclick="downloadResult('${student.name}', '${student.symbol}')">
+                                <i class="fas fa-download me-2"></i>डाउनलोड
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        } else {
+            resultDiv.innerHTML = `
+                <div class="card border-danger">
+                    <div class="card-header bg-danger text-white">
+                        <h5 class="mb-0"><i class="fas fa-times-circle me-2"></i>नतिजा फेला परेन!</h5>
+                    </div>
+                    <div class="card-body text-center">
+                        <i class="fas fa-search fa-4x text-danger mb-3"></i>
+                        <p class="text-muted">कृपया तपाईंको जानकारी सही छ कि छैन जाँच गर्नुहोस् र पुन: प्रयास गर्नुहोस्।</p>
+                        <button class="btn btn-outline-danger" onclick="clearModalSearch()">
+                            <i class="fas fa-redo me-2"></i>पुन: प्रयास गर्नुहोस्
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+    }, 1000);
+}
+
+function clearModalSearch() {
+    document.getElementById("modalClass").value = "";
+    document.getElementById("modalYear").value = "";
+    document.getElementById("modalTerm").value = "";
+    document.getElementById("modalDob").value = "";
+    document.getElementById("modalSymbol").value = "";
+    document.getElementById("modalResultDisplay").style.display = "none";
+}
+
+function downloadResult(name, symbol) {
+    // Create a simple text file with result info
+    const content = `विद्यार्थी नतिजा\nनाम: ${name}\nप्रतीक नम्बर: ${symbol}\nमिति: ${new Date().toLocaleDateString('ne-NP')}`;
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `Result_${symbol}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+}
+</script>
 
 
 
