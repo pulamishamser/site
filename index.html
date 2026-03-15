@@ -1880,28 +1880,42 @@ function myFunction() {
 </div>
 
 <!-- IEMIS Login Modal -->
-<div class="modal fade" id="iemisModal" tabindex="-1" aria-labelledby="iemisModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<!-- IEMIS Modal -->
+<div class="modal fade" id="iemisModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="iemisModalLabel"><i class="fas fa-sign-in-alt me-2"></i>IEMIS लगइन</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header">
+                <h5 class="modal-title fs-3"><i class="fas fa-sign-in-alt"></i> एकिकृत परीक्षा तथा सूचना प्रणाली (IEMIS)</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form id="iemisLoginForm" onsubmit="event.preventDefault(); alert('लगइन सफल भयो'); closeModal('iemisModal');">
-                    <div class="mb-3">
-                        <label class="form-label">प्रयोगकर्ता नाम</label>
-                        <input type="text" class="form-control" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">पासवर्ड</label>
-                        <input type="password" class="form-control" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100">लगइन</button>
-                </form>
-                <div class="text-center mt-3">
-                    <a href="#" class="text-decoration-none">पासवर्ड बिर्सनुभयो?</a>
+                <!-- New ID Card Option Dropdown -->
+                <div class="mb-4">
+                    <label class="form-label fs-5 fw-bold">ID Card विकल्प छान्नुहोस्</label>
+                    <select class="form-select form-select-lg" id="idCardOption">
+                        <option value="">-- ID Card विकल्प छान्नुहोस् --</option>
+                        <option value="offline">अफलाइन (Offline) - डाउनलोड गर्नुहोस्</option>
+                        <option value="online">अनलाइन (Online) - वेब संस्करण</option>
+                    </select>
                 </div>
+                
+                <!-- IEMIS Login Form -->
+                <form id="iemisLoginForm">
+                    <div class="mb-4">
+                        <label class="form-label fs-5 fw-bold">प्रयोगकर्ता नाम</label>
+                        <input type="text" class="form-control form-control-lg" id="username" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label fs-5 fw-bold">पासवर्ड</label>
+                        <input type="password" class="form-control form-control-lg" id="password" required>
+                    </div>
+                    <div class="mb-4 form-check">
+                        <input type="checkbox" class="form-check-input" id="rememberMe">
+                        <label class="form-check-label fs-5">मलाई सम्झनुहोस्</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 py-3 fs-4 fw-bold">लगइन गर्नुहोस्</button>
+                    <div id="loginMsg" class="text-center mt-3 fs-5"></div>
+                </form>
             </div>
         </div>
     </div>
@@ -2636,11 +2650,60 @@ function downloadResult(name, symbol) {
     document.body.removeChild(a);
     window.URL.revokeObjectURL(url);
 }
+
+
+
+// IEMIS Login with ID Card Option Dropdown
+document.getElementById('iemisLoginForm')?.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const remember = document.getElementById('rememberMe').checked;
+    const idCardOption = document.getElementById('idCardOption').value;
+    const msg = document.getElementById('loginMsg');
+    
+    // Check if ID Card option is selected
+    if (!idCardOption) {
+        msg.innerHTML = "<span class='text-danger fs-5'>कृपया ID Card विकल्प छान्नुहोस्</span>";
+        return;
+    }
+    
+    msg.innerHTML = "<span class='text-primary fs-5'>जाँच हुँदैछ...</span>";
+    
+    // Demo login - replace with actual API
+    setTimeout(() => {
+        if (username && password) {
+            msg.innerHTML = "<span class='text-success fs-5'>लगइन सफल भयो...</span>";
+            
+            // Redirect based on ID Card option
+            setTimeout(() => {
+                if (idCardOption === 'offline') {
+                    // Offline version - download
+                    window.location.href = "https://shamser.info.np/ID%20Card%20Software.zip";
+                } else if (idCardOption === 'online') {
+                    // Online version
+                    window.location.href = "https://shamser.info.np/IDCardDemo.html";
+                } else {
+                    // Default IEMIS dashboard
+                    window.location.href = "https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Dashboard.html";
+                }
+            }, 800);
+        } else {
+            msg.innerHTML = "<span class='text-danger fs-5'>गलत प्रयोगकर्ता नाम वा पासवर्ड</span>";
+        }
+    }, 1000);
+});
+
+// Optional: Handle dropdown change event
+document.getElementById('idCardOption')?.addEventListener('change', function() {
+    const selectedOption = this.value;
+    if (selectedOption) {
+        console.log('Selected ID Card option:', selectedOption);
+        // You can add additional logic here if needed
+    }
+});
 </script>
-
-
-
-
 
 
 
