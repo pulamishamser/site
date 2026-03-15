@@ -1737,7 +1737,7 @@ function myFunction() {
                 <span>ID Card</span>
             </button>
             <ul class="dropdown-menu w-100" aria-labelledby="idCardDropdownBtn">
-                <li><h6 class="dropdown-header">ID Card विकल्पहरू</h6></li>
+                <li><h6 class="dropdown-header">ID Card Options</h6></li>
                 <li><a class="dropdown-item" href="#" onclick="openIDCardOption('offline'); return false;"><i class="fas fa-download me-2 text-success"></i>अफलाइन डाउनलोड</a></li>
                 <li><a class="dropdown-item" href="#" onclick="openIDCardOption('online'); return false;"><i class="fas fa-globe me-2 text-primary"></i>अनलाइन प्रयोग गर्नुहोस्</a></li>
                 <li><hr class="dropdown-divider"></li>
@@ -1839,6 +1839,817 @@ $(document).ready(function(){
 
 <!----End-----myModal----------->   
 
+<!---------------Pop up ----->
+<style>
+
+/* General Styles */
+:root {
+    --primary-color: #4361ee;
+    --secondary-color: #3f37c9;
+    --success-color: #4cc9f0;
+    --warning-color: #f8961e;
+    --danger-color: #f94144;
+    --dark-color: #2b2d42;
+    --light-color: #f8f9fa;
+}
+
+body {
+    font-family: 'Segoe UI', 'Poppins', 'Nepali', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: var(--dark-color);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+/* Button Styles */
+.btn {
+    border-radius: 12px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:active::after {
+    width: 300px;
+    height: 300px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    border: none;
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    border: none;
+    color: #fff;
+}
+
+.btn-info {
+    background: linear-gradient(135deg, #3b8dff 0%, #6b3bff 100%);
+    border: none;
+    color: #fff;
+}
+
+/* Modal Styles */
+.modal-content {
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    border-radius: 20px 20px 0 0;
+    padding: 1.5rem;
+}
+
+.modal-header.bg-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+.modal-header.bg-success {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%) !important;
+}
+
+.modal-header.bg-warning {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%) !important;
+}
+
+.modal-header.bg-info {
+    background: linear-gradient(135deg, #3b8dff 0%, #6b3bff 100%) !important;
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+.modal-footer {
+    border-radius: 0 0 20px 20px;
+    padding: 1rem 1.5rem;
+}
+
+/* Form Styles */
+.form-control, .form-select {
+    border-radius: 12px;
+    border: 2px solid #e9ecef;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.25);
+}
+
+.form-control-lg {
+    padding: 1rem 1.25rem;
+    font-size: 1.1rem;
+}
+
+.form-check-input:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* Card Styles */
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+    border-radius: 15px 15px 0 0 !important;
+    font-weight: 600;
+}
+
+/* List Group Styles */
+.list-group-item {
+    border: none;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #f1f3f5;
+    transition: background-color 0.3s ease;
+}
+
+.list-group-item:last-child {
+    border-bottom: none;
+}
+
+.list-group-item:hover {
+    background-color: #f8f9fa;
+}
+
+/* Alert Styles */
+.alert {
+    border: none;
+    border-radius: 15px;
+    padding: 1rem 1.5rem;
+}
+
+.alert-warning {
+    background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%);
+    color: #856404;
+}
+
+.alert-info {
+    background: linear-gradient(135deg, #d1ecf1 0%, #b6effb 100%);
+    color: #0c5460;
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+    color: #155724;
+}
+
+/* Quick Access Buttons */
+.row.g-3 .btn {
+    padding: 1.5rem 0.5rem !important;
+    border-radius: 15px;
+}
+
+.row.g-3 .btn i {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.row.g-3 .btn span {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* Dropdown Styles */
+.dropdown-menu {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    padding: 0.5rem;
+    animation: dropdownFade 0.2s ease;
+}
+
+@keyframes dropdownFade {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dropdown-item {
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    transform: translateX(5px);
+}
+
+.dropdown-item i {
+    width: 20px;
+    margin-right: 10px;
+}
+
+/* Pricing Cards */
+.pricing-card {
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.pricing-card:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-10px);
+}
+
+.pricing-card .card-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1rem;
+}
+
+.pricing-card .card-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--dark-color);
+}
+
+.pricing-card .card-footer {
+    background: transparent;
+    border-top: none;
+    padding: 1rem;
+}
+
+/* Carousel Styles */
+.carousel {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-indicators button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin: 0 5px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    padding: 20px;
+}
+
+/* Subscription Button Styles */
+.subscribe-container {
+    position: relative;
+}
+
+#subscribeBtn {
+    background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+#subscribeBtn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 20px rgba(255, 107, 107, 0.4);
+}
+
+#subscribeBtn .badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #f94144;
+    color: white;
+    border-radius: 50%;
+    padding: 5px 8px;
+    font-size: 12px;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.counter-container {
+    margin-top: 10px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+}
+
+.counter-value {
+    font-weight: bold;
+    color: #4cc9f0;
+    font-size: 1.2rem;
+}
+
+/* Subscription Modal Styles */
+.subscription-modal .modal-content {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.subscription-modal .form-control {
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    color: var(--dark-color);
+}
+
+.subscription-modal .form-control:focus {
+    background: white;
+    box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.5);
+}
+
+.benefits-list {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.benefits-list li {
+    list-style: none;
+    margin-bottom: 10px;
+    padding: 5px 0;
+}
+
+.benefits-list i {
+    color: #4cc9f0;
+    margin-right: 10px;
+}
+
+.success-message {
+    display: none;
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(76, 201, 240, 0.2);
+    border-radius: 10px;
+    color: white;
+}
+
+/* Quiz Styles */
+.quiz-container {
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.quiz-container .card {
+    border: 2px solid #f1f3f5;
+    transition: all 0.3s ease;
+}
+
+.quiz-container .card:hover {
+    border-color: var(--primary-color);
+}
+
+.quiz-container .form-check {
+    padding: 10px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.quiz-container .form-check:hover {
+    background-color: #f8f9fa;
+}
+
+.quiz-container .form-check-input:checked + .form-check-label {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Result Display Styles */
+.result-display .card {
+    border: 2px solid transparent;
+}
+
+.result-display .card.border-success {
+    border-color: var(--success-color);
+}
+
+.result-display .card.border-danger {
+    border-color: var(--danger-color);
+}
+
+/* Welcome Popup Modal */
+#welcomePopupModal .modal-body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+#welcomePopupModal .btn {
+    padding: 1rem 0.5rem;
+    font-size: 1rem;
+}
+
+#welcomePopupModal .btn i {
+    font-size: 2rem;
+}
+
+/* Ad Popup Modal */
+#adPopupModal .modal-header {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+}
+
+/* Auto Popup Modal */
+#autoPopupModal .modal-header {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+}
+
+/* IEMIS Modal */
+#iemisModal .modal-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+#iemisModal .btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    font-size: 1.2rem;
+    padding: 1rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .modal-dialog {
+        margin: 10px;
+    }
+    
+    .row.g-3 .btn {
+        padding: 1rem 0.5rem !important;
+    }
+    
+    .row.g-3 .btn i {
+        font-size: 2rem;
+    }
+    
+    .row.g-3 .btn span {
+        font-size: 1rem;
+    }
+    
+    .modal-body {
+        padding: 1.5rem;
+    }
+    
+    .pricing-card {
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .btn {
+        font-size: 0.9rem;
+    }
+    
+    h4 {
+        font-size: 1.2rem;
+    }
+    
+    h5 {
+        font-size: 1rem;
+    }
+    
+    .modal-title {
+        font-size: 1.1rem;
+    }
+}
+
+/* Animation Classes */
+.fade-in {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.slide-in {
+    animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Loading Spinner */
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+    color: var(--primary-color);
+}
+
+/* Tooltip Styles */
+[data-tooltip] {
+    position: relative;
+    cursor: pointer;
+}
+
+[data-tooltip]:before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 10px;
+    background: var(--dark-color);
+    color: white;
+    border-radius: 5px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+[data-tooltip]:hover:before {
+    opacity: 1;
+    visibility: visible;
+    bottom: 120%;
+}
+
+/* Custom Checkbox Styles */
+.custom-checkbox {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.custom-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.custom-checkbox:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+.custom-checkbox input:checked ~ .checkmark {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.custom-checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.custom-checkbox .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
+
+/* Progress Bar Styles */
+.progress {
+    height: 10px;
+    border-radius: 5px;
+    background-color: #e9ecef;
+}
+
+.progress-bar {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 5px;
+    animation: progress 1s ease;
+}
+
+@keyframes progress {
+    from {
+        width: 0;
+    }
+}
+
+/* Badge Styles */
+.badge {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+.badge.bg-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+.badge.bg-success {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%) !important;
+}
+
+.badge.bg-warning {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%) !important;
+}
+
+/* Nepali Font Support */
+@font-face {
+    font-family: 'Nepali';
+    src: url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
+    font-display: swap;
+}
+
+.nepali-text {
+    font-family: 'Hind Siliguri', 'Nepali', sans-serif;
+}
+
+/* Glassmorphism Effects */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 20px;
+}
+
+/* Gradient Text */
+.gradient-text {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Hover Effects */
+.hover-scale {
+    transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+    transform: scale(1.05);
+}
+
+.hover-rotate {
+    transition: transform 0.3s ease;
+}
+
+.hover-rotate:hover {
+    transform: rotate(5deg);
+}
+
+/* Loading Skeleton */
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .btn, .modal-footer, .no-print {
+        display: none !important;
+    }
+    
+    .modal-content {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+    
+    body {
+        background: white;
+    }
+}
+
+ </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
 <div class="container cmspage">
  <div class="row">
  <div class="col-md-9" col-sm-12 style="padding:0px; margin:0px;">
@@ -1883,6 +2694,17 @@ style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscre
      
     </div>
     <div class="carousel-inner">
+
+     <div class="carousel-item active">
+            <img src="HomePage/20260310014938_5921904.jpeg" class="d-block w-100" alt="" style="height: 400px; object-fit: cover;">
+            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 p-4 rounded">
+                <h2>shamser.info.np</h2>
+                <p>Advertisement</p>
+                <a href="#" class="btn btn-success">more</a>
+            </div>
+        </div>
+
+     
         <div class="carousel-item">
             <img src="https://shamser.info.np/HomePage/IEMIS%20SHAMSER.jpg" class="d-block w-100" alt="IEMIS" style="height: 400px; object-fit: cover;">
             <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 p-4 rounded">
@@ -1895,8 +2717,7 @@ style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscre
 
      
        <div class="carousel-item">
-            <img src="HomePage/645438540_122202357224340431_2596040425311961331_n.jpg
-" class="d-block w-100" alt="" style="height: 400px; object-fit: cover;">
+            <img src="HomePage/645438540_122202357224340431_2596040425311961331_n.jpg" class="d-block w-100" alt="" style="height: 400px; object-fit: cover;">
             <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 p-4 rounded">
                 <h2>shamser.info.np</h2>
                 <p>Comprensive educational resources</p>
@@ -1907,22 +2728,13 @@ style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscre
 
 
 
-     <div class="carousel-item active">
-            <img src="HomePage/20260310014938_5921904.jpeg
-" class="d-block w-100" alt="" style="height: 400px; object-fit: cover;">
-            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 p-4 rounded">
-                <h2>shamser.info.np</h2>
-                <p>Advertisement</p>
-                <a href="#" class="btn btn-success">more</a>
-            </div>
-        </div>
+
 
      
 
 <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="HomePage/ID Card Generator Tool.JPG
-" class="d-block w-100" alt="id card" style="height: 400px; object-fit: cover;">
+        <div class="carousel-item ">
+            <img src="HomePage/ID Card Generator Tool.JPG" class="d-block w-100" alt="id card" style="height: 400px; object-fit: cover;">
             <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 p-4 rounded">
                 <h2>ID Card generator tool</h2>
                 <p>छिटो र सजिलो तरिकाले id card तयार पार्ने डिजिटल समाधान</p>
