@@ -5393,7 +5393,639 @@ function downloadTrialVersion() {
 
 <!---========------->
 
+<!-- Add these after the existing modals and before the closing body tag -->
 
+<!-- WhatsApp Community Modal -->
+<div class="modal fade" id="whatsappModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title">
+                    <i class="fab fa-whatsapp me-2"></i>Join WhatsApp Community
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center">
+                <i class="fab fa-whatsapp fa-5x text-success mb-3"></i>
+                <h4>शैक्षिक WhatsApp समूह</h4>
+                <p class="text-muted mb-4">शिक्षक, विद्यार्थी र अभिभावकहरूको लागि शैक्षिक सामग्री आदानप्रदान समूह</p>
+                
+                <div class="list-group mb-4">
+                    <a href="#" class="list-group-item list-group-item-action d-flex align-items-center">
+                        <i class="fab fa-whatsapp text-success fa-2x me-3"></i>
+                        <div class="text-start">
+                            <h6 class="mb-0">शिक्षक समूह</h6>
+                            <small class="text-muted">२५०+ सदस्यहरू</small>
+                        </div>
+                        <i class="fas fa-chevron-right ms-auto"></i>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action d-flex align-items-center">
+                        <i class="fab fa-whatsapp text-success fa-2x me-3"></i>
+                        <div class="text-start">
+                            <h6 class="mb-0">विद्यार्थी समूह</h6>
+                            <small class="text-muted">५००+ सदस्यहरू</small>
+                        </div>
+                        <i class="fas fa-chevron-right ms-auto"></i>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action d-flex align-items-center">
+                        <i class="fab fa-whatsapp text-success fa-2x me-3"></i>
+                        <div class="text-start">
+                            <h6 class="mb-0">अभिभावक समूह</h6>
+                            <small class="text-muted">१८०+ सदस्यहरू</small>
+                        </div>
+                        <i class="fas fa-chevron-right ms-auto"></i>
+                    </a>
+                </div>
+                
+                <div class="d-grid">
+                    <button class="btn btn-success" onclick="window.open('https://chat.whatsapp.com/example', '_blank')">
+                        <i class="fab fa-whatsapp me-2"></i>Join Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Feedback Modal -->
+<div class="modal fade" id="feedbackModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title">
+                    <i class="fas fa-comment me-2"></i>प्रतिक्रिया दिनुहोस्
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="feedbackForm">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">तपाईंको नाम</label>
+                        <input type="text" class="form-control" id="feedbackName" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">इमेल ठेगाना</label>
+                        <input type="email" class="form-control" id="feedbackEmail" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">प्रतिक्रिया प्रकार</label>
+                        <select class="form-select" id="feedbackType">
+                            <option value="suggestion">सुझाव</option>
+                            <option value="bug">समस्या रिपोर्ट</option>
+                            <option value="feature">नयाँ सुविधाको लागि अनुरोध</option>
+                            <option value="other">अन्य</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">तपाईंको प्रतिक्रिया</label>
+                        <textarea class="form-control" id="feedbackMessage" rows="4" required></textarea>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="rating text-center">
+                            <span class="fw-bold d-block mb-2">हामीलाई मूल्याङ्कन गर्नुहोस्</span>
+                            <div class="star-rating">
+                                <i class="far fa-star fa-2x text-warning" onclick="rate(1)"></i>
+                                <i class="far fa-star fa-2x text-warning" onclick="rate(2)"></i>
+                                <i class="far fa-star fa-2x text-warning" onclick="rate(3)"></i>
+                                <i class="far fa-star fa-2x text-warning" onclick="rate(4)"></i>
+                                <i class="far fa-star fa-2x text-warning" onclick="rate(5)"></i>
+                            </div>
+                            <input type="hidden" id="ratingValue" value="0">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-info text-white w-100 py-2">
+                        <i class="fas fa-paper-plane me-2"></i>प्रतिक्रिया पठाउनुहोस्
+                    </button>
+                </form>
+                
+                <div id="feedbackSuccess" class="alert alert-success mt-3" style="display: none;">
+                    <i class="fas fa-check-circle me-2"></i>धन्यवाद! तपाईंको प्रतिक्रिया सफलतापूर्वक पठाइयो।
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Download Counter Modal -->
+<div class="modal fade" id="downloadModal" tabindex="-1">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h6 class="modal-title">
+                    <i class="fas fa-download me-2"></i>Download Started
+                </h6>
+            </div>
+            <div class="modal-body text-center">
+                <i class="fas fa-check-circle fa-4x text-success mb-3"></i>
+                <h5>Thank You!</h5>
+                <p class="text-muted">Your download will begin shortly.</p>
+                <div class="progress mb-3" style="height: 5px;">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width: 100%"></div>
+                </div>
+                <p class="small text-muted">
+                    <i class="fas fa-download me-1"></i>
+                    Total Downloads: <span id="downloadCount">1,234</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Help Modal -->
+<div class="modal fade" id="helpModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-warning">
+                <h5 class="modal-title">
+                    <i class="fas fa-question-circle me-2"></i>सहायता केन्द्र
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="list-group">
+                    <button class="list-group-item list-group-item-action d-flex align-items-center" onclick="showHelp('iemis')">
+                        <i class="fas fa-graduation-cap text-primary fa-2x me-3"></i>
+                        <div class="text-start">
+                            <h6 class="mb-0">IEMIS कसरी प्रयोग गर्ने?</h6>
+                            <small class="text-muted">परीक्षा व्यवस्थापन प्रणाली</small>
+                        </div>
+                        <i class="fas fa-chevron-right ms-auto"></i>
+                    </button>
+                    
+                    <button class="list-group-item list-group-item-action d-flex align-items-center" onclick="showHelp('idcard')">
+                        <i class="fas fa-id-card text-success fa-2x me-3"></i>
+                        <div class="text-start">
+                            <h6 class="mb-0">ID Card कसरी बनाउने?</h6>
+                            <small class="text-muted">स्टेप बाइ स्टेप गाइड</small>
+                        </div>
+                        <i class="fas fa-chevron-right ms-auto"></i>
+                    </button>
+                    
+                    <button class="list-group-item list-group-item-action d-flex align-items-center" onclick="showHelp('quiz')">
+                        <i class="fas fa-laptop-code text-warning fa-2x me-3"></i>
+                        <div class="text-start">
+                            <h6 class="mb-0">क्विज कसरी खेल्ने?</h6>
+                            <small class="text-muted">इन्टरएक्टिभ क्विज नियमहरू</small>
+                        </div>
+                        <i class="fas fa-chevron-right ms-auto"></i>
+                    </button>
+                    
+                    <button class="list-group-item list-group-item-action d-flex align-items-center" onclick="showHelp('result')">
+                        <i class="fas fa-search text-info fa-2x me-3"></i>
+                        <div class="text-start">
+                            <h6 class="mb-0">नतिजा कसरी हेर्ने?</h6>
+                            <small class="text-muted">विद्यार्थी नतिजा खोजी</small>
+                        </div>
+                        <i class="fas fa-chevron-right ms-auto"></i>
+                    </button>
+                </div>
+                
+                <div id="helpContent" class="mt-4 p-3 bg-light rounded" style="display: none;">
+                    <!-- Dynamic help content will appear here -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add these floating action buttons -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 999">
+    <!-- Quick Help Button -->
+    <button class="btn btn-warning rounded-circle mb-2 shadow" onclick="openModal('helpModal')" 
+            data-bs-toggle="tooltip" title="सहायता">
+        <i class="fas fa-question"></i>
+    </button>
+    
+    <!-- WhatsApp Button -->
+    <button class="btn btn-success rounded-circle mb-2 shadow" onclick="openModal('whatsappModal')"
+            data-bs-toggle="tooltip" title="WhatsApp समूह">
+        <i class="fab fa-whatsapp"></i>
+    </button>
+    
+    <!-- Feedback Button -->
+    <button class="btn btn-info rounded-circle mb-2 shadow text-white" onclick="openModal('feedbackModal')"
+            data-bs-toggle="tooltip" title="प्रतिक्रिया">
+        <i class="fas fa-comment"></i>
+    </button>
+    
+    <!-- Back to Top Button -->
+    <button class="btn btn-primary rounded-circle shadow" onclick="scrollToTop()"
+            data-bs-toggle="tooltip" title="माथि जानुहोस्">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+</div>
+
+<!-- Add this notification toast container -->
+<div class="toast-container position-fixed bottom-0 start-0 p-3">
+    <div id="notificationToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="5000">
+        <div class="toast-header bg-primary text-white">
+            <i class="fas fa-bell me-2"></i>
+            <strong class="me-auto">सूचना</strong>
+            <small>अहिले</small>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
+        </div>
+        <div class="toast-body" id="toastMessage">
+            नयाँ शैक्षिक सामग्रीहरू अपलोड गरिएको छ।
+        </div>
+    </div>
+</div>
+
+<!-- Add these JavaScript functions -->
+<script>
+// Rating system for feedback
+function rate(stars) {
+    document.getElementById('ratingValue').value = stars;
+    const stars_elements = document.querySelectorAll('.star-rating i');
+    for (let i = 0; i < stars_elements.length; i++) {
+        if (i < stars) {
+            stars_elements[i].className = 'fas fa-star fa-2x text-warning';
+        } else {
+            stars_elements[i].className = 'far fa-star fa-2x text-warning';
+        }
+    }
+}
+
+// Handle feedback form submission
+document.getElementById('feedbackForm')?.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const name = document.getElementById('feedbackName').value;
+    const email = document.getElementById('feedbackEmail').value;
+    const type = document.getElementById('feedbackType').value;
+    const message = document.getElementById('feedbackMessage').value;
+    const rating = document.getElementById('ratingValue').value;
+    
+    // Send feedback to email
+    const subject = encodeURIComponent(`Feedback from ${name} - ${type}`);
+    const body = encodeURIComponent(
+        `Feedback Details:\n\n` +
+        `Name: ${name}\n` +
+        `Email: ${email}\n` +
+        `Type: ${type}\n` +
+        `Rating: ${rating} stars\n` +
+        `Message: ${message}\n` +
+        `Date: ${new Date().toLocaleString()}`
+    );
+    
+    window.location.href = `mailto:shamserpulami500@gmail.com?subject=${subject}&body=${body}`;
+    
+    // Show success message
+    document.getElementById('feedbackSuccess').style.display = 'block';
+    this.reset();
+    
+    // Reset stars
+    const stars_elements = document.querySelectorAll('.star-rating i');
+    stars_elements.forEach(star => {
+        star.className = 'far fa-star fa-2x text-warning';
+    });
+    document.getElementById('ratingValue').value = '0';
+    
+    // Hide success message after 3 seconds
+    setTimeout(() => {
+        document.getElementById('feedbackSuccess').style.display = 'none';
+        closeModal('feedbackModal');
+    }, 3000);
+});
+
+// Help system
+function showHelp(topic) {
+    const helpContent = document.getElementById('helpContent');
+    let content = '';
+    
+    switch(topic) {
+        case 'iemis':
+            content = `
+                <h6 class="text-primary"><i class="fas fa-graduation-cap me-2"></i>IEMIS प्रयोग गर्ने तरिका:</h6>
+                <ol class="mb-0">
+                    <li>IEMIS बटनमा क्लिक गर्नुहोस्</li>
+                    <li>आफ्नो प्रयोगकर्ता नाम र पासवर्ड हाल्नुहोस्</li>
+                    <li>लगइन पछि तपाईं ड्यासबोर्डमा जानुहुनेछ</li>
+                    <li>त्यहाँबाट परीक्षा व्यवस्थापन गर्न सक्नुहुन्छ</li>
+                </ol>
+            `;
+            break;
+        case 'idcard':
+            content = `
+                <h6 class="text-success"><i class="fas fa-id-card me-2"></i>ID Card बनाउने तरिका:</h6>
+                <ol class="mb-0">
+                    <li>ID Card बटनमा क्लिक गर्नुहोस्</li>
+                    <li>अफलाइन वा अनलाइन विकल्प छान्नुहोस्</li>
+                    <li>एक्सेल फाइल तयार गर्नुहोस्</li>
+                    <li>फोटोहरू राख्नुहोस्</li>
+                    <li>जेनरेट बटनमा क्लिक गर्नुहोस्</li>
+                </ol>
+            `;
+            break;
+        case 'quiz':
+            content = `
+                <h6 class="text-warning"><i class="fas fa-laptop-code me-2"></i>क्विज खेल्ने तरिका:</h6>
+                <ol class="mb-0">
+                    <li>Quiz बटनमा क्लिक गर्नुहोस्</li>
+                    <li>प्रश्नहरू पढ्नुहोस् र उत्तर दिनुहोस्</li>
+                    <li>सबै प्रश्नको उत्तर दिएपछि Submit गर्नुहोस्</li>
+                    <li>तुरुन्त नतिजा हेर्न सक्नुहुन्छ</li>
+                </ol>
+            `;
+            break;
+        case 'result':
+            content = `
+                <h6 class="text-info"><i class="fas fa-search me-2"></i>नतिजा हेर्ने तरिका:</h6>
+                <ol class="mb-0">
+                    <li>Check Result बटनमा क्लिक गर्नुहोस्</li>
+                    <li>कक्षा, वर्ष, टर्म चयन गर्नुहोस्</li>
+                    <li>जन्म मिति र प्रतीक नम्बर हाल्नुहोस्</li>
+                    <li>खोजी गर्नुहोस् र नतिजा हेर्नुहोस्</li>
+                </ol>
+            `;
+            break;
+    }
+    
+    helpContent.innerHTML = content;
+    helpContent.style.display = 'block';
+}
+
+// Download tracking
+function trackDownload(fileName) {
+    // Show download modal
+    const downloadModal = new bootstrap.Modal(document.getElementById('downloadModal'));
+    downloadModal.show();
+    
+    // Increment download count
+    const downloadCount = document.getElementById('downloadCount');
+    let count = parseInt(downloadCount.innerText.replace(',', ''));
+    count++;
+    downloadCount.innerText = count.toLocaleString();
+    
+    // Track download via email (optional)
+    const subject = encodeURIComponent('Software Download');
+    const body = encodeURIComponent(
+        `Download Details:\n\n` +
+        `Software: ${fileName}\n` +
+        `Time: ${new Date().toLocaleString()}\n` +
+        `Total Downloads: ${count}`
+    );
+    
+    // Uncomment to send email notification
+    // window.location.href = `mailto:shamserpulami500@gmail.com?subject=${subject}&body=${body}`;
+    
+    // Start actual download
+    setTimeout(() => {
+        window.location.href = fileName;
+    }, 1500);
+    
+    // Close modal after 3 seconds
+    setTimeout(() => {
+        downloadModal.hide();
+    }, 3000);
+}
+
+// Show notification toast
+function showNotification(message, type = 'info') {
+    const toast = document.getElementById('notificationToast');
+    const toastMessage = document.getElementById('toastMessage');
+    
+    // Set message
+    toastMessage.innerText = message;
+    
+    // Set color based on type
+    const toastHeader = toast.querySelector('.toast-header');
+    toastHeader.className = `toast-header bg-${type} text-white`;
+    
+    // Show toast
+    const bsToast = new bootstrap.Toast(toast);
+    bsToast.show();
+}
+
+// Scroll to top function
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Auto-show notifications periodically
+setInterval(() => {
+    const notifications = [
+        "नयाँ ID Card Software अपडेट उपलब्ध छ!",
+        "आज राती ८ बजे नि:शुल्क क्विज प्रतियोगिता हुनेछ",
+        "नयाँ शैक्षिक सामग्रीहरू अपलोड गरिएको छ",
+        "तपाईंको प्रतिक्रियाको लागि धन्यवाद!"
+    ];
+    
+    const randomNotification = notifications[Math.floor(Math.random() * notifications.length)];
+    showNotification(randomNotification, 'primary');
+}, 60000); // Show every minute
+
+// Initialize tooltips
+document.addEventListener('DOMContentLoaded', function() {
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+    
+    // Update download count periodically
+    setInterval(() => {
+        const downloadCount = document.getElementById('downloadCount');
+        if (downloadCount) {
+            let count = parseInt(downloadCount.innerText.replace(',', ''));
+            // Simulate random downloads
+            if (Math.random() > 0.7) {
+                count++;
+                downloadCount.innerText = count.toLocaleString();
+            }
+        }
+    }, 30000);
+});
+
+// Override download buttons to track downloads
+document.querySelectorAll('a[href$=".zip"], a[href$=".exe"], a[download]').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const fileName = this.getAttribute('href');
+        trackDownload(fileName);
+    });
+});
+</script>
+
+<!-- Add custom CSS for floating buttons and responsiveness -->
+<style>
+/* Floating action buttons */
+.position-fixed.bottom-0.end-0 .btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.position-fixed.bottom-0.end-0 .btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Star rating */
+.star-rating i {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: 0 2px;
+}
+
+.star-rating i:hover {
+    transform: scale(1.2);
+}
+
+/* Help content animation */
+#helpContent {
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Modal animations */
+.modal.fade .modal-dialog {
+    transform: scale(0.8);
+    transition: transform 0.2s ease-in-out;
+}
+
+.modal.show .modal-dialog {
+    transform: scale(1);
+}
+
+/* Toast notification */
+.toast {
+    min-width: 250px;
+}
+
+/* Responsive design for small screens */
+@media (max-width: 576px) {
+    .position-fixed.bottom-0.end-0 {
+        padding: 1rem !important;
+    }
+    
+    .position-fixed.bottom-0.end-0 .btn {
+        width: 40px;
+        height: 40px;
+        font-size: 0.9rem;
+    }
+    
+    .modal-dialog {
+        margin: 0.5rem;
+    }
+}
+
+/* Loading spinner animation */
+.fa-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Hover effects for cards */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+/* Gradient backgrounds for modals */
+.modal-header.bg-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Custom scrollbar for modals */
+.modal-body::-webkit-scrollbar {
+    width: 5px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Pulse animation for notification button */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(255, 193, 7, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 193, 7, 0);
+    }
+}
+
+.btn-warning.position-fixed {
+    animation: pulse 2s infinite;
+}
+
+/* Ripple effect for buttons */
+.btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 1;
+    }
+    20% {
+        transform: scale(25, 25);
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: scale(40, 40);
+    }
+}
+
+.btn:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+}
+</style>
 
 
 </body>
