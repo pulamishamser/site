@@ -1721,6 +1721,7 @@ function myFunction() {
 <!-------------=========---->
 
     <!-- Quick Access Buttons -->
+<!-- Quick Access Buttons -->
 <div class="row g-3">
     <div class="col-6">
         <button class="btn btn-primary w-100 py-3" onclick="openModal('iemisModal'); closeModal('welcomePopupModal')">
@@ -1729,10 +1730,20 @@ function myFunction() {
         </button>
     </div>
     <div class="col-6">
-        <button class="btn btn-success w-100 py-3" onclick="openModal('idCardSoftwareModal'); closeModal('welcomePopupModal')">
-            <i class="fas fa-id-card fa-2x mb-2 d-block"></i>
-            <span>ID Card</span>
-        </button>
+        <!-- ID Card Button with Dropdown -->
+        <div class="dropdown w-100">
+            <button class="btn btn-success w-100 py-3 dropdown-toggle" type="button" id="idCardDropdownBtn" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-id-card fa-2x mb-2 d-block"></i>
+                <span>ID Card</span>
+            </button>
+            <ul class="dropdown-menu w-100" aria-labelledby="idCardDropdownBtn">
+                <li><h6 class="dropdown-header">ID Card विकल्पहरू</h6></li>
+                <li><a class="dropdown-item" href="#" onclick="openIDCardOption('offline'); return false;"><i class="fas fa-download me-2 text-success"></i>अफलाइन डाउनलोड</a></li>
+                <li><a class="dropdown-item" href="#" onclick="openIDCardOption('online'); return false;"><i class="fas fa-globe me-2 text-primary"></i>अनलाइन प्रयोग गर्नुहोस्</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#" onclick="openModal('idCardSoftwareModal'); return false;"><i class="fas fa-info-circle me-2 text-info"></i>थप जानकारी</a></li>
+            </ul>
+        </div>
     </div>
     <div class="col-6">
         <button class="btn btn-warning w-100 py-3" onclick="openModal('quizModal'); closeModal('welcomePopupModal')">
@@ -1767,6 +1778,7 @@ function myFunction() {
         </button>
     </div>
 </div>
+
 
      <!----=========------>
 
@@ -4469,6 +4481,9 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
  
 
 <!-- Welcome Popup Modal (Shows on page load) -->
+
+
+<!-- Welcome Popup Modal (Shows on page load) -->
 <div class="modal fade" id="welcomePopupModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="welcomePopupModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -4491,10 +4506,18 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
                         </button>
                     </div>
                     <div class="col-6">
-                        <button class="btn btn-success w-100 py-3" onclick="openModal('idCardSoftwareModal'); closeModal('welcomePopupModal')">
-                            <i class="fas fa-id-card fa-2x mb-2 d-block"></i>
-                            <span>ID Card</span>
-                        </button>
+                        <div class="dropdown w-100">
+                            <button class="btn btn-success w-100 py-3 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-id-card fa-2x mb-2 d-block"></i>
+                                <span>ID Card</span>
+                            </button>
+                            <ul class="dropdown-menu w-100">
+                                <li><a class="dropdown-item" href="#" onclick="openIDCardOption('offline'); return false;"><i class="fas fa-download me-2"></i>अफलाइन डाउनलोड</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="openIDCardOption('online'); return false;"><i class="fas fa-globe me-2"></i>अनलाइन प्रयोग</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#" onclick="openModal('idCardSoftwareModal'); return false;"><i class="fas fa-info-circle me-2"></i>थप जानकारी</a></li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="col-6">
                         <button class="btn btn-warning w-100 py-3" onclick="openModal('quizModal'); closeModal('welcomePopupModal')">
@@ -4512,62 +4535,14 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
                 
                 <hr class="my-4">
                 
-                <div class="row g-2">
-                    <div class="col-4">
-                        <a href="https://shamser.info.np/IDCardDemo.html" class="btn btn-outline-primary w-100" target="_blank">
-                            <i class="fas fa-globe me-1"></i> Online
-                        </a>
-                    </div>
-                    <div class="col-4">
-                        <a href="https://shamser.info.np/Multi%20letterpad.html" class="btn btn-outline-warning w-100" target="_blank">
-                            <i class="fas fa-pencil-alt me-1"></i> Letterpad
-                        </a>
-                    </div>
-                    <div class="col-4">
-                        <button class="btn btn-outline-success w-100" onclick="openModal('demoModal'); closeModal('welcomePopupModal')">
-                            <i class="fas fa-info-circle me-1"></i> More
-                        </button>
-                    </div>
-                </div>
-                
                 <!-- Additional Links Section -->
                 <div class="d-grid gap-2 mt-3">
-                    <a href="https://shamser.info.np/Multi%20letterpad.html" class="btn btn-primary">
+                    <a href="https://shamser.info.np/Multi%20letterpad.html" class="btn btn-primary" target="_blank">
                         <i class="fas fa-pencil-alt me-2"></i>🌐 Generate Multi letters
                     </a>
                     <a href="https://forms.gle/LVm68DdiXN5Ep1Mb6" class="btn btn-success" target="_blank">
-                        <i class="fas fa-info-circle me-2"></i>💁🏻‍♀️ About Service charge ⛶
+                        <i class="fas fa-info-circle me-2"></i>💁🏻‍♀️ About Service charge
                     </a>
-                    
-                    <!-- ID Card Generator Dropdown -->
-                    <div class="dropdown mt-2">
-                        <button class="btn btn-info dropdown-toggle w-100" type="button" id="idCardDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-id-card me-2"></i> ID Card Generator Software
-                        </button>
-                        <ul class="dropdown-menu w-100" aria-labelledby="idCardDropdown">
-                            <li>
-                                <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#demoModal">
-                                    <i class="fas fa-download me-2"></i> Offline Version
-                                </button>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="IDCardDemo.html" target="_blank">
-                                    <i class="fas fa-globe me-2"></i> Online Version
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <!-- Quiz and Resources Section -->
-                <div class="row mt-4">
-                    <div class="col-12">
-                        <div class="d-grid">
-                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#quizModal">
-                                <i class="fas fa-play-circle me-2"></i>🌐 Computer Interactive Quiz
-                            </button>
-                        </div>
-                    </div>
                 </div>
                 
                 <!-- Resource Links -->
@@ -4575,7 +4550,7 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
                     <div class="col-12">
                         <a href="http://janajyoticampus.edu.np/wp-content/uploads/2024/12/%E0%A4%B8%E0%A5%8D%E0%A4%AE%E0%A4%BE%E0%A4%B0%E0%A5%80%E0%A4%95%E0%A4%BE-%E0%A5%A8%E0%A5%A6%E0%A5%AE%E0%A5%A7.pdf" 
                            class="btn btn-outline-primary w-100 mb-2" target="_blank">
-                            <i class="fas fa-book me-2"></i>👉 जनज्योति क्याम्पसको स्मारिका 🚻
+                            <i class="fas fa-book me-2"></i>👉 जनज्योति क्याम्पसको स्मारिका
                         </a>
                         <a href="http://shamser.info.np/News modal.html" class="btn btn-outline-info w-100 mb-2" target="_blank">
                             <i class="fas fa-newspaper me-2"></i>🌐 ताजा अनलाइन समाचार
@@ -4604,15 +4579,8 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
                         <li><i class="fas fa-check-circle text-success me-2"></i>शिक्षकहरूकालागि उपयोगी स्रोतहरू</li>
                         <li><i class="fas fa-check-circle text-success me-2"></i>विद्यार्थीहरूकालागि शैक्षिक सामग्री</li>
                         <li><i class="fas fa-check-circle text-success me-2"></i>कम्प्युटर क्विज तथा सामान्य ज्ञान</li>
-                        <li><i class="fas fa-check-circle text-success me-2"></i>विद्यालय स्मारिका तयारी</li>
                     </ul>
                 </div>
-                
-                <!-- Facebook Like Button -->
-                <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2F&width=450&layout&action&size&share=true&height=35&appId" 
-                        width="100%" height="35" style="border:none;overflow:hidden" scrolling="no" frameborder="0" 
-                        allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-                </iframe>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">पछि हेर्ने</button>
@@ -4621,7 +4589,7 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
     </div>
 </div>
 
-<!-- Subscription Modal -->
+<!-- Subscription Modal with Email Integration -->
 <div class="modal fade subscription-modal" id="subscriptionModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -4645,10 +4613,23 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
                                placeholder="Enter your email" required>
                     </div>
                     
+                    <div class="mb-3">
+                        <label for="subscriberPhone" class="form-label fw-bold">Phone Number (Optional)</label>
+                        <input type="tel" class="form-control" id="subscriberPhone" 
+                               placeholder="Enter your phone number">
+                    </div>
+                    
                     <div class="form-check mb-3">
-                        <input class="form-check-input" type="checkbox" id="newsletterUpdates" checked>
-                        <label class="form-check-label" for="newsletterUpdates">
-                            Send me weekly educational updates
+                        <input class="form-check-input" type="checkbox" id="whatsappUpdates">
+                        <label class="form-check-label" for="whatsappUpdates">
+                            Send updates on WhatsApp
+                        </label>
+                    </div>
+                    
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="emailUpdates" checked>
+                        <label class="form-check-label" for="emailUpdates">
+                            Send me weekly educational updates via email
                         </label>
                     </div>
                     
@@ -4664,13 +4645,20 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
                         <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Teaching resources</li>
                         <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Exam preparation materials</li>
                         <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>School management tips</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Free software updates</li>
                     </ul>
                 </div>
                 
                 <div id="subscriptionSuccess" class="alert alert-success mt-3" style="display: none;">
                     <i class="fas fa-check-circle me-2"></i>
                     <strong>Thank you for subscribing!</strong>
-                    <p class="mb-0">You'll receive a confirmation email shortly.</p>
+                    <p class="mb-0">You'll receive a confirmation email at your provided email address.</p>
+                </div>
+                
+                <div id="subscriptionError" class="alert alert-danger mt-3" style="display: none;">
+                    <i class="fas fa-exclamation-circle me-2"></i>
+                    <strong>Error!</strong>
+                    <p class="mb-0" id="errorMessage">Something went wrong. Please try again.</p>
                 </div>
             </div>
             <div class="modal-footer">
@@ -4682,52 +4670,7 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
     </div>
 </div>
 
-<!-- Ad Popup Modal -->
-<div class="modal fade" id="adPopupModal" tabindex="-1" aria-labelledby="adModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header bg-warning">
-                <h5 class="modal-title" id="adModalLabel"><i class="fas fa-gift me-2"></i>विशेष अफर!</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center">
-                <img src="https://shamser.info.np/HomePage/Id_card%20Software.JPG" class="img-fluid mb-3 rounded" alt="ID Card Software" style="max-height: 150px;">
-                <h4>ID Card Generator Software</h4>
-                <p>अफलाइन र अनलाइन संस्करण निःशुल्क डेमोको लागि सम्पर्क गर्नुहोस्।</p>
-                <div class="d-grid gap-2">
-                    <button class="btn btn-primary" onclick="openModal('idCardSoftwareModal'); closeModal('adPopupModal')">थप जानकारी</button>
-                    <button class="btn btn-success" onclick="alert('सम्पर्क: 9844087012')">सम्पर्क गर्नुहोस्</button>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" data-bs-dismiss="modal">पछि हेर्ने</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Auto Popup Modal -->
-<div class="modal fade" id="autoPopupModal" tabindex="-1" aria-labelledby="autoPopupModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header bg-info text-white">
-                <h5 class="modal-title" id="autoPopupModalLabel"><i class="fas fa-bullhorn me-2"></i>विशेष सूचना!</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center">
-                <i class="fas fa-newspaper fa-4x mb-3 text-info"></i>
-                <h4>नयाँ शैक्षिक सामग्रीहरू</h4>
-                <p>हाम्रो वेबसाइटमा नयाँ पाठ्यपुस्तक र शिक्षक निर्देशिकाहरू अपलोड गरिएको छ।</p>
-                <p>आजै हेर्नुहोस् र आफ्नो ज्ञान अद्यावधिक गर्नुहोस्।</p>
-                <div class="mt-3">
-                    <a href="#textbooks" class="btn btn-info text-white" onclick="closeModal('autoPopupModal')">पाठ्यपुस्तक हेर्नुहोस्</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- IEMIS Modal (Separate Login - No ID Card option) -->
+<!-- IEMIS Modal -->
 <div class="modal fade" id="iemisModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -4736,7 +4679,7 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <!-- IEMIS Login Form - NO ID CARD OPTIONS HERE -->
+                <!-- IEMIS Login Form -->
                 <form id="iemisLoginForm">
                     <div class="mb-4">
                         <label class="form-label fs-5 fw-bold">प्रयोगकर्ता नाम</label>
@@ -4753,24 +4696,18 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
                     <button type="submit" class="btn btn-primary w-100 py-3 fs-4 fw-bold">लगइन गर्नुहोस्</button>
                     <div id="iemisLoginMsg" class="text-center mt-3 fs-5"></div>
                 </form>
-                
-                <div class="mt-4">
-                    <button type="button" class="btn btn-outline-info w-100" data-bs-toggle="modal" data-bs-target="#iemisInfoModal">
-                        <i class="fas fa-info-circle me-2"></i>IEMIS बारे जानकारी
-                    </button>
-                </div>
             </div>
         </div>
     </div>
 </div>
 
 <!-- IEMIS Info Modal -->
-<div class="modal fade" id="iemisInfoModal" tabindex="-1" aria-labelledby="iemisInfoModalLabel" aria-hidden="true">
+<div class="modal fade" id="iemisInfoModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-info text-white">
-                <h5 class="modal-title" id="iemisInfoModalLabel"><i class="fas fa-info-circle me-2"></i>IEMIS जानकारी</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title"><i class="fas fa-info-circle me-2"></i>IEMIS जानकारी</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 <ul class="list-group">
@@ -4779,71 +4716,30 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
                     <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i> अनलाइन ग्रेडशिट</li>
                     <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i> एक्सेल डाटा इम्पोर्ट</li>
                 </ul>
-                <div class="mt-3">
-                    <span class="fw-bold">लगइन लिङ्क: </span>
-                    <button class="btn btn-sm btn-primary copy-btn" data-url="https://script.google.com/macros/s/AKfycbyk4Q3O6Gygn1wTj2fZqE82CWKEEiK57VoLH6l-iWNZlcB26pCy1Bl5PJWp15V7OgCk7g/exec">
-                        <i class="far fa-copy me-1"></i> प्रतिलिपि
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- ID Card Software Options Modal (Separate from IEMIS) -->
-<div class="modal fade" id="idCardOptionsModal" tabindex="-1">
-    <div class="modal-dialog modal-md">
-        <div class="modal-content">
-            <div class="modal-header bg-success text-white">
-                <h5 class="modal-title"><i class="fas fa-id-card me-2"></i>ID Card Generator</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <p class="text-center mb-4">कृपया ID Card विकल्प छान्नुहोस्:</p>
-                
-                <!-- ID Card Option Dropdown - Properly placed here -->
-                <div class="mb-4">
-                    <label class="form-label fs-5 fw-bold">ID Card विकल्प छान्नुहोस्</label>
-                    <select class="form-select form-select-lg" id="idCardOption">
-                        <option value="">-- ID Card विकल्प छान्नुहोस् --</option>
-                        <option value="offline">अफलाइन (Offline) - डाउनलोड गर्नुहोस्</option>
-                        <option value="online">अनलाइन (Online) - वेब संस्करण</option>
-                    </select>
-                </div>
-                
-                <div class="d-grid gap-2">
-                    <button class="btn btn-success" onclick="processIDCardSelection()">
-                        <i class="fas fa-arrow-right me-2"></i>जानुहोस्
-                    </button>
-                    <button class="btn btn-outline-primary" onclick="openModal('idCardSoftwareModal')">
-                        <i class="fas fa-info-circle me-2"></i>थप जानकारी
-                    </button>
-                </div>
             </div>
         </div>
     </div>
 </div>
 
 <!-- ID Card Generator Software Modal (Main Info Modal) -->
-<div class="modal fade" id="idCardSoftwareModal" tabindex="-1" aria-labelledby="idCardSoftwareModalLabel" aria-hidden="true">
+<div class="modal fade" id="idCardSoftwareModal" tabindex="-1">
     <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header bg-gradient" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                <h5 class="modal-title text-white" id="idCardSoftwareModalLabel">
+                <h5 class="modal-title text-white">
                     <i class="fas fa-id-card me-2"></i>ID Card Generator Software
                 </h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 <div class="alert alert-warning">
                     <i class="fas fa-info-circle me-2"></i>
-                    <strong>जानकारी:</strong> यो सफ्टवेयर शैक्षिक उद्देश्यका लागि मात्र हो। यसलाई विद्यालय, क्याम्पस र अन्य शैक्षिक संस्थाहरूले निःशुल्क प्रयोग गर्न सक्छन्।
+                    <strong>जानकारी:</strong> यो सफ्टवेयर शैक्षिक उद्देश्यका लागि मात्र हो।
                 </div>
                 
                 <div class="text-center mb-4">
                     <img src="https://shamser.info.np/HomePage/Id_card%20Software.JPG" class="img-fluid rounded shadow" style="max-height:200px;" alt="ID Card Generator Logo">
                     <h4 class="mt-3 text-primary">ID Card Generator Software</h4>
-                    <p class="text-muted">Professional ID Card Creation Tool for Schools and Organizations</p>
                 </div>
 
                 <div class="row mb-4">
@@ -4858,14 +4754,10 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
                                     <li class="list-group-item"><i class="fas fa-camera text-success me-2"></i> Auto photo path creation</li>
                                     <li class="list-group-item"><i class="fas fa-database text-success me-2"></i> Student/Teacher database</li>
                                     <li class="list-group-item"><i class="fas fa-print text-success me-2"></i> Bulk printing support</li>
-                                    <li class="list-group-item"><i class="fas fa-palette text-success me-2"></i> Time saving design</li>
                                     <li class="list-group-item"><i class="fas fa-file-alt text-primary me-2"></i> एउटा A4 साइज पेपरमा ९ जनाको ID Card अट्छ</li>
                                     <li class="list-group-item"><i class="fas fa-layer-group text-primary me-2"></i> आवश्यक अनुसार जति पनि ID Card Generate गर्न सकिन्छ</li>
-                                    <li class="list-group-item"><i class="fas fa-qrcode text-primary me-2"></i> QR Code Image आफै Generate हुन्छ</li>
                                     <li class="list-group-item"><i class="fas fa-id-badge text-success me-2"></i> School logo can be uploaded</li>
                                     <li class="list-group-item"><i class="fas fa-signature text-success me-2"></i> School Principal signature can be added</li>
-                                    <li class="list-group-item"><i class="fas fa-shield-alt text-success me-2"></i> Security hologram support</li>
-                                    <li class="list-group-item"><i class="fas fa-barcode text-primary me-2"></i> QR Code स्क्यान गरेर नाम, कक्षा र रोल नम्बर पत्ता लगाउन सकिन्छ</li>
                                 </ul>
                             </div>
                         </div>
@@ -4878,165 +4770,27 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
                             </div>
                             <div class="card-body">
                                 <div class="ratio ratio-16x9">
-                                    <video controls class="rounded" poster="https://shamser.info.np/HomePage/Id_card%20Software.JPG">
-                                        <source src="Home/ID Card Generator Software Demo video.mp4" type="video/mp4">
+                                    <video controls class="rounded">
                                         <source src="https://shamser.info.np/HomePage/ID%20Card%20Generator%20Software%20Demo%20video.mp4" type="video/mp4">
                                         Your browser does not support the video tag.
                                     </video>
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="card">
-                            <div class="card-header bg-success text-white">
-                                <h5 class="mb-0"><i class="fas fa-database me-2"></i>Supported Data Import:</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="row text-center">
-                                    <div class="col-6 mb-3">
-                                        <i class="fas fa-file-excel fa-4x text-success mb-2"></i>
-                                        <p class="fw-bold">Excel File</p>
-                                        <span class="badge bg-success">.xlsx, .xls</span>
-                                    </div>
-                                    <div class="col-6 mb-3">
-                                        <i class="fas fa-database fa-4x text-primary mb-2"></i>
-                                        <p class="fw-bold">Database</p>
-                                        <span class="badge bg-primary">MySQL, SQLite</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 
-                <!-- Software Screenshot Carousel -->
+                <!-- Quick Access Buttons -->
                 <div class="row mb-4">
-                    <div class="col-12">
-                        <h5 class="mb-3">Software Screenshots:</h5>
-                        <div id="softwareCarousel" class="carousel slide" data-bs-ride="carousel">
-                            <div class="carousel-indicators">
-                                <button type="button" data-bs-target="#softwareCarousel" data-bs-slide-to="0" class="active"></button>
-                                <button type="button" data-bs-target="#softwareCarousel" data-bs-slide-to="1"></button>
-                                <button type="button" data-bs-target="#softwareCarousel" data-bs-slide-to="2"></button>
-                            </div>
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img src="https://shamser.info.np/HomePage/Id_card data excel.JPG" class="d-block w-100 rounded" alt="Excel Data Management">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="https://shamser.info.np/HomePage/ID Card Generator Tool.JPG" class="d-block w-100 rounded" alt="Software Interface">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="https://shamser.info.np/HomePage/Id_card Software.JPG" class="d-block w-100 rounded" alt="ID Card Output">
-                                </div>
-                            </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#softwareCarousel" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon"></span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#softwareCarousel" data-bs-slide="next">
-                                <span class="carousel-control-next-icon"></span>
-                            </button>
-                        </div>
+                    <div class="col-6">
+                        <a href="https://shamser.info.np/ID%20Card%20Software.zip" class="btn btn-primary w-100" download>
+                            <i class="fas fa-download me-2"></i>Download Offline
+                        </a>
                     </div>
-                </div>
-                
-                <!-- Pricing Section -->
-                <div class="pricing-section mb-4 p-4 bg-light rounded">
-                    <h4 class="text-center mb-4">खरिद गर्नुहोस्</h4>
-                    <div class="text-center mb-4">
-                        <img src="https://shamser.info.np/HomePage/esewa.JPG" class="img-fluid mb-3 rounded shadow" alt="eSewa QR Code" style="max-width: 200px;">
-                        <p class="mb-4">रकम भुक्तानीको लागि eSewa मा यो QR code स्क्यान गर्नुहोस्</p>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <div class="card pricing-card text-center h-100">
-                                <div class="card-header bg-primary text-white">
-                                    <h5>१ बर्ष</h5>
-                                </div>
-                                <div class="card-body">
-                                    <h3 class="card-title">रु ५,०००</h3>
-                                    <ul class="list-unstyled mt-3 mb-4">
-                                        <li><i class="fas fa-check text-success me-2"></i>Full version</li>
-                                        <li><i class="fas fa-check text-success me-2"></i>1 year service</li>
-                                        <li><i class="fas fa-check text-success me-2"></i>Pay support</li>
-                                    </ul>
-                                </div>
-                                <div class="card-footer">
-                                    <button class="btn btn-primary w-100" onclick="purchaseSoftware('1_year', 5000)">
-                                        खरिद गर्नुहोस्
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="col-md-4 mb-3">
-                            <div class="card pricing-card text-center h-100">
-                                <div class="card-header bg-success text-white">
-                                    <h5>५ बर्ष</h5>
-                                </div>
-                                <div class="card-body">
-                                    <h3 class="card-title">रु १५,०००</h3>
-                                    <p class="text-muted"><small>बचत: रु १०,०००</small></p>
-                                    <ul class="list-unstyled mt-3 mb-4">
-                                        <li><i class="fas fa-check text-success me-2"></i>Full version Software</li>
-                                        <li><i class="fas fa-check text-success me-2"></i>५ बर्षको लाइसेन्स</li>
-                                        <li><i class="fas fa-check text-success me-2"></i>Free tech support</li>
-                                    </ul>
-                                </div>
-                                <div class="card-footer">
-                                    <button class="btn btn-success w-100" onclick="purchaseSoftware('5_years', 15000)">
-                                        खरिद गर्नुहोस्
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="col-md-4 mb-3">
-                            <div class="card pricing-card text-center h-100">
-                                <div class="card-header bg-warning text-white">
-                                    <h5>१० बर्ष</h5>
-                                </div>
-                                <div class="card-body">
-                                    <h3 class="card-title">रु ३५,०००</h3>
-                                    <p class="text-muted"><small>बचत: रु १५,०००</small></p>
-                                    <ul class="list-unstyled mt-3 mb-4">
-                                        <li><i class="fas fa-check text-success me-2"></i>Full version Software</li>
-                                        <li><i class="fas fa-check text-success me-2"></i>१० बर्षको लाइसेन्स</li>
-                                        <li><i class="fas fa-check text-success me-2"></i>Free tech support</li>
-                                    </ul>
-                                </div>
-                                <div class="card-footer">
-                                    <button class="btn btn-warning w-100" onclick="purchaseSoftware('10_years', 35000)">
-                                        खरिद गर्नुहोस्
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Trial Section -->
-                <div class="trial-section p-4 bg-light rounded mb-4">
-                    <h4 class="text-center mb-4">ट्रायलको लागि अनुरोध गर्नुहोस्</h4>
-                    <p class="text-center mb-4">सफ्टवेयर परीक्षण गर्न १५ दिनको निःशुल्क ट्रायलको लागि फाराम भर्नुहोस्।</p>
-                    
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <div class="d-grid">
-                                <button class="btn btn-outline-primary btn-lg" onclick="requestTrial()">
-                                    <i class="fas fa-play-circle me-2"></i>अनुरोध गर्नुहोस्
-                                </button>
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <div class="d-grid">
-                                <a href="https://shamser.info.np/ID.pdf" 
-                                   class="btn btn-outline-secondary btn-lg" target="_blank">
-                                    <i class="fas fa-file-pdf me-2"></i>Download pdf demo file
-                                </a>
-                            </div>
-                        </div>
+                    <div class="col-6">
+                        <a href="https://shamser.info.np/IDCardDemo.html" class="btn btn-success w-100" target="_blank">
+                            <i class="fas fa-globe me-2"></i>Try Online
+                        </a>
                     </div>
                 </div>
                 
@@ -5046,222 +4800,52 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
                     <p><i class="fas fa-phone me-2 text-primary"></i> 9844087012</p>
                     <p><i class="fas fa-envelope me-2 text-primary"></i> shamserpulami500@gmail.com</p>
                 </div>
-                
-                <div class="alert alert-info">
-                    <h5><i class="fas fa-info-circle me-2"></i>Important Note:</h5>
-                    <p class="mb-0">यो सफ्टवेयर अझै Development अवस्थामा छ, त्यसैले कुनै समस्या आइपर्न सक्छ। कृपया समस्या आएमा shamserpulami500@gmail.com मा इमेल गर्नुहोस्।</p>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                    <i class="fas fa-times me-2"></i>Close
-                </button>
-                <button type="button" class="btn btn-outline-primary" onclick="downloadTrialVersion()">
-                    <i class="fas fa-download me-2"></i>Free Trial डाउनलोड
-                </button>
-                <a href="https://shamser.info.np/ID%20Card%20Software.zip" class="btn btn-primary" download>
-                    <i class="fas fa-download me-2"></i>Download Now (Offline)
-                </a>
-                <a href="https://shamser.info.np/IDCardDemo.html" class="btn btn-success" target="_blank">
-                    <i class="fas fa-globe me-2"></i>Try Online Version
-                </a>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Demo/More Info Modal -->
-<div class="modal fade" id="demoModal" tabindex="-1" aria-labelledby="demoModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="demoModalLabel">ID Card Generator Software</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <div class="alert alert-warning">
-                    <i class="fas fa-info-circle me-2"></i>
-                    <strong>जानकारी:</strong> यो सफ्टवेयर शैक्षिक उद्देश्यका लागि मात्र हो।
-                </div>
-                
-                <div class="text-center mb-4">
-                    <img src="https://shamser.info.np/HomePage/Id_card Software.JPG" class="img-fluid rounded" style="max-height:150px;" alt="ID Card Generator Logo">
-                    <h4 class="mt-2">ID Card Generator Software</h4>
-                    <p class="text-muted">Professional ID Card Creation Tool for Schools and Organizations</p>
-                </div>
-
-                <div class="row mb-4">
-                    <div class="col-md-6">
-                        <h5>Features:</h5>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><i class="fas fa-qrcode text-primary me-2"></i> Auto QR code generation</li>
-                            <li class="list-group-item"><i class="fas fa-camera text-primary me-2"></i> Auto photo path creation</li>
-                            <li class="list-group-item"><i class="fas fa-database text-primary me-2"></i> Student/Teacher database</li>
-                            <li class="list-group-item"><i class="fas fa-print text-primary me-2"></i> Bulk printing support</li>
-                            <li class="list-group-item"><i class="fas fa-palette text-primary me-2"></i> Time saving design</li>
-                            <li class="list-group-item"><i class="fas fa-file-alt text-success me-2"></i> एउटा A4 साइज पेपरमा ९ जनाको ID Card अट्छ</li>
-                            <li class="list-group-item"><i class="fas fa-layer-group text-success me-2"></i> आवश्यक अनुसार जति पनि ID Card Generate गर्न सकिन्छ</li>
-                            <li class="list-group-item"><i class="fas fa-qrcode text-success me-2"></i> QR Code Image आफै Generate हुन्छ</li>
-                            <li class="list-group-item"><i class="fas fa-id-badge text-success me-2"></i> School logo can be uploaded</li>
-                            <li class="list-group-item"><i class="fas fa-signature text-success me-2"></i> School Principal signature can be added</li>
-                            <li class="list-group-item"><i class="fas fa-shield-alt text-success me-2"></i> Security hologram support</li>
-                            <li class="list-group-item"><i class="fas fa-barcode text-success me-2"></i> QR Code स्क्यान गरेर नाम, कक्षा र रोल नम्बर पत्ता लगाउन सकिन्छ</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="col-md-6">
-                        <h5>Supported Data Import:</h5>
-                        <div class="row text-center mt-3">
-                            <div class="col-6 mb-3">
-                                <i class="fas fa-file-excel fa-3x text-success mb-2"></i>
-                                <p>Excel File</p>
-                            </div>
-                            <div class="col-6 mb-3">
-                                <i class="fas fa-database fa-3x text-primary mb-2"></i>
-                                <p>Database</p>
-                            </div>
-                        </div>
-                        
-                        <h5 class="mt-4">Quick Links:</h5>
-                        <div class="d-grid gap-2">
-                            <a href="https://shamser.info.np/Multi%20letterpad.html" class="btn btn-primary">
-                                <i class="fas fa-pencil-alt me-2"></i>🌐 Generate Multi letters
-                            </a>
-                            <a href="https://forms.gle/LVm68DdiXN5Ep1Mb6" class="btn btn-success" target="_blank">
-                                <i class="fas fa-info-circle me-2"></i>💁🏻‍♀️ About Service charge
-                            </a>
-                        </div>
-                        
-                        <!-- ID Card Options inside demo modal -->
-                        <div class="mt-3">
-                            <label class="form-label fw-bold">ID Card विकल्प:</label>
-                            <div class="d-grid gap-2">
-                                <a href="https://shamser.info.np/ID%20Card%20Software.zip" class="btn btn-outline-primary" download>
-                                    <i class="fas fa-download me-2"></i>Download Offline Version
-                                </a>
-                                <a href="https://shamser.info.np/IDCardDemo.html" class="btn btn-outline-success" target="_blank">
-                                    <i class="fas fa-globe me-2"></i>Try Online Version
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <!-- Quiz Button -->
-                        <div class="mt-3">
-                            <div class="d-grid">
-                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#quizModal">
-                                    <i class="fas fa-play-circle me-2"></i>🌐 Computer Interactive Quiz
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Resource Links -->
-                <div class="row mt-3">
-                    <div class="col-12">
-                        <a href="http://janajyoticampus.edu.np/wp-content/uploads/2024/12/%E0%A4%B8%E0%A5%8D%E0%A4%AE%E0%A4%BE%E0%A4%B0%E0%A5%80%E0%A4%95%E0%A4%BE-%E0%A5%A8%E0%A5%A6%E0%A5%AE%E0%A5%A7.pdf" 
-                           class="btn btn-outline-primary w-100 mb-2" target="_blank">
-                            <i class="fas fa-book me-2"></i>👉 जनज्योति क्याम्पसको स्मारिका 🚻
-                        </a>
-                        <a href="http://shamser.info.np/News modal.html" class="btn btn-outline-info w-100" target="_blank">
-                            <i class="fas fa-newspaper me-2"></i>🌐 ताजा अनलाइन समाचार
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Contact Info -->
-                <div class="mt-4 text-center">
-                    <h5>सम्पर्क जानकारी</h5>
-                    <p><i class="fas fa-phone me-2"></i> 9844087012</p>
-                    <p><i class="fas fa-envelope me-2"></i> shamserpulami500@gmail.com</p>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बन्द गर्नुहोस्</button>
-                <button type="button" class="btn btn-outline-primary" onclick="downloadTrialVersion()">
-                    <i class="fas fa-download me-2"></i>Free Trial डाउनलोड
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Quiz Modal -->
-<div class="modal fade" id="quizModal" tabindex="-1" aria-labelledby="quizModalLabel" aria-hidden="true">
+<!-- Quiz Modal (Improved Interactive) -->
+<div class="modal fade" id="quizModal" tabindex="-1">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header bg-warning">
-                <h5 class="modal-title" id="quizModalLabel">
+                <h5 class="modal-title">
                     <i class="fas fa-laptop-code me-2"></i>कम्प्युटर इन्टरएक्टिभ क्विज
                 </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 <div class="quiz-container">
-                    <h4 class="text-center mb-4 text-primary">कम्प्युटर सम्बन्धी सामान्य ज्ञान क्विज</h4>
-                    
-                    <div id="quizQuestions" class="mb-4">
-                        <!-- Questions will be loaded here -->
+                    <div class="text-center mb-4">
+                        <div class="progress" style="height: 10px;">
+                            <div id="quizProgress" class="progress-bar bg-success" style="width: 0%;"></div>
+                        </div>
+                        <p class="mt-2" id="quizProgressText">0/5 Questions</p>
                     </div>
                     
-                    <div class="text-center mt-4">
-                        <button id="submitQuiz" class="btn btn-primary px-4 py-2" onclick="submitQuiz()">
-                            <i class="fas fa-check-circle me-2"></i>Submit Answers
+                    <div id="quizArea">
+                        <!-- Quiz will be loaded here -->
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mt-4">
+                        <button id="prevBtn" class="btn btn-secondary" onclick="prevQuestion()" style="display: none;">
+                            <i class="fas fa-arrow-left me-2"></i>पछिल्लो
                         </button>
-                        <button id="retakeQuiz" class="btn btn-secondary px-4 py-2 ms-2" onclick="resetQuiz()">
-                            <i class="fas fa-redo-alt me-2"></i>Retake Quiz
+                        <div></div>
+                        <button id="nextBtn" class="btn btn-primary" onclick="nextQuestion()">
+                            अर्को<i class="fas fa-arrow-right ms-2"></i>
+                        </button>
+                        <button id="submitQuizBtn" class="btn btn-success" onclick="submitQuiz()" style="display: none;">
+                            <i class="fas fa-check-circle me-2"></i>पेश गर्नुहोस्
                         </button>
                     </div>
                     
-                    <div id="quizResult" class="score mt-4" style="display: none;">
-                        <!-- Result will be shown here -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Features Modal -->
-<div class="modal fade" id="featuresModal" tabindex="-1" aria-labelledby="featuresModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header bg-info text-white">
-                <h5 class="modal-title" id="featuresModalLabel"><i class="fas fa-star me-2"></i>हाम्रा सुविधाहरू</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-4 mb-3">
-                        <div class="card h-100">
-                            <div class="card-body text-center">
-                                <i class="fas fa-graduation-cap fa-3x text-primary mb-3"></i>
-                                <h6>IEMIS</h6>
-                                <p>परीक्षा प्रणाली</p>
-                                <button class="btn btn-sm btn-primary" onclick="openModal('iemisModal'); closeModal('featuresModal')">लगइन</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <div class="card h-100 border-success">
-                            <div class="card-body text-center">
-                                <i class="fas fa-id-card fa-3x text-success mb-3"></i>
-                                <h6>ID Card</h6>
-                                <p>अफलाइन/अनलाइन</p>
-                                <button class="btn btn-sm btn-success" onclick="openModal('idCardSoftwareModal'); closeModal('featuresModal')">खोल्नुहोस्</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <div class="card h-100">
-                            <div class="card-body text-center">
-                                <i class="fas fa-pencil-alt fa-3x text-warning mb-3"></i>
-                                <h6>लेटरप्याड</h6>
-                                <p>मल्टी लेटर</p>
-                                <a href="https://shamser.info.np/Multi%20letterpad.html" class="btn btn-sm btn-warning" target="_blank">प्रयोग गर्नुहोस्</a>
-                            </div>
-                        </div>
-                    </div>
+                    <div id="quizResult" class="mt-4" style="display: none;"></div>
+                    
+                    <button id="restartQuizBtn" class="btn btn-outline-primary w-100 mt-3" onclick="restartQuiz()" style="display: none;">
+                        <i class="fas fa-redo-alt me-2"></i>पुन: सुरु गर्नुहोस्
+                    </button>
                 </div>
             </div>
         </div>
@@ -5269,17 +4853,16 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
 </div>
 
 <!-- Result Search Modal -->
-<div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true">
+<div class="modal fade" id="resultModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-info text-white">
-                <h5 class="modal-title" id="resultModalLabel">
+                <h5 class="modal-title">
                     <i class="fas fa-search me-2"></i>विद्यार्थी नतिजा खोज्नुहोस्
                 </h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <!-- Student Result Search Form -->
                 <div class="result-container p-3">
                     <div class="row">
                         <div class="col-md-4 mb-3">
@@ -5296,8 +4879,6 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
                                 <option value="8">कक्षा ८</option>
                                 <option value="9">कक्षा ९</option>
                                 <option value="10">कक्षा १०</option>
-                                <option value="11">कक्षा ११</option>
-                                <option value="12">कक्षा १२</option>
                             </select>
                         </div>
                         
@@ -5341,105 +4922,54 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
                     <div id="modalResultDisplay" class="result-display mt-4" style="display: none;"></div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बन्द गर्नुहोस्</button>
+        </div>
+    </div>
+</div>
+
+<!-- Demo Modal -->
+<div class="modal fade" id="demoModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">थप जानकारी</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <i class="fas fa-id-card fa-3x text-success mb-3"></i>
+                                <h5>ID Card Software</h5>
+                                <p>अफलाइन र अनलाइन संस्करण</p>
+                                <a href="https://shamser.info.np/ID%20Card%20Software.zip" class="btn btn-sm btn-success" download>डाउनलोड</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <i class="fas fa-pencil-alt fa-3x text-warning mb-3"></i>
+                                <h5>Multi Letterpad</h5>
+                                <p>धेरै पत्रहरू एकै पटक</p>
+                                <a href="https://shamser.info.np/Multi%20letterpad.html" class="btn btn-sm btn-warning" target="_blank">प्रयोग गर्नुहोस्</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-3">
+                    <p><i class="fas fa-phone me-2 text-primary"></i> सम्पर्क: 9844087012</p>
+                    <p><i class="fas fa-envelope me-2 text-primary"></i> shamserpulami500@gmail.com</p>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-// Auto-show welcome popup when page loads
-document.addEventListener('DOMContentLoaded', function() {
-    // Show welcome popup after 1 second
-    setTimeout(function() {
-        var welcomeModal = new bootstrap.Modal(document.getElementById('welcomePopupModal'));
-        welcomeModal.show();
-    }, 1000);
-    
-    // Show ad popup after 5 seconds
-    setTimeout(function() {
-        var adModal = new bootstrap.Modal(document.getElementById('adPopupModal'));
-        adModal.show();
-    }, 5000);
-    
-    // Initialize subscription button
-    initSubscription();
-});
-
-// Global modal functions
-function openModal(modalId) {
-    var modalElement = document.getElementById(modalId);
-    if (modalElement) {
-        var modal = new bootstrap.Modal(modalElement);
-        modal.show();
-    }
-}
-
-function closeModal(modalId) {
-    var modalElement = document.getElementById(modalId);
-    if (modalElement) {
-        var modal = bootstrap.Modal.getInstance(modalElement);
-        if (modal) {
-            modal.hide();
-        }
-    }
-}
-
-// IEMIS Login - Separate function (NO ID Card options)
-document.getElementById('iemisLoginForm')?.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const username = document.getElementById('iemisUsername').value.trim();
-    const password = document.getElementById('iemisPassword').value.trim();
-    const remember = document.getElementById('iemisRememberMe').checked;
-    const msg = document.getElementById('iemisLoginMsg');
-    
-    msg.innerHTML = "<span class='text-primary fs-5'>जाँच हुँदैछ...</span>";
-    
-    // Demo login - replace with actual API
-    setTimeout(() => {
-        if (username && password) {
-            msg.innerHTML = "<span class='text-success fs-5'>लगइन सफल भयो...</span>";
-            
-            // Redirect to IEMIS dashboard only - NO ID CARD REDIRECT
-            setTimeout(() => {
-                window.location.href = "https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Dashboard.html";
-            }, 800);
-        } else {
-            msg.innerHTML = "<span class='text-danger fs-5'>गलत प्रयोगकर्ता नाम वा पासवर्ड</span>";
-        }
-    }, 1000);
-});
-
-// Process ID Card selection
-function processIDCardSelection() {
-    const idCardOption = document.getElementById('idCardOption').value;
-    
-    if (!idCardOption) {
-        alert("कृपया ID Card विकल्प छान्नुहोस्");
-        return;
-    }
-    
-    // Close the options modal
-    closeModal('idCardOptionsModal');
-    
-    // Redirect based on selection
-    if (idCardOption === 'offline') {
-        window.location.href = "https://shamser.info.np/ID%20Card%20Software.zip";
-    } else if (idCardOption === 'online') {
-        window.location.href = "https://shamser.info.np/IDCardDemo.html";
-    }
-}
-
-// Handle ID Card button click - Open options modal instead of main modal
-document.querySelector('[onclick="openModal(\'idCardSoftwareModal\')"]')?.addEventListener('click', function(e) {
-    e.preventDefault();
-    openModal('idCardOptionsModal');
-});
-
 // Quiz Data
-const quizQuestions = [
+const quizData = [
     {
         question: "CPU को पूरा रूप के हो?",
         options: ["Central Processing Unit", "Computer Personal Unit", "Central Program Unit", "Computer Processing Unit"],
@@ -5467,164 +4997,272 @@ const quizQuestions = [
     }
 ];
 
-let currentAnswers = new Array(quizQuestions.length).fill(null);
+let currentQuestion = 0;
+let userAnswers = new Array(quizData.length).fill(null);
+let quizSubmitted = false;
 
-function loadQuiz() {
-    let quizHtml = '';
-    for (let i = 0; i < quizQuestions.length; i++) {
-        quizHtml += `
-            <div class="card mb-3">
-                <div class="card-header bg-light">
-                    <strong>प्रश्न ${i + 1}:</strong> ${quizQuestions[i].question}
-                </div>
-                <div class="card-body">
-                    <div class="row">
-        `;
-        
-        for (let j = 0; j < quizQuestions[i].options.length; j++) {
-            quizHtml += `
-                <div class="col-md-6 mb-2">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="q${i}" id="q${i}o${j}" value="${j}" onchange="saveAnswer(${i}, ${j})">
-                        <label class="form-check-label" for="q${i}o${j}">
-                            ${quizQuestions[i].options[j]}
-                        </label>
-                    </div>
-                </div>
-            `;
+// Auto-show welcome popup
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+        var welcomeModal = new bootstrap.Modal(document.getElementById('welcomePopupModal'));
+        welcomeModal.show();
+    }, 1000);
+    
+    setTimeout(function() {
+        // Optional: Show ad popup if you have one
+    }, 5000);
+    
+    // Initialize subscription button
+    initSubscription();
+});
+
+// Modal functions
+function openModal(modalId) {
+    var modalElement = document.getElementById(modalId);
+    if (modalElement) {
+        var modal = new bootstrap.Modal(modalElement);
+        modal.show();
+    }
+}
+
+function closeModal(modalId) {
+    var modalElement = document.getElementById(modalId);
+    if (modalElement) {
+        var modal = bootstrap.Modal.getInstance(modalElement);
+        if (modal) {
+            modal.hide();
         }
-        
-        quizHtml += `
-                    </div>
-                </div>
+    }
+}
+
+// ID Card option handler
+function openIDCardOption(option) {
+    if (option === 'offline') {
+        window.location.href = "https://shamser.info.np/ID%20Card%20Software.zip";
+    } else if (option === 'online') {
+        window.open("https://shamser.info.np/IDCardDemo.html", "_blank");
+    }
+}
+
+// IEMIS Login
+document.getElementById('iemisLoginForm')?.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const username = document.getElementById('iemisUsername').value.trim();
+    const password = document.getElementById('iemisPassword').value.trim();
+    const msg = document.getElementById('iemisLoginMsg');
+    
+    msg.innerHTML = "<span class='text-primary'>जाँच हुँदैछ...</span>";
+    
+    setTimeout(() => {
+        if (username && password) {
+            msg.innerHTML = "<span class='text-success'>लगइन सफल भयो...</span>";
+            setTimeout(() => {
+                window.location.href = "https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Dashboard.html";
+            }, 800);
+        } else {
+            msg.innerHTML = "<span class='text-danger'>गलत प्रयोगकर्ता नाम वा पासवर्ड</span>";
+        }
+    }, 1000);
+});
+
+// Quiz Functions
+function loadQuiz() {
+    currentQuestion = 0;
+    userAnswers = new Array(quizData.length).fill(null);
+    quizSubmitted = false;
+    displayQuestion();
+    updateButtons();
+    document.getElementById('quizResult').style.display = 'none';
+    document.getElementById('restartQuizBtn').style.display = 'none';
+}
+
+function displayQuestion() {
+    const quizArea = document.getElementById('quizArea');
+    const q = quizData[currentQuestion];
+    
+    let optionsHtml = '';
+    q.options.forEach((option, index) => {
+        const checked = userAnswers[currentQuestion] === index ? 'checked' : '';
+        optionsHtml += `
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="quizOption" 
+                       id="opt${index}" value="${index}" ${checked} onchange="saveAnswer(${index})">
+                <label class="form-check-label" for="opt${index}">
+                    ${option}
+                </label>
             </div>
         `;
-    }
+    });
     
-    document.getElementById('quizQuestions').innerHTML = quizHtml;
+    quizArea.innerHTML = `
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">प्रश्न ${currentQuestion + 1}/${quizData.length}</h5>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title mb-4">${q.question}</h5>
+                ${optionsHtml}
+            </div>
+        </div>
+    `;
+    
+    // Update progress
+    const progress = ((currentQuestion + 1) / quizData.length) * 100;
+    document.getElementById('quizProgress').style.width = progress + '%';
+    document.getElementById('quizProgressText').innerText = `${currentQuestion + 1}/${quizData.length} Questions`;
 }
 
-function saveAnswer(questionIndex, answerIndex) {
-    currentAnswers[questionIndex] = answerIndex;
+function saveAnswer(answerIndex) {
+    userAnswers[currentQuestion] = answerIndex;
 }
 
-function submitQuiz() {
-    let score = 0;
-    let answered = 0;
-    
-    // Check if all questions are answered
-    for (let i = 0; i < quizQuestions.length; i++) {
-        if (currentAnswers[i] !== null) {
-            answered++;
-            if (currentAnswers[i] === quizQuestions[i].correct) {
-                score++;
-            }
-        }
-    }
-    
-    if (answered < quizQuestions.length) {
-        alert(`कृपया सबै ${quizQuestions.length} प्रश्नहरूको उत्तर दिनुहोस्।`);
+function nextQuestion() {
+    if (userAnswers[currentQuestion] === null) {
+        alert('कृपया उत्तर दिनुहोस्');
         return;
     }
     
-    // Calculate percentage
-    let percentage = (score / quizQuestions.length) * 100;
-    let grade = '';
-    let message = '';
+    if (currentQuestion < quizData.length - 1) {
+        currentQuestion++;
+        displayQuestion();
+        updateButtons();
+    }
+}
+
+function prevQuestion() {
+    if (currentQuestion > 0) {
+        currentQuestion--;
+        displayQuestion();
+        updateButtons();
+    }
+}
+
+function updateButtons() {
+    document.getElementById('prevBtn').style.display = currentQuestion > 0 ? 'block' : 'none';
+    
+    if (currentQuestion === quizData.length - 1) {
+        document.getElementById('nextBtn').style.display = 'none';
+        document.getElementById('submitQuizBtn').style.display = 'block';
+    } else {
+        document.getElementById('nextBtn').style.display = 'block';
+        document.getElementById('submitQuizBtn').style.display = 'none';
+    }
+}
+
+function submitQuiz() {
+    // Check if current question is answered
+    if (userAnswers[currentQuestion] === null) {
+        alert('कृपया उत्तर दिनुहोस्');
+        return;
+    }
+    
+    // Check if all questions are answered
+    for (let i = 0; i < quizData.length; i++) {
+        if (userAnswers[i] === null) {
+            alert(`कृपया प्रश्न ${i + 1} को उत्तर दिनुहोस्`);
+            currentQuestion = i;
+            displayQuestion();
+            updateButtons();
+            return;
+        }
+    }
+    
+    // Calculate score
+    let score = 0;
+    for (let i = 0; i < quizData.length; i++) {
+        if (userAnswers[i] === quizData[i].correct) {
+            score++;
+        }
+    }
+    
+    // Show result
+    const percentage = (score / quizData.length) * 100;
+    let grade = '', message = '', resultClass = '';
     
     if (percentage >= 80) {
         grade = 'उत्कृष्ट';
         message = 'तपाईंको ज्ञान साँच्चै राम्रो छ!';
+        resultClass = 'success';
     } else if (percentage >= 60) {
         grade = 'राम्रो';
         message = 'राम्रो प्रयास, अझै सुधार गर्न सक्नुहुन्छ।';
+        resultClass = 'info';
     } else if (percentage >= 40) {
         grade = 'औसत';
         message = 'थप अध्ययन आवश्यक छ।';
+        resultClass = 'warning';
     } else {
         grade = 'सुधार आवश्यक';
         message = 'कृपया पुन: अध्ययन गर्नुहोस्।';
+        resultClass = 'danger';
     }
     
-    // Show result
-    document.getElementById('quizResult').style.display = 'block';
     document.getElementById('quizResult').innerHTML = `
-        <div class="alert alert-${percentage >= 60 ? 'success' : 'warning'}">
+        <div class="alert alert-${resultClass}">
             <h4 class="alert-heading">तपाईंको नतिजा:</h4>
-            <p class="mb-2">सही उत्तर: ${score} / ${quizQuestions.length}</p>
-            <p class="mb-2">प्रतिशत: ${percentage}%</p>
-            <p class="mb-2">ग्रेड: <strong>${grade}</strong></p>
+            <p class="mb-2"><strong>सही उत्तर:</strong> ${score} / ${quizData.length}</p>
+            <p class="mb-2"><strong>प्रतिशत:</strong> ${percentage}%</p>
+            <p class="mb-2"><strong>ग्रेड:</strong> ${grade}</p>
             <hr>
             <p class="mb-0">${message}</p>
         </div>
     `;
     
-    // Disable radio buttons after submission
-    for (let i = 0; i < quizQuestions.length; i++) {
-        let radios = document.getElementsByName(`q${i}`);
-        radios.forEach(radio => radio.disabled = true);
-    }
-}
-
-function resetQuiz() {
-    currentAnswers = new Array(quizQuestions.length).fill(null);
+    document.getElementById('quizResult').style.display = 'block';
+    document.getElementById('restartQuizBtn').style.display = 'block';
+    document.getElementById('nextBtn').style.display = 'none';
+    document.getElementById('prevBtn').style.display = 'none';
+    document.getElementById('submitQuizBtn').style.display = 'none';
     
-    // Clear all selections
-    for (let i = 0; i < quizQuestions.length; i++) {
-        let radios = document.getElementsByName(`q${i}`);
-        radios.forEach(radio => {
-            radio.checked = false;
-            radio.disabled = false;
-        });
-    }
-    
-    // Hide result
-    document.getElementById('quizResult').style.display = 'none';
-}
-
-// Load quiz when modal is shown
-if (document.getElementById('quizModal')) {
-    document.getElementById('quizModal').addEventListener('show.bs.modal', function () {
-        loadQuiz();
+    // Disable radio buttons
+    document.querySelectorAll('input[type="radio"]').forEach(radio => {
+        radio.disabled = true;
     });
 }
 
-// Student Data for Modal Search
-const modalStudents = [
-    // Class 10 Students
+function restartQuiz() {
+    currentQuestion = 0;
+    userAnswers = new Array(quizData.length).fill(null);
+    displayQuestion();
+    updateButtons();
+    document.getElementById('quizResult').style.display = 'none';
+    document.getElementById('restartQuizBtn').style.display = 'none';
+}
+
+// Load quiz when modal is shown
+document.getElementById('quizModal')?.addEventListener('show.bs.modal', function() {
+    loadQuiz();
+});
+
+// Student Data for Result Search
+const studentData = [
     { symbol: "1001", class: "10", year: "2081", term: "1", dob: "2008-05-10", name: "राम शर्मा", gpa: "3.50", result: "PASS", percentage: "85%" },
     { symbol: "1002", class: "10", year: "2081", term: "1", dob: "2008-09-12", name: "सीता गुरुङ", gpa: "3.85", result: "PASS", percentage: "92%" },
     { symbol: "1003", class: "10", year: "2081", term: "1", dob: "2008-03-15", name: "हरि प्रसाद", gpa: "3.20", result: "PASS", percentage: "78%" },
     { symbol: "1004", class: "10", year: "2081", term: "1", dob: "2008-11-20", name: "गीता थापा", gpa: "3.65", result: "PASS", percentage: "88%" },
     { symbol: "1005", class: "10", year: "2081", term: "1", dob: "2008-07-08", name: "कृष्ण बस्नेत", gpa: "2.80", result: "PASS", percentage: "72%" },
-    
-    // Class 9 Students
-    { symbol: "9001", class: "9", year: "2081", term: "1", dob: "2009-06-15", name: "सुनिता राई", gpa: "3.60", result: "PASS", percentage: "87%" },
-    { symbol: "9002", class: "9", year: "2081", term: "1", dob: "2009-08-22", name: "विक्रम सिंह", gpa: "3.40", result: "PASS", percentage: "82%" },
-    { symbol: "9003", class: "9", year: "2081", term: "1", dob: "2009-12-10", name: "अञ्जली महर्जन", gpa: "3.75", result: "PASS", percentage: "90%" }
+    { symbol: "9001", class: "9", year: "2081", term: "1", dob: "2009-06-15", name: "सुनिता राई", gpa: "3.60", result: "PASS", percentage: "87%" }
 ];
 
 function searchModalResult() {
-    let classVal = document.getElementById("modalClass").value;
-    let yearVal = document.getElementById("modalYear").value;
-    let termVal = document.getElementById("modalTerm").value;
-    let dobVal = document.getElementById("modalDob").value;
-    let symbolVal = document.getElementById("modalSymbol").value;
+    const classVal = document.getElementById("modalClass").value;
+    const yearVal = document.getElementById("modalYear").value;
+    const termVal = document.getElementById("modalTerm").value;
+    const dobVal = document.getElementById("modalDob").value;
+    const symbolVal = document.getElementById("modalSymbol").value;
 
-    // Validate inputs
     if (!classVal || !yearVal || !termVal || !dobVal || !symbolVal) {
         alert("कृपया सबै आवश्यक जानकारी भर्नुहोस्!");
         return;
     }
 
-    // Show loading state
-    let resultDiv = document.getElementById("modalResultDisplay");
+    const resultDiv = document.getElementById("modalResultDisplay");
     resultDiv.style.display = "block";
     resultDiv.innerHTML = '<div class="text-center"><i class="fas fa-spinner fa-spin fa-3x text-info"></i><p class="mt-2">खोजी हुँदैछ...</p></div>';
 
-    // Simulate search delay
     setTimeout(() => {
-        let student = modalStudents.find(st =>
+        const student = studentData.find(st =>
             st.class == classVal &&
             st.year == yearVal &&
             st.term == termVal &&
@@ -5652,118 +5290,108 @@ function searchModalResult() {
                                 <p><strong>नतिजा:</strong> <span class="badge bg-success">${student.result}</span></p>
                             </div>
                         </div>
-                        <hr>
-                        <div class="text-center">
-                            <button class="btn btn-primary me-2" onclick="window.print()">
-                                <i class="fas fa-print me-2"></i>प्रिन्ट
-                            </button>
-                            <button class="btn btn-success" onclick="downloadResult('${student.name}', '${student.symbol}')">
-                                <i class="fas fa-download me-2"></i>डाउनलोड
-                            </button>
-                        </div>
                     </div>
                 </div>
             `;
         } else {
             resultDiv.innerHTML = `
-                <div class="card border-danger">
-                    <div class="card-header bg-danger text-white">
-                        <h5 class="mb-0"><i class="fas fa-times-circle me-2"></i>नतिजा फेला परेन!</h5>
-                    </div>
-                    <div class="card-body text-center">
-                        <i class="fas fa-search fa-4x text-danger mb-3"></i>
-                        <p class="text-muted">कृपया तपाईंको जानकारी सही छ कि छैन जाँच गर्नुहोस् र पुन: प्रयास गर्नुहोस्।</p>
-                        <button class="btn btn-outline-danger" onclick="clearModalSearch()">
-                            <i class="fas fa-redo me-2"></i>पुन: प्रयास गर्नुहोस्
-                        </button>
-                    </div>
+                <div class="alert alert-danger text-center">
+                    <i class="fas fa-exclamation-circle fa-3x mb-3"></i>
+                    <h5>नतिजा फेला परेन!</h5>
+                    <p>कृपया जानकारी सही छ कि छैन जाँच गर्नुहोस्।</p>
                 </div>
             `;
         }
     }, 1000);
 }
 
-function clearModalSearch() {
-    document.getElementById("modalClass").value = "";
-    document.getElementById("modalYear").value = "";
-    document.getElementById("modalTerm").value = "";
-    document.getElementById("modalDob").value = "";
-    document.getElementById("modalSymbol").value = "";
-    document.getElementById("modalResultDisplay").style.display = "none";
-}
-
-function downloadResult(name, symbol) {
-    // Create a simple text file with result info
-    const content = `विद्यार्थी नतिजा\nनाम: ${name}\nप्रतीक नम्बर: ${symbol}\nमिति: ${new Date().toLocaleDateString('ne-NP')}`;
-    const blob = new Blob([content], { type: 'text/plain' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `Result_${symbol}.txt`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    window.URL.revokeObjectURL(url);
-}
-
-// Subscription functionality
+// Subscription Functions
 function initSubscription() {
-    document.getElementById('subscribeBtn')?.addEventListener('click', function() {
-        let modal = new bootstrap.Modal(document.getElementById('subscriptionModal'));
-        modal.show();
-    });
+    const subscribeBtn = document.getElementById('subscribeBtn');
+    if (subscribeBtn) {
+        subscribeBtn.addEventListener('click', function() {
+            const modal = new bootstrap.Modal(document.getElementById('subscriptionModal'));
+            modal.show();
+        });
+    }
 
-    document.getElementById('subscriptionForm')?.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        let name = document.getElementById('subscriberName').value;
-        let email = document.getElementById('subscriberEmail').value;
-        
-        // Update counter
-        let counter = document.getElementById('counter');
-        let currentCount = parseInt(counter.innerText);
-        counter.innerText = currentCount + 1;
-        
-        // Show badge
-        let badge = document.getElementById('badge');
-        badge.style.display = 'inline-block';
-        badge.innerText = currentCount + 1;
-        
-        // Show success message
-        document.getElementById('subscriptionSuccess').style.display = 'block';
-        
-        // Reset form
-        this.reset();
-        
-        // Close modal after 2 seconds
-        setTimeout(() => {
-            bootstrap.Modal.getInstance(document.getElementById('subscriptionModal')).hide();
-            document.getElementById('subscriptionSuccess').style.display = 'none';
-        }, 2000);
-    });
+    const subscriptionForm = document.getElementById('subscriptionForm');
+    if (subscriptionForm) {
+        subscriptionForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('subscriberName').value;
+            const email = document.getElementById('subscriberEmail').value;
+            const phone = document.getElementById('subscriberPhone').value;
+            const whatsappUpdates = document.getElementById('whatsappUpdates').checked;
+            const emailUpdates = document.getElementById('emailUpdates').checked;
+            
+            // Send email using mailto
+            const subject = encodeURIComponent("New Newsletter Subscription");
+            const body = encodeURIComponent(
+                `New Subscription Details:\n\n` +
+                `Name: ${name}\n` +
+                `Email: ${email}\n` +
+                `Phone: ${phone || 'Not provided'}\n` +
+                `WhatsApp Updates: ${whatsappUpdates ? 'Yes' : 'No'}\n` +
+                `Email Updates: ${emailUpdates ? 'Yes' : 'No'}\n` +
+                `Subscription Date: ${new Date().toLocaleString()}`
+            );
+            
+            // Open default email client
+            window.location.href = `mailto:shamserpulami500@gmail.com?subject=${subject}&body=${body}`;
+            
+            // Update counter
+            const counter = document.getElementById('counter');
+            const currentCount = parseInt(counter.innerText) || 0;
+            counter.innerText = currentCount + 1;
+            
+            // Show badge
+            const badge = document.getElementById('badge');
+            badge.style.display = 'inline-block';
+            badge.innerText = currentCount + 1;
+            
+            // Show success message
+            document.getElementById('subscriptionSuccess').style.display = 'block';
+            document.getElementById('subscriptionError').style.display = 'none';
+            
+            // Reset form
+            this.reset();
+            
+            // Close modal after 3 seconds
+            setTimeout(() => {
+                const modal = bootstrap.Modal.getInstance(document.getElementById('subscriptionModal'));
+                if (modal) modal.hide();
+                document.getElementById('subscriptionSuccess').style.display = 'none';
+            }, 3000);
+        });
+    }
 }
 
-// Software purchase function
+// Software Functions
 function purchaseSoftware(plan, amount) {
-    alert(`धन्यवाद! तपाईंले ${plan} प्याकेज रु. ${amount} मा खरिद गर्न लाग्नुभएको छ।\n\nकृपया eSewa बाट भुक्तानी गर्नुहोस् र हामीलाई सम्पर्क गर्नुहोस्।`);
+    alert(`धन्यवाद! तपाईंले ${plan} प्याकेज रु. ${amount} मा खरिद गर्न लाग्नुभएको छ।\n\nकृपया eSewa बाट भुक्तानी गर्नुहोस्।`);
 }
 
-// Request trial function
 function requestTrial() {
     alert("ट्रायलको लागि अनुरोध गर्नुभएकोमा धन्यवाद।\n\nहामी तपाईंलाई २४ घण्टा भित्र सम्पर्क गर्नेछौं।");
 }
 
-// Download trial version
 function downloadTrialVersion() {
     window.location.href = "https://shamser.info.np/ID%20Card%20Software%20Trial.zip";
 }
 </script>
- 
+
+<!-- Add Bootstrap Icons and CSS if not already included -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 
 
 
 
+<!---========------->
 
 
 
