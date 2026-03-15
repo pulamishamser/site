@@ -1786,43 +1786,7 @@ function myFunction() {
 
 
 <!--------Kara popup-------------->
-
 <button class="openBtn" onclick="openPopup()">Read KARA</button>
-
-<!-- Popup -->
-<div id="popupBox" class="popup">
-
-  <div class="popup-content">
-
-    <span class="close" onclick="closePopup()">×</span>
-
-    <iframe src="https://shamser.info.np/kara.html"></iframe>
-
-  </div>
-
-</div>
-
-<script>
-
-function openPopup(){
-    document.getElementById("popupBox").style.display = "block";
-}
-
-function closePopup(){
-    document.getElementById("popupBox").style.display = "none";
-}
-
-/* close when clicking outside */
-window.onclick = function(event){
-    let popup = document.getElementById("popupBox");
-    if(event.target == popup){
-        popup.style.display = "none";
-    }
-}
-
-</script>
-```
-
 
 
 
@@ -6064,6 +6028,55 @@ document.querySelectorAll('a[href$=".zip"], a[href$=".exe"], a[download]').forEa
 </style>
 
 
+
+
+
+
+
+
+
+<!--Kara webpage -->
+<!-- Popup -->
+<div id="popupBox" class="popup">
+
+  <div class="popup-content">
+
+    <span class="close" onclick="closePopup()">×</span>
+
+    <iframe src="https://shamser.info.np/kara.html"></iframe>
+
+  </div>
+
+</div>
+
+<script>
+
+function openPopup(){
+    document.getElementById("popupBox").style.display = "block";
+}
+
+function closePopup(){
+    document.getElementById("popupBox").style.display = "none";
+}
+
+/* close when clicking outside */
+window.onclick = function(event){
+    let popup = document.getElementById("popupBox");
+    if(event.target == popup){
+        popup.style.display = "none";
+    }
+}
+
+</script>
+<!--End Kara webpage -->
+
+
+
+
+
+
+
+ 
 </body>
 </html>
 
