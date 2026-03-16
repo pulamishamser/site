@@ -1657,7 +1657,15 @@ myModal{
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
         </div>
-
+<!-- Your like button code -->
+  <div class="fb-like" 
+       data-href="https://shamser.info.np" 
+       data-width=""
+       data-layout="standard" 
+       data-action="like" 
+       data-size="small"  
+       data-share="false">
+  </div>  
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal5">
           IEMIS को विशेषता र प्रयोगतरीका
         </button>
@@ -2787,15 +2795,23 @@ function toggleTeacherReadMore() {
     </div>
   </div>
      </div> 
-
-
-
-  <script>
+<script>
 document.querySelectorAll('.copy-btn').forEach(button => {
+  let timeoutId = null;
+  
   button.addEventListener('click', async function() {
+    // Clear any pending reset timeout
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+    
     const url = this.getAttribute('data-url');
     const originalText = this.textContent;
     const originalColor = window.getComputedStyle(this).color;
+    const originalHTML = this.innerHTML; // In case there are icons
+    
+    // Disable button during copy operation
+    this.disabled = true;
     
     try {
       await navigator.clipboard.writeText(url);
@@ -2803,6 +2819,9 @@ document.querySelectorAll('.copy-btn').forEach(button => {
       // Success feedback
       this.textContent = '✓ Copied!';
       this.style.color = '#28a745';
+      
+      // Announce for screen readers
+      this.setAttribute('aria-label', 'Copied to clipboard');
       
     } catch (err) {
       console.error('Failed to copy: ', err);
@@ -2816,27 +2835,35 @@ document.querySelectorAll('.copy-btn').forEach(button => {
         document.execCommand('copy');
         document.body.removeChild(tempInput);
         
-        // Success feedback for fallback
         this.textContent = '✓ Copied!';
         this.style.color = '#28a745';
+        this.setAttribute('aria-label', 'Copied to clipboard');
       } catch (fallbackErr) {
         console.error('Fallback copy failed: ', fallbackErr);
         this.textContent = 'Failed to copy';
         this.style.color = '#dc3545';
+        this.setAttribute('aria-label', 'Copy failed');
       }
     } finally {
-      // Reset button after timeout
-      setTimeout(() => {
-        this.textContent = originalText;
-        this.style.color = originalColor;
+      // Re-enable button
+      this.disabled = false;
+      
+      // Store timeout ID to clear if needed
+      timeoutId = setTimeout(() => {
+        // Check if button still exists in DOM
+        if (document.body.contains(this)) {
+          this.textContent = originalText;
+          this.style.color = originalColor;
+          this.innerHTML = originalHTML;
+          this.setAttribute('aria-label', 'Copy to clipboard');
+        }
+        timeoutId = null;
       }, 1500);
     }
   });
 });
+                 
 </script>
-
-
-
 
 <div class="col-lg-9 col-sm-12 slider-margin">
   <div class="wow fadeInUp image-slider" data-wow-delay="0.2s">
@@ -3219,15 +3246,7 @@ RRB NBL NEPAL RASHTRA
 सबै
 <img src="Home/wp-content/themes/onlinekhabar-2021/assets/img/arrow-right.svg" alt>
 </a>
-  <!-- Your like button code -->
-  <div class="fb-like" 
-       data-href="https://shamser.info.np" 
-       data-width=""
-       data-layout="standard" 
-       data-action="like" 
-       data-size="small"  
-       data-share="false">
-  </div>  
+  
 </div>
 </div>
 <div class="okv4-post-parent-wrapper grid-item grid-item-3 m-grid-item-1 ltr-on-mobile style-free-grid">
