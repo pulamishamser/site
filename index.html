@@ -5203,6 +5203,117 @@ function downloadTrialVersion() {
 
 <!---========------->
 
+<!-- Add these floating action buttons -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index:999; bottom:110px;">
+    <!-- Quick Help Button -->
+    <button class="btn btn-warning rounded-circle mb-2 shadow" onclick="openModal('helpModal')" 
+            data-bs-toggle="tooltip" title="सहायता">
+        <i class="fas fa-question"></i>
+    </button>
+    
+    <!-- WhatsApp Button -->
+    <button class="btn btn-success rounded-circle mb-2 shadow" onclick="openModal('whatsappModal')"
+            data-bs-toggle="tooltip" title="WhatsApp समूह">
+        <i class="fab fa-whatsapp"></i>
+    </button>
+    
+    <!-- Feedback Button -->
+    <button class="btn btn-info rounded-circle mb-2 shadow text-white" onclick="openModal('feedbackModal')"
+            data-bs-toggle="tooltip" title="प्रतिक्रिया">
+        <i class="fas fa-comment"></i>
+    </button>
+  
+    <!-- Back to Top Button - Single button placed here -->
+    <button class="btn btn-primary rounded-circle shadow" onclick="scrollToTop()"
+            data-bs-toggle="tooltip" title="माथि जानुहोस्">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+</div>
+<style>
+/* Floating Action Buttons Styling */
+.position-fixed.bottom-0.end-0.p-3 {
+    bottom: 90px !important; /* Adjust this value as needed */
+    right: 20px !important;
+}
+
+/* Button hover effects */
+.position-fixed.bottom-0.end-0.p-3 .btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2) !important;
+}
+
+.position-fixed.bottom-0.end-0.p-3 .btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3) !important;
+}
+
+/* Individual button colors */
+.btn-warning { background-color: #ffc107; border-color: #ffc107; }
+.btn-success { background-color: #25D366; border-color: #25D366; }
+.btn-info { background-color: #17a2b8; border-color: #17a2b8; }
+.btn-primary { background-color: #007bff; border-color: #007bff; }
+
+/* Back to Top button specific styling */
+.btn-primary.rounded-circle {
+    background-color: #007bff;
+    border: 2px solid #fff;
+}
+
+.btn-primary.rounded-circle:hover {
+    background-color: #0056b3;
+}
+
+/* Animation for buttons */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.position-fixed.bottom-0.end-0.p-3 .btn:last-child {
+    animation: pulse 2s infinite;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .position-fixed.bottom-0.end-0.p-3 {
+        bottom: 70px !important;
+        right: 15px !important;
+    }
+    
+    .position-fixed.bottom-0.end-0.p-3 .btn {
+        width: 45px;
+        height: 45px;
+    }
+}
+
+/* Tooltip styling */
+[data-bs-toggle="tooltip"] {
+    position: relative;
+}
+
+/* Ensure buttons are above other content */
+.position-fixed {
+    z-index: 9999 !important;
+}
+
+/* Add a subtle backdrop blur on hover */
+.position-fixed.bottom-0.end-0.p-3:hover {
+    backdrop-filter: blur(2px);
+}
+</style>
+
+
+
+
+
+ 
 <!-- Add these after the existing modals and before the closing body tag -->
 
 <!-- WhatsApp Community Modal -->
@@ -5445,6 +5556,17 @@ function downloadTrialVersion() {
     </div>
 </div>
 
+
+
+
+
+
+
+
+
+
+
+ 
 <!-- Add these JavaScript functions -->
 <script>
 // Rating system for feedback
@@ -5659,30 +5781,6 @@ document.querySelectorAll('a[href$=".zip"], a[href$=".exe"], a[download]').forEa
     });
 });
 </script>
-
-
-
-
-
-
-
-
-
-
-
-<!--Kara webpage -->
-<!-- Popup -->
-<div id="popupBox" class="popup">
-
-  <div class="popup-content">
-
-    <span class="close" onclick="closePopup()">×</span>
-
-    <iframe src="https://shamser.info.np/kara.html"></iframe>
-
-  </div>
-
-</div>
 
 <script>
 
