@@ -222,7 +222,7 @@ window.scrollTo(0, 0);
 <style>
 .scroll-top{
         position: fixed;
-        bottom:90px;
+        bottom:70px;
         right: 10px;
         z-index: 99;
        */ background: red;*/
@@ -982,7 +982,7 @@ Grid </a>
     .bottom-nav {
       position: fixed;
       bottom: 0;
-      width: 93%;
+      width: 100%;
       background: #3498db;
       display: flex;
       justify-content: space-around;
@@ -4755,14 +4755,7 @@ function downloadTrialVersion() {
 }
 </script>
 
-<!-- Optional: Add some sample content to see the page -->
-<div class="container mt-5 text-center">
-    <h1>शम्सेरको शैक्षिक पोर्टल</h1>
-    <p>तलको बटन थिच्नुहोस् वा पपअप आउनको लागि पर्खनुहोस्</p>
-    <button class="btn btn-primary btn-lg" onclick="openModal('welcomePopupModal')">
-        <i class="fas fa-hand-peace me-2"></i>पपअप खोल्नुहोस्
-    </button>
-</div>
+
 
 
 
@@ -5235,180 +5228,117 @@ document.querySelectorAll('a[href$=".zip"], a[href$=".exe"], a[download]').forEa
 });
 </script>
 
+
+
+
+
+
+<!-- Add these floating action buttons -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index:999; bottom:110px;">
+    <!-- Quick Help Button -->
+    <button class="btn btn-warning rounded-circle mb-2 shadow" onclick="openModal('helpModal')" 
+            data-bs-toggle="tooltip" title="सहायता">
+        <i class="fas fa-question"></i>
+    </button>
+    
+    <!-- WhatsApp Button -->
+    <button class="btn btn-success rounded-circle mb-2 shadow" onclick="openModal('whatsappModal')"
+            data-bs-toggle="tooltip" title="WhatsApp समूह">
+        <i class="fab fa-whatsapp"></i>
+    </button>
+    
+    <!-- Feedback Button -->
+    <button class="btn btn-info rounded-circle mb-2 shadow text-white" onclick="openModal('feedbackModal')"
+            data-bs-toggle="tooltip" title="प्रतिक्रिया">
+        <i class="fas fa-comment"></i>
+    </button>
+  
+    <!-- Back to Top Button - Single button placed here -->
+    <button class="btn btn-primary rounded-circle shadow" onclick="scrollToTop()"
+            data-bs-toggle="tooltip" title="माथि जानुहोस्">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+</div>
+
+ 
 <!-- Add custom CSS for floating buttons and responsiveness -->
 <style>
-/* Floating action buttons */
-.position-fixed.bottom-0.end-0 .btn {
+/* Floating Action Buttons Styling */
+.position-fixed.bottom-0.end-0.p-3 {
+    bottom: 100px !important; /* Adjust this value as needed */
+    right: 18px !important;
+}
+
+/* Button hover effects */
+.position-fixed.bottom-0.end-0.p-3 .btn {
     width: 50px;
     height: 50px;
-    border-radius: 50%;
+    border-radius: 50% !important;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2) !important;
 }
 
-.position-fixed.bottom-0.end-0 .btn:hover {
+.position-fixed.bottom-0.end-0.p-3 .btn:hover {
     transform: scale(1.1);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3) !important;
 }
 
-/* Star rating */
-.star-rating i {
-    cursor: pointer;
-    transition: all 0.2s ease;
-    margin: 0 2px;
+/* Individual button colors */
+.btn-warning { background-color: #ffc107; border-color: #ffc107; }
+.btn-success { background-color: #25D366; border-color: #25D366; }
+.btn-info { background-color: #17a2b8; border-color: #17a2b8; }
+.btn-primary { background-color: #007bff; border-color: #007bff; }
+
+/* Back to Top button specific styling */
+.btn-primary.rounded-circle {
+    background-color: #007bff;
+    border: 2px solid #fff;
 }
 
-.star-rating i:hover {
-    transform: scale(1.2);
+.btn-primary.rounded-circle:hover {
+    background-color: #0056b3;
 }
 
-/* Help content animation */
-#helpContent {
-    animation: slideIn 0.3s ease;
-}
-
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Modal animations */
-.modal.fade .modal-dialog {
-    transform: scale(0.8);
-    transition: transform 0.2s ease-in-out;
-}
-
-.modal.show .modal-dialog {
-    transform: scale(1);
-}
-
-/* Toast notification */
-.toast {
-    min-width: 250px;
-}
-
-/* Responsive design for small screens */
-@media (max-width: 576px) {
-    .position-fixed.bottom-0.end-0 {
-        padding: 1rem !important;
-    }
-    
-    .position-fixed.bottom-0.end-0 .btn {
-        width: 40px;
-        height: 40px;
-        font-size: 0.9rem;
-    }
-    
-    .modal-dialog {
-        margin: 0.5rem;
-    }
-}
-
-/* Loading spinner animation */
-.fa-spinner {
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-/* Hover effects for cards */
-.card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-}
-
-/* Gradient backgrounds for modals */
-.modal-header.bg-gradient {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-/* Custom scrollbar for modals */
-.modal-body::-webkit-scrollbar {
-    width: 5px;
-}
-
-.modal-body::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-
-.modal-body::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 5px;
-}
-
-.modal-body::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
-
-/* Pulse animation for notification button */
+/* Animation for buttons */
 @keyframes pulse {
-    0% {
-        box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.7);
-    }
-    70% {
-        box-shadow: 0 0 0 10px rgba(255, 193, 7, 0);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(255, 193, 7, 0);
-    }
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
 }
 
-.btn-warning.position-fixed {
+.position-fixed.bottom-0.end-0.p-3 .btn:last-child {
     animation: pulse 2s infinite;
 }
 
-/* Ripple effect for buttons */
-.btn {
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .position-fixed.bottom-0.end-0.p-3 {
+        bottom: 70px !important;
+        right: 15px !important;
+    }
+    
+    .position-fixed.bottom-0.end-0.p-3 .btn {
+        width: 45px;
+        height: 45px;
+    }
+}
+
+/* Tooltip styling */
+[data-bs-toggle="tooltip"] {
     position: relative;
-    overflow: hidden;
 }
 
-.btn:after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 5px;
-    height: 5px;
-    background: rgba(255, 255, 255, 0.5);
-    opacity: 0;
-    border-radius: 100%;
-    transform: scale(1, 1) translate(-50%);
-    transform-origin: 50% 50%;
+/* Ensure buttons are above other content */
+.position-fixed {
+    z-index: 9999 !important;
 }
 
-@keyframes ripple {
-    0% {
-        transform: scale(0, 0);
-        opacity: 1;
-    }
-    20% {
-        transform: scale(25, 25);
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-        transform: scale(40, 40);
-    }
-}
-
-.btn:focus:not(:active)::after {
-    animation: ripple 1s ease-out;
+/* Add a subtle backdrop blur on hover */
+.position-fixed.bottom-0.end-0.p-3:hover {
+    backdrop-filter: blur(2px);
 }
 </style>
 <script>
@@ -5430,7 +5360,7 @@ window.onclick = function(event){
 }
 
 </script>
-<!--End Kara webpage -->
+
 
 <!-- Bootstrap JS (good) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
