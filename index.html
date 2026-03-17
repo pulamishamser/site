@@ -3854,108 +3854,23 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
 
 
 <!-- Welcome Popup Modal (Shows on page load) -->
-<div class="modal fade" id="welcomePopupModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="welcomePopupModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="welcomePopupModalLabel">
-                    <i class="fas fa-hand-peace me-2"></i>स्वागतम्!
-                </h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center">
-                <img src="HomePage/img/brp.jpg" height="60" width="80" class="rounded mb-3" alt="brp">  
-                <h4>shamser.info.np मा तपाईंलाई स्वागत छ!</h4>
-                <p class="text-muted mb-4">हाम्रा विभिन्न सेवाहरू प्रयोग गर्नुहोस्:</p>
-                
-                <div class="row g-3">
-                    <div class="col-6">
-                        <button class="btn btn-primary w-100 py-3" onclick="openModal('iemisModal'); closeModal('welcomePopupModal')">
-                            <i class="fas fa-graduation-cap fa-2x mb-2 d-block"></i>
-                            <span>IEMIS</span>
-                        </button>
-                    </div>
-                    <div class="col-6">
-                        <div class="dropdown w-100">
-                            <button class="btn btn-success w-100 py-3 dropdown-toggle" type="button" id="idCardDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-id-card fa-2x mb-2 d-block"></i>
-                                <span>ID Card</span>
-                            </button>
-                            <ul class="dropdown-menu w-100" aria-labelledby="idCardDropdown">
-                                <li><a class="dropdown-item" href="#" onclick="openModal('idCardSoftwareModal'); return false;"><i class="fas fa-info-circle me-2"></i>अफलाइन प्रयोग</a></li>
-                                <li><a class="dropdown-item" href="#" onclick="openIDCardOption('online'); return false;"><i class="fas fa-globe me-2"></i>अनलाइन प्रयोग</a></li>
-                                <li><a class="dropdown-item" href="HomePage/Id_card Software.JPG" download><i class="fas fa-download me-2"></i>डाउनलोड</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <button class="btn btn-warning w-100 py-3" onclick="openModal('quizModal'); closeModal('welcomePopupModal')">
-                            <i class="fas fa-laptop-code fa-2x mb-2 d-block"></i>
-                            <span>Quiz</span>
-                        </button>
-                    </div>
-                    <div class="col-6">
-                        <button class="btn btn-info w-100 py-3 text-white" onclick="openModal('resultModal'); closeModal('welcomePopupModal')">
-                            <i class="fas fa-search fa-2x mb-2 d-block"></i>
-                            <span>Check Result</span>
-                        </button>
-                    </div>
-                </div>
-                
-                <hr class="my-4">
-                
-                <!-- Additional Links Section -->
-                <div class="d-grid gap-2 mt-3">
-                    <a href="https://shamser.info.np/Multi%20letterpad.html" class="btn btn-primary" target="_blank">
-                        <i class="fas fa-pencil-alt me-2"></i>🌐 Generate Multi letters
-                    </a>
-                    <a href="https://forms.gle/LVm68DdiXN5Ep1Mb6" class="btn btn-success" target="_blank">
-                        <i class="fas fa-info-circle me-2"></i>💁🏻‍♀️ About Service charge
-                    </a>
-                </div>
-                
-                <!-- Resource Links -->
-                <div class="row mt-4">
-                    <div class="col-12">
-                        <a href="http://janajyoticampus.edu.np/wp-content/uploads/2024/12/%E0%A4%B8%E0%A5%8D%E0%A4%AE%E0%A4%BE%E0%A4%B0%E0%A5%80%E0%A4%95%E0%A4%BE-%E0%A5%A8%E0%A5%A6%E0%A5%AE%E0%A5%A7.pdf" 
-                           class="btn btn-outline-primary w-100 mb-2" target="_blank">
-                            <i class="fas fa-book me-2"></i>👉 जनज्योति क्याम्पसको स्मारिका
-                        </a>
-                        <a href="http://shamser.info.np/News modal.html" class="btn btn-outline-info w-100 mb-2" target="_blank">
-                            <i class="fas fa-newspaper me-2"></i>🌐 ताजा अनलाइन समाचार
-                        </a>
-                        
-                        <!-- Subscription Button -->
-                        <div class="subscribe-container mt-3">
-                            <button id="subscribeBtn" class="btn btn-danger w-100">
-                                <i class="fas fa-bell me-2"></i>
-                                <span>Subscribe</span>
-                                <span id="badge" class="badge bg-light text-dark ms-2" style="display: none;">0</span>
-                            </button>
-                            <div class="counter-container mt-2 text-center">
-                                <p class="mb-0">Total Subscribers: <span class="fw-bold" id="counter">0</span></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Updates Section -->
-                <div class="mt-4 text-start">
-                    <h5>📢 ताजा अपडेटहरू</h5>
-                    <ul class="list-unstyled">
-                        <li><i class="fas fa-check-circle text-success me-2"></i>शैक्षिक समाचार</li>
-                        <li><i class="fas fa-check-circle text-success me-2"></i>विद्यालयको लागि उपयोगी सामाग्री</li>
-                        <li><i class="fas fa-check-circle text-success me-2"></i>शिक्षकहरूकालागि उपयोगी स्रोतहरू</li>
-                        <li><i class="fas fa-check-circle text-success me-2"></i>विद्यार्थीहरूकालागि शैक्षिक सामग्री</li>
-                        <li><i class="fas fa-check-circle text-success me-2"></i>कम्प्युटर क्विज तथा सामान्य ज्ञान</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">पछि हेर्ने</button>
-            </div>
-        </div>
+<!-- First occurrence -->
+<div class="col-6">
+    <button class="btn btn-success w-100 py-3 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fas fa-id-card fa-2x mb-2 d-block"></i>
+        <span>ID Card</span>
+    </button>
+    <!-- dropdown menu -->
+</div>
+
+<!-- Second occurrence (duplicate) - This is causing the issue -->
+<div class="col-6">
+    <div class="dropdown w-100">
+        <button class="btn btn-success w-100 py-3 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-id-card fa-2x mb-2 d-block"></i>
+            <span>ID Card</span>
+        </button>
+        <!-- dropdown menu -->
     </div>
 </div>
 
