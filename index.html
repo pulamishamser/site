@@ -4423,10 +4423,73 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
 <!---------->
 
 
+
+
  
 
-<!-- Welcome Popup Modal (Shows on page load) -->
 
+
+<!---========------->
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        .modal-content {
+            border-radius: 15px;
+        }
+        .modal-header {
+            border-radius: 15px 15px 0 0;
+        }
+        .btn {
+            border-radius: 10px;
+        }
+        .dropdown-menu {
+            border-radius: 10px;
+        }
+        .form-control, .form-select {
+            border-radius: 8px;
+            padding: 10px;
+        }
+        .bg-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .subscription-modal .modal-content {
+            border: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .benefits-list {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+        }
+        .counter-container {
+            background: #f8f9fa;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        #badge {
+            transition: all 0.3s ease;
+        }
+        .result-display {
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* additional utility */
+        .cursor-pointer {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
 
 <!-- Welcome Popup Modal (Shows on page load) -->
 <div class="modal fade" id="welcomePopupModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="welcomePopupModalLabel" aria-hidden="true">
@@ -4439,7 +4502,8 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center">
-                <i class="fas fa-smile fa-4x mb-3 text-primary"></i>
+                <!-- placeholder image; if missing, hide or replace -->
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='60' viewBox='0 0 80 60'%3E%3Crect width='80' height='60' fill='%23cccccc'/%3E%3Ctext x='10' y='35' font-family='Arial' font-size='12' fill='%23333'%3Ebrp logo%3C/text%3E%3C/svg%3E" height="60" width="80" class="rounded mb-3" alt="brp">  
                 <h4>shamser.info.np मा तपाईंलाई स्वागत छ!</h4>
                 <p class="text-muted mb-4">हाम्रा विभिन्न सेवाहरू प्रयोग गर्नुहोस्:</p>
                 
@@ -4457,10 +4521,22 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
                                 <span>ID Card</span>
                             </button>
                             <ul class="dropdown-menu w-100">
-                                <li><a class="dropdown-item" href="#" onclick="openIDCardOption('offline'); return false;"><i class="fas fa-download me-2"></i>अफलाइन डाउनलोड</a></li>
-                                <li><a class="dropdown-item" href="#" onclick="openIDCardOption('online'); return false;"><i class="fas fa-globe me-2"></i>अनलाइन प्रयोग</a></li>
+                                <li>
+                                    <a class="dropdown-item" href="#" onclick="openModal('idCardSoftwareModal'); return false;">
+                                        <i class="fas fa-info-circle me-2"></i>अफलाइन प्रयोग 
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#" onclick="openIDCardOnline(); return false;">
+                                        <i class="fas fa-globe me-2"></i>अनलाइन प्रयोग
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="https://shamser.info.np/ID%20Card%20Software.zip" download>
+                                        <i class="fas fa-download me-2"></i>डाउनलोड
+                                    </a>
+                                </li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#" onclick="openModal('idCardSoftwareModal'); return false;"><i class="fas fa-info-circle me-2"></i>थप जानकारी</a></li>
                             </ul>
                         </div>
                     </div>
@@ -4497,7 +4573,7 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
                            class="btn btn-outline-primary w-100 mb-2" target="_blank">
                             <i class="fas fa-book me-2"></i>👉 जनज्योति क्याम्पसको स्मारिका
                         </a>
-                        <a href="http://shamser.info.np/News modal.html" class="btn btn-outline-info w-100 mb-2" target="_blank">
+                        <a href="http://shamser.info.np/News%20modal.html" class="btn btn-outline-info w-100 mb-2" target="_blank">
                             <i class="fas fa-newspaper me-2"></i>🌐 ताजा अनलाइन समाचार
                         </a>
                         
@@ -4683,7 +4759,7 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
                 </div>
                 
                 <div class="text-center mb-4">
-                    <img src="https://shamser.info.np/HomePage/Id_card%20Software.JPG" class="img-fluid rounded shadow" style="max-height:200px;" alt="ID Card Generator Logo">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='120' viewBox='0 0 200 120'%3E%3Crect width='200' height='120' fill='%234280f4'/%3E%3Ctext x='30' y='70' font-family='Arial' font-size='16' fill='white'%3EID Card Demo%3C/text%3E%3C/svg%3E" class="img-fluid rounded shadow" style="max-height:200px;" alt="ID Card Generator Logo">
                     <h4 class="mt-3 text-primary">ID Card Generator Software</h4>
                 </div>
 
@@ -4728,7 +4804,7 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
                 <!-- Quick Access Buttons -->
                 <div class="row mb-4">
                     <div class="col-6">
-                        <a href="https://shamser.info.np/ID%20Card%20Software.zip" class="btn btn-primary w-100" download>
+                        <a href="https://shamser.info.np/HomePage/Id_card%20Software.JPG" class="btn btn-primary w-100" download>
                             <i class="fas fa-download me-2"></i>Download Offline
                         </a>
                     </div>
@@ -4871,7 +4947,7 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
     </div>
 </div>
 
-<!-- Demo Modal -->
+<!-- Demo Modal (extra) -->
 <div class="modal fade" id="demoModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -4912,6 +4988,7 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
     </div>
 </div>
 
+<!-- JavaScript -->
 <script>
 // Quiz Data
 const quizData = [
@@ -4953,10 +5030,6 @@ document.addEventListener('DOMContentLoaded', function() {
         welcomeModal.show();
     }, 1000);
     
-    setTimeout(function() {
-        // Optional: Show ad popup if you have one
-    }, 5000);
-    
     // Initialize subscription button
     initSubscription();
 });
@@ -4980,13 +5053,9 @@ function closeModal(modalId) {
     }
 }
 
-// ID Card option handler
-function openIDCardOption(option) {
-    if (option === 'offline') {
-        window.location.href = "https://shamser.info.np/ID%20Card%20Software.zip";
-    } else if (option === 'online') {
-        window.open("https://shamser.info.np/IDCardDemo.html", "_blank");
-    }
+// ID Card functions
+function openIDCardOnline() {
+    window.open("https://shamser.info.np/IDCardDemo.html", "_blank");
 }
 
 // IEMIS Login
@@ -5313,7 +5382,7 @@ function initSubscription() {
     }
 }
 
-// Software Functions
+// Software Functions (if used elsewhere)
 function purchaseSoftware(plan, amount) {
     alert(`धन्यवाद! तपाईंले ${plan} प्याकेज रु. ${amount} मा खरिद गर्न लाग्नुभएको छ।\n\nकृपया eSewa बाट भुक्तानी गर्नुहोस्।`);
 }
@@ -5327,16 +5396,9 @@ function downloadTrialVersion() {
 }
 </script>
 
-<!-- Add Bootstrap Icons and CSS if not already included -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
-
-
-
-
-<!---========------->
 
 <!---========------->
 
