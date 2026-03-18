@@ -2848,85 +2848,9 @@ function toggleTeacherReadMore() {
   
   </li>
 </ul>
-<script>
-document.querySelectorAll('.copy-btn').forEach(button => {
-  button.addEventListener('click', async function() {
-    const url = this.getAttribute('data-url');
-    
-    try {
-      await navigator.clipboard.writeText(url);
-      
-      // Visual feedback
-      const originalText = this.textContent;
-      this.textContent = '✓ Copied!';
-      this.style.color = '#28a745'; /* Green color for success feedback */
-      setTimeout(() => {
-        this.textContent = originalText;
-        this.style.color = '#0066cc'; /* Revert to original color */
-      }, 1500);
-    } catch (err) {
-      console.error('Failed to copy: ', err);
-      
-      // Fallback for browsers that don't support Clipboard API
-      const tempInput = document.createElement('input');
-      tempInput.value = url;
-      document.body.appendChild(tempInput);
-      tempInput.select();
-      document.execCommand('copy');
-      document.body.removeChild(tempInput);
-      
-      // Visual feedback
-      const originalText = this.textContent;
-      this.textContent = '✓ Copied!';
-      this.style.color = '#28a745';
-      setTimeout(() => {
-        this.textContent = originalText;
-        this.style.color = '#0066cc';
-      }, 1500);
-    }
-  });
-});
-</script>
 
-  
-<script>
-document.querySelectorAll('.copy-btn').forEach(button => {
-  button.addEventListener('click', async function() {
-    const url = this.getAttribute('data-url');
-    
-    try {
-      await navigator.clipboard.writeText(url);
-      
-      // Visual feedback
-      const originalText = this.textContent;
-      this.textContent = 'Copied!';
-      setTimeout(() => {
-        this.textContent = originalText;
-      }, 1500);
-    } catch (err) {
-      console.error('Failed to copy: ', err);
-      
-      // Fallback for browsers that don't support Clipboard API
-      const tempInput = document.createElement('input');
-      tempInput.value = url;
-      document.body.appendChild(tempInput);
-      tempInput.select();
-      document.execCommand('copy');
-      document.body.removeChild(tempInput);
-      
-      // Visual feedback
-      const originalText = this.textContent;
-      this.textContent = 'Copied!';
-      setTimeout(() => {
-        this.textContent = originalText;
-      }, 1500);
-    }
-  });
-});
-</script>
- 
  </ul>  
-  details
+  
       </div>
 
       <!-- Modal footer -->
