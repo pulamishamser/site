@@ -2799,7 +2799,11 @@ function toggleTeacherReadMore() {
 <!-- Modal footer -->
 <div class="modal-footer">
   <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-</div>
+      </div>
+    </div>
+  </div>
+     </div> 
+
 
 <style>
 .copy-btn {
@@ -2847,54 +2851,40 @@ a:hover {
 </style>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.copy-btn').forEach(button => {
-    button.addEventListener('click', async function() {
-      const url = this.getAttribute('data-url');
+document.querySelectorAll('.copy-btn').forEach(button => {
+  button.addEventListener('click', async function() {
+    const url = this.getAttribute('data-url');
+    
+    try {
+      await navigator.clipboard.writeText(url);
       
-      try {
-        await navigator.clipboard.writeText(url);
-        
-        // Visual feedback
-        const originalText = this.textContent;
-        this.textContent = 'Copied!';
-        this.classList.add('copied');
-        
-        setTimeout(() => {
-          this.textContent = originalText;
-          this.classList.remove('copied');
-        }, 1500);
-      } catch (err) {
-        console.error('Failed to copy: ', err);
-        
-        // Fallback for browsers that don't support Clipboard API
-        try {
-          const tempInput = document.createElement('input');
-          tempInput.value = url;
-          document.body.appendChild(tempInput);
-          tempInput.select();
-          document.execCommand('copy');
-          document.body.removeChild(tempInput);
-          
-          // Visual feedback
-          const originalText = this.textContent;
-          this.textContent = 'Copied!';
-          this.classList.add('copied');
-          
-          setTimeout(() => {
-            this.textContent = originalText;
-            this.classList.remove('copied');
-          }, 1500);
-        } catch (fallbackErr) {
-          console.error('Fallback copy failed: ', fallbackErr);
-          alert('Failed to copy URL. Please copy manually.');
-        }
-      }
-    });
+      // Visual feedback
+      const originalText = this.textContent;
+      this.textContent = 'Copied!';
+      setTimeout(() => {
+        this.textContent = originalText;
+      }, 1500);
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+      
+      // Fallback for browsers that don't support Clipboard API
+      const tempInput = document.createElement('input');
+      tempInput.value = url;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+      
+      // Visual feedback
+      const originalText = this.textContent;
+      this.textContent = 'Copied!';
+      setTimeout(() => {
+        this.textContent = originalText;
+      }, 1500);
+    }
   });
 });
 </script>
-
 
 
 
