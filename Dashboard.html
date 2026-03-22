@@ -1107,31 +1107,230 @@
 
 
         // ===============================
-// CLEAR CACHE + COOKIES SYSTEM
-// ===============================
-function clearAllData() {
-    // Clear Cookies
-    document.cookie.split(";").forEach(function(cookie) {
-        document.cookie = cookie
-            .replace(/^ +/, "")
-            .replace(/=.*/, "=;expires=" + new Date(0).toUTCString() + ";path=/");
-    });
+  <script>
+        // Session configuration
+        const SESSION_TIMEOUT = 30 * 60 * 1000; // 30 minutes
+        const WARNING_TIMEOUT = 2 * 60 * 1000; // Show warning 2 minutes before timeout
+        const CHECK_INTERVAL = 1 * 60 * 1000; // Check session every 1 minute
+        
+        let inactivityTimer;
+        let warningTimer;
+        let lastActivityTime = Date.now();
+        let isLoggedIn = false;
+        let sessionTimerInterval;
 
-    // Clear Local Storage
-    localStorage.clear();
-
-    // Clear Session Storage
-    sessionStorage.clear();
-
-    // Clear Cache (Service Worker)
-    if ('caches' in window) {
-        caches.keys().then(names => {
-            names.forEach(name => caches.delete(name));
+        // Initialize on page load
+        $(document).ready(function() {
+          // Check if we're coming back from a successful login
+          const urlParams = new URLSearchParams(window.location.search);
+          if (urlParams.has('loggedIn')) {
+            isLoggedIn = true;
+            initSessionTimeout();
+          }
         });
-    }
 
-    console.log("All cache, cookies & storage cleared!");
-}
+        // Initialize session timeout tracking
+        function initSessionTimeout() {
+          // Clear any existing timers
+          clearTimeout(inactivityTimer);
+          clearTimeout(warningTimer);
+          clearInterval(sessionTimerInterval);
+          
+          // Show session timer
+          $('#sessionTimer').show();
+          updateSessionTimerDisplay();
+          
+          // Start session timer updates
+          sessionTimerInterval = setInterval(updateSessionTimerDisplay, 1000);
+          
+          // Set new timers
+          lastActivityTime = Date.now();
+          
+          // Show warning 2 minutes before timeout
+          warningTimer = setTimeout(showTimeoutWarning, SESSION_TIMEOUT - WARNING_TIMEOUT);
+          
+          // Full timeout after 30 minutes
+          inactivityTimer = setTimeout(logoutDueToInactivity, SESSION_TIMEOUT);
+          
+          // Track user activity
+          ['mousemove', 'keydown', 'click', 'scroll', 'touchstart'].forEach(event => {
+            document.addEventListener(event, resetInactivityTimer, { passive: true });
+          });
+          
+          // Start periodic session checks
+          checkSessionStatus();
+          
+          // Handle tab visibility changes
+          handleVisibilityChanges();
+        }
+
+        // Update the session timer display
+        function updateSessionTimerDisplay() {
+          if (!isLoggedIn) return;
+          
+          const timeLeft = lastActivityTime + SESSION_TIMEOUT - Date.now();
+          if (timeLeft <= 0) {
+            $('#timeRemaining').text('00:00');
+            return;
+          }
+          
+          const minutes = Math.floor(timeLeft / 60000);
+          const seconds = Math.floor((timeLeft % 60000) / 1000);
+          $('#timeRemaining').text(
+            `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+          );
+        }
+
+        // Reset the inactivity timer on user activity
+        function resetInactivityTimer() {
+          if (!isLoggedIn) return;
+          
+          lastActivityTime = Date.now();
+          clearTimeout(inactivityTimer);
+          clearTimeout(warningTimer);
+          
+          // Restart the timers
+          warningTimer = setTimeout(showTimeoutWarning, SESSION_TIMEOUT - WARNING_TIMEOUT);
+          inactivityTimer = setTimeout(logoutDueToInactivity, SESSION_TIMEOUT);
+          
+          // Hide warning if it was showing
+          $('#sessionTimeoutWarning').fadeOut();
+          
+          // Notify server to extend session
+          google.script.run
+            .withSuccessHandler(() => console.log("Session activity recorded"))
+            .withFailureHandler((err) => console.error("Error recording activity:", err))
+            .extendSession();
+        }
+
+        // Show timeout warning
+        function showTimeoutWarning() {
+          if (!isLoggedIn) return;
+          
+          let secondsLeft = WARNING_TIMEOUT / 1000;
+          $('#countdown').text(Math.floor(secondsLeft / 60));
+          
+          // Update countdown every second
+          const countdownInterval = setInterval(() => {
+            secondsLeft--;
+            $('#countdown').text(Math.floor(secondsLeft / 60));
+            
+            if (secondsLeft <= 0) {
+              clearInterval(countdownInterval);
+            }
+          }, 1000);
+          
+          $('#sessionTimeoutWarning').fadeIn();
+        }
+
+        // Handle logout due to inactivity
+        async function logoutDueToInactivity() {
+          if (!isLoggedIn) return;
+          
+          console.log("Session expired due to inactivity");
+          await performLogout();
+          showSessionExpiredMessage();
+        }
+
+        // Perform the logout
+        async function performLogout() {
+          try {
+            // Use both methods for reliability
+            await Promise.race([
+              new Promise((resolve) => {
+                google.script.run
+                  .withSuccessHandler(resolve)
+                  .withFailureHandler(resolve)
+                  .logoutUser();
+              }),
+              new Promise(resolve => setTimeout(resolve, 3000)) // 3 second timeout
+            ]);
+          } catch (error) {
+            console.error("Logout error:", error);
+          } finally {
+            isLoggedIn = false;
+            clearInterval(sessionTimerInterval);
+            $('#sessionTimer').hide();
+            $('#sessionTimeoutWarning').hide();
+            // Force page reload to ensure clean state
+            window.location.href = '<?= myURL() ?>';
+          }
+        }
+
+        // Show session expired message
+        function showSessionExpiredMessage() {
+          const alertDiv = document.createElement('div');
+          alertDiv.className = 'alert alert-warning';
+          alertDiv.style.position = 'fixed';
+          alertDiv.style.top = '20px';
+          alertDiv.style.left = '50%';
+          alertDiv.style.transform = 'translateX(-50%)';
+          alertDiv.style.zIndex = '1000';
+          alertDiv.textContent = 'Your session has expired due to inactivity. Please login again.';
+          document.body.appendChild(alertDiv);
+          
+          setTimeout(() => {
+            alertDiv.remove();
+          }, 5000);
+        }
+
+        // Reset session when user clicks "Stay Logged In"
+        function resetSession() {
+          $('#sessionTimeoutWarning').fadeOut();
+          resetInactivityTimer();
+          
+          // Notify server to extend session
+          google.script.run
+            .withSuccessHandler(() => console.log("Session extended"))
+            .withFailureHandler((err) => console.error("Error extending session:", err))
+            .extendSession();
+        }
+
+        // Check session status periodically
+        function checkSessionStatus() {
+          const checkInterval = setInterval(async () => {
+            if (!isLoggedIn) {
+              clearInterval(checkInterval);
+              return;
+            }
+            
+            try {
+              const response = await new Promise((resolve) => {
+                google.script.run
+                  .withSuccessHandler(resolve)
+                  .withFailureHandler(resolve)
+                  .checkSession();
+              });
+              
+              if (!response || !response.active) {
+                await performLogout();
+              }
+            } catch (error) {
+              console.error("Session check failed:", error);
+            }
+          }, CHECK_INTERVAL);
+        }
+
+        // Handle page visibility changes
+        function handleVisibilityChanges() {
+          document.addEventListener('visibilitychange', () => {
+            if (!isLoggedIn) return;
+            
+            if (document.visibilityState === 'visible') {
+              // Check if session expired while tab was inactive
+              const inactiveDuration = Date.now() - lastActivityTime;
+              if (inactiveDuration > SESSION_TIMEOUT) {
+                logoutDueToInactivity();
+              } else {
+                // Reset timers when tab becomes active again
+                resetInactivityTimer();
+                
+                // Verify session is still valid
+                checkSessionStatus();
+              }
+            }
+          });
+        }
     </script>
 </body>
 </html>
