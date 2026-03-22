@@ -1212,6 +1212,39 @@
                 })
                 .fillDownFormula();
         }
+
+
+
+
+
+
+
+        // ===============================
+// CLEAR CACHE + COOKIES SYSTEM
+// ===============================
+function clearAllData() {
+    // Clear Cookies
+    document.cookie.split(";").forEach(function(cookie) {
+        document.cookie = cookie
+            .replace(/^ +/, "")
+            .replace(/=.*/, "=;expires=" + new Date(0).toUTCString() + ";path=/");
+    });
+
+    // Clear Local Storage
+    localStorage.clear();
+
+    // Clear Session Storage
+    sessionStorage.clear();
+
+    // Clear Cache (Service Worker)
+    if ('caches' in window) {
+        caches.keys().then(names => {
+            names.forEach(name => caches.delete(name));
+        });
+    }
+
+    console.log("All cache, cookies & storage cleared!");
+}
     </script>
 </body>
 </html>
