@@ -603,6 +603,21 @@
         .login-links a:hover {
             text-decoration: underline;
         }
+        
+        /* Session Timer Styles */
+        .session-timer {
+            margin-right: 15px;
+            font-size: 0.9rem;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-family: monospace;
+        }
+        
+        .session-warning {
+            color: #ffeb3b;
+            font-weight: bold;
+        }
 
         /* Responsive Styles */
         @media (max-width: 992px) {
@@ -649,6 +664,11 @@
             .login-modal-content {
                 width: 95%;
                 margin: 20px;
+            }
+            
+            .session-timer {
+                font-size: 0.7rem;
+                padding: 3px 8px;
             }
         }
 
@@ -741,6 +761,7 @@
             </div>
             <div class="user-info">
                 <span id="userDisplay">School Profile</span>
+                <span id="sessionTimer" class="session-timer"></span>
                 <i class="fas fa-user-circle profile-icon"></i>
                 <div class="user-dropdown">
                     <a href="#"><i class="fas fa-user"></i> User</a>
@@ -761,7 +782,6 @@
                     <p>
                         <img width="30" height="30" src="https://media.tenor.com/dhfraztxBo8AAAAj/globe-joypixels.gif" alt="Logo">&nbsp;
                         <a href="https://shamser.info.np">shamser.info.np</a>
-                    <a href ="https://shamser.info.np/Integrated Exam Management Information System/ID Card/LoginDashboard.html">ID Card</a>
                     </p>
                 </center>
                 <nav>
@@ -1099,37 +1119,211 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <script>
-        // Login and Logout Functions
+        // ==================== SESSION MANAGEMENT ====================
+        // Session configuration
+        const SESSION_TIMEOUT_MINUTES = 30; // Session expires after 30 minutes
+        const WARNING_BEFORE_MINUTES = 2;    // Show warning 2 minutes before expiry
+        
+        let sessionTimerInterval = null;
+        let sessionExpiryTime = null;
+        
+        // Clear all browser cache and storage (preserves only session data)
+        function clearCacheAndStorage() {
+            try {
+                // Clear localStorage except iemisUser and sessionExpiry if needed
+                const currentUser = localStorage.getItem("iemisUser");
+                const currentExpiry = localStorage.getItem("sessionExpiry");
+                localStorage.clear();
+                if (currentUser) localStorage.setItem("iemisUser", currentUser);
+                if (currentExpiry) localStorage.setItem("sessionExpiry", currentExpiry);
+                
+                // Clear sessionStorage except iemisUser
+                const sessionUser = sessionStorage.getItem("iemisUser");
+                sessionStorage.clear();
+                if (sessionUser) sessionStorage.setItem("iemisUser", sessionUser);
+                
+                // Clear all cookies
+                document.cookie.split(";").forEach(function(c) {
+                    document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+                });
+                
+                console.log("Cache and storage cleared successfully");
+            } catch(e) {
+                console.warn("Could not clear all storage:", e);
+            }
+        }
+        
+        // Start session timer
+        function startSessionTimer() {
+            if (sessionTimerInterval) clearInterval(sessionTimerInterval);
+            
+            sessionTimerInterval = setInterval(function() {
+                if (!sessionExpiryTime) return;
+                
+                const now = Date.now();
+                const timeLeft = sessionExpiryTime - now;
+                
+                if (timeLeft <= 0) {
+                    // Session expired
+                    clearInterval(sessionTimerInterval);
+                    sessionTimerInterval = null;
+                    showSessionExpiredMessage();
+                    logout();
+                } else {
+                    // Update timer display
+                    const minutesLeft = Math.floor(timeLeft / 60000);
+                    const secondsLeft = Math.floor((timeLeft % 60000) / 1000);
+                    const timerElement = document.getElementById('sessionTimer');
+                    if (timerElement) {
+                        let timerText = `${minutesLeft}:${secondsLeft.toString().padStart(2,'0')}`;
+                        if (minutesLeft <= WARNING_BEFORE_MINUTES) {
+                            timerElement.innerHTML = `<i class="fas fa-hourglass-half"></i> ${timerText}`;
+                            timerElement.classList.add('session-warning');
+                        } else {
+                            timerElement.innerHTML = `<i class="fas fa-clock"></i> ${timerText}`;
+                            timerElement.classList.remove('session-warning');
+                        }
+                    }
+                    
+                    // Auto-refresh session on user activity
+                    resetSessionOnActivity();
+                }
+            }, 1000);
+        }
+        
+        // Reset session expiry on user activity
+        let activityResetTimer = null;
+        function resetSessionOnActivity() {
+            if (activityResetTimer) clearTimeout(activityResetTimer);
+            activityResetTimer = setTimeout(function() {
+                const user = localStorage.getItem("iemisUser") || sessionStorage.getItem("iemisUser");
+                if (user) {
+                    const newExpiry = Date.now() + (SESSION_TIMEOUT_MINUTES * 60 * 1000);
+                    sessionExpiryTime = newExpiry;
+                    if (localStorage.getItem("iemisUser")) {
+                        localStorage.setItem("sessionExpiry", newExpiry);
+                    } else {
+                        sessionStorage.setItem("sessionExpiry", newExpiry);
+                    }
+                }
+            }, 500);
+        }
+        
+        // Show session expired message
+        function showSessionExpiredMessage() {
+            const statusDiv = document.getElementById('status');
+            if (statusDiv) {
+                statusDiv.innerHTML = '⏰ Session expired! Please login again.';
+                statusDiv.className = 'error';
+                setTimeout(() => {
+                    if (statusDiv) statusDiv.innerHTML = '';
+                }, 3000);
+            }
+            alert('Your session has expired due to inactivity. Please login again.');
+        }
+        
+        // Setup activity listeners for session refresh
+        function setupActivityListeners() {
+            const events = ['click', 'mousemove', 'keypress', 'scroll', 'touchstart'];
+            events.forEach(event => {
+                document.addEventListener(event, function() {
+                    resetSessionOnActivity();
+                });
+            });
+        }
+        
+        // Clear session and logout
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                // Clear all session data
+                localStorage.removeItem("iemisUser");
+                localStorage.removeItem("sessionExpiry");
+                sessionStorage.removeItem("iemisUser");
+                sessionStorage.removeItem("sessionExpiry");
+                
+                // Clear cache and storage
+                clearCacheAndStorage();
+                
+                // Stop timer
+                if (sessionTimerInterval) {
+                    clearInterval(sessionTimerInterval);
+                    sessionTimerInterval = null;
+                }
+                
+                // Show login modal
+                checkLoginStatus();
+                
+                // Clear form
+                const loginForm = document.getElementById('loginForm');
+                if (loginForm) loginForm.reset();
+                const loginMessage = document.getElementById('loginMessage');
+                if (loginMessage) loginMessage.textContent = '';
+                
+                // Reset timer display
+                const timerElement = document.getElementById('sessionTimer');
+                if (timerElement) timerElement.innerHTML = '';
+            }
+        }
+        
+        // Login and Logout Functions with session management
         document.addEventListener('DOMContentLoaded', function() {
             // Check if user is logged in
             checkLoginStatus();
             
+            // Setup activity listeners for session refresh
+            setupActivityListeners();
+            
             // Login form submission
-            document.getElementById('loginForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                loginUser();
-            });
+            const loginForm = document.getElementById('loginForm');
+            if (loginForm) {
+                loginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    loginUser();
+                });
+            }
             
             // Initialize other dashboard functions
             initializeDashboard();
         });
 
         function checkLoginStatus() {
-            const user = localStorage.getItem("iemisUser") || sessionStorage.getItem("iemisUser");
+            // Check both localStorage and sessionStorage
+            let user = localStorage.getItem("iemisUser") || sessionStorage.getItem("iemisUser");
+            let expiry = localStorage.getItem("sessionExpiry") || sessionStorage.getItem("sessionExpiry");
+            
             const loginModal = document.getElementById('loginModal');
             const dashboard = document.querySelector('.dashboard-container');
             const userDisplay = document.getElementById('userDisplay');
             
+            // Check if session has expired
+            if (user && expiry) {
+                const expiryTime = parseInt(expiry);
+                if (Date.now() > expiryTime) {
+                    // Session expired, clear and show login
+                    logout();
+                    return;
+                } else {
+                    // Valid session, set expiry time and start timer
+                    sessionExpiryTime = expiryTime;
+                    startSessionTimer();
+                }
+            }
+            
             if (!user) {
                 // Show login modal
-                loginModal.style.display = 'flex';
-                dashboard.style.display = 'none';
-                userDisplay.textContent = 'School Profile';
+                if (loginModal) loginModal.style.display = 'flex';
+                if (dashboard) dashboard.style.display = 'none';
+                if (userDisplay) userDisplay.textContent = 'School Profile';
+                // Clear any stale timers
+                if (sessionTimerInterval) {
+                    clearInterval(sessionTimerInterval);
+                    sessionTimerInterval = null;
+                }
             } else {
                 // Hide login modal, show dashboard
-                loginModal.style.display = 'none';
-                dashboard.style.display = 'flex';
-                userDisplay.textContent = user;
+                if (loginModal) loginModal.style.display = 'none';
+                if (dashboard) dashboard.style.display = 'flex';
+                if (userDisplay) userDisplay.textContent = user;
             }
         }
 
@@ -1169,20 +1363,33 @@
                     const data = JSON.parse(text);
                     
                     if (data.status === "success") {
+                        // Set session expiry time (30 minutes from now)
+                        const expiryTime = Date.now() + (SESSION_TIMEOUT_MINUTES * 60 * 1000);
+                        sessionExpiryTime = expiryTime;
+                        
                         // Store user session
                         if (rememberMe) {
                             localStorage.setItem("iemisUser", data.username);
+                            localStorage.setItem("sessionExpiry", expiryTime);
                         } else {
                             sessionStorage.setItem("iemisUser", data.username);
+                            sessionStorage.setItem("sessionExpiry", expiryTime);
                         }
                         
+                        // Clear cache on successful login
+                        clearCacheAndStorage();
+                        
                         showLoginMessage('Login successful!', 'success');
+                        
+                        // Start session timer
+                        startSessionTimer();
                         
                         // Update UI after short delay
                         setTimeout(() => {
                             checkLoginStatus();
                             // Reset form
-                            document.getElementById('loginForm').reset();
+                            const form = document.getElementById('loginForm');
+                            if (form) form.reset();
                         }, 1000);
                         
                     } else {
@@ -1204,22 +1411,9 @@
 
         function showLoginMessage(message, type) {
             const loginMessage = document.getElementById('loginMessage');
-            loginMessage.textContent = message;
-            loginMessage.className = `login-message ${type}`;
-        }
-
-        function logout() {
-            if (confirm('Are you sure you want to logout?')) {
-                // Clear all session data
-                localStorage.removeItem("iemisUser");
-                sessionStorage.removeItem("iemisUser");
-                
-                // Show login modal
-                checkLoginStatus();
-                
-                // Clear form
-                document.getElementById('loginForm').reset();
-                document.getElementById('loginMessage').textContent = '';
+            if (loginMessage) {
+                loginMessage.textContent = message;
+                loginMessage.className = `login-message ${type}`;
             }
         }
 
@@ -1230,39 +1424,55 @@
 
         function showStatus(message, isSuccess) {
             var statusDiv = document.getElementById('status');
-            statusDiv.textContent = message;
-            statusDiv.className = isSuccess ? 'success' : 'error';
+            if (statusDiv) {
+                statusDiv.textContent = message;
+                statusDiv.className = isSuccess ? 'success' : 'error';
+            }
         }
         
         function runSetPlainText() {
-            google.script.run
-                .withSuccessHandler(function(result) {
-                    showStatus(result, true);
-                })
-                .withFailureHandler(function(error) {
-                    showStatus("Error: " + error.message, false);
-                })
-                .setPlainTextFormat();
+            if (typeof google !== 'undefined' && google.script) {
+                google.script.run
+                    .withSuccessHandler(function(result) {
+                        showStatus(result, true);
+                    })
+                    .withFailureHandler(function(error) {
+                        showStatus("Error: " + error.message, false);
+                    })
+                    .setPlainTextFormat();
+            } else {
+                showStatus("Google Apps Script not available in this context", false);
+            }
         }
         
         function runFormulaFiller() {
-            document.getElementById('runButton').disabled = true;
-            document.getElementById('spinner').style.display = 'block';
-            document.getElementById('status').innerHTML = 'Processing...';
+            const runButton = document.getElementById('runButton');
+            const spinner = document.getElementById('spinner');
+            const statusDiv = document.getElementById('status');
             
-            google.script.run
-                .withSuccessHandler(function(result) {
-                    document.getElementById('spinner').style.display = 'none';
-                    document.getElementById('status').innerHTML = '✅ Data Refreshed Successfully!.';
-                    document.getElementById('runButton').disabled = false;
-                })
-                .withFailureHandler(function(error) {
-                    document.getElementById('spinner').style.display = 'none';
-                    document.getElementById('status').innerHTML = '❌ Error: ' + error.message;
-                    document.getElementById('runButton').disabled = false;
-                    console.error(error);
-                })
-                .fillDownFormula();
+            if (runButton) runButton.disabled = true;
+            if (spinner) spinner.style.display = 'block';
+            if (statusDiv) statusDiv.innerHTML = 'Processing...';
+            
+            if (typeof google !== 'undefined' && google.script) {
+                google.script.run
+                    .withSuccessHandler(function(result) {
+                        if (spinner) spinner.style.display = 'none';
+                        if (statusDiv) statusDiv.innerHTML = '✅ Data Refreshed Successfully!.';
+                        if (runButton) runButton.disabled = false;
+                    })
+                    .withFailureHandler(function(error) {
+                        if (spinner) spinner.style.display = 'none';
+                        if (statusDiv) statusDiv.innerHTML = '❌ Error: ' + error.message;
+                        if (runButton) runButton.disabled = false;
+                        console.error(error);
+                    })
+                    .fillDownFormula();
+            } else {
+                if (spinner) spinner.style.display = 'none';
+                if (statusDiv) statusDiv.innerHTML = '⚠️ Google Apps Script not available';
+                if (runButton) runButton.disabled = false;
+            }
         }
 
         // Modal Functions (kept exactly the same)
@@ -1280,25 +1490,26 @@
             const modalLoading = document.getElementById('modalLoading');
             
             // Set modal title
-            modalTitle.textContent = title || 'Content';
+            if (modalTitle) modalTitle.textContent = title || 'Content';
             
             // Show loading spinner
-            modalLoading.style.display = 'flex';
-            modalFrame.style.display = 'none';
+            if (modalLoading) modalLoading.style.display = 'flex';
+            if (modalFrame) modalFrame.style.display = 'none';
             
             // Open modal
-            modal.style.display = 'block';
+            if (modal) modal.style.display = 'block';
             document.body.style.overflow = 'hidden';
             
             // Encode spaces in URL
             const encodedUrl = url.replace(/ /g, '%20');
             
             // Load content in iframe
-            modalFrame.src = encodedUrl;
+            if (modalFrame) modalFrame.src = encodedUrl;
             
             // Close sidebar on mobile
             if (window.innerWidth <= 992) {
-                document.querySelector('.sidebar').classList.remove('active');
+                const sidebar = document.querySelector('.sidebar');
+                if (sidebar) sidebar.classList.remove('active');
             }
             
             return false;
@@ -1309,10 +1520,10 @@
             const modalFrame = document.getElementById('modalFrame');
             
             // Stop loading content
-            modalFrame.src = '';
+            if (modalFrame) modalFrame.src = '';
             
             // Hide modal
-            modal.style.display = 'none';
+            if (modal) modal.style.display = 'none';
             document.body.style.overflow = 'auto';
         }
 
@@ -1322,23 +1533,32 @@
         }
 
         // Handle iframe load event
-        document.getElementById('modalFrame').addEventListener('load', function() {
-            document.getElementById('modalLoading').style.display = 'none';
-            this.style.display = 'block';
-        });
+        const modalFrame = document.getElementById('modalFrame');
+        if (modalFrame) {
+            modalFrame.addEventListener('load', function() {
+                const modalLoading = document.getElementById('modalLoading');
+                if (modalLoading) modalLoading.style.display = 'none';
+                if (this) this.style.display = 'block';
+            });
 
-        // Handle iframe errors
-        document.getElementById('modalFrame').addEventListener('error', function() {
-            document.getElementById('modalLoading').innerHTML = 
-                '<p class="text-danger">Failed to load content. Please try again.</p>';
-        });
+            // Handle iframe errors
+            modalFrame.addEventListener('error', function() {
+                const modalLoading = document.getElementById('modalLoading');
+                if (modalLoading) {
+                    modalLoading.innerHTML = '<p class="text-danger">Failed to load content. Please try again.</p>';
+                }
+            });
+        }
 
         // Close modal when clicking outside content
-        document.getElementById('pageModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
+        const pageModal = document.getElementById('pageModal');
+        if (pageModal) {
+            pageModal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal();
+                }
+            });
+        }
 
         // Close modal with escape key
         document.addEventListener('keydown', function(e) {
@@ -1348,25 +1568,30 @@
         });
 
         // Close modal button
-        document.getElementById('modalClose').addEventListener('click', closeModal);
+        const modalClose = document.getElementById('modalClose');
+        if (modalClose) {
+            modalClose.addEventListener('click', closeModal);
+        }
 
         // Copy URL functionality
         document.addEventListener('click', function(e) {
             if (e.target.classList.contains('copy-btn')) {
                 const url = e.target.getAttribute('data-url');
-                navigator.clipboard.writeText(url).then(function() {
-                    const originalText = e.target.textContent;
-                    e.target.textContent = 'Copied!';
-                    e.target.classList.add('copied');
-                    
-                    setTimeout(function() {
-                        e.target.textContent = originalText;
-                        e.target.classList.remove('copied');
-                    }, 2000);
-                }).catch(function(err) {
-                    console.error('Failed to copy: ', err);
-                    alert('Failed to copy URL to clipboard');
-                });
+                if (url) {
+                    navigator.clipboard.writeText(url).then(function() {
+                        const originalText = e.target.textContent;
+                        e.target.textContent = 'Copied!';
+                        e.target.classList.add('copied');
+                        
+                        setTimeout(function() {
+                            e.target.textContent = originalText;
+                            e.target.classList.remove('copied');
+                        }, 2000);
+                    }).catch(function(err) {
+                        console.error('Failed to copy: ', err);
+                        alert('Failed to copy URL to clipboard');
+                    });
+                }
             }
         });
 
@@ -1377,7 +1602,7 @@
             
             if (menuToggle) {
                 menuToggle.addEventListener('click', function() {
-                    sidebar.classList.toggle('active');
+                    if (sidebar) sidebar.classList.toggle('active');
                 });
             }
 
@@ -1403,6 +1628,7 @@
             document.addEventListener('click', function(e) {
                 if (window.innerWidth <= 992 && 
                     sidebar && 
+                    menuToggle && 
                     !sidebar.contains(e.target) && 
                     !menuToggle.contains(e.target) && 
                     sidebar.classList.contains('active')) {
@@ -1410,107 +1636,108 @@
                 }
             });
 
-            // Initialize charts
-            if (document.getElementById('schoolChart')) {
-                const schoolCtx = document.getElementById('schoolChart').getContext('2d');
-                new Chart(schoolCtx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Kathmandu', 'Pokhara', 'Lalitpur', 'Bhaktapur', 'Biratnagar'],
-                        datasets: [{
-                            label: 'Number of Schools',
-                            data: [1200, 800, 600, 400, 300],
-                            backgroundColor: '#3498db',
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                    }
-                });
-            }
+            // Initialize charts (if Chart.js is available and canvas elements exist)
+            if (typeof Chart !== 'undefined') {
+                if (document.getElementById('schoolChart')) {
+                    const schoolCtx = document.getElementById('schoolChart').getContext('2d');
+                    new Chart(schoolCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Kathmandu', 'Pokhara', 'Lalitpur', 'Bhaktapur', 'Biratnagar'],
+                            datasets: [{
+                                label: 'Number of Schools',
+                                data: [1200, 800, 600, 400, 300],
+                                backgroundColor: '#3498db',
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                        }
+                    });
+                }
 
-            if (document.getElementById('studentChart')) {
-                const studentCtx = document.getElementById('studentChart').getContext('2d');
-                new Chart(studentCtx, {
-                    type: 'line',
-                    data: {
-                        labels: ['2019', '2020', '2021', '2022', '2023'],
-                        datasets: [{
-                            label: 'Student Enrollment',
-                            data: [1000000, 1050000, 1100000, 1150000, 1200000],
-                            borderColor: '#e74c3c',
-                            fill: false,
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                    }
-                });
-            }
+                if (document.getElementById('studentChart')) {
+                    const studentCtx = document.getElementById('studentChart').getContext('2d');
+                    new Chart(studentCtx, {
+                        type: 'line',
+                        data: {
+                            labels: ['2019', '2020', '2021', '2022', '2023'],
+                            datasets: [{
+                                label: 'Student Enrollment',
+                                data: [1000000, 1050000, 1100000, 1150000, 1200000],
+                                borderColor: '#e74c3c',
+                                fill: false,
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                        }
+                    });
+                }
 
-            if (document.getElementById('boysChart')) {
-                const boysCtx = document.getElementById('boysChart').getContext('2d');
-                new Chart(boysCtx, {
-                    type: 'pie',
-                    data: {
-                        labels: ['Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5'],
-                        datasets: [{
-                            data: [15, 20, 18, 22, 25],
-                            backgroundColor: [
-                                '#3498db',
-                                '#2ecc71',
-                                '#f1c40f',
-                                '#e74c3c',
-                                '#9b59b6'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                position: 'right',
+                if (document.getElementById('boysChart')) {
+                    const boysCtx = document.getElementById('boysChart').getContext('2d');
+                    new Chart(boysCtx, {
+                        type: 'pie',
+                        data: {
+                            labels: ['Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5'],
+                            datasets: [{
+                                data: [15, 20, 18, 22, 25],
+                                backgroundColor: [
+                                    '#3498db',
+                                    '#2ecc71',
+                                    '#f1c40f',
+                                    '#e74c3c',
+                                    '#9b59b6'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    position: 'right',
+                                }
                             }
                         }
-                    }
-                });
-            }
+                    });
+                }
 
-            if (document.getElementById('girlsChart')) {
-                const girlsCtx = document.getElementById('girlsChart').getContext('2d');
-                new Chart(girlsCtx, {
-                    type: 'pie',
-                    data: {
-                        labels: ['Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5'],
-                        datasets: [{
-                            data: [18, 22, 20, 15, 25],
-                            backgroundColor: [
-                                '#3498db',
-                                '#2ecc71',
-                                '#f1c40f',
-                                '#e74c3c',
-                                '#9b59b6'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                position: 'right',
+                if (document.getElementById('girlsChart')) {
+                    const girlsCtx = document.getElementById('girlsChart').getContext('2d');
+                    new Chart(girlsCtx, {
+                        type: 'pie',
+                        data: {
+                            labels: ['Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5'],
+                            datasets: [{
+                                data: [18, 22, 20, 15, 25],
+                                backgroundColor: [
+                                    '#3498db',
+                                    '#2ecc71',
+                                    '#f1c40f',
+                                    '#e74c3c',
+                                    '#9b59b6'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    position: 'right',
+                                }
                             }
                         }
-                    }
-                });
+                    });
+                }
             }
         }
     </script>
 </body>
 </html>
-
