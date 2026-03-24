@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IEMIS Dashboard | Secure Session</title>
-    <link rel="icon" type="image/x-icon" href="https://shamser.info.np/HomePage/favicon.ico">
+    <title>IEMIS Dashboard</title>
+      <link rel="icon" type="image/x-icon" href="https://shamser.info.np/HomePage/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -604,44 +604,6 @@
             text-decoration: underline;
         }
 
-        /* Session Timeout Warning Toast */
-        .session-toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #2c3e50;
-            color: white;
-            padding: 12px 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            z-index: 10000;
-            transform: translateX(400px);
-            transition: transform 0.3s ease;
-            font-size: 14px;
-        }
-        .session-toast.show {
-            transform: translateX(0);
-        }
-        .session-toast button {
-            background: #e67e22;
-            padding: 6px 12px;
-            margin: 0;
-            font-size: 12px;
-        }
-        .session-toast button:hover {
-            background: #d35400;
-        }
-        .session-toast .close-toast {
-            background: none;
-            color: white;
-            font-size: 18px;
-            padding: 0;
-            margin-left: 10px;
-        }
-
         /* Responsive Styles */
         @media (max-width: 992px) {
             .sidebar {
@@ -749,24 +711,6 @@
         </div>
     </div>
 
-    <!-- Session Timeout Warning Toast 
-    <div id="sessionToast" class="session-toast">
-        <span><i class="fas fa-hourglass-half"></i> Session expiring soon! Inactive for <span id="inactiveSeconds">0</span> seconds.</span>
-        <button id="stayLoggedBtn">Stay Logged In</button>
-        <button id="closeToastBtn" class="close-toast">&times;</button>
-    </div>
--->
-  <!-- Session timeout warning -->
-  <div id="sessionTimeoutWarning" class="alert alert-warning">
-    Your session will expire in <span id="countdown">2</span> minutes due to inactivity.
-    <button onclick="resetSession()" class="btn btn-sm btn-primary ms-2">Stay Logged In</button>
-  </div>
-
-
-
-
-
-    
     <!-- Modal Structure -->
     <div id="pageModal" class="modal">
         <div class="modal-content">
@@ -817,24 +761,202 @@
                     <p>
                         <img width="30" height="30" src="https://media.tenor.com/dhfraztxBo8AAAAj/globe-joypixels.gif" alt="Logo">&nbsp;
                         <a href="https://shamser.info.np">shamser.info.np</a>
+                    <a href ="https://shamser.info.np/Integrated Exam Management Information System/ID Card/LoginDashboard.html">ID Card</a>
                     </p>
                 </center>
                 <nav>
                     <ul>
                         <li class="active"><a href="#" onclick="return showDashboard();"><i class="fas fa-tachometer-alt"></i> MENU</a></li>
+
                         <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Data Entry form-v.3.html', 'Data Entry Manually(1-12)')"> <i class="fas fa-edit"></i>Data Entry Manually(1-12) </a></li>
+
                         <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Markslip.html', 'Markslip')"> <i class="fas fa-edit"></i>Markslip </a></li>
+
                         <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Download Sample File, Upload & transfer data.html', 'Data Upload & Transfer')"> <i class="fas fa-edit"></i>Data Upload & transfer</a></li>
+
                         <li>
                             <button class="toggle-submenu"><i class="fa-solid fa-file"></i>Marks ledger<i class="fas fa-chevron-down arrow"></i></button>
-                            <ul class="submenu">...</ul>
+                            <ul class="submenu">
+                                <li>
+                                    <button class="toggle-submenu"> Mark ledger by symbol No. <i class="fas fa-chevron-down arrow"></i></button>
+                                    <ul class="submenu">
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Student Information.html', 'All in one Ledger')">All in one Ledger</a></li>
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Mark Ledger1-3Non Sorting By Range.html', 'Mark Ledger (1-3) No Sorting')">Mark_ledger(1-3)No_sorting</a></li>
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Mark Ledger1-3 Sorting By Range.html', 'Mark Ledger (1-3) Sorting')">Mark ledger(1-3)Sorting</a></li>
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Marks Ledger4-10 NoSorting by Id.html', 'Mark Ledger (4-10) No Sorting')">Mark ledger(4-10)No sorting</a></li>
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Marks Ledger4-10 Sorting by Id.html', 'Mark Ledger (4-10) Sorting')">Mark ledger(4-10)Sorting</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <button class="toggle-submenu"> Marks ledger by class <i class="fas fa-chevron-down arrow"></i></button>
+                                    <ul class="submenu">
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Ledger in details by code&year.html', 'All Ledger')">All Ledger</a></li>
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/MarksLedger1-3No sortingFilter.html', 'Marks Ledger (1-3) No Sorting')">Marks ledger(1-3)No Sorting</a></li>
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Mark_Ledger1_3Sorting By filter.html', 'Marks Ledger (1-3) Sorting')">Marks ledger(1-3)Sorting</a></li>
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Mark Ledger9-10Sorting byclass.html', 'Marks Ledger (9-10) Sorting')">Marks ledger(9-10)Sorting</a></li>
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Mark Ledger9-10No sortingbyclass.html', 'Marks Ledger (9-10) No Sorting')">Marks ledger(9-10)No Sorting</a></li>
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Mark_Ledger4-8sorting byClass.html', 'Marks Ledger (4-8) Sorting')">Marks ledger(4-8)Sorting</a></li>
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Mark Ledger4-8 by class (not sorting).html', 'Marks Ledger (4-8) No Sorting')">Marks ledger(4-8)NoSorting</a></li>
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Mark Ledger11-12 Non Sorting By Filter.html', 'Marks Ledger (11-12) No Sorting')">Marks ledger(11-12)No sorting</a></li>
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Mark Ledger11-12by class Sorting.html', 'Marks Ledger (11-12) Sorting')">Marks ledger(11-12)Sorting</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
                         </li>
-                        <!-- (Keeping all menu items for brevity, they work same) -->
+
+                        <li>
+                            <button class="toggle-submenu"><i class="fa-solid fa-copy"></i>Grade ledger<i class="fas fa-chevron-down arrow"></i></button>
+                            <ul class="submenu">
+                                <li>
+                                    <button class="toggle-submenu">Grade ledger by symbol No. <i class="fas fa-chevron-down arrow"></i></button>
+                                    <ul class="submenu">
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Grade%20Ledger1-3.html', 'Grade Ledger (1-3) Sorting')">Grade ledger(1-3)Sorting</a></li>
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Grade%20Ledger%204-10.html', 'Grade Ledger (4-10) No Sorting')">Grade ledger(4-10)No.sorting</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <button class="toggle-submenu">Grade ledger by class<i class="fas fa-chevron-down arrow"></i></button>
+                                    <ul class="submenu">
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Grade Ledger1-3by filter.html', 'Grade Ledger (1-3) Sorting')">Grade ledger(1-3)Sorting</a></li>
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Grade Ledger4-8byclass(Sorting).html', 'Grade Ledger (4-8) Sorting')">Grade ledger(4-8)Sorting</a></li>
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Grade Ledger9-10byClass(Sorting).html', 'Grade Ledger (9-10) Sorting')">Grade ledger(9-10)Sorting</a></li>
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Grade Ledger11-12 by class Sorting.html', 'Grade Ledger (11-12) Sorting')">Grade ledger(11-12)Sorting</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <button class="toggle-submenu"><i class="fas fa-address-card"></i>Grade Sheet <i class="fas fa-chevron-down arrow"></i></button>
+                            <ul class="submenu">
+                                <li>
+                                    <button class="toggle-submenu">Grade Sheet by symbol No. <i class="fas fa-chevron-down arrow"></i></button>
+                                    <ul class="submenu">
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Grade%20sheet%20%20All%20for%209-10.html', 'Multi Grade Sheet (9-10)')">Multi Grade Sheet(9-10)</a></li>
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Gradesheet%20for%20class%201-8%20&%2011-12.html', 'Multi Grade Sheet (4-12)')">Multi Grade Sheet(4-12)</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <button class="toggle-submenu">Grade Sheet by class <i class="fas fa-chevron-down arrow"></i></button>
+                                    <ul class="submenu">
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Greadsheet (4-8)All by Class.html', 'GradeSheet by Class (4-8)')">GradeSheet by class(4-8)</a></li>
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Gradesheet9-10 All by class.html', 'GradeSheet by Class (9-10)')">GradeSheet by class(9-10)</a></li>
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Greadsheet (11-12)All by Class.html', 'GradeSheet by Class (11-12)')">GradeSheet by class(11-12)</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <button class="toggle-submenu">Grade Sheet by SBL NO & DOB <i class="fas fa-chevron-down arrow"></i></button>
+                                    <ul class="submenu">
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Single%20Grade%20Sheet(9-10).html', 'Single Grade Sheet (9-10)')">Single GradeSheet(9-10)</a></li>
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/GradesheetSingle(11-12).html', 'Single Grade Sheet (11-12)')">Single Grade Sheet(11-12)</a></li>
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Greadsheet%20Single(4-8).html', 'Single Grade Sheet (4-8)')">Single Grade Sheet(4-8)</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <button class="toggle-submenu"> <i class="fas fa-file-alt"></i>Result-Sheet<i class="fas fa-chevron-down arrow"></i></button>
+                            <ul class="submenu">
+                                <li>
+                                    <button class="toggle-submenu"> Result-Sheet by symbolNo<i class="fas fa-chevron-down arrow"></i></button>
+                                    <ul class="submenu">
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Result Sheet_Under consider.html', 'Result-Sheet (Consider)')">Result-Sheet(consider)</a></li>
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Result Sheet_No consider.html', 'Result-Sheet (No Consider)')">Result-Sheet(No consider)</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <button class="toggle-submenu">Result-Sheet by class<i class="fas fa-chevron-down arrow"></i></button>
+                                    <ul class="submenu">
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Publish Result_Sheet by Filter.html', 'Result-Sheet (Consider)')">Result-Sheet(consider)</a></li>
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Publish_Resultsheet by filter_Abs+consider.html', 'Result-Sheet (No Consider)')">Result-Sheet(No consider)</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <button class="toggle-submenu"><i class="fas fa-address-card"></i> Admit Card<i class="fas fa-chevron-down arrow"></i></button>
+                            <ul class="submenu">
+                                <li>
+                                    <button class="toggle-submenu"><i class="fas fa-address-card"></i>By range<i class="fas fa-chevron-down arrow"></i></button>
+                                    <ul class="submenu">
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Entrance 2Card by range.html', 'Admit Two Cards')">Admit Two Cards</a></li>
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Admit 4card by range.html', 'Admit Four Cards')">Admit Four Cards</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <button class="toggle-submenu"><i class="fas fa-address-card"></i>By class<i class="fas fa-chevron-down arrow"></i></button>
+                                    <ul class="submenu">
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Admit 2card by class.html', 'Admit Card 2pg by Class')">Two Cards</a></li>
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Admit 4card by class.html', 'Admit Card 4pg by Class')">Four Cards</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <button class="toggle-submenu"><i class="fas fa-edit"></i> Upgrade<i class="fas fa-chevron-down arrow"></i></button>
+                            <ul class="submenu">
+                                <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Upgrade%20in%20new%20class%20or%20next%20term.html', 'Upgrade by Range')">Upgrade by range</a></li>
+                                <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Upgrade by class  in new class or next term.html', 'Upgrade by Class')">Upgrade by class</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <button class="toggle-submenu"><i class="fas fa-edit"></i> Update<i class="fas fa-chevron-down arrow"></i></button>
+                            <ul class="submenu">
+                                <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Routine_Update.html', 'Routine Update')">Routine</a></li>
+                                <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Update%20Manually.html', 'Update Manually')">Update manually</a></li>
+                                <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Student\'s%20ID%20Profile%20Update.html', 'Update Profile/ID by Range')">Update Profile/ID by Range</a></li>
+                                <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Student Record Management by class.html', 'Update Profile/ID (by class)')">Update Profile/ID (by class)</a></li>
+                                <li>
+                                    <button class="toggle-submenu">Marks Update<i class="fas fa-chevron-down arrow"></i></button>
+                                    <ul class="submenu">
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Marks Update by filter.html', 'Marks Update Classwise')">Classwise</a></li>
+                                        <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Update%20All%20Subject%20Marks.html', 'Update All Subject Marks by Range')">All subject by Range</a></li>
+                                        <li>
+                                            <button class="toggle-submenu">Subjectwise<i class="fas fa-chevron-down arrow"></i></button>
+                                            <ul class="submenu">
+                                                <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Nepali.html', 'Nepali Marks Update')">Nepali</a></li>
+                                                <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/English.html', 'English Marks Update')">English</a></li>
+                                                <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Math%20&%20Social.html', 'Maths/Social Marks Update')">Maths/Social(11-12)</a></li>
+                                                <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Science.html', 'Science Marks Update')">Science/Serofero/OPTI(11-12)</a></li>
+                                                <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Social.html', 'Social Marks Update')">Social/Local Sub(1-3)/OPTI(11-12)</a></li>
+                                                <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/OPT1-HPC-OPT3.html', 'OPT1/HPC/OPT3 Marks Update')">OPT1/HPC//OPT3(11-12)</a></li>
+                                                <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/OPT2%20(9-10)%20Local-Sub(4-8).html', 'OPT2/Local Sub Marks Update')">OPT2/Local Sub(4-8)</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <button class="toggle-submenu"><i class="fas fa-users"></i> Record Mgt<i class="fas fa-chevron-down arrow"></i></button>
+                            <ul class="submenu">
+                                <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Student Information by sclcode and year.html', 'Student Information')">Student Information</a></li>
+                                <li><a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Student Record Management by class.html', 'Student Record Management')">Student Record Management (by class)</a></li>
+                                <li><a href="#" onclick="openModal('#', 'Scholarship')">Scholarship</a></li>
+                                <li><a href="#" onclick="openModal('#', 'Student Transfer')">Student Transfer</a></li>
+                                <li><a href="#" onclick="openModal('#', 'Student Accept')">Student Accept</a></li>
+                                <li><a href="#" onclick="openModal('#', 'Undo Upgrade')">Undo Upgrade</a></li>
+                            </ul>
+                        </li>
+
+                        <li style="border-top: 1px solid #eee; margin-top: 10px;">
+                            <button type="button" class="btn btn-link" onclick="OpenRegisterPage()" style="width: 100%; text-align: left;"> <i class="fas fa-user-plus"></i> Register Account</button>
+                            <a href="https://script.google.com/macros/s/AKfycbxUs8Nn3kl1P_eGD6A7zR-sBfNT6kIksBxpIiPvJAE8jg6qilPQ1Thq_kLgabk6rKqvhw/exec" style="display: block; padding: 15px 20px;"><i class='fas fa-key'></i>Change Password</a>
+                            <button class="btn btn-link" type="button" onclick="logout()" style="width: 100%; text-align: left;">    <i class="fas fa-sign-out-alt"></i> Log Out</button>
+                            <a href="#" onclick="openModal('https://shamser.info.np/Contact_Form.html', 'Contact Us')" style="display: block; padding: 15px 20px;">
+                                <i class="fas fa-envelope"></i>Contact</a>
+                        </li>
                     </ul>
                 </nav>
             </aside>
 
             <main class="main-content">
+                <!-- Dashboard Content -->
                 <div class="stats-cards">
                     <div class="card schools-card">
                         <h5><b>Data Entry भैसकेपछि Refresh र Set Format मा थिच्नु अनिवार्य छ ।</b></h5>
@@ -842,130 +964,156 @@
                         <button id="runButton" onclick="runFormulaFiller()">Refresh</button>
                         <div class="spinner" id="spinner"></div>
                         <div id="status"></div>
+                        
                         <section class="detailed-stats">
-                            <div class="card chart-card"><h3>Boys</h3><canvas id="boysChart"></canvas></div>
+                            <div class="card chart-card">
+                                <h3>Boys</h3>
+                                <canvas id="boysChart"></canvas>
+                            </div>
                         </section>
-                        <div class="card grade-table-card"><h3>TOTAL SCHOOLS</h3><div class="charts"><div class="chart-container"><canvas id="schoolChart"></canvas></div></div></div>
+                        
+                        <div class="card grade-table-card">
+                            <h3>TOTAL SCHOOLS</h3>
+                            <div class="charts">
+                                <div class="chart-container">
+                                    <canvas id="schoolChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="card teachers-card">
                         <h3>STUDENT ENROLLMENT</h3>
-                        <div class="chart-container"><canvas id="studentChart"></canvas></div>
-                        <br><h3>Year</h3>
-                        <div class="card chart-card"><h3>Girls</h3><canvas id="girlsChart"></canvas></div>
+                        <div class="chart-container">
+                            <canvas id="studentChart"></canvas>
+                        </div>
+                        <br>
+                        <h3>Year</h3>
+                        <div class="card chart-card">
+                            <h3>Girls</h3>
+                            <canvas id="girlsChart"></canvas>
+                        </div>
+
                         <h3>Important Notices & Updates</h3>
-                        <ol><li><strong>Subjecting Mapping सम्बन्धमा।</strong><br> कक्षा ५ वा सो भन्दा तलको कक्षामा Subjecting Mapping स्थानीय तहको यूजरबाट मात्र...</li></ol>
+                        <ol>
+                            <li><strong>Subjecting Mapping सम्बन्धमा।</strong><br> कक्षा ५ वा सो भन्दा तलको कक्षामा Subjecting Mapping स्थानीय तहको यूजरबाट मात्र र कक्षा ६ वा सो भन्दा माथिको Subjecting Mapping विद्यालयको यूजरबाट मात्र...</li>
+                            <li><strong>Grade ८ का विद्यार्थीको Symbol Number सम्बन्धी महत्वपूर्ण सूचना।</strong><br> ग्रेड ८ का विद्यार्थी (Symbol No.) हाल सिस्टमले नलिएकोले, विद्यालय प्रयोगकर्ताले विद्यार्थीको विवरण सम्पादन गर्न सक्दैनन्। यदि विवरण सच्याउन आवश्यक भएमा, कृपया...</li>
+                        </ol>
                     </div>
-                    <div class="card notices-card"><h3>Important Notices & Updates</h3><h5><b>IEMIS सफ्टवेयर प्रयोग गर्दा ध्यान दिनुपर्ने मुख्य बुँदाहरू...</b></h5><ul><li> &nbsp; सर्च ब्राउजर खोल्नुहोस्</li></ul></div>
+
+                    <div class="card notices-card">
+                        <h3>Important Notices & Updates</h3>
+                        <h5 class="modal-title"><b>एकीकृत परीक्षा व्यवस्थापन सूचना प्रणाली (IEMIS) को प्रयोग र विशेषताहरू</b></h5>
+                        <ul>
+                            <li> &nbsp; CEHRD द्वारा निर्धारित निर्देशिका (लेटरग्रेडिङ प्रणाली) अपनाइएको</li>
+                            <li> &nbsp; अनलाइन Mark Entry र update गर्न मिल्ने र रिपोर्ट १ मिनेटपछि प्राप्त गर्न सकिन्छ । </li>
+                            <li> &nbsp; ग्रेडशीट, ग्रेडलेजर, मार्कलेजर, रिजल्टशिट, रुटिन एडिट गरी एडमिट कार्ड डाउनलोड गर्न सकिने यसैगरी मार्कस्लीप पनि प्रिन्ट गर्न सकिने </li>
+                            <li> &nbsp; Mark Entry मेनुअली नगरी एक्सेल फाइलमा मार्क चढाइ अपलोड गर्न सकिने । यहाँ एक्सेल फाइलको  स्याम्पल दिएको छ ।  <a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Download Sample File, Upload & transfer data.html', 'Data Upload & Transfer')">Upload</a></li>
+                            <li> &nbsp; सिङ्गल तथा मल्टी ग्रेडशीट, लेजर र प्रवेश पत्रहरू प्राप्त गर्न सकिन्छ</li>
+                            <li> &nbsp; तुरुन्तै रिजल्टशिट निकाली सूचनापाटीमा टाँस्न सकिन्छ</li>
+                            <li> &nbsp; विद्यार्थीहरूले अनलाइन ग्रेडशीट डाउनलोड गर्न सक्ने</li>
+                            <li> &nbsp; कुनै पनि वर्षको त्रैमासिक वा वार्षिक परीक्षाको अभिलेख राख्न सजिलो</li>
+                            <li> &nbsp; अपग्रेड गर्न मिल्ने</li>
+                            <li> &nbsp; युजर आईडी र पासवर्ड सुरक्षित रहने</li>
+                            <li> &nbsp; अभिलेख कायम रहने</li>
+                        </ul>
+                        <h5><b>IEMIS सफ्टवेयर प्रयोग गर्दा ध्यान दिनुपर्ने मुख्य बुँदाहरू...</b></h5>
+                        <ul>
+                            <li> &nbsp; सर्च ब्राउजर खोल्नुहोस्</li>
+                            <li> &nbsp; टाइप गर्नुहोस्: shamser.info.np</li>
+                            <li> &nbsp; मोबाइल प्रयोगकर्ताका लागि 3 line (≡) मा जानुहोस्</li>
+                            <li> &nbsp; IEMIS छान्नुहोस् त्यहाँ LOGIN र Change Password भन्ने option आउँछ</li>
+                            <li> &nbsp;नयाँ युजरले Contact Form भरेर पठाएमा युजरनेम र पासवर्ड पाउनु हुनेछ</li>
+                            <li> &nbsp;Mannually Data entry गर्न चाहेमा Data entryForm मा जानुपर्छ</li>
+                            <li> &nbsp;मेनुअली नगरी एक्सेल फाइलमा मार्क चढाइ अपलोड गर्न सकिन्छ। यहाँ एक्सेल फाइलको    स्याम्पल दिएको छ ।  <a href="#" onclick="openModal('https://shamser.info.np/Integrated Exam Management Information System/Download Sample File, Upload & transfer data.html', 'Data Upload & Transfer')">Upload</a></li>
+                            <li> &nbsp; एक्सेल फाइलबाट एकपटक एन्ट्री भइसकेको डाटा पुन एन्ट्री हुँदैन तर नयाँ छुटफुटको भने Add हुन्छ । Edi गर्नुपरे अपडेट मेन्युमा जानुपर्छ ।</li>
+                            <li> &nbsp; Marks बिना पनि डेटा गर्न सकिन्छ र पछि अपडेट गर्न सकिन्छ</li>
+                            <li> &nbsp; डेटा प्रविष्टि कार्य पूरा गर्नुहोस्</li>
+                            <li> &nbsp; डेटा प्रविष्टि र अद्यावधिकपछि रिफ्रेस बटन थिचेर रिफ्रेस गर्नुहोस्</li>
+                            <li> &nbsp; मेनुबार हेर्नुहोस्</li>
+                            <li> &nbsp; तपाईंलाई चाहिएको खोज्नुहोस्</li>
+                            <li> &nbsp;कसैसँग नमिल्ने गरी कोड राखेर  Symbol no.राख्नुपर्छ । जस्तै 827100 यहाँ 7 चाही कक्षाा हो ।</li>
+                            <li> &nbsp; विद्यार्थीहरूलाई नतिजा हेर्नको लागि लिङ्क प्रतिलिपि उपलब्ध गराउनुपर्छ</li>
+                            <li> &nbsp;आन्तरिक अंक बाहेकको नतिजाको लागि Credit hour and FM खाली गरेर अंक चढाउनुहोला</li>
+                            <li> &nbsp;जति FM मा परीक्षा लिएको हो त्यति नै चढाउँदा पनि हुन्छ ।</li>
+                        </ul>
+                        
+                        <h5><b>विद्यार्थीको लागि यो लिङ्क शेयर गर्नुपर्नेछ ।</b></h5>
+                        <ul>
+                            <li>
+                                <a href="https://script.google.com/macros/s/AKfycbxLevNSFI7CAFvorNd2oiRc1f6iCUGC-VWAUrXb8MyhgEc393O6O063p1P-g6G9fMiW/exec">AdmitCard4page</a>
+                                <button class="copy-btn" data-url="https://script.google.com/macros/s/AKfycbxLevNSFI7CAFvorNd2oiRc1f6iCUGC-VWAUrXb8MyhgEc393O6O063p1P-g6G9fMiW/exec">Copy</button>
+                            </li>
+                            <li>
+                                <a href="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Single%20Grade%20Sheet(9-10).html">Single Grade Sheet for 9-10</a>
+                                <button class="copy-btn" data-url="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Single%20Grade%20Sheet(9-10).html">Copy</button>
+                            </li>
+                            <li>
+                                <a href="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/GradesheetSingle(11-12).html">Single Grade Sheet 11-12</a>
+                                <button class="copy-btn" data-url="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/GradesheetSingle(11-12).html">Copy</button>
+                            </li>
+                            <li>
+                                <a href="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Greadsheet%20Single(4-8).html">Single Grade Sheet 4-8</a>
+                                <button class="copy-btn" data-url="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Greadsheet%20Single(4-8).html">Copy</button>
+                            </li>
+                            <li>
+                                <a href="https://shamser.info.np/Integrated Exam Management Information System/Routine_Update.html">Routine Update</a>
+                                <button class="copy-btn" data-url="https://shamser.info.np/Integrated Exam Management Information System/Routine_Update.html">Copy</button>
+                            </li>
+                            <li>
+                                <a href="https://shamser.info.np/Integrated Exam Management Information System/Admit 2card by class.html">AdmitCard 2pg byclass</a>
+                                <button class="copy-btn" data-url="https://shamser.info.np/Integrated Exam Management Information System/Admit 2card by class.html">Copy</button>
+                            </li>
+                            <li>
+                                <a href="https://shamser.info.np/Integrated Exam Management Information System/Admit 4card by class.html">AdmitCard 4pg byclass</a>
+                                <button class="copy-btn" data-url="https://shamser.info.np/Integrated Exam Management Information System/Admit 4card by class.html">Copy</button>
+                            </li>
+                            <li>
+                                <a href="https://shamser.info.np/Integrated Exam Management Information System/Entrance 2Card by range.html">AdmitCard 2pg byRange</a>
+                                <button class="copy-btn" data-url="https://shamser.info.np/Integrated Exam Management Information System/Entrance 2Card by range.html">Copy</button>
+                            </li>
+                            <li>
+                                <a href="https://shamser.info.np/Integrated Exam Management Information System/Admit 4card by range.html">AdmitCard 4pg byRange</a>
+                                <button class="copy-btn" data-url="https://shamser.info.np/Integrated Exam Management Information System/Admit 4card by range.html">Copy</button>
+                            </li>
+                        </ul>
+                        
+                        <div class="pagination">
+                            <button>&lt; Prev</button>
+                            <span>1</span>
+                            <button>Next &gt;</button>
+                        </div>
+                    </div>
                 </div>
-                <footer style="text-align: center; margin-top: 20px; color: #666;">© 2023 shamser.info.np. All rights reserved.</footer>
+
+                <footer style="text-align: center; margin-top: 20px; color: #666;">
+                    © 2023 shamser.info.np. All rights reserved.
+                </footer>
             </main>
         </div>
     </div>
 
+    <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <script>
-        // ======================= SESSION TIMEOUT & AUTO-LOGOUT =======================
-        const SESSION_TIMEOUT_MS = 30 * 60 * 1000;   // 30 minutes total idle timeout
-        const WARNING_BEFORE_MS = 2 * 60 * 1000;     // Show warning 2 minutes before logout
-        
-        let activityTimer = null;
-        let warningTimer = null;
-        let logoutTimer = null;
-        let inactiveSeconds = 0;
-        let warningActive = false;
-        
-        // Function to reset all timers on user activity
-        function resetSessionTimers() {
-            if (!isUserLoggedIn()) return;
-            
-            // Clear existing timers
-            if (activityTimer) clearTimeout(activityTimer);
-            if (warningTimer) clearTimeout(warningTimer);
-            if (logoutTimer) clearTimeout(logoutTimer);
-            
-            // Hide warning toast if visible
-            hideWarningToast();
-            warningActive = false;
-            
-            // Set timer for warning (SESSION_TIMEOUT_MS - WARNING_BEFORE_MS)
-            const warningDelay = SESSION_TIMEOUT_MS - WARNING_BEFORE_MS;
-            if (warningDelay > 0) {
-                warningTimer = setTimeout(showSessionWarning, warningDelay);
-            }
-            
-            // Set final logout timer
-            logoutTimer = setTimeout(forceLogout, SESSION_TIMEOUT_MS);
-            
-            // Reset inactivity counter for display
-            inactiveSeconds = 0;
-        }
-        
-        function showSessionWarning() {
-            if (!isUserLoggedIn()) return;
-            warningActive = true;
-            const toast = document.getElementById('sessionToast');
-            toast.classList.add('show');
-            
-            // Start countdown updater every second
-            if (window.inactivityInterval) clearInterval(window.inactivityInterval);
-            window.inactivityInterval = setInterval(() => {
-                if (!warningActive || !isUserLoggedIn()) {
-                    clearInterval(window.inactivityInterval);
-                    return;
-                }
-                inactiveSeconds++;
-                const secLeft = Math.max(0, (SESSION_TIMEOUT_MS/1000) - (inactiveSeconds + (SESSION_TIMEOUT_MS - WARNING_BEFORE_MS)/1000));
-                const secondsSpan = document.getElementById('inactiveSeconds');
-                if (secondsSpan) secondsSpan.innerText = Math.floor(secLeft);
-                if (secLeft <= 0 && warningActive) {
-                    clearInterval(window.inactivityInterval);
-                }
-            }, 1000);
-        }
-        
-        function hideWarningToast() {
-            const toast = document.getElementById('sessionToast');
-            toast.classList.remove('show');
-            if (window.inactivityInterval) clearInterval(window.inactivityInterval);
-        }
-        
-        function stayLoggedIn() {
-            if (!isUserLoggedIn()) return;
-            // Reset all timers and hide warning
-            hideWarningToast();
-            warningActive = false;
-            resetSessionTimers();
-        }
-        
-        function forceLogout() {
-            if (!isUserLoggedIn()) return;
-            hideWarningToast();
-            if (window.inactivityInterval) clearInterval(window.inactivityInterval);
-            // Perform logout with alert message
-            alert('Your session has expired due to inactivity. Please login again.');
-            logout(true); // silent clear
+        // Login and Logout Functions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
             checkLoginStatus();
-        }
-        
-        function isUserLoggedIn() {
-            const user = localStorage.getItem("iemisUser") || sessionStorage.getItem("iemisUser");
-            return !!user;
-        }
-        
-        // Attach activity listeners for mouse, keyboard, scroll, touch
-        function attachActivityListeners() {
-            const events = ['mousedown', 'keydown', 'scroll', 'touchstart', 'click', 'mousemove'];
-            events.forEach(event => {
-                document.addEventListener(event, () => {
-                    if (isUserLoggedIn()) resetSessionTimers();
-                });
+            
+            // Login form submission
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                loginUser();
             });
-        }
-        
-        // ======================= LOGIN / LOGOUT (enhanced) =======================
+            
+            // Initialize other dashboard functions
+            initializeDashboard();
+        });
+
         function checkLoginStatus() {
             const user = localStorage.getItem("iemisUser") || sessionStorage.getItem("iemisUser");
             const loginModal = document.getElementById('loginModal');
@@ -973,20 +1121,18 @@
             const userDisplay = document.getElementById('userDisplay');
             
             if (!user) {
+                // Show login modal
                 loginModal.style.display = 'flex';
                 dashboard.style.display = 'none';
                 userDisplay.textContent = 'School Profile';
-                if (window.inactivityInterval) clearInterval(window.inactivityInterval);
-                hideWarningToast();
-                warningActive = false;
             } else {
+                // Hide login modal, show dashboard
                 loginModal.style.display = 'none';
                 dashboard.style.display = 'flex';
                 userDisplay.textContent = user;
-                resetSessionTimers(); // start session timers after successful login
             }
         }
-        
+
         function loginUser() {
             const username = document.getElementById('username').value.trim();
             const password = document.getElementById('password').value.trim();
@@ -994,354 +1140,377 @@
             const loginButton = document.getElementById('loginButton');
             const loginMessage = document.getElementById('loginMessage');
             
+            // Validate inputs
             if (!username || !password) {
                 showLoginMessage('Please enter both username and password', 'error');
                 return;
             }
             
+            // Disable login button and show loading
             loginButton.disabled = true;
             loginButton.textContent = 'Logging in...';
             loginMessage.textContent = '';
             
+            // Make login request
             fetch("https://script.google.com/macros/s/AKfycbw8aVDBPbix7346o647ZapCWJxUYqkNC4rCP9ZRoLFs4IT8EW_tuE3GD9BFjG4UpSPPBQ/exec", {
                 method: "POST",
-                headers: { "Content-Type": "text/plain;charset=utf-8" },
-                body: JSON.stringify({ action: "login", username: username, password: password })
+                headers: {
+                    "Content-Type": "text/plain;charset=utf-8"
+                },
+                body: JSON.stringify({
+                    action: "login",
+                    username: username,
+                    password: password
+                })
             })
             .then(response => response.text())
             .then(text => {
                 try {
                     const data = JSON.parse(text);
+                    
                     if (data.status === "success") {
-                        if (rememberMe) localStorage.setItem("iemisUser", data.username);
-                        else sessionStorage.setItem("iemisUser", data.username);
+                        // Store user session
+                        if (rememberMe) {
+                            localStorage.setItem("iemisUser", data.username);
+                        } else {
+                            sessionStorage.setItem("iemisUser", data.username);
+                        }
+                        
                         showLoginMessage('Login successful!', 'success');
+                        
+                        // Update UI after short delay
                         setTimeout(() => {
                             checkLoginStatus();
+                            // Reset form
                             document.getElementById('loginForm').reset();
                         }, 1000);
-                    } else throw new Error(data.message || 'Invalid credentials');
-                } catch(e) { throw new Error('Invalid server response'); }
+                        
+                    } else {
+                        throw new Error(data.message || 'Invalid credentials');
+                    }
+                } catch (parseError) {
+                    throw new Error('Invalid server response');
+                }
             })
             .catch(err => {
                 showLoginMessage(err.message || 'Login failed. Please try again.', 'error');
             })
             .finally(() => {
+                // Re-enable login button
                 loginButton.disabled = false;
                 loginButton.textContent = 'Login';
             });
         }
-        
+
         function showLoginMessage(message, type) {
             const loginMessage = document.getElementById('loginMessage');
             loginMessage.textContent = message;
             loginMessage.className = `login-message ${type}`;
         }
-        
-        function logout(silent = false) {
-            if (!silent && !confirm('Are you sure you want to logout?')) return;
-            localStorage.removeItem("iemisUser");
-            sessionStorage.removeItem("iemisUser");
-            if (window.inactivityInterval) clearInterval(window.inactivityInterval);
-            hideWarningToast();
-            warningActive = false;
-            checkLoginStatus();
-            document.getElementById('loginForm')?.reset();
-            document.getElementById('loginMessage').textContent = '';
-            // Close any open modal
-            closeModal();
+
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                // Clear all session data
+                localStorage.removeItem("iemisUser");
+                sessionStorage.removeItem("iemisUser");
+                
+                // Show login modal
+                checkLoginStatus();
+                
+                // Clear form
+                document.getElementById('loginForm').reset();
+                document.getElementById('loginMessage').textContent = '';
+            }
+        }
+
+        // Your existing functions (kept exactly the same)
+        function OpenRegisterPage() {
+            openModal('#', 'Register Account');
+        }
+
+        function showStatus(message, isSuccess) {
+            var statusDiv = document.getElementById('status');
+            statusDiv.textContent = message;
+            statusDiv.className = isSuccess ? 'success' : 'error';
         }
         
-        // ======================= EXISTING FUNCTIONS (unchanged) =======================
-        function OpenRegisterPage() { openModal('#', 'Register Account'); }
-        function runSetPlainText() { if (window.google?.script?.run) google.script.run.withSuccessHandler(function(r){showStatus(r,true);}).withFailureHandler(function(e){showStatus("Error: "+e.message,false);}).setPlainTextFormat(); else showStatus("Google script not available", false); }
-        function runFormulaFiller() { 
-            if(!window.google?.script?.run){ showStatus("Google script not available", false); return; }
-            document.getElementById('runButton').disabled = true; document.getElementById('spinner').style.display = 'block';
+        function runSetPlainText() {
+            google.script.run
+                .withSuccessHandler(function(result) {
+                    showStatus(result, true);
+                })
+                .withFailureHandler(function(error) {
+                    showStatus("Error: " + error.message, false);
+                })
+                .setPlainTextFormat();
+        }
+        
+        function runFormulaFiller() {
+            document.getElementById('runButton').disabled = true;
+            document.getElementById('spinner').style.display = 'block';
             document.getElementById('status').innerHTML = 'Processing...';
-            google.script.run.withSuccessHandler(function(result){ document.getElementById('spinner').style.display = 'none'; document.getElementById('status').innerHTML = '✅ Data Refreshed Successfully!.'; document.getElementById('runButton').disabled = false; }).withFailureHandler(function(error){ document.getElementById('spinner').style.display = 'none'; document.getElementById('status').innerHTML = '❌ Error: ' + error.message; document.getElementById('runButton').disabled = false; }).fillDownFormula();
+            
+            google.script.run
+                .withSuccessHandler(function(result) {
+                    document.getElementById('spinner').style.display = 'none';
+                    document.getElementById('status').innerHTML = '✅ Data Refreshed Successfully!.';
+                    document.getElementById('runButton').disabled = false;
+                })
+                .withFailureHandler(function(error) {
+                    document.getElementById('spinner').style.display = 'none';
+                    document.getElementById('status').innerHTML = '❌ Error: ' + error.message;
+                    document.getElementById('runButton').disabled = false;
+                    console.error(error);
+                })
+                .fillDownFormula();
         }
-        function showStatus(message, isSuccess) { var statusDiv = document.getElementById('status'); statusDiv.textContent = message; statusDiv.className = isSuccess ? 'success' : 'error'; }
+
+        // Modal Functions (kept exactly the same)
         function openModal(url, title) {
-            if (!isUserLoggedIn()) { checkLoginStatus(); return false; }
-            const modal = document.getElementById('pageModal'); const modalFrame = document.getElementById('modalFrame'); const modalTitle = document.getElementById('modalTitle'); const modalLoading = document.getElementById('modalLoading');
-            modalTitle.textContent = title || 'Content'; modalLoading.style.display = 'flex'; modalFrame.style.display = 'none';
-            modal.style.display = 'block'; document.body.style.overflow = 'hidden';
-            modalFrame.src = url.replace(/ /g, '%20');
-            if (window.innerWidth <= 992) document.querySelector('.sidebar').classList.remove('active');
+            // Check if user is logged in before opening modal
+            const user = localStorage.getItem("iemisUser") || sessionStorage.getItem("iemisUser");
+            if (!user) {
+                checkLoginStatus();
+                return false;
+            }
+            
+            const modal = document.getElementById('pageModal');
+            const modalFrame = document.getElementById('modalFrame');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalLoading = document.getElementById('modalLoading');
+            
+            // Set modal title
+            modalTitle.textContent = title || 'Content';
+            
+            // Show loading spinner
+            modalLoading.style.display = 'flex';
+            modalFrame.style.display = 'none';
+            
+            // Open modal
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            
+            // Encode spaces in URL
+            const encodedUrl = url.replace(/ /g, '%20');
+            
+            // Load content in iframe
+            modalFrame.src = encodedUrl;
+            
+            // Close sidebar on mobile
+            if (window.innerWidth <= 992) {
+                document.querySelector('.sidebar').classList.remove('active');
+            }
+            
             return false;
         }
-        function closeModal() { const modal = document.getElementById('pageModal'); const modalFrame = document.getElementById('modalFrame'); if(modalFrame) modalFrame.src = ''; if(modal) modal.style.display = 'none'; document.body.style.overflow = 'auto'; }
-        function showDashboard() { closeModal(); return false; }
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            checkLoginStatus();
-            document.getElementById('loginForm').addEventListener('submit', function(e) { e.preventDefault(); loginUser(); });
-            attachActivityListeners();
+
+        function closeModal() {
+            const modal = document.getElementById('pageModal');
+            const modalFrame = document.getElementById('modalFrame');
             
-            // Toast buttons
-            document.getElementById('stayLoggedBtn').addEventListener('click', function() { stayLoggedIn(); });
-            document.getElementById('closeToastBtn').addEventListener('click', function() { hideWarningToast(); if(warningActive) stayLoggedIn(); });
+            // Stop loading content
+            modalFrame.src = '';
             
-            // Modal event handlers
-            document.getElementById('modalFrame').addEventListener('load', function() { document.getElementById('modalLoading').style.display = 'none'; this.style.display = 'block'; });
-            document.getElementById('pageModal').addEventListener('click', function(e) { if(e.target === this) closeModal(); });
-            document.addEventListener('keydown', function(e) { if(e.key === 'Escape') closeModal(); });
-            document.getElementById('modalClose').addEventListener('click', closeModal);
-            
-            // Copy functionality
-            document.addEventListener('click', function(e) {
-                if (e.target.classList.contains('copy-btn')) {
-                    const url = e.target.getAttribute('data-url');
-                    navigator.clipboard.writeText(url).then(function() {
-                        const originalText = e.target.textContent;
-                        e.target.textContent = 'Copied!'; e.target.classList.add('copied');
-                        setTimeout(() => { e.target.textContent = originalText; e.target.classList.remove('copied'); }, 2000);
-                    }).catch(() => alert('Failed to copy URL'));
-                }
-            });
-            
-            // Toggle sidebar & submenus (preserved)
+            // Hide modal
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function showDashboard() {
+            closeModal();
+            return false;
+        }
+
+        // Handle iframe load event
+        document.getElementById('modalFrame').addEventListener('load', function() {
+            document.getElementById('modalLoading').style.display = 'none';
+            this.style.display = 'block';
+        });
+
+        // Handle iframe errors
+        document.getElementById('modalFrame').addEventListener('error', function() {
+            document.getElementById('modalLoading').innerHTML = 
+                '<p class="text-danger">Failed to load content. Please try again.</p>';
+        });
+
+        // Close modal when clicking outside content
+        document.getElementById('pageModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Close modal with escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Close modal button
+        document.getElementById('modalClose').addEventListener('click', closeModal);
+
+        // Copy URL functionality
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('copy-btn')) {
+                const url = e.target.getAttribute('data-url');
+                navigator.clipboard.writeText(url).then(function() {
+                    const originalText = e.target.textContent;
+                    e.target.textContent = 'Copied!';
+                    e.target.classList.add('copied');
+                    
+                    setTimeout(function() {
+                        e.target.textContent = originalText;
+                        e.target.classList.remove('copied');
+                    }, 2000);
+                }).catch(function(err) {
+                    console.error('Failed to copy: ', err);
+                    alert('Failed to copy URL to clipboard');
+                });
+            }
+        });
+
+        function initializeDashboard() {
+            // Toggle sidebar
             const menuToggle = document.querySelector('.menu-toggle');
             const sidebar = document.querySelector('.sidebar');
-            if(menuToggle) menuToggle.addEventListener('click', () => sidebar.classList.toggle('active'));
-            document.querySelectorAll('.toggle-submenu').forEach(item => {
-                item.addEventListener('click', function(e) { e.preventDefault(); const submenu = this.nextElementSibling; const arrow = this.querySelector('.arrow'); if(submenu){ submenu.classList.toggle('expanded'); if(arrow) arrow.classList.toggle('rotated'); } });
+            
+            if (menuToggle) {
+                menuToggle.addEventListener('click', function() {
+                    sidebar.classList.toggle('active');
+                });
+            }
+
+            // Toggle submenus
+            const toggleSubmenus = document.querySelectorAll('.toggle-submenu');
+            
+            toggleSubmenus.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const submenu = this.nextElementSibling;
+                    const arrow = this.querySelector('.arrow');
+                    
+                    if (submenu) {
+                        submenu.classList.toggle('expanded');
+                        if (arrow) {
+                            arrow.classList.toggle('rotated');
+                        }
+                    }
+                });
             });
-            
-            // Initialize dummy charts if canvas exists
-            if (document.getElementById('schoolChart')) new Chart(document.getElementById('schoolChart').getContext('2d'), { type:'bar', data:{ labels:['Kathmandu','Pokhara','Lalitpur','Bhaktapur','Biratnagar'], datasets:[{ label:'Number of Schools', data:[1200,800,600,400,300], backgroundColor:'#3498db'}] }, options:{ responsive:true, maintainAspectRatio:false } });
-            if (document.getElementById('studentChart')) new Chart(document.getElementById('studentChart').getContext('2d'), { type:'line', data:{ labels:['2019','2020','2021','2022','2023'], datasets:[{ label:'Student Enrollment', data:[1000000,1050000,1100000,1150000,1200000], borderColor:'#e74c3c', fill:false }] }, options:{ responsive:true, maintainAspectRatio:false } });
-            if (document.getElementById('boysChart')) new Chart(document.getElementById('boysChart').getContext('2d'), { type:'pie', data:{ labels:['Grade 1','Grade 2','Grade 3','Grade 4','Grade 5'], datasets:[{ data:[15,20,18,22,25], backgroundColor:['#3498db','#2ecc71','#f1c40f','#e74c3c','#9b59b6'] }] }, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'right' } } } });
-            if (document.getElementById('girlsChart')) new Chart(document.getElementById('girlsChart').getContext('2d'), { type:'pie', data:{ labels:['Grade 1','Grade 2','Grade 3','Grade 4','Grade 5'], datasets:[{ data:[18,22,20,15,25], backgroundColor:['#3498db','#2ecc71','#f1c40f','#e74c3c','#9b59b6'] }] }, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'right' } } } });
-        });
 
+            // Close sidebar when clicking outside on mobile
+            document.addEventListener('click', function(e) {
+                if (window.innerWidth <= 992 && 
+                    sidebar && 
+                    !sidebar.contains(e.target) && 
+                    !menuToggle.contains(e.target) && 
+                    sidebar.classList.contains('active')) {
+                    sidebar.classList.remove('active');
+                }
+            });
 
-        // ===============================
-  <script>
-        // Session configuration
-        const SESSION_TIMEOUT = 30 * 60 * 1000; // 30 minutes
-        const WARNING_TIMEOUT = 2 * 60 * 1000; // Show warning 2 minutes before timeout
-        const CHECK_INTERVAL = 1 * 60 * 1000; // Check session every 1 minute
-        
-        let inactivityTimer;
-        let warningTimer;
-        let lastActivityTime = Date.now();
-        let isLoggedIn = false;
-        let sessionTimerInterval;
-
-        // Initialize on page load
-        $(document).ready(function() {
-          // Check if we're coming back from a successful login
-          const urlParams = new URLSearchParams(window.location.search);
-          if (urlParams.has('loggedIn')) {
-            isLoggedIn = true;
-            initSessionTimeout();
-          }
-        });
-
-        // Initialize session timeout tracking
-        function initSessionTimeout() {
-          // Clear any existing timers
-          clearTimeout(inactivityTimer);
-          clearTimeout(warningTimer);
-          clearInterval(sessionTimerInterval);
-          
-          // Show session timer
-          $('#sessionTimer').show();
-          updateSessionTimerDisplay();
-          
-          // Start session timer updates
-          sessionTimerInterval = setInterval(updateSessionTimerDisplay, 1000);
-          
-          // Set new timers
-          lastActivityTime = Date.now();
-          
-          // Show warning 2 minutes before timeout
-          warningTimer = setTimeout(showTimeoutWarning, SESSION_TIMEOUT - WARNING_TIMEOUT);
-          
-          // Full timeout after 30 minutes
-          inactivityTimer = setTimeout(logoutDueToInactivity, SESSION_TIMEOUT);
-          
-          // Track user activity
-          ['mousemove', 'keydown', 'click', 'scroll', 'touchstart'].forEach(event => {
-            document.addEventListener(event, resetInactivityTimer, { passive: true });
-          });
-          
-          // Start periodic session checks
-          checkSessionStatus();
-          
-          // Handle tab visibility changes
-          handleVisibilityChanges();
-        }
-
-        // Update the session timer display
-        function updateSessionTimerDisplay() {
-          if (!isLoggedIn) return;
-          
-          const timeLeft = lastActivityTime + SESSION_TIMEOUT - Date.now();
-          if (timeLeft <= 0) {
-            $('#timeRemaining').text('00:00');
-            return;
-          }
-          
-          const minutes = Math.floor(timeLeft / 60000);
-          const seconds = Math.floor((timeLeft % 60000) / 1000);
-          $('#timeRemaining').text(
-            `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
-          );
-        }
-
-        // Reset the inactivity timer on user activity
-        function resetInactivityTimer() {
-          if (!isLoggedIn) return;
-          
-          lastActivityTime = Date.now();
-          clearTimeout(inactivityTimer);
-          clearTimeout(warningTimer);
-          
-          // Restart the timers
-          warningTimer = setTimeout(showTimeoutWarning, SESSION_TIMEOUT - WARNING_TIMEOUT);
-          inactivityTimer = setTimeout(logoutDueToInactivity, SESSION_TIMEOUT);
-          
-          // Hide warning if it was showing
-          $('#sessionTimeoutWarning').fadeOut();
-          
-          // Notify server to extend session
-          google.script.run
-            .withSuccessHandler(() => console.log("Session activity recorded"))
-            .withFailureHandler((err) => console.error("Error recording activity:", err))
-            .extendSession();
-        }
-
-        // Show timeout warning
-        function showTimeoutWarning() {
-          if (!isLoggedIn) return;
-          
-          let secondsLeft = WARNING_TIMEOUT / 1000;
-          $('#countdown').text(Math.floor(secondsLeft / 60));
-          
-          // Update countdown every second
-          const countdownInterval = setInterval(() => {
-            secondsLeft--;
-            $('#countdown').text(Math.floor(secondsLeft / 60));
-            
-            if (secondsLeft <= 0) {
-              clearInterval(countdownInterval);
+            // Initialize charts
+            if (document.getElementById('schoolChart')) {
+                const schoolCtx = document.getElementById('schoolChart').getContext('2d');
+                new Chart(schoolCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Kathmandu', 'Pokhara', 'Lalitpur', 'Bhaktapur', 'Biratnagar'],
+                        datasets: [{
+                            label: 'Number of Schools',
+                            data: [1200, 800, 600, 400, 300],
+                            backgroundColor: '#3498db',
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                    }
+                });
             }
-          }, 1000);
-          
-          $('#sessionTimeoutWarning').fadeIn();
-        }
 
-        // Handle logout due to inactivity
-        async function logoutDueToInactivity() {
-          if (!isLoggedIn) return;
-          
-          console.log("Session expired due to inactivity");
-          await performLogout();
-          showSessionExpiredMessage();
-        }
-
-        // Perform the logout
-        async function performLogout() {
-          try {
-            // Use both methods for reliability
-            await Promise.race([
-              new Promise((resolve) => {
-                google.script.run
-                  .withSuccessHandler(resolve)
-                  .withFailureHandler(resolve)
-                  .logoutUser();
-              }),
-              new Promise(resolve => setTimeout(resolve, 3000)) // 3 second timeout
-            ]);
-          } catch (error) {
-            console.error("Logout error:", error);
-          } finally {
-            isLoggedIn = false;
-            clearInterval(sessionTimerInterval);
-            $('#sessionTimer').hide();
-            $('#sessionTimeoutWarning').hide();
-            // Force page reload to ensure clean state
-            window.location.href = '<?= myURL() ?>';
-          }
-        }
-
-        // Show session expired message
-        function showSessionExpiredMessage() {
-          const alertDiv = document.createElement('div');
-          alertDiv.className = 'alert alert-warning';
-          alertDiv.style.position = 'fixed';
-          alertDiv.style.top = '20px';
-          alertDiv.style.left = '50%';
-          alertDiv.style.transform = 'translateX(-50%)';
-          alertDiv.style.zIndex = '1000';
-          alertDiv.textContent = 'Your session has expired due to inactivity. Please login again.';
-          document.body.appendChild(alertDiv);
-          
-          setTimeout(() => {
-            alertDiv.remove();
-          }, 5000);
-        }
-
-        // Reset session when user clicks "Stay Logged In"
-        function resetSession() {
-          $('#sessionTimeoutWarning').fadeOut();
-          resetInactivityTimer();
-          
-          // Notify server to extend session
-          google.script.run
-            .withSuccessHandler(() => console.log("Session extended"))
-            .withFailureHandler((err) => console.error("Error extending session:", err))
-            .extendSession();
-        }
-
-        // Check session status periodically
-        function checkSessionStatus() {
-          const checkInterval = setInterval(async () => {
-            if (!isLoggedIn) {
-              clearInterval(checkInterval);
-              return;
+            if (document.getElementById('studentChart')) {
+                const studentCtx = document.getElementById('studentChart').getContext('2d');
+                new Chart(studentCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['2019', '2020', '2021', '2022', '2023'],
+                        datasets: [{
+                            label: 'Student Enrollment',
+                            data: [1000000, 1050000, 1100000, 1150000, 1200000],
+                            borderColor: '#e74c3c',
+                            fill: false,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                    }
+                });
             }
-            
-            try {
-              const response = await new Promise((resolve) => {
-                google.script.run
-                  .withSuccessHandler(resolve)
-                  .withFailureHandler(resolve)
-                  .checkSession();
-              });
-              
-              if (!response || !response.active) {
-                await performLogout();
-              }
-            } catch (error) {
-              console.error("Session check failed:", error);
-            }
-          }, CHECK_INTERVAL);
-        }
 
-        // Handle page visibility changes
-        function handleVisibilityChanges() {
-          document.addEventListener('visibilitychange', () => {
-            if (!isLoggedIn) return;
-            
-            if (document.visibilityState === 'visible') {
-              // Check if session expired while tab was inactive
-              const inactiveDuration = Date.now() - lastActivityTime;
-              if (inactiveDuration > SESSION_TIMEOUT) {
-                logoutDueToInactivity();
-              } else {
-                // Reset timers when tab becomes active again
-                resetInactivityTimer();
-                
-                // Verify session is still valid
-                checkSessionStatus();
-              }
+            if (document.getElementById('boysChart')) {
+                const boysCtx = document.getElementById('boysChart').getContext('2d');
+                new Chart(boysCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5'],
+                        datasets: [{
+                            data: [15, 20, 18, 22, 25],
+                            backgroundColor: [
+                                '#3498db',
+                                '#2ecc71',
+                                '#f1c40f',
+                                '#e74c3c',
+                                '#9b59b6'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'right',
+                            }
+                        }
+                    }
+                });
             }
-          });
+
+            if (document.getElementById('girlsChart')) {
+                const girlsCtx = document.getElementById('girlsChart').getContext('2d');
+                new Chart(girlsCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5'],
+                        datasets: [{
+                            data: [18, 22, 20, 15, 25],
+                            backgroundColor: [
+                                '#3498db',
+                                '#2ecc71',
+                                '#f1c40f',
+                                '#e74c3c',
+                                '#9b59b6'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'right',
+                            }
+                        }
+                    }
+                });
+            }
         }
     </script>
 </body>
 </html>
+
