@@ -105,12 +105,7 @@
 <title>shamser.info.np</title>
 
 
-<!-- Google Translate Script -->
 
-
-
-
-   
 <script>
 var cid = 9492; 
 (function() { 
@@ -168,7 +163,30 @@ var cid = 9492;
 
 <link rel='stylesheet' href='https://shamser.info.np/Shaikshik Khabakhaabar/online/assets/css/style.css' type='text/css' media='all' />
 <link rel='stylesheet' href='https://shamser.ifo.np/Shaikshik Khabakhaabar/online/assets/css/app.css' type='text/css' media='all' />
+<!-- Remove ALL existing Facebook SDK scripts and keep ONLY this -->
 
+<!-- Facebook SDK - Single Clean Version -->
+<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '758915462507587',
+      xfbml      : true,
+      version    : 'v20.0'
+    });
+    
+    // Optional: Log when SDK is ready
+    console.log('Facebook SDK loaded successfully');
+  };
+
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
 
 
 
