@@ -28,12 +28,12 @@
 
 
 
-<!---------Save to facebook
+<!---------Save to facebook----->
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v20.0" nonce="2vA4OymM"></script>
          </div>
- End Section Title     
-            <div class="fb-save" data-uri="https://shamser.info.np/" data-size=""></div> ----->
+    
+           <!------ <div class="fb-save" data-uri="https://shamser.info.np/" data-size=""></div> ----->
 
 <script>
     document.onselectstart = () => {
@@ -1837,7 +1837,8 @@ $(document).ready(function(){
  <div class="col-md-9" col-sm-12 style="padding:0px; margin:0px;">
 <script type="text/javascript" src="https://free-hit-counters.net/count/gd0n" width="30" height="20"></script>
 
-<!-- Load Facebook SDK -->
+<!-- 1. Load Facebook SDK FIRST -->
+<div id="fb-root"></div>
 <script>
   window.fbAsyncInit = function() {
     FB.init({
@@ -1845,18 +1846,32 @@ $(document).ready(function(){
       xfbml      : true,
       version    : 'v20.0'
     });
+    
+    // Optional: Track when like button is loaded
+    FB.Event.subscribe('xfbml.render', function() {
+      console.log('Facebook like button loaded');
+    });
   };
 
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<!-- Like Button -->
+<!-- 2. Then load CSS (no conflict here) -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- 3. Load jQuery BEFORE Bootstrap JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<!-- 4. Load Bootstrap JS (single version only) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- 5. Add your Like button where needed -->
 <div class="fb-like" 
      data-href="https://shamser.info.np/" 
      data-layout="button_count" 
@@ -1864,7 +1879,6 @@ $(document).ready(function(){
      data-size="small" 
      data-share="true">
 </div>
-
 
 
 
@@ -2129,18 +2143,11 @@ window.onload = function() {
 </script>
 
  
-  <!-- Your like button  -->
-  <div class="fb-like" 
-       data-href="https://shamser.info.np/" 
-       data-width="30"
-       data-action="like" 
-       data-size="small" >
-  </div>
 
-
-  <!-- Trigger the modal with a button 
+  <!-- Trigger the modal with a button--> 
   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal55">Share your contents</button>
--->
+   <div class="fb-save" data-uri="https://shamser.info.np/" data-size=""></div>
+
 
         <style>
 
