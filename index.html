@@ -189,10 +189,7 @@ src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v20.0&appId=75891
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v20.0" nonce="2vA4OymM"></script>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163260228-1"></script>
-<!---Vertical Share button---->
-<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=618f78d6f2438b001a7e8872&product=image-share-buttons' async='async'></script>	       
-<!------------  <SDK>------------>		  
-<!---Vertical Share button---->
+<!---Vertical Share button
 <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=618f78d6f2438b001a7e8872&product=image-share-buttons' async='async'></script>
 <script>
       (function(d, s, id) {
@@ -204,7 +201,7 @@ src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v20.0&appId=75891
     }(document, 'script', 'facebook-jssdk'));
     </script>			       
 <!------------  <SDK>------------>		
-   
+   ---->
   <!-- Favicon -->
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   
@@ -1840,13 +1837,26 @@ $(document).ready(function(){
  <div class="col-md-9" col-sm-12 style="padding:0px; margin:0px;">
 <script type="text/javascript" src="https://free-hit-counters.net/count/gd0n" width="30" height="20"></script>
 
-<!-- Facebook SDK - Add this once, preferably just after the opening <body> tag -->
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" 
-    src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v20.0&appId=758915462507587">
+<!-- Load Facebook SDK -->
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '758915462507587',
+      xfbml      : true,
+      version    : 'v20.0'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<!-- Single Facebook Like & Share Button (working) -->
+<!-- Like Button -->
 <div class="fb-like" 
      data-href="https://shamser.info.np/" 
      data-layout="button_count" 
