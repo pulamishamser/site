@@ -167,27 +167,15 @@ var cid = 9492;
 <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=618f78d6f2438b001a7e8872&product=image-share-buttons' async='async'></script>
 <div class="sharethis-inline-share-buttons"> </div>
 <!-- Facebook SDK - Single Clean Version -->
-<div id="fb-root"></div>
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '758915462507587',
-      xfbml      : true,
-      version    : 'v20.0'
-    });
-    
-    // Optional: Log when SDK is ready
-    console.log('Facebook SDK loaded successfully');
-  };
-
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "https://connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
+ <script>
+      (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = '../connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    </script>			
 
 
 
