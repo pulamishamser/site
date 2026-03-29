@@ -4899,14 +4899,16 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
 <!---========------->
 
     
-<!-- Bootstrap CSS -->
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Shamser.info.np - शैक्षिक सेवा पोर्टल</title>
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-
-
-
-   
     <style>
         /* GLOBAL FONT SIZE INCREASE */
         body, p, li, .modal-body, .form-label, .btn, .dropdown-item, .list-group-item {
@@ -5047,86 +5049,74 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
             font-size: 1rem;
             border: none;
         }
+        /* Floating action buttons styling */
+        .fab-container {
+            position: fixed;
+            bottom: 96px;
+            right: 15px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .fab-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            border: none;
+            color: white;
+        }
+        .fab-btn:hover {
+            transform: scale(1.1);
+        }
+        @media (max-width: 768px) {
+            .fab-container { bottom: 90px; right: 10px; }
+            .fab-btn { width: 45px; height: 45px; }
+        }
     </style>
+</head>
+<body>
 
-
-<!-- Welcome Popup Modal (Shows on page load) -->
+<!-- Welcome Popup Modal -->
 <div class="modal fade" id="welcomePopupModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="welcomePopupModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">
                 <h5 class="modal-title" id="welcomePopupModalLabel">
                     <i class="fas fa-hand-peace me-2"></i>स्वागतम्!
- <style>
-.dropbtn {
-  background-color: #04AA6D;
-  color: white;
-  padding: 12px;
-  font-size: 18px;
-  border: none;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 180px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 10px 10px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown-content a:hover {background-color: #ddd;}
-
-.dropdown:hover .dropdown-content {display: block;}
-
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
-</style>
-
-<div class="dropdown">
-  <button class="dropbtn">Our Services</button>
-  <div class="dropdown-content">
-  <a href="https://shamser.info.np/Entry_Form/our_service.html">service Item : 1</a>
- <a href="https://shamser.info.np/Entry_Form/our_service_2.html">service Item :2</a>
- <a href="https://shamser.info.np/Entry_Form/our_service_3.html">service Item :3</a>
- <a href="https://shamser.info.np/LoginPage/Login_download.html">Download</a>
-
-  </div>
-</div>
-                   
+                    <div class="dropdown d-inline-block ms-3">
+                        <button class="btn btn-sm btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">Our Services</button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="https://shamser.info.np/Entry_Form/our_service.html">service Item : 1</a>
+                            <a class="dropdown-item" href="https://shamser.info.np/Entry_Form/our_service_2.html">service Item :2</a>
+                            <a class="dropdown-item" href="https://shamser.info.np/Entry_Form/our_service_3.html">service Item :3</a>
+                            <a class="dropdown-item" href="https://shamser.info.np/LoginPage/Login_download.html">Download</a>
+                        </div>
+                    </div>
                 </h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body text-center">
-               <h4>shamser.info.np मा तपाईंलाई स्वागत छ!</h4>
+                <h4>shamser.info.np मा तपाईंलाई स्वागत छ!</h4>
                 <p class="text-muted mb-4">हाम्रा विभिन्न सेवाहरू प्रयोग गर्नुहोस्:</p>
-                             <!-- placeholder image; if missing, hide or replace---->
-                  <!-- <img src='glamour/30.jpg' width='40' height='30' viewBox='0 0 80 60'%3E%3Crect width='80' height='60' fill='%23cccccc'/%3E%3Ctext x='10' y='35' font-family='Arial' font-size='12' fill='%23333'%3Ebrp logo%3C/text%3E%3C/svg%3E" height="60" width="80" class="rounded mb-3" alt="">---->
-        <!-- ShareThis BEGIN --><div class="sharethis-inline-share-buttons"></div><!-- ShareThis END -->
-               
-               <video width="100%" height="220" controls autoplay muted>
-                        <source src="HomePage/IEMIS Demo.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video> 
-                <div class="row g-3">
+                <video width="100%" height="220" controls autoplay muted>
+                    <source src="HomePage/IEMIS Demo.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video> 
+                <div class="row g-3 mt-3">
                     <div class="col-6">
-<a href="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Dashboard.html" >
-                <button class="btn btn-#FAFAF9 w-100 py-3" onclick="openModal('iemisModal'); closeModal('welcomePopupModal')">
-                            <i class="fas fa-graduation-cap fa-2x mb-2 d-block"></i>
-                            <span>IEMIS</span></a>
-                        </button>
-            </div>
+                        <a href="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Dashboard.html">
+                            <button class="btn btn-primary w-100 py-3">
+                                <i class="fas fa-graduation-cap fa-2x mb-2 d-block"></i>
+                                <span>IEMIS</span>
+                            </button>
+                        </a>
+                    </div>
                     <div class="col-6">
                         <div class="dropdown w-100">
                             <button class="btn btn-success w-100 py-3 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -5134,136 +5124,34 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
                                 <span>ID Card</span>
                             </button>
                             <ul class="dropdown-menu w-100">
-                                <li>
-                                    <a class="dropdown-item" href="#" onclick="openModal('idCardSoftwareModal'); return false;">
-                                        <i class="fas fa-info-circle me-2"></i>अफलाइन प्रयोग 
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#" onclick="openIDCardOnline(); return false;">
-                                        <i class="fas fa-globe me-2"></i>अनलाइन प्रयोग
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="https://shamser.info.np/ID%20Card%20Software.zip" download>
-                                        <i class="fas fa-download me-2"></i>डाउनलोड
-                                    </a>
-                                </li>
-                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#" onclick="openIDCardOfflineModal(); return false;"><i class="fas fa-info-circle me-2"></i>अफलाइन प्रयोग</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="openIDCardOnline(); return false;"><i class="fas fa-globe me-2"></i>अनलाइन प्रयोग</a></li>
+                                <li><a class="dropdown-item" href="https://shamser.info.np/ID%20Card%20Software.zip" download onclick="trackDownload('ID Card Software.zip'); return true;"><i class="fas fa-download me-2"></i>डाउनलोड</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-6">
-                        <button class="btn btn-warning w-100 py-3" onclick="openModal('quizModal'); closeModal('welcomePopupModal')">
+                        <button class="btn btn-warning w-100 py-3" onclick="openModal('quizModal')">
                             <i class="fas fa-laptop-code fa-2x mb-2 d-block"></i>
                             <span>Quiz</span>
                         </button>
                     </div>
                     <div class="col-6">
-                        <button class="btn btn-primary w-100 py-3 text-white" onclick="openModal('resultModal'); closeModal('welcomePopupModal')">
+                        <button class="btn btn-primary w-100 py-3 text-white" onclick="openModal('resultModal')">
                             <i class="fas fa-search fa-2x mb-2 d-block"></i>
                             <span>Check Result</span>
                         </button>
                     </div>
                 </div>
-                
                 <hr class="my-4">
-               <h2>📌 IEMIS प्रणाली प्रयोग गर्ने तरिका</h2>
-
-
-<p style="font-size:13px; text-align: justify; padding:5px; margin: 0px; line-height: 15px; color:black;">1.कुनै पनि सर्च ब्राउजर (Google, Chrome, Bing आदि) खोल्नुहोस्।</p>
-
-<p style="font-size:13px; text-align: justify; padding:5px; margin: 0px; line-height: 15px; color:black;">👉 ब्राउजरको url address bar मा shamser.info.np टाइप गरेर enter हान्नुहोस । अब वेबसाइट खुल्छ ।</p>
-<p style="font-size:13px; text-align: justify; padding:5px; margin: 0px; line-height: 15px; color:black;">👉 यदि तपाईले google.com प्रयोग गर्नु भएको छ भने वेबसाइट मा देखिने shamser.info.np मा पुन थिच्नु पर्ने हुन्छ।</p>
-<p style="font-size:13px; text-align: justify; padding:5px; margin: 0px; line-height: 15px; color:black;">3. यसमा दुइवटा Popup आउँछ । पहिलो Popup मा IEMIS बटन थिचेर Login गर्न सकिनेछ ।  </p>
-<p style="font-size:13px; text-align: justify; padding:5px; margin: 0px; line-height: 15px; color:black;">👉 दोश्रो Popup मा पनि Login गर्न IEMIS मै थिच्नु पर्नेछ । दोश्रो Popup मा कुनै कुनै मोबाइलमा error देखाउँने हुँदा पहिलो Popup तयार गरिएको हो ।पहिलो Popup मा मै लगिन गर्नुहोला । </p>
-<p style="font-size:13px; text-align: justify; padding:5px; margin: 0px; line-height: 15px; color:black;">पहिलो Popup बन्द गरेमा अर्को Popup आउँछ ।</p>
-<p style="font-size:13px; text-align: justify; padding:5px; margin: 0px; line-height: 15px; color:black;">4.यसमा Shamser को फोटो र IEMIS Login Dropdown देखिन्छ जसमा Login मा थिच्नुहोस</p>
-<p style="font-size:13px; text-align: justify; padding:5px; margin: 0px; line-height: 15px; color:black;">5. Login प्रक्रिया</p>
-<p style="font-size:13px; text-align: justify; padding:5px; margin: 0px; line-height: 15px; color:black;">Username:***** </p>
-<p style="font-size:13px; text-align: justify; padding:5px; margin: 0px; line-height: 15px; color:black;">Password: *****</p>
-<p style="font-size:13px; text-align: justify; padding:5px; margin: 0px; line-height: 15px; color:black;">👉 Login गरेपछि Dashboard खुल्छ।</p>
-<p style="font-size:13px; text-align: justify; padding:5px; margin: 0px; line-height: 15px; color:black;">6.मोबाइलमा Dashboard को बायाँ तर्फ माथि तीनवटा लाइन (☰ Menu Icon) देखिन्छ।</p>
-<p style="font-size:13px; text-align: justify; padding:5px; margin: 0px; line-height: 15px; color:black;">👉 यसमा टच गरेर स्क्रोल गरी Update मा जानुहोस</p>
-<p style="font-size:13px; text-align: justify; padding:5px; margin: 0px; line-height: 15px; color:black;">7. Update Section</p>
-<p style="font-size:13px; text-align: justify; padding:5px; margin: 0px; line-height: 15px; color:black;">8. “Marks Update” छान्नुहोस।</p>
-<p style="font-size:13px; text-align: justify; padding:5px; margin: 0px; line-height: 15px; color:black;">9.यसपछि Classwise छान्नुहोस</p>
-<p style="font-size:13px; text-align: justify; padding:5px; margin: 0px; line-height: 15px; color:black;">👉यसपछि Marks Update Form खुल्छ।</p>
-<p style="font-size:13px; text-align: justify; padding:5px; margin: 0px; line-height: 15px; color:black;">10.Marks Update Form मा निम्न विवरण भर्नुहोस्</p>
-<p style="font-size:13px; text-align: justify; padding:5px; margin: 0px; line-height: 15px; color:black;">School Code: ******</p>
-
-               
-   
-
-               
-               
-<p style="font-size:13px; text-align: justify; padding:5px; margin: 0px; line-height: 15px; color:black;">Year: 2082</p>
-<p style="font-size:13px; text-align: justify; padding:5px; margin: 0px; line-height: 15px; color:black;">Term: Final</p>
-<p style="font-size:13px; text-align: justify; padding:5px; margin: 0px; line-height: 15px; color:black;">Class र Subject छान्नुहोस (आफ्नो अनुसार) </p>
-<p style="font-size:13px; text-align: justify; padding:5px; margin: 0px; line-height: 15px; color:black;">11. सबै Marks भरेपछि तल रहेको “Update” बटन एकपटक मात्र थिच्नुहोस्।</p>
-<p style="font-size:13px; text-align: justify; padding:5px; margin: 0px; line-height: 15px; color:black;">👉 त्यसपछि “Data successfully update” भन्ने हरियो सन्देशस‌केत देखिन्छ।</p>
-<p style="font-size:13px; text-align: justify; padding:5px; margin: 0px; line-height: 15px; color:black;">12.हालै हालिएको डाटा जाँच गर्न पुनः Update गर्न फेरि “Update” बटन थिच्न सक्नुहुन्छ। </p>
-<p style="font-size:13px; text-align: justify; padding:5px; margin: 0px; line-height: 15px; color:black;">13☎️ सम्पर्कShamser: 9844087012</p>
-</p>
-
-        <h2>नवशिशु मन्टेश्वरी लालबन्दी ७ सर्लाही</h2>              
-  <img src='HomePage/IMG_6014.png' width="100%" height='350'>                
-                    <p>नवशिशु मन्टेश्वरीमा प्ले ग्रुप देखि कक्षा १ सम्म भर्ना खुल्दै छ ।आफ्ना नानीहरुलाई समयमा नै भर्ना गराैं </p>          
-                <!-- Additional Links Section
-                <div class="d-grid gap-2 mt-3">
-                    <a href="https://shamser.info.np/Multi%20letterpad.html" class="btn btn-primary" target="_blank">
-                        <i class="fas fa-pencil-alt me-2"></i>🌐 Generate Multi letters
-                    </a>
-                    <a href="https://forms.gle/LVm68DdiXN5Ep1Mb6" class="btn btn-success" target="_blank">
-                        <i class="fas fa-info-circle me-2"></i>💁🏻‍♀️ About Service charge
-                    </a>
-                </div>
-                
-                <!-- Resource Links -
-                <div class="row mt-4">
-                    <div class="col-12">
-                        <a href="http://janajyoticampus.edu.np/wp-content/uploads/2024/12/%E0%A4%B8%E0%A5%8D%E0%A4%AE%E0%A4%BE%E0%A4%B0%E0%A5%80%E0%A4%95%E0%A4%BE-%E0%A5%A8%E0%A5%A6%E0%A5%AE%E0%A5%A7.pdf" 
-                           class="btn btn-outline-primary w-100 mb-2" target="_blank">
-                            <i class="fas fa-book me-2"></i>👉 जनज्योति क्याम्पसको स्मारिका
-                        </a>
-                        <a href="http://shamser.info.np/News%20modal.html" class="btn btn-outline-info w-100 mb-2" target="_blank">
-                            <i class="fas fa-newspaper me-2"></i>🌐 ताजा अनलाइन समाचार
-                        </a>
-                        
-                        <!-- Subscription Button 
-                        <div class="subscribe-container mt-3">
-                            <button id="subscribeBtn" class="btn btn-danger w-100">
-                                <i class="fas fa-bell me-2"></i>
-                                <span>Subscribe</span>
-                                <span id="badge" class="badge bg-light text-dark ms-2" style="display: none;">0</span>
-                            </button>
-                            <div class="counter-container mt-2 text-center">
-                                <p class="mb-0">Total Subscribers: <span class="fw-bold" id="counter">0</span></p>
-                            </div>
-                
-
-
-
-
-
-
-               
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Updates Section 
-                <div class="mt-4 text-start">
-                    <h5>📢 ताजा अपडेटहरू</h5>
-                    <ul class="list-unstyled">
-                        <li><i class="fas fa-check-circle text-success me-2"></i>शैक्षिक समाचार</li>
-                        <li><i class="fas fa-check-circle text-success me-2"></i>विद्यालयको लागि उपयोगी सामाग्री</li>
-                        <li><i class="fas fa-check-circle text-success me-2"></i>शिक्षकहरूकालागि उपयोगी स्रोतहरू</li>
-                        <li><i class="fas fa-check-circle text-success me-2"></i>विद्यार्थीहरूकालागि शैक्षिक सामग्री</li>
-                        <li><i class="fas fa-check-circle text-success me-2"></i>कम्प्युटर क्विज तथा सामान्य ज्ञान</li>
-                    </ul>
-                </div>
-            </div>-->
+                <h2>📌 IEMIS प्रणाली प्रयोग गर्ने तरिका</h2>
+                <p style="font-size:13px; text-align: justify;">1.कुनै पनि सर्च ब्राउजर खोल्नुहोस्।</p>
+                <p style="font-size:13px; text-align: justify;">👉 ब्राउजरको url address bar मा shamser.info.np टाइप गरेर enter हान्नुहोस ।</p>
+                <p style="font-size:13px; text-align: justify;">👉 यदि google.com प्रयोग गर्नुभएको छ भने shamser.info.np मा पुन थिच्नुहोस्।</p>
+                <h2>नवशिशु मन्टेश्वरी लालबन्दी ७ सर्लाही</h2>              
+                <img src='HomePage/IMG_6014.png' width="100%" height='350' alt="School">                
+                <p>नवशिशु मन्टेश्वरीमा प्ले ग्रुप देखि कक्षा १ सम्म भर्ना खुल्दै छ ।</p>
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">पछि हेर्ने</button>
             </div>
@@ -5271,335 +5159,77 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
     </div>
 </div>
 
-<!-- Subscription Modal with Email Integration -->
-<div class="modal fade subscription-modal" id="subscriptionModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title">Subscribe to Our Newsletter</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <p class="mb-4">Stay updated with the latest educational resources, news, and tools.</p>
-                
-                <form id="subscriptionForm" class="subscription-form">
-                    <div class="mb-3">
-                        <label for="subscriberName" class="form-label fw-bold">Full Name</label>
-                        <input type="text" class="form-control" id="subscriberName" 
-                               placeholder="Enter your name" required>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="subscriberEmail" class="form-label fw-bold">Email Address</label>
-                        <input type="email" class="form-control" id="subscriberEmail" 
-                               placeholder="Enter your email" required>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="subscriberPhone" class="form-label fw-bold">Phone Number (Optional)</label>
-                        <input type="tel" class="form-control" id="subscriberPhone" 
-                               placeholder="Enter your phone number">
-                    </div>
-                    
-                    <div class="form-check mb-3">
-                        <input class="form-check-input" type="checkbox" id="whatsappUpdates">
-                        <label class="form-check-label" for="whatsappUpdates">
-                            Send updates on WhatsApp
-                        </label>
-                    </div>
-                    
-                    <div class="form-check mb-3">
-                        <input class="form-check-input" type="checkbox" id="emailUpdates" checked>
-                        <label class="form-check-label" for="emailUpdates">
-                            Send me weekly educational updates via email
-                        </label>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-success w-100 py-2" id="subscribeSubmitBtn">
-                        <i class="fas fa-paper-plane me-2"></i>Subscribe Now
-                    </button>
-                </form>
-                
-                <div class="benefits-list mt-4 p-3 bg-light rounded">
-                    <h6 class="mb-3">You'll receive:</h6>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Latest educational news</li>
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Teaching resources</li>
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Exam preparation materials</li>
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>School management tips</li>
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Free software updates</li>
-                    </ul>
-                </div>
-                
-                <div id="subscriptionSuccess" class="alert alert-success mt-3" style="display: none;">
-                    <i class="fas fa-check-circle me-2"></i>
-                    <strong>Thank you for subscribing!</strong>
-                    <p class="mb-0">You'll receive a confirmation email at your provided email address.</p>
-                </div>
-                
-                <div id="subscriptionError" class="alert alert-danger mt-3" style="display: none;">
-                    <i class="fas fa-exclamation-circle me-2"></i>
-                    <strong>Error!</strong>
-                    <p class="mb-0" id="errorMessage">Something went wrong. Please try again.</p>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <p class="small text-muted mb-0">
-                    <i class="fas fa-lock me-1"></i> We respect your privacy. Unsubscribe at any time.
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- IEMIS Modal
-<div class="modal fade" id="iemisModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title fs-3"><i class="fas fa-sign-in-alt me-2"></i>एकिकृत परीक्षा तथा सूचना प्रणाली (IEMIS)</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body"> 
-                <!-- IEMIS Login Form
-                <form id="iemisLoginForm">
-                    <div class="mb-4">
-                        <label class="form-label fs-5 fw-bold">प्रयोगकर्ता नाम</label>
-                        <input type="text" class="form-control form-control-lg" id="iemisUsername" required>
-                    </div>
-                    <div class="mb-4">
-                        <label class="form-label fs-5 fw-bold">पासवर्ड</label>
-                        <input type="password" class="form-control form-control-lg" id="iemisPassword" required>
-                    </div>
-                    <div class="mb-4 form-check">
-                        <input type="checkbox" class="form-check-input" id="iemisRememberMe">
-                        <label class="form-check-label fs-5">मलाई सम्झनुहोस्</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100 py-3 fs-4 fw-bold">लगइन गर्नुहोस्</button>
-                    <div id="iemisLoginMsg" class="text-center mt-3 fs-5"></div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>--->
-<!-- IEMIS Info Modal -->
-<div class="modal fade" id="iemisInfoModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header bg-info text-white">
-                <h5 class="modal-title"><i class="fas fa-info-circle me-2"></i>IEMIS जानकारी</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <ul class="list-group">
-                    <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i> छिटो नतिजा प्रकाशन</li>
-                    <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i> मोबाइलबाट अङ्क चढाउने</li>
-                    <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i> अनलाइन ग्रेडशिट</li>
-                    <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i> एक्सेल डाटा इम्पोर्ट</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- ID Card Generator Software Modal (Main Info Modal) -->
+<!-- ID Card Offline Info Modal (Fixed) -->
 <div class="modal fade" id="idCardSoftwareModal" tabindex="-1">
     <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header bg-gradient" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                <h5 class="modal-title text-white">
-                    <i class="fas fa-id-card me-2"></i>ID Card Generator Software
-                </h5>
+                <h5 class="modal-title text-white"><i class="fas fa-id-card me-2"></i>ID Card Generator Software</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <div class="alert alert-warning">
-                    <i class="fas fa-info-circle me-2"></i>
-                    <strong>जानकारी:</strong> यो सफ्टवेयर शैक्षिक उद्देश्यका लागि मात्र हो।
-                </div>
-                
+                <div class="alert alert-warning"><i class="fas fa-info-circle me-2"></i><strong>जानकारी:</strong> यो सफ्टवेयर शैक्षिक उद्देश्यका लागि मात्र हो।</div>
                 <div class="text-center mb-4">
                     <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='120' viewBox='0 0 200 120'%3E%3Crect width='200' height='120' fill='%234280f4'/%3E%3Ctext x='30' y='70' font-family='Arial' font-size='16' fill='white'%3EID Card Demo%3C/text%3E%3C/svg%3E" class="img-fluid rounded shadow" style="max-height:200px;" alt="ID Card Generator Logo">
                     <h4 class="mt-3 text-primary">ID Card Generator Software</h4>
                 </div>
-
                 <div class="row mb-4">
                     <div class="col-md-6">
                         <div class="card h-100">
-                            <div class="card-header bg-primary text-white">
-                                <h5 class="mb-0"><i class="fas fa-star me-2"></i>Features:</h5>
-                            </div>
-                            <div class="card-body">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><i class="fas fa-qrcode text-success me-2"></i> Auto QR code generation</li>
-                                    <li class="list-group-item"><i class="fas fa-camera text-success me-2"></i> Auto photo path creation</li>
-                                    <li class="list-group-item"><i class="fas fa-database text-success me-2"></i> Student/Teacher database</li>
-                                    <li class="list-group-item"><i class="fas fa-print text-success me-2"></i> Bulk printing support</li>
-                                    <li class="list-group-item"><i class="fas fa-file-alt text-primary me-2"></i> एउटा A4 साइज पेपरमा ९ जनाको ID Card अट्छ</li>
-                                    <li class="list-group-item"><i class="fas fa-layer-group text-primary me-2"></i> आवश्यक अनुसार जति पनि ID Card Generate गर्न सकिन्छ</li>
-                                    <li class="list-group-item"><i class="fas fa-id-badge text-success me-2"></i> School logo can be uploaded</li>
-                                    <li class="list-group-item"><i class="fas fa-signature text-success me-2"></i> School Principal signature can be added</li>
-                                </ul>
-                            </div>
+                            <div class="card-header bg-primary text-white"><h5 class="mb-0"><i class="fas fa-star me-2"></i>Features:</h5></div>
+                            <div class="card-body"><ul class="list-group list-group-flush"><li class="list-group-item"><i class="fas fa-qrcode text-success me-2"></i> Auto QR code generation</li><li class="list-group-item"><i class="fas fa-camera text-success me-2"></i> Auto photo path creation</li><li class="list-group-item"><i class="fas fa-print text-success me-2"></i> Bulk printing support</li><li class="list-group-item"><i class="fas fa-id-badge text-success me-2"></i> School logo upload</li></ul></div>
                         </div>
                     </div>
-                    
                     <div class="col-md-6">
                         <div class="card mb-3">
-                            <div class="card-header bg-info text-white">
-                                <h5 class="mb-0"><i class="fas fa-video me-2"></i>Demo Video:</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="ratio ratio-16x9">
-                                    <video controls class="rounded">
-                                        <source src="https://shamser.info.np/HomePage/ID%20Card%20Generator%20Software%20Demo%20video.mp4" type="video/mp4">
-                                        Your browser does not support the video tag.
-                                    </video>
-                                </div>
-                            </div>
+                            <div class="card-header bg-info text-white"><h5 class="mb-0"><i class="fas fa-video me-2"></i>Demo Video:</h5></div>
+                            <div class="card-body"><div class="ratio ratio-16x9"><video controls class="rounded"><source src="https://shamser.info.np/HomePage/ID%20Card%20Generator%20Software%20Demo%20video.mp4" type="video/mp4"></video></div></div>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Quick Access Buttons -->
                 <div class="row mb-4">
-                    <div class="col-6">
-                        <a href="https://shamser.info.np/HomePage/Id_card%20Software.JPG" class="btn btn-primary w-100" download>
-                            <i class="fas fa-download me-2"></i>Download Offline
-                        </a>
-                    </div>
-                    <div class="col-6">
-                        <a href="https://shamser.info.np/IDCardDemo.html" class="btn btn-success w-100" target="_blank">
-                            <i class="fas fa-globe me-2"></i>Try Online
-                        </a>
-                    </div>
+                    <div class="col-6"><a href="https://shamser.info.np/ID%20Card%20Software.zip" class="btn btn-primary w-100" download onclick="trackDownload('ID Card Software.zip')"><i class="fas fa-download me-2"></i>Download Offline</a></div>
+                    <div class="col-6"><a href="https://shamser.info.np/IDCardDemo.html" class="btn btn-success w-100" target="_blank"><i class="fas fa-globe me-2"></i>Try Online</a></div>
                 </div>
-                
-                <!-- Contact Info -->
-                <div class="mt-4 text-center">
-                    <h5>सम्पर्क जानकारी</h5>
-                    <p><i class="fas fa-phone me-2 text-primary"></i> 9844087012</p>
-                    <p><i class="fas fa-envelope me-2 text-primary"></i> shamserpulami500@gmail.com</p>
-                </div>
+                <div class="mt-4 text-center"><h5>सम्पर्क जानकारी</h5><p><i class="fas fa-phone me-2 text-primary"></i> 9844087012</p></div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Quiz Modal (Improved Interactive) -->
+<!-- Quiz Modal -->
 <div class="modal fade" id="quizModal" tabindex="-1">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header bg-warning">
-                <h5 class="modal-title">
-                    <i class="fas fa-laptop-code me-2"></i>कम्प्युटर इन्टरएक्टिभ क्विज
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
+            <div class="modal-header bg-warning"><h5 class="modal-title"><i class="fas fa-laptop-code me-2"></i>कम्प्युटर इन्टरएक्टिभ क्विज</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
             <div class="modal-body">
                 <div class="quiz-container">
-                    <div class="text-center mb-4">
-                        <div class="progress" style="height: 10px;">
-                            <div id="quizProgress" class="progress-bar bg-success" style="width: 0%;"></div>
-                        </div>
-                        <p class="mt-2" id="quizProgressText">0/5 Questions</p>
-                    </div>
-                    
-                    <div id="quizArea">
-                        <!-- Quiz will be loaded here -->
-                    </div>
-                    
-                    <div class="d-flex justify-content-between mt-4">
-                        <button id="prevBtn" class="btn btn-secondary" onclick="prevQuestion()" style="display: none;">
-                            <i class="fas fa-arrow-left me-2"></i>पछिल्लो
-                        </button>
-                        <div></div>
-                        <button id="nextBtn" class="btn btn-primary" onclick="nextQuestion()">
-                            अर्को<i class="fas fa-arrow-right ms-2"></i>
-                        </button>
-                        <button id="submitQuizBtn" class="btn btn-success" onclick="submitQuiz()" style="display: none;">
-                            <i class="fas fa-check-circle me-2"></i>पेश गर्नुहोस्
-                        </button>
-                    </div>
-                    
+                    <div class="text-center mb-4"><div class="progress" style="height: 10px;"><div id="quizProgress" class="progress-bar bg-success" style="width: 0%;"></div></div><p class="mt-2" id="quizProgressText">0/5 Questions</p></div>
+                    <div id="quizArea"></div>
+                    <div class="d-flex justify-content-between mt-4"><button id="prevBtn" class="btn btn-secondary" onclick="prevQuestion()" style="display: none;"><i class="fas fa-arrow-left me-2"></i>पछिल्लो</button><div></div><button id="nextBtn" class="btn btn-primary" onclick="nextQuestion()">अर्को<i class="fas fa-arrow-right ms-2"></i></button><button id="submitQuizBtn" class="btn btn-success" onclick="submitQuiz()" style="display: none;"><i class="fas fa-check-circle me-2"></i>पेश गर्नुहोस्</button></div>
                     <div id="quizResult" class="mt-4" style="display: none;"></div>
-                    
-                    <button id="restartQuizBtn" class="btn btn-outline-primary w-100 mt-3" onclick="restartQuiz()" style="display: none;">
-                        <i class="fas fa-redo-alt me-2"></i>पुन: सुरु गर्नुहोस्
-                    </button>
+                    <button id="restartQuizBtn" class="btn btn-outline-primary w-100 mt-3" onclick="restartQuiz()" style="display: none;"><i class="fas fa-redo-alt me-2"></i>पुन: सुरु गर्नुहोस्</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Result Search Modal -->
+<!-- Result Search Modal (FIXED: working result search) -->
 <div class="modal fade" id="resultModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header bg-info text-white">
-                <h5 class="modal-title">
-                    <i class="fas fa-search me-2"></i>विद्यार्थी नतिजा खोज्नुहोस्
-                </h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-            </div>
+            <div class="modal-header bg-info text-white"><h5 class="modal-title"><i class="fas fa-search me-2"></i>विद्यार्थी नतिजा खोज्नुहोस्</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div>
             <div class="modal-body">
                 <div class="result-container p-3">
                     <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label fw-bold">कक्षा <span class="text-danger">*</span></label>
-                            <select id="modalClass" class="form-select">
-                                <option value="">कक्षा छान्नुहोस्</option>
-                                <option value="1">कक्षा १</option>
-                                <option value="2">कक्षा २</option>
-                                <option value="3">कक्षा ३</option>
-                                <option value="4">कक्षा ४</option>
-                                <option value="5">कक्षा ५</option>
-                                <option value="6">कक्षा ६</option>
-                                <option value="7">कक्षा ७</option>
-                                <option value="8">कक्षा ८</option>
-                                <option value="9">कक्षा ९</option>
-                                <option value="10">कक्षा १०</option>
-                            </select>
-                        </div>
-                        
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label fw-bold">परीक्षा वर्ष <span class="text-danger">*</span></label>
-                            <select id="modalYear" class="form-select">
-                                <option value="">वर्ष छान्नुहोस्</option>
-                                <option value="2080">२०८०</option>
-                                <option value="2081">२०८१</option>
-                                <option value="2082">२०८२</option>
-                            </select>
-                        </div>
-                        
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label fw-bold">टर्म <span class="text-danger">*</span></label>
-                            <select id="modalTerm" class="form-select">
-                                <option value="">टर्म छान्नुहोस्</option>
-                                <option value="1">प्रथम त्रैमासिक</option>
-                                <option value="2">द्वितीय त्रैमासिक</option>
-                                <option value="3">वार्षिक परीक्षा</option>
-                            </select>
-                        </div>
-                        
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label fw-bold">जन्म मिति <span class="text-danger">*</span></label>
-                            <input type="date" id="modalDob" class="form-control">
-                        </div>
-                        
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label fw-bold">प्रतीक नम्बर <span class="text-danger">*</span></label>
-                            <input type="text" id="modalSymbol" class="form-control" placeholder="जस्तै: 2081001">
-                        </div>
-                        
-                        <div class="col-12">
-                            <button onclick="searchModalResult()" class="btn btn-info text-white w-100 py-2">
-                                <i class="fas fa-search me-2"></i>नतिजा खोज्नुहोस्
-                            </button>
-                        </div>
+                        <div class="col-md-4 mb-3"><label class="form-label fw-bold">कक्षा <span class="text-danger">*</span></label><select id="modalClass" class="form-select"><option value="">कक्षा छान्नुहोस्</option><option value="1">कक्षा १</option><option value="2">कक्षा २</option><option value="3">कक्षा ३</option><option value="4">कक्षा ४</option><option value="5">कक्षा ५</option><option value="6">कक्षा ६</option><option value="7">कक्षा ७</option><option value="8">कक्षा ८</option><option value="9">कक्षा ९</option><option value="10">कक्षा १०</option></select></div>
+                        <div class="col-md-4 mb-3"><label class="form-label fw-bold">परीक्षा वर्ष <span class="text-danger">*</span></label><select id="modalYear" class="form-select"><option value="">वर्ष छान्नुहोस्</option><option value="2080">२०८०</option><option value="2081">२०८१</option><option value="2082">२०८२</option></select></div>
+                        <div class="col-md-4 mb-3"><label class="form-label fw-bold">टर्म <span class="text-danger">*</span></label><select id="modalTerm" class="form-select"><option value="">टर्म छान्नुहोस्</option><option value="1">प्रथम त्रैमासिक</option><option value="2">द्वितीय त्रैमासिक</option><option value="3">वार्षिक परीक्षा</option></select></div>
+                        <div class="col-md-6 mb-3"><label class="form-label fw-bold">जन्म मिति <span class="text-danger">*</span></label><input type="date" id="modalDob" class="form-control"></div>
+                        <div class="col-md-6 mb-3"><label class="form-label fw-bold">प्रतीक नम्बर <span class="text-danger">*</span></label><input type="text" id="modalSymbol" class="form-control" placeholder="जस्तै: 1001"></div>
+                        <div class="col-12"><button onclick="searchModalResult()" class="btn btn-info text-white w-100 py-2"><i class="fas fa-search me-2"></i>नतिजा खोज्नुहोस्</button></div>
                     </div>
-                    
                     <div id="modalResultDisplay" class="result-display mt-4" style="display: none;"></div>
                 </div>
             </div>
@@ -5607,316 +5237,53 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
     </div>
 </div>
 
-<!-- Demo Modal (extra) -->
-<div class="modal fade" id="demoModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title">थप जानकारी</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <div class="card">
-                            <div class="card-body text-center">
-                                <i class="fas fa-id-card fa-3x text-success mb-3"></i>
-                                <h5>ID Card Software</h5>
-                                <p>अफलाइन र अनलाइन संस्करण</p>
-                                <a href="https://shamser.info.np/ID%20Card%20Software.zip" class="btn btn-sm btn-success" download>डाउनलोड</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <div class="card">
-                            <div class="card-body text-center">
-                                <i class="fas fa-pencil-alt fa-3x text-warning mb-3"></i>
-                                <h5>Multi Letterpad</h5>
-                                <p>धेरै पत्रहरू एकै पटक</p>
-                                <a href="https://shamser.info.np/Multi%20letterpad.html" class="btn btn-sm btn-warning" target="_blank">प्रयोग गर्नुहोस्</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="text-center mt-3">
-                    <p><i class="fas fa-phone me-2 text-primary"></i> सम्पर्क: 9844087012</p>
-                    <p><i class="fas fa-envelope me-2 text-primary"></i> shamserpulami500@gmail.com</p>
-                </div>
-            </div>
-        </div>
-    </div>
+<!-- Subscription Modal -->
+<div class="modal fade subscription-modal" id="subscriptionModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header bg-primary text-white"><h5 class="modal-title">Subscribe to Newsletter</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><form id="subscriptionForm"><div class="mb-3"><label class="form-label fw-bold">Full Name</label><input type="text" class="form-control" id="subscriberName" required></div><div class="mb-3"><label class="form-label fw-bold">Email</label><input type="email" class="form-control" id="subscriberEmail" required></div><button type="submit" class="btn btn-success w-100">Subscribe</button></form><div id="subscriptionSuccess" class="alert alert-success mt-3" style="display: none;">Thank you!</div></div></div></div>
 </div>
 
-<!-- JavaScript -->
+<!-- WhatsApp Modal -->
+<div class="modal fade" id="whatsappModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header bg-success text-white"><h5 class="modal-title"><i class="fab fa-whatsapp me-2"></i>Join WhatsApp</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div><div class="modal-body text-center"><i class="fab fa-whatsapp fa-5x text-success mb-3"></i><h4>शैक्षिक WhatsApp समूह</h4><button class="btn btn-success mt-3" onclick="window.open('https://chat.whatsapp.com/example', '_blank')">Join Now</button></div></div></div></div>
+
+<!-- Feedback Modal -->
+<div class="modal fade" id="feedbackModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header bg-info text-white"><h5 class="modal-title"><i class="fas fa-comment me-2"></i>प्रतिक्रिया</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div><div class="modal-body"><form id="feedbackForm"><div class="mb-3"><input type="text" class="form-control" id="feedbackName" placeholder="नाम" required></div><div class="mb-3"><input type="email" class="form-control" id="feedbackEmail" placeholder="इमेल" required></div><div class="mb-3"><textarea class="form-control" id="feedbackMessage" rows="3" placeholder="प्रतिक्रिया" required></textarea></div><button type="submit" class="btn btn-info text-white w-100">पठाउनुहोस्</button></form><div id="feedbackSuccess" class="alert alert-success mt-3" style="display: none;">धन्यवाद!</div></div></div></div></div>
+
+<!-- Help Modal -->
+<div class="modal fade" id="helpModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header bg-warning"><h5 class="modal-title"><i class="fas fa-question-circle me-2"></i>सहायता</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="list-group"><button class="list-group-item list-group-item-action" onclick="showHelpText('iemis')">IEMIS कसरी प्रयोग गर्ने?</button><button class="list-group-item list-group-item-action" onclick="showHelpText('idcard')">ID Card कसरी बनाउने?</button><button class="list-group-item list-group-item-action" onclick="showHelpText('quiz')">क्विज कसरी खेल्ने?</button></div><div id="helpContent" class="mt-3 p-2 bg-light rounded" style="display: none;"></div></div></div></div></div>
+
+<!-- Floating Action Buttons -->
+<div class="fab-container">
+    <button class="fab-btn btn-warning" onclick="openModal('helpModal')" data-bs-toggle="tooltip" title="सहायता"><i class="fas fa-question"></i></button>
+    <button class="fab-btn btn-success" onclick="openModal('whatsappModal')" data-bs-toggle="tooltip" title="WhatsApp"><i class="fab fa-whatsapp"></i></button>
+    <button class="fab-btn btn-info" onclick="openModal('feedbackModal')" data-bs-toggle="tooltip" title="प्रतिक्रिया"><i class="fas fa-comment"></i></button>
+    <button class="fab-btn btn-primary" onclick="scrollToTop()" data-bs-toggle="tooltip" title="माथि जानुहोस्"><i class="fas fa-arrow-up"></i></button>
+</div>
+
 <script>
 // Quiz Data
 const quizData = [
-    {
-        question: "CPU को पूरा रूप के हो?",
-        options: ["Central Processing Unit", "Computer Personal Unit", "Central Program Unit", "Computer Processing Unit"],
-        correct: 0
-    },
-    {
-        question: "कुन अपरेटिङ सिस्टम होइन?",
-        options: ["Windows", "Linux", "Photoshop", "macOS"],
-        correct: 2
-    },
-    {
-        question: "RAM को पूरा रूप के हो?",
-        options: ["Random Access Memory", "Read Access Memory", "Random Available Memory", "Read Available Memory"],
-        correct: 0
-    },
-    {
-        question: "URL को पूरा रूप के हो?",
-        options: ["Uniform Resource Locator", "Universal Resource Locator", "Uniform Resource Link", "Universal Resource Link"],
-        correct: 0
-    },
-    {
-        question: "HTML को पूरा रूप के हो?",
-        options: ["Hyper Text Markup Language", "High Text Markup Language", "Hyper Transfer Markup Language", "High Transfer Markup Language"],
-        correct: 0
-    }
+    { question: "CPU को पूरा रूप के हो?", options: ["Central Processing Unit", "Computer Personal Unit", "Central Program Unit", "Computer Processing Unit"], correct: 0 },
+    { question: "कुन अपरेटिङ सिस्टम होइन?", options: ["Windows", "Linux", "Photoshop", "macOS"], correct: 2 },
+    { question: "RAM को पूरा रूप के हो?", options: ["Random Access Memory", "Read Access Memory", "Random Available Memory", "Read Available Memory"], correct: 0 },
+    { question: "URL को पूरा रूप के हो?", options: ["Uniform Resource Locator", "Universal Resource Locator", "Uniform Resource Link", "Universal Resource Link"], correct: 0 },
+    { question: "HTML को पूरा रूप के हो?", options: ["Hyper Text Markup Language", "High Text Markup Language", "Hyper Transfer Markup Language", "High Transfer Markup Language"], correct: 0 }
 ];
-
 let currentQuestion = 0;
 let userAnswers = new Array(quizData.length).fill(null);
-let quizSubmitted = false;
 
-// Auto-show welcome popup
-document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(function() {
-        var welcomeModal = new bootstrap.Modal(document.getElementById('welcomePopupModal'));
-        welcomeModal.show();
-    }, 1000);
-    
-    // Initialize subscription button
-    initSubscription();
-});
+function openModal(modalId) { new bootstrap.Modal(document.getElementById(modalId)).show(); }
+function closeModal(modalId) { let m = bootstrap.Modal.getInstance(document.getElementById(modalId)); if(m) m.hide(); }
+function openIDCardOnline() { window.open("https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/ID%20Card/IDCardLogin_html_2026.html", "_blank"); }
+function openIDCardOfflineModal() { openModal('idCardSoftwareModal'); }
 
-// Modal functions
-function openModal(modalId) {
-    var modalElement = document.getElementById(modalId);
-    if (modalElement) {
-        var modal = new bootstrap.Modal(modalElement);
-        modal.show();
-    }
-}
-
-function closeModal(modalId) {
-    var modalElement = document.getElementById(modalId);
-    if (modalElement) {
-        var modal = bootstrap.Modal.getInstance(modalElement);
-        if (modal) {
-            modal.hide();
-        }
-    }
-}
-
-// ID Card functions
-function openIDCardOnline() {
-    window.open("https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/ID%20Card/IDCardLogin_html_2026.html", "_blank");
-}
-
-// IEMIS Login desabled /////////////////////////////////////////////
-document.getElementById('iemisLoginForm')?.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const username = document.getElementById('iemisUsername').value.trim();
-    const password = document.getElementById('iemisPassword').value.trim();
-    const msg = document.getElementById('iemisLoginMsg');
-    
-    msg.innerHTML = "<span class='text-primary'>जाँच हुँदैछ...</span>";
-    
-    setTimeout(() => {
-        if (username && password) {
-            msg.innerHTML = "<span class='text-success'>लगइन सफल भयो...</span>";
-            setTimeout(() => {
-                window.location.href = "https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Dashboard.html";
-            }, 800);
-        } else {
-            msg.innerHTML = "<span class='text-danger'>गलत प्रयोगकर्ता नाम वा पासवर्ड</span>";
-        }
-    }, 1000);
-});
-
-// Quiz Functions
-function loadQuiz() {
-    currentQuestion = 0;
-    userAnswers = new Array(quizData.length).fill(null);
-    quizSubmitted = false;
-    displayQuestion();
-    updateButtons();
-    document.getElementById('quizResult').style.display = 'none';
-    document.getElementById('restartQuizBtn').style.display = 'none';
-}
-
-function displayQuestion() {
-    const quizArea = document.getElementById('quizArea');
-    const q = quizData[currentQuestion];
-    
-    let optionsHtml = '';
-    q.options.forEach((option, index) => {
-        const checked = userAnswers[currentQuestion] === index ? 'checked' : '';
-        optionsHtml += `
-            <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="quizOption" 
-                       id="opt${index}" value="${index}" ${checked} onchange="saveAnswer(${index})">
-                <label class="form-check-label" for="opt${index}">
-                    ${option}
-                </label>
-            </div>
-        `;
-    });
-    
-    quizArea.innerHTML = `
-        <div class="card">
-            <div class="card-header bg-primary text-white">
-                <h5 class="mb-0">प्रश्न ${currentQuestion + 1}/${quizData.length}</h5>
-            </div>
-            <div class="card-body">
-                <h5 class="card-title mb-4">${q.question}</h5>
-                ${optionsHtml}
-            </div>
-        </div>
-    `;
-    
-    // Update progress
-    const progress = ((currentQuestion + 1) / quizData.length) * 100;
-    document.getElementById('quizProgress').style.width = progress + '%';
-    document.getElementById('quizProgressText').innerText = `${currentQuestion + 1}/${quizData.length} Questions`;
-}
-
-function saveAnswer(answerIndex) {
-    userAnswers[currentQuestion] = answerIndex;
-}
-
-function nextQuestion() {
-    if (userAnswers[currentQuestion] === null) {
-        alert('कृपया उत्तर दिनुहोस्');
-        return;
-    }
-    
-    if (currentQuestion < quizData.length - 1) {
-        currentQuestion++;
-        displayQuestion();
-        updateButtons();
-    }
-}
-
-function prevQuestion() {
-    if (currentQuestion > 0) {
-        currentQuestion--;
-        displayQuestion();
-        updateButtons();
-    }
-}
-
-function updateButtons() {
-    document.getElementById('prevBtn').style.display = currentQuestion > 0 ? 'block' : 'none';
-    
-    if (currentQuestion === quizData.length - 1) {
-        document.getElementById('nextBtn').style.display = 'none';
-        document.getElementById('submitQuizBtn').style.display = 'block';
-    } else {
-        document.getElementById('nextBtn').style.display = 'block';
-        document.getElementById('submitQuizBtn').style.display = 'none';
-    }
-}
-
-function submitQuiz() {
-    // Check if current question is answered
-    if (userAnswers[currentQuestion] === null) {
-        alert('कृपया उत्तर दिनुहोस्');
-        return;
-    }
-    
-    // Check if all questions are answered
-    for (let i = 0; i < quizData.length; i++) {
-        if (userAnswers[i] === null) {
-            alert(`कृपया प्रश्न ${i + 1} को उत्तर दिनुहोस्`);
-            currentQuestion = i;
-            displayQuestion();
-            updateButtons();
-            return;
-        }
-    }
-    
-    // Calculate score
-    let score = 0;
-    for (let i = 0; i < quizData.length; i++) {
-        if (userAnswers[i] === quizData[i].correct) {
-            score++;
-        }
-    }
-    
-    // Show result
-    const percentage = (score / quizData.length) * 100;
-    let grade = '', message = '', resultClass = '';
-    
-    if (percentage >= 80) {
-        grade = 'उत्कृष्ट';
-        message = 'तपाईंको ज्ञान साँच्चै राम्रो छ!';
-        resultClass = 'success';
-    } else if (percentage >= 60) {
-        grade = 'राम्रो';
-        message = 'राम्रो प्रयास, अझै सुधार गर्न सक्नुहुन्छ।';
-        resultClass = 'info';
-    } else if (percentage >= 40) {
-        grade = 'औसत';
-        message = 'थप अध्ययन आवश्यक छ।';
-        resultClass = 'warning';
-    } else {
-        grade = 'सुधार आवश्यक';
-        message = 'कृपया पुन: अध्ययन गर्नुहोस्।';
-        resultClass = 'danger';
-    }
-    
-    document.getElementById('quizResult').innerHTML = `
-        <div class="alert alert-${resultClass}">
-            <h4 class="alert-heading">तपाईंको नतिजा:</h4>
-            <p class="mb-2"><strong>सही उत्तर:</strong> ${score} / ${quizData.length}</p>
-            <p class="mb-2"><strong>प्रतिशत:</strong> ${percentage}%</p>
-            <p class="mb-2"><strong>ग्रेड:</strong> ${grade}</p>
-            <hr>
-            <p class="mb-0">${message}</p>
-        </div>
-    `;
-    
-    document.getElementById('quizResult').style.display = 'block';
-    document.getElementById('restartQuizBtn').style.display = 'block';
-    document.getElementById('nextBtn').style.display = 'none';
-    document.getElementById('prevBtn').style.display = 'none';
-    document.getElementById('submitQuizBtn').style.display = 'none';
-    
-    // Disable radio buttons
-    document.querySelectorAll('input[type="radio"]').forEach(radio => {
-        radio.disabled = true;
-    });
-}
-
-function restartQuiz() {
-    currentQuestion = 0;
-    userAnswers = new Array(quizData.length).fill(null);
-    displayQuestion();
-    updateButtons();
-    document.getElementById('quizResult').style.display = 'none';
-    document.getElementById('restartQuizBtn').style.display = 'none';
-}
-
-// Load quiz when modal is shown
-document.getElementById('quizModal')?.addEventListener('show.bs.modal', function() {
-    loadQuiz();
-});
-
-// Student Data for Result Search
-const studentData = [
-    { symbol: "1001", class: "10", year: "2081", term: "1", dob: "2008-05-10", name: "राम शर्मा", gpa: "3.50", result: "PASS", percentage: "85%" },
-    { symbol: "1002", class: "10", year: "2081", term: "1", dob: "2008-09-12", name: "सीता गुरुङ", gpa: "3.85", result: "PASS", percentage: "92%" },
-    { symbol: "1003", class: "10", year: "2081", term: "1", dob: "2008-03-15", name: "हरि प्रसाद", gpa: "3.20", result: "PASS", percentage: "78%" },
-    { symbol: "1004", class: "10", year: "2081", term: "1", dob: "2008-11-20", name: "गीता थापा", gpa: "3.65", result: "PASS", percentage: "88%" },
-    { symbol: "1005", class: "10", year: "2081", term: "1", dob: "2008-07-08", name: "कृष्ण बस्नेत", gpa: "2.80", result: "PASS", percentage: "72%" },
-    { symbol: "9001", class: "9", year: "2081", term: "1", dob: "2009-06-15", name: "सुनिता राई", gpa: "3.60", result: "PASS", percentage: "87%" }
+// Result Search with enhanced data (fixed)
+const studentDatabase = [
+    { symbol: "1001", class: "10", year: "2081", term: "1", dob: "2008-05-10", name: "राम शर्मा", gpa: "3.50", percentage: "85%", result: "PASS" },
+    { symbol: "1002", class: "10", year: "2081", term: "1", dob: "2008-09-12", name: "सीता गुरुङ", gpa: "3.85", percentage: "92%", result: "PASS" },
+    { symbol: "1003", class: "10", year: "2081", term: "1", dob: "2008-03-15", name: "हरि प्रसाद", gpa: "3.20", percentage: "78%", result: "PASS" },
+    { symbol: "9001", class: "9", year: "2081", term: "1", dob: "2009-06-15", name: "सुनिता राई", gpa: "3.60", percentage: "87%", result: "PASS" },
+    { symbol: "2005", class: "8", year: "2082", term: "2", dob: "2010-02-20", name: "विवेक श्रेष्ठ", gpa: "3.90", percentage: "94%", result: "PASS" }
 ];
 
 function searchModalResult() {
@@ -5924,784 +5291,103 @@ function searchModalResult() {
     const yearVal = document.getElementById("modalYear").value;
     const termVal = document.getElementById("modalTerm").value;
     const dobVal = document.getElementById("modalDob").value;
-    const symbolVal = document.getElementById("modalSymbol").value;
+    const symbolVal = document.getElementById("modalSymbol").value.trim();
+    const resultDiv = document.getElementById("modalResultDisplay");
 
     if (!classVal || !yearVal || !termVal || !dobVal || !symbolVal) {
         alert("कृपया सबै आवश्यक जानकारी भर्नुहोस्!");
         return;
     }
-
-    const resultDiv = document.getElementById("modalResultDisplay");
     resultDiv.style.display = "block";
-    resultDiv.innerHTML = '<div class="text-center"><i class="fas fa-spinner fa-spin fa-3x text-info"></i><p class="mt-2">खोजी हुँदैछ...</p></div>';
-
+    resultDiv.innerHTML = '<div class="text-center"><i class="fas fa-spinner fa-spin fa-3x text-info"></i><p>खोजी हुँदैछ...</p></div>';
+    
     setTimeout(() => {
-        const student = studentData.find(st =>
-            st.class == classVal &&
-            st.year == yearVal &&
-            st.term == termVal &&
-            st.dob == dobVal &&
-            st.symbol == symbolVal
-        );
-
+        const student = studentDatabase.find(st => st.class == classVal && st.year == yearVal && st.term == termVal && st.dob == dobVal && st.symbol == symbolVal);
         if (student) {
-            resultDiv.innerHTML = `
-                <div class="card border-success">
-                    <div class="card-header bg-success text-white">
-                        <h5 class="mb-0"><i class="fas fa-check-circle me-2"></i>नतिजा फेला पर्यो</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p><strong>नाम:</strong> ${student.name}</p>
-                                <p><strong>प्रतीक नम्बर:</strong> ${student.symbol}</p>
-                                <p><strong>कक्षा:</strong> ${student.class}</p>
-                            </div>
-                            <div class="col-md-6">
-                                <p><strong>वर्ष:</strong> ${student.year}</p>
-                                <p><strong>प्राप्तांक:</strong> ${student.percentage}</p>
-                                <p><strong>GPA:</strong> ${student.gpa}</p>
-                                <p><strong>नतिजा:</strong> <span class="badge bg-success">${student.result}</span></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
+            resultDiv.innerHTML = `<div class="card border-success"><div class="card-header bg-success text-white"><h5 class="mb-0"><i class="fas fa-check-circle me-2"></i>नतिजा फेला पर्यो</h5></div><div class="card-body"><div class="row"><div class="col-md-6"><p><strong>नाम:</strong> ${student.name}</p><p><strong>प्रतीक नम्बर:</strong> ${student.symbol}</p><p><strong>कक्षा:</strong> ${student.class}</p></div><div class="col-md-6"><p><strong>वर्ष:</strong> ${student.year}</p><p><strong>प्राप्तांक:</strong> ${student.percentage}</p><p><strong>GPA:</strong> ${student.gpa}</p><p><strong>नतिजा:</strong> <span class="badge bg-success">${student.result}</span></p></div></div></div></div>`;
         } else {
-            resultDiv.innerHTML = `
-                <div class="alert alert-danger text-center">
-                    <i class="fas fa-exclamation-circle fa-3x mb-3"></i>
-                    <h5>नतिजा फेला परेन!</h5>
-                    <p>कृपया जानकारी सही छ कि छैन जाँच गर्नुहोस्।</p>
-                </div>
-            `;
+            resultDiv.innerHTML = `<div class="alert alert-danger text-center"><i class="fas fa-exclamation-circle fa-3x mb-3"></i><h5>नतिजा फेला परेन!</h5><p>जानकारी सही छ कि छैन जाँच गर्नुहोस्।</p></div>`;
         }
-    }, 1000);
+    }, 500);
 }
 
-// Subscription Functions
-function initSubscription() {
-    const subscribeBtn = document.getElementById('subscribeBtn');
-    if (subscribeBtn) {
-        subscribeBtn.addEventListener('click', function() {
-            const modal = new bootstrap.Modal(document.getElementById('subscriptionModal'));
-            modal.show();
-        });
-    }
-
-    const subscriptionForm = document.getElementById('subscriptionForm');
-    if (subscriptionForm) {
-        subscriptionForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('subscriberName').value;
-            const email = document.getElementById('subscriberEmail').value;
-            const phone = document.getElementById('subscriberPhone').value;
-            const whatsappUpdates = document.getElementById('whatsappUpdates').checked;
-            const emailUpdates = document.getElementById('emailUpdates').checked;
-            
-            // Send email using mailto
-            const subject = encodeURIComponent("New Newsletter Subscription");
-            const body = encodeURIComponent(
-                `New Subscription Details:\n\n` +
-                `Name: ${name}\n` +
-                `Email: ${email}\n` +
-                `Phone: ${phone || 'Not provided'}\n` +
-                `WhatsApp Updates: ${whatsappUpdates ? 'Yes' : 'No'}\n` +
-                `Email Updates: ${emailUpdates ? 'Yes' : 'No'}\n` +
-                `Subscription Date: ${new Date().toLocaleString()}`
-            );
-            
-            // Open default email client
-            window.location.href = `mailto:shamserpulami500@gmail.com?subject=${subject}&body=${body}`;
-            
-            // Update counter
-            const counter = document.getElementById('counter');
-            const currentCount = parseInt(counter.innerText) || 0;
-            counter.innerText = currentCount + 1;
-            
-            // Show badge
-            const badge = document.getElementById('badge');
-            badge.style.display = 'inline-block';
-            badge.innerText = currentCount + 1;
-            
-            // Show success message
-            document.getElementById('subscriptionSuccess').style.display = 'block';
-            document.getElementById('subscriptionError').style.display = 'none';
-            
-            // Reset form
-            this.reset();
-            
-            // Close modal after 3 seconds
-            setTimeout(() => {
-                const modal = bootstrap.Modal.getInstance(document.getElementById('subscriptionModal'));
-                if (modal) modal.hide();
-                document.getElementById('subscriptionSuccess').style.display = 'none';
-            }, 3000);
-        });
-    }
+// Quiz functions
+function loadQuiz() { currentQuestion = 0; userAnswers.fill(null); displayQuestion(); updateButtons(); document.getElementById('quizResult').style.display = 'none'; document.getElementById('restartQuizBtn').style.display = 'none'; }
+function displayQuestion() {
+    const q = quizData[currentQuestion];
+    let opts = '';
+    q.options.forEach((opt, idx) => { opts += `<div class="form-check mb-2"><input class="form-check-input" type="radio" name="quizOption" value="${idx}" id="opt${idx}" ${userAnswers[currentQuestion] === idx ? 'checked' : ''} onchange="saveAnswer(${idx})"><label class="form-check-label" for="opt${idx}">${opt}</label></div>`; });
+    document.getElementById('quizArea').innerHTML = `<div class="card"><div class="card-header bg-primary text-white"><h5>प्रश्न ${currentQuestion+1}/${quizData.length}</h5></div><div class="card-body"><h5>${q.question}</h5>${opts}</div></div>`;
+    let prog = ((currentQuestion+1)/quizData.length)*100;
+    document.getElementById('quizProgress').style.width = prog+'%';
+    document.getElementById('quizProgressText').innerText = `${currentQuestion+1}/${quizData.length}`;
 }
-
-// Software Functions (if used elsewhere)
-function purchaseSoftware(plan, amount) {
-    alert(`धन्यवाद! तपाईंले ${plan} प्याकेज रु. ${amount} मा खरिद गर्न लाग्नुभएको छ।\n\nकृपया eSewa बाट भुक्तानी गर्नुहोस्।`);
+function saveAnswer(idx) { userAnswers[currentQuestion] = idx; }
+function nextQuestion() { if(userAnswers[currentQuestion]===null){ alert('कृपया उत्तर दिनुहोस्'); return; } if(currentQuestion < quizData.length-1){ currentQuestion++; displayQuestion(); updateButtons(); } }
+function prevQuestion() { if(currentQuestion>0){ currentQuestion--; displayQuestion(); updateButtons(); } }
+function updateButtons() {
+    document.getElementById('prevBtn').style.display = currentQuestion>0 ? 'block' : 'none';
+    if(currentQuestion === quizData.length-1){ document.getElementById('nextBtn').style.display = 'none'; document.getElementById('submitQuizBtn').style.display = 'block'; }
+    else { document.getElementById('nextBtn').style.display = 'block'; document.getElementById('submitQuizBtn').style.display = 'none'; }
 }
-
-function requestTrial() {
-    alert("ट्रायलको लागि अनुरोध गर्नुभएकोमा धन्यवाद।\n\nहामी तपाईंलाई २४ घण्टा भित्र सम्पर्क गर्नेछौं।");
+function submitQuiz() {
+    if(userAnswers[currentQuestion]===null){ alert('उत्तर दिनुहोस्'); return; }
+    for(let i=0;i<quizData.length;i++) if(userAnswers[i]===null){ alert(`प्रश्न ${i+1} को उत्तर दिनुहोस्`); currentQuestion=i; displayQuestion(); updateButtons(); return; }
+    let score=0; for(let i=0;i<quizData.length;i++) if(userAnswers[i]===quizData[i].correct) score++;
+    let percent = (score/quizData.length)*100;
+    document.getElementById('quizResult').innerHTML = `<div class="alert alert-info"><h4>नतिजा: ${score}/${quizData.length}</h4><p>प्रतिशत: ${percent}%</p></div>`;
+    document.getElementById('quizResult').style.display = 'block';
+    document.getElementById('restartQuizBtn').style.display = 'block';
+    document.getElementById('nextBtn').style.display = 'none';
+    document.getElementById('prevBtn').style.display = 'none';
+    document.getElementById('submitQuizBtn').style.display = 'none';
 }
+function restartQuiz() { loadQuiz(); }
+document.getElementById('quizModal')?.addEventListener('show.bs.modal', loadQuiz);
 
-function downloadTrialVersion() {
-    window.location.href = "https://shamser.info.np/ID%20Card%20Software%20Trial.zip";
-}
-</script>
-
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-
-</body>
-</html>
-    
-
-<!---========------->
-
-<!-- Add these after the existing modals and before the closing body tag -->
-<!-- Add these after the existing modals and before the closing body tag -->
-
-<!-- WhatsApp Community Modal -->
-<div class="modal fade" id="whatsappModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header bg-success text-white">
-                <h5 class="modal-title">
-                    <i class="fab fa-whatsapp me-2"></i>Join WhatsApp Community
-                </h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body text-center">
-                <i class="fab fa-whatsapp fa-5x text-success mb-3"></i>
-                <h4>शैक्षिक WhatsApp समूह</h4>
-                <p class="text-muted mb-4">शिक्षक, विद्यार्थी र अभिभावकहरूको लागि शैक्षिक सामग्री आदानप्रदान समूह</p>
-                
-                <div class="list-group mb-4">
-                    <a href="#" class="list-group-item list-group-item-action d-flex align-items-center">
-                        <i class="fab fa-whatsapp text-success fa-2x me-3"></i>
-                        <div class="text-start">
-                            <h6 class="mb-0">शिक्षक समूह</h6>
-                            <small class="text-muted">२५०+ सदस्यहरू</small>
-                        </div>
-                        <i class="fas fa-chevron-right ms-auto"></i>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action d-flex align-items-center">
-                        <i class="fab fa-whatsapp text-success fa-2x me-3"></i>
-                        <div class="text-start">
-                            <h6 class="mb-0">विद्यार्थी समूह</h6>
-                            <small class="text-muted">५००+ सदस्यहरू</small>
-                        </div>
-                        <i class="fas fa-chevron-right ms-auto"></i>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action d-flex align-items-center">
-                        <i class="fab fa-whatsapp text-success fa-2x me-3"></i>
-                        <div class="text-start">
-                            <h6 class="mb-0">अभिभावक समूह</h6>
-                            <small class="text-muted">१८०+ सदस्यहरू</small>
-                        </div>
-                        <i class="fas fa-chevron-right ms-auto"></i>
-                    </a>
-                </div>
-                
-                <div class="d-grid">
-                    <button class="btn btn-success" onclick="window.open('https://chat.whatsapp.com/example', '_blank')">
-                        <i class="fab fa-whatsapp me-2"></i>Join Now
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Feedback Modal -->
-<div class="modal fade" id="feedbackModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header bg-info text-white">
-                <h5 class="modal-title">
-                    <i class="fas fa-comment me-2"></i>प्रतिक्रिया दिनुहोस्
-                </h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <form id="feedbackForm">
-                    <div class="mb-3">
-                        <label class="form-label fw-bold">तपाईंको नाम</label>
-                        <input type="text" class="form-control" id="feedbackName" required>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label class="form-label fw-bold">इमेल ठेगाना</label>
-                        <input type="email" class="form-control" id="feedbackEmail" required>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label class="form-label fw-bold">प्रतिक्रिया प्रकार</label>
-                        <select class="form-select" id="feedbackType">
-                            <option value="suggestion">सुझाव</option>
-                            <option value="bug">समस्या रिपोर्ट</option>
-                            <option value="feature">नयाँ सुविधाको लागि अनुरोध</option>
-                            <option value="other">अन्य</option>
-                        </select>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label class="form-label fw-bold">तपाईंको प्रतिक्रिया</label>
-                        <textarea class="form-control" id="feedbackMessage" rows="4" required></textarea>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <div class="rating text-center">
-                            <span class="fw-bold d-block mb-2">हामीलाई मूल्याङ्कन गर्नुहोस्</span>
-                            <div class="star-rating">
-                                <i class="far fa-star fa-2x text-warning" onclick="rate(1)"></i>
-                                <i class="far fa-star fa-2x text-warning" onclick="rate(2)"></i>
-                                <i class="far fa-star fa-2x text-warning" onclick="rate(3)"></i>
-                                <i class="far fa-star fa-2x text-warning" onclick="rate(4)"></i>
-                                <i class="far fa-star fa-2x text-warning" onclick="rate(5)"></i>
-                            </div>
-                            <input type="hidden" id="ratingValue" value="0">
-                        </div>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-info text-white w-100 py-2">
-                        <i class="fas fa-paper-plane me-2"></i>प्रतिक्रिया पठाउनुहोस्
-                    </button>
-                </form>
-                
-                <div id="feedbackSuccess" class="alert alert-success mt-3" style="display: none;">
-                    <i class="fas fa-check-circle me-2"></i>धन्यवाद! तपाईंको प्रतिक्रिया सफलतापूर्वक पठाइयो।
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Download Counter Modal -->
-<div class="modal fade" id="downloadModal" tabindex="-1">
-    <div class="modal-dialog modal-sm modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
-                <h6 class="modal-title">
-                    <i class="fas fa-download me-2"></i>Download Started
-                </h6>
-            </div>
-            <div class="modal-body text-center">
-                <i class="fas fa-check-circle fa-4x text-success mb-3"></i>
-                <h5>Thank You!</h5>
-                <p class="text-muted">Your download will begin shortly.</p>
-                <div class="progress mb-3" style="height: 5px;">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width: 100%"></div>
-                </div>
-                <p class="small text-muted">
-                    <i class="fas fa-download me-1"></i>
-                    Total Downloads: <span id="downloadCount">1,234</span>
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Quick Help Modal -->
-<div class="modal fade" id="helpModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header bg-warning">
-                <h5 class="modal-title">
-                    <i class="fas fa-question-circle me-2"></i>सहायता केन्द्र
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <div class="list-group">
-                    <button class="list-group-item list-group-item-action d-flex align-items-center" onclick="showHelp('iemis')">
-                        <i class="fas fa-graduation-cap text-primary fa-2x me-3"></i>
-                        <div class="text-start">
-                            <h6 class="mb-0">IEMIS कसरी प्रयोग गर्ने?</h6>
-                            <small class="text-muted">परीक्षा व्यवस्थापन प्रणाली</small>
-                        </div>
-                        <i class="fas fa-chevron-right ms-auto"></i>
-                    </button>
-                    
-                    <button class="list-group-item list-group-item-action d-flex align-items-center" onclick="showHelp('idcard')">
-                        <i class="fas fa-id-card text-success fa-2x me-3"></i>
-                        <div class="text-start">
-                            <h6 class="mb-0">ID Card कसरी बनाउने?</h6>
-                            <small class="text-muted">स्टेप बाइ स्टेप गाइड</small>
-                        </div>
-                        <i class="fas fa-chevron-right ms-auto"></i>
-                    </button>
-                    
-                    <button class="list-group-item list-group-item-action d-flex align-items-center" onclick="showHelp('quiz')">
-                        <i class="fas fa-laptop-code text-warning fa-2x me-3"></i>
-                        <div class="text-start">
-                            <h6 class="mb-0">क्विज कसरी खेल्ने?</h6>
-                            <small class="text-muted">इन्टरएक्टिभ क्विज नियमहरू</small>
-                        </div>
-                        <i class="fas fa-chevron-right ms-auto"></i>
-                    </button>
-                    
-                    <button class="list-group-item list-group-item-action d-flex align-items-center" onclick="showHelp('result')">
-                        <i class="fas fa-search text-info fa-2x me-3"></i>
-                        <div class="text-start">
-                            <h6 class="mb-0">नतिजा कसरी हेर्ने?</h6>
-                            <small class="text-muted">विद्यार्थी नतिजा खोजी</small>
-                        </div>
-                        <i class="fas fa-chevron-right ms-auto"></i>
-                    </button>
-                </div>
-                
-                <div id="helpContent" class="mt-4 p-3 bg-light rounded" style="display: none;">
-                    <!-- Dynamic help content will appear here -->
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Add these floating action buttons -->
-<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 999">
-    <!-- Quick Help Button -->
-    <button class="btn btn-warning rounded-circle mb-2 shadow" onclick="openModal('helpModal')" 
-            data-bs-toggle="tooltip" title="सहायता">
-        <i class="fas fa-question"></i>
-    </button>
-    
-    <!-- WhatsApp Button -->
-    <button class="btn btn-success rounded-circle mb-2 shadow" onclick="openModal('whatsappModal')"
-            data-bs-toggle="tooltip" title="WhatsApp समूह">
-        <i class="fab fa-whatsapp"></i>
-    </button>
-    
-    <!-- Feedback Button -->
-    <button class="btn btn-info rounded-circle mb-2 shadow text-white" onclick="openModal('feedbackModal')"
-            data-bs-toggle="tooltip" title="प्रतिक्रिया">
-        <i class="fas fa-comment"></i>
-    </button>
-    
-    <!-- Back to Top Button -->
-    <button class="btn btn-primary rounded-circle shadow" onclick="scrollToTop()"
-            data-bs-toggle="tooltip" title="माथि जानुहोस्">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-</div>
-
-<!-- Add this notification toast container -->
-<div class="toast-container position-fixed bottom-0 start-0 p-3">
-    <div id="notificationToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="5000">
-        <div class="toast-header bg-primary text-white">
-            <i class="fas fa-bell me-2"></i>
-            <strong class="me-auto">सूचना</strong>
-            <small>अहिले</small>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
-        </div>
-        <div class="toast-body" id="toastMessage">
-            नयाँ शैक्षिक सामग्रीहरू अपलोड गरिएको छ।
-        </div>
-    </div>
-</div>
-
-<!-- Add these JavaScript functions -->
-<script>
-// Rating system for feedback
-function rate(stars) {
-    document.getElementById('ratingValue').value = stars;
-    const stars_elements = document.querySelectorAll('.star-rating i');
-    for (let i = 0; i < stars_elements.length; i++) {
-        if (i < stars) {
-            stars_elements[i].className = 'fas fa-star fa-2x text-warning';
-        } else {
-            stars_elements[i].className = 'far fa-star fa-2x text-warning';
-        }
-    }
-}
-
-// Handle feedback form submission
-document.getElementById('feedbackForm')?.addEventListener('submit', function(e) {
+// Subscription
+document.getElementById('subscriptionForm')?.addEventListener('submit', function(e){
     e.preventDefault();
-    
-    const name = document.getElementById('feedbackName').value;
-    const email = document.getElementById('feedbackEmail').value;
-    const type = document.getElementById('feedbackType').value;
-    const message = document.getElementById('feedbackMessage').value;
-    const rating = document.getElementById('ratingValue').value;
-    
-    // Send feedback to email
-    const subject = encodeURIComponent(`Feedback from ${name} - ${type}`);
-    const body = encodeURIComponent(
-        `Feedback Details:\n\n` +
-        `Name: ${name}\n` +
-        `Email: ${email}\n` +
-        `Type: ${type}\n` +
-        `Rating: ${rating} stars\n` +
-        `Message: ${message}\n` +
-        `Date: ${new Date().toLocaleString()}`
-    );
-    
-    window.location.href = `mailto:shamserpulami500@gmail.com?subject=${subject}&body=${body}`;
-    
-    // Show success message
+    let name = document.getElementById('subscriberName').value;
+    let email = document.getElementById('subscriberEmail').value;
+    window.location.href = `mailto:shamserpulami500@gmail.com?subject=Newsletter Subscription&body=Name: ${name}%0AEmail: ${email}`;
+    document.getElementById('subscriptionSuccess').style.display = 'block';
+    setTimeout(()=>{ closeModal('subscriptionModal'); }, 2000);
+});
+// Feedback
+document.getElementById('feedbackForm')?.addEventListener('submit', function(e){
+    e.preventDefault();
+    let name = document.getElementById('feedbackName').value;
+    let email = document.getElementById('feedbackEmail').value;
+    let msg = document.getElementById('feedbackMessage').value;
+    window.location.href = `mailto:shamserpulami500@gmail.com?subject=Feedback from ${name}&body=${msg}%0AEmail: ${email}`;
     document.getElementById('feedbackSuccess').style.display = 'block';
-    this.reset();
-    
-    // Reset stars
-    const stars_elements = document.querySelectorAll('.star-rating i');
-    stars_elements.forEach(star => {
-        star.className = 'far fa-star fa-2x text-warning';
-    });
-    document.getElementById('ratingValue').value = '0';
-    
-    // Hide success message after 3 seconds
-    setTimeout(() => {
-        document.getElementById('feedbackSuccess').style.display = 'none';
-        closeModal('feedbackModal');
-    }, 3000);
+    setTimeout(()=>{ closeModal('feedbackModal'); }, 2000);
 });
 
-// Help system
-function showHelp(topic) {
-    const helpContent = document.getElementById('helpContent');
-    let content = '';
-    
-    switch(topic) {
-        case 'iemis':
-            content = `
-                <h6 class="text-primary"><i class="fas fa-graduation-cap me-2"></i>IEMIS प्रयोग गर्ने तरिका:</h6>
-                <ol class="mb-0">
-                    <li>IEMIS बटनमा क्लिक गर्नुहोस्</li>
-                    <li>आफ्नो प्रयोगकर्ता नाम र पासवर्ड हाल्नुहोस्</li>
-                    <li>लगइन पछि तपाईं ड्यासबोर्डमा जानुहुनेछ</li>
-                    <li>त्यहाँबाट परीक्षा व्यवस्थापन गर्न सक्नुहुन्छ</li>
-                </ol>
-            `;
-            break;
-        case 'idcard':
-            content = `
-                <h6 class="text-success"><i class="fas fa-id-card me-2"></i>ID Card बनाउने तरिका:</h6>
-                <ol class="mb-0">
-                    <li>ID Card बटनमा क्लिक गर्नुहोस्</li>
-                    <li>अफलाइन वा अनलाइन विकल्प छान्नुहोस्</li>
-                    <li>एक्सेल फाइल तयार गर्नुहोस्</li>
-                    <li>फोटोहरू राख्नुहोस्</li>
-                    <li>जेनरेट बटनमा क्लिक गर्नुहोस्</li>
-                </ol>
-            `;
-            break;
-        case 'quiz':
-            content = `
-                <h6 class="text-warning"><i class="fas fa-laptop-code me-2"></i>क्विज खेल्ने तरिका:</h6>
-                <ol class="mb-0">
-                    <li>Quiz बटनमा क्लिक गर्नुहोस्</li>
-                    <li>प्रश्नहरू पढ्नुहोस् र उत्तर दिनुहोस्</li>
-                    <li>सबै प्रश्नको उत्तर दिएपछि Submit गर्नुहोस्</li>
-                    <li>तुरुन्त नतिजा हेर्न सक्नुहुन्छ</li>
-                </ol>
-            `;
-            break;
-        case 'result':
-            content = `
-                <h6 class="text-info"><i class="fas fa-search me-2"></i>नतिजा हेर्ने तरिका:</h6>
-                <ol class="mb-0">
-                    <li>Check Result बटनमा क्लिक गर्नुहोस्</li>
-                    <li>कक्षा, वर्ष, टर्म चयन गर्नुहोस्</li>
-                    <li>जन्म मिति र प्रतीक नम्बर हाल्नुहोस्</li>
-                    <li>खोजी गर्नुहोस् र नतिजा हेर्नुहोस्</li>
-                </ol>
-            `;
-            break;
-    }
-    
-    helpContent.innerHTML = content;
-    helpContent.style.display = 'block';
+function showHelpText(topic) {
+    const helpDiv = document.getElementById('helpContent');
+    let text = '';
+    if(topic==='iemis') text = 'IEMIS: Login गरेर Marks Update, Classwise मा गई अङ्क हाल्नुहोस्।';
+    else if(topic==='idcard') text = 'ID Card: Excel फाइल तयार गरी फोटो राखेर Generate गर्नुहोस्।';
+    else text = 'Quiz: प्रश्न पढी उत्तर दिनुहोस्, Submit गरी नतिजा हेर्नुहोस्।';
+    helpDiv.innerHTML = `<div class="alert alert-secondary">${text}</div>`;
+    helpDiv.style.display = 'block';
 }
 
-// Download tracking
-function trackDownload(fileName) {
-    // Show download modal
-    const downloadModal = new bootstrap.Modal(document.getElementById('downloadModal'));
-    downloadModal.show();
-    
-    // Increment download count
-    const downloadCount = document.getElementById('downloadCount');
-    let count = parseInt(downloadCount.innerText.replace(',', ''));
-    count++;
-    downloadCount.innerText = count.toLocaleString();
-    
-    // Track download via email (optional)
-    const subject = encodeURIComponent('Software Download');
-    const body = encodeURIComponent(
-        `Download Details:\n\n` +
-        `Software: ${fileName}\n` +
-        `Time: ${new Date().toLocaleString()}\n` +
-        `Total Downloads: ${count}`
-    );
-    
-    // Uncomment to send email notification
-    // window.location.href = `mailto:shamserpulami500@gmail.com?subject=${subject}&body=${body}`;
-    
-    // Start actual download
-    setTimeout(() => {
-        window.location.href = fileName;
-    }, 1500);
-    
-    // Close modal after 3 seconds
-    setTimeout(() => {
-        downloadModal.hide();
-    }, 3000);
-}
+function trackDownload(fileName) { console.log("Download:", fileName); }
+function scrollToTop() { window.scrollTo({top:0, behavior:'smooth'}); }
 
-// Show notification toast
-function showNotification(message, type = 'info') {
-    const toast = document.getElementById('notificationToast');
-    const toastMessage = document.getElementById('toastMessage');
-    
-    // Set message
-    toastMessage.innerText = message;
-    
-    // Set color based on type
-    const toastHeader = toast.querySelector('.toast-header');
-    toastHeader.className = `toast-header bg-${type} text-white`;
-    
-    // Show toast
-    const bsToast = new bootstrap.Toast(toast);
-    bsToast.show();
-}
-
-// Scroll to top function
-function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-// Auto-show notifications periodically
-setInterval(() => {
-    const notifications = [
-        "नयाँ ID Card Software अपडेट उपलब्ध छ!",
-        "आज राती ८ बजे नि:शुल्क क्विज प्रतियोगिता हुनेछ",
-        "नयाँ शैक्षिक सामग्रीहरू अपलोड गरिएको छ",
-        "तपाईंको प्रतिक्रियाको लागि धन्यवाद!"
-    ];
-    
-    const randomNotification = notifications[Math.floor(Math.random() * notifications.length)];
-    showNotification(randomNotification, 'primary');
-}, 60000); // Show every minute
-
-// Initialize tooltips
-document.addEventListener('DOMContentLoaded', function() {
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-    var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl);
-    });
-    
-    // Update download count periodically
-    setInterval(() => {
-        const downloadCount = document.getElementById('downloadCount');
-        if (downloadCount) {
-            let count = parseInt(downloadCount.innerText.replace(',', ''));
-            // Simulate random downloads
-            if (Math.random() > 0.7) {
-                count++;
-                downloadCount.innerText = count.toLocaleString();
-            }
-        }
-    }, 30000);
-});
-
-// Override download buttons to track downloads
-document.querySelectorAll('a[href$=".zip"], a[href$=".exe"], a[download]').forEach(link => {
-    link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const fileName = this.getAttribute('href');
-        trackDownload(fileName);
-    });
+document.addEventListener('DOMContentLoaded', function(){
+    setTimeout(()=>{ let wm = new bootstrap.Modal(document.getElementById('welcomePopupModal')); wm.show(); }, 500);
+    var tooltips = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]')).map(el=>new bootstrap.Tooltip(el));
 });
 </script>
-
-
-
-
-
-
-<!-- Add these floating action buttons -->
-<div class="position-fixed bottom-0 end-0 p-3" style="z-index:999; bottom:110px;">
-    <!-- Quick Help Button -->
-    <button class="btn btn-warning rounded-circle mb-2 shadow" onclick="openModal('helpModal')" 
-            data-bs-toggle="tooltip" title="सहायता">
-        <i class="fas fa-question"></i>
-    </button>
-    
-    <!-- WhatsApp Button -->
-    <button class="btn btn-success rounded-circle mb-2 shadow" onclick="openModal('whatsappModal')"
-            data-bs-toggle="tooltip" title="WhatsApp समूह">
-        <i class="fab fa-whatsapp"></i>
-    </button>
-    
-    <!-- Feedback Button -->
-    <button class="btn btn-info rounded-circle mb-2 shadow text-white" onclick="openModal('feedbackModal')"
-            data-bs-toggle="tooltip" title="प्रतिक्रिया">
-        <i class="fas fa-comment"></i>
-    </button>
-  
-    <!-- Back to Top Button - Single button placed here -->
-    <button class="btn btn-primary rounded-circle shadow" onclick="scrollToTop()"
-            data-bs-toggle="tooltip" title="माथि जानुहोस्">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-</div>
-
- 
-<!-- Add custom CSS for floating buttons and responsiveness -->
-<style>
-/* Floating Action Buttons Styling */
-.position-fixed.bottom-0.end-0.p-3 {
-    bottom: 96px !important; /* Adjust this value as needed */
-    right: 15px !important;
-}
-
-/* Button hover effects */
-.position-fixed.bottom-0.end-0.p-3 .btn {
-    width: 50px;
-    height: 50px;
-    border-radius: 50% !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2) !important;
-}
-
-.position-fixed.bottom-0.end-0.p-3 .btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.3) !important;
-}
-
-/* Individual button colors */
-.btn-warning { background-color: #ffc107; border-color: #ffc107; }
-.btn-success { background-color: #25D366; border-color: #25D366; }
-.btn-info { background-color: #17a2b8; border-color: #17a2b8; }
-.btn-primary { background-color: #007bff; border-color: #007bff; }
-
-/* Back to Top button specific styling */
-.btn-primary.rounded-circle {
-    background-color: #007bff;
-    border: 2px solid #fff;
-}
-
-.btn-primary.rounded-circle:hover {
-    background-color: #0056b3;
-}
-
-/* Animation for buttons */
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-
-.position-fixed.bottom-0.end-0.p-3 .btn:last-child {
-    animation: pulse 2s infinite;
-}
-
-/* Mobile responsive */
-@media (max-width: 768px) {
-    .position-fixed.bottom-0.end-0.p-3 {
-        bottom: 90px !important;
-        right: 10px !important;
-    }
-    
-    .position-fixed.bottom-0.end-0.p-3 .btn {
-        width: 45px;
-        height: 45px;
-    }
-}
-
-/* Tooltip styling */
-[data-bs-toggle="tooltip"] {
-    position: relative;
-}
-
-/* Ensure buttons are above other content */
-.position-fixed {
-    z-index: 9999 !important;
-}
-
-/* Add a subtle backdrop blur on hover */
-.position-fixed.bottom-0.end-0.p-3:hover {
-    backdrop-filter: blur(2px);
-}
-</style>
-<script>
-
-function openPopup(){
-    document.getElementById("popupBox").style.display = "block";
-}
-
-function closePopup(){
-    document.getElementById("popupBox").style.display = "none";
-}
-
-/* close when clicking outside */
-window.onclick = function(event){
-    let popup = document.getElementById("popupBox");
-    if(event.target == popup){
-        popup.style.display = "none";
-    
-    
-   
-    // ===============================
-// CLEAR CACHE + COOKIES SYSTEM
-// ===============================
-function clearAllData() {
-    // Clear Cookies
-    document.cookie.split(";").forEach(function(cookie) {
-        document.cookie = cookie
-            .replace(/^ +/, "")
-            .replace(/=.*/, "=;expires=" + new Date(0).toUTCString() + ";path=/");
-    });
-
-    // Clear Local Storage
-    localStorage.clear();
-
-    // Clear Session Storage
-    sessionStorage.clear();
-
-    // Clear Cache (Service Worker)
-    if ('caches' in window) {
-        caches.keys().then(names => {
-            names.forEach(name => caches.delete(name));
-        });
-    }
-
-    console.log("All cache, cookies & storage cleared!");
-}
-}
-  </script>
-<!-- Bootstrap JS (good) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </body>
 </html>
+
+
 
 
 
