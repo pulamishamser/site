@@ -21,7 +21,7 @@
     document.addEventListener('contextmenu', event => event.preventDefault());
 </script>
 <!--social button show -->
-<link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet" type="text/<!-- Google Fonts -->
+<link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet" type="text/<!-- Google Fonts>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
 <!---------Save to facebook
 <div id="fb-root"></div>
@@ -96,10 +96,16 @@
 
    
 
-<!-- Google Translate Script -->
+<!-- Like share  -->
+<script>
+window.onload = function() {
+  if (typeof FB !== "undefined") {
+    FB.XFBML.parse();
+  }
+};
+</script>
 
-
-
+<!--End  Like share  -->
 
    
 <script>
@@ -1204,7 +1210,7 @@ Grid </a>
 
 <!-- Widget Container -->
 <div class="widget-container" id="widget-container">
-  <button class="close-btn" onclick="hideWidgets()">×</button>
+ <button class="close-btn" onclick="hideWidgets()">×</button> 
   
   <!-- Calendar Widget -->
   <div id="calendar-widget" class="widget">
@@ -1682,11 +1688,7 @@ myModal{
   
                 <hr class="my-4">
                 
-                <!-- Additional Links Section -->
-                <div class="d-grid gap-2 mt-3">
-                    <a href="https://shamser.info.np/Multi%20letterpad.html" class="btn btn-primary" target="_blank">
-                        <i class="fas fa-pencil-alt me-2"></i>🌐 Generate Multi letters
-                    </a>
+   
                     <a href="https://forms.gle/LVm68DdiXN5Ep1Mb6" class="btn btn-success" target="_blank">
                         <i class="fas fa-info-circle me-2"></i>💁🏻‍♀️ About Service charge
                     </a>
@@ -1699,10 +1701,28 @@ myModal{
                            class="btn btn-outline-primary w-100 mb-2" target="_blank">
                             <i class="fas fa-book me-2"></i>👉 जनज्योति क्याम्पसको स्मारिका
                         </a>
-                        <a href="http://shamser.info.np/News%20modal.html" class="btn btn-outline-info w-100 mb-2" target="_blank">
-                            <i class="fas fa-newspaper me-2"></i>🌐 ताजा अनलाइन समाचार
-                        </a>
+
                         
+
+  <button class="btn btn-warning w-100 py-3" onclick="openModal('quizModal')">
+                            <i class="fas fa-laptop-code fa-2x mb-2 d-block"></i>
+                            <span>Quiz</span>
+                        </button>
+
+
+
+                        <button class="btn btn-primary w-100 py-3 text-white" onclick="openModal('resultModal')">
+                            <i class="fas fa-search fa-2x mb-2 d-block"></i>
+                            <span>Check Result</span>
+                        </button>
+
+
+
+
+
+
+
+
                         <!-- Subscription Button -->
                         <div class="subscribe-container mt-3">
                             <button id="subscribeBtn" class="btn btn-danger w-100">
@@ -1841,6 +1861,17 @@ $(document).ready(function(){
 <!----End-----myModal----------->   
 
   <div class="fb-save" data-uri="https://shamser.info.np/" data-size=""></div>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" 
+src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0">
+</script>
+<div class="fb-like"
+     data-href="https://shamser.info.np/"
+     data-layout="button_count"
+     data-action="like"
+     data-size="small"
+     data-share="true">
+</div>
 
 <div class="container cmspage">
  <div class="row">
@@ -1854,11 +1885,7 @@ $(document).ready(function(){
       <p style="font-size:20x; text-align: justify; padding:5px; margin: 0px; line-height: 26px;">सामुदायिक विद्यालयको शैक्षिक उन्नयनमा समर्पित खोजमूलक प्रस्तुति र निष्पक्ष विश्लेषणका साथमा सदैव पाठकलाई सुसुचित गराउने प्रविधिमैत्री, शैक्षिक सूचना संचारहरूको पोर्टल shamser.info.np । &nbsp;&nbsp;हामीलाई बिज्ञापन दिनुहोस आफ्नो ब्यापार व्यवसाय सँघसंस्था र दक्षताको प्रचारप्रसार गर्नुहोस्</a>  </p>
   </p></font></marquee> 
 
-    
-<marquee bgcolor=#f9f3dc direction=right>
-    <font size="3" color="black">   &nbsp;
-      <p style="font-size:16x; text-align: justify; padding:5px; margin: 0px; line-height: 26px;">
-    &nbsp;हामीलाई बिज्ञापन दिनुहोस आफ्नो ब्यापार व्यवसाय सँघसंस्था र दक्षताको प्रचारप्रसार गर्नुहोस् । </p></font></marquee> 
+ 
 
 
 <!-----<img width="100%" src="HomePage/IEMIS SHAMSER.jpg" alt="IEMIS Background" class="emis-bg-image">-      #0e4f42;
@@ -2048,10 +2075,6 @@ $(document).ready(function(){
 
 
 
-
-
-
-
 <div class="container">
 <h1 class="header3">
 <i class="fa fa-pencil-square-o"></i> <b> ‘विद्यार्थीबाट शुल्क लिनु गैरकानूनी हो; शिक्षा उद्योग होइन</b> </h1>
@@ -2061,53 +2084,59 @@ $(document).ready(function(){
 <div class="clear-both"></div>
 
 <h1><img src="https://pbs.twimg.com/profile_images/1579086841227059200/JyklJEUx_400x400.jpg" alt="Editor" style="float: left;width:60px;height:60px;border: 1px dotted black;margin: 10px 10px 15px 20px;"> 
-<style>
-#more {display: none;}
-.mybox2 {display: none;}
-</style>
 <p style="font-size:15px; text-align: justify; padding:5px; margin: 0px; line-height: 22px;">अनिवार्य तथा निःशुल्क शिक्षा ऐन २०७५ कार्यान्वयन गर्न निवर्तमान शिक्षा, विज्ञान तथा प्रविधि मन्त्री विद्या भट्टराईले २०८३ सालसम्मको कार्ययोजना बनाएकी थिइन् । तर भट्टराईले ९ महिनामै पदबाट राजीनामा दिइन् । उनले आफ्नो कार्यकालमा अनिवार्य तथा निःशुल्क शिक्षा ऐन कति कार्यान्वयन गरिन् त ? 
-<span id="span2">...</span>
-<span id="mybox2id" class="mybox2"> अनलाइनखबरकर्मी दिनेश गौतमले गरेको कुराकानीको सम्पादित अंश :
+<span id="dots">...</span>
+<span id="moreText" style="display:none;"> अनलाइनखबरकर्मी दिनेश गौतमले गरेको कुराकानीको सम्पादित अंश :
 
 नौ महिना मन्त्री हुनुभयो । शुरूदेखि नै अनिवार्य तथा निःशुल्क शिक्षा ऐन कार्यान्वयनमा जोड दिनुभएको थियो । कति कार्यान्वयन गर्नुभयो ?अनिवार्य तथा निःशुल्क शिक्षा ऐन २०७५ पास भएपछि मन्त्रालयले केही काम शुरू गरेको थियो । किताब निःशुल्क दिने, खाजा दिने र छात्रवृत्तिको काम भएको थियो । र, निःशुल्क शिक्षा बनाउन स्थानीय तहलाई तयार पार्ने काम भयो । तर सबै ठाउँमा पुगेको थिएन । स्रोत भएको पालिकाले शुरू गरेका थिए ।
 
 संविधानको मौलिक हकले शिक्षा राज्यको दायित्व भनेको छ । जसमा आधारभूतसम्म अनिवार्य र निःशुल्क तथा माध्यमिक तहसम्म निःशुल्क भनेको छ । ऐनले पनि तीनै सरकारको दायित्व र जिम्मेवारी हो भनेको छ । अनिवार्य तथा निःशुल्क शिक्षा ऐन पूरा नगरेमा कानूनसम्मत कारबाही हुन्छ भन्ने स्पष्ट छ ।<br>
 <a href="https://www.onlinekhabar.com/2025/06/1701879/it-is-illegal-to-charge-fees-from-students-education-is-not-an-industry">बाँकी अनलाइनखबरमा पढ्नुहोला</a>
 
-</div>
-
-
-
-
 </span>
-<button onclick="toggleReadMore()">Read More</button></p>
+<button onclick="toggleReadMore()" id="readMoreBtn">Read More</button></p>
 
 <script>
 function toggleReadMore() {
-    const content = document.getElementById('mybox2id');
-    const button = document.getElementById('mybuttonid');
-    const dots = document.getElementById('span2');
+    const moreText = document.getElementById('moreText');
+    const dots = document.getElementById('dots');
+    const button = document.getElementById('readMoreBtn');
 
-    if (content.style.display === 'none' || content.style.display === '') {
-        content.style.display = 'inline';
+    if (moreText.style.display === 'none' || moreText.style.display === '') {
+        moreText.style.display = 'inline';
         dots.style.display = 'none';
-
+        button.textContent = 'Read Less';
     } else {
-        content.style.display = 'none';
+        moreText.style.display = 'none';
         dots.style.display = 'inline';
- 
-           button.textContent = 'Read Less';
+        button.textContent = 'Read More';
     }
 }
 
 // Initialize on page load
 window.onload = function() {
-    document.getElementById('mybox2id').style.display = 'none';
-    document.getElementById('span2').style.display = 'inline';
+    document.getElementById('moreText').style.display = 'none';
+    document.getElementById('dots').style.display = 'inline';
+    document.getElementById('readMoreBtn').textContent = 'Read More';
 };
 </script>
- 
- 
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <style>
 
@@ -2293,56 +2322,80 @@ window.onload = function() {
     </div>
 
    
-
-   
-<h1 id="P1">शिक्षकको सरुवा हुँदै..</h1>
+<h1>शिक्षकको सरुवा हुँदै..</h1>
 <img src="https://shamser.info.np/HomePage/1708402451_changu-1200x560-1200x560.jpg" width="100%" height="315">
 
-<div class="clear-both"></div>
+<br><br>
 
-<h1><img src="https://pbs.twimg.com/profile_images/1579086841227059200/JyklJEUx_400x400.jpg" alt="Editor" style="float: left;width:60px;height:60px; border: 1px dotted black; margin: 10px 10px 15px 20px;"> 
-<style>
-#more {display: none;}
-</style>
+<!-- Editor info -->
+<img src="https://pbs.twimg.com/profile_images/1579086841227059200/JyklJEUx_400x400.jpg" alt="Editor" style="width:60px;height:60px;border:1px dotted black;margin:10px 10px 15px 20px;float:left">
 
-<div class="teacher-content">
-  <p style="font-size:15px; text-align: justify; padding:5px; margin: 0px; line-height: 22px;">लालबन्दी नगरपालिका भित्र संचालित सामुदायिक विद्यालयहरुमा कार्यरत शिक्षक सरुवाको विषयले पटकपटक हल्ला चल्दै आएको छ । विगत केही दिन देखि लालबन्दी नगरपालिका भित्र संचालित सामुदायिक विद्यालयहरुमा कार्यरत शिक्षक सरुवाको विषयले निकै चर्चा पायो । स्कुलदेखि चिया पसलमा शिक्षक सरुवाको विषय चलेको थियो । कक्षामा जानुपहिले हरेक दिन केही न केही कुरा निस्कन्थ्यो र कहाँ कता पुर्याइदिने हो भनेर 
-  <span id="span1">...</span>
-  <span id="moreText" style="display: none;"> सोच्न आपसमा कुराकानी भैरहन्थ्यो । 
-  खासगरी धेरै वर्षदेखि एउटै विद्यालयमा रहेका घरपायक शहरी क्षेत्रमा सपरिवार बस्ने टिउशन कोचिङ् चल्ने काम पाउने अङ्ग्रेजी माध्यम र कक्षा ११/१२ र क्याम्पसमा पार्टटाइम काम पाउने अर्थात बृतिविकास हुने विद्यालयहरुका शिक्षकहरुमा खासमा एक किसिमको तनाव बढेको थियो। हल्लाैहल्लामा मिति: २०८१/०५/१७, सोमबारका दिन नगर प्रमुखको कार्यालयबाट प्रेस विज्ञप्ति जारी भयो । शिक्षक सरुवाको विषय केही दिनसम्म सामसुम हुन पुग्यो । 
-
-  यधपि नगर प्रमुखको कार्यालयबाट जारी भएको प्रेस विज्ञप्तिमा दरबन्दी मिलानको विषय उठान भएकोले एकदिन पक्कै शिक्षक सरुवाको विषय उठ्छ भन्ने कुरा सबैलाई थाह नभएको हैन। 
-  दशैं तिहारपछि शिक्षक सरुवाको प्रक्रिया अघि बढ्नेछ भन्ने अनुमान गरिएको छ । भरपर्दो श्रोत अनुसार अहिले सरुवा कार्यबिधिमा नगरपालिका जुटिरहेको छ । नगर शिक्षा समितिमा छलफल गरी नगरपरिषदबाट कार्यबिधि पास गर्ने तयारीमा रहेको छ भन्ने हल्ला पनि सुनिन थालेको छ । बिधि प्रक्रियाको लागि कार्यबिधि बन्नु राम्रो पक्ष हो । तर कार्यबिधिमा रहने प्रक्रियाहरु कति तटस्थ रहन्छ र नियमसम्मत हुन्छ हुँदैन भन्ने विषय मुख्य हो । यता हल्ला होइन भनेपनि भित्रभित्र होमवर्क गर्ने प्रबृतिले नगरपालिकाको कार्यप्रति शिक्षकहरु असन्तुष्ट बनेकाछन् । शिक्षक सरुवाले मात्र शिक्षाको गुणस्तर बढ्छ भनेर कठोर निर्णय लिनु ठीक होला नहोला तर कहिले सरुवा कहिले दरबन्दी मिलानको हल्लाले शिक्षा तहसनहस हुने कुरा चाही पक्का छ । अरुले जे अपनाए जे गरे त्यही गर्नु र अरुको लहैलहैमा बहकिनु ठीक हैन । भर्खरै शिक्षामन्त्रीले देशभरी दरबन्दी मिलानको कुरा उठाउनु भएको छ । दरबन्दी मिलान भयो भने पक्कैपनि स्थायी दरबन्दी बितरण हुन्छ नै । एकदुई महिना पर्खने पो होकी । यसपछि अवस्था परिस्थिति अनुसार नीति नियमसम्मत सही निर्णय लिनु बुद्धिमानी हुन्छ । हाम्रो भन्नु यत्ति हो ।
-  यस पटकको हल्ला हल्लामात्र हो वा यथार्थ हो फेरि प्रेस विज्ञप्तिकोपर्खाइमा शिक्षकहरु रहेकाछन् ।   </span>
-  
-  <button onclick="toggleReadMore()" id="readMoreBtn" class="btn btn-primary btn-sm mt-2">
-    Read More
-  </button></p>
-</div>
+<p style="font-size:15px; text-align: justify; padding:5px; margin: 0px; line-height: 22px;">
+लालबन्दी नगरपालिका भित्र संचालित सामुदायिक विद्यालयहरुमा कार्यरत शिक्षक सरुवाको विषयले पटकपटक हल्ला चल्दै आएको छ । विगत केही दिन देखि लालबन्दी नगरपालिका भित्र संचालित सामुदायिक विद्यालयहरुमा कार्यरत शिक्षक सरुवाको विषयले निकै चर्चा पायो । स्कुलदेखि चिया पसलमा शिक्षक सरुवाको विषय चलेको थियो । कक्षामा जानुपहिले हरेक दिन केही न केही कुरा निस्कन्थ्यो र कहाँ कता पुर्याइदिने हो भनेर 
+<span id="secondDots">...</span>
+<span id="secondExtra" style="display:none;">
+सोच्न आपसमा कुराकानी भैरहन्थ्यो । 
+खासगरी धेरै वर्षदेखि एउटै विद्यालयमा रहेका घरपायक शहरी क्षेत्रमा सपरिवार बस्ने टिउशन कोचिङ् चल्ने काम पाउने अङ्ग्रेजी माध्यम र कक्षा ११/१२ र क्याम्पसमा पार्टटाइम काम पाउने अर्थात बृतिविकास हुने विद्यालयहरुका शिक्षकहरुमा खासमा एक किसिमको तनाव बढेको थियो। हल्लाैहल्लामा मिति: २०८१/०५/१७, सोमबारका दिन नगर प्रमुखको कार्यालयबाट प्रेस विज्ञप्ति जारी भयो । शिक्षक सरुवाको विषय केही दिनसम्म सामसुम हुन पुग्यो । 
+<br><br>
+यधपि नगर प्रमुखको कार्यालयबाट जारी भएको प्रेस विज्ञप्तिमा दरबन्दी मिलानको विषय उठान भएकोले एकदिन पक्कै शिक्षक सरुवाको विषय उठ्छ भन्ने कुरा सबैलाई थाह नभएको हैन। 
+दशैं तिहारपछि शिक्षक सरुवाको प्रक्रिया अघि बढ्नेछ भन्ने अनुमान गरिएको छ । भरपर्दो श्रोत अनुसार अहिले सरुवा कार्यबिधिमा नगरपालिका जुटिरहेको छ । नगर शिक्षा समितिमा छलफल गरी नगरपरिषदबाट कार्यबिधि पास गर्ने तयारीमा रहेको छ भन्ने हल्ला पनि सुनिन थालेको छ । बिधि प्रक्रियाको लागि कार्यबिधि बन्नु राम्रो पक्ष हो । तर कार्यबिधिमा रहने प्रक्रियाहरु कति तटस्थ रहन्छ र नियमसम्मत हुन्छ हुँदैन भन्ने विषय मुख्य हो । यता हल्ला होइन भनेपनि भित्रभित्र होमवर्क गर्ने प्रबृतिले नगरपालिकाको कार्यप्रति शिक्षकहरु असन्तुष्ट बनेकाछन् । शिक्षक सरुवाले मात्र शिक्षाको गुणस्तर बढ्छ भनेर कठोर निर्णय लिनु ठीक होला नहोला तर कहिले सरुवा कहिले दरबन्दी मिलानको हल्लाले शिक्षा तहसनहस हुने कुरा चाही पक्का छ । अरुले जे अपनाए जे गरे त्यही गर्नु र अरुको लहैलहैमा बहकिनु ठीक हैन । भर्खरै शिक्षामन्त्रीले देशभरी दरबन्दी मिलानको कुरा उठाउनु भएको छ । दरबन्दी मिलान भयो भने पक्कैपनि स्थायी दरबन्दी बितरण हुन्छ नै । एकदुई महिना पर्खने पो होकी । यसपछि अवस्था परिस्थिति अनुसार नीति नियमसम्मत सही निर्णय लिनु बुद्धिमानी हुन्छ । हाम्रो भन्नु यत्ति हो ।
+यस पटकको हल्ला हल्लामात्र हो वा यथार्थ हो फेरि प्रेस विज्ञप्तिकोपर्खाइमा शिक्षकहरु रहेकाछन् ।
+</span>
+</p>
+<button onclick="toggleSecond()">Read More</button>
 
 <script>
-function toggleReadMore() {
-    var moreText = document.getElementById("moreText");
-    var span1 = document.getElementById("span1");
-    var btnText = document.getElementById("readMoreBtn");
 
-    if (moreText.style.display === "none" || moreText.style.display === "") {
-        moreText.style.display = "inline";
-        span1.style.display = "none";
-        btnText.innerHTML = "Read Less";
+
+// Second article toggle function
+function toggleSecond() {
+    var dots = document.getElementById('secondDots');
+    var extra = document.getElementById('secondExtra');
+    var btn = event.target;
+    
+    if (extra.style.display === 'none' || extra.style.display === '') {
+        extra.style.display = 'inline';
+        dots.style.display = 'none';
+        btn.innerHTML = 'Read Less';
     } else {
-        moreText.style.display = "none";
-        span1.style.display = "inline";
-        btnText.innerHTML = "Read More";
+        extra.style.display = 'none';
+        dots.style.display = 'inline';
+        btn.innerHTML = 'Read More';
     }
 }
 
 // Initialize on page load
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('moreText').style.display = 'none';
-    document.getElementById('span1').style.display = 'inline';
-});
+window.onload = function() {
+    document.getElementById('firstExtra').style.display = 'none';
+    document.getElementById('firstDots').style.display = 'inline';
+    document.getElementById('secondExtra').style.display = 'none';
+    document.getElementById('secondDots').style.display = 'inline';
+};
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!---End --teacher----Transfer------------>  
 <marquee bgcolor=red direction=left>
     <font size="5" color="white">एउटा भोको पेट, रित्तो गोजी र टुक्रिएको हृदयले जिन्दगीमा धेरैथोक सिकाएर जान्छ : रोविन विलियम
@@ -4630,7 +4683,7 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
                         <a href="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Dashboard.html">
                             <button class="btn btn-primary w-100 py-3">
                                 <i class="fas fa-graduation-cap fa-2x mb-2 d-block"></i>
-                                <span>Login IEMIS</span>
+                                <span>🌐 Login IEMIS</span>
                             </button>
                         </a>
                     </div>
@@ -4647,19 +4700,55 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
                             </ul>
                         </div>
                     </div>
+    <div class="col-6">
+<button class="btn btn-warning w-100 py-3">
+ <a href="https://shamser.info.np/Multi%20letterpad.html" class="btn btn-primary" target="_blank">
+<i class="fas fa-pencil-alt me-2"></i> <span>Generate Multi letters </span>  </a>
+</button>
+</div>
+
+
+
                     <div class="col-6">
-                        <button class="btn btn-warning w-100 py-3" onclick="openModal('quizModal')">
-                            <i class="fas fa-laptop-code fa-2x mb-2 d-block"></i>
-                            <span>Quiz</span>
+<button class="btn btn-primary w-100 py-3">
+<a href="http://shamser.info.np/News%20modal.html" class="btn btn-primary" target="_blank">
+<span>🌐 ताजा अनलाइन समाचार </span>  </a>
+  </button>
+  </div>
+
+
+
+    <div class="col-6">
+<button class="btn btn-danger w-100 py-3" >
+<a href="https://shamser.info.np/quiz_App3/quiz_app.html" class="btn btn-primary" target="_blank"><span>TSC Quiz App</span> </a>
+   </button>
+    </div>     
+
+ <div class="col-6">
+  <button class="btn btn-warning w-100 py-3">
+                            <a href="https://shamser.info.np/Number_to_Text.html" target="_blank">
+                            <span>Number_to_Text</span></a>
                         </button>
-                    </div>
-                    <div class="col-6">
+ </div>
+
+
+
+     <div class="col-6">
                         <button class="btn btn-primary w-100 py-3 text-white" onclick="openModal('resultModal')">
                             <i class="fas fa-search fa-2x mb-2 d-block"></i>
                             <span>Check Result</span>
                         </button>
                     </div>
-                </div>
+
+
+ <div class="col-6">
+<button class="btn btn-warning w-100 py-3" onclick="openModal('quizModal')">
+ <i class="fas fa-laptop-code fa-2x mb-2 d-block"></i>
+<span>Quiz</span>
+</button>
+ </div>
+
+ </div>
                 <hr class="my-4">
                 <h2>📌 IEMIS प्रणालीमा Mark update (Mark Entry) गर्ने तरिका</h2>
                  <video width="100%" height="220" controls autoplay muted>
