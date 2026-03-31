@@ -4778,12 +4778,42 @@ window.onload = function() {
     if (dots) dots.style.display = 'inline';
 };
 </script>
-        <h2>नवशिशु मन्टेश्वरी लालबन्दी ७ सर्लाही</h2>              
-  <img src='HomePage/IMG_6014.png' width="100%" height='350'>                
-                    <p>नवशिशु मन्टेश्वरीमा प्ले ग्रुप देखि कक्षा १ सम्म भर्ना खुल्दै छ । आफ्ना नानीहरुलाई समयमा नै भर्ना गराैं </p>      
-            </div>
 
-           
+
+
+<div class="container">
+    <!-- popup container will hold the floating card ABOVE menu bar -->
+    <div class="popup-container">
+        <div id="imagePopup" class="image-popup">
+            <img id="popupImg" src="" alt="full size preview">
+            <div id="popupCaption" class="caption"></div>
+        </div>
+    </div>
+    
+    <!-- menu bar with 4 items (now popup appears above this bar) -->
+    <p> भर्ना खुल्यो</p>
+    <div class="menu-bar">
+        <div class="menu-item" data-key="img1">नबशिशु मन्र६ेश्रवरी</div>
+        <div class="menu-item" data-key="img2">८िम जनता मा.वि.</div>
+
+    </div>
+    </div>
+
+ 
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            </div>           
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">पछि हेर्ने</button>
             </div>
@@ -5016,10 +5046,577 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+       
+
+        /* main container */
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        /* menu bar styling - elevated with shadow */
+        .menu-bar {
+   
+            backdrop-filter: blur(16px);
+        
+            padding: 14px 28px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+
+            position: relative;
+      
+         
+        }
+
+        .menu-item {
+          
+            font-size: 1.2rem;
+            font-weight: 600;
+          
+      
+     
+
+            border: none;
+            font-family: inherit;
+            letter-spacing: 0.3px;
+        }
+
+        .menu-item:hover {
+        
+            color: black;
+          
+    
+        }
+
+        /* popup container - positioned ABOVE menu bar */
+        .popup-container {
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            min-height: 0;
+        }
+
+        /* FULL SIZE image popup - now floating above menu */
+        .image-popup {
+      
+        
+       
+            opacity: 0;
+            visibility: hidden;
+
+            width: auto;
+            max-width: 92vw;
+        
+            position: fixed;
+            /* positioned dynamically via JS */
+        }
+
+        .image-popup.show {
+            opacity: 1;
+            visibility: visible;
+        
+        }
+
+        /* FULL SIZE image - no cropping, original proportions */
+        .image-popup img {
+            width: auto;
+            height: auto;
+            max-width: 85vw;
+            max-height: 100vh;
+            min-width: 280px;
+            min-height: 180px;
+            border-radius: 24px;
+            display: block;
+            object-fit: contain;
+    
+
+        }
+
+        
+
+        /* arrow pointing DOWNWARD to menu bar (since popup is ABOVE menu) */
+        .image-popup::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+
+            width: 0;
+            height: 0;
+
+        }
+
+        /* subtle glow effect */
+        .image-popup.show::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+        
+            border-radius: 36px;
+            z-index: -1;
+            opacity: 0.6;
+            filter: blur(12px);
+            transition: opacity 0.3s;
+        }
+
+        .image-popup.show::before {
+            opacity: 0.7;
+        }
+
+        /* info text */
+        .info {
+            text-align: center;
+            margin-top: 30px;
+      
+            font-size: 0.9rem;
+
+            padding: 12px 28px;
+            border-radius: 60px;
+            font-weight: 500;
+ 
+        }
+
+        /* loading state */
+        .image-popup.loading img {
+            opacity: 0.5;
+            filter: blur(2px);
+        }
+
+        .image-popup.loading {
+            position: relative;
+        }
+
+        .image-popup.loading .caption::after {
+            content: " 🔄 loading high-res...";
+            font-size: 0.85rem;
+         
+            margin-left: 8px;
+        }
+
+        /* responsive */
+        @media (max-width: 768px) {
+            .menu-item {
+                padding: 8px 22px;
+                font-size: 1rem;
+            }
+            .image-popup img {
+                max-width: 88vw;
+                max-height: 55vh;
+                min-width: 240px;
+            }
+            .image-popup {
+                padding: 12px;
+                border-radius: 28px;
+            }
+            .image-popup .caption {
+                font-size: 0.85rem;
+                padding: 10px 4px 4px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .image-popup img {
+                max-width: 92vw;
+                max-height: 48vh;
+            }
+            .menu-bar {
+                padding: 10px 18px;
+                gap: 8px;
+            }
+            .menu-item {
+                padding: 6px 16px;
+                font-size: 0.9rem;
+            }
+        }
+
+       
+    </style>
+
+
+<script>
+    // Enhanced image database – high quality full-size images
+    const images = {
+        img1: { 
+            url: 'https://shamser.info.np/HomePage/IMG_6014.png', 
+            text: 'New Admission opened in Navashishu Montessori' 
+        },
+        img2: { 
+            url: 'https://shamser.info.np/HomePage/DimBharna.png', 
+            text: 'New Admission opened in Dim Janata Secondary School' 
+        },
+        img: { 
+            url: 'https://picsum.photos/id/104/2000/1500', 
+            text: '🌄 Waterfall majesty · 2000px original quality' 
+        },
+        auto: { 
+            url: 'https://picsum.photos/id/169/2100/1400', 
+            text: '✨ Golden sunrise · panoramic full size · Ultra HD' 
+        }
+    };
+
+    const popup = document.getElementById('imagePopup');
+    const popupImg = document.getElementById('popupImg');
+    const popupCaption = document.getElementById('popupCaption');
+    let hideTimeout = null;
+    let isLoading = false;
+    let currentKey = null;
+
+    // ---------- POSITION POPUP ABOVE MENU BAR (CENTERED, with arrow connection) ----------
+    function positionPopupAboveMenu() {
+        const menuBar = document.querySelector('.menu-bar');
+        if (!menuBar) return;
+        
+        const menuRect = menuBar.getBoundingClientRect();
+        const popupRect = popup.getBoundingClientRect();
+        
+        // get popup dimensions (if hidden, use offsetWidth/Height fallback)
+        let popupWidth = popupRect.width;
+        let popupHeight = popupRect.height;
+        
+        if (popupWidth === 0) {
+            popupWidth = popup.offsetWidth;
+            popupHeight = popup.offsetHeight;
+        }
+        
+        // desired gap above menu bar: 18px between popup bottom and menu top
+        const gapAboveMenu = 18;
+        // popup bottom edge should be at menuBar top - gap
+        let topPosition = menuRect.top - popupHeight - gapAboveMenu;
+        
+        // Horizontal centering relative to menu bar
+        let leftPosition = menuRect.left + (menuRect.width / 2) - (popupWidth / 2);
+        
+        // boundary checks: ensure popup stays within viewport
+        const padding = 16;
+        if (leftPosition < padding) {
+            leftPosition = padding;
+        }
+        if (leftPosition + popupWidth > window.innerWidth - padding) {
+            leftPosition = window.innerWidth - popupWidth - padding;
+        }
+        
+        // if popup would go above viewport top, adjust to be fully visible with small top margin
+        if (topPosition < 10) {
+            topPosition = 12;
+            // alternative: reposition arrow but maintain readability
+        }
+        
+        popup.style.position = 'fixed';
+        popup.style.top = topPosition + 'px';
+        popup.style.left = leftPosition + 'px';
+        popup.style.right = 'auto';
+        popup.style.bottom = 'auto';
+        
+        // adjust the arrow (::after) position to point exactly to the center of menu bar
+        // compute arrow horizontal shift relative to popup left edge
+        const menuCenterX = menuRect.left + menuRect.width / 2;
+        const popupLeftEdge = leftPosition;
+        const arrowOffsetX = menuCenterX - popupLeftEdge;
+        
+        // apply custom property for dynamic arrow placement
+        popup.style.setProperty('--arrow-pos', arrowOffsetX + 'px');
+        
+        // inject or update style for the arrow pointer
+        updateArrowStylePosition(arrowOffsetX);
+    }
+    
+    // dynamic arrow style updater (pointing downward)
+    function updateArrowStylePosition(arrowOffsetX) {
+        let styleEl = document.getElementById('dynamic-arrow-style');
+        if (!styleEl) {
+            styleEl = document.createElement('style');
+            styleEl.id = 'dynamic-arrow-style';
+            document.head.appendChild(styleEl);
+        }
+        styleEl.textContent = `
+            .image-popup::after {
+                left: ${arrowOffsetX}px !important;
+                bottom: -12px;
+                border-left: 14px solid transparent;
+
+                position: absolute;
+                transform: translateX(0);
+            }
+            .image-popup::before {
+                content: '';
+                position: absolute;
+                inset: -4px;
+
+                z-index: -1;
+                opacity: 0.6;
+                filter: blur(12px);
+                pointer-events: none;
+            }
+            .image-popup.show::before {
+                opacity: 0.75;
+            }
+        `;
+    }
+    
+    // ensure popup is positioned above menu on each show / resize / scroll
+    function refreshPopupPosition() {
+        if (popup.classList.contains('show')) {
+            positionPopupAboveMenu();
+        }
+    }
+    
+    // ---- Show popup with full size image (above menu) ----
+    function showPopup(key) {
+        const data = images[key];
+        if (!data) return;
+        currentKey = key;
+        
+        // clear any pending hide timer
+        if (hideTimeout) {
+            clearTimeout(hideTimeout);
+            hideTimeout = null;
+        }
+        
+        // Add loading indicator
+        popup.classList.add('loading');
+        isLoading = true;
+        
+        // set caption placeholder
+        popupCaption.textContent = data.text + ' ';
+        
+        // Preload image properly
+        const imgLoader = new Image();
+        
+        imgLoader.onload = () => {
+            // assign final high-res image
+            popupImg.src = data.url;
+        
+            popupImg.alt = data.text;
+            
+            popup.classList.remove('loading');
+            isLoading = false;
+            
+            // show popup with smooth transition
+            popup.classList.add('show');
+            
+            // Position it ABOVE menu bar after a micro frame to get correct dimensions
+            setTimeout(() => {
+                positionPopupAboveMenu();
+                // ensure caption is fresh
+                popupCaption.innerHTML = data.text + '  ';
+            }, 20);
+        };
+        
+        imgLoader.onerror = () => {
+            // fallback: try to display anyway but with error note
+            popupImg.src = data.url;
+            popupImg.style.background = "#2d1f2c";
+            popupCaption.innerHTML = data.text + " ⚠️ (check network) · full size image ready";
+            popup.classList.remove('loading');
+            isLoading = false;
+            popup.classList.add('show');
+            setTimeout(() => {
+                positionPopupAboveMenu();
+            }, 20);
+        };
+        
+        // start loading
+        imgLoader.src = data.url;
+        
+        // Set placeholder background
+        popupImg.style.background = "#111827";
+        popupImg.alt = data.text;
+    }
+    
+    // delayed hide with graceful exit
+    function hidePopup() {
+        if (hideTimeout) clearTimeout(hideTimeout);
+        hideTimeout = setTimeout(() => {
+            if (!isLoading || true) {
+                popup.classList.remove('show');
+                popup.classList.remove('loading');
+                // clear src optionally to avoid flicker? keep but fine
+            }
+        }, 200);
+    }
+    
+    function hidePopupImmediate() {
+        if (hideTimeout) {
+            clearTimeout(hideTimeout);
+            hideTimeout = null;
+        }
+        popup.classList.remove('show');
+        popup.classList.remove('loading');
+        isLoading = false;
+    }
+    
+    // ========== ATTACH EVENTS TO MENU ITEMS (hover + touch, above menu experience) ==========
+    const menuItems = document.querySelectorAll('.menu-item');
+    
+    // Desktop: mouse enter/leave
+    menuItems.forEach(item => {
+        item.addEventListener('mouseenter', (e) => {
+            const key = item.getAttribute('data-key');
+            showPopup(key);
+        });
+        
+        item.addEventListener('mouseleave', () => {
+            hidePopup();
+        });
+        
+        // Touch events for mobile & tablets
+        item.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const key = item.getAttribute('data-key');
+            showPopup(key);
+        });
+        
+        item.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            hidePopup();
+        });
+    });
+    
+    // Keep popup open when hovering over the popup itself? optional enhancement: prevent hide if mouse enters popup
+    popup.addEventListener('mouseenter', () => {
+        if (hideTimeout) {
+            clearTimeout(hideTimeout);
+            hideTimeout = null;
+        }
+    });
+    
+    popup.addEventListener('mouseleave', () => {
+        hidePopup();
+    });
+    
+    // Click outside menu or popup will hide
+    document.addEventListener('click', (e) => {
+        const isMenuClick = e.target.closest('.menu-item');
+        const isPopupClick = e.target.closest('.image-popup');
+        if (!isMenuClick && !isPopupClick) {
+            hidePopupImmediate();
+        }
+    });
+    
+    // reposition on window resize / scroll (critical for above-menu positioning)
+    window.addEventListener('resize', () => {
+        if (popup.classList.contains('show')) {
+            positionPopupAboveMenu();
+        }
+    });
+    
+    window.addEventListener('scroll', () => {
+        if (popup.classList.contains('show')) {
+            positionPopupAboveMenu();
+        }
+    });
+    
+    // also when orientation changes
+    window.addEventListener('orientationchange', () => {
+        setTimeout(() => {
+            if (popup.classList.contains('show')) {
+                positionPopupAboveMenu();
+            }
+        }, 30);
+    });
+    
+    // Preload all images in background for instant feel
+    function preloadAllImages() {
+        Object.values(images).forEach(img => {
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.as = 'image';
+            link.href = img.url;
+            document.head.appendChild(link);
+            // also image preload
+            const preloadImg = new Image();
+            preloadImg.src = img.url;
+        });
+    }
+    preloadAllImages();
+    
+    // For initial load: show a subtle preview but ensure popup hidden
+    console.log('✅ FULL SIZE POPUP ABOVE MENU — dynamic arrow pointing to menu, fully responsive');
+    console.log('📸 high-res assets ready');
+    
+    // optional: ensure that if popup hidden due to resize we keep arrow consistent
+    document.body.addEventListener('touchmove', () => {
+        if (popup.classList.contains('show')) {
+            positionPopupAboveMenu();
+        }
+    });
+    
+    // small fix: recalc after image fully loads to avoid misplaced arrow
+    popupImg.addEventListener('load', () => {
+        if (popup.classList.contains('show')) {
+            positionPopupAboveMenu();
+        }
+    });
+    
+    // improve arrow dynamic after any image size change
+    const resizeObserver = new ResizeObserver(() => {
+        if (popup.classList.contains('show')) {
+            positionPopupAboveMenu();
+        }
+    });
+    if (popup) resizeObserver.observe(popup);
+    
+    // additional touch end handling for leaving menu area
+    let touchTimer = null;
+    document.addEventListener('touchend', (e) => {
+        if (!e.target.closest('.menu-item') && !e.target.closest('.image-popup')) {
+            hidePopupImmediate();
+        }
+    });
+    
+    // also while scrolling on touch, close popup gently to avoid obstruction? but we keep open for better UX
+    // but to be user friendly: we keep stable open only on hover/menu interaction.
+    // FIX: when scrolling with popup open, reposition
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                if (popup.classList.contains('show')) {
+                    positionPopupAboveMenu();
+                }
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+</script>
 </body>
 </html>
 
 
+<!--------------End भर्ना खुल्यो----------------->
 
 
 
@@ -5030,6 +5627,13 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
 
+
+
+
+
+
+
+   
 
 
 
