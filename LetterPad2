@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Site Verification -->
+    <meta name="google-site-verification" content="E55SOW9-xbb-lDSUK0AVczLIVhmmsK8GouR_0ScNU9k">
+    
+    <!-- Facebook App IDs -->
+    <meta property="fb:app_id" content="758915462507587">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://shamser.info.np/favicon.ico">
+    <link rel="apple-touch-icon" href="https://shamser.info.np/apple-touch-icon.png">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5 (Primary) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+
+
+ <meta property="og:title" content="Multi Letterpad" />
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://shamser.info.np/Multi letterpad.html"/>
+    <meta property="og:image" content="https://shamser.info.np/HomePage/letter.jpg" />
+    <meta property="og:description" content="लेखेर वा बोलेर एउटै बिषयमा धेरैजनालाई पत्र लेख्न वा कुनै सिफारिसपत्र बनाउन सकिने मल्टी लेटरप्याड जेनेरेटर टुल ।" />
+    <meta name="keywords" content="">
+    <meta name="author" content="shamserpulami">
+    <meta property="fb:app_id" content="123456789012345" />
+
+    
+<title>Multi‑letterpad</title>
+<!--social button show -->
+<link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet" type="text/css">
+<!--circle fb -->
+<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+<!----share button---->
+<script type='text/javascript' src='../platform-api.sharethis.com/js/sharethis.js#property=5b5b234df5aa6d001130d104&product=inline-share-buttons' async='async'></script>
+              <div id="fb-root"></div>
+
+ 
+     <!-- Favicon -->
+    <link rel="icon" type="image/ico" href="https://shamser.info.np/HomePage/favicon.ico"/>
+<!-- Libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<!-- Font Awesome 6 (free) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<!-- back to top button (unchanged) -->
+<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+<button type="button" class="scroll-top" onclick="goToTop();">
+<img src="https://ps.w.org/back-to-the-top-button/assets/icon-128x128.png?rev=2283756" style="height: 40px; width: 40px;">
+</button>
+<script>
+function goToTop(){ window.scrollTo(0,0); }
+</script>
+
+<style>
+    /* scroll-top style */
+    .scroll-top {
+        position: fixed;
+        bottom: 90px;
+        right: 10px;
+        z-index: 99;
+        padding: 20px;
+        border: none;
+        background: transparent;
+    }
+    /* additional variable */
+    :root {
+        --primary-color: #0b3552;
+        --secondary-color: #2c5a7a;
+        --shadow: 0 8px 30px rgba(0,0,0,0.12);
+    }
+
+    /* -------------------- RESET & GLOBAL -------------------- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+        font-family: 'Nirmala UI', 'Segoe UI', 'Times New Roman', sans-serif;
+        background: #eef2f7;
+        padding: 10px;
+        min-height: 100vh;
+        justify-content: left;
+        overflow-x: hidden;
+    }
+    .container { width: 100%; margin: 0 auto; }
+    h1 {
+        color: var(--primary-color);
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    .subtitle {
+        color: var(--secondary-color);
+        font-weight: 400;
+        margin-bottom: 20px;
+    }
+
+    /* -------------------- FORM CARD -------------------- */
+    .card {
+        background: #ffffff;
+        box-shadow: 0 18px 40px -8px rgba(19, 50, 80, 0.25);
+        margin-bottom: 30px;
+        border: 1px solid rgba(44, 116, 179, 0.2);
+        transition: box-shadow 0.2s;
+        text-align: left;
+        padding: 24px;
+        border-radius: 24px;
+    }
+    .card h2 {
+        font-size: 30px;
+        font-weight: 700;
+        color: #0b3552;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 6px;
+    }
+    .instructions {
+        background: #f0f7fe;
+        border-radius: 28px;
+        padding: 16px 24px;
+        margin: 20px 0 28px;
+        border-left: 6px solid #2c74b3;
+    }
+    .instructions h3 {
+        color: #113855;
+        font-size: 1.3rem;
+        margin-bottom: 8px;
+    }
+    .instructions ul {
+        padding-left: 28px;
+        color: #1d486b;
+    }
+    .instructions li { margin: 6px 0; }
+
+    /* form row layout */
+    .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        margin-bottom: 24px;
+    }
+    .form-group {
+        flex: 1 1 240px;
+        min-width: 200px;
+    }
+    .form-group label {
+        font-weight: 600;
+        display: block;
+        margin-bottom: 6px;
+        color: #1e3a5f;
+        font-size: 0.95rem;
+        letter-spacing: 0.02rem;
+        text-align: left;
+    }
+    .form-group label i {
+        width: 22px;
+        color: #2c74b3;
+    }
+    input, textarea {
+        width: 100%;
+        padding: 12px 18px;
+        border-radius: 40px;
+        border: 1.5px solid #d4e0ec;
+        background: #ffffff;
+        font-size: 1rem;
+        transition: 0.15s;
+        font-family: 'Nirmala UI', sans-serif;
+    }
+    textarea {
+        border-radius: 28px;
+        resize: vertical;
+        min-height: 100px;
+    }
+    input:focus, textarea:focus {
+        outline: none;
+        border-color: #2c74b3;
+        box-shadow: 0 0 0 4px rgba(44,116,179,0.2);
+    }
+    small {
+        color: #4a627a;
+        margin-top: 5px;
+        display: inline-block;
+        font-size: 0.85rem;
+    }
+
+    /* ---- NEW logo url style ---- */
+    #logoUrl {
+        margin-top: 10px;
+    }
+
+    /* button group */
+    .actions {
+        margin-top: 28px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+    button {
+        padding: 14px 30px;
+        border: none;
+        border-radius: 60px;
+        font-weight: 700;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: 0.2s;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 8px 16px -8px rgba(0,35,60,0.2);
+        border: 1px solid rgba(255,255,255,0.3);
+    }
+    .generate { background: #1f6390; color: white; }
+    .generate:hover { background: #124b73; transform: translateY(-3px); }
+    .print { background: #1e7b4b; color: white; }
+    .print:hover { background: #14633a; transform: translateY(-3px); }
+    .pdf { background: #6a3e8a; color: white; }
+    .pdf:hover { background: #522d6b; transform: translateY(-3px); }
+    .clear { background: #b13e32; color: white; }
+    .clear:hover { background: #8f2f24; transform: translateY(-3px); }
+
+    /* -------------------- MODAL STYLES -------------------- */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+        backdrop-filter: blur(5px);
+        align-items: center;
+        justify-content: center;
+    }
+    .modal-content {
+        background: linear-gradient(145deg, #ffffff, #f8fcff);
+        max-width: 700px;
+        width: 90%;
+        border-radius: 40px;
+        box-shadow: 0 40px 70px rgba(11,53,82,0.3);
+        border: 2px solid rgba(255,255,255,0.7);
+        animation: slideUp 0.4s ease;
+        max-height: 90vh;
+        overflow-y: auto;
+        margin: 20px;
+    }
+    @keyframes slideUp {
+        from { transform: translateY(60px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+    .modal-header {
+        background: #0b3552;
+        color: white;
+        padding: 20px 28px;
+        border-radius: 40px 40px 0 0;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    .modal-header i {
+        font-size: 2.2rem;
+        color: #f5c542;
+    }
+    .modal-header h2 {
+        font-size: 1.8rem;
+        font-weight: 600;
+        flex: 1;
+    }
+    .close-btn {
+        background: rgba(255,255,255,0.2);
+        border: none;
+        font-size: 2rem;
+        color: white;
+        padding: 0 12px;
+        border-radius: 60px;
+        cursor: pointer;
+        transition: 0.2s;
+        box-shadow: none;
+    }
+    .close-btn:hover {
+        background: #ffffff;
+        color: #0b3552;
+    }
+    .modal-body {
+        padding: 28px 30px;
+        line-height: 1.7;
+        color: #1d3a5c;
+        font-size: 1.1rem;
+    }
+    .modal-body img {
+        width: 100%;
+        max-height: 200px;
+        object-fit: cover;
+        border-radius: 28px;
+        margin-bottom: 20px;
+        border: 3px solid #dbeafe;
+    }
+    .modal-body p {
+        margin-bottom: 18px;
+        background: #ecf5fd;
+        padding: 18px 22px;
+        border-radius: 30px;
+        border-left: 8px solid #2c74b3;
+    }
+    .modal-footer {
+        padding: 10px 28px 28px;
+        text-align: right;
+    }
+    .modal-footer button {
+        background: #2c74b3;
+        color: white;
+        font-size: 1.2rem;
+        padding: 16px 40px;
+        border-radius: 60px;
+        border: none;
+    }
+    .modal-footer button:hover {
+        background: #1d5080;
+        transform: scale(1.02);
+    }
+
+    /* -------------------- A4 PAGE with exactly 1 inch margins & fixed height 297mm -------------------- */
+    .page {
+        width: 210mm;
+        height: 297mm;          /* fixed A4 height */
+        background: white;
+        margin: 20px auto;
+        padding: 25.4mm;         /* 1 inch on all sides */
+        box-sizing: border-box;
+        position: relative;
+        page-break-after: always;
+        box-shadow: 0 20px 45px rgba(0,25,45,0.3);
+        border-radius: 2px;
+        font-family: 'Times New Roman', 'Nirmala UI', serif;
+        overflow: hidden;         /* keep content inside */
+        display: flex;
+        flex-direction: column;
+    }
+
+    .page-content {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* letter header: logo left, org name centered - with reduced gap */
+    .letter-header {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-bottom: 2mm;
+        flex-shrink: 0;
+        gap: 2px;  /* REDUCED GAP from 15px to 2px */
+        position: relative;
+    }
+    .org-logo {
+        max-height: 56px;
+        max-width: 96px;
+        object-fit: contain;
+        border-radius: 10px;
+        flex-shrink: 0;
+    }
+    .org-name {
+        font-weight: 800;
+        font-size: 22pt;
+        color: #003057;
+        line-height: 0.8;
+        text-align: center;
+        flex: 1;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    /* address container - centered with two lines */
+    .address-container {
+        text-align: center;
+        margin: 2mm 0 5mm 0;
+        flex-shrink: 0;
+        border-bottom: 1px dashed #9bb8da;
+        padding-bottom: 3mm;
+    }
+    .address-line1 {
+        font-size: 14pt;
+        color: #25597e;
+        font-weight: 600;
+        line-height: 1.1;
+    }
+    .address-line2 {
+        font-size: 12pt;
+        color: #2c5a7a;
+        font-weight: 500;
+        line-height: 1.1;
+        margin-top: 2px;
+    }
+
+    /* meta-line: letterNo+refNo left (stacked), date right */
+    .meta-line {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin: 2mm 0 5mm;
+        padding: 5px 0;
+        border-bottom: 2px dashed #a4c2dd;
+        font-size: 6pt;
+        color: #1e3a5f;
+        flex-shrink: 0;
+    }
+    .left-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        line-height: 1.1;
+    }
+    .right-meta {
+        white-space: nowrap;
+        padding-left: 15px;
+    }
+    .meta-line i { color: #2c74b3; width: 24px; }
+
+    /* recipient — properly handles commas and breaks after each comma */
+    .recipient-line {
+        font-size: 10pt;
+        font-weight: 700;
+        margin: 3mm 0 3mm;
+        
+        padding: 6px 18px;
+        
+        display: inline-block;
+        flex-shrink: 0;
+        white-space: normal;
+        word-break: break-word;
+        max-width: 100%;
+    }
+    
+    /* Style for comma-separated values to break after commas */
+    .recipient-line br.comma-break {
+        display: none; /* Hidden by default, will be used for line breaks */
+    }
+    
+    .subject {
+        font-weight: 700;
+        border-bottom: 3px solid #2c74b3;
+        margin: 12px 0 16px;
+        padding-bottom: 6px;
+        font-size: 10pt;
+        color: #0d3b5c;
+        flex-shrink: 0;
+    }
+
+    /* main body — takes remaining space */
+    .body {
+        line-height: 1.8;
+        text-align: justify;
+        white-space: pre-line;
+        font-size: 10pt;
+        margin-bottom: 20px;
+        color: #212529;
+        flex: 1;
+        overflow-y: auto;
+        min-height: 0;
+    }
+
+    .signature-area {
+        text-align: right;
+        margin-top: 15px;
+        border-top: 2px dotted #7fa3c2;
+        padding-top: 15px;
+        flex-shrink: 0;
+    }
+    .signature-img {
+        max-height: 70px;
+        max-width: 160px;
+        object-fit: contain;
+        margin-bottom: 6px;
+    }
+    .sender-name {
+        font-size: 10pt;
+        font-weight: 700;
+        color: #0b2d4b;
+    }
+    .sender-position {
+        font-size: 10pt;
+        color: #25597e;
+    }
+
+    /* footer fixed at bottom within padding - with email and mobile */
+    .footer {
+        text-align: center;
+        border-top: 1px solid #6082a3;
+        padding-top: 6px;
+        margin-top: 8px;
+        font-size: 9pt;
+        color: #1f405e;
+        font-weight: 500;
+        flex-shrink: 0;
+    }
+    .footer-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+    .footer-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .footer-item i {
+        color: #2c74b3;
+        font-size: 10pt;
+    }
+    /* QR box removed - no longer needed */
+    .qr-box { display: none; }
+
+    /* print media */
+    @media print {
+        body * { visibility: hidden; }
+        #output, #output * { visibility: visible; }
+        #output { position: absolute; top: 0; left: 0; width: 100%; }
+        .page { box-shadow: none; margin: 0; border-radius: 0; page-break-after: always; height: 297mm; }
+        .modal { display: none !important; }
+    }
+
+    @media (max-width: 700px) {
+        .card { padding: 18px; }
+        .actions button { width: 100%; justify-content: center; }
+        .org-name { font-size: 22px; }
+        .letter-header { flex-wrap: wrap; justify-content: center; gap: 5px; }
+        .address-line1 { font-size: 18px; }
+        .address-line2 { font-size: 16px; }
+        .page { padding: 15mm; }
+        .footer-content {
+            flex-direction: column;
+            gap: 8px;
+        }
+        .modal-header h2 { font-size: 1.3rem; }
+    }
+</style>
+</head>
+<body>
+
+<!-- AUTO POP-UP MODAL (hidden by default, shown via JS) -->
+<div id="welcomeModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <i class="fas fa-hands-helping"></i>
+            <h2><strong>Thank you for opening multi letter generator tool!</strong></h2>
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <!-- Image at top as requested -->
+            <img src="HomePage/team_img/team1.JPG" alt="letter head preview" style="width:20%; border-radius:10px;">    
+            
+            <p>आजको युग डिजिटल युग हो । फिजिकल चिट्ठीपत्र वा सिफारिसपत्र उपयोगी नहुन सक्छ, फेसबुक ह्वाट्सएप भाइबरजस्ता सामाजिक संजालबाट सुचना सम्प्रेषण गर्नुलाई यधपि सजिलो मानिन्छ तर सामाजिक सञ्जालमार्फत जानकारी दिन सबैसँग मोबाइल नहुन सक्छ, सबै ब्यक्तिमा डिजिटल पहुँच नहुन सक्छ साथै सबै बिद्यालयमा कम्प्युटर नहुन सक्छ, कम्प्युटर चलाउने कर्मचारी नहुन सक्छ, बिधुत लाइन गएको हुन सक्छ बिद्यालय र अफिस बन्द भएको हुन सक्छ, फोनबाट जानकारी गराउन सबैको मोबाइल नम्बर सेभ नभएको पनि हुन सक्छ, टावर गएको पनि हुन सक्छ । तर इमर्जेन्सी बैठक बोलाउनु पर्यो वा जानकारी गराउन पर्यो अथवा सिफारिस पत्र बनाउनु पर्ने अवस्था पर्यो भने यस्तो अवस्थामा यो टुल एकदमै उपयोगी हुन सक्छ । घरमा वा बिश्वको कुनै कुनामा बसेर वा सुतेर आरामले मोबाइलमै बोलेर पाँच दश मिनेटमै धेरै चिट्ठीपत्र वा सिफारिसपत्र बनाउने यो डिजिटल टुल प्रयोग गर्न सकिन्छ । यो टुलमा धेरै चिट्ठीपत्र वा सिफारिसपत्र तयार पारी पिडिएफमा सेभ गरी प्रिन्टर सेन्टरमा पिडिएफ फाइल इमेलबाट पठाइ प्रिन्ट गर्न गराउन सकिन्छ ।</p>
+
+            <p style="background:#fbeec2; border-left-color:#b棕; "><i class="fas fa-exclamation-triangle" style="color:#b34f0a;"></i> 
+            <strong>सुझाब र चेतावनी :</strong> यो टुलमा अनाधिकृतरुपमा कुनै स‌स्थाको डिजिटल लोगो र सिग्नेचर प्रयोग नगर्नुहोला । यस्तो कार्य साईबर अपराध मानिन्छ । यस अपराधमा ५ लाख र ५ बर्ष सजाय समेत हुन सक्नेछ ।
+            </p>
+
+<!-- Subscription Button -->
+                            <div class="subscribe-container">
+                                <button id="subscribeBtn">
+                                    <i class="fas fa-bell"></i>
+                                    <span>Subscribe</span>
+                                    <span id="badge" class="badge" style="display: none;">0</span>
+                                </button>
+         
+        </div>
+        <div class="modal-footer">
+            <button onclick="closeModal()"><i class="fas fa-check-circle"></i> बुझें / ल सुरु गर्छु </button>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+  <!-- Subscription Modal -->
+    <div class="modal fade subscription-modal" id="subscriptionModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Subscribe to Our Newsletter</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Stay updated with the latest educational resources, news, and tools.</p>
+                    
+                    <form id="subscriptionForm" class="subscription-form">
+                        <div class="form-group">
+                            <label for="subscriberName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="subscriberName" 
+                                   placeholder="Enter your name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subscriberEmail" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="subscriberEmail" 
+                                   placeholder="Enter your email" required>
+                        </div>
+                        
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="newsletterUpdates" checked>
+                            <label class="form-check-label" for="newsletterUpdates">
+                                Send me weekly educational updates
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn" id="subscribeSubmitBtn">
+                            <i class="fas fa-paper-plane me-2"></i>Subscribe Now
+                        </button>
+                    </form>
+                    
+                    <div class="benefits-list">
+                        <h6>You'll receive:</h6>
+                        <li><i class="fas fa-check-circle"></i> Latest educational news</li>
+                        <li><i class="fas fa-check-circle"></i> Teaching resources</li>
+                        <li><i class="fas fa-check-circle"></i> Exam preparation materials</li>
+                        <li><i class="fas fa-check-circle"></i> School management tips</li>
+                    </div>
+                    
+                    <div id="subscriptionSuccess" class="success-message">
+                        <i class="fas fa-check-circle me-2"></i>
+                        <strong>Thank you for subscribing!</strong>
+                        <p class="mb-0">You'll receive a confirmation email shortly.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <p class="small text-muted mb-0">
+                        We respect your privacy. Unsubscribe at any time.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+ 
+<div class="container">
+    <!-- card header -->
+    <div class="card">
+        <h1><i class="fas fa-envelope-open-text"></i> Generate multi letter</h1>
+        <p class="subtitle">यसमा लेखेर वा बोलेर एउटै बिषयमा धेरैजनालाई पत्र लेख्न वा कुनै सिफारिसपत्र बनाउन सकिन्छ ।</p>
+
+        <div class="instructions">
+            <h3><i class="fas fa-info-circle"></i> Instructions</h3>
+            <ul>
+                <li>प्रत्येक लाईनमा प्रत्येक प्रापकको नाम लेख्नुहोस ।</li>
+                <li>आफुले चाहेको मिति राख्नुहोस</li>
+                <li>यसमा Data store भएर बस्दैन ।</li>
+                <li>पत्रलाई pdf मा save गरेर राख्न सकिन्छ ।</li>
+                <li>Save गरिसकेपछिमात्र रिफ्रेश गर्नुहोला अन्यथा फेरि रिपिट लेख्नुपर्छ ।</li>
+            </ul>
+        </div>
+            <h2><i class="fas fa-info-circle"></i> यसमा दिइएको सबै बिवरण नमुनामात्र हुन् । </h2>
+<iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2FMulti%20letterpad.html&width=0&layout&action&size&share=true&height=35&appId" width="0" height="35" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+        <!-- Logo upload & logoUrl field -->
+        <div class="form-row">
+            <div class="form-group">
+                <label><i class="fas fa-cloud-upload-alt"></i> लोगो (फाइल)</label>
+                <input type="file" id="logoFile" accept="image/*">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-link"></i> लोगो URL (यदि छ भने)</label>
+                <input type="url" id="logoUrl" placeholder="https://example.com/logo.png">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-school"></i> विद्यालय / कार्यालय</label>
+                <input type="text" id="org" value="श्री डिम जनता माध्यमिक बिद्यालय">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label><i class="fas fa-location-dot"></i> ठेगाना (पहिलो भाग)</label>
+                <input type="text" id="address1" value="लालबन्दी-१६, परवानीपुर">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-location-dot"></i> ठेगाना (दोस्रो भाग)</label>
+                <input type="text" id="address2" value="सर्लाही, नेपाल">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-calendar"></i> पत्र मिति</label>
+                <input type="text" id="letterDate" value="२०८२-१०-१२">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label><i class="fas fa-hashtag"></i> पत्र संख्या</label>
+                <input type="text" id="letterNo" value="११/०८१-०८२">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-file-lines"></i> चलानी संख्या</label>
+                <input type="text" id="refNo" value="६/२०८२ शिक्षा शाखा">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-tag"></i> विषय</label>
+                <input type="text" id="subject" value="आमन्त्रण बारे">
+            </div>
+        </div>
+
+        <!-- New row for Email and Mobile -->
+        <div class="form-row">
+            <div class="form-group">
+                <label><i class="fas fa-envelope"></i> इमेल ठेगाना</label>
+                <input type="email" id="email" value="info@djmav.edu.np" placeholder="office@school.edu.np">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-phone-alt"></i> सम्पर्क नम्बर</label>
+                <input type="text" id="mobile" value="९८४१२३४५६७" placeholder="९८४१२३४५६७">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label><i class="fas fa-user-tie"></i> पठाउने व्यक्ति</label>
+                <input type="text" id="sender" value="ध्रुवबहादुर भण्डारी">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-briefcase"></i> पद</label>
+                <input type="text" id="position" value="प्रधानाध्यापक">
+            </div>
+            <div class="form-group" style="flex:1.5">
+                <label><i class="fas fa-address-card"></i> प्रापकहरुको नाम</label>
+                <textarea id="receivers" rows="3">
+मुख्य निर्वाचन अधिकृतऽ जिल्ला निर्वाचन कार्यालय सर्लाही
+शिक्षा शाखा प्रमुख, लालबन्दी नपाको कार्यालय
+बासु अधिकारी, नगर प्रमुख लालबन्दी नपा
+राम बहादुर स्याङ्तान,बिब्यस सदस्य
+पुष्पराज पौडेल, प्रअ नारायण जनता माबि जियाजोर सर्लाही
+जयराज भट्टराई, प्रअ जनता माबि तिनघरे परवानीपुर १५ सर्लाही
+कमला देवी, बिब्यस महिला सदस्य</textarea>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group" style="flex:2">
+                <label><i class="fas fa-pen"></i> पत्र मुख्य भाग</label>
+                <textarea id="body" rows="3">यस संस्थाको यहि मिति २०८२-१२-१५ का दिन हुन गई रहेको वार्षिकोत्सव कार्यक्रममा यहाँको गरिमामय उपस्थितिको लागि हार्दिक अनुरोध गर्दछु ।
+मिति: २०८१ चैत १५, बिहान ११ बजे।
+
+धन्यवाद ।</textarea>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-signature"></i>डिजिटल हस्ताक्षरि </label>
+                <input type="file" id="signatureFile" accept="image/*">
+                <small>सही खाली भए नाम/पद मात्र देखिन्छ</small>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="generate" onclick="generateLetters()"><i class="fas fa-bolt"></i> पत्र जेनेरेट गर्नुहोस्</button>
+            <button class="print" onclick="window.print()"><i class="fas fa-print"></i> प्रिन्ट</button>
+            <button class="pdf" onclick="downloadPDF()"><i class="fas fa-file-pdf"></i> पीडीएफ डाउनलोड</button>
+            <button class="clear" onclick="location.reload()"><i class="fas fa-rotate-left"></i> सबै हटाउनुहोस्</button>
+        </div>
+    </div>
+
+    <!-- Generated letters output -->
+    <div id="output"></div>
+</div>
+
+<script>
+// auto show modal after page load
+window.onload = function() {
+    document.getElementById('welcomeModal').style.display = 'flex';
+};
+
+// close modal function
+function closeModal() {
+    document.getElementById('welcomeModal').style.display = 'none';
+}
+
+// close modal if user clicks outside (on background overlay)
+window.onclick = function(event) {
+    let modal = document.getElementById('welcomeModal');
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+};
+
+let logoData = "";
+let signatureData = "";
+
+// Helper function to format recipient with line breaks after commas
+function formatRecipientWithBreaks(recipient) {
+    // If there's no comma, return as is
+    if (!recipient.includes(',')) {
+        return recipient;
+    }
+    
+    // Split by comma and join with comma + line break
+    // This will create a line break after each comma
+    let parts = recipient.split(',').map(part => part.trim());
+    return parts.join(',<br>');
+}
+
+// file uploads
+document.getElementById("logoFile").onchange = function(e) {
+    let reader = new FileReader();
+    reader.onload = (ev) => { logoData = ev.target.result; };
+    if (e.target.files[0]) reader.readAsDataURL(e.target.files[0]);
+};
+document.getElementById("signatureFile").onchange = function(e) {
+    let reader = new FileReader();
+    reader.onload = (ev) => { signatureData = ev.target.result; };
+    if (e.target.files[0]) reader.readAsDataURL(e.target.files[0]);
+};
+
+function generateLetters() {
+    // get all fields
+    let org = document.getElementById("org").value.trim() || "श्री डिम जनता माध्यमिक विद्यालय";
+    let address1 = document.getElementById("address1").value.trim() || "लालबन्दी-१६, परवानीपुर";
+    let address2 = document.getElementById("address2").value.trim() || "सर्लाही,मधेश प्रदेश, नेपाल";
+    let letterDate = document.getElementById("letterDate").value.trim() || "२०८२-१०-१२";
+    let letterNo = document.getElementById("letterNo").value.trim() || "११/०८१-०८२";
+    let refNo = document.getElementById("refNo").value.trim() || "६/२०८२";
+    let subject = document.getElementById("subject").value.trim() || "आमन्त्रण बारे";
+    let sender = document.getElementById("sender").value.trim() || "ध्रुवबहादुर भण्डारी";
+    let position = document.getElementById("position").value.trim() || "प्रधानाध्यापक";
+    let email = document.getElementById("email").value.trim() || "info@djmav.edu.np";
+    let mobile = document.getElementById("mobile").value.trim() || "९८४१२३४५६७";
+    let bodyTemplate = document.getElementById("body").value || "[नाम] ज्यू, उपस्थित हुनुहोला ।";
+    let receiversRaw = document.getElementById("receivers").value;
+    let receivers = receiversRaw.split("\n").map(r => r.trim()).filter(r => r !== "");
+    if (receivers.length === 0) receivers = ["प्रापकको नाम"];
+
+    // handle logo URL (if provided and no uploaded file)
+    let logoUrlInput = document.getElementById("logoUrl").value.trim();
+    let finalLogo = logoData;  // uploaded file takes precedence
+    if (!finalLogo && logoUrlInput) {
+        finalLogo = logoUrlInput;  // use URL string directly
+    }
+
+    let outputHtml = "";
+
+    receivers.forEach((rec, idx) => {
+        // Format recipient with line breaks after commas
+        let formattedRecipient = formatRecipientWithBreaks(rec);
+        
+        // Replace [नाम] placeholder in body with the original recipient (not formatted)
+        // For the body, we keep the original text without HTML breaks
+        let personalizedBody = bodyTemplate.replace(/\[नाम\]/g, rec);
+
+        // Build the header HTML: conditionally include logo and organization name side by side
+        let headerHtml = '';
+        if (finalLogo || org) {
+            headerHtml += '<div class="letter-header">';
+            if (finalLogo) {
+                headerHtml += `<img src="${finalLogo}" class="org-logo" alt="logo" onerror="this.style.display='none';">`;
+            }
+            if (org) {
+                headerHtml += `<div class="org-name">${org}</div>`;
+            }
+            headerHtml += '</div>';
+        }
+
+        // REMOVED the span with non-breaking spaces completely
+        // The page now starts directly with header or address container
+        
+        outputHtml += `
+        <div class="page" id="page-${idx}">
+            <div class="page-content">
+                ${headerHtml}
+                
+                <div class="address-container">
+                    <div class="address-line1">${address1}</div>
+                    <div class="address-line2">${address2}</div>
+                </div>
+
+                <div class="meta-line">
+                    <div class="left-meta">
+                        <span><i class="fas fa-hashtag"></i> पत्र संख्या : ${letterNo}</span>
+                        <span><i class="fas fa-qrcode"></i> चलानी संख्या : ${refNo}</span>
+                    </div>
+                    <div class="right-meta">
+                        <span><i class="fas fa-calendar-alt"></i> मिति: ${letterDate}</span>
+                    </div>
+                </div>
+
+                <div class="recipient-line">${formattedRecipient}</div>
+                <div class="subject">विषय: ${subject}</div>
+
+                <div class="body">${personalizedBody.replace(/\n/g, '<br>')}</div>
+
+                <div class="signature-area">
+                    ${signatureData ? `<img src="${signatureData}" class="signature-img"><br>` : ''}
+                    <div class="sender-name">${sender}</div>
+                    <div class="sender-position">${position}</div>
+                </div>
+
+                <div class="footer">
+                    <div class="footer-content">
+                        <span class="footer-item"><i class="fas fa-envelope"></i> ${email}</span>
+                        <span class="footer-item"><i class="fas fa-phone-alt"></i> ${mobile}</span>
+                        <span class="footer-item"><i class="fas fa-map-marker-alt"></i> ${address1}</span>
+                    </div>
+                    <!-- QR box removed -->
+                </div>
+            </div>
+        </div>`;
+    });
+
+    document.getElementById("output").innerHTML = outputHtml;
+}
+
+async function downloadPDF() {
+    const { jsPDF } = window.jspdf;
+    let pdf = new jsPDF({ orientation: 'p', unit: 'mm', format: 'a4' });
+    let pages = document.querySelectorAll("#output .page");
+    if (!pages.length) { alert("पहिला पत्र जेनेरेट गर्नुहोस्"); return; }
+
+    for (let i = 0; i < pages.length; i++) {
+        if (i > 0) pdf.addPage();
+        try {
+            let canvas = await html2canvas(pages[i], { 
+                scale: 1.8, 
+                backgroundColor: '#ffffff',
+                logging: false,
+                allowTaint: false,
+                useCORS: true 
+            });
+            pdf.addImage(canvas.toDataURL('image/jpeg', 0.95), 'JPEG', 0, 0, 210, 297, undefined, 'FAST');
+        } catch (err) { console.error(err); }
+    }
+    pdf.save("letters.pdf");
+}
+</script>
+
+</body>
+</html>
