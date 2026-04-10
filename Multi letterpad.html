@@ -581,26 +581,27 @@ function goToTop(){ window.scrollTo(0,0); }
                 <i class="fas fa-text-height"></i> <span id="orientationHint">Single letter: font size=16 (Potrait)</span>
             </div>
         </div>
-
         <div class="instructions">
             <h3><i class="fas fa-info-circle"></i> निर्देशन</h3>
             <ul>
-                <li>प्रत्येक लाइनमा प्रापकको नाम लेख्नुहोस् ।</li>
-                <li>युनिकोडमा पत्र तयार हुन्छ ।</li>
-                <li>पत्रको मुख्य भागमा लाइन स्पेस 1.5 छ ।</li>
+                <li>प्रत्येक लाइनमा एक वा एक भन्दाबढी प्रापकको नाम लेख्नुहोस् ।</li>
+                <li>गल्ती सच्याई रि-जेनेरेट गर्न सकिन्छ।</li>
+                <li>रिफ्रेश गर्दा लेखिएको डेटा सबै हराउँछ । किनकी यसमा Data store भएर बस्दैन । </li>
                 <li>पत्रलाई PDF मा सेभ गर्न सकिन्छ ।</li>
+                      <li>यसमा दिएको नमुना बिवरणहरु काल्पनिक हुन् र यसै अनुसार आफ्नो बिवरणहरु भरेर पत्र जेनेरेट गर्नुहोस् ।</li>
+                      <li>पत्रलाई PDF मा सेभ गर्न सकिन्छ ।</li>
             </ul>
         </div>
 
         <!-- Form Fields -->
         <div class="form-row">
-            <div class="form-group"><label><i class="fas fa-cloud-upload-alt"></i> लोगो (फाइल)</label><input type="file" id="logoFile" accept="image/*"></div>
-            <div class="form-group"><label><i class="fas fa-link"></i> लोगो URL</label><input type="url" id="logoUrl" placeholder="https://example.com/logo.png"></div>
+            <div class="form-group"><label><i class="fas fa-cloud-upload-alt"></i> लोगो from Device</label><input type="file" id="logoFile" accept="image/*"></div>
+            <div class="form-group"><label><i class="fas fa-link"></i> लोगो by Pasting URL</label><input type="url" id="logoUrl" placeholder="https://example.com/logo.png"></div>
             <div class="form-group"><label><i class="fas fa-school"></i> विद्यालय / कार्यालय</label><input type="text" id="org" value="श्री डिम जनता माध्यमिक बिद्यालय"></div>
         </div>
         <div class="form-row">
-            <div class="form-group"><label><i class="fas fa-location-dot"></i> ठेगाना (पहिलो)</label><input type="text" id="address1" value="लालबन्दी-१६, परवानीपुर"></div>
-            <div class="form-group"><label><i class="fas fa-location-dot"></i> ठेगाना (दोस्रो)</label><input type="text" id="address2" value="सर्लाही, नेपाल"></div>
+            <div class="form-group"><label><i class="fas fa-location-dot"></i> ठेगाना (A)</label><input type="text" id="address1" value="लालबन्दी-१६, परवानीपुर"></div>
+            <div class="form-group"><label><i class="fas fa-location-dot"></i> ठेगाना (B)</label><input type="text" id="address2" value="सर्लाही, नेपाल"></div>
             <div class="form-group"><label><i class="fas fa-calendar"></i> पत्र मिति</label><input type="text" id="letterDate" value="२०८२-१०-१२"></div>
         </div>
         <div class="form-row">
@@ -610,12 +611,12 @@ function goToTop(){ window.scrollTo(0,0); }
         </div>
         <div class="form-row">
             <div class="form-group"><label><i class="fas fa-envelope"></i> इमेल</label><input type="email" id="email" value="info@djmav.edu.np"></div>
-            <div class="form-group"><label><i class="fas fa-phone-alt"></i> सम्पर्क नम्बर</label><input type="text" id="mobile" value="९८४१२३४५६७"></div>
+            <div class="form-group"><label><i class="fas fa-phone-alt"></i> सम्पर्क नम्बर</label><input type="text" id="mobile" value="९८########"></div>
         </div>
         <div class="form-row">
-            <div class="form-group"><label><i class="fas fa-user-tie"></i> पठाउने व्यक्ति</label><input type="text" id="sender" value="ध्रुवबहादुर भण्डारी"></div>
+            <div class="form-group"><label><i class="fas fa-user-tie"></i> प्रेषक</label><input type="text" id="sender" value="ध्रुवबहादुर भण्डारी"></div>
             <div class="form-group"><label><i class="fas fa-briefcase"></i> पद</label><input type="text" id="position" value="प्रधानाध्यापक"></div>
-            <div class="form-group"><label><i class="fas fa-address-card"></i> प्रापकहरु (प्रति लाइन)</label><textarea id="receivers" rows="3">मुख्य निर्वाचन अधिकृत, जिल्ला निर्वाचन कार्यालय सर्लाही
+            <div class="form-group"><label><i class="fas fa-address-card"></i> प्रापकहरु (लाइनब्रेक गर्नुहोस्)</label><textarea id="receivers" rows="3">मुख्य निर्वाचन अधिकृत, जिल्ला निर्वाचन कार्यालय सर्लाही
 शिक्षा शाखा प्रमुख, लालबन्दी नपाको कार्यालय
 बासु अधिकारी, नगर प्रमुख लालबन्दी नपा
 राम बहादुर स्याङ्तान, व्यवसाय सदस्य
@@ -624,13 +625,14 @@ function goToTop(){ window.scrollTo(0,0); }
 कमला देवी, महिला सदस्य</textarea></div>
         </div>
         <div class="form-row">
-            <div class="form-group" style="flex:2"><label><i class="fas fa-pen"></i> पत्र मुख्य भाग ([नाम] प्रयोग गर्नुहोस्)</label><textarea id="body" rows="3">यस संस्थाको यहि मिति २०८२-१२-१५ का दिन हुने वार्षिकोत्सव कार्यक्रममा [नाम] ज्यूको गरिमामय उपस्थितिको हार्दिक अनुरोध गर्दछौं । मिति: २०८१ चैत १५, बिहान ११ बजे । धन्यवाद ।</textarea></div>
+            <div class="form-group" style="flex:2"><label><i class="fas fa-pen"></i> पत्रको ब्यहोरा/पेटबोलि (LetterBody)</label><textarea id="body" rows="3">यस संस्थाको यहि मिति २०८२-१२-१५ का दिन हुने वार्षिकोत्सव कार्यक्रममा यहाँको गरिमामय उपस्थितिको हार्दिक अनुरोध गर्दछौं । धन्यवाद । 
+                मिति: २०८१ चैत १५, बिहान ११ बजे । </textarea></div>
             <div class="form-group"><label><i class="fas fa-signature"></i> डिजिटल हस्ताक्षर</label><input type="file" id="signatureFile" accept="image/*"><small>खाली भए नाम/पद मात्र</small></div>
         </div>
         <div class="actions">
-            <button class="generate" onclick="generateLetters()"><i class="fas fa-bolt"></i> पत्र जेनेरेट गर्नुहोस्</button>
+            <button class="generate" onclick="generateLetters()"><i class="fas fa-bolt"></i> जेनेरेट </button>
             <button class="print" onclick="window.print()"><i class="fas fa-print"></i> प्रिन्ट</button>
-            <button class="pdf" onclick="downloadPDF()"><i class="fas fa-file-pdf"></i> पीडीएफ डाउनलोड</button>
+            <button class="pdf" onclick="downloadPDF()"><i class="fas fa-file-pdf"></i> डाउनलोड</button>
             <button class="clear" onclick="location.reload()"><i class="fas fa-rotate-left"></i> सबै हटाउनुहोस्</button>
         </div>
     </div>
@@ -647,9 +649,9 @@ const orientationHint = document.getElementById('orientationHint');
 
 layoutSelect.addEventListener('change', function() {
     currentLayout = this.value;
-    if (currentLayout === 'one') orientationHint.innerText = 'एक पत्र: 16px (पोर्ट्रेट)';
-    else if (currentLayout === 'two') orientationHint.innerText = 'दुई पत्र: 14px (ल्याण्डस्केप)';
-    else orientationHint.innerText = 'चार पत्र: 12px (ल्याण्डस्केप)';
+    if (currentLayout === 'one') orientationHint.innerText = 'Single Letter: Font size=16px (Potrait)';
+    else if (currentLayout === 'two') orientationHint.innerText = 'Two Letter: 14px (Landscape)';
+    else orientationHint.innerText = 'Four Letter: 12px (Landscape)';
     generateLetters();
 });
 
@@ -798,7 +800,7 @@ function generateLetters() {
 async function downloadPDF() {
     const { jsPDF } = window.jspdf;
     const pages = document.querySelectorAll("#output .page-portrait, #output .page-landscape-two, #output .page-landscape-four");
-    if (!pages.length) { alert("पहिला पत्र जेनेरेट गर्नुहोस्"); return; }
+    if (!pages.length) { alert("Generate Single Letter"); return; }
     let pdf = null;
     for (let i = 0; i < pages.length; i++) {
         let orientation = 'p';
