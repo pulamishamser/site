@@ -575,6 +575,63 @@ function goToTop(){ window.scrollTo(0,0); }
         .letter-half, .letter-quarter { width: 100%; margin-bottom: 15px; }
     }
 </style>
+
+
+<style>
+  
+    /* Like Button Styles */
+    .like-container {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: #f0f2f5;
+        padding: 8px 20px;
+        border-radius: 60px;
+        margin-left: auto;
+    }
+    .like-btn {
+        background: linear-gradient(135deg, #4267B2, #365899);
+        color: white;
+        padding: 10px 24px;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    .like-btn:hover {
+        background: linear-gradient(135deg, #365899, #2d4a82);
+        transform: scale(1.05);
+    }
+    .like-btn.liked {
+        background: linear-gradient(135deg, #e74c3c, #c0392b);
+    }
+    .like-btn.liked i {
+        animation: heartBeat 0.3s ease;
+    }
+    @keyframes heartBeat {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.3); }
+        100% { transform: scale(1); }
+    }
+    .like-count {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #1e3a5f;
+        background: white;
+        padding: 6px 16px;
+        border-radius: 50px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .like-count i {
+        color: #e74c3c;
+        margin-right: 6px;
+    }
+</style>
+
+
+
+
+  
 </head>
 
 
@@ -750,12 +807,84 @@ window.scrollTo(0, 0);
             <button class="print" onclick="window.print()"><i class="fas fa-print"></i> प्रिन्ट</button>
             <button class="pdf" onclick="downloadPDF()"><i class="fas fa-file-pdf"></i> डाउनलोड</button>
             <button class="clear" onclick="location.reload()"><i class="fas fa-rotate-left"></i> सबै हटाउनुहोस्</button>
+            <!-- Like Button with Counter -->
+            <div class="like-container">
+                <button id="likeButton" class="like-btn">
+                    <i class="fas fa-thumbs-up"></i> <span id="likeText">Like</span>
+                </button>
+                <div class="like-count">
+                    <i class="fas fa-heart"></i> <span id="likeCount">0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="output"></div>
+</div>
+
+
+
         </div>
     </div>
     <div id="output"></div>
 </div>
 
 <script>
+<script>
+// Like Button Functionality with localStorage persistence
+let likeCount = 0;
+let isLiked = false;
+
+// Load saved like count from localStorage
+function loadLikeCount() {
+    const savedCount = localStorage.getItem('letterpad_likes');
+    const savedStatus = localStorage.getItem('letterpad_liked');
+    if (savedCount !== null) {
+        likeCount = parseInt(savedCount);
+    }
+    if (savedStatus === 'true') {
+        isLiked = true;
+    }
+    updateLikeUI();
+}
+
+// Update like button UI
+function updateLikeUI() {
+    document.getElementById('likeCount').innerText = likeCount;
+    const likeBtn = document.getElementById('likeButton');
+    const likeTextSpan = document.getElementById('likeText');
+    if (isLiked) {
+        likeBtn.classList.add('liked');
+        likeTextSpan.innerText = 'Liked';
+    } else {
+        likeBtn.classList.remove('liked');
+        likeTextSpan.innerText = 'Like';
+    }
+}
+
+// Handle like button click
+function handleLike() {
+    if (!isLiked) {
+        likeCount++;
+        isLiked = true;
+        // Add animation effect
+        const likeBtn = document.getElementById('likeButton');
+        likeBtn.style.transform = 'scale(1.1)';
+        setTimeout(() => { likeBtn.style.transform = ''; }, 200);
+    } else {
+        likeCount--;
+        isLiked = false;
+    }
+    // Save to localStorage
+    localStorage.setItem('letterpad_likes', likeCount);
+    localStorage.setItem('letterpad_liked', isLiked);
+    updateLikeUI();
+}
+
+// Initialize like button event listener
+document.getElementById('likeButton').addEventListener('click', handleLike);
+
+
+  
 let logoData = "";
 let signatureData = "";
 let currentLayout = "one";
