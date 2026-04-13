@@ -2222,30 +2222,7 @@ src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0">
         </div>
     </div>
 
-    <!-- ========= TRENDING SECTION (Extra content with like) ========= -->
-    <div class="content-card" id="content_trending">
-        <section class="trending-section">
-            <h2><i class="fa fa-pencil-square-o"></i> ट्रेन्डिङ विषयहरू</h2>
-            <div class="trending-content">
-                <div class="trending-tags">
-                    <a href="#P4"><span>शिक्षामा जुत्ता बेचेजस्तो</span></a>
-                    <a href="https://shamser.info.np/tsc_questions.html"><span>Quiz</span></a>
-                    <a href="#P1"><span>शिक्षकको सरुवा.</span></a>
-                    <a href="#P2"><span>पुस्तक बिक्री</span></a>
-                    <a href="#P3"><span>School Page</span></a>
-                    <a href="https://script.google.com/macros/s/AKfycbxD3lnuphwTi_E4bwqogA-hBjgiU9XpnyTUKz_yXe4jHARi6OLhklZ8WM3LR8UtkuIJIA/exec"><span>Login IEMIS</span></a>
-                </div>
-            </div>
-        </section>
-        <div class="like-block" data-content-id="trending">
-            <div class="like-group">
-                <button class="like-btn" data-like-key="trending"><i class="fa fa-heart-o"></i><span class="like-text">मन पर्यो</span></button>
-                <div class="like-count-badge" data-count-key="trending">0</div>
-            </div>
-            <div class="time-micro"><i class="fa fa-clock-o"></i> <span data-time-key="trending">अहिले</span></div>
-        </div>
-    </div>
-
+   
     <!-- ========= 4. शिक्षकको सरुवा हुँदै (Teacher Transfer) ========= -->
     <div class="content-card" id="content_transfer">
         <h1>शिक्षकको सरुवा हुँदै..</h1>
@@ -2442,67 +2419,761 @@ src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0">
     
     loadAllLikes();
 </script>
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>नेपाली समाचार पोर्टल | ताजा अपडेट</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        :root {
+            --white: #ffffff;
+            --light: #f8f9fa;
+            --light-gray: #e9ecef;
+            --gray: #6c757d;
+            --secondary: #2c3e50;
+            --primary: #e67e22;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
 
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+            padding: 20px;
+            color: #1e2a3a;
+            min-height: 100vh;
+        }
 
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
 
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .trending-content {
+                flex-direction: column;
+            }
+        }
 
+        @media (max-width: 768px) {
+            body {
+                padding: 12px;
+            }
+            .trending-tags span {
+                font-size: 11px;
+                padding: 6px 12px;
+            }
+            .news-list {
+                grid-template-columns: 1fr;
+            }
+        }
 
+        /* Header Styles */
+        .site-header {
+            background: linear-gradient(135deg, #1e4663 0%, #2c3e50 100%);
+            border-radius: 20px;
+            padding: 25px 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            color: white;
+        }
 
+        .site-header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
 
+        .site-header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
 
+        /* Trending Section */
+        .trending-section {
+            background-color: var(--white);
+            border-radius: 24px;
+            padding: 20px 24px;
+            margin-bottom: 32px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+        
+        .trending-section h2 {
+            font-size: 22px;
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--light-gray);
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .trending-content {
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+        
+        .trending-tags-wrapper {
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .trending-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            flex: 2;
+        }
+        
+        .trending-tags a {
+            text-decoration: none;
+            display: inline-flex;
+        }
+        
+        .trending-tags span {
+            background-color: var(--light);
+            padding: 10px 18px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #1e4663;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .trending-tags span:hover {
+            background-color: var(--primary);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 18px rgba(230, 126, 34, 0.2);
+            border-color: var(--primary);
+        }
+        
+        .trending-tags span::before {
+            content: "#";
+            font-weight: bold;
+            font-size: 14px;
+        }
 
+        /* Like Block Styles */
+        .like-block {
+            background: linear-gradient(135deg, #fff5eb 0%, #ffe8d6 100%);
+            padding: 12px 20px;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #ffd8b5;
+        }
+        
+        .like-block:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 16px rgba(230,126,34,0.15);
+        }
+        
+        .like-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .like-btn {
+            background: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            color: #e67e22;
+            border: 1px solid #f0c8a0;
+            font-family: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .like-btn i {
+            font-size: 16px;
+            transition: transform 0.2s;
+        }
+        
+        .like-btn:hover {
+            background: #e67e22;
+            color: white;
+            border-color: #e67e22;
+            transform: translateY(-2px);
+        }
+        
+        .like-btn:hover i {
+            transform: scale(1.1);
+        }
+        
+        .like-btn.liked {
+            background: #e67e22;
+            color: white;
+            border-color: #e67e22;
+        }
+        
+        .like-btn.liked i {
+            animation: heartBeat 0.4s ease;
+        }
+        
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+        }
+        
+        .like-count-badge {
+            background: #e67e22;
+            color: white;
+            border-radius: 50px;
+            padding: 5px 12px;
+            font-size: 14px;
+            font-weight: bold;
+            min-width: 48px;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        
+        .time-micro {
+            font-size: 12px;
+            color: #b45f1b;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(255,255,240,0.8);
+            padding: 4px 12px;
+            border-radius: 30px;
+        }
+        
+        .time-micro i {
+            font-size: 12px;
+        }
 
+        /* News Section */
+        .news-section {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 20px 24px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+        }
 
- <!-- News Section -->
-        <section class="news-section">
-            <div class="news-header">
+        .news-header {
+            margin-bottom: 22px;
+            border-left: 5px solid var(--primary);
+            padding-left: 16px;
+        }
 
-                <h2 id="P2"class="header3"><i class="fa fa-pencil-square-o"></i> <b>राष्ट्रिय समाचार </b> </h2>
+        .header3 {
+            font-size: 22px;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .news-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+        
+        .news-item {
+            display: flex;
+            gap: 18px;
+            padding: 12px;
+            background: #fefefe;
+            border-radius: 20px;
+            transition: var(--transition);
+            border: 1px solid #edf2f7;
+        }
+
+        .news-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.05);
+            border-color: #ffe0c4;
+            background: #fffaf5;
+        }
+        
+        .news-item img {
+            width: 95px;
+            height: 95px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+        
+        .news-info .title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+            font-size: 0.95rem;
+            color: #1a2c3e;
+        }
+        
+        .news-info .source {
+            font-size: 12px;
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        
+        .news-info .date {
+            font-size: 11px;
+            color: var(--gray);
+            display: inline-block;
+            margin-left: 6px;
+        }
+
+        /* Marquee */
+        .custom-marquee {
+            background: linear-gradient(90deg, #f39c12, #e67e22);
+            border-radius: 48px;
+            margin: 20px 0 10px;
+            padding: 6px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .custom-marquee marquee {
+            background: transparent;
+            border-radius: 48px;
+        }
+        
+        .custom-marquee p {
+            font-size: 15px;
+            font-weight: 500;
+            color: white;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+            padding: 8px 0;
+            margin: 0;
+            letter-spacing: 0.3px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--secondary);
+            color: white;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            .trending-tags-wrapper {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .like-block {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            .trending-tags {
+                justify-content: center;
+            }
+            .site-header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Site Header -->
+    <div class="site-header">
+        <h1>
+            <i class="fa fa-newspaper-o"></i> 
+            नेपाली समाचार पोर्टल
+            <i class="fa fa-globe"></i>
+        </h1>
+        <p>ताजा, द्रुत र विश्वसनीय समाचार | सत्यको पक्षमा सधैं</p>
+    </div>
+
+    <!-- ========= TRENDING SECTION (with like block) ========= -->
+    <section class="trending-section">
+        <h2><i class="fa fa-line-chart" style="color:#e67e22;"></i> ट्रेन्डिङ विषयहरू</h2>
+        <div class="trending-content">
+            <div class="trending-tags-wrapper">
+                <div class="trending-tags">
+                    <a href="#P4"><span><i class="fa fa-graduation-cap"></i> शिक्षामा जुत्ता बेचेजस्तो</span></a>
+                    <a href="https://shamser.info.np/tsc_questions.html" target="_blank"><span><i class="fa fa-question-circle"></i> Quiz</span></a>
+                    <a href="#P1"><span><i class="fa fa-exchange"></i> शिक्षकको सरुवा</span></a>
+                    <a href="#P2"><span><i class="fa fa-book"></i> पुस्तक बिक्री</span></a>
+                    <a href="#P3"><span><i class="fa fa-school"></i> School Page</span></a>
+                    <a href="https://script.google.com/macros/s/AKfycbxD3lnuphwTi_E4bwqogA-hBjgiU9XpnyTUKz_yXe4jHARi6OLhklZ8WM3LR8UtkuIJIA/exec" target="_blank"><span><i class="fa fa-sign-in"></i> Login IEMIS</span></a>
+                </div>
+                
+                <!-- LIKE BLOCK integrated -->
+                <div class="like-block" data-content-id="trending">
+                    <div class="like-group">
+                        <button class="like-btn" data-like-key="trending">
+                            <i class="fa fa-heart-o"></i>
+                            <span class="like-text">मन पर्यो</span>
+                        </button>
+                        <div class="like-count-badge" data-count-key="trending">0</div>
+                    </div>
+                    <div class="time-micro">
+                        <i class="fa fa-clock-o"></i> 
+                        <span data-time-key="trending">अहिले</span>
+                    </div>
+                </div>
             </div>
-            <div class="news-list">
-                <div class="news-item">
-                    <img src="https://images.unsplash.com/photo-1588681664899-f142ff2dc9b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="news">
-                    <div class="news-info">
-                        <p class="title">जेनजि आन्दोलनमा कानुनी व्यवस्थालाई खल्बल्याउने प्रयास भयो : शंकर पोखरेल</p>
-                        <span class="source">baahrakhari.com</span> · <span id="datetimenw"></span> 
-                    </div>
-                </div>
-                <div class="news-item">
-                    <img src="https://images.unsplash.com/photo-1551135049-8a33b42738b4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="news">
-                    <div class="news-info">
-                        <p class="title">काठमाण्डौका लागि उडेको श्री एयरको जहाज डेढ घण्टा फर्काइयो</p>
-                        <span class="source">nepalpress.com</span> ·<span data-livestamp="2025-11-03, 5:55:25 PM"></span>
-                    </div>
-                </div>
-                <div class="news-item">
-                    <img src="https://images.unsplash.com/photo-1584824486506-c19c3e275c1b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="news">
-                    <div class="news-info">
-                        <p class="title">सरकारले ल्याउने लागि भनिएको ऐन अझै समितिमै</p>
-                        <span class="source">annapurnapost.com</span> ·<span data-livestamp="2025-11-03, 5:55:25 PM"></span>
-                    </div>
-                </div>
-                <div class="news-item">
-                    <img src="https://images.unsplash.com/photo-1590247813693-5541d1c609fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="news">
-                    <div class="news-info">
-                        <p class="title">भर्खरको भूकम्पले धेरै जिल्लामा कम्पन महशुस</p>
-                        <span class="source">news24nepal.tv</span> · <span data-livestamp="2025-11-03, 5:55:25 PM"></span>
-                    </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="news-section">
+        <div class="news-header">
+            <h2 id="P2" class="header3"><i class="fa fa-newspaper-o"></i> <b>राष्ट्रिय समाचार</b></h2>
+        </div>
+        <div class="news-list">
+            <div class="news-item">
+                <img src="https://images.unsplash.com/photo-1588681664899-f142ff2dc9b1?w=150&h=150&fit=crop" alt="news">
+                <div class="news-info">
+                    <p class="title">जेनजि आन्दोलनमा कानुनी व्यवस्थालाई खल्बल्याउने प्रयास भयो : शंकर पोखरेल</p>
+                    <span class="source">baahrakhari.com</span>
+                    <span class="date" id="datetimenw1"></span>
                 </div>
             </div>
-        </section>
+            <div class="news-item">
+                <img src="https://images.unsplash.com/photo-1551135049-8a33b42738b4?w=150&h=150&fit=crop" alt="news">
+                <div class="news-info">
+                    <p class="title">काठमाण्डौका लागि उडेको श्री एयरको जहाज डेढ घण्टा फर्काइयो</p>
+                    <span class="source">nepalpress.com</span>
+                    <span class="date" id="date2"></span>
+                </div>
+            </div>
+            <div class="news-item">
+                <img src="https://images.unsplash.com/photo-1584824486506-c19c3e275c1b?w=150&h=150&fit=crop" alt="news">
+                <div class="news-info">
+                    <p class="title">सरकारले ल्याउने भनिएको ऐन अझै समितिमै</p>
+                    <span class="source">annapurnapost.com</span>
+                    <span class="date" id="date3"></span>
+                </div>
+            </div>
+            <div class="news-item">
+                <img src="https://images.unsplash.com/photo-1590247813693-5541d1c609fd?w=150&h=150&fit=crop" alt="news">
+                <div class="news-info">
+                    <p class="title">भर्खरको भूकम्पले धेरै जिल्लामा कम्पन महशुस</p>
+                    <span class="source">news24nepal.tv</span>
+                    <span class="date" id="date4"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Marquee -->
+    <div class="custom-marquee">
+        <marquee behavior="scroll" direction="left" scrollamount="4" onmouseover="this.stop();" onmouseout="this.start();">
+            <p>✨ शुन्दर रुपले भन्दा शुन्दर मनले सुन्दर जीवन बनाउछ । डाहा गर्नेले जति नै राम्रो गरेपनि खोट लगाउँछन् माया गर्नेले झुक्किएर गल्ती भएपनि हौसला दिन्छन् । ✨&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;🇳🇵 नेपाली समाचार डटकम — ताजा अपडेटको लागि जोडिनुहोस् &nbsp;&nbsp;❤️</p>
+        </marquee>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p><i class="fa fa-copyright"></i> 2024 नेपाली समाचार पोर्टल | सबै अधिकार सुरक्षित</p>
+        <p style="margin-top: 8px; opacity: 0.8;">सम्पर्क: news@nepaliportal.com | तपाईंको प्रतिक्रिया हाम्रो लागि महत्वपूर्ण छ</p>
+    </div>
+</div>
+
+<script>
+    // ========= DYNAMIC DATE FOR NEWS =========
+    function formatNepaliDate() {
+        const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+        const now = new Date();
+        return now.toLocaleDateString('ne-NP', options);
+    }
+
+    // Set dates for each news item
+    document.getElementById('datetimenw1') && (document.getElementById('datetimenw1').innerText = formatNepaliDate());
+    document.getElementById('date2') && (document.getElementById('date2').innerText = formatNepaliDate());
+    document.getElementById('date3') && (document.getElementById('date3').innerText = formatNepaliDate());
+    document.getElementById('date4') && (document.getElementById('date4').innerText = formatNepaliDate());
+
+    // ========= LIKE SYSTEM (Persistent with localStorage) =========
+    (function() {
+        // Load likes from localStorage
+        function loadLikes() {
+            const savedLikes = localStorage.getItem('newsPortalLikes');
+            if(savedLikes) {
+                const likesData = JSON.parse(savedLikes);
+                for(const [key, value] of Object.entries(likesData)) {
+                    const countElement = document.querySelector(`[data-count-key="${key}"]`);
+                    const likeButton = document.querySelector(`[data-like-key="${key}"]`);
+                    const timeElement = document.querySelector(`[data-time-key="${key}"]`);
+                    
+                    if(countElement) {
+                        countElement.textContent = value.count || 0;
+                    }
+                    
+                    if(likeButton && value.liked) {
+                        likeButton.classList.add('liked');
+                        const icon = likeButton.querySelector('i');
+                        if(icon) {
+                            icon.classList.remove('fa-heart-o');
+                            icon.classList.add('fa-heart');
+                        }
+                        const textSpan = likeButton.querySelector('.like-text');
+                        if(textSpan) textSpan.textContent = 'मन पर्यो ✅';
+                    }
+                    
+                    if(timeElement && value.lastLiked) {
+                        const timeAgo = getTimeAgo(new Date(value.lastLiked));
+                        timeElement.textContent = timeAgo;
+                    }
+                }
+            }
+        }
+        
+        // Save likes to localStorage
+        function saveLike(key, count, liked, lastLikedTime = null) {
+            const savedLikes = localStorage.getItem('newsPortalLikes');
+            let likesData = savedLikes ? JSON.parse(savedLikes) : {};
+            
+            likesData[key] = {
+                count: count,
+                liked: liked,
+                lastLiked: lastLikedTime || (liked ? new Date().toISOString() : (likesData[key]?.lastLiked || null))
+            };
+            
+            localStorage.setItem('newsPortalLikes', JSON.stringify(likesData));
+        }
+        
+        // Get time ago in Nepali
+        function getTimeAgo(date) {
+            const now = new Date();
+            const diffMs = now - date;
+            const diffMins = Math.floor(diffMs / 60000);
+            const diffHours = Math.floor(diffMins / 60);
+            const diffDays = Math.floor(diffHours / 24);
+            
+            if(diffMins < 1) return 'अहिले भर्खर';
+            if(diffMins < 60) return `${diffMins} मिनेट अघि`;
+            if(diffHours < 24) return `${diffHours} घण्टा अघि`;
+            if(diffDays < 7) return `${diffDays} दिन अघि`;
+            return date.toLocaleDateString('ne-NP');
+        }
+        
+        // Handle like button
+        function setupLikeButton(button) {
+            const likeKey = button.getAttribute('data-like-key');
+            const countElement = document.querySelector(`[data-count-key="${likeKey}"]`);
+            const timeElement = document.querySelector(`[data-time-key="${likeKey}"]`);
+            
+            if(!countElement) return;
+            
+            let currentCount = parseInt(countElement.textContent) || 0;
+            let isLiked = button.classList.contains('liked');
+            
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                if(!isLiked) {
+                    currentCount++;
+                    isLiked = true;
+                    button.classList.add('liked');
+                    
+                    const icon = button.querySelector('i');
+                    icon.classList.remove('fa-heart-o');
+                    icon.classList.add('fa-heart');
+                    
+                    const textSpan = button.querySelector('.like-text');
+                    textSpan.textContent = 'मन पर्यो ✅';
+                    
+                    countElement.style.transform = 'scale(1.2)';
+                    setTimeout(() => {
+                        countElement.style.transform = '';
+                    }, 200);
+                    
+                    const now = new Date();
+                    const timeAgo = getTimeAgo(now);
+                    timeElement.textContent = timeAgo;
+                    
+                    saveLike(likeKey, currentCount, true, now.toISOString());
+                    showToast('❤️ धन्यवाद! तपाईंको प्रतिक्रिया सुरक्षित भयो');
+                } else {
+                    currentCount = Math.max(0, currentCount - 1);
+                    isLiked = false;
+                    button.classList.remove('liked');
+                    
+                    const icon = button.querySelector('i');
+                    icon.classList.remove('fa-heart');
+                    icon.classList.add('fa-heart-o');
+                    
+                    const textSpan = button.querySelector('.like-text');
+                    textSpan.textContent = 'मन पर्यो';
+                    
+                    countElement.textContent = currentCount;
+                    timeElement.textContent = 'अहिले';
+                    
+                    saveLike(likeKey, currentCount, false, null);
+                    showToast('💔 हटाइयो । फेरि दिनुहोस्!');
+                }
+                
+                countElement.textContent = currentCount;
+                createRipple(e, button);
+            });
+        }
+        
+        // Ripple effect
+        function createRipple(event, element) {
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple-effect');
+            const rect = element.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = event.clientX - rect.left - size/2;
+            const y = event.clientY - rect.top - size/2;
+            
+            ripple.style.width = ripple.style.height = `${size}px`;
+            ripple.style.left = `${x}px`;
+            ripple.style.top = `${y}px`;
+            ripple.style.position = 'absolute';
+            ripple.style.borderRadius = '50%';
+            ripple.style.backgroundColor = 'rgba(255,255,255,0.5)';
+            ripple.style.pointerEvents = 'none';
+            ripple.style.transform = 'scale(0)';
+            ripple.style.transition = 'transform 0.4s ease, opacity 0.4s';
+            element.style.position = 'relative';
+            element.style.overflow = 'hidden';
+            
+            element.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.style.transform = 'scale(4)';
+                ripple.style.opacity = '0';
+            }, 10);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 400);
+        }
+        
+        // Toast notification
+        function showToast(message) {
+            let toast = document.querySelector('.custom-toast');
+            if(!toast) {
+                toast = document.createElement('div');
+                toast.className = 'custom-toast';
+                toast.style.position = 'fixed';
+                toast.style.bottom = '20px';
+                toast.style.left = '50%';
+                toast.style.transform = 'translateX(-50%)';
+                toast.style.backgroundColor = '#2c3e50';
+                toast.style.color = 'white';
+                toast.style.padding = '12px 24px';
+                toast.style.borderRadius = '50px';
+                toast.style.fontSize = '14px';
+                toast.style.zIndex = '9999';
+                toast.style.boxShadow = '0 4px 20px rgba(0,0,0,0.2)';
+                toast.style.fontFamily = 'inherit';
+                toast.style.whiteSpace = 'nowrap';
+                document.body.appendChild(toast);
+            }
+            
+            toast.textContent = message;
+            toast.style.opacity = '1';
+            toast.style.transition = 'opacity 0.3s';
+            
+            setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 2000);
+        }
+        
+        // Initialize all like buttons
+        document.querySelectorAll('.like-btn').forEach(button => {
+            setupLikeButton(button);
+        });
+        
+        // Load existing likes
+        loadLikes();
+        
+        // Auto-refresh time display
+        setInterval(() => {
+            const savedLikes = localStorage.getItem('newsPortalLikes');
+            if(savedLikes) {
+                const likesData = JSON.parse(savedLikes);
+                for(const [key, value] of Object.entries(likesData)) {
+                    if(value.lastLiked) {
+                        const timeElement = document.querySelector(`[data-time-key="${key}"]`);
+                        if(timeElement && value.lastLiked) {
+                            const timeAgo = getTimeAgo(new Date(value.lastLiked));
+                            timeElement.textContent = timeAgo;
+                        }
+                    }
+                }
+            }
+        }, 60000);
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('.trending-tags a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    e.preventDefault();
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    targetElement.style.transition = '0.2s';
+                    targetElement.style.backgroundColor = '#fff3e0';
+                    setTimeout(() => {
+                        targetElement.style.backgroundColor = '';
+                    }, 800);
+                }
+            });
+        });
+    })();
+</script>
+</body>
+</html>
 
 
 
-<marquee bgcolor=red direction=left>
-    <font size="5" color="white">सपना त्यो होइन जुन तिमी निदाउदा देख्छौ, सपना त त्यो हो जसले तिमीलाई निदाउन दिदैन । 
-पाउ छुन दिनु मन छुन कहिल्यै  दिन हुँदैन ।
-</font></marquee>
 
-<marquee bgcolor="yellow"><font size="3" color="blue" direction="left">
-<p style="font-size:15px; text-align: justify; padding:5px; margin: 0px; line-height: 22px;">
-जताततै हरियो देख्ने पशु हैन,आपद बिपदमा प्रष्ट देख्ने भिजिबिलिटी चाहिन्छ ।     <font size="5" color="black">एउटा भोको पेट, रित्तो गोजी र टुक्रिएको हृदयले जिन्दगीमा धेरैथोक सिकाएर जान्छ : रोविन विलियम
-</font></marquee>
+
+
+
+
+
+
 
 
 
