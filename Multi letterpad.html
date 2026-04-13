@@ -350,7 +350,7 @@
     .address-line1 { font-weight: 600; font-size: 0.75rem; }
     .address-line2 { font-size: 0.65rem; color: #2c5a7a; }
     .meta-line { display: flex; justify-content: space-between; font-size: 0.6rem; border-bottom: 1px dashed #a4c2dd; padding: 4px 0; margin-bottom: 4px; flex-wrap: wrap; gap: 5px; }
-    .recipient-line { font-weight: 700; background: #eef3fc; padding: 3px 10px; border-radius: 30px; display: inline-block; margin: 5px 0 8px 0; font-size: 0.72rem; }
+    .recipient-line { font-weight: 700; background: #fff; padding: 3px 10px; border-radius: 30px; display: inline-block; margin: 5px 0 8px 0; font-size: 0.72rem;   word-break: break-word;}
     .subject { font-weight: 800; border-bottom: 2px solid #2c74b3; padding-bottom: 4px; margin: 8px 0 10px 0; text-align: center; font-size: 0.78rem; }
     .body { line-height: 1.5; text-align: justify; white-space: pre-line; flex: 1; font-size: 0.72rem; }
     .signature-area { text-align: right; margin-top: 10px; border-top: 1px dotted #7fa3c2; padding-top: 5px; }
@@ -545,13 +545,13 @@
         
         <div class="form-row">
             <div class="form-group"><label><i class="fas fa-hashtag"></i> पत्र सं.</label><input type="text" id="letterNo" value="११/०८१-०८२"></div>
-            <div class="form-group"><label><i class="fas fa-qrcode"></i> चलानी सं.</label><input type="text" id="refNo" value="६/२०८२ शिक्षा शाखा"></div>
-            <div class="form-group"><label><i class="fas fa-tag"></i> विषय</label><input type="text" id="subject" value="वार्षिकोत्सव आमन्त्रण"></div>
+            <div class="form-group"><label><i class="fas fa-qrcode"></i> चलानी सं.</label><input type="text" id="refNo" value="६/२०८२"></div>
+            <div class="form-group"><label><i class="fas fa-tag"></i> विषय</label><input type="text" id="subject" value=" आमन्त्रण बारे"></div>
         </div>
         
         <div class="form-row">
             <div class="form-group"><label><i class="fas fa-envelope"></i> इमेल</label><input type="email" id="email" value="info@djmav.edu.np"></div>
-            <div class="form-group"><label><i class="fas fa-phone-alt"></i> सम्पर्क</label><input type="text" id="mobile" value="९८४१२३४५६७"></div>
+            <div class="form-group"><label><i class="fas fa-phone-alt"></i> सम्पर्क</label><input type="text" id="mobile" value="९७########"></div>
             <div class="form-group"><label><i class="fas fa-user-tie"></i> प्रेषक</label><input type="text" id="sender" value="ध्रुवबहादुर भण्डारी"></div>
         </div>
         
@@ -561,7 +561,7 @@
         </div>
         
         <div class="form-row">
-            <div class="form-group"><label><i class="fas fa-address-card"></i> प्रापकहरु (एक लाइनमा एक)</label>
+            <div class="form-group"><label><i class="fas fa-address-card"></i> प्रापकहरु (लाइन ब्रेक गर्न Comma , को प्रयाेग गर्नुपर्छ ।)</label>
                <textarea id="receivers" rows="3">
                मुख्य निर्वाचन अधिकृत, जिल्ला निर्वाचन कार्यालय सर्लाही
 शिक्षा शाखा प्रमुख, लालबन्दी नपा
@@ -655,7 +655,7 @@
             <div class="letter-header">${logoHtml}<div class="org-name">${escapeHtml(org)}</div></div>
             <div class="address-container"><div class="address-line1">${escapeHtml(addr1)}</div><div class="address-line2">${escapeHtml(addr2)}</div></div>
             <div class="meta-line"><span><i class="fas fa-hashtag"></i> ${escapeHtml(letterNo)}</span><span><i class="fas fa-qrcode"></i> ${escapeHtml(refNo)}</span><span><i class="fas fa-calendar-alt"></i> ${escapeHtml(date)}</span></div>
-            <div class="recipient-line">सम्मानित ${escapeHtml(displayRec)}</div>
+            <div class="recipient-line">महोदय, ${escapeHtml(displayRec)}</div>
             <div class="subject">विषय: ${escapeHtml(subjectTxt)}</div>
             <div class="body">${escapeHtml(personalizedBody).replace(/\n/g, '<br>')}</div>
             <div class="signature-area">${signatureHtml}<div class="sender-name">${escapeHtml(sender)}</div><div style="font-size:0.7rem;">${escapeHtml(position)}</div></div>
