@@ -2,783 +2,787 @@
 <html lang="ne">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="google-site-verification" content="E55SOW9-xbb-lDSUK0AVczLIVhmmsK8GouR_0ScNU9k">
-<meta property="fb:app_id" content="758915462507587">
-<link rel="icon" type="image/x-icon" href="https://shamser.info.np/favicon.ico">
-<link rel="apple-touch-icon" href="https://shamser.info.np/apple-touch-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+<title>Multi Letterpad Pro | पूर्ण मोबाइल अनुकूल</title>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<meta property="og:title" content="Multi Letterpad" />
-<meta property="og:type" content="website"/>
-<meta property="og:url" content="https://shamser.info.np/Multi letterpad.html"/>
-<meta property="og:image" content="https://shamser.info.np/HomePage/Letterpad.jpeg" />
-<meta property="og:description" content="मोबाइलमै लेखेर वा बोलेर धेरैजनालाई धेरै स‌स्था कार्यालय बिद्यालयलाई एउटै बिषयमा चिट्ठीपत्र सिफारिसपत्र सुचना जानकारी आदि लेटरप्याडबाट बनाउन सकिने मल्टी लेटरप्याड जेनेरेटर टुल ।" />
-<meta name="author" content="shamserpulami">
-<title>Multi‑letterpad | पत्र जेनेरेटर</title>
-<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
-<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=64ac37c60f9156001a2918eb&product=sop' async='async'></script>
-<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-<script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(async function(OneSignal) {
-    await OneSignal.init({
-      appId: "2dcf0fae-27c7-4c6e-a29e-f9a9ffb3a9e5",
-    });
-  });
-</script>
-<script>
-    document.addEventListener('contextmenu', event => event.preventDefault());
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
     }
+    
     body {
-        font-family: 'Hind Siliguri', 'Nirmala UI', 'Segoe UI', sans-serif;
         background: #eef2f7;
-        padding: 10px;
+        font-family: 'Hind Siliguri', 'Nirmala UI', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+        padding: 8px;
         min-height: 100vh;
-        overflow-x: hidden;
     }
-    .container { width: 100%; margin: 0 auto; }
+    
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+    }
+    
+    /* Mobile-first card design */
+    .card {
+        background: white;
+        border-radius: 24px;
+        padding: 16px;
+        margin-bottom: 20px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+    
+    @media (min-width: 768px) {
+        .card {
+            padding: 24px 28px;
+        }
+        body {
+            padding: 16px;
+        }
+    }
+    
     h1 {
+        font-size: 1.4rem;
         color: #0b3552;
-        margin-bottom: 10px;
         display: flex;
         align-items: center;
-        gap: 12px;
-        font-size: 1.8rem;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 12px;
     }
-    .card {
-        background: #ffffff;
-        box-shadow: 0 18px 40px -8px rgba(19, 50, 80, 0.25);
-        margin-bottom: 30px;
-        border: 1px solid rgba(44, 116, 179, 0.2);
-        padding: 24px;
-        border-radius: 24px;
+    
+    @media (min-width: 768px) {
+        h1 {
+            font-size: 1.8rem;
+        }
     }
+    
     .instructions {
         background: #f0f7fe;
-        border-radius: 28px;
-        padding: 16px 24px;
-        margin: 20px 0 28px;
-        border-left: 6px solid #2c74b3;
+        border-radius: 20px;
+        padding: 12px 16px;
+        margin: 15px 0;
+        border-left: 4px solid #2c74b3;
+        font-size: 0.8rem;
     }
-    .instructions h3 {
-        color: #113855;
-        font-size: 1.3rem;
-        margin-bottom: 8px;
+    
+    @media (min-width: 768px) {
+        .instructions {
+            padding: 14px 22px;
+            font-size: 0.9rem;
+        }
     }
-    .instructions ul {
-        padding-left: 28px;
-        color: #1d486b;
-    }
-    .instructions li { margin: 6px 0; }
-    .form-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 24px;
-        margin-bottom: 24px;
-    }
-    .form-group {
-        flex: 1 1 240px;
-        min-width: 200px;
-    }
-    .form-group label {
-        font-weight: 600;
-        display: block;
-        margin-bottom: 6px;
-        color: #1e3a5f;
-        font-size: 0.95rem;
-    }
-    .form-group label i {
-        width: 22px;
-        color: #2c74b3;
-    }
-    input, textarea {
-        width: 100%;
-        padding: 12px 18px;
-        border-radius: 40px;
-        border: 1.5px solid #d4e0ec;
-        background: #ffffff;
-        font-size: 1rem;
-        transition: 0.15s;
-        font-family: 'Hind Siliguri', sans-serif;
-    }
-    textarea {
-        border-radius: 28px;
-        resize: vertical;
-        min-height: 100px;
-    }
-    input:focus, textarea:focus {
-        outline: none;
-        border-color: #2c74b3;
-        box-shadow: 0 0 0 4px rgba(44,116,179,0.2);
-    }
-    .actions {
-        margin-top: 28px;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        align-items: center;
-        justify-content: flex-start;
-    }
-    button {
-        padding: 12px 28px;
-        border: none;
-        border-radius: 60px;
-        font-weight: 700;
-        font-size: 0.95rem;
-        cursor: pointer;
-        transition: 0.2s;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        box-shadow: 0 8px 16px -8px rgba(0,35,60,0.2);
-        font-family: 'Hind Siliguri', sans-serif;
-    }
-    .generate { background: #1f6390; color: white; }
-    .generate:hover { background: #124b73; transform: translateY(-3px); }
-    .print { background: #1e7b4b; color: white; }
-    .print:hover { background: #14633a; transform: translateY(-3px); }
-    .pdf { background: #6a3e8a; color: white; }
-    .pdf:hover { background: #522d6b; transform: translateY(-3px); }
-    .clear { background: #b13e32; color: white; }
-    .clear:hover { background: #8f2f24; transform: translateY(-3px); }
+    
     .layout-dropdown-area {
         background: #f0f6fe;
-        padding: 12px 24px;
-        border-radius: 60px;
-        margin-bottom: 25px;
+        padding: 12px 16px;
+        border-radius: 50px;
         display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        gap: 15px;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 20px;
     }
+    
+    @media (min-width: 600px) {
+        .layout-dropdown-area {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+    }
+    
     .dropdown-group {
         display: flex;
         align-items: center;
-        gap: 16px;
-        flex-wrap: wrap;
-    }
-    .dropdown-group label {
-        font-weight: 700;
-        color: #0b3552;
-        margin: 0;
-    }
-    #layoutSelect {
-        background: white;
-        border: 2px solid #cbdde9;
-        padding: 10px 28px;
-        border-radius: 60px;
-        font-weight: bold;
-        font-size: 1rem;
-        cursor: pointer;
-        font-family: 'Hind Siliguri', sans-serif;
-        color: #1f6390;
-    }
-    .orientation-badge {
-        background: #e6f0fa;
-        padding: 6px 20px;
-        border-radius: 40px;
-        font-size: 0.85rem;
-        color: #113855;
-    }
-    /* MODAL */
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0,0,0,0.5);
-        backdrop-filter: blur(5px);
-        align-items: center;
-        justify-content: center;
-    }
-    .modal-content {
-        background: linear-gradient(145deg, #ffffff, #f8fcff);
-        max-width: 700px;
-        width: 90%;
-        border-radius: 40px;
-        box-shadow: 0 40px 70px rgba(11,53,82,0.3);
-        max-height: 90vh;
-        overflow-y: auto;
-    }
-    .modal-header {
-        background: #0b3552;
-        color: white;
-        padding: 20px 28px;
-        border-radius: 40px 40px 0 0;
-        display: flex;
-        align-items: center;
-        gap: 15px;
-    }
-    .close-btn {
-        background: rgba(255,255,255,0.2);
-        border: none;
-        font-size: 2rem;
-        color: white;
-        padding: 0 12px;
-        border-radius: 60px;
-        cursor: pointer;
-    }
-    .modal-body { padding: 28px 30px; }
-    .modal-footer { padding: 10px 28px 28px; text-align: right; }
-    .modal-footer button { background: #2c74b3; color: white; padding: 12px 32px; border-radius: 60px; }
-    
-    /* LETTER STYLES */
-    .page-portrait, .page-landscape-two, .page-landscape-four {
-        background: white;
-        box-shadow: 0 20px 35px rgba(0,0,0,0.2);
-        border-radius: 4px;
-        margin: 20px auto;
-        box-sizing: border-box;
-        page-break-after: always;
-        font-family: 'Hind Siliguri', 'Nirmala UI', serif;
-    }
-    .page-portrait {
-        width: 210mm;
-        height: 297mm;
-        padding: 20mm 18mm;
-        display: flex;
-        flex-direction: column;
-        font-size: 16px;
-    }
-    .page-landscape-two {
-        width: 297mm;
-        height: 210mm;
-        padding: 12mm 12mm;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12mm;
-        font-size: 14px;
-    }
-    .letter-half {
-        width: calc(50% - 6mm);
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        border-right: 1px dashed #ccc;
-        padding-right: 8mm;
-    }
-    .letter-half:last-child { border-right: none; padding-right: 0; }
-    .page-landscape-four {
-        width: 297mm;
-        height: 210mm;
-        padding: 8mm 8mm;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 5mm;
-        font-size: 12px;
-    }
-    .letter-quarter {
-        width: calc(50% - 2.5mm);
-        height: calc(50% - 2.5mm);
-        display: flex;
-        flex-direction: column;
-        border: 1px solid #e9eef3;
-        padding: 4mm 5mm;
-        border-radius: 6px;
-        background: #fff;
-        overflow: hidden;
-    }
-    .letter-header {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin-bottom: 0.2rem;
-    }
-    .org-logo {
-        max-height: 3rem;
-        max-width: 4.5rem;
-        object-fit: contain;
-    }
-    .org-name {
-        font-weight: 800;
-        font-size: 1.5rem;
-        color: #003057;
-        text-align: center;
-        flex: 1;
-    }
-    .address-container {
-        text-align: center;
-        margin: 0.15rem 0 0.25rem;
-        border-bottom: 1px dashed #9bb8da;
-        padding-bottom: 0.2rem;
-    }
-    .address-line1 { font-weight: 600; font-size: 0.9rem; color: #25597e; }
-    .address-line2 { font-size: 0.8rem; color: #2c5a7a; }
-    .meta-line {
-        display: flex;
         justify-content: space-between;
-        margin: 0.15rem 0 0.25rem;
-        padding: 0.2rem 0;
-        border-bottom: 2px dashed #a4c2dd;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .dropdown-group label {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #0b3552;
+    }
+    
+    #layoutSelect {
+        padding: 8px 20px;
+        border-radius: 50px;
+        border: 2px solid #cbdde9;
+        font-weight: bold;
+        background: white;
+        font-family: inherit;
+        cursor: pointer;
+        font-size: 0.85rem;
+        flex: 1;
+        min-width: 140px;
+    }
+    
+    .orientation-badge {
         font-size: 0.75rem;
         color: #1e3a5f;
-    }
-    .recipient-line {
-        font-weight: 700;
-        margin: 0.3rem 0 0.8rem;
-        padding: 0.2rem 0;
-        font-size: 0.85rem;
-        background: #f4f9ff;
-        border-radius: 20px;
-        display: inline-block;
-    }
-    .subject {
-        font-weight: 700;
-        border-bottom: 2px solid #2c74b3;
-        margin: 0.5rem 0 0.4rem;
-        padding-bottom: 0.3rem;
-        font-size: 0.9rem;
-        color: #0d3b5c;
+        background: #e6f0fa;
+        padding: 6px 12px;
+        border-radius: 40px;
         text-align: center;
     }
-    .body {
-        line-height: 1.5;
-        text-align: justify;
-        white-space: pre-line;
-        margin-bottom: 0.5rem;
-        flex: 1;
-        font-size: 0.9rem;
-    }
-    .signature-area {
-        text-align: right;
-        margin-top: 0.3rem;
-        border-top: 1px dotted #7fa3c2;
-        padding-top: 0.2rem;
-    }
-    .signature-img { max-height: 2rem; max-width: 4rem; }
-    .sender-name { font-weight: 700; color: #0b2d4b; }
-    .footer {
-        text-align: center;
-        border-top: 1px solid #6082a3;
-        padding-top: 0.2rem;
-        margin-top: 0.2rem;
-        font-size: 0.7rem;
-    }
-    .footer-content {
+    
+    .form-row {
         display: flex;
-        justify-content: center;
-        gap: 0.8rem;
-        flex-wrap: wrap;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 15px;
     }
-    /* Like Button Styles */
+    
+    @media (min-width: 640px) {
+        .form-row {
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+    }
+    
+    .form-group {
+        flex: 1;
+        min-width: 100%;
+    }
+    
+    @media (min-width: 640px) {
+        .form-group {
+            min-width: 180px;
+        }
+    }
+    
+    .form-group label {
+        font-weight: 600;
+        color: #1e3a5f;
+        margin-bottom: 5px;
+        display: block;
+        font-size: 0.75rem;
+    }
+    
+    @media (min-width: 768px) {
+        .form-group label {
+            font-size: 0.85rem;
+        }
+    }
+    
+    input, textarea, select {
+        width: 100%;
+        padding: 10px 14px;
+        border-radius: 30px;
+        border: 1.5px solid #d4e0ec;
+        font-family: inherit;
+        font-size: 0.85rem;
+        background: white;
+        -webkit-appearance: none;
+        appearance: none;
+    }
+    
+    textarea {
+        border-radius: 20px;
+        resize: vertical;
+        min-height: 80px;
+    }
+    
+    input:focus, textarea:focus {
+        outline: none;
+        border-color: #2c74b3;
+        box-shadow: 0 0 0 3px rgba(44,116,179,0.15);
+    }
+    
+    .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 20px;
+        align-items: center;
+    }
+    
+    button {
+        padding: 10px 16px;
+        border: none;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.8rem;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: 0.2s;
+        font-family: inherit;
+        background: #1f6390;
+        color: white;
+        flex: 1;
+        justify-content: center;
+        min-width: 90px;
+    }
+    
+    @media (min-width: 500px) {
+        button {
+            flex: 0 1 auto;
+            padding: 10px 20px;
+            font-size: 0.85rem;
+        }
+    }
+    
+    .generate { background: #1f6390; }
+    .print { background: #1e7b4b; }
+    .pdf { background: #6a3e8a; }
+    .clear { background: #b13e32; }
+    
     .like-container {
         display: inline-flex;
         align-items: center;
-        gap: 12px;
+        gap: 8px;
         background: #f0f2f5;
-        padding: 5px 18px;
-        border-radius: 60px;
+        padding: 4px 12px;
+        border-radius: 50px;
         margin-left: auto;
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
     }
+    
+    @media (min-width: 550px) {
+        .like-container {
+            width: auto;
+            margin-top: 0;
+        }
+    }
+    
     .like-btn {
         background: linear-gradient(135deg, #4267B2, #365899);
         color: white;
-        padding: 8px 20px;
-        border-radius: 50px;
-        font-weight: 600;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-        gap: 8px;
+        padding: 6px 14px;
+        min-width: auto;
+        flex: 0 0 auto;
     }
-    .like-btn:hover {
-        transform: scale(1.02);
-        background: linear-gradient(135deg, #365899, #2d4a82);
+    
+    .like-btn.liked { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+    .like-count { background: white; padding: 5px 12px; border-radius: 40px; font-weight: bold; font-size: 0.8rem; }
+    
+    /* ========= LETTER OUTPUT - MOBILE FRIENDLY SCROLL ========= */
+    #output {
+        margin-top: 20px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
-    .like-btn.liked {
-        background: linear-gradient(135deg, #e74c3c, #c0392b);
+    
+    /* Mobile preview - scaled down for viewing */
+    @media (max-width: 768px) {
+        #output {
+            transform: scale(0.95);
+            transform-origin: top center;
+        }
     }
-    .like-btn.liked i {
-        animation: heartBeat 0.3s ease;
-    }
-    @keyframes heartBeat {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.2); }
-        100% { transform: scale(1); }
-    }
-    .like-count {
-        font-size: 1rem;
-        font-weight: 700;
-        color: #1e3a5f;
+    
+    .page-portrait, .page-landscape-two, .page-landscape-four {
         background: white;
-        padding: 5px 14px;
-        border-radius: 50px;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        margin: 15px auto;
+        box-sizing: border-box;
+        page-break-after: always;
+        break-inside: avoid;
+        font-family: 'Hind Siliguri', 'Times New Roman', serif;
     }
-    .like-count i {
-        color: #e74c3c;
-        margin-right: 6px;
+    
+    /* A4 exact dimensions for PDF */
+    .page-portrait {
+        width: 210mm;
+        min-height: 297mm;
+        padding: 15mm 12mm;
+        font-size: 13px;
     }
-    .scroll-top {
-        position: fixed;
-        bottom: 90px;
-        right: 10px;
-        z-index: 99;
-        background: transparent;
-        border: none;
-        cursor: pointer;
+    
+    .page-landscape-two {
+        width: 297mm;
+        min-height: 210mm;
+        padding: 8mm 10mm;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6mm;
+        font-size: 11px;
     }
+    
+    .letter-half {
+        width: calc(50% - 3mm);
+        display: flex;
+        flex-direction: column;
+        border-right: 1px dashed #bbb;
+        padding-right: 5mm;
+    }
+    .letter-half:last-child { border-right: none; padding-right: 0; }
+    
+    .page-landscape-four {
+        width: 297mm;
+        min-height: 210mm;
+        padding: 6mm 6mm;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 3mm;
+        font-size: 9px;
+    }
+    
+    .letter-quarter {
+        width: calc(50% - 1.5mm);
+        height: calc(50% - 1.5mm);
+        padding: 3mm 3mm;
+        border: 1px solid #e2e8f0;
+        border-radius: 4px;
+        background: white;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* Letter inner styles - responsive font sizes */
+    .letter-header { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; flex-wrap: wrap; }
+    .org-logo { max-height: 38px; max-width: 55px; object-fit: contain; }
+    .org-name { font-weight: 800; font-size: 1.2rem; color: #003057; line-height: 1.2; flex: 1; text-align: center; }
+    .address-container { text-align: center; border-bottom: 1px dashed #9bb8da; padding-bottom: 4px; margin-bottom: 4px; }
+    .address-line1 { font-weight: 600; font-size: 0.75rem; }
+    .address-line2 { font-size: 0.65rem; color: #2c5a7a; }
+    .meta-line { display: flex; justify-content: space-between; font-size: 0.6rem; border-bottom: 1px dashed #a4c2dd; padding: 4px 0; margin-bottom: 4px; flex-wrap: wrap; gap: 5px; }
+    .recipient-line { font-weight: 700; background: #eef3fc; padding: 3px 10px; border-radius: 30px; display: inline-block; margin: 5px 0 8px 0; font-size: 0.72rem; }
+    .subject { font-weight: 800; border-bottom: 2px solid #2c74b3; padding-bottom: 4px; margin: 8px 0 10px 0; text-align: center; font-size: 0.78rem; }
+    .body { line-height: 1.5; text-align: justify; white-space: pre-line; flex: 1; font-size: 0.72rem; }
+    .signature-area { text-align: right; margin-top: 10px; border-top: 1px dotted #7fa3c2; padding-top: 5px; }
+    .signature-img { max-height: 28px; max-width: 70px; }
+    .sender-name { font-weight: 800; font-size: 0.72rem; }
+    .footer { font-size: 0.55rem; text-align: center; border-top: 1px solid #cbdde9; margin-top: 8px; padding-top: 4px; }
+    
+    /* Two letter adjustments */
+    .page-landscape-two .org-name { font-size: 1rem; }
+    .page-landscape-two .body { font-size: 0.65rem; }
+    .page-landscape-two .recipient-line { font-size: 0.65rem; }
+    
+    /* Four letter adjustments */
+    .page-landscape-four .org-name { font-size: 0.85rem; }
+    .page-landscape-four .body { font-size: 0.58rem; }
+    .page-landscape-four .recipient-line { font-size: 0.55rem; padding: 2px 6px; }
+    .page-landscape-four .org-logo { max-height: 25px; max-width: 40px; }
+    
+    /* Print styles */
     @media print {
         body * { visibility: hidden; }
         #output, #output * { visibility: visible; }
-        #output { position: absolute; top: 0; left: 0; width: 100%; }
-        .modal { display: none !important; }
-    }
-    @media (max-width: 700px) {
+        #output { position: absolute; top: 0; left: 0; width: 100%; margin: 0; padding: 0; }
         .page-portrait, .page-landscape-two, .page-landscape-four {
-            width: 100%;
-            height: auto;
+            box-shadow: none;
+            margin: 0;
+            padding: 0;
+            page-break-after: always;
+            break-inside: avoid;
         }
-        .letter-half, .letter-quarter { width: 100%; margin-bottom: 15px; }
+        @page { size: A4; margin: 0; }
+        button, .actions, .card, .layout-dropdown-area, .instructions, .scroll-top { display: none; }
+    }
+    
+    .scroll-top {
+        position: fixed;
+        bottom: 70px;
+        right: 12px;
+        background: #0b3552;
+        border-radius: 50%;
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 99;
+        border: none;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    }
+    
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.7);
+        backdrop-filter: blur(5px);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+    }
+    
+    .modal-content {
+        background: white;
+        max-width: 450px;
+        width: 100%;
+        border-radius: 32px;
+        max-height: 85vh;
+        overflow-y: auto;
+    }
+    
+    .modal-header {
+        background: #0b3552;
+        color: white;
+        padding: 16px 20px;
+        border-radius: 32px 32px 0 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .close-btn {
+        background: none;
+        border: none;
+        font-size: 28px;
+        color: white;
+        cursor: pointer;
+        padding: 0 8px;
+    }
+    
+    .modal-body {
+        padding: 20px;
+    }
+    
+    .modal-footer {
+        padding: 12px 20px 20px;
+        text-align: right;
+    }
+    
+    .modal-footer button {
+        background: #2c74b3;
+        color: white;
+        margin: 0;
+        padding: 10px 24px;
+    }
+    
+    #loadingIndicator {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0,0,0,0.85);
+        color: white;
+        padding: 15px 25px;
+        border-radius: 50px;
+        z-index: 10000;
+        font-size: 0.9rem;
+        white-space: nowrap;
+    }
+    
+    @media (max-width: 480px) {
+        #loadingIndicator {
+            white-space: normal;
+            text-align: center;
+            width: 80%;
+            font-size: 0.8rem;
+        }
     }
 </style>
 </head>
 <body>
+
+<div id="loadingIndicator">
+    <i class="fas fa-spinner fa-pulse"></i> PDF बनाउँदै... कृपया पर्खनुहोस्
+</div>
+
 <div id="welcomeModal" class="modal" style="display: flex;">
     <div class="modal-content">
         <div class="modal-header">
-            <i class="fas fa-hands-helping"></i>
-            <h2><strong>Multi Letter Generator Tool</strong></h2>
+            <h3 style="font-size: 1.2rem;"><i class="fas fa-envelope-open-text"></i> मल्टी लेटरप्याड</h3>
             <button class="close-btn" onclick="closeModal()">&times;</button>
         </div>
         <div class="modal-body">
-            <p>मोबाइलमै लेखेर वा बोलेर धेरैजनालाई धेरै सस्था कार्यालय बिद्यालयलाई एउटै बिषयमा चिट्ठीपत्र सिफारिसपत्र सुचना जानकारी आदि लेटरप्याडबाट बनाउन सकिने मल्टी लेटरप्याड जेनेरेटर टुल</p>
-            <img src="https://shamser.info.np/HomePage/team_img/team1.JPG" alt="letter head preview" style="width:80px; border-radius:10px;" onerror="this.style.display='none';">
-            <p>आजको युग डिजिटल युग हो । फिजिकल चिट्ठीपत्र वा सिफारिसपत्र उपयोगी नहुन सक्छ, तर यो टुल एकदमै उपयोगी छ । घरमा वा विश्वको कुनै कुनामा बसेर मोबाइलमै बोलेर धेरै चिट्ठीपत्र तयार गर्न सकिन्छ ।</p>
-            <div class="instructions">
-                <h3><i class="fas fa-info-circle"></i> निर्देशन</h3>
-                <ul>
-                    <li>Single letter, Two letter र Four letter मध्ये कुनै एक प्रकार छान्नुहोस् ।</li>
-                    <li>प्रत्येक लाइनमा एक वा एक भन्दाबढी प्रापकको नाम लेख्नुहोस् ।</li>
-                    <li>गल्ती सच्याई रि-जेनेरेट गर्न सकिन्छ।</li>
-                    <li>पत्रलाई PDF मा सेभ गर्न सकिन्छ ।</li>
-                </ul>
-            </div>
-            <p style="background:#fbeec2; padding:12px;"><i class="fas fa-exclamation-triangle"></i> <strong>चेतावनी :</strong> अनाधिकृत लोगो/सिग्नेचर प्रयोग नगर्नुहोला ।</p>
+            <p><strong>📄 एकै पटक धेरैलाई पत्र तयार गर्नुहोस्</strong></p>
+            <ul style="margin: 12px 0 12px 20px; font-size:0.85rem;">
+                <li>✅ Single / Two / Four letter लेआउट</li>
+                <li>✅ <strong>पूर्ण मोबाइल अनुकूल</strong> - सबै स्क्रिनमा मिल्छ</li>
+                <li>✅ Like बटनको संख्या सेभ हुन्छ</li>
+                <li>✅ PDF डाउनलोड र प्रिन्ट सही</li>
+            </ul>
         </div>
         <div class="modal-footer">
-            <button onclick="closeModal()"><i class="fas fa-check-circle"></i> बुझें / सुरु गर्छु</button>
+            <button onclick="closeModal()">सुरु गर्छु</button>
         </div>
     </div>
 </div>
+
 <div class="container">
     <div class="card">
-        <h1><i class="fas fa-envelope-open-text"></i> Generate Multi Letter</h1>
-        <div class="sharethis-inline-share-buttons"></div>
-        <a href="https://shamser.info.np/"><i class="fa fa-home fa-lg"></i> Back to home</a>
-        <div class="instructions">
-            <h3><i class="fas fa-info-circle"></i> निर्देशन</h3>
-            <ul>
-                <li>Single letter, Two letter र four letter मध्ये कुनै एक प्रकार छान्नुहोस् ।</li>
-                <li>प्रत्येक लाइनमा एक वा एक भन्दाबढी प्रापकको नाम लेख्नुहोस् ।</li>
-                <li>रिफ्रेश गर्दा लेखिएको डेटा सबै हराउँछ ।</li>
-                <li>पत्रलाई PDF मा सेभ गर्न सकिन्छ ।</li>
-            </ul>
-        </div>
+        <h1><i class="fas fa-layer-group"></i> मल्टी लेटरप्याड जेनेरेटर</h1>
+        
         <div class="layout-dropdown-area">
             <div class="dropdown-group">
-                <label><i class="fas fa-layer-group"></i> लेटर प्रकार छान्नुहोस्:</label>
+                <label><i class="fas fa-object-group"></i> लेटर प्रकार:</label>
                 <select id="layoutSelect">
-                    <option value="one">Single letter (Portrait)</option>
-                    <option value="two">Two letter (Landscape)</option>
-                    <option value="four">Four letter (Landscape)</option>
+                    <option value="one">📄 Single Letter</option>
+                    <option value="two">📑 Two Letter</option>
+                    <option value="four">🔲 Four Letter</option>
                 </select>
             </div>
             <div class="orientation-badge">
-                <i class="fas fa-text-height"></i> <span id="orientationHint">Single letter: font size 16px</span>
+                <i class="fas fa-mobile-alt"></i> <span id="orientationHint">Single A4</span>
             </div>
         </div>
+        
         <div class="form-row">
-            <div class="form-group"><label><i class="fas fa-cloud-upload-alt"></i> लोगो from Device</label><input type="file" id="logoFile" accept="image/*"></div>
-            <div class="form-group"><label><i class="fas fa-link"></i> लोगो by URL</label><input type="url" id="logoUrl" placeholder="https://example.com/logo.png"></div>
-            <div class="form-group"><label><i class="fas fa-school"></i> विद्यालय / कार्यालय</label><input type="text" id="org" value="श्री डिम जनता माध्यमिक बिद्यालय"></div>
+            <div class="form-group"><label><i class="fas fa-cloud-upload-alt"></i> लोगो फाइल</label><input type="file" id="logoFile" accept="image/*"></div>
+            <div class="form-group"><label><i class="fas fa-link"></i> लोगो URL</label><input type="url" id="logoUrl" placeholder="https://..."></div>
+            <div class="form-group"><label><i class="fas fa-school"></i> संस्था</label><input type="text" id="org" value="श्री डिम जनता माध्यमिक विद्यालय"></div>
         </div>
+        
         <div class="form-row">
-            <div class="form-group"><label><i class="fas fa-location-dot"></i> ठेगाना (A)</label><input type="text" id="address1" value="लालबन्दी-१६, परवानीपुर"></div>
-            <div class="form-group"><label><i class="fas fa-location-dot"></i> ठेगाना (B)</label><input type="text" id="address2" value="सर्लाही, नेपाल"></div>
-            <div class="form-group"><label><i class="fas fa-calendar"></i> पत्र मिति</label><input type="text" id="letterDate" value="२०८२-१०-१२"></div>
+            <div class="form-group"><label><i class="fas fa-location-dot"></i> ठेगाना (१)</label><input type="text" id="address1" value="लालबन्दी-१६, परवानीपुर"></div>
+            <div class="form-group"><label><i class="fas fa-location-dot"></i> ठेगाना (२)</label><input type="text" id="address2" value="सर्लाही, नेपाल"></div>
+            <div class="form-group"><label><i class="fas fa-calendar"></i> मिति</label><input type="text" id="letterDate" value="२०८२-१०-१२"></div>
         </div>
+        
         <div class="form-row">
-            <div class="form-group"><label><i class="fas fa-hashtag"></i> पत्र संख्या</label><input type="text" id="letterNo" value="११/०८१-०८२"></div>
-            <div class="form-group"><label><i class="fas fa-file-lines"></i> चलानी संख्या</label><input type="text" id="refNo" value="६/२०८२ शिक्षा शाखा"></div>
-            <div class="form-group"><label><i class="fas fa-tag"></i> विषय</label><input type="text" id="subject" value="आमन्त्रण बारे"></div>
+            <div class="form-group"><label><i class="fas fa-hashtag"></i> पत्र सं.</label><input type="text" id="letterNo" value="११/०८१-०८२"></div>
+            <div class="form-group"><label><i class="fas fa-qrcode"></i> चलानी सं.</label><input type="text" id="refNo" value="६/२०८२ शिक्षा शाखा"></div>
+            <div class="form-group"><label><i class="fas fa-tag"></i> विषय</label><input type="text" id="subject" value="वार्षिकोत्सव आमन्त्रण"></div>
         </div>
+        
         <div class="form-row">
             <div class="form-group"><label><i class="fas fa-envelope"></i> इमेल</label><input type="email" id="email" value="info@djmav.edu.np"></div>
-            <div class="form-group"><label><i class="fas fa-phone-alt"></i> सम्पर्क नम्बर</label><input type="text" id="mobile" value="९८४१२३४५६७"></div>
-        </div>
-        <div class="form-row">
+            <div class="form-group"><label><i class="fas fa-phone-alt"></i> सम्पर्क</label><input type="text" id="mobile" value="९८४१२३४५६७"></div>
             <div class="form-group"><label><i class="fas fa-user-tie"></i> प्रेषक</label><input type="text" id="sender" value="ध्रुवबहादुर भण्डारी"></div>
-            <div class="form-group"><label><i class="fas fa-briefcase"></i> पद</label><input type="text" id="position" value="प्रधानाध्यापक"></div>
-            <div class="form-group"><label><i class="fas fa-address-card"></i> प्रापकहरु (लाइनब्रेक गर्नुहोस्)</label><textarea id="receivers" rows="3">मुख्य निर्वाचन अधिकृत, जिल्ला निर्वाचन कार्यालय सर्लाही
-शिक्षा शाखा प्रमुख, लालबन्दी नपाको कार्यालय
-बासु अधिकारी, नगर प्रमुख लालबन्दी नपा
-राम बहादुर स्याङ्तान, व्यवसाय सदस्य
-पुष्पराज पौडेल, प्रअ नारायण जनता माबि जियाजोर
-जयराज भट्टराई, प्रअ जनता माबि तिनघरे
-कमला देवी, महिला सदस्य</textarea></div>
         </div>
+        
         <div class="form-row">
-            <div class="form-group" style="flex:2"><label><i class="fas fa-pen"></i> पत्रको ब्यहोरा/पेटबोलि</label><textarea id="body" rows="3">यस संस्थाको यहि मिति २०८२-१२-१५ का दिन हुने वार्षिकोत्सव कार्यक्रममा यहाँको गरिमामय उपस्थितिको हार्दिक अनुरोध गर्दछौं । धन्यवाद । 
-मिति: २०८१ चैत १५, बिहान ११ बजे ।</textarea></div>
-            <div class="form-group"><label><i class="fas fa-signature"></i> डिजिटल हस्ताक्षर</label><input type="file" id="signatureFile" accept="image/*"><small>खाली भए नाम/पद मात्र</small></div>
+            <div class="form-group"><label><i class="fas fa-briefcase"></i> पद</label><input type="text" id="position" value="प्रधानाध्यापक"></div>
+            <div class="form-group"><label><i class="fas fa-signature"></i> हस्ताक्षर</label><input type="file" id="signatureFile" accept="image/*"></div>
         </div>
+        
+        <div class="form-row">
+            <div class="form-group"><label><i class="fas fa-address-card"></i> प्रापकहरु (एक लाइनमा एक)</label><textarea id="receivers" rows="3">मुख्य निर्वाचन अधिकृत, जिल्ला निर्वाचन कार्यालय सर्लाही
+शिक्षा शाखा प्रमुख, लालबन्दी नपा
+बासु अधिकारी, नगर प्रमुख लालबन्दी
+पुष्पराज पौडेल, प्रअ नारायण जनता माबि</textarea></div>
+            <div class="form-group"><label><i class="fas fa-pen"></i> पत्र ब्यहोरा</label><textarea id="body" rows="3">यस संस्थाको यहि मिति २०८२-१२-१५ का दिन हुने वार्षिकोत्सव कार्यक्रममा यहाँको गरिमामय उपस्थितिको हार्दिक अनुरोध गर्दछौं । कार्यक्रम बिहान ११ बजे सुरु हुनेछ ।</textarea></div>
+        </div>
+        
         <div class="actions">
             <button class="generate" onclick="generateLetters()"><i class="fas fa-bolt"></i> जेनेरेट</button>
-            <button class="print" onclick="window.print()"><i class="fas fa-print"></i> प्रिन्ट</button>
-            <button class="pdf" onclick="downloadPDF()"><i class="fas fa-file-pdf"></i> डाउनलोड</button>
-            <button class="clear" onclick="resetAll()"><i class="fas fa-rotate-left"></i> सबै हटाउनुहोस्</button>
+            <button class="print" onclick="handlePrint()"><i class="fas fa-print"></i> प्रिन्ट</button>
+            <button class="pdf" onclick="downloadPDF()"><i class="fas fa-file-pdf"></i> PDF</button>
+            <button class="clear" onclick="resetAll()"><i class="fas fa-undo-alt"></i> रिसेट</button>
             <div class="like-container">
-                <button id="likeButton" class="like-btn">
-                    <i class="fas fa-thumbs-up"></i> <span id="likeText">Like</span>
-                </button>
-                <div class="like-count">
-                    <i class="fas fa-heart"></i> <span id="likeCount">0</span>
-                </div>
+                <button id="likeButton" class="like-btn"><i class="fas fa-thumbs-up"></i> <span id="likeText">Like</span></button>
+                <div class="like-count"><i class="fas fa-heart"></i> <span id="likeCount">0</span></div>
             </div>
         </div>
     </div>
     <div id="output"></div>
 </div>
-<button type="button" class="scroll-top" onclick="goToTop();"><img src="https://ps.w.org/back-to-the-top-button/assets/icon-128x128.png?rev=2283756" style="height: 40px; width: 40px;"></button>
+<button class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-arrow-up" style="color:white; font-size:18px;"></i></button>
+
 <script>
-// ========== LIKE BUTTON FUNCTIONALITY (FULLY WORKING) ==========
-let likeCount = 0;
-let isLiked = false;
-function loadLikeData() {
-    const savedCount = localStorage.getItem('letterpad_multi_likes');
-    const savedStatus = localStorage.getItem('letterpad_multi_liked');
-    if (savedCount !== null) likeCount = parseInt(savedCount);
-    if (savedStatus === 'true') isLiked = true;
-    updateLikeUI();
-}
-function updateLikeUI() {
-    document.getElementById('likeCount').innerText = likeCount;
-    const likeBtn = document.getElementById('likeButton');
-    const likeTextSpan = document.getElementById('likeText');
-    if (isLiked) {
-        likeBtn.classList.add('liked');
-        likeTextSpan.innerText = 'Liked';
-    } else {
-        likeBtn.classList.remove('liked');
-        likeTextSpan.innerText = 'Like';
+    // LIKE SYSTEM
+    let likeCount = 0, isLiked = false;
+    function loadLikeData() {
+        const savedCount = localStorage.getItem('multiletter_likes_mobile');
+        const savedStatus = localStorage.getItem('multiletter_liked_mobile');
+        likeCount = (savedCount !== null && !isNaN(parseInt(savedCount))) ? parseInt(savedCount) : 0;
+        isLiked = (savedStatus === 'true');
+        updateLikeUI();
     }
-}
-function handleLikeClick() {
-    if (!isLiked) {
-        likeCount++;
-        isLiked = true;
-    } else {
-        likeCount--;
-        isLiked = false;
+    function updateLikeUI() {
+        document.getElementById('likeCount').innerText = likeCount;
+        const likeBtn = document.getElementById('likeButton');
+        const likeTextSpan = document.getElementById('likeText');
+        if (isLiked) { likeBtn.classList.add('liked'); likeTextSpan.innerText = 'Liked'; }
+        else { likeBtn.classList.remove('liked'); likeTextSpan.innerText = 'Like'; }
     }
-    localStorage.setItem('letterpad_multi_likes', likeCount);
-    localStorage.setItem('letterpad_multi_liked', isLiked);
-    updateLikeUI();
-    const btn = document.getElementById('likeButton');
-    btn.style.transform = 'scale(1.05)';
-    setTimeout(() => { btn.style.transform = ''; }, 200);
-}
-// ========== LETTER GENERATION LOGIC ==========
-let logoData = "";
-let signatureData = "";
-let currentLayout = "one";
-const layoutSelect = document.getElementById('layoutSelect');
-const orientationHint = document.getElementById('orientationHint');
-layoutSelect.addEventListener('change', function() {
-    currentLayout = this.value;
-    if (currentLayout === 'one') orientationHint.innerText = 'Single Letter: Font size 16px (Portrait)';
-    else if (currentLayout === 'two') orientationHint.innerText = 'Two Letter: 14px (Landscape)';
-    else orientationHint.innerText = 'Four Letter: 12px (Landscape)';
-    generateLetters();
-});
-document.getElementById("logoFile").onchange = function(e) {
-    let reader = new FileReader();
-    reader.onload = (ev) => { logoData = ev.target.result; generateLetters(); };
-    if (e.target.files[0]) reader.readAsDataURL(e.target.files[0]);
-};
-document.getElementById("signatureFile").onchange = function(e) {
-    let reader = new FileReader();
-    reader.onload = (ev) => { signatureData = ev.target.result; generateLetters(); };
-    if (e.target.files[0]) reader.readAsDataURL(e.target.files[0]);
-};
-function formatRecipient(recipient) {
-    if (!recipient.includes(',')) return recipient;
-    return recipient.split(',').map(p => p.trim()).join(',<br>');
-}
-function buildLetterHTML(recipientRaw, org, addr1, addr2, date, letterNo, refNo, subjectTxt, sender, position, email, mobile, bodyTemplate, logo, signature) {
-    let personalizedBody = bodyTemplate.replace(/\[नाम\]/g, recipientRaw);
-    let displayRecipient = formatRecipient(recipientRaw);
-    const logoHtml = logo ? `<img src="${logo}" class="org-logo" alt="logo" onerror="this.style.display='none';">` : '';
-    const signatureHtml = signature ? `<img src="${signature}" class="signature-img"><br>` : '';
-    return `
-        <div style="display:flex; flex-direction:column; height:100%;">
-            <div class="letter-header">
-                ${logoHtml}
-                <div class="org-name">${org}</div>
-            </div>
-            <div class="address-container">
-                <div class="address-line1">${addr1}</div>
-                <div class="address-line2">${addr2}</div>
-            </div>
-            <div class="meta-line">
-                <div class="left-meta">
-                    <span><i class="fas fa-hashtag"></i> पत्र संख्या : ${letterNo}</span>
-                    <span><i class="fas fa-qrcode"></i> चलानी संख्या : ${refNo}</span>
-                </div>
-                <div class="right-meta">
-                    <span><i class="fas fa-calendar-alt"></i> मिति: ${date}</span>
-                </div>
-            </div>
-            <div class="recipient-line">${displayRecipient}</div>
-            <div class="subject">विषय: ${subjectTxt}</div>
-            <div class="body">${personalizedBody.replace(/\n/g, '<br>')}</div>
-            <div class="signature-area">
-                ${signatureHtml}
-                <div class="sender-name">${sender}</div>
-                <div class="sender-position">${position}</div>
-            </div>
-            <div class="footer">
-                <div class="footer-content">
-                    <span class="footer-item"><i class="fas fa-envelope"></i> ${email}</span>
-                    <span class="footer-item"><i class="fas fa-phone-alt"></i> ${mobile}</span>
-                    <span class="footer-item"><i class="fas fa-map-marker-alt"></i> ${addr1}</span>
-                </div>
-            </div>
-        </div>
-    `;
-}
-function generateLetters() {
-    let org = document.getElementById("org").value.trim() || "श्री डिम जनता माध्यमिक विद्यालय";
-    let address1 = document.getElementById("address1").value.trim() || "लालबन्दी-१६, परवानीपुर";
-    let address2 = document.getElementById("address2").value.trim() || "सर्लाही, नेपाल";
-    let letterDate = document.getElementById("letterDate").value.trim() || "२०८२-१०-१२";
-    let letterNo = document.getElementById("letterNo").value.trim() || "११/०८१-०८२";
-    let refNo = document.getElementById("refNo").value.trim() || "६/२०८२";
-    let subjectTxt = document.getElementById("subject").value.trim() || "आमन्त्रण";
-    let sender = document.getElementById("sender").value.trim() || "ध्रुवबहादुर भण्डारी";
-    let position = document.getElementById("position").value.trim() || "प्रधानाध्यापक";
-    let email = document.getElementById("email").value.trim() || "info@djmav.edu.np";
-    let mobile = document.getElementById("mobile").value.trim() || "९८४१२३४५६७";
-    let bodyTemplate = document.getElementById("body").value || "सम्मानित ज्यू, कृपया उपस्थित हुनुहोला ।";
-    let receiversRaw = document.getElementById("receivers").value;
-    let receivers = receiversRaw.split("\n").map(r => r.trim()).filter(r => r !== "");
-    if (receivers.length === 0) receivers = ["प्रापकको नाम"];
-    let logoUrlInput = document.getElementById("logoUrl").value.trim();
-    let finalLogo = logoData;
-    if (!finalLogo && logoUrlInput) finalLogo = logoUrlInput;
-    let finalSignature = signatureData;
-    const outputDiv = document.getElementById("output");
-    outputDiv.innerHTML = "";
-    if (currentLayout === 'one') {
-        receivers.forEach((rec) => {
-            const letterHTML = buildLetterHTML(rec, org, address1, address2, letterDate, letterNo, refNo, subjectTxt, sender, position, email, mobile, bodyTemplate, finalLogo, finalSignature);
-            const pageDiv = document.createElement('div');
-            pageDiv.className = 'page-portrait';
-            pageDiv.innerHTML = letterHTML;
-            outputDiv.appendChild(pageDiv);
-        });
+    function handleLikeClick() {
+        if (!isLiked) { likeCount++; isLiked = true; }
+        else { if (likeCount > 0) likeCount--; isLiked = false; }
+        localStorage.setItem('multiletter_likes_mobile', likeCount);
+        localStorage.setItem('multiletter_liked_mobile', isLiked);
+        updateLikeUI();
     }
-    else if (currentLayout === 'two') {
-        for (let i = 0; i < receivers.length; i += 2) {
-            const pageDiv = document.createElement('div');
-            pageDiv.className = 'page-landscape-two';
-            const firstHTML = buildLetterHTML(receivers[i], org, address1, address2, letterDate, letterNo, refNo, subjectTxt, sender, position, email, mobile, bodyTemplate, finalLogo, finalSignature);
-            const leftCol = document.createElement('div');
-            leftCol.className = 'letter-half';
-            leftCol.innerHTML = firstHTML;
-            pageDiv.appendChild(leftCol);
-            if (i+1 < receivers.length) {
-                const secondHTML = buildLetterHTML(receivers[i+1], org, address1, address2, letterDate, letterNo, refNo, subjectTxt, sender, position, email, mobile, bodyTemplate, finalLogo, finalSignature);
-                const rightCol = document.createElement('div');
-                rightCol.className = 'letter-half';
-                rightCol.innerHTML = secondHTML;
-                pageDiv.appendChild(rightCol);
-            } else {
-                const emptyCol = document.createElement('div');
-                emptyCol.className = 'letter-half';
-                emptyCol.style.opacity = '0.3';
-                emptyCol.innerHTML = '<div style="text-align:center; margin-top:30%;">— खाली —</div>';
-                pageDiv.appendChild(emptyCol);
-            }
-            outputDiv.appendChild(pageDiv);
-        }
-    }
-    else if (currentLayout === 'four') {
-        for (let i = 0; i < receivers.length; i += 4) {
-            const pageDiv = document.createElement('div');
-            pageDiv.className = 'page-landscape-four';
-            for (let s = 0; s < 4; s++) {
-                const idx = i + s;
-                const card = document.createElement('div');
-                card.className = 'letter-quarter';
-                if (idx < receivers.length) {
-                    const letterHtml = buildLetterHTML(receivers[idx], org, address1, address2, letterDate, letterNo, refNo, subjectTxt, sender, position, email, mobile, bodyTemplate, finalLogo, finalSignature);
-                    card.innerHTML = letterHtml;
-                } else {
-                    card.style.background = "#fafcff";
-                    card.style.opacity = "0.4";
-                    card.style.display = "flex";
-                    card.style.alignItems = "center";
-                    card.style.justifyContent = "center";
-                    card.innerHTML = "<div style='text-align:center; color:#8ba0bc;'><i class='fas fa-ban'></i><br/>खाली</div>";
-                }
-                pageDiv.appendChild(card);
-            }
-            outputDiv.appendChild(pageDiv);
-        }
-    }
-}
-async function downloadPDF() {
-    const { jsPDF } = window.jspdf;
-    const pages = document.querySelectorAll("#output .page-portrait, #output .page-landscape-two, #output .page-landscape-four");
-    if (!pages.length) { alert("कृपया पत्र जेनेरेट गर्नुहोस्"); return; }
-    let pdf = null;
-    for (let i = 0; i < pages.length; i++) {
-        let orientation = 'p';
-        let widthMm = 210, heightMm = 297;
-        if (pages[i].classList.contains('page-landscape-two') || pages[i].classList.contains('page-landscape-four')) {
-            orientation = 'l';
-            widthMm = 297;
-            heightMm = 210;
-        }
-        if (!pdf) pdf = new jsPDF({ orientation: orientation, unit: 'mm', format: [widthMm, heightMm] });
-        else pdf.addPage([widthMm, heightMm], orientation);
-        try {
-            let canvas = await html2canvas(pages[i], { scale: 2.2, backgroundColor: '#ffffff', useCORS: true });
-            pdf.addImage(canvas.toDataURL('image/jpeg', 0.95), 'JPEG', 0, 0, widthMm, heightMm);
-        } catch(err) { console.error(err); }
-    }
-    if (pdf) pdf.save("multi_letters.pdf");
-}
-function resetAll() {
-    location.reload();
-}
-function goToTop() { window.scrollTo(0, 0); }
-window.onload = function() {
-    loadLikeData();
     document.getElementById('likeButton').addEventListener('click', handleLikeClick);
-    generateLetters();
-};
-function closeModal() { document.getElementById('welcomeModal').style.display = 'none'; }
-window.onclick = function(event) {
-    let modal = document.getElementById('welcomeModal');
-    if (event.target === modal) modal.style.display = 'none';
-};
+
+    let logoData = "", signatureData = "", currentLayout = "one";
+    const layoutSelect = document.getElementById('layoutSelect');
+    const orientationHint = document.getElementById('orientationHint');
+    layoutSelect.addEventListener('change', function() {
+        currentLayout = this.value;
+        const hints = { one: 'Single A4 Portrait', two: 'Two Letters Landscape', four: 'Four Letters Landscape' };
+        orientationHint.innerText = hints[currentLayout];
+        generateLetters();
+    });
+
+    document.getElementById("logoFile").onchange = function(e) {
+        if (e.target.files[0]) {
+            const reader = new FileReader();
+            reader.onload = (ev) => { logoData = ev.target.result; generateLetters(); };
+            reader.readAsDataURL(e.target.files[0]);
+        }
+    };
+    document.getElementById("signatureFile").onchange = function(e) {
+        if (e.target.files[0]) {
+            const reader = new FileReader();
+            reader.onload = (ev) => { signatureData = ev.target.result; generateLetters(); };
+            reader.readAsDataURL(e.target.files[0]);
+        }
+    };
+    document.getElementById("logoUrl").addEventListener("input", function() {
+        if (this.value.trim()) { logoData = this.value.trim(); generateLetters(); }
+    });
+
+    function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
+    function formatRecipient(r) { return r.includes(',') ? r.split(',').map(p=>p.trim()).join(', ') : r; }
+
+    function buildLetterHTML(recipientRaw, org, addr1, addr2, date, letterNo, refNo, subjectTxt, sender, position, email, mobile, bodyTemplate, logo, signature) {
+        let personalizedBody = bodyTemplate.replace(/\[नाम\]/g, recipientRaw);
+        let displayRec = formatRecipient(recipientRaw);
+        const logoHtml = logo ? `<img src="${logo}" class="org-logo" alt="logo" onerror="this.style.display='none';">` : '';
+        const signatureHtml = signature ? `<img src="${signature}" class="signature-img" alt="sign"><br>` : '';
+        return `<div style="display:flex; flex-direction:column; height:100%;">
+            <div class="letter-header">${logoHtml}<div class="org-name">${escapeHtml(org)}</div></div>
+            <div class="address-container"><div class="address-line1">${escapeHtml(addr1)}</div><div class="address-line2">${escapeHtml(addr2)}</div></div>
+            <div class="meta-line"><span><i class="fas fa-hashtag"></i> ${escapeHtml(letterNo)}</span><span><i class="fas fa-qrcode"></i> ${escapeHtml(refNo)}</span><span><i class="fas fa-calendar-alt"></i> ${escapeHtml(date)}</span></div>
+            <div class="recipient-line">सम्मानित ${escapeHtml(displayRec)}</div>
+            <div class="subject">विषय: ${escapeHtml(subjectTxt)}</div>
+            <div class="body">${escapeHtml(personalizedBody).replace(/\n/g, '<br>')}</div>
+            <div class="signature-area">${signatureHtml}<div class="sender-name">${escapeHtml(sender)}</div><div style="font-size:0.7rem;">${escapeHtml(position)}</div></div>
+            <div class="footer"><i class="fas fa-envelope"></i> ${escapeHtml(email)} | <i class="fas fa-phone-alt"></i> ${escapeHtml(mobile)}</div>
+        </div>`;
+    }
+
+    function generateLetters() {
+        let org = document.getElementById("org").value.trim() || "श्री डिम जनता माध्यमिक विद्यालय";
+        let address1 = document.getElementById("address1").value.trim() || "लालबन्दी-१६";
+        let address2 = document.getElementById("address2").value.trim() || "सर्लाही";
+        let letterDate = document.getElementById("letterDate").value.trim() || "२०८२-१०-१२";
+        let letterNo = document.getElementById("letterNo").value.trim() || "११/०८१-०८२";
+        let refNo = document.getElementById("refNo").value.trim() || "६/२०८२";
+        let subjectTxt = document.getElementById("subject").value.trim() || "आमन्त्रण";
+        let sender = document.getElementById("sender").value.trim() || "ध्रुवबहादुर भण्डारी";
+        let position = document.getElementById("position").value.trim() || "प्रधानाध्यापक";
+        let email = document.getElementById("email").value.trim() || "info@djmav.edu.np";
+        let mobile = document.getElementById("mobile").value.trim() || "९८४१२३४५६७";
+        let bodyTemplate = document.getElementById("body").value || "कृपया उपस्थित हुनुहोला ।";
+        let receiversRaw = document.getElementById("receivers").value;
+        let receivers = receiversRaw.split("\n").filter(r => r.trim().length > 0);
+        if (receivers.length === 0) receivers = ["प्रापकको नाम थप्नुहोस्"];
+        
+        let finalLogo = logoData || document.getElementById("logoUrl").value.trim();
+        let finalSignature = signatureData;
+        const outputDiv = document.getElementById("output");
+        outputDiv.innerHTML = "";
+        
+        if (currentLayout === 'one') {
+            receivers.forEach(rec => {
+                const page = document.createElement('div'); page.className = 'page-portrait';
+                page.innerHTML = buildLetterHTML(rec, org, address1, address2, letterDate, letterNo, refNo, subjectTxt, sender, position, email, mobile, bodyTemplate, finalLogo, finalSignature);
+                outputDiv.appendChild(page);
+            });
+        }
+        else if (currentLayout === 'two') {
+            for (let i = 0; i < receivers.length; i += 2) {
+                const pageDiv = document.createElement('div'); pageDiv.className = 'page-landscape-two';
+                const leftDiv = document.createElement('div'); leftDiv.className = 'letter-half';
+                leftDiv.innerHTML = buildLetterHTML(receivers[i], org, address1, address2, letterDate, letterNo, refNo, subjectTxt, sender, position, email, mobile, bodyTemplate, finalLogo, finalSignature);
+                pageDiv.appendChild(leftDiv);
+                if (i+1 < receivers.length) {
+                    const rightDiv = document.createElement('div'); rightDiv.className = 'letter-half';
+                    rightDiv.innerHTML = buildLetterHTML(receivers[i+1], org, address1, address2, letterDate, letterNo, refNo, subjectTxt, sender, position, email, mobile, bodyTemplate, finalLogo, finalSignature);
+                    pageDiv.appendChild(rightDiv);
+                } else {
+                    const emptyDiv = document.createElement('div'); emptyDiv.className = 'letter-half';
+                    emptyDiv.innerHTML = '<div style="text-align:center; margin-top:40%; color:#aaa;">— खाली —</div>';
+                    pageDiv.appendChild(emptyDiv);
+                }
+                outputDiv.appendChild(pageDiv);
+            }
+        }
+        else if (currentLayout === 'four') {
+            for (let i = 0; i < receivers.length; i += 4) {
+                const pageDiv = document.createElement('div'); pageDiv.className = 'page-landscape-four';
+                for (let s = 0; s < 4; s++) {
+                    const idx = i + s;
+                    const card = document.createElement('div'); card.className = 'letter-quarter';
+                    if (idx < receivers.length) {
+                        card.innerHTML = buildLetterHTML(receivers[idx], org, address1, address2, letterDate, letterNo, refNo, subjectTxt, sender, position, email, mobile, bodyTemplate, finalLogo, finalSignature);
+                    } else {
+                        card.style.background = "#f9fafc";
+                        card.innerHTML = "<div style='text-align:center; opacity:0.5; padding:15px 0;'><i class='fas fa-minus-circle'></i><br/>रिक्त</div>";
+                    }
+                    pageDiv.appendChild(card);
+                }
+                outputDiv.appendChild(pageDiv);
+            }
+        }
+    }
+
+    async function downloadPDF() {
+        const { jsPDF } = window.jspdf;
+        const pages = document.querySelectorAll("#output .page-portrait, #output .page-landscape-two, #output .page-landscape-four");
+        if (!pages.length) { alert("कृपया पहिले 'जेनेरेट' गर्नुहोस्।"); return; }
+        
+        const loader = document.getElementById('loadingIndicator');
+        loader.style.display = 'flex';
+        
+        try {
+            let pdf = null;
+            for (let i = 0; i < pages.length; i++) {
+                const pageElem = pages[i];
+                let orientation = 'p';
+                let widthMm = 210, heightMm = 297;
+                if (pageElem.classList.contains('page-landscape-two') || pageElem.classList.contains('page-landscape-four')) {
+                    orientation = 'l';
+                    widthMm = 297;
+                    heightMm = 210;
+                }
+                
+                const canvas = await html2canvas(pageElem, { 
+                    scale: 2.8,
+                    backgroundColor: '#ffffff',
+                    useCORS: true,
+                    logging: false
+                });
+                
+                const imgData = canvas.toDataURL('image/jpeg', 0.98);
+                
+                if (!pdf) {
+                    pdf = new jsPDF({ orientation: orientation, unit: 'mm', format: [widthMm, heightMm] });
+                    pdf.addImage(imgData, 'JPEG', 0, 0, widthMm, heightMm);
+                } else {
+                    pdf.addPage([widthMm, heightMm], orientation);
+                    pdf.addImage(imgData, 'JPEG', 0, 0, widthMm, heightMm);
+                }
+            }
+            
+            if (pdf) {
+                pdf.save('Multi_Letterpad.pdf');
+            }
+        } catch (err) {
+            console.error("PDF Error:", err);
+            alert("PDF बनाउँदा समस्या आयो।");
+        } finally {
+            loader.style.display = 'none';
+        }
+    }
+    
+    function handlePrint() { setTimeout(() => window.print(), 100); }
+    function resetAll() { if(confirm("सबै डाटा रिसेट हुनेछ।")) location.reload(); }
+    function closeModal() { document.getElementById('welcomeModal').style.display = 'none'; }
+    
+    window.onload = () => {
+        loadLikeData();
+        generateLetters();
+        const inputs = document.querySelectorAll('input, textarea');
+        inputs.forEach(el => { if(el.id !== 'layoutSelect') el.addEventListener('input', () => generateLetters()); });
+        document.getElementById('layoutSelect').addEventListener('change', () => generateLetters());
+    };
 </script>
 </body>
 </html>
