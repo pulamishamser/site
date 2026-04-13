@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
-<title>Multi Letterpad Pro | पूर्ण मोबाइल अनुकूल</title>
+<title>Multi Letterpad</title>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -189,7 +189,7 @@
     textarea {
         border-radius: 20px;
         resize: vertical;
-        min-height: 80px;
+        min-height: 280px;
     }
     
     input:focus, textarea:focus {
@@ -501,7 +501,7 @@
         <div class="modal-body">
             <p><strong>📄 एकै पटक धेरैलाई पत्र तयार गर्नुहोस्</strong></p>
             <ul style="margin: 12px 0 12px 20px; font-size:0.85rem;">
-                <li>✅ Single / Two / Four letter लेआउट</li>
+                <li>✅ Single / Two / Four letter layout</li>
                 <li>✅ <strong>पूर्ण मोबाइल अनुकूल</strong> - सबै स्क्रिनमा मिल्छ</li>
                 <li>✅ Like बटनको संख्या सेभ हुन्छ</li>
                 <li>✅ PDF डाउनलोड र प्रिन्ट सही</li>
@@ -561,7 +561,7 @@
         </div>
         
         <div class="form-row">
-            <div class="form-group"><label><i class="fas fa-address-card"></i> प्रापकहरु (लाइन ब्रेक गर्न Comma , को प्रयाेग गर्नुपर्छ ।)</label>
+            <div class="form-group"><label><i class="fas fa-address-card"></i> प्रापकहरु (एकलाईन प्रापक)(एक लाइन ब्रेक गर्न (Comma ,) को प्रयाेग गर्नुपर्छ ।)</label>
                <textarea id="receivers" rows="3">
                मुख्य निर्वाचन अधिकृत, जिल्ला निर्वाचन कार्यालय सर्लाही
 शिक्षा शाखा प्रमुख, लालबन्दी नपा
@@ -655,7 +655,7 @@
             <div class="letter-header">${logoHtml}<div class="org-name">${escapeHtml(org)}</div></div>
             <div class="address-container"><div class="address-line1">${escapeHtml(addr1)}</div><div class="address-line2">${escapeHtml(addr2)}</div></div>
             <div class="meta-line"><span><i class="fas fa-hashtag"></i> ${escapeHtml(letterNo)}</span><span><i class="fas fa-qrcode"></i> ${escapeHtml(refNo)}</span><span><i class="fas fa-calendar-alt"></i> ${escapeHtml(date)}</span></div>
-            <div class="recipient-line">महोदय, ${escapeHtml(displayRec)}</div>
+            <div class="recipient-line">${escapeHtml(displayRec)}</div>
             <div class="subject">विषय: ${escapeHtml(subjectTxt)}</div>
             <div class="body">${escapeHtml(personalizedBody).replace(/\n/g, '<br>')}</div>
             <div class="signature-area">${signatureHtml}<div class="sender-name">${escapeHtml(sender)}</div><div style="font-size:0.7rem;">${escapeHtml(position)}</div></div>
