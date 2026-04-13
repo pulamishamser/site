@@ -1995,377 +1995,441 @@ src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0">
 
     </div>
 <!------------------Page Started------------------------------------>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-        :root {
-            --white: #ffffff;
-            --light: #f8f9fa;
-            --light-gray: #e9ecef;
-            --gray: #6c757d;
-            --secondary: #2c3e50;
-            --primary: #e67e22;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            --transition: all 0.3s ease;
-        }
+    :root {
+        --white: #ffffff;
+        --light: #f8f9fa;
+        --light-gray: #e9ecef;
+        --gray: #6c757d;
+        --secondary: #2c3e50;
+        --primary: #e67e22;
+        --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        --transition: all 0.3s ease;
+    }
 
-        body {
-            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
-            padding: 20px;
-            color: #1e2a3a;
-            min-height: 100vh;
-        }
+    body {
+        font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+        padding: 20px;
+        color: #1e2a3a;
+        min-height: 100vh;
+    }
 
-        .main-container {
-            max-width: 1280px;
-            margin: 0 auto;
-        }
+    .main-container {
+        max-width: 1280px;
+        margin: 0 auto;
+    }
 
-        /* Responsive */
-        @media (max-width: 992px) {
-            .trending-content { flex-direction: column; }
-        }
-        @media (max-width: 768px) {
-            body { padding: 12px; }
-            .trending-tags span { font-size: 11px; padding: 6px 12px; }
-            .news-list { grid-template-columns: 1fr; }
-        }
+    /* Responsive */
+    @media (max-width: 992px) {
+        .trending-content { flex-direction: column; }
+    }
+    @media (max-width: 768px) {
+        body { padding: 12px; }
+        .trending-tags span { font-size: 11px; padding: 6px 12px; }
+        .news-list { grid-template-columns: 1fr; }
+    }
 
-        /* Header */
-        .site-header {
-            background: linear-gradient(135deg, #1e4663 0%, #2c3e50 100%);
-            border-radius: 20px;
-            padding: 25px 30px;
-            margin-bottom: 30px;
-            box-shadow: var(--shadow);
-            text-align: center;
-            color: white;
-        }
-        .site-header h1 { font-size: 32px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 12px; }
-        .site-header p { opacity: 0.9; font-size: 14px; }
+    /* Header */
+    .site-header {
+        background: linear-gradient(135deg, #1e4663 0%, #2c3e50 100%);
+        border-radius: 20px;
+        padding: 25px 30px;
+        margin-bottom: 30px;
+        box-shadow: var(--shadow);
+        text-align: center;
+        color: white;
+    }
+    .site-header h1 { font-size: 32px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 12px; }
+    .site-header p { opacity: 0.9; font-size: 14px; }
 
-        /* Trending Section */
-        .trending-section {
-            background-color: var(--white);
-            border-radius: 24px;
-            padding: 20px 24px;
-            margin-bottom: 32px;
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(0,0,0,0.03);
-        }
-        .trending-section h2 {
-            font-size: 22px;
-            margin-bottom: 18px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid var(--light-gray);
-            color: var(--secondary);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .trending-content {
-            display: flex;
-            gap: 24px;
-            align-items: flex-start;
-            flex-wrap: wrap;
-        }
-        .trending-tags-wrapper {
-            flex: 1;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-        }
-        .trending-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            flex: 2;
-        }
-        .trending-tags a { text-decoration: none; display: inline-flex; }
-        .trending-tags span {
-            background-color: var(--light);
-            padding: 10px 18px;
-            border-radius: 40px;
-            font-size: 13px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            color: #1e4663;
-            border: 1px solid #e2e8f0;
-        }
-        .trending-tags span:hover {
-            background-color: var(--primary);
-            color: var(--white);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 18px rgba(230, 126, 34, 0.2);
-        }
-        .trending-tags span::before { content: "#"; font-weight: bold; }
+    /* Trending Section */
+    .trending-section {
+        background-color: var(--white);
+        border-radius: 24px;
+        padding: 20px 24px;
+        margin-bottom: 32px;
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(0,0,0,0.03);
+    }
+    .trending-section h2 {
+        font-size: 22px;
+        margin-bottom: 18px;
+        padding-bottom: 12px;
+        border-bottom: 3px solid var(--light-gray);
+        color: var(--secondary);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    .trending-content {
+        display: flex;
+        gap: 24px;
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+    .trending-tags-wrapper {
+        flex: 1;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+    }
+    .trending-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        flex: 2;
+    }
+    .trending-tags a { text-decoration: none; display: inline-flex; }
+    .trending-tags span {
+        background-color: var(--light);
+        padding: 10px 18px;
+        border-radius: 40px;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: var(--transition);
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: #1e4663;
+        border: 1px solid #e2e8f0;
+    }
+    .trending-tags span:hover {
+        background-color: var(--primary);
+        color: var(--white);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 18px rgba(230, 126, 34, 0.2);
+    }
+    .trending-tags span::before { content: "#"; font-weight: bold; }
 
-        /* Like Block Styling */
-        .like-block {
-            background: linear-gradient(135deg, #fff5eb 0%, #ffe8d6 100%);
-            padding: 10px 20px;
-            border-radius: 60px;
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            border: 1px solid #ffd8b5;
-        }
-        .like-group { display: flex; align-items: center; gap: 10px; }
-        .like-btn {
-            background: white;
-            border: none;
-            padding: 8px 18px;
-            border-radius: 40px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            color: #e67e22;
-            border: 1px solid #f0c8a0;
-            font-family: inherit;
-            position: relative;
-            overflow: hidden;
-        }
-        .like-btn i { font-size: 16px; transition: transform 0.2s; }
-        .like-btn:hover { background: #e67e22; color: white; transform: translateY(-2px); }
-        .like-btn.liked { background: #e67e22; color: white; border-color: #e67e22; }
-        .like-btn.liked i { animation: heartBeat 0.4s ease; }
-        @keyframes heartBeat { 0%,100%{transform:scale(1);} 50%{transform:scale(1.3);} }
-        .like-count-badge {
-            background: #e67e22;
-            color: white;
-            border-radius: 50px;
-            padding: 5px 12px;
-            font-size: 14px;
-            font-weight: bold;
-            min-width: 48px;
-            text-align: center;
-        }
-        .time-micro {
-            font-size: 12px;
-            color: #b45f1b;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            background: rgba(255,255,240,0.8);
-            padding: 4px 12px;
-            border-radius: 30px;
-        }
+    /* Like Block Styling */
+    .like-block {
+        background: linear-gradient(135deg, #fff5eb 0%, #ffe8d6 100%);
+        padding: 10px 20px;
+        border-radius: 60px;
+        display: inline-flex;
+        align-items: center;
+        gap: 18px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        border: 1px solid #ffd8b5;
+    }
+    .like-group { display: flex; align-items: center; gap: 10px; }
+    .like-btn {
+        background: white;
+        border: none;
+        padding: 8px 18px;
+        border-radius: 40px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        color: #e67e22;
+        border: 1px solid #f0c8a0;
+        font-family: inherit;
+        position: relative;
+        overflow: hidden;
+    }
+    .like-btn i { font-size: 16px; transition: transform 0.2s; }
+    .like-btn:hover { background: #e67e22; color: white; transform: translateY(-2px); }
+    .like-btn.liked { background: #e67e22; color: white; border-color: #e67e22; }
+    .like-btn.liked i { animation: heartBeat 0.4s ease; }
+    @keyframes heartBeat { 0%,100%{transform:scale(1);} 50%{transform:scale(1.3);} }
+    .like-count-badge {
+        background: #e67e22;
+        color: white;
+        border-radius: 50px;
+        padding: 5px 12px;
+        font-size: 14px;
+        font-weight: bold;
+        min-width: 48px;
+        text-align: center;
+    }
+    .time-micro {
+        font-size: 12px;
+        color: #b45f1b;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        background: rgba(255,255,240,0.8);
+        padding: 4px 12px;
+        border-radius: 30px;
+    }
 
-        /* News Section */
-        .news-section {
-            background: var(--white);
-            border-radius: 24px;
-            padding: 20px 24px;
-            margin-bottom: 30px;
-            box-shadow: var(--shadow);
-        }
-        .news-header { margin-bottom: 22px; border-left: 5px solid var(--primary); padding-left: 16px; }
-        .header3 { font-size: 22px; color: var(--secondary); display: flex; align-items: center; gap: 10px; }
-        .news-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 24px;
-        }
-        .news-item {
-            display: flex;
-            gap: 18px;
-            padding: 12px;
-            background: #fefefe;
-            border-radius: 20px;
-            transition: var(--transition);
-            border: 1px solid #edf2f7;
-        }
-        .news-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.05);
-            background: #fffaf5;
-        }
-        .news-item img {
-            width: 95px;
-            height: 95px;
-            object-fit: cover;
-            border-radius: 16px;
-        }
-        .news-info .title { font-weight: 600; margin-bottom: 8px; line-height: 1.4; font-size: 0.95rem; color: #1a2c3e; }
-        .news-info .source { font-size: 12px; color: var(--primary); font-weight: 600; }
+    /* News Section */
+    .news-section {
+        background: var(--white);
+        border-radius: 24px;
+        padding: 20px 24px;
+        margin-bottom: 30px;
+        box-shadow: var(--shadow);
+    }
+    .news-header { margin-bottom: 22px; border-left: 5px solid var(--primary); padding-left: 16px; }
+    .header3 { font-size: 22px; color: var(--secondary); display: flex; align-items: center; gap: 10px; }
+    .news-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 24px;
+    }
+    .news-item {
+        display: flex;
+        gap: 18px;
+        padding: 12px;
+        background: #fefefe;
+        border-radius: 20px;
+        transition: var(--transition);
+        border: 1px solid #edf2f7;
+    }
+    .news-item:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 24px rgba(0,0,0,0.05);
+        background: #fffaf5;
+    }
+    .news-item img {
+        width: 95px;
+        height: 95px;
+        object-fit: cover;
+        border-radius: 16px;
+    }
+    .news-info .title { font-weight: 600; margin-bottom: 8px; line-height: 1.4; font-size: 0.95rem; color: #1a2c3e; }
+    .news-info .source { font-size: 12px; color: var(--primary); font-weight: 600; }
 
-        /* Smritika Section */
-        .smritika-section {
-            background-color: #f0f8ff;
-            border-radius: 24px;
-            padding: 25px;
-            margin: 30px 0;
-            border: 2px solid #1e3c72;
-        }
-        .overlay {
-            background: #fef4e8;
-            padding: 12px 18px;
-            border-left: 6px solid #f39c12;
-            margin: 18px 0;
-            border-radius: 20px;
-        }
-        .custom-marquee {
-            background: linear-gradient(90deg, #f39c12, #e67e22);
-            border-radius: 48px;
-            margin: 20px 0;
-            padding: 6px 0;
-        }
-        .custom-marquee p { color: white; font-weight: 500; padding: 8px 0; margin: 0; text-align: center; }
-        .footer {
-            background: var(--secondary);
-            color: white;
-            border-radius: 20px;
-            padding: 20px;
-            text-align: center;
-            margin-top: 20px;
-            font-size: 13px;
-        }
-        .read-more-btn {
-            background: none;
-            border: none;
-            color: #e67e22;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 8px;
-            font-size: 13px;
-        }
-        img { max-width: 100%; border-radius: 16px; }
-        .book-content { margin-top: 12px; }
-    </style>
+    /* Smritika Section */
+    .smritika-section {
+        background-color: #f0f8ff;
+        border-radius: 24px;
+        padding: 25px;
+        margin: 30px 0;
+        border: 2px solid #1e3c72;
+    }
+    .overlay {
+        background: #fef4e8;
+        padding: 12px 18px;
+        border-left: 6px solid #f39c12;
+        margin: 18px 0;
+        border-radius: 20px;
+    }
+    .custom-marquee {
+        background: linear-gradient(90deg, #f39c12, #e67e22);
+        border-radius: 48px;
+        margin: 20px 0;
+        padding: 6px 0;
+    }
+    .custom-marquee p { color: white; font-weight: 500; padding: 8px 0; margin: 0; text-align: center; }
+    .footer {
+        background: var(--secondary);
+        color: white;
+        border-radius: 20px;
+        padding: 20px;
+        text-align: center;
+        margin-top: 20px;
+        font-size: 13px;
+    }
+    .read-more-btn {
+        background: none;
+        border: none;
+        color: #e67e22;
+        font-weight: 600;
+        cursor: pointer;
+        margin-top: 8px;
+        font-size: 13px;
+    }
+    img { max-width: 100%; border-radius: 16px; }
+    .book-content { margin-top: 12px; }
+    
+    .custom-toast {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #2c3e50;
+        color: white;
+        padding: 10px 24px;
+        border-radius: 50px;
+        z-index: 9999;
+        font-size: 14px;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+    }
+    
+    .inline-content {
+        display: inline;
+    }
+    
+    .hidden-content {
+        display: none;
+    }
+</style>
 <!--------------------End style------------------->
-<!----------------Start main-container-------------
+
 <div class="main-container">
-    <!--------------------- Header
+    <!-- Header
     <div class="site-header">
-        <h1><i class="fa fa-newspaper-o"></i> शम्शेर.इन्फो.एनपी <i class="fa fa-globe"></i></h1>
+        <h1>📰 शम्शेर.इन्फो.एनपी 🌐</h1>
         <p>शिक्षा, समाज र सत्यको पक्षमा | हरेक सामग्रीमा तपाईंको प्रतिक्रिया</p>
-    </div> ---------------------------->
+    </div> -->
 
     <!-- ========= TRENDING SECTION WITH LIKE ========= -->
     <section class="trending-section">
-        <h2><i class="fa fa-line-chart"></i> ट्रेन्डिङ विषयहरू</h2>
+        <h2>📈 ट्रेन्डिङ विषयहरू</h2>
         <div class="trending-content">
             <div class="trending-tags-wrapper">
                 <div class="trending-tags">
-                    <a href="#P4"><span>शिक्षामा जुत्ता बेचेजस्तो</span></a>
+                    <a href="#content_education"><span>शिक्षामा जुत्ता बेचेजस्तो</span></a>
                     <a href="https://shamser.info.np/tsc_questions.html"><span>Quiz</span></a>
-                    <a href="#P1"><span>शिक्षकको सरुवा</span></a>
-                    <a href="#P2"><span>पुस्तक बिक्री</span></a>
+                    <a href="#content_transfer"><span>शिक्षकको सरुवा</span></a>
+                    <a href="#content_booksale"><span>पुस्तक बिक्री</span></a>
                     <a href="#P3"><span>School Page</span></a>
                     <a href="https://script.google.com/macros/s/AKfycbxD3lnuphwTi_E4bwqogA-hBjgiU9XpnyTUKz_yXe4jHARi6OLhklZ8WM3LR8UtkuIJIA/exec"><span>Login IEMIS</span></a>
                 </div>
-        <!------------------   <div class="like-block" data-content-id="trending">
-                    <div class="like-group">
-                        <button class="like-btn" data-like-key="trending"><i class="fa fa-heart-o"></i><span class="like-text">मन पर्यो</span></button>
-                        <div class="like-count-badge" data-count-key="trending">0</div>
-                    </div>
-                    <div class="time-micro"><i class="fa fa-clock-o"></i> <span data-time-key="trending">अहिले</span></div>
-                </div>
-               --End style------------------->     
             </div>
         </div>
     </section>
 
     <!-- ========= SMARIKA SECTION ========= -->
     <div id="content_smritika" class="smritika-section">
-        <h2><i class="fa fa-book"></i> विद्यालय स्मारिका</h2>
-        <img src="https://shamser.info.np/HomePage/smarika.png" alt="SMARIKA" style="width:100%; margin:10px 0;">
+        <h2>📖 विद्यालय स्मारिका</h2>
+        <img src="https://shamser.info.np/HomePage/smarika.png" alt="SMARIKA" style="width:100%; height:500px; margin:10px 0;">
         <p>विद्यालय स्मारिका भनेको विद्यालयको पहिचान, इतिहास, उपलब्धि र गतिविधिहरूलाई समेटेर तयार गरिने स्मरणीय प्रकाशन हो। यसले विद्यालयको विकासको कथा समेट्छ र भविष्यको लागि ऐतिहासिक दस्तावेजको रूपमा काम गर्छ।</p>
         <h5>स्मारिका तयार गर्दा ध्यान दिनुपर्ने कुराहरू:</h5>
-        <ul><li>विद्यालयको इतिहास र विकास यात्रा</li><li>शिक्षक, कर्मचारी र विद्यार्थीहरूको विवरण</li><li>शैक्षिक र पाठ्यक्रम गतिविधिहरू</li><li>खेलकुद र सांस्कृतिक कार्यक्रमहरू</li><li>उपलब्धिहरू र पुरस्कारहरू</li></ul>
-        <div class="like-block" data-content-id="smritika" style="margin-top:15px;">
+        <ul>
+            <li>विद्यालयको इतिहास र विकास यात्रा</li>
+            <li>शिक्षक, कर्मचारी र विद्यार्थीहरूको विवरण</li>
+            <li>शैक्षिक र पाठ्यक्रम गतिविधिहरू</li>
+            <li>खेलकुद र सांस्कृतिक कार्यक्रमहरू</li>
+            <li>उपलब्धिहरू र पुरस्कारहरू</li>
+        </ul>
+        <div class="like-block" style="margin-top:15px;">
             <div class="like-group">
-                <button class="like-btn" data-like-key="smritika"><i class="fa fa-heart-o"></i><span class="like-text">मन पर्यो</span></button>
+                <button class="like-btn" data-like-key="smritika">❤️ <span class="like-text">मन पर्यो</span></button>
                 <div class="like-count-badge" data-count-key="smritika">0</div>
             </div>
-            <div class="time-micro"><i class="fa fa-clock-o"></i> <span data-time-key="smritika">अहिले</span></div>
+            <div class="time-micro">🕐 <span data-time-key="smritika">अहिले</span></div>
         </div>
     </div>
 
     <!-- ========= उपन्यास कारा ========= -->
     <div class="news-section" id="content_kara">
-        <div class="news-header"><h2 class="header3"><i class="fa fa-pencil-square-o"></i> सुशीला कार्कीद्वारा लिखित नेपाली उपन्यास - कारा (Kara)</h2></div>
+        <div class="news-header"><h2 class="header3">✍️ सुशीला कार्कीद्वारा लिखित नेपाली उपन्यास - कारा (Kara)</h2></div>
         <p>जेल जीवन, महिला हिंसा र सामाजिक बन्धनको कथा। पुस्तक समीक्षा, कथावस्तु र पात्रहरूको विस्तृत विश्लेषण</p>
-        <img src="https://media.thuprai.com/front_covers/Kara_by_Sushila_Karki_-_front.jpg" width="100%">
-        <div style="margin:15px 0"><img src="https://pbs.twimg.com/profile_images/1579086841227059200/JyklJEUx_400x400.jpg" alt="Editor" style="width:60px;height:60px;border-radius:50%;float:left;margin-right:15px;"> 
-        <p style="text-align:justify">सुशीला कार्कीद्वारा लिखित नेपाली उपन्यास कारा (Kara) जेल जीवन, महिला हिंसा र सामाजिक बन्धनको कथा पुस्तक समीक्षा, कथावस्तु र पात्रहरूको विस्तृत विश्लेषण। महिला कैदीहरूको भौतिक र सामाजिक बन्धनको कथा – कारा उपन्यासको विस्तृत समीक्षा <a href="https://shamser.info.np/kara.html">बाँकी पढ्नुहोला</a></p></div>
-        <div class="like-block" data-content-id="kara"><div class="like-group"><button class="like-btn" data-like-key="kara"><i class="fa fa-heart-o"></i><span class="like-text">मन पर्यो</span></button><div class="like-count-badge" data-count-key="kara">0</div></div><div class="time-micro"><i class="fa fa-clock-o"></i> <span data-time-key="kara">अहिले</span></div></div>
+        <img src="https://media.thuprai.com/front_covers/Kara_by_Sushila_Karki_-_front.jpg" width="100%" height="500">
+        <div style="margin:15px 0; overflow: auto;">
+            <img src="https://pbs.twimg.com/profile_images/1579086841227059200/JyklJEUx_400x400.jpg" alt="Editor" style="width:60px;height:60px;border-radius:50%;float:left;margin-right:15px;"> 
+            <p style="text-align:justify">सुशीला कार्कीद्वारा लिखित नेपाली उपन्यास कारा (Kara) जेल जीवन, महिला हिंसा र सामाजिक बन्धनको कथा पुस्तक समीक्षा, कथावस्तु र पात्रहरूको विस्तृत विश्लेषण। महिला कैदीहरूको भौतिक र सामाजिक बन्धनको कथा – कारा उपन्यासको विस्तृत समीक्षा <a href="https://shamser.info.np/kara.html">बाँकी पढ्नुहोला</a></p>
+        </div>
+        <div class="like-block">
+            <div class="like-group">
+                <button class="like-btn" data-like-key="kara">❤️ <span class="like-text">मन पर्यो</span></button>
+                <div class="like-count-badge" data-count-key="kara">0</div>
+            </div>
+            <div class="time-micro">🕐 <span data-time-key="kara">अहिले</span></div>
+        </div>
     </div>
 
     <!-- ========= विद्यार्थीबाट शुल्क लिनु गैरकानूनी ========= -->
     <div class="news-section" id="content_education">
-        <div class="news-header"><h2 class="header3"><i class="fa fa-pencil-square-o"></i> ‘विद्यार्थीबाट शुल्क लिनु गैरकानूनी हो; शिक्षा उद्योग होइन</h2></div>
+        <div class="news-header"><h2 class="header3">✍️ ‘विद्यार्थीबाट शुल्क लिनु गैरकानूनी हो; शिक्षा उद्योग होइन</h2></div>
         <p>विद्या भट्टराई, निवर्तमान शिक्षा, विज्ञान तथा प्रविधि मन्त्री</p>
-        <img src="https://www.onlinekhabar.com/wp-content/uploads/2025/06/Bidhya-Bhattarai-Banner.png" width="100%">
-        <div style="margin:15px 0"><img src="https://pbs.twimg.com/profile_images/1579086841227059200/JyklJEUx_400x400.jpg" style="width:60px;height:60px;border-radius:50%;float:left;margin-right:15px;">
-        <p style="text-align:justify">अनिवार्य तथा निःशुल्क शिक्षा ऐन २०७५ कार्यान्वयन गर्न निवर्तमान शिक्षा, विज्ञान तथा प्रविधि मन्त्री विद्या भट्टराईले २०८३ सालसम्मको कार्ययोजना बनाएकी थिइन् । तर भट्टराईले ९ महिनामै पदबाट राजीनामा दिइन् । उनले आफ्नो कार्यकालमा अनिवार्य तथा निःशुल्क शिक्षा ऐन कति कार्यान्वयन गरिन् त ? 
-        <span id="eduDots">...</span><span id="eduMore" style="display:none;"> अनलाइनखबरकर्मी दिनेश गौतमले गरेको कुराकानीको सम्पादित अंश : नौ महिना मन्त्री हुनुभयो । शुरूदेखि नै अनिवार्य तथा निःशुल्क शिक्षा ऐन कार्यान्वयनमा जोड दिनुभएको थियो । किताब निःशुल्क दिने, खाजा दिने र छात्रवृत्तिको काम भएको थियो । <a href="https://www.onlinekhabar.com/2025/06/1701879/it-is-illegal-to-charge-fees-from-students-education-is-not-an-industry">बाँकी अनलाइनखबरमा पढ्नुहोला</a></span>
-        <button class="read-more-btn" onclick="toggleEdu()">थप पढ्नुहोस्</button></p></div>
-        <div class="like-block" data-content-id="education"><div class="like-group"><button class="like-btn" data-like-key="education"><i class="fa fa-heart-o"></i><span class="like-text">मन पर्यो</span></button><div class="like-count-badge" data-count-key="education">0</div></div><div class="time-micro"><i class="fa fa-clock-o"></i> <span data-time-key="education">अहिले</span></div></div>
+        <img src="https://www.onlinekhabar.com/wp-content/uploads/2025/06/Bidhya-Bhattarai-Banner.png" width="100%" height="500">
+        <div style="margin:15px 0; overflow: auto;">
+            <img src="https://pbs.twimg.com/profile_images/1579086841227059200/JyklJEUx_400x400.jpg" style="width:60px;height:60px;border-radius:50%;float:left;margin-right:15px;">
+            <p style="text-align:justify">अनिवार्य तथा निःशुल्क शिक्षा ऐन २०७५ कार्यान्वयन गर्न निवर्तमान शिक्षा, विज्ञान तथा प्रविधि मन्त्री विद्या भट्टराईले २०८३ सालसम्मको कार्ययोजना बनाएकी थिइन् । तर भट्टराईले ९ महिनामै पदबाट राजीनामा दिइन् । उनले आफ्नो कार्यकालमा अनिवार्य तथा निःशुल्क शिक्षा ऐन कति कार्यान्वयन गरिन् त ? 
+            <span id="eduDots">...</span>
+            <span id="eduMore" class="hidden-content"> अनलाइनखबरकर्मी दिनेश गौतमले गरेको कुराकानीको सम्पादित अंश : नौ महिना मन्त्री हुनुभयो । शुरूदेखि नै अनिवार्य तथा निःशुल्क शिक्षा ऐन कार्यान्वयनमा जोड दिनुभएको थियो । किताब निःशुल्क दिने, खाजा दिने र छात्रवृत्तिको काम भएको थियो । <a href="https://www.onlinekhabar.com/2025/06/1701879/it-is-illegal-to-charge-fees-from-students-education-is-not-an-industry">बाँकी अनलाइनखबरमा पढ्नुहोला</a></span>
+            <button class="read-more-btn" onclick="toggleContent('eduMore', 'eduDots', this)">थप पढ्नुहोस्</button>
+            </p>
+        </div>
+        <div class="like-block">
+            <div class="like-group">
+                <button class="like-btn" data-like-key="education">❤️ <span class="like-text">मन पर्यो</span></button>
+                <div class="like-count-badge" data-count-key="education">0</div>
+            </div>
+            <div class="time-micro">🕐 <span data-time-key="education">अहिले</span></div>
+        </div>
     </div>
 
     <!-- ========= शिक्षक सरुवा ========= -->
     <div class="news-section" id="content_transfer">
         <h2 class="header3">शिक्षकको सरुवा हुँदै..</h2>
-        <img src="https://shamser.info.np/HomePage/1708402451_changu-1200x560-1200x560.jpg" width="100%">
-        <img src="https://pbs.twimg.com/profile_images/1579086841227059200/JyklJEUx_400x400.jpg" style="width:60px;height:60px;border-radius:50%;float:left;margin:10px 15px 10px 0;">
-        <p style="text-align:justify">लालबन्दी नगरपालिका भित्र संचालित सामुदायिक विद्यालयहरुमा कार्यरत शिक्षक सरुवाको विषयले पटकपटक हल्ला चल्दै आएको छ । विगत केही दिन देखि निकै चर्चा पायो । कक्षामा जानुपहिले हरेक दिन केही न केही कुरा निस्कन्थ्यो <span id="transferDots">...</span><span id="transferMore" style="display:none;">सोच्न आपसमा कुराकानी भैरहन्थ्यो । दशैं तिहारपछि शिक्षक सरुवाको प्रक्रिया अघि बढ्नेछ भन्ने अनुमान गरिएको छ । यस पटकको हल्ला हल्लामात्र हो वा यथार्थ हो फेरि प्रेस विज्ञप्तिको पर्खाइमा शिक्षकहरु रहेकाछन् ।</span>
-        <button class="read-more-btn" onclick="toggleTransfer()">थप पढ्नुहोस्</button></p>
-        <div class="like-block" data-content-id="transfer"><div class="like-group"><button class="like-btn" data-like-key="transfer"><i class="fa fa-heart-o"></i><span class="like-text">मन पर्यो</span></button><div class="like-count-badge" data-count-key="transfer">0</div></div><div class="time-micro"><i class="fa fa-clock-o"></i> <span data-time-key="transfer">अहिले</span></div></div>
+        <img src="https://shamser.info.np/HomePage/1708402451_changu-1200x560-1200x560.jpg" width="100%" height= "400" >
+        <div style="overflow: auto;">
+            <img src="https://pbs.twimg.com/profile_images/1579086841227059200/JyklJEUx_400x400.jpg" style="width:60px;height:60px;border-radius:50%;float:left;margin:10px 15px 10px 0;">
+            <p style="text-align:justify">लालबन्दी नगरपालिका भित्र संचालित सामुदायिक विद्यालयहरुमा कार्यरत शिक्षक सरुवाको विषयले पटकपटक हल्ला चल्दै आएको छ । विगत केही दिन देखि निकै चर्चा पायो । कक्षामा जानुपहिले हरेक दिन केही न केही कुरा निस्कन्थ्यो <span id="transferDots">...</span>
+            <span id="transferMore" class="hidden-content">सोच्न आपसमा कुराकानी भैरहन्थ्यो । दशैं तिहारपछि शिक्षक सरुवाको प्रक्रिया अघि बढ्नेछ भन्ने अनुमान गरिएको छ । यस पटकको हल्ला हल्लामात्र हो वा यथार्थ हो फेरि प्रेस विज्ञप्तिको पर्खाइमा शिक्षकहरु रहेकाछन् ।</span>
+            <button class="read-more-btn" onclick="toggleContent('transferMore', 'transferDots', this)">थप पढ्नुहोस्</button>
+            </p>
+        </div>
+        <div class="like-block">
+            <div class="like-group">
+                <button class="like-btn" data-like-key="transfer">❤️ <span class="like-text">मन पर्यो</span></button>
+                <div class="like-count-badge" data-count-key="transfer">0</div>
+            </div>
+            <div class="time-micro">🕐 <span data-time-key="transfer">अहिले</span></div>
+        </div>
     </div>
 
     <!-- ========= पुस्तक बिक्री (महावीर पुन) ========= -->
     <div class="news-section" id="content_booksale">
-        <h2 id="P2" class="header3"><i class="fa fa-pencil-square-o"></i> महावीर पुनद्वारा पुस्तक बिक्री</h2>
-        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj-UHKZ0j1bTr27Qiln7gUBB2BhtbDl3NDU8FeGSxsUZv8xeCT7g9ih1Rm0P6yvVziXv8_tUS-SGS-WOz6FJgjtFWGUGccCRNpPzeqo9PmUuBry4wQwMxfrsvMAgTsVZRfRAa5aXMKghG2JH_Nv-3wKyJfDT4lVCV-gUSgUb3jo8e69MS03kXUj5swQUQE/w545-h363/Nepali%20Hami%20Rahula%20Kaha%20With%20Lyrics%20Nepali.jpg" width="100%">
+        <h2 id="P2" class="header3">✍️ महावीर पुनद्वारा पुस्तक बिक्री</h2>
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj-UHKZ0j1bTr27Qiln7gUBB2BhtbDl3NDU8FeGSxsUZv8xeCT7g9ih1Rm0P6yvVziXv8_tUS-SGS-WOz6FJgjtFWGUGccCRNpPzeqo9PmUuBry4wQwMxfrsvMAgTsVZRfRAa5aXMKghG2JH_Nv-3wKyJfDT4lVCV-gUSgUb3jo8e69MS03kXUj5swQUQE/w545-h363/Nepali%20Hami%20Rahula%20Kaha%20With%20Lyrics%20Nepali.jpg" width="100%"  height= "500">
         <div class="overlay"><p>बीरगंज कृषि औजार कारखाना संचानार्थ महावीर पुनद्वारा पुस्तक बिक्री</p></div>
         <div class="book-content">
-            <p>बीरगंज कृषि औजार कारखानालाई ब्युँताउन किताब बिक्री गर्ने क्रममा सर्लाही आउनु भएका समाजसेवी तथा नेपाली बैज्ञानिक महाबिर पुन आज बाईरोड हुँदै काठमाण्डौ फर्कनु भएको छ । सर्लाहीको बागमति नपामा सबैभन्दा बढी पुस्तक बिक्री भएको । <span id="bookSpan">...</span><span id="bookMoreText" style="display:none;">किताब बिक्री गर्ने क्रममा डिमजनता माविमा आउनु भएका डा.पुनले भन्नु भयो "सरकारी स्वामित्वमा रहेको बीरगंज कृषि औजार कारखाना पुन संचालनमा ल्याउने जिम्मेवारी सरकारले मलाई दिनुभएको छ ।" सोही दिन पुनबाट लालबन्दी नपाले 100 थान लिँदा दिनेश पाठक एक्लैले ६८ वटा किताब किन्नुभएको छ ।</span>
-            <button class="read-more-btn" onclick="toggleBook()">थप पढ्नुहोस्</button></p>
+            <p>बीरगंज कृषि औजार कारखानालाई ब्युँताउन किताब बिक्री गर्ने क्रममा सर्लाही आउनु भएका समाजसेवी तथा नेपाली बैज्ञानिक महाबिर पुन आज बाईरोड हुँदै काठमाण्डौ फर्कनु भएको छ । सर्लाहीको बागमति नपामा सबैभन्दा बढी पुस्तक बिक्री भएको । <span id="bookSpan">...</span>
+            <span id="bookMoreText" class="hidden-content">किताब बिक्री गर्ने क्रममा डिमजनता माविमा आउनु भएका डा.पुनले भन्नु भयो "सरकारी स्वामित्वमा रहेको बीरगंज कृषि औजार कारखाना पुन संचालनमा ल्याउने जिम्मेवारी सरकारले मलाई दिनुभएको छ ।" सोही दिन पुनबाट लालबन्दी नपाले 100 थान लिँदा दिनेश पाठक एक्लैले ६८ वटा किताब किन्नुभएको छ ।</span>
+            <button class="read-more-btn" onclick="toggleContent('bookMoreText', 'bookSpan', this)">थप पढ्नुहोस्</button>
+            </p>
         </div>
-        <div class="like-block" data-content-id="booksale"><div class="like-group"><button class="like-btn" data-like-key="booksale"><i class="fa fa-heart-o"></i><span class="like-text">मन पर्यो</span></button><div class="like-count-badge" data-count-key="booksale">0</div></div><div class="time-micro"><i class="fa fa-clock-o"></i> <span data-time-key="booksale">अहिले</span></div></div>
+        <div class="like-block">
+            <div class="like-group">
+                <button class="like-btn" data-like-key="booksale">❤️ <span class="like-text">मन पर्यो</span></button>
+                <div class="like-count-badge" data-count-key="booksale">0</div>
+            </div>
+            <div class="time-micro">🕐 <span data-time-key="booksale">अहिले</span></div>
+        </div>
     </div>
 
     <!-- News List Section -->
     <section class="news-section">
-        <div class="news-header"><h2 class="header3"><i class="fa fa-newspaper-o"></i> राष्ट्रिय समाचार</h2></div>
+        <div class="news-header"><h2 class="header3">📰 राष्ट्रिय समाचार</h2></div>
         <div class="news-list">
-            <div class="news-item"><img src="https://images.unsplash.com/photo-1588681664899-f142ff2dc9b1?w=150&h=150&fit=crop"><div class="news-info"><p class="title">जेनजि आन्दोलनमा कानुनी व्यवस्थालाई खल्बल्याउने प्रयास : शंकर पोखरेल</p><span class="source">baahrakhari.com</span></div></div>
-            <div class="news-item"><img src="https://images.unsplash.com/photo-1551135049-8a33b42738b4?w=150&h=150&fit=crop"><div class="news-info"><p class="title">काठमाण्डौका लागि उडेको श्री एयरको जहाज डेढ घण्टा फर्काइयो</p><span class="source">nepalpress.com</span></div></div>
-            <div class="news-item"><img src="https://images.unsplash.com/photo-1584824486506-c19c3e275c1b?w=150&h=150&fit=crop"><div class="news-info"><p class="title">सरकारले ल्याउने भनिएको ऐन अझै समितिमै</p><span class="source">annapurnapost.com</span></div></div>
+            <div class="news-item"><img src="https://images.unsplash.com/photo-1588681664899-f142ff2dc9b1?w=150&h=150&fit=crop" alt="news"><div class="news-info"><p class="title">जेनजि आन्दोलनमा कानुनी व्यवस्थालाई खल्बल्याउने प्रयास : शंकर पोखरेल</p><span class="source">baahrakhari.com</span></div></div>
+            <div class="news-item"><img src="https://images.unsplash.com/photo-1551135049-8a33b42738b4?w=150&h=150&fit=crop" alt="news"><div class="news-info"><p class="title">काठमाण्डौका लागि उडेको श्री एयरको जहाज डेढ घण्टा फर्काइयो</p><span class="source">nepalpress.com</span></div></div>
+            <div class="news-item"><img src="https://images.unsplash.com/photo-1584824486506-c19c3e275c1b?w=150&h=150&fit=crop" alt="news"><div class="news-info"><p class="title">सरकारले ल्याउने भनिएको ऐन अझै समितिमै</p><span class="source">annapurnapost.com</span></div></div>
         </div>
-        <div class="like-block" data-content-id="newslist" style="margin-top:20px;"><div class="like-group"><button class="like-btn" data-like-key="newslist"><i class="fa fa-heart-o"></i><span class="like-text">मन पर्यो</span></button><div class="like-count-badge" data-count-key="newslist">0</div></div><div class="time-micro"><i class="fa fa-clock-o"></i> <span data-time-key="newslist">अहिले</span></div></div>
+        <div class="like-block" style="margin-top:20px;">
+            <div class="like-group">
+                <button class="like-btn" data-like-key="newslist">❤️ <span class="like-text">मन पर्यो</span></button>
+                <div class="like-count-badge" data-count-key="newslist">0</div>
+            </div>
+            <div class="time-micro">🕐 <span data-time-key="newslist">अहिले</span></div>
+        </div>
     </section>
 
-    <div class="custom-marquee"><marquee behavior="scroll" direction="left" scrollamount="4"><p>✨ कसैको बाटोमा काँढा नबिछ्याउ किनकी त्यो बाटोमा तिमी फर्केर आउनुपर्छ । ✨ &nbsp;|&nbsp; शम्शेर.इन्फो.एनपी — सत्यको पक्षमा सधैं</p></marquee></div>
-</div>
-</div>
-</div>
-</div>
+    <div class="custom-marquee">
+        <marquee behavior="scroll" direction="left" scrollamount="4"><p>✨ कसैको बाटोमा काँढा नबिछ्याउ किनकी त्यो बाटोमा तिमी फर्केर आउनुपर्छ । ✨ &nbsp;|&nbsp; शम्शेर.इन्फो.एनपी — सत्यको पक्षमा सधैं</p></marquee>
+    </div>
+ </div>   
+   
 </div>
 
 <script>
     // ---- Like System with localStorage ----
-    const likeKeys = ['trending', 'smritika', 'kara', 'education', 'transfer', 'booksale', 'newslist'];
+    const likeKeys = ['smritika', 'kara', 'education', 'transfer', 'booksale', 'newslist'];
     let likeCounts = {}, userLiked = {};
 
-    const defaults = { trending: 0, smritika: 0, kara: 0, education: 0, transfer: 0, booksale: 0, newslist: 0 };
+    const defaults = { smritika: 0, kara: 0, education: 0, transfer: 0, booksale: 0, newslist: 0 };
+    
     function loadAll() {
         for(let key of likeKeys){
             let stored = localStorage.getItem(`shamser_like_${key}`);
@@ -2376,6 +2440,7 @@ src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0">
             updateUI(key);
         }
     }
+    
     function updateUI(key){
         let countSpan = document.querySelector(`.like-count-badge[data-count-key="${key}"]`);
         if(countSpan) countSpan.innerText = likeCounts[key];
@@ -2384,18 +2449,17 @@ src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0">
             let icon = btn.querySelector('i');
             let textSpan = btn.querySelector('.like-text');
             if(userLiked[key]){
-                icon.className = 'fa fa-heart';
-                icon.style.color = '#fff';
-                textSpan.innerText = 'मन पर्यो ✅';
+                if(icon) icon.className = 'fa fa-heart';
+                if(textSpan) textSpan.innerText = 'मन पर्यो ✅';
                 btn.classList.add('liked');
             } else {
-                icon.className = 'fa fa-heart-o';
-                icon.style.color = '#e67e22';
-                textSpan.innerText = 'मन पर्यो';
+                if(icon) icon.className = 'fa fa-heart-o';
+                if(textSpan) textSpan.innerText = 'मन पर्यो';
                 btn.classList.remove('liked');
             }
         }
     }
+    
     function handleLike(key){
         if(userLiked[key]){
             if(likeCounts[key] > 0) likeCounts[key]--;
@@ -2410,84 +2474,54 @@ src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0">
             localStorage.setItem(`shamser_like_${key}`, likeCounts[key]);
             localStorage.setItem(`shamser_liked_${key}`, 'true');
             updateUI(key);
-            // update time
             let timeSpan = document.querySelector(`.time-micro span[data-time-key="${key}"]`);
-            if(timeSpan) timeSpan.innerText = 'अहिले भर्खर';
+            if(timeSpan) timeSpan.innerText = 'भर्खरै';
             showToast('❤️ धन्यवाद! तपाईंले मन पराउनुभयो');
         }
     }
+    
     function showToast(msg){
         let t = document.querySelector('.custom-toast');
         if(!t){
             t = document.createElement('div');
             t.className = 'custom-toast';
-            t.style.position = 'fixed'; t.style.bottom = '20px'; t.style.left = '50%';
-            t.style.transform = 'translateX(-50%)'; t.style.backgroundColor = '#2c3e50';
-            t.style.color = 'white'; t.style.padding = '10px 24px'; t.style.borderRadius = '50px';
-            t.style.zIndex = '9999'; t.style.fontSize = '14px';
             document.body.appendChild(t);
         }
-        t.textContent = msg; t.style.opacity = '1';
-        setTimeout(()=> t.style.opacity = '0', 2000);
+        t.textContent = msg;
+        t.style.opacity = '1';
+        setTimeout(() => t.style.opacity = '0', 2000);
     }
+    
     // attach listeners
     for(let key of likeKeys){
         let btnEl = document.querySelector(`.like-btn[data-like-key="${key}"]`);
-        if(btnEl) btnEl.addEventListener('click', (e) => { e.preventDefault(); handleLike(key); });
-    }
-    // read more functions
-    window.toggleEdu = function(){ let dots=document.getElementById('eduDots'), more=document.getElementById('eduMore'), btn=event.target; if(more.style.display==='none'){ more.style.display='inline'; dots.style.display='none'; btn.innerText='संक्षिप्त पढ्नुहोस्'; } else { more.style.display='none'; dots.style.display='inline'; btn.innerText='थप पढ्नुहोस्'; } };
-    window.toggleTransfer = function(){ let dots=document.getElementById('transferDots'), more=document.getElementById('transferMore'), btn=event.target; if(more.style.display==='none'){ more.style.display='inline'; dots.style.display='none'; btn.innerText='संक्षिप्त पढ्नुहोस्'; } else { more.style.display='none'; dots.style.display='inline'; btn.innerText='थप पढ्नुहोस्'; } };
-    window.toggleBook = function(){ let more=document.getElementById('bookMoreText'), span=document.getElementById('bookSpan'), btn=event.target; if(more.style.display==='none'){ more.style.display='inline'; span.style.display='none'; btn.innerText='संक्षिप्त पढ्नुहोस्'; } else { more.style.display='none'; span.style.display='inline'; btn.innerText='थप पढ्नुहोस्'; } };
-    // init hidden states
-    document.getElementById('eduMore') && (document.getElementById('eduMore').style.display = 'none');
-    document.getElementById('transferMore') && (document.getElementById('transferMore').style.display = 'none');
-    document.getElementById('bookMoreText') && (document.getElementById('bookMoreText').style.display = 'none');
-    loadAll();
-    // time ago update
-    function updateTimeAgo(){
-        let now = new Date();
-        for(let key of likeKeys){
-            let ts = document.querySelector(`.time-micro span[data-time-key="${key}"]`);
-            if(ts && !userLiked[key]) ts.innerText = 'अहिले';
-            else if(ts && userLiked[key]) ts.innerText = 'भर्खरै';
+        if(btnEl) {
+            btnEl.addEventListener('click', (e) => { 
+                e.preventDefault(); 
+                handleLike(key); 
+            });
         }
     }
-    setInterval(updateTimeAgo, 30000);
-</script>
-
-
-<!--------------------------End Page---------------------------------------->
-
-
-
-<script>
-    // Dynamic date/time generator for news items (Nepal Time formatted)
-    function formatNepaliDate() {
-        const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-        const now = new Date();
-        return now.toLocaleDateString('ne-NP', options);
-    }
-
-    // Set dates for each news block (showing current dynamic time)
-    document.getElementById('datetimenw1') && (document.getElementById('datetimenw1').innerText = formatNepaliDate());
-    document.getElementById('date2') && (document.getElementById('date2').innerText = formatNepaliDate());
-    document.getElementById('date3') && (document.getElementById('date3').innerText = formatNepaliDate());
-    document.getElementById('date4') && (document.getElementById('date4').innerText = formatNepaliDate());
-
-    // Optional: If you want livestamp-like relative time for the 2nd news, keep both.
-    // For better UX we unify all as current date.
-    // Also handle any old livestamp attributes gracefully
-    const livestamps = document.querySelectorAll('[data-livestamp]');
-    livestamps.forEach(el => {
-        if(el.classList && el.classList.contains('date')) {
-            el.innerText = formatNepaliDate();
+    
+    // Generic toggle function for read-more
+    window.toggleContent = function(moreId, dotsId, btnElement) {
+        let more = document.getElementById(moreId);
+        let dots = document.getElementById(dotsId);
+        if(more.classList.contains('hidden-content')) {
+            more.classList.remove('hidden-content');
+            dots.style.display = 'none';
+            btnElement.innerText = 'संक्षिप्त पढ्नुहोस्';
         } else {
-            el.innerText = formatNepaliDate();
+            more.classList.add('hidden-content');
+            dots.style.display = 'inline';
+            btnElement.innerText = 'थप पढ्नुहोस्';
         }
-    });
-
-    // Smooth scroll for anchor links (#P1, #P2 etc) with offset if needed
+    };
+    
+    // Initialize
+    loadAll();
+    
+    // Smooth scroll for anchor links
     document.querySelectorAll('.trending-tags a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             const targetId = this.getAttribute('href');
@@ -2499,7 +2533,6 @@ src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0">
                     behavior: 'smooth',
                     block: 'start'
                 });
-                // Optional: highlight effect
                 targetElement.style.transition = '0.2s';
                 targetElement.style.backgroundColor = '#fff3e0';
                 setTimeout(() => {
@@ -2508,7 +2541,21 @@ src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0">
             }
         });
     });
+    
+    // Set initial hidden states
+    document.getElementById('eduMore')?.classList.add('hidden-content');
+    document.getElementById('transferMore')?.classList.add('hidden-content');
+    document.getElementById('bookMoreText')?.classList.add('hidden-content');
+    
+    // Font Awesome dynamic loading (optional, but good for icons)
+    if(!document.querySelector('link[href*="font-awesome"]')) {
+        const faLink = document.createElement('link');
+        faLink.rel = 'stylesheet';
+        faLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css';
+        document.head.appendChild(faLink);
+    }
 </script>
+<!--------------------------End Page---------------------------------------->
 
 <!-- Additional small improvement: fixing any unclosed tags from original and ensuring responsive images -->
 
@@ -2565,7 +2612,7 @@ function toggleTeacherReadMore() {
 </script>
   </div>  </div><
 --------smarika section--->
-   </div>
+
 
    <!------End big news----->       
 <div class="col-md-3" col-sm-12 style="padding:0px; margin:0px;">
