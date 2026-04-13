@@ -1996,382 +1996,451 @@ src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0">
     </div>
 
 
-<!---------------------Smarika----------->
-<style>
 
 
-
-        /* Smritika Section */
+    <!-- Font Awesome 4.7 & 5 (for compatibility) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #f0f2f5;
+            font-family: 'Segoe UI', Roboto, 'Noto Sans', sans-serif;
+            padding: 20px 16px 60px;
+            color: #1e2a3a;
+        }
+        .main-wrapper {
+            max-width: 880px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+            overflow: hidden;
+            padding: 28px 28px 45px;
+        }
+        /* each content block gets a like widget */
+        .like-block {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 18px;
+            flex-wrap: wrap;
+            background: #f8fafd;
+            padding: 8px 18px;
+            border-radius: 60px;
+            width: fit-content;
+            border: 1px solid #e2edf2;
+        }
+        .like-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: white;
+            padding: 4px 18px 4px 14px;
+            border-radius: 48px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .like-btn {
+            background: none;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #4a5b6e;
+            transition: 0.2s;
+            padding: 6px 10px;
+            border-radius: 40px;
+            font-weight: 500;
+        }
+        .like-btn i {
+            font-size: 26px;
+        }
+        .like-btn.liked {
+            color: #e11d48;
+        }
+        .like-btn.liked i {
+            animation: popHeart 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
+        }
+        @keyframes popHeart {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.28); }
+            100% { transform: scale(1); }
+        }
+        .like-count-badge {
+            background: white;
+            border-radius: 36px;
+            padding: 0 16px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            line-height: 44px;
+            min-width: 70px;
+            text-align: center;
+            color: #0f172a;
+            border: 1px solid #dce3ec;
+        }
+        .time-micro {
+            font-size: 0.7rem;
+            color: #5b6e8c;
+            background: #f1f5f9;
+            padding: 5px 14px;
+            border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .read-more-btn {
+            background: none;
+            border: none;
+            color: #1f6392;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-top: 8px;
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 30px;
+        }
+        .read-more-btn:hover {
+            background: #eef2ff;
+        }
         .smritika-section {
             background-color: #f0f8ff;
-            border-radius: 10px;
+            border-radius: 16px;
             padding: 25px;
             margin: 30px 0;
             border: 2px solid #1e3c72;
         }
-
-        .smritika-section h2 {
-            color: #1e3c72;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .smritika-section ul {
-            padding-left: 20px;
-        }
-
-        .smritika-section li {
-            margin-bottom: 8px;
-        }
-
-</style>
-   <!------Starting big news----->    
-
-
-<div class="container">
-<h1 class="header3"><i class="fas fa-book me-2"></i>विद्यालय स्मारिका</h1>
-
-
-  <!-- School Smritika Section -->
-                <section class="smritika-section">
-
-                 
-  			<img src="https://shamser.info.np/HomePage/smarika.png" class="img-fluid rounded mt-3" alt="SMARIKA">
-                    <p>विद्यालय स्मारिका भनेको विद्यालयको पहिचान, इतिहास, उपलब्धि र गतिविधिहरूलाई समेटेर तयार गरिने स्मरणीय प्रकाशन (बुक/पत्रिका) हो। यसले विद्यालयको विकासको कथा समेट्छ र भविष्यको लागि ऐतिहासिक दस्तावेजको रूपमा काम गर्छ।</p>
-                    <div class="clear-both"></div>
-                    <h5 class="mt-4">स्मारिका तयार गर्दा ध्यान दिनुपर्ने कुराहरू:</h5>
-                    <ul>
-                        <li>विद्यालयको इतिहास र विकास यात्रा</li>
-                        <li>शिक्षक, कर्मचारी र विद्यार्थीहरूको विवरण</li>
-                        <li>शैक्षिक र पाठ्यक्रम गतिविधिहरू</li>
-                        <li>खेलकुद र सांस्कृतिक कार्यक्रमहरू</li>
-                        <li>उपलब्धिहरू र पुरस्कारहरू</li>
-                        <li>भविष्यका योजनाहरू</li>
-                        <li>आर्थिक विवरण</li>
-                    </ul>
-                     </div>   
-<!---------------------Smarika----------->
-
-
-
-<div class="container">
-<h1 class="header3">
-<i class="fa fa-pencil-square-o"></i> <b>  सुशीला कार्कीद्वारा लिखित नेपाली उपन्यास-कारा (Kara) </b> </h1>
-<div class="fb-save" data-uri="https://shamser.info.np/" data-size=""></div>
-<p style="font-size:14px">जेल जीवन, महिला हिंसा र सामाजिक बन्धनको कथा। पुस्तक समीक्षा, कथावस्तु र पात्रहरूको विस्तृत विश्लेषण</p>
-
-<img src="https://media.thuprai.com/front_covers/Kara_by_Sushila_Karki_-_front.jpg" width="100%" height="455">
-<div class="clear-both"></div>
-
-<h1><img src="https://pbs.twimg.com/profile_images/1579086841227059200/JyklJEUx_400x400.jpg" alt="Editor" style="float: left;width:60px;height:60px;border: 1px dotted black;margin: 10px 10px 15px 20px;"> 
-<style>
-#more {display: none;}
-.mybox2 {display: none;}
-</style>
-<p style="font-size:15px; text-align: justify; padding:5px; margin: 0px; line-height: 22px;">सुशीला कार्कीद्वारा लिखित नेपाली उपन्यास कारा (Kara) जेल जीवन, महिला हिंसा र सामाजिक बन्धनको कथा पुस्तक समीक्षा, कथावस्तु र पात्रहरूको विस्तृत विश्लेषण।
-महिला कैदीहरूको भौतिक र सामाजिक बन्धनको कथा – कारा उपन्यासको विस्तृत समीक्षा
-<a href="https://shamser.info.np/kara.html">बाँकी पढ्नुहोला</a>
- </div>   
-
-
-
-
-<div class="container">
-<h1 class="header3">
-<i class="fa fa-pencil-square-o"></i> <b> ‘विद्यार्थीबाट शुल्क लिनु गैरकानूनी हो; शिक्षा उद्योग होइन</b> </h1>
-<p style="font-size:14px">विद्या भट्टराई, निवर्तमान शिक्षा, विज्ञान तथा प्रविधि मन्त्री</p>
-<img src="https://www.onlinekhabar.com/wp-content/uploads/2025/06/Bidhya-Bhattarai-Banner.png" width="100%" height="315">
-
-<div class="clear-both"></div>
-
-<h1><img src="https://pbs.twimg.com/profile_images/1579086841227059200/JyklJEUx_400x400.jpg" alt="Editor" style="float: left;width:60px;height:60px;border: 1px dotted black;margin: 10px 10px 15px 20px;"> 
-<p style="font-size:15px; text-align: justify; padding:5px; margin: 0px; line-height: 22px;">अनिवार्य तथा निःशुल्क शिक्षा ऐन २०७५ कार्यान्वयन गर्न निवर्तमान शिक्षा, विज्ञान तथा प्रविधि मन्त्री विद्या भट्टराईले २०८३ सालसम्मको कार्ययोजना बनाएकी थिइन् । तर भट्टराईले ९ महिनामै पदबाट राजीनामा दिइन् । उनले आफ्नो कार्यकालमा अनिवार्य तथा निःशुल्क शिक्षा ऐन कति कार्यान्वयन गरिन् त ? 
-<span id="dots">...</span>
-<span id="moreText" style="display:none;"> अनलाइनखबरकर्मी दिनेश गौतमले गरेको कुराकानीको सम्पादित अंश :
-
-नौ महिना मन्त्री हुनुभयो । शुरूदेखि नै अनिवार्य तथा निःशुल्क शिक्षा ऐन कार्यान्वयनमा जोड दिनुभएको थियो । कति कार्यान्वयन गर्नुभयो ?अनिवार्य तथा निःशुल्क शिक्षा ऐन २०७५ पास भएपछि मन्त्रालयले केही काम शुरू गरेको थियो । किताब निःशुल्क दिने, खाजा दिने र छात्रवृत्तिको काम भएको थियो । र, निःशुल्क शिक्षा बनाउन स्थानीय तहलाई तयार पार्ने काम भयो । तर सबै ठाउँमा पुगेको थिएन । स्रोत भएको पालिकाले शुरू गरेका थिए ।
-
-संविधानको मौलिक हकले शिक्षा राज्यको दायित्व भनेको छ । जसमा आधारभूतसम्म अनिवार्य र निःशुल्क तथा माध्यमिक तहसम्म निःशुल्क भनेको छ । ऐनले पनि तीनै सरकारको दायित्व र जिम्मेवारी हो भनेको छ । अनिवार्य तथा निःशुल्क शिक्षा ऐन पूरा नगरेमा कानूनसम्मत कारबाही हुन्छ भन्ने स्पष्ट छ ।<br>
-<a href="https://www.onlinekhabar.com/2025/06/1701879/it-is-illegal-to-charge-fees-from-students-education-is-not-an-industry">बाँकी अनलाइनखबरमा पढ्नुहोला</a>
-
-</span>
-<button onclick="toggleReadMore()" id="readMoreBtn">Read More</button></p>
-
-<script>
-function toggleReadMore() {
-    const moreText = document.getElementById('moreText');
-    const dots = document.getElementById('dots');
-    const button = document.getElementById('readMoreBtn');
-
-    if (moreText.style.display === 'none' || moreText.style.display === '') {
-        moreText.style.display = 'inline';
-        dots.style.display = 'none';
-        button.textContent = 'Read Less';
-    } else {
-        moreText.style.display = 'none';
-        dots.style.display = 'inline';
-        button.textContent = 'Read More';
-    }
-}
-
-// Initialize on page load
-window.onload = function() {
-    document.getElementById('moreText').style.display = 'none';
-    document.getElementById('dots').style.display = 'inline';
-    document.getElementById('readMoreBtn').textContent = 'Read More';
-};
-</script>
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <style>
-
-  /* Responsive Design */
-        @media (max-width: 992px) {
-            .hero-section {
-                grid-template-columns: 1fr;
-            }
-            
-            .trending-content {
-                flex-direction: column;
-            }
-            
-            .trending-image {
-                flex: 0 0 auto;
-                width: 100%;
-            }}
-            
-
-           
-         /* Trending Section */
         .trending-section {
-            background-color: var(--white);
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 30px;
-            box-shadow: var(--shadow);
-            position: relative;
-        }
-        
-        .trending-section h2 {
-            font-size: 20px;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--light-gray);
-            color: var(--secondary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-
-        
-        .trending-content {
-            display: flex;
-            gap: 20px;
-            align-items: flex-start;
-        }
-        
-        .trending-image {
-            flex: 0 0 300px;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-        
-        .trending-image img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            transition: transform 0.3s;
-        }
-        
-        .trending-image:hover img {
-            transform: scale(1.05);
-        }
-        
-        .trending-tags {
-            flex: 1;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .trending-tags span {
-            background-color: var(--light);
-            padding: 8px 16px;
+            background: white;
             border-radius: 20px;
-            font-size: 12px;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 5px;
+            padding: 20px;
+            margin: 25px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
-        
-        .trending-tags span:hover {
-            background-color: var(--primary);
-            color: var(--white);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        img {
+            max-width: 100%;
+            border-radius: 20px;
         }
-        
-        .trending-tags span::before {
-            content: "#";
-            font-weight: bold;
+        .overlay {
+            background: #fef4e8;
+            padding: 12px 18px;
+            border-left: 6px solid #f39c12;
+            margin: 18px 0;
+            border-radius: 20px;
         }
+        marquee {
+            border-radius: 40px;
+            margin: 15px 0;
+        }
+        hr {
+            margin: 20px 0;
+        }
+        .header3 {
+            margin: 20px 0 10px;
+        }
+        .book-content {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+<div class="main-wrapper">
+    <!-- ========= 1. विद्यालय स्मारिका (Smritika) SECTION ========= -->
+    <div class="content-card" id="content_smritika">
+        <div class="smritika-section">
+            <h2><i class="fas fa-book me-2"></i> विद्यालय स्मारिका</h2>
+            <img src="https://shamser.info.np/HomePage/smarika.png" class="img-fluid rounded mt-3" alt="SMARIKA" style="width:100%; border-radius:16px;">
+            <p>विद्यालय स्मारिका भनेको विद्यालयको पहिचान, इतिहास, उपलब्धि र गतिविधिहरूलाई समेटेर तयार गरिने स्मरणीय प्रकाशन (बुक/पत्रिका) हो। यसले विद्यालयको विकासको कथा समेट्छ र भविष्यको लागि ऐतिहासिक दस्तावेजको रूपमा काम गर्छ।</p>
+            <h5 class="mt-4">स्मारिका तयार गर्दा ध्यान दिनुपर्ने कुराहरू:</h5>
+            <ul>
+                <li>विद्यालयको इतिहास र विकास यात्रा</li>
+                <li>शिक्षक, कर्मचारी र विद्यार्थीहरूको विवरण</li>
+                <li>शैक्षिक र पाठ्यक्रम गतिविधिहरू</li>
+                <li>खेलकुद र सांस्कृतिक कार्यक्रमहरू</li>
+                <li>उपलब्धिहरू र पुरस्कारहरू</li>
+                <li>भविष्यका योजनाहरू</li>
+                <li>आर्थिक विवरण</li>
+            </ul>
+        </div>
+        <!-- LIKE WIDGET for Smritika -->
+        <div class="like-block" data-content-id="smritika">
+            <div class="like-group">
+                <button class="like-btn" data-like-key="smritika">
+                    <i class="fa fa-heart-o"></i>
+                    <span class="like-text">मन पर्यो</span>
+                </button>
+                <div class="like-count-badge" data-count-key="smritika">0</div>
+            </div>
+            <div class="time-micro"><i class="fa fa-clock-o"></i> <span data-time-key="smritika">अहिले</span></div>
+        </div>
+    </div>
 
+    <!-- ========= 2. सुशीला कार्कीको उपन्यास कारा (Kara) ========= -->
+    <div class="content-card" id="content_kara">
+        <h1 class="header3"><i class="fa fa-pencil-square-o"></i> <b>सुशीला कार्कीद्वारा लिखित नेपाली उपन्यास-कारा (Kara)</b></h1>
+        <p style="font-size:14px">जेल जीवन, महिला हिंसा र सामाजिक बन्धनको कथा। पुस्तक समीक्षा, कथावस्तु र पात्रहरूको विस्तृत विश्लेषण</p>
+        <img src="https://media.thuprai.com/front_covers/Kara_by_Sushila_Karki_-_front.jpg" width="100%" style="border-radius:20px;">
+        <div class="clear-both"></div>
+        <img src="https://pbs.twimg.com/profile_images/1579086841227059200/JyklJEUx_400x400.jpg" alt="Editor" style="float:left; width:60px;height:60px;border:1px dotted black;margin:10px 20px 15px 0; border-radius:50%;">
+        <p style="font-size:15px; text-align: justify; line-height: 22px;">सुशीला कार्कीद्वारा लिखित नेपाली उपन्यास कारा (Kara) जेल जीवन, महिला हिंसा र सामाजिक बन्धनको कथा पुस्तक समीक्षा, कथावस्तु र पात्रहरूको विस्तृत विश्लेषण। महिला कैदीहरूको भौतिक र सामाजिक बन्धनको कथा – कारा उपन्यासको विस्तृत समीक्षा <a href="https://shamser.info.np/kara.html">बाँकी पढ्नुहोला</a></p>
+        <!-- LIKE Kara -->
+        <div class="like-block" data-content-id="kara">
+            <div class="like-group">
+                <button class="like-btn" data-like-key="kara"><i class="fa fa-heart-o"></i><span class="like-text">मन पर्यो</span></button>
+                <div class="like-count-badge" data-count-key="kara">0</div>
+            </div>
+            <div class="time-micro"><i class="fa fa-clock-o"></i> <span data-time-key="kara">अहिले</span></div>
+        </div>
+    </div>
 
-   .news-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        
-        .news-item {
-            display: flex;
-            gap: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--light-gray);
-        }
-        
-        .news-item:last-child {
-            border-bottom: none;
-        }
-        
-        .news-item img {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 4px;
-        }
-        
-        .news-info .title {
-            font-weight: 500;
-            margin-bottom: 5px;
-            line-height: 1.4;
-        }
-        
-        .news-info .source {
-            font-size: 12px;
-            color: var(--primary);
-            font-weight: 500;
-        }
-        
-        .news-info .date {
-            font-size: 12px;
-            color: var(--gray);
-        }                        
-           }
-      </style>
+    <!-- ========= 3. विद्यार्थीबाट शुल्क लिनु गैरकानूनी (विद्या भट्टराई) ========= -->
+    <div class="content-card" id="content_education">
+        <h1 class="header3"><i class="fa fa-pencil-square-o"></i> <b>‘विद्यार्थीबाट शुल्क लिनु गैरकानूनी हो; शिक्षा उद्योग होइन</b></h1>
+        <p style="font-size:14px">विद्या भट्टराई, निवर्तमान शिक्षा, विज्ञान तथा प्रविधि मन्त्री</p>
+        <img src="https://www.onlinekhabar.com/wp-content/uploads/2025/06/Bidhya-Bhattarai-Banner.png" width="100%">
+        <div class="clear-both"></div>
+        <img src="https://pbs.twimg.com/profile_images/1579086841227059200/JyklJEUx_400x400.jpg" alt="Editor" style="float:left; width:60px;height:60px;border:1px dotted black;margin:10px 20px 15px 0; border-radius:50%;">
+        <p style="font-size:15px; text-align: justify; line-height: 22px;">अनिवार्य तथा निःशुल्क शिक्षा ऐन २०७५ कार्यान्वयन गर्न निवर्तमान शिक्षा, विज्ञान तथा प्रविधि मन्त्री विद्या भट्टराईले २०८३ सालसम्मको कार्ययोजना बनाएकी थिइन् । तर भट्टराईले ९ महिनामै पदबाट राजीनामा दिइन् । उनले आफ्नो कार्यकालमा अनिवार्य तथा निःशुल्क शिक्षा ऐन कति कार्यान्वयन गरिन् त ? 
+        <span id="eduDots">...</span>
+        <span id="eduMore" style="display:none;"> अनलाइनखबरकर्मी दिनेश गौतमले गरेको कुराकानीको सम्पादित अंश : नौ महिना मन्त्री हुनुभयो । शुरूदेखि नै अनिवार्य तथा निःशुल्क शिक्षा ऐन कार्यान्वयनमा जोड दिनुभएको थियो । कति कार्यान्वयन गर्नुभयो ?अनिवार्य तथा निःशुल्क शिक्षा ऐन २०७५ पास भएपछि मन्त्रालयले केही काम शुरू गरेको थियो । किताब निःशुल्क दिने, खाजा दिने र छात्रवृत्तिको काम भएको थियो । र, निःशुल्क शिक्षा बनाउन स्थानीय तहलाई तयार पार्ने काम भयो । तर सबै ठाउँमा पुगेको थिएन । स्रोत भएको पालिकाले शुरू गरेका थिए । संविधानको मौलिक हकले शिक्षा राज्यको दायित्व भनेको छ । जसमा आधारभूतसम्म अनिवार्य र निःशुल्क तथा माध्यमिक तहसम्म निःशुल्क भनेको छ । ऐनले पनि तीनै सरकारको दायित्व र जिम्मेवारी हो भनेको छ । अनिवार्य तथा निःशुल्क शिक्षा ऐन पूरा नगरेमा कानूनसम्मत कारबाही हुन्छ भन्ने स्पष्ट छ ।<br><a href="https://www.onlinekhabar.com/2025/06/1701879/it-is-illegal-to-charge-fees-from-students-education-is-not-an-industry">बाँकी अनलाइनखबरमा पढ्नुहोला</a></span>
+        <button class="read-more-btn" id="eduReadBtn" onclick="toggleEduMore()">थप पढ्नुहोस्</button></p>
+        <!-- LIKE widget for education -->
+        <div class="like-block" data-content-id="education">
+            <div class="like-group">
+                <button class="like-btn" data-like-key="education"><i class="fa fa-heart-o"></i><span class="like-text">मन पर्यो</span></button>
+                <div class="like-count-badge" data-count-key="education">0</div>
+            </div>
+            <div class="time-micro"><i class="fa fa-clock-o"></i> <span data-time-key="education">अहिले</span></div>
+        </div>
+    </div>
 
- <!-- Trending Section -->
+    <!-- ========= TRENDING SECTION (Extra content with like) ========= -->
+    <div class="content-card" id="content_trending">
         <section class="trending-section">
-            <h2><i class="fa fa-pencil-square-o"></i>ट्रेन्डिङ विषयहरू</h2>
+            <h2><i class="fa fa-pencil-square-o"></i> ट्रेन्डिङ विषयहरू</h2>
             <div class="trending-content">
-                <!---https://script.google.com/macros/s/AKfycbyk4Q3O6Gygn1wTj2fZqE82CWKEEiK57VoLH6l-iWNZlcB26pCy1Bl5PJWp15V7OgCk7g/exec<div class="trending-image">
-                    <img src="https://images.unsplash.com/photo-1584824486537-46f70c0c545a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Trending News">
-                </div>---->
                 <div class="trending-tags">
-                 <a href="#P4"><span>शिक्षामा जुत्ता बेचेजस्तो</span>
-                   <a href="https://shamser.info.np/tsc_questions.html"><span>Quiz</span></a>
-                  <a href="#P1"> <span>शिक्षकको सरुवा.</span></a>
-                   <a href="#P2"> <span>पुस्तक बिक्री</span></a>
-                   <a href="#P3"> <span>School Page</span></a>
-                   <a href="https://script.google.com/macros/s/AKfycbxD3lnuphwTi_E4bwqogA-hBjgiU9XpnyTUKz_yXe4jHARi6OLhklZ8WM3LR8UtkuIJIA/exec"><span>Login IEMIS</span></a>
-
-                    
+                    <a href="#P4"><span>शिक्षामा जुत्ता बेचेजस्तो</span></a>
+                    <a href="https://shamser.info.np/tsc_questions.html"><span>Quiz</span></a>
+                    <a href="#P1"><span>शिक्षकको सरुवा.</span></a>
+                    <a href="#P2"><span>पुस्तक बिक्री</span></a>
+                    <a href="#P3"><span>School Page</span></a>
+                    <a href="https://script.google.com/macros/s/AKfycbxD3lnuphwTi_E4bwqogA-hBjgiU9XpnyTUKz_yXe4jHARi6OLhklZ8WM3LR8UtkuIJIA/exec"><span>Login IEMIS</span></a>
                 </div>
             </div>
         </section>
-
-
-
- 
-<!-----------------
- <iframe src="https://shamser.info.np/OnlineNewsAutoUpdate.html" 
-                width="100%" 
-                height="600" 
-                frameborder="0">
-        </iframe>-------------------->
-
-
-
-  
-<!-------------<iframe width="100%" height="315" src="HomePage/solutions.mp4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>-------------->
-
-
-
- <!-- Message Box (Initially Hidden) -->
-    <div id="thankYouMessage" style="display: none; margin-top: 10px; color: green; font-weight: bold;">
-        ✅ Thank you for liking our website! Keep it up! 😊
+        <div class="like-block" data-content-id="trending">
+            <div class="like-group">
+                <button class="like-btn" data-like-key="trending"><i class="fa fa-heart-o"></i><span class="like-text">मन पर्यो</span></button>
+                <div class="like-count-badge" data-count-key="trending">0</div>
+            </div>
+            <div class="time-micro"><i class="fa fa-clock-o"></i> <span data-time-key="trending">अहिले</span></div>
+        </div>
     </div>
 
-   
-<h1>शिक्षकको सरुवा हुँदै..</h1>
-<img src="https://shamser.info.np/HomePage/1708402451_changu-1200x560-1200x560.jpg" width="100%" height="315">
+    <!-- ========= 4. शिक्षकको सरुवा हुँदै (Teacher Transfer) ========= -->
+    <div class="content-card" id="content_transfer">
+        <h1>शिक्षकको सरुवा हुँदै..</h1>
+        <img src="https://shamser.info.np/HomePage/1708402451_changu-1200x560-1200x560.jpg" width="100%">
+        <img src="https://pbs.twimg.com/profile_images/1579086841227059200/JyklJEUx_400x400.jpg" alt="Editor" style="width:60px;height:60px;border:1px dotted black;margin:10px 20px 15px 0;float:left; border-radius:50%;">
+        <p style="font-size:15px; text-align: justify; line-height: 22px;">लालबन्दी नगरपालिका भित्र संचालित सामुदायिक विद्यालयहरुमा कार्यरत शिक्षक सरुवाको विषयले पटकपटक हल्ला चल्दै आएको छ । विगत केही दिन देखि लालबन्दी नगरपालिका भित्र संचालित सामुदायिक विद्यालयहरुमा कार्यरत शिक्षक सरुवाको विषयले निकै चर्चा पायो । स्कुलदेखि चिया पसलमा शिक्षक सरुवाको विषय चलेको थियो । कक्षामा जानुपहिले हरेक दिन केही न केही कुरा निस्कन्थ्यो र कहाँ कता पुर्याइदिने हो भनेर 
+        <span id="transferDots">...</span>
+        <span id="transferMore" style="display:none;">सोच्न आपसमा कुराकानी भैरहन्थ्यो । खासगरी धेरै वर्षदेखि एउटै विद्यालयमा रहेका घरपायक शहरी क्षेत्रमा सपरिवार बस्ने टिउशन कोचिङ् चल्ने काम पाउने अङ्ग्रेजी माध्यम र कक्षा ११/१२ र क्याम्पसमा पार्टटाइम काम पाउने अर्थात बृतिविकास हुने विद्यालयहरुका शिक्षकहरुमा खासमा एक किसिमको तनाव बढेको थियो। हल्लाैहल्लामा मिति: २०८१/०५/१७, सोमबारका दिन नगर प्रमुखको कार्यालयबाट प्रेस विज्ञप्ति जारी भयो । शिक्षक सरुवाको विषय केही दिनसम्म सामसुम हुन पुग्यो । यधपि नगर प्रमुखको कार्यालयबाट जारी भएको प्रेस विज्ञप्तिमा दरबन्दी मिलानको विषय उठान भएकोले एकदिन पक्कै शिक्षक सरुवाको विषय उठ्छ भन्ने कुरा सबैलाई थाह नभएको हैन। दशैं तिहारपछि शिक्षक सरुवाको प्रक्रिया अघि बढ्नेछ भन्ने अनुमान गरिएको छ । भरपर्दो श्रोत अनुसार अहिले सरुवा कार्यबिधिमा नगरपालिका जुटिरहेको छ । नगर शिक्षा समितिमा छलफल गरी नगरपरिषदबाट कार्यबिधि पास गर्ने तयारीमा रहेको छ भन्ने हल्ला पनि सुनिन थालेको छ । बिधि प्रक्रियाको लागि कार्यबिधि बन्नु राम्रो पक्ष हो । तर कार्यबिधिमा रहने प्रक्रियाहरु कति तटस्थ रहन्छ र नियमसम्मत हुन्छ हुँदैन भन्ने विषय मुख्य हो । यता हल्ला होइन भनेपनि भित्रभित्र होमवर्क गर्ने प्रबृतिले नगरपालिकाको कार्यप्रति शिक्षकहरु असन्तुष्ट बनेकाछन् । शिक्षक सरुवाले मात्र शिक्षाको गुणस्तर बढ्छ भनेर कठोर निर्णय लिनु ठीक होला नहोला तर कहिले सरुवा कहिले दरबन्दी मिलानको हल्लाले शिक्षा तहसनहस हुने कुरा चाही पक्का छ । अरुले जे अपनाए जे गरे त्यही गर्नु र अरुको लहैलहैमा बहकिनु ठीक हैन । भर्खरै शिक्षामन्त्रीले देशभरी दरबन्दी मिलानको कुरा उठाउनु भएको छ । दरबन्दी मिलान भयो भने पक्कैपनि स्थायी दरबन्दी बितरण हुन्छ नै । एकदुई महिना पर्खने पो होकी । यसपछि अवस्था परिस्थिति अनुसार नीति नियमसम्मत सही निर्णय लिनु बुद्धिमानी हुन्छ । हाम्रो भन्नु यत्ति हो । यस पटकको हल्ला हल्लामात्र हो वा यथार्थ हो फेरि प्रेस विज्ञप्तिकोपर्खाइमा शिक्षकहरु रहेकाछन् ।</span>
+        <button class="read-more-btn" id="transferBtn" onclick="toggleTransferMore()">थप पढ्नुहोस्</button></p>
+        <div class="like-block" data-content-id="transfer">
+            <div class="like-group">
+                <button class="like-btn" data-like-key="transfer"><i class="fa fa-heart-o"></i><span class="like-text">मन पर्यो</span></button>
+                <div class="like-count-badge" data-count-key="transfer">0</div>
+            </div>
+            <div class="time-micro"><i class="fa fa-clock-o"></i> <span data-time-key="transfer">अहिले</span></div>
+        </div>
+    </div>
 
-<br><br>
+    <!-- ========= 5. महावीर पुन पुस्तक बिक्री (Book sale + marquee) ========= -->
+    <div class="content-card" id="content_book">
+        <h2 id="P2" class="header3"><i class="fa fa-pencil-square-o"></i> <b>महावीर पुनद्वारा पुस्तक बिक्री</b></h2>
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj-UHKZ0j1bTr27Qiln7gUBB2BhtbDl3NDU8FeGSxsUZv8xeCT7g9ih1Rm0P6yvVziXv8_tUS-SGS-WOz6FJgjtFWGUGccCRNpPzeqo9PmUuBry4wQwMxfrsvMAgTsVZRfRAa5aXMKghG2JH_Nv-3wKyJfDT4lVCV-gUSgUb3jo8e69MS03kXUj5swQUQE/w545-h363/Nepali%20Hami%20Rahula%20Kaha%20With%20Lyrics%20Nepali.jpg" width="100%">
+        <div class="overlay"><p>बीरगंज कृषि औजार कारखाना संचानार्थ महावीर पुनद्वारा पुस्तक बिक्री</p></div>
+        <marquee bgcolor="yellow"><font size="3" color="blue">कसैको बाटोमा काँढा नबिछ्याउ किनकी त्योमा बाटोमा तिमी फर्केर आउनुपर्छ ।</font></marquee>
+        <div class="book-content">
+            <p>बीरगंज कृषि औजार कारखानालाई ब्युँताउन किताब बिक्री गर्ने क्रममा सर्लाही आउनु भएका समाजसेवी तथा नेपाली बैज्ञानिक महाबिर तथा राष्ट्रिय आविष्कार केन्द्रका अध्यक्ष पुन आज बाईरोडको बाटो हुँदै काठमाण्डौ फर्कनु भएको छ । सर्लाहीको बागमति नपामा सबैभन्दा बढी पुस्तक बिक्री भएको र ३ वटा स्कुलहरु र ३ वटा संस्थाहरुमा किताब पुगेन अब छठ पर्वपछि फेरि किताब बेच्न सर्लाही आउने छु भन्दै आफ्नो फेशबुकपेजमा लेख्नु भएको छ ।<span id="bookSpan">...</span>
+            <span id="bookMoreText" style="display:none;"><br><br>किताब बिक्री गर्ने क्रममा डिमजनता माविमा आउनु भएका डा.पुनले भन्नु भयो "सरकारी स्वामित्वमा रहेको बीरगंज कृषि औजार कारखाना मर्मतसंभार गरी पुन संचालनमा ल्याउने जिम्मेवारी सरकारले मलाई दिनुभएको छ । आइन्दा सरकारले बदमासी गर्यो भने जनताले खबरदारी गर्नुपर्छ यसकै लागि पनि जनतालाई सचेत बनाउन पुस्तक बिक्री अभियानमा लागेको हुँ ।" सोही दिन दशैंतिहारको शुभ कामना आदनप्रदान गर्ने दिन परेकोले उहाँले शिक्षक अभिभावक विद्यार्थी लालबन्दीबासी र संघसंस्था कर्मचारी जनप्रतिनिधिसबैलाई शुभकामना दिनुभएको थियो । उक्त दिनमै पुनबाट लालबन्दी नपाले 100 थान लिँदा लालबन्दी निवासी दिनेश पाठक एक्लैले ६८ वटा किताब किन्नुभएको छ । उहाँले ति किताबहरु दशैंमा उपहार स्वरूप युवाहरुलाई बाँडने र स्थानिय विद्यालयहरुमा दिने बताउनु भएको छ ।</span></p>
+            <button id="bookReadMoreBtn" class="read-more-btn" onclick="toggleBookMore()">थप पढ्नुहोस्</button>
+        </div>
+        <div class="like-block" data-content-id="booksale">
+            <div class="like-group">
+                <button class="like-btn" data-like-key="booksale"><i class="fa fa-heart-o"></i><span class="like-text">मन पर्यो</span></button>
+                <div class="like-count-badge" data-count-key="booksale">0</div>
+            </div>
+            <div class="time-micro"><i class="fa fa-clock-o"></i> <span data-time-key="booksale">अहिले</span></div>
+        </div>
+    </div>
 
-<!-- Editor info -->
-<img src="https://pbs.twimg.com/profile_images/1579086841227059200/JyklJEUx_400x400.jpg" alt="Editor" style="width:60px;height:60px;border:1px dotted black;margin:10px 10px 15px 20px;float:left">
-
-<p style="font-size:15px; text-align: justify; padding:5px; margin: 0px; line-height: 22px;">
-लालबन्दी नगरपालिका भित्र संचालित सामुदायिक विद्यालयहरुमा कार्यरत शिक्षक सरुवाको विषयले पटकपटक हल्ला चल्दै आएको छ । विगत केही दिन देखि लालबन्दी नगरपालिका भित्र संचालित सामुदायिक विद्यालयहरुमा कार्यरत शिक्षक सरुवाको विषयले निकै चर्चा पायो । स्कुलदेखि चिया पसलमा शिक्षक सरुवाको विषय चलेको थियो । कक्षामा जानुपहिले हरेक दिन केही न केही कुरा निस्कन्थ्यो र कहाँ कता पुर्याइदिने हो भनेर 
-<span id="secondDots">...</span>
-<span id="secondExtra" style="display:none;">
-सोच्न आपसमा कुराकानी भैरहन्थ्यो । 
-खासगरी धेरै वर्षदेखि एउटै विद्यालयमा रहेका घरपायक शहरी क्षेत्रमा सपरिवार बस्ने टिउशन कोचिङ् चल्ने काम पाउने अङ्ग्रेजी माध्यम र कक्षा ११/१२ र क्याम्पसमा पार्टटाइम काम पाउने अर्थात बृतिविकास हुने विद्यालयहरुका शिक्षकहरुमा खासमा एक किसिमको तनाव बढेको थियो। हल्लाैहल्लामा मिति: २०८१/०५/१७, सोमबारका दिन नगर प्रमुखको कार्यालयबाट प्रेस विज्ञप्ति जारी भयो । शिक्षक सरुवाको विषय केही दिनसम्म सामसुम हुन पुग्यो । 
-<br><br>
-यधपि नगर प्रमुखको कार्यालयबाट जारी भएको प्रेस विज्ञप्तिमा दरबन्दी मिलानको विषय उठान भएकोले एकदिन पक्कै शिक्षक सरुवाको विषय उठ्छ भन्ने कुरा सबैलाई थाह नभएको हैन। 
-दशैं तिहारपछि शिक्षक सरुवाको प्रक्रिया अघि बढ्नेछ भन्ने अनुमान गरिएको छ । भरपर्दो श्रोत अनुसार अहिले सरुवा कार्यबिधिमा नगरपालिका जुटिरहेको छ । नगर शिक्षा समितिमा छलफल गरी नगरपरिषदबाट कार्यबिधि पास गर्ने तयारीमा रहेको छ भन्ने हल्ला पनि सुनिन थालेको छ । बिधि प्रक्रियाको लागि कार्यबिधि बन्नु राम्रो पक्ष हो । तर कार्यबिधिमा रहने प्रक्रियाहरु कति तटस्थ रहन्छ र नियमसम्मत हुन्छ हुँदैन भन्ने विषय मुख्य हो । यता हल्ला होइन भनेपनि भित्रभित्र होमवर्क गर्ने प्रबृतिले नगरपालिकाको कार्यप्रति शिक्षकहरु असन्तुष्ट बनेकाछन् । शिक्षक सरुवाले मात्र शिक्षाको गुणस्तर बढ्छ भनेर कठोर निर्णय लिनु ठीक होला नहोला तर कहिले सरुवा कहिले दरबन्दी मिलानको हल्लाले शिक्षा तहसनहस हुने कुरा चाही पक्का छ । अरुले जे अपनाए जे गरे त्यही गर्नु र अरुको लहैलहैमा बहकिनु ठीक हैन । भर्खरै शिक्षामन्त्रीले देशभरी दरबन्दी मिलानको कुरा उठाउनु भएको छ । दरबन्दी मिलान भयो भने पक्कैपनि स्थायी दरबन्दी बितरण हुन्छ नै । एकदुई महिना पर्खने पो होकी । यसपछि अवस्था परिस्थिति अनुसार नीति नियमसम्मत सही निर्णय लिनु बुद्धिमानी हुन्छ । हाम्रो भन्नु यत्ति हो ।
-यस पटकको हल्ला हल्लामात्र हो वा यथार्थ हो फेरि प्रेस विज्ञप्तिकोपर्खाइमा शिक्षकहरु रहेकाछन् ।
-</span>
-</p>
-<button onclick="toggleSecond()">Read More</button>
+    <footer style="text-align:center; margin-top:40px; color:#6c7a91;"><i class="fa fa-heart" style="color:#e11d48;"></i> शम्शेर.इन्फो.एनपी — हरेक सामग्रीमा लाइक गर्नुहोस्</footer>
+</div>
 
 <script>
+    // ---------- PER-CONTENT LIKE SYSTEM (localStorage) ----------
+    const contentKeys = ['smritika', 'kara', 'education', 'trending', 'transfer', 'booksale'];
+    let likeCounts = {};
+    let userLiked = {};
 
-
-// Second article toggle function
-function toggleSecond() {
-    var dots = document.getElementById('secondDots');
-    var extra = document.getElementById('secondExtra');
-    var btn = event.target;
+    // Default attractive counts
+    const defaults = { smritika: 28, kara: 41, education: 56, trending: 33, transfer: 47, booksale: 39 };
     
-    if (extra.style.display === 'none' || extra.style.display === '') {
-        extra.style.display = 'inline';
-        dots.style.display = 'none';
-        btn.innerHTML = 'Read Less';
-    } else {
-        extra.style.display = 'none';
-        dots.style.display = 'inline';
-        btn.innerHTML = 'Read More';
+    function loadAllLikes() {
+        for (let key of contentKeys) {
+            const stored = localStorage.getItem(`shamser_like_${key}`);
+            if (stored !== null && !isNaN(parseInt(stored))) {
+                likeCounts[key] = parseInt(stored);
+            } else {
+                likeCounts[key] = defaults[key];
+                localStorage.setItem(`shamser_like_${key}`, defaults[key]);
+            }
+            const likedFlag = localStorage.getItem(`shamser_user_liked_${key}`);
+            userLiked[key] = (likedFlag === 'true');
+            updateUIForKey(key);
+        }
     }
-}
 
-// Initialize on page load
-window.onload = function() {
-    document.getElementById('firstExtra').style.display = 'none';
-    document.getElementById('firstDots').style.display = 'inline';
-    document.getElementById('secondExtra').style.display = 'none';
-    document.getElementById('secondDots').style.display = 'inline';
-};
+    function updateUIForKey(key) {
+        const countSpan = document.querySelector(`.like-count-badge[data-count-key="${key}"]`);
+        if (countSpan) countSpan.innerText = likeCounts[key];
+        const btn = document.querySelector(`.like-btn[data-like-key="${key}"]`);
+        if (btn) {
+            const icon = btn.querySelector('i');
+            const textSpan = btn.querySelector('.like-text');
+            if (userLiked[key]) {
+                icon.className = 'fa fa-heart';
+                icon.style.color = '#e11d48';
+                textSpan.innerText = 'मन पर्यो';
+                btn.classList.add('liked');
+            } else {
+                icon.className = 'fa fa-heart-o';
+                icon.style.color = '#4a5b6e';
+                textSpan.innerText = 'मन पर्यो';
+                btn.classList.remove('liked');
+            }
+        }
+    }
+
+    function handleLike(key) {
+        if (userLiked[key]) {
+            if (likeCounts[key] > 0) {
+                likeCounts[key]--;
+                userLiked[key] = false;
+                localStorage.setItem(`shamser_like_${key}`, likeCounts[key]);
+                localStorage.setItem(`shamser_user_liked_${key}`, 'false');
+                updateUIForKey(key);
+                animateButton(key, false);
+            }
+        } else {
+            likeCounts[key]++;
+            userLiked[key] = true;
+            localStorage.setItem(`shamser_like_${key}`, likeCounts[key]);
+            localStorage.setItem(`shamser_user_liked_${key}`, 'true');
+            updateUIForKey(key);
+            animateButton(key, true);
+        }
+    }
+
+    function animateButton(key, isLiked) {
+        const btn = document.querySelector(`.like-btn[data-like-key="${key}"]`);
+        if (!btn) return;
+        if (isLiked) {
+            btn.style.transform = 'scale(0.95)';
+            setTimeout(() => { if(btn) btn.style.transform = ''; }, 120);
+            const icon = btn.querySelector('i');
+            if(icon) {
+                icon.style.animation = 'none';
+                icon.offsetHeight;
+                icon.style.animation = 'popHeart 0.3s ease';
+                setTimeout(() => { if(icon) icon.style.animation = ''; }, 300);
+            }
+        } else {
+            btn.style.transform = 'scale(0.96)';
+            setTimeout(() => { if(btn) btn.style.transform = ''; }, 100);
+        }
+    }
+
+    // Attach event listeners
+    contentKeys.forEach(key => {
+        const btn = document.querySelector(`.like-btn[data-like-key="${key}"]`);
+        if (btn) {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                handleLike(key);
+            });
+        }
+    });
+
+    // Time ago for all blocks (relative to page load)
+    const pageLoadTime = new Date();
+    function updateAllTimeAgo() {
+        const now = new Date();
+        const diffSec = Math.floor((now - pageLoadTime) / 1000);
+        let timeStr = '';
+        if (diffSec < 15) timeStr = 'भर्खरै';
+        else if (diffSec < 60) timeStr = `${diffSec} सेकेन्ड अघि`;
+        else if (diffSec < 3600) timeStr = `${Math.floor(diffSec/60)} मिनेट अघि`;
+        else if (diffSec < 86400) timeStr = `${Math.floor(diffSec/3600)} घण्टा अघि`;
+        else timeStr = `${Math.floor(diffSec/86400)} दिन अघि`;
+        contentKeys.forEach(key => {
+            const timeSpan = document.querySelector(`.time-micro span[data-time-key="${key}"]`);
+            if (timeSpan) timeSpan.innerText = timeStr;
+        });
+    }
+    updateAllTimeAgo();
+    setInterval(updateAllTimeAgo, 30000);
+
+    // Read more functions
+    window.toggleEduMore = function() {
+        let dots = document.getElementById('eduDots');
+        let more = document.getElementById('eduMore');
+        let btn = document.getElementById('eduReadBtn');
+        if (more.style.display === 'none') {
+            more.style.display = 'inline'; dots.style.display = 'none'; btn.innerText = 'संक्षिप्त पढ्नुहोस्';
+        } else {
+            more.style.display = 'none'; dots.style.display = 'inline'; btn.innerText = 'थप पढ्नुहोस्';
+        }
+    };
+    window.toggleTransferMore = function() {
+        let dots = document.getElementById('transferDots');
+        let more = document.getElementById('transferMore');
+        let btn = document.getElementById('transferBtn');
+        if (more.style.display === 'none') {
+            more.style.display = 'inline'; dots.style.display = 'none'; btn.innerText = 'संक्षिप्त पढ्नुहोस्';
+        } else {
+            more.style.display = 'none'; dots.style.display = 'inline'; btn.innerText = 'थप पढ्नुहोस्';
+        }
+    };
+    window.toggleBookMore = function() {
+        let more = document.getElementById('bookMoreText');
+        let span = document.getElementById('bookSpan');
+        let btn = document.getElementById('bookReadMoreBtn');
+        if (more.style.display === 'none') {
+            more.style.display = 'inline'; span.style.display = 'none'; btn.innerText = 'संक्षिप्त पढ्नुहोस्';
+        } else {
+            more.style.display = 'none'; span.style.display = 'inline'; btn.innerText = 'थप पढ्नुहोस्';
+        }
+    };
+    // initial hidden states
+    if(document.getElementById('eduMore')) document.getElementById('eduMore').style.display = 'none';
+    if(document.getElementById('transferMore')) document.getElementById('transferMore').style.display = 'none';
+    if(document.getElementById('bookMoreText')) document.getElementById('bookMoreText').style.display = 'none';
+    if(document.getElementById('bookSpan')) document.getElementById('bookSpan').style.display = 'inline';
+    if(document.getElementById('transferDots')) document.getElementById('transferDots').style.display = 'inline';
+    if(document.getElementById('eduDots')) document.getElementById('eduDots').style.display = 'inline';
+    
+    loadAllLikes();
 </script>
 
 
@@ -2381,98 +2450,7 @@ window.onload = function() {
 
 
 
-<!---End --teacher----Transfer------------>  
-<marquee bgcolor=red direction=left>
-    <font size="5" color="white">एउटा भोको पेट, रित्तो गोजी र टुक्रिएको हृदयले जिन्दगीमा धेरैथोक सिकाएर जान्छ : रोविन विलियम
-</font></marquee>
-   
-<h2 id="P2" class="header3"><i class="fa fa-pencil-square-o"></i> <b>महावीर पुनद्वारा पुस्तक बिक्री </b> </h2>
 
-<div class="container">
-<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj-UHKZ0j1bTr27Qiln7gUBB2BhtbDl3NDU8FeGSxsUZv8xeCT7g9ih1Rm0P6yvVziXv8_tUS-SGS-WOz6FJgjtFWGUGccCRNpPzeqo9PmUuBry4wQwMxfrsvMAgTsVZRfRAa5aXMKghG2JH_Nv-3wKyJfDT4lVCV-gUSgUb3jo8e69MS03kXUj5swQUQE/w545-h363/Nepali%20Hami%20Rahula%20Kaha%20With%20Lyrics%20Nepali.jpg" width="100%" height="315">
-<div class="clear-both"></div>
-<div class="overlay"><p style="font-size:15px"> बीरगंज कृषि औजार कारखाना संचानार्थ महावीर पुनद्वारा पुस्तक बिक्री</p></div>
-</div>
- 
-<marquee bgcolor="yellow"><font size="3" color="blue" direction="left">
-<p style="font-size:15px; text-align: justify; padding:5px; margin: 0px; line-height: 22px;">कसैको बाटोमा काँढा नबिछ्याउ किनकी त्योमा बाटोमा तिमी फर्केर आउनुपर्छ ।</p>
-</font></marquee>
-
-<div class="book-content">
-<p style="font-size:20x; text-align: justify; padding:5px; margin: 0px; line-height: 26px;">
-बीरगंज कृषि औजार कारखानालाई ब्युँताउन किताब बिक्री गर्ने क्रममा सर्लाही आउनु भएका समाजसेवी तथा नेपाली बैज्ञानिक महाबिर तथा राष्ट्रिय आविष्कार केन्द्रका अध्यक्ष पुन आज 
-बाईरोडको बाटो हुँदै काठमाण्डौ फर्कनु भएको छ । सर्लाहीको बागमति नपामा सबैभन्दा बढी पुस्तक बिक्री भएको र ३ वटा स्कुलहरु र ३ वटा संस्थाहरुमा किताब पुगेन अब छठ पर्वपछि फेरि किताब बेच्न सर्लाही आउने छु भन्दै आफ्नो फेशबुकपेजमा लेख्नु भएको छ ।</p>
-
-<span id="bookSpan">...</span>
-
-<div id="bookMoreText" style="display: none;">
-<p style="font-size:20x; text-align: justify; padding:5px; margin: 0px; line-height: 26px;">
-किताब बिक्री गर्ने क्रममा डिमजनता माविमा आउनु भएका डा.पुनले भन्नु भयो "सरकारी स्वामित्वमा रहेको बीरगंज कृषि औजार कारखाना मर्मतसंभार गरी पुन संचालनमा ल्याउने जिम्मेवारी सरकारले मलाई दिनुभएको छ । 
-आइन्दा सरकारले बदमासी गर्यो भने जनताले खबरदारी गर्नुपर्छ यसकै लागि पनि जनतालाई सचेत बनाउन पुस्तक बिक्री अभियानमा लागेको हुँ "
-सोही दिन दशैंतिहारको शुभ कामना आदनप्रदान गर्ने दिन परेकोले उहाँले शिक्षक अभिभावक विद्यार्थी लालबन्दीबासी र संघसंस्था कर्मचारी जनप्रतिनिधिसबैलाई शुभकामना दिनुभएको थियो ।
-उक्त दिनमै पुनबाट लालबन्दी नपाले 100 थान लिँदा लालबन्दी निवासी दिनेश पाठक एक्लैले ६८ वटा किताब किन्नुभएको छ । उहाँले ति किताबहरु दशैंमा उपहार स्वरूप युवाहरुलाई बाँडने र स्थानिय विद्यालयहरुमा दिने बताउनु भएको छ ।</p>
-</div>
-</div>
-
-<button id="bookReadMoreBtn" class="read-more-btn" onclick="toggleBookReadMore()">Read More</button>
-
-<script>
-function toggleBookReadMore() {
-    var moreBookText = document.getElementById("bookMoreText");
-    var bookSpan = document.getElementById("bookSpan");
-    var bookBtn = document.getElementById("bookReadMoreBtn");
-
-    if (moreBookText.style.display === "none" || moreBookText.style.display === "") {
-        moreBookText.style.display = "inline";
-        bookSpan.style.display = "none";
-        bookBtn.innerHTML = "Read Less";
-    } else {
-        moreBookText.style.display = "none";
-        bookSpan.style.display = "inline";
-        bookBtn.innerHTML = "Read More";
-    }
-}
-
-// Initialize on page load
-document.addEventListener('DOMContentLoaded', function() {
-    if (document.getElementById('moreText')) {
-        document.getElementById('moreText').style.display = 'none';
-    }
-    if (document.getElementById('bookMoreText')) {
-        document.getElementById('bookMoreText').style.display = 'none';
-    }
-    if (document.getElementById('span1')) {
-        document.getElementById('span1').style.display = 'inline';
-    }
-    if (document.getElementById('bookSpan')) {
-        document.getElementById('bookSpan').style.display = 'inline';
-    }
-});
-</script>
-
-<style>
-.read-more-btn {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 8px 16px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    margin: 10px 5px;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.3s;
-}
-
-.read-more-btn:hover {
-    background-color: #45a049;
-}
-</style>
-
-
-<br>
 
 
 
@@ -5354,7 +5332,6 @@ style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscre
 
 
    
-
 
 
 
