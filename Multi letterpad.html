@@ -606,11 +606,21 @@
         
         <div class="form-row">
             <div class="form-group">
-                <label><i class="fas fa-address-card"></i> प्रापकहरु (एक लाइनमा एक) <span style="color:#2c74b3;">कमा (,) ले पनि लाइन ब्रेक</span></label>
+                <label><i class="fas fa-address-card"></i> प्रापकहरु (एक लाइनमा एक)</label>
                 <textarea id="receivers" rows="3">मुख्य निर्वाचन अधिकृत, जिल्ला निर्वाचन कार्यालय सर्लाही
-शिक्षा शाखा प्रमुख, लालबन्दी नपा
-बासु अधिकारी, नगर प्रमुख लालबन्दी
-पुष्पराज पौडेल, प्रअ नारायण जनता माबि</textarea>
+शिक्षा शाखा प्रमुख, लालबन्दी नपाको कार्यालय
+बासु अधिकारी, नगर प्रमुख लालबन्दी नपा
+राम बहादुर स्याङ्तान, व्यवसाय सदस्य
+पुष्पराज पौडेल, प्रअ नारायण जनता माबि जियाजोर
+जयराज भट्टराई, प्रअ जनता माबि तिनघरे
+गणेश कार्की, बिब्यस सदस्य
+गणेश थापा, बिब्यस पदेन सदस्य               
+शर्मिला वाईबा, बिब्यस सदस्य                     
+बिष्णुबहादुर पोखरेल, प्रअ जाज्योति माबि लालबन्दी             
+नवराज थापा, प्रअ शिशुकल्याण माबि लालबन्दी                
+                
+                
+                </textarea>
                 <div class="comma-note" style="margin-top: 6px;">
                     <i class="fas fa-arrow-right"></i> कमा (,) प्रयोग गर्नुहोस् - प्रत्येक भाग नयाँ लाइनमा देखिनेछ
                 </div>
@@ -716,8 +726,8 @@
         return `<div style="display:flex; flex-direction:column; height:100%;">
             <div class="letter-header">${logoHtml}<div class="org-name">${escapeHtml(org)}</div></div>
             <div class="address-container"><div class="address-line1">${escapeHtml(addr1)}</div><div class="address-line2">${escapeHtml(addr2)}</div></div>
-            <div class="meta-line"><span><i class="fas fa-hashtag"></i> ${escapeHtml(letterNo)}</span><span><i class="fas fa-qrcode"></i> ${escapeHtml(refNo)}</span><span><i class="fas fa-calendar-alt"></i> ${escapeHtml(date)}</span></div>
-            <div class="recipient-line">सम्मानित<br>${displayRecWithBreaks}</div>
+            <div class="meta-line"><span><i class="fas fa-hashtag"></i> ${escapeHtml(letterNo)}</span><span><i class="fas fa-qrcode"></i> <br>${escapeHtml(refNo)}</span><span><i class="fas fa-calendar-alt"></i> ${escapeHtml(date)}</span></div>
+            <div class="recipient-line"><br>${displayRecWithBreaks}</div>
             <div class="subject">विषय: ${escapeHtml(subjectTxt)}</div>
             <div class="body">${escapeHtml(personalizedBody).replace(/\n/g, '<br>')}</div>
             <div class="signature-area">${signatureHtml}<div class="sender-name">${escapeHtml(sender)}</div><div style="font-size:0.7rem;">${escapeHtml(position)}</div></div>
