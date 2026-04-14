@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://shamser.info.np/HomePage/favicon.ico">
+    <link rel="apple-touch-icon" href="https://shamser.info.np/apple-touch-icon.png">
+    <link rel="manifest" href="/manifest.webmanifest">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+ 
+    <!-- Meta Tags -->
+
+<meta property="og:title" content="Translator" />
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://shamser.info.np/Multi letterpad.html"/>
+<meta property="og:image" content="https://shamser.info.np/HomePage/img gallery/images/24-computer.jpg">
+<meta property="og:description" content="English ↔ Nepali Translator fast tool">
+    <meta name="keywords" content="Translator">
+    <meta name="author" content="shamserpulami">
+    <title>English ↔ Nepali Translator | Fast</title>
+    <!-- Google Fonts & Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Roboto', sans-serif;
+            background: #f8fafc;
+            color: #0f172a;
+            line-height: 1.5;
+            padding: 1.5rem;
+        }
+
+        .app-wrapper {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        /* header with brand */
+        .brand-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #dc143c;
+            padding-bottom: 0.75rem;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo-icon {
+            background: #dc143c;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            color: white;
+            font-weight: 700;
+            font-size: 1.4rem;
+        }
+        .brand h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+        .brand p {
+            font-size: 0.8rem;
+            color: #334155;
+        }
+        .nav-links {
+            display: flex;
+            gap: 24px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #1e293b;
+            font-weight: 500;
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+        .nav-links a:hover {
+            color: #dc143c;
+        }
+
+        /* main translation card */
+        .translation-card {
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            border: 1px solid #eef2f8;
+            margin-bottom: 1rem;
+        }
+        .lang-bar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            border-bottom: 1px solid #edf2f7;
+            background: #ffffff;
+            padding: 0.5rem 1rem;
+            gap: 12px;
+        }
+        .lang-selector {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #f8fafc;
+            padding: 0.5rem 1rem;
+            border-radius: 60px;
+            border: 1px solid #e2e8f0;
+        }
+        .lang-selector select {
+            flex: 1;
+            border: none;
+            background: transparent;
+            font-weight: 500;
+            font-size: 0.95rem;
+            outline: none;
+            cursor: pointer;
+            font-family: inherit;
+            color: #0f172a;
+        }
+        .flag-icon {
+            font-size: 1.5rem;
+        }
+        .swap-btn {
+            cursor: pointer;
+            background: #f1f5f9;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            border: 1px solid #e2e8f0;
+        }
+        .swap-btn:hover {
+            background: #e2e8f0;
+            transform: rotate(180deg);
+        }
+        .text-panel {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .source-area, .target-area {
+            flex: 1;
+            padding: 1.8rem 1.5rem;
+            min-height: 280px;
+        }
+        .target-area {
+            background: #fbfdff;
+            border-left: 1px solid #edf2f7;
+        }
+        textarea {
+            width: 100%;
+            height: 210px;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            font-family: 'Inter', monospace;
+            resize: vertical;
+            background: transparent;
+            line-height: 1.5;
+            color: #0f172a;
+        }
+        .target-area textarea {
+            color: #1e293b;
+        }
+        .char-counter {
+            margin-top: 12px;
+            font-size: 0.75rem;
+            color: #5b6e8c;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .action-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.9rem 1.5rem 1.5rem;
+            background: white;
+            border-top: 1px solid #edf2f7;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .btn-translate {
+            background: #dc143c;
+            border: none;
+            padding: 10px 28px;
+            border-radius: 40px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 2px 8px rgba(220,20,60,0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-translate:hover {
+            background: #b01034;
+            transform: scale(0.97);
+        }
+        .btn-secondary {
+            background: #f1f5f9;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: 0.2s;
+        }
+        .btn-secondary:hover {
+            background: #e2e8f0;
+        }
+        .footer-note {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            color: #475569;
+            border-top: 1px solid #e2edf7;
+            padding-top: 1.5rem;
+        }
+        @media (max-width: 720px) {
+            body { padding: 1rem; }
+            .source-area, .target-area { padding: 1.2rem; min-height: 220px; }
+            .lang-selector { padding: 0.4rem 0.8rem; }
+        }
+        .material-icons {
+            font-size: 20px;
+            vertical-align: middle;
+        }
+        button:disabled {
+            opacity: 0.6;
+            cursor: default;
+        }
+    </style>
+</head>
+<body>
+<div class="app-wrapper">
+    <!-- Header (brand) -->
+    <div class="brand-header">
+        <div class="logo-area">
+            <div class="logo-icon">📝</div>
+                  <img src="HomePage/team_img/team1.JPG" alt="letter head preview" style="width:10%; border-radius:10px;" onerror="this.src='https://via.placeholder.com/150?text=Team';"> 
+            <div class="brand">
+                <h1>Translation tool</h1>
+                <p>Translation Instantly: English ↔ Nepali  </p>
+            </div>
+        </div>
+        <div class="nav-links">
+            <a href="https://shamser.info.np">Home</a>
+            <a href="https://shamser.info.np/Shaikshik_Sansar/sobiztrend.com/preeti_to_unicode.html" id="typingLink" target="_blank">preeti_to_unicode</a>
+                   <a href="https://shamser.info.np/Shaikshik_Sansar/sobiztrend.com/unicode_to_preeti.html" id="typingLink" target="_blank">Unicode_to_ preeti</a>
+        </div>
+    </div>
+
+    <!-- Translation core: dynamic language selectors for source and target -->
+    <div class="translation-card">
+        <div class="lang-bar">
+            <div class="lang-selector" id="sourceLangSelector">
+                <span class="flag-icon" id="sourceFlag"></span>
+                <select id="sourceLangSelect">
+                    <option value="en" selected>🇬🇧 English</option>
+                    <option value="ne">🇳🇵 Nepali</option>
+                </select>
+            </div>
+            <div class="swap-btn" id="swapLangBtn" title="Swap languages">
+                <span class="material-icons">swap_horiz</span>
+            </div>
+            <div class="lang-selector" id="targetLangSelector">
+                <span class="flag-icon" id="targetFlag"></span>
+                <select id="targetLangSelect">
+                    <option value="ne" selected>🇳🇵 Nepali</option>
+                    <option value="en">🇬🇧 English</option>
+                </select>
+            </div>
+        </div>
+        <div class="text-panel">
+            <div class="source-area">
+                <textarea id="sourceText" placeholder="Type text here ... (e.g., How are you?)" maxlength="500" spellcheck="false"></textarea>
+                <div class="char-counter"><span id="charCount">0</span> / 500 characters</div>
+            </div>
+            <div class="target-area">
+                <textarea id="targetText" placeholder="Translation will appear here" readonly spellcheck="false"></textarea>
+            </div>
+        </div>
+        <div class="action-row">
+            <div>
+                <button class="btn-translate" id="translateBtn"><span class="material-icons">g_translate</span> Translate</button>
+                <button class="btn-secondary" id="resetBtn"><span class="material-icons">restart_alt</span> Reset</button>
+            </div>
+            <div>
+                <button class="btn-secondary" id="copyBtn"><span class="material-icons">content_copy</span> Copy Translation</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer: only shamser.info.np attribution + required copyright (cleaned as requested) -->
+    <div class="footer-note">
+        <span>shamser.info.np</span> • English ↔ Nepali translation<br>
+        © 2026 EasyTranslation.app — All rights reserved.
+    </div>
+</div>
+
+<script>
+    (function() {
+        // DOM elements
+        const sourceTextarea = document.getElementById('sourceText');
+        const targetTextarea = document.getElementById('targetText');
+        const translateBtn = document.getElementById('translateBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const copyBtn = document.getElementById('copyBtn');
+        const swapBtn = document.getElementById('swapLangBtn');
+        const charCountSpan = document.getElementById('charCount');
+        
+        // language select elements
+        const sourceLangSelect = document.getElementById('sourceLangSelect');
+        const targetLangSelect = document.getElementById('targetLangSelect');
+        const sourceFlagSpan = document.getElementById('sourceFlag');
+        const targetFlagSpan = document.getElementById('targetFlag');
+
+        // helper: update flag icons based on selected language
+        function updateFlags() {
+            const sourceVal = sourceLangSelect.value;
+            const targetVal = targetLangSelect.value;
+            sourceFlagSpan.textContent = sourceVal === 'en' ? '🇬🇧' : '🇳🇵';
+            targetFlagSpan.textContent = targetVal === 'en' ? '🇬🇧' : '🇳🇵';
+        }
+
+        // update character counter
+        function updateCounter() {
+            charCountSpan.innerText = sourceTextarea.value.length;
+        }
+        sourceTextarea.addEventListener('input', updateCounter);
+
+        // reset fields (clear both textareas)
+        function resetFields() {
+            sourceTextarea.value = '';
+            targetTextarea.value = '';
+            updateCounter();
+        }
+
+        // Core translation function: respects source & target dropdowns (EN<->NE fully)
+        async function translateText() {
+            let textToTranslate = sourceTextarea.value.trim();
+            if (!textToTranslate) {
+                targetTextarea.value = '⚠️ Please enter some text to translate.';
+                return;
+            }
+            
+            // get selected languages (ISO codes)
+            let sourceLang = sourceLangSelect.value;   // 'en' or 'ne'
+            let targetLang = targetLangSelect.value;   // 'en' or 'ne'
+            
+            // if source and target are same, show warning
+            if (sourceLang === targetLang) {
+                targetTextarea.value = '⚠️ Source and target languages are the same. Please select different languages or use swap.';
+                return;
+            }
+            
+            // show loading state
+            targetTextarea.value = '🔄 Translating...';
+            
+            try {
+                // using Google Translate public endpoint (no API key required for basic usage)
+                const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sourceLang}&tl=${targetLang}&dt=t&q=${encodeURIComponent(textToTranslate)}`;
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`HTTP error ${response.status}`);
+                const data = await response.json();
+                let translatedText = '';
+                if (data && data[0] && Array.isArray(data[0])) {
+                    for (let segment of data[0]) {
+                        if (segment && segment[0]) translatedText += segment[0];
+                    }
+                } else {
+                    translatedText = '⚠️ Translation result unavailable. Please try again.';
+                }
+                targetTextarea.value = translatedText || '⚠️ No translation returned.';
+            } catch (error) {
+                console.error('Translation error:', error);
+                targetTextarea.value = '❌ Network error. Please check your connection and try again.';
+            }
+        }
+
+        // swap languages: exchange source/target dropdown values + exchange text content
+        function swapLanguages() {
+            // swap selected values between source and target selects
+            const currentSourceLang = sourceLangSelect.value;
+            const currentTargetLang = targetLangSelect.value;
+            sourceLangSelect.value = currentTargetLang;
+            targetLangSelect.value = currentSourceLang;
+            
+            // update flags UI
+            updateFlags();
+            
+            // also swap textarea contents (optional but user-friendly)
+            const sourceText = sourceTextarea.value;
+            const targetText = targetTextarea.value;
+            sourceTextarea.value = targetText;
+            targetTextarea.value = sourceText;
+            updateCounter();
+            
+            // update placeholder based on new source language
+            updateSourcePlaceholder();
+        }
+        
+        // update placeholder text according to source language selected
+        function updateSourcePlaceholder() {
+            const srcLang = sourceLangSelect.value;
+            if (srcLang === 'en') {
+                sourceTextarea.placeholder = 'Type English text here ... (e.g., Where is the temple?)';
+            } else {
+                sourceTextarea.placeholder = 'नेपालीमा लेख्नुहोस् ... (उदाहरण: तपाईंलाई कस्तो छ?)';
+            }
+        }
+        
+        // copy translated text to clipboard
+        async function copyTranslation() {
+            const translation = targetTextarea.value;
+            if (!translation || translation === '' || translation.startsWith('⚠️') || translation.startsWith('🔄')) {
+                alert('No valid translation to copy. Translate something first.');
+                return;
+            }
+            try {
+                await navigator.clipboard.writeText(translation);
+                alert('✅ Translation copied to clipboard!');
+            } catch (err) {
+                alert('Could not copy. Select text manually.');
+            }
+        }
+        
+        // event listeners for language select changes: update flags & placeholder
+        sourceLangSelect.addEventListener('change', () => {
+            updateFlags();
+            updateSourcePlaceholder();
+            // optional: clear target when source language changes? preserve but not required
+        });
+        targetLangSelect.addEventListener('change', updateFlags);
+        
+        // main button events
+        translateBtn.addEventListener('click', translateText);
+        resetBtn.addEventListener('click', resetFields);
+        copyBtn.addEventListener('click', copyTranslation);
+        swapBtn.addEventListener('click', swapLanguages);
+        
+        // initial char count
+        updateCounter();
+        updateFlags();
+        updateSourcePlaceholder();
+        
+        // set initial target hint text
+        targetTextarea.value = '✨ Translation will appear here.';
+        
+        // optional: Ctrl+Enter trigger translate
+        sourceTextarea.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                e.preventDefault();
+                translateText();
+            }
+        });
+        
+        // external links (keep header functional)
+        const homeLink = document.getElementById('homeLink');
+        const typingLink = document.getElementById('typingLink');
+        const fontsLink = document.getElementById('fontsLink');
+        
+        if (homeLink) {
+            homeLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+        if (typingLink) {
+            typingLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.open('https://www.atoznepal.info/type-nepali', '_blank');
+            });
+        }
+        if (fontsLink) {
+            fontsLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.open('https://www.easynepalityping.com/nepali-fonts-download', '_blank');
+            });
+        }
+    })();
+</script>
+</body>
+</html>
