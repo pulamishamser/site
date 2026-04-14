@@ -588,7 +588,7 @@
         </div>
         
         <div class="form-row">
-            <div class="form-group"><label><i class="fas fa-hashtag"></i> पत्र सं.</label><input type="text" id="letterNo" value="११/०८१-०८२"></div>
+            <div class="form-group"><label><i class="fas fa-hashtag"></i> पत्र सं.</label><input type="text" id="letterNo" value="११/०८१-०८२"></div><br>
             <div class="form-group"><label><i class="fas fa-qrcode"></i> चलानी सं.</label><input type="text" id="refNo" value="६/२०८२ शिक्षा शाखा"></div>
             <div class="form-group"><label><i class="fas fa-tag"></i> विषय</label><input type="text" id="subject" value="वार्षिकोत्सव आमन्त्रण"></div>
         </div>
@@ -726,7 +726,7 @@
         return `<div style="display:flex; flex-direction:column; height:100%;">
             <div class="letter-header">${logoHtml}<div class="org-name">${escapeHtml(org)}</div></div>
             <div class="address-container"><div class="address-line1">${escapeHtml(addr1)}</div><div class="address-line2">${escapeHtml(addr2)}</div></div>
-            <div class="meta-line"><span><i class="fas fa-hashtag"></i> ${escapeHtml(letterNo)}</span><span> <br><i class="fas fa-qrcode"></i>${escapeHtml(refNo)}</span><span><i class="fas fa-calendar-alt"></i> ${escapeHtml(date)}</span></div>
+            <div class="meta-line"><span><i class="fas fa-hashtag"></i> ${escapeHtml(letterNo)}</span><span><i class="fas fa-qrcode"></i>${escapeHtml(refNo)}</span><span><i class="fas fa-calendar-alt"></i> ${escapeHtml(date)}</span></div>
             <div class="recipient-line"><br>${displayRecWithBreaks}</div>
             <div class="subject">विषय: ${escapeHtml(subjectTxt)}</div>
             <div class="body">${escapeHtml(personalizedBody).replace(/\n/g, '<br>')}</div>
