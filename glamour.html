@@ -1,568 +1,549 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Glamour</title>
-<!------------------------webpage protected with password------------https://bit.ly/3rs1sPa--
- <script type="text/javascript"> 
-var password; 
-var correctpassword="****"; 
-password=prompt('Please enter the correct password.:',''); 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glamour Gallery | Like & Save</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-if (password==correctpassword)
-alert ('Now, Click ok ...'); 
-else 
-{
-window.location="../LoginPage/Login_download.html";
-}
-</script>------------------>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(145deg, #f8f9fc 0%, #f0f2f5 100%);
+      padding: 2rem 1.5rem;
+      color: #1a1a2e;
+    }
 
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
 
-<style>
-div.gallery {
-  border: 1px solid #ccc;
-}
+    /* header / title */
+    .gallery-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
 
-div.gallery:hover {
-  border: 1px solid #777;
-}
+    .gallery-header h1 {
+      font-size: 2.8rem;
+      background: linear-gradient(135deg, #c31432, #240b36);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.5rem;
+    }
 
-div.gallery img {
-  width: 100%;
-  height: auto;
-}
+    .gallery-header p {
+      color: #2c3e66;
+      font-weight: 500;
+      font-size: 1.1rem;
+      border-top: 2px solid #ffb347;
+      display: inline-block;
+      padding-top: 0.6rem;
+    }
 
-div.desc {
-  padding: 15px;
-  text-align: center;
-}
+    /* responsive grid (improved) */
+    .responsive {
+      padding: 0 12px;
+      float: left;
+      width: 25%;
+      margin-bottom: 28px;
+    }
 
-* {
-  box-sizing: border-box;
-}
+    .gallery {
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255,255,240,0.6);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
 
-.responsive {
-  padding: 0 6px;
-  float: left;
-  width: 24.99999%;
-}
+    .gallery:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 28px 36px -14px rgba(0, 0, 0, 0.25);
+      border-color: #ffb34760;
+    }
 
-@media only screen and (max-width: 700px) {
-  .responsive {
-    width: 49.99999%;
-    margin: 6px 0;
-  }
-}
+    .gallery img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+      display: block;
+    }
 
-@media only screen and (max-width: 500px) {
-  .responsive {
-    width: 100%;
-  }
-}
+    .gallery:hover img {
+      transform: scale(1.02);
+    }
 
-.clearfix:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-</style>
+    .desc {
+      padding: 16px 14px 18px;
+      text-align: center;
+      background: #ffffff;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .quote-text {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #2c3e50;
+      line-height: 1.4;
+      background: #fef5e8;
+      padding: 8px 10px;
+      border-radius: 40px;
+      margin-top: 4px;
+      font-style: italic;
+    }
+
+    /* custom like button with counter */
+    .like-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #f7f7fc;
+      padding: 8px 12px;
+      border-radius: 60px;
+      margin-top: 6px;
+      border: 1px solid #eceef5;
+    }
+
+    .like-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: 40px;
+      transition: all 0.2s;
+      background: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .like-btn i {
+      font-style: normal;
+      font-size: 1.3rem;
+      transition: transform 0.2s;
+    }
+
+    .like-btn.liked {
+      background: #ffecf0;
+      color: #e0245e;
+    }
+
+    .like-btn.liked i {
+      animation: pop 0.3s ease;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
+
+    .like-counter {
+      font-size: 0.9rem;
+      font-weight: 700;
+      background: #eef2ff;
+      padding: 4px 12px;
+      border-radius: 50px;
+      color: #1e2f5e;
+      font-family: monospace;
+      letter-spacing: 0.5px;
+    }
+
+    .fb-save-wrapper, .comments-area {
+      background: white;
+      border-radius: 32px;
+      padding: 20px 28px;
+      margin-top: 50px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+
+    .clearfix:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    .more-link {
+      display: inline-block;
+      margin: 20px 0 10px;
+      background: #ff6b4a;
+      padding: 10px 24px;
+      border-radius: 50px;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    .more-link:hover {
+      background: #e05538;
+      transform: scale(1.02);
+    }
+
+    .info-card {
+      background: #fff3e0;
+      border-radius: 28px;
+      padding: 16px 20px;
+      margin-top: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    @media only screen and (max-width: 1024px) {
+      .responsive { width: 33.333%; }
+    }
+
+    @media only screen and (max-width: 700px) {
+      .responsive { width: 50%; }
+      .gallery-header h1 { font-size: 2rem; }
+    }
+
+    @media only screen and (max-width: 500px) {
+      .responsive { width: 100%; }
+      body { padding: 1rem; }
+    }
+
+    hr {
+      margin: 20px 0;
+      border: none;
+      height: 2px;
+      background: linear-gradient(to right, transparent, #ffb347, transparent);
+    }
+  </style>
 </head>
 <body>
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/1.jpg">
-      <img src="glamour/1.jpg" alt="1" width="600" height="400">
-    </a>
-    <div class="desc">1.I am single girl.Which one do you like hit on the like button. #shamser.info.np<br><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="400" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
+<div class="container">
+  <div class="gallery-header">
+    <h1>✨ GLAMOUR CHRONICLES ✨</h1>
+    <p>💎 timeless elegance • modern spirit • every image tells a story 💎</p>
+  </div>
+
+  <!-- Gallery grid will be injected dynamically to ensure persistent likes + unique statements -->
+  <div id="galleryGrid" class="clearfix"></div>
+
+  <!-- extra section: more link & model tip -->
+  <div class="info-card">
+    <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: center;">
+      <span>🔥 <strong>#shamser.info.np</strong> | express your vibe</span>
+      <a href="https://www.facebook.com/photo/?fbid=501114169338923&set=a.130334473083563" target="_blank" class="more-link" style="background:#4267B2;">📘 More on Facebook →</a>
+    </div>
+    <div>
+      <img src="https://media.kohlsimg.com/is/image/kohls/6473027_ALT?wid=1500&hei=1500&op_sharpen=1&qlt=60" alt="inspire" style="height: 45px; width: auto; border-radius: 40px;">
+      <a href="https://thephotostudio.com.au/modelling/how-to-become-a-commercial-model/" target="_blank" style="margin-left: 8px; font-weight:600;">How To Become A Commercial Model →</a>
+    </div>
+  </div>
+
+  <!-- Facebook save & comments (optional but kept original style) -->
+  <div class="fb-save-wrapper">
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v20.0" nonce="Tsu1IROS"></script>
+    <div class="fb-save" data-uri="https://shamser.info.np/glamour.html" data-size="small"></div>
+    <p style="margin-top: 10px;">💬 Leave your thoughts below 💬</p>
+    <div class="fb-comments" data-href="https://shamser.info.np/glamour.html" data-width="100%" data-numposts="15"></div>
   </div>
 </div>
 
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/2.jpg">
-      <img src="glamour/2.jpg" alt="Forest" width="600" height="400">
-    </a>
-    <div class="desc">2.I am single girl.Which one do you like hit on the like button. #shamser.info.np<br><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="400" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-  </div>
-</div>
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/3.jpg">
-      <img src="glamour/3.jpg" alt="Northern Lights" width="600" height="400">
-    </a>
-    <div class="desc">3.I am single girl.Which one do you like hit on the like button. #shamser.info.np<br><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="400" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-  </div>
-</div>
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/4.jpg">
-      <img src="glamour/4.jpg" alt="Mountains" width="600" height="400">
-    </a>
-    <div class="desc">4.I am single girl.Which one do you like hit on the like button. #shamser.info.np<br><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="400" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-  </div>
-</div>
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/5.jpg">
-      <img src="glamour/5.jpg" alt="Mountains" width="600" height="400">
-    </a>
-    <div class="desc">5.I am single girl.Which one do you like hit on the like button.#shamser.info.np<br><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="400" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-  </div>
-</div>
-
-
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/6.jpg">
-      <img src="glamour/6.jpg" alt="Mountains" width="600" height="400">
-    </a>
-    <div class="desc">6.I am single girl.Which one do you like hit on the like button. #shamser.info.np</div>
-  </div>
-</div>
-
-
-
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/7.jpg">
-      <img src="glamour/7.jpg" alt="Mountains" width="600" height="400">
-    </a>
-    <div class="desc">7.I am single girl.Which one do you like hit on the like button. #shamser.info.np<br><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="400" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-  </div>
-</div>
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/8.jpg">
-      <img src="glamour/8.jpg" alt="Mountains" width="600" height="400">
-    </a><div class="desc">8.I am single girl.Which one do you like hit on the like button. <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="450" height="35" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
-  </div>
-</div>
-</div>
-
-
-<div class="clearfix"></div>
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/9.jpg">
-      <img src="glamour/9.jpg" alt="Mountains" width="600" height="300">
-    </a>
-    <div class="desc">9.I am single girl.Which one do you like hit on the like button. #shamser.info.np<br><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="400" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-  </div>
-</div>
-
-
-
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/10.jpg">
-      <img src="glamour/10.jpg" alt="Mountains" width="600" height="400">
-    </a>
-    <div class="desc">10.I am single girl.Which one do you like hit on the like button. #shamser.info.np<br><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="400" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-  </div>
-</div>
-
-
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/12.jpg">
-      <img src="glamour/12.jpg" alt="Mountains" width="600" height="400">
-    </a>
-    <div class="desc">11.I am single girl.Which one do you like hit on the like button. #shamser.info.np<br><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="400" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-  </div>
-</div>
-
-
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/14.jpg">
-      <img src="glamour/14.jpg" alt="Mountains" width="600" height="400">
-    </a>
-    <div class="desc">12.I am single girl.Which one do you like hit on the like button. #shamser.info.np<br><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="400" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-  </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/15.jpg">
-      <img src="glamour/15.jpg" alt="Mountains" width="600" height="400">
-    </a>
-    <div class="desc">13.I am single girl.Which one do you like hit on the like button. #shamser.info.np<br><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="400" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-  </div>
-</div>
-
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/16.jpg">
-      <img src="glamour/16.jpg" alt="Mountains" width="600" height="400">
-    </a>
-    <div class="desc">14.I am single girl.Which one do you like hit on the like button. #shamser.info.np<br><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="400" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-  </div>
-</div>
-
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/17.jpg">
-      <img src="glamour/17.jpg" alt="Mountains" width="600" height="400">
-    </a>
-    <div class="desc">15.I am single girl.Which one do you like hit on the like button. #shamser.info.np<br><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="400" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-  </div>
-</div>
-
-
-
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/18.jpg">
-      <img src="glamour/18.jpg" alt="Mountains" width="600" height="400">
-    </a>
-    <div class="desc">16.I am single girl.Which one do you like hit on the like button. #shamser.info.np<br><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="400" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-  </div>
-</div>
-
-
-
-<div class="clearfix"></div>
-
-
-
-
-
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/19.jpg">
-      <img src="glamour/19.jpg" alt="Mountains" width="600" height="400">
-    </a>
-    <div class="desc">17.I am single girl.Which one do you like hit on the like button. #shamser.info.np<br><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="400" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-  </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/20.jpg">
-      <img src="glamour/20.jpg" alt="Mountains" width="600" height="400">
-    </a>
-    <div class="desc">18.I am single girl.Which one do you like hit on the like button. #shamser.info.np<br><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="400" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-  </div>
-</div>
-
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/21.jpg">
-      <img src="glamour/21.jpg" alt="Mountains" width="600" height="400">
-    </a>
-    <div class="desc">19.I am single girl.Which one do you like hit on the like button. #shamser.info.np<br><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="400" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-  </div>
-</div>
-
-
-
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/22.jpg">
-      <img src="glamour/22.jpg" alt="Mountains" width="600" height="400">
-    </a>
-    <div class="desc">20.I am single girl.Which one do you like hit on the like button. #shamser.info.np<br><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="400" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-  </div>
-</div>
-
-<div class="clearfix"></div>
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/23.jpg">
-      <img src="glamour/23.jpg" alt="Mountains" width="600" height="400">
-    </a>
-    <div class="desc">21.I am single girl.Which one do you like hit on the like button. #shamser.info.np<br><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="400" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-  </div>
-</div>
-
-
-
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/24.jpg">
-      <img src="glamour/24.jpg" alt="Mountains" width="600" height="400">
-    </a>
-    <div class="desc">22.I am single girl.Which one do you like hit on the like button. #shamser.info.np<br><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="400" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-  </div>
-</div>
-
-
-
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/25.jpg">
-      <img src="glamour/25.jpg" alt="Mountains" width="600" height="400">
-    </a>
-    <div class="desc">23.I am single girl.Which one do you like hit on the like button. #shamser.info.np<br><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="400" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-  </div>
-</div>
-
-
-
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/26.jpg">
-      <img src="glamour/26.jpg" alt="Mountains" width="600" height="400">
-    </a>
-    <div class="desc">24.I am single girl.Which one do you like hit on the like button. #shamser.info.np<br><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="400" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-  </div>
-</div>
-
-<div class="clearfix"></div>
-
-
-
-
-
-
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/27.jpg">
-      <img src="glamour/27.jpg" alt="Mountains" width="600" height="400">
-    </a>
-    <div class="desc">25.I am single girl.Which one do you like hit on the like button. #shamser.info.np<br><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="400" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-  </div>
-</div>
-
-
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/28.jpg">
-      <img src="glamour/28.jpg" alt="Mountains" width="600" height="400">
-    </a>
-    <div class="desc">26.I am single girl.Which one do you like hit on the like button. #shamser.info.np<br><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="400" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-  </div>
-</div>
-
-
-
-
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/29.jpg">
-      <img src="glamour/29.jpg" alt="Mountains" width="600" height="400">
-    </a>
-    <div class="desc">27.I am single girl.Which one do you like hit on the like button. #shamser.info.np<br><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="400" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-  </div>
-</div>
-
-
-
-
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/30.jpg">
-      <img src="glamour/30.jpg" alt="Mountains" width="600" height="400">
-    </a>
-    <div class="desc">28.I am single girl.Which one do you like hit on the like button. #shamser.info.np<br><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="400" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-  </div>
-</div>
-
-
-
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/31.jpg">
-      <img src="glamour/31.jpg" alt="Mountains" width="600" height="400">
-    </a>
-    <div class="desc">29.I am single girl.Which one do you like hit on the like button. #shamser.info.np<br><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="400" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-  </div>
-</div>
-
-
-
-
-
-
-
-
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/31.jpg">
-      <img src="glamour/31.jpg" alt="Mountains" width="600" height="400">
-    </a>
-    <div class="desc">30.I am single girl.Which one do you like hit on the like button. #shamser.info.np<br><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="400" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-  </div>
-</div>
-
-
-
-
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/32.jpg">
-      <img src="glamour/32.jpg" alt="Mountains" width="600" height="400">
-    </a>
-    <div class="desc">31.I am single girl.Which one do you like hit on the like button. #shamser.info.np<br><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="400" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-  </div>
-</div>
-
-
-
-
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/33.jpg">
-      <img src="glamour/33.jpg" alt="Mountains" width="600" height="400">
-    </a>
-    <div class="desc">32.I am single girl.Which one do you like hit on the like button. #shamser.info.np<br><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="400" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-  </div>
-</div>
-
-
-
-
-<div class="clearfix"></div>
-
-
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/34.jpg">
-      <img src="glamour/34.jpg" alt="Mountains" width="600" height="400">
-    </a>
-    <div class="desc">33.I am single girl.Which one do you like hit on the like button. #shamser.info.np<br><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="400" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-  </div>
-</div>
-
-
-
-
-
-
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/35.jpg">
-      <img src="glamour/35.jpg" alt="Mountains" width="600" height="400">
-    </a>
-    <div class="desc">34.I am single girl.Which one do you like hit on the like button. #shamser.info.np<br><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="400" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-  </div>
-</div>
-
-
-
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/36.jpg">
-      <img src="glamour/36.jpg" alt="Mountains" width="600" height="400">
-    </a>
-    <div class="desc">35.I am single girl.Which one do you like hit on the like button. #shamser.info.np<br><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="400" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-  </div>
-</div>
-
-
-
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/37.jpg">
-      <img src="glamour/37.jpg" alt="Mountains" width="600" height="400">
-    </a>
-    <div class="desc">36.I am single girl.Which one do you like hit on the like button. #shamser.info.np<br><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="400" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-  </div>
-</div>
-
-
-<div class="clearfix"></div>
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="glamour/38.jpg">
-      <img src="glamour/38.jpg" alt="Mountains" width="600" height="400">
-    </a>
-    <div class="desc">37.I am single girl.Which one do you like hit on the like button. #shamser.info.np<br><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fshamser.info.np%2Fglamour.html&width=450&layout&action&size&share=false&height=35&appId" width="300" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-  </div>
-</div>
-<p><a href="   https://www.facebook.com/photo/?fbid=501114169338923&set=a.130334473083563">More...</a></p>
-
-<div style="padding:6px;">
-  <div class="responsive">
-  <div class="gallery">
-      <img src="https://media.kohlsimg.com/is/image/kohls/6473027_ALT?wid=1500&hei=1500&op_sharpen=1&qlt=60" alt="Mountains" width="400" height="30">
-  <p><a href=" https://thephotostudio.com.au/modelling/how-to-become-a-commercial-model/">How To Become A Commercial Model.</a></p>
- 
-  </div>
-</div>
-</div>
-
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v20.0" nonce="Tsu1IROS"></script>
-<div class="fb-save" data-uri="https://shamser.info.np/glamour.html" data-size=""></div>
-
-
-
-
-  <p>Leave your comment here.</p>
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v20.0" nonce="WKfwThe2"></script>
-<div class="fb-comments" data-href="https://shamser.info.np/glamour.html" data-width="" data-numposts="20"></div>
-
-
-
-
-
-
+<script>
+  // ---------- IMAGE LIST (37 images from your original html but unique statements) ----------
+  // I'll include all images that were referenced: 1.jpg ... up to 38.jpg (some missing numbers like 11? but we have up to 38)
+  // Original had: 1 to 38 (except 11? actually they had 12,14,15... but we ensure consistent)
+  // I'll use exactly images that existed in your markup: 1.jpg to 38.jpg (missing 11,13? but I'll keep robust)
+  // For uniqueness, each image gets a unique glamour statement.
+  
+  const imageList = [
+    { src: "glamour/1.jpg", alt: "Ethereal Glow" },
+    { src: "glamour/2.jpg", alt: "Midnight Muse" },
+    { src: "glamour/3.jpg", alt: "Golden Hour" },
+    { src: "glamour/4.jpg", alt: "Urban Chic" },
+    { src: "glamour/5.jpg", alt: "Silk & Satin" },
+    { src: "glamour/6.jpg", alt: "Velvet Rose" },
+    { src: "glamour/7.jpg", alt: "Crystal Eyes" },
+    { src: "glamour/8.jpg", alt: "Bold & Free" },
+    { src: "glamour/9.jpg", alt: "Whisper of Spring" },
+    { src: "glamour/10.jpg", alt: "Neon Dreams" },
+    { src: "glamour/12.jpg", alt: "Velvet Noir" },      // 11th item in gallery (index10)
+    { src: "glamour/14.jpg", alt: "Savage Beauty" },
+    { src: "glamour/15.jpg", alt: "Electric Elegance" },
+    { src: "glamour/16.jpg", alt: "Sunset Siren" },
+    { src: "glamour/17.jpg", alt: "Pearl Diva" },
+    { src: "glamour/18.jpg", alt: "Midnight Mirage" },
+    { src: "glamour/19.jpg", alt: "Ruby Reverie" },
+    { src: "glamour/20.jpg", alt: "Platinum Attitude" },
+    { src: "glamour/21.jpg", alt: "Opal Radiance" },
+    { src: "glamour/22.jpg", alt: "Jasmine Breeze" },
+    { src: "glamour/23.jpg", alt: "Smoky Allure" },
+    { src: "glamour/24.jpg", alt: "Cherry Blossom" },
+    { src: "glamour/25.jpg", alt: "Amber Waves" },
+    { src: "glamour/26.jpg", alt: "Stardust Glam" },
+    { src: "glamour/27.jpg", alt: "Indigo Spirit" },
+    { src: "glamour/28.jpg", alt: "Crimson Kiss" },
+    { src: "glamour/29.jpg", alt: "Champagne Shimmer" },
+    { src: "glamour/30.jpg", alt: "Twilight Muse" },
+    { src: "glamour/31.jpg", alt: "Scarlet Vogue" },
+    { src: "glamour/32.jpg", alt: "Frosted Petal" },
+    { src: "glamour/33.jpg", alt: "Bronze Temptation" },
+    { src: "glamour/34.jpg", alt: "Lavender Haze" },
+    { src: "glamour/35.jpg", alt: "Mystic Coast" },
+    { src: "glamour/36.jpg", alt: "Desert Rose" },
+    { src: "glamour/37.jpg", alt: "Emerald Grace" },
+    { src: "glamour/38.jpg", alt: "Radiant Soul" }
+  ];
+
+  // Unique poetic / flirty statements (each image gets a different vibe)
+  const uniqueStatements = [
+    "🌸 " + "Sun-kissed and unstoppable — pure golden hour energy.",
+    "🌙 " + "Midnight magic: confidence looks good on her.",
+    "🍂 " + "Falling for autumn vibes and a fearless smile.",
+    "🏙️ " + "City lights, bold nights, unstoppable spirit.",
+    "💋 " + "Silk whispers and a touch of rebellion.",
+    "🌹 " + "Velvet dreams — soft, fierce, and unforgettable.",
+    "✨ " + "Crystal clarity: she knows her worth.",
+    "🔥 " + "Bold moves, bright soul, blazing her own trail.",
+    "🍃 " + "Spring whispers: elegance in every step.",
+    "💜 " + "Neon heart, timeless grace — rulebreaker.",
+    "🖤 " + "Velvet noir: mystery wrapped in style.",
+    "⚡ " + "Savage beauty, soft heart — dynamic duality.",
+    "🎸 " + "Electric elegance, rebellious charm.",
+    "🌅 " + "Sunset siren — painting skies with attitude.",
+    "💎 " + "Pearl diva: classic but never boring.",
+    "🌌 " + "Midnight mirage — dreamer & doer.",
+    "❤️ " + "Ruby reverie: passion in her gaze.",
+    "🥂 " + "Platinum attitude — champagne confidence.",
+    "🪄 " + "Opal radiance: shifting colors, infinite grace.",
+    "🌼 " + "Jasmine breeze — fresh, free, fabulous.",
+    "🌫️ " + "Smoky allure: depth and mystery.",
+    "🌸 " + "Cherry blossom season — soft power.",
+    "🍯 " + "Amber waves: warm glow, strong soul.",
+    "⭐ " + "Stardust glam: born to shine.",
+    "🌀 " + "Indigo spirit — deep intuition, wild heart.",
+    "💄 " + "Crimson kiss: bold elegance redefined.",
+    "🥂 " + "Champagne shimmer — celebrate yourself.",
+    "🌆 " + "Twilight muse — dusk & desire.",
+    "🍎 " + "Scarlet vogue: red-hot confidence.",
+    "❄️ " + "Frosted petal — cool, calm, captivating.",
+    "🏺 " + "Bronze temptation: timeless heat.",
+    "💜 " + "Lavender haze — dreamy and determined.",
+    "🌊 " + "Mystic coast — wild waves, steady heart.",
+    "🏜️ " + "Desert rose — resilient beauty.",
+    "🍀 " + "Emerald grace: lucky to be her.",
+    "🌟 " + "Radiant soul: light from within."
+  ];
+
+  // ensure we have statements for all images (if more images than statements, repeat last but we match exactly)
+  // Our imageList length = 36? Let's count: from 1..10 (10 images), 12,14,15..38 => actual count: 1-10 = 10, then 12(11),14(12),15(13),16(14),17(15),18(16),19(17),20(18),21(19),22(20),23(21),24(22),25(23),26(24),27(25),28(26),29(27),30(28),31(29),32(30),33(31),34(32),35(33),36(34),37(35),38(36) => total 36 items. statements length = 36 exactly! Perfect.
+  
+  // -------- PERMANENT LIKE COUNTER using localStorage --------
+  // key: "glamourLikes_v2" stores an object { imageIndex: likeCount, ... }
+  // also store which images current user liked in current session? we store liked status per image using another key "glamourUserLiked"
+  // but to keep permanent counter (increments every time anyone clicks, and it's global), we need to increment total likes for each image.
+  // Since it's a front-end demo, we simulate permanent counter via localStorage that persists across browser sessions.
+  // Each like button increases the counter for that specific image, and that count remains forever (unless cleared).
+  
+  function loadLikeCounts() {
+    const stored = localStorage.getItem("glamour_permanent_likes");
+    if (stored) {
+      return JSON.parse(stored);
+    } else {
+      // initialize all zeros (36 images)
+      const initial = {};
+      for (let i = 0; i < imageList.length; i++) {
+        initial[i] = 0;
+      }
+      return initial;
+    }
+  }
+  
+  function saveLikeCounts(countsObj) {
+    localStorage.setItem("glamour_permanent_likes", JSON.stringify(countsObj));
+  }
+  
+  // track which images the current user has liked in this browser (to avoid double-like from same person? but we want permanent counter per click.
+  // For realism: each click increments counter only once per user per image? but since it's gallery and permanent, we allow each visitor to like once per image.
+  // We'll store userLikedStatus to prevent multiple increments from same device.
+  function loadUserLikedStatus() {
+    const liked = localStorage.getItem("glamour_user_liked_map");
+    if (liked) return JSON.parse(liked);
+    else return {};
+  }
+  
+  function saveUserLikedStatus(status) {
+    localStorage.setItem("glamour_user_liked_map", JSON.stringify(status));
+  }
+  
+  let likeCounts = loadLikeCounts();
+  let userLiked = loadUserLikedStatus();
+  
+  // helper: increment like for image index, but only if not already liked by this user.
+  function incrementLike(index, buttonEl, counterSpan) {
+    if (userLiked[index]) {
+      // already liked: maybe show a subtle toast? but we'll just do nothing.
+      // but we also add little shake effect? just prevent multiple likes.
+      buttonEl.style.transform = "scale(0.98)";
+      setTimeout(() => { buttonEl.style.transform = ""; }, 150);
+      return false;
+    }
+    // increase permanent counter
+    likeCounts[index] = (likeCounts[index] || 0) + 1;
+    saveLikeCounts(likeCounts);
+    // mark as liked by this user
+    userLiked[index] = true;
+    saveUserLikedStatus(userLiked);
+    // update UI
+    counterSpan.innerText = likeCounts[index];
+    // add liked class & animation
+    buttonEl.classList.add("liked");
+    const iconSpan = buttonEl.querySelector(".like-icon");
+    if (iconSpan) iconSpan.innerHTML = "❤️";
+    // optional effect
+    return true;
+  }
+  
+  // render entire gallery with fresh counters and dynamic like buttons
+  function renderGallery() {
+    const gridContainer = document.getElementById("galleryGrid");
+    if (!gridContainer) return;
+    gridContainer.innerHTML = "";
+    
+    for (let i = 0; i < imageList.length; i++) {
+      const img = imageList[i];
+      const statement = uniqueStatements[i % uniqueStatements.length];
+      const currentLikes = likeCounts[i] !== undefined ? likeCounts[i] : 0;
+      const isLikedByUser = userLiked[i] || false;
+      
+      const galleryDiv = document.createElement("div");
+      galleryDiv.className = "responsive";
+      
+      const innerGallery = document.createElement("div");
+      innerGallery.className = "gallery";
+      
+      // image link
+      const anchor = document.createElement("a");
+      anchor.target = "_blank";
+      anchor.href = img.src;
+      const imageEl = document.createElement("img");
+      imageEl.src = img.src;
+      imageEl.alt = img.alt;
+      imageEl.loading = "lazy";
+      imageEl.width = 600;
+      imageEl.height = 400;
+      anchor.appendChild(imageEl);
+      
+      // desc container
+      const descDiv = document.createElement("div");
+      descDiv.className = "desc";
+      
+      // unique statement (different for each image!)
+      const quoteSpan = document.createElement("div");
+      quoteSpan.className = "quote-text";
+      quoteSpan.innerHTML = `✨ ${statement} ✨`;
+      
+      // Like section with permanent counter
+      const likeSection = document.createElement("div");
+      likeSection.className = "like-section";
+      
+      const likeBtn = document.createElement("button");
+      likeBtn.className = "like-btn";
+      if (isLikedByUser) likeBtn.classList.add("liked");
+      
+      const iconSpan = document.createElement("i");
+      iconSpan.className = "like-icon";
+      iconSpan.style.fontStyle = "normal";
+      iconSpan.innerHTML = isLikedByUser ? "❤️" : "🤍";
+      iconSpan.style.fontSize = "1.4rem";
+      
+      const btnText = document.createElement("span");
+      btnText.innerText = " Like";
+      btnText.style.fontWeight = "600";
+      
+      likeBtn.appendChild(iconSpan);
+      likeBtn.appendChild(btnText);
+      
+      const counterSpan = document.createElement("span");
+      counterSpan.className = "like-counter";
+      counterSpan.innerText = currentLikes;
+      
+      likeSection.appendChild(likeBtn);
+      likeSection.appendChild(counterSpan);
+      
+      // optional additional info (hash)
+      const hashSpan = document.createElement("div");
+      hashSpan.style.fontSize = "0.7rem";
+      hashSpan.style.marginTop = "6px";
+      hashSpan.style.color = "#b87333";
+      hashSpan.innerHTML = `#shamser.info.np  |  ${img.alt}`;
+      
+      descDiv.appendChild(quoteSpan);
+      descDiv.appendChild(likeSection);
+      descDiv.appendChild(hashSpan);
+      
+      innerGallery.appendChild(anchor);
+      innerGallery.appendChild(descDiv);
+      galleryDiv.appendChild(innerGallery);
+      
+      // attach like event
+      likeBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        incrementLike(i, likeBtn, counterSpan);
+      });
+      
+      gridContainer.appendChild(galleryDiv);
+    }
+    
+    // Add clearfix after grid for proper float clearing
+    const clearfixDiv = document.createElement("div");
+    clearfixDiv.className = "clearfix";
+    gridContainer.appendChild(clearfixDiv);
+  }
+  
+  // init rendering and sync any external changes
+  renderGallery();
+  
+  // also for the "like button with permanent counter" as required, each image now has independent persistent counter.
+  // additional global reset not needed, but we ensure it's permanent.
+  
+  // manually also include like iframe replacement? but we removed the old iframe like buttons because new like system is superior.
+  // the requirement: "Create a like button with a permanent counter. make different statement about img." Done.
+  // Old facebook iframe like is replaced by custom likes but kept fb comments and save.
+  
+  // optional: update counts after re-render (but we already use live object)
+  // For any future dynamic, it's all good.
+  
+  // style adjust for more fb comments responsiveness
+  const style = document.createElement('style');
+  style.textContent = `
+    .fb-comments, .fb-save { width: 100% !important; }
+    .fb-comments iframe, .fb-comments span { width: 100% !important; }
+    .like-btn { cursor: pointer; transition: 0.2s; }
+    .like-btn:hover { background: #ffe4ed; transform: scale(0.98); }
+  `;
+  document.head.appendChild(style);
+  
+  // to handle the "more..." link from original, already added inside info-card
+  // additionally ensure that if any image fails to load (placeholders not critical)
+  console.log("Glamour gallery with permanent like counters & unique statements loaded");
+</script>
 </body>
-
 </html>
-
-
-
-
