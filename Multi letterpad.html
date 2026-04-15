@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
-<title>Multi Letterpad </title>
+<title>Multi Letterpad - पत्र जेनेरेटर</title>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -59,22 +59,6 @@
     @media (min-width: 768px) {
         h1 {
             font-size: 1.8rem;
-        }
-    }
-    
-    .instructions {
-        background: #f0f7fe;
-        border-radius: 20px;
-        padding: 12px 16px;
-        margin: 15px 0;
-        border-left: 4px solid #2c74b3;
-        font-size: 0.8rem;
-    }
-    
-    @media (min-width: 768px) {
-        .instructions {
-            padding: 14px 22px;
-            font-size: 0.9rem;
         }
     }
     
@@ -345,9 +329,47 @@
     .address-container { text-align: center; border-bottom: 1px dashed #9bb8da; padding-bottom: 4px; margin-bottom: 4px; }
     .address-line1 { font-weight: 600; font-size: 0.75rem; }
     .address-line2 { font-size: 0.65rem; color: #2c5a7a; }
-    .meta-line { display: flex; justify-content: space-between; font-size: 0.6rem; border-bottom: 1px dashed #a4c2dd; padding: 4px 0; margin-bottom: 4px; flex-wrap: wrap; gap: 5px; }
     
-    /* IMPORTANT: Recipient line with comma break - each part on new line */
+    /* Meta section - Letter No on its own line, then Ref No + Date on same line */
+    .meta-line {
+        border-bottom: 1px dashed #a4c2dd;
+        padding: 4px 0;
+        margin-bottom: 6px;
+    }
+    .meta-letter {
+        font-size: 0.65rem;
+        display: block;
+        margin-bottom: 3px;
+    }
+    .meta-ref-date {
+        font-size: 0.65rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .meta-item {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 4px;
+        flex-wrap: wrap;
+    }
+    .meta-item i {
+        font-size: 0.65rem;
+        color: #1f6390;
+        width: 16px;
+    }
+    .meta-label {
+        font-weight: 700;
+        color: #0b3552;
+    }
+    .meta-value {
+        font-weight: 500;
+        color: #1e3a5f;
+        word-break: break-word;
+    }
+    
     .recipient-line {
         font-weight: 700;
         background: #eef3fc;
@@ -363,11 +385,6 @@
         display: block;
         content: "";
         margin: 2px 0;
-    }
-    
-    .recipient-part {
-        display: inline-block;
-        margin-right: 4px;
     }
     
     .subject {
@@ -540,12 +557,12 @@
             <ul style="margin: 12px 0 12px 20px; font-size:0.85rem;">
               <li>✅Single letter, Two letter र four letter मध्ये कुनै एक प्रकार छान्नुहोस् । 
                 <li>✅ <strong>कमा (,) प्रयोग गर्दा रिसिभरको नाम अलग-अलग लाइनमा ब्रेक हुन्छ</strong></li>
-               
-                  <li>✅ Single letter A4 size को एक पेजको Potrait मा प्रिन्ट हुन्छ भने Two letter र four letter Landscape मा प्रिन्ट हुन्छ</li>
+                <li>✅ <strong>पत्र सं. एक लाइनमा, चलानी सं. र मिति एउटै लाइनमा देखिन्छन्</strong></li>
+                <li>✅ Single letter A4 size को एक पेजको Potrait मा प्रिन्ट हुन्छ भने Two letter र four letter Landscape मा प्रिन्ट हुन्छ</li>
                 <li>✅गल्ती सच्याई रि-जेनेरेट गर्न सकिन्छ।</li>
                 <li>✅रिफ्रेश वा रिसेट गर्दा लेखिएको डेटा सबै हराउँछ । किनकी यसमा Data store भएर बस्दैन । </li>
                 <li>✅यसमा दिएको काल्पनिक नमुना अनुसार आफ्नो बिवरणहरु भरेर जेनेरेट गर्नुहोस् ।</li>
-                 <li>✅पत्रलाई PDF मा सेभ गर्न सकिन्छ ।</li>
+                <li>✅पत्रलाई PDF मा सेभ गर्न सकिन्छ ।</li>
             </ul>
             <div class="comma-note">
                 <i class="fas fa-info-circle"></i> उदाहरण: "राम शर्मा, प्रधानाध्यापक, विद्यालय" → तीन लाइनमा ब्रेक
@@ -560,7 +577,6 @@
 <div class="container">
     <div class="card">
         <h1><i class="fas fa-layer-group"></i> मल्टी लेटरप्याड जेनेरेटर</h1>
-              <div class="sharethis-inline-share-buttons"></div>
         <a href="https://shamser.info.np/"><i class="fa fa-home fa-lg"></i> Back to home</a>
         
         <div class="layout-dropdown-area">
@@ -590,7 +606,7 @@
         </div>
         
         <div class="form-row">
-            <div class="form-group"><label><i class="fas fa-hashtag"></i> पत्र सं.</label><input type="text" id="letterNo" value="११/०८१-०८२"></div><br>
+            <div class="form-group"><label><i class="fas fa-hashtag"></i> पत्र सं.</label><input type="text" id="letterNo" value="११/०८१-०८२"></div>
             <div class="form-group"><label><i class="fas fa-qrcode"></i> चलानी सं.</label><input type="text" id="refNo" value="६/२०८२ शिक्षा शाखा"></div>
             <div class="form-group"><label><i class="fas fa-tag"></i> विषय</label><input type="text" id="subject" value="वार्षिकोत्सव आमन्त्रण"></div>
         </div>
@@ -619,10 +635,7 @@
 गणेश थापा, बिब्यस पदेन सदस्य               
 शर्मिला वाईबा, बिब्यस सदस्य                     
 बिष्णुबहादुर पोखरेल, प्रअ जाज्योति माबि लालबन्दी             
-नवराज थापा, प्रअ शिशुकल्याण माबि लालबन्दी                
-                
-                
-                </textarea>
+नवराज थापा, प्रअ शिशुकल्याण माबि लालबन्दी</textarea>
                 <div class="comma-note" style="margin-top: 6px;">
                     <i class="fas fa-arrow-right"></i> कमा (,) प्रयोग गर्नुहोस् - प्रत्येक भाग नयाँ लाइनमा देखिनेछ
                 </div>
@@ -704,32 +717,41 @@
         return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));
     }
     
-    // NEW: Format recipient with comma line breaks
-    // If comma exists, split into multiple lines (each part on new line)
     function formatRecipientWithLineBreaks(recipient) {
         if (!recipient) return '';
-        // If comma exists, split by comma and join with <br>
         if (recipient.includes(',')) {
             const parts = recipient.split(',').map(p => p.trim()).filter(p => p !== '');
             return parts.join('<br>');
         }
-        // If no comma, return as is
         return recipient;
+    }
+
+    // Build meta section: Letter No on its own line, then Ref No and Date on same line (continuous)
+    function buildMetaSection(letterNo, refNo, date) {
+        return `<div class="meta-line">
+            <div class="meta-letter">
+                <span class="meta-item"><i class="fas fa-hashtag"></i><span class="meta-label">पत्र सं.:</span><span class="meta-value">${escapeHtml(letterNo)}</span></span>
+            </div>
+            <div class="meta-ref-date">
+                <span class="meta-item"><i class="fas fa-qrcode"></i><span class="meta-label">चलानी सं.:</span><span class="meta-value">${escapeHtml(refNo)}</span></span>
+                <span class="meta-item"><i class="fas fa-calendar-alt"></i><span class="meta-label">मिति:</span><span class="meta-value">${escapeHtml(date)}</span></span>
+            </div>
+        </div>`;
     }
 
     function buildLetterHTML(recipientRaw, org, addr1, addr2, date, letterNo, refNo, subjectTxt, sender, position, email, mobile, bodyTemplate, logo, signature) {
         let personalizedBody = bodyTemplate.replace(/\[नाम\]/g, recipientRaw);
-        // Format recipient with line breaks on commas
         let displayRecWithBreaks = formatRecipientWithLineBreaks(recipientRaw);
         
         const logoHtml = logo ? `<img src="${logo}" class="org-logo" alt="logo" onerror="this.style.display='none';">` : '';
         const signatureHtml = signature ? `<img src="${signature}" class="signature-img" alt="sign"><br>` : '';
+        const metaHtml = buildMetaSection(letterNo, refNo, date);
         
         return `<div style="display:flex; flex-direction:column; height:100%;">
             <div class="letter-header">${logoHtml}<div class="org-name">${escapeHtml(org)}</div></div>
             <div class="address-container"><div class="address-line1">${escapeHtml(addr1)}</div><div class="address-line2">${escapeHtml(addr2)}</div></div>
-            <div class="meta-line"><span><i class="fas fa-hashtag"></i> ${escapeHtml(letterNo)}</span><br><span><i class="fas fa-qrcode"></i>${escapeHtml(refNo)}</span><span><i class="fas fa-calendar-alt"></i> ${escapeHtml(date)}</span></div>
-            <div class="recipient-line"><br>${displayRecWithBreaks}</div>
+            ${metaHtml}
+            <div class="recipient-line">${displayRecWithBreaks}</div>
             <div class="subject">विषय: ${escapeHtml(subjectTxt)}</div>
             <div class="body">${escapeHtml(personalizedBody).replace(/\n/g, '<br>')}</div>
             <div class="signature-area">${signatureHtml}<div class="sender-name">${escapeHtml(sender)}</div><div style="font-size:0.7rem;">${escapeHtml(position)}</div></div>
@@ -743,7 +765,7 @@
         let address2 = document.getElementById("address2").value.trim() || "सर्लाही";
         let letterDate = document.getElementById("letterDate").value.trim() || "२०८२-१०-१२";
         let letterNo = document.getElementById("letterNo").value.trim() || "११/०८१-०८२";
-        let refNo = document.getElementById("refNo").value.trim() || "६/२०८२";
+        let refNo = document.getElementById("refNo").value.trim() || "६/२०८२ शिक्षा शाखा";
         let subjectTxt = document.getElementById("subject").value.trim() || "आमन्त्रण";
         let sender = document.getElementById("sender").value.trim() || "ध्रुवबहादुर भण्डारी";
         let position = document.getElementById("position").value.trim() || "प्रधानाध्यापक";
