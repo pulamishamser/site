@@ -126,14 +126,129 @@
                 margin: 5px 0;
             }
         }
+
+        /* Login Overlay Styles - Added without modifying original */
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a3a5c, #2a6592);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(3px);
+            transition: all 0.3s ease;
+        }
+        .login-card {
+            background: white;
+            border-radius: 28px;
+            padding: 32px 28px;
+            max-width: 380px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.3);
+            animation: fadeInUp 0.4s ease;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .login-card h2 {
+            color: #1a3a5c;
+            margin-bottom: 8px;
+            font-size: 1.6rem;
+        }
+        .login-card p {
+            color: #5a6e7c;
+            margin-bottom: 24px;
+            font-size: 0.85rem;
+        }
+        .login-input {
+            width: 100%;
+            padding: 12px 16px;
+            margin: 10px 0;
+            border: 2px solid #e2e8f0;
+            border-radius: 50px;
+            font-size: 0.9rem;
+        }
+        .login-input:focus {
+            border-color: #2a6592;
+            outline: none;
+        }
+        .login-btn {
+            background: linear-gradient(95deg, #1a3a5c, #2a6592);
+            width: 100%;
+            padding: 12px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1rem;
+            margin-top: 15px;
+        }
+        .login-error {
+            color: #dc2626;
+            font-size: 0.75rem;
+            margin-top: 12px;
+            min-height: 32px;
+        }
+        .show-pwd-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 12px 0 5px;
+            font-size: 0.75rem;
+            justify-content: flex-start;
+        }
+        .logout-btn {
+            background-color: #dc2626;
+            margin-left: 10px;
+            padding: 5px 15px;
+            font-size: 0.8rem;
+        }
+        .logout-btn:hover {
+            background-color: #b91c1c;
+        }
+        .header-logout {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
+
+<!-- LOGIN OVERLAY - Added without modifying original content -->
+<div id="loginOverlay" class="login-overlay">
+    <div class="login-card">
+        <i class="fas fa-language" style="font-size: 48px; color: #2a6592; margin-bottom: 12px;"></i>
+        <h2>Number to Words</h2>
+        <p>कृपया लगइन गर्नुहोस्</p>
+        <input type="text" id="loginUsername" class="login-input" placeholder="प्रयोगकर्ता नाम" value="Admin">
+        <input type="password" id="loginPassword" class="login-input" placeholder="पासवर्ड" value="1234">
+        <div class="show-pwd-row">
+            <input type="checkbox" id="showLoginPwd"> <label>पासवर्ड देखाउनुहोस्</label>
+        </div>
+        <button id="doLoginBtn" class="login-btn"><i class="fas fa-sign-in-alt"></i> प्रवेश गर्नुहोस्</button>
+        <div id="loginErrorMsg" class="login-error"></div>
+        <div style="margin-top: 16px; font-size: 0.7rem; color: #6c757d;">
+            <i class="fas fa-info-circle"></i> डेमो: Admin / 1234
+        </div>
+    </div>
+</div>
+
+<!-- Original Container - wrapped with main app div for login control -->
+<div id="mainAppContainer" style="display: none;">
     <!-- Facebook SDK (required for like button) -->
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v12.0" nonce="YOUR_NONCE_VALUE"></script>
 
     <div class="container">
+        <!-- Logout Button added at top -->
+        <div class="header-logout">
+            <button id="logoutBtn" class="logout-btn"><i class="fas fa-sign-out-alt"></i> लगआउट</button>
+        </div>
         <!-- Social Links -->
         <div class="social-links">
             <a href="https://www.facebook.com/" target="_blank" class="social-icon facebook">
@@ -203,176 +318,228 @@
     </div>
         
     </div>
+</div>
 
-    <script>
-        function convertNumbers() {
-            const number = document.getElementById("numberInput").value;
-            const englishResult = document.getElementById("Number_inWords");
-            const nepaliResult = document.getElementById("NumberinWords");
+<script>
+    // ==================== LOGIN SYSTEM ====================
+    const loginOverlay = document.getElementById('loginOverlay');
+    const mainAppContainer = document.getElementById('mainAppContainer');
+    const doLoginBtn = document.getElementById('doLoginBtn');
+    const loginUsername = document.getElementById('loginUsername');
+    const loginPassword = document.getElementById('loginPassword');
+    const showLoginPwd = document.getElementById('showLoginPwd');
+    const loginErrorMsg = document.getElementById('loginErrorMsg');
+    const logoutBtn = document.getElementById('logoutBtn');
 
-            if (isNaN(number) || number === "") {
-                englishResult.value = "Please enter a valid number.";
-                nepaliResult.value = "कृपया वैध नम्बर प्रविष्ट गर्नुहोस्।";
-                return;
-            }
+    // Show/hide password for login
+    if(showLoginPwd) {
+        showLoginPwd.addEventListener('change', function() {
+            loginPassword.type = this.checked ? 'text' : 'password';
+        });
+    }
 
-            if (number.length > 21) {
-                englishResult.value = "Number cannot exceed 21 digits.";
-                nepaliResult.value = "नम्बर २१ अंक भन्दा बढी हुन सक्दैन।";
-                return;
-            }
+    function performLogin() {
+        const username = loginUsername.value.trim();
+        const password = loginPassword.value.trim();
+        
+        if(username === "Admin" && password === "1234") {
+            loginErrorMsg.innerHTML = "";
+            sessionStorage.setItem('numtowords_logged_in', 'true');
+            loginOverlay.style.display = 'none';
+            mainAppContainer.style.display = 'block';
+        } else {
+            loginErrorMsg.innerHTML = "<i class='fas fa-exclamation-triangle'></i> गलत प्रयोगकर्ता नाम वा पासवर्ड";
+        }
+    }
 
-            englishResult.value = englishNumberToWords(number);
-            nepaliResult.value = nepaliNumberToWords(number);
+    function performLogout() {
+        sessionStorage.removeItem('numtowords_logged_in');
+        loginOverlay.style.display = 'flex';
+        mainAppContainer.style.display = 'none';
+        // Clear input fields for security
+        document.getElementById("numberInput").value = "";
+        document.getElementById("Number_inWords").value = "";
+        document.getElementById("NumberinWords").value = "";
+    }
+
+    doLoginBtn.addEventListener('click', performLogin);
+    if(logoutBtn) logoutBtn.addEventListener('click', performLogout);
+    
+    // Check for existing session
+    if(sessionStorage.getItem('numtowords_logged_in') === 'true') {
+        loginOverlay.style.display = 'none';
+        mainAppContainer.style.display = 'block';
+    }
+
+    // ==================== ORIGINAL CONVERTER SCRIPT (COMPLETELY UNCHANGED) ====================
+    function convertNumbers() {
+        const number = document.getElementById("numberInput").value;
+        const englishResult = document.getElementById("Number_inWords");
+        const nepaliResult = document.getElementById("NumberinWords");
+
+        if (isNaN(number) || number === "") {
+            englishResult.value = "Please enter a valid number.";
+            nepaliResult.value = "कृपया वैध नम्बर प्रविष्ट गर्नुहोस्।";
+            return;
         }
 
-        function englishNumberToWords(n) {
-            const num = BigInt(n);
-            if (num === 0n) return "zero";
+        if (number.length > 21) {
+            englishResult.value = "Number cannot exceed 21 digits.";
+            nepaliResult.value = "नम्बर २१ अंक भन्दा बढी हुन सक्दैन।";
+            return;
+        }
 
-            const units = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
-            const teens = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
-            const tens = ["", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
-            const scales = ["", "thousand", "million", "billion", "trillion", "quadrillion", "quintillion", "sextillion", "septillion", "octillion", "nonillion"];
+        englishResult.value = englishNumberToWords(number);
+        nepaliResult.value = nepaliNumberToWords(number);
+    }
 
-            function convertLessThanOneThousand(num) {
-                if (num === 0n) return "";
-                if (num < 10n) return units[Number(num)];
-                if (num < 20n) return teens[Number(num - 10n)];
-                if (num < 100n) {
-                    return tens[Number(num / 10n)] + (num % 10n !== 0n ? "-" + units[Number(num % 10n)] : "");
+    function englishNumberToWords(n) {
+        const num = BigInt(n);
+        if (num === 0n) return "zero";
+
+        const units = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+        const teens = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
+        const tens = ["", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+        const scales = ["", "thousand", "million", "billion", "trillion", "quadrillion", "quintillion", "sextillion", "septillion", "octillion", "nonillion"];
+
+        function convertLessThanOneThousand(num) {
+            if (num === 0n) return "";
+            if (num < 10n) return units[Number(num)];
+            if (num < 20n) return teens[Number(num - 10n)];
+            if (num < 100n) {
+                return tens[Number(num / 10n)] + (num % 10n !== 0n ? "-" + units[Number(num % 10n)] : "");
+            }
+            return units[Number(num / 100n)] + " hundred" + (num % 100n !== 0n ? " and " + convertLessThanOneThousand(num % 100n) : "");
+        }
+
+        let words = "";
+        let scaleIndex = 0;
+        let remaining = num;
+
+        while (remaining > 0n) {
+            const chunk = remaining % 1000n;
+            if (chunk !== 0n) {
+                let chunkWords = convertLessThanOneThousand(chunk);
+                if (scaleIndex > 0) {
+                    chunkWords += " " + scales[scaleIndex];
                 }
-                return units[Number(num / 100n)] + " hundred" + (num % 100n !== 0n ? " and " + convertLessThanOneThousand(num % 100n) : "");
+                words = chunkWords + (words ? ", " + words : "");
             }
-
-            let words = "";
-            let scaleIndex = 0;
-            let remaining = num;
-
-            while (remaining > 0n) {
-                const chunk = remaining % 1000n;
-                if (chunk !== 0n) {
-                    let chunkWords = convertLessThanOneThousand(chunk);
-                    if (scaleIndex > 0) {
-                        chunkWords += " " + scales[scaleIndex];
-                    }
-                    words = chunkWords + (words ? ", " + words : "");
-                }
-                remaining = remaining / 1000n;
-                scaleIndex++;
-            }
-
-            return words;
+            remaining = remaining / 1000n;
+            scaleIndex++;
         }
 
-        function nepaliNumberToWords(n) {
-            const num = parseInt(n);
-            if (num === 0) return "शून्य";
+        return words;
+    }
 
-            const units = ["", "एक", "दुई", "तीन", "चार", "पाँच", "छ", "सात", "आठ", "नौ"];
-            const teens = ["दश", "एघार", "बाह्र", "तेह्र", "चौध", "पन्ध्र", "सोह्र", "सत्र", "अठार", "उन्नाइस"];
-            const tens = ["", "दश", "बीस", "तीस", "चालीस", "पचास", "साठी", "सत्तरी", "अस्सी", "नब्बे"];
-            const jointNumbers = {
-                21: "एक्काइस", 22: "बाइस", 23: "तेइस", 24: "चौबिस", 25: "पच्चिस",
-                26: "छब्बिस", 27: "सत्ताइस", 28: "अठ्ठाइस", 29: "उनन्तिस",
-                31: "एकत्तिस", 32: "बत्तिस", 33: "तेत्तिस", 34: "चौँतिस", 35: "पैँतिस",
-                36: "छत्तिस", 37: "सैँतीस", 38: "अठ्ठाइस", 39: "उनन्चालिस",
-                41: "एकचालिस", 42: "बयालिस", 43: "त्रियालिस", 44: "चवालिस", 45: "पैँतालिस",
-                46: "छयालिस", 47: "सच्चालिस", 48: "अठचालिस", 49: "उनन्पचास",
-                51: "एकाउन्न", 52: "बाउन्न", 53: "त्रिपन्न", 54: "चउन्न", 55: "पचपन्न",
-                56: "छपन्न", 57: "सन्ताउन्न", 58: "अन्ठाउन्न", 59: "उनन्साठी",
-                61: "एकसट्ठी", 62: "बैसट्ठी", 63: "त्रिसट्ठी", 64: "चौंसट्ठी", 65: "पैंसट्ठी",
-                66: "छयसट्ठी", 67: "सतसट्ठी", 68: "अठसट्ठी", 69: "उनन्सत्तरी",
-                71: "एकहत्तर", 72: "बहत्तर", 73: "त्रिहत्तर", 74: "चौहत्तर", 75: "पचहत्तर",
-                76: "छयहत्तर", 77: "सतहत्तर", 78: "अठहत्तर", 79: "उनासी",
-                81: "एकासी", 82: "बयासी", 83: "त्रियासी", 84: "चौरासी", 85: "पचासी",
-                86: "छयासी", 87: "सतासी", 88: "अठासी", 89: "उनान्नब्बे",
-                91: "एकान्नब्बे", 92: "बयान्नब्बे", 93: "त्रियान्नब्बे", 94: "चौरान्नब्बे", 95: "पन्चानब्बे",
-                96: "छयान्नब्बे", 97: "सन्तान्नब्बे", 98: "अन्ठान्नब्बे", 99: "उनान्सय"
-            };
+    function nepaliNumberToWords(n) {
+        const num = parseInt(n);
+        if (num === 0) return "शून्य";
 
-            function convertLessThanOneHundred(num) {
-                if (num === 0) return "";
-                if (num < 10) return units[num];
-                if (num < 20) return teens[num - 10];
-                if (jointNumbers[num]) return jointNumbers[num];
-                return tens[Math.floor(num / 10)] + (num % 10 !== 0 ? " " + units[num % 10] : "");
-            }
+        const units = ["", "एक", "दुई", "तीन", "चार", "पाँच", "छ", "सात", "आठ", "नौ"];
+        const teens = ["दश", "एघार", "बाह्र", "तेह्र", "चौध", "पन्ध्र", "सोह्र", "सत्र", "अठार", "उन्नाइस"];
+        const tens = ["", "दश", "बीस", "तीस", "चालीस", "पचास", "साठी", "सत्तरी", "अस्सी", "नब्बे"];
+        const jointNumbers = {
+            21: "एक्काइस", 22: "बाइस", 23: "तेइस", 24: "चौबिस", 25: "पच्चिस",
+            26: "छब्बिस", 27: "सत्ताइस", 28: "अठ्ठाइस", 29: "उनन्तिस",
+            31: "एकत्तिस", 32: "बत्तिस", 33: "तेत्तिस", 34: "चौँतिस", 35: "पैँतिस",
+            36: "छत्तिस", 37: "सैँतीस", 38: "अठ्ठाइस", 39: "उनन्चालिस",
+            41: "एकचालिस", 42: "बयालिस", 43: "त्रियालिस", 44: "चवालिस", 45: "पैँतालिस",
+            46: "छयालिस", 47: "सच्चालिस", 48: "अठचालिस", 49: "उनन्पचास",
+            51: "एकाउन्न", 52: "बाउन्न", 53: "त्रिपन्न", 54: "चउन्न", 55: "पचपन्न",
+            56: "छपन्न", 57: "सन्ताउन्न", 58: "अन्ठाउन्न", 59: "उनन्साठी",
+            61: "एकसट्ठी", 62: "बैसट्ठी", 63: "त्रिसट्ठी", 64: "चौंसट्ठी", 65: "पैंसट्ठी",
+            66: "छयसट्ठी", 67: "सतसट्ठी", 68: "अठसट्ठी", 69: "उनन्सत्तरी",
+            71: "एकहत्तर", 72: "बहत्तर", 73: "त्रिहत्तर", 74: "चौहत्तर", 75: "पचहत्तर",
+            76: "छयहत्तर", 77: "सतहत्तर", 78: "अठहत्तर", 79: "उनासी",
+            81: "एकासी", 82: "बयासी", 83: "त्रियासी", 84: "चौरासी", 85: "पचासी",
+            86: "छयासी", 87: "सतासी", 88: "अठासी", 89: "उनान्नब्बे",
+            91: "एकान्नब्बे", 92: "बयान्नब्बे", 93: "त्रियान्नब्बे", 94: "चौरान्नब्बे", 95: "पन्चानब्बे",
+            96: "छयान्नब्बे", 97: "सन्तान्नब्बे", 98: "अन्ठान्नब्बे", 99: "उनान्सय"
+        };
 
-            function convertLessThanOneThousand(num) {
-                if (num < 100) return convertLessThanOneHundred(num);
-                return units[Math.floor(num / 100)] + " सय" + (num % 100 !== 0 ? " " + convertLessThanOneHundred(num % 100) : "");
-            }
-
-            function convertLessThanTenThousand(num) {
-                if (num < 1000) return convertLessThanOneThousand(num);
-                return convertLessThanOneHundred(Math.floor(num / 1000)) + " हजार" + (num % 1000 !== 0 ? " " + convertLessThanOneThousand(num % 1000) : "");
-            }
-
-            function convertLessThanOneLakh(num) {
-                if (num < 10000) return convertLessThanTenThousand(num);
-                return convertLessThanOneHundred(Math.floor(num / 1000)) + " हजार" + (num % 1000 !== 0 ? " " + convertLessThanOneThousand(num % 1000) : "");
-            }
-
-            let words = "";
-            let remaining = num;
-
-            // Handle numbers greater than or equal to 1 lakh
-            if (remaining >= 100000) {
-                const lakhs = Math.floor(remaining / 100000);
-                remaining = remaining % 100000;
-                words += convertLessThanOneHundred(lakhs) + " लाख";
-                if (remaining > 0) {
-                    words += " " + convertLessThanOneLakh(remaining);
-                }
-            } 
-            // Handle numbers between 1000 and 99999
-            else if (remaining >= 1000) {
-                words = convertLessThanTenThousand(remaining);
-            } 
-            // Handle numbers less than 1000
-            else {
-                words = convertLessThanOneThousand(remaining);
-            }
-
-            return words;
+        function convertLessThanOneHundred(num) {
+            if (num === 0) return "";
+            if (num < 10) return units[num];
+            if (num < 20) return teens[num - 10];
+            if (jointNumbers[num]) return jointNumbers[num];
+            return tens[Math.floor(num / 10)] + (num % 10 !== 0 ? " " + units[num % 10] : "");
         }
 
-        function formatText(formatType) {
-            const textarea = document.getElementById("Number_inWords");
-            let text = textarea.value;
-            
-            switch(formatType) {
-                case 'sentencecase':
-                    text = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
-                    break;
-                case 'titlecase':
-                    text = text.split(' ').map(word => 
-                        word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-                    ).join(' ');
-                    break;
-                case 'capitalcase':
-                    text = text.split(' ').map(word => 
-                        word.charAt(0).toUpperCase() + word.slice(1)
-                    ).join(' ');
-                    break;
-                case 'lowercase':
-                    text = text.toLowerCase();
-                    break;
-                case 'uppercase':
-                    text = text.toUpperCase();
-                    break;
-            }
-            
-            textarea.value = text;
+        function convertLessThanOneThousand(num) {
+            if (num < 100) return convertLessThanOneHundred(num);
+            return units[Math.floor(num / 100)] + " सय" + (num % 100 !== 0 ? " " + convertLessThanOneHundred(num % 100) : "");
         }
 
-        function copyToClipboard(elementId) {
-            const textarea = document.getElementById(elementId);
-            textarea.select();
-            document.execCommand('copy');
-            alert('Copied to clipboard!');
+        function convertLessThanTenThousand(num) {
+            if (num < 1000) return convertLessThanOneThousand(num);
+            return convertLessThanOneHundred(Math.floor(num / 1000)) + " हजार" + (num % 1000 !== 0 ? " " + convertLessThanOneThousand(num % 1000) : "");
         }
-    </script>
+
+        function convertLessThanOneLakh(num) {
+            if (num < 10000) return convertLessThanTenThousand(num);
+            return convertLessThanOneHundred(Math.floor(num / 1000)) + " हजार" + (num % 1000 !== 0 ? " " + convertLessThanOneThousand(num % 1000) : "");
+        }
+
+        let words = "";
+        let remaining = num;
+
+        // Handle numbers greater than or equal to 1 lakh
+        if (remaining >= 100000) {
+            const lakhs = Math.floor(remaining / 100000);
+            remaining = remaining % 100000;
+            words += convertLessThanOneHundred(lakhs) + " लाख";
+            if (remaining > 0) {
+                words += " " + convertLessThanOneLakh(remaining);
+            }
+        } 
+        // Handle numbers between 1000 and 99999
+        else if (remaining >= 1000) {
+            words = convertLessThanTenThousand(remaining);
+        } 
+        // Handle numbers less than 1000
+        else {
+            words = convertLessThanOneThousand(remaining);
+        }
+
+        return words;
+    }
+
+    function formatText(formatType) {
+        const textarea = document.getElementById("Number_inWords");
+        let text = textarea.value;
+        
+        switch(formatType) {
+            case 'sentencecase':
+                text = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+                break;
+            case 'titlecase':
+                text = text.split(' ').map(word => 
+                    word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+                ).join(' ');
+                break;
+            case 'capitalcase':
+                text = text.split(' ').map(word => 
+                    word.charAt(0).toUpperCase() + word.slice(1)
+                ).join(' ');
+                break;
+            case 'lowercase':
+                text = text.toLowerCase();
+                break;
+            case 'uppercase':
+                text = text.toUpperCase();
+                break;
+        }
+        
+        textarea.value = text;
+    }
+
+    function copyToClipboard(elementId) {
+        const textarea = document.getElementById(elementId);
+        textarea.select();
+        document.execCommand('copy');
+        alert('Copied to clipboard!');
+    }
+</script>
 </body>
 </html>
