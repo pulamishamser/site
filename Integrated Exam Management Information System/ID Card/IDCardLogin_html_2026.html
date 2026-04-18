@@ -1,1 +1,568 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>IEMIS - एकीकृत परीक्षा तथा सूचना प्रणाली | ID Card Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="https://shamser.info.np/HomePage/favicon.ico">
+    
+    <!-- Required CSS & Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <!-- jQuery for potential helpers -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    
+    <style>
+        /* ========== MERGED STYLES: TAKEN FROM SECOND DESIGN (MODERN DASHBOARD) ========== */
+        body {
+            font-family: 'Segoe UI', 'Prompt', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #5a42c8, #d04ba2);
+            min-height: 100vh;
+        }
+
+        /* Login Container (original second design structure) */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #5a42c8, #9b59b6);
+            padding: 20px;
+        }
+        .login-card {
+            background: white;
+            width: 100%;
+            max-width: 900px;
+            border-radius: 24px;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.2);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        @media (min-width: 768px) {
+            .login-card {
+                flex-direction: row;
+            }
+        }
+        .left-panel {
+            width: 100%;
+            padding: 30px 24px;
+            background: white;
+            text-align: justify;
+            border-bottom: 2px solid #eee;
+        }
+        @media (min-width: 768px) {
+            .left-panel {
+                width: 45%;
+                border-right: 2px solid #eee;
+                border-bottom: none;
+            }
+        }
+        .right-panel {
+            width: 100%;
+            padding: 30px 28px;
+        }
+        @media (min-width: 768px) {
+            .right-panel { width: 55%; }
+        }
+        .input-group { margin-bottom: 20px; }
+        .input-group label { font-weight: 600; margin-bottom: 6px; display: block; color: #2c3e66; }
+        input { width: 100%; padding: 12px 14px; border: 1px solid #ddd; border-radius: 12px; font-size: 0.9rem; transition: 0.2s; }
+        input:focus { outline: none; border-color: #5a42c8; box-shadow: 0 0 0 3px rgba(90,66,200,0.2); }
+        button { width: 100%; padding: 12px; background: #5a42c8; border: none; color: white; border-radius: 40px; font-weight: 600; transition: 0.2s; cursor: pointer; }
+        button:hover { background: #3e2a9e; transform: translateY(-2px); }
+        .media-buttons { display: flex; justify-content: center; gap: 12px; margin: 15px 0; }
+        .media-buttons .link { width: 36px; height: 36px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: white; font-size: 1rem; transition: 0.2s; }
+        .show-password { display: flex; align-items: center; gap: 8px; margin: 12px 0; }
+        .contact-info p { margin: 8px 0; font-size: 0.85rem; }
+
+        /* Dashboard Wrapper Styles (second design) */
+        .dashboard-wrapper {
+            display: none;
+            width: 100%;
+            min-height: 100vh;
+            background: #f5f7fb;
+            position: relative;
+        }
+        .dashboard-header {
+            background: #5a42c8;
+            color: white;
+            padding: 0 24px;
+            height: 64px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .dashboard-logo img { height: 36px; filter: brightness(0) invert(1); }
+        .menu-toggle { display: none; font-size: 1.6rem; cursor: pointer; }
+        .user-area { display: flex; align-items: center; gap: 18px; position: relative; cursor: pointer; }
+        .session-badge { background: rgba(255,255,255,0.2); padding: 5px 12px; border-radius: 40px; font-family: monospace; font-size: 0.75rem; font-weight: 500; }
+        .user-dropdown { position: absolute; top: 100%; right: 0; background: white; width: 220px; border-radius: 16px; display: none; box-shadow: 0 12px 28px rgba(0,0,0,0.15); z-index: 101; overflow: hidden; }
+        .user-area:hover .user-dropdown { display: block; }
+        .user-dropdown a, .user-dropdown button { display: flex; align-items: center; gap: 12px; padding: 12px 18px; color: #1e293b; text-decoration: none; width: 100%; border: none; background: white; font-size: 0.9rem; transition: 0.1s; }
+        .user-dropdown a:hover, .user-dropdown button:hover { background: #f1f5f9; color: #5a42c8; }
+        
+        .dashboard-main-area { display: flex; margin-top: 64px; }
+        .sidebar-nav {
+            width: 280px;
+            background: white;
+            height: calc(100vh - 64px);
+            overflow-y: auto;
+            position: fixed;
+            box-shadow: 2px 0 12px rgba(0,0,0,0.05);
+            z-index: 90;
+        }
+        .sidebar-nav ul { list-style: none; padding: 0; margin: 0; }
+        .sidebar-nav li { border-bottom: 1px solid #edf2f7; }
+        .sidebar-nav a, .sidebar-nav button {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 14px 20px;
+            color: #334155;
+            text-decoration: none;
+            background: none;
+            border: none;
+            gap: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .sidebar-nav a i, .sidebar-nav button i { width: 28px; font-size: 1.2rem; }
+        .sidebar-nav a:hover, .sidebar-nav button:hover { background: #f0f2ff; color: #5a42c8; }
+        .submenu-items { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: #fafcff; padding-left: 36px; }
+        .submenu-items.expanded { max-height: 300px; }
+        .arrow-icon { transition: transform 0.2s; }
+        .rotated { transform: rotate(180deg); }
+        
+        .content-panel {
+            flex: 1;
+            margin-left: 280px;
+            padding: 28px 32px;
+            transition: 0.2s;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 28px;
+        }
+        .stat-card {
+            background: white;
+            border-radius: 28px;
+            padding: 20px 24px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #eef2f6;
+        }
+        .stat-card:hover { transform: translateY(-4px); box-shadow: 0 16px 28px rgba(0,0,0,0.08); }
+        canvas { max-height: 180px; width: 100%; margin-top: 12px; }
+        .copy-btn { background: #eef2ff; border: none; padding: 4px 14px; border-radius: 40px; font-size: 0.7rem; margin-left: 12px; color: #5a42c8; font-weight: 600; }
+        
+        /* Modal overlay */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.75);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+        .modal-card {
+            background: white;
+            width: 90%;
+            height: 90%;
+            max-width: 1300px;
+            border-radius: 28px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 40px rgba(0,0,0,0.3);
+        }
+        .modal-iframe { flex: 1; border: none; width: 100%; }
+        .toast-notify {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e293b;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 50px;
+            z-index: 2100;
+            font-size: 0.85rem;
+            animation: fadeUp 0.2s ease;
+        }
+        @keyframes fadeUp { from { opacity: 0; transform: translateX(-50%) translateY(20px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+        .warning-timer { background: #f59e0b; color: #1e1e1f; }
+        
+        @media (max-width: 992px) {
+            .sidebar-nav { transform: translateX(-100%); z-index: 99; transition: 0.2s; }
+            .sidebar-nav.active { transform: translateX(0); }
+            .content-panel { margin-left: 0; }
+            .menu-toggle { display: block; }
+        }
+        
+        footer { text-align: center; margin-top: 48px; padding-top: 20px; color: #6c757d; border-top: 1px solid #e2e8f0; font-size: 0.8rem; }
+        .badge-id { background: #eef2ff; color: #5a42c8; border-radius: 30px; padding: 4px 12px; font-size: 0.7rem; }
+        hr { margin: 12px 0; }
+    </style>
+</head>
+<body>
+
+<!-- ================= LOGIN CONTAINER (SECOND DESIGN STYLES) ================= -->
+<div id="loginContainer" class="login-container">
+    <div class="login-card">
+        <div class="left-panel">
+            <img width="60" height="60" src="https://media.tenor.com/dhfraztxBo8AAAAj/globe-joypixels.gif" alt="Logo">
+            <h2 class="mt-2" style="font-weight: 600; color:#5a42c8;">एकिकृत परीक्षा तथा सूचना प्रणाली IEMIS</h2>
+            <div class="contact-info">
+                <p><i class="fas fa-phone"></i> &nbsp;Support&nbsp;: <a href="tel:9844087012">+977 9844087012</a></p>
+                <p><i class="fas fa-envelope"></i>&nbsp;Email&nbsp;: <a href="mailto:info@shamser.info.np">info@shamser.info.np</a></p>
+                <p><i class="fas fa-globe"></i>&nbsp;Website&nbsp;: <a href="https://shamser.info.np">shamser.info.np</a></p>
+                <div class="media-buttons">
+                    <a href="https://www.facebook.com/" style="background: #4267b2" class="link" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/shamser_info" style="background: #1da1f2" class="link" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.youtube.com/channel/UCfGP1pKJErzg10EjftyC3lg" style="background: #ff0000" class="link" target="_blank"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="right-panel">
+            <form id="loginFormIEMIS">
+                <div class="input-group">
+                    <label><i class="fas fa-user"></i> Username / Email</label>
+                    <input type="text" id="loginUsername" placeholder="Enter username" value="Admin" autocomplete="username">
+                </div>
+                <div class="input-group">
+                    <label><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter password" value="1234#" autocomplete="current-password">
+                </div>
+                 <label>Show Password</label>
+                <div class="show-password">
+                    <input type="checkbox" id="showPwdCheck">
+                </div>
+                <button type="submit" id="loginBtnMain"><i class="fas fa-sign-in-alt"></i> Login</button>
+                <div id="loginMessageArea" class="mt-2 text-center small"></div>
+                <div class="text-center mt-3">
+                    <a href="#" onclick="openRegisterPage(); return false;" style="color:#5a42c8;"><i class="fas fa-user-plus"></i> Register New Account</a>
+                    <span class="mx-2">|</span>
+                    <a href="#" onclick="alert('Contact support to reset password'); return false;" style="color:#5a42c8;"><i class="fas fa-key"></i> Forgot Password?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- ================= DASHBOARD (ID CARD MANAGEMENT + IEMIS) ================= -->
+<div class="dashboard-wrapper" id="dashboardApp">
+    <div class="dashboard-header">
+        <div class="menu-toggle" id="menuToggleBtn"><i class="fas fa-bars"></i></div>
+        <div class="dashboard-logo"><img src="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Logo.JPG" alt="IEMIS"></div>
+        <div class="user-area">
+            <span id="dashboardUserName">School</span>
+            <span id="sessionTimerDisplay" class="session-badge"></span>
+            <i class="fas fa-user-circle fa-2x"></i>
+            <div class="user-dropdown">
+                <a href="#" onclick="showProfileInfo(); return false;"><i class="fas fa-user"></i> My Profile</a>
+                <a href="#" onclick="openChangePasswordModal(); return false;"><i class="fas fa-key"></i> Change Password</a>
+                <button id="logoutDashboardBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-main-area">
+        <aside class="sidebar-nav" id="sidebarNav">
+            <div class="text-center pt-3 pb-2">
+                <img width="32" src="https://media.tenor.com/dhfraztxBo8AAAAj/globe-joypixels.gif"> 
+                <a href="https://shamser.info.np" style="color:#5a42c8; text-decoration:none;"> shamser.info.np</a>
+            </div>
+            <ul>
+                <li><a href="#" onclick="return showDashboardHome();"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <!-- ID Card specific modules (open in modal) -->
+                <li><a href="#" onclick="openInModalWindow('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/ID%20Card/ID%20Card%20DataEntryForm.html', 'Data Entry (ID Card)')"><i class="fas fa-id-card"></i> Data Entry (ID Card)</a></li>
+                <li><a href="#" onclick="openInModalWindow('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/ID%20Card/ID%20Card%20UpdateForm.html', 'Update Data')"><i class="fas fa-pen-alt"></i> Update Data</a></li>
+                <li><a href="#" onclick="openInModalWindow('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/ID%20Card/Card%20Generator.html', 'Card Generator')"><i class="fas fa-credit-card"></i> Card Generator</a></li>
+                <li><a href="#" onclick="openInModalWindow('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/ID%20Card/Download%20file.html', 'Download File')"><i class="fas fa-download"></i> Download File</a></li>
+                <li><a href="#" onclick="openInModalWindow('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/ID%20Card/clear%20data.html', 'Clear All Data')"><i class="fas fa-trash-alt"></i> Clear All Data</a></li>
+                <hr>
+                <li><a href="#" onclick="openInModalWindow('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Data%20Entry%20form-v.3.html','Manual Entry 1-12')"><i class="fas fa-edit"></i> Data Entry Manually</a></li>
+                <li><a href="#" onclick="openInModalWindow('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Markslip.html','Markslip')"><i class="fas fa-print"></i> Markslip</a></li>
+                <li><a href="#" onclick="openInModalWindow('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Download%20Sample%20File,%20Upload%20&%20transfer%20data.html','Data Upload & Transfer')"><i class="fas fa-upload"></i> Bulk Upload</a></li>
+                <li>
+                    <button class="toggle-submenu-btn"><i class="fas fa-chart-line"></i> Reports & Ledger <i class="fas fa-chevron-down arrow-icon"></i></button>
+                    <ul class="submenu-items">
+                        <li><a href="#" onclick="openInModalWindow('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Student%20Information.html','Master Ledger')">All in One Ledger</a></li>
+                        <li><a href="#" onclick="openInModalWindow('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Grade%20Ledger1-3.html','Grade Ledger')">Grade Ledger</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" onclick="openRegisterPage()"><i class="fas fa-user-plus"></i> Register Account</a></li>
+                <li><a href="#" onclick="openInModalWindow('https://shamser.info.np/Contact_Form.html','Contact Support')"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+        </aside>
+        <main class="content-panel" id="mainContentArea">
+            <!-- Dashboard view with charts -->
+            <div id="dashboardHomePanel">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h5><i class="fas fa-id-card text-primary"></i> <b>ID Card Statistics</b></h5>
+                        <canvas id="boysChartCanvas" style="height:160px"></canvas>
+                        <div class="mt-2"><span class="badge-id">Total Students: 235</span> <span class="badge-id">Cards Issued: 210</span></div>
+                    </div>
+                    <div class="stat-card">
+                        <h5><i class="fas fa-chalkboard-user"></i> Enrollment Overview</h5>
+                        <canvas id="studentChartCanvas"></canvas>
+                    </div>
+                    <div class="stat-card">
+                        <h5><i class="fas fa-school"></i> Staff / Faculty Ratio</h5>
+                        <canvas id="girlsChartCanvas"></canvas>
+                    </div>
+                    <div class="stat-card">
+                        <h5><i class="fas fa-link"></i> Quick Actions & Links</h5>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-id-card"></i> <a href="#" onclick="openInModalWindow('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/ID%20Card/Card%20Generator.html','Generate ID Card')">Generate ID Cards</a></li>
+                            <li><i class="fas fa-database"></i> <a href="#" onclick="openInModalWindow('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/ID%20Card/ID%20Card%20DataEntryForm.html','Data Entry')">New Student Entry</a></li>
+                            <li><i class="fas fa-chart-simple"></i> <a href="#" onclick="showDashboardHome()">Refresh Charts</a></li>
+                        </ul>
+                        <hr>
+                        <p><strong>Admit Card (Share)</strong> <button class="copy-btn" data-url="https://script.google.com/macros/s/AKfycbxLevNSFI7CAFvorNd2oiRc1f6iCUGC-VWAUrXb8MyhgEc393O6O063p1P-g6G9fMiW/exec">Copy Link</button></p>
+                    </div>
+                </div>
+                <footer>© 2025 IEMIS • Integrated ID Card & Exam Management • <i class="fas fa-shield-alt"></i> Secure Portal</footer>
+            </div>
+        </main>
+    </div>
+</div>
+
+<!-- Modal Overlay -->
+<div id="globalModal" class="modal-overlay">
+    <div class="modal-card">
+        <div class="d-flex justify-content-between align-items-center p-3 border-bottom">
+            <h5 id="modalTitleText" class="m-0"><i class="fas fa-id-card"></i> ID Card Module</h5>
+            <button class="btn-close" id="closeModalButton"></button>
+        </div>
+        <iframe id="modalIframeFrame" class="modal-iframe" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals"></iframe>
+    </div>
+</div>
+
+<script>
+    // -------------------- SESSION & INACTIVITY LOGIC (30 min) --------------------
+    const INACTIVE_LIMIT = 30 * 60 * 1000;
+    let idleTimer = null, sessionIntervalRef = null, lastActivityTime = Date.now();
+    let isSessionActive = false;
+    let currentLoggedUser = "";
+
+    function showToastMsg(msg, isWarning = false) {
+        let toastDiv = document.createElement('div');
+        toastDiv.className = 'toast-notify';
+        if (isWarning) toastDiv.style.background = "#f97316";
+        toastDiv.innerHTML = `<i class="fas fa-info-circle me-2"></i>${msg}`;
+        document.body.appendChild(toastDiv);
+        setTimeout(() => toastDiv.remove(), 4000);
+    }
+
+    function logoutSession() {
+        if (!isSessionActive) return;
+        localStorage.removeItem("iemis_auth_data");
+        sessionStorage.removeItem("iemis_auth_data");
+        isSessionActive = false;
+        if (sessionIntervalRef) clearInterval(sessionIntervalRef);
+        document.getElementById('dashboardApp').style.display = 'none';
+        document.getElementById('loginContainer').style.display = 'flex';
+        showToastMsg("Session expired due to inactivity. Please login again.");
+    }
+
+    function resetInactivityTimer() {
+        if (!isSessionActive) return;
+        lastActivityTime = Date.now();
+        if (idleTimer) clearTimeout(idleTimer);
+        idleTimer = setTimeout(() => logoutSession(), INACTIVE_LIMIT);
+        updateTimerUI();
+    }
+
+    function updateTimerUI() {
+        if (!isSessionActive) return;
+        let elapsed = Date.now() - lastActivityTime;
+        let remaining = Math.max(0, INACTIVE_LIMIT - elapsed);
+        let mins = Math.floor(remaining / 60000);
+        let secs = Math.floor((remaining % 60000) / 1000);
+        let timerSpan = document.getElementById('sessionTimerDisplay');
+        if (timerSpan) {
+            timerSpan.innerHTML = `<i class="far fa-clock"></i> ${mins.toString().padStart(2,'0')}:${secs.toString().padStart(2,'0')}`;
+            if (mins <= 2) timerSpan.classList.add('warning-timer');
+            else timerSpan.classList.remove('warning-timer');
+        }
+    }
+
+    function startGlobalWatcher() {
+        if (sessionIntervalRef) clearInterval(sessionIntervalRef);
+        sessionIntervalRef = setInterval(updateTimerUI, 1000);
+        ['click', 'mousemove', 'keydown', 'scroll', 'touchstart'].forEach(ev => document.addEventListener(ev, resetInactivityTimer));
+        resetInactivityTimer();
+    }
+
+    function initUserSession(username, remember) {
+        let authObj = { user: username, expiry: Date.now() + INACTIVE_LIMIT };
+        if (remember) localStorage.setItem("iemis_auth_data", JSON.stringify(authObj));
+        else sessionStorage.setItem("iemis_auth_data", JSON.stringify(authObj));
+        isSessionActive = true;
+        currentLoggedUser = username;
+        document.getElementById('loginContainer').style.display = 'none';
+        document.getElementById('dashboardApp').style.display = 'block';
+        document.getElementById('dashboardUserName').innerHTML = `<i class="fas fa-school"></i> ${username}`;
+        startGlobalWatcher();
+        initializeCharts();
+    }
+
+    function checkSavedSession() {
+        let stored = localStorage.getItem("iemis_auth_data") || sessionStorage.getItem("iemis_auth_data");
+        if (stored) {
+            try {
+                let data = JSON.parse(stored);
+                if (data.expiry > Date.now()) {
+                    isSessionActive = true;
+                    currentLoggedUser = data.user;
+                    document.getElementById('loginContainer').style.display = 'none';
+                    document.getElementById('dashboardApp').style.display = 'block';
+                    document.getElementById('dashboardUserName').innerHTML = `<i class="fas fa-school"></i> ${data.user}`;
+                    startGlobalWatcher();
+                    initializeCharts();
+                    return true;
+                } else { localStorage.removeItem("iemis_auth_data"); sessionStorage.removeItem("iemis_auth_data"); }
+            } catch(e) {}
+        }
+        document.getElementById('loginContainer').style.display = 'flex';
+        document.getElementById('dashboardApp').style.display = 'none';
+        return false;
+    }
+
+    // Login API Call (same endpoint as second design but works)
+    async function performLoginAction(e) {
+        e.preventDefault();
+        let username = document.getElementById('loginUsername').value.trim();
+        let pwd = document.getElementById('loginPassword').value.trim();
+        let msgDiv = document.getElementById('loginMessageArea');
+        let loginBtn = document.getElementById('loginBtnMain');
+        if (!username || !pwd) { msgDiv.innerHTML = '<span class="text-danger">❌ Please enter credentials</span>'; return; }
+        loginBtn.disabled = true; loginBtn.innerHTML = 'Logging...';
+        msgDiv.innerHTML = '';
+        try {
+            let response = await fetch("https://script.google.com/macros/s/AKfycbw8aVDBPbix7346o647ZapCWJxUYqkNC4rCP9ZRoLFs4IT8EW_tuE3GD9BFjG4UpSPPBQ/exec", {
+                method: "POST", headers: { "Content-Type": "text/plain" }, body: JSON.stringify({ action: "login", username: username, password: pwd })
+            });
+            let textResp = await response.text();
+            let jsonData = JSON.parse(textResp);
+            if (jsonData.status === "success") {
+                msgDiv.innerHTML = '<span class="text-success">✅ Login successful! Redirecting...</span>';
+                initUserSession(jsonData.username, false);
+                document.getElementById('loginFormIEMIS').reset();
+            } else throw new Error(jsonData.message || 'Invalid');
+        } catch (err) {
+            // Demo fallback for testing if API fails (matching original ID card demo)
+            if (username === "Admin" && pwd === "1234#") {
+                msgDiv.innerHTML = '<span class="text-success">✅ Demo Login Success (Offline Mode)</span>';
+                initUserSession(username, false);
+            } else {
+                msgDiv.innerHTML = '<span class="text-danger">⚠️ Login failed. Contact support.</span>';
+            }
+        } finally { loginBtn.disabled = false; loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login'; }
+    }
+
+    // Show Password Toggle
+    document.getElementById('showPwdCheck')?.addEventListener('change', function(e) {
+        let pwdField = document.getElementById('loginPassword');
+        if (pwdField) pwdField.type = e.target.checked ? 'text' : 'password';
+    });
+
+    // ----- Modal & Dashboard Functions -----
+    window.openInModalWindow = function(url, title) {
+        if (!isSessionActive) { checkSavedSession(); return false; }
+        resetInactivityTimer();
+        let modal = document.getElementById('globalModal');
+        let iframe = document.getElementById('modalIframeFrame');
+        document.getElementById('modalTitleText').innerHTML = `<i class="fas fa-id-card"></i> ${title || 'ID Card Module'}`;
+        modal.style.display = 'flex';
+        iframe.src = url;
+        if (window.innerWidth <= 992) document.getElementById('sidebarNav')?.classList.remove('active');
+        return false;
+    };
+    window.closeModalFunc = function() {
+        let modal = document.getElementById('globalModal');
+        let iframe = document.getElementById('modalIframeFrame');
+        iframe.src = '';
+        modal.style.display = 'none';
+    };
+    window.showDashboardHome = function() {
+        window.closeModalFunc();
+        resetInactivityTimer();
+        return false;
+    };
+    window.openRegisterPage = function() { openInModalWindow('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Register.html', 'Register New Account'); };
+    window.showProfileInfo = function() {
+        alert(`📋 Profile: ${currentLoggedUser || 'User'}\nRole: Administrator\nID Card Management Access`);
+    };
+    window.openChangePasswordModal = function() { openInModalWindow('https://script.google.com/macros/s/AKfycbxUs8Nn3kl1P_eGD6A7zR-sBfNT6kIksBxpIiPvJAE8jg6qilPQ1Thq_kLgabk6rKqvhw/exec', 'Change Password'); };
+    
+    // Logout Handler
+    document.getElementById('logoutDashboardBtn')?.addEventListener('click', () => {
+        localStorage.removeItem("iemis_auth_data");
+        sessionStorage.removeItem("iemis_auth_data");
+        isSessionActive = false;
+        if (sessionIntervalRef) clearInterval(sessionIntervalRef);
+        document.getElementById('dashboardApp').style.display = 'none';
+        document.getElementById('loginContainer').style.display = 'flex';
+        showToastMsg("Logged out successfully.");
+    });
+    
+    // Submenu toggle & sidebar mobile
+    document.querySelectorAll('.toggle-submenu-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            let subMenu = btn.nextElementSibling;
+            let arrowSpan = btn.querySelector('.arrow-icon');
+            if (subMenu) {
+                subMenu.classList.toggle('expanded');
+                if (arrowSpan) arrowSpan.classList.toggle('rotated');
+            }
+        });
+    });
+    document.getElementById('menuToggleBtn')?.addEventListener('click', () => { document.getElementById('sidebarNav')?.classList.toggle('active'); });
+    document.getElementById('closeModalButton')?.addEventListener('click', closeModalFunc);
+    document.getElementById('globalModal')?.addEventListener('click', (e) => { if (e.target === document.getElementById('globalModal')) closeModalFunc(); });
+    
+    // Copy button functionality
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('copy-btn')) {
+            let url = e.target.getAttribute('data-url');
+            if (url) { navigator.clipboard.writeText(url); e.target.innerText = 'Copied!'; setTimeout(() => e.target.innerText = 'Copy', 1500); }
+        }
+    });
+
+    // Initialize Charts (same as second design but custom)
+    function initializeCharts() {
+        if (typeof Chart !== 'undefined') {
+            let ctxBoys = document.getElementById('boysChartCanvas')?.getContext('2d');
+            if (ctxBoys) new Chart(ctxBoys, { type: 'pie', data: { labels: ['Issued', 'Pending', 'Total'], datasets: [{ data: [210, 25, 235], backgroundColor: ['#5a42c8', '#f1c40f', '#e67e22'] }] } });
+            let ctxStudent = document.getElementById('studentChartCanvas')?.getContext('2d');
+            if (ctxStudent) new Chart(ctxStudent, { type: 'line', data: { labels: ['2021', '2022', '2023', '2024'], datasets: [{ label: 'Enrollment', data: [880, 950, 1120, 1280], borderColor: '#5a42c8', fill: false, tension: 0.3 }] } });
+            let ctxGirls = document.getElementById('girlsChartCanvas')?.getContext('2d');
+            if (ctxGirls) new Chart(ctxGirls, { type: 'doughnut', data: { labels: ['Teaching Staff', 'Admin', 'Support'], datasets: [{ data: [45, 28, 22], backgroundColor: ['#3498db', '#2ecc71', '#9b59b6'] }] } });
+        }
+    }
+    
+    document.getElementById('loginFormIEMIS')?.addEventListener('submit', performLoginAction);
+    checkSavedSession();
+</script>
+</body>
+</html>
