@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title> ID Card Dashboard with Login</title>
+    <link rel="icon" type="image/x-icon" href="https://shamser.info.np/HomePage/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <style>
+        :root {
+            --primary-color: #5D5DC9;
+            --secondary-color: #4a4ab0;
+            --sidebar-width: 260px;
+            --header-height: 60px;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: #f4f7fc;
+            color: #1e293b;
+        }
+
+        /* Login Modal Styles */
+        .login-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            backdrop-filter: blur(5px);
+        }
+
+        .login-modal-content {
+            background: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .login-header {
+            background: #5D5DC9;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .login-header h3 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .login-body {
+            padding: 30px;
+        }
+
+        .login-form-group {
+            margin-bottom: 20px;
+        }
+
+        .login-form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .login-form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .login-form-group input:focus {
+            outline: none;
+            border-color: #5D5DC9;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 14px;
+            background: #5D5DC9;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .login-button:hover {
+            background: #4a4ab5;
+        }
+
+        .login-button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .login-message {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .login-message.success {
+            background: #e6f4ea;
+            color: #137333;
+        }
+
+        .login-message.error {
+            background: #fce8e6;
+            color: #d93025;
+        }
+
+        .login-links {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        .login-links a {
+            color: #5D5DC9;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .login-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* MAIN DASHBOARD STYLES */
+        .dashboard-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 24px;
+            height: var(--header-height);
+            background: linear-gradient(135deg, #5D5DC9 0%, #4a4ab0 100%);
+            box-shadow: var(--card-shadow);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            color: white;
+        }
+        .logo img {
+            border-radius: 8px;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+            cursor: pointer;
+            background: rgba(255,255,255,0.15);
+            padding: 6px 16px;
+            border-radius: 40px;
+            backdrop-filter: blur(4px);
+        }
+        .profile-icon {
+            font-size: 1.6rem;
+            color: white;
+        }
+        .user-dropdown {
+            position: absolute;
+            top: 110%;
+            right: 0;
+            background: white;
+            box-shadow: var(--card-shadow);
+            border-radius: 16px;
+            padding: 12px 0;
+            width: 220px;
+            display: none;
+            z-index: 200;
+            border: 1px solid #eef2f6;
+        }
+        .user-dropdown a, .user-dropdown button {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 20px;
+            color: #1e293b;
+            text-decoration: none;
+            transition: var(--transition);
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        .user-dropdown a:hover, .user-dropdown button:hover {
+            background-color: #f1f5f9;
+            color: var(--primary-color);
+        }
+        .user-info:hover .user-dropdown {
+            display: block;
+        }
+        .content-wrapper {
+            display: flex;
+            margin-top: var(--header-height);
+            flex: 1;
+        }
+        .sidebar {
+            width: var(--sidebar-width);
+            background: white;
+            box-shadow: 2px 0 12px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            height: calc(100vh - var(--header-height));
+            overflow-y: auto;
+            position: fixed;
+            z-index: 90;
+        }
+        .sidebar nav ul {
+            list-style: none;
+            padding: 16px 0;
+        }
+        .sidebar nav li {
+            margin: 4px 12px;
+            border-radius: 12px;
+        }
+        .sidebar nav a, .sidebar nav button.sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            color: #334155;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.2s;
+            font-weight: 500;
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+        }
+        .sidebar nav a i, .sidebar nav button i {
+            width: 28px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+        .sidebar nav a:hover, .sidebar nav button.sidebar-link:hover {
+            background: #eef2ff;
+            color: var(--primary-color);
+        }
+        .sidebar nav .active a {
+            background: #eef2ff;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        .main-content {
+            flex: 1;
+            padding: 24px;
+            margin-left: var(--sidebar-width);
+            transition: var(--transition);
+        }
+        .stats-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+        .card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: var(--card-shadow);
+            padding: 20px;
+            border: none;
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+        }
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #0f172a;
+            border-left: 4px solid var(--primary-color);
+            padding-left: 12px;
+        }
+        .chart-container {
+            height: 220px;
+            position: relative;
+        }
+        canvas {
+            max-height: 100%;
+            width: 100%;
+        }
+        .content-area {
+            width: 100%;
+            height: calc(100vh - var(--header-height) - 40px);
+            border: none;
+            background: white;
+            border-radius: 24px;
+            box-shadow: var(--card-shadow);
+        }
+        .content-container {
+            display: none;
+        }
+        .content-container.active {
+            display: block;
+        }
+        .loading-spinner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+        }
+        .menu-toggle {
+            display: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: white;
+        }
+        .back-button {
+            display: none;
+            padding: 8px 20px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 40px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        footer {
+            text-align: center;
+            margin-top: 32px;
+            padding-top: 16px;
+            color: #64748b;
+            font-size: 0.8rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        @media (max-width: 992px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            .main-content {
+                margin-left: 0;
+            }
+            .menu-toggle {
+                display: block;
+            }
+        }
+        .status-badge {
+            background: #e6f7e6;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-top: 12px;
+        }
+        hr {
+            margin: 12px;
+        }
+        
+        /* Modal for external content */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 10000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(8px);
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal-content {
+            background: white;
+            width: 90%;
+            height: 85%;
+            max-width: 1200px;
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            animation: slideIn 0.3s ease;
+        }
+        .modal-header {
+            background: linear-gradient(135deg, #5D5DC9, #4a4ab0);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .modal-header h4 {
+            margin: 0;
+            font-weight: 600;
+        }
+        .modal-close {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            transition: 0.2s;
+        }
+        .modal-close:hover {
+            background: rgba(255,255,255,0.4);
+            transform: rotate(90deg);
+        }
+        .modal-iframe {
+            flex: 1;
+            border: none;
+            width: 100%;
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                height: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ================= LOGIN MODAL (Popup) ================= -->
+<div id="loginModal" class="login-modal" style="display: none;">
+    <div class="login-modal-content">
+        <div class="login-header">
+            <h3><i class="fas fa-id-card"></i>ID Card Dashboard Login</h3>
+        </div>
+        <div class="login-body">
+            <div class="login-form-group">
+                <label>Username / Email</label>
+                <input type="text" id="loginUsername" value="Admin" autocomplete="username">
+            </div>
+            <div class="login-form-group">
+                <label>Password</label>
+                <input type="password" id="loginPassword" value="1234#" autocomplete="current-password">
+            </div>
+            <div class="remember-me">
+                <input type="checkbox" id="rememberMe"> <label for="rememberMe" style="margin:0;">Remember me</label>
+            </div>
+            <button class="login-button" id="loginBtnModal" onclick="performLoginModal()">Login</button>
+            <div id="loginMsgModal" class="login-message"></div>
+            <div class="login-links">
+                <a href="#" onclick="openRegisterWindow(); return false;"><i class="fas fa-user-plus"></i> Register</a>
+                <span style="margin:0 10px">|</span>
+                <a href="#" onclick="openForgotPassword(); return false;"><i class="fas fa-key"></i> Forgot Password?</a>
+            </div>
+            <div style="margin-top:12px; text-align:center; font-size:12px; color:#7f8c8d;">Demo: user / password123</div>
+        </div>
+    </div>
+</div>
+
+<!-- ================= MAIN DASHBOARD (initially hidden) ================= -->
+<div class="dashboard-container" id="dashboardMain" style="display: none;">
+    <header class="header">
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="logo">
+            <img width="80" height="30" src="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Logo.JPG" alt="Logo">
+        </div>
+        <div class="user-info">
+            <span id="userDisplayName">User Profile</span>
+            <i class="fas fa-user-circle profile-icon"></i>
+            <div class="user-dropdown">
+                <a href="#" onclick="showProfileInfo(); return false;"><i class="fas fa-user"></i>UserProfile</a>
+                <a href="#" onclick="openChangePassword(); return false;"><i class="fas fa-key"></i> Change Password</a>
+                <button type="button" onclick="openRegisterWindow()"><i class="fas fa-user-plus"></i> Register Account</button>
+                <button type="button" onclick="logoutUser()"><i class="fas fa-sign-out-alt"></i> Log Out</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="content-wrapper">
+        <aside class="sidebar" id="mainSidebar">
+            <center style="margin-top: 16px;">
+                <img width="36" height="36" src="https://media.tenor.com/dhfraztxBo8AAAAj/globe-joypixels.gif" alt="globe">
+                <a href="https://shamser.info.np" style="display: inline-block; margin-left: 6px; color:#5D5DC9; text-decoration:none;">shamser.info.np</a>
+            </center>
+            <nav>
+                <ul style="list-style: none;">
+                    <li class="active" id="dashboardNavItem"><a href="#" id="dashboardMainLink"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    
+                    <!-- ID Card related links with modal popup (openInModal function) -->
+                    <li><a href="#" onclick="openInModal('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/ID%20Card/ID%20Card%20DataEntryForm.html', 'Data Entry (ID Card)')"><i class="fas fa-id-card"></i> Data Entry (ID card)</a></li>
+                    <li><a href="#" onclick="openInModal('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/ID%20Card/ID%20Card%20UpdateForm.html', 'Update Data')"><i class="fas fa-pen-alt"></i> Update Data</a></li>
+                    <li><a href="#" onclick="openInModal('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/ID%20Card/Card%20Generator.html', 'Card Generator')"><i class="fas fa-credit-card"></i> Card Generator</a></li>
+                    <li><a href="#" onclick="openInModal('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/ID%20Card/Download%20file.html', 'Download File')"><i class="fas fa-download"></i> Download file</a></li>
+                    <li><a href="#" onclick="openInModal('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/ID%20Card/clear%20data.html', 'Clear All Data')"><i class="fas fa-trash-alt"></i> Clear All Data</a></li>
+
+                    <hr>
+                    <li><button class="sidebar-link" onclick="openRegisterWindow()"><i class="fas fa-user-plus"></i> Register Account</button></li>
+                    <li><a href="#" onclick="openChangePassword(); return false;"><i class="fas fa-key"></i> Change Password</a></li>
+                    <li><button class="sidebar-link" onclick="logoutUser()"><i class="fas fa-sign-out-alt"></i> Log Out</button></li>
+                    <li><a href="#" onclick="openInModal('https://shamser.info.np/Contact_Form.html', 'Contact Us')"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <!-- Dashboard View -->
+            <div class="content-container active" id="dashboard-content">
+                <div class="stats-cards">
+                    <div class="card">
+                        <h3><i class="fas fa-chalkboard-user"></i> Students Overview</h3>
+                        <div class="chart-container">
+                            <canvas id="boysChart"></canvas>
+                        </div>
+                        <div class="status-badge mt-2">📊 Grade-wise distribution</div>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fas fa-chalkboard"></i> Teachers / Staff</h3>
+                        <div class="chart-container">
+                            <canvas id="studentChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fas fa-school"></i> School Metrics</h3>
+                        <div class="chart-container">
+                            <canvas id="schoolChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-chart-pie"></i> Employee Ratio</h3>
+                    <div class="chart-container" style="height: 220px;">
+                        <canvas id="girlsChart"></canvas>
+                    </div>
+                </div>
+                <footer>
+                    © 2025 shamser.info.np • ID Card Management System
+                </footer>
+            </div>
+
+            <!-- External Content Container (fallback iframe) -->
+            <div class="content-container" id="external-content">
+                <button class="back-button" id="backToDashboardBtn"><i class="fas fa-arrow-left"></i> Back to Dashboard</button>
+                <div class="loading-spinner" id="loading-spinner" style="display: none;">Loading content... <i class="fas fa-spinner fa-spin"></i></div>
+                <iframe class="content-area" id="content-frame" title="external content" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals"></iframe>
+            </div>
+        </main>
+    </div>
+</div>
+
+<!-- Modal Overlay for External Pages -->
+<div id="pageModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 id="modalTitle"><i class="fas fa-window-maximize"></i> Loading...</h4>
+            <button class="modal-close" onclick="closeModalWindow()"><i class="fas fa-times"></i></button>
+        </div>
+        <iframe id="modalIframe" class="modal-iframe" title="modal content" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox"></iframe>
+    </div>
+</div>
+
+<script>
+    // Modal Popup Function
+    function openInModal(url, title) {
+        if (!url) return;
+        const modal = document.getElementById('pageModal');
+        const iframe = document.getElementById('modalIframe');
+        const titleElem = document.getElementById('modalTitle');
+        
+        titleElem.innerHTML = `<i class="fas fa-window-maximize"></i> ${title || 'External Content'}`;
+        iframe.src = url;
+        modal.classList.add('active');
+        
+        // Close sidebar on mobile if open
+        if (window.innerWidth <= 992) {
+            document.getElementById('mainSidebar').classList.remove('active');
+        }
+    }
+    
+    function closeModalWindow() {
+        const modal = document.getElementById('pageModal');
+        const iframe = document.getElementById('modalIframe');
+        iframe.src = ''; // clear src
+        modal.classList.remove('active');
+    }
+    
+    // Login Modal Logic
+    function performLoginModal() {
+        const username = document.getElementById('loginUsername').value.trim();
+        const password = document.getElementById('loginPassword').value.trim();
+        const msgDiv = document.getElementById('loginMsgModal');
+        const rememberCheck = document.getElementById('rememberMe');
+        
+        if (!username || !password) {
+            msgDiv.innerHTML = "❌ Please enter username and password";
+            msgDiv.className = "login-message error";
+            return;
+        }
+        
+        msgDiv.innerHTML = "⏳ Authenticating...";
+        msgDiv.className = "login-message";
+        
+        fetch("https://script.google.com/macros/s/AKfycbzQrWWm5yoRfc06iIXkJGIlA0Wz2ID5ezPsn66W1_uU67ETOQNOf-fRVLMNRLyMxN4/exec", {
+            method: "POST",
+            body: JSON.stringify({
+                action: "login",
+                username: username,
+                password: password
+            })
+        })
+        .then(res => res.json())
+        .then(response => {
+            if (response.status === "success") {
+                sessionStorage.setItem("iemisLoggedUser", response.user);
+                if (rememberCheck.checked) {
+                    localStorage.setItem("iemisUserSession", response.user);
+                } else {
+                    localStorage.removeItem("iemisUserSession");
+                }
+                
+                msgDiv.innerHTML = "✅ Login successful! Redirecting...";
+                msgDiv.className = "login-message success";
+                
+                setTimeout(() => {
+                    document.getElementById('loginModal').style.display = 'none';
+                    document.getElementById('dashboardMain').style.display = 'flex';
+                    updateUserInterface(response.user);
+                    initializeDashboardChartsAndEvents();
+                }, 800);
+            } else {
+                msgDiv.innerHTML = "❌ " + response.message;
+                msgDiv.className = "login-message error";
+            }
+        })
+        .catch(err => {
+            msgDiv.innerHTML = "⚠️ Server error. Using demo mode.";
+            msgDiv.className = "login-message error";
+            console.error(err);
+            // Demo fallback for testing
+            if (username === "user" && password === "password123") {
+                sessionStorage.setItem("iemisLoggedUser", username);
+                msgDiv.innerHTML = "✅ Demo login success!";
+                msgDiv.className = "login-message success";
+                setTimeout(() => {
+                    document.getElementById('loginModal').style.display = 'none';
+                    document.getElementById('dashboardMain').style.display = 'flex';
+                    updateUserInterface(username);
+                    initializeDashboardChartsAndEvents();
+                }, 500);
+            }
+        });
+    }
+    
+    function updateUserInterface(username) {
+        const displaySpan = document.getElementById('userDisplayName');
+        if (displaySpan) displaySpan.innerText = username;
+    }
+    
+    function logoutUser() {
+        if (confirm("Are you sure you want to logout?")) {
+            sessionStorage.removeItem("iemisLoggedUser");
+            localStorage.removeItem("iemisUserSession");
+            document.getElementById('dashboardMain').style.display = 'none';
+            document.getElementById('loginModal').style.display = 'flex';
+            document.getElementById('loginUsername').value = '';
+            document.getElementById('loginPassword').value = '';
+            document.getElementById('loginMsgModal').innerHTML = '';
+            document.getElementById('loginMsgModal').className = 'login-message';
+            // reset any open modals
+            closeModalWindow();
+            const iframeFrame = document.getElementById('content-frame');
+            if (iframeFrame) iframeFrame.src = '';
+            document.getElementById('dashboard-content').classList.add('active');
+            document.getElementById('external-content').classList.remove('active');
+        }
+    }
+  
+   //   function openRegisterWindow() {
+      /////    openInModal('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/New%20User%20Register.html', 'Register New Account');   }
+    
+     ///// function openForgotPassword() {
+         ///// openInModal('https://script.google.com/macros/s/AKfycbxUs8Nn3kl1P_eGD6A7zR-sBfNT6kIksBxpIiPvJAE8jg6qilPQ1Thq_kLgabk6rKqvhw/exec', 'Reset Password');   }
+    
+    /////  function openChangePassword() {
+         ///// openInModal('https://script.google.com/macros/s/AKfycbxUs8Nn3kl1P_eGD6A7zR-sBfNT6kIksBxpIiPvJAE8jg6qilPQ1Thq_kLgabk6rKqvhw/exec', 'Change Password');   }
+    
+    function showProfileInfo() {
+        const user = sessionStorage.getItem("iemisLoggedUser") || "User";
+        alert(`📋 Profile Information\nUsername: ${user}\nRole: Administrator\nStatus: Active\nSchool: ID Card System`);
+    }
+    
+    function showDashboardOnly() {
+        const dashboardDiv = document.getElementById('dashboard-content');
+        const externalDiv = document.getElementById('external-content');
+        const iframe = document.getElementById('content-frame');
+        
+        dashboardDiv.classList.add('active');
+        externalDiv.classList.remove('active');
+        if (iframe) iframe.src = '';
+        
+        const sidebar = document.getElementById('mainSidebar');
+        if (sidebar && window.innerWidth <= 992) sidebar.classList.remove('active');
+    }
+    
+    // Charts initialization
+    let boysChartObj, studentChartObj, schoolChartObj, girlsChartObj;
+    
+    function initializeDashboardChartsAndEvents() {
+        if (boysChartObj) boysChartObj.destroy();
+        if (studentChartObj) studentChartObj.destroy();
+        if (schoolChartObj) schoolChartObj.destroy();
+        if (girlsChartObj) girlsChartObj.destroy();
+        
+        const boysCtx = document.getElementById('boysChart')?.getContext('2d');
+        if (boysCtx) {
+            boysChartObj = new Chart(boysCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'],
+                    datasets: [{ data: [42, 38, 45, 40, 36, 30], backgroundColor: ['#5D5DC9', '#6c8ee0', '#9b87f5', '#47b5ff', '#2c9cd4', '#3b82f6'], borderWidth: 0 }]
+                },
+                options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'bottom' } } }
+            });
+        }
+        const studentCtx = document.getElementById('studentChart')?.getContext('2d');
+        if (studentCtx) {
+            studentChartObj = new Chart(studentCtx, {
+                type: 'line',
+                data: { labels: ['Primary', 'Lower Sec', 'Secondary', 'Higher Sec'], datasets: [{ label: 'Teachers Count', data: [28, 24, 32, 18], borderColor: '#e67e22', backgroundColor: 'rgba(230,126,34,0.1)', fill: true, tension: 0.3 }] },
+                options: { responsive: true }
+            });
+        }
+        const schoolCtx = document.getElementById('schoolChart')?.getContext('2d');
+        if (schoolCtx) {
+            schoolChartObj = new Chart(schoolCtx, {
+                type: 'bar',
+                data: { labels: ['Kathmandu', 'Pokhara', 'Lalitpur', 'Bhaktapur', 'Biratnagar'], datasets: [{ label: 'Affiliated Schools', data: [142, 98, 76, 54, 62], backgroundColor: '#5D5DC9', borderRadius: 8 }] },
+                options: { responsive: true }
+            });
+        }
+        const girlsCtx = document.getElementById('girlsChart')?.getContext('2d');
+        if (girlsCtx) {
+            girlsChartObj = new Chart(girlsCtx, {
+                type: 'pie',
+                data: { labels: ['Teaching Staff', 'Admin Staff', 'Support Staff', 'Management'], datasets: [{ data: [48, 22, 18, 12], backgroundColor: ['#3498db', '#2ecc71', '#f1c40f', '#e74c3c'] }] },
+                options: { responsive: true, plugins: { legend: { position: 'right' } } }
+            });
+        }
+        
+        // menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const sidebar = document.getElementById('mainSidebar');
+        if (menuToggle) {
+            menuToggle.addEventListener('click', function(e) { sidebar.classList.toggle('active'); });
+        }
+        // dashboard link
+        const dashboardLink = document.getElementById('dashboardMainLink');
+        if (dashboardLink) {
+            dashboardLink.addEventListener('click', function(e) { e.preventDefault(); showDashboardOnly(); });
+        }
+        const backBtn = document.getElementById('backToDashboardBtn');
+        if (backBtn) backBtn.addEventListener('click', showDashboardOnly);
+        
+        // close modal on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModalWindow();
+            }
+        });
+    }
+    
+    // Auto-check session on load
+    document.addEventListener('DOMContentLoaded', function() {
+        const savedUser = sessionStorage.getItem("iemisLoggedUser") || localStorage.getItem("iemisUserSession");
+        if (savedUser) {
+            document.getElementById('loginModal').style.display = 'none';
+            document.getElementById('dashboardMain').style.display = 'flex';
+            updateUserInterface(savedUser);
+            initializeDashboardChartsAndEvents();
+        } else {
+            document.getElementById('loginModal').style.display = 'flex';
+            document.getElementById('dashboardMain').style.display = 'none';
+        }
+        
+        // Enter key support in login modal
+        const passwordField = document.getElementById('loginPassword');
+        if (passwordField) {
+            passwordField.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') performLoginModal();
+            });
+        }
+        const userField = document.getElementById('loginUsername');
+        if (userField) {
+            userField.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') performLoginModal();
+            });
+        }
+    });
+    
+    // expose globals
+    window.performLoginModal = performLoginModal;
+    window.logoutUser = logoutUser;
+    window.openRegisterWindow = openRegisterWindow;
+    window.openForgotPassword = openForgotPassword;
+    window.openChangePassword = openChangePassword;
+    window.openInModal = openInModal;
+    window.closeModalWindow = closeModalWindow;
+    window.showDashboardOnly = showDashboardOnly;
+    window.showProfileInfo = showProfileInfo;
+</script>
+
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
