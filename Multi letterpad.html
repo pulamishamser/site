@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="ne">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
-<title>Multi Letterpad - पत्र जेनेरेटर</title>
+<title>Multi Letterpad - पत्र जेनेरेटर | Secure Access</title>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -331,7 +330,6 @@
     .address-line1 { font-weight: 600; font-size: 0.75rem; }
     .address-line2 { font-size: 0.65rem; color: #2c5a7a; }
     
-    /* Meta section - Letter No on its own line, then Ref No + Date on same line */
     .meta-line {
         border-bottom: 1px dashed #a4c2dd;
         padding: 4px 0;
@@ -537,190 +535,240 @@
         display: inline-block;
     }
 
-    /* LOGIN OVERLAY STYLES - Added without disturbing original */
-    .login-overlay {
+    /* LOGIN MODAL STYLES - Premium secure login from ID Card Dashboard */
+    .login-modal {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(135deg, #0b3552, #1a5d8f);
-        z-index: 10000;
+        background: rgba(0, 0, 0, 0.85);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 99999;
+        backdrop-filter: blur(5px);
+    }
+    .login-modal-content {
+        background: white;
+        border-radius: 10px;
+        width: 90%;
+        max-width: 400px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+        animation: fadeInUp 0.3s ease;
+    }
+    .login-header {
+        background: #5D5DC9;
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
+    .login-header h3 {
+        margin: 0;
+        font-size: 1.5rem;
+    }
+    .login-body {
+        padding: 30px;
+    }
+    .login-form-group {
+        margin-bottom: 20px;
+        position: relative;
+    }
+    .login-form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: #333;
+    }
+    .login-form-group input {
+        width: 100%;
+        padding: 12px;
+        padding-right: 45px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+    }
+    .login-form-group input:focus {
+        outline: none;
+        border-color: #5D5DC9;
+    }
+    .password-toggle {
+        position: absolute;
+        right: 12px;
+        top: 42px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #5D5DC9;
+        font-size: 1.1rem;
+        padding: 0;
+    }
+    .login-button {
+        width: 100%;
+        padding: 14px;
+        background: #5D5DC9;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    .login-button:hover { background: #4a4ab5; }
+    .login-message {
+        margin-top: 15px;
+        padding: 10px;
+        border-radius: 6px;
+        text-align: center;
+        font-size: 0.9rem;
+    }
+    .login-message.success { background: #e6f4ea; color: #137333; }
+    .login-message.error { background: #fce8e6; color: #d93025; }
+    .login-links {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 0.9rem;
+    }
+    .login-links a {
+        color: #5D5DC9;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    .show-pwd-hint {
+        font-size: 0.75rem;
+        text-align: right;
+        margin-top: 4px;
+        color: #5D5DC9;
+    }
+    .user-header {
         display: flex;
         align-items: center;
-        justify-content: center;
-        backdrop-filter: blur(2px);
-        transition: all 0.3s ease;
+        gap: 15px;
+        background: linear-gradient(135deg, #5D5DC9, #4a4ab0);
+        padding: 10px 20px;
+        border-radius: 40px;
+        color: white;
+        margin-bottom: 15px;
+        justify-content: flex-end;
     }
-    .login-card {
-        background: white;
-        border-radius: 32px;
-        padding: 28px 24px;
-        max-width: 380px;
-        width: 90%;
-        text-align: center;
-        box-shadow: 0 25px 45px rgba(0,0,0,0.3);
-        animation: fadeInUp 0.4s ease;
+    .user-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        cursor: pointer;
+    }
+    .logout-btn {
+        background: rgba(255,255,255,0.2);
+        border: none;
+        padding: 6px 15px;
+        border-radius: 30px;
+        color: white;
+        cursor: pointer;
     }
     @keyframes fadeInUp {
         from { opacity: 0; transform: translateY(30px); }
         to { opacity: 1; transform: translateY(0); }
     }
-    .login-card h2 {
-        color: #0b3552;
-        margin-bottom: 8px;
-        font-size: 1.5rem;
-    }
-    .login-card p {
-        color: #4a627a;
-        margin-bottom: 24px;
-        font-size: 0.85rem;
-    }
-    .login-input {
-        width: 100%;
-        padding: 12px 16px;
-        margin: 10px 0;
-        border: 2px solid #e2e8f0;
-        border-radius: 50px;
-        font-size: 0.9rem;
-    }
-    .login-input:focus {
-        border-color: #2c74b3;
-        outline: none;
-    }
-    .login-btn {
-        background: linear-gradient(95deg, #1f6390, #2c74b3);
-        width: 100%;
-        padding: 12px;
-        border-radius: 50px;
-        font-weight: bold;
-        font-size: 1rem;
-        margin-top: 15px;
-    }
-    .login-error {
-        color: #dc2626;
-        font-size: 0.75rem;
-        margin-top: 12px;
-        min-height: 32px;
-    }
-    .show-pwd-row {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin: 12px 0 5px;
-        font-size: 0.75rem;
-        justify-content: flex-start;
-    }
 </style>
 </head>
 <body>
 
-<!-- LOGIN OVERLAY - Added without modifying original content -->
-<div id="loginOverlay" class="login-overlay">
-    <div class="login-card">
-        <i class="fas fa-envelope-open-text" style="font-size: 48px; color: #1f6390; margin-bottom: 12px;"></i>
-        <h2>Multi Letterpad</h2>
-        <p>Login</p>
-        <input type="text" id="loginUsername" class="login-input" placeholder="Username" value="Admin">
-        <input type="password" id="loginPassword" class="login-input" placeholder="Password" value="1234">
-        <div class="show-pwd-row">
-            <input type="checkbox" id="showLoginPwd"> <label>Show password</label>
+<!-- LOGIN MODAL (from ID Card Dashboard) -->
+<div id="loginModal" class="login-modal">
+    <div class="login-modal-content">
+        <div class="login-header">
+            <h3><i class="fas fa-envelope-open-text"></i> Multi Letterpad Login</h3>
         </div>
-        <button id="doLoginBtn" class="login-btn"><i class="fas fa-sign-in-alt"></i>Login</button>
-        <div id="loginErrorMsg" class="login-error"></div>
-        <div style="margin-top: 16px; font-size: 0.7rem; color: #6c757d;">
-            <i class="fas fa-info-circle"></i> Demo: Admin / 1234
+        <div class="login-body">
+            <div class="login-form-group">
+                <label>Username / Email</label>
+                <input type="text" id="loginUsername" value="Admin" autocomplete="username">
+            </div>
+            <div class="login-form-group" style="position: relative;">
+                <label>Password</label>
+                <input type="password" id="loginPassword" value="1234" autocomplete="current-password">
+                <button type="button" id="togglePasswordBtn" class="password-toggle" tabindex="-1">
+                    <i class="fas fa-eye-slash"></i>
+                </button>
+            </div>
+            <div class="show-pwd-hint">
+                <i class="fas fa-low-vision"></i> Click eye icon to show/hide password
+            </div>
+            <button class="login-button" id="loginBtnModal" onclick="performLoginModal()">Login</button>
+            <div id="loginMsgModal" class="login-message"></div>
+            <div class="login-links">
+                <a href="#" onclick="openRegisterWindow(); return false;"><i class="fas fa-user-plus"></i> Register</a>
+                <span style="margin:0 10px">|</span>
+                <a href="#" onclick="openForgotPassword(); return false;"><i class="fas fa-key"></i> Forgot Password?</a>
+            </div>
+            <div style="margin-top:12px; text-align:center; font-size:12px; color:#7f8c8d;">Demo: Admin / 1234</div>
         </div>
     </div>
 </div>
 
-<div id="loadingIndicator">
-    <i class="fas fa-spinner fa-pulse"></i> Please wait.......pdf preparing
-</div>
-
-<div id="welcomeModal" class="modal" style="display: flex;">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h3 style="font-size: 1.2rem;"><i class="fas fa-envelope-open-text"></i>Multi Letter Generator Tool</h3>
-            <button class="close-btn" onclick="closeModal()">&times;</button>
-        </div>
-        <div class="modal-body">
-            <p>मोबाइलमै लेखेर वा बोलेर धेरैजनालाई धेरै सस्था कार्यालय बिद्यालयलाई एउटै बिषयमा चिट्ठीपत्र सिफारिसपत्र सुचना जानकारी आदि लेटरप्याडबाट बनाउन सकिने मल्टी लेटरप्याड जेनेरेटर टुल</p>
-            <img src="https://shamser.info.np/HomePage/team_img/team1.JPG" alt="letter head preview" style="width:50px; border-radius:10px;" onerror="this.style.display='none';">
-             <p><strong>📄 एकै पटक धेरैलाई पत्र तयार गर्नुहोस्</strong></p> <p>आजको युग डिजिटल युग हो । फिजिकल चिट्ठीपत्र वा सिफारिसपत्र उपयोगी नहुन सक्छ, फेसबुक ह्वाट्सएप भाइबरजस्ता सामाजिक संजालबाट सुचना सम्प्रेषण गर्नुलाई यधपि सजिलो मानिन्छ तर सामाजिक सञ्जालमार्फत जानकारी दिन सबैसँग मोबाइल नहुन सक्छ, सबै ब्यक्तिमा डिजिटल पहुँच नहुन सक्छ साथै सबै बिद्यालयमा कम्प्युटर नहुन सक्छ, कम्प्युटर चलाउने कर्मचारी नहुन सक्छ, बिधुत लाइन गएको हुन सक्छ बिद्यालय र अफिस बन्द भएको हुन सक्छ, फोनबाट जानकारी गराउन सबैको मोबाइल नम्बर सेभ नभएको पनि हुन सक्छ, टावर गएको पनि हुन सक्छ । तर इमर्जेन्सी बैठक बोलाउनु पर्यो वा जानकारी गराउन पर्यो अथवा सिफारिस पत्र बनाउनु पर्ने अवस्था पर्यो भने यस्तो अवस्थामा यो टुल एकदमै उपयोगी हुन सक्छ । घरमा वा बिश्वको कुनै कुनामा बसेर वा सुतेर आरामले मोबाइलमै बोलेर पाँच दश मिनेटमै धेरै चिट्ठीपत्र वा सिफारिसपत्र बनाउने यो डिजिटल टुल प्रयोग गर्न सकिन्छ । यो टुलमा धेरै चिट्ठीपत्र वा सिफारिसपत्र तयार पारी पिडिएफमा सेभ गरी प्रिन्टर सेन्टरमा पिडिएफ फाइल इमेलबाट पठाइ प्रिन्ट गर्न गराउन सकिन्छ ।</p>
-         
-            <ul style="margin: 12px 0 12px 20px; font-size:0.85rem;">
-              <li>✅Single letter, Two letter र four letter मध्ये कुनै एक प्रकार छान्नुहोस् । 
-                <li>✅ <strong>कमा (,) प्रयोग गर्दा रिसिभरको नाम अलग-अलग लाइनमा ब्रेक हुन्छ</strong></li>
-                <li>✅ <strong>पत्र सं. एक लाइनमा, चलानी सं. र मिति एउटै लाइनमा देखिन्छन्</strong></li>
-                <li>✅ Single letter A4 size को एक पेजको Potrait मा प्रिन्ट हुन्छ भने Two letter र four letter Landscape मा प्रिन्ट हुन्छ</li>
-                <li>✅गल्ती सच्याई रि-जेनेरेट गर्न सकिन्छ।</li>
-                <li>✅रिफ्रेश वा रिसेट गर्दा लेखिएको डेटा सबै हराउँछ । किनकी यसमा Data store भएर बस्दैन । </li>
-                <li>✅यसमा दिएको काल्पनिक नमुना अनुसार आफ्नो बिवरणहरु भरेर जेनेरेट गर्नुहोस् ।</li>
-                <li>✅पत्रलाई PDF मा सेभ गर्न सकिन्छ ।</li>
-            </ul>
-            <div class="comma-note">
-                <i class="fas fa-info-circle"></i> उदाहरण: "राम शर्मा, प्रधानाध्यापक, विद्यालय" → तीन लाइनमा ब्रेक
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button onclick="closeModal()">सुरु गर्छु</button>
+<!-- MAIN APP CONTAINER (initially hidden) -->
+<div id="mainContent" style="display: none;">
+    <div class="user-header">
+        <div class="user-info">
+            <i class="fas fa-user-circle"></i> <span id="userDisplayName">User</span>
+            <button class="logout-btn" onclick="logoutUser()"><i class="fas fa-sign-out-alt"></i> Logout</button>
         </div>
     </div>
-</div>
-
-<div class="container" id="mainAppContainer" style="display: none;">
-    <div class="card">
-        <h1><i class="fas fa-layer-group"></i> मल्टी लेटरप्याड जेनेरेटर</h1>
-        <a href="https://shamser.info.np/"><i class="fa fa-home fa-lg"></i> Back to home</a>
-        
-        <div class="layout-dropdown-area">
-            <div class="dropdown-group">
-                <label><i class="fas fa-object-group"></i> लेटर प्रकार:</label>
-                <select id="layoutSelect">
-                    <option value="one">📄 Single Letter</option>
-                    <option value="two">📑 Two Letter</option>
-                    <option value="four">🔲 Four Letter</option>
-                </select>
+    <div class="container">
+        <div class="card">
+            <h1><i class="fas fa-layer-group"></i> मल्टी लेटरप्याड जेनेरेटर</h1>
+            <a href="https://shamser.info.np/"><i class="fa fa-home fa-lg"></i> Back to home</a>
+            
+            <div class="layout-dropdown-area">
+                <div class="dropdown-group">
+                    <label><i class="fas fa-object-group"></i> लेटर प्रकार:</label>
+                    <select id="layoutSelect">
+                        <option value="one">📄 Single Letter</option>
+                        <option value="two">📑 Two Letter</option>
+                        <option value="four">🔲 Four Letter</option>
+                    </select>
+                </div>
+                <div class="orientation-badge">
+                    <i class="fas fa-mobile-alt"></i> <span id="orientationHint">Single A4</span>
+                </div>
             </div>
-            <div class="orientation-badge">
-                <i class="fas fa-mobile-alt"></i> <span id="orientationHint">Single A4</span>
+            
+            <div class="form-row">
+                <div class="form-group"><label><i class="fas fa-cloud-upload-alt"></i> लोगो फाइल</label><input type="file" id="logoFile" accept="image/*"></div>
+                <div class="form-group"><label><i class="fas fa-link"></i> लोगो URL</label><input type="url" id="logoUrl" placeholder="https://..."></div>
+                <div class="form-group"><label><i class="fas fa-school"></i> संस्था</label><input type="text" id="org" value="श्री डिम जनता माध्यमिक विद्यालय"></div>
             </div>
-        </div>
-        
-        <div class="form-row">
-            <div class="form-group"><label><i class="fas fa-cloud-upload-alt"></i> लोगो फाइल</label><input type="file" id="logoFile" accept="image/*"></div>
-            <div class="form-group"><label><i class="fas fa-link"></i> लोगो URL</label><input type="url" id="logoUrl" placeholder="https://..."></div>
-            <div class="form-group"><label><i class="fas fa-school"></i> संस्था</label><input type="text" id="org" value="श्री डिम जनता माध्यमिक विद्यालय"></div>
-        </div>
-        
-        <div class="form-row">
-            <div class="form-group"><label><i class="fas fa-location-dot"></i> ठेगाना (१)</label><input type="text" id="address1" value="लालबन्दी-१६, परवानीपुर"></div>
-            <div class="form-group"><label><i class="fas fa-location-dot"></i> ठेगाना (२)</label><input type="text" id="address2" value="सर्लाही, नेपाल"></div>
-            <div class="form-group"><label><i class="fas fa-calendar"></i> मिति</label><input type="text" id="letterDate" value="२०८२-१०-१२"></div>
-        </div>
-        
-        <div class="form-row">
-            <div class="form-group"><label><i class="fas fa-hashtag"></i> पत्र सं.</label><input type="text" id="letterNo" value="११/०८१-०८२"></div>
-            <div class="form-group"><label><i class="fas fa-qrcode"></i> चलानी सं.</label><input type="text" id="refNo" value="६/२०८२ शिक्षा शाखा"></div>
-            <div class="form-group"><label><i class="fas fa-tag"></i> विषय</label><input type="text" id="subject" value="वार्षिकोत्सव आमन्त्रण"></div>
-        </div>
-        
-        <div class="form-row">
-            <div class="form-group"><label><i class="fas fa-envelope"></i> इमेल</label><input type="email" id="email" value="info@djmav.edu.np"></div>
-            <div class="form-group"><label><i class="fas fa-phone-alt"></i> सम्पर्क</label><input type="text" id="mobile" value="९८४१२३४५६७"></div>
-            <div class="form-group"><label><i class="fas fa-user-tie"></i> प्रेषक</label><input type="text" id="sender" value="ध्रुवबहादुर भण्डारी"></div>
-        </div>
-        
-        <div class="form-row">
-            <div class="form-group"><label><i class="fas fa-briefcase"></i> पद</label><input type="text" id="position" value="प्रधानाध्यापक"></div>
-            <div class="form-group"><label><i class="fas fa-signature"></i> हस्ताक्षर</label><input type="file" id="signatureFile" accept="image/*"></div>
-        </div>
-        
-        <div class="form-row">
-            <div class="form-group">
-                <label><i class="fas fa-address-card"></i> प्रापकहरु (एक लाइनमा एक)</label>
-                <textarea id="receivers" rows="3">मुख्य निर्वाचन अधिकृत, जिल्ला निर्वाचन कार्यालय सर्लाही
+            
+            <div class="form-row">
+                <div class="form-group"><label><i class="fas fa-location-dot"></i> ठेगाना (१)</label><input type="text" id="address1" value="लालबन्दी-१६, परवानीपुर"></div>
+                <div class="form-group"><label><i class="fas fa-location-dot"></i> ठेगाना (२)</label><input type="text" id="address2" value="सर्लाही, नेपाल"></div>
+                <div class="form-group"><label><i class="fas fa-calendar"></i> मिति</label><input type="text" id="letterDate" value="२०८२-१०-१२"></div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group"><label><i class="fas fa-hashtag"></i> पत्र सं.</label><input type="text" id="letterNo" value="११/०८१-०८२"></div>
+                <div class="form-group"><label><i class="fas fa-qrcode"></i> चलानी सं.</label><input type="text" id="refNo" value="६/२०८२ शिक्षा शाखा"></div>
+                <div class="form-group"><label><i class="fas fa-tag"></i> विषय</label><input type="text" id="subject" value="वार्षिकोत्सव आमन्त्रण"></div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group"><label><i class="fas fa-envelope"></i> इमेल</label><input type="email" id="email" value="info@djmav.edu.np"></div>
+                <div class="form-group"><label><i class="fas fa-phone-alt"></i> सम्पर्क</label><input type="text" id="mobile" value="९८४१२३४५६७"></div>
+                <div class="form-group"><label><i class="fas fa-user-tie"></i> प्रेषक</label><input type="text" id="sender" value="ध्रुवबहादुर भण्डारी"></div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group"><label><i class="fas fa-briefcase"></i> पद</label><input type="text" id="position" value="प्रधानाध्यापक"></div>
+                <div class="form-group"><label><i class="fas fa-signature"></i> हस्ताक्षर</label><input type="file" id="signatureFile" accept="image/*"></div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label><i class="fas fa-address-card"></i> प्रापकहरु (एक लाइनमा एक)</label>
+                    <textarea id="receivers" rows="3">मुख्य निर्वाचन अधिकृत, जिल्ला निर्वाचन कार्यालय सर्लाही
 शिक्षा शाखा प्रमुख, लालबन्दी नपाको कार्यालय
 बासु अधिकारी, नगर प्रमुख लालबन्दी नपा
 राम बहादुर स्याङ्तान, व्यवसाय सदस्य
@@ -731,71 +779,120 @@
 शर्मिला वाईबा, बिब्यस सदस्य                     
 बिष्णुबहादुर पोखरेल, प्रअ जाज्योति माबि लालबन्दी             
 नवराज थापा, प्रअ शिशुकल्याण माबि लालबन्दी</textarea>
-                <div class="comma-note" style="margin-top: 6px;">
-                    <i class="fas fa-arrow-right"></i> कमा (,) प्रयोग गर्नुहोस् - प्रत्येक भाग नयाँ लाइनमा देखिनेछ
+                    <div class="comma-note" style="margin-top: 6px;">
+                        <i class="fas fa-arrow-right"></i> कमा (,) प्रयोग गर्नुहोस् - प्रत्येक भाग नयाँ लाइनमा देखिनेछ
+                    </div>
+                </div>
+                <div class="form-group"><label><i class="fas fa-pen"></i> पत्र ब्यहोरा</label><textarea id="body" rows="3">यस संस्थाको यहि मिति २०८२-१२-१५ का दिन हुने वार्षिकोत्सव कार्यक्रममा यहाँको गरिमामय उपस्थितिको हार्दिक अनुरोध गर्दछौं । कार्यक्रम बिहान ११ बजे सुरु हुनेछ ।</textarea></div>
+            </div>
+            
+            <div class="actions">
+                <button class="generate" onclick="generateLetters()"><i class="fas fa-bolt"></i> जेनेरेट</button>
+                <button class="print" onclick="handlePrint()"><i class="fas fa-print"></i> प्रिन्ट</button>
+                <button class="pdf" onclick="downloadPDF()"><i class="fas fa-file-pdf"></i> PDF</button>
+                <button class="clear" onclick="resetAll()"><i class="fas fa-undo-alt"></i> रिसेट</button>
+                <div class="like-container">
+                    <button id="likeButton" class="like-btn"><i class="fas fa-thumbs-up"></i> <span id="likeText">Like</span></button>
+                    <div class="like-count"><i class="fas fa-heart"></i> <span id="likeCount">0</span></div>
                 </div>
             </div>
-            <div class="form-group"><label><i class="fas fa-pen"></i> पत्र ब्यहोरा</label><textarea id="body" rows="3">यस संस्थाको यहि मिति २०८२-१२-१५ का दिन हुने वार्षिकोत्सव कार्यक्रममा यहाँको गरिमामय उपस्थितिको हार्दिक अनुरोध गर्दछौं । कार्यक्रम बिहान ११ बजे सुरु हुनेछ ।</textarea></div>
         </div>
-        
-        <div class="actions">
-            <button class="generate" onclick="generateLetters()"><i class="fas fa-bolt"></i> जेनेरेट</button>
-            <button class="print" onclick="handlePrint()"><i class="fas fa-print"></i> प्रिन्ट</button>
-            <button class="pdf" onclick="downloadPDF()"><i class="fas fa-file-pdf"></i> PDF</button>
-            <button class="clear" onclick="resetAll()"><i class="fas fa-undo-alt"></i> रिसेट</button>
-            <div class="like-container">
-                <button id="likeButton" class="like-btn"><i class="fas fa-thumbs-up"></i> <span id="likeText">Like</span></button>
-                <div class="like-count"><i class="fas fa-heart"></i> <span id="likeCount">0</span></div>
-            </div>
-        </div>
+        <div id="output"></div>
     </div>
-    <div id="output"></div>
 </div>
-<button class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-arrow-up" style="color:white; font-size:18px;"></i></button>
+<div id="loadingIndicator"><i class="fas fa-spinner fa-pulse"></i> कृपया पर्खनुहोस्... PDF तयार हुँदै</div>
+<div id="welcomeModal" class="modal" style="display: flex;">
+    <div class="modal-content">
+        <div class="modal-header"><h3><i class="fas fa-envelope-open-text"></i> Multi Letter Generator Tool</h3><button class="close-btn" onclick="closeModal()">&times;</button></div>
+        <div class="modal-body"><p>मोबाइलमै लेखेर वा बोलेर धेरैजनालाई धेरै सस्था कार्यालय बिद्यालयलाई एउटै बिषयमा चिट्ठीपत्र सिफारिसपत्र सुचना जानकारी आदि लेटरप्याडबाट बनाउन सकिने मल्टी लेटरप्याड जेनेरेटर टुल</p><div class="comma-note"><i class="fas fa-info-circle"></i> कमा (,) प्रयोग गर्दा रिसिभरको नाम अलग-अलग लाइनमा ब्रेक हुन्छ</div></div>
+        <div class="modal-footer"><button onclick="closeModal()">सुरु गर्छु</button></div>
+    </div>
+</div>
+<button class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-arrow-up" style="color:white;"></i></button>
 
 <script>
-    // ==================== LOGIN SYSTEM ====================
-    const loginOverlay = document.getElementById('loginOverlay');
-    const mainAppContainer = document.getElementById('mainAppContainer');
-    const doLoginBtn = document.getElementById('doLoginBtn');
-    const loginUsername = document.getElementById('loginUsername');
-    const loginPassword = document.getElementById('loginPassword');
-    const showLoginPwd = document.getElementById('showLoginPwd');
-    const loginErrorMsg = document.getElementById('loginErrorMsg');
+    // Password toggle
+    document.getElementById('togglePasswordBtn')?.addEventListener('click', function() {
+        const pwd = document.getElementById('loginPassword');
+        const type = pwd.type === 'password' ? 'text' : 'password';
+        pwd.type = type;
+        this.querySelector('i').classList.toggle('fa-eye');
+        this.querySelector('i').classList.toggle('fa-eye-slash');
+    });
 
-    // Show/hide password for login
-    if(showLoginPwd) {
-        showLoginPwd.addEventListener('change', function() {
-            loginPassword.type = this.checked ? 'text' : 'password';
+    // Login function with Google Script endpoint
+    function performLoginModal() {
+        const username = document.getElementById('loginUsername').value.trim();
+        const password = document.getElementById('loginPassword').value.trim();
+        const msgDiv = document.getElementById('loginMsgModal');
+        
+        if (!username || !password) {
+            msgDiv.innerHTML = "❌ Please enter username and password";
+            msgDiv.className = "login-message error";
+            return;
+        }
+        
+        msgDiv.innerHTML = "⏳ Authenticating...";
+        msgDiv.className = "login-message";
+        
+        fetch("https://script.google.com/macros/s/AKfycbzQrWWm5yoRfc06iIXkJGIlA0Wz2ID5ezPsn66W1_uU67ETOQNOf-fRVLMNRLyMxN4/exec", {
+            method: "POST",
+            body: JSON.stringify({ action: "login", username: username, password: password })
+        })
+        .then(res => res.json())
+        .then(response => {
+            if (response.status === "success") {
+                sessionStorage.setItem("converterLoggedUser", response.user);
+                msgDiv.innerHTML = "✅ Login successful! Redirecting...";
+                msgDiv.className = "login-message success";
+                setTimeout(() => {
+                    document.getElementById('loginModal').style.display = 'none';
+                    document.getElementById('mainContent').style.display = 'block';
+                    document.getElementById('userDisplayName').innerText = response.user;
+                    initializeAppAfterLogin();
+                }, 800);
+            } else {
+                msgDiv.innerHTML = "❌ " + response.message;
+                msgDiv.className = "login-message error";
+            }
+        })
+        .catch(err => {
+            console.error("Server error:", err);
+            msgDiv.innerHTML = "⚠️ Server error. Using demo mode.";
+            msgDiv.className = "login-message error";
+            if ((username === "Admin" && password === "1234")) {
+                sessionStorage.setItem("converterLoggedUser", username);
+                msgDiv.innerHTML = "✅ Demo login success!";
+                msgDiv.className = "login-message success";
+                setTimeout(() => {
+                    document.getElementById('loginModal').style.display = 'none';
+                    document.getElementById('mainContent').style.display = 'block';
+                    document.getElementById('userDisplayName').innerText = username;
+                    initializeAppAfterLogin();
+                }, 500);
+            }
         });
     }
-
-    function performLogin() {
-        const username = loginUsername.value.trim();
-        const password = loginPassword.value.trim();
-        
-        if(username === "Admin" && password === "1234") {
-            loginErrorMsg.innerHTML = "";
-            sessionStorage.setItem('letterpad_logged_in', 'true');
-            loginOverlay.style.display = 'none';
-            mainAppContainer.style.display = 'block';
-            // Initialize the app after login
-            initializeAppAfterLogin();
-        } else {
-            loginErrorMsg.innerHTML = "<i class='fas fa-exclamation-triangle'></i> गलत प्रयोगकर्ता नाम वा पासवर्ड";
+    
+    function logoutUser() {
+        if (confirm("Are you sure you want to logout?")) {
+            sessionStorage.removeItem("converterLoggedUser");
+            document.getElementById('mainContent').style.display = 'none';
+            document.getElementById('loginModal').style.display = 'flex';
+            document.getElementById('loginUsername').value = 'Admin';
+            document.getElementById('loginPassword').value = '1234';
+            const pwdInput = document.getElementById('loginPassword');
+            if (pwdInput) pwdInput.type = 'password';
+            document.getElementById('loginMsgModal').innerHTML = '';
+            document.getElementById('loginMsgModal').className = 'login-message';
         }
     }
-
-    doLoginBtn.addEventListener('click', performLogin);
     
-    // Check for existing session
-    if(sessionStorage.getItem('letterpad_logged_in') === 'true') {
-        loginOverlay.style.display = 'none';
-        mainAppContainer.style.display = 'block';
-        window.addEventListener('load', () => initializeAppAfterLogin());
-    }
-
-    // ==================== ORIGINAL APP SCRIPT (unchanged except for init function) ====================
+    function openRegisterWindow() { alert("📝 Registration\n\nPlease contact administrator to create an account.\nDemo: Admin / 1234"); }
+    function openForgotPassword() { alert("🔐 Forgot Password\n\nA reset link would be sent to your registered email.\nDemo: Admin / 1234"); }
+    function closeModal() { document.getElementById('welcomeModal').style.display = 'none'; }
+    
+    // Letterpad App Logic
     let likeCount = 0, isLiked = false;
     let logoData = "", signatureData = "", currentLayout = "one";
     
@@ -806,7 +903,6 @@
         isLiked = (savedStatus === 'true');
         updateLikeUI();
     }
-    
     function updateLikeUI() {
         const likeCountSpan = document.getElementById('likeCount');
         const likeBtn = document.getElementById('likeButton');
@@ -817,7 +913,6 @@
             else { likeBtn.classList.remove('liked'); likeTextSpan.innerText = 'Like'; }
         }
     }
-    
     function handleLikeClick() {
         if (!isLiked) { likeCount++; isLiked = true; }
         else { if (likeCount > 0) likeCount--; isLiked = false; }
@@ -825,51 +920,23 @@
         localStorage.setItem('multiletter_liked_mobile', isLiked);
         updateLikeUI();
     }
-    
-    function escapeHtml(str) { 
-        if(!str) return ''; 
-        return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));
-    }
-    
+    function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
     function formatRecipientWithLineBreaks(recipient) {
         if (!recipient) return '';
-        if (recipient.includes(',')) {
-            const parts = recipient.split(',').map(p => p.trim()).filter(p => p !== '');
-            return parts.join('<br>');
-        }
+        if (recipient.includes(',')) return recipient.split(',').map(p => p.trim()).filter(p => p !== '').join('<br>');
         return recipient;
     }
-
     function buildMetaSection(letterNo, refNo, date) {
-        return `<div class="meta-line">
-            <div class="meta-letter">
-                <span class="meta-item"><i class="fas fa-hashtag"></i><span class="meta-label">पत्र सं.:</span><span class="meta-value">${escapeHtml(letterNo)}</span></span>
-            </div>
-            <div class="meta-ref-date">
-                <span class="meta-item"><i class="fas fa-qrcode"></i><span class="meta-label">चलानी सं.:</span><span class="meta-value">${escapeHtml(refNo)}</span></span>
-                <span class="meta-item"><i class="fas fa-calendar-alt"></i><span class="meta-label">मिति:</span><span class="meta-value">${escapeHtml(date)}</span></span>
-            </div>
-        </div>`;
+        return `<div class="meta-line"><div class="meta-letter"><span class="meta-item"><i class="fas fa-hashtag"></i><span class="meta-label">पत्र सं.:</span><span class="meta-value">${escapeHtml(letterNo)}</span></span></div><div class="meta-ref-date"><span class="meta-item"><i class="fas fa-qrcode"></i><span class="meta-label">चलानी सं.:</span><span class="meta-value">${escapeHtml(refNo)}</span></span><span class="meta-item"><i class="fas fa-calendar-alt"></i><span class="meta-label">मिति:</span><span class="meta-value">${escapeHtml(date)}</span></span></div></div>`;
     }
-
     function buildLetterHTML(recipientRaw, org, addr1, addr2, date, letterNo, refNo, subjectTxt, sender, position, email, mobile, bodyTemplate, logo, signature) {
         let personalizedBody = bodyTemplate.replace(/\[नाम\]/g, recipientRaw);
         let displayRecWithBreaks = formatRecipientWithLineBreaks(recipientRaw);
         const logoHtml = logo ? `<img src="${logo}" class="org-logo" alt="logo" onerror="this.style.display='none';">` : '';
         const signatureHtml = signature ? `<img src="${signature}" class="signature-img" alt="sign"><br>` : '';
         const metaHtml = buildMetaSection(letterNo, refNo, date);
-        return `<div style="display:flex; flex-direction:column; height:100%;">
-            <div class="letter-header">${logoHtml}<div class="org-name">${escapeHtml(org)}</div></div>
-            <div class="address-container"><div class="address-line1">${escapeHtml(addr1)}</div><div class="address-line2">${escapeHtml(addr2)}</div></div>
-            ${metaHtml}
-            <div class="recipient-line">${displayRecWithBreaks}</div>
-            <div class="subject">विषय: ${escapeHtml(subjectTxt)}</div>
-            <div class="body">${escapeHtml(personalizedBody).replace(/\n/g, '<br>')}</div>
-            <div class="signature-area">${signatureHtml}<div class="sender-name">${escapeHtml(sender)}</div><div style="font-size:0.7rem;">${escapeHtml(position)}</div></div>
-            <div class="footer"><i class="fas fa-envelope"></i> ${escapeHtml(email)} | <i class="fas fa-phone-alt"></i> ${escapeHtml(mobile)}</div>
-        </div>`;
+        return `<div style="display:flex; flex-direction:column; height:100%;"><div class="letter-header">${logoHtml}<div class="org-name">${escapeHtml(org)}</div></div><div class="address-container"><div class="address-line1">${escapeHtml(addr1)}</div><div class="address-line2">${escapeHtml(addr2)}</div></div>${metaHtml}<div class="recipient-line">${displayRecWithBreaks}</div><div class="subject">विषय: ${escapeHtml(subjectTxt)}</div><div class="body">${escapeHtml(personalizedBody).replace(/\n/g, '<br>')}</div><div class="signature-area">${signatureHtml}<div class="sender-name">${escapeHtml(sender)}</div><div style="font-size:0.7rem;">${escapeHtml(position)}</div></div><div class="footer"><i class="fas fa-envelope"></i> ${escapeHtml(email)} | <i class="fas fa-phone-alt"></i> ${escapeHtml(mobile)}</div></div>`;
     }
-
     function generateLetters() {
         let org = document.getElementById("org").value.trim() || "श्री डिम जनता माध्यमिक विद्यालय";
         let address1 = document.getElementById("address1").value.trim() || "लालबन्दी-१६";
@@ -890,51 +957,26 @@
         let finalSignature = signatureData;
         const outputDiv = document.getElementById("output");
         outputDiv.innerHTML = "";
-        
         if (currentLayout === 'one') {
-            receivers.forEach(rec => {
-                const page = document.createElement('div'); page.className = 'page-portrait';
-                page.innerHTML = buildLetterHTML(rec, org, address1, address2, letterDate, letterNo, refNo, subjectTxt, sender, position, email, mobile, bodyTemplate, finalLogo, finalSignature);
-                outputDiv.appendChild(page);
-            });
-        }
-        else if (currentLayout === 'two') {
+            receivers.forEach(rec => { const page = document.createElement('div'); page.className = 'page-portrait'; page.innerHTML = buildLetterHTML(rec, org, address1, address2, letterDate, letterNo, refNo, subjectTxt, sender, position, email, mobile, bodyTemplate, finalLogo, finalSignature); outputDiv.appendChild(page); });
+        } else if (currentLayout === 'two') {
             for (let i = 0; i < receivers.length; i += 2) {
                 const pageDiv = document.createElement('div'); pageDiv.className = 'page-landscape-two';
                 const leftDiv = document.createElement('div'); leftDiv.className = 'letter-half';
                 leftDiv.innerHTML = buildLetterHTML(receivers[i], org, address1, address2, letterDate, letterNo, refNo, subjectTxt, sender, position, email, mobile, bodyTemplate, finalLogo, finalSignature);
                 pageDiv.appendChild(leftDiv);
-                if (i+1 < receivers.length) {
-                    const rightDiv = document.createElement('div'); rightDiv.className = 'letter-half';
-                    rightDiv.innerHTML = buildLetterHTML(receivers[i+1], org, address1, address2, letterDate, letterNo, refNo, subjectTxt, sender, position, email, mobile, bodyTemplate, finalLogo, finalSignature);
-                    pageDiv.appendChild(rightDiv);
-                } else {
-                    const emptyDiv = document.createElement('div'); emptyDiv.className = 'letter-half';
-                    emptyDiv.innerHTML = '<div style="text-align:center; margin-top:40%; color:#aaa;">— खाली —</div>';
-                    pageDiv.appendChild(emptyDiv);
-                }
+                if (i+1 < receivers.length) { const rightDiv = document.createElement('div'); rightDiv.className = 'letter-half'; rightDiv.innerHTML = buildLetterHTML(receivers[i+1], org, address1, address2, letterDate, letterNo, refNo, subjectTxt, sender, position, email, mobile, bodyTemplate, finalLogo, finalSignature); pageDiv.appendChild(rightDiv); }
+                else { const emptyDiv = document.createElement('div'); emptyDiv.className = 'letter-half'; emptyDiv.innerHTML = '<div style="text-align:center; margin-top:40%; color:#aaa;">— खाली —</div>'; pageDiv.appendChild(emptyDiv); }
                 outputDiv.appendChild(pageDiv);
             }
-        }
-        else if (currentLayout === 'four') {
+        } else if (currentLayout === 'four') {
             for (let i = 0; i < receivers.length; i += 4) {
                 const pageDiv = document.createElement('div'); pageDiv.className = 'page-landscape-four';
-                for (let s = 0; s < 4; s++) {
-                    const idx = i + s;
-                    const card = document.createElement('div'); card.className = 'letter-quarter';
-                    if (idx < receivers.length) {
-                        card.innerHTML = buildLetterHTML(receivers[idx], org, address1, address2, letterDate, letterNo, refNo, subjectTxt, sender, position, email, mobile, bodyTemplate, finalLogo, finalSignature);
-                    } else {
-                        card.style.background = "#f9fafc";
-                        card.innerHTML = "<div style='text-align:center; opacity:0.5; padding:15px 0;'><i class='fas fa-minus-circle'></i><br/>रिक्त</div>";
-                    }
-                    pageDiv.appendChild(card);
-                }
+                for (let s = 0; s < 4; s++) { const idx = i + s; const card = document.createElement('div'); card.className = 'letter-quarter'; if (idx < receivers.length) card.innerHTML = buildLetterHTML(receivers[idx], org, address1, address2, letterDate, letterNo, refNo, subjectTxt, sender, position, email, mobile, bodyTemplate, finalLogo, finalSignature); else card.innerHTML = "<div style='text-align:center; opacity:0.5; padding:15px 0;'><i class='fas fa-minus-circle'></i><br/>रिक्त</div>"; pageDiv.appendChild(card); }
                 outputDiv.appendChild(pageDiv);
             }
         }
     }
-
     async function downloadPDF() {
         const { jsPDF } = window.jspdf;
         const pages = document.querySelectorAll("#output .page-portrait, #output .page-landscape-two, #output .page-landscape-four");
@@ -945,73 +987,47 @@
             let pdf = null;
             for (let i = 0; i < pages.length; i++) {
                 const pageElem = pages[i];
-                let orientation = 'p';
-                let widthMm = 210, heightMm = 297;
-                if (pageElem.classList.contains('page-landscape-two') || pageElem.classList.contains('page-landscape-four')) {
-                    orientation = 'l';
-                    widthMm = 297;
-                    heightMm = 210;
-                }
+                let orientation = 'p', widthMm = 210, heightMm = 297;
+                if (pageElem.classList.contains('page-landscape-two') || pageElem.classList.contains('page-landscape-four')) { orientation = 'l'; widthMm = 297; heightMm = 210; }
                 const canvas = await html2canvas(pageElem, { scale: 2.8, backgroundColor: '#ffffff', useCORS: true, logging: false });
                 const imgData = canvas.toDataURL('image/jpeg', 0.98);
-                if (!pdf) {
-                    pdf = new jsPDF({ orientation: orientation, unit: 'mm', format: [widthMm, heightMm] });
-                    pdf.addImage(imgData, 'JPEG', 0, 0, widthMm, heightMm);
-                } else {
-                    pdf.addPage([widthMm, heightMm], orientation);
-                    pdf.addImage(imgData, 'JPEG', 0, 0, widthMm, heightMm);
-                }
+                if (!pdf) { pdf = new jsPDF({ orientation: orientation, unit: 'mm', format: [widthMm, heightMm] }); pdf.addImage(imgData, 'JPEG', 0, 0, widthMm, heightMm); }
+                else { pdf.addPage([widthMm, heightMm], orientation); pdf.addImage(imgData, 'JPEG', 0, 0, widthMm, heightMm); }
             }
             if (pdf) pdf.save('Multi_Letterpad.pdf');
         } catch (err) { alert("PDF बनाउँदा समस्या आयो।"); } finally { loader.style.display = 'none'; }
     }
-    
     function handlePrint() { setTimeout(() => window.print(), 100); }
     function resetAll() { if(confirm("सबै डाटा रिसेट हुनेछ।")) location.reload(); }
-    function closeModal() { document.getElementById('welcomeModal').style.display = 'none'; }
-    
     function initializeAppAfterLogin() {
         loadLikeData();
-        const likeBtn = document.getElementById('likeButton');
-        if(likeBtn) likeBtn.addEventListener('click', handleLikeClick);
-        
+        document.getElementById('likeButton')?.addEventListener('click', handleLikeClick);
         const layoutSelectElem = document.getElementById('layoutSelect');
         const orientationHintElem = document.getElementById('orientationHint');
         currentLayout = layoutSelectElem.value;
         const hints = { one: 'Single A4 Portrait', two: 'Two Letters Landscape', four: 'Four Letters Landscape' };
         orientationHintElem.innerText = hints[currentLayout];
-        layoutSelectElem.addEventListener('change', function() { 
-            currentLayout = this.value; 
-            orientationHintElem.innerText = hints[currentLayout];
-            generateLetters(); 
-        });
-        
-        document.getElementById("logoFile").onchange = function(e) {
-            if (e.target.files[0]) {
-                const reader = new FileReader();
-                reader.onload = (ev) => { logoData = ev.target.result; generateLetters(); };
-                reader.readAsDataURL(e.target.files[0]);
-            }
-        };
-        document.getElementById("signatureFile").onchange = function(e) {
-            if (e.target.files[0]) {
-                const reader = new FileReader();
-                reader.onload = (ev) => { signatureData = ev.target.result; generateLetters(); };
-                reader.readAsDataURL(e.target.files[0]);
-            }
-        };
-        document.getElementById("logoUrl").addEventListener("input", function() {
-            if (this.value.trim()) { logoData = this.value.trim(); generateLetters(); }
-        });
-        
-        const inputs = document.querySelectorAll('#mainAppContainer input, #mainAppContainer textarea');
-        inputs.forEach(el => { if(el.id !== 'layoutSelect') el.addEventListener('input', () => generateLetters()); });
+        layoutSelectElem.addEventListener('change', function() { currentLayout = this.value; orientationHintElem.innerText = hints[currentLayout]; generateLetters(); });
+        document.getElementById("logoFile").onchange = function(e) { if (e.target.files[0]) { const reader = new FileReader(); reader.onload = (ev) => { logoData = ev.target.result; generateLetters(); }; reader.readAsDataURL(e.target.files[0]); } };
+        document.getElementById("signatureFile").onchange = function(e) { if (e.target.files[0]) { const reader = new FileReader(); reader.onload = (ev) => { signatureData = ev.target.result; generateLetters(); }; reader.readAsDataURL(e.target.files[0]); } };
+        document.getElementById("logoUrl").addEventListener("input", function() { if (this.value.trim()) { logoData = this.value.trim(); generateLetters(); } });
+        document.querySelectorAll('#mainContent input, #mainContent textarea').forEach(el => { if(el.id !== 'layoutSelect') el.addEventListener('input', () => generateLetters()); });
         generateLetters();
     }
-    
-    if(sessionStorage.getItem('letterpad_logged_in') === 'true') {
-        window.addEventListener('load', initializeAppAfterLogin);
-    }
+    document.addEventListener('DOMContentLoaded', function() {
+        const savedUser = sessionStorage.getItem("converterLoggedUser");
+        if (savedUser) {
+            document.getElementById('loginModal').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'block';
+            document.getElementById('userDisplayName').innerText = savedUser;
+            initializeAppAfterLogin();
+        } else {
+            document.getElementById('loginModal').style.display = 'flex';
+            document.getElementById('mainContent').style.display = 'none';
+        }
+        document.getElementById('loginPassword')?.addEventListener('keypress', function(e) { if (e.key === 'Enter') performLoginModal(); });
+        document.getElementById('loginUsername')?.addEventListener('keypress', function(e) { if (e.key === 'Enter') performLoginModal(); });
+    });
 </script>
 </body>
 </html>
