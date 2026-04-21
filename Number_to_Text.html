@@ -3,758 +3,715 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <meta property="og:url"     content="https://shamser.info.np/Number_to_Text.html"/> 
- <meta property="og:type"        content="application" /> 
+    <meta property="og:url" content="https://shamser.info.np/Number_to_Text.html"/> 
+    <meta property="og:type" content="application" /> 
     <meta name="description" content="Convert numbers to words in English and Nepali up to 21 digits"/>
- <meta property="og:title"       content="Convert Number into English & Nepali Words"> 
- <meta property="og:image" content="https://shamser.info.np/HomePage/converter.webp"/>
-
-   <!-- Social icons -->
-    <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet" type="text/css">
-    <!-- Bootstrap -->
+    <meta property="og:title" content="Convert Number into English & Nepali Words"> 
+    <meta property="og:image" content="https://shamser.info.np/HomePage/converter.webp"/>
+    <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-
-    <title>Number to Words Converter - English & Nepali</title>
+    <title>Number to Words Converter - English & Nepali (Auto-Logout)</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
         body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #e9f0f5;
             margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
+            padding: 24px 16px;
         }
-        
-        .container {
-            max-width: 800px;
+        .glass-container {
+            max-width: 880px;
             margin: 0 auto;
+        }
+        .main-card {
             background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 32px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.15);
+            overflow: hidden;
+            transition: all 0.2s;
         }
-        
-        h1, h2 {
-            color: #2a6592;
-            text-align: center;
+        .converter-panel {
+            padding: 28px 30px 36px;
         }
-        
-        .converter-box {
-            background-color: #E0E8F0;
-            border: 1px solid #51A2D9;
-            border-radius: 5px;
-            padding: 15px;
-            margin-bottom: 20px;
+        h2 {
+            font-weight: 700;
+            color: #1e4663;
+            margin: 0 0 8px 0;
+            font-size: 1.8rem;
+            letter-spacing: -0.2px;
         }
-        
-        .result-box {
-            background-color: #B9E5F3;
-            border: 1px solid #51A2D9;
-            border-radius: 5px;
-            padding: 15px;
-            margin: 10px 0;
+        .sub {
+            color: #4a6f8f;
+            border-left: 4px solid #2a7faa;
+            padding-left: 14px;
+            margin: 12px 0 20px 0;
+            font-weight: 500;
         }
-        
-        input[type="text"], input[type="number"], input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        
-        button {
-            background-color: #2a6592;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            font-size: 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-right: 5px;
-            margin-bottom: 5px;
-        }
-        
-        button:hover {
-            background-color: #1d4b6f;
-        }
-        
-        textarea {
-            width: 100%;
-            height: 120px;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            resize: vertical;
-        }
-        
-        .social-links {
+        .user-bar {
             display: flex;
-            gap: 12px;
-            justify-content: flex-end;
-            margin-bottom: 20px;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8fafd;
+            padding: 12px 28px;
+            border-bottom: 1px solid #e2edf2;
         }
-        
-        .social-icon {
+        .user-greeting {
+            font-weight: 600;
+            color: #1e5a7a;
+            background: #e6f2f9;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 0.85rem;
             display: flex;
             align-items: center;
-            justify-content: center;
-            width: 32px;
-            height: 32px;
+            gap: 12px;
+        }
+        .session-timer {
+            background: #fff3e0;
+            color: #c96f0e;
+            padding: 2px 12px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+        .logout-link {
+            background: none;
+            border: none;
+            color: #c23d2b;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 6px 16px;
+            border-radius: 40px;
+            transition: 0.2s;
+        }
+        .logout-link:hover {
+            background: #ffe8e5;
+        }
+        .social-links {
+            display: flex;
+            gap: 14px;
+            justify-content: flex-end;
+            margin-bottom: 16px;
+        }
+        .social-icon {
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             color: white;
+            transition: 0.2s;
             text-decoration: none;
-            transition: all 0.3s ease;
         }
-        
-        .social-icon:hover {
-            transform: translateY(-3px);
+        .facebook { background: #1877f2; }
+        .twitter { background: #1da1f2; }
+        .blogspot { background: #f46d25; }
+        .email { background: #c71610; }
+        .map { background: #2c974b; }
+        .social-icon:hover { transform: translateY(-3px); opacity: 0.9; }
+        .converter-box {
+            background: #f2f6fa;
+            border-radius: 24px;
+            padding: 18px 20px;
+            margin: 20px 0 16px;
         }
-        
-        .facebook { background-color: #3b5998; }
-        .twitter { background-color: #1da1f2; }
-        .blogspot { background-color: #ff5722; }
-        .email { background-color: #d44638; }
-        .map { background-color: #34a853; }
-        
-        .social-icon i {
-            font-size: 16px;
+        .result-box {
+            background: #eef3fc;
+            border-radius: 24px;
+            padding: 16px 20px;
+            margin: 20px 0;
+            border: 1px solid #cde3f0;
         }
-        
-        @media (max-width: 600px) {
-            .container {
-                padding: 15px;
-            }
-            button {
-                width: 100%;
-                margin: 5px 0;
-            }
+        input[type="number"] {
+            width: 100%;
+            padding: 14px 18px;
+            font-size: 1.1rem;
+            border-radius: 60px;
+            border: 1px solid #cbdde9;
+            background: white;
+            font-weight: 500;
         }
-        
-        /* Login Modal Styles */
-        .login-modal {
+        button {
+            background: #1f6392;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 40px;
+            color: white;
+            font-weight: 600;
+            margin: 6px 6px 0 0;
+            transition: 0.2s;
+        }
+        button:hover {
+            background: #0e4b70;
+            transform: translateY(-1px);
+        }
+        textarea {
+            width: 100%;
+            padding: 14px;
+            border-radius: 20px;
+            border: 1px solid #cce0ec;
+            font-size: 0.95rem;
+            background: white;
+            font-family: monospace;
+            resize: vertical;
+        }
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px 0 8px;
+            font-size: 0.8rem;
+            color: #4a627a;
+        }
+        .login-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(6px);
             display: flex;
-            justify-content: center;
             align-items: center;
-            z-index: 99999;
-            backdrop-filter: blur(5px);
+            justify-content: center;
+            z-index: 100000;
         }
-        
-        .login-modal-content {
+        .login-card {
             background: white;
-            border-radius: 10px;
+            max-width: 440px;
             width: 90%;
-            max-width: 400px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-radius: 48px;
             overflow: hidden;
+            box-shadow: 0 30px 40px rgba(0,0,0,0.3);
         }
-        
         .login-header {
-            background: #2a6592;
-            color: white;
-            padding: 20px;
+            background: linear-gradient(135deg, #1f6392, #123f5c);
+            padding: 28px 20px;
             text-align: center;
+            color: white;
         }
-        
-        .login-header h3 {
-            margin: 0;
-            font-size: 1.5rem;
-        }
-        
         .login-body {
-            padding: 30px;
+            padding: 32px 28px;
         }
-        
         .login-form-group {
             margin-bottom: 20px;
         }
-        
         .login-form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: #333;
+            font-weight: 600;
+            color: #1e3b4f;
         }
-        
         .login-form-group input {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 1rem;
+            padding: 12px 16px;
+            border-radius: 60px;
+            border: 1px solid #bdd4e4;
+            margin-top: 6px;
         }
-        
-        .login-form-group input:focus {
-            outline: none;
-            border-color: #2a6592;
-        }
-        
-        /* Show Password checkbox styling */
-        .show-password {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 20px;
-        }
-        
-        .show-password label {
-            margin: 0;
-            cursor: pointer;
-            color: #555;
-            font-weight: normal;
-        }
-        
-        .login-button {
-            width: 100%;
-            padding: 14px;
-            background: #2a6592;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-        }
-        
-        .login-button:hover {
-            background: #1d4b6f;
-        }
-        
-        .login-message {
-            margin-top: 15px;
-            padding: 10px;
-            border-radius: 6px;
-            text-align: center;
-            font-size: 0.9rem;
-        }
-        
-        .login-message.success {
-            background: #e6f4ea;
-            color: #137333;
-        }
-        
-        .login-message.error {
-            background: #fce8e6;
-            color: #d93025;
-        }
-        
-        .login-links {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 0.9rem;
-        }
-        
-        .login-links a {
-            color: #2a6592;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        
-        .login-links a:hover {
-            text-decoration: underline;
-        }
-        
-        /* User bar for logged in state */
-        .user-bar {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        .user-greeting {
-            font-size: 0.9rem;
-            color: #2a6592;
-            font-weight: 500;
-        }
-        
-        .logout-link {
-            background: none;
-            border: none;
-            color: #d93025;
-            cursor: pointer;
-            font-size: 0.85rem;
-            padding: 5px 10px;
-            border-radius: 5px;
-        }
-        
-        .logout-link:hover {
-            background: #fce8e6;
-        }
-        
-        /* Password toggle icon inside input */
         .password-wrapper {
             position: relative;
         }
-        .toggle-password {
+        .toggle-eye {
             position: absolute;
-            right: 12px;
+            right: 18px;
             top: 50%;
             transform: translateY(-50%);
             cursor: pointer;
-            color: #888;
-            background: white;
-            padding-left: 5px;
+            color: #7e95ab;
         }
-        .toggle-password:hover {
-            color: #2a6592;
+        .login-button {
+            width: 100%;
+            background: #1f6392;
+            padding: 12px;
+            border-radius: 60px;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+        .login-message {
+            margin-top: 16px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+        .login-links {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            margin-top: 18px;
+        }
+        .login-links a {
+            color: #1f6392;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-home {
+            display: inline-block;
+            margin: 10px 0 10px;
+            color: #1e6f5c;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .warning-timer {
+            background: #fff1e0;
+            border-radius: 20px;
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        @media (max-width: 580px) {
+            .converter-panel { padding: 20px; }
         }
     </style>
 </head>
 <body>
+<div class="glass-container" id="appRoot">
+    <div id="loginModalContainer"></div>
 
-<!-- ================= LOGIN MODAL ================= -->
-<div id="loginModal" class="login-modal" style="display: none;">
-    <div class="login-modal-content">
-        <div class="login-header">
-            <h3><i class="fas fa-language"></i> Number to Words Converter</h3>
-            <p style="margin:5px 0 0; font-size:12px;">Login to Access</p>
-        </div>
-        <div class="login-body">
-            <div class="login-form-group">
-                <label>Username / Email</label>
-                <input type="text" id="loginUsername" value="Admin" autocomplete="username">
+    <div id="protectedContent" style="display: none;">
+        <div class="main-card">
+            <div class="user-bar">
+                <span class="user-greeting">
+                    <i class="fas fa-user-astronaut"></i> Welcome, <strong id="displayUserName">User</strong>
+                    <span class="session-timer" id="sessionTimerBadge"><i class="far fa-hourglass-half"></i> <span id="timerSeconds">05:00</span></span>
+                </span>
+                <button class="logout-link" id="logoutBtnMain"><i class="fas fa-sign-out-alt"></i> Logout</button>
             </div>
-            <div class="login-form-group">
-                <label>Password</label>
-                <div style="position: relative;">
-                    <input type="password" id="loginPassword" value="1234#" autocomplete="current-password">
-                    <i class="fas fa-eye toggle-password" id="togglePasswordIcon" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #888;"></i>
+            <div class="converter-panel">
+                <div class="social-links">
+                    <a href="#" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon blogspot"><i class="fab fa-blogger-b"></i></a>
+                    <a href="mailto:example@domain.com" class="social-icon email"><i class="fas fa-envelope"></i></a>
+                    <a href="#" class="social-icon map"><i class="fas fa-map-marker-alt"></i></a>
                 </div>
-            </div>
-            <!-- Show Password checkbox instead of Remember me -->
-            <div class="show-password">
-                <input type="checkbox" id="showPasswordCheck"> <label for="showPasswordCheck" style="margin:0;">Show Password</label>
-            </div>
-            <button class="login-button" id="loginBtnModal" onclick="performLoginModal()">Login</button>
-            <div id="loginMsgModal" class="login-message"></div>
-            <div class="login-links">
-                <a href="#" onclick="openRegisterWindow(); return false;"><i class="fas fa-user-plus"></i> Register</a>
-                <span style="margin:0 10px">|</span>
-                <a href="#" onclick="openForgotPassword(); return false;"><i class="fas fa-key"></i> Forgot Password?</a>
-            </div>
-            <div style="margin-top:12px; text-align:center; font-size:12px; color:#7f8c8d;">shamser.info.np/div>
-        </div>
-    </div>
-</div>
-
-<!-- ================= ORIGINAL CONVERTER (wrapped with login protection) ================= -->
-<div id="mainContent" style="display: none;">
-    <div class="container">
-        <!-- User bar -->
-        <div class="user-bar">
-            <span class="user-greeting"><i class="fas fa-user-circle"></i> Welcome, <span id="userDisplayName">User</span></span>
-            <button class="logout-link" onclick="logoutUser()"><i class="fas fa-sign-out-alt"></i> Logout</button>
-        </div>
-        
-        <!-- Social Links (original) -->
-        <div class="social-links">
-            <a href="https://www.facebook.com/" target="_blank" class="social-icon facebook">
-                <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="https://twitter.com/" target="_blank" class="social-icon twitter">
-                <i class="fab fa-twitter"></i>
-            </a>
-            <a href="https://lauro-media.blogspot.com/" target="_blank" class="social-icon blogspot">
-                <i class="fab fa-blogger-b"></i>
-            </a>
-            <a href="mailto:shamserpulami500@gmail.com" target="_blank" class="social-icon email">
-                <i class="fas fa-envelope"></i>
-            </a>
-            <a href="https://maps.app.goo.gl/CQG8KiSPvofKn5RB7" target="_blank" class="social-icon map">
-                <i class="fas fa-map-marker-alt"></i>
-            </a>
-        </div>
-
-        <h2>Convert Number into English & Nepali Words</h2>
-
-        <img src="https://shamser.info.np/HomePage/team_img/team1.JPG" alt="lNumber_to_text" style="width:60px; border-radius:10px;" onerror="this.style.display='none';">
-        <!-- Facebook Like Button -->
-        <div class="fb-like" data-href="https://shamser.info.np" data-width="" data-layout="button_count" data-action="like" data-size="small" data-share="true"></div>
-        <p style="text-align: center; color:red;">shamser.info.np</p> 
-                      <a href="https://shamser.info.np/"><i class="fa fa-home fa-lg"></i>Back to home</a>
-        <p style="text-align: center;">This converter supports numbers up to 21 digits in length.</p>
-        
- 
-        <div class="converter-box">
-            <p><strong>Enter Number:</strong></p>
-            <input type="number" id="numberInput" placeholder="Enter number" min="0" max="999999999999999999999">
-        </div>
-        
-        <button onclick="convertNumbers()">Convert to Words</button>
-        
-        <div class="result-box">
-            <p><strong>Words in English:</strong></p>
-            <textarea id="Number_inWords" readonly></textarea>
-            <div>
-                <button onclick="formatText('sentencecase')">Sentence Case</button>
-                <button onclick="formatText('titlecase')">Title Case</button>
-                <button onclick="formatText('capitalcase')">Capital Case</button>
-                <button onclick="formatText('lowercase')">Lower Case</button>
-                <button onclick="formatText('uppercase')">Upper Case</button>
-                <button onclick="copyToClipboard('Number_inWords')">Copy</button>
+                <h2><i class="fas fa-language"></i> Number → Words</h2>
+                <div class="sub">English & Nepali · Auto-logout after 5 min of inactivity</div>
+                <a href="https://shamser.info.np/" class="back-home"><i class="fa fa-home"></i> Back to home</a>
+                
+                <div class="converter-box">
+                    <p><strong><i class="fas fa-keyboard"></i> Enter Number:</strong></p>
+                    <input type="number" id="numInput" placeholder="e.g., 123456789012345678901" step="1" value="987654321">
+                </div>
+                <button id="convertBtn"><i class="fas fa-sync-alt"></i> Convert to Words</button>
+                
+                <div class="result-box">
+                    <p><strong><i class="fas fa-globe-americas"></i> English Words:</strong></p>
+                    <textarea id="engTextarea" rows="3" readonly placeholder="Converted text appears here..."></textarea>
+                    <div class="btn-group">
+                        <button onclick="formatEnglishText('sentence')">Sentence</button>
+                        <button onclick="formatEnglishText('title')">Title</button>
+                        <button onclick="formatEnglishText('upper')">UPPER</button>
+                        <button onclick="formatEnglishText('lower')">lower</button>
+                        <button onclick="copyText('engTextarea')">📋 Copy</button>
+                    </div>
+                </div>
+                
+                <div class="result-box">
+                    <p><strong><i class="fas fa-flag-checkered"></i> Nepali Words (नेपाली):</strong></p>
+                    <textarea id="nepTextarea" rows="3" readonly placeholder="नेपालीमा शब्द..."></textarea>
+                    <button onclick="copyText('nepTextarea')"><i class="far fa-copy"></i> Copy Nepali</button>
+                </div>
+                <footer class="footer">
+                    <div>© 2025 shamser.info.np — Inactivity auto-logout (5 min)</div>
+                    <div style="margin-top: 8px;"><i class="fas fa-shield-alt"></i> Secure converter | English + Nepali</div>
+                </footer>
             </div>
         </div>
-        
-        <div class="result-box">
-            <p><strong>Words in Nepali:</strong></p>
-            <textarea id="NumberinWords" readonly></textarea>
-            <button onclick="copyToClipboard('NumberinWords')">Copy</button>
-        </div>
-
-
-
-<footer class="footer">
-  <div class="container">
-    <div class="footer-content">
-      <div class="col-sm-12 text-center">&copy; Copyrights 2022 <strong><a href="https%3A%2F%2Fshamser.info.np%2Findex.html">shamser.info.np</a></strong>All Rights Reserved</strong></div>
-      <div class="footer-links" style="text-align: center;">
-        <a href="#"><i class="fab fa-facebook"></i> Community</a>
-        <a href="#"><i class="fab fa-twitter"></i> Updates</a>
-        <a href="#"><i class="fas fa-envelope"></i> Contact</a>
-      </div>
-    </div>
-        
     </div>
 </div>
 
 <script>
-    // ==================== LOGIN SYSTEM ====================
+    // ======================= AUTO-LOGOUT SYSTEM ==========================
+    // Session timeout in milliseconds (5 minutes)
+    const SESSION_TIMEOUT_MS = 5 * 60 * 1000;   // 5 minutes
+    let logoutTimer = null;
+    let countdownInterval = null;
     
-    // Demo credentials
-    const DEMO_USER = "user";
-    const DEMO_PASS = "password123";
-    const ADMIN_USER = "Admin";
-    const ADMIN_PASS = "1234#";
-    
-    // Show Password functionality
-    document.addEventListener('DOMContentLoaded', function() {
-        const showPasswordCheck = document.getElementById('showPasswordCheck');
-        const passwordInput = document.getElementById('loginPassword');
+    // Reset inactivity timer
+    function resetInactivityTimer() {
+        if (logoutTimer) {
+            clearTimeout(logoutTimer);
+        }
+        if (countdownInterval) {
+            clearInterval(countdownInterval);
+        }
+        // start new timer
+        logoutTimer = setTimeout(() => {
+            // auto logout due to inactivity
+            if (sessionStorage.getItem("converterLoggedUser")) {
+                console.log("Auto-logout due to inactivity");
+                performAutoLogout();
+            }
+        }, SESSION_TIMEOUT_MS);
         
-        if (showPasswordCheck && passwordInput) {
-            showPasswordCheck.addEventListener('change', function() {
-                if (this.checked) {
-                    passwordInput.type = 'text';
+        // start visual countdown (every second)
+        updateCountdownDisplay();
+        countdownInterval = setInterval(() => {
+            updateCountdownDisplay();
+        }, 1000);
+    }
+    
+    function updateCountdownDisplay() {
+        const timerSpan = document.getElementById('timerSeconds');
+        if (!timerSpan) return;
+        // if no timer active or no user -> hide or default
+        if (!logoutTimer) {
+            timerSpan.innerText = "05:00";
+            return;
+        }
+        // calculate remaining time (rough approximation using stored deadline)
+        const deadline = window._inactivityDeadline;
+        if (deadline) {
+            const remaining = Math.max(0, deadline - Date.now());
+            const seconds = Math.floor(remaining / 1000);
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            timerSpan.innerText = `${mins.toString().padStart(2,'0')}:${secs.toString().padStart(2,'0')}`;
+            if (remaining <= 0) {
+                if (timerSpan.innerText !== "00:00") timerSpan.innerText = "00:00";
+            }
+        } else {
+            timerSpan.innerText = "05:00";
+        }
+    }
+    
+    function refreshDeadline() {
+        window._inactivityDeadline = Date.now() + SESSION_TIMEOUT_MS;
+        updateCountdownDisplay();
+    }
+    
+    // function to extend session on any user activity
+    function extendSession() {
+        if (!sessionStorage.getItem("converterLoggedUser")) return;
+        if (logoutTimer) {
+            clearTimeout(logoutTimer);
+        }
+        refreshDeadline();
+        logoutTimer = setTimeout(() => {
+            if (sessionStorage.getItem("converterLoggedUser")) {
+                performAutoLogout();
+            }
+        }, SESSION_TIMEOUT_MS);
+        updateCountdownDisplay();
+    }
+    
+    function performAutoLogout() {
+        if (countdownInterval) {
+            clearInterval(countdownInterval);
+            countdownInterval = null;
+        }
+        if (logoutTimer) {
+            clearTimeout(logoutTimer);
+            logoutTimer = null;
+        }
+        if (sessionStorage.getItem("converterLoggedUser")) {
+            sessionStorage.removeItem("converterLoggedUser");
+            // hide protected content and show login
+            const protectedDiv = document.getElementById('protectedContent');
+            if (protectedDiv) protectedDiv.style.display = 'none';
+            showLoginModal();
+            // optional alert
+            alert("⏰ Session expired due to inactivity. Please login again.");
+        }
+    }
+    
+    // attach activity listeners to track user interactions
+    function attachActivityTracker() {
+        const events = ['mousedown', 'keydown', 'scroll', 'touchstart', 'click', 'input'];
+        const resetSession = () => {
+            if (sessionStorage.getItem("converterLoggedUser")) {
+                extendSession();
+            }
+        };
+        events.forEach(ev => {
+            document.addEventListener(ev, resetSession);
+        });
+        // also specific for inputs
+        const numberInput = document.getElementById('numInput');
+        if (numberInput) numberInput.addEventListener('input', resetSession);
+        const convertBtn = document.getElementById('convertBtn');
+        if (convertBtn) convertBtn.addEventListener('click', resetSession);
+    }
+    
+    // clean logout for manual logout
+    function logoutUser(manual = true) {
+        if (manual && !confirm("Logout from converter?")) return;
+        if (countdownInterval) clearInterval(countdownInterval);
+        if (logoutTimer) clearTimeout(logoutTimer);
+        sessionStorage.removeItem("converterLoggedUser");
+        const protectedDiv = document.getElementById('protectedContent');
+        if (protectedDiv) protectedDiv.style.display = 'none';
+        showLoginModal();
+        if (manual) {
+            // optional reset fields
+        }
+    }
+    
+    // ======================== AUTH + MODAL LOGIC ==========================
+    const DEMO_USERS = [
+        { username: "Admin", password: "1234#" },
+        { username: "user", password: "password123" },
+        { username: "demo", password: "demo123" }
+    ];
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzQrWWm5yoRfc06iIXkJGIlA0Wz2ID5ezPsn66W1_uU67ETOQNOf-fRVLMNRLyMxN4/exec";
+
+    function showLoginModal() {
+        const modalContainer = document.getElementById('loginModalContainer');
+        if (!modalContainer) return;
+        modalContainer.innerHTML = `
+            <div class="login-overlay" id="loginOverlayElem">
+                <div class="login-card">
+                    <div class="login-header">
+                        <h3><i class="fas fa-clock"></i> Auto-Logout Session</h3>
+                        <p style="margin:5px 0 0; opacity:0.8;">Login • 5 min inactivity timeout</p>
+                    </div>
+                    <div class="login-body">
+                        <div class="login-form-group">
+                            <label><i class="fas fa-user"></i> Username / Email</label>
+                            <input type="text" id="loginUsername" placeholder="Admin / user / demo" value="Admin">
+                        </div>
+                        <div class="login-form-group">
+                            <label><i class="fas fa-lock"></i> Password</label>
+                            <div class="password-wrapper">
+                                <input type="password" id="loginPassword" placeholder="••••••" value="1234#">
+                                <i class="fas fa-eye toggle-eye" id="toggleLoginPass"></i>
+                            </div>
+                        </div>
+                        <div class="login-form-group" style="margin-top: -8px;">
+                            <label style="font-weight: normal;"><input type="checkbox" id="showPassCheckbox"> Show Password</label>
+                        </div>
+                        <button class="login-button" id="loginExecuteBtn"><i class="fas fa-sign-in-alt"></i> Login & Start Session</button>
+                        <div id="loginMessageArea" class="login-message"></div>
+                        <div class="login-links">
+                            <a href="#" id="registerLinkBtn"><i class="fas fa-user-plus"></i> Register</a>
+                            <a href="#" id="forgotLinkBtn"><i class="fas fa-key"></i> Forgot?</a>
+                        </div>
+                        <div style="margin-top:14px; text-align:center; font-size:12px; color:#7f8c8d;">Inactivity auto-logout (5 min) | shamser.info.np</div>
+                    </div>
+                </div>
+            </div>
+        `;
+        const passInput = document.getElementById('loginPassword');
+        const showCheck = document.getElementById('showPassCheckbox');
+        const toggleEye = document.getElementById('toggleLoginPass');
+        const syncPasswordVisibility = (isChecked) => {
+            if (isChecked) {
+                passInput.type = 'text';
+                if (toggleEye) toggleEye.classList.remove('fa-eye');
+                if (toggleEye) toggleEye.classList.add('fa-eye-slash');
+            } else {
+                passInput.type = 'password';
+                if (toggleEye) toggleEye.classList.remove('fa-eye-slash');
+                if (toggleEye) toggleEye.classList.add('fa-eye');
+            }
+        };
+        if (showCheck) {
+            showCheck.addEventListener('change', (e) => syncPasswordVisibility(e.target.checked));
+        }
+        if (toggleEye) {
+            toggleEye.addEventListener('click', () => {
+                const current = passInput.type === 'password';
+                if (current) {
+                    passInput.type = 'text';
+                    toggleEye.classList.remove('fa-eye');
+                    toggleEye.classList.add('fa-eye-slash');
+                    if (showCheck) showCheck.checked = true;
                 } else {
-                    passwordInput.type = 'password';
+                    passInput.type = 'password';
+                    toggleEye.classList.remove('fa-eye-slash');
+                    toggleEye.classList.add('fa-eye');
+                    if (showCheck) showCheck.checked = false;
                 }
             });
         }
-        
-        // Also add eye icon toggle
-        const toggleIcon = document.getElementById('togglePasswordIcon');
-        if (toggleIcon && passwordInput) {
-            toggleIcon.addEventListener('click', function() {
-                if (passwordInput.type === 'password') {
-                    passwordInput.type = 'text';
-                    toggleIcon.classList.remove('fa-eye');
-                    toggleIcon.classList.add('fa-eye-slash');
-                    if (showPasswordCheck) showPasswordCheck.checked = true;
-                } else {
-                    passwordInput.type = 'password';
-                    toggleIcon.classList.remove('fa-eye-slash');
-                    toggleIcon.classList.add('fa-eye');
-                    if (showPasswordCheck) showPasswordCheck.checked = false;
-                }
-            });
-        }
-    });
+        document.getElementById('loginExecuteBtn').onclick = () => performLogin();
+        document.getElementById('registerLinkBtn').onclick = (e) => { e.preventDefault(); alert("📝 Demo accounts: Admin/1234#, user/password123, demo/demo123"); };
+        document.getElementById('forgotLinkBtn').onclick = (e) => { e.preventDefault(); alert("🔐 For password reset, contact admin. Demo mode available."); };
+        const pwdField = document.getElementById('loginPassword');
+        const userField = document.getElementById('loginUsername');
+        const loginHandler = (e) => { if(e.key === 'Enter') performLogin(); };
+        if(pwdField) pwdField.addEventListener('keypress', loginHandler);
+        if(userField) userField.addEventListener('keypress', loginHandler);
+    }
     
-    function performLoginModal() {
+    async function performLogin() {
         const username = document.getElementById('loginUsername').value.trim();
         const password = document.getElementById('loginPassword').value.trim();
-        const msgDiv = document.getElementById('loginMsgModal');
-        
-        if (!username || !password) {
-            msgDiv.innerHTML = "❌ Please enter username and password";
-            msgDiv.className = "login-message error";
+        const msgDiv = document.getElementById('loginMessageArea');
+        if(!username || !password) {
+            msgDiv.innerHTML = '<span style="color:#d32f2f;">❌ Please fill both fields</span>';
             return;
         }
-        
-        msgDiv.innerHTML = "⏳ Authenticating...";
-        msgDiv.className = "login-message";
-        
-        // Using the same Google Script endpoint as ID Card Dashboard
-        fetch("https://script.google.com/macros/s/AKfycbzQrWWm5yoRfc06iIXkJGIlA0Wz2ID5ezPsn66W1_uU67ETOQNOf-fRVLMNRLyMxN4/exec", {
-            method: "POST",
-            body: JSON.stringify({
-                action: "login",
-                username: username,
-                password: password
-            })
-        })
-        .then(res => res.json())
-        .then(response => {
-            if (response.status === "success") {
-                sessionStorage.setItem("converterLoggedUser", response.user);
-                
-                msgDiv.innerHTML = "✅ Login successful! Redirecting...";
-                msgDiv.className = "login-message success";
-                
-                setTimeout(() => {
-                    document.getElementById('loginModal').style.display = 'none';
-                    document.getElementById('mainContent').style.display = 'block';
-                    document.getElementById('userDisplayName').innerText = response.user;
-                }, 800);
+        msgDiv.innerHTML = '<span>⏳ Authenticating...</span>';
+        try {
+            const response = await fetch(GOOGLE_SCRIPT_URL, {
+                method: "POST",
+                body: JSON.stringify({ action: "login", username: username, password: password }),
+                headers: { "Content-Type": "application/json" }
+            });
+            const data = await response.json();
+            if(data && data.status === "success") {
+                sessionStorage.setItem("converterLoggedUser", data.user || username);
+                msgDiv.innerHTML = '<span style="color:#2e7d32;">✅ Login successful!</span>';
+                setTimeout(() => finalizeLogin(data.user || username), 400);
+                return;
             } else {
-                msgDiv.innerHTML = "❌ " + response.message;
-                msgDiv.className = "login-message error";
+                throw new Error("remote fail");
             }
-        })
-        .catch(err => {
-            console.error("Server error:", err);
-            msgDiv.innerHTML = "⚠️ Server error. Using demo mode.";
-            msgDiv.className = "login-message error";
-            // Demo fallback
-            if ((username === DEMO_USER && password === DEMO_PASS) || (username === ADMIN_USER && password === ADMIN_PASS)) {
-                const demoUser = username;
-                sessionStorage.setItem("converterLoggedUser", demoUser);
-                msgDiv.innerHTML = "✅ Demo login success!";
-                msgDiv.className = "login-message success";
-                setTimeout(() => {
-                    document.getElementById('loginModal').style.display = 'none';
-                    document.getElementById('mainContent').style.display = 'block';
-                    document.getElementById('userDisplayName').innerText = demoUser;
-                }, 500);
+        } catch(err) {
+            const validUser = DEMO_USERS.find(u => u.username === username && u.password === password);
+            if(validUser) {
+                sessionStorage.setItem("converterLoggedUser", validUser.username);
+                msgDiv.innerHTML = '<span style="color:#2e7d32;">✅ Local login success!</span>';
+                setTimeout(() => finalizeLogin(validUser.username), 400);
+            } else {
+                msgDiv.innerHTML = '<span style="color:#d32f2f;">❌ Invalid credentials. Try Admin/1234# or user/password123</span>';
             }
-        });
-    }
-    
-    function logoutUser() {
-        if (confirm("Are you sure you want to logout?")) {
-            sessionStorage.removeItem("converterLoggedUser");
-            document.getElementById('mainContent').style.display = 'none';
-            document.getElementById('loginModal').style.display = 'flex';
-            document.getElementById('loginUsername').value = '';
-            document.getElementById('loginPassword').value = '';
-            // Reset password field type to password
-            const pwdInput = document.getElementById('loginPassword');
-            if (pwdInput) pwdInput.type = 'password';
-            const showCheck = document.getElementById('showPasswordCheck');
-            if (showCheck) showCheck.checked = false;
-            document.getElementById('loginMsgModal').innerHTML = '';
-            document.getElementById('loginMsgModal').className = 'login-message';
-            // Clear converter fields
-            document.getElementById('Number_inWords').value = '';
-            document.getElementById('NumberinWords').value = '';
-            document.getElementById('numberInput').value = '';
         }
     }
     
-    function openRegisterWindow() {
-        alert("📝 Registration\n\nPlease contact administrator to create an account.\nDemo credentials: user / password123");
-    }
-    
-    function openForgotPassword() {
-        alert("🔐 Forgot Password\n\nA reset link would be sent to your registered email.\nDemo: user / password123");
-    }
-    
-    // Auto-check session on load
-    document.addEventListener('DOMContentLoaded', function() {
-        const savedUser = sessionStorage.getItem("converterLoggedUser");
-        if (savedUser) {
-            document.getElementById('loginModal').style.display = 'none';
-            document.getElementById('mainContent').style.display = 'block';
-            document.getElementById('userDisplayName').innerText = savedUser;
-        } else {
-            document.getElementById('loginModal').style.display = 'flex';
-            document.getElementById('mainContent').style.display = 'none';
-        }
+    function finalizeLogin(displayName) {
+        document.getElementById('loginModalContainer').innerHTML = '';
+        document.getElementById('protectedContent').style.display = 'block';
+        document.getElementById('displayUserName').innerText = displayName;
+        document.getElementById('numInput').value = '987654321';
+        document.getElementById('engTextarea').value = '';
+        document.getElementById('nepTextarea').value = '';
+        performConversion();  // initial conversion
         
-        // Enter key support in login modal
-        const passwordField = document.getElementById('loginPassword');
-        if (passwordField) {
-            passwordField.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') performLoginModal();
-            });
-        }
-        const userField = document.getElementById('loginUsername');
-        if (userField) {
-            userField.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') performLoginModal();
-            });
-        }
-    });
-    
-    // ==================== ORIGINAL CONVERTER FUNCTIONS (COMPLETELY UNMODIFIED) ====================
-    
-    function convertNumbers() {
-        const number = document.getElementById("numberInput").value;
-        const englishResult = document.getElementById("Number_inWords");
-        const nepaliResult = document.getElementById("NumberinWords");
-
-        if (isNaN(number) || number === "") {
-            englishResult.value = "Please enter a valid number.";
-            nepaliResult.value = "कृपया वैध नम्बर प्रविष्ट गर्नुहोस्।";
-            return;
-        }
-
-        if (number.length > 21) {
-            englishResult.value = "Number cannot exceed 21 digits.";
-            nepaliResult.value = "नम्बर २१ अंक भन्दा बढी हुन सक्दैन।";
-            return;
-        }
-
-        englishResult.value = englishNumberToWords(number);
-        nepaliResult.value = nepaliNumberToWords(number);
+        // Initialize session timers and activity tracking
+        if (logoutTimer) clearTimeout(logoutTimer);
+        if (countdownInterval) clearInterval(countdownInterval);
+        refreshDeadline();
+        logoutTimer = setTimeout(() => {
+            if (sessionStorage.getItem("converterLoggedUser")) performAutoLogout();
+        }, SESSION_TIMEOUT_MS);
+        countdownInterval = setInterval(() => updateCountdownDisplay(), 1000);
+        attachActivityTracker();
     }
-
-    function englishNumberToWords(n) {
-        const num = BigInt(n);
+    
+    // ==================== NUMBER TO WORDS ENGINE (ENGLISH + NEPALI) ===================
+    function performConversion() {
+        const inputElem = document.getElementById('numInput');
+        let rawValue = inputElem.value.trim();
+        if(rawValue === "") {
+            document.getElementById('engTextarea').value = "Please enter a number.";
+            document.getElementById('nepTextarea').value = "कृपया संख्या प्रविष्ट गर्नुहोस्।";
+            return;
+        }
+        let cleanNumber = rawValue.replace(/,/g, '');
+        if (!/^\d+$/.test(cleanNumber)) {
+            document.getElementById('engTextarea').value = "Invalid number (digits only)";
+            document.getElementById('nepTextarea').value = "अमान्य संख्या (केवल अंकहरू)";
+            return;
+        }
+        if(cleanNumber.length > 21) {
+            document.getElementById('engTextarea').value = "Number exceeds 21 digits limit.";
+            document.getElementById('nepTextarea').value = "२१ अंक भन्दा बढी अनुमति छैन।";
+            return;
+        }
+        const bigNum = BigInt(cleanNumber);
+        const englishWords = convertEnglish(bigNum);
+        const nepaliWords = convertToNepaliWords(cleanNumber);
+        document.getElementById('engTextarea').value = englishWords;
+        document.getElementById('nepTextarea').value = nepaliWords;
+        // extend session on conversion action (manual trigger)
+        extendSession();
+    }
+    
+    function convertEnglish(num) {
         if (num === 0n) return "zero";
-
         const units = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
         const teens = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
-        const tens = ["", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+        const tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
         const scales = ["", "thousand", "million", "billion", "trillion", "quadrillion", "quintillion", "sextillion", "septillion", "octillion", "nonillion"];
-
-        function convertLessThanOneThousand(num) {
-            if (num === 0n) return "";
-            if (num < 10n) return units[Number(num)];
-            if (num < 20n) return teens[Number(num - 10n)];
-            if (num < 100n) {
-                return tens[Number(num / 10n)] + (num % 10n !== 0n ? "-" + units[Number(num % 10n)] : "");
+        function chunkToWords(n) {
+            if (n === 0n) return "";
+            if (n < 10n) return units[Number(n)];
+            if (n < 20n) return teens[Number(n - 10n)];
+            if (n < 100n) {
+                let ten = Number(n / 10n);
+                let unit = Number(n % 10n);
+                return tens[ten] + (unit ? "-" + units[unit] : "");
             }
-            return units[Number(num / 100n)] + " hundred" + (num % 100n !== 0n ? " and " + convertLessThanOneThousand(num % 100n) : "");
+            let hundred = Number(n / 100n);
+            let remainder = n % 100n;
+            let rest = remainder === 0n ? "" : " and " + chunkToWords(remainder);
+            return units[hundred] + " hundred" + rest;
         }
-
-        let words = "";
-        let scaleIndex = 0;
+        let result = [];
+        let scaleIdx = 0;
         let remaining = num;
-
         while (remaining > 0n) {
-            const chunk = remaining % 1000n;
+            let chunk = remaining % 1000n;
             if (chunk !== 0n) {
-                let chunkWords = convertLessThanOneThousand(chunk);
-                if (scaleIndex > 0) {
-                    chunkWords += " " + scales[scaleIndex];
-                }
-                words = chunkWords + (words ? ", " + words : "");
+                let chunkStr = chunkToWords(chunk);
+                if (scaleIdx > 0) chunkStr += " " + scales[scaleIdx];
+                result.unshift(chunkStr);
             }
             remaining = remaining / 1000n;
-            scaleIndex++;
+            scaleIdx++;
         }
-
-        return words;
+        return result.join(", ");
     }
-
-    function nepaliNumberToWords(n) {
-        const num = parseInt(n);
+    
+    function convertToNepaliWords(numStr) {
+        let num = parseInt(numStr, 10);
+        if (isNaN(num)) return "अमान्य संख्या";
         if (num === 0) return "शून्य";
-
         const units = ["", "एक", "दुई", "तीन", "चार", "पाँच", "छ", "सात", "आठ", "नौ"];
         const teens = ["दश", "एघार", "बाह्र", "तेह्र", "चौध", "पन्ध्र", "सोह्र", "सत्र", "अठार", "उन्नाइस"];
         const tens = ["", "दश", "बीस", "तीस", "चालीस", "पचास", "साठी", "सत्तरी", "अस्सी", "नब्बे"];
-        const jointNumbers = {
-            21: "एक्काइस", 22: "बाइस", 23: "तेइस", 24: "चौबिस", 25: "पच्चिस",
-            26: "छब्बिस", 27: "सत्ताइस", 28: "अठ्ठाइस", 29: "उनन्तिस",
-            31: "एकत्तिस", 32: "बत्तिस", 33: "तेत्तिस", 34: "चौँतिस", 35: "पैँतिस",
-            36: "छत्तिस", 37: "सैँतीस", 38: "अठ्ठाइस", 39: "उनन्चालिस",
-            41: "एकचालिस", 42: "बयालिस", 43: "त्रियालिस", 44: "चवालिस", 45: "पैँतालिस",
-            46: "छयालिस", 47: "सच्चालिस", 48: "अठचालिस", 49: "उनन्पचास",
-            51: "एकाउन्न", 52: "बाउन्न", 53: "त्रिपन्न", 54: "चउन्न", 55: "पचपन्न",
-            56: "छपन्न", 57: "सन्ताउन्न", 58: "अन्ठाउन्न", 59: "उनन्साठी",
-            61: "एकसट्ठी", 62: "बैसट्ठी", 63: "त्रिसट्ठी", 64: "चौंसट्ठी", 65: "पैंसट्ठी",
-            66: "छयसट्ठी", 67: "सतसट्ठी", 68: "अठसट्ठी", 69: "उनन्सत्तरी",
-            71: "एकहत्तर", 72: "बहत्तर", 73: "त्रिहत्तर", 74: "चौहत्तर", 75: "पचहत्तर",
-            76: "छयहत्तर", 77: "सतहत्तर", 78: "अठहत्तर", 79: "उनासी",
-            81: "एकासी", 82: "बयासी", 83: "त्रियासी", 84: "चौरासी", 85: "पचासी",
-            86: "छयासी", 87: "सतासी", 88: "अठासी", 89: "उनान्नब्बे",
-            91: "एकान्नब्बे", 92: "बयान्नब्बे", 93: "त्रियान्नब्बे", 94: "चौरान्नब्बे", 95: "पन्चानब्बे",
-            96: "छयान्नब्बे", 97: "सन्तान्नब्बे", 98: "अन्ठान्नब्बे", 99: "उनान्सय"
-        };
-
-        function convertLessThanOneHundred(num) {
-            if (num === 0) return "";
-            if (num < 10) return units[num];
-            if (num < 20) return teens[num - 10];
-            if (jointNumbers[num]) return jointNumbers[num];
-            return tens[Math.floor(num / 10)] + (num % 10 !== 0 ? " " + units[num % 10] : "");
-        }
-
-        function convertLessThanOneThousand(num) {
-            if (num < 100) return convertLessThanOneHundred(num);
-            return units[Math.floor(num / 100)] + " सय" + (num % 100 !== 0 ? " " + convertLessThanOneHundred(num % 100) : "");
-        }
-
-        function convertLessThanTenThousand(num) {
-            if (num < 1000) return convertLessThanOneThousand(num);
-            return convertLessThanOneHundred(Math.floor(num / 1000)) + " हजार" + (num % 1000 !== 0 ? " " + convertLessThanOneThousand(num % 1000) : "");
-        }
-
-        function convertLessThanOneLakh(num) {
-            if (num < 10000) return convertLessThanTenThousand(num);
-            return convertLessThanOneHundred(Math.floor(num / 1000)) + " हजार" + (num % 1000 !== 0 ? " " + convertLessThanOneThousand(num % 1000) : "");
-        }
-
-        let words = "";
-        let remaining = num;
-
-        if (remaining >= 100000) {
-            const lakhs = Math.floor(remaining / 100000);
-            remaining = remaining % 100000;
-            words += convertLessThanOneHundred(lakhs) + " लाख";
-            if (remaining > 0) {
-                words += " " + convertLessThanOneLakh(remaining);
-            }
-        } 
-        else if (remaining >= 1000) {
-            words = convertLessThanTenThousand(remaining);
-        } 
-        else {
-            words = convertLessThanOneThousand(remaining);
-        }
-
-        return words;
+        const jointMap = {21:"एक्काइस",22:"बाइस",23:"तेइस",24:"चौबिस",25:"पच्चिस",26:"छब्बिस",27:"सत्ताइस",28:"अठ्ठाइस",29:"उनन्तिस",31:"एकत्तिस",32:"बत्तिस",33:"तेत्तिस",34:"चौँतिस",35:"पैँतिस",36:"छत्तिस",37:"सैँतीस",38:"अठ्ठाइस",39:"उनन्चालिस",41:"एकचालिस",42:"बयालिस",43:"त्रियालिस",44:"चवालिस",45:"पैँतालिस",46:"छयालिस",47:"सच्चालिस",48:"अठचालिस",49:"उनन्पचास",51:"एकाउन्न",52:"बाउन्न",53:"त्रिपन्न",54:"चउन्न",55:"पचपन्न",56:"छपन्न",57:"सन्ताउन्न",58:"अन्ठाउन्न",59:"उनन्साठी",61:"एकसट्ठी",62:"बैसट्ठी",63:"त्रिसट्ठी",64:"चौंसट्ठी",65:"पैंसट्ठी",66:"छयसट्ठी",67:"सतसट्ठी",68:"अठसट्ठी",69:"उनन्सत्तरी",71:"एकहत्तर",72:"बहत्तर",73:"त्रिहत्तर",74:"चौहत्तर",75:"पचहत्तर",76:"छयहत्तर",77:"सतहत्तर",78:"अठहत्तर",79:"उनासी",81:"एकासी",82:"बयासी",83:"त्रियासी",84:"चौरासी",85:"पचासी",86:"छयासी",87:"सतासी",88:"अठासी",89:"उनान्नब्बे",91:"एकान्नब्बे",92:"बयान्नब्बे",93:"त्रियान्नब्बे",94:"चौरान्नब्बे",95:"पन्चानब्बे",96:"छयान्नब्बे",97:"सन्तान्नब्बे",98:"अन्ठान्नब्बे",99:"उनान्सय"};
+        function underHundred(n) { if (n===0) return ""; if (n<10) return units[n]; if (n<20) return teens[n-10]; if (jointMap[n]) return jointMap[n]; let ten = Math.floor(n/10); let unit = n%10; return tens[ten] + (unit ? " " + units[unit] : ""); }
+        function underThousand(n) { if (n<100) return underHundred(n); let hundred = Math.floor(n/100); let rem = n%100; let base = units[hundred] + " सय"; if (rem) base += " " + underHundred(rem); return base; }
+        function underLakh(n) { if (n<1000) return underThousand(n); let thousand = Math.floor(n/1000); let rem = n%1000; let part = underHundred(thousand) + " हजार"; if (rem) part += " " + underThousand(rem); return part; }
+        if (num >= 100000) { let lakhs = Math.floor(num/100000); let rem = num%100000; let res = underHundred(lakhs) + " लाख"; if (rem>0) res += " " + (rem>=1000 ? underLakh(rem) : underThousand(rem)); return res; }
+        else if (num >= 1000) return underLakh(num);
+        else return underThousand(num);
     }
-
-    function formatText(formatType) {
-        const textarea = document.getElementById("Number_inWords");
-        let text = textarea.value;
-        
-        switch(formatType) {
-            case 'sentencecase':
-                text = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
-                break;
-            case 'titlecase':
-                text = text.split(' ').map(word => 
-                    word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-                ).join(' ');
-                break;
-            case 'capitalcase':
-                text = text.split(' ').map(word => 
-                    word.charAt(0).toUpperCase() + word.slice(1)
-                ).join(' ');
-                break;
-            case 'lowercase':
-                text = text.toLowerCase();
-                break;
-            case 'uppercase':
-                text = text.toUpperCase();
-                break;
+    
+    window.formatEnglishText = function(type) {
+        const ta = document.getElementById('engTextarea');
+        let text = ta.value;
+        if (!text) return;
+        if (type === 'sentence') text = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+        else if (type === 'title') text = text.split(' ').map(w=>w.charAt(0).toUpperCase()+w.slice(1).toLowerCase()).join(' ');
+        else if (type === 'upper') text = text.toUpperCase();
+        else if (type === 'lower') text = text.toLowerCase();
+        ta.value = text;
+        extendSession();
+    };
+    window.copyText = function(id) { let el=document.getElementById(id); el.select(); document.execCommand('copy'); alert('✓ Copied'); extendSession(); };
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedUser = sessionStorage.getItem("converterLoggedUser");
+        if(savedUser) {
+            document.getElementById('protectedContent').style.display = 'block';
+            document.getElementById('displayUserName').innerText = savedUser;
+            document.getElementById('loginModalContainer').innerHTML = '';
+            performConversion();
+            refreshDeadline();
+            logoutTimer = setTimeout(() => { if(sessionStorage.getItem("converterLoggedUser")) performAutoLogout(); }, SESSION_TIMEOUT_MS);
+            countdownInterval = setInterval(() => updateCountdownDisplay(), 1000);
+            attachActivityTracker();
+        } else {
+            document.getElementById('protectedContent').style.display = 'none';
+            showLoginModal();
         }
-        
-        textarea.value = text;
-    }
-
-    function copyToClipboard(elementId) {
-        const textarea = document.getElementById(elementId);
-        textarea.select();
-        document.execCommand('copy');
-        alert('Copied to clipboard!');
-    }
+        const logoutBtn = document.getElementById('logoutBtnMain');
+        if(logoutBtn) logoutBtn.onclick = () => logoutUser(true);
+        const convertElem = document.getElementById('convertBtn');
+        if(convertElem) convertElem.onclick = () => { performConversion(); extendSession(); };
+        const numField = document.getElementById('numInput');
+        if(numField) numField.addEventListener('input', () => extendSession());
+    });
 </script>
 </body>
 </html>
