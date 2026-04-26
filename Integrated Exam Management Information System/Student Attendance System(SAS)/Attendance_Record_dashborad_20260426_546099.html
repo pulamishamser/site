@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Student Attendance System | Secure Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="https://shamser.info.np/HomePage/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <style>
+        :root {
+            --primary-color: #2c7da0;
+            --secondary-color: #1f5e7a;
+            --accent-color: #61a5c2;
+            --sidebar-width: 260px;
+            --header-height: 60px;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: #eef2f7;
+            color: #1e293b;
+        }
+
+        /* Login Modal Styles */
+        .login-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            backdrop-filter: blur(5px);
+        }
+
+        .login-modal-content {
+            background: white;
+            border-radius: 24px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .login-header {
+            background: linear-gradient(135deg, #2c7da0, #1f5e7a);
+            color: white;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .login-header h3 {
+            margin: 0;
+            font-size: 1.6rem;
+            font-weight: 600;
+        }
+
+        .login-header p {
+            margin: 8px 0 0;
+            opacity: 0.9;
+            font-size: 0.85rem;
+        }
+
+        .login-body {
+            padding: 30px;
+        }
+
+        .login-form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .login-form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #1e293b;
+        }
+
+        .login-form-group input {
+            width: 100%;
+            padding: 12px;
+            padding-right: 45px;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+
+        .login-form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(44,125,160,0.1);
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 12px;
+            top: 42px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #2c7da0, #1f5e7a);
+            color: white;
+            border: none;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .login-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(44,125,160,0.3);
+        }
+
+        .login-message {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        .login-message.success {
+            background: #e0f2e9;
+            color: #1e7b4a;
+        }
+
+        .login-message.error {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .login-links {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.85rem;
+        }
+
+        .login-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* Dashboard Layout */
+        .dashboard-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 24px;
+            height: var(--header-height);
+            background: linear-gradient(135deg, #2c7da0 0%, #1f5e7a 100%);
+            box-shadow: var(--card-shadow);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            color: white;
+        }
+        .logo img {
+            border-radius: 8px;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255,255,255,0.15);
+            padding: 6px 16px;
+            border-radius: 40px;
+            cursor: pointer;
+            position: relative;
+        }
+        .profile-icon {
+            font-size: 1.6rem;
+        }
+        .user-dropdown {
+            position: absolute;
+            top: 110%;
+            right: 0;
+            background: white;
+            border-radius: 16px;
+            width: 220px;
+            display: none;
+            z-index: 200;
+            box-shadow: var(--card-shadow);
+        }
+        .user-info:hover .user-dropdown {
+            display: block;
+        }
+        .user-dropdown a, .user-dropdown button {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 20px;
+            color: #1e293b;
+            text-decoration: none;
+            width: 100%;
+            border: none;
+            background: none;
+            text-align: left;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        .user-dropdown a:hover, .user-dropdown button:hover {
+            background: #f1f5f9;
+            color: var(--primary-color);
+        }
+        .content-wrapper {
+            display: flex;
+            margin-top: var(--header-height);
+        }
+        .sidebar {
+            width: var(--sidebar-width);
+            background: white;
+            box-shadow: 2px 0 12px rgba(0,0,0,0.05);
+            height: calc(100vh - var(--header-height));
+            overflow-y: auto;
+            position: fixed;
+            z-index: 90;
+        }
+        .sidebar nav ul {
+            list-style: none;
+            padding: 16px 0;
+        }
+        .sidebar nav li {
+            margin: 4px 12px;
+            border-radius: 12px;
+        }
+        .sidebar nav a, .sidebar nav button.sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            color: #334155;
+            text-decoration: none;
+            border-radius: 12px;
+            width: 100%;
+            border: none;
+            background: none;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .sidebar nav a i, .sidebar nav button i {
+            width: 28px;
+        }
+        .sidebar nav a:hover, .sidebar nav button:hover {
+            background: #e6f4f9;
+            color: var(--primary-color);
+        }
+        .main-content {
+            flex: 1;
+            padding: 24px;
+            margin-left: var(--sidebar-width);
+            transition: var(--transition);
+        }
+        .stats-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+        .card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: var(--card-shadow);
+            padding: 20px;
+            border: none;
+            transition: all 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+        }
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary-color);
+            padding-left: 12px;
+        }
+        .chart-container {
+            height: 220px;
+            position: relative;
+        }
+        .content-container {
+            display: none;
+        }
+        .content-container.active {
+            display: block;
+        }
+        .menu-toggle {
+            display: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+        }
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 40px;
+            padding: 8px 20px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        .attendance-summary {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 16px;
+            margin-top: 20px;
+        }
+        @media (max-width: 992px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            .main-content {
+                margin-left: 0;
+            }
+            .menu-toggle {
+                display: block;
+            }
+        }
+        footer {
+            text-align: center;
+            margin-top: 32px;
+            padding-top: 16px;
+            color: #64748b;
+            font-size: 0.8rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 10000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(8px);
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal-content {
+            background: white;
+            width: 90%;
+            height: 85%;
+            max-width: 1200px;
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .modal-header {
+            background: linear-gradient(135deg, #2c7da0, #1f5e7a);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .modal-close {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+        }
+        .modal-iframe {
+            flex: 1;
+            border: none;
+        }
+        hr {
+            margin: 12px;
+        }
+        .demo-badge {
+            font-size: 11px;
+            text-align: center;
+            margin-top: 8px;
+            color: #5f6c80;
+        }
+    </style>
+</head>
+<body>
+
+<!-- LOGIN MODAL -->
+<div id="loginModal" class="login-modal" style="display: none;">
+    <div class="login-modal-content">
+        <div class="login-header">
+            <h3><i class="fas fa-calendar-check"></i> Student Attendance</h3>
+            <p>Secure Access • Dashboard</p>
+        </div>
+        <div class="login-body">
+            <div class="login-form-group">
+                <label><i class="fas fa-user"></i> Username / Email</label>
+                <input type="text" id="loginUsername" value="Admin" autocomplete="username">
+            </div>
+            <div class="login-form-group" style="position: relative;">
+                <label><i class="fas fa-lock"></i> Password</label>
+                <input type="password" id="loginPassword" value="1234#" autocomplete="current-password">
+                <button type="button" id="togglePasswordBtn" class="password-toggle" tabindex="-1">
+                    <i class="fas fa-eye-slash"></i>
+                </button>
+            </div>
+            <button class="login-button" id="loginBtnModal" onclick="performLogin()"><i class="fas fa-arrow-right-to-bracket"></i> Login to Dashboard</button>
+            <div id="loginMsgModal" class="login-message"></div>
+            <div class="login-links">
+                <a href="#" onclick="openRegister(); return false;"><i class="fas fa-user-plus"></i> Register</a>
+                <span style="margin:0 10px">|</span>
+                <a href="#" onclick="openForgot(); return false;"><i class="fas fa-key"></i> Forgot Password?</a>
+            </div>
+            <div class="demo-badge">Demo: Admin / 1234#</div>
+        </div>
+    </div>
+</div>
+
+<!-- MAIN DASHBOARD -->
+<div class="dashboard-container" id="dashboardMain" style="display: none;">
+    <header class="header">
+        <div class="menu-toggle" id="menuToggleBtn">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="logo">
+            <img width="80" height="30" src="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Logo.JPG" alt="Logo">
+        </div>
+        <div class="user-info">
+            <span id="userDisplayName">Attendance Admin</span>
+            <i class="fas fa-user-circle profile-icon"></i>
+            <div class="user-dropdown">
+                <a href="#" onclick="showProfile();"><i class="fas fa-user"></i> My Profile</a>
+                <a href="#" onclick="openChangePwd();"><i class="fas fa-key"></i> Change Password</a>
+                <button onclick="openRegister()"><i class="fas fa-user-plus"></i> Register Account</button>
+                <button onclick="logout()"><i class="fas fa-sign-out-alt"></i> Log Out</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="content-wrapper">
+        <aside class="sidebar" id="mainSidebar">
+            <center style="margin-top: 16px;">
+                <img width="36" height="36" src="https://media.tenor.com/dhfraztxBo8AAAAj/globe-joypixels.gif" alt="globe">
+                <a href="https://shamser.info.np" style="font-size:12px; color:#2c7da0;">shamser.info.np</a>
+            </center>
+            <nav>
+                <ul>
+                    <li class="active" id="dashboardNav"><a href="#" id="dashboardMainLink"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <!-- Attendance System Core Links -->
+                    <li><a href="#" onclick="openModalWindow('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Student%20Attendance%20System(SAS)/Attendance%20Entry%20Form.html', 'Attendance Entry')"><i class="fas fa-check-circle"></i> Attendance Entry</a></li>
+                    <li><a href="#" onclick="openModalWindow('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Student%20Attendance%20System(SAS)/UpdateForm.html', 'Update Attendance')"><i class="fas fa-edit"></i> Update Record</a></li>
+                    <li><a href="#" onclick="openModalWindow('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Student%20Attendance%20System(SAS)/IndividualReport.html', 'Individual Report')"><i class="fas fa-id-badge"></i> Individual Report</a></li>
+                    <li><a href="#" onclick="openModalWindow('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Student%20Attendance%20System(SAS)/Report.html', 'Master Report')"><i class="fas fa-chart-line"></i> Master Report</a></li>
+                    <hr>
+                    <li><button class="sidebar-link" onclick="openRegister()"><i class="fas fa-user-plus"></i> Register New User</button></li>
+                    <li><a href="#" onclick="openChangePwd();"><i class="fas fa-shield-alt"></i> Change Password</a></li>
+                    <li><button class="sidebar-link" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Log Out</button></li>
+                    <li><a href="#" onclick="openModalWindow('https://shamser.info.np/Contact_Form.html', 'Support Desk')"><i class="fas fa-headset"></i> Support</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <!-- Dashboard Home -->
+            <div class="content-container active" id="dashboard-content">
+                <div class="stats-cards">
+                    <div class="card">
+                        <h3><i class="fas fa-user-graduate"></i> Today's Attendance Rate</h3>
+                        <div class="chart-container">
+                            <canvas id="attendanceRateChart"></canvas>
+                        </div>
+                        <div class="attendance-summary mt-2"><i class="fas fa-chalkboard-user"></i> Overall: <strong>92% Present</strong> out of 450 students</div>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fas fa-chart-simple"></i> Weekly Trends</h3>
+                        <div class="chart-container">
+                            <canvas id="weeklyTrendsChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fas fa-school"></i> Class-wise Presence</h3>
+                        <div class="chart-container">
+                            <canvas id="classPresenceChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-clock"></i> Late Arrivals / Absenteeism</h3>
+                    <div class="chart-container" style="height: 240px;">
+                        <canvas id="lateAbsentChart"></canvas>
+                    </div>
+                    <div class="attendance-summary" style="margin-top: 16px;">📌 March Summary: 94% Present | 4% Absent | 2% Late</div>
+                </div>
+                <footer>
+                    <i class="fas fa-calendar-alt"></i> Student Attendance System © 2025 • shamser.info.np
+                </footer>
+            </div>
+            <!-- External content container fallback (optional) -->
+            <div class="content-container" id="external-content">
+                <button class="back-button" id="backToDashboardBtn"><i class="fas fa-arrow-left"></i> Back to Dashboard</button>
+                <iframe class="content-area" id="content-frame" style="width:100%; height:70vh; border-radius:20px;" title="attendance frame"></iframe>
+            </div>
+        </main>
+    </div>
+</div>
+
+<!-- MODAL FOR EXTERNAL TOOLS -->
+<div id="pageModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 id="modalTitle"><i class="fas fa-chalkboard-user"></i> Attendance Module</h4>
+            <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+        </div>
+        <iframe id="modalIframe" class="modal-iframe" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox"></iframe>
+    </div>
+</div>
+
+<script>
+    // PASSWORD TOGGLE
+    const toggleBtn = document.getElementById('togglePasswordBtn');
+    const pwdInput = document.getElementById('loginPassword');
+    if(toggleBtn && pwdInput) {
+        toggleBtn.addEventListener('click', () => {
+            const type = pwdInput.type === 'password' ? 'text' : 'password';
+            pwdInput.type = type;
+            toggleBtn.querySelector('i').classList.toggle('fa-eye');
+            toggleBtn.querySelector('i').classList.toggle('fa-eye-slash');
+        });
+    }
+
+    // GLOBAL FUNCTIONS
+    function performLogin() {
+        const username = document.getElementById('loginUsername').value.trim();
+        const password = document.getElementById('loginPassword').value.trim();
+        const msgDiv = document.getElementById('loginMsgModal');
+        if(!username || !password) {
+            msgDiv.innerHTML = "❌ Please enter credentials";
+            msgDiv.className = "login-message error";
+            return;
+        }
+        msgDiv.innerHTML = "⏳ Authenticating...";
+        msgDiv.className = "login-message";
+        // Call google script (external auth)
+        fetch("https://script.google.com/macros/s/AKfycbzQrWWm5yoRfc06iIXkJGIlA0Wz2ID5ezPsn66W1_uU67ETOQNOf-fRVLMNRLyMxN4/exec", {
+            method: "POST",
+            body: JSON.stringify({ action: "login", username: username, password: password })
+        })
+        .then(res => res.json())
+        .then(resp => {
+            if(resp.status === "success") {
+                sessionStorage.setItem("attendanceUser", resp.user);
+                msgDiv.innerHTML = "✅ Access Granted! Redirecting...";
+                msgDiv.className = "login-message success";
+                setTimeout(() => {
+                    document.getElementById('loginModal').style.display = 'none';
+                    document.getElementById('dashboardMain').style.display = 'flex';
+                    updateUI(resp.user);
+                    initCharts();
+                }, 700);
+            } else {
+                msgDiv.innerHTML = "❌ " + resp.message;
+                msgDiv.className = "login-message error";
+            }
+        })
+        .catch(() => {
+            // Demo fallback
+            if(username === "Admin" && password === "1234#") {
+                sessionStorage.setItem("attendanceUser", username);
+                msgDiv.innerHTML = "✅ Demo Login Successful!";
+                msgDiv.className = "login-message success";
+                setTimeout(() => {
+                    document.getElementById('loginModal').style.display = 'none';
+                    document.getElementById('dashboardMain').style.display = 'flex';
+                    updateUI(username);
+                    initCharts();
+                }, 500);
+            } else {
+                msgDiv.innerHTML = "⚠️ Server error. Use Admin/1234#";
+                msgDiv.className = "login-message error";
+            }
+        });
+    }
+    
+    function updateUI(user) {
+        document.getElementById('userDisplayName').innerText = user || "Staff";
+    }
+    
+    function logout() {
+        if(confirm("Exit attendance system?")) {
+            sessionStorage.removeItem("attendanceUser");
+            document.getElementById('dashboardMain').style.display = 'none';
+            document.getElementById('loginModal').style.display = 'flex';
+            document.getElementById('loginUsername').value = "Admin";
+            document.getElementById('loginPassword').value = "1234#";
+            document.getElementById('loginMsgModal').innerHTML = "";
+            closeModal();
+        }
+    }
+    
+    function openModalWindow(url, title) {
+        if(!url) return;
+        const modal = document.getElementById('pageModal');
+        const iframe = document.getElementById('modalIframe');
+        document.getElementById('modalTitle').innerHTML = `<i class="fas fa-window-restore"></i> ${title}`;
+        iframe.src = url;
+        modal.classList.add('active');
+        if(window.innerWidth <= 992) document.getElementById('mainSidebar')?.classList.remove('active');
+    }
+    
+    function closeModal() {
+        const modal = document.getElementById('pageModal');
+        const iframe = document.getElementById('modalIframe');
+        if(iframe) iframe.src = '';
+        modal.classList.remove('active');
+    }
+    
+    function openRegister() { openModalWindow('https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/New%20User%20Register.html', 'Register New Account'); }
+    function openForgot() { openModalWindow('https://script.google.com/macros/s/AKfycbxUs8Nn3kl1P_eGD6A7zR-sBfNT6kIksBxpIiPvJAE8jg6qilPQ1Thq_kLgabk6rKqvhw/exec', 'Reset Password'); }
+    function openChangePwd() { openModalWindow('https://script.google.com/macros/s/AKfycbxUs8Nn3kl1P_eGD6A7zR-sBfNT6kIksBxpIiPvJAE8jg6qilPQ1Thq_kLgabk6rKqvhw/exec', 'Change Password'); }
+    function showProfile() { const u = sessionStorage.getItem("attendanceUser") || "Admin"; alert(`📋 Profile\nUser: ${u}\nRole: Attendance Manager\nStatus: Active\nSchool: Integrated Attendance System`); }
+    
+    function showDashboardOnly() {
+        document.getElementById('dashboard-content').classList.add('active');
+        document.getElementById('external-content').classList.remove('active');
+        const ifr = document.getElementById('content-frame');
+        if(ifr) ifr.src = '';
+    }
+    
+    // CHARTS INTEGRATION (Attendance specific)
+    let chart1, chart2, chart3, chart4;
+    function initCharts() {
+        if(chart1) chart1.destroy(); if(chart2) chart2.destroy(); if(chart3) chart3.destroy(); if(chart4) chart4.destroy();
+        
+        const ctxRate = document.getElementById('attendanceRateChart')?.getContext('2d');
+        if(ctxRate) {
+            chart1 = new Chart(ctxRate, {
+                type: 'doughnut',
+                data: { labels: ['Present 92%', 'Absent 5%', 'Late 3%'], datasets: [{ data: [92,5,3], backgroundColor: ['#2c7da0', '#e2a76f', '#f4c542'], borderWidth: 0 }] },
+                options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+            });
+        }
+        const ctxWeekly = document.getElementById('weeklyTrendsChart')?.getContext('2d');
+        if(ctxWeekly) {
+            chart2 = new Chart(ctxWeekly, {
+                type: 'line',
+                data: { labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], datasets: [{ label: 'Present %', data: [94, 91, 89, 93, 95, 88], borderColor: '#2c7da0', backgroundColor: 'rgba(44,125,160,0.05)', fill: true, tension: 0.3 }] },
+                options: { responsive: true }
+            });
+        }
+        const ctxClass = document.getElementById('classPresenceChart')?.getContext('2d');
+        if(ctxClass) {
+            chart3 = new Chart(ctxClass, {
+                type: 'bar',
+                data: { labels: ['Grade 6', 'Grade 7', 'Grade 8', 'Grade 9', 'Grade 10'], datasets: [{ label: 'Attendance %', data: [96, 90, 88, 92, 85], backgroundColor: '#61a5c2', borderRadius: 8 }] },
+                options: { responsive: true, scales: { y: { max: 100, title: { display: true, text: 'Percentage' } } } }
+            });
+        }
+        const ctxLate = document.getElementById('lateAbsentChart')?.getContext('2d');
+        if(ctxLate) {
+            chart4 = new Chart(ctxLate, {
+                type: 'pie',
+                data: { labels: ['On Time (88%)', 'Late (7%)', 'Absent (5%)'], datasets: [{ data: [88,7,5], backgroundColor: ['#2c7da0', '#f4a261', '#e76f51'] }] },
+                options: { responsive: true, plugins: { legend: { position: 'right' } } }
+            });
+        }
+    }
+    
+    // SIDEBAR & EVENT LISTENERS
+    document.addEventListener('DOMContentLoaded', () => {
+        const logged = sessionStorage.getItem("attendanceUser");
+        if(logged) {
+            document.getElementById('loginModal').style.display = 'none';
+            document.getElementById('dashboardMain').style.display = 'flex';
+            updateUI(logged);
+            initCharts();
+        } else {
+            document.getElementById('loginModal').style.display = 'flex';
+            document.getElementById('dashboardMain').style.display = 'none';
+        }
+        
+        // toggle sidebar
+        const menuBtn = document.getElementById('menuToggleBtn');
+        const sidebar = document.getElementById('mainSidebar');
+        if(menuBtn) menuBtn.onclick = () => sidebar.classList.toggle('active');
+        
+        const dashboardLink = document.getElementById('dashboardMainLink');
+        if(dashboardLink) dashboardLink.addEventListener('click', (e) => { e.preventDefault(); showDashboardOnly(); });
+        const backBtn = document.getElementById('backToDashboardBtn');
+        if(backBtn) backBtn.addEventListener('click', showDashboardOnly);
+        
+        // Enter key login
+        const pwdField = document.getElementById('loginPassword');
+        const userField = document.getElementById('loginUsername');
+        if(pwdField) pwdField.addEventListener('keypress', (e) => { if(e.key === 'Enter') performLogin(); });
+        if(userField) userField.addEventListener('keypress', (e) => { if(e.key === 'Enter') performLogin(); });
+        
+        // close modal on escape
+        document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });
+    });
+    
+    window.performLogin = performLogin;
+    window.logout = logout;
+    window.openModalWindow = openModalWindow;
+    window.closeModal = closeModal;
+    window.openRegister = openRegister;
+    window.openForgot = openForgot;
+    window.openChangePwd = openChangePwd;
+    window.showProfile = showProfile;
+    window.showDashboardOnly = showDashboardOnly;
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
