@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>📝 Update Attendance | Year, Month & Class Filters</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    }
+
+    body {
+      background: #f0f2f5;
+      margin: 0;
+      padding: 24px 20px;
+    }
+
+    .dashboard-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: white;
+      border-radius: 28px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.02);
+      padding: 20px 24px 28px;
+      margin-bottom: 28px;
+    }
+
+    h2 {
+      font-size: 1.7rem;
+      font-weight: 600;
+      margin: 0 0 6px 0;
+      background: linear-gradient(135deg, #1e3c72, #2b3b5c);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      display: inline-block;
+    }
+
+    .subhead {
+      color: #5a6874;
+      margin-bottom: 24px;
+      border-left: 4px solid #3b82f6;
+      padding-left: 14px;
+      font-size: 0.9rem;
+    }
+
+    .message-area {
+      padding: 12px 20px;
+      border-radius: 60px;
+      margin-bottom: 20px;
+      font-weight: 500;
+      display: none;
+    }
+    
+    .message-success {
+      background: #dcfce7;
+      color: #166534;
+      border-left: 5px solid #22c55e;
+    }
+    
+    .message-error {
+      background: #fee2e2;
+      color: #991b1b;
+      border-left: 5px solid #ef4444;
+    }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: flex-end;
+      background: #f8fafc;
+      padding: 18px 20px;
+      border-radius: 32px;
+      margin-bottom: 28px;
+      border: 1px solid #e2edf2;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 130px;
+    }
+
+    .filter-group label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #2c3e66;
+    }
+
+    select, input, button {
+      padding: 10px 14px;
+      border-radius: 60px;
+      border: 1px solid #cbd5e1;
+      background: white;
+      font-size: 0.85rem;
+      outline: none;
+      transition: 0.2s;
+    }
+
+    select:focus, input:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+    }
+
+    button {
+      background: #1e293b;
+      color: white;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      padding: 10px 28px;
+    }
+
+    button:hover {
+      background: #0f172a;
+      transform: translateY(-1px);
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .btn-primary {
+      background: #3b82f6;
+    }
+    
+    .btn-primary:hover {
+      background: #2563eb;
+    }
+    
+    .btn-success {
+      background: #10b981;
+    }
+    
+    .btn-success:hover {
+      background: #059669;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 20px;
+      border: 1px solid #e9eef3;
+      background: white;
+      margin-top: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+
+    th {
+      background: #f1f5f9;
+      color: #0f2b3d;
+      font-weight: 700;
+      padding: 14px 12px;
+      border-bottom: 1px solid #dce5ec;
+      text-align: left;
+      position: sticky;
+      top: 0;
+    }
+
+    td {
+      padding: 12px 12px;
+      border-bottom: 1px solid #ecf3f9;
+      vertical-align: middle;
+    }
+
+    tr:hover td {
+      background-color: #fafcff;
+    }
+
+    .attendance-select {
+      padding: 8px 12px;
+      border-radius: 40px;
+      font-weight: 600;
+      cursor: pointer;
+      min-width: 100px;
+    }
+    
+    .attendance-select.P {
+      background: #d1fae5;
+      color: #065f46;
+      border-color: #10b981;
+    }
+    
+    .attendance-select.A {
+      background: #ffe4e2;
+      color: #9b2c1d;
+      border-color: #ef4444;
+    }
+    
+    .attendance-select.H {
+      background: #fef3c7;
+      color: #92400e;
+      border-color: #f59e0b;
+    }
+
+    .present-badge {
+      background: #d1fae5;
+      color: #065f46;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 40px;
+      display: inline-block;
+      font-size: 0.75rem;
+    }
+
+    .absent-badge {
+      background: #ffe4e2;
+      color: #9b2c1d;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 40px;
+      display: inline-block;
+      font-size: 0.75rem;
+    }
+
+    .holiday-badge {
+      background: #fef3c7;
+      color: #92400e;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 40px;
+      display: inline-block;
+      font-size: 0.75rem;
+    }
+
+    .stats-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 16px 24px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+
+    .save-all-btn {
+      background: white;
+      color: #667eea;
+      border: none;
+      padding: 10px 20px;
+      font-weight: 700;
+      margin-top: 12px;
+      cursor: pointer;
+      border-radius: 40px;
+    }
+    
+    .save-all-btn:hover:not(:disabled) {
+      background: #f0f0f0;
+      transform: translateY(-1px);
+    }
+    
+    .save-all-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 48px;
+      color: #6c86a3;
+    }
+    
+    .bulk-btns {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+    
+    .bulk-btn {
+      padding: 6px 16px;
+      border-radius: 40px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.8rem;
+      border: none;
+    }
+    
+    .bulk-present {
+      background: #10b981;
+      color: white;
+      
+    }
+    
+    .bulk-absent {
+      background: #ef4444;
+      color: white;
+    }
+    
+    .bulk-holiday {
+      background: #f59e0b;
+      color: white;
+    }
+
+    @media (max-width: 780px) {
+      .filter-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .filter-group {
+        width: 100%;
+      }
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="dashboard-container">
+  <div class="card">
+    <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;">
+      <div>
+        <h2>Update Attendance</h2>
+        <div class="subhead">Filter by Year, Month & Class | Mark Present (P) / Absent (A) / Holiday (H)</div>
+      </div>
+      <div class="badge-new">🔐 Real-time Updates</div>
+    </div>
+
+    <div id="globalMessage" class="message-area"></div>
+
+    <!-- FILTER BAR -->
+    <div class="filter-bar">
+      <div class="filter-group">
+        <label> 📆ACADEMIC YEAR</label>
+        <select id="yearSelect">
+          <option value="2080">2080</option>
+          <option value="2081" selected>2081</option>
+          <option value="2082">2082</option>
+          <option value="2083">2083</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label> MONTH</label>
+        <select id="monthSelect">
+          <option value="Baisakh">Baisakh</option>
+          <option value="Jeshtha">Jeshtha</option>
+          <option value="Ashad">Ashad</option>
+          <option value="Shrawan">Shrawan</option>
+          <option value="Bhadra">Bhadra</option>
+          <option value="Ashwin">Ashwin</option>
+          <option value="Kartik">Kartik</option>
+          <option value="Mangsir">Mangsir</option>
+          <option value="Poush">Poush</option>
+          <option value="Magh">Magh</option>
+          <option value="Falgun">Falgun</option>
+          <option value="Chaitra">Chaitra</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label>CLASS</label>
+        <select id="classSelect">
+          <option value="all"> All Classes</option>
+          <option value="4">Grade 4</option>
+          <option value="5">Grade 5</option>
+          <option value="6">Grade 6</option>
+          <option value="7">Grade 7</option>
+          <option value="8">Grade 8</option>
+          <option value="9">Grade 9</option>
+          <option value="10">Grade 10</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label> DAY NUMBER</label>
+        <input type="number" id="dayNumberInput" placeholder="e.g., 14 Gate" value="14" min="1" max="32">
+      </div>
+
+      <div class="filter-group">
+
+        <button id="loadStudentsBtn" class="btn-primary">⟳ Load Students</button>
+      </div>
+    </div>
+
+    <!-- Stats and Save All button -->
+    <div id="statsContainer" style="display: none;">
+      <div class="stats-card">
+        <div id="statsText">Loading...</div>
+        <div class="bulk-btns">
+          <button class="bulk-btn bulk-present" onclick="bulkUpdate('P')">✅ All Present</button>
+          <button class="bulk-btn bulk-absent" onclick="bulkUpdate('A')">❌ All Absent</button>
+          <button class="bulk-btn bulk-holiday" onclick="bulkUpdate('H')">🎉 All Holiday</button>
+        </div>
+        <button id="saveAllBtn" class="save-all-btn" disabled> Save All Changes</button>
+      </div>
+    </div>
+
+    <!-- Students Table -->
+    <div id="studentsContainer">
+      <div class="loading">
+        <span style="font-size: 0.9rem;"> Select filters and click "Load Students" to start updating attendance👈</span><br/>
+       
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ======================= CONFIGURATION =======================
+  // IMPORTANT: Replace with your actual Apps Script Web App URL
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxbHayq6mbJN5xS301x1Xuz70-NZYjcSx49pHvUP_vOnekE7c26q1AfFe-xMbSqIc-0hg/exec";
+  
+  // Global state
+  let currentStudents = [];
+  let currentMonthSheet = "";
+  let currentDayColumn = 0;
+  let pendingChanges = new Map(); // rowNum -> { rollNo, newStatus, oldStatus }
+  
+  function showMessage(msg, type = "success") {
+    const msgDiv = document.getElementById("globalMessage");
+    msgDiv.textContent = msg;
+    msgDiv.className = `message-area message-${type === "error" ? "error" : "success"}`;
+    msgDiv.style.display = "block";
+    setTimeout(() => {
+      msgDiv.style.display = "none";
+    }, 4000);
+  }
+
+  // API call function for POST actions
+  async function callAppsScriptPost(action, payload) {
+    const requestBody = new URLSearchParams({
+      action: action,
+      ...payload
+    }).toString();
+
+    try {
+      const response = await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: requestBody,
+        mode: 'cors'
+      });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const data = await response.json();
+      console.log(`${action} response:`, data);
+      return data;
+    } catch (err) {
+      console.error('Fetch error:', err);
+      throw new Error(`Network error: ${err.message}`);
+    }
+  }
+  
+  // API call function for GET actions
+  async function callAppsScriptGet(action, payload) {
+    const url = new URL(APPS_SCRIPT_URL);
+    url.searchParams.append('action', action);
+    Object.keys(payload).forEach(key => {
+      url.searchParams.append(key, payload[key]);
+    });
+
+    try {
+      const response = await fetch(url.toString(), {
+        method: 'GET',
+        mode: 'cors'
+      });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const data = await response.json();
+      console.log(`${action} response:`, data);
+      return data;
+    } catch (err) {
+      console.error('Fetch error:', err);
+      throw new Error(`Network error: ${err.message}`);
+    }
+  }
+
+  // Load students with filters
+  async function loadStudents() {
+    const year = document.getElementById('yearSelect').value;
+    const month = document.getElementById('monthSelect').value;
+    const classFilter = document.getElementById('classSelect').value;
+    const dayNum = parseInt(document.getElementById('dayNumberInput').value);
+    
+    if (isNaN(dayNum) || dayNum < 1 || dayNum > 32) {
+      showMessage("Please enter a valid day number (1-32)", "error");
+      return;
+    }
+    
+    currentMonthSheet = month;
+    currentDayColumn = 14 + dayNum - 1; // Column O (index 14) is Day 1
+    
+    const container = document.getElementById('studentsContainer');
+    container.innerHTML = `<div class="loading">⏳ Loading students for ${month}, Day ${dayNum}...</div>`;
+    document.getElementById('statsContainer').style.display = 'none';
+    
+    try {
+      // First get all students using GET
+      const studentsResult = await callAppsScriptGet('getStudents', { monthSheet: month });
+      
+      if (!studentsResult.success) {
+        throw new Error(studentsResult.message || "Failed to load students");
+      }
+      
+      let students = studentsResult.data || [];
+      
+      // Filter by year and class
+      students = students.filter(s => {
+        if (year && s.year != year) return false;
+        if (classFilter !== 'all' && s.class != classFilter) return false;
+        return true;
+      });
+      
+      if (students.length === 0) {
+        container.innerHTML = `<div class="error-message">⚠️ No students found for Year: ${year}, Class: ${classFilter === 'all' ? 'All' : classFilter}</div>`;
+        return;
+      }
+      
+      // Get current attendance for the selected day using GET
+      const attendanceResult = await callAppsScriptGet('getDayAttendance', { 
+        monthSheet: month, 
+        dayColumn: currentDayColumn 
+      });
+      
+      const attendanceMap = attendanceResult.success ? (attendanceResult.data || {}) : {};
+      
+      // Merge attendance data with students
+      currentStudents = students.map(student => ({
+        ...student,
+        currentStatus: attendanceMap[student.roll_no] || '',
+        originalStatus: attendanceMap[student.roll_no] || ''
+      }));
+      
+      // Reset pending changes
+      pendingChanges.clear();
+      
+      renderStudentsTable();
+      updateStats();
+      document.getElementById('statsContainer').style.display = 'block';
+      
+      showMessage(`Loaded ${currentStudents.length} students for ${month}, Day ${dayNum}`, "success");
+      
+    } catch (err) {
+      console.error(err);
+      container.innerHTML = `<div class="error-message">❌ Failed to load students: ${err.message}</div>`;
+      showMessage(err.message, "error");
+    }
+  }
+  
+  // Render students table
+  function renderStudentsTable() {
+    const container = document.getElementById('studentsContainer');
+    
+    let html = `
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>SN</th>
+              <th>Roll No</th>
+              <th>Class</th>
+              <th>Student Name</th>
+              <th>Father's Name</th>
+              <th>Current Status</th>
+              <th>Update Status</th>
+            </tr>
+          </thead>
+          <tbody>
+    `;
+    
+    currentStudents.forEach((student, idx) => {
+      const hasPending = pendingChanges.has(student.rowNum);
+      const pendingStatus = hasPending ? pendingChanges.get(student.rowNum).newStatus : null;
+      const displayStatus = pendingStatus || student.currentStatus;
+      
+      let statusBadge = '';
+      if (displayStatus === 'P') statusBadge = '<span class="present-badge">✅ Present</span>';
+      else if (displayStatus === 'A') statusBadge = '<span class="absent-badge">❌ Absent</span>';
+      else if (displayStatus === 'H') statusBadge = '<span class="holiday-badge">🎉 Holiday</span>';
+      else statusBadge = '<span class="absent-badge">⚪ Not Marked</span>';
+      
+      html += `
+        <tr ${hasPending ? 'style="background-color: #fef3c7;"' : ''}>
+          <td>${student.sn || idx+1}</td>
+          <td><strong>${student.roll_no}</strong></td>
+          <td>${student.class}</td>
+          <td>${student.name}</td>
+          <td>${student.father_name || '-'}</td>
+          <td>${statusBadge}</td>
+          <td>
+            <select class="attendance-select ${displayStatus}" 
+                    data-row="${student.rowNum}" 
+                    data-roll="${student.roll_no}"
+                    onchange="updateAttendanceStatus(this, '${student.rowNum}', '${student.roll_no}')">
+              <option value="" ${!displayStatus ? 'selected' : ''}>-- Select --</option>
+              <option value="P" ${displayStatus === 'P' ? 'selected' : ''}>✅ Present (P)</option>
+              <option value="A" ${displayStatus === 'A' ? 'selected' : ''}>❌ Absent (A)</option>
+              <option value="H" ${displayStatus === 'H' ? 'selected' : ''}>🎉 Holiday (H)</option>
+            </select>
+            ${hasPending ? '<span style="font-size: 11px; margin-left: 8px; color: #d97706;">📝 Pending</span>' : ''}
+          </td>
+        </tr>
+      `;
+    });
+    
+    html += `
+          </tbody>
+        </table>
+      </div>
+    `;
+    
+    container.innerHTML = html;
+  }
+  
+  // Update attendance status (track pending changes)
+  window.updateAttendanceStatus = function(selectElement, rowNum, rollNo) {
+    const newStatus = selectElement.value;
+    const student = currentStudents.find(s => s.rowNum == rowNum);
+    
+    if (!student) return;
+    
+    const oldStatus = student.currentStatus;
+    
+    if (newStatus === oldStatus) {
+      // Remove from pending if same as original
+      pendingChanges.delete(parseInt(rowNum));
+    } else if (newStatus === "") {
+      // Remove from pending if cleared
+      pendingChanges.delete(parseInt(rowNum));
+    } else {
+      // Add to pending changes
+      pendingChanges.set(parseInt(rowNum), {
+        rollNo: rollNo,
+        newStatus: newStatus,
+        oldStatus: oldStatus
+      });
+    }
+    
+    // Update visual feedback
+    const row = selectElement.closest('tr');
+    if (pendingChanges.has(parseInt(rowNum))) {
+      row.style.backgroundColor = '#fef3c7';
+    } else {
+      row.style.backgroundColor = '';
+    }
+    
+    // Update select class
+    selectElement.className = `attendance-select ${newStatus}`;
+    
+    updateStats();
+    
+    // Show quick feedback
+    if (newStatus) {
+      const statusText = newStatus === 'P' ? 'Present' : (newStatus === 'A' ? 'Absent' : 'Holiday');
+      showMessage(`Roll ${rollNo}: Marked as ${statusText} - Click "Save All Changes" to confirm`, "success");
+    }
+  };
+  
+  // Update statistics
+  function updateStats() {
+    const statsText = document.getElementById('statsText');
+    const totalStudents = currentStudents.length;
+    const pendingCount = pendingChanges.size;
+    
+    let presentCount = 0;
+    let absentCount = 0;
+    let holidayCount = 0;
+    let notMarked = 0;
+    
+    currentStudents.forEach(student => {
+      const status = pendingChanges.has(student.rowNum) ? pendingChanges.get(student.rowNum).newStatus : student.currentStatus;
+      if (status === 'P') presentCount++;
+      else if (status === 'A') absentCount++;
+      else if (status === 'H') holidayCount++;
+      else notMarked++;
+    });
+    
+    statsText.innerHTML = `
+      📚 Total: ${totalStudents} | 
+      ✅ Present: ${presentCount} | 
+      ❌ Absent: ${absentCount} | 
+      🎉 Holiday: ${holidayCount} | 
+      ⚪ Not Marked: ${notMarked}
+      ${pendingCount > 0 ? ` | 📝 Pending Changes: ${pendingCount}` : ''}
+    `;
+    
+    // Enable/disable save button based on pending changes
+    const saveBtn = document.getElementById('saveAllBtn');
+    if (saveBtn) {
+      saveBtn.disabled = pendingCount === 0;
+    }
+  }
+  
+  // Save all pending changes
+  async function saveAllChanges() {
+    if (pendingChanges.size === 0) {
+      showMessage("No changes to save", "error");
+      return;
+    }
+    
+    const saveBtn = document.getElementById('saveAllBtn');
+    saveBtn.disabled = true;
+    saveBtn.textContent = "💾 Saving...";
+    
+    let successCount = 0;
+    let errorCount = 0;
+    
+    for (const [rowNum, change] of pendingChanges) {
+      try {
+        const result = await callAppsScriptPost('updateAttendance', {
+          monthSheet: currentMonthSheet,
+          rowNumber: rowNum,
+          dayColumn: currentDayColumn,
+          status: change.newStatus,
+          roll_no: change.rollNo
+        });
+        
+        if (result.success) {
+          successCount++;
+          // Update the student's current status
+          const student = currentStudents.find(s => s.rowNum == rowNum);
+          if (student) {
+            student.currentStatus = change.newStatus;
+            student.originalStatus = change.newStatus;
+          }
+        } else {
+          errorCount++;
+          console.error(`Failed to update roll ${change.rollNo}:`, result.message);
+        }
+      } catch (err) {
+        errorCount++;
+        console.error(`Error updating roll ${change.rollNo}:`, err);
+      }
+    }
+    
+    // Clear pending changes
+    pendingChanges.clear();
+    
+    // Re-render table and update stats
+    renderStudentsTable();
+    updateStats();
+    
+    if (errorCount === 0) {
+      showMessage(`✅ Successfully saved ${successCount} attendance record(s)!`, "success");
+    } else {
+      showMessage(`⚠️ Saved ${successCount} records, ${errorCount} failed. Check console for details.`, "error");
+    }
+    
+    saveBtn.disabled = false;
+    saveBtn.textContent = "💾 Save All Changes";
+  }
+  
+  // Bulk update (for same status across multiple students)
+  window.bulkUpdate = function(status) {
+    if (currentStudents.length === 0) {
+      showMessage("No students loaded. Please load students first.", "error");
+      return;
+    }
+    
+    const statusText = status === 'P' ? 'Present' : (status === 'A' ? 'Absent' : 'Holiday');
+    if (!confirm(`Mark ALL students as ${statusText}? This will override all existing selections.`)) return;
+    
+    currentStudents.forEach(student => {
+      if (student.currentStatus !== status) {
+        pendingChanges.set(student.rowNum, {
+          rollNo: student.roll_no,
+          newStatus: status,
+          oldStatus: student.currentStatus
+        });
+      }
+    });
+    
+    renderStudentsTable();
+    updateStats();
+    showMessage(`Bulk update: All students marked as ${statusText}. Click "Save All Changes" to confirm.`, "success");
+  };
+  
+  // Event listeners
+  document.getElementById('loadStudentsBtn').addEventListener('click', loadStudents);
+  document.getElementById('saveAllBtn').addEventListener('click', saveAllChanges);
+  
+  // Initialize
+  window.addEventListener('load', () => {
+    // Set default day
+    if (!document.getElementById('dayNumberInput').value) {
+      document.getElementById('dayNumberInput').value = "15";
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>School Management System - Smart Data Entry</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: system-ui, 'Segoe UI', 'Roboto', sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .main-card {
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        .header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 30px 35px;
+        }
+        .header h1 {
+            margin: 0 0 8px 0;
+            font-size: 28px;
+        }
+        .header p {
+            margin: 0;
+            opacity: 0.9;
+            font-size: 14px;
+        }
+        .form-body {
+            padding: 35px;
+        }
+        .default-bar {
+            background: #fef9e3;
+            border: 1px solid #ffe4a2;
+            border-radius: 20px;
+            padding: 18px 24px;
+            margin-bottom: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+        .default-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            background: white;
+            padding: 8px 20px;
+            border-radius: 48px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+        .default-group label {
+            font-weight: 700;
+            color: #92400e;
+            font-size: 0.85rem;
+            letter-spacing: 0.3px;
+        }
+        /* DROPDOWN STYLES */
+        .default-select {
+            background: #fffbeb;
+            border: 1px solid #fed7aa;
+            border-radius: 32px;
+            padding: 6px 28px 6px 14px;
+            font-weight: 600;
+            color: #b45309;
+            font-size: 0.9rem;
+            cursor: pointer;
+            font-family: inherit;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23b45309' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 16px;
+        }
+        .default-select:focus {
+            outline: none;
+            border-color: #f59e0b;
+            box-shadow: 0 0 0 2px #fed7aa;
+        }
+        .reset-defaults {
+            background: #e2e8f0;
+            color: #334155;
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: 0.2s;
+        }
+        .reset-defaults:hover {
+            background: #cbd5e1;
+            transform: scale(0.98);
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px 35px;
+            margin-bottom: 35px;
+        }
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .field-group label {
+            font-weight: 700;
+            color: #1e293b;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .field-group label .required {
+            color: #ef4444;
+            margin-left: 4px;
+        }
+        .hint-temp {
+            font-size: 0.7rem;
+            color: #6c757d;
+            margin-top: 4px;
+        }
+        input, select {
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            background: #fafcff;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+            background: white;
+        }
+        input[readonly] {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+            cursor: not-allowed;
+        }
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 10px;
+            margin-bottom: 25px;
+        }
+        button {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-primary {
+            background: #1e3a8a;
+            color: white;
+            box-shadow: 0 4px 12px rgba(30,58,138,0.3);
+        }
+        .btn-danger {
+            background: #dc2626;
+            color: white;
+        }
+        .btn-secondary {
+            background: #475569;
+            color: white;
+        }
+        .btn-success {
+            background: #059669;
+            color: white;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.05);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+        .message-area {
+            padding: 15px 20px;
+            border-radius: 20px;
+            margin: 15px 0;
+            display: none;
+            font-weight: 500;
+        }
+        .message-success {
+            background: #d1fae5;
+            color: #065f46;
+            border-left: 5px solid #059669;
+        }
+        .message-error {
+            background: #fee2e2;
+            color: #991b1b;
+            border-left: 5px solid #dc2626;
+        }
+        .info-panel {
+            background: #f0f9ff;
+            border-radius: 24px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid #bae6fd;
+        }
+        .info-panel h3 {
+            margin: 0 0 12px 0;
+            color: #0c4a6e;
+            font-size: 18px;
+        }
+        .info-panel ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .info-panel li {
+            margin: 8px 0;
+            color: #475569;
+        }
+        .stats-badge {
+            display: inline-block;
+            background: #e0e7ff;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #3730a3;
+        }
+        hr {
+            margin: 20px 0;
+            border: none;
+            border-top: 2px dashed #e2e8f0;
+        }
+        @media (max-width: 700px) {
+            .form-body { padding: 20px; }
+            .btn-group button { flex: 1; justify-content: center; }
+            .default-bar { flex-direction: column; align-items: stretch; }
+            .default-group { justify-content: space-between; }
+        }
+        .live-badge {
+            background: #e6f7e6;
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #2b6e2f;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="main-card">
+        <div class="header">
+            <h1>📚 Student Attendance Data Entry System</h1>
+
+        </div>
+        <div class="form-body">
+            <div id="globalMessage" class="message-area"></div>
+            <div class="default-group">
+               <label> DEFAULT MENU</label>
+                </div>
+            <!-- DROPDOWN DEFAULTS PANEL: dynamically updates main form -->
+            <div class="default-bar" id="defaultBar">
+                <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
+                    <!-- Default Class Dropdown -->
+                    <div class="default-group">
+                        <label>Class:</label>
+                        <select id="defaultClassSelect" class="default-select">
+                            <option value="1">Class 1</option>>
+                            <option value="2">Class 2</option>
+                            <option value="3">Class 3</option>
+                            <option value="4">Class 4</option>
+                            <option value="5">Class 5<option>
+                            <option value="6">Class 6</option>
+                            <option value="7">Class 7</option>
+                            <option value="8">Class 8</option>
+                            <option value="9">Class 9</option>
+                            <option value="10" selected>Class 10</option>
+                            <option value="11">Class 11</option>
+                            <option value="12">Class 12<option>
+                            <option value="Nursery">Nursery</option>
+                            <option value="PG">PG/ECD<option>
+                            <option value="UKG">UKG</option>
+                            <option value="LKG">LKG<option>
+                            <option value="4EM">Class 4EM</option>
+                            <option value="5EM">Class 5EM<option>
+                        </select>
+                    </div>
+                    
+                    <!-- Default Academic Year Dropdown -->
+                    <div class="default-group">
+                        <label>Year:</label>
+                        <select id="defaultYearSelect" class="default-select">
+                         
+                            <option value="2080">2080</option>
+                            <option value="2081" selected>2081</option>
+                            <option value="2082">2082</option>
+                            <option value="2083">2083</option>
+                            <option value="2084">2084</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Default Nepali Month Dropdown -->
+                    <div class="default-group">
+                        <label> Month:</label>
+                        <select id="defaultMonthSelect" class="default-select">
+                            <option value="Baisakh"> Baisakh</option>
+                            <option value="Jeshtha"> Jeshtha</option>
+                            <option value="Ashad">☔ Ashad</option>
+                            <option value="Shrawan"> Shrawan</option>
+                            <option value="Bhadra"> Bhadra</option>
+                            <option value="Ashwin">Ashwin</option>
+                            <option value="Kartik">Kartik</option>
+                            <option value="Mangsir"> Mangsir</option>
+                            <option value="Poush">Poush</option>
+                            <option value="Magh">Magh</option>
+                            <option value="Falgun"> Falgun</option>
+                            <option value="Chaitra"> Chaitra</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="button" id="resetDefaultBtn" class="reset-defaults">⟳ Reset</button>
+            </div>
+            
+            <form id="studentEntryForm">
+                <div class="form-grid">
+                     <div class="field-group">
+                        <label>Academic Year <span class="required">*</span></label>
+                        <input type="text" id="year" required placeholder="e.g., 2081">
+                   
+                    </div>
+                    <div class="field-group">
+                        <label> Nepali Month <span class="required">*</span></label>
+                        <select id="month_select" required>
+                            <option value="">-- Select Nepali Month --</option>
+                            <option value="Baisakh"> Baisakh</option>
+                            <option value="Jeshtha">Jeshtha</option>
+                            <option value="Ashad">☔ Ashad</option>
+                            <option value="Shrawan"> Shrawan</option>
+                            <option value="Bhadra"> Bhadra</option>
+                            <option value="Ashwin"> Ashwin</option>
+                            <option value="Kartik"> Kartik</option>
+                            <option value="Mangsir"> Mangsir</option>
+                            <option value="Poush"> Poush</option>
+                            <option value="Magh"> Magh</option>
+                            <option value="Falgun"> Falgun</option>
+                            <option value="Chaitra"> Chaitra</option>
+                        </select>
+                 
+                    </div>
+                    <div class="field-group">
+                        <label>SN <span class="required">(Auto)</span></label>
+                        <input type="text" id="auto_sn" readonly placeholder="Will generate automatically">
+                    </div>
+                    <div class="field-group">
+                        <label>Roll No <span class="required">*</span></label>
+                        <input type="text" id="roll_no" required placeholder="e.g., 101">
+                    </div>
+                    <div class="field-group">
+                        <label>Class <span class="required">*</span></label>
+                        <input type="text" id="class_name" required placeholder="e.g., Grade 10">
+                        <div class="hint-temp">Reflects default class dropdown (auto-updates)</div>
+                    </div>
+                    <div class="field-group">
+                        <label> Full Name <span class="required">*</span></label>
+                        <input type="text" id="student_name" required placeholder="Student full name">
+                    </div>
+                    <div class="field-group">
+                        <label>Father Name</label>
+                        <input type="text" id="father_name" placeholder="Father's full name">
+                    </div>
+                    <div class="field-group">
+                        <label>Mother Name</label>
+                        <input type="text" id="mother_name" placeholder="Mother's full name">
+                    </div>
+                    <div class="field-group">
+                        <label> Date of Birth</label>
+                        <input type="date" id="dob">
+                    </div>
+                    <div class="field-group">
+                        <label> Mobile No</label>
+                        <input type="tel" id="mobile_no" placeholder="Contact number">
+                    </div>
+                   
+                </div>
+           
+                <div class="btn-group">
+                    <button type="submit" class="btn-primary">✅ Submit </button>
+                    <button type="button" id="deleteLastBtn" class="btn-danger">🗑️ Delete Row</button>
+                    <button type="reset" class="btn-secondary">🔄 Reset </button>
+                </div>
+            </form>
+                 <div class="hint-temp">✨ shamser.info.np</div>
+           <!-------- 
+            <div class="info-panel">
+                <h3>✨ Smart Features (Dropdown Defaults + Auto-Update Form)</h3>
+                <ul>
+                    <li><strong>Live Defaults:</strong> Dropdowns for Class, Academic Year & Nepali Month <strong>instantly update</strong> the main form fields (Class, Year, MonthSelect). No page reload needed.</li>
+                    <li><strong>Auto SN:</strong> Sequential number based on existing records from Google Sheets.</li>
+                    <li><strong>Auto Day Columns (O to AT):</strong> When you choose a Nepali Month, sheet checks/creates day name headers automatically.</li>
+                    <li><strong>Auto Totals (AU to AZ):</strong> Present, Opened days, Teaching days, Sundays, Holiday, Casual days are auto-calculated.</li>
+                    <li><strong>Add / Delete:</strong> Easy row management with instant sync.</li>
+                    <li><strong>Session Persistence:</strong> Dropdown selections survive page refresh via localStorage; "Reset" button restores factory defaults.</li>
+                </ul>
+                <div style="margin-top: 12px;">
+                    <span class="stats-badge">📊 Real-time Google Sheets sync</span>
+                    <span class="stats-badge">⚡ Auto-sum totals AU:AZ</span>
+                    <span class="stats-badge">🔄 Dropdown → Form auto sync</span>
+                </div>
+            </div>
+            --------------->
+        </div>
+    </div>
+</div>
+
+<script>
+    // ======================= CONFIGURATION =======================
+    // REPLACE WITH YOUR ACTUAL APPS SCRIPT URL (Web App)
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxbHayq6mbJN5xS301x1Xuz70-NZYjcSx49pHvUP_vOnekE7c26q1AfFe-xMbSqIc-0hg/exec";
+    
+    // Helper: messages
+    function showMessage(msg, type = "success") {
+        const msgDiv = document.getElementById("globalMessage");
+        msgDiv.textContent = msg;
+        msgDiv.className = `message-area message-${type === "error" ? "error" : "success"}`;
+        msgDiv.style.display = "block";
+        setTimeout(() => {
+            msgDiv.style.display = "none";
+        }, 4500);
+    }
+    
+    // ---------- PERSISTENT DEFAULTS (localStorage) ----------
+    const STORAGE_CLASS = "smart_default_class";
+    const STORAGE_YEAR = "smart_default_year";
+    const STORAGE_MONTH = "smart_default_month";
+    
+    const INIT_CLASS = "Grade 10";
+    const INIT_YEAR = "2081";
+    const INIT_MONTH = "Baisakh";
+    
+    // DOM elements
+    const defaultClassSelect = document.getElementById("defaultClassSelect");
+    const defaultYearSelect = document.getElementById("defaultYearSelect");
+    const defaultMonthSelect = document.getElementById("defaultMonthSelect");
+    
+    const classInput = document.getElementById("class_name");
+    const yearInput = document.getElementById("year");
+    const monthSelect = document.getElementById("month_select");
+    
+    // Load saved defaults or initial
+    function loadStoredDefaults() {
+        let savedClass = localStorage.getItem(STORAGE_CLASS);
+        let savedYear = localStorage.getItem(STORAGE_YEAR);
+        let savedMonth = localStorage.getItem(STORAGE_MONTH);
+        
+        if (!savedClass) savedClass = INIT_CLASS;
+        if (!savedYear) savedYear = INIT_YEAR;
+        if (!savedMonth) savedMonth = INIT_MONTH;
+        
+        return { defaultClass: savedClass, defaultYear: savedYear, defaultMonth: savedMonth };
+    }
+    
+    // Update all UI defaults: dropdowns + main form fields
+    function syncDefaultsToUI() {
+        const { defaultClass, defaultYear, defaultMonth } = loadStoredDefaults();
+        
+        // update dropdowns values
+        if (defaultClassSelect.querySelector(`option[value="${defaultClass}"]`)) {
+            defaultClassSelect.value = defaultClass;
+        } else {
+            // fallback if custom value not in options (just in case)
+            defaultClassSelect.value = INIT_CLASS;
+        }
+        
+        if (defaultYearSelect.querySelector(`option[value="${defaultYear}"]`)) {
+            defaultYearSelect.value = defaultYear;
+        } else {
+            defaultYearSelect.value = INIT_YEAR;
+        }
+        
+        if (defaultMonthSelect.querySelector(`option[value="${defaultMonth}"]`)) {
+            defaultMonthSelect.value = defaultMonth;
+        } else {
+            defaultMonthSelect.value = INIT_MONTH;
+        }
+        
+        // Update main form fields (class, year, month select)
+        classInput.value = defaultClass;
+        yearInput.value = defaultYear;
+        monthSelect.value = defaultMonth;
+    }
+    
+    // Store individual default and sync
+    function setDefault(type, value) {
+        if (type === 'class') {
+            localStorage.setItem(STORAGE_CLASS, value);
+        } else if (type === 'year') {
+            localStorage.setItem(STORAGE_YEAR, value);
+        } else if (type === 'month') {
+            localStorage.setItem(STORAGE_MONTH, value);
+        }
+        syncDefaultsToUI();
+        // subtle visual feedback - but avoid spamming message for each dropdown change
+        showMessage(`✨ Default ${type} updated to "${value}"`, "success");
+    }
+    
+    // Reset to initial factory defaults
+    function resetToInitialDefaults() {
+        localStorage.setItem(STORAGE_CLASS, INIT_CLASS);
+        localStorage.setItem(STORAGE_YEAR, INIT_YEAR);
+        localStorage.setItem(STORAGE_MONTH, INIT_MONTH);
+        syncDefaultsToUI();
+        showMessage(`🔄 Defaults reset to Class: ${INIT_CLASS}, Year: ${INIT_YEAR}, Month: ${INIT_MONTH}`, "success");
+    }
+    
+    // Event listeners for dropdown changes -> update stored defaults and sync to form
+    defaultClassSelect.addEventListener("change", (e) => {
+        setDefault('class', e.target.value);
+    });
+    defaultYearSelect.addEventListener("change", (e) => {
+        setDefault('year', e.target.value);
+    });
+    defaultMonthSelect.addEventListener("change", (e) => {
+        setDefault('month', e.target.value);
+    });
+    
+    document.getElementById("resetDefaultBtn").addEventListener("click", resetToInitialDefaults);
+    
+    // ========== BACKEND INTERACTION (Google Sheets API) ==========
+    async function callBackend(action, payload = {}) {
+        try {
+            const formBody = new URLSearchParams({ action: action, ...payload });
+            const response = await fetch(APPS_SCRIPT_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: formBody.toString()
+            });
+            const text = await response.text();
+            try {
+                return JSON.parse(text);
+            } catch(e) {
+                console.warn("Response not JSON:", text);
+                return { success: false, message: "Invalid response from server. Check Apps Script deployment." };
+            }
+        } catch(err) {
+            console.error(err);
+            return { success: false, message: `Network error: ${err.message}` };
+        }
+    }
+    
+    // Fetch latest SN from the sheet based on all records
+    async function fetchLatestSN() {
+        try {
+            const url = `${APPS_SCRIPT_URL}?action=getAll&_=${Date.now()}`;
+            const resp = await fetch(url);
+            const result = await resp.json();
+            if (result.success && result.data && Array.isArray(result.data)) {
+                let maxSn = 0;
+                result.data.forEach(rec => {
+                    let snVal = parseInt(rec.sn);
+                    if (!isNaN(snVal)) maxSn = Math.max(maxSn, snVal);
+                });
+                const nextSN = (maxSn + 1) || 1;
+                document.getElementById("auto_sn").value = nextSN;
+            } else {
+                document.getElementById("auto_sn").value = "1";
+            }
+        } catch(err) {
+            console.error("SN fetch error", err);
+            document.getElementById("auto_sn").value = "?";
+        }
+    }
+    
+    // Submit handler: uses current form values (which already reflect defaults)
+    document.getElementById("studentEntryForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        
+        let rollNo = document.getElementById("roll_no").value.trim();
+        let className = classInput.value.trim();
+        let studentName = document.getElementById("student_name").value.trim();
+        let month = monthSelect.value;
+        let yearVal = yearInput.value.trim();
+        
+        // Additional validation
+        if (!rollNo) { showMessage("Roll No is required", "error"); return; }
+        if (!className) { showMessage("Class is required (default fills automatically)", "error"); return; }
+        if (!studentName) { showMessage("Student name is required", "error"); return; }
+        if (!month) { showMessage("Please select a Nepali Month", "error"); return; }
+        if (!yearVal) { showMessage("Academic Year is required", "error"); return; }
+        
+        const payload = {
+            sn: document.getElementById("auto_sn").value,
+            roll_no: rollNo,
+            class: className,
+            name: studentName,
+            father_name: document.getElementById("father_name").value,
+            mother_name: document.getElementById("mother_name").value,
+            dob: document.getElementById("dob").value,
+            mobile_no: document.getElementById("mobile_no").value,
+            year: yearVal,
+            monthSheet: month
+        };
+        
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerText;
+        submitBtn.innerText = "⏳ Submitting...";
+        submitBtn.disabled = true;
+        
+        const result = await callBackend("addStudent", payload);
+        
+        submitBtn.innerText = originalText;
+        submitBtn.disabled = false;
+        
+        if (result.success) {
+            showMessage(`✅ ${result.message || "Student added successfully! Day columns & totals auto-managed."}`, "success");
+            // Reset only the variable fields: roll, names, etc. Keep defaults intact
+            document.getElementById("roll_no").value = "";
+            document.getElementById("student_name").value = "";
+            document.getElementById("father_name").value = "";
+            document.getElementById("mother_name").value = "";
+            document.getElementById("dob").value = "";
+            document.getElementById("mobile_no").value = "";
+            // Important: class, year, month remain as per current defaults (already correct)
+            // Re-fresh SN from server
+            await fetchLatestSN();
+            document.getElementById("roll_no").focus();
+        } else {
+            showMessage(`❌ Error: ${result.message}`, "error");
+        }
+    });
+    
+    // Delete Last Row using selected month (from main form or default fallback)
+    document.getElementById("deleteLastBtn").addEventListener("click", async () => {
+        let month = monthSelect.value;
+        if (!month) {
+            const { defaultMonth } = loadStoredDefaults();
+            month = defaultMonth;
+        }
+        if (!month) {
+            showMessage("Please select a Nepali Month to delete from that sheet", "error");
+            return;
+        }
+        if (!confirm(`⚠️ Delete LAST student record from "${month}" sheet? Cannot undo.`)) return;
+        const result = await callBackend("deleteLastRow", { monthSheet: month });
+        if (result.success) {
+            showMessage(`🗑️ ${result.message}`, "success");
+            await fetchLatestSN();
+        } else {
+            showMessage(`Failed: ${result.message}`, "error");
+        }
+    });
+    
+    // Reset form event: doesn't reset defaults but keeps class, year, month locked to current defaults
+    document.getElementById("studentEntryForm").addEventListener("reset", async (e) => {
+        e.preventDefault(); // prevent native reset that would erase fields arbitrarily
+        // manually reset non-default fields: roll, student name, father, mother, dob, mobile
+        document.getElementById("roll_no").value = "";
+        document.getElementById("student_name").value = "";
+        document.getElementById("father_name").value = "";
+        document.getElementById("mother_name").value = "";
+        document.getElementById("dob").value = "";
+        document.getElementById("mobile_no").value = "";
+        // re-sync defaults to class/year/month (ensuring they match dropdown)
+        const { defaultClass, defaultYear, defaultMonth } = loadStoredDefaults();
+        classInput.value = defaultClass;
+        yearInput.value = defaultYear;
+        monthSelect.value = defaultMonth;
+        await fetchLatestSN();
+        showMessage("Form cleared (class/year/month preserved from defaults)", "success");
+    });
+    
+    // Additional: if user manually changes month in main form, it's allowed but does not change global default.
+    // For consistency, we also listen to main month select? we keep dropdowns authoritative for defaults.
+    // On page load, ensure all fields are consistent.
+    function init() {
+        syncDefaultsToUI();     // load stored defaults into dropdowns + form fields
+        fetchLatestSN();        // fetch latest SN from backend
+        
+        // Watch for manual changes in main form's class/year if needed? Not required but we respect defaults authority.
+        // Ensure if user modifies class/year in main fields it's independent of defaults but for usability it's fine.
+        // Additionally, set a small visual hint.
+        console.log("✅ Smart Dropdown System Ready: Changing any default dropdown instantly updates main form");
+    }
+    
+    init();
+</script>
+</body>
+</html>
