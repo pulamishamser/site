@@ -3,226 +3,184 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>🎓 Individual Attendance Report - Print & PDF</title>
+  <title>📋 Advanced Attendance | Print & PDF Export</title>
+  <!-- html2pdf library for fixed-format PDF export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <style>
     * {
       box-sizing: border-box;
-      font-family: 'Inter', system-ui, 'Segoe UI', Roboto, sans-serif;
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
     }
 
     body {
-      background: #eef2ff;
+      background: #f0f2f5;
       margin: 0;
-      padding: 28px 20px;
+      padding: 24px 20px;
     }
 
-    .dashboard {
-      max-width: 1400px;
+    .dashboard-container {
+      max-width: 1500px;
       margin: 0 auto;
     }
 
-    .main-card {
+    .card {
       background: white;
-      border-radius: 2rem;
-      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.02);
-      overflow: hidden;
-      transition: all 0.2s;
+      border-radius: 28px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.02);
+      padding: 20px 24px 28px;
+      margin-bottom: 28px;
     }
 
-    .header-area {
-      padding: 28px 32px 12px 32px;
-      border-bottom: 1px solid #e9ecf2;
-      background: #ffffff;
-    }
-
-    h1 {
-      font-size: 1.9rem;
-      font-weight: 700;
-      margin: 0 0 8px 0;
-      background: linear-gradient(130deg, #0b2b5c, #1e4a76);
+    h2 {
+      font-size: 1.7rem;
+      font-weight: 600;
+      margin: 0 0 6px 0;
+      background: linear-gradient(135deg, #1e3c72, #2b3b5c);
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
-      letter-spacing: -0.3px;
+      display: inline-block;
     }
 
-    .sub {
-      color: #4b5b6c;
-      font-size: 0.85rem;
+    .subhead {
+      color: #5a6874;
+      margin-bottom: 24px;
+      border-left: 4px solid #3b82f6;
+      padding-left: 14px;
+      font-size: 0.9rem;
+    }
+
+    .message-area {
+      padding: 12px 20px;
+      border-radius: 60px;
+      margin-bottom: 20px;
+      font-weight: 500;
+      display: none;
+    }
+    .message-success {
+      background: #dcfce7;
+      color: #166534;
+      border-left: 5px solid #22c55e;
+    }
+    .message-error {
+      background: #fee2e2;
+      color: #991b1b;
+      border-left: 5px solid #ef4444;
+    }
+
+    .filter-bar {
       display: flex;
-      align-items: center;
-      gap: 12px;
       flex-wrap: wrap;
-      margin-bottom: 16px;
-    }
-
-    .individual-badge {
-      background: #e9f0ff;
-      color: #1e40af;
-      border-radius: 40px;
-      padding: 6px 18px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .filter-panel {
-      background: #fafbff;
-      border-radius: 28px;
-      margin: 20px 32px 24px 32px;
-      padding: 18px 24px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 18px;
+      gap: 16px;
       align-items: flex-end;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02), inset 0 1px 0 white;
-      border: 1px solid #e6edf2;
+      background: #f8fafc;
+      padding: 18px 20px;
+      border-radius: 32px;
+      margin-bottom: 28px;
+      border: 1px solid #e2edf2;
     }
 
     .filter-group {
       display: flex;
       flex-direction: column;
       gap: 6px;
-      min-width: 140px;
+      min-width: 130px;
     }
 
     .filter-group label {
-      font-size: 0.7rem;
+      font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.6px;
+      letter-spacing: 0.5px;
       color: #2c3e66;
     }
 
-    select, input {
+    select, input, button {
+      padding: 10px 14px;
+      border-radius: 60px;
+      border: 1px solid #cbd5e1;
       background: white;
-      border: 1px solid #cfdee9;
-      border-radius: 48px;
-      padding: 10px 16px;
       font-size: 0.85rem;
-      font-weight: 500;
-      transition: 0.2s;
       outline: none;
+      transition: 0.2s;
     }
 
     select:focus, input:focus {
       border-color: #3b82f6;
-      box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
     }
 
     button {
-      background: #0f2b45;
-      border: none;
-      border-radius: 48px;
-      padding: 10px 32px;
-      font-weight: 600;
+      background: #1e293b;
       color: white;
-      font-size: 0.85rem;
+      font-weight: 600;
+      border: none;
       cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      justify-content: center;
+      padding: 10px 28px;
     }
 
     button:hover {
-      background: #123a60;
+      background: #0f172a;
       transform: translateY(-1px);
-      box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.15);
     }
 
     button:disabled {
       opacity: 0.6;
-      transform: none;
       cursor: not-allowed;
     }
 
+    .badge-new {
+      background: #e6f0ff;
+      border-radius: 30px;
+      padding: 4px 12px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+    
     /* Action Buttons Group */
     .action-buttons {
       display: flex;
       gap: 14px;
       margin-left: auto;
-    }
-    .print-pdf-btn {
-      background: #2c5f8a;
-      padding: 8px 20px;
-      font-size: 0.8rem;
-    }
-    .print-pdf-btn:hover {
-      background: #1e4668;
-    }
-    .print-pdf-btn.pdf {
-      background: #b91c1c;
-    }
-    .print-pdf-btn.pdf:hover {
-      background: #911515;
-    }
-
-    .message-strip {
-      margin: 0 32px 20px 32px;
-      padding: 12px 20px;
-      border-radius: 60px;
-      font-weight: 500;
-      display: none;
-    }
-
-    .message-success {
-      background: #e0f2e9;
-      color: #0b4f2e;
-      border-left: 5px solid #2b9348;
-    }
-
-    .message-error {
-      background: #ffe9e7;
-      color: #b91c1c;
-      border-left: 5px solid #e53e3e;
-    }
-
-    .report-area {
-      padding: 8px 32px 38px 32px;
-    }
-
-    .stats-hero {
-      background: linear-gradient(115deg, #0f2b45, #e53e3e);
-      border-radius: 28px;
-      padding: 22px 28px;
-      color: white;
-      margin-bottom: 28px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
       align-items: center;
     }
-
-    .stats-hero h3 {
-      margin: 0 0 6px 0;
-      font-weight: 600;
-      font-size: 1.4rem;
+    .btn-print {
+      background: #2c5f2d;
     }
-
-    .stats-hero p {
-      margin: 0;
-      opacity: 0.8;
-      font-size: 0.85rem;
+    .btn-print:hover {
+      background: #1e3a1e;
     }
-
-    .att-circle {
-      background: #2dd4bf20;
-      backdrop-filter: blur(4px);
-      padding: 6px 18px;
-      border-radius: 60px;
-      font-weight: 700;
-      font-size: 1.1rem;
+    .btn-pdf {
+      background: #b22234;
+    }
+    .btn-pdf:hover {
+      background: #7a1a1a;
+    }
+    .btn-secondary {
+      background: #4b5563;
+    }
+    .btn-secondary:hover {
+      background: #374151;
+    }
+    .btn-update {
+      background: #0f5c6b;
+    }
+    .btn-update:hover {
+      background: #0a3f4a;
+    }
+    .btn-update-all {
+      background: #8b5cf6;
+    }
+    .btn-update-all:hover {
+      background: #6d28d9;
     }
 
     .table-wrapper {
       overflow-x: auto;
       border-radius: 20px;
-      border: 1px solid #ecf3fa;
+      border: 1px solid #e9eef3;
       background: white;
+      margin-top: 20px;
     }
 
     table {
@@ -232,62 +190,141 @@
     }
 
     th {
-      background: #f8fafd;
-      padding: 14px 12px;
+      background: #f1f5f9;
+      color: #0f2b3d;
       font-weight: 700;
-      color: #0f2b44;
-      border-bottom: 1px solid #e2edf5;
+      padding: 14px 12px;
+      border-bottom: 1px solid #dce5ec;
       text-align: left;
     }
 
     td {
       padding: 12px 12px;
-      border-bottom: 1px solid #f0f4fa;
+      border-bottom: 1px solid #ecf3f9;
       vertical-align: middle;
     }
 
+    tr:hover td {
+      background-color: #fafcff;
+    }
+
     .present-badge {
-      background: #c8f0e1;
-      color: #0b5e42;
-      font-weight: 700;
-      padding: 4px 14px;
+      background: #d1fae5;
+      color: #065f46;
+      font-weight: 600;
+      padding: 4px 12px;
       border-radius: 40px;
       display: inline-block;
       font-size: 0.75rem;
     }
 
     .absent-badge {
-      background: #ffdedb;
-      color: #ac2c1a;
-      font-weight: 700;
-      padding: 4px 14px;
+      background: #ffe4e2;
+      color: #9b2c1d;
+      font-weight: 600;
+      padding: 4px 12px;
       border-radius: 40px;
+      display: inline-block;
+      font-size: 0.75rem;
     }
 
     .holiday-badge {
-      background: #ffefcc;
-      color: #b45309;
-      font-weight: 700;
-      padding: 4px 14px;
+      background: #fef3c7;
+      color: #92400e;
+      font-weight: 600;
+      padding: 4px 12px;
       border-radius: 40px;
+      display: inline-block;
+      font-size: 0.75rem;
     }
 
     .total-row {
-      background: #f1f5f9;
-      font-weight: 800;
-      border-top: 2px solid #cfdfed;
+      background: #f3f4f6;
+      font-weight: 700;
+      border-top: 2px solid #cbd5e1;
     }
 
-    .empty-state {
-      background: #fefce8;
-      border-radius: 28px;
-      padding: 48px 20px;
-      text-align: center;
-      color: #6c757d;
+    .error-message {
+      background: #fff1f0;
+      border-left: 6px solid #e11d48;
+      color: #b91c1c;
+      padding: 14px 20px;
+      border-radius: 24px;
+      font-weight: 500;
+    }
+
+    .stats-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 16px 24px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      display: inline-block;
+      width: 100%;
+    }
+
+    /* Fixed print / PDF styling - ensures consistent clean format */
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+        margin: 0;
+      }
+      .filter-bar, .action-buttons, .badge-new, .message-area, .generate-btn-print-hide, button, select, input, .btn-print, .btn-pdf, #generateBtn, #updateDataBtn, #updateAllMonthsBtn {
+        display: none !important;
+      }
+      .card {
+        box-shadow: none;
+        padding: 0;
+        margin: 0;
+        border-radius: 0;
+      }
+      .dashboard-container {
+        max-width: 100%;
+        padding: 0;
+      }
+      .table-wrapper {
+        border-radius: 0;
+        border: 1px solid #ccc;
+        overflow-x: visible;
+      }
+      .stats-card {
+        background: #2c3e66;
+        color: white;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .present-badge, .absent-badge, .holiday-badge {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      th {
+        background: #e2e8f0;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      body {
+        font-size: 10pt;
+      }
+    }
+
+    /* PDF export container styling */
+    .pdf-export-container {
+      background: white;
+      padding: 20px;
+    }
+    
+    .report-header-details {
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+      border-bottom: 1px dashed #ddd;
+      padding-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
     }
 
     @media (max-width: 780px) {
-      .filter-panel {
+      .filter-bar {
         flex-direction: column;
         align-items: stretch;
       }
@@ -297,109 +334,67 @@
       button {
         width: 100%;
       }
-      .header-area {
-        padding: 20px;
-      }
-      .report-area {
-        padding: 20px;
-      }
       .action-buttons {
         margin-left: 0;
-        margin-top: 12px;
+        flex-direction: column;
         width: 100%;
+        margin-top: 8px;
       }
-    }
-
-    /* ========== PRINT STYLES (A4 optimized) ========== */
-    @media print {
-      body {
-        background: white;
-        padding: 0;
-        margin: 0;
-      }
-      .filter-panel, .action-buttons, .print-pdf-btn, .individual-badge, .sub button, #generateBtn, .message-strip {
-        display: none !important;
-      }
-      .main-card {
-        box-shadow: none;
-        border-radius: 0;
-        margin: 0;
-        padding: 0;
-      }
-      .header-area {
-        padding: 12px 20px 4px 20px;
-        border-bottom: 1px solid #ccc;
-      }
-      .report-area {
-        padding: 12px 20px 20px 20px;
-      }
-      .stats-hero {
-        background: #0f2b45;
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-        break-inside: avoid;
-      }
-      .table-wrapper {
-        break-inside: avoid;
-        page-break-inside: avoid;
-      }
-      table {
-        font-size: 0.75rem;
-      }
-      .present-badge, .absent-badge, .holiday-badge {
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-      }
-      body, .dashboard {
-        margin: 0;
-        padding: 0;
-      }
-      @page {
-        size: A4;
-        margin: 1.2cm;
-      }
-      h1 {
-        font-size: 1.5rem;
+      .action-buttons button {
+        width: 100%;
       }
     }
   </style>
 </head>
 <body>
-<div class="dashboard">
-  <div class="main-card">
-    <div class="header-area">
-      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
-        <div>
-          <h1>Individual Attendance Report</h1>
-          <div class="sub">
-            <span>🔍 Focus: Individual student performance</span>
-            <span class="individual-badge"> Roll‑Number filter · Year + Class scope</span>
-          </div>
-        </div>
-        <div class="action-buttons">
-          <button id="printReportBtn" class="print-pdf-btn">🖨️ Print Report</button>
-          <button id="downloadPdfBtn" class="print-pdf-btn pdf">📄 Download as PDF</button>
-        </div>
+<div class="dashboard-container">
+  <div class="card">
+    <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;">
+      <div>
+        <h2>Individual Student Attendance Report</h2>
+        <div class="subhead">Year + Class filters | Daily · Monthly · Weekly · Yearly | Whole class / Individual</div>
       </div>
+      <div class="badge-new">🔐 Year & Class Enabled</div>
     </div>
 
-    <div id="globalToast" class="message-strip"></div>
+    <div id="globalMessage" class="message-area"></div>
 
-    <!-- FILTER PANEL (individual only) -->
-    <div class="filter-panel">
-     
+    <!-- FILTER BAR with Print & PDF buttons -->
+    <div class="filter-bar">
       <div class="filter-group">
-        <label>📆 ACADEMIC YEAR</label>
-        <select id="yearSelect">
-          <option value="2080">2080</option>
-          <option value="2081" selected>2081</option>
-          <option value="2082">2082</option>
-          <option value="2083">2083</option>
+        <label>REPORT TYPE</label>
+        <select id="reportTypeSelect">
+          <option value="daily"> Daily Report</option>
+          <option value="monthly"> Monthly Report</option>
+          <option value="weekly"> Weekly Report</option>
+          <option value="yearly"> Yearly Report</option>
         </select>
       </div>
 
-      <div class="filter-group" id="monthGroup">
-        <label>MONTH </label>
+      <div class="filter-group">
+        <label> SCOPE</label>
+        <select id="scopeSelect" default>
+          <option value="individual"> Individual Student</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label>YEAR (e.g., 2081)</label>
+        <input type="Number" id="yearSelect" placeholder="e.g., 2083,2081" value="2081">
+      </div>
+
+      <div class="filter-group">
+        <label>CLASS (e.g., 1,2,LKG,UKG)</label>
+        <input type="text" id="classSelect" placeholder="e.g., 1,2..LKG,UKG,5EM" value="1">
+      </div>
+
+      <div class="filter-group" id="individualRollGroup" style="display: none;">
+        <label>Roll Number</label>
+        <input type="number" id="rollNoInput" placeholder="e.g., 1, 101" value="">
+      </div>
+
+      <div class="filter-group">
+        <label>MONTH</label>
         <select id="monthSelect">
           <option value="Baisakh">Baisakh</option>
           <option value="Jeshtha">Jeshtha</option>
@@ -417,326 +412,480 @@
       </div>
 
       <div class="filter-group" id="dailyDateGroup">
-        <label> DAY (1-32 गते)</label>
-        <input type="number" id="dailyDay" value="15" min="1" max="32" step="1">
+        <label> DAY NUMBER</label>
+        <input type="number" id="dailyDayInput" placeholder="e.g., 15" value="15" min="1" max="32">
+      </div>
+
+      <div class="filter-group" id="weeklyStartGroup" style="display: none;">
+        <label>START DAY</label>
+        <input type="number" id="startDayInput" placeholder="e.g., 1" value="1" min="1" max="32">
+      </div>
+      <div class="filter-group" id="weeklyEndGroup" style="display: none;">
+        <label>END DAY</label>
+        <input type="number" id="endDayInput" placeholder="e.g., 7" value="7" min="1" max="32">
       </div>
 
       <div class="filter-group">
-        <label> CLASS</label>
-        <select id="classSelect">
-          <option value="all"> All Classes</option>
-          <option value="1">Grade 1</option><option value="2">Grade 2</option><option value="3">Grade 3</option>
-          <option value="4">Grade 4</option><option value="5">Grade 5</option><option value="6">Grade 6</option>
-          <option value="7">Grade 7</option><option value="8">Grade 8</option><option value="9">Grade 9</option>
-          <option value="10">Grade 10</option>
-        </select>
+        <button id="generateBtn">⟳ Generate Report</button>
       </div>
-
-      <div class="filter-group">
-        <label>ROLL NUMBER</label>
-        <input type="text" id="rollNumberInput" placeholder="e.g., 5, 12, 101" value="7">
-      </div>
-
- <div class="filter-group">
-        <label>REPORT TYPE</label>
-        <select id="reportModeSelect">
-          <option value="daily">Daily Status</option>
-          <option value="monthly">Monthly Summary</option>
-          <option value="weekly">Weekly Overview</option>
-          <option value="yearly">Yearly Master Report</option>
-        </select>
-      </div>
-
-      <div class="filter-group" id="weeklyRangeGroup" style="display: none;">
-        <label> START DAY</label>
-        <input type="number" id="weekStart" value="1" min="1" max="32" style="width: 100px;">
-        <label style="margin-top: 4px;">➡ END DAY</label>
-        <input type="number" id="weekEnd" value="7" min="1" max="32" style="width: 100px;">
-      </div>
-
-
-
-
-
-
-
-
-      <div class="filter-group">
-        <button id="generateBtn">⟳ Generate Individual Report</button>
+      
+      <!-- PRINT & PDF ACTION BUTTONS -->
+      <div class="action-buttons">
+        <button id="printReportBtn" class="btn-print">🖨️ Print Report</button>
+        <button id="downloadPdfBtn" class="btn-pdf">📄 Download PDF</button>
+        <button id="updateDataBtn" class="btn-update">🔄 Update Current Month</button>
+        <button id="updateAllMonthsBtn" class="btn-update-all">🌟 Update ALL Months</button>
       </div>
     </div>
 
-    <!-- OUTPUT CONTAINER -->
-    <div class="report-area" id="reportContainer">
-      <div class="stats-hero" style="justify-content: center; text-align: center;">
-        <div>
-          <span style="font-size: 2.5rem;"></span>
-          <h3 style="margin-top: 8px;">Ready for individual analytics</h3>
-          <p>Select year, class, roll number & report type → get precise attendance data</p>
-        </div>
+    <!-- Report output container (will hold the report content) -->
+    <div id="reportContainer">
+      <div class="stats-card" style="text-align: center;">
+        <span style="font-size: 2rem;">📋 Select Year, Class, Report type & click Generate</span><br/>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-  // ========================= CONFIGURATION =========================
-  const BACKEND_URL = "https://script.google.com/macros/s/AKfycbxbHayq6mbJN5xS301x1Xuz70-NZYjcSx49pHvUP_vOnekE7c26q1AfFe-xMbSqIc-0hg/exec";
+  // ======================= CONFIGURATION =======================
+  // Google Apps Script Web App URL - REPLACE WITH YOUR DEPLOYED URL
+  const APPS_SCRIPT_URL = " https://script.google.com/macros/s/AKfycbwDOQHxtQQ9XjFenmvR1LHP1vc9oLb0T7wcNQCYp1Tyqw_ckjIWsJBWBWhWmjOTCIW_gw/exec";
+  
+  // Store latest report HTML snapshot & metadata for print/pdf
+  let latestReportHTML = "";
+  let currentReportMetadata = {
+    title: "Attendance Report",
+    filters: {}
+  };
+  
+  function showMessage(msg, type = "success") {
+    const msgDiv = document.getElementById("globalMessage");
+    msgDiv.textContent = msg;
+    msgDiv.className = `message-area message-${type === "error" ? "error" : "success"}`;
+    msgDiv.style.display = "block";
+    setTimeout(() => {
+      msgDiv.style.display = "none";
+    }, 5000);
+  }
 
-  // DOM references
+  // DOM elements
+  const reportTypeSelect = document.getElementById('reportTypeSelect');
+  const scopeSelect = document.getElementById('scopeSelect');
+  const individualRollGroup = document.getElementById('individualRollGroup');
+  const dailyDateGroup = document.getElementById('dailyDateGroup');
+  const weeklyStartGroup = document.getElementById('weeklyStartGroup');
+  const weeklyEndGroup = document.getElementById('weeklyEndGroup');
+  const dailyDayInput = document.getElementById('dailyDayInput');
+  const startDayInput = document.getElementById('startDayInput');
+  const endDayInput = document.getElementById('endDayInput');
+  const rollNoField = document.getElementById('rollNoInput');
+  const monthSelect = document.getElementById('monthSelect');
   const yearSelect = document.getElementById('yearSelect');
   const classSelect = document.getElementById('classSelect');
-  const rollInput = document.getElementById('rollNumberInput');
-  const reportMode = document.getElementById('reportModeSelect');
-  const monthSelect = document.getElementById('monthSelect');
-  const dailyDateGroup = document.getElementById('dailyDateGroup');
-  const weeklyRangeGroup = document.getElementById('weeklyRangeGroup');
-  const dailyDayInput = document.getElementById('dailyDay');
-  const weekStartInput = document.getElementById('weekStart');
-  const weekEndInput = document.getElementById('weekEnd');
   const generateBtn = document.getElementById('generateBtn');
-  const reportContainer = document.getElementById('reportContainer');
-  const toastDiv = document.getElementById('globalToast');
   const printBtn = document.getElementById('printReportBtn');
-  const downloadPdfBtn = document.getElementById('downloadPdfBtn');
+  const pdfBtn = document.getElementById('downloadPdfBtn');
+  const updateBtn = document.getElementById('updateDataBtn');
+  const updateAllBtn = document.getElementById('updateAllMonthsBtn');
 
-  // Helper: show toast message
-  function showMessage(msg, type = "success") {
-    toastDiv.textContent = msg;
-    toastDiv.className = `message-strip ${type === "error" ? "message-error" : "message-success"}`;
-    toastDiv.style.display = "block";
-    setTimeout(() => {
-      toastDiv.style.display = "none";
-    }, 4800);
-  }
-
-  // Dynamic UI: toggle day/week fields based on report type
+  // Toggle conditional fields
   function updateDynamicFields() {
-    const type = reportMode.value;
-    if (type === "daily") {
-      dailyDateGroup.style.display = "flex";
-      weeklyRangeGroup.style.display = "none";
-    } else if (type === "weekly") {
-      dailyDateGroup.style.display = "none";
-      weeklyRangeGroup.style.display = "flex";
-    } else {
-      dailyDateGroup.style.display = "none";
-      weeklyRangeGroup.style.display = "none";
+    const rType = reportTypeSelect.value;
+    const scope = scopeSelect.value;
+    individualRollGroup.style.display = (scope === 'individual') ? 'flex' : 'none';
+    dailyDateGroup.style.display = 'none';
+    weeklyStartGroup.style.display = 'none';
+    weeklyEndGroup.style.display = 'none';
+    
+    if (rType === 'daily') {
+      dailyDateGroup.style.display = 'flex';
+    } else if (rType === 'weekly') {
+      weeklyStartGroup.style.display = 'flex';
+      weeklyEndGroup.style.display = 'flex';
     }
   }
 
-  reportMode.addEventListener('change', updateDynamicFields);
+  reportTypeSelect.addEventListener('change', updateDynamicFields);
+  scopeSelect.addEventListener('change', updateDynamicFields);
   updateDynamicFields();
 
-  // ---------- BACKEND CALLER ----------
-  async function callBackend(action, payloadObj) {
-    const params = new URLSearchParams({ action: action, ...payloadObj }).toString();
+  // ======================= BACKEND COMMUNICATION =======================
+  async function callAppsScript(action, payload) {
+    const requestBody = new URLSearchParams({
+      action: action,
+      ...payload
+    }).toString();
+
     try {
-      const response = await fetch(BACKEND_URL, {
+      const response = await fetch(APPS_SCRIPT_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: params,
+        body: requestBody,
         mode: 'cors'
       });
-      if (!response.ok) throw new Error(`HTTP ${response.status} – server error`);
-      const json = await response.json();
-      console.log(`[${action}] response:`, json);
-      return json;
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const data = await response.json();
+      console.log('Response from server:', data);
+      return data;
     } catch (err) {
-      console.error("Fetch error:", err);
-      throw new Error(`Network / CORS issue: ${err.message}. Check Apps Script deployment.`);
+      console.error('Fetch error:', err);
+      throw new Error(`Network error: ${err.message}`);
+    }
+  }
+  
+  // Helper: build descriptive header string for print/PDF
+  function buildReportTitle(filters, rType, scope, rollNoValue) {
+    let title = `${rType.toUpperCase()} REPORT | Year: ${filters.year} | Class: ${filters.classFilter === 'all' ? 'All Classes' : 'Grade '+filters.classFilter}`;
+    if (scope === 'individual' && rollNoValue) title += ` | Roll: ${rollNoValue}`;
+    if (filters.month) title += ` | Month: ${filters.month}`;
+    if (rType === 'daily' && filters.dayNum) title += ` | Day: ${filters.dayNum}`;
+    if (rType === 'weekly' && filters.startDayNum && filters.endDayNum) title += ` | Week: ${filters.startDayNum}-${filters.endDayNum}`;
+    return title;
+  }
+
+  // Update Function - Current Month only
+  async function executeUpdateData() {
+    const year = yearSelect.value;
+    const selectedClass = classSelect.value;
+    const currentMonth = monthSelect.value;
+    
+    if (!year || !currentMonth) {
+      showMessage("Please ensure Year and Month are selected before updating.", "error");
+      return;
+    }
+    
+    updateBtn.disabled = true;
+    const originalText = updateBtn.textContent;
+    updateBtn.textContent = "⏳ Updating...";
+    showMessage(`Initiating data transfer for Year ${year}, Class: ${selectedClass || 'specified class'}, Month: ${currentMonth}`, "success");
+    
+    try {
+      const payload = {
+        year: year,
+        class: selectedClass,
+        month: currentMonth
+      };
+      const result = await callAppsScript('updateDataTransfer', payload);
+      if (result && result.success) {
+        showMessage(`✅ Update successful! ${result.message || 'Data transferred from AZ to BA and BA set as (AU + AZ) for the month.'}`, "success");
+        await generateReport(false);
+      } else {
+        throw new Error(result?.message || "Update operation failed on server.");
+      }
+    } catch (err) {
+      console.error("Update error:", err);
+      showMessage(`❌ Update failed: ${err.message}`, "error");
+    } finally {
+      updateBtn.disabled = false;
+      updateBtn.textContent = originalText;
     }
   }
 
-  // ======= MAIN GENERATION (ONLY INDIVIDUAL SCOPE) =======
-  let lastRenderedData = null;     // store last successful render data for print/pdf
-  let lastFilters = null;
+  // NEW: Update ALL Months at once
+  async function executeUpdateAllMonths() {
+    updateAllBtn.disabled = true;
+    const originalText = updateAllBtn.textContent;
+    updateAllBtn.textContent = "⏳ Updating ALL Months...";
+    showMessage(`Initiating data transfer for ALL months across all sheets...`, "success");
+    
+    try {
+      const result = await callAppsScript('updateAllMonthsTransfer', {});
+      if (result && result.success) {
+        showMessage(`✅ Update ALL Months successful! ${result.message || 'All month sheets have been updated.'}`, "success");
+        await generateReport(false);
+      } else {
+        throw new Error(result?.message || "Update ALL months operation failed on server.");
+      }
+    } catch (err) {
+      console.error("Update ALL error:", err);
+      showMessage(`❌ Update ALL Months failed: ${err.message}`, "error");
+    } finally {
+      updateAllBtn.disabled = false;
+      updateAllBtn.textContent = originalText;
+    }
+  }
 
-  async function generateIndividualReport() {
+  // Main generate function that stores rendered HTML
+  async function generateReport(returnHtmlOnly = false) {
+    const rType = reportTypeSelect.value;
+    const scope = scopeSelect.value;
+    const month = monthSelect.value;
+    const individualRoll = rollNoField.value.trim();
     const year = yearSelect.value;
     const classFilter = classSelect.value;
-    const rollNo = rollInput.value.trim();
-    const reportType = reportMode.value;
-    const month = monthSelect.value;
-
-    if (!rollNo) {
-      showMessage("❌ Please enter a Roll Number for individual report", "error");
+    
+    if (!year || !classFilter) {
+      showMessage("Year and Class are required fields", "error");
       return;
     }
-    if (!/^\d+$/.test(rollNo)) {
-      showMessage("❌ Roll number must contain only digits", "error");
-      return;
-    }
-
-    reportContainer.innerHTML = `<div class="stats-hero" style="justify-content:center;"><span>⏳ Generating individual report for Roll #${rollNo} ...</span></div>`;
+    
+    const container = document.getElementById('reportContainer');
+    container.innerHTML = `<div class="stats-card" style="text-align:center;">⏳ Fetching data (Year: ${year}, Class: ${classFilter}) ...</div>`;
     generateBtn.disabled = true;
     generateBtn.textContent = "⟳ Processing...";
-
+    
     try {
       let result = null;
-      const basePayload = { year: year, class: classFilter, rollNo: rollNo };
-      let renderPayload = null;
-
-      if (reportType === "daily") {
-        let dayRaw = dailyDayInput.value;
+      const basePayload = { year: year, class: classFilter };
+      let renderArgs = null;
+      
+      // Daily report
+      if (rType === 'daily') {
+        let dayRaw = dailyDayInput.value.trim();
         if (!dayRaw) dayRaw = "15";
         const dayNum = parseInt(dayRaw, 10);
-        if (isNaN(dayNum) || dayNum < 1 || dayNum > 32) throw new Error("Invalid day (1–32)");
-        const dateStr = `${month} ${dayNum}`;
-        const payload = { ...basePayload, month: month, date: dateStr };
-        result = await callBackend("getDailyReport", payload);
-        if (result && result.success) {
-          renderPayload = { type: 'daily', data: result.data, filters: { year, classFilter, rollNo, month, dayNum } };
-          renderDailyIndividual(result.data, renderPayload.filters);
-          showMessage(`✅ Daily record for Roll ${rollNo} loaded`, "success");
-        } else throw new Error(result?.message || "Daily data not found");
+        if (isNaN(dayNum) || dayNum < 1 || dayNum > 32) throw new Error("Invalid day number (1-32)");
+        const dateString = `${month} ${dayNum}`;
+        const payload = {
+          ...basePayload,
+          month: month,
+          date: dateString,
+          ...(scope === 'individual' && individualRoll ? { rollNo: individualRoll } : {})
+        };
+        result = await callAppsScript('getDailyReport', payload);
+        if (result.success) {
+          renderArgs = { year, classFilter, month, dayNum, scope, individualRoll };
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = buildDailyHTML(result.data, renderArgs);
+          latestReportHTML = tempDiv.innerHTML;
+          if (!returnHtmlOnly) renderDailyReport(result.data, renderArgs);
+          currentReportMetadata = { type: 'daily', title: buildReportTitle({year, classFilter, month, dayNum}, rType, scope, individualRoll), filters: renderArgs };
+        } else throw new Error(result.message || "Failed daily");
       }
-      else if (reportType === "monthly") {
-        const payload = { ...basePayload, month: month };
-        result = await callBackend("getMonthlyReport", payload);
-        if (result && result.success) {
-          renderPayload = { type: 'monthly', data: result.data, filters: { year, classFilter, rollNo, month } };
-          renderMonthlyIndividual(result.data, renderPayload.filters);
-          showMessage(`📆 Monthly summary for Roll ${rollNo}`, "success");
-        } else throw new Error(result?.message || "Monthly summary failed");
+      // MONTHLY: updated columns to Present (P), Absent (A), Grand Total (GT) based on data from AU, AV, BA
+      else if (rType === 'monthly') {
+        const payload = {
+          ...basePayload,
+          month: month,
+          ...(scope === 'individual' && individualRoll ? { rollNo: individualRoll } : {})
+        };
+        result = await callAppsScript('getMonthlyReport', payload);
+        if (result.success) {
+          renderArgs = { year, classFilter, month, scope, individualRoll };
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = buildMonthlyHTML(result.data, renderArgs);
+          latestReportHTML = tempDiv.innerHTML;
+          if (!returnHtmlOnly) renderMonthlyReport(result.data, renderArgs);
+          currentReportMetadata = { type: 'monthly', title: buildReportTitle({year, classFilter, month}, rType, scope, individualRoll), filters: renderArgs };
+        } else throw new Error(result.message || "Failed monthly");
       }
-      else if (reportType === "weekly") {
-        let startDay = weekStartInput.value.trim() || "1";
-        let endDay = weekEndInput.value.trim() || "7";
-        const sDay = parseInt(startDay, 10);
-        const eDay = parseInt(endDay, 10);
-        if (isNaN(sDay) || isNaN(eDay) || sDay < 1 || eDay > 32 || sDay > eDay) throw new Error("Week range must be 1–32 and start ≤ end");
-        const startDate = `${month} ${sDay}`;
-        const endDate = `${month} ${eDay}`;
-        const payload = { ...basePayload, month: month, startDate: startDate, endDate: endDate };
-        result = await callBackend("getWeeklyReport", payload);
-        if (result && result.success) {
-          renderPayload = { type: 'weekly', data: result.data, filters: { year, classFilter, rollNo, month, sDay, eDay } };
-          renderWeeklyIndividual(result.data, renderPayload.filters);
-          showMessage(`🗓️ Weekly report (${sDay}-${eDay}) for Roll ${rollNo}`, "success");
-        } else throw new Error(result?.message || "Weekly data error");
+      // Weekly
+      else if (rType === 'weekly') {
+        let startDay = startDayInput.value.trim() || "1";
+        let endDay = endDayInput.value.trim() || "7";
+        const startDayNum = parseInt(startDay, 10);
+        const endDayNum = parseInt(endDay, 10);
+        if (isNaN(startDayNum) || isNaN(endDayNum)) throw new Error("Invalid week range");
+        if (startDayNum < 1 || endDayNum > 32 || startDayNum > endDayNum) throw new Error("Invalid day range");
+        const startDate = `${month} ${startDayNum}`;
+        const endDate = `${month} ${endDayNum}`;
+        const payload = {
+          ...basePayload,
+          month: month,
+          startDate: startDate,
+          endDate: endDate,
+          ...(scope === 'individual' && individualRoll ? { rollNo: individualRoll } : {})
+        };
+        result = await callAppsScript('getWeeklyReport', payload);
+        if (result.success) {
+          renderArgs = { year, classFilter, month, startDayNum, endDayNum, scope, individualRoll };
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = buildWeeklyHTML(result.data, renderArgs);
+          latestReportHTML = tempDiv.innerHTML;
+          if (!returnHtmlOnly) renderWeeklyReport(result.data, renderArgs);
+          currentReportMetadata = { type: 'weekly', title: buildReportTitle({year, classFilter, month, startDayNum, endDayNum}, rType, scope, individualRoll), filters: renderArgs };
+        } else throw new Error(result.message || "Failed weekly");
       }
-      else if (reportType === "yearly") {
-        const payload = { ...basePayload };
-        result = await callBackend("getYearlyReport", payload);
-        if (result && result.success) {
-          renderPayload = { type: 'yearly', data: result.data, filters: { year, classFilter, rollNo } };
-          renderYearlyIndividual(result.data, renderPayload.filters);
-          showMessage(`📈 Yearly master report for Roll ${rollNo} (${year})`, "success");
-        } else throw new Error(result?.message || "Yearly individual not available");
+      // Yearly
+      else if (rType === 'yearly') {
+        if (scope === 'individual') {
+          if (!individualRoll) throw new Error("Roll number required");
+          const payload = { ...basePayload, rollNo: individualRoll };
+          result = await callAppsScript('getYearlyReport', payload);
+          if (result.success) {
+            renderArgs = { year, classFilter, individualRoll, scope };
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = buildYearlyIndividualHTML(result.data, renderArgs);
+            latestReportHTML = tempDiv.innerHTML;
+            if (!returnHtmlOnly) renderYearlyIndividualReport(result.data, renderArgs);
+            currentReportMetadata = { type: 'yearly_individual', title: buildReportTitle({year, classFilter}, rType, scope, individualRoll), filters: renderArgs };
+          } else throw new Error(result.message || "Failed yearly individual");
+        } else {
+          const payload = { ...basePayload };
+          result = await callAppsScript('getWholeYearlySummary', payload);
+          if (result.success) {
+            renderArgs = { year, classFilter };
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = buildYearlyWholeHTML(result.data, renderArgs);
+            latestReportHTML = tempDiv.innerHTML;
+            if (!returnHtmlOnly) renderYearlyWholeReport(result.data, renderArgs);
+            currentReportMetadata = { type: 'yearly_whole', title: buildReportTitle({year, classFilter}, rType, scope, ''), filters: renderArgs };
+          } else throw new Error(result.message || "Failed yearly summary");
+        }
       }
-      if (renderPayload) {
-        lastRenderedData = renderPayload;
-        lastFilters = renderPayload.filters;
-      }
+      
+      if (!returnHtmlOnly) showMessage(`Report generated successfully!`, "success");
+      return latestReportHTML;
     } catch (err) {
       console.error(err);
-      reportContainer.innerHTML = `<div class="empty-state" style="background: #fee9e6;">❌ Failed: ${err.message}<br><span style="font-size:0.8rem;">Please verify backend script or network.</span></div>`;
-      showMessage(err.message, "error");
-      lastRenderedData = null;
+      if (!returnHtmlOnly) {
+        container.innerHTML = `<div class="error-message">❌ Failed: ${err.message}</div>`;
+        showMessage(err.message, "error");
+      }
+      throw err;
     } finally {
       generateBtn.disabled = false;
-      generateBtn.textContent = "⟳ Generate Individual Report";
+      generateBtn.textContent = "⟳ Generate Report";
     }
   }
-
-  // ---------- RENDER FUNCTIONS (unchanged but store for print) ----------
-  function renderDailyIndividual(data, filters) {
-    const report = data?.report || [];
-    if (!report.length) {
-      reportContainer.innerHTML = `<div class="empty-state">⚠️ No attendance record for Roll #${filters.rollNo} on ${filters.month} ${filters.dayNum}.</div>`;
-      return;
-    }
-    const student = report[0];
-    let statusHtml = `<span class="absent-badge">${student.status || 'अनुपस्थित'}</span>`;
-    if (student.status === 'उपस्थित') statusHtml = `<span class="present-badge">उपस्थित (Present)</span>`;
-    else if (student.status === 'सार्वजनिक बिदा') statusHtml = `<span class="holiday-badge">सार्वजनिक बिदा (Holiday)</span>`;
-
-    const html = `
-      <div class="stats-hero">
-        <div><h3>📅 Daily Attendance · Individual</h3>
-        <p><strong>${student.name}</strong> | Roll: ${student.rollNo} | Class: ${student.class}</p>
-        <p>📆 Date: ${data.month || filters.month} ${filters.dayNum}, Year ${filters.year}</p></div>
-        <div class="att-circle">${statusHtml}</div>
-      </div>
-      <div class="table-wrapper"><table><thead><tr><th>Roll No</th><th>Name</th><th>Class</th><th>Status</th><th>Remarks</th></tr></thead><tbody>
-        <tr><td>${student.rollNo}</td><td>${student.name}</td><td>${student.class}</td><td>${statusHtml}</td><td>${student.remarks || '—'}</td></tr>
-      </tbody></table></div>`;
-    reportContainer.innerHTML = html;
-  }
-
-  function renderMonthlyIndividual(data, filters) {
-    const studentData = data?.report?.[0];
-    if (!studentData) { reportContainer.innerHTML = `<div class="empty-state">📭 No monthly data for Roll ${filters.rollNo}</div>`; return; }
-    const html = `<div class="stats-hero"><div><h3>Monthly Summary (Individual)</h3><p>${studentData.name} | Roll ${studentData.rollNo} | Class ${studentData.class}</p><p>Month: ${data.month || filters.month} | Year ${filters.year}</p></div><div class="att-circle"> ${studentData.percentage}%</div></div>
-      <div class="table-wrapper"><table><thead><tr><th>Roll</th><th>Student</th><th>Present</th><th>Total Days</th><th>Teaching Days</th><th>Attendance %</th></tr></thead>
-      <tbody><tr><td>${studentData.rollNo}</td><td>${studentData.name}</td><td><strong>${studentData.present}</strong></td><td>${studentData.totalOpened}</td><td>${studentData.teachingDays}</td><td><span class="present-badge">${studentData.percentage}%</span></td></tr></tbody></table></div>`;
-    reportContainer.innerHTML = html;
-  }
-
-  function renderWeeklyIndividual(data, filters) {
-    const record = data?.report?.[0];
-    if (!record) { reportContainer.innerHTML = `<div class="empty-state">📅 No weekly data for Roll ${filters.rollNo}</div>`; return; }
-    const html = `<div class="stats-hero"><div><h3>Weekly Attendance Snapshot</h3><p>${record.name} | Roll ${record.rollNo} | Grade ${record.class}</p><p> Week: ${filters.month} ${filters.sDay} – ${filters.eDay} (Year ${filters.year})</p></div><div class="att-circle">⭐ ${record.percentage}%</div></div>
-      <div class="table-wrapper"><table><thead><tr><th>Roll</th><th>Name</th><th>Present</th><th>Absent</th><th>Total Days</th><th>Percentage</th></tr></thead>
-      <tbody><tr><td>${record.rollNo}</td><td>${record.name}</td><td><strong>${record.present}</strong></td><td>${record.absent}</td><td>${record.total}</td><td><span class="present-badge">${record.percentage}%</span></td></tr></tbody></table></div>`;
-    reportContainer.innerHTML = html;
-  }
-
-  function renderYearlyIndividual(data, filters) {
-    const monthlyBreakdown = data?.yearlyData || [];
-    if (!monthlyBreakdown.length) { reportContainer.innerHTML = `<div class="empty-state">📭 No yearly data found for Roll ${filters.rollNo}</div>`; return; }
-    let rows = "";
-    monthlyBreakdown.forEach(m => {
-      rows += `<tr><td><strong>${m.month}</strong></td><td>${m.present}</td><td>${m.totalOpened}</td><td>${m.teachingDays}</td><td><span class="${m.percentage >= 75 ? 'present-badge' : 'absent-badge'}">${m.percentage}%</span></td></tr>`;
+  
+  // ---------- HTML builders for consistent fixed layout ----------
+  function buildDailyHTML(data, filters) {
+    const report = data.report || [];
+    if (!report.length) return '<div class="error-message">⚠️ No students found</div>';
+    let html = `<div class="stats-card"><strong>📅 Daily Report</strong><br>${filters.month} ${filters.dayNum} | Year: ${filters.year} | Class: ${filters.classFilter}<br>Total Students: ${report.length}</div>
+    <div class="table-wrapper"><table><thead><tr><th>SN</th><th>Roll No</th><th>Class</th><th>Name</th><th>Status</th></td></thead><tbody>`;
+    report.forEach((r, idx) => {
+      let statusClass = r.status === 'उपस्थित' ? 'present-badge' : (r.status === 'सार्वजनिक बिदा' ? 'holiday-badge' : 'absent-badge');
+      html += `<tr>
+        <td>${r.sn || idx+1}</td>
+        <td>${r.rollNo}</td>
+        <td>${r.class}</td>
+        <td>${r.name}</td>
+        <td><span class="${statusClass}">${r.status || 'अनुपस्थित'}</span></td>
+      </tr>`;
     });
-    const totalPresent = data.totalPresent || 0;
-    const totalDays = data.totalDays || 0;
-    const yearlyPercent = data.yearlyPercentage || 0;
-    const overallClassLabel = filters.classFilter === 'all' ? 'All Classes' : `Grade ${filters.classFilter}`;
-    const html = `<div class="stats-hero"><div><h3>Yearly Report · Individual</h3><p>Roll No: ${filters.rollNo} | ${data.studentName || 'Student'} | Class: ${overallClassLabel}</p><p>🎓 Academic Year ${filters.year}</p></div><div class="att-circle"> Yearly: ${yearlyPercent}%</div></div>
-      <div class="table-wrapper"><table><thead><tr><th>Month (Nepali)</th><th>Present</th><th>Total Opened Days</th><th>Teaching Days</th><th>Attendance %</th></tr></thead>
-      <tbody>${rows}<tr class="total-row"><td><strong>📌 TOTAL / AVERAGE</strong></td><td><strong>${totalPresent}</strong></td><td><strong>${totalDays}</strong></td><td>—</td><td><strong>${yearlyPercent}%</strong></td></tr></tbody></table></div>`;
-    reportContainer.innerHTML = html;
+    html += `</tbody>}</div>`;
+    return html;
   }
-
-  // ---------- PRINT & PDF (A4 fixed format) ----------
-  function printReport() {
-    if (!lastRenderedData) {
-      showMessage("⚠️ Please generate a report first before printing.", "error");
+  
+  // UPDATED MONTHLY: Present(P)=AU, Absent(A)=AV, Grand Total(GT)=BA
+  function buildMonthlyHTML(data, filters) {
+    const report = data.report || [];
+    if (!report.length) return '<div class="error-message">⚠️ No data for the selected month/class.</div>';
+    let html = `<div class="stats-card"><strong>📆 Monthly Summary (P/A/GT)</strong><br>${filters.month} | Year: ${filters.year} | Class: ${filters.classFilter}<br>Total Students: ${report.length}</div>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>Roll No</th><th>Name</th><th>Class</th><th>📌 Present (P)</th><th>📌 Absent (A)</th><th>📌 Grand Total (GT)</th></tr>
+        </thead>
+        <tbody>`;
+    report.forEach(r => {
+      // Map fields: present = r.present (AU), absent = r.absent (AV), grandTotal = r.grandTotal (BA)
+      const presentVal = r.present !== undefined ? r.present : (r.Present || 0);
+      const absentVal = r.absent !== undefined ? r.absent : (r.Absent || 0);
+      const grandTotalVal = r.grandTotal !== undefined ? r.grandTotal : (r.GrandTotal || (Number(presentVal) + Number(absentVal)));
+      html += `<tr>
+        <td>${r.rollNo}</td>
+        <td>${r.name}</td>
+        <td>${r.class}</td>
+        <td><strong>${presentVal}</strong></td>
+        <td>${absentVal}</td>
+        <td><strong>${grandTotalVal}</strong></td>
+      </tr>`;
+    });
+    html += `</tbody></table></div>`;
+    return html;
+  }
+  
+  function buildWeeklyHTML(data, filters) {
+    const report = data.report || [];
+    if (!report.length) return '<div class="error-message">⚠️ No data</div>';
+    let html = `<div class="stats-card"><strong>🗓️ Weekly Report</strong><br>${filters.month} ${filters.startDayNum}-${filters.endDayNum} | Year: ${filters.year} | Class: ${filters.classFilter}<br>Total: ${report.length}</div><div class="table-wrapper"><table><thead><tr><th>Roll No</th><th>Name</th><th>Class</th><th>Present</th><th>Absent</th><th>Total Days</th><th>%</th></tr></thead><tbody>`;
+    report.forEach(r => { html += `<tr><td>${r.rollNo}</td><td>${r.name}</td><td>${r.class}</td><td><strong>${r.present}</strong></td><td>${r.absent}</td><td>${r.total}</td><td><strong>${r.percentage}%</strong></td></tr>`; });
+    html += `</tbody>}</div>`;
+    return html;
+  }
+  function buildYearlyIndividualHTML(data, filters) {
+    const yearlyData = data.yearlyData || [];
+    if (!yearlyData.length) return `<div class="error-message">⚠️ No data for Roll ${filters.individualRoll}</div>`;
+    let html = `<div class="stats-card"><strong>📈 Yearly - Individual</strong><br>Roll: ${data.rollNo || filters.individualRoll} | Year: ${filters.year} | Class: ${filters.classFilter}</div><div class="table-wrapper"><table><thead></tr><th>Month</th><th>Present</th><th>Total Days</th><th>Teaching Days</th><th>%</th></tr></thead><tbody>`;
+    yearlyData.forEach(d => { html += `<tr><td>${d.month}</td><td><strong>${d.present}</strong></td><td>${d.totalOpened}</td><td>${d.teachingDays}</td><td><strong>${d.percentage}%</strong></td></tr>`; });
+    html += `<tr class="total-row"><td><strong>TOTAL</strong></td><td><strong>${data.totalPresent}</strong></td><td><strong>${data.totalDays}</strong></td><td>-</td><td><strong>${data.yearlyPercentage}%</strong></td></tr></tbody></table></div>`;
+    return html;
+  }
+  function buildYearlyWholeHTML(data, filters) {
+    const students = data.studentsSummary || [];
+    if (!students.length) return '<div class="error-message">⚠️ No students</div>';
+    let html = `<div class="stats-card"><strong>📈 Yearly Class Summary</strong><br>Year: ${filters.year} | Class: ${filters.classFilter}<br>Total: ${students.length}</div><div class="table-wrapper"></table><thead><tr><th>Roll No</th><th>Name</th><th>Class</th><th>Total Present</th><th>Total Days</th><th>%</th></tr></thead><tbody>`;
+    students.forEach(s => { let badgeClass = (s.percentage<60)?'absent-badge':(s.percentage<75?'holiday-badge':'present-badge'); html += `<tr><td>${s.rollNo}</td><td>${s.name}</td><td>${s.class}</td><td><strong>${s.presentTotal}</strong></td><td>${s.totalDays}</td><td><span class="${badgeClass}">${s.percentage}%</span></td></tr>`; });
+    html += `</tbody>}</div>`;
+    return html;
+  }
+  
+  function renderDailyReport(data, filters) { document.getElementById('reportContainer').innerHTML = buildDailyHTML(data, filters); }
+  function renderMonthlyReport(data, filters) { document.getElementById('reportContainer').innerHTML = buildMonthlyHTML(data, filters); }
+  function renderWeeklyReport(data, filters) { document.getElementById('reportContainer').innerHTML = buildWeeklyHTML(data, filters); }
+  function renderYearlyIndividualReport(data, filters) { document.getElementById('reportContainer').innerHTML = buildYearlyIndividualHTML(data, filters); }
+  function renderYearlyWholeReport(data, filters) { document.getElementById('reportContainer').innerHTML = buildYearlyWholeHTML(data, filters); }
+  
+  // PRINT feature: using current report HTML stored
+  async function printReport() {
+    if (!latestReportHTML) {
+      showMessage("No report loaded. Generate a report first.", "error");
       return;
     }
-    window.print();
+    const printWindow = window.open('', '_blank');
+    const styles = document.querySelector('style').innerHTML;
+    printWindow.document.write(`
+      <!DOCTYPE html><html><head><title>Attendance Report</title><style>${styles} body { padding: 20px; } .filter-bar, .action-buttons, .btn-print, .btn-pdf, #generateBtn, #updateDataBtn, #updateAllMonthsBtn { display: none; } .stats-card { background: #2c3e66; color: white; }</style></head>
+      <body><div class="dashboard-container">${latestReportHTML}</div></body></html>
+    `);
+    printWindow.document.close();
+    printWindow.print();
   }
-
-  function downloadAsPDF() {
-    if (!lastRenderedData) {
-      showMessage("⚠️ Please generate a report first before downloading PDF.", "error");
+  
+  // PDF download using html2pdf with fixed layout
+  async function downloadPDF() {
+    if (!latestReportHTML) {
+      showMessage("Please generate a report first", "error");
       return;
     }
-    // Clone the entire report section and style for print preview + PDF
-    const originalTitle = document.title;
-    document.title = `Attendance_Roll_${lastFilters?.rollNo || 'student'}_${new Date().toISOString().slice(0,19)}`;
-    
-    // Create a hidden iframe or use browser print media? We'll use window.print with custom PDF settings.
-    // For high-fidelity A4 PDF we trigger print and user can "Save as PDF". This is standard cross-browser.
-    // To improve UX, notify about "Save as PDF" option in print dialog.
-    showMessage("📄 In print dialog, select 'Save as PDF' as destination → A4 format", "success");
-    setTimeout(() => {
-      window.print();
-    }, 200);
+    showMessage("Generating PDF, please wait...", "success");
+    const pdfContainer = document.createElement('div');
+    pdfContainer.style.background = "white";
+    pdfContainer.style.padding = "20px";
+    pdfContainer.style.width = "100%";
+    pdfContainer.style.fontFamily = "'Segoe UI', Roboto, sans-serif";
+    const titleDiv = document.createElement('div');
+    titleDiv.style.marginBottom = "20px";
+    titleDiv.style.borderBottom = "2px solid #3b82f6";
+    titleDiv.style.paddingBottom = "8px";
+    titleDiv.innerHTML = `<h2 style="margin:0;">📋 Attendance Report</h2><p style="color:#2c3e66; margin-top:6px;">${currentReportMetadata.title} | Generated: ${new Date().toLocaleString()}</p>`;
+    pdfContainer.appendChild(titleDiv);
+    const reportClone = document.createElement('div');
+    reportClone.innerHTML = latestReportHTML;
+    pdfContainer.appendChild(reportClone);
+    const opt = {
+      margin: [0.5, 0.5, 0.5, 0.5],
+      filename: `Attendance_${currentReportMetadata.title.replace(/[^a-z0-9]/gi, '_')}.pdf`,
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, letterRendering: true },
+      jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+    };
+    try {
+      await html2pdf().set(opt).from(pdfContainer).save();
+      showMessage("PDF downloaded successfully!", "success");
+    } catch(e) {
+      console.error(e);
+      showMessage("PDF error: " + e.message, "error");
+    }
   }
-
-  // Attach print & PDF download events
+  
+  // Event binding
+  generateBtn.addEventListener('click', async () => { await generateReport(false); });
   printBtn.addEventListener('click', printReport);
-  downloadPdfBtn.addEventListener('click', downloadAsPDF);
-
-  // Auto restore last render if any after print or ensure dynamic
-  generateBtn.addEventListener('click', generateIndividualReport);
-  window.addEventListener('DOMContentLoaded', () => {
-    if (!rollInput.value) rollInput.value = "7";
+  pdfBtn.addEventListener('click', downloadPDF);
+  updateBtn.addEventListener('click', executeUpdateData);
+  updateAllBtn.addEventListener('click', executeUpdateAllMonths);
+  
+  window.addEventListener('load', async () => {
+    if (!dailyDayInput.value) dailyDayInput.value = "15";
+    if (!startDayInput.value) startDayInput.value = "1";
+    if (!endDayInput.value) endDayInput.value = "7";
     updateDynamicFields();
-    generateIndividualReport();
+    await generateReport(false);
   });
 </script>
 </body>
