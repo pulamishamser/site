@@ -162,6 +162,18 @@
     .btn-secondary:hover {
       background: #374151;
     }
+    .btn-update {
+      background: #0f5c6b;
+    }
+    .btn-update:hover {
+      background: #0a3f4a;
+    }
+    .btn-update-all {
+      background: #8b5cf6;
+    }
+    .btn-update-all:hover {
+      background: #6d28d9;
+    }
 
     .table-wrapper {
       overflow-x: auto;
@@ -258,7 +270,7 @@
         padding: 0;
         margin: 0;
       }
-      .filter-bar, .action-buttons, .badge-new, .message-area, .generate-btn-print-hide, button, select, input, .btn-print, .btn-pdf, #generateBtn {
+      .filter-bar, .action-buttons, .badge-new, .message-area, .generate-btn-print-hide, button, select, input, .btn-print, .btn-pdf, #generateBtn, #updateDataBtn, #updateAllMonthsBtn {
         display: none !important;
       }
       .card {
@@ -296,7 +308,7 @@
       }
     }
 
-    /* PDF export uses similar cleanup but we apply temporary class */
+    /* PDF export container styling */
     .pdf-export-container {
       background: white;
       padding: 20px;
@@ -368,32 +380,18 @@
       </div>
 
       <div class="filter-group">
-        <label> YEAR</label>
-        <select id="yearSelect">
-          <option value="2080">2080</option>
-          <option value="2081" selected>2081</option>
-          <option value="2082">2082</option>
-          <option value="2083">2083</option>
-        </select>
+        <label>YEAR (e.g., 2081)</label>
+        <input type="Number" id="yearSelect" placeholder="e.g., 2083,2081" value="2081">
       </div>
 
       <div class="filter-group">
-        <label> CLASS</label>
-        <select id="classSelect">
-          <option value="all">🎓 All Classes</option>
-          <option value="4">Grade 4</option>
-          <option value="5">Grade 5</option>
-          <option value="6">Grade 6</option>
-          <option value="7">Grade 7</option>
-          <option value="8">Grade 8</option>
-          <option value="9">Grade 9</option>
-          <option value="10">Grade 10</option>
-        </select>
+        <label>CLASS (e.g., 1,2,LKG,UKG)</label>
+        <input type="text" id="classSelect" placeholder="e.g., 1,2..LKG,UKG,5EM" value="1">
       </div>
 
       <div class="filter-group" id="individualRollGroup" style="display: none;">
         <label>Roll Number</label>
-        <input type="text" id="rollNoInput" placeholder="e.g., 1, 101" value="">
+        <input type="number" id="rollNoInput" placeholder="e.g., 1, 101" value="">
       </div>
 
       <div class="filter-group">
@@ -436,6 +434,8 @@
       <div class="action-buttons">
         <button id="printReportBtn" class="btn-print">🖨️ Print Report</button>
         <button id="downloadPdfBtn" class="btn-pdf">📄 Download PDF</button>
+        <button id="updateDataBtn" class="btn-update">🔄 Update Current Month</button>
+        <button id="updateAllMonthsBtn" class="btn-update-all">🌟 Update ALL Months</button>
       </div>
     </div>
 
@@ -450,8 +450,8 @@
 
 <script>
   // ======================= CONFIGURATION =======================
-  // Google Apps Script Web App URL
-  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxbHayq6mbJN5xS301x1Xuz70-NZYjcSx49pHvUP_vOnekE7c26q1AfFe-xMbSqIc-0hg/exec";
+  // Google Apps Script Web App URL - REPLACE WITH YOUR DEPLOYED URL
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwDOQHxtQQ9XjFenmvR1LHP1vc9oLb0T7wcNQCYp1Tyqw_ckjIWsJBWBWhWmjOTCIW_gw/exec";
   
   // Store latest report HTML snapshot & metadata for print/pdf
   let latestReportHTML = "";
@@ -487,6 +487,8 @@
   const generateBtn = document.getElementById('generateBtn');
   const printBtn = document.getElementById('printReportBtn');
   const pdfBtn = document.getElementById('downloadPdfBtn');
+  const updateBtn = document.getElementById('updateDataBtn');
+  const updateAllBtn = document.getElementById('updateAllMonthsBtn');
 
   // Toggle conditional fields
   function updateDynamicFields() {
@@ -543,6 +545,68 @@
     return title;
   }
 
+  // Update Function - Current Month only
+  async function executeUpdateData() {
+    const year = yearSelect.value;
+    const selectedClass = classSelect.value;
+    const currentMonth = monthSelect.value;
+    
+    if (!year || !currentMonth) {
+      showMessage("Please ensure Year and Month are selected before updating.", "error");
+      return;
+    }
+    
+    updateBtn.disabled = true;
+    const originalText = updateBtn.textContent;
+    updateBtn.textContent = "⏳ Updating...";
+    showMessage(`Initiating data transfer for Year ${year}, Class: ${selectedClass || 'specified class'}, Month: ${currentMonth}`, "success");
+    
+    try {
+      const payload = {
+        year: year,
+        class: selectedClass,
+        month: currentMonth
+      };
+      const result = await callAppsScript('updateDataTransfer', payload);
+      if (result && result.success) {
+        showMessage(`✅ Update successful! ${result.message || 'Data transferred from AZ to BA and BA set as (AU + AZ) for the month.'}`, "success");
+        await generateReport(false);
+      } else {
+        throw new Error(result?.message || "Update operation failed on server.");
+      }
+    } catch (err) {
+      console.error("Update error:", err);
+      showMessage(`❌ Update failed: ${err.message}`, "error");
+    } finally {
+      updateBtn.disabled = false;
+      updateBtn.textContent = originalText;
+    }
+  }
+
+  // NEW: Update ALL Months at once
+  async function executeUpdateAllMonths() {
+    updateAllBtn.disabled = true;
+    const originalText = updateAllBtn.textContent;
+    updateAllBtn.textContent = "⏳ Updating ALL Months...";
+    showMessage(`Initiating data transfer for ALL months across all sheets...`, "success");
+    
+    try {
+      const result = await callAppsScript('updateAllMonthsTransfer', {});
+      if (result && result.success) {
+        showMessage(`✅ Update ALL Months successful! ${result.message || 'All month sheets have been updated.'}`, "success");
+        await generateReport(false);
+      } else {
+        throw new Error(result?.message || "Update ALL months operation failed on server.");
+      }
+    } catch (err) {
+      console.error("Update ALL error:", err);
+      showMessage(`❌ Update ALL Months failed: ${err.message}`, "error");
+    } finally {
+      updateAllBtn.disabled = false;
+      updateAllBtn.textContent = originalText;
+    }
+  }
+
   // Main generate function that stores rendered HTML
   async function generateReport(returnHtmlOnly = false) {
     const rType = reportTypeSelect.value;
@@ -552,8 +616,13 @@
     const year = yearSelect.value;
     const classFilter = classSelect.value;
     
+    if (!year || !classFilter) {
+      showMessage("Year and Class are required fields", "error");
+      return;
+    }
+    
     const container = document.getElementById('reportContainer');
-    container.innerHTML = `<div class="stats-card" style="text-align:center;">⏳ Fetching data (Year: ${year}, Class: ${classFilter === 'all' ? 'All' : classFilter}) ...</div>`;
+    container.innerHTML = `<div class="stats-card" style="text-align:center;">⏳ Fetching data (Year: ${year}, Class: ${classFilter}) ...</div>`;
     generateBtn.disabled = true;
     generateBtn.textContent = "⟳ Processing...";
     
@@ -672,11 +741,11 @@
     }
   }
   
-  // ---------- HTML builders for consistent fixed layout (reuse by both render & PDF) ----------
+  // ---------- HTML builders for consistent fixed layout ----------
   function buildDailyHTML(data, filters) {
     const report = data.report || [];
     if (!report.length) return '<div class="error-message">⚠️ No students found</div>';
-    let html = `<div class="stats-card"><strong>📅 Daily Report</strong><br>${filters.month} ${filters.dayNum} | Year: ${filters.year} | Class: ${filters.classFilter === 'all' ? 'All' : filters.classFilter}<br>Total Students: ${report.length}</div>
+    let html = `<div class="stats-card"><strong>📅 Daily Report</strong><br>${filters.month} ${filters.dayNum} | Year: ${filters.year} | Class: ${filters.classFilter}<br>Total Students: ${report.length}</div>
     <div class="table-wrapper"><table><thead><tr><th>SN</th><th>Roll No</th><th>Class</th><th>Name</th><th>Status</th></tr></thead><tbody>`;
     report.forEach((r, idx) => {
       let statusClass = r.status === 'उपस्थित' ? 'present-badge' : (r.status === 'सार्वजनिक बिदा' ? 'holiday-badge' : 'absent-badge');
@@ -688,7 +757,7 @@
   function buildMonthlyHTML(data, filters) {
     const report = data.report || [];
     if (!report.length) return '<div class="error-message">⚠️ No data</div>';
-    let html = `<div class="stats-card"><strong>📆 Monthly Summary</strong><br>${filters.month} | Year: ${filters.year} | Class: ${filters.classFilter === 'all' ? 'All' : filters.classFilter}<br>Total Students: ${report.length}</div><div class="table-wrapper"><table><thead><tr><th>Roll No</th><th>Name</th><th>Class</th><th>Present</th><th>Total Days</th><th>Teaching Days</th><th>Attendance %</th></tr></thead><tbody>`;
+    let html = `<div class="stats-card"><strong>📆 Monthly Summary</strong><br>${filters.month} | Year: ${filters.year} | Class: ${filters.classFilter}<br>Total Students: ${report.length}</div><div class="table-wrapper"><table><thead><tr><th>Roll No</th><th>Name</th><th>Class</th><th>Present</th><th>Total Days</th><th>Teaching Days</th><th>Attendance %</th></tr></thead><tbody>`;
     report.forEach(r => { html += `<tr><td>${r.rollNo}</td><td>${r.name}</td><td>${r.class}</td><td><strong>${r.present}</strong></td><td>${r.totalOpened}</td><td>${r.teachingDays}</td><td><strong>${r.percentage}%</strong></td></tr>`; });
     html += `</tbody></table></div>`;
     return html;
@@ -696,7 +765,7 @@
   function buildWeeklyHTML(data, filters) {
     const report = data.report || [];
     if (!report.length) return '<div class="error-message">⚠️ No data</div>';
-    let html = `<div class="stats-card"><strong>🗓️ Weekly Report</strong><br>${filters.month} ${filters.startDayNum}-${filters.endDayNum} | Year: ${filters.year} | Class: ${filters.classFilter === 'all' ? 'All' : filters.classFilter}<br>Total: ${report.length}</div><div class="table-wrapper"><table><thead><tr><th>Roll No</th><th>Name</th><th>Class</th><th>Present</th><th>Absent</th><th>Total Days</th><th>%</th></tr></thead><tbody>`;
+    let html = `<div class="stats-card"><strong>🗓️ Weekly Report</strong><br>${filters.month} ${filters.startDayNum}-${filters.endDayNum} | Year: ${filters.year} | Class: ${filters.classFilter}<br>Total: ${report.length}</div><div class="table-wrapper"><table><thead><tr><th>Roll No</th><th>Name</th><th>Class</th><th>Present</th><th>Absent</th><th>Total Days</th><th>%</th></tr></thead><tbody>`;
     report.forEach(r => { html += `<tr><td>${r.rollNo}</td><td>${r.name}</td><td>${r.class}</td><td><strong>${r.present}</strong></td><td>${r.absent}</td><td>${r.total}</td><td><strong>${r.percentage}%</strong></td></tr>`; });
     html += `</tbody></table></div>`;
     return html;
@@ -704,7 +773,7 @@
   function buildYearlyIndividualHTML(data, filters) {
     const yearlyData = data.yearlyData || [];
     if (!yearlyData.length) return `<div class="error-message">⚠️ No data for Roll ${filters.individualRoll}</div>`;
-    let html = `<div class="stats-card"><strong>📈 Yearly - Individual</strong><br>Roll: ${data.rollNo || filters.individualRoll} | Year: ${filters.year} | Class: ${filters.classFilter === 'all' ? 'All' : filters.classFilter}</div><div class="table-wrapper"><table><thead><tr><th>Month</th><th>Present</th><th>Total Days</th><th>Teaching Days</th><th>%</th></tr></thead><tbody>`;
+    let html = `<div class="stats-card"><strong>📈 Yearly - Individual</strong><br>Roll: ${data.rollNo || filters.individualRoll} | Year: ${filters.year} | Class: ${filters.classFilter}</div><div class="table-wrapper"><table><thead><tr><th>Month</th><th>Present</th><th>Total Days</th><th>Teaching Days</th><th>%</th></tr></thead><tbody>`;
     yearlyData.forEach(d => { html += `<tr><td>${d.month}</td><td><strong>${d.present}</strong></td><td>${d.totalOpened}</td><td>${d.teachingDays}</td><td><strong>${d.percentage}%</strong></td></tr>`; });
     html += `<tr class="total-row"><td><strong>TOTAL</strong></td><td><strong>${data.totalPresent}</strong></td><td><strong>${data.totalDays}</strong></td><td>-</td><td><strong>${data.yearlyPercentage}%</strong></td></tr></tbody></table></div>`;
     return html;
@@ -712,7 +781,7 @@
   function buildYearlyWholeHTML(data, filters) {
     const students = data.studentsSummary || [];
     if (!students.length) return '<div class="error-message">⚠️ No students</div>';
-    let html = `<div class="stats-card"><strong>📈 Yearly Class Summary</strong><br>Year: ${filters.year} | Class: ${filters.classFilter === 'all' ? 'All Classes' : 'Grade '+filters.classFilter}<br>Total: ${students.length}</div><div class="table-wrapper"><table><thead><tr><th>Roll No</th><th>Name</th><th>Class</th><th>Total Present</th><th>Total Days</th><th>%</th></tr></thead><tbody>`;
+    let html = `<div class="stats-card"><strong>📈 Yearly Class Summary</strong><br>Year: ${filters.year} | Class: ${filters.classFilter}<br>Total: ${students.length}</div><div class="table-wrapper"><table><thead><tr><th>Roll No</th><th>Name</th><th>Class</th><th>Total Present</th><th>Total Days</th><th>%</th></tr></thead><tbody>`;
     students.forEach(s => { let badgeClass = (s.percentage<60)?'absent-badge':(s.percentage<75?'holiday-badge':'present-badge'); html += `<tr><td>${s.rollNo}</td><td>${s.name}</td><td>${s.class}</td><td><strong>${s.presentTotal}</strong></td><td>${s.totalDays}</td><td><span class="${badgeClass}">${s.percentage}%</span></td></tr>`; });
     html += `</tbody></table></div>`;
     return html;
@@ -733,7 +802,7 @@
     const printWindow = window.open('', '_blank');
     const styles = document.querySelector('style').innerHTML;
     printWindow.document.write(`
-      <!DOCTYPE html><html><head><title>Attendance Report</title><style>${styles} body { padding: 20px; } .filter-bar, .action-buttons, .btn-print, .btn-pdf, #generateBtn, button { display: none; } .stats-card { background: #2c3e66; color: white; }</style></head>
+      <!DOCTYPE html><html><head><title>Attendance Report</title><style>${styles} body { padding: 20px; } .filter-bar, .action-buttons, .btn-print, .btn-pdf, #generateBtn, #updateDataBtn, #updateAllMonthsBtn { display: none; } .stats-card { background: #2c3e66; color: white; }</style></head>
       <body><div class="dashboard-container">${latestReportHTML}</div></body></html>
     `);
     printWindow.document.close();
@@ -781,6 +850,8 @@
   generateBtn.addEventListener('click', async () => { await generateReport(false); });
   printBtn.addEventListener('click', printReport);
   pdfBtn.addEventListener('click', downloadPDF);
+  updateBtn.addEventListener('click', executeUpdateData);
+  updateAllBtn.addEventListener('click', executeUpdateAllMonths);
   
   window.addEventListener('load', async () => {
     if (!dailyDayInput.value) dailyDayInput.value = "15";
