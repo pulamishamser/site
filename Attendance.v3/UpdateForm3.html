@@ -420,7 +420,7 @@
     <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;">
       <div>
         <h2>✏️ Update Attendance</h2>
-        <div class="subhead">Editable: Roll No, Class, Name | Automatic roll no conflict detection (red) + reject duplicate</div>
+        <div class="subhead">Editable: Roll No, Class, Name | Automatic roll + reject duplicate with red </div>
       </div>
       <div style="background: #e6f0ff; border-radius: 30px; padding: 4px 12px; font-size: 0.7rem;">shamser.info.np</div>
     </div>
@@ -434,7 +434,7 @@
       </div>
 
       <div class="filter-group">
-        <label> 📅 MONTH</label>
+        <label> 📅 MONTHS</label>
         <select id="monthSelect">
           <option value="Baisakh">Baisakh</option>
           <option value="Jeshtha">Jeshtha</option>
@@ -488,7 +488,7 @@
       </div>
 
       <div class="filter-group">
-        <label> 📆 DAY NUMBER</label>
+        <label> 📆 DAY NUMBER(1-32)</label>
         <input type="number" id="dayNumberInput" placeholder="e.g., 1, 3, 15"  min="1" max="32">
       </div>
 
@@ -824,7 +824,7 @@
   function renderStudentsTable() {
     const container = document.getElementById('studentsContainer');
     let html = `<div class="table-wrapper"><table><thead><tr>
-      <th>SN</th><th>🎓 Roll No <span style="font-weight:normal;">(✏️ editable)</span></th>
+      <th> SN</th><th>✏️ Roll/Sbl No</th>
       <th>📚 Class</th><th>👤 Student Name</th><th>📊 Current Status</th><th>🔄 Update Status</th>
      </tr></thead><tbody>`;
     
