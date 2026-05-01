@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>📊 Attendance Reports | Individual & Whole Class</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    * { box-sizing: border-box; font-family: 'Segoe UI', Roboto, system-ui, sans-serif; }
+    body { background: #f0f2f5; margin: 0; padding: 24px 20px; }
+    .dashboard-container { max-width: 1600px; margin: 0 auto; }
+    .card { background: white; border-radius: 28px; box-shadow: 0 12px 28px rgba(0,0,0,0.08); padding: 20px 24px 28px; margin-bottom: 28px; transition: all 0.2s; }
+    h2 { font-size: 1.7rem; font-weight: 600; margin: 0 0 6px 0; background: linear-gradient(135deg, #1e3c72, #2b3b5c); background-clip: text; -webkit-background-clip: text; color: transparent; }
+    .subhead { color: #5a6874; margin-bottom: 24px; border-left: 4px solid #3b82f6; padding-left: 14px; font-size: 0.9rem; }
+    .school-header { background: linear-gradient(135deg, #1e293b, #0f172a); color: white; border-radius: 24px; padding: 16px 24px; margin-bottom: 24px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    .school-name { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.3px; margin-bottom: 6px; }
+    .school-address { font-size: 0.85rem; opacity: 0.85; }
+    .message-area { padding: 12px 20px; border-radius: 60px; margin-bottom: 20px; font-weight: 500; display: none; }
+    .message-success { background: #dcfce7; color: #166534; border-left: 5px solid #22c55e; }
+    .message-error { background: #fee2e2; color: #991b1b; border-left: 5px solid #ef4444; }
+    .filter-bar { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end; background: #f8fafc; padding: 18px 20px; border-radius: 32px; margin-bottom: 28px; border: 1px solid #e2edf2; }
+    .filter-group { display: flex; flex-direction: column; gap: 6px; min-width: 120px; }
+    .filter-group label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: #2c3e66; letter-spacing: 0.4px; }
+    select, input, button { padding: 10px 14px; border-radius: 60px; border: 1px solid #cbd5e1; background: white; font-size: 0.85rem; outline: none; transition: 0.15s; }
+    select:focus, input:focus { border-color: #3b82f6; box-shadow: 0 0 0 2px rgba(59,130,246,0.1); }
+    button { background: #1e293b; color: white; font-weight: 600; border: none; cursor: pointer; padding: 10px 28px; }
+    button:hover { background: #0f172a; transform: translateY(-1px); }
+    button:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .action-buttons { display: flex; gap: 14px; margin-left: auto; align-items: center; flex-wrap: wrap; }
+    .btn-print { background: #2c5f2d; }
+    .btn-pdf { background: #b22234; }
+    .btn-update { background: #0f5c6b; }
+    .btn-update-all { background: #8b5cf6; }
+    .required-star::after { content: " *"; color: #e53e3e; font-weight: bold; }
+    .table-wrapper { overflow-x: auto; border-radius: 20px; border: 1px solid #e9eef3; background: white; margin-top: 20px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    th { background: #f1f5f9; color: #0f2b3d; font-weight: 700; padding: 14px 12px; border-bottom: 1px solid #dce5ec; text-align: left; }
+    td { padding: 12px 12px; border-bottom: 1px solid #ecf3f9; }
+    tr:hover td { background-color: #fafcff; }
+    .present-badge { background: #d1fae5; color: #065f46; font-weight: 600; padding: 4px 12px; border-radius: 40px; display: inline-block; font-size: 0.75rem; }
+    .absent-badge { background: #ffe4e2; color: #9b2c1d; font-weight: 600; padding: 4px 12px; border-radius: 40px; display: inline-block; font-size: 0.75rem; }
+    .holiday-badge { background: #fef3c7; color: #92400e; font-weight: 600; padding: 4px 12px; border-radius: 40px; display: inline-block; font-size: 0.75rem; }
+    .stats-card { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 16px 24px; border-radius: 20px; margin-bottom: 20px; width: 100%; }
+    .error-message { background: #fff1f0; border-left: 6px solid #e11d48; color: #b91c1c; padding: 14px 20px; border-radius: 24px; font-weight: 500; }
+    .yearly-matrix-wrapper { overflow-x: auto; border-radius: 20px; border: 1px solid #e9eef3; background: white; margin-top: 20px; }
+    .matrix-table { border-collapse: collapse; width: 100%; min-width: 1300px; font-size: 0.8rem; }
+    .matrix-table th, .matrix-table td { border: 1px solid #ccc; padding: 8px 6px; text-align: center; vertical-align: middle; }
+    .matrix-table th { background-color: #f4f4f4; font-weight: 700; color: #1f2a44; }
+    .matrix-table thead tr:first-child th { background-color: #e0e0e0; }
+    .matrix-table tbody tr:nth-child(even) { background-color: #fafafa; }
+    .stats-summary { background: #eef2ff; border-radius: 20px; padding: 15px 20px; margin-bottom: 20px; font-weight: 500; display: flex; justify-content: space-between; flex-wrap: wrap; }
+    .loading-spinner { display: inline-block; width: 20px; height: 20px; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: white; animation: spin 0.6s linear infinite; margin-right: 8px; vertical-align: middle; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @media print { .filter-bar, .action-buttons, button, select, input, .no-print { display: none !important; } .school-header { print-color-adjust: exact; } }
+    @media (max-width: 780px) { .filter-bar { flex-direction: column; } .action-buttons { margin-left: 0; flex-direction: column; } }
+    .required-field label .required-asterisk { color: #e53e3e; margin-left: 3px; font-weight: bold; }
+  </style>
+</head>
+<body>
+<div class="dashboard-container">
+  <div class="card">
+    <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;">
+      <div><h2>📋 Single Attendance Reports</h2><div class="subhead">Daily · Monthly · Weekly · Yearly Individual </div></div>
+      <div style="background: #e6f0ff; border-radius: 30px; padding: 4px 12px; font-size: 0.7rem; font-weight: 600;">shamser.info.np</div>
+    </div>
+    <div id="globalMessage" class="message-area"></div>
+
+    <div class="filter-bar">
+      <div class="filter-group"><label>REPORT TYPE</label><select id="reportTypeSelect"><option value="daily">Daily Report</option><option value="monthly">Monthly Report</option><option value="weekly">Weekly Report</option><option value="yearly">Yearly Report</option></select></div>
+
+      <div class="filter-group"><label>SCOPE</label>
+        <select id="scopeSelect">
+         <!--- <option value="whole">Whole Class</option>--->
+          <option value="individual" selected>Individual</option>
+        </select>
+      </div>
+
+      <div class="filter-group"><label>YEAR</label><input type="number" id="yearSelect" value="2083"></div>
+ <!--     <div class="filter-group"><label>CLASS</label><input type="text" id="classSelect" value="1"></div>--->
+
+
+  <select id="classSelect" class="filter-group">
+                            <optgroup label="General">
+                                <option value="ECD">ECD</option>
+                                <option value="PG">PG</option>
+                                <option value="Nursary">Nursary</option>
+                                <option value="LKG">LKG</option>
+                                <option value="UKG">UKG</option>
+                            </optgroup>
+                            <optgroup label="Grade (Nepali)">
+                                <option value="1">Grade 1</option><option value="2">Grade 2</option><option value="3">Grade 3</option>
+                                <option value="4">Grade 4</option><option value="5">Grade 5</option><option value="6">Grade 6</option>
+                                <option value="7">Grade 7</option><option value="8" selected>Grade 8</option><option value="9">Grade 9</option>
+                                <option value="10">Grade 10</option><option value="11">Grade 11</option><option value="12">Grade 12</option>
+                            </optgroup>
+                            <optgroup label="English Medium (EM)">
+                                <option value="1EM">Grade 1EM</option><option value="2EM">Grade 2EM</option><option value="3EM">Grade 3EM</option>
+                                <option value="4EM">Grade 4EM</option><option value="5EM">Grade 5EM</option><option value="6EM">Grade 6EM</option>
+                                <option value="7EM">Grade 7EM</option><option value="8EM">Grade 8EM</option><option value="9EM">Grade 9EM</option>
+                                <option value="10EM">Grade 10EM</option><option value="11EM">Grade 11EM</option><option value="12EM">Grade 12EM</option>
+                            </optgroup>
+                        </select>
+
+
+
+
+
+
+
+
+
+
+
+      
+      <!-- INDIVIDUAL ROLL GROUP WITH REQUIRED ATTRIBUTE (enforced) -->
+      <div class="filter-group" id="individualRollGroup" style="display: flex;">
+        <label>🔢 Roll/Sbl No <span class="required-asterisk" style="color:#e53e3e;">*</span></label>
+        <input type="text" id="rollNoInput" class="input-style" placeholder="Roll/Symbol No" required>
+      </div>
+
+      <!-- Month Group - hidden for Yearly Report -->
+      <div class="filter-group" id="monthGroup"><label>MONTH</label><select id="monthSelect"><option value="Baisakh">Baisakh</option><option value="Jeshtha">Jeshtha</option><option value="Ashad">Ashad</option><option value="Shrawan">Shrawan</option><option value="Bhadra">Bhadra</option><option value="Ashwin">Ashwin</option><option value="Kartik">Kartik</option><option value="Mangsir">Mangsir</option><option value="Poush">Poush</option><option value="Magh">Magh</option><option value="Falgun">Falgun</option><option value="Chaitra">Chaitra</option></select></div>
+      
+      <div class="filter-group" id="dailyDateGroup"><label>DAY NUMBER</label><input type="number" id="dailyDayInput" value="1" min="1" max="32"></div>
+      <div class="filter-group" id="weeklyStartGroup" style="display: none;"><label>START DAY</label><input type="number" id="startDayInput" value="1" min="1" max="32"></div>
+      <div class="filter-group" id="weeklyEndGroup" style="display: none;"><label>END DAY</label><input type="number" id="endDayInput" value="7" min="1" max="32"></div>
+      
+      <div class="filter-group"><button id="generateBtn">⟳ Generate Report</button><button id="resetBtn">🔄 Reset</button></div>
+      <div class="action-buttons"><button id="printReportBtn" class="btn-print">🖨️ Print</button><button id="downloadPdfBtn" class="btn-pdf">📄 PDF</button><button id="updateDataBtn" class="btn-update">⚡ Update Month</button><button id="updateAllMonthsBtn" class="btn-update-all">🔄 Update All</button></div>
+    </div>
+    <div id="reportContainer"><div class="stats-card" style="text-align:center;">📋 Select filters & click Generate</div></div>
+  </div>
+</div>
+
+<script>
+  // ======================= CONFIGURATION =======================
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzdma6ZBD0HIP_rL9McmsEUDkvmXOuf-2Os1TZIweHthOMihR5T2NxEr2fnOGaSQ9dS9g/exec";
+  const MONTHS_LIST = ['Baisakh', 'Jeshtha', 'Ashad', 'Shrawan', 'Bhadra', 'Ashwin', 'Kartik', 'Mangsir', 'Poush', 'Magh', 'Falgun', 'Chaitra'];
+  
+  let currentSchoolInfo = { schoolName: "", schoolAddress: "" };
+  let lastGeneratedHTML = "";
+  let lastReportTitle = "";
+  let schoolInfoLoaded = false;
+
+  function showMessage(msg, type) {
+    const div = document.getElementById('globalMessage');
+    div.textContent = msg;
+    div.className = `message-area message-${type}`;
+    div.style.display = "block";
+    setTimeout(() => div.style.display = "none", 4000);
+  }
+
+  async function callAPI(action, payload, timeout = 15000) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeout);
+    try {
+      const params = new URLSearchParams({ action, ...payload }).toString();
+      const res = await fetch(APPS_SCRIPT_URL, { 
+        method: 'POST', 
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: params,
+        signal: controller.signal
+      });
+      clearTimeout(timeoutId);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return await res.json();
+    } catch(err) {
+      clearTimeout(timeoutId);
+      if(err.name === 'AbortError') throw new Error('Request timeout');
+      throw err;
+    }
+  }
+
+  function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, m => m==='&'?'&amp;':m==='<'?'&lt;':'&gt;'); }
+
+  async function fetchSchoolInfoFromSheet() {
+    if(schoolInfoLoaded) return currentSchoolInfo;
+    try {
+      const result = await callAPI('getWholeYearlySummary', { year: '2081', class: '1' }, 8000);
+      if(result.success && result.data) {
+        if(result.data.schoolName) currentSchoolInfo.schoolName = result.data.schoolName;
+        if(result.data.schoolAddress) currentSchoolInfo.schoolAddress = result.data.schoolAddress;
+      }
+      if(!currentSchoolInfo.schoolName) currentSchoolInfo.schoolName = "Shree Janakalyan Secondary School";
+      if(!currentSchoolInfo.schoolAddress) currentSchoolInfo.schoolAddress = "Nepal";
+      schoolInfoLoaded = true;
+    } catch(e) {
+      console.warn("School info fetch:", e);
+      currentSchoolInfo.schoolName = "Shree Janakalyan Secondary School";
+      currentSchoolInfo.schoolAddress = "Nepal";
+      schoolInfoLoaded = true;
+    }
+    return currentSchoolInfo;
+  }
+
+  // ========== RENDERERS ==========
+  function buildDailyHTML(data, filters) {
+    let report = data.report || [];
+    if(!report.length) return '<div class="error-message">⚠️ No attendance data found</div>';
+    let html = `<div class="stats-card"><strong>📅 Daily Report</strong><br>${escapeHtml(currentSchoolInfo.schoolName)}<br> ${escapeHtml(currentSchoolInfo.schoolAddress)}<br> ${filters.month} Day ${filters.dayNum} | Year: ${filters.year} | Total Std: ${report.length}</div><div class="table-wrapper"><table><thead><tr><th>SN</th><th>SBL No</th><th>Class</th><th>Name</th><th>Status</th></tr></thead><tbody>`;
+    report.forEach(r => {
+      let status = r.status || 'अनुपस्थित';
+      let cls = status === 'उपस्थित' ? 'present-badge' : (status === 'सार्वजनिक बिदा' ? 'holiday-badge' : 'absent-badge');
+      html += `<tr><td>${r.sn}</td><td>${r.rollNo}</td><td>${r.class}</td><td>${escapeHtml(r.name)}</td><td><span class="${cls}">${status}</span></td></tr>`;
+    });
+    html += `</tbody></table></div>`;
+    return html;
+  }
+
+  function buildMonthlyHTML(data, filters) {
+    let report = data.report || [];
+    if(!report.length) return '<div class="error-message">⚠️ No monthly data found</div>';
+    let html = `<div class="stats-card"><strong>📆 Monthly Report</strong><br> ${escapeHtml(currentSchoolInfo.schoolName)}<br>📍 ${escapeHtml(currentSchoolInfo.schoolAddress)}<br>Month :${filters.month} | Year: ${filters.year} | Class: ${filters.class}<br> Total Students: ${report.length}</div><div class="table-wrapper"><table><thead><tr><th>SN</th><th>SBL No</th><th>Name</th><th>Present</th><th>Absent</th><th>Closed</th></tr></thead><tbody>`;
+    report.forEach(r => {
+      html += `<tr><td>${r.sn}</td><td>${r.rollNo}</td><td>${escapeHtml(r.name)}</td><td><strong>${r.totalPresent}</strong></td><td>${r.totalAbsent}</td><td>${r.totalClosed}</td></tr>`;
+    });
+    html += `</tbody></table></div>`;
+    return html;
+  }
+
+  function buildWeeklyHTML(data, filters) {
+    let report = data.report || [];
+    if(!report.length) return '<div class="error-message">⚠️ No weekly data found</div>';
+    let html = `<div class="stats-card"><strong>🗓️ Weekly Report</strong><br> ${escapeHtml(currentSchoolInfo.schoolName)}<br> ${escapeHtml(currentSchoolInfo.schoolAddress)}<br>Month : ${filters.month} Days : ${filters.startDay}-${filters.endDay} | Year: ${filters.year} | Class: ${filters.class}<br> Total Std: ${report.length}</div><div class="table-wrapper"><table><thead><tr><th>SN</th><th>SBL No</th><th>Name</th><th>Present</th><th>Absent</th><th>Closed</th></tr></thead><tbody>`;
+    report.forEach(r => {
+      html += `<tr><td>${r.sn}</td><td>${r.rollNo}</td><td>${escapeHtml(r.name)}</td><td><strong>${r.totalPresent}</strong></td><td>${r.totalAbsent}</td><td>${r.totalClosed}</td></tr>`;
+    });
+    html += `</tbody></table></div>`;
+    return html;
+  }
+
+
+
+
+
+
+
+
+function buildYearlyIndividualHTML(data, filters) {
+    let yearlyData = data.yearlyData || [];
+    if(!yearlyData.length) return `<div class="error-message">⚠️ No yearly data for Roll ${filters.rollNo}</div>`;
+    let html = `<div class="stats-card"><strong>📈 Yearly Summary Report</strong><br> ${escapeHtml(currentSchoolInfo.schoolName)}<br> ${escapeHtml(currentSchoolInfo.schoolAddress)}<br> Roll: ${data.rollNo || filters.rollNo} | ${data.studentName || ''} | Year: ${filters.year} | Class: ${filters.class}</div><div class="table-wrapper"><table><thead><tr><th>SN</th><th>Month</th><th>Present</th><th>Absent</th><th>Closed</th></tr></thead><tbody>`;
+    
+    yearlyData.forEach((d, idx) => {
+        html += `<tr>
+            <td>${idx+1}</td>
+  
+            <td><strong>${d.month}</strong></td>
+            <td>${d.totalPresent}</td>
+            <td>${d.totalAbsent}</td>
+            <td>${d.totalClosed}</td>
+        </tr>`;
+    });
+    
+    let totalP = yearlyData.reduce((s, m) => s + (m.totalPresent || 0), 0);
+    let totalA = yearlyData.reduce((s, m) => s + (m.totalAbsent || 0), 0);
+    let totalC = yearlyData.reduce((s, m) => s + (m.totalClosed || 0), 0);
+    
+    html += `<tr style="background:#f3f4f6; font-weight:bold;">
+        <td colspan="2"><strong>GRAND TOTAL</strong></td>
+        <td><strong>${totalP}</strong></td>
+        <td><strong>${totalA}</strong></td>
+        <td><strong>${totalC}</strong></td>
+    </tr>`;
+    html += `</tbody></table></div>`;
+    return html;
+}
+  
+
+
+
+
+
+  // Whole class yearly matrix (Optimized parallel)
+  async function buildYearlyMatrixWhole(studentsList, year, classVal) {
+    const fetchPromises = studentsList.map(async (student) => {
+      try {
+        const indivRes = await callAPI('getYearlyReport', { year, class: classVal, rollNo: student.rollNo }, 10000);
+        if(indivRes.success) {
+          const monthlyArr = indivRes.data.yearlyData || [];
+          let monthMap = new Map();
+          monthlyArr.forEach(m => monthMap.set(m.month, { present: m.totalPresent || 0, absent: m.totalAbsent || 0 }));
+          return { sn: student.sn, rollNo: student.rollNo, name: student.name, monthMap };
+        }
+      } catch(e) { console.warn(`Err roll ${student.rollNo}`); }
+      return { sn: student.sn, rollNo: student.rollNo, name: student.name, monthMap: new Map() };
+    });
+    const matrixRows = await Promise.all(fetchPromises);
+    matrixRows.sort((a,b) => (Number(a.rollNo) - Number(b.rollNo)) || (a.sn - b.sn));
+    
+    let html = `<div class="yearly-matrix-wrapper"><table class="matrix-table"><thead>`;
+    html += `<tr><th rowspan="2">SN</th><th rowspan="2">Roll/Sbl No</th><th rowspan="2">Name</th>`;
+    for(let m of MONTHS_LIST) html += `<th colspan="2">${m}</th>`;
+    html += `<th rowspan="2">Total P</th><th rowspan="2">%</th></tr><tr>`;
+    for(let i=0;i<MONTHS_LIST.length;i++) html += `<th>P</th><th>A</th>`;
+    html += `</tr></thead><tbody>`;
+    for(let stud of matrixRows) {
+      let totalPresent = 0, totalDays = 0;
+      html += `<tr><td>${stud.sn}</td><td>${stud.rollNo}</td><td style="text-align:left">${escapeHtml(stud.name)}</td>`;
+      for(let month of MONTHS_LIST) {
+        let mm = stud.monthMap.get(month) || { present: 0, absent: 0 };
+        totalPresent += mm.present;
+        totalDays += (mm.present + mm.absent);
+        html += `<td><strong>${mm.present}</strong></td><td>${mm.absent}</td>`;
+      }
+      let percent = totalDays > 0 ? ((totalPresent/totalDays)*100).toFixed(1) : 0;
+      let badgeClass = percent < 60 ? 'absent-badge' : (percent < 75 ? 'holiday-badge' : 'present-badge');
+      html += `<td><strong>${totalPresent}</strong></td><td><span class="${badgeClass}" style="padding:4px 10px;border-radius:30px;">${percent}%</span></td></tr>`;
+    }
+    html += `</tbody></table></div>`;
+    return html;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+  // MAIN GENERATION WITH REQUIRED ROLL NUMBER VALIDATION
+  async function generateReport() {
+    const rType = document.getElementById('reportTypeSelect').value;
+    const scope = document.getElementById('scopeSelect').value;
+    const month = document.getElementById('monthSelect').value;
+    const rollNo = document.getElementById('rollNoInput').value.trim();
+    const year = document.getElementById('yearSelect').value.trim();
+    const classVal = document.getElementById('classSelect').value.trim();
+    const container = document.getElementById('reportContainer');
+    
+    if(!year || !classVal) { showMessage("Year and Class required", "error"); return; }
+    
+    // ⭐ ENFORCE REQUIRED ROLL NUMBER FOR INDIVIDUAL SCOPE (strict validation)
+    if(scope === 'individual' && (!rollNo || rollNo === "")) {
+      showMessage("❌ Roll/Symbol Number is REQUIRED for Individual Student Report. Please enter a valid roll number.", "error");
+      // highlight roll input field
+      const rollInputElem = document.getElementById('rollNoInput');
+      rollInputElem.style.border = "2px solid #e53e3e";
+      rollInputElem.style.backgroundColor = "#fff5f5";
+      setTimeout(() => {
+        rollInputElem.style.border = "";
+        rollInputElem.style.backgroundColor = "";
+      }, 2000);
+      return;
+    }
+    // reset roll input style
+    document.getElementById('rollNoInput').style.border = "";
+    document.getElementById('rollNoInput').style.backgroundColor = "";
+    
+    // Show loading
+    container.innerHTML = `<div class="stats-card" style="text-align:center;"><span class="loading-spinner"></span> Loading report...</div>`;
+    document.getElementById('generateBtn').disabled = true;
+    
+    try {
+      await fetchSchoolInfoFromSheet();
+      let result, html = "";
+      const filters = { year, class: classVal, month };
+      
+      // YEARLY WHOLE CLASS MATRIX
+      if(rType === 'yearly' && scope === 'whole') {
+        const summaryRes = await callAPI('getWholeYearlySummary', { year, class: classVal }, 10000);
+        if(!summaryRes.success) throw new Error(summaryRes.message);
+        const studentsList = summaryRes.data.studentsSummary || [];
+        if(studentsList.length === 0) throw new Error("No students found");
+        if(summaryRes.data.schoolName) currentSchoolInfo.schoolName = summaryRes.data.schoolName;
+        if(summaryRes.data.schoolAddress) currentSchoolInfo.schoolAddress = summaryRes.data.schoolAddress;
+        const matrixHtml = await buildYearlyMatrixWhole(studentsList, year, classVal);
+        html = `<div class="school-header no-print"><div class="school-name">${escapeHtml(currentSchoolInfo.schoolName)}</div><div class="school-address">${escapeHtml(currentSchoolInfo.schoolAddress)}</div></div>
+
+                <div class="stats-summary"><div><strong>📈 YEARLY ATTENDANCE (Present/Absent per month)</strong></div><div>Year: ${year} | Class: ${classVal}</div><div>Total Students: ${studentsList.length}</div></div>
+                ${matrixHtml}<div style="font-size:0.7rem; margin-top:12px; text-align:center;">* P = Present, A = Absent | Percentage based on total working days per student</div>`;
+        lastReportTitle = `YearlyMatrix_${year}_Class${classVal}`;
+      }
+      else if(rType === 'yearly' && scope === 'individual') {
+        if(!rollNo) throw new Error("Roll number is mandatory for individual yearly view");
+        result = await callAPI('getYearlyReport', { year, class: classVal, rollNo }, 10000);
+        if(!result.success) throw new Error(result.message);
+        html = buildYearlyIndividualHTML(result.data, { year, class: classVal, rollNo });
+        lastReportTitle = `Yearly_${rollNo}_${year}`;
+      }
+      else if(rType === 'daily') {
+        const dayNum = parseInt(document.getElementById('dailyDayInput').value);
+        if(isNaN(dayNum)) throw new Error("Invalid day");
+        let payload = { year, class: classVal, month, date: `${month} ${dayNum}` };
+        if(scope === 'individual') {
+          if(!rollNo) throw new Error("Roll number required for individual daily report");
+          payload.rollNo = rollNo;
+        }
+        result = await callAPI('getDailyReport', payload, 10000);
+        if(!result.success) throw new Error(result.message);
+        html = buildDailyHTML(result.data, { ...filters, dayNum, class: classVal });
+        lastReportTitle = `Daily_${month}_${dayNum}`;
+      }
+      else if(rType === 'monthly') {
+        let payload = { year, class: classVal, month };
+        if(scope === 'individual') {
+          if(!rollNo) throw new Error("Roll number required for individual monthly report");
+          payload.rollNo = rollNo;
+        }
+        result = await callAPI('getMonthlyReport', payload, 10000);
+        if(!result.success) throw new Error(result.message);
+        html = buildMonthlyHTML(result.data, filters);
+        lastReportTitle = `Monthly_${month}`;
+      }
+      else if(rType === 'weekly') {
+        const startDay = parseInt(document.getElementById('startDayInput').value);
+        const endDay = parseInt(document.getElementById('endDayInput').value);
+        if(isNaN(startDay) || isNaN(endDay)) throw new Error("Invalid week range");
+        let payload = { year, class: classVal, month, startDate: `${month} ${startDay}`, endDate: `${month} ${endDay}` };
+        if(scope === 'individual') {
+          if(!rollNo) throw new Error("Roll number required for individual weekly report");
+          payload.rollNo = rollNo;
+        }
+        result = await callAPI('getWeeklyReport', payload, 10000);
+        if(!result.success) throw new Error(result.message);
+        html = buildWeeklyHTML(result.data, { ...filters, startDay, endDay });
+        lastReportTitle = `Weekly_${month}_${startDay}-${endDay}`;
+      }
+      else {
+        throw new Error("Invalid report type");
+      }
+      container.innerHTML = html;
+      lastGeneratedHTML = html;
+      showMessage("✓ Report generated successfully", "success");
+    } catch(err) {
+      console.error(err);
+      container.innerHTML = `<div class="error-message">❌ ${err.message}</div>`;
+      showMessage(err.message, "error");
+    } finally {
+      document.getElementById('generateBtn').disabled = false;
+    }
+  }
+
+  async function updateCurrentMonth() {
+    const year = document.getElementById('yearSelect').value;
+    const classVal = document.getElementById('classSelect').value;
+    const month = document.getElementById('monthSelect').value;
+    const btn = document.getElementById('updateDataBtn');
+    const orig = btn.textContent;
+    btn.textContent = "⏳ Updating...";
+    btn.disabled = true;
+    try {
+      const res = await callAPI('updateDataTransfer', { year, class: classVal, month }, 15000);
+      if(res.success) { showMessage(res.message, "success"); await generateReport(); }
+      else throw new Error(res.message);
+    } catch(e) { showMessage(e.message, "error"); }
+    finally { btn.textContent = orig; btn.disabled = false; }
+  }
+
+  async function updateAllMonths() {
+    const btn = document.getElementById('updateAllMonthsBtn');
+    const orig = btn.textContent;
+    btn.textContent = "⏳ Updating ALL...";
+    btn.disabled = true;
+    try {
+      const res = await callAPI('updateAllMonthsTransfer', {}, 20000);
+      if(res.success) { showMessage(res.message, "success"); await generateReport(); }
+      else throw new Error(res.message);
+    } catch(e) { showMessage(e.message, "error"); }
+    finally { btn.textContent = orig; btn.disabled = false; }
+  }
+
+  function printReport() {
+    if(!lastGeneratedHTML) { showMessage("Generate report first", "error"); return; }
+    const win = window.open('', '_blank');
+    win.document.write(`<html><head><title>Attendance Report</title><style>${document.querySelector('style').innerHTML} .filter-bar, .action-buttons, button, .btn-print, .btn-pdf { display: none !important; }</style></head><body><div class="dashboard-container">${lastGeneratedHTML}</div></body></html>`);
+    win.document.close();
+    win.print();
+  }
+
+  async function downloadPDF() {
+    if(!lastGeneratedHTML) { showMessage("Generate report first", "error"); return; }
+    showMessage("Preparing PDF...", "success");
+    const container = document.createElement('div');
+    container.style.padding = "20px";
+    container.style.background = "white";
+    container.innerHTML = `<h3 style="text-align:center;">Attendance Report</h3>${lastGeneratedHTML}`;
+    const opt = { margin: [0.5,0.5,0.5,0.5], filename: `${lastReportTitle.replace(/[^a-z0-9]/gi,'_')}.pdf`, image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2 }, jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' } };
+    try { await html2pdf().set(opt).from(container).save(); showMessage("PDF downloaded", "success"); } 
+    catch(e) { showMessage("PDF error: "+e.message, "error"); }
+  }
+
+  function updateDynamicFields() {
+    const rType = document.getElementById('reportTypeSelect').value;
+    const scope = document.getElementById('scopeSelect').value;
+    const isYearly = (rType === 'yearly');
+    const monthGroup = document.getElementById('monthGroup');
+    if(monthGroup) monthGroup.style.display = isYearly ? 'none' : 'flex';
+    
+    // Individual roll group visibility & required behavior: always show for individual, hide for whole
+    const rollGroup = document.getElementById('individualRollGroup');
+    const rollInput = document.getElementById('rollNoInput');
+    if(scope === 'individual') {
+      rollGroup.style.display = 'flex';
+      rollInput.setAttribute('required', 'required');
+      rollInput.parentElement.querySelector('label').innerHTML = '🔢 Roll/Sbl No <span class="required-asterisk" style="color:#e53e3e;">*</span>';
+    } else {
+      rollGroup.style.display = 'none';
+      rollInput.removeAttribute('required');
+    }
+    
+    document.getElementById('dailyDateGroup').style.display = rType === 'daily' ? 'flex' : 'none';
+    const weeklyVisible = rType === 'weekly';
+    document.getElementById('weeklyStartGroup').style.display = weeklyVisible ? 'flex' : 'none';
+    document.getElementById('weeklyEndGroup').style.display = weeklyVisible ? 'flex' : 'none';
+  }
+
+  // Event listeners
+  document.getElementById('reportTypeSelect').addEventListener('change', updateDynamicFields);
+  document.getElementById('scopeSelect').addEventListener('change', updateDynamicFields);
+  document.getElementById('generateBtn').addEventListener('click', generateReport);
+  document.getElementById('printReportBtn').addEventListener('click', printReport);
+  document.getElementById('downloadPdfBtn').addEventListener('click', downloadPDF);
+  document.getElementById('updateDataBtn').addEventListener('click', updateCurrentMonth);
+  document.getElementById('updateAllMonthsBtn').addEventListener('click', updateAllMonths);
+  document.getElementById('resetBtn').addEventListener('click', () => location.reload());
+  
+  updateDynamicFields();
+  fetchSchoolInfoFromSheet().then(() => generateReport());
+</script>
+</body>
+</html>

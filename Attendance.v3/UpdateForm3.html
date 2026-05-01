@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>📝 Update Attendance Records</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    }
+
+    body {
+      background: #f0f2f5;
+      margin: 0;
+      padding: 24px 20px;
+    }
+
+    .dashboard-container {
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: white;
+      border-radius: 28px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.02);
+      padding: 20px 24px 28px;
+      margin-bottom: 28px;
+    }
+
+    h2 {
+      font-size: 1.7rem;
+      font-weight: 600;
+      margin: 0 0 6px 0;
+      background: linear-gradient(135deg, #1e3c72, #2b3b5c);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      display: inline-block;
+    }
+
+    .subhead {
+      color: #5a6874;
+      margin-bottom: 24px;
+      border-left: 4px solid #3b82f6;
+      padding-left: 14px;
+      font-size: 0.9rem;
+    }
+
+    .message-area {
+      padding: 12px 20px;
+      border-radius: 60px;
+      margin-bottom: 20px;
+      font-weight: 500;
+      display: none;
+    }
+    
+    .message-success {
+      background: #dcfce7;
+      color: #166534;
+      border-left: 5px solid #22c55e;
+    }
+    
+    .message-error {
+      background: #fee2e2;
+      color: #991b1b;
+      border-left: 5px solid #ef4444;
+    }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: flex-end;
+      background: #f8fafc;
+      padding: 18px 20px;
+      border-radius: 32px;
+      margin-bottom: 28px;
+      border: 1px solid #e2edf2;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 130px;
+    }
+
+    .filter-group label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #2c3e66;
+    }
+
+    select, input, button {
+      padding: 10px 14px;
+      border-radius: 60px;
+      border: 1px solid #cbd5e1;
+      background: white;
+      font-size: 0.85rem;
+      outline: none;
+      transition: 0.2s;
+    }
+
+    select:focus, input:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+    }
+
+    button {
+      background: #1e293b;
+      color: white;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      padding: 10px 28px;
+    }
+
+    button:hover:not(:disabled) {
+      background: #0f172a;
+      transform: translateY(-1px);
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-primary {
+      background: #3b82f6;
+    }
+    
+    .btn-primary:hover:not(:disabled) {
+      background: #2563eb;
+    }
+    
+    .btn-update-month {
+      background: #0f5c6b;
+    }
+    
+    .btn-update-month:hover:not(:disabled) {
+      background: #0a4a56;
+    }
+    
+    .btn-update-all {
+      background: #8b5cf6;
+    }
+    
+    .btn-update-all:hover:not(:disabled) {
+      background: #7c3aed;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 20px;
+      border: 1px solid #e9eef3;
+      background: white;
+      margin-top: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+
+    th {
+      background: #f1f5f9;
+      color: #0f2b3d;
+      font-weight: 700;
+      padding: 14px 12px;
+      border-bottom: 1px solid #dce5ec;
+      text-align: left;
+      position: sticky;
+      top: 0;
+    }
+
+    td {
+      padding: 12px 12px;
+      border-bottom: 1px solid #ecf3f9;
+      vertical-align: middle;
+    }
+
+    tr:hover td {
+      background-color: #fafcff;
+    }
+
+    .editable-input {
+      padding: 6px 10px;
+      border-radius: 12px;
+      border: 1px solid #cbd5e1;
+      font-size: 0.85rem;
+      width: 100%;
+      min-width: 80px;
+      transition: 0.15s;
+      background: #fff;
+    }
+    
+    .editable-input:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 2px rgba(59,130,246,0.1);
+      outline: none;
+    }
+    
+    .editable-input.changed {
+      background: #fef3c7;
+      border-color: #f59e0b;
+    }
+
+    /* Conflict red color */
+    .editable-input.conflict {
+      background: #fee2e2;
+      border-color: #dc2626;
+      color: #991b1b;
+      box-shadow: 0 0 0 1px #dc2626;
+    }
+
+    .attendance-select {
+      padding: 8px 12px;
+      border-radius: 40px;
+      font-weight: 600;
+      cursor: pointer;
+      min-width: 100px;
+    }
+    
+    .attendance-select.P {
+      background: #d1fae5;
+      color: #065f46;
+      border-color: #10b981;
+    }
+    
+    .attendance-select.A {
+      background: #ffe4e2;
+      color: #9b2c1d;
+      border-color: #ef4444;
+    }
+    
+    .attendance-select.H {
+      background: #fef3c7;
+      color: #92400e;
+      border-color: #f59e0b;
+    }
+
+    .present-badge {
+      background: #d1fae5;
+      color: #065f46;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 40px;
+      display: inline-block;
+      font-size: 0.75rem;
+    }
+
+    .absent-badge {
+      background: #ffe4e2;
+      color: #9b2c1d;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 40px;
+      display: inline-block;
+      font-size: 0.75rem;
+    }
+
+    .holiday-badge {
+      background: #fef3c7;
+      color: #92400e;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 40px;
+      display: inline-block;
+      font-size: 0.75rem;
+    }
+
+    .stats-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 16px 24px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+
+    .save-all-btn {
+      background: white;
+      color: #667eea;
+      border: none;
+      padding: 10px 20px;
+      font-weight: 700;
+      margin-top: 12px;
+      cursor: pointer;
+      border-radius: 40px;
+    }
+    
+    .save-all-btn:hover:not(:disabled) {
+      background: #f0f0f0;
+      transform: translateY(-1px);
+    }
+    
+    .save-all-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 48px;
+      color: #6c86a3;
+    }
+    
+    .error-message {
+      background: #fff1f0;
+      border-left: 6px solid #e11d48;
+      color: #b91c1c;
+      padding: 14px 20px;
+      border-radius: 24px;
+      font-weight: 500;
+    }
+    
+    .bulk-btns {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+    
+    .bulk-btn {
+      padding: 6px 16px;
+      border-radius: 40px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.8rem;
+      border: none;
+    }
+    
+    .bulk-present {
+      background: #10b981;
+      color: white;
+    }
+    
+    .bulk-absent {
+      background: #ef4444;
+      color: white;
+    }
+    
+    .bulk-holiday {
+      background: #f59e0b;
+      color: white;
+    }
+    
+    .action-buttons-group {
+      display: flex;
+      gap: 12px;
+      margin-left: auto;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    
+    .loading-spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 0.6s linear infinite;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .pending-badge {
+      font-size: 11px;
+      margin-left: 8px;
+      color: #d97706;
+      font-weight: 500;
+    }
+    
+    .conflict-icon {
+      display: inline-block;
+      background: #dc2626;
+      color: white;
+      font-size: 10px;
+      border-radius: 20px;
+      padding: 2px 8px;
+      margin-left: 8px;
+      font-weight: bold;
+    }
+    
+    @media (max-width: 780px) {
+      .filter-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .filter-group {
+        width: 100%;
+      }
+      button {
+        width: 100%;
+      }
+      .action-buttons-group {
+        margin-left: 0;
+        flex-direction: column;
+        width: 100%;
+      }
+      .editable-input {
+        min-width: 60px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="dashboard-container">
+  <div class="card">
+    <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;">
+      <div>
+        <h2>✏️ Update Attendance</h2>
+        <div class="subhead">Editable: Roll No, Class, Name | Automatic roll no conflict detection (red) + reject duplicate</div>
+      </div>
+      <div style="background: #e6f0ff; border-radius: 30px; padding: 4px 12px; font-size: 0.7rem;">shamser.info.np</div>
+    </div>
+
+    <div id="globalMessage" class="message-area"></div>
+
+    <div class="filter-bar">
+      <div class="filter-group">
+        <label> 📆 ACADEMIC YEAR</label>
+        <input type="number" id="yearSelect" value="2083" min="2080" max="2090">
+      </div>
+
+      <div class="filter-group">
+        <label> 📅 MONTH</label>
+        <select id="monthSelect">
+          <option value="Baisakh">Baisakh</option>
+          <option value="Jeshtha">Jeshtha</option>
+          <option value="Ashad">Ashad</option>
+          <option value="Shrawan">Shrawan</option>
+          <option value="Bhadra">Bhadra</option>
+          <option value="Ashwin">Ashwin</option>
+          <option value="Kartik">Kartik</option>
+          <option value="Mangsir">Mangsir</option>
+          <option value="Poush">Poush</option>
+          <option value="Magh">Magh</option>
+          <option value="Falgun">Falgun</option>
+          <option value="Chaitra">Chaitra</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label> 🏫 CLASS</label>
+        <select id="classSelect">
+          <option value="all">All Classes</option>
+          <option value="ECD">ECD</option>
+          <option value="PG">PG</option>
+          <option value="Nursary">Nursary</option>
+          <option value="LKG">LKG</option>
+          <option value="UKG">UKG</option>
+          <option value="1">Grade 1</option>
+          <option value="2">Grade 2</option>
+          <option value="3">Grade 3</option>
+          <option value="4">Grade 4</option>
+          <option value="5">Grade 5</option>
+          <option value="6">Grade 6</option>
+          <option value="7">Grade 7</option>
+          <option value="8" selected>Grade 8</option>
+          <option value="9">Grade 9</option>
+          <option value="10">Grade 10</option>
+          <option value="11">Grade 11</option>
+          <option value="12">Grade 12</option>
+          <option value="1EM">Grade 1EM</option>
+          <option value="2EM">Grade 2EM</option>
+          <option value="3EM">Grade 3EM</option>
+          <option value="4EM">Grade 4EM</option>
+          <option value="5EM">Grade 5EM</option>
+          <option value="6EM">Grade 6EM</option>
+          <option value="7EM">Grade 7EM</option>
+          <option value="8EM">Grade 8EM</option>
+          <option value="9EM">Grade 9EM</option>
+          <option value="10EM">Grade 10EM</option>
+          <option value="11EM">Grade 11EM</option>
+          <option value="12EM">Grade 12EM</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label> 📆 DAY NUMBER</label>
+        <input type="number" id="dayNumberInput" placeholder="e.g., 1, 3, 15" value="2" min="1" max="32">
+      </div>
+
+      <div class="filter-group">
+        <button id="loadStudentsBtn" class="btn-primary">⟳ Load Students</button>
+      </div>
+      
+      <div class="action-buttons-group">
+        <button id="updateMonthBtn" class="btn-update-month">⚡ Update This Month</button>
+        <button id="updateAllMonthsBtn" class="btn-update-all">🔄 Update All Months</button>
+      </div>
+    </div>
+
+    <div id="statsContainer" style="display: none;">
+      <div class="stats-card">
+        <div id="statsText">Loading...</div>
+        <div class="bulk-btns">
+          <button class="bulk-btn bulk-present" onclick="window.bulkUpdate('P')">✅ All Present</button>
+          <button class="bulk-btn bulk-absent" onclick="window.bulkUpdate('A')">❌ All Absent</button>
+          <button class="bulk-btn bulk-holiday" onclick="window.bulkUpdate('H')">🎉 All Holiday</button>
+        </div>
+        <button id="saveAllBtn" class="save-all-btn" disabled> 💾 Save All Changes </button>
+      </div>
+    </div>
+
+    <div id="studentsContainer">
+      <div class="loading">
+        <span style="font-size: 0.9rem;">🔍 Select filters and click "Load Students" to start updating 👈</span><br/>
+        <span style="font-size:0.8rem;">✨ Red border + red background = roll number conflict with another student (not allowed to save)</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // CONFIG
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzdma6ZBD0HIP_rL9McmsEUDkvmXOuf-2Os1TZIweHthOMihR5T2NxEr2fnOGaSQ9dS9g/exec";
+  
+  let currentStudents = [];
+  let currentMonthSheet = "";
+  let currentDayColumn = 0;
+  let pendingChanges = new Map();  // key: rowNum, value: { rollNo, newRollNo?, newClass?, newName?, newStatus?, oldStatus }
+  let isSaveRunning = false;
+  let currentYear = "2083";
+  let currentClassFilter = "8";
+  
+  // Helper functions
+  function showMessage(msg, type = "success") {
+    const msgDiv = document.getElementById("globalMessage");
+    msgDiv.textContent = msg;
+    msgDiv.className = `message-area message-${type === "error" ? "error" : "success"}`;
+    msgDiv.style.display = "block";
+    setTimeout(() => {
+      msgDiv.style.display = "none";
+    }, 4200);
+  }
+
+  function setLoadButtonState(disabled) {
+    const loadBtn = document.getElementById('loadStudentsBtn');
+    if (loadBtn) loadBtn.disabled = disabled;
+  }
+
+  function escapeHtml(str) {
+    if (str === null || str === undefined) return '';
+    return String(str).replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    });
+  }
+
+  async function callAPI(action, payload, timeout = 20000) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeout);
+    try {
+      const params = new URLSearchParams({ action, ...payload }).toString();
+      const response = await fetch(APPS_SCRIPT_URL, { 
+        method: 'POST', 
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: params,
+        signal: controller.signal
+      });
+      clearTimeout(timeoutId);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      return await response.json();
+    } catch(err) {
+      clearTimeout(timeoutId);
+      if(err.name === 'AbortError') throw new Error('Request timeout');
+      throw err;
+    }
+  }
+
+  async function updateCurrentMonth() {
+    const year = document.getElementById('yearSelect').value;
+    const classVal = document.getElementById('classSelect').value;
+    const month = document.getElementById('monthSelect').value;
+    const btn = document.getElementById('updateMonthBtn');
+    const origText = btn.textContent;
+    btn.disabled = true;
+    btn.innerHTML = '<span class="loading-spinner"></span> Updating...';
+    try {
+      const res = await callAPI('updateDataTransfer', { year: year, class: classVal, month: month });
+      if (res && res.success) {
+        showMessage(res.message || `✅ Month ${month} structure updated!`, "success");
+        await loadStudents();
+      } else {
+        throw new Error(res?.message || "Update failed");
+      }
+    } catch (e) {
+      showMessage(e.message, "error");
+    } finally {
+      btn.disabled = false;
+      btn.textContent = origText;
+    }
+  }
+
+  async function updateAllMonths() {
+    const btn = document.getElementById('updateAllMonthsBtn');
+    const origText = btn.textContent;
+    btn.disabled = true;
+    btn.innerHTML = '<span class="loading-spinner"></span> Updating ALL...';
+    try {
+      const res = await callAPI('updateAllMonthsTransfer', {});
+      if (res && res.success) {
+        showMessage(res.message || "✅ All months updated!", "success");
+        await loadStudents();
+      } else {
+        throw new Error(res?.message || "Update all months failed");
+      }
+    } catch (e) {
+      showMessage(e.message, "error");
+    } finally {
+      btn.disabled = false;
+      btn.textContent = origText;
+    }
+  }
+
+  // --- Conflict detection: given current student list and a proposed new roll number (excluding current student row),
+  // returns true if duplicate roll number exists.
+  function isRollNoConflict(rowNum, newRollNoStr) {
+    const trimmedNew = String(newRollNoStr).trim();
+    if (trimmedNew === "") return false;
+    return currentStudents.some(student => 
+      student.rowNum != rowNum && String(student.roll_no).trim() === trimmedNew
+    );
+  }
+
+  // Re-evaluate all roll number conflicts, apply 'conflict' class to inputs, and block save if any conflict exists.
+  function refreshAllConflictStatuses() {
+    let hasAnyConflict = false;
+    for (let student of currentStudents) {
+      const row = student.rowNum;
+      let currentRollValue = student.roll_no;
+      // If there's a pending change for roll no, use that for conflict detection
+      let effectiveRoll = currentRollValue;
+      if (pendingChanges.has(row) && pendingChanges.get(row).newRollNo !== undefined) {
+        effectiveRoll = pendingChanges.get(row).newRollNo;
+      }
+      const conflict = isRollNoConflict(row, effectiveRoll);
+      const rollInput = document.getElementById(`editable_roll_${row}`);
+      if (rollInput) {
+        if (conflict) {
+          rollInput.classList.add('conflict');
+          hasAnyConflict = true;
+        } else {
+          rollInput.classList.remove('conflict');
+        }
+      }
+      // Store conflict flag in student temporary metadata
+      student._conflict = conflict;
+    }
+    // Update save button enable/disable based on conflicts + pending changes
+    const saveBtn = document.getElementById('saveAllBtn');
+    const pendingExists = pendingChanges.size > 0;
+    if (saveBtn) {
+      if (hasAnyConflict && pendingExists) {
+        saveBtn.disabled = true;
+        saveBtn.title = "Resolve roll number conflicts (red fields) before saving";
+      } else if (!pendingExists) {
+        saveBtn.disabled = true;
+      } else {
+        saveBtn.disabled = false;
+      }
+    }
+    // Show warning if conflict exists
+    if (hasAnyConflict && pendingChanges.size > 0) {
+      const msgDiv = document.getElementById('globalMessage');
+      if (msgDiv && msgDiv.style.display !== 'block') {
+        showMessage("⚠️ Roll number conflict detected! Red fields must be unique. Cannot save while conflicts exist.", "error");
+      }
+    }
+    return !hasAnyConflict;
+  }
+
+  async function loadStudents() {
+    if (isSaveRunning) {
+      showMessage("Please wait, save in progress...", "error");
+      return;
+    }
+    
+    const year = document.getElementById('yearSelect').value;
+    const classVal = document.getElementById('classSelect').value;
+    const month = document.getElementById('monthSelect').value;
+    const dayNum = parseInt(document.getElementById('dayNumberInput').value);
+    
+    if (!classVal.trim()) { showMessage("Select a class", "error"); return; }
+    if (isNaN(dayNum) || dayNum < 1 || dayNum > 32) { showMessage("Valid day 1-32", "error"); return; }
+    
+    currentYear = year;
+    currentClassFilter = classVal;
+    currentMonthSheet = month;
+    currentDayColumn = 14 + dayNum - 1;
+    
+    const container = document.getElementById('studentsContainer');
+    container.innerHTML = `<div class="loading"><span class="loading-spinner"></span> Loading fast...</div>`;
+    document.getElementById('statsContainer').style.display = 'none';
+    
+    try {
+      const monthlyRes = await callAPI('getMonthlyReport', { year, class: classVal, month });
+      if (!monthlyRes.success) throw new Error(monthlyRes.message || "Failed to load");
+      let students = monthlyRes.data?.report || [];
+      if (students.length === 0) {
+        container.innerHTML = `<div class="error-message">⚠️ No students found for ${year}, class ${classVal}</div>`;
+        return;
+      }
+      
+      const dateStr = `${month} ${dayNum}`;
+      const dailyRes = await callAPI('getDailyReport', { year, class: classVal, month, date: dateStr });
+      const dailyAttendanceMap = {};
+      if (dailyRes.success && dailyRes.data?.report) {
+        dailyRes.data.report.forEach(s => { dailyAttendanceMap[s.rollNo] = s.status || ''; });
+      }
+      
+      currentStudents = students.map((student, idx) => ({
+        rowNum: student.sn || idx + 1,
+        roll_no: String(student.rollNo || ''),
+        class: String(student.class || classVal),
+        name: String(student.name || ''),
+        sn: student.sn || idx + 1,
+        currentStatus: dailyAttendanceMap[student.rollNo] || '',
+        originalStatus: dailyAttendanceMap[student.rollNo] || '',
+        originalRollNo: String(student.rollNo || ''),
+        originalClass: String(student.class || classVal),
+        originalName: String(student.name || '')
+      }));
+      
+      pendingChanges.clear();
+      renderStudentsTable();
+      updateStats();
+      document.getElementById('statsContainer').style.display = 'block';
+      showMessage(`✅ Loaded ${currentStudents.length} records • Roll conflict detection active`, "success");
+    } catch (err) {
+      console.error(err);
+      container.innerHTML = `<div class="error-message">❌ ${escapeHtml(err.message)}</div>`;
+      showMessage(err.message, "error");
+    }
+  }
+
+  // Unified roll number change handler with conflict detection
+  window.onRollNoChange = function(rowNum, value) {
+    const student = currentStudents.find(s => s.rowNum == rowNum);
+    if (!student) return;
+    const oldVal = student.roll_no;
+    if (oldVal === value) {
+      if (pendingChanges.has(rowNum)) {
+        let change = pendingChanges.get(rowNum);
+        delete change.newRollNo;
+        if (Object.keys(change).filter(k => k !== 'rollNo' && change[k] !== undefined && k !== 'oldStatus').length === 0) pendingChanges.delete(rowNum);
+      }
+    } else {
+      let change = pendingChanges.get(rowNum) || { rollNo: student.roll_no, oldStatus: student.currentStatus };
+      change.newRollNo = value;
+      pendingChanges.set(rowNum, change);
+    }
+    student.roll_no = value;
+    // after update re-check conflicts globally
+    refreshAllConflictStatuses();
+    updateStats();
+    highlightEditableField(rowNum, 'roll');
+  };
+  
+  window.onClassChange = function(rowNum, value) {
+    const student = currentStudents.find(s => s.rowNum == rowNum);
+    if (!student) return;
+    if (student.class === value) {
+      if (pendingChanges.has(rowNum)) {
+        let change = pendingChanges.get(rowNum);
+        delete change.newClass;
+        if (Object.keys(change).filter(k => k !== 'rollNo' && change[k] !== undefined && k !== 'oldStatus').length === 0) pendingChanges.delete(rowNum);
+      }
+    } else {
+      let change = pendingChanges.get(rowNum) || { rollNo: student.roll_no, oldStatus: student.currentStatus };
+      change.newClass = value;
+      pendingChanges.set(rowNum, change);
+    }
+    student.class = value;
+    highlightEditableField(rowNum, 'class');
+    updateStats();
+  };
+  
+  window.onNameChange = function(rowNum, value) {
+    const student = currentStudents.find(s => s.rowNum == rowNum);
+    if (!student) return;
+    if (student.name === value) {
+      if (pendingChanges.has(rowNum)) {
+        let change = pendingChanges.get(rowNum);
+        delete change.newName;
+        if (Object.keys(change).filter(k => k !== 'rollNo' && change[k] !== undefined && k !== 'oldStatus').length === 0) pendingChanges.delete(rowNum);
+      }
+    } else {
+      let change = pendingChanges.get(rowNum) || { rollNo: student.roll_no, oldStatus: student.currentStatus };
+      change.newName = value;
+      pendingChanges.set(rowNum, change);
+    }
+    student.name = value;
+    highlightEditableField(rowNum, 'name');
+    updateStats();
+  };
+  
+  function highlightEditableField(rowNum, field) {
+    const input = document.getElementById(`editable_${field}_${rowNum}`);
+    if (input) {
+      const hasChange = pendingChanges.has(rowNum);
+      if (hasChange && (field === 'roll' ? (pendingChanges.get(rowNum).newRollNo !== undefined) : true)) {
+        input.classList.add('changed');
+      } else {
+        input.classList.remove('changed');
+      }
+    }
+  }
+
+  function renderStudentsTable() {
+    const container = document.getElementById('studentsContainer');
+    let html = `<div class="table-wrapper"><table><thead><tr>
+      <th>SN</th><th>🎓 Roll No <span style="font-weight:normal;">(✏️ editable)</span></th>
+      <th>📚 Class</th><th>👤 Student Name</th><th>📊 Current Status</th><th>🔄 Update Status</th>
+     </tr></thead><tbody>`;
+    
+    for (let student of currentStudents) {
+      const hasPending = pendingChanges.has(student.rowNum);
+      const pendingStatus = hasPending ? pendingChanges.get(student.rowNum).newStatus : null;
+      const displayStatus = pendingStatus || student.currentStatus;
+      let statusBadge = '';
+      if (displayStatus === 'उपस्थित' || displayStatus === 'P') statusBadge = '<span class="present-badge">✅ Present</span>';
+      else if (displayStatus === 'अनुपस्थित' || displayStatus === 'A') statusBadge = '<span class="absent-badge">❌ Absent</span>';
+      else if (displayStatus === 'सार्वजनिक बिदा' || displayStatus === 'H') statusBadge = '<span class="holiday-badge">🎉 Holiday</span>';
+      else statusBadge = '<span class="absent-badge">⚪ Not Marked</span>';
+      
+      const selectValue = (displayStatus === 'उपस्थित' ? 'P' : (displayStatus === 'अनुपस्थित' ? 'A' : (displayStatus === 'सार्वजनिक बिदा' ? 'H' : displayStatus)));
+      
+      const conflictClass = (student._conflict && pendingChanges.get(student.rowNum)?.newRollNo !== undefined) ? 'conflict' : 
+                              (student._conflict ? 'conflict' : '');
+      const rollInput = `<input type="text" class="editable-input ${conflictClass}" id="editable_roll_${student.rowNum}" value="${escapeHtml(student.roll_no)}" 
+                          onchange="window.onRollNoChange(${student.rowNum}, this.value)" style="width:90px;">`;
+      const classInput = `<input type="text" class="editable-input" id="editable_class_${student.rowNum}" value="${escapeHtml(student.class)}" 
+                           onchange="window.onClassChange(${student.rowNum}, this.value)" style="width:80px;">`;
+      const nameInput = `<input type="text" class="editable-input" id="editable_name_${student.rowNum}" value="${escapeHtml(student.name)}" 
+                          onchange="window.onNameChange(${student.rowNum}, this.value)" style="min-width:150px;">`;
+      
+      html += `<tr ${hasPending ? 'style="background-color: #fef3c7;"' : ''}>
+        <td>${student.sn}</td>
+        <td>${rollInput} ${student._conflict ? '<span class="conflict-icon">duplicate</span>' : ''}</td>
+        <td>${classInput}</td>
+        <td>${nameInput}</td>
+        <td>${statusBadge}</td>
+        <td><select class="attendance-select ${selectValue}" onchange="window.updateAttendanceStatus(this, ${student.rowNum}, '${escapeHtml(student.roll_no)}')">
+          <option value="" ${!selectValue ? 'selected' : ''}>-- Select --</option>
+          <option value="P" ${selectValue === 'P' ? 'selected' : ''}>✅ Present</option>
+          <option value="A" ${selectValue === 'A' ? 'selected' : ''}>❌ Absent</option>
+          <option value="H" ${selectValue === 'H' ? 'selected' : ''}>🎉 Holiday</option>
+        </select> ${hasPending ? '<span class="pending-badge">📝 Pending</span>' : ''}</td>
+       </tr>`;
+    }
+    html += `</tbody></table></div>`;
+    container.innerHTML = html;
+    refreshAllConflictStatuses();
+  }
+
+  window.updateAttendanceStatus = function(selectElement, rowNum, rollNo) {
+    const newStatus = selectElement.value;
+    const student = currentStudents.find(s => s.rowNum == rowNum);
+    if (!student) return;
+    const oldStatus = student.currentStatus;
+    const currentDisplayStatus = (oldStatus === 'उपस्थित' ? 'P' : (oldStatus === 'अनुपस्थित' ? 'A' : (oldStatus === 'सार्वजनिक बिदा' ? 'H' : oldStatus)));
+    if (newStatus === currentDisplayStatus || newStatus === "") {
+      if (pendingChanges.has(rowNum)) {
+        let change = pendingChanges.get(rowNum);
+        delete change.newStatus;
+        if (Object.keys(change).filter(k => k !== 'rollNo' && change[k] !== undefined).length === 0) pendingChanges.delete(rowNum);
+      }
+    } else {
+      let change = pendingChanges.get(rowNum) || { rollNo: student.roll_no };
+      change.newStatus = newStatus;
+      change.oldStatus = oldStatus;
+      pendingChanges.set(rowNum, change);
+    }
+    student.currentStatus = newStatus;
+    selectElement.className = `attendance-select ${newStatus}`;
+    renderStudentsTable();
+    updateStats();
+  };
+  
+  function updateStats() {
+    const totalStudents = currentStudents.length;
+    let presentCount = 0, absentCount = 0, holidayCount = 0, notMarked = 0;
+    for (let student of currentStudents) {
+      let status = student.currentStatus;
+      if (pendingChanges.has(student.rowNum) && pendingChanges.get(student.rowNum).newStatus) {
+        status = pendingChanges.get(student.rowNum).newStatus;
+      }
+      if (status === 'P' || status === 'उपस्थित') presentCount++;
+      else if (status === 'A' || status === 'अनुपस्थित') absentCount++;
+      else if (status === 'H' || status === 'सार्वजनिक बिदा') holidayCount++;
+      else notMarked++;
+    }
+    let conflictCount = currentStudents.filter(s => s._conflict === true).length;
+    const pendingCount = pendingChanges.size;
+    document.getElementById('statsText').innerHTML = `📚 Total: ${totalStudents} | ✅ Present: ${presentCount} | ❌ Absent: ${absentCount} | 🎉 Holiday: ${holidayCount} | ⚪ Not Marked: ${notMarked} ${conflictCount ? `⚠️ Conflict: ${conflictCount}` : ''} | 📝 Pending: ${pendingCount}`;
+    const saveBtn = document.getElementById('saveAllBtn');
+    if (saveBtn) {
+      const hasActiveConflict = currentStudents.some(s => s._conflict === true && pendingChanges.has(s.rowNum) && pendingChanges.get(s.rowNum).newRollNo !== undefined);
+      if ((hasActiveConflict || currentStudents.some(s => s._conflict === true)) && pendingChanges.size > 0) saveBtn.disabled = true;
+      else if (pendingChanges.size === 0) saveBtn.disabled = true;
+      else saveBtn.disabled = false;
+    }
+  }
+
+  async function saveAllChanges() {
+    if (pendingChanges.size === 0) { showMessage("No changes to save", "error"); return; }
+    const hasActiveConflict = currentStudents.some(s => s._conflict === true && pendingChanges.has(s.rowNum) && pendingChanges.get(s.rowNum).newRollNo !== undefined);
+    if (hasActiveConflict) {
+      showMessage("❌ Cannot save: Roll number conflict exists. Please resolve duplicate roll numbers (red fields).", "error");
+      return;
+    }
+    if (isSaveRunning) return;
+    isSaveRunning = true;
+    setLoadButtonState(true);
+    const saveBtn = document.getElementById('saveAllBtn');
+    saveBtn.disabled = true;
+    saveBtn.innerHTML = '<span class="loading-spinner"></span> Saving...';
+    const year = document.getElementById('yearSelect').value;
+    const month = document.getElementById('monthSelect').value;
+    const dayNum = parseInt(document.getElementById('dayNumberInput').value);
+    const dateStr = `${month} ${dayNum}`;
+    let successCount = 0, errorCount = 0;
+    const changesSnapshot = Array.from(pendingChanges.entries());
+    for (const [rowNum, change] of changesSnapshot) {
+      try {
+        if (change.newStatus) {
+          await callAPI('updateAttendance', { year, class: currentClassFilter, month, date: dateStr, rollNo: change.rollNo, status: change.newStatus });
+        }
+        if (change.newRollNo || change.newClass || change.newName) {
+          await callAPI('updateStudentInfo', { year, oldRollNo: change.rollNo, newRollNo: change.newRollNo || change.rollNo, class: change.newClass || currentClassFilter, name: change.newName || '', monthSheet: month });
+        }
+        successCount++;
+        const student = currentStudents.find(s => s.rowNum == rowNum);
+        if (student) {
+          if (change.newStatus) student.currentStatus = change.newStatus;
+          if (change.newRollNo) student.roll_no = change.newRollNo;
+          if (change.newClass) student.class = change.newClass;
+          if (change.newName) student.name = change.newName;
+        }
+        pendingChanges.delete(rowNum);
+      } catch(err) { 
+        errorCount++; 
+        console.error(err); 
+      }
+    }
+    pendingChanges.clear();
+    renderStudentsTable();
+    updateStats();
+    showMessage(errorCount === 0 ? `✅ Saved ${successCount} changes!` : `⚠️ ${successCount} saved, ${errorCount} failed.`, errorCount === 0 ? "success" : "error");
+    saveBtn.disabled = false;
+    saveBtn.textContent = "💾 Save All Changes";
+    isSaveRunning = false;
+    setLoadButtonState(false);
+  }
+
+  window.bulkUpdate = function(status) {
+    if (!currentStudents.length) { showMessage("Load students first", "error"); return; }
+    if (!confirm(`Mark ALL as ${status === 'P' ? 'Present' : status === 'A' ? 'Absent' : 'Holiday'}?`)) return;
+    for (let student of currentStudents) {
+      let change = pendingChanges.get(student.rowNum) || { rollNo: student.roll_no };
+      change.newStatus = status;
+      change.oldStatus = student.currentStatus;
+      pendingChanges.set(student.rowNum, change);
+      student.currentStatus = status;
+    }
+    renderStudentsTable();
+    updateStats();
+    showMessage(`Bulk: all marked as ${status === 'P' ? 'Present' : status === 'A' ? 'Absent' : 'Holiday'}. Click Save to confirm.`, "success");
+  };
+
+  document.getElementById('loadStudentsBtn').addEventListener('click', loadStudents);
+  document.getElementById('saveAllBtn').addEventListener('click', saveAllChanges);
+  document.getElementById('updateMonthBtn').addEventListener('click', updateCurrentMonth);
+  document.getElementById('updateAllMonthsBtn').addEventListener('click', updateAllMonths);
+  window.addEventListener('load', () => { setLoadButtonState(false); });
+</script>
+</body>
+</html>
