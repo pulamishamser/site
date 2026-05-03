@@ -795,7 +795,7 @@
                     <button type="button" onclick="OpenRegisterPage()">
                         <i class="fas fa-user-plus"></i> Register Account
                     </button>
-                       <button type="button" onclick="logout()">
+                       <button type="button" id="logoutButtonSidebar">
                         <i class="fas fa-sign-out-alt"></i> Logout
                     </button>
                 </div>
@@ -991,11 +991,11 @@
                         </li>
 
                         <li style="border-top: 1px solid #eee; margin-top: 10px;">
-                            <button type="button" class="btn btn-link" onclick="OpenRegisterPage()" style="width: 100%; text-align: left;"> <i class="fas fa-user-plus"></i> Register Account</button>
+                            <button type="button" class="btn-link" onclick="OpenRegisterPage()" style="width: 100%; text-align: left;"> <i class="fas fa-user-plus"></i> Register Account</button>
                             <a href="#" style="display: block; padding: 15px 20px;"><i class='fas fa-key'></i>Change Password</a>
                             <a href="#" onclick="openModal('https://www.jotform.com/form/231287552368463', 'Contact Us')" style="display: block; padding: 15px 20px;">
                                 <i class="fas fa-envelope"></i>Contact</a>
-                       <button type="button" onclick="logout()">
+                       <button type="button" id="logoutButtonSidebarBottom">
                         <i class="fas fa-sign-out-alt"></i> Logout
                         </button>
                          </li>                        
@@ -1012,9 +1012,6 @@
                         <button onclick="">Set AutoFormat & Refresh</button></a>
                            <div class="spinner" id="spinner"></div>
                         <div id="status"></div>
-                        <!---- <a href="https://script.google.com/macros/s/AKfycbzMgvm_62iC7GMDlUpXtfZz6ScL9WjuqcsGcFXizLdaV_9xGf5msPVGx5vKwEvL660i0w/exec">
-                        <button onclick="">Set AutoFormat & Refresh</button></a>--->
-
                        
                         <section class="detailed-stats">
                             <div class="card chart-card">
@@ -1088,46 +1085,6 @@
                             <li> &nbsp;आन्तरिक अंक बाहेकको नतिजाको लागि Credit hour and FM खाली गरेर अंक चढाउनुहोला</li>
                             <li> &nbsp;जति FM मा परीक्षा लिएको हो त्यति नै चढाउँदा पनि हुन्छ ।</li>
                         </ul>
-                      <!-----       https://script.google.com/macros/s/AKfycbw8aVDBPbix7346o647ZapCWJxUYqkNC4rCP9ZRoLFs4IT8EW_tuE3GD9BFjG4UpSPPBQ/exec
-                        <h5><b>विद्यार्थीको लागि यो लिङ्क शेयर गर्नुपर्नेछ ।</b></h5>
-                        <ul>
-                            <li>
-                                <a href="https://script.google.com/macros/s/AKfycbxLevNSFI7CAFvorNd2oiRc1f6iCUGC-VWAUrXb8MyhgEc393O6O063p1P-g6G9fMiW/exec">AdmitCard4page</a>
-                                <button class="copy-btn" data-url="https://script.google.com/macros/s/AKfycbxLevNSFI7CAFvorNd2oiRc1f6iCUGC-VWAUrXb8MyhgEc393O6O063p1P-g6G9fMiW/exec">Copy</button>
-                            </li>
-                            <li>
-                                <a href="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Single%20Grade%20Sheet(9-10).html">Single Grade Sheet for 9-10</a>
-                                <button class="copy-btn" data-url="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Single%20Grade%20Sheet(9-10).html">Copy</button>
-                            </li>
-                            <li>
-                                <a href="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/GradesheetSingle(11-12).html">Single Grade Sheet 11-12</a>
-                                <button class="copy-btn" data-url="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/GradesheetSingle(11-12).html">Copy</button>
-                            </li>
-                            <li>
-                                <a href="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Greadsheet%20Single(4-8).html">Single Grade Sheet 4-8</a>
-                                <button class="copy-btn" data-url="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Greadsheet%20Single(4-8).html">Copy</button>
-                            </li>
-                            <li>
-                                <a href="https://shamser.info.np/Integrated Exam Management Information System/Routine_Update.html">Routine Update</a>
-                                <button class="copy-btn" data-url="https://shamser.info.np/Integrated Exam Management Information System/Routine_Update.html">Copy</button>
-                            </li>
-                            <li>
-                                <a href="https://shamser.info.np/Integrated Exam Management Information System/Admit 2card by class.html">AdmitCard 2pg byclass</a>
-                                <button class="copy-btn" data-url="https://shamser.info.np/Integrated Exam Management Information System/Admit 2card by class.html">Copy</button>
-                            </li>
-                            <li>
-                                <a href="https://shamser.info.np/Integrated Exam Management Information System/Admit 4card by class.html">AdmitCard 4pg byclass</a>
-                                <button class="copy-btn" data-url="https://shamser.info.np/Integrated Exam Management Information System/Admit 4card by class.html">Copy</button>
-                            </li>
-                            <li>
-                                <a href="https://shamser.info.np/Integrated Exam Management Information System/Entrance 2Card by range.html">AdmitCard 2pg byRange</a>
-                                <button class="copy-btn" data-url="https://shamser.info.np/Integrated Exam Management Information System/Entrance 2Card by range.html">Copy</button>
-                            </li>
-                            <li>
-                                <a href="https://shamser.info.np/Integrated Exam Management Information System/Admit 4card by range.html">AdmitCard 4pg byRange</a>
-                                <button class="copy-btn" data-url="https://shamser.info.np/Integrated Exam Management Information System/Admit 4card by range.html">Copy</button>
-                            </li>
-                        </ul>-------------->
                         
                         <div class="pagination">
                             <button>&lt; Prev</button>
@@ -1150,7 +1107,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <script>
-        // ==================== AUTOMATIC LOGOUT AFTER 30 MINUTES INACTIVITY (NO LOGOUT BUTTON) ====================
+        // ==================== AUTOMATIC LOGOUT AFTER 30 MINUTES INACTIVITY ====================
         const INACTIVITY_TIMEOUT_MS = 30 * 60 * 1000; // 30 minutes
         
         let inactivityTimer = null;
@@ -1158,11 +1115,11 @@
         let lastActivityTime = Date.now();
         let isUserLoggedIn = false;
         
-        // Function to clear session and show login modal (no alert, just silent auto-logout)
+        // Function to clear session and show login modal
         function performAutoLogout() {
             if (!isUserLoggedIn) return;
             
-            // Clear all session storage
+            // Clear all storage
             localStorage.removeItem("iemisUser");
             localStorage.removeItem("sessionExpiry");
             sessionStorage.removeItem("iemisUser");
@@ -1189,47 +1146,70 @@
             const timerElement = document.getElementById('sessionTimer');
             if (timerElement) timerElement.innerHTML = '';
             
-            // Show a subtle toast notification (no alert popup)
             showToastNotification("Session expired due to inactivity. Please login again.");
         }
         
-        // Show subtle toast notification (no alert)
+        // Manual logout function (now correctly working)
+        window.performManualLogout = function() {
+            if (!isUserLoggedIn) return;
+            
+            // Clear all storage
+            localStorage.removeItem("iemisUser");
+            localStorage.removeItem("sessionExpiry");
+            sessionStorage.removeItem("iemisUser");
+            sessionStorage.removeItem("sessionExpiry");
+            
+            isUserLoggedIn = false;
+            
+            // Stop timer display
+            if (sessionTimerInterval) {
+                clearInterval(sessionTimerInterval);
+                sessionTimerInterval = null;
+            }
+            
+            // Hide dashboard, show login modal
+            const dashboard = document.querySelector('.dashboard-container');
+            const loginModal = document.getElementById('loginModal');
+            const userDisplay = document.getElementById('userDisplay');
+            
+            if (dashboard) dashboard.style.display = 'none';
+            if (loginModal) loginModal.style.display = 'flex';
+            if (userDisplay) userDisplay.textContent = 'School Profile';
+            
+            // Reset timer display
+            const timerElement = document.getElementById('sessionTimer');
+            if (timerElement) timerElement.innerHTML = '';
+            
+            // Clear login form if exists
+            const loginForm = document.getElementById('loginForm');
+            if (loginForm) loginForm.reset();
+            const loginMessage = document.getElementById('loginMessage');
+            if (loginMessage) loginMessage.textContent = '';
+            
+            showToastNotification("You have been logged out successfully.");
+        };
+        
         function showToastNotification(message) {
             const toast = document.createElement('div');
             toast.className = 'session-toast';
             toast.textContent = message;
             document.body.appendChild(toast);
-            setTimeout(() => {
-                toast.remove();
-            }, 4000);
+            setTimeout(() => { toast.remove(); }, 4000);
         }
         
-        // Reset inactivity timer on user activity
         function resetInactivityTimer() {
             if (!isUserLoggedIn) return;
-            
             lastActivityTime = Date.now();
-            
-            // Clear existing timer
-            if (inactivityTimer) {
-                clearTimeout(inactivityTimer);
-            }
-            
-            // Set new timer
-            inactivityTimer = setTimeout(function() {
-                performAutoLogout();
-            }, INACTIVITY_TIMEOUT_MS);
+            if (inactivityTimer) clearTimeout(inactivityTimer);
+            inactivityTimer = setTimeout(function() { performAutoLogout(); }, INACTIVITY_TIMEOUT_MS);
         }
         
-        // Update session timer display (shows remaining time)
         function updateSessionTimerDisplay() {
             if (!isUserLoggedIn) return;
-            
             const timeElapsed = Date.now() - lastActivityTime;
             const timeLeftMs = Math.max(0, INACTIVITY_TIMEOUT_MS - timeElapsed);
             const minutesLeft = Math.floor(timeLeftMs / 60000);
             const secondsLeft = Math.floor((timeLeftMs % 60000) / 1000);
-            
             const timerElement = document.getElementById('sessionTimer');
             if (timerElement) {
                 const timeStr = `${minutesLeft.toString().padStart(2, '0')}:${secondsLeft.toString().padStart(2, '0')}`;
@@ -1243,63 +1223,41 @@
             }
         }
         
-        // Start the session timer update interval
         function startSessionTimerDisplay() {
             if (sessionTimerInterval) clearInterval(sessionTimerInterval);
             sessionTimerInterval = setInterval(updateSessionTimerDisplay, 1000);
         }
         
-        // Setup activity listeners for inactivity detection
         function setupInactivityListeners() {
             const events = ['mousedown', 'mousemove', 'keydown', 'keypress', 'scroll', 'touchstart', 'click'];
-            events.forEach(event => {
-                document.addEventListener(event, resetInactivityTimer, { passive: true });
-            });
+            events.forEach(event => { document.addEventListener(event, resetInactivityTimer, { passive: true }); });
         }
         
-        // Initialize session after successful login
         function initSessionAfterLogin() {
             isUserLoggedIn = true;
             lastActivityTime = Date.now();
-            
-            // Clear any existing timer
             if (inactivityTimer) clearTimeout(inactivityTimer);
-            
-            // Set new inactivity timer
-            inactivityTimer = setTimeout(function() {
-                performAutoLogout();
-            }, INACTIVITY_TIMEOUT_MS);
-            
-            // Start timer display
+            inactivityTimer = setTimeout(function() { performAutoLogout(); }, INACTIVITY_TIMEOUT_MS);
             startSessionTimerDisplay();
-            
-            // Setup listeners
             setupInactivityListeners();
         }
         
-        // Check login status on page load
         function checkLoginStatus() {
             let user = localStorage.getItem("iemisUser") || sessionStorage.getItem("iemisUser");
             let expiry = localStorage.getItem("sessionExpiry") || sessionStorage.getItem("sessionExpiry");
-            
             const loginModal = document.getElementById('loginModal');
             const dashboard = document.querySelector('.dashboard-container');
             const userDisplay = document.getElementById('userDisplay');
-            
             if (user && expiry) {
                 const expiryTime = parseInt(expiry);
                 if (Date.now() > expiryTime) {
-                    // Expired, clear and show login
-                    localStorage.removeItem("iemisUser");
-                    localStorage.removeItem("sessionExpiry");
-                    sessionStorage.removeItem("iemisUser");
-                    sessionStorage.removeItem("sessionExpiry");
+                    localStorage.removeItem("iemisUser"); localStorage.removeItem("sessionExpiry");
+                    sessionStorage.removeItem("iemisUser"); sessionStorage.removeItem("sessionExpiry");
                     if (loginModal) loginModal.style.display = 'flex';
                     if (dashboard) dashboard.style.display = 'none';
                     if (userDisplay) userDisplay.textContent = 'School Profile';
                     isUserLoggedIn = false;
                 } else {
-                    // Valid session
                     if (loginModal) loginModal.style.display = 'none';
                     if (dashboard) dashboard.style.display = 'flex';
                     if (userDisplay) userDisplay.textContent = user;
@@ -1314,29 +1272,20 @@
             }
         }
         
-        // Login function
         function loginUser() {
             const username = document.getElementById('username').value.trim();
             const password = document.getElementById('password').value.trim();
             const rememberMe = document.getElementById('rememberMe').checked;
             const loginButton = document.getElementById('loginButton');
             const loginMessage = document.getElementById('loginMessage');
-            
             if (!username || !password) {
-                if (loginMessage) {
-                    loginMessage.textContent = 'Please enter both username and password';
-                    loginMessage.className = 'login-message error';
-                }
+                if (loginMessage) { loginMessage.textContent = 'Please enter both username and password'; loginMessage.className = 'login-message error'; }
                 return;
             }
-       
-            loginButton.disabled = true;
-            loginButton.textContent = 'Logging in...';
+            loginButton.disabled = true; loginButton.textContent = 'Logging in...';
             if (loginMessage) loginMessage.textContent = '';
-          
             fetch("https://script.google.com/macros/s/AKfycbw8aVDBPbix7346o647ZapCWJxUYqkNC4rCP9ZRoLFs4IT8EW_tuE3GD9BFjG4UpSPPBQ/exec", {
-                method: "POST",
-                headers: { "Content-Type": "text/plain;charset=utf-8" },
+                method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" },
                 body: JSON.stringify({ action: "login", username: username, password: password })
             })
             .then(response => response.text())
@@ -1345,273 +1294,115 @@
                     const data = JSON.parse(text);
                     if (data.status === "success") {
                         const expiryTime = Date.now() + INACTIVITY_TIMEOUT_MS;
-                        if (rememberMe) {
-                            localStorage.setItem("iemisUser", data.username);
-                            localStorage.setItem("sessionExpiry", expiryTime);
-                        } else {
-                            sessionStorage.setItem("iemisUser", data.username);
-                            sessionStorage.setItem("sessionExpiry", expiryTime);
-                        }
-                        
-                        if (loginMessage) {
-                            loginMessage.textContent = 'Login successful!';
-                            loginMessage.className = 'login-message success';
-                        }
-                        
-                        setTimeout(() => {
-                            checkLoginStatus();
-                            const form = document.getElementById('loginForm');
-                            if (form) form.reset();
-                        }, 1000);
-                    } else {
-                        throw new Error(data.message || 'Invalid credentials');
-                    }
-                } catch (e) {
-                    throw new Error('Invalid server response');
-                }
+                        if (rememberMe) { localStorage.setItem("iemisUser", data.username); localStorage.setItem("sessionExpiry", expiryTime); }
+                        else { sessionStorage.setItem("iemisUser", data.username); sessionStorage.setItem("sessionExpiry", expiryTime); }
+                        if (loginMessage) { loginMessage.textContent = 'Login successful!'; loginMessage.className = 'login-message success'; }
+                        setTimeout(() => { checkLoginStatus(); const form = document.getElementById('loginForm'); if (form) form.reset(); }, 1000);
+                    } else { throw new Error(data.message || 'Invalid credentials'); }
+                } catch (e) { throw new Error('Invalid server response'); }
             })
             .catch(err => {
-                if (loginMessage) {
-                    loginMessage.textContent = err.message || 'Login failed. Please try again.';
-                    loginMessage.className = 'login-message error';
-                }
+                if (loginMessage) { loginMessage.textContent = err.message || 'Login failed. Please try again.'; loginMessage.className = 'login-message error'; }
             })
-            .finally(() => {
-                loginButton.disabled = false;
-                loginButton.textContent = 'Login';
-            });
+            .finally(() => { loginButton.disabled = false; loginButton.textContent = 'Login'; });
         }
-
-
-  function logout() {
-            if (confirm('Are you sure you want to logout?')) {
-                // Clear all session data
-                localStorage.removeItem("iemisUser");
-                sessionStorage.removeItem("iemisUser");
-                
-                // Show login modal
-                checkLoginStatus();
-                
-                // Clear form
-                document.getElementById('loginForm').reset();
-                document.getElementById('loginMessage').textContent = '';
-            }
-        }
-
-
-
-
-
-
-
-
-
-
-
         
-        // Handle visibility change (tab becomes active again)
         function handleVisibilityChange() {
             if (!isUserLoggedIn) return;
             if (document.visibilityState === 'visible') {
                 const inactiveDuration = Date.now() - lastActivityTime;
-                if (inactiveDuration >= INACTIVITY_TIMEOUT_MS) {
-                    performAutoLogout();
-                } else {
-                    resetInactivityTimer();
-                }
+                if (inactiveDuration >= INACTIVITY_TIMEOUT_MS) performAutoLogout();
+                else resetInactivityTimer();
             }
         }
         
-        // Page unload cleanup
-        window.addEventListener("beforeunload", function() {
-            if (inactivityTimer) clearTimeout(inactivityTimer);
-            if (sessionTimerInterval) clearInterval(sessionTimerInterval);
-        });
+        window.addEventListener("beforeunload", function() { if (inactivityTimer) clearTimeout(inactivityTimer); if (sessionTimerInterval) clearInterval(sessionTimerInterval); });
         
-        // DOM ready initialization
         document.addEventListener('DOMContentLoaded', function() {
             checkLoginStatus();
             document.addEventListener('visibilitychange', handleVisibilityChange);
-            
-            // Login form submission
             const loginForm = document.getElementById('loginForm');
-            if (loginForm) {
-                loginForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    loginUser();
-                });
-            }
+            if (loginForm) loginForm.addEventListener('submit', function(e) { e.preventDefault(); loginUser(); });
             
-            // Initialize other dashboard functions
+            // Attach logout handlers to both logout buttons
+            const logoutBtn1 = document.getElementById('logoutButtonSidebar');
+            const logoutBtn2 = document.getElementById('logoutButtonSidebarBottom');
+            if (logoutBtn1) logoutBtn1.addEventListener('click', function(e) { e.preventDefault(); performManualLogout(); });
+            if (logoutBtn2) logoutBtn2.addEventListener('click', function(e) { e.preventDefault(); performManualLogout(); });
+            
             initializeDashboard();
         });
         
-        // Clean up old logout function references - remove any logout button calls
-        window.logout = function() {
-            // Override to do nothing - prevent manual logout
-            console.log("Logout disabled - automatic only");
-            return false;
-        };
-        
-        // Keep all your existing functions (openModal, closeModal, showDashboard, etc.)
-        function openModal(url, title) {
+        // Keep all existing functions (openModal, closeModal, showDashboard, etc.)
+        window.openModal = function(url, title) {
             const user = localStorage.getItem("iemisUser") || sessionStorage.getItem("iemisUser");
-            if (!user) {
-                checkLoginStatus();
-                return false;
-            }
-            resetInactivityTimer(); // Reset timer on action
-            
+            if (!user) { checkLoginStatus(); return false; }
+            resetInactivityTimer();
             const modal = document.getElementById('pageModal');
             const modalFrame = document.getElementById('modalFrame');
             const modalTitle = document.getElementById('modalTitle');
             const modalLoading = document.getElementById('modalLoading');
-            
             if (modalTitle) modalTitle.textContent = title || 'Content';
             if (modalLoading) modalLoading.style.display = 'flex';
             if (modalFrame) modalFrame.style.display = 'none';
             if (modal) modal.style.display = 'block';
             document.body.style.overflow = 'hidden';
-            
             const encodedUrl = url.replace(/ /g, '%20');
             if (modalFrame) modalFrame.src = encodedUrl;
-            
-            if (window.innerWidth <= 992) {
-                const sidebar = document.querySelector('.sidebar');
-                if (sidebar) sidebar.classList.remove('active');
-            }
+            if (window.innerWidth <= 992) { const sidebar = document.querySelector('.sidebar'); if (sidebar) sidebar.classList.remove('active'); }
             return false;
-        }
+        };
         
-        function closeModal() {
+        window.closeModal = function() {
             const modal = document.getElementById('pageModal');
             const modalFrame = document.getElementById('modalFrame');
             if (modalFrame) modalFrame.src = '';
             if (modal) modal.style.display = 'none';
             document.body.style.overflow = 'auto';
-        }
+        };
         
-        function showDashboard() {
-            closeModal();
-            resetInactivityTimer();
-            return false;
-        }
-        
-        function OpenRegisterPage() {
-            openModal('#', 'Register Account');
-        }
-        
-        function runSetPlainText() {
-            const statusDiv = document.getElementById('status');
-            if (statusDiv) showStatus("Set Format function (simulated)", true);
-        }
+        window.showDashboard = function() { closeModal(); resetInactivityTimer(); return false; };
+        window.OpenRegisterPage = function() { openModal('#', 'Register Account'); };
+        window.runSetPlainText = function() { showStatus("Set Format function (simulated)", true); };
         
         function showStatus(message, isSuccess) {
             var statusDiv = document.getElementById('status');
-            if (statusDiv) {
-                statusDiv.textContent = message;
-                statusDiv.className = isSuccess ? 'success' : 'error';
-                setTimeout(() => { if(statusDiv) statusDiv.textContent = ''; }, 3000);
-            }
+            if (statusDiv) { statusDiv.textContent = message; statusDiv.className = isSuccess ? 'success' : 'error'; setTimeout(() => { if(statusDiv) statusDiv.textContent = ''; }, 3000); }
         }
         
         const modalFrame = document.getElementById('modalFrame');
         if (modalFrame) {
-            modalFrame.addEventListener('load', function() {
-                const modalLoading = document.getElementById('modalLoading');
-                if (modalLoading) modalLoading.style.display = 'none';
-                if (this) this.style.display = 'block';
-            });
-            modalFrame.addEventListener('error', function() {
-                const modalLoading = document.getElementById('modalLoading');
-                if (modalLoading) modalLoading.innerHTML = '<p class="text-danger">Failed to load content.</p>';
-            });
+            modalFrame.addEventListener('load', function() { const modalLoading = document.getElementById('modalLoading'); if (modalLoading) modalLoading.style.display = 'none'; if (this) this.style.display = 'block'; });
+            modalFrame.addEventListener('error', function() { const modalLoading = document.getElementById('modalLoading'); if (modalLoading) modalLoading.innerHTML = '<p class="text-danger">Failed to load content.</p>'; });
         }
         
         const pageModal = document.getElementById('pageModal');
-        if (pageModal) {
-            pageModal.addEventListener('click', function(e) {
-                if (e.target === this) closeModal();
-            });
-        }
-        
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeModal();
-        });
-        
+        if (pageModal) pageModal.addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+        document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
         const modalClose = document.getElementById('modalClose');
         if (modalClose) modalClose.addEventListener('click', closeModal);
         
         document.addEventListener('click', function(e) {
             if (e.target.classList.contains('copy-btn')) {
                 const url = e.target.getAttribute('data-url');
-                if (url) {
-                    navigator.clipboard.writeText(url).then(function() {
-                        const originalText = e.target.textContent;
-                        e.target.textContent = 'Copied!';
-                        e.target.classList.add('copied');
-                        setTimeout(function() {
-                            e.target.textContent = originalText;
-                            e.target.classList.remove('copied');
-                        }, 2000);
-                    }).catch(function(err) { console.error('Copy failed:', err); });
-                }
+                if (url) { navigator.clipboard.writeText(url).then(function() { const originalText = e.target.textContent; e.target.textContent = 'Copied!'; e.target.classList.add('copied'); setTimeout(function() { e.target.textContent = originalText; e.target.classList.remove('copied'); }, 2000); }).catch(function(err) { console.error('Copy failed:', err); }); }
             }
         });
         
         function initializeDashboard() {
             const menuToggle = document.querySelector('.menu-toggle');
             const sidebar = document.querySelector('.sidebar');
-            if (menuToggle) {
-                menuToggle.addEventListener('click', function() {
-                    if (sidebar) sidebar.classList.toggle('active');
-                });
-            }
-            
+            if (menuToggle) menuToggle.addEventListener('click', function() { if (sidebar) sidebar.classList.toggle('active'); });
             const toggleSubmenus = document.querySelectorAll('.toggle-submenu');
             toggleSubmenus.forEach(item => {
-                item.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const submenu = this.nextElementSibling;
-                    const arrow = this.querySelector('.arrow');
-                    if (submenu) {
-                        submenu.classList.toggle('expanded');
-                        if (arrow) arrow.classList.toggle('rotated');
-                    }
-                });
+                item.addEventListener('click', function(e) { e.preventDefault(); const submenu = this.nextElementSibling; const arrow = this.querySelector('.arrow'); if (submenu) { submenu.classList.toggle('expanded'); if (arrow) arrow.classList.toggle('rotated'); } });
             });
-            
-            document.addEventListener('click', function(e) {
-                if (window.innerWidth <= 992 && sidebar && menuToggle && !sidebar.contains(e.target) && !menuToggle.contains(e.target) && sidebar.classList.contains('active')) {
-                    sidebar.classList.remove('active');
-                }
-            });
-            
+            document.addEventListener('click', function(e) { if (window.innerWidth <= 992 && sidebar && menuToggle && !sidebar.contains(e.target) && !menuToggle.contains(e.target) && sidebar.classList.contains('active')) sidebar.classList.remove('active'); });
             if (typeof Chart !== 'undefined') {
-                if (document.getElementById('schoolChart')) {
-                    new Chart(document.getElementById('schoolChart').getContext('2d'), {
-                        type: 'bar', data: { labels: ['Kathmandu', 'Pokhara', 'Lalitpur', 'Bhaktapur', 'Biratnagar'], datasets: [{ label: 'Number of Schools', data: [1200, 800, 600, 400, 300], backgroundColor: '#3498db' }] },
-                        options: { responsive: true, maintainAspectRatio: false }
-                    });
-                }
-                if (document.getElementById('studentChart')) {
-                    new Chart(document.getElementById('studentChart').getContext('2d'), {
-                        type: 'line', data: { labels: ['2019', '2020', '2021', '2022', '2023'], datasets: [{ label: 'Student Enrollment', data: [1000000, 1050000, 1100000, 1150000, 1200000], borderColor: '#e74c3c', fill: false }] },
-                        options: { responsive: true, maintainAspectRatio: false }
-                    });
-                }
-                if (document.getElementById('boysChart')) {
-                    new Chart(document.getElementById('boysChart').getContext('2d'), {
-                        type: 'pie', data: { labels: ['Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5'], datasets: [{ data: [15, 20, 18, 22, 25], backgroundColor: ['#3498db', '#2ecc71', '#f1c40f', '#e74c3c', '#9b59b6'] }] },
-                        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right' } } }
-                    });
-                }
-                if (document.getElementById('girlsChart')) {
-                    new Chart(document.getElementById('girlsChart').getContext('2d'), {
-                        type: 'pie', data: { labels: ['Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5'], datasets: [{ data: [18, 22, 20, 15, 25], backgroundColor: ['#3498db', '#2ecc71', '#f1c40f', '#e74c3c', '#9b59b6'] }] },
-                        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right' } } }
-                    });
-                }
+                if (document.getElementById('schoolChart')) new Chart(document.getElementById('schoolChart').getContext('2d'), { type: 'bar', data: { labels: ['Kathmandu', 'Pokhara', 'Lalitpur', 'Bhaktapur', 'Biratnagar'], datasets: [{ label: 'Number of Schools', data: [1200, 800, 600, 400, 300], backgroundColor: '#3498db' }] }, options: { responsive: true, maintainAspectRatio: false } });
+                if (document.getElementById('studentChart')) new Chart(document.getElementById('studentChart').getContext('2d'), { type: 'line', data: { labels: ['2019', '2020', '2021', '2022', '2023'], datasets: [{ label: 'Student Enrollment', data: [1000000, 1050000, 1100000, 1150000, 1200000], borderColor: '#e74c3c', fill: false }] }, options: { responsive: true, maintainAspectRatio: false } });
+                if (document.getElementById('boysChart')) new Chart(document.getElementById('boysChart').getContext('2d'), { type: 'pie', data: { labels: ['Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5'], datasets: [{ data: [15, 20, 18, 22, 25], backgroundColor: ['#3498db', '#2ecc71', '#f1c40f', '#e74c3c', '#9b59b6'] }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right' } } } });
+                if (document.getElementById('girlsChart')) new Chart(document.getElementById('girlsChart').getContext('2d'), { type: 'pie', data: { labels: ['Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5'], datasets: [{ data: [18, 22, 20, 15, 25], backgroundColor: ['#3498db', '#2ecc71', '#f1c40f', '#e74c3c', '#9b59b6'] }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right' } } } });
             }
         }
     </script>
