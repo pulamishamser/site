@@ -1381,6 +1381,33 @@
                 loginButton.textContent = 'Login';
             });
         }
+
+
+  function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                // Clear all session data
+                localStorage.removeItem("iemisUser");
+                sessionStorage.removeItem("iemisUser");
+                
+                // Show login modal
+                checkLoginStatus();
+                
+                // Clear form
+                document.getElementById('loginForm').reset();
+                document.getElementById('loginMessage').textContent = '';
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
         
         // Handle visibility change (tab becomes active again)
         function handleVisibilityChange() {
