@@ -1326,9 +1326,9 @@
        
             loginButton.disabled = true;
             loginButton.textContent = 'Logging in...';
-            if (loginMessage) loginMessage.textContent = 'https://script.google.com/macros/s/AKfycbw8aVDBPbix7346o647ZapCWJxUYqkNC4rCP9ZRoLFs4IT8EW_tuE3GD9BFjG4UpSPPBQ/exec';
+            if (loginMessage) loginMessage.textContent = '';
           
-            fetch("", {
+            fetch("https://script.google.com/macros/s/AKfycbw8aVDBPbix7346o647ZapCWJxUYqkNC4rCP9ZRoLFs4IT8EW_tuE3GD9BFjG4UpSPPBQ/exec", {
                 method: "POST",
                 headers: { "Content-Type": "text/plain;charset=utf-8" },
                 body: JSON.stringify({ action: "login", username: username, password: password })
