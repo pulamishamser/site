@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Attendance Data Entry Form</title>
+    <title>Student Data Entry</title>
     <style>
         * {
             box-sizing: border-box;
@@ -24,8 +24,6 @@
             border-radius: 48px;
             box-shadow: 0 25px 50px -12px rgba(0,0,0,0.35);
             overflow: hidden;
-            backdrop-filter: blur(0px);
-            transition: all 0.2s;
         }
         .header {
             background: linear-gradient(105deg, #0f2b4d 0%, #1d4ed8 100%);
@@ -43,10 +41,6 @@
             margin: 0;
             opacity: 0.85;
             font-size: 0.85rem;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
         }
         .form-body {
             padding: 32px 36px;
@@ -85,7 +79,6 @@
             font-size: 0.75rem;
             text-transform: uppercase;
             color: #854d0e;
-            letter-spacing: 0.3px;
         }
         .smart-select, .smart-input-year {
             background: #fffbeb;
@@ -97,11 +90,6 @@
             font-size: 0.9rem;
             cursor: pointer;
             font-family: inherit;
-            appearance: none;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23b45309' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 12px center;
-            background-size: 14px;
         }
         .smart-input-year {
             background-image: none;
@@ -118,11 +106,81 @@
             font-size: 0.75rem;
             cursor: pointer;
             transition: 0.2s;
-            color: #1e293b;
         }
         .reset-default-btn:hover {
             background: #cbd5e1;
-            transform: scale(0.97);
+        }
+        .month-selector-container {
+            background: #ffffff;
+            border-radius: 28px;
+            border: 2px solid #e2e8f0;
+            margin: 8px 0 20px 0;
+            transition: all 0.2s;
+        }
+        .month-selector-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 20px;
+            background: #f8fafc;
+            border-radius: 26px 26px 0 0;
+            border-bottom: 1px solid #e2e8f0;
+            gap: 12px;
+        }
+        .month-selector-title {
+            font-weight: 800;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .month-checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 12px;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 0 0 28px 28px;
+        }
+        .month-check-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #f1f5f9;
+            padding: 8px 12px;
+            border-radius: 48px;
+            transition: 0.1s;
+            cursor: pointer;
+        }
+        .month-check-item:hover {
+            background: #e2e8f0;
+        }
+        .month-check-item input {
+            width: 18px;
+            height: 18px;
+            margin: 0;
+            cursor: pointer;
+            accent-color: #1d4ed8;
+        }
+        .month-check-item label {
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: #0f172a;
+            cursor: pointer;
+            flex: 1;
+        }
+        .toggle-all-btn {
+            background: #e2e8f0;
+            border: none;
+            border-radius: 32px;
+            padding: 6px 16px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
         }
         .form-grid {
             display: grid;
@@ -139,12 +197,7 @@
             font-weight: 700;
             color: #0f172a;
             font-size: 0.8rem;
-            letter-spacing: 0.3px;
             text-transform: uppercase;
-        }
-        .field-group label .required-star {
-            color: #ef4444;
-            margin-left: 4px;
         }
         input, select {
             padding: 12px 16px;
@@ -163,7 +216,6 @@
             background: #f1f5f9;
             border-color: #cbd5e1;
             font-weight: 500;
-            color: #1e293b;
         }
         .action-buttons {
             display: flex;
@@ -184,7 +236,6 @@
             gap: 8px;
         }
         .btn-submit {
-            background: #0f3b2c;
             background: linear-gradient(95deg, #047857, #10b981);
             color: white;
             box-shadow: 0 5px 12px rgba(4,120,87,0.35);
@@ -201,84 +252,72 @@
             transform: translateY(-2px);
             filter: brightness(1.03);
         }
-        .message-panel {
-            padding: 14px 20px;
-            border-radius: 28px;
-            margin: 16px 0 0;
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.6);
             display: none;
-            font-weight: 500;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(4px);
         }
-        .msg-success {
-            background: #d1fae5;
-            color: #065f46;
-            border-left: 6px solid #059669;
+        .spinner {
+            width: 55px;
+            height: 55px;
+            border: 6px solid white;
+            border-top-color: #1d4ed8;
+            border-radius: 50%;
+            animation: spin 0.9s linear infinite;
         }
-        .msg-error {
-            background: #fee2e2;
-            color: #991b1b;
-            border-left: 6px solid #dc2626;
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
-        .badge-smart {
-            background: #d9f99d;
-            padding: 4px 14px;
-            border-radius: 40px;
+        .info-chip {
+            background: #dbeafe;
+            border-radius: 20px;
+            padding: 4px 12px;
             font-size: 0.7rem;
             font-weight: 600;
-            color: #365314;
-        }
-        hr {
-            margin: 20px 0;
-            border: 0;
-            height: 1px;
-            background: linear-gradient(to right, #cbd5e1, transparent);
-        }
-        @media (max-width: 700px) {
-            .form-body { padding: 20px; }
-            .default-cluster { flex-direction: column; align-items: stretch; width: 100%; }
-            .auto-default-pavilion { flex-direction: column; align-items: stretch; }
-        }
-        .live-sync-note {
-            font-size: 0.7rem;
-            margin-top: 16px;
-            color: #4b5563;
-            text-align: center;
+            color: #1e40af;
         }
     </style>
 </head>
 <body>
+<div class="loading-overlay" id="loadingOverlay">
+    <div class="spinner"></div>
+</div>
 <div class="container">
     <div class="main-card">
         <div class="header">
-            <h1>🌼Student Attendance Data Entry Form🌼</h1>
-            <p1>Class Year and Month are default. Changing Year class and month instantly updates!</p1>
         </div>
         <div class="form-body">
-            <div id="globalToast" class="message-panel"></div>
-
-            <!-- DEFAULTS PAVILION (auto-updates main form in realtime) -->
             <div class="auto-default-pavilion">
                 <div class="default-cluster">
                     <div class="default-tile">
-                        <label> CLASS</label>
+                        <label>🏫 DEFAULT CLASS</label>
                         <select id="globalDefaultClass" class="smart-select">
                             <optgroup label="General">
-                                <option value="ECD">ECD</option>
-                                <option value="PG">PG</option>
-                                <option value="Nursary">Nursary</option>
-                                <option value="LKG">LKG</option>
-                                <option value="UKG">UKG</option>
+                                <option value="ECD">ECD</option><option value="PG">PG</option>
+                                <option value="Nursary">Nursary</option><option value="LKG">LKG</option><option value="UKG">UKG</option>
                             </optgroup>
-                            <optgroup label="Grade (Nepali)">
-                                <option value="1">Grade 1</option><option value="2">Grade 2</option><option value="3">Grade 3</option>
-                                <option value="4">Grade 4</option><option value="5">Grade 5</option><option value="6">Grade 6</option>
-                                <option value="7">Grade 7</option><option value="8" selected>Grade 8</option><option value="9">Grade 9</option>
-                                <option value="10">Grade 10</option><option value="11">Grade 11</option><option value="12">Grade 12</option>
+                            <optgroup label="Grade">
+                                <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+                                <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+                                <option value="7">7</option><option value="8" selected>8</option>
+                                <option value="9">9</option><option value="10">10</option>
+                                <option value="11">11</option><option value="12">12</option>
                             </optgroup>
-                            <optgroup label="English Medium (EM)">
-                                <option value="1EM">Grade 1EM</option><option value="2EM">Grade 2EM</option><option value="3EM">Grade 3EM</option>
-                                <option value="4EM">Grade 4EM</option><option value="5EM">Grade 5EM</option><option value="6EM">Grade 6EM</option>
-                                <option value="7EM">Grade 7EM</option><option value="8EM">Grade 8EM</option><option value="9EM">Grade 9EM</option>
-                                <option value="10EM">Grade 10EM</option><option value="11EM">Grade 11EM</option><option value="12EM">Grade 12EM</option>
+                            <optgroup label="EM">
+                                <option value="1EM">1EM</option><option value="2EM">2EM</option>
+                                <option value="3EM">3EM</option><option value="4EM">4EM</option>
+                                <option value="5EM">5EM</option><option value="6EM">6EM</option>
+                                <option value="7EM">7EM</option><option value="8EM">8EM</option>
+                                <option value="9EM">9EM</option><option value="10EM">10EM</option>
+                                <option value="11EM">11EM</option><option value="12EM">12EM</option>
                             </optgroup>
                         </select>
                     </div>
@@ -286,54 +325,43 @@
                         <label>📆 YEAR (BS)</label>
                         <input type="number" id="globalDefaultYear" class="smart-input-year" value="2083" step="1">
                     </div>
-                    <div class="default-tile">
-                        <label> MONTH</label>
-                        <select id="globalDefaultMonth" class="smart-select">
-                            <option value="Baisakh"> Baisakh</option><option value="Jeshtha">Jeshtha</option>
-                            <option value="Ashad"> Ashad</option><option value="Shrawan"> Shrawan</option>
-                            <option value="Bhadra"> Bhadra</option><option value="Ashwin"> Ashwin</option>
-                            <option value="Kartik">Kartik</option><option value="Mangsir"> Mangsir</option>
-                            <option value="Poush"> Poush</option><option value="Magh"> Magh</option>
-                            <option value="Falgun"> Falgun</option><option value="Chaitra"> Chaitra</option>
-                        </select>
-                    </div>
                 </div>
-                <button type="button" id="factoryResetDefaultsBtn" class="reset-default-btn">⟳ RESET DEFAULTS (2083 · Grade 8 · Baisakh)</button>
+                <button type="button" id="factoryResetDefaultsBtn" class="reset-default-btn">⟳ RESET DEFAULTS</button>
             </div>
 
-            <!-- MAIN DATA ENTRY FORM -->
+            <div class="month-selector-container">
+                <div class="month-selector-header">
+                    <div class="month-selector-title">
+                        📅 SELECT MONTH <span class="info-chip">SN auto </span>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <button type="button" id="selectAllMonthsBtn" class="toggle-all-btn">✅ All Months</button>
+                        <button type="button" id="deselectAllMonthsBtn" class="toggle-all-btn">❌ None</button>
+                    </div>
+                </div>
+                <div id="monthCheckboxGrid" class="month-checkbox-grid"></div>
+            </div>
+
             <form id="masterStudentForm">
                 <div class="form-grid">
                     <div class="field-group">
-                        <label>📅 ACADEMIC YEAR <span class="required-star">*</span></label>
+                        <label>📅 ACADEMIC YEAR</label>
                         <input type="text" id="mainYear" placeholder="e.g., 2083" required>
                     </div>
                     <div class="field-group">
-                        <label> NEPALI MONTH <span class="required-star">*</span></label>
-                        <select id="mainMonth" required>
-                            <option value="">-- select month --</option>
-                            <option value="Baisakh">Baisakh</option><option value="Jeshtha">Jeshtha</option>
-                            <option value="Ashad">Ashad</option><option value="Shrawan">Shrawan</option>
-                            <option value="Bhadra">Bhadra</option><option value="Ashwin">Ashwin</option>
-                            <option value="Kartik">Kartik</option><option value="Mangsir">Mangsir</option>
-                            <option value="Poush">Poush</option><option value="Magh">Magh</option>
-                            <option value="Falgun">Falgun</option><option value="Chaitra">Chaitra</option>
-                        </select>
+                        <label>🔢 SN </label>
+                        <input type="text" id="autoSnField" readonly placeholder="Auto from last row">
                     </div>
                     <div class="field-group">
-                        <label>🔢 SN <span class="required-star">(Auto)</span></label>
-                        <input type="text" id="autoSnField" readonly placeholder="Auto increment">
-                    </div>
-                    <div class="field-group">
-                        <label>📌 ROLL / SBL NO <span class="required-star">*</span></label>
+                        <label>📌 ROLL NUMBER </label>
                         <input type="text" id="rollNumber" required placeholder="e.g., 101">
                     </div>
                     <div class="field-group">
-                        <label>🏫 CLASS <span class="required-star">*</span></label>
-                        <input type="text" id="classMain" required placeholder="Class (auto-sync)">
+                        <label>🏫 CLASS</label>
+                        <input type="text" id="classMain" required placeholder="Class">
                     </div>
                     <div class="field-group">
-                        <label>👤 FULL NAME <span class="required-star">*</span></label>
+                        <label>👤 FULL NAME</label>
                         <input type="text" id="studentFullName" required placeholder="Full name">
                     </div>
                     <div class="field-group">
@@ -346,7 +374,7 @@
                     </div>
                     <div class="field-group">
                         <label>🎂 DATE OF BIRTH</label>
-                        <input type="text" id="dobField">
+                        <input type="text" id="dobField" placeholder="YYYY-MM-DD">
                     </div>
                     <div class="field-group">
                         <label>📞 MOBILE NUMBER</label>
@@ -354,41 +382,33 @@
                     </div>
                 </div>
                 <div class="action-buttons">
-                    <button type="submit" class="btn-submit">✅ SUBMIT & SYNC</button>
+                    <button type="submit" class="btn-submit">💾 SUBMIT RECORD</button>
                     <button type="button" id="deleteLastRowBtn" class="btn-delete">🗑️ DELETE LAST ROW</button>
                     <button type="button" id="clearFormBtn" class="btn-reset-form">🔄 CLEAR FIELDS</button>
                 </div>
             </form>
-            <div class="live-sync-note">
-                ⚡ <strong>Attendance Data Entry Form:</strong> Changing Class, Year, Month in the golden bar instantly updates main form fields. <br>
-              @Reserved all in shamser.info.np
-            </div>
         </div>
     </div>
 </div>
 
 <script>
     // ======================== CONFIGURATION ========================
-    // ⚠️ REPLACE WITH YOUR DEPLOYED APPS SCRIPT WEB APP URL
-    const SCRIPT_API = "https://script.google.com/macros/s/AKfycbxbHayq6mbJN5xS301x1Xuz70-NZYjcSx49pHvUP_vOnekE7c26q1AfFe-xMbSqIc-0hg/exec";
+    const SCRIPT_API = "https://script.google.com/macros/s/AKfycbxslJwrgmEweE1jwFGn91yhGCt5SDmSbM652-oRg3Lxl3adH0BO-WqtLVLYMLnAp_2Hdw/exec";
     
-    // ---------- STORAGE KEYS ----------
-    const STORAGE_DEF_CLASS = "smart_att_class_def";
-    const STORAGE_DEF_YEAR = "smart_att_year_def";
-    const STORAGE_DEF_MONTH = "smart_att_month_def";
-    
+    const STORAGE_DEF_CLASS = "att_class_default";
+    const STORAGE_DEF_YEAR = "att_year_default";
     const FALLBACK_CLASS = "8";
     const FALLBACK_YEAR = "2083";
-    const FALLBACK_MONTH = "Baisakh";
     
-    // DOM elements (default bar)
+    const ALL_MONTHS_LIST = [
+        "Baisakh", "Jeshtha", "Ashad", "Shrawan", "Bhadra", "Ashwin",
+        "Kartik", "Mangsir", "Poush", "Magh", "Falgun", "Chaitra"
+    ];
+    
+    // DOM Elements
     const defaultClassSelect = document.getElementById("globalDefaultClass");
     const defaultYearInput = document.getElementById("globalDefaultYear");
-    const defaultMonthSelect = document.getElementById("globalDefaultMonth");
-    
-    // Main form fields
     const mainYear = document.getElementById("mainYear");
-    const mainMonth = document.getElementById("mainMonth");
     const mainClass = document.getElementById("classMain");
     const autoSnField = document.getElementById("autoSnField");
     const rollNoInput = document.getElementById("rollNumber");
@@ -397,78 +417,168 @@
     const motherNameInput = document.getElementById("motherName");
     const dobInput = document.getElementById("dobField");
     const mobileInput = document.getElementById("mobileContact");
+    const monthCheckboxGrid = document.getElementById("monthCheckboxGrid");
+    const loadingOverlay = document.getElementById("loadingOverlay");
     
-    // UI messaging
-    const toastDiv = document.getElementById("globalToast");
+    let selectedMonthsSet = new Set();
     
-    function showToast(text, type = "success") {
-        toastDiv.textContent = text;
-        toastDiv.className = `message-panel ${type === "error" ? "msg-error" : "msg-success"}`;
-        toastDiv.style.display = "block";
-        setTimeout(() => {
-            toastDiv.style.display = "none";
-        }, 4300);
+    function setLoading(show) {
+        loadingOverlay.style.display = show ? "flex" : "none";
     }
     
-    // Storage helpers
+    function renderMonthCheckboxes() {
+        monthCheckboxGrid.innerHTML = "";
+        ALL_MONTHS_LIST.forEach(month => {
+            const div = document.createElement("div");
+            div.className = "month-check-item";
+            const cb = document.createElement("input");
+            cb.type = "checkbox";
+            cb.value = month;
+            cb.id = `chk_${month}`;
+            cb.checked = selectedMonthsSet.has(month);
+            cb.addEventListener("change", (e) => {
+                if (e.target.checked) selectedMonthsSet.add(month);
+                else selectedMonthsSet.delete(month);
+                localStorage.setItem("selected_months", JSON.stringify(Array.from(selectedMonthsSet)));
+                refreshAutoSN();
+            });
+            const label = document.createElement("label");
+            label.htmlFor = `chk_${month}`;
+            label.textContent = month;
+            div.appendChild(cb);
+            div.appendChild(label);
+            monthCheckboxGrid.appendChild(div);
+        });
+    }
+    
+    function syncCheckboxUI() {
+        ALL_MONTHS_LIST.forEach(month => {
+            const cb = document.getElementById(`chk_${month}`);
+            if (cb) cb.checked = selectedMonthsSet.has(month);
+        });
+    }
+    
+    function selectAllMonths() {
+        ALL_MONTHS_LIST.forEach(month => selectedMonthsSet.add(month));
+        syncCheckboxUI();
+        localStorage.setItem("selected_months", JSON.stringify(Array.from(selectedMonthsSet)));
+        refreshAutoSN();
+    }
+    
+    function deselectAllMonths() {
+        selectedMonthsSet.clear();
+        syncCheckboxUI();
+        localStorage.setItem("selected_months", JSON.stringify([]));
+        autoSnField.value = "—";
+    }
+    
+    function loadStoredMonthSelections() {
+        const stored = localStorage.getItem("selected_months");
+        if (stored) {
+            try {
+                const arr = JSON.parse(stored);
+                if (Array.isArray(arr)) {
+                    selectedMonthsSet.clear();
+                    arr.forEach(m => { if (ALL_MONTHS_LIST.includes(m)) selectedMonthsSet.add(m); });
+                }
+            } catch(e) {}
+        }
+        if (selectedMonthsSet.size === 0) selectedMonthsSet.add("Baisakh");
+        renderMonthCheckboxes();
+    }
+    
     function getStoredDefaults() {
         return {
             defClass: localStorage.getItem(STORAGE_DEF_CLASS) ?? FALLBACK_CLASS,
             defYear: localStorage.getItem(STORAGE_DEF_YEAR) ?? FALLBACK_YEAR,
-            defMonth: localStorage.getItem(STORAGE_DEF_MONTH) ?? FALLBACK_MONTH
         };
+    }
+    
+    function syncDefaultsToForm() {
+        const { defClass, defYear } = getStoredDefaults();
+        if ([...defaultClassSelect.options].some(opt => opt.value === defClass)) defaultClassSelect.value = defClass;
+        else defaultClassSelect.value = FALLBACK_CLASS;
+        defaultYearInput.value = defYear;
+        mainYear.value = defYear;
+        mainClass.value = defClass;
     }
     
     function updateStoredAndSyncUI(type, value) {
         if (type === 'class') localStorage.setItem(STORAGE_DEF_CLASS, value);
         if (type === 'year') localStorage.setItem(STORAGE_DEF_YEAR, value);
-        if (type === 'month') localStorage.setItem(STORAGE_DEF_MONTH, value);
-        syncAllDefaultsToForm();
+        syncDefaultsToForm();
+        refreshAutoSN();
     }
     
-    function syncAllDefaultsToForm() {
-        const { defClass, defYear, defMonth } = getStoredDefaults();
-        // Update default bar UI
-        if ([...defaultClassSelect.options].some(opt => opt.value === defClass)) defaultClassSelect.value = defClass;
-        else defaultClassSelect.value = FALLBACK_CLASS;
-        defaultYearInput.value = defYear;
-        if ([...defaultMonthSelect.options].some(opt => opt.value === defMonth)) defaultMonthSelect.value = defMonth;
-        else defaultMonthSelect.value = FALLBACK_MONTH;
-        
-        // 🔁 AUTO CHANGE MAIN FORM FIELDS
-        mainYear.value = defYear;
-        mainMonth.value = defMonth;
-        mainClass.value = defClass;
-    }
-    
-    function resetToFactoryDefaults() {
-        localStorage.setItem(STORAGE_DEF_CLASS, FALLBACK_CLASS);
-        localStorage.setItem(STORAGE_DEF_YEAR, FALLBACK_YEAR);
-        localStorage.setItem(STORAGE_DEF_MONTH, FALLBACK_MONTH);
-        syncAllDefaultsToForm();
-        showToast(`✅ Default reset to Class: ${FALLBACK_CLASS}, Year: ${FALLBACK_YEAR}, Month: ${FALLBACK_MONTH}`, "success");
-    }
-    
-    // Event listeners for default bar -> instant main form update
-    defaultClassSelect.addEventListener("change", (e) => {
-        updateStoredAndSyncUI('class', e.target.value);
-        showToast(`🔁 Class default changed → "${e.target.value}"`, "success");
-    });
+    defaultClassSelect.addEventListener("change", (e) => updateStoredAndSyncUI('class', e.target.value));
     defaultYearInput.addEventListener("change", (e) => {
         let yr = e.target.value.trim();
         if (yr === "") yr = FALLBACK_YEAR;
         updateStoredAndSyncUI('year', yr);
-        showToast(`📅 Year default set to ${yr}`, "success");
-    });
-    defaultMonthSelect.addEventListener("change", (e) => {
-        updateStoredAndSyncUI('month', e.target.value);
-        showToast(`🌙 Month default changed → ${e.target.value}`, "success");
     });
     
-    // ========== BACKEND REQUESTS : Google Sheets (optional day columns/totals) ==========
-    async function backendRequest(action, payloadObj = {}) {
+    // ========== CORE FUNCTIONS ==========
+    
+    // Fetch all records from a month sheet (including full data to get SN from Column A)
+    async function fetchAllRecords(monthSheet, year) {
         try {
-            const bodyParams = new URLSearchParams({ action, ...payloadObj });
+            const url = `${SCRIPT_API}?action=getAll&monthSheet=${encodeURIComponent(monthSheet)}&year=${encodeURIComponent(year)}&_=${Date.now()}`;
+            const response = await fetch(url);
+            const data = await response.json();
+            if (data.success && Array.isArray(data.data)) {
+                return data.data;
+            }
+            return [];
+        } catch (err) {
+            console.error(`Fetch error for ${monthSheet}:`, err);
+            return [];
+        }
+    }
+    
+    // Get the last SN from Column A (maximum SN value in the sheet)
+    async function getLastSNFromColumnA(monthSheet, year) {
+        const records = await fetchAllRecords(monthSheet, year);
+        let maxSn = 0;
+        
+        records.forEach(record => {
+            // Check SN from Column A (the 'sn' field)
+            let snVal = parseInt(record.sn);
+            if (!isNaN(snVal) && snVal > maxSn) {
+                maxSn = snVal;
+            }
+        });
+        
+        // Return next SN (max + 1), or 1 if no records exist
+        return maxSn + 1;
+    }
+    
+    // Check duplicate in records - Class + Roll Number combination
+    function isDuplicate(records, rollNo, className) {
+        const searchRoll = String(rollNo).trim().toLowerCase();
+        const searchClass = String(className).trim().toLowerCase();
+        
+        return records.some(record => {
+            const recordRoll = String(record.roll_no || record.roll || record.rollnumber || "").trim().toLowerCase();
+            const recordClass = String(record.class || record.class_name || "").trim().toLowerCase();
+            return recordRoll === searchRoll && recordClass === searchClass;
+        });
+    }
+    
+    async function refreshAutoSN() {
+        if (selectedMonthsSet.size === 0) {
+            autoSnField.value = "—";
+            return;
+        }
+        const firstMonth = Array.from(selectedMonthsSet)[0];
+        const yearVal = mainYear.value.trim() || getStoredDefaults().defYear;
+        const nextSN = await getLastSNFromColumnA(firstMonth, yearVal);
+        autoSnField.value = nextSN;
+    }
+    
+    // Submit to backend with proper SN from Column A
+    async function submitToBackend(payload) {
+        try {
+            const bodyParams = new URLSearchParams({ action: "addStudent", ...payload });
             const resp = await fetch(SCRIPT_API, {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -478,78 +588,89 @@
             try {
                 return JSON.parse(raw);
             } catch (err) {
-                console.warn("Non-JSON response", raw);
-                return { success: false, message: "Server response invalid. Check Apps Script deployment." };
+                return { success: false, message: "Server response error" };
             }
         } catch (err) {
             return { success: false, message: `Network error: ${err.message}` };
         }
     }
     
-    // Fetch latest SN (auto increment based on all records from ALL sheets)
-    async function refreshAutoSN() {
-        try {
-            const url = `${SCRIPT_API}?action=getAll&_=${Date.now()}`;
-            const response = await fetch(url);
-            const result = await response.json();
-            if (result.success && Array.isArray(result.data)) {
-                let maxSn = 0;
-                result.data.forEach(record => {
-                    let snVal = parseInt(record.sn);
-                    if (!isNaN(snVal) && snVal > maxSn) maxSn = snVal;
-                });
-                const nextSn = maxSn + 1;
-                autoSnField.value = nextSn;
-            } else {
-                autoSnField.value = "1";
-            }
-        } catch (err) {
-            console.error("SN fetch error", err);
-            autoSnField.value = "?";
-        }
-    }
-    
-    // Submit handler - reflect current main form values (which are auto-synced to defaults)
+    // MAIN SUBMIT HANDLER with proper SN increment per month
     document.getElementById("masterStudentForm").addEventListener("submit", async (e) => {
         e.preventDefault();
         
         const yearVal = mainYear.value.trim();
-        const monthVal = mainMonth.value;
         const classVal = mainClass.value.trim();
         const roll = rollNoInput.value.trim();
         const studentName = studentNameInput.value.trim();
         
-        if (!yearVal) { showToast("Academic year required", "error"); return; }
-        if (!monthVal) { showToast("Please select a Nepali month", "error"); return; }
-        if (!classVal) { showToast("Class is required (auto-filled by default)", "error"); return; }
-        if (!roll) { showToast("Roll/Sbl number required", "error"); return; }
-        if (!studentName) { showToast("Student full name required", "error"); return; }
+        if (!yearVal) { alert("Please enter academic year"); return; }
+        if (!classVal) { alert("Please enter Class"); return; }
+        if (!roll) { alert("Please enter Roll Number"); return; }
+        if (!studentName) { alert("Please enter Full Name"); return; }
         
-        const payload = {
-            sn: autoSnField.value,
-            roll_no: roll,
-            class: classVal,
-            name: studentName,
-            father_name: fatherNameInput.value,
-            mother_name: motherNameInput.value,
-            dob: dobInput.value,
-            mobile_no: mobileInput.value,
-            year: yearVal,
-            monthSheet: monthVal
-        };
+        const selectedMonths = Array.from(selectedMonthsSet);
+        if (selectedMonths.length === 0) {
+            alert("Please select at least one month sheet");
+            return;
+        }
         
-        const submitBtn = e.target.querySelector('button[type="submit"]');
-        const originalBtnText = submitBtn.innerText;
-        submitBtn.innerText = "⏳ Syncing...";
-        submitBtn.disabled = true;
+        setLoading(true);
         
-        const result = await backendRequest("addStudent", payload);
-        submitBtn.innerText = originalBtnText;
-        submitBtn.disabled = false;
+        // Check for duplicates in ALL selected months
+        let duplicateFound = false;
+        let duplicateMonths = [];
         
-        if (result.success) {
-            showToast(`✅ ${result.message || "Student added! Day columns & totals updated automatically."}`, "success");
-            // clear variable fields only (preserve class/year/month from defaults)
+        for (const month of selectedMonths) {
+            const records = await fetchAllRecords(month, yearVal);
+            if (isDuplicate(records, roll, classVal)) {
+                duplicateFound = true;
+                duplicateMonths.push(month);
+            }
+        }
+        
+        if (duplicateFound) {
+            setLoading(false);
+            const monthList = duplicateMonths.join(", ");
+            alert(`This records has already exist! Enter new record\n(Duplicate found in: ${monthList})`);
+            return;
+        }
+        
+        // No duplicate found - proceed with submission
+        // For EACH month, get the current last SN and increment
+        let successMonths = [];
+        let failedMonths = [];
+        
+        for (const month of selectedMonths) {
+            // Fetch fresh SN for this specific month (ensures correct increment)
+            const freshSN = await getLastSNFromColumnA(month, yearVal);
+            
+            const payload = {
+                sn: freshSN,
+                roll_no: roll,
+                class: classVal,
+                name: studentName,
+                father_name: fatherNameInput.value || "",
+                mother_name: motherNameInput.value || "",
+                dob: dobInput.value || "",
+                mobile_no: mobileInput.value || "",
+                year: yearVal,
+                monthSheet: month
+            };
+            
+            const result = await submitToBackend(payload);
+            if (result.success) {
+                successMonths.push(month);
+            } else {
+                failedMonths.push(month);
+            }
+        }
+        
+        setLoading(false);
+        
+        if (successMonths.length === selectedMonths.length) {
+            alert(`This record successfully entered.\nAdded to: ${successMonths.join(", ")}\nSN auto-incremented from Column A in each sheet.`);
+            // Clear form fields except class/year
             rollNoInput.value = "";
             studentNameInput.value = "";
             fatherNameInput.value = "";
@@ -558,30 +679,44 @@
             mobileInput.value = "";
             await refreshAutoSN();
             rollNoInput.focus();
-        } else {
-            showToast(`❌ Submission error: ${result.message}`, "error");
-        }
-    });
-    
-    // Delete last row based on CURRENT month from main form (auto uses default month if empty)
-    document.getElementById("deleteLastRowBtn").addEventListener("click", async () => {
-        let activeMonth = mainMonth.value;
-        if (!activeMonth) {
-            const { defMonth } = getStoredDefaults();
-            activeMonth = defMonth;
-            if (!activeMonth) { showToast("No month selected or default missing", "error"); return; }
-        }
-        if (!confirm(`⚠️ Permanently delete LAST student record from month sheet: "${activeMonth}" ? This action cannot be undone.`)) return;
-        const res = await backendRequest("deleteLastRow", { monthSheet: activeMonth });
-        if (res.success) {
-            showToast(`🗑️ ${res.message}`, "success");
+        } else if (successMonths.length > 0) {
+            alert(`Partial success.\nAdded to: ${successMonths.join(", ")}\nFailed: ${failedMonths.join(", ")}`);
             await refreshAutoSN();
         } else {
-            showToast(`❌ Delete failed: ${res.message}`, "error");
+            alert(`Submission failed for all months. Please try again.`);
         }
     });
     
-    // Clear non-default fields (reset form but keep class/year/month from defaults)
+    // Delete last row handler (removes last entry and SN will adjust on next add)
+    document.getElementById("deleteLastRowBtn").addEventListener("click", async () => {
+        if (selectedMonthsSet.size === 0) {
+            alert("Select at least one month to delete from");
+            return;
+        }
+        let monthToDelete = null;
+        if (selectedMonthsSet.size === 1) {
+            monthToDelete = Array.from(selectedMonthsSet)[0];
+        } else {
+            monthToDelete = prompt(`Selected months: ${Array.from(selectedMonthsSet).join(", ")}.\nEnter month name to delete last row:`);
+            if (!monthToDelete || !ALL_MONTHS_LIST.includes(monthToDelete)) {
+                alert("Invalid month name");
+                return;
+            }
+        }
+        if (!confirm(`⚠️ Delete LAST record from "${monthToDelete}" sheet?\nThis will remove the last row from Column A.`)) return;
+        setLoading(true);
+        const yearVal = mainYear.value.trim() || getStoredDefaults().defYear;
+        const result = await submitToBackend({ action: "deleteLastRow", monthSheet: monthToDelete, year: yearVal });
+        setLoading(false);
+        if (result.success) {
+            alert(`Last row deleted from ${monthToDelete}\nNext SN will be recalculated from remaining rows.`);
+            await refreshAutoSN();
+        } else {
+            alert(`Delete failed: ${result.message}`);
+        }
+    });
+    
+    // Clear form handler
     document.getElementById("clearFormBtn").addEventListener("click", () => {
         rollNoInput.value = "";
         studentNameInput.value = "";
@@ -589,39 +724,30 @@
         motherNameInput.value = "";
         dobInput.value = "";
         mobileInput.value = "";
-        // Keep class/year/month from default (re-sync to be safe)
-        const { defClass, defYear, defMonth } = getStoredDefaults();
+        const { defClass, defYear } = getStoredDefaults();
         mainClass.value = defClass;
         mainYear.value = defYear;
-        mainMonth.value = defMonth;
-        showToast("🧹 Variable fields cleared (Class/Year/Month preserved from defaults)", "success");
         refreshAutoSN();
     });
     
-    // If user manually changes main month/class/year they are allowed but we don't override defaults.
-    // However to keep coherence we add manual note: but we can also allow default bar to always dominate.
-    // Additionally monitor changes on main fields? Not necessary but ensures SN update.
-    document.getElementById("resetDefaultBtn")?.removeEventListener; // safe
+    // Factory reset
+    document.getElementById("factoryResetDefaultsBtn").addEventListener("click", () => {
+        localStorage.setItem(STORAGE_DEF_CLASS, FALLBACK_CLASS);
+        localStorage.setItem(STORAGE_DEF_YEAR, FALLBACK_YEAR);
+        syncDefaultsToForm();
+        refreshAutoSN();
+    });
     
-    // Factory reset button
-    document.getElementById("factoryResetDefaultsBtn").addEventListener("click", resetToFactoryDefaults);
+    document.getElementById("selectAllMonthsBtn").addEventListener("click", selectAllMonths);
+    document.getElementById("deselectAllMonthsBtn").addEventListener("click", deselectAllMonths);
     
-    // Also ensure when main month / class / year are manually changed we don't disturb default bar,
-    // but we still respect them for submission. Everything works.
-    
-    // initial load: sync defaults, fetch SN
-    async function initSystem() {
-        syncAllDefaultsToForm();
+    async function init() {
+        loadStoredMonthSelections();
+        syncDefaultsToForm();
         await refreshAutoSN();
-        // Additional: if backend supports, we can trigger any warmup
-        showToast("Changing Year class and month instantly updates!", "success");
     }
     
-    initSystem();
-    
-    // Extra safeguard: when year input is changed manually in default bar, it syncs (already)
-    // Log utility for debugging
-    console.log("✅ Smart Attendance System |  Data Entry Form| @ copy reserved in shamser.info.np");
+    init();
 </script>
 </body>
 </html>
