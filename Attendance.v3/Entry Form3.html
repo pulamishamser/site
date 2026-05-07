@@ -1,431 +1,753 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>UpadteAll</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  <style>
-    * { box-sizing: border-box; font-family: 'Segoe UI', Roboto, system-ui, sans-serif; }
-    body { background: #f0f2f5; margin: 0; padding: 24px 20px; }
-    .dashboard-container { max-width: 1600px; margin: 0 auto; }
-    .card { background: white; border-radius: 28px; box-shadow: 0 12px 28px rgba(0,0,0,0.08); padding: 20px 24px 28px; margin-bottom: 28px; }
-    h2 { font-size: 1.7rem; font-weight: 600; margin: 0 0 6px 0; background: linear-gradient(135deg, #1e3c72, #2b3b5c); background-clip: text; -webkit-background-clip: text; color: transparent; }
-    .subhead { color: #5a6874; margin-bottom: 24px; border-left: 4px solid #3b82f6; padding-left: 14px; font-size: 0.9rem; }
-    .school-header { background: linear-gradient(135deg, #1e293b, #0f172a); color: white; border-radius: 24px; padding: 16px 24px; margin-bottom: 24px; text-align: center; }
-    .school-name { font-size: 1.6rem; font-weight: 700; margin-bottom: 6px; }
-    .school-address { font-size: 0.85rem; opacity: 0.85; }
-    .message-area { padding: 12px 20px; border-radius: 60px; margin-bottom: 20px; font-weight: 500; display: none; }
-    .message-success { background: #dcfce7; color: #166534; border-left: 5px solid #22c55e; }
-    .message-error { background: #fee2e2; color: #991b1b; border-left: 5px solid #ef4444; }
-    .filter-bar { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end; background: #f8fafc; padding: 18px 20px; border-radius: 32px; margin-bottom: 28px; border: 1px solid #e2edf2; }
-    .filter-group { display: flex; flex-direction: column; gap: 6px; min-width: 120px; }
-    .filter-group label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: #2c3e66; }
-    select, input, button { padding: 10px 14px; border-radius: 60px; border: 1px solid #cbd5e1; background: white; font-size: 0.85rem; outline: none; }
-    select:focus, input:focus { border-color: #3b82f6; box-shadow: 0 0 0 2px rgba(59,130,246,0.1); }
-    button { background: #1e293b; color: white; font-weight: 600; border: none; cursor: pointer; padding: 10px 28px; transition: all 0.2s; }
-    button:hover { background: #0f172a; transform: translateY(-1px); }
-    button:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-    .action-buttons { display: flex; gap: 14px; margin-left: auto; flex-wrap: wrap; }
-    .btn-print { background: #2c5f2d; }
-    .btn-pdf { background: #b22234; }
-    .table-wrapper { overflow-x: auto; border-radius: 20px; border: 1px solid #e9eef3; background: white; margin-top: 20px; }
-    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; min-width: 900px; }
-    th { background: #f1f5f9; color: #0f2b3d; font-weight: 700; padding: 14px 12px; border-bottom: 1px solid #dce5ec; text-align: left; }
-    td { padding: 12px 12px; border-bottom: 1px solid #ecf3f9; }
-    tr:hover td { background-color: #fafcff; }
-    .present-badge { background: #d1fae5; color: #065f46; font-weight: 600; padding: 4px 12px; border-radius: 40px; display: inline-block; font-size: 0.75rem; }
-    .absent-badge { background: #ffe4e2; color: #9b2c1d; font-weight: 600; padding: 4px 12px; border-radius: 40px; display: inline-block; font-size: 0.75rem; }
-    .stats-card { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 16px 24px; border-radius: 20px; margin-bottom: 20px; }
-    .error-message { background: #fff1f0; border-left: 6px solid #e11d48; color: #b91c1c; padding: 14px 20px; border-radius: 24px; font-weight: 500; }
-    .loading-spinner { display: inline-block; width: 20px; height: 20px; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: white; animation: spin 0.6s linear infinite; margin-right: 8px; vertical-align: middle; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    @media print { .filter-bar, .action-buttons, button, .no-print { display: none !important; } }
-    @media (max-width: 780px) { .filter-bar { flex-direction: column; } .action-buttons { margin-left: 0; flex-direction: column; } }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Student Data Entry</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: system-ui, 'Segoe UI', 'Inter', 'Roboto', sans-serif;
+        }
+        body {
+            background: linear-gradient(125deg, #0f172a 0%, #1e1b4b 100%);
+            margin: 0;
+            padding: 24px 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1350px;
+            margin: 0 auto;
+        }
+        .main-card {
+            background: rgba(255,255,255,0.98);
+            border-radius: 48px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.35);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(105deg, #0f2b4d 0%, #1d4ed8 100%);
+            color: white;
+            padding: 28px 36px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        .header h1 {
+            margin: 0 0 6px 0;
+            font-size: 1.9rem;
+            letter-spacing: -0.3px;
+            font-weight: 700;
+        }
+        .header p {
+            margin: 0;
+            opacity: 0.85;
+            font-size: 0.85rem;
+        }
+        .form-body {
+            padding: 32px 36px;
+        }
+        .auto-default-pavilion {
+            background: #fefce8;
+            border: 1px solid #fde047;
+            border-radius: 32px;
+            padding: 16px 26px;
+            margin-bottom: 32px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            box-shadow: 0 6px 12px -8px rgba(0,0,0,0.1);
+        }
+        .default-cluster {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+        }
+        .default-tile {
+            background: white;
+            border-radius: 60px;
+            padding: 5px 18px 5px 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+            border: 1px solid #eferc6;
+        }
+        .default-tile label {
+            font-weight: 800;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #854d0e;
+        }
+        .smart-select, .smart-input-year {
+            background: #fffbeb;
+            border: 1px solid #fed7aa;
+            border-radius: 40px;
+            padding: 8px 28px 8px 16px;
+            font-weight: 600;
+            color: #b45309;
+            font-size: 0.9rem;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .smart-input-year {
+            background-image: none;
+            width: 90px;
+            text-align: center;
+            appearance: textfield;
+        }
+        .reset-default-btn {
+            background: #e2e8f0;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 34px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .reset-default-btn:hover {
+            background: #cbd5e1;
+        }
+        .month-selector-container {
+            background: #ffffff;
+            border-radius: 28px;
+            border: 2px solid #e2e8f0;
+            margin: 8px 0 20px 0;
+            transition: all 0.2s;
+        }
+        .month-selector-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 20px;
+            background: #f8fafc;
+            border-radius: 26px 26px 0 0;
+            border-bottom: 1px solid #e2e8f0;
+            gap: 12px;
+        }
+        .month-selector-title {
+            font-weight: 800;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .month-checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 12px;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 0 0 28px 28px;
+        }
+        .month-check-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #f1f5f9;
+            padding: 8px 12px;
+            border-radius: 48px;
+            transition: 0.1s;
+            cursor: pointer;
+        }
+        .month-check-item:hover {
+            background: #e2e8f0;
+        }
+        .month-check-item input {
+            width: 18px;
+            height: 18px;
+            margin: 0;
+            cursor: pointer;
+            accent-color: #1d4ed8;
+        }
+        .month-check-item label {
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: #0f172a;
+            cursor: pointer;
+            flex: 1;
+        }
+        .toggle-all-btn {
+            background: #e2e8f0;
+            border: none;
+            border-radius: 32px;
+            padding: 6px 16px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+            gap: 26px 32px;
+            margin-bottom: 32px;
+        }
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .field-group label {
+            font-weight: 700;
+            color: #0f172a;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+        input, select {
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: 0.2s;
+            background: #ffffff;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.25);
+        }
+        input[readonly] {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+            font-weight: 500;
+        }
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin: 16px 0 20px 0;
+        }
+        button {
+            border: none;
+            border-radius: 48px;
+            padding: 11px 28px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-submit {
+            background: linear-gradient(95deg, #047857, #10b981);
+            color: white;
+            box-shadow: 0 5px 12px rgba(4,120,87,0.35);
+        }
+        .btn-delete {
+            background: #b91c1c;
+            color: white;
+        }
+        .btn-reset-form {
+            background: #334155;
+            color: white;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.03);
+        }
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+        }
+        .spinner {
+            width: 55px;
+            height: 55px;
+            border: 6px solid white;
+            border-top-color: #1d4ed8;
+            border-radius: 50%;
+            animation: spin 0.9s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .info-chip {
+            background: #dbeafe;
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #1e40af;
+        }
+    </style>
 </head>
 <body>
-<div class="dashboard-container">
-  <div class="card">
-    <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;">
-      <div><h2>📋 Upatate Attendance </h2></div>
-      <div style="background: #e6f0ff; border-radius: 30px; padding: 4px 12px; font-size: 0.7rem; font-weight: 600;">SHAMSER.INFO.NP</div>
-    </div>
-    <div id="globalMessage" class="message-area"></div>
+<div class="loading-overlay" id="loadingOverlay">
+    <div class="spinner"></div>
+</div>
+<div class="container">
+    <div class="main-card">
+        <div class="header">
+        </div>
+        <div class="form-body">
+            <div class="auto-default-pavilion">
+                <div class="default-cluster">
+                    <div class="default-tile">
+                        <label>🏫 DEFAULT CLASS</label>
+                        <select id="globalDefaultClass" class="smart-select">
+                            <optgroup label="General">
+                                <option value="ECD">ECD</option><option value="PG">PG</option>
+                                <option value="Nursary">Nursary</option><option value="LKG">LKG</option><option value="UKG">UKG</option>
+                            </optgroup>
+                            <optgroup label="Grade">
+                                <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+                                <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+                                <option value="7">7</option><option value="8" selected>8</option>
+                                <option value="9">9</option><option value="10">10</option>
+                                <option value="11">11</option><option value="12">12</option>
+                            </optgroup>
+                            <optgroup label="EM">
+                                <option value="1EM">1EM</option><option value="2EM">2EM</option>
+                                <option value="3EM">3EM</option><option value="4EM">4EM</option>
+                                <option value="5EM">5EM</option><option value="6EM">6EM</option>
+                                <option value="7EM">7EM</option><option value="8EM">8EM</option>
+                                <option value="9EM">9EM</option><option value="10EM">10EM</option>
+                                <option value="11EM">11EM</option><option value="12EM">12EM</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="default-tile">
+                        <label>📆 YEAR (BS)</label>
+                        <input type="number" id="globalDefaultYear" class="smart-input-year" value="2083" step="1">
+                    </div>
+                </div>
+                <button type="button" id="factoryResetDefaultsBtn" class="reset-default-btn">⟳ RESET DEFAULTS</button>
+            </div>
 
-    <div class="filter-bar">
-      <div class="filter-group"><label>📋 REPORT TYPE</label><select id="reportTypeSelect"><option value="daily">📅 Daily</option><option value="monthly"> Monthly</option><option value="weekly"> Weekly</option><option value="yearly">📈Yearly Matrix</option></select></div>
-      <div class="filter-group"><label>🎯 SCOPE</label><select id="scopeSelect"><option value="whole">Whole Class</option><option value="individual">Individual Student</option></select></div>
-      <div class="filter-group"><label>📅 YEAR</label><input type="number" id="yearSelect" value="2081"></div>
-      <select id="classSelect" class="filter-group">
-        <optgroup label="General"><option value="ECD">ECD</option><option value="PG">PG</option><option value="Nursary">Nursary</option><option value="LKG">LKG</option><option value="UKG">UKG</option></optgroup>
-        <optgroup label="Grade (Nepali)"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8" selected>8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></optgroup>
-        <optgroup label="English Medium"><option value="1EM">1EM</option><option value="2EM">2EM</option><option value="3EM">3EM</option><option value="4EM">4EM</option><option value="5EM">5EM</option><option value="6EM">6EM</option><option value="7EM">7EM</option><option value="8EM">8EM</option><option value="9EM">9EM</option><option value="10EM">10EM</option></optgroup>
-      </select>
-      <div class="filter-group" id="individualRollGroup" style="display:none"><label>🔢 ROLL NUMBER</label><input type="text" id="rollNoInput" placeholder="e.g., 101"></div>
-      <div class="filter-group" id="monthGroup"><label>📆 MONTH</label><select id="monthSelect"><option value="Baisakh">Baisakh</option><option value="Jeshtha">Jeshtha</option><option value="Ashad">Ashad</option><option value="Shrawan">Shrawan</option><option value="Bhadra">Bhadra</option><option value="Ashwin">Ashwin</option><option value="Kartik">Kartik</option><option value="Mangsir">Mangsir</option><option value="Poush">Poush</option><option value="Magh">Magh</option><option value="Falgun">Falgun</option><option value="Chaitra">Chaitra</option></select></div>
-      <div class="filter-group" id="dailyDateGroup"><label>📌 DAY NUMBER</label><input type="number" id="dailyDayInput" value="1" min="1" max="32"></div>
-      <div class="filter-group" id="weeklyStartGroup"><label>START DAY</label><input type="number" id="startDayInput" value="1" min="1" max="32"></div>
-      <div class="filter-group" id="weeklyEndGroup"><label>END DAY</label><input type="number" id="endDayInput" value="7" min="1" max="32"></div>
-      <div class="filter-group"><button id="generateBtn">⟳ GENERATE</button><button id="resetBtn">🔄 RESET</button></div>
-      <div class="action-buttons"><button id="printReportBtn" class="btn-print">🖨️ PRINT</button><button id="downloadPdfBtn" class="btn-pdf">📄 PDF</button></div>
+            <div class="month-selector-container">
+                <div class="month-selector-header">
+                    <div class="month-selector-title">
+                        📅 SELECT MONTH <span class="info-chip">SN auto </span>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <button type="button" id="selectAllMonthsBtn" class="toggle-all-btn">✅ All Months</button>
+                        <button type="button" id="deselectAllMonthsBtn" class="toggle-all-btn">❌ None</button>
+                    </div>
+                </div>
+                <div id="monthCheckboxGrid" class="month-checkbox-grid"></div>
+            </div>
+
+            <form id="masterStudentForm">
+                <div class="form-grid">
+                    <div class="field-group">
+                        <label>📅 ACADEMIC YEAR</label>
+                        <input type="text" id="mainYear" placeholder="e.g., 2083" required>
+                    </div>
+                    <div class="field-group">
+                        <label>🔢 SN </label>
+                        <input type="text" id="autoSnField" readonly placeholder="Auto from last row">
+                    </div>
+                    <div class="field-group">
+                        <label>📌 ROLL NUMBER </label>
+                        <input type="text" id="rollNumber" required placeholder="e.g., 101">
+                    </div>
+                    <div class="field-group">
+                        <label>🏫 CLASS</label>
+                        <input type="text" id="classMain" required placeholder="Class">
+                    </div>
+                    <div class="field-group">
+                        <label>👤 FULL NAME</label>
+                        <input type="text" id="studentFullName" required placeholder="Full name">
+                    </div>
+                    <div class="field-group">
+                        <label>👨 FATHER'S NAME</label>
+                        <input type="text" id="fatherName" placeholder="Father's name">
+                    </div>
+                    <div class="field-group">
+                        <label>👩 MOTHER'S NAME</label>
+                        <input type="text" id="motherName" placeholder="Mother's name">
+                    </div>
+                    <div class="field-group">
+                        <label>🎂 DATE OF BIRTH</label>
+                        <input type="text" id="dobField" placeholder="YYYY-MM-DD">
+                    </div>
+                    <div class="field-group">
+                        <label>📞 MOBILE NUMBER</label>
+                        <input type="tel" id="mobileContact" placeholder="Contact number">
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <button type="submit" class="btn-submit">💾 SUBMIT RECORD</button>
+                    <button type="button" id="deleteLastRowBtn" class="btn-delete">🗑️ DELETE LAST ROW</button>
+                    <button type="button" id="clearFormBtn" class="btn-reset-form">🔄 CLEAR FIELDS</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <div id="reportContainer"><div class="stats-card" style="text-align:center;">📋 Select filters & click GENERATE </div></div>
-  </div>
 </div>
 
 <script>
-  // ======================= CONFIGURATION =======================
-  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxslJwrgmEweE1jwFGn91yhGCt5SDmSbM652-oRg3Lxl3adH0BO-WqtLVLYMLnAp_2Hdw/exec";
-  const MONTHS_LIST = ['Baisakh', 'Jeshtha', 'Ashad', 'Shrawan', 'Bhadra', 'Ashwin', 'Kartik', 'Mangsir', 'Poush', 'Magh', 'Falgun', 'Chaitra'];
-  
-  let currentSchoolInfo = { schoolName: "Shree Janakalyan Secondary School", schoolAddress: "Nepal" };
-  let lastGeneratedHTML = "";
-  let lastReportTitle = "";
-  let familyDetailsCache = new Map();
-  
-  function formatDate(dateValue) {
-    if (!dateValue) return '';
-    if (typeof dateValue === 'string') {
-      try {
-        const date = new Date(dateValue);
-        if (!isNaN(date.getTime())) {
-          const year = date.getFullYear();
-          const month = String(date.getMonth() + 1).padStart(2, '0');
-          const day = String(date.getDate()).padStart(2, '0');
-          return `${year}-${month}-${day}`;
-        }
-      } catch(e) {}
-      return dateValue.split('T')[0];
-    }
-    if (dateValue instanceof Date) {
-      const year = dateValue.getFullYear();
-      const month = String(dateValue.getMonth() + 1).padStart(2, '0');
-      const day = String(dateValue.getDate()).padStart(2, '0');
-      return `${year}-${month}-${day}`;
-    }
-    return String(dateValue);
-  }
-  
-  function showMessage(msg, type) {
-    const div = document.getElementById('globalMessage');
-    div.textContent = msg;
-    div.className = `message-area message-${type}`;
-    div.style.display = "block";
-    setTimeout(() => div.style.display = "none", 5000);
-  }
-  
-  async function callAPI(action, payload, timeout = 15000) {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), timeout);
-    try {
-      const params = new URLSearchParams({ action, ...payload }).toString();
-      const res = await fetch(APPS_SCRIPT_URL, { 
-        method: 'POST', 
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: params,
-        signal: controller.signal
-      });
-      clearTimeout(timeoutId);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const json = await res.json();
-      return json;
-    } catch(err) {
-      clearTimeout(timeoutId);
-      if(err.name === 'AbortError') throw new Error('Request timeout');
-      throw err;
-    }
-  }
-  
-  function escapeHtml(str) { if(!str) return ''; return String(str).replace(/[&<>]/g, m => m==='&'?'&amp;':m==='<'?'&lt;':'&gt;'); }
-  
-  async function fetchFamilyDetails(classVal, year) {
-    const cacheKey = `${classVal}_${year}`;
-    if (familyDetailsCache.has(cacheKey)) return familyDetailsCache.get(cacheKey);
+    // ======================== CONFIGURATION ========================
+    const SCRIPT_API = "https://script.google.com/macros/s/AKfycbxslJwrgmEweE1jwFGn91yhGCt5SDmSbM652-oRg3Lxl3adH0BO-WqtLVLYMLnAp_2Hdw/exec";
     
-    const detailsMap = new Map();
-    try {
-      const response = await callAPI('getStudentExtendedList', { class: classVal, year: year }, 10000);
-      if (response && response.success && Array.isArray(response.data)) {
-        response.data.forEach(student => {
-          const rollKey = String(student.rollNo || student.rollNumber || '');
-          detailsMap.set(rollKey, {
-            fatherName: student.fatherName || student.father || '',
-            motherName: student.motherName || student.mother || '',
-            dob: formatDate(student.dob || student.DOB || ''),
-            mobile: student.mobile || student.mobileNo || '',
-            name: student.name || ''
-          });
-        });
-      } else {
-        const summaryRes = await callAPI('getWholeYearlySummary', { year: year, class: classVal }, 10000);
-        if (summaryRes.success && summaryRes.data && summaryRes.data.studentsSummary) {
-          summaryRes.data.studentsSummary.forEach(s => {
-            const rollKey = String(s.rollNo);
-            detailsMap.set(rollKey, {
-              fatherName: s.fatherName || '',
-              motherName: s.motherName || '',
-              dob: formatDate(s.dob || ''),
-              mobile: s.mobile || '',
-              name: s.name || ''
+    const STORAGE_DEF_CLASS = "att_class_default";
+    const STORAGE_DEF_YEAR = "att_year_default";
+    const FALLBACK_CLASS = "8";
+    const FALLBACK_YEAR = "2083";
+    
+    const ALL_MONTHS_LIST = [
+        "Baisakh", "Jeshtha", "Ashad", "Shrawan", "Bhadra", "Ashwin",
+        "Kartik", "Mangsir", "Poush", "Magh", "Falgun", "Chaitra"
+    ];
+    
+    // DOM Elements
+    const defaultClassSelect = document.getElementById("globalDefaultClass");
+    const defaultYearInput = document.getElementById("globalDefaultYear");
+    const mainYear = document.getElementById("mainYear");
+    const mainClass = document.getElementById("classMain");
+    const autoSnField = document.getElementById("autoSnField");
+    const rollNoInput = document.getElementById("rollNumber");
+    const studentNameInput = document.getElementById("studentFullName");
+    const fatherNameInput = document.getElementById("fatherName");
+    const motherNameInput = document.getElementById("motherName");
+    const dobInput = document.getElementById("dobField");
+    const mobileInput = document.getElementById("mobileContact");
+    const monthCheckboxGrid = document.getElementById("monthCheckboxGrid");
+    const loadingOverlay = document.getElementById("loadingOverlay");
+    
+    let selectedMonthsSet = new Set();
+    
+    function setLoading(show) {
+        loadingOverlay.style.display = show ? "flex" : "none";
+    }
+    
+    function renderMonthCheckboxes() {
+        monthCheckboxGrid.innerHTML = "";
+        ALL_MONTHS_LIST.forEach(month => {
+            const div = document.createElement("div");
+            div.className = "month-check-item";
+            const cb = document.createElement("input");
+            cb.type = "checkbox";
+            cb.value = month;
+            cb.id = `chk_${month}`;
+            cb.checked = selectedMonthsSet.has(month);
+            cb.addEventListener("change", (e) => {
+                if (e.target.checked) selectedMonthsSet.add(month);
+                else selectedMonthsSet.delete(month);
+                localStorage.setItem("selected_months", JSON.stringify(Array.from(selectedMonthsSet)));
+                refreshAutoSN();
             });
-          });
+            const label = document.createElement("label");
+            label.htmlFor = `chk_${month}`;
+            label.textContent = month;
+            div.appendChild(cb);
+            div.appendChild(label);
+            monthCheckboxGrid.appendChild(div);
+        });
+    }
+    
+    function syncCheckboxUI() {
+        ALL_MONTHS_LIST.forEach(month => {
+            const cb = document.getElementById(`chk_${month}`);
+            if (cb) cb.checked = selectedMonthsSet.has(month);
+        });
+    }
+    
+    function selectAllMonths() {
+        ALL_MONTHS_LIST.forEach(month => selectedMonthsSet.add(month));
+        syncCheckboxUI();
+        localStorage.setItem("selected_months", JSON.stringify(Array.from(selectedMonthsSet)));
+        refreshAutoSN();
+    }
+    
+    function deselectAllMonths() {
+        selectedMonthsSet.clear();
+        syncCheckboxUI();
+        localStorage.setItem("selected_months", JSON.stringify([]));
+        autoSnField.value = "—";
+    }
+    
+    function loadStoredMonthSelections() {
+        const stored = localStorage.getItem("selected_months");
+        if (stored) {
+            try {
+                const arr = JSON.parse(stored);
+                if (Array.isArray(arr)) {
+                    selectedMonthsSet.clear();
+                    arr.forEach(m => { if (ALL_MONTHS_LIST.includes(m)) selectedMonthsSet.add(m); });
+                }
+            } catch(e) {}
         }
-      }
-    } catch(e) {
-      console.warn("Failed to fetch family details:", e);
+        if (selectedMonthsSet.size === 0) selectedMonthsSet.add("Baisakh");
+        renderMonthCheckboxes();
     }
-    familyDetailsCache.set(cacheKey, detailsMap);
-    return detailsMap;
-  }
-  
-  function enrichWithFamily(rows, detailsMap, rollField = 'rollNo') {
-    if (!rows || !Array.isArray(rows)) return rows;
-    return rows.map(row => {
-      const rollKey = String(row[rollField] || row.rollNo || '');
-      const info = detailsMap.get(rollKey) || {};
-      return { 
-        ...row, 
-        fatherName: info.fatherName || '', 
-        motherName: info.motherName || '', 
-        dob: info.dob || '', 
-        mobile: info.mobile || '' 
-      };
-    });
-  }
-  
-  // ========== CORRECTED WEEKLY REPORT BUILDER ==========
-  // Each student appears ONCE with aggregated totals for the week
-  function buildWeeklyHTML(data, filters, detailsMap) {
-    let report = data.report || [];
-    if (!report.length) return '<div class="error-message">⚠️ No weekly data found for this period.</div>';
     
-    // Report should already be aggregated by student from backend
-    // Each row has: sn, rollNo, name, totalPresent, totalAbsent, totalClosed
-    const enriched = enrichWithFamily(report, detailsMap, 'rollNo');
-    
-    let html = `<div class="stats-card"><strong>📆 WEEKLY ATTENDANCE SUMMARY</strong><br>${escapeHtml(currentSchoolInfo.schoolName)}<br>${filters.month} | Days ${filters.startDay} - ${filters.endDay} | Year: ${filters.year} | Class: ${filters.class}<br>👥 Total Students: ${enriched.length}</div>`;
-    html += `<div class="table-wrapper">`;
-    html += `<table>
-      <thead>
-        <tr>
-          <th>SN</th><th>Roll No</th><th>Student Name</th><th>👨 Father's Name</th><th>👩 Mother's Name</th><th>🎂 DOB</th><th>📞 Mobile No</th><th>Present</th><th>Absent</th><th>Closed</th>
-        </tr>
-      </thead>
-      <tbody>`;
-    
-    enriched.forEach(r => {
-      html += `<tr>
-        <td>${r.sn}</td>
-        <td>${escapeHtml(r.rollNo)}</td>
-        <td>${escapeHtml(r.name)}</td>
-        <td>${escapeHtml(r.fatherName)}</td>
-        <td>${escapeHtml(r.motherName)}</td>
-        <td>${escapeHtml(r.dob)}</td>
-        <td>${escapeHtml(r.mobile)}</td>
-        <td><strong>${r.totalPresent || 0}</strong></td>
-        <td>${r.totalAbsent || 0}</td>
-        <td>${r.totalClosed || 0}</td>
-      </tr>`;
-    });
-    
-    // Add summary row
-    const totalPresent = enriched.reduce((sum, r) => sum + (r.totalPresent || 0), 0);
-    const totalAbsent = enriched.reduce((sum, r) => sum + (r.totalAbsent || 0), 0);
-    const totalClosed = enriched.reduce((sum, r) => sum + (r.totalClosed || 0), 0);
-    
-    html += `<tr style="background: #eef2ff; font-weight: bold;">
-      <td colspan="7" style="text-align: right;">📊 TOTAL →</td>
-      <td>${totalPresent}</td>
-      <td>${totalAbsent}</td>
-      <td>${totalClosed}</td>
-    </tr>`;
-    
-    html += `</tbody></table></div>`;
-    return html;
-  }
-  
-  function buildDailyHTML(data, filters, detailsMap) {
-    let report = data.report || [];
-    if (!report.length) return '<div class="error-message">⚠️ No attendance data found for this day.</div>';
-    const enriched = enrichWithFamily(report, detailsMap, 'rollNo');
-    let html = `<div class="stats-card"><strong>📅 DAILY ATTENDANCE REPORT</strong><br>${escapeHtml(currentSchoolInfo.schoolName)}<br>${filters.month} Day ${filters.dayNum} | Year: ${filters.year} | Class: ${filters.class}<br>👥 Total Students: ${enriched.length}</div>`;
-    html += `<div class="table-wrapper"><table><thead><tr><th>SN</th><th>Roll No</th><th>Student Name</th><th>👨 Father's Name</th><th>👩 Mother's Name</th><th>🎂 DOB</th><th>📞 Mobile No</th><th>Status</th></tr></thead><tbody>`;
-    enriched.forEach(r => {
-      let status = r.status || 'अनुपस्थित';
-      let cls = status === 'उपस्थित' ? 'present-badge' : (status === 'सार्वजनिक बिदा' ? 'holiday-badge' : 'absent-badge');
-      html += `<tr><td>${r.sn}</td><td>${escapeHtml(r.rollNo)}</td><td>${escapeHtml(r.name)}</td><td>${escapeHtml(r.fatherName)}</td><td>${escapeHtml(r.motherName)}</td><td>${escapeHtml(r.dob)}</td><td>${escapeHtml(r.mobile)}</td><td><span class="${cls}">${status}</span></td></tr>`;
-    });
-    html += `</tbody></table></div>`;
-    return html;
-  }
-  
-  function buildMonthlyHTML(data, filters, detailsMap) {
-    let report = data.report || [];
-    if (!report.length) return '<div class="error-message">⚠️ No monthly summary found.</div>';
-    const enriched = enrichWithFamily(report, detailsMap, 'rollNo');
-    let html = `<div class="stats-card"><strong>📊 MONTHLY SUMMARY REPORT</strong><br>${escapeHtml(currentSchoolInfo.schoolName)}<br>${filters.month} ${filters.year} | Class: ${filters.class}</div>`;
-    html += `<div class="table-wrapper"><table><thead><tr><th>SN</th><th>Roll No</th><th>Name</th><th>👨 Father</th><th>👩 Mother</th><th>🎂 DOB</th><th>📞 Mobile</th><th>Present</th><th>Absent</th><th>Closed</th></tr></thead><tbody>`;
-    enriched.forEach(r => {
-      html += `<tr><td>${r.sn}</td><td>${escapeHtml(r.rollNo)}</td><td>${escapeHtml(r.name)}</td><td>${escapeHtml(r.fatherName)}</td><td>${escapeHtml(r.motherName)}</td><td>${escapeHtml(r.dob)}</td><td>${escapeHtml(r.mobile)}</td><td><strong>${r.totalPresent}</strong></td><td>${r.totalAbsent}</td><td>${r.totalClosed}</td></tr>`;
-    });
-    html += `</tbody></table></div>`;
-    return html;
-  }
-  
-  function buildYearlyIndividualHTML(data, filters, detailsMap) {
-    let yearlyData = data.yearlyData || [];
-    const rollKey = String(filters.rollNo);
-    const info = detailsMap.get(rollKey) || {};
-    let html = `<div class="stats-card"><strong>📅 YEARLY REPORT (INDIVIDUAL)</strong><br>${escapeHtml(currentSchoolInfo.schoolName)}<br>Roll No: ${filters.rollNo} | Student: ${escapeHtml(data.studentName || info.name)}<br><span style="background:rgba(255,255,255,0.2); padding:4px 12px; border-radius:20px; display:inline-block; margin-top:6px;">👨 Father: ${escapeHtml(info.fatherName)} &nbsp; | &nbsp; 👩 Mother: ${escapeHtml(info.motherName)} &nbsp; | &nbsp; 🎂 DOB: ${escapeHtml(info.dob)} &nbsp; | &nbsp; 📞 Mobile: ${escapeHtml(info.mobile)}</span><br>Year: ${filters.year} | Class: ${filters.class}</div>`;
-    html += `<div class="table-wrapper"><table><thead><tr><th>#</th><th>Month</th><th>Present</th><th>Absent</th><th>Closed</th></tr></thead><tbody>`;
-    yearlyData.forEach((d, idx) => {
-      html += `<tr><td>${idx+1}</td><td><strong>${d.month}</strong></td><td>${d.totalPresent}</td><td>${d.totalAbsent}</td><td>${d.totalClosed}</td></tr>`;
-    });
-    html += `<tr style="background:#f3f4f6;"><td colspan="2"><strong>GRAND TOTAL</strong></td><td><strong>${data.totalPresent}</strong></td><td><strong>${data.totalAbsent}</strong></td><td><strong>${data.totalClosed}</strong></td></tr>`;
-    html += `</tbody></table></div>`;
-    return html;
-  }
-  
-  async function buildYearlyMatrix(classVal, year, detailsMap) {
-    const summaryRes = await callAPI('getWholeYearlySummary', { year: year, class: classVal }, 15000);
-    if (!summaryRes.success) throw new Error(summaryRes.message);
-    const students = summaryRes.data.studentsSummary || [];
-    if (students.length === 0) return '<div class="error-message">No students found</div>';
-    
-    let html = `<div class="stats-card"><strong>📈 YEARLY ATTENDANCE MATRIX</strong><br>${escapeHtml(currentSchoolInfo.schoolName)}<br>Year: ${year} | Class: ${classVal} | Total Students: ${students.length}</div>`;
-    html += `<div class="table-wrapper"><table><thead><tr><th>SN</th><th>Roll</th><th>Name</th><th>👨 Father</th><th>👩 Mother</th><th>🎂 DOB</th><th>📞 Mobile</th><th>Total P</th><th>Total A</th><th>%</th></tr></thead><tbody>`;
-    
-    for (let s of students) {
-      const ext = detailsMap.get(String(s.rollNo)) || {};
-      let percent = (s.totalPresent + s.totalAbsent) > 0 ? ((s.totalPresent / (s.totalPresent + s.totalAbsent)) * 100).toFixed(1) : 0;
-      html += `<tr><td>${s.sn}</td><td>${escapeHtml(s.rollNo)}</td><td>${escapeHtml(s.name)}</td><td>${escapeHtml(ext.fatherName)}</td><td>${escapeHtml(ext.motherName)}</td><td>${escapeHtml(ext.dob)}</td><td>${escapeHtml(ext.mobile)}</td><td><strong>${s.totalPresent}</strong></td><td>${s.totalAbsent}</td><td>${percent}%</td></tr>`;
+    function getStoredDefaults() {
+        return {
+            defClass: localStorage.getItem(STORAGE_DEF_CLASS) ?? FALLBACK_CLASS,
+            defYear: localStorage.getItem(STORAGE_DEF_YEAR) ?? FALLBACK_YEAR,
+        };
     }
-    html += `</tbody></table></div>`;
-    return html;
-  }
-  
-  // ========== MAIN GENERATE FUNCTION ==========
-  async function generateReport() {
-    const rType = document.getElementById('reportTypeSelect').value;
-    const scope = document.getElementById('scopeSelect').value;
-    const month = document.getElementById('monthSelect').value;
-    const rollNo = document.getElementById('rollNoInput').value.trim();
-    const year = document.getElementById('yearSelect').value.trim();
-    const classVal = document.getElementById('classSelect').value.trim();
-    const container = document.getElementById('reportContainer');
     
-    if (!year || !classVal) { showMessage("Year and Class required", "error"); return; }
-    container.innerHTML = `<div class="stats-card" style="text-align:center;"><span class="loading-spinner"></span> Loading attendance with family details...</div>`;
-    document.getElementById('generateBtn').disabled = true;
+    function syncDefaultsToForm() {
+        const { defClass, defYear } = getStoredDefaults();
+        if ([...defaultClassSelect.options].some(opt => opt.value === defClass)) defaultClassSelect.value = defClass;
+        else defaultClassSelect.value = FALLBACK_CLASS;
+        defaultYearInput.value = defYear;
+        mainYear.value = defYear;
+        mainClass.value = defClass;
+    }
     
-    try {
-      const schoolRes = await callAPI('getSchoolInfo', {}, 5000);
-      if (schoolRes.success && schoolRes.data) {
-        if (schoolRes.data.schoolName) currentSchoolInfo.schoolName = schoolRes.data.schoolName;
-        if (schoolRes.data.schoolAddress) currentSchoolInfo.schoolAddress = schoolRes.data.schoolAddress;
-      }
-      
-      const detailsMap = await fetchFamilyDetails(classVal, year);
-      
-      let html = "";
-      let result = null;
-      
-      if (rType === 'daily') {
-        const dayNum = parseInt(document.getElementById('dailyDayInput').value);
-        if (isNaN(dayNum)) throw new Error("Invalid day");
-        let payload = { year, class: classVal, month, date: `${month} ${dayNum}` };
-        if (scope === 'individual' && rollNo) payload.rollNo = rollNo;
-        result = await callAPI('getDailyReport', payload, 10000);
-        if (!result.success) throw new Error(result.message);
-        html = buildDailyHTML(result.data, { year, class: classVal, month, dayNum }, detailsMap);
-        lastReportTitle = `Daily_${month}_${dayNum}_${classVal}`;
-      } 
-      else if (rType === 'monthly') {
-        let payload = { year, class: classVal, month };
-        if (scope === 'individual' && rollNo) payload.rollNo = rollNo;
-        result = await callAPI('getMonthlyReport', payload, 10000);
-        if (!result.success) throw new Error(result.message);
-        html = buildMonthlyHTML(result.data, { year, class: classVal, month }, detailsMap);
-        lastReportTitle = `Monthly_${month}_${classVal}`;
-      }
-      else if (rType === 'weekly') {
-        const startDay = parseInt(document.getElementById('startDayInput').value);
-        const endDay = parseInt(document.getElementById('endDayInput').value);
-        if (isNaN(startDay) || isNaN(endDay)) throw new Error("Invalid week range");
-        let payload = { year, class: classVal, month, startDate: `${month} ${startDay}`, endDate: `${month} ${endDay}` };
-        if (scope === 'individual' && rollNo) payload.rollNo = rollNo;
-        result = await callAPI('getWeeklyReport', payload, 10000);
-        if (!result.success) throw new Error(result.message);
-        html = buildWeeklyHTML(result.data, { year, class: classVal, month, startDay, endDay }, detailsMap);
-        lastReportTitle = `Weekly_${month}_${startDay}-${endDay}_${classVal}`;
-      }
-      else if (rType === 'yearly') {
-        if (scope === 'individual') {
-          if (!rollNo) throw new Error("Roll number required");
-          result = await callAPI('getYearlyReport', { year, class: classVal, rollNo }, 10000);
-          if (!result.success) throw new Error(result.message);
-          html = buildYearlyIndividualHTML(result.data, { year, class: classVal, rollNo }, detailsMap);
-          lastReportTitle = `Yearly_${rollNo}_${classVal}`;
+    function updateStoredAndSyncUI(type, value) {
+        if (type === 'class') localStorage.setItem(STORAGE_DEF_CLASS, value);
+        if (type === 'year') localStorage.setItem(STORAGE_DEF_YEAR, value);
+        syncDefaultsToForm();
+        refreshAutoSN();
+    }
+    
+    defaultClassSelect.addEventListener("change", (e) => updateStoredAndSyncUI('class', e.target.value));
+    defaultYearInput.addEventListener("change", (e) => {
+        let yr = e.target.value.trim();
+        if (yr === "") yr = FALLBACK_YEAR;
+        updateStoredAndSyncUI('year', yr);
+    });
+    
+    // ========== CORE FUNCTIONS ==========
+    
+    // Fetch all records from a month sheet (including full data to get SN from Column A)
+    async function fetchAllRecords(monthSheet, year) {
+        try {
+            const url = `${SCRIPT_API}?action=getAll&monthSheet=${encodeURIComponent(monthSheet)}&year=${encodeURIComponent(year)}&_=${Date.now()}`;
+            const response = await fetch(url);
+            const data = await response.json();
+            if (data.success && Array.isArray(data.data)) {
+                return data.data;
+            }
+            return [];
+        } catch (err) {
+            console.error(`Fetch error for ${monthSheet}:`, err);
+            return [];
+        }
+    }
+    
+    // Get the last SN from Column A (maximum SN value in the sheet)
+    async function getLastSNFromColumnA(monthSheet, year) {
+        const records = await fetchAllRecords(monthSheet, year);
+        let maxSn = 0;
+        
+        records.forEach(record => {
+            // Check SN from Column A (the 'sn' field)
+            let snVal = parseInt(record.sn);
+            if (!isNaN(snVal) && snVal > maxSn) {
+                maxSn = snVal;
+            }
+        });
+        
+        // Return next SN (max + 1), or 1 if no records exist
+        return maxSn + 1;
+    }
+    
+    // Check duplicate in records - Class + Roll Number combination
+    function isDuplicate(records, rollNo, className) {
+        const searchRoll = String(rollNo).trim().toLowerCase();
+        const searchClass = String(className).trim().toLowerCase();
+        
+        return records.some(record => {
+            const recordRoll = String(record.roll_no || record.roll || record.rollnumber || "").trim().toLowerCase();
+            const recordClass = String(record.class || record.class_name || "").trim().toLowerCase();
+            return recordRoll === searchRoll && recordClass === searchClass;
+        });
+    }
+    
+    async function refreshAutoSN() {
+        if (selectedMonthsSet.size === 0) {
+            autoSnField.value = "—";
+            return;
+        }
+        const firstMonth = Array.from(selectedMonthsSet)[0];
+        const yearVal = mainYear.value.trim() || getStoredDefaults().defYear;
+        const nextSN = await getLastSNFromColumnA(firstMonth, yearVal);
+        autoSnField.value = nextSN;
+    }
+    
+    // Submit to backend with proper SN from Column A
+    async function submitToBackend(payload) {
+        try {
+            const bodyParams = new URLSearchParams({ action: "addStudent", ...payload });
+            const resp = await fetch(SCRIPT_API, {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: bodyParams.toString()
+            });
+            const raw = await resp.text();
+            try {
+                return JSON.parse(raw);
+            } catch (err) {
+                return { success: false, message: "Server response error" };
+            }
+        } catch (err) {
+            return { success: false, message: `Network error: ${err.message}` };
+        }
+    }
+    
+    // MAIN SUBMIT HANDLER with proper SN increment per month
+    document.getElementById("masterStudentForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        
+        const yearVal = mainYear.value.trim();
+        const classVal = mainClass.value.trim();
+        const roll = rollNoInput.value.trim();
+        const studentName = studentNameInput.value.trim();
+        
+        if (!yearVal) { alert("Please enter academic year"); return; }
+        if (!classVal) { alert("Please enter Class"); return; }
+        if (!roll) { alert("Please enter Roll Number"); return; }
+        if (!studentName) { alert("Please enter Full Name"); return; }
+        
+        const selectedMonths = Array.from(selectedMonthsSet);
+        if (selectedMonths.length === 0) {
+            alert("Please select at least one month sheet");
+            return;
+        }
+        
+        setLoading(true);
+        
+        // Check for duplicates in ALL selected months
+        let duplicateFound = false;
+        let duplicateMonths = [];
+        
+        for (const month of selectedMonths) {
+            const records = await fetchAllRecords(month, yearVal);
+            if (isDuplicate(records, roll, classVal)) {
+                duplicateFound = true;
+                duplicateMonths.push(month);
+            }
+        }
+        
+        if (duplicateFound) {
+            setLoading(false);
+            const monthList = duplicateMonths.join(", ");
+            alert(`This records has already exist! Enter new record\n(Duplicate found in: ${monthList})`);
+            return;
+        }
+        
+        // No duplicate found - proceed with submission
+        // For EACH month, get the current last SN and increment
+        let successMonths = [];
+        let failedMonths = [];
+        
+        for (const month of selectedMonths) {
+            // Fetch fresh SN for this specific month (ensures correct increment)
+            const freshSN = await getLastSNFromColumnA(month, yearVal);
+            
+            const payload = {
+                sn: freshSN,
+                roll_no: roll,
+                class: classVal,
+                name: studentName,
+                father_name: fatherNameInput.value || "",
+                mother_name: motherNameInput.value || "",
+                dob: dobInput.value || "",
+                mobile_no: mobileInput.value || "",
+                year: yearVal,
+                monthSheet: month
+            };
+            
+            const result = await submitToBackend(payload);
+            if (result.success) {
+                successMonths.push(month);
+            } else {
+                failedMonths.push(month);
+            }
+        }
+        
+        setLoading(false);
+        
+        if (successMonths.length === selectedMonths.length) {
+            alert(`This record successfully entered.\nAdded to: ${successMonths.join(", ")}\nSN auto-incremented from Column A in each sheet.`);
+            // Clear form fields except class/year
+            rollNoInput.value = "";
+            studentNameInput.value = "";
+            fatherNameInput.value = "";
+            motherNameInput.value = "";
+            dobInput.value = "";
+            mobileInput.value = "";
+            await refreshAutoSN();
+            rollNoInput.focus();
+        } else if (successMonths.length > 0) {
+            alert(`Partial success.\nAdded to: ${successMonths.join(", ")}\nFailed: ${failedMonths.join(", ")}`);
+            await refreshAutoSN();
         } else {
-          html = await buildYearlyMatrix(classVal, year, detailsMap);
-          lastReportTitle = `YearlyMatrix_${classVal}_${year}`;
+            alert(`Submission failed for all months. Please try again.`);
         }
-      }
-      
-      const finalHtml = `<div class="school-header no-print"><div class="school-name">${escapeHtml(currentSchoolInfo.schoolName)}</div><div class="school-address">📍 ${escapeHtml(currentSchoolInfo.schoolAddress)} &nbsp;|&nbsp; 📋 Data: Col E (Father) · F (Mother) · G (DOB) · H (Mobile)</div></div>${html}`;
-      container.innerHTML = finalHtml;
-      lastGeneratedHTML = finalHtml;
-      showMessage("✅ Report generated successfully", "success");
-    } catch(err) {
-      console.error(err);
-      container.innerHTML = `<div class="error-message">❌ ${escapeHtml(err.message)}</div>`;
-      showMessage(err.message, "error");
-    } finally {
-      document.getElementById('generateBtn').disabled = false;
+    });
+    
+    // Delete last row handler (removes last entry and SN will adjust on next add)
+    document.getElementById("deleteLastRowBtn").addEventListener("click", async () => {
+        if (selectedMonthsSet.size === 0) {
+            alert("Select at least one month to delete from");
+            return;
+        }
+        let monthToDelete = null;
+        if (selectedMonthsSet.size === 1) {
+            monthToDelete = Array.from(selectedMonthsSet)[0];
+        } else {
+            monthToDelete = prompt(`Selected months: ${Array.from(selectedMonthsSet).join(", ")}.\nEnter month name to delete last row:`);
+            if (!monthToDelete || !ALL_MONTHS_LIST.includes(monthToDelete)) {
+                alert("Invalid month name");
+                return;
+            }
+        }
+        if (!confirm(`⚠️ Delete LAST record from "${monthToDelete}" sheet?\nThis will remove the last row from Column A.`)) return;
+        setLoading(true);
+        const yearVal = mainYear.value.trim() || getStoredDefaults().defYear;
+        const result = await submitToBackend({ action: "deleteLastRow", monthSheet: monthToDelete, year: yearVal });
+        setLoading(false);
+        if (result.success) {
+            alert(`Last row deleted from ${monthToDelete}\nNext SN will be recalculated from remaining rows.`);
+            await refreshAutoSN();
+        } else {
+            alert(`Delete failed: ${result.message}`);
+        }
+    });
+    
+    // Clear form handler
+    document.getElementById("clearFormBtn").addEventListener("click", () => {
+        rollNoInput.value = "";
+        studentNameInput.value = "";
+        fatherNameInput.value = "";
+        motherNameInput.value = "";
+        dobInput.value = "";
+        mobileInput.value = "";
+        const { defClass, defYear } = getStoredDefaults();
+        mainClass.value = defClass;
+        mainYear.value = defYear;
+        refreshAutoSN();
+    });
+    
+    // Factory reset
+    document.getElementById("factoryResetDefaultsBtn").addEventListener("click", () => {
+        localStorage.setItem(STORAGE_DEF_CLASS, FALLBACK_CLASS);
+        localStorage.setItem(STORAGE_DEF_YEAR, FALLBACK_YEAR);
+        syncDefaultsToForm();
+        refreshAutoSN();
+    });
+    
+    document.getElementById("selectAllMonthsBtn").addEventListener("click", selectAllMonths);
+    document.getElementById("deselectAllMonthsBtn").addEventListener("click", deselectAllMonths);
+    
+    async function init() {
+        loadStoredMonthSelections();
+        syncDefaultsToForm();
+        await refreshAutoSN();
     }
-  }
-  
-  function printReport() {
-    if (!lastGeneratedHTML) { showMessage("Generate report first", "error"); return; }
-    const win = window.open('', '_blank');
-    win.document.write(`<html><head><title>Attendance Report</title><style>${document.querySelector('style').innerHTML} .filter-bar, .action-buttons, button, .no-print { display: none !important; }</style></head><body><div class="dashboard-container">${lastGeneratedHTML}</div></body></html>`);
-    win.document.close();
-    win.print();
-  }
-  
-  async function downloadPDF() {
-    if (!lastGeneratedHTML) { showMessage("Generate report first", "error"); return; }
-    showMessage("Preparing PDF...", "success");
-    const container = document.createElement('div');
-    container.style.padding = "20px";
-    container.style.background = "white";
-    container.innerHTML = `<h3 style="text-align:center;">Attendance Report</h3>${lastGeneratedHTML}`;
-    const opt = { margin: [0.5,0.5,0.5,0.5], filename: `${lastReportTitle.replace(/[^a-z0-9]/gi,'_')}.pdf`, image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2 }, jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' } };
-    try { await html2pdf().set(opt).from(container).save(); showMessage("PDF downloaded", "success"); } 
-    catch(e) { showMessage("PDF error: "+e.message, "error"); }
-  }
-  
-  function updateDynamicFields() {
-    const rType = document.getElementById('reportTypeSelect').value;
-    const scope = document.getElementById('scopeSelect').value;
-    document.getElementById('monthGroup').style.display = rType === 'yearly' ? 'none' : 'flex';
-    document.getElementById('individualRollGroup').style.display = scope === 'individual' ? 'flex' : 'none';
-    document.getElementById('dailyDateGroup').style.display = rType === 'daily' ? 'flex' : 'none';
-    const weeklyVis = rType === 'weekly';
-    document.getElementById('weeklyStartGroup').style.display = weeklyVis ? 'flex' : 'none';
-    document.getElementById('weeklyEndGroup').style.display = weeklyVis ? 'flex' : 'none';
-  }
-  
-  document.getElementById('reportTypeSelect').addEventListener('change', updateDynamicFields);
-  document.getElementById('scopeSelect').addEventListener('change', updateDynamicFields);
-  document.getElementById('generateBtn').addEventListener('click', generateReport);
-  document.getElementById('printReportBtn').addEventListener('click', printReport);
-  document.getElementById('downloadPdfBtn').addEventListener('click', downloadPDF);
-  document.getElementById('resetBtn').addEventListener('click', () => location.reload());
-  
-  updateDynamicFields();
-  generateReport();
+    
+    init();
 </script>
 </body>
 </html>
