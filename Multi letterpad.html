@@ -163,7 +163,7 @@
         border-radius: 30px;
         border: 1.5px solid #d4e0ec;
         font-family: inherit;
-        font-size: 0.85rem;
+        font-size: 0.65rem;
         background: white;
         -webkit-appearance: none;
         appearance: none;
@@ -172,7 +172,7 @@
     textarea {
         border-radius: 20px;
         resize: vertical;
-        min-height: 80px;
+        min-height: 300px;
     }
     
     input:focus, textarea:focus {
@@ -280,7 +280,7 @@
         width: 210mm;
         min-height: 297mm;
         padding: 15mm 12mm;
-        font-size: 13px;
+        font-size: 16px;
     }
     
     .page-landscape-two {
@@ -325,10 +325,10 @@
     
     .letter-header { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; flex-wrap: wrap; }
     .org-logo { max-height: 38px; max-width: 55px; object-fit: contain; }
-    .org-name { font-weight: 800; font-size: 1.2rem; color: #003057; line-height: 1.2; flex: 1; text-align: center; }
+    .org-name { font-weight: 800; font-size: 1.8rem; color: #003057; line-height: 1.2; flex: 1; text-align: center; }
     .address-container { text-align: center; border-bottom: 1px dashed #9bb8da; padding-bottom: 4px; margin-bottom: 4px; }
-    .address-line1 { font-weight: 600; font-size: 0.75rem; }
-    .address-line2 { font-size: 0.65rem; color: #2c5a7a; }
+    .address-line1 { font-weight: 600; font-size: 0.85rem; }
+    .address-line2 { font-size: 0.75rem; color: #2c5a7a; }
     
     /* Meta section - Letter No on its own line, then Ref No + Date on same line */
     .meta-line {
@@ -377,7 +377,7 @@
         border-radius: 12px;
         display: block;
         margin: 5px 0 10px 0;
-        font-size: 0.75rem;
+        font-size: 0.8rem;
         line-height: 1.2rem;
     }
     
@@ -393,24 +393,27 @@
         padding-bottom: 4px;
         margin: 8px 0 10px 0;
         text-align: center;
-        font-size: 0.78rem;
+        font-size: 0.85rem;
     }
     
-    .body { line-height: 2.5rem; text-align: justify; white-space: pre-line; flex: 1; font-size: 0.72rem; }
+    .body { line-height: 1.4rem; text-align: justify; white-space: pre-line; flex: 1; font-size: 0.95rem; }
     .signature-area { text-align: right; margin-top: 10px; border-top: 1px dotted #7fa3c2; padding-top: 5px; }
     .signature-img { max-height: 28px; max-width: 70px; }
-    .sender-name { font-weight: 800; font-size: 0.72rem; }
+    .sender-name { font-weight: 800; font-size: 0.65rem; }
     .footer { font-size: 0.55rem; text-align: center; border-top: 1px solid #cbdde9; margin-top: 8px; padding-top: 4px; }
     
-    .page-landscape-two .org-name { font-size: 1rem; }
-    .page-landscape-two .body { font-size: 0.65rem; }
-    .page-landscape-two .recipient-line { font-size: 0.68rem; }
+
+    .page-landscape-two .org-name { font-size: 1.6rem; }
+    .page-landscape-two .body { font-size: 0.8rem; }
+    .page-landscape-two .recipient-line { font-size: 0.8rem; }
+    .page-landscape-two .subject { font-size: 0.8rem; }
     
-    .page-landscape-four .org-name { font-size: 0.85rem; }
-    .page-landscape-four .body { font-size: 0.58rem; }
-    .page-landscape-four .recipient-line { font-size: 0.6rem; padding: 3px 8px; }
+    .page-landscape-four .org-name { font-size: 1.0rem; }
+    .page-landscape-four .body { font-size: 0.75rem; }
+    .page-landscape-four .recipient-line { font-size: 0.72rem; padding: 3px 8px; }
     .page-landscape-four .org-logo { max-height: 25px; max-width: 40px; }
-    
+    .page-landscape-four .body { font-size: 0.75rem; }
+    .page-landscape-four .subject {font-size: 0.75rem;}
     @media print {
         body * { visibility: hidden; }
         #output, #output * { visibility: visible; }
@@ -640,7 +643,8 @@
                     <i class="fas fa-arrow-right"></i> कमा (,) प्रयोग गर्नुहोस् - प्रत्येक भाग नयाँ लाइनमा देखिनेछ
                 </div>
             </div>
-            <div class="form-group"><label><i class="fas fa-pen"></i> पत्र ब्यहोरा</label><textarea id="body" rows="3">यस संस्थाको यहि मिति २०८२-१२-१५ का दिन हुने वार्षिकोत्सव कार्यक्रममा यहाँको गरिमामय उपस्थितिको हार्दिक अनुरोध गर्दछौं । कार्यक्रम बिहान ११ बजे सुरु हुनेछ ।</textarea></div>
+            <div class="form-group"><label><i class="fas fa-pen"></i> पत्र ब्यहोरा</label><textarea id="body" rows="3">यस संस्थाको यहि मिति २०८२-१२-१५ का दिन हुने वार्षिकोत्सव कार्यक्रममा यहाँको गरिमामय उपस्थितिको हार्दिक अनुरोध गर्दछौं । 
+            कार्यक्रम बिहान ११ बजे सुरु हुनेछ ।</textarea></div>
         </div>
         
         <div class="actions">
