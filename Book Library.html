@@ -1,304 +1,162 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ne">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>CDC Nepal Digital Library | Teacher Guides & Textbooks</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="utf-8">
+  
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-        body {
-            font-family: 'Segoe UI', 'Roboto', system-ui, -apple-system, 'Noto Sans', sans-serif;
-            background: #f8fafc;
-            min-height: 100vh;
-        }
 
-        /* --- fix container: no forced left margin, menu uses proper spacing --- */
-        .nav-container {
-            background: #0f3b3c;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            width: 100%;
-            border-bottom: 3px solid #ffb347;
-        }
 
-        .main-nav {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            padding: 0;
-        }
 
-        .logo-area {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 20px;
-            background: #0f3b3c;
-            flex-wrap: wrap;
-            gap: 12px;
-            border-bottom: 1px solid rgba(255, 215, 150, 0.25);
-        }
 
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
 
-        .cdc-logo-img {
-            height: 48px;
-            width: auto;
-            display: block;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
-            border-radius: 12px;
-        }
 
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-        }
 
-        .logo-badge {
-            background: #ffb347;
-            color: #1e3a3a;
-            padding: 4px 14px;
-            border-radius: 40px;
-            font-size: 0.7rem;
-            font-weight: bold;
-            display: inline-block;
-            width: fit-content;
-            margin-bottom: 5px;
-        }
 
-        .sub-badge {
-            font-size: 0.7rem;
-            color: rgba(255,245,200,0.9);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
+<link rel="icon" type="image/ico" href="https://shamser.info.np/HomePage/favicon.ico"/>
 
-        .personal-link {
-            color: #ffde9e;
-            text-decoration: none;
-            font-weight: 500;
-        }
+ 
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800|Montserrat:300,400,700" rel="stylesheet">
+<link rel="stylesheet" href="Home/css/app.css">
+<script src="https://cdn.gravitec.net/storage/aa664ba1123813bb53c536c5a8e08fdb/client.js" async></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-        .mobile-menu-btn {
-            background: rgba(255, 255, 255, 0.15);
-            border: none;
-            color: white;
-            font-size: 1.8rem;
-            padding: 8px 18px;
-            border-radius: 40px;
-            cursor: pointer;
-            display: none;
-            align-items: center;
-            gap: 8px;
-            font-weight: 600;
-            transition: 0.2s;
-        }
 
-        .mobile-menu-btn:hover {
-            background: #ffb347;
-            color: #0f3b3c;
-        }
+<link rel="stylesheet" id="ok-health-style-css" href="Home/wp-content/themes/onlinekhabar-2021/assets/css/okstylesdc8c.css?ver=1715942441" media="all" />
+<link rel="stylesheet" id="ok-owl-css" href="Home/wp-content/themes/onlinekhabar-2021/owl/owl.carousel.min5a2c.css?ver=1.1.7" media="all" />
 
-        .menu-wrapper-container {
-            transition: all 0.3s ease-in-out;
-            width: 100%;
-        }
 
-        /* MAIN MENU WRAPPER: clean flex with proper alignment, no unwanted left margins */
-        .menu-wrapper {
-            display: flex;
-            flex-wrap: wrap;
-            list-style: none;
-            background: #0f3b3c;
-            margin: 0;
-            padding: 0;
-            gap: 2px;
-            /* right alignment on desktop: items align to end (right side) */
-            justify-content: flex-end;
-        }
+<link rel='stylesheet' href='https://shamser.info.np/Shaikshik Khabakhaabar/online/assets/css/style.css' type='text/css' media='all' />
+<link rel='stylesheet' href='https://shamser.ifo.np/Shaikshik Khabakhaabar/online/assets/css/app.css' type='text/css' media='all' />
 
-        /* desktop first style: no forced left margin */
-        @media (min-width: 901px) {
-            .menu-wrapper {
-                padding: 6px 20px;
-            }
-            .menu-has-children > a {
-                white-space: nowrap;
-            }
-        }
+<style>
+  
+.hero-section {
+    max-width:100%;
+    margin: 32px auto;
+    padding: 24px 20px;
+    background: #fff;
+    border-radius: 32px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+    text-align: center;
+}
 
-        /* fix for all child lists: normal text direction, no extra left margin */
-        .menu-has-children {
-            position: relative;
-            list-style: none;
-        }
+.hero-section h1 {
+    color: #0f3b3c;
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+}
 
-        .menu-has-children > a {
-            display: inline-block;
-            padding: 12px 18px;
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.2s;
-            border-radius: 40px;
-            cursor: pointer;
-            background: transparent;
-            line-height: 1.3;
-        }
+.feature-img {
+    max-width: 100%;
+    border-radius: 24px;
+    margin-top: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
 
-        .menu-has-children > a:hover {
-            background: #ffb347;
-            color: #0a2f30;
-            transform: translateY(-1px);
-        }
+footer {
+    text-align: center;
+    padding: 28px 20px;
+    color: #3e6b70;
+    font-size: 0.8rem;
+    border-top: 1px solid #e2ecef;
+}
 
-        /* dropdown style */
-        .menu-has-children ul {
-            position: absolute;
-            left: 0;
-            top: 100%;
-            background: #ffffff;
-            min-width: 260px;
-            box-shadow: 0 20px 32px -12px rgba(0, 0, 0, 0.2);
-            border-radius: 20px;
-            padding: 10px 0;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: all 0.22s ease;
-            z-index: 1002;
-            border: 1px solid #e2edf0;
-        }
+/* Desktop */
+@media (min-width: 901px) {
+    .main-nav {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
 
-        /* nested dropdown */
-        .menu-has-children ul ul {
-            left: 100%;
-            top: -12px;
-            transform: translateX(12px) translateY(0);
-        }
+/* Logo Area */
+.logo-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background: #0f3b3c;
+    flex-wrap: wrap;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255, 215, 150, 0.25);
+}
 
-        @media (min-width: 901px) {
-            .menu-has-children:hover > ul,
-            .menu-has-children:focus-within > ul {
-                opacity: 1;
-                visibility: visible;
-                transform: translateY(0px);
-            }
-            .menu-has-children ul li:hover > ul {
-                opacity: 1;
-                visibility: visible;
-                transform: translateX(0px) translateY(0);
-            }
-        }
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
 
-        .menu-has-children ul li a {
-            display: block;
-            padding: 10px 22px;
-            color: #1e2f3a;
-            text-decoration: none;
-            font-size: 0.88rem;
-            font-weight: 500;
-            transition: all 0.2s;
-            border-left: 3px solid transparent;
-        }
+.cdc-logo-img {
+    height: 48px;
+    width: auto;
+    display: block;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    border-radius: 12px;
+}
 
-        .menu-has-children ul li a:hover {
-            background: #f0f6fa;
-            border-left-color: #ffb347;
-            color: #0f3b3c;
-            padding-left: 28px;
-        }
+.logo-text {
+    display: flex;
+    flex-direction: column;
+}
 
-        .menu-has-children > a::after {
-            content: " ▾";
-            font-size: 0.7rem;
-            opacity: 0.85;
-            margin-left: 5px;
-        }
+.logo-badge {
+    background: #ffb347;
+    color: #1e3a3a;
+    padding: 4px 14px;
+    border-radius: 40px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    display: inline-block;
+    width: fit-content;
+    margin-bottom: 5px;
+}
 
-        .menu-has-children ul .menu-has-children > a::after {
-            content: " ▸";
-            float: right;
-        }
+.sub-badge {
+    font-size: 0.7rem;
+    color: rgba(255, 245, 200, 0.9);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
 
-        /* Mobile styles: menu transforms to full-width, still no margin issues */
-        @media (max-width: 900px) {
-            .mobile-menu-btn {
-                display: flex;
-            }
-            .menu-wrapper-container {
-                max-height: 0;
-                overflow: hidden;
-                visibility: hidden;
-                transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.2s;
-            }
-            .menu-wrapper-container.open {
-                max-height: 70vh;
-                visibility: visible;
-                overflow-y: auto;
-                border-top: 1px solid rgba(255,200,100,0.4);
-                background: #0f3b3c;
-            }
-            .menu-wrapper {
-                flex-direction: column;
-                width: 100%;
-                padding: 8px 12px 20px;
-                gap: 4px;
-                justify-content: flex-start;
-            }
-            .menu-has-children {
-                width: 100%;
-            }
-            .menu-has-children > a {
-                display: flex;
-                justify-content: space-between;
-                width: 100%;
-                white-space: normal;
-                background: rgba(255,255,240,0.05);
-                border-radius: 14px;
-                padding: 12px 16px;
-            }
-            .menu-has-children ul,
-            .menu-has-children ul ul {
-                position: static !important;
-                box-shadow: none;
-                background: #fef9ef;
-                border-radius: 18px;
-                margin-top: 8px;
-                margin-bottom: 8px;
-                margin-left: 12px;
-                width: calc(100% - 12px);
-                display: none;
-                border: 1px solid #ffe2b5;
-            }
-            .menu-has-children.open-mobile > ul {
-                display: block !important;
-            }
-            .menu-has-children:hover > ul {
-                visibility: hidden;
-                display: none;
-            }
-            .menu-has-children ul .menu-has-children > a::after {
-                content: " ▼";
-            }
-        }
+.personal-link {
+    color: #ffde9e;
+    text-decoration: none;
+    font-weight: 500;
+}
 
+.personal-link:hover {
+    text-decoration: underline;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* modal styles */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -382,29 +240,7 @@
             font-weight: 500;
         }
 
-        .hero-section {
-            max-width: 1200px;
-            margin: 32px auto;
-            padding: 24px 20px;
-            background: white;
-            border-radius: 32px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
-            text-align: center;
-        }
-
-        .hero-section h1 {
-            color: #0f3b3c;
-            font-size: 1.8rem;
-            margin-bottom: 12px;
-        }
-
-        .feature-img {
-            max-width: 100%;
-            border-radius: 24px;
-            margin-top: 20px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-        }
-
+     
         footer {
             text-align: center;
             padding: 28px 20px;
@@ -413,18 +249,16 @@
             border-top: 1px solid #e2ecef;
         }
 
-        /* ensure right margin consistent on any screen */
         @media (min-width: 901px) {
             .main-nav {
                 padding-right: 0;
                 padding-left: 0;
             }
-            /* no extra left margin for menu wrapper */
-            .menu-wrapper {
-                margin-right: 0;
-            }
         }
     </style>
+
+    </style>
+
 </head>
 <body>
 <div class="nav-container">
@@ -442,14 +276,38 @@
                     </div>
                 </div>
             </div>
-            <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Menu">☰ Menu</button>
+    
         </div>
+<!--==========================
+    Top Bar
+  ============================-->
+===================
+    menu
+  ============================-->
+<header id="header">
+  
+    <div id="logo" class="pull-left">
+    <nav id="nav-menu-container">
+      <ul class="nav-menu">
+        <li class="menu-active"><a href="https://shamser.info.np/"><i class="fa fa-home fa-lg"></i></a></li>
+ 
+   
+<li class="menu-has-children">
+    <a href="javascript:;">About</a>
+    <ul>
+    
+    
+          <li><a href="https://shamser.info.np/Home/About.html">Website</a></li>
+     <li class="menu-has-children"><a href="javascript:;" >Our Services</a>
+              <ul>
+                <li><a href="https://shamser.info.np/Home/Get free service.html" >Free Service</a></li> 
+                   <li><a href="https://shamser.info.np/Entry_Form/our_service.html" >Payable Service</a></li>
+           </ul>
+            </li>
+    </ul>
+</li>
 
-        <div class="menu-wrapper-container" id="menuWrapper">
-            <ul class="menu-wrapper">
-                <!-- TEACHER GUIDES -->
-             
-                   <li class="menu-has-children"><a href="javascript:;">Teacher-guides</a>
+   <li class="menu-has-children"><a href="javascript:;">Teacher-guides</a>
 
               <ul>   
 <li class="menu-has-children"><a href="javascript:;" >Grade-1</a>
@@ -866,7 +724,47 @@ https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%86%E0%A4%A7%E0%A4%BE%E0%A4%B0
  </li>
  </ul>
  </li>
-                
+               
+<li class="menu-has-children"><a href="javascript:;">Tech.Support</a>
+<ul>   
+<li class="menu-has-children"><a href="javascript:;" >Computer Knoledge</a>
+<ul> 
+<li><a href="https://shamser.info.np/Computer Knowledge/Computer Knowledge Quize.html">Computer Science Quiz</a></li>
+ <li><a href="https://shamser.info.np/Computer Knowledge/History of Computer.html" >History of Computer</a></li>
+                <li><a href="https://shamser.info.np/Computer Knowledge/Types of Computer.html">Types of Computer</a></li>
+
+
+         </ul>
+         </li>
+
+
+          <li class="menu-has-children"><a href="javascript:;" >EMIS</a>
+              <ul>
+              <li><a href="https://youtu.be/NVl4Mb8A68A" >Video</a></li>
+                <li><a href="#">Notice</a></li>
+          <li><a href="https://emis.cehrd.gov.np/">Website</a></li>
+
+                       </ul>
+                    </li>
+
+
+
+
+                    <li class="menu-has-children"><a href="javascript:;" >Employees Provident Fund-EPF</a>
+                        <ul>
+                          <li><a href="https://youtu.be/lgBZu7hqD9U?si=P9FwGP51CywPVLCY">Digital Fatbari</a></li>
+                          <li><a href="https://epf.org.np/resource/7">Form -download</a></li>
+                           </ul>
+                        </li>
+                    <li class="menu-has-children"><a href="javascript:;" >Citizen Investment Fund (nlk) </a>
+                             <ul>
+          <li><a href="https://www.nlk.org.np/assets/uploads/images/listingpage/KBB_DEPOSIT_ACCOUNT3.jpg">KBB_DEPOSIT_ACCOUNT</a></li>
+    <li><a href="chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.nlk.org.np/assets/uploads/files/listingpage/Beema-Notice-20760201.pdf" >Notice</a></li>
+    <li><a href="chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.nlk.org.np/assets/uploads/files/listingpage/rbb-2.pdf">RBB Acount No.</a></li>
+    <li><a href="chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.nlk.org.np/assets/uploads/files/listingpage/Premium_Rate_Table.pdf">५० वर्ष भन्दा माथि उमेर भएका बचतकर्ताहरुको Premium Rate</a></li>
+</ul>
+ </li>
+ </ul>  
      
          
    
@@ -900,13 +798,137 @@ https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%86%E0%A4%A7%E0%A4%BE%E0%A4%B0
 
 <li><a href=" https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%B5%E0%A4%BF%E0%A4%A6%E0%A5%8D%E0%A4%AF%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%A5%E0%A5%80%20%E0%A4%AE%E0%A5%82%E0%A4%B2%E0%A5%8D%E0%A4%AF%E0%A4%BE%E0%A4%99%E0%A5%8D%E0%A4%95%E0%A4%A8%20%E0%A4%AE%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%97%E0%A4%A6%E0%A4%B0%E0%A5%8D%E0%A4%B6%E0%A4%A8%20%E0%A5%A8%E0%A5%A6%E0%A5%AE%E0%A5%A9_eorih3h.pd">fशनिवार र आइतवार सार्वजनिक बिदा भएको सन्दर्भमा विद्यालय तहमा पठनपाठन सञ्चालन तथा व्यवस्थापन</a></li>
                              
-  </ul>
+                             
+                             </ul>
  </li>
  </ul>  
-        
-        </div>
-    </div>
-</div>
+           
+                
+
+
+
+
+
+
+<li class="menu-has-children"><a href="javascript:;">Research</a>
+              <ul>   
+              <li class="menu-has-children"><a href="javascript:;" >Project work</a>
+              <ul> 
+                
+              <li><a href="https://educationalresearchreport.blogspot.com/2024/08/blog-post_12.html">Project work Report</a></li>
+              <li><a href="https://shamser.info.np/TPD.html#">TPD Project work</a></li>
+                </ul>
+                  </li>
+           
+              <li class="menu-has-children"><a href="javascript:;" >Thesis</a>
+              <ul> 
+              <li><a href="https://docs.google.com/document/d/1Suzt5C7MACb08ce-vTZMJN0OsHoPQoMagzZVMBVfRcE/edit?usp=sharing">Thesis१</a></li>
+                              
+                    <li class="menu-has-children"><a href="https://www.scribd.com/document/642378075/%E0%A4%B5%E0%A4%BF%E0%A4%A6-%E0%A4%AF%E0%A4%BE%E0%A4%B2%E0%A4%AF-%E0%A4%AC-%E0%A4%AF%E0%A4%B5%E0%A4%B8-%E0%A4%A5%E0%A4%BE%E0%A4%AA%E0%A4%A8%E0%A4%AE%E0%A4%BE-%E0%A4%85%E0%A4%AD%E0%A4%BF%E0%A4%AD%E0%A4%BE%E0%A4%B5%E0%A4%95-%E0%A4%B8%E0%A4%B9%E0%A4%AD%E0%A4%BE%E0%A4%97%E0%A4%BF%E0%A4%A4%E0%A4%BE-%E0%A4%B6%E0%A5%8B%E0%A4%A7%E0%A4%AA%E0%A4%A4-%E0%A4%B0-1-pdf" data-id="more2">Thesis2</a>   </li>
+                     <li><a href="https://drive.google.com/drive/folders/1K9w9Enl4RNICnNHx0ODAVYt7zhpcxvXW?usp=sharing">Seminar Paper</a> </li>
+   
+                    <li><a href="https://lauro-media.blogspot.com/2024/08/proposal-for-thesis.html">Proposal</a></li>
+                     </ul>
+                        </li>
+
+                      <li class="menu-has-children"><a href="javascript:;" >विद्यालय विकास / सुधार योजना</a>
+                        <ul>
+
+                    <li><a href="#" > विद्यालय सुधार योजना SIP</a></li>
+                    <li><a href="#" >विद्यालय विकास प्रस्ताव SDP</a></li>
+                        </li>
+                     </ul>
+
+               
+<li class="menu-has-children"><a href="javascript:;" >Research Report</a>                    
+ <ul>
+ <li class="menu-has-children"><a href="https://docs.google.com/document/d/1FRgmP3h4pxOeukbTaRElUdlZ6AtG8mMYxBaUPT-HeWw/edit?usp=sharin" >Action Research</a></li>
+
+<li><a href="#">School Report</a></li>
+<li class="menu-has-children"><a href="https://shamser.info.np/articles.html#" >Article</a></li>
+
+
+<li><a href="#" >Case study</a></li>
+
+</ul>
+ </li>
+
+ </li>
+ </ul>        
+
+
+<!-----------TSC ----------------------------------------------->
+ <li class="menu-has-children"><a href="javascript:;" >SitePages</a>
+
+<ul>
+    
+ 
+  <li><a href="https://shamser.info.np/lauro_media/project.html">Our projects</a></li>
+ <li><a href="https://shamser.info.np/integrated%20services.html">download</a></li>
+    <li><a href="https://bit.ly/m/Teacher-Kosh-Lalbandi">Lalbandi Teacher Kosh</a></li>
+                   <li><a href="Service_Site/index.html">Service_Site</a></li>
+      <li><a href='student_support.html'>student_support</a></li>
+             
+
+        <li><a href="https://shamser-tech.blogspot.com/">Computer Blog</a></li>
+           <li><a href=" https://lauro-media.blogspot.com/">Blog</a></li>
+             <li> <a href="https://shamser.info.np/Folio/index.html#">PortFolio </a></li>
+  
+          </ul>
+</li>
+
+
+ 
+<li class="menu-has-children">
+    <a href="javascript:;">IEMIS</a>
+    <ul>
+    
+    
+          <li><a href="https://shamser.info.np/Integrated Exam Management Information System/IEMIS.v2.html" class="emis-login-link">LOGIN</a></li>
+       https://shamser.info.np/integrated%20services.html
+       <li><a href="https://forms.gle/8pyBMNzYhZjVw27v7" class="emis-register-link">About</a></li>
+   
+    </ul>
+</li>
+ </ul>  
+
+ </nav>
+  </div>
+  </div>
+</header>
+<style>
+/* For EMIS Login Link */
+.emis-login-link {
+    background: #004d40; /* Dark Blue background */
+   color: white !important;
+    padding: 8px 20px;
+    border-radius: 4px;
+    margin: 5px 0;
+    display: inline-block;
+}
+
+/* For Register Now Link */
+.emis-register-link {
+    background: #ff6f00; /*  orange background */
+    color: white !important;
+    padding: 8px 20px;
+    border-radius: 4px;
+    margin: 5px 0;
+    display: inline-block;
+}
+
+/* Hover Effects */
+.emis-login-link:hover, .emis-register-link:hover {
+    opacity: 0.9;
+    text-decoration: none;
+}
+      
+</style>
+
+
+<!--------Widgets------------------------------------------->
+
+
 
 <div class="hero-section">
     <h1>📚 CDC Nepal Official Digital Library</h1>
@@ -919,35 +941,44 @@ https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%86%E0%A4%A7%E0%A4%BE%E0%A4%B0
 <div class="modal-overlay" id="infoModal">
     <div class="modal-container">
         <div class="modal-header"><h3>📚 Welcome to Digital Library</h3><button class="modal-close" id="closeModalBtn">&times;</button></div>
-        <div class="modal-body"><p>✅ Menu now aligned perfectly (right margin 10px spacing via flex-end), all Teacher Guides & Textbooks accessible.</p><p>📖 Use the top navigation to explore guides by grade and textbooks.</p></div>
+        <div class="modal-body"><p>✅ Menu now aligned perfectly, all Teacher Guides & Textbooks accessible.</p><p>📖 On mobile: Tap any parent menu (e.g. Teacher Guides, Textbooks, Grade-1) to expand submenus. Fully responsive dropdowns work flawlessly!</p></div>
     </div>
 </div>
 
 <script>
     const toggleBtn = document.getElementById('mobileMenuToggle');
-    const menuContainer = document.getElementById('menuWrapper');
+    const menuContainerWrap = document.getElementById('menuWrapper');
     if (toggleBtn) {
         toggleBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            menuContainer.classList.toggle('open');
+            menuContainerWrap.classList.toggle('open');
         });
     }
-    function setupMobileSubmenus() {
+    // robust mobile submenu handling for all .menu-has-children
+    function attachMobileSubmenuEvents() {
         const isMobile = window.matchMedia('(max-width: 900px)').matches;
-        document.querySelectorAll('.menu-has-children').forEach(parent => {
+        const allParents = document.querySelectorAll('.menu-has-children');
+        allParents.forEach(parent => {
             const link = parent.querySelector(':scope > a');
             if (!link) return;
+            // Remove previous inline listener to avoid duplication
             const newLink = link.cloneNode(true);
             if (link.parentNode) link.parentNode.replaceChild(newLink, link);
             if (isMobile) {
                 newLink.addEventListener('click', (e) => {
                     e.preventDefault();
+                    e.stopPropagation();
                     const parentLi = newLink.closest('.menu-has-children');
                     if (parentLi) {
+                        // close siblings but keep hierarchy independent
                         const isOpen = parentLi.classList.contains('open-mobile');
-                        document.querySelectorAll('.menu-has-children.open-mobile').forEach(el => { if (el !== parentLi) el.classList.remove('open-mobile'); });
-                        if (!isOpen) parentLi.classList.add('open-mobile');
-                        else parentLi.classList.remove('open-mobile');
+                        // optional: close other top-level menus for cleanliness? not mandatory but can be.
+                        if (!isOpen) {
+                            // avoid closing nested parents unintentionally, only same-level? better keep as is
+                            parentLi.classList.add('open-mobile');
+                        } else {
+                            parentLi.classList.remove('open-mobile');
+                        }
                     }
                 });
             } else {
@@ -955,20 +986,25 @@ https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%86%E0%A4%A7%E0%A4%BE%E0%A4%B0
             }
         });
     }
+    // also close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+        const container = document.getElementById('menuWrapper');
+        const btn = document.getElementById('mobileMenuToggle');
+        if (container?.classList.contains('open') && !container.contains(e.target) && btn && !btn.contains(e.target)) {
+            container.classList.remove('open');
+        }
+    });
     window.addEventListener('resize', () => {
         if (window.matchMedia('(min-width: 901px)').matches) {
             document.querySelectorAll('.menu-has-children').forEach(el => el.classList.remove('open-mobile'));
-            if (menuContainer) menuContainer.classList.remove('open');
+            if (menuContainerWrap) menuContainerWrap.classList.remove('open');
+        } else {
+            // ensure mobile menu touch behavior persists
         }
-        setupMobileSubmenus();
+        attachMobileSubmenuEvents();
     });
     document.addEventListener('DOMContentLoaded', () => {
-        setupMobileSubmenus();
-        document.addEventListener('click', (e) => {
-            if (menuContainer?.classList.contains('open') && !menuContainer.contains(e.target) && !toggleBtn.contains(e.target)) {
-                menuContainer.classList.remove('open');
-            }
-        });
+        attachMobileSubmenuEvents();
         const modal = document.getElementById('infoModal');
         const closeModal = document.getElementById('closeModalBtn');
         if (modal) {
@@ -977,7 +1013,26 @@ https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%86%E0%A4%A7%E0%A4%BE%E0%A4%B0
             modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
         }
     });
+    // open all external links in new tab
     document.querySelectorAll('a[href^="http"]').forEach(a => { if (!a.target) a.target = '_blank'; });
 </script>
+
+
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
