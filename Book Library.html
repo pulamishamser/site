@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>Digital Library</title>
+    <title>CDC Nepal Digital Library | Teacher Guides & Textbooks</title>
     <style>
         * {
             margin: 0;
@@ -17,7 +17,7 @@
             min-height: 100vh;
         }
 
-        /* Navigation Container */
+        /* --- fix container: no forced left margin, menu uses proper spacing --- */
         .nav-container {
             background: #0f3b3c;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
@@ -36,12 +36,11 @@
             padding: 0;
         }
 
-        /* Top bar: logo + CDC image */
         .logo-area {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 16px;
+            padding: 10px 20px;
             background: #0f3b3c;
             flex-wrap: wrap;
             gap: 12px;
@@ -51,16 +50,16 @@
         .brand {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
             flex-wrap: wrap;
         }
 
         .cdc-logo-img {
-            height: 44px;
+            height: 48px;
             width: auto;
             display: block;
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
-            border-radius: 10px;
+            border-radius: 12px;
         }
 
         .logo-text {
@@ -68,38 +67,44 @@
             flex-direction: column;
         }
 
-        .logo-main {
-            color: white;
-            font-weight: 800;
-            font-size: 1.25rem;
-            letter-spacing: -0.2px;
-            line-height: 1.3;
-        }
-
         .logo-badge {
             background: #ffb347;
             color: #1e3a3a;
-            padding: 3px 12px;
+            padding: 4px 14px;
             border-radius: 40px;
             font-size: 0.7rem;
             font-weight: bold;
             display: inline-block;
             width: fit-content;
-            margin-top: 5px;
+            margin-bottom: 5px;
         }
 
-        /* MOBILE-FRIENDLY HAMBURGER + TOGGLE */
+        .sub-badge {
+            font-size: 0.7rem;
+            color: rgba(255,245,200,0.9);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .personal-link {
+            color: #ffde9e;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
         .mobile-menu-btn {
             background: rgba(255, 255, 255, 0.15);
             border: none;
             color: white;
             font-size: 1.8rem;
-            padding: 6px 12px;
+            padding: 8px 18px;
             border-radius: 40px;
             cursor: pointer;
             display: none;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             font-weight: 600;
             transition: 0.2s;
         }
@@ -109,22 +114,35 @@
             color: #0f3b3c;
         }
 
-        /* wrapper for menu (collapsible on mobile) */
         .menu-wrapper-container {
             transition: all 0.3s ease-in-out;
+            width: 100%;
         }
 
+        /* MAIN MENU WRAPPER: clean flex with proper alignment, no unwanted left margins */
         .menu-wrapper {
             display: flex;
             flex-wrap: wrap;
             list-style: none;
             background: #0f3b3c;
-            padding: 0;
             margin: 0;
+            padding: 0;
             gap: 2px;
+            /* right alignment on desktop: items align to end (right side) */
+            justify-content: flex-end;
         }
 
-        /* main menu items */
+        /* desktop first style: no forced left margin */
+        @media (min-width: 901px) {
+            .menu-wrapper {
+                padding: 6px 20px;
+            }
+            .menu-has-children > a {
+                white-space: nowrap;
+            }
+        }
+
+        /* fix for all child lists: normal text direction, no extra left margin */
         .menu-has-children {
             position: relative;
             list-style: none;
@@ -142,7 +160,6 @@
             cursor: pointer;
             background: transparent;
             line-height: 1.3;
-            white-space: nowrap;
         }
 
         .menu-has-children > a:hover {
@@ -151,13 +168,13 @@
             transform: translateY(-1px);
         }
 
-        /* submenu base */
+        /* dropdown style */
         .menu-has-children ul {
             position: absolute;
             left: 0;
             top: 100%;
             background: #ffffff;
-            min-width: 240px;
+            min-width: 260px;
             box-shadow: 0 20px 32px -12px rgba(0, 0, 0, 0.2);
             border-radius: 20px;
             padding: 10px 0;
@@ -169,82 +186,81 @@
             border: 1px solid #e2edf0;
         }
 
-        /* second level nested */
+        /* nested dropdown */
         .menu-has-children ul ul {
             left: 100%;
             top: -12px;
             transform: translateX(12px) translateY(0);
         }
 
-        /* Hover (desktop) */
-        .menu-has-children:hover > ul,
-        .menu-has-children:focus-within > ul {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0px);
-        }
-
-        .menu-has-children ul li {
-            position: relative;
+        @media (min-width: 901px) {
+            .menu-has-children:hover > ul,
+            .menu-has-children:focus-within > ul {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0px);
+            }
+            .menu-has-children ul li:hover > ul {
+                opacity: 1;
+                visibility: visible;
+                transform: translateX(0px) translateY(0);
+            }
         }
 
         .menu-has-children ul li a {
             display: block;
-            padding: 10px 20px;
+            padding: 10px 22px;
             color: #1e2f3a;
             text-decoration: none;
             font-size: 0.88rem;
             font-weight: 500;
             transition: all 0.2s;
             border-left: 3px solid transparent;
-            line-height: 1.4;
         }
 
         .menu-has-children ul li a:hover {
             background: #f0f6fa;
             border-left-color: #ffb347;
             color: #0f3b3c;
-            padding-left: 26px;
+            padding-left: 28px;
         }
 
-        /* arrow indicators */
         .menu-has-children > a::after {
             content: " ▾";
             font-size: 0.7rem;
             opacity: 0.85;
             margin-left: 5px;
-            transition: transform 0.2s;
         }
 
         .menu-has-children ul .menu-has-children > a::after {
             content: " ▸";
             float: right;
-            margin-top: 2px;
         }
 
-        /* ========== FULLY MOBILE RESPONSIVE ========== */
+        /* Mobile styles: menu transforms to full-width, still no margin issues */
         @media (max-width: 900px) {
             .mobile-menu-btn {
                 display: flex;
             }
             .menu-wrapper-container {
-                width: 100%;
                 max-height: 0;
                 overflow: hidden;
                 visibility: hidden;
                 transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.2s;
             }
             .menu-wrapper-container.open {
-                max-height: 80vh;
+                max-height: 70vh;
                 visibility: visible;
                 overflow-y: auto;
-                border-top: 1px solid rgba(255,200,100,0.3);
+                border-top: 1px solid rgba(255,200,100,0.4);
+                background: #0f3b3c;
             }
             .menu-wrapper {
                 flex-direction: column;
                 width: 100%;
-                padding: 8px 0 20px;
+                padding: 8px 12px 20px;
                 gap: 4px;
+                justify-content: flex-start;
             }
             .menu-has-children {
                 width: 100%;
@@ -252,558 +268,313 @@
             .menu-has-children > a {
                 display: flex;
                 justify-content: space-between;
-                align-items: center;
                 width: 100%;
                 white-space: normal;
                 background: rgba(255,255,240,0.05);
                 border-radius: 14px;
-                margin: 2px 0;
                 padding: 12px 16px;
             }
-            /* fix arrow on mobile */
-            .menu-has-children > a::after {
-                float: right;
-                font-size: 1rem;
-            }
-            /* submenu on mobile: become block, not absolute */
             .menu-has-children ul,
             .menu-has-children ul ul {
                 position: static !important;
                 box-shadow: none;
                 background: #fef9ef;
                 border-radius: 18px;
-                margin-top: 6px;
-                margin-bottom: 6px;
+                margin-top: 8px;
+                margin-bottom: 8px;
                 margin-left: 12px;
                 width: calc(100% - 12px);
-                opacity: 1;
-                visibility: hidden;
-                transform: none;
                 display: none;
-                transition: none;
                 border: 1px solid #ffe2b5;
             }
             .menu-has-children.open-mobile > ul {
                 display: block !important;
-                visibility: visible;
-                opacity: 1;
             }
-            .menu-has-children ul li a {
-                padding: 12px 20px;
-                font-size: 0.9rem;
-            }
-            .menu-has-children ul .menu-has-children > a::after {
-                content: " ▼";
-                float: right;
-            }
-            /* nested second level indent */
-            .menu-has-children ul ul {
-                margin-left: 18px;
-                background: #fff7ed;
-            }
-            .menu-has-children:hover > ul,
-            .menu-has-children:focus-within > ul {
+            .menu-has-children:hover > ul {
                 visibility: hidden;
                 display: none;
             }
-            .menu-has-children.open-mobile > ul {
-                display: block !important;
-                visibility: visible;
+            .menu-has-children ul .menu-has-children > a::after {
+                content: " ▼";
             }
         }
 
-        /* Fine tuning for small devices */
-        @media (max-width: 550px) {
-            .cdc-logo-img {
-                height: 36px;
-            }
-            .logo-main {
-                font-size: 1rem;
-            }
-            .menu-has-children > a {
-                font-size: 0.85rem;
-                padding: 10px 14px;
-            }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0.2s, opacity 0.2s;
         }
 
-        /* Desktop keeps normal behaviour */
-        @media (min-width: 901px) {
-            .menu-wrapper {
-                flex-wrap: wrap;
-                justify-content: flex-end;
-                padding: 6px 16px;
-            }
-            .menu-has-children ul {
-                left: 0;
-                right: auto;
-            }
-            .menu-has-children ul ul {
-                left: 100%;
-                right: auto;
-            }
+        .modal-overlay.active {
+            visibility: visible;
+            opacity: 1;
         }
 
-        /* hero and footer */
+        .modal-container {
+            background: white;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 32px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4);
+            overflow: hidden;
+            transform: scale(0.95);
+            transition: transform 0.2s ease;
+        }
+
+        .modal-overlay.active .modal-container {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            background: #0f3b3c;
+            color: white;
+            padding: 18px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .modal-close {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            font-size: 1.6rem;
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        .modal-close:hover {
+            background: #ffb347;
+            color: #0f3b3c;
+        }
+
+        .modal-body {
+            padding: 24px;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        .modal-body p {
+            color: #2c5a5c;
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+
         .hero-section {
             max-width: 1200px;
             margin: 32px auto;
             padding: 24px 20px;
             background: white;
             border-radius: 32px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
             text-align: center;
         }
+
         .hero-section h1 {
             color: #0f3b3c;
-            font-size: 1.7rem;
+            font-size: 1.8rem;
             margin-bottom: 12px;
         }
-        .hero-section p {
-            color: #2c5a5c;
+
+        .feature-img {
+            max-width: 100%;
+            border-radius: 24px;
+            margin-top: 20px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
         }
+
         footer {
             text-align: center;
-            padding: 24px;
+            padding: 28px 20px;
             color: #3e6b70;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             border-top: 1px solid #e2ecef;
+        }
+
+        /* ensure right margin consistent on any screen */
+        @media (min-width: 901px) {
+            .main-nav {
+                padding-right: 0;
+                padding-left: 0;
+            }
+            /* no extra left margin for menu wrapper */
+            .menu-wrapper {
+                margin-right: 0;
+            }
         }
     </style>
 </head>
 <body>
-<section id="topbar fixed-top" class="d-none d-lg-block">
 <div class="nav-container">
     <div class="main-nav">
         <div class="logo-area">
             <div class="brand">
-                <!-- CDC Official Graphic Image (Base64 SVG with modern look) -->
- <a href="https://moecdc.gov.np/">                
-                <img class="cdc-logo-img" src="https://giwmscdnone.gov.np/media/logo/Emblem_of_Nepal_tniwwzj.png"
-                     alt="Curriculum Development Centre Nepal Logo"></a>
+                <a href="https://moecdc.gov.np/" target="_blank">
+                    <img class="cdc-logo-img" src="https://giwmscdnone.gov.np/media/logo/Emblem_of_Nepal_tniwwzj.png" alt="CDC Logo">
+                </a>
                 <div class="logo-text">
-    
-                    <span class="logo-badge">नेपाल सरकार<br>
-शिक्षा तथा खेलकुद मन्त्रालय<br>
-पाठ्यक्रम विकास केन्द्र<br>
-सानोठिमी, भक्तपुर</span>
-
- <div class="logo-main">  <a href="https://shamser.info.np">   <img class="cdc-logo-img" src="https://giwmscdnone.gov.np/static/grapejs/img/Nepal-flag.gif" width="100" height="120"></a>shamser.info.np</div>
-                  
+                    <span class="logo-badge">नेपाल सरकार | शिक्षा तथा खेलकुद मन्त्रालय<br>पाठ्यक्रम विकास केन्द्र, सानोठिमी, भक्तपुर</span>
+                    <div class="sub-badge">
+                        <a href="https://shamser.info.np" target="_blank" class="personal-link">🔗 shamser.info.np</a>
+                        <img src="https://giwmscdnone.gov.np/static/grapejs/img/Nepal-flag.gif" width="28" alt="flag">
+                    </div>
                 </div>
             </div>
             <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Menu">☰ Menu</button>
         </div>
+
         <div class="menu-wrapper-container" id="menuWrapper">
             <ul class="menu-wrapper">
-                <!-- TEACHER GUIDES SECTION -->
-                <li class="menu-has-children">
-                <!-----------Teacher Guide----  ============================-->
-   <li class="menu-has-children"><a href="javascript:;">Teacher-guides</a>
-
-              <ul>   
-<li class="menu-has-children"><a href="javascript:;" >Grade-1</a>
-              <ul>
-<li><a href="javascript:;">Nepali</a></li>
-<li><a href="#">English</a></li>
-<li><a href="#">Maths</a></li>				 
-<li><a href="#">Serofero</a></li>
-
-                          </ul>
-                    </li>
-
-<li class="menu-has-children"><a href="javascript:;" >Grade-2</a>
-              <ul>
-<li><a href="#">Nepali</a></li>
-<li><a href="#">English </a></li>
-<li><a href="#">Maths</a></li>
-<li><a href="#">Maths</a></li>
-<li><a href="#">Serofero</a></li>
-
-                          </ul>
-                    </li>
-
-<li class="menu-has-children"><a href="javascript:;" >Grade-3</a>
-              <ul>
-<li><a href="">Nepali 2078</a></li>
-<li><a href="">English 2078</a></li>
-<li><a href="">Maths 2078</a></li>
-<li><a href="">Maths (EM)2078</a></li>
-<li><a href="#">Serofero</a></li>
-
-                          </ul>
-                    </li>
-
-
-<!-- Grade-4 Teacher Guide - Fixed -->
-<li class="menu-has-children"><a href="javascript:;">Grade-4</a>
-  <ul>
-    <li><a href="#">Nepali</a></li>
-    <li><a href="#">English 2022AD</a></li>
-    <li><a href="#">Maths</a></li>
-    <li><a href="#">Science & Technology</a></li>
-    <li><a href="#">Social</a></li>
-    <li><a href="#">Health</a></li>
-  </ul>
-</li>	  
-
-<li class="menu-has-children"><a href="javascript:;" >Grade-5</a>
-              <ul>
-<li><a href="#">Nepali</a></li>
-<li><a href="#">English</a></li>
-<li><a href="#">Maths</a></li>
-<li><a href="#">Science & Technology</a></li>
-
-<li><a href="#">Social </a></li>
-<li><a href="#">Health </a></li>
-
-                          </ul>
-                    </li>
-<li class="menu-has-children"><a href="javascript:;" >Class-6</a>
-              <ul>
-<li><a href="#">Nepali</a></li>
-<li><a href="#">English</a></li>
-<li><a href="#">Maths</a></li>
-<li><a href="#">Social</a></li>
-<li><a href="#">Health Physical</a></li>
-                          </ul>
-                    </li>
- <li class="menu-has-children"><a href="javascript:;" >Class-7</a>
-                        <ul>
-  <li><a href="#">Nepali</a></li>  
-<li><a href="#">English</a></li>
-<li><a href="#">Maths</a></li>
-<li><a href="#">Science & Technology</a></li> 
-<li><a href="#">Social</a></li>  
-        
-        
-                                   </ul>
-                                </li>
-
-
-
- <li class="menu-has-children"><a href="javascript:;" >Class-8</a>
-                        <ul>
-  <li><a href="#">Nepali</a></li>  
-<li><a href="#">English</a></li>
-<li><a href="#">Maths</a></li>
-<li><a href="#">Science & Technology</a></li> 
-<li><a href="#">Social</a></li>  
-        
-        
-                                   </ul>
-                                </li>
-
-				  
-<li class="menu-has-children"><a href="javascript:;" >Class-9</a>
-                             <ul>
-  <li><a href="#">Nepali</a></li>
-<li><a href="#" >English</a></li>
-<li><a href="#">Maths</a></li>
-<li><a href="#">Aci & techn.</a></li>
-<li><a href="#">Social</a></li>
-            
-                  </ul>
-                    </li>
-                </ul>
-            </li>
-  
-
-<!-------End Teacher Guide----------------------------------->
-
-
-<!-------Textbook------------------------------------>
-   <li class="menu-has-children"><a href="javascript:;">Text book</a>
-
-              <ul>   
-<li class="menu-has-children"><a href="javascript:;" >Grade-1</a>
-              <ul>
-<li><a href="http://moecdc.gov.np/storage/gallery/1704094092.pdf">Nepali</a></li>
-<li><a href="http://moecdc.gov.np/storage/gallery/1672217211.pdf">English</a></li>
-<li><a href="http://moecdc.gov.np/storage/gallery/1672217481.pdf">Maths</a></li>
-<li><a href="http://moecdc.gov.np/storage/gallery/1672217425.pdf">Serofero</a></li>
-
-                          </ul>
-                    </li>
-
-<li class="menu-has-children"><a href="javascript:;" >Grade-2</a>
-              <ul>
-<li><a href="http://moecdc.gov.np/storage/gallery/1672813233.pdf">Nepali</a></li>
-<li><a href="http://moecdc.gov.np/storage/gallery/1672217645.pdf">English</a></li>
-<li><a href="http://moecdc.gov.np/storage/gallery/1686566355.pdf">Maths</a></li>
-<li><a href="http://moecdc.gov.np/storage/gallery/1672218837.pdf">Serofero</a></li>
-
-                          </ul>
-                    </li>
-
-<li class="menu-has-children"><a href="javascript:;" >Grade-3</a>
-              <ul>
-<li><a href="http://moecdc.gov.np/storage/gallery/1672223512.pdf">Nepali</a></li>
-<li><a href="http://moecdc.gov.np/storage/gallery/1672223512.pdf">English</a></li>
-<li><a href="http://moecdc.gov.np/storage/gallery/1686566541.pdf">Maths</a></li>
-<li><a href="http://moecdc.gov.np/storage/gallery/1672219097.pdf">Serofero</a></li>
-
-                          </ul>
-                    </li>
-
-
-<li class="menu-has-children"><a href="javascript:;" >Grade-4</a>
-              <ul>
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/4.Reduced-Nepali%2004_nztgffb.pdf">Nepali</a></li>
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/3.%20Reducced-English%20Grade%206%20Final_fntvwhe.pdf">English</a></li>
-
-				 
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%97%E0%A4%A3%E0%A4%BF%E0%A4%A4%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A5%AA_ksjyjha.pdf">Maths 2078</a></li>
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%B5%E0%A4%BF%E0%A4%9C%E0%A5%8D%E0%A4%9E%E0%A4%BE%E0%A4%A8%20%E0%A4%A4%E0%A4%A5%E0%A4%BE%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%B5%E0%A4%BF%E0%A4%A7%E0%A4%BF%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A5%AA_lya2m6l.pdf">Science & Technology 2079</a></li>
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%B5%E0%A4%BF%E0%A4%9C%E0%A5%8D%E0%A4%9E%E0%A4%BE%E0%A4%A8%20%E0%A4%A4%E0%A4%A5%E0%A4%BE%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%B5%E0%A4%BF%E0%A4%A7%E0%A4%BF%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE-%E0%A5%AA%20(%E0%A4%85%E0%A4%82%E0%A4%97%E0%A5%8D%E0%A4%B0%E0%A5%87%E0%A4%9C%E0%A5%80%20%E0%A4%85%E0%A4%A8%E0%A5%81%E0%A4%B5%E0%A4%BE%E0%A4%A6)_vr8r2hm.pdf">Science & Technology(EM) 2022</a></li>
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%9C%E0%A4%BF%E0%A4%95%20%E0%A4%85%E0%A4%A7%E0%A5%8D%E0%A4%AF%E0%A4%AF%E0%A4%A8%20%E0%A4%A4%E0%A4%A5%E0%A4%BE%20%E0%A4%AE%E0%A4%BE%E0%A4%A8%E0%A4%B5%20%E0%A4%AE%E0%A5%82%E0%A4%B2%E0%A5%8D%E0%A4%AF%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A5%AA_x4w7kt9.pdf">Social 2079</a></li>
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/2.%20Reduced-class%204%20health%20final_1nd5zum.pdf">Health </a></li>
-<li><a href=" https://giwmscdnone.gov.np/media/pdf_upload/HPC%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A5%AA%20(%E0%A4%85%E0%A4%82%E0%A4%97%E0%A5%8D%E0%A4%B0%E0%A5%87%E0%A4%9C%E0%A5%80%20%E0%A4%B8%E0%A4%82%E0%A4%B8%E0%A5%8D%E0%A4%95%E0%A4%B0%E0%A4%A3)_lmoifyz.pdf">Health (EM) 2022</a></li>
-<li><a href=" https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%97%E0%A4%A3%E0%A4%BF%E0%A4%A4%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A5%AA%20(%E0%A4%85%E0%A4%82%E0%A4%97%E0%A5%8D%E0%A4%B0%E0%A5%87%E0%A4%9C%E0%A5%80%20%E0%A4%85%E0%A4%A8%E0%A5%81%E0%A4%B5%E0%A4%BE%E0%A4%A6)_pvmidzb.pdf">Maths (EM)</a></li>				 
-                          </ul>
-                    </li>
-
-<li class="menu-has-children"><a href="javascript:;" >Grade-5</a>
-              <ul>
-			
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/Nepali%2005%20Final%20File_foagqer.pdf">Nepali</a></li>
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%85%E0%A4%82%E0%A4%97%E0%A5%8D%E0%A4%B0%E0%A5%87%E0%A4%9C%E0%A5%80%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A5%AB_xkoobwo.pdf">English 2023</a></li>
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%97%E0%A4%A3%E0%A4%BF%E0%A4%A4%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A5%AB%20(%E0%A4%A8%E0%A5%87%E0%A4%AA%E0%A4%BE%E0%A4%B2%E0%A5%80%20%E0%A4%B8%E0%A4%82%E0%A4%B8%E0%A5%8D%E0%A4%95%E0%A4%B0%E0%A4%A3)_3kpojvv.pdf">Maths 2080</a></li>
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%B5%E0%A4%BF%E0%A4%9C%E0%A5%8D%E0%A4%9E%E0%A4%BE%E0%A4%A8%20%E0%A4%A4%E0%A4%A5%E0%A4%BE%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%B5%E0%A4%BF%E0%A4%A7%E0%A4%BF%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A5%AB%20(%E0%A4%A8%E0%A5%87%E0%A4%AA%E0%A4%BE%E0%A4%B2%E0%A5%80%20%E0%A4%B8%E0%A4%82%E0%A4%B8%E0%A5%8D%E0%A4%95%E0%A4%B0%E0%A4%A3)_lhcgijf.pdf">Science & Technology-2080</a></li>
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%97%E0%A4%A3%E0%A4%BF%E0%A4%A4%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A5%AB%20(%E0%A4%85%E0%A4%82%E0%A4%97%E0%A5%8D%E0%A4%B0%E0%A4%9C%E0%A5%80%20%E0%A4%85%E0%A4%A8%E0%A5%81%E0%A4%B5%E0%A4%BE%E0%A4%A6)_agnb8n4.pdf">Maths(EM)-2023</a></li>
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%B5%E0%A4%BF%E0%A4%9C%E0%A5%8D%E0%A4%9E%E0%A4%BE%E0%A4%A8%20%E0%A4%A4%E0%A4%A5%E0%A4%BE%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%B5%E0%A4%BF%E0%A4%A7%E0%A4%BF%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A5%AB%20(%E0%A4%85%E0%A4%82%E0%A4%97%E0%A5%8D%E0%A4%B0%E0%A4%9C%E0%A5%80%20%E0%A4%85%E0%A4%A8%E0%A5%81%E0%A4%B5%E0%A4%BE%E0%A4%A6)_i4myx5b.pdf">Science & Technology(EM)2023 </a></li>
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%9C%E0%A4%BF%E0%A4%95%20%E0%A4%85%E0%A4%A7%E0%A5%8D%E0%A4%AF%E0%A4%AF%E0%A4%A8%20%E0%A4%A4%E0%A4%A5%E0%A4%BE%20%E0%A4%AE%E0%A4%BE%E0%A4%A8%E0%A4%B5%20%E0%A4%AE%E0%A5%81%E0%A4%B2%E0%A5%8D%E0%A4%AF%E0%A4%AE%E0%A4%BE%E0%A4%A8%E0%A5%8D%E0%A4%AF%E0%A4%A4%E0%A4%BE%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A5%AB%20(%E0%A4%A8%E0%A5%87%E0%A4%AA%E0%A4%BE%E0%A4%B2%E0%A5%80%20%E0%A4%B8%E0%A4%82%E0%A4%B8%E0%A5%8D%E0%A4%95%E0%A4%B0%E0%A4%A3)_srmp9sk.pdf">Social 2080</a></li>
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/3.%20Reduced-class%205%20health%20final_yg4igv7.pdf">Health </a></li>
-
-                          </ul>
-                    </li>
-
-<li class="menu-has-children"><a href="javascript:;" >Class 6 </a>
-              <ul>
- <li><a href="https://shamserinfo.blogspot.com/2024/04/lesson-1-fundamental-knowledge-of.html" >Computer</a></li>
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%B8%E0%A5%8D%E0%A4%B5%E0%A4%BE%E0%A4%B8%E0%A5%8D%E0%A4%A5%E0%A5%8D%E0%A4%AF%2C%20%E0%A4%B6%E0%A4%BE%E0%A4%B0%E0%A5%80%E0%A4%B0%E0%A4%BF%E0%A4%95%20%E0%A4%A4%E0%A4%A5%E0%A4%BE%20%E0%A4%B8%E0%A4%BF%E0%A4%B0%E0%A5%8D%E0%A4%9C%E0%A4%A8%E0%A4%BE%E0%A4%A4%E0%A5%8D%E0%A4%AE%E0%A4%95%20%E0%A4%95%E0%A4%B2%E0%A4%BE%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE-%E0%A5%AC%20(%E0%A4%85%E0%A4%82%E0%A4%97%E0%A5%8D%E0%A4%B0%E0%A5%87%E0%A4%9C%E0%A5%80%20%E0%A4%B8%E0%A4%82%E0%A4%B8%E0%A5%8D%E0%A4%95%E0%A4%B0%E0%A4%A3)_d8xkses.pdf">Health (EM) </a></li>
-<li><a href="https://url-shortener.me/M80R">Maths 2078</a></li>
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%AE%E0%A5%87%E0%A4%B0%E0%A5%8B%20%E0%A4%97%E0%A4%A3%E0%A4%BF%E0%A4%A4%20-%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A5%AC%20(%E0%A4%85%E0%A4%82%E0%A4%97%E0%A5%8D%E0%A4%B0%E0%A5%87%E0%A4%9C%E0%A5%80%20%E0%A4%85%E0%A4%A8%E0%A5%81%E0%A4%B5%E0%A4%BE%E0%A4%A6)_6wbslaj.pdf">Maths (EM)</a></li>
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/4.Reduced-class%206%20Nepali%20final_hy7w99r.pdf">Nepali</a></li>
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/3.%20Reducced-English%20Grade%206%20Final_fntvwhe.pdf">English</a></li>
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/5.Reduced-Class%206%20Social%20Final_l9n6lkg.pdf">Social</a></li>
-<li><a href=""></a></li>
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%B5%E0%A4%BF%E0%A4%9C%E0%A5%8D%E0%A4%9E%E0%A4%BE%E0%A4%A8%20%E0%A4%A4%E0%A4%A5%E0%A4%BE%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%B5%E0%A4%BF%E0%A4%A7%E0%A4%BF%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A5%AC%20(%E0%A4%85%E0%A4%82%E0%A4%97%E0%A5%8D%E0%A4%B0%E0%A4%9C%E0%A5%80%20%E0%A4%85%E0%A4%A8%E0%A5%81%E0%A4%B5%E0%A4%BE%E0%A4%A6)_k7zzrbw.pdf">Science (EM)</a></li>
-
-				  
-                     </ul>
-                    </li>
-                                                     
-                    <li class="menu-has-children"><a href="javascript:;" >Class-7</a>
-                        <ul>
-        <li><a href="https://online.anyflip.com/hhfss/optj/mobile/index.html">कम्प्युटर शिक्षा कक्षा ७ (नेपाली माध्यम)  </a></li>co_speechnotes_plugin_fab_id:311,332
-         <li><a href=""></a></li>
-         <li><a href="https://giwmscdnone.gov.np/media/pdf_upload/0007_MathematicsGrade7EnglishTranslation_fqz5dkt.pdf">Maths (EM) 2080</a></li>
-        <li><a href="https://giwmscdnone.gov.np/media/pdf_upload/0007_MathsGrade7NepaliEdition_gtyci7i.pdf">Maths 2080</a></li>
-        <li><a href="https://giwmscdnone.gov.np/media/pdf_upload/9.Reduced-class%207%20science%20final_ypdi9pg.pdf">Science</a></li>
-		<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/Science%20and%20Technology%20Grade%207(English%20Translation)%20Reduced_yvhc6cc.pdf">Science EM</a></li>
-	 	<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/8.Reduced-class%207%20samajik%20Final_zq04sfi.pdf">Social</a></li>
-     <li><a href="https://giwmscdnone.gov.np/media/pdf_upload/7.Reduced-class%207%20Nepali%20final_lnxtmxf.pdf">Nepali</a></li>  
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/6.%20Reduced-class%207%20English%20final_lro4mmc.pdf">English</a></li>
-          <li><a href=" https://giwmscdnone.gov.np/media/pdf_upload/1.%20class%207%20health%20final-compressed_pqmbsce.pdf">Health, Physical & Creative</a></li>
-                        </ul>
-                        </li>
-                    <li class="menu-has-children"><a href="javascript:;" >Class 8 </a>
-                        <ul>
-     <li><a href="https://online.anyflip.com/hhfss/iwdd/mobile/index.html ">कम्प्युटर शिक्षा कक्षा ८ (नेपाली माध्यम) </a></li>                   
-      <!----<li><a href="https://www.esikai.com.np/2020/09/fundamental-knowledge-of-computer-gade-8.html">Computer Chapter-1</a></li>------>
-
-     <li><a href="https://giwmscdnone.gov.np/media/pdf_upload/1.%20Reduced-class%208%20English%20final_vfiq0xm.pdf">English</a></li>
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/2.%20Reduced-class%208%20nepali%20final_ahsi1f6.pdf">Nepali</a></li>co_speechnotes_plugin_fab_id:918,190
-      <li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%A8%E0%A5%87%E0%A4%AA%E0%A4%BE%E0%A4%B2%E0%A5%80%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20-%E0%A5%AE_dfftkn4.pdf" >Nepali-2080</a></li>
-
-
-
-							
-     <li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%97%E0%A4%A3%E0%A4%BF%E0%A4%A4%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20-%20%E0%A5%AE%20(%E0%A4%A8%E0%A5%87%E0%A4%AA%E0%A4%BE%E0%A4%B2%E0%A5%80%20%E0%A4%B8%E0%A4%82%E0%A4%B8%E0%A5%8D%E0%A4%95%E0%A4%B0%E0%A4%A3)_zwpacgp.pdf">Maths 2080</a></li>
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%97%E0%A4%A3%E0%A4%BF%E0%A4%A4%20(%E0%A4%85%E0%A4%82%E0%A4%97%E0%A5%8D%E0%A4%B0%E0%A4%9C%E0%A5%80%20%E0%A4%85%E0%A4%A8%E0%A5%81%E0%A4%B5%E0%A4%BE%E0%A4%A6)%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A5%AE_slnsxcm.pdf">Maths ( EM)</a></li>
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%B8%E0%A5%8D%E0%A4%B5%E0%A4%BE%E0%A4%B8%E0%A5%8D%E0%A4%A5%E0%A5%8D%E0%A4%AF%2C%20%E0%A4%B6%E0%A4%BE%E0%A4%B0%E0%A5%80%E0%A4%B0%E0%A4%BF%E0%A4%95%20%E0%A4%A4%E0%A4%A5%E0%A4%BE%20%E0%A4%B8%E0%A4%BF%E0%A4%B0%E0%A5%8D%E0%A4%9C%E0%A4%A8%E0%A4%BE%E0%A4%A4%E0%A5%8D%E0%A4%AE%E0%A4%95%20%E0%A4%95%E0%A4%B2%E0%A4%BE%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A5%AE%20(%E0%A4%A8%E0%A5%87%E0%A4%AA%E0%A4%BE%E0%A4%B2%E0%A5%80%20%E0%A4%B8%E0%A4%82%E0%A4%B8%E0%A5%8D%E0%A4%95%E0%A4%B0%E0%A4%A3)_xptqvop.pdf">Health 2080 </a></li>
-							
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%B8%E0%A5%8D%E0%A4%B5%E0%A4%BE%E0%A4%B8%E0%A5%8D%E0%A4%A5%E0%A5%8D%E0%A4%AF%2C%20%E0%A4%B6%E0%A4%BE%E0%A4%B0%E0%A5%80%E0%A4%B0%E0%A4%BF%E0%A4%95%20%E0%A4%A4%E0%A4%A5%E0%A4%BE%20%E0%A4%B8%E0%A4%BF%E0%A4%B0%E0%A5%8D%E0%A4%9C%E0%A4%A8%E0%A4%BE%E0%A4%A4%E0%A5%8D%E0%A4%AE%E0%A4%95%20%E0%A4%95%E0%A4%B2%E0%A4%BE%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A5%AE%20(%E0%A4%85%E0%A4%99%E0%A5%8D%E0%A4%97%E0%A5%8D%E0%A4%B0%E0%A5%87%E0%A4%9C%E0%A5%80%20%E0%A4%85%E0%A4%A8%E0%A5%81%E0%A4%B5%E0%A4%BE%E0%A4%A6)_mxy4m6m.pdf">Health (EM)</a></li>co_speechnotes_plugin_fab_id:640,212
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%B5%E0%A4%BF%E0%A4%9C%E0%A5%8D%E0%A4%9E%E0%A4%BE%E0%A4%A8%20%E0%A4%A4%E0%A4%A5%E0%A4%BE%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%B5%E0%A4%BF%E0%A4%A7%E0%A4%BF%20(%E0%A4%85%E0%A4%99%E0%A5%8D%E0%A4%97%E0%A5%8D%E0%A4%B0%E0%A5%87%E0%A4%9C%E0%A5%80%20%E0%A4%85%E0%A4%A8%E0%A5%81%E0%A4%B5%E0%A4%BE%E0%A4%A6)%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A5%AE%20(%E0%A4%95)_a3cai6y.pdf">Science (EM)</a></li>co_speechnotes_plugin_fab_id:640,212
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%9C%E0%A4%BF%E0%A4%95%20%E0%A4%85%E0%A4%A7%E0%A5%8D%E0%A4%AF%E0%A4%AF%E0%A4%A8%20%E0%A4%A4%E0%A4%A5%E0%A4%BE%20%E0%A4%AE%E0%A4%BE%E0%A4%A8%E0%A4%B5%20%E0%A4%AE%E0%A5%82%E0%A4%B2%E0%A5%8D%E0%A4%AF%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20-%E0%A5%AE%20(%E0%A4%A8%E0%A5%87%E0%A4%AA%E0%A4%BE%E0%A4%B2%E0%A5%80%20%E0%A4%B8%E0%A4%82%E0%A4%B8%E0%A5%8D%E0%A4%95%E0%A4%B0%E0%A4%A3)_lfgcjyd.pdf">Social</a></li>co_speechnotes_plugin_fab_id:640,212
-
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%B5%E0%A4%BF%E0%A4%9C%E0%A5%8D%E0%A4%9E%E0%A4%BE%E0%A4%A8%20%E0%A4%A4%E0%A4%A5%E0%A4%BE%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%B5%E0%A4%BF%E0%A4%A7%E0%A4%BF%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20-%E0%A5%AE%20(%E0%A4%96)%20%E0%A4%A8%E0%A5%87%E0%A4%AA%E0%A4%BE%E0%A4%B2%E0%A5%80%20%E0%A4%B8%E0%A4%82%E0%A4%B8%E0%A5%8D%E0%A4%95%E0%A4%B0%E0%A4%A3_piy57pg.pdf">Science</a></li>co_speechnotes_plugin_fab_id:640,212
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/3.%20Reduced-Class%208%20Social%20study%20final_nl4c3bh.pdf">Social</a></li>
-
-							
-		
-                        </ul>
-                        </li>
-                    <li class="menu-has-children"><a href="javascript:;" >Class 9 </a>
-                        <ul>
-							
-      <li><a href="https://giwmscdnone.gov.np/media/pdf_upload/6.Reduced-class%209%20Nepali_1tgrnzq.pdf">Nepali</a></li>
-      <li><a href="https://anyflip.com/ilkfk/qtbo">Account Book(EM)</a></li>
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/class%209%20population%2022%20mangsir%202082%20Final_aohanvo.pdf">Population</a></li>
-								
-      <li><a href="https://url-shortener.me/M7TC" >Social</a></li>
-     <li><a href="https://giwmscdnone.gov.np/media/pdf_upload/5.%20Reduced-class%209%20English%20final_5hjggyv.pdf">English</a></li>
-     <li><a href="https://moecdc.gov.np/storage/gallery/1672910414.pdf">Maths</a></li>
- <li><a href="https://giwmscdnone.gov.np/media/pdf_upload/Final%20opt%20math%20eng%20for%20press%209%20(2082-11-26)%201-12%20PM%20(1)_1iwtizb.pdf">Opt-Maths (EM)</a></li>
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/8.Reduced-class%209%20Science%20final_lyfjyve.pdf">Science</a></li>
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%90%E0%A4%9A%E0%A5%8D%E0%A4%9B%E0%A4%BF%E0%A4%95%20%E0%A4%97%E0%A4%A3%E0%A4%BF%E0%A4%A4%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A5%AF%2C%20%E0%A5%A8%E0%A5%A6%E0%A5%AE%E0%A5%A7_compressed_jkmpou5.pdf"></a>OPT Math</li>
-			
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/4.%20Reduced-class%209%20account%20final_9sk9qfx.pdf">Account</a></li>
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/Science%20and%20Technology%20Grade%20-9%20(English%20Translation)_v0nphvf.pdf">Science-EM</a></li>
-<li><a href="https://url-shortener.me/M80K">History</a></li>
-<li><a href="https://url-shortener.me/M8E7">वाताबरण बिज्ञान</a></li>
-<li><a href="https://url-shortener.me/M8E8">नागरिक शास्त्र</a></li>
-<li><a href="https://url-shortener.me/M8E9">Computer Science</a></li>
-<li><a href="https://url-shortener.me/M8EB">भुगोल</a></li>		
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%85%E0%A4%B0%E0%A5%8D%E0%A4%A5%E0%A4%B6%E0%A4%BE%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A5%8D%E0%A4%B0%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A5%AF_ddbtrjm.pdf">अर्थशास्त्र</a></li>
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/Computer%20Science%20Grade%209_r12pxcl.pdf">Computer Science</a></li>
-
-
-
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%B6%E0%A4%BF%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A5%AF_dkmivc2.pdf">शिक्षा 2076</a></li>	
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%B2%E0%A5%87%E0%A4%96%E0%A4%BE%E0%A4%AA%E0%A4%B0%E0%A4%BF%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%A3%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE-%E0%A5%AF_reo5kar.pdf">लेखापरिक्षण 2076 </a></li>							
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%B8%E0%A5%8D%E0%A4%B5%E0%A4%BE%E0%A4%B8%E0%A5%8D%E0%A4%A5%E0%A5%8D%E0%A4%AF%20%E0%A4%A4%E0%A4%A5%E0%A4%BE%20%E0%A4%B6%E0%A4%BE%E0%A4%B0%E0%A4%BF%E0%A4%B0%E0%A4%BF%E0%A4%95%20%E0%A4%B6%E0%A4%BF%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE-%E0%A5%AF_ocfwcgh.pdf">स्वास्थ्य तथा शारिरिक शिक्षा/a></li>	
-
-
-
-
-
-							
-                         </ul>
-                        </li>
-
-                    <li class="menu-has-children"><a href="javascript:;" >Class 10 </a>
-                    <ul>
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/class%2010%20Nepali%20Final_kjvwvtg.pdf" >Nepali</a></li>
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/9.Reduced-class%2010%20English%20Final_hsjc8bm.pdf">English</a></li>
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/Maths%20Grade%20-9%20(Nepali)_ipc05nv.pdf">Maths 2081</a></li>
-<li><a href="	https://giwmscdnone.gov.np/media/pdf_upload/Final%20OPT%20math%20class%2010%20for%20Press%20(11-16)_cljqcad.pdf">Opt-Maths</a></li>			
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/Class%2010%20Economics%20Final%20Edit%202082-11-16_ysjzl2g.pdf">Economics</a></li>					
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/2.%20Reduced-class%2010%20science%20Final%2011.2.2025_zbgnya7.pdf">Science (NM)</a></li>
-<li><a href="https://h1.nu/1v5j9">Account</a></li>
-<li><a href="https://url-shortener.me/M7TG">Social</a></li>				
-<li><a href="https://url-shortener.me/M7TE">Education</a></li>
-<li><a href="https://giwmscdnone.gov.np/media/pdf_upload/Computer%20Science%20-%20Grade%2010_tazdzp7.pdf">COMPUTER SCIENCE (EM)</a></li>	
-<li><a href="  https://giwmscdnone.gov.np/media/pdf_upload/download%20(3)_nyy1bgm.pdf">Geography</a></li>	
-                       </ul>
-                        </li>
-
-
-          
-       <li class="menu-has-children"><a href="javascript:;" >Class 11</a>
-       <ul>
-       <li><a href="#">Educational Development</a></li>
-<li><a href="#" >Child Learning</a></li><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/Optional%20English%20Grade-11_x851zhx.pdf" >Optional English</a></li>
-
-<li><a href="https://url-shortener.me/M80N" >व्यवसाय अत्ध्ययन</a></li>
-
- <li><a href="https://giwmscdnone.gov.np/media/pdf_upload/Grade%2011_account%20final_orerrsn.pdf" >लेखाविधि (कक्षा ११)</a></li>
+                <!-- TEACHER GUIDES -->
+                <li class="menu-has-children"><a href="javascript:;">Teacher Guides</a>
+                    <ul>   
+                        <li class="menu-has-children"><a href="javascript:;">Grade-1</a>
+                            <ul>
+                                <li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%B6%E0%A4%BF%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%95%20%E0%A4%A8%E0%A4%BF%E0%A4%B0%E0%A5%8D%E0%A4%A6%E0%A5%87%E0%A4%B6%E0%A4%BF%E0%A4%95%E0%A4%BE%20%E0%A4%A8%E0%A5%87%E0%A4%AA%E0%A4%BE%E0%A4%B2%E0%A5%80%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE-%E0%A5%A7_xrx7oam.pdf">Nepali-2078</a></li>
+                                <li><a href="https://giwmscdnone.gov.np/media/pdf_upload/TG-%20English%20Grade-%201_7dnmh5m.pdf">English-2022</a></li>
+                                <li><a href="https://giwmscdnone.gov.np/media/pdf_upload/TG-%20%E0%A4%AE%E0%A5%87%E0%A4%B0%E0%A5%8B%20%E0%A4%97%E0%A4%A3%E0%A4%BF%E0%A4%A4%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20-%20%E0%A5%A7_tqx5gey.pdf">Maths-2077</a></li>              
+                                <li><a href="https://giwmscdnone.gov.np/media/pdf_upload/TG-HAMRO%20SEROFERO%20TEACHER_S%20GUIDE-1_yovd8mn.pdf">Serofero-2077</a></li>
                             </ul>
                         </li>
-
-                    <li class="menu-has-children"><a href="javascript:;" >Class 12</a>
-                        <ul>
-      <li><a href="#">Educational Development</a></li>
-<li><a href="#" >Economics</a></li>
-
-            </ul>
-        </li>
-    </ul>
-
-<li class="menu-has-children"><a href="javascript:;">Grid </a>
-              <ul>   
-
-<li class="menu-has-children"><a href="javascript:;" >Class 10 </a>
-              <ul>
-                         <li><a href="https://moecdc.gov.np/storage/gallery/1704364899.pdf" >विशिष्टीकरण तालिका २०८० नेपाली (ऐच्छिक)</a></li>
-                         <li><a href="https://moecdc.gov.np/storage/gallery/1707712589.pdf">विशिष्टीकरण तालिका अर्थशास्त्र</a></li>
-                          <li><a href="https://moecdc.gov.np/storage/gallery/1704349792.pdf"> विशिष्टीकरण तालिका ऐच्छिक गणित</a></li>
-          
-                  </ul>
-                    </li>
-               
-                  </ul>
-                    </li>
-                                   
-                
-                <li class="menu-has-children"><a href="javascript:;">Tech Support</a><ul><li class="menu-has-children"><a href="javascript:;">Computer Knowledge</a><ul><li><a href="https://shamser.info.np/Computer%20Knowledge/Computer%20Knowledge%20Quize.html">Computer Science Quiz</a></li><li><a href="https://shamser.info.np/Computer%20Knowledge/History%20of%20Computer.html">History of Computer</a></li><li><a href="https://shamser.info.np/Computer%20Knowledge/Types%20of%20Computer.html">Types of Computer</a></li></ul></li><li><a href="https://emis.cehrd.gov.np/">EMIS Website</a></li><li><a href="https://epf.org.np/resource/7">EPF Forms</a></li></ul></li>
-                <li class="menu-has-children"><a href="javascript:;">Act & Rules</a><ul><li><a href="https://www.moljpa.gov.np/wp-content/uploads/2020/06/नेपालको-संविधान.pdf">संविधान</a></li><li><a href="https://hr.parliament.gov.np/uploads/attachments/kpkjoxrppjm1y2jt.pdf">शिक्षा ऐन २०२८</a></li><li><a href="https://aathraitribenimun.gov.np/sites/default/files/शिक्षा%20नियमावली%2C%20२७९.pdf">शिक्षा नियमावली २०५९</a></li></ul></li>
-                <li class="menu-has-children"><a href="javascript:;">Research</a><ul><li><a href="https://educationalresearchreport.blogspot.com/2024/08/blog-post_12.html">Project Work Report</a></li><li><a href="https://shamser.info.np/TPD.html#">TPD Project work</a></li><li><a href="https://drive.google.com/drive/folders/1K9w9Enl4RNICnNHx0ODAVYt7zhpcxvXW?usp=sharing">Seminar Paper</a></li></ul></li>
-                <li class="menu-has-children"><a href="javascript:;">Site Pages</a><ul><li><a href="https://shamser.info.np/lauro_media/project.html">Our projects</a></li><li><a href="https://bit.ly/m/Teacher-Kosh-Lalbandi">Lalbandi Teacher Kosh</a></li><li><a href="https://shamser-tech.blogspot.com/">Computer Blog</a></li><li><a href="https://shamser.info.np/Folio/index.html#">PortFolio</a></li></ul></li>
-                <li class="menu-has-children"><a href="javascript:;">IEMIS</a><ul><li><a href="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/IEMIS.v2.html">LOGIN</a></li><li><a href="https://forms.gle/8pyBMNzYhZjVw27v7">About / Register</a></li></ul></li>
+                        <li class="menu-has-children"><a href="javascript:;">Grade-2</a>
+                            <ul>
+                                <li><a href="#">Nepali (coming)</a></li>
+                                <li><a href="https://giwmscdnone.gov.np/media/pdf_upload/My%20English%20Grade%20-2_3wmsi5o.pdf">English-2021</a></li>
+                                <li><a href="https://giwmscdnone.gov.np/media/pdf_upload/RS10251_%E0%A4%B6%E0%A4%BF%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%95%20%E0%A4%A8%E0%A4%BF%E0%A4%B0%E0%A5%8D%E0%A4%A6%E0%A5%87%E0%A4%B6%E0%A4%BF%E0%A4%95%E0%A4%BE%20%E0%A4%97%E0%A4%A3%E0%A4%BF%E0%A4%A4%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A5%A8_mlktsnd.pdf">Maths-2078</a></li>
+                                <li><a href="https://giwmscdnone.gov.np/media/pdf_upload/RS10004_Grade%20Two%20Serofero%202079-01-15_bczutyw.pdf">Serofero-2077</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-has-children"><a href="javascript:;">Grade-3</a>
+                            <ul>
+                                <li><a href="https://giwmscdnone.gov.np/media/pdf_upload/RS10005_FINAL%20NEPALI%20TG%20GRADE%203%202078_g35o8yw.pdf">Nepali 2077</a></li>
+                                <li><a href="https://giwmscdnone.gov.np/media/pdf_upload/TG-%20English%20Grade%20-3_wf13clr.pdf">English 2021</a></li>
+                                <li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%B6%E0%A4%BF%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%95%20%E0%A4%A8%E0%A4%BF%E0%A4%B0%E0%A5%8D%E0%A4%A6%E0%A5%87%E0%A4%B6%E0%A4%BF%E0%A4%95%E0%A4%BE%20%E0%A4%AE%E0%A5%87%E0%A4%B0%E0%A5%8B%20%E0%A4%97%E0%A4%A3%E0%A4%BF%E0%A4%A4%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A5%A9_3nnhmxu.pdf">Maths 2078</a></li>
+                                <li><a href="https://giwmscdnone.gov.np/media/pdf_upload/RS10004_Grade%20Two%20Serofero%202079-01-15_bczutyw.pdf">Serofero-2079</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-has-children"><a href="javascript:;">Grade-4</a>
+                            <ul>
+                                <li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%A8%E0%A5%87%E0%A4%AA%E0%A4%BE%E0%A4%B2%E0%A5%80_d7bxiq3.pdf">Nepali-2080</a></li>
+                                <li><a href="https://giwmscdnone.gov.np/media/pdf_upload/TG-%20English%20Grade%20-4_pjs5ghl.pdf">English-2023</a></li>
+                                <li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%97%E0%A4%A3%E0%A4%BF%E0%A4%A4%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A5%AA%20%E0%A5%A8%E0%A5%A6%E0%A5%AE%E0%A5%A6_xeiiydh.pdf">Maths</a></li>
+                                <li><a href="https://giwmscdnone.gov.np/media/pdf_upload/RS10884_TG%20Grade%204-Science%202nd%20Design%20Draft_euxywln.pdf">Science & Tech</a></li>
+                                <li><a href="https://giwmscdnone.gov.np/media/pdf_upload/TG-%20%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%9C%E0%A4%BF%E0%A4%95%20%E0%A4%85%E0%A4%A7%E0%A5%8D%E0%A4%AF%E0%A4%AF%E0%A4%A8%20%E0%A4%A4%E0%A4%A5%E0%A4%BE%20%E0%A4%AE%E0%A4%BE%E0%A4%A8%E0%A4%B5%20%E0%A4%AE%E0%A5%82%E0%A4%B2%E0%A5%8D%E0%A4%AF%20%E0%A4%B6%E0%A4%BF%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE-%E0%A5%AA_zfjsvmd.pdf">Social-2079</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-has-children"><a href="javascript:;">Grade-5</a>
+                            <ul>
+                                <li><a href="https://giwmscdnone.gov.np/media/pdf_upload/TG-%20Nepali%20Grade-%205_q7haqbl.pdf">Nepali-2081</a></li>
+                                <li><a href="https://giwmscdnone.gov.np/media/pdf_upload/TG-(Feedback%20Copy)%20English%20Grade%20-5_kvtrljk.pdf">English-2024</a></li>
+                                <li><a href="https://giwmscdnone.gov.np/media/pdf_upload/TG-%20Mathematics%20(2024)-Grade-5_afjotwt.pdf">Maths-2081</a></li>
+                                <li><a href="https://giwmscdnone.gov.np/media/pdf_upload/TG-%20%E0%A4%B5%E0%A4%BF%E0%A4%9C%E0%A5%8D%E0%A4%9E%E0%A4%BE%E0%A4%A8%20%E0%A4%A4%E0%A4%A5%E0%A4%BE%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%B5%E0%A4%BF%E0%A4%A7%E0%A4%BF%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20-%E0%A5%AB_bkvsgcd.pdf">Science & Tech</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-has-children"><a href="javascript:;">Class-6</a>
+                            <ul><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/TG-%20Nepali%20Grade-%206_2aueryr.pdf">Nepali</a></li>
+                            <li><a href="https://giwmscdnone.gov.np/media/pdf_upload/TG-English%20Grade%20-6_an0rtxj.pdf">English</a></li>
+                            <li><a href="https://giwmscdnone.gov.np/media/pdf_upload/Teacher's%20Guide%20Mathematics%20Grade%206%20(2079)_2h33x9i.pdf">Maths-2079</a></li>
+                            <li><a href="https://giwmscdnone.gov.np/media/pdf_upload/TG-%20%E0%A4%B5%E0%A4%BF%E0%A4%9C%E0%A5%8D%E0%A4%9E%E0%A4%BE%E0%A4%A8%20%E0%A4%A4%E0%A4%A5%E0%A4%BE%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%B5%E0%A4%BF%E0%A4%A7%E0%A4%BF%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20-%20%E0%A5%AC_facemln.pdf">Science 2080</a></li></ul>
+                        </li>
+                        <li class="menu-has-children"><a href="javascript:;">Class-7</a><ul><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/TG-%20%E0%A4%86%E0%A4%A7%E0%A4%BE%E0%A4%B0%E0%A4%AD%E0%A5%82%E0%A4%A4%20%E0%A4%A4%E0%A4%B9%20%E0%A4%A8%E0%A5%87%E0%A4%AA%E0%A4%BE%E0%A4%B2%E0%A5%80%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE-%20%E0%A5%AD_jckktsd.pdf">Nepali-2080</a></li><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/TG-%20English%20Grade%207_aacywbf.pdf">English</a></li></ul></li>
+                        <li class="menu-has-children"><a href="javascript:;">Class-8</a><ul><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%B6%E0%A4%BF%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%95%20%E0%A4%A8%E0%A4%BF%E0%A4%B0%E0%A5%8D%E0%A4%A6%E0%A5%87%E0%A4%B6%E0%A4%BF%E0%A4%95%E0%A4%BE%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A5%AE%20%E0%A4%A8%E0%A5%87%E0%A4%AA%E0%A4%BE%E0%A4%B2%E0%A5%80%20(%E0%A5%A8%E0%A5%A6%E0%A5%AE%E0%A5%A7)_bjblpky.pdf">Nepali-2081</a></li><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%B6%E0%A4%BF%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%95%20%E0%A4%A8%E0%A4%BF%E0%A4%B0%E0%A5%8D%E0%A4%A6%E0%A5%87%E0%A4%B6%E0%A4%BF%E0%A4%95%E0%A4%BE%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A5%AE%20%E0%A4%85%E0%A4%82%E0%A4%97%E0%A5%8D%E0%A4%B0%E0%A5%87%E0%A4%9C%E0%A5%80%20(%E0%A5%A8%E0%A5%A6%E0%A5%AE%E0%A5%A7)_nzkud2q.pdf">English-2024</a></li></ul></li>
+                        <li class="menu-has-children"><a href="javascript:;">Class-9</a><ul><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/TG-%20%E0%A4%AE%E0%A4%BE%E0%A4%A7%E0%A5%8D%E0%A4%AF%E0%A4%BE%E0%A4%AE%E0%A4%BF%E0%A4%95%20%E0%A4%A4%E0%A4%B9-%20%E0%A4%A8%E0%A5%87%E0%A4%AA%E0%A4%BE%E0%A4%B2%E0%A5%80%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20-%20%E0%A5%AF_nwhlp0g.pdf">Nepali-2080</a></li><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/TG-%20(Feedback%20copy)%20English%20Grade-9_qghjpbp.pdf">English</a></li></ul></li>
+                        <li class="menu-has-children"><a href="javascript:;">Class-10</a><ul><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/TG-%20Nepali%20Grade-%2010_brzn6tw.pdf">Nepali-2074</a></li><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/TG-(Feedback%20Copy)%20English%20Grade%20-10_j4rz4t8.pdf">English</a></li><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%A8%E0%A4%BF%E0%A4%B0%E0%A5%8D%E0%A4%A6%E0%A5%87%E0%A4%B6%E0%A4%BF%E0%A4%95%E0%A4%BE%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A5%A7%E0%A5%A6%20%E0%A4%97%E0%A4%A3%E0%A4%BF%E0%A4%A4_4fdbqmk.pdf">Maths-2081</a></li></ul></li>
+                    </ul>
+                </li>
+                <!-- TEXTBOOK SECTION -->
+                <li class="menu-has-children"><a href="javascript:;">Textbooks</a>
+                    <ul>
+                        <li class="menu-has-children"><a href="javascript:;">Grade-1</a><ul><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%AE%E0%A5%87%E0%A4%B0%E0%A5%8B%20%E0%A4%A8%E0%A5%87%E0%A4%AA%E0%A4%BE%E0%A4%B2%E0%A5%80%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A5%A7_yj4bcfx.pdf">Nepali-2077</a></li><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%AE%E0%A5%87%E0%A4%B0%E0%A5%8B%20%E0%A4%85%E0%A4%82%E0%A4%97%E0%A5%8D%E0%A4%B0%E0%A5%87%E0%A4%9C%E0%A5%80%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A5%A7_gvf7szb.pdf">English 2078</a></li></ul></li>
+                        <li class="menu-has-children"><a href="javascript:;">Grade-2</a><ul><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/my%20nepali%20class%202_qdpkeit.pdf">Nepali-2078</a></li><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%AE%E0%A5%87%E0%A4%B0%E0%A5%8B%20%E0%A4%85%E0%A4%82%E0%A4%97%E0%A5%8D%E0%A4%B0%E0%A5%87%E0%A4%9C%E0%A5%80%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A5%A8_7aspfdj.pdf">English-2078</a></li></ul></li>
+                        <li class="menu-has-children"><a href="javascript:;">Grade-3</a><ul><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%AE%E0%A5%87%E0%A4%B0%E0%A5%8B%20%E0%A4%A8%E0%A5%87%E0%A4%AA%E0%A4%BE%E0%A4%B2%E0%A5%80%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A5%A9_tibywma.pdf">Nepali</a></li><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%AE%E0%A5%87%E0%A4%B0%E0%A5%8B%20%E0%A4%85%E0%A4%82%E0%A4%97%E0%A5%8D%E0%A4%B0%E0%A5%87%E0%A4%9C%E0%A5%80%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%20%E0%A5%A9_ipbasdw.pdf">English-2078</a></li></ul></li>
+                        <li class="menu-has-children"><a href="javascript:;">Grade-4</a><ul><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/4.Reduced-Nepali%2004_nztgffb.pdf">Nepali</a></li><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/3.%20Reducced-English%20Grade%206%20Final_fntvwhe.pdf">English</a></li><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%97%E0%A4%A3%E0%A4%BF%E0%A4%A4%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A5%AA_ksjyjha.pdf">Maths 2078</a></li></ul></li>
+                        <li class="menu-has-children"><a href="javascript:;">Grade-5</a><ul><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/Nepali%2005%20Final%20File_foagqer.pdf">Nepali</a></li><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%85%E0%A4%82%E0%A4%97%E0%A5%8D%E0%A4%B0%E0%A5%87%E0%A4%9C%E0%A5%80%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A5%AB_xkoobwo.pdf">English 2023</a></li><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%97%E0%A4%A3%E0%A4%BF%E0%A4%A4%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A5%AB%20(%E0%A4%A8%E0%A5%87%E0%A4%AA%E0%A4%BE%E0%A4%B2%E0%A5%80%20%E0%A4%B8%E0%A4%82%E0%A4%B8%E0%A5%8D%E0%A4%95%E0%A4%B0%E0%A4%A3)_3kpojvv.pdf">Maths 2080</a></li></ul></li>
+                        <li class="menu-has-children"><a href="javascript:;">Class-6</a><ul><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/4.Reduced-class%206%20Nepali%20final_hy7w99r.pdf">Nepali</a></li><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/3.%20Reducced-English%20Grade%206%20Final_fntvwhe.pdf">English</a></li></ul></li>
+                        <li class="menu-has-children"><a href="javascript:;">Class-7</a><ul><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/7.Reduced-class%207%20Nepali%20final_lnxtmxf.pdf">Nepali</a></li><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/6.%20Reduced-class%207%20English%20final_lro4mmc.pdf">English</a></li><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/0007_MathematicsGrade7EnglishTranslation_fqz5dkt.pdf">Maths (EM)</a></li></ul></li>
+                        <li class="menu-has-children"><a href="javascript:;">Class-8</a><ul><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/1.%20Reduced-class%208%20English%20final_vfiq0xm.pdf">English</a></li><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/2.%20Reduced-class%208%20nepali%20final_ahsi1f6.pdf">Nepali</a></li><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%97%E0%A4%A3%E0%A4%BF%E0%A4%A4%20%E0%A4%95%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20-%20%E0%A5%AE%20(%E0%A4%A8%E0%A5%87%E0%A4%AA%E0%A4%BE%E0%A4%B2%E0%A5%80%20%E0%A4%B8%E0%A4%82%E0%A4%B8%E0%A5%8D%E0%A4%95%E0%A4%B0%E0%A4%A3)_zwpacgp.pdf">Maths 2080</a></li></ul></li>
+                        <li class="menu-has-children"><a href="javascript:;">Class-9</a><ul><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/6.Reduced-class%209%20Nepali_1tgrnzq.pdf">Nepali</a></li><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/5.%20Reduced-class%209%20English%20final_5hjggyv.pdf">English</a></li></ul></li>
+                        <li class="menu-has-children"><a href="javascript:;">Class-10</a><ul><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/class%2010%20Nepali%20Final_kjvwvtg.pdf">Nepali</a></li><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/9.Reduced-class%2010%20English%20Final_hsjc8bm.pdf">English</a></li><li><a href="https://giwmscdnone.gov.np/media/pdf_upload/Maths%20Grade%20-9%20(Nepali)_ipc05nv.pdf">Maths 2081</a></li></ul></li>
+                        <li><a href="https://moecdc.gov.np/storage/gallery/1672910414.pdf">Class 9 Maths Full</a></li>
+                    </ul>
+                </li>
+                <li class="menu-has-children"><a href="javascript:;">Grids & Syllabus</a><ul><li><a href="https://moecdc.gov.np/storage/gallery/1704364899.pdf">Spec. Table Nepali</a></li><li><a href="https://moecdc.gov.np/storage/gallery/1707712589.pdf">Economics Grid</a></li></ul></li>
+                <li class="menu-has-children"><a href="javascript:;">ICT Support</a><ul><li><a href="https://shamser.info.np/Computer%20Knowledge/Computer%20Knowledge%20Quize.html">Computer Quiz</a></li><li><a href="https://emis.cehrd.gov.np/">EMIS Portal</a></li></ul></li>
+                <li class="menu-has-children"><a href="javascript:;">Act/Rules</a><ul><li><a href="https://www.moljpa.gov.np/wp-content/uploads/2020/06/नेपालको-संविधान.pdf">Constitution</a></li><li><a href="https://hr.parliament.gov.np/uploads/attachments/kpkjoxrppjm1y2jt.pdf">Education Act</a></li></ul></li>
+                <li class="menu-has-children"><a href="javascript:;">Research</a><ul><li><a href="https://educationalresearchreport.blogspot.com/2024/08/blog-post_12.html">Project Report</a></li><li><a href="https://shamser.info.np/articles.html">Articles</a></li></ul></li>
             </ul>
         </div>
     </div>
-</div></section>
-<div class="hero-section">
-    <h1>📖 CDC Nepal: Digital Library</h1>
-    <p>Complete Teacher Guides, Textbooks, Syllabus Grids & ICT Resources — optimized for mobile & desktop</p>
-
-
-<img src="https://giwmscdnone.gov.np/media/carousels/Ministerincdc_c0jknhq.jpeg" height="600" width="100%">
-
-	
 </div>
-<footer>© copyright reserved on shamser.info.np | Official support for CDC / MoE curriculum | All resources for educational purpose</footer>
+
+<div class="hero-section">
+    <h1>📚 CDC Nepal Official Digital Library</h1>
+    <p>Full Teacher Guides & Textbooks (Grade 1-12) – Easy navigation with right‑aligned desktop menu, margin fix, responsive design.</p>
+    <img class="feature-img" src="https://giwmscdnone.gov.np/media/carousels/Ministerincdc_c0jknhq.jpeg" alt="CDC Library">
+</div>
+
+<footer>© CDC Nepal – Curriculum Development Centre | Resources for educational purpose | Maintained by shamser.info.np</footer>
+
+<div class="modal-overlay" id="infoModal">
+    <div class="modal-container">
+        <div class="modal-header"><h3>📚 Welcome to Digital Library</h3><button class="modal-close" id="closeModalBtn">&times;</button></div>
+        <div class="modal-body"><p>✅ Menu now aligned perfectly (right margin 10px spacing via flex-end), all Teacher Guides & Textbooks accessible.</p><p>📖 Use the top navigation to explore guides by grade and textbooks.</p></div>
+    </div>
+</div>
 
 <script>
-    // MOBILE MENU: TOGGLE + DROPDOWN HANDLER for touch/click
     const toggleBtn = document.getElementById('mobileMenuToggle');
     const menuContainer = document.getElementById('menuWrapper');
-
     if (toggleBtn) {
         toggleBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             menuContainer.classList.toggle('open');
         });
     }
-
-    // Mobile: For nested dropdowns - add toggle capability for submenus on touch
     function setupMobileSubmenus() {
-        const isMobileView = window.matchMedia('(max-width: 900px)').matches;
-        const allParentItems = document.querySelectorAll('.menu-has-children');
-        
-        allParentItems.forEach(parent => {
+        const isMobile = window.matchMedia('(max-width: 900px)').matches;
+        document.querySelectorAll('.menu-has-children').forEach(parent => {
             const link = parent.querySelector(':scope > a');
-            const subMenu = parent.querySelector(':scope > ul');
-            if (!link || !subMenu) return;
-            
-            // remove existing listeners to avoid duplication
-            link.removeEventListener('click', mobileSubmenuHandler);
-            if (isMobileView) {
-                link.addEventListener('click', mobileSubmenuHandler);
+            if (!link) return;
+            const newLink = link.cloneNode(true);
+            if (link.parentNode) link.parentNode.replaceChild(newLink, link);
+            if (isMobile) {
+                newLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const parentLi = newLink.closest('.menu-has-children');
+                    if (parentLi) {
+                        const isOpen = parentLi.classList.contains('open-mobile');
+                        document.querySelectorAll('.menu-has-children.open-mobile').forEach(el => { if (el !== parentLi) el.classList.remove('open-mobile'); });
+                        if (!isOpen) parentLi.classList.add('open-mobile');
+                        else parentLi.classList.remove('open-mobile');
+                    }
+                });
             } else {
-                // cleanup desktop mode
-                parent.classList.remove('open-mobile');
-                if (subMenu.style.display) subMenu.style.display = '';
+                if (parent.classList.contains('open-mobile')) parent.classList.remove('open-mobile');
             }
         });
-        
-        function mobileSubmenuHandler(e) {
-            if (window.matchMedia('(max-width: 900px)').matches) {
-                e.preventDefault();
-                e.stopPropagation();
-                const parentLi = this.parentElement;
-                const sub = parentLi.querySelector(':scope > ul');
-                if (sub) {
-                    const isOpen = parentLi.classList.contains('open-mobile');
-                    // close siblings at same level
-                    const siblings = parentLi.parentElement.children;
-                    for (let sibling of siblings) {
-                        if (sibling !== parentLi && sibling.classList.contains('menu-has-children')) {
-                            sibling.classList.remove('open-mobile');
-                        }
-                    }
-                    if (!isOpen) {
-                        parentLi.classList.add('open-mobile');
-                    } else {
-                        parentLi.classList.remove('open-mobile');
-                    }
-                }
-            }
-        }
     }
-    
     window.addEventListener('resize', () => {
         if (window.matchMedia('(min-width: 901px)').matches) {
             document.querySelectorAll('.menu-has-children').forEach(el => el.classList.remove('open-mobile'));
@@ -811,15 +582,22 @@
         }
         setupMobileSubmenus();
     });
-    setupMobileSubmenus();
-    // close menu when clicking outside
-    document.addEventListener('click', function(e) {
-        if (menuContainer && menuContainer.classList.contains('open')) {
-            if (!menuContainer.contains(e.target) && !toggleBtn.contains(e.target)) {
+    document.addEventListener('DOMContentLoaded', () => {
+        setupMobileSubmenus();
+        document.addEventListener('click', (e) => {
+            if (menuContainer?.classList.contains('open') && !menuContainer.contains(e.target) && !toggleBtn.contains(e.target)) {
                 menuContainer.classList.remove('open');
             }
+        });
+        const modal = document.getElementById('infoModal');
+        const closeModal = document.getElementById('closeModalBtn');
+        if (modal) {
+            modal.classList.add('active');
+            closeModal.addEventListener('click', () => modal.classList.remove('active'));
+            modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
         }
     });
+    document.querySelectorAll('a[href^="http"]').forEach(a => { if (!a.target) a.target = '_blank'; });
 </script>
 </body>
 </html>
