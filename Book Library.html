@@ -330,6 +330,34 @@ footer {
         font-size: 10px;
         opacity: 0.7;
     }
+
+    /* NEW HIDE/SHOW BEHAVIOR: Only active menu (or hovered) shows its submenus, others collapsed */
+    .nav-menu .menu-has-children > ul {
+        display: none !important;
+    }
+    
+    /* When a top-level menu item is hovered, show its direct submenu */
+    .nav-menu .menu-has-children:hover > ul {
+        display: block !important;
+    }
+    
+    /* For nested submenus: when hovering over parent that is already inside a visible submenu, show deeper levels */
+    .nav-menu .menu-has-children > ul .menu-has-children:hover > ul {
+        display: block !important;
+    }
+    
+    /* Ensure that when hovering out, only the intended submenu remains visible */
+    /* This creates a clean "hide other menus" effect naturally via :hover */
+    
+    /* Also support active class for click selection (optional, but keeps consistency) */
+    .nav-menu .menu-has-children.active-menu > ul {
+        display: block !important;
+    }
+    
+    /* When an item has active class, maintain its submenu visibility, but still allow hover */
+    .nav-menu .menu-has-children.active-menu:hover > ul {
+        display: block !important;
+    }
 }
 
 /* MOBILE STYLES - ALL SUBMENUS ACCESSIBLE VIA TOGGLE */
