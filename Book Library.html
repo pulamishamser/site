@@ -68,6 +68,30 @@
     }
 }
 
+
+@media (max-width: 768px) {
+    .menu-bar {
+        display: block;
+        width: 100%;
+    }
+    .menu-bar ul {
+        flex-direction: column;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 /* Ensure all menus are visible */
 .nav-menu, .nav-menu ul {
     list-style: none;
@@ -652,6 +676,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 document.querySelectorAll('a[href^="http"]').forEach(a => { if (!a.target) a.target = '_blank'; });
+
+
+
+document.querySelector('.hamburger').onclick = function() {
+    document.querySelector('.mobile-menu').style.display = 'block';
+};
+    
 </script>
 </body>
 </html>
