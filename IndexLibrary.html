@@ -635,8 +635,8 @@ nav-container {
  <div class="col-sm-12">
 
   <center>
-<div class="container footer">
-    <div class="main-nav">
+<div class="container- footer">
+    
         <div class="logo-area">
             <div class="brand">
                 <a href="https://moecdc.gov.np/" target="_blank">
@@ -649,7 +649,7 @@ nav-container {
                         <img src="https://giwmscdnone.gov.np/static/grapejs/img/Nepal-flag.gif" width="32" alt="flag">
                     </div>
                 </div>
-            </div>
+     
 
  </div>   
 </center>
@@ -1334,11 +1334,135 @@ https://giwmscdnone.gov.np/media/pdf_upload/%E0%A4%86%E0%A4%A7%E0%A4%BE%E0%A4%B0
   </div>
 </header>
 
-    
-		<div class="hero-section>    <h1>📚Digital Book Library</h1>
-    <p>Full Teacher Guides & Textbooks (Grade 1-12) – General & Technical and vocational stream.</p>
+
+	
+<div class="hero-section">
+    <h1>📚 CDC Nepal Official Digital Library</h1>
+    <p>Full Teacher Guides & Textbooks (Grade 1-12 General and Technical and Vocational Stream) and other Resources</p>
     <img class="feature-img" src="https://giwmscdnone.gov.np/media/carousels/Ministerincdc_c0jknhq.jpeg" alt="CDC Library">
+</div>
+
 <footer>© CDC Nepal – Curriculum Development Centre | Resources for educational purpose | Maintained by shamser.info.np</footer>
+
+<div class="modal-overlay" id="infoModal">
+    <div class="modal-container">
+        <div class="modal-header"><h3>📚 Welcome to Digital Library</h3><button class="modal-close" id="closeModalBtn">&times;</button></div>
+        <div class="modal-body"><p>✅ All Teacher Guides & Textbooks accessible (Grade 1-12)</p></div>
+    </div>
+</div>
+
+<script>
+function initMobileMenu() {
+    var menuContainer = document.getElementById('nav-menu-container');
+    var menuToggle = document.getElementById('mobileMenuToggle');
+    var menuClose = document.getElementById('mobileMenuCloseBtn');
+    var overlay = document.getElementById('mobileMenuOverlay');
+    
+    if (!menuToggle) return;
+    
+    function openMenu() {
+        menuContainer.classList.add('mobile-open');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeMenu() {
+        menuContainer.classList.remove('mobile-open');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    menuToggle.addEventListener('click', openMenu);
+    if (menuClose) menuClose.addEventListener('click', closeMenu);
+    if (overlay) overlay.addEventListener('click', closeMenu);
+    
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && menuContainer && menuContainer.classList.contains('mobile-open')) {
+            closeMenu();
+        }
+    });
+    
+    function attachMobileSubmenuEvents() {
+        var isMobile = window.matchMedia('(max-width: 900px)').matches;
+        var allParents = document.querySelectorAll('.menu-has-children');
+        
+        allParents.forEach(function(parent) {
+            var link = parent.querySelector(':scope > a');
+            if (!link) return;
+            
+            var newLink = link.cloneNode(true);
+            if (link.parentNode) link.parentNode.replaceChild(newLink, link);
+            
+            if (isMobile) {
+                newLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    parent.classList.toggle('open-mobile');
+                });
+            } else {
+                parent.classList.remove('open-mobile');
+            }
+        });
+    }
+    
+    attachMobileSubmenuEvents();
+    
+    window.addEventListener('resize', function() {
+        if (window.matchMedia('(min-width: 901px)').matches) {
+            var allParents = document.querySelectorAll('.menu-has-children');
+            for (var i = 0; i < allParents.length; i++) {
+                allParents[i].classList.remove('open-mobile');
+            }
+        }
+        attachMobileSubmenuEvents();
+    });
+}
+
+function initModal() {
+    var modal = document.getElementById('infoModal');
+    var closeModal = document.getElementById('closeModalBtn');
+    if (modal) {
+        modal.classList.add('active');
+        if (closeModal) {
+            closeModal.addEventListener('click', function() { modal.classList.remove('active'); });
+        }
+        modal.addEventListener('click', function(e) { if (e.target === modal) modal.classList.remove('active'); });
+    }
+}
+
+function initExternalLinks() {
+    var links = document.querySelectorAll('a[href^="http"]');
+    for (var i = 0; i < links.length; i++) {
+        var a = links[i];
+        if (!a.target && a.href.indexOf('javascript:') === -1) {
+            a.target = '_blank';
+            a.rel = 'noopener noreferrer';
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    initMobileMenu();
+    initModal();
+    initExternalLinks();
+});
+</script>
+
+
+			
+
+			
+
+
+			
+
+			
+
+
+
+			
+			
+			<footer>© CDC Nepal – Curriculum Development Centre | Resources for educational purpose | Maintained by shamser.info.np</footer>
 	  <!----footer---------------->                                    
  <div class="container footer">
      <div class="container">
