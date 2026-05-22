@@ -12,7 +12,6 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Poppins', 'Segoe UI', 'Arial', sans-serif;
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
@@ -27,7 +26,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: #FDFBFB;
             backdrop-filter: blur(8px);
             z-index: 9999;
             display: flex;
@@ -433,8 +432,8 @@
             
             <div class="diary-content">
                 <div class="organization">
-                    <h3>लालबद्धी नगरपालिका</h3>
-                    <p>सलीही</p>
+                    <h3>लालबन्दी नगरपालिका</h3>
+                    <p>सर्लाही</p>
                 </div>
                 
                 <div class="contact-info">
@@ -476,11 +475,11 @@
             
             <button class="close-btn" onclick="closePopup()">
                 <i class="fas fa-chalkboard-teacher"></i>
-                प्रवेश गर्नुहोस्
+          Go to site
             </button>
             
             <div class="diary-footer">
-                <i class="fas fa-heart" style="color: #ff6b6b;"></i> शिक्षक डायरी प्रणाली
+                <i class="fas fa-heart" style="color: #ff6b6b;"></i>Smart Digital Dairy System
             </div>
         </div>
     </div>
@@ -544,7 +543,7 @@
                         <div class="input-group">
                             <label>कक्षा</label>
                             <select id="class" required>
-                                <option value="">कक्षा चयन गर्नुहोस्</option>
+                                <option value="">कक्षा छान्नु गर्नुहोस्</option>
                                 <option>कक्षा १</option><option>कक्षा २</option><option>कक्षा ३</option>
                                 <option>कक्षा ४</option><option>कक्षा ५</option><option>कक्षा ६</option>
                                 <option>कक्षा ७</option><option>कक्षा ८</option><option>कक्षा ९</option>
@@ -629,7 +628,7 @@
                             <textarea id="yearAssessment" rows="3"></textarea>
                         </div>
                     </div>
-                    <button type="submit" class="btn-submit"><i class="fas fa-save"></i> वार्षिक योजना सुरक्षित गर्नुहोस्</button>
+                    <button type="submit" class="btn-submit"><i class="fas fa-save"></i> वार्षिक योजना सेभ गर्नुहोस्</button>
                 </form>
             </div>
         </div>
@@ -767,7 +766,7 @@
                 </div>
                 <div class="action-buttons">
                     <button class="btn-action btn-print" onclick="printLessonPlan()"><i class="fas fa-print"></i> प्रिन्ट गर्नुहोस्</button>
-                    <button class="btn-action btn-download" onclick="downloadAsImage()"><i class="fas fa-download"></i> छवि डाउनलोड गर्नुहोस्</button>
+                    <button class="btn-action btn-download" onclick="downloadAsImage()"><i class="fas fa-download"></i> डाउनलोड गर्नुहोस्</button>
                 </div>
             </div>
         `;
@@ -875,9 +874,9 @@
             link.download = `Lesson_Plan_${Date.now()}.jpg`;
             link.href = canvas.toDataURL('image/jpeg', 0.95);
             link.click();
-            showToast('✓ छवि डाउनलोड गरियो!', 'success');
+            showToast('✓Downloaded img!', 'success');
         } catch (error) {
-            showToast('त्रुटि: छवि बनाउन सकिएन', 'error');
+            showToast('Error:Couldnot make img', 'error');
         }
         showLoading(false);
     }
