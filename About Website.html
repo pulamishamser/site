@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Shamser Info | Flipcard Gallery – Educational Tools & Resources</title>
+  <!-- Google Fonts for clean typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 (free) for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(145deg, #f0f7ff 0%, #e9f0fa 100%);
+      font-family: 'Inter', sans-serif;
+      color: #1a2c3e;
+      line-height: 1.4;
+    }
+
+    /* modern container with soft edges */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem 1.8rem 4rem;
+    }
+
+    /* header with flair */
+    .hero {
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #1e3c72, #2b4c7c);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+    .hero .tagline {
+      font-size: 1.2rem;
+      color: #2c5a7a;
+      background: rgba(255,255,240,0.7);
+      display: inline-block;
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      backdrop-filter: blur(2px);
+      margin-top: 0.5rem;
+      font-weight: 500;
+    }
+    .hero p {
+      max-width: 700px;
+      margin: 1rem auto 0;
+      color: #2c3e4e;
+      font-weight: 400;
+      font-size: 1rem;
+    }
+    .badge-nepal {
+      background: #ffffffcc;
+      border-radius: 60px;
+      padding: 0.2rem 1rem;
+      width: fit-content;
+      margin: 1rem auto 0;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #1f6392;
+      backdrop-filter: blur(4px);
+    }
+
+    /* ----- FLIPCARD GRID (dynamic, responsive) ----- */
+    .flip-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 2rem;
+      margin: 2.5rem 0 3rem;
+    }
+
+    /* flip card container */
+    .flip-card {
+      background-color: transparent;
+      width: 100%;
+      height: 380px;
+      perspective: 1500px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .flip-card:hover {
+      transform: translateY(-5px);
+    }
+
+    /* inner 3D wrapper */
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+      transform-style: preserve-3d;
+      border-radius: 28px;
+      box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* flip on hover (desktop & touch friendly) */
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    /* Front & back panel styling */
+    .flip-front, .flip-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 28px;
+      padding: 1.8rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
+      background: white;
+    }
+
+    /* FRONT SIDE design */
+    .flip-front {
+      background: linear-gradient(145deg, #ffffff, #fefefe);
+      border: 1px solid rgba(60, 110, 145, 0.2);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+    }
+    .icon-circle {
+      background: #eef3fc;
+      width: 85px;
+      height: 85px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.8rem;
+      font-size: 2.8rem;
+      color: #1f6e9c;
+      transition: all 0.2s;
+      box-shadow: 0 5px 12px rgba(0,0,0,0.05);
+    }
+    .flip-front h3 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+      color: #1f4468;
+    }
+    .flip-front p {
+      font-size: 0.95rem;
+      color: #445e77;
+      margin-bottom: 1.5rem;
+      line-height: 1.4;
+    }
+    .flip-hint {
+      font-size: 0.75rem;
+      background: #d9e9fb;
+      padding: 0.3rem 0.9rem;
+      border-radius: 40px;
+      color: #1f5a7e;
+      font-weight: 500;
+      margin-top: auto;
+    }
+
+    /* BACK SIDE (flipped) */
+    .flip-back {
+      background: linear-gradient(125deg, #1f3f5c, #1b344b);
+      color: white;
+      transform: rotateY(180deg);
+      justify-content: space-between;
+      text-align: left;
+      align-items: flex-start;
+    }
+    .back-content {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .back-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      border-left: 4px solid #ffc857;
+      padding-left: 12px;
+      margin-bottom: 1.2rem;
+    }
+    .feature-list {
+      list-style: none;
+      margin: 1rem 0;
+      flex: 1;
+    }
+    .feature-list li {
+      margin-bottom: 0.85rem;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 400;
+      line-height: 1.3;
+    }
+    .feature-list li i {
+      width: 24px;
+      color: #ffd966;
+      font-size: 1rem;
+    }
+    .back-footer {
+      font-size: 0.7rem;
+      background: rgba(255,255,240,0.15);
+      padding: 0.5rem 0.8rem;
+      border-radius: 30px;
+      width: 100%;
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+
+    /* IEMIS special badge */
+    .badge-new {
+      background: #ffc10720;
+      border-radius: 30px;
+      padding: 0.2rem 0.6rem;
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: #ffd966;
+      margin-left: 8px;
+    }
+
+    /* section spacing & additional info */
+    .info-bar {
+      text-align: center;
+      margin-top: 2rem;
+      background: #ffffffee;
+      border-radius: 60px;
+      padding: 1.2rem 2rem;
+      backdrop-filter: blur(4px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      align-items: center;
+      border: 1px solid rgba(90, 140, 170, 0.3);
+    }
+    .support-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #1f4b6e;
+    }
+    .support-item i {
+      font-size: 1.3rem;
+      color: #2c7cb6;
+    }
+    .contact-info {
+      font-family: monospace;
+      background: #eef3fc;
+      padding: 0.2rem 0.8rem;
+      border-radius: 40px;
+      font-size: 0.85rem;
+    }
+
+    /* responsive adjustments */
+    @media (max-width: 780px) {
+      .container {
+        padding: 1rem 1rem 2rem;
+      }
+      .flip-card {
+        height: 400px;
+      }
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .info-bar {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+        border-radius: 28px;
+      }
+    }
+
+    /* optional focus for accessibility */
+    .flip-card:focus-visible .flip-card-inner {
+      transform: rotateY(180deg);
+      outline: 2px solid #ffb74d;
+    }
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      font-size: 0.8rem;
+      color: #4f6f8f;
+      border-top: 1px solid #caddf0;
+      padding-top: 2rem;
+    }
+    a {
+      text-decoration: none;
+      color: #2c7cb6;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="hero">
+    <h1>📚 shamser.info.np</h1>
+    <div class="tagline">
+      <i class="fas fa-chalkboard-user"></i> Technology-friendly education · Nepal
+    </div>
+    <p>Empowering community schools with IEMIS, exam tools, TSC prep, and creative Edu-tech.</p>
+    <div class="badge-nepal">
+      <i class="fas fa-map-marker-alt"></i> Dim Janta Secondary School · Lauro Media
+    </div>
+  </div>
+
+  <!-- dynamic flipcard grid - 6 core features of the portal -->
+  <div class="flip-grid">
+    <!-- Card 1: IEMIS Integrated Exam -->
+    <div class="flip-card" tabindex="0">
+      <div class="flip-card-inner">
+        <div class="flip-front">
+          <div class="icon-circle"><i class="fas fa-chart-line"></i></div>
+          <h3>IEMIS</h3>
+          <p>Integrated Exam Management Information System</p>
+          <div class="flip-hint"><i class="fas fa-sync-alt"></i> Hover to flip →</div>
+        </div>
+        <div class="flip-back">
+          <div class="back-content">
+            <div class="back-title">📊 IEMIS Suite</div>
+            <ul class="feature-list">
+              <li><i class="fas fa-pen-fancy"></i> Online marks entry & Excel upload</li>
+              <li><i class="fas fa-id-card"></i> Generate gradesheets, admit cards, ledgers</li>
+              <li><i class="fas fa-download"></i> Students check results & download PDF</li>
+              <li><i class="fas fa-school"></i> Real-time result sheets & analytics</li>
+            </ul>
+            <div class="back-footer">Used by dozens of community schools</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: Educational Content + TSC prep -->
+    <div class="flip-card" tabindex="0">
+      <div class="flip-card-inner">
+        <div class="flip-front">
+          <div class="icon-circle"><i class="fas fa-graduation-cap"></i></div>
+          <h3>Study Materials</h3>
+          <p>Computer knowledge, TSC, school subjects</p>
+          <div class="flip-hint"><i class="fas fa-sync-alt"></i> Hover to flip →</div>
+        </div>
+        <div class="flip-back">
+          <div class="back-content">
+            <div class="back-title">📖 Learning Hub</div>
+            <ul class="feature-list">
+              <li><i class="fas fa-laptop-code"></i> Computer history & basic IT skills</li>
+              <li><i class="fas fa-chalkboard"></i> School-level: science, maths, English</li>
+              <li><i class="fas fa-file-alt"></i> Teacher Service Commission (TSC) prep</li>
+              <li><i class="fas fa-newspaper"></i> Educational articles & book reviews</li>
+            </ul>
+            <div class="back-footer">Updated notes & question banks</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3: School Support Tools (ID, result publishing, database) -->
+    <div class="flip-card" tabindex="0">
+      <div class="flip-card-inner">
+        <div class="flip-front">
+          <div class="icon-circle"><i class="fas fa-tools"></i></div>
+          <h3>School Tools</h3>
+          <p>ID card generator, letterpad, DB manager</p>
+          <div class="flip-hint"><i class="fas fa-sync-alt"></i> Hover to flip →</div>
+        </div>
+        <div class="flip-back">
+          <div class="back-content">
+            <div class="back-title">🛠️ Admin Suite</div>
+            <ul class="feature-list">
+              <li><i class="fas fa-id-badge"></i> Instant student & staff ID card generator</li>
+              <li><i class="fas fa-chart-simple"></i> Result publishing in one click</li>
+              <li><i class="fas fa-layer-group"></i> Multi-letterpad support (official templates)</li>
+              <li><i class="fas fa-database"></i> Student & teacher database management</li>
+            </ul>
+            <div class="back-footer">Simplify daily school operations</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4: News & Educational Updates -->
+    <div class="flip-card" tabindex="0">
+      <div class="flip-card-inner">
+        <div class="flip-front">
+          <div class="icon-circle"><i class="fas fa-bullhorn"></i></div>
+          <h3>Edu-News</h3>
+          <p>School activities & national updates</p>
+          <div class="flip-hint"><i class="fas fa-sync-alt"></i> Hover to flip →</div>
+        </div>
+        <div class="flip-back">
+          <div class="back-content">
+            <div class="back-title">📰 Info & Updates</div>
+            <ul class="feature-list">
+              <li><i class="fas fa-school-circle-check"></i> Local school events & achievements</li>
+              <li><i class="fas fa-newspaper"></i> Nepal educational policy news</li>
+              <li><i class="fas fa-microphone-alt"></i> Interviews with educators & articles</li>
+              <li><i class="fas fa-book-open"></i> Book reviews & creative writing</li>
+            </ul>
+            <div class="back-footer">Stay informed, stay connected</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5: Technology-friendly & Creative Platform -->
+    <div class="flip-card" tabindex="0">
+      <div class="flip-card-inner">
+        <div class="flip-front">
+          <div class="icon-circle"><i class="fas fa-lightbulb"></i></div>
+          <h3>Tech Innovation</h3>
+          <p>Digital transformation for community schools</p>
+          <div class="flip-hint"><i class="fas fa-sync-alt"></i> Hover to flip →</div>
+        </div>
+        <div class="flip-back">
+          <div class="back-content">
+            <div class="back-title">🚀 Edu-Tech Vision</div>
+            <ul class="feature-list">
+              <li><i class="fas fa-globe"></i> Paperless exam workflow & instant results</li>
+              <li><i class="fas fa-mobile-alt"></i> Mobile-friendly student portal</li>
+              <li><i class="fas fa-chalkboard-user"></i> Creative, fair information sharing</li>
+              <li><i class="fab fa-youtube"></i> Lauro Media integration & tutorials</li>
+            </ul>
+            <div class="back-footer">Shamser Pulami's commitment to digital Nepal</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 6: Support & Collaboration (Dim Janta, Lauro media) -->
+    <div class="flip-card" tabindex="0">
+      <div class="flip-card-inner">
+        <div class="flip-front">
+          <div class="icon-circle"><i class="fas fa-handshake"></i></div>
+          <h3>Community Support</h3>
+          <p>Dim Janta SS & Lauro Media</p>
+          <div class="flip-hint"><i class="fas fa-sync-alt"></i> Hover to flip →</div>
+        </div>
+        <div class="flip-back">
+          <div class="back-content">
+            <div class="back-title">🤝 Partners & Credits</div>
+            <ul class="feature-list">
+              <li><i class="fas fa-school-flag"></i> Dim Janta Secondary School – pilot partner</li>
+              <li><i class="fab fa-youtube"></i> Lauro Media – video resources & promotion</li>
+              <li><i class="fas fa-phone-alt"></i> 📞 984-4087012 (support contact)</li>
+              <li><i class="fab fa-blogger"></i> Blogger: lauro-media (dynamic flipcard)</li>
+            </ul>
+            <div class="back-footer"><i class="fas fa-heart" style="color:#ffb347;"></i> Open collaboration for rural schools</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- additional information row mimicking website purpose and contact -->
+  <div class="info-bar">
+    <div class="support-item"><i class="fas fa-bullseye"></i> <span><strong>Mission:</strong> Improve community school education & fair info sharing</span></div>
+    <div class="support-item"><i class="fab fa-youtube"></i> <span>YouTube: <strong>lauro_media</strong></span></div>
+    <div class="support-item"><i class="fas fa-mobile-alt"></i> <span class="contact-info"><i class="fas fa-phone"></i> 984-4087012</span></div>
+    <div class="support-item"><i class="fab fa-blogger"></i> <span>lauro-media (dynamic flipcard)</span></div>
+  </div>
+
+  <footer>
+    <p>📌 <strong>shamser.info.np</strong> — Exam management, TSC preparation, ID card generator & school news. Technology-friendly educational communication platform.<br>
+    © 2025 | Designed with flipcard interaction | All school support tools accessible online</p>
+  </footer>
+</div>
+
+<!-- small script for optional touch + keyboard accessibility (keeps flip consistent on click/tap for touch devices) -->
+<script>
+  // Enhance for touch devices: tapping a flip-card toggles flip on mobile.
+  // also ensures that if users click on cards, flip state remains consistent.
+  // We won't break hover; just add double-click prevention.
+  const cards = document.querySelectorAll('.flip-card');
+  cards.forEach(card => {
+    card.addEventListener('click', function(e) {
+      // avoid toggle if user clicks inner link or maybe interfering.
+      // On touch devices where hover is not persistent, we simulate.
+      // Let's check if we are on a device that likely supports hover? 
+      // For simplicity, we don't want to remove the natural hover but on touch we add class toggling.
+      // But better: toggle a temporary class? but hover already works on modern mobile browsers using 'ontouchstart' 
+      // but sometimes fails. However, we apply a manual CSS rotation via extra class if needed.
+      // Alternative: for any click, if device doesn't support fine pointer, we toggle.
+      const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      if (isTouch) {
+        // Toggle flip effect manually: find inner and toggle active class
+        const inner = card.querySelector('.flip-card-inner');
+        if (inner.style.transform === 'rotateY(180deg)' || getComputedStyle(inner).transform !== 'none' && getComputedStyle(inner).transform.includes('matrix') && !getComputedStyle(inner).transform.includes('0, 0')) {
+          // but easier: we set/unset data-flipped
+          if (card.getAttribute('data-flipped') === 'true') {
+            inner.style.transform = '';
+            card.setAttribute('data-flipped', 'false');
+          } else {
+            inner.style.transform = 'rotateY(180deg)';
+            card.setAttribute('data-flipped', 'true');
+          }
+        } else {
+          inner.style.transform = 'rotateY(180deg)';
+          card.setAttribute('data-flipped', 'true');
+        }
+        // prevent event from bubbling random
+        e.stopPropagation();
+      }
+    });
+    // On hover reset for mouse when using manual transform (only for touch we keep control)
+    card.addEventListener('mouseleave', function() {
+      const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      if (isTouch && card.getAttribute('data-flipped') === 'true') {
+        // do not override intentional flip
+        return;
+      }
+      if (!isTouch) {
+        // default behavior by CSS will handle
+        const inner = card.querySelector('.flip-card-inner');
+        if (inner.style.transform) inner.style.transform = '';
+      }
+    });
+  });
+  // reset any manual transforms on window resize to avoid visual glitches
+  window.addEventListener('resize', () => {
+    if ('ontouchstart' in window) {
+      cards.forEach(card => {
+        const inner = card.querySelector('.flip-card-inner');
+        if (card.getAttribute('data-flipped') !== 'true') {
+          inner.style.transform = '';
+        }
+      });
+    }
+  });
+</script>
+</body>
+</html>
