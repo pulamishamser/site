@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>दैनिक पाठ योजना | विद्यालय शैक्षिक योजना प्रणाली</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Roboto', 'Noto Sans', system-ui, sans-serif;
+        }
+        body {
+            background: #eef2f7;
+            padding: 24px 20px;
+        }
+        .app-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .tabs-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            background: white;
+            border-radius: 48px 48px 20px 20px;
+            padding: 8px 24px 0 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 12px 28px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 40px 40px 16px 16px;
+            cursor: pointer;
+            color: #2c3e50;
+            transition: 0.2s;
+        }
+        .tab-btn:hover { background: #e2e8f0; }
+        .tab-btn.active {
+            background: #1e3a5f;
+            color: white;
+        }
+        .panel {
+            display: none;
+            background: white;
+            border-radius: 32px;
+            margin-top: 24px;
+            padding: 28px 32px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+        }
+        .panel.active-panel { display: block; }
+        .basic-info-card {
+            background: #f8fafc;
+            border-radius: 28px;
+            padding: 18px 24px;
+            margin-bottom: 28px;
+            border: 1px solid #e2edf2;
+        }
+        .info-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .info-field {
+            flex: 1;
+            min-width: 170px;
+        }
+        .info-field label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #1e4a76;
+            letter-spacing: 0.5px;
+            display: block;
+            margin-bottom: 6px;
+        }
+        .info-field input, .info-field select {
+            width: 100%;
+            padding: 10px 16px;
+            border-radius: 40px;
+            border: 1px solid #cbdcec;
+            background: white;
+            font-size: 0.9rem;
+        }
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #0f2b3d;
+            margin: 28px 0 20px 0;
+            border-left: 6px solid #2c5282;
+            padding-left: 18px;
+        }
+        .daily-form-card {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 10px 0;
+        }
+        .row-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            margin-bottom: 24px;
+            align-items: flex-end;
+        }
+        .field-group {
+            flex: 1;
+            min-width: 180px;
+        }
+        .field-group label {
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 0.8rem;
+            display: block;
+            margin-bottom: 6px;
+        }
+        input, select, textarea {
+            border-radius: 24px;
+            border: 1px solid #cfdfed;
+            padding: 10px 16px;
+            font-size: 0.9rem;
+            width: 100%;
+            background: white;
+        }
+        textarea { min-height: 70px; resize: vertical; }
+        .submit-btn {
+            background: #1e3a5f;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 60px;
+            cursor: pointer;
+            margin-top: 32px;
+            transition: 0.2s;
+            width: 100%;
+        }
+        .submit-btn:hover { background: #0f2c48; transform: translateY(-1px); }
+        .status-msg {
+            margin-top: 20px;
+            padding: 12px 20px;
+            border-radius: 60px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        .status-msg.success { background: #d4edda; color: #155724; border-left: 5px solid #2e7d32; }
+        .status-msg.error { background: #f8d7da; color: #721c24; border-left: 5px solid #c62828; }
+        .status-msg.loading { background: #e9ecef; color: #2c3e50; }
+        .info-note {
+            font-size: 0.7rem;
+            background: #ecf3f9;
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 40px;
+            color: #1e4a76;
+            margin-top: 12px;
+        }
+        hr {
+            margin: 20px 0;
+            border-color: #e2edf2;
+        }
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 20px 0 15px;
+            border-radius: 24px;
+            border: 1px solid #e2edf2;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+            min-width: 800px;
+        }
+        table th {
+            background: #1e3a5f;
+            color: white;
+            padding: 12px 8px;
+            font-weight: 600;
+            text-align: center;
+        }
+        table td {
+            border: 1px solid #cbdce6;
+            padding: 10px 6px;
+            vertical-align: top;
+        }
+        table input, table textarea, table select {
+            width: 100%;
+            border-radius: 20px;
+            padding: 6px 10px;
+            font-size: 0.75rem;
+        }
+        .delete-row {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+        .add-row-btn {
+            background: #2c7a4d;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 40px;
+            cursor: pointer;
+            margin-top: 8px;
+            margin-right: 12px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 700px) {
+            .panel { padding: 20px; }
+            .info-grid { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+<div class="app-container">
+    <div class="tabs-bar">
+        <button class="tab-btn active" data-tab="daily">📖 दैनिक पाठ योजना</button>
+        <button class="tab-btn" data-tab="annual">📅 वार्षिक योजना</button>
+        <button class="tab-btn" data-tab="unit">📚 एकाइ योजना</button>
+        <button class="tab-btn" data-tab="calendar">🗓 सञ्चालन क्यालेन्डर</button>
+    </div>
+
+    <!-- ===================== DAILY LESSON PANEL ===================== -->
+    <div id="dailyPanel" class="panel active-panel">
+        <div class="basic-info-card">
+            <div class="info-grid">
+                <div class="info-field"><label>शैक्षिक वर्ष (Academic Year)</label><input type="text" id="academicYear" placeholder="२०८२ / 2025"></div>
+                <div class="info-field"><label>विद्यालयको नाम</label><input type="text" id="schoolName" placeholder="लालबन्दी-१७, सर्लाही"></div>
+                <div class="info-field"><label>शिक्षकको नाम</label><input type="text" id="teacherName" placeholder="शिक्षकको नाम"></div>
+            </div>
+            <div class="info-note">★ मुख्य जानकारी (पाठ योजनाको लागि अनिवार्य)</div>
+        </div>
+
+        <div class="section-title">📌 दैनिक पाठ योजना विवरण</div>
+        
+        <div class="daily-form-card">
+            <div class="row-flex">
+                <div class="field-group"><label>कक्षा (Class)</label><input type="text" id="classInfo" placeholder="कक्षा ८ / ९"></div>
+                <div class="field-group"><label>समय (Time/Duration)</label><input type="text" id="classTime" placeholder="४५ मिनेट"></div>
+                <div class="field-group"><label>विषय (Subject)</label><input type="text" id="subjectInfo" placeholder="विज्ञान, गणित"></div>
+                <div class="field-group"><label>मिति (Date)</label><input type="date" id="lessonDate"></div>
+            </div>
+            <div class="row-flex">
+                <div class="field-group"><label>एकाइ वा क्षेत्र (Unit/Scope)</label><input type="text" id="unitScope" placeholder="एकाइ नं."></div>
+                <div class="field-group"><label>पाठ शीर्षक (Lesson Title)</label><input type="text" id="lessonTitle" placeholder="पाठको नाम"></div>
+                <div class="field-group"><label>विद्यार्थी संख्या</label><input type="number" id="studentCount" placeholder="संख्या"></div>
+                <div class="field-group"><label>विधि (Method)</label><input type="text" id="teachingMethod" placeholder="शिक्षण विधि"></div>
+            </div>
+            <div class="row-flex"><div class="field-group" style="flex:2"><label>परिभाषित विवरण / विषयवस्तु</label><textarea id="topicsDescription" rows="2"></textarea></div></div>
+            <hr>
+            <div class="row-flex"><div class="field-group"><label>१. सिकाइ उपलब्धि</label><textarea id="learningAchievements" rows="2"></textarea></div></div>
+            <div class="row-flex"><div class="field-group"><label>२. सिकाइ सामग्री</label><textarea id="learningMaterials" rows="2"></textarea></div></div>
+            <div class="row-flex"><div class="field-group"><label>३. सिकाइ क्रियाकलाप</label><textarea id="learningActivities" rows="2"></textarea></div></div>
+            <div class="row-flex"><div class="field-group"><label>४. मूल्याङ्कन (५ मिनेट)</label><textarea id="evaluation" rows="2"></textarea></div></div>
+            <div class="row-flex"><div class="field-group"><label>५. सुधारात्मक सिकाइ</label><textarea id="remedialTeaching" rows="2"></textarea></div></div>
+            <div class="row-flex"><div class="field-group"><label>६. गृहकार्य</label><textarea id="homeworkAssign" rows="2"></textarea></div></div>
+            <div class="row-flex"><div class="field-group"><label>कैफियत (Remark)</label><input type="text" id="remarkField" placeholder="टिप्पणी"></div></div>
+        </div>
+        <button class="submit-btn" id="submitSingleDailyBtn">✅ दैनिक पाठ योजना सुरक्षित गर्नुहोस्</button>
+        <div id="dailyStatus" class="status-msg"></div>
+    </div>
+
+    <!-- ===================== ANNUAL PLAN PANEL ===================== -->
+    <div id="annualPanel" class="panel">
+        <div class="basic-info-card">
+            <div class="info-grid">
+                <div class="info-field"><label>शैक्षिक सत्र</label><input id="ann_year" placeholder="२०८२"></div>
+                <div class="info-field"><label>विद्यालय</label><input id="ann_school" placeholder="विद्यालयको नाम"></div>
+                <div class="info-field"><label>शिक्षक</label><input id="ann_teacher" placeholder="शिक्षकको नाम"></div>
+                <div class="info-field"><label>कक्षा</label><input id="ann_class" placeholder="कक्षा"></div>
+                <div class="info-field"><label>विषय</label><input id="ann_subj" placeholder="विषय"></div>
+            </div>
+        </div>
+        <div class="section-title">📅 वार्षिक योजना तालिका</div>
+        <div class="table-wrapper">
+            <table id="annualTable">
+                <thead>
+                    <tr><th>क्र.स.</th><th>महिना</th><th>एकाइ/पाठ</th><th>विषयवस्तु</th><th>शिक्षण विधि</th><th>सामग्री</th><th>मूल्याङ्कन</th><th>टिप्पणी</th><th>कार्य</th></tr>
+                </thead>
+                <tbody id="annualTableBody"></tbody>
+            </table>
+        </div>
+        <button class="add-row-btn" onclick="addAnnualRow()">+ नयाँ पङ्क्ति थप्नुहोस्</button>
+        <button class="submit-btn" id="submitAnnualBtn">वार्षिक योजना सेभ गर्नुहोस्</button>
+        <div id="annualStatus" class="status-msg"></div>
+    </div>
+
+    <!-- ===================== UNIT PLAN PANEL ===================== -->
+    <div id="unitPanel" class="panel">
+        <div class="basic-info-card">
+            <div class="info-grid">
+                <div class="info-field"><label>शैक्षिक सत्र</label><input id="unit_year" placeholder="२०८२"></div>
+                <div class="info-field"><label>विद्यालय</label><input id="unit_school" placeholder="विद्यालयको नाम"></div>
+                <div class="info-field"><label>शिक्षक</label><input id="unit_teacher" placeholder="शिक्षकको नाम"></div>
+                <div class="info-field"><label>कक्षा</label><input id="unit_class" placeholder="कक्षा"></div>
+                <div class="info-field"><label>विषय</label><input id="unit_subj" placeholder="विषय"></div>
+                <div class="info-field"><label>एकाइ शीर्षक</label><input id="unit_title" placeholder="एकाइको नाम"></div>
+                <div class="info-field"><label>कुल पीरियड</label><input id="unit_periods" placeholder="कुल समय"></div>
+            </div>
+        </div>
+        <div class="section-title">📚 एकाइ योजना तालिका</div>
+        <div class="table-wrapper">
+            <table id="unitTable">
+                <thead>
+                    <tr><th>क्र.स.</th><th>पाठ विषय</th><th>सिकाइ उपलब्धि</th><th>शिक्षण विधि</th><th>सामग्री</th><th>क्रियाकलाप</th><th>मूल्याङ्कन</th><th>पीरियड</th><th>टिप्पणी</th><th>कार्य</th></tr>
+                </thead>
+                <tbody id="unitTableBody"></tbody>
+            </table>
+        </div>
+        <button class="add-row-btn" onclick="addUnitRow()">+ नयाँ पाठ थप्नुहोस्</button>
+        <button class="submit-btn" id="submitUnitBtn">एकाइ योजना सेभ गर्नुहोस्</button>
+        <div id="unitStatus" class="status-msg"></div>
+    </div>
+
+    <!-- ===================== CALENDAR PANEL ===================== -->
+    <div id="calendarPanel" class="panel">
+        <div class="basic-info-card">
+            <div class="info-grid">
+                <div class="info-field"><label>शैक्षिक सत्र</label><input id="cal_year" placeholder="२०८२"></div>
+                <div class="info-field"><label>विद्यालय</label><input id="cal_school" placeholder="विद्यालयको नाम"></div>
+                <div class="info-field"><label>शिक्षक</label><input id="cal_teacher" placeholder="शिक्षकको नाम"></div>
+                <div class="info-field"><label>कक्षा</label><input id="cal_class" placeholder="कक्षा"></div>
+            </div>
+        </div>
+        <div class="section-title">🗓 सञ्चालन क्यालेन्डर</div>
+        <div class="table-wrapper">
+            <table id="calendarTable">
+                <thead>
+                    <tr><th>क्र.स.</th><th>महिना</th><th>गतिविधि/कार्यक्रम</th><th>मिति</th><th>जिम्मेवार व्यक्ति</th><th>टिप्पणी</th><th>कार्य</th></tr>
+                </thead>
+                <tbody id="calendarTableBody"></tbody>
+            </table>
+        </div>
+        <button class="add-row-btn" onclick="addCalendarRow()">+ नयाँ गतिविधि थप्नुहोस्</button>
+        <button class="submit-btn" id="submitCalendarBtn">क्यालेन्डर सेभ गर्नुहोस्</button>
+        <div id="calendarStatus" class="status-msg"></div>
+    </div>
+</div>
+
+<script>
+    // ====================== CONFIGURATION ======================
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzAnMfxmhV9HlZvTV6_aonoJV_qDxWQRUrvONjrYmaK5bcMaaT7w4kzPdMHJLnjw1Cq8w/exec";
+
+    function submitToSheet(payload, statusElementId, successMsg, clearCallback) {
+        const statusDiv = document.getElementById(statusElementId);
+        if (!statusDiv) return;
+        statusDiv.className = 'status-msg loading';
+        statusDiv.innerHTML = 'पठाउँदै, कृपया पर्खनुहोस्...';
+        const callbackName = 'jsonp_cb_' + Date.now() + '_' + Math.random().toString(36).substr(2, 8);
+        const timeout = setTimeout(() => {
+            if (window[callbackName]) delete window[callbackName];
+            statusDiv.className = 'status-msg error';
+            statusDiv.innerHTML = 'सर्भरमा जडान हुन समय लाग्यो।';
+            if (script && script.parentNode) script.parentNode.removeChild(script);
+        }, 45000);
+        window[callbackName] = function(response) {
+            clearTimeout(timeout);
+            if (response && response.status === 'success') {
+                statusDiv.className = 'status-msg success';
+                statusDiv.innerHTML = successMsg || 'सफलतापूर्वक सेभ गरियो!';
+                if (clearCallback && typeof clearCallback === 'function') clearCallback();
+            } else {
+                statusDiv.className = 'status-msg error';
+                statusDiv.innerHTML = 'त्रुटि: ' + (response?.message || 'अज्ञात समस्या');
+            }
+            delete window[callbackName];
+            if (script && script.parentNode) script.parentNode.removeChild(script);
+        };
+        const params = new URLSearchParams();
+        params.append('callback', callbackName);
+        params.append('data', JSON.stringify(payload));
+        const script = document.createElement('script');
+        script.src = APPS_SCRIPT_URL + '?' + params.toString();
+        script.onerror = () => {
+            clearTimeout(timeout);
+            statusDiv.className = 'status-msg error';
+            statusDiv.innerHTML = 'Apps Script URL गलत वा पहुँच असफल।';
+            delete window[callbackName];
+            if (script.parentNode) script.parentNode.removeChild(script);
+        };
+        document.body.appendChild(script);
+    }
+
+    // ==================== ANNUAL PLAN ROWS ====================
+    let annualRowCount = 1;
+    function getAnnualRowHTML(sn) {
+        return `<tr>
+            <td>${sn}</td>
+            <td><select class="ann_month"><option value="">चयन गर्नुहोस्</option><option>बैशाख</option><option>जेठ</option><option>असार</option><option>श्रावण</option><option>भदौ</option><option>असोज</option><option>कार्तिक</option><option>मंसिर</option><option>पुष</option><option>माघ</option><option>फागुन</option><option>चैत्र</option></select></td>
+            <td><input type="text" class="ann_unit" placeholder="एकाइ/पाठ"></td>
+            <td><textarea class="ann_topics" rows="1" placeholder="विषयवस्तु"></textarea></td>
+            <td><input type="text" class="ann_method" placeholder="शिक्षण विधि"></td>
+            <td><input type="text" class="ann_materials" placeholder="सामग्री"></td>
+            <td><input type="text" class="ann_evaluation" placeholder="मूल्याङ्कन"></td>
+            <td><input type="text" class="ann_remarks" placeholder="टिप्पणी"></td>
+            <td><button type="button" class="delete-row" onclick="deleteAnnualRow(this)">हटाउनुहोस्</button></td>
+        </tr>`;
+    }
+    function addAnnualRow() { annualRowCount++; const tbody = document.getElementById('annualTableBody'); const newRow = document.createElement('tr'); newRow.innerHTML = getAnnualRowHTML(annualRowCount); tbody.appendChild(newRow); updateAnnualSerialNumbers(); }
+    function deleteAnnualRow(btn) { btn.closest('tr').remove(); updateAnnualSerialNumbers(); }
+    function updateAnnualSerialNumbers() { const rows = document.querySelectorAll('#annualTableBody tr'); rows.forEach((r, idx) => { if(r.cells[0]) r.cells[0].textContent = idx + 1; }); annualRowCount = rows.length || 1; }
+    function collectAnnualData() { const data = []; document.querySelectorAll('#annualTableBody tr').forEach(r => { data.push({ month: r.querySelector('.ann_month')?.value || '', unit: r.querySelector('.ann_unit')?.value || '', topics: r.querySelector('.ann_topics')?.value || '', method: r.querySelector('.ann_method')?.value || '', materials: r.querySelector('.ann_materials')?.value || '', evaluation: r.querySelector('.ann_evaluation')?.value || '', remarks: r.querySelector('.ann_remarks')?.value || '' }); }); return data; }
+
+    // ==================== UNIT PLAN ROWS ====================
+    let unitRowCount = 1;
+    function getUnitRowHTML(sn) {
+        return `<tr>
+            <td>${sn}</td>
+            <td><input type="text" class="unit_lesson" placeholder="पाठ विषय"></td>
+            <td><textarea class="unit_outcomes" rows="1" placeholder="सिकाइ उपलब्धि"></textarea></td>
+            <td><input type="text" class="unit_method" placeholder="शिक्षण विधि"></td>
+            <td><input type="text" class="unit_materials" placeholder="सामग्री"></td>
+            <td><textarea class="unit_activities" rows="1" placeholder="क्रियाकलाप"></textarea></td>
+            <td><input type="text" class="unit_assessment" placeholder="मूल्याङ्कन"></td>
+            <td><input type="number" class="unit_periods" placeholder="पीरियड"></td>
+            <td><input type="text" class="unit_remarks" placeholder="टिप्पणी"></td>
+            <td><button type="button" class="delete-row" onclick="deleteUnitRow(this)">हटाउनुहोस्</button></td>
+        </tr>`;
+    }
+    function addUnitRow() { unitRowCount++; const tbody = document.getElementById('unitTableBody'); const newRow = document.createElement('tr'); newRow.innerHTML = getUnitRowHTML(unitRowCount); tbody.appendChild(newRow); updateUnitSerialNumbers(); }
+    function deleteUnitRow(btn) { btn.closest('tr').remove(); updateUnitSerialNumbers(); }
+    function updateUnitSerialNumbers() { const rows = document.querySelectorAll('#unitTableBody tr'); rows.forEach((r, idx) => { if(r.cells[0]) r.cells[0].textContent = idx + 1; }); unitRowCount = rows.length || 1; }
+    function collectUnitData() { const data = []; document.querySelectorAll('#unitTableBody tr').forEach(r => { data.push({ lessonTitle: r.querySelector('.unit_lesson')?.value || '', outcomes: r.querySelector('.unit_outcomes')?.value || '', method: r.querySelector('.unit_method')?.value || '', materials: r.querySelector('.unit_materials')?.value || '', activities: r.querySelector('.unit_activities')?.value || '', assessment: r.querySelector('.unit_assessment')?.value || '', periods: r.querySelector('.unit_periods')?.value || '', remarks: r.querySelector('.unit_remarks')?.value || '' }); }); return data; }
+
+    // ==================== CALENDAR ROWS ====================
+    let calendarRowCount = 1;
+    function getCalendarRowHTML(sn) {
+        return `<tr>
+            <td>${sn}</td>
+            <td><select class="cal_month"><option value="">चयन गर्नुहोस्</option><option>बैशाख</option><option>जेठ</option><option>असार</option><option>श्रावण</option><option>भदौ</option><option>असोज</option><option>कार्तिक</option><option>मंसिर</option><option>पुष</option><option>माघ</option><option>फागुन</option><option>चैत्र</option></select></td>
+            <td><textarea class="cal_activity" rows="1" placeholder="गतिविधि"></textarea></td>
+            <td><input type="date" class="cal_date"></td>
+            <td><input type="text" class="cal_responsible" placeholder="जिम्मेवार व्यक्ति"></td>
+            <td><input type="text" class="cal_remarks" placeholder="टिप्पणी"></td>
+            <td><button type="button" class="delete-row" onclick="deleteCalendarRow(this)">हटाउनुहोस्</button></td>
+        </tr>`;
+    }
+    function addCalendarRow() { calendarRowCount++; const tbody = document.getElementById('calendarTableBody'); const newRow = document.createElement('tr'); newRow.innerHTML = getCalendarRowHTML(calendarRowCount); tbody.appendChild(newRow); updateCalendarSerialNumbers(); }
+    function deleteCalendarRow(btn) { btn.closest('tr').remove(); updateCalendarSerialNumbers(); }
+    function updateCalendarSerialNumbers() { const rows = document.querySelectorAll('#calendarTableBody tr'); rows.forEach((r, idx) => { if(r.cells[0]) r.cells[0].textContent = idx + 1; }); calendarRowCount = rows.length || 1; }
+    function collectCalendarData() { const data = []; document.querySelectorAll('#calendarTableBody tr').forEach(r => { data.push({ month: r.querySelector('.cal_month')?.value || '', activity: r.querySelector('.cal_activity')?.value || '', eventDate: r.querySelector('.cal_date')?.value || '', responsible: r.querySelector('.cal_responsible')?.value || '', remarks: r.querySelector('.cal_remarks')?.value || '' }); }); return data; }
+
+    // ==================== SUBMIT FUNCTIONS ====================
+    function submitDailyLesson() {
+        const academicYear = document.getElementById('academicYear').value.trim();
+        const schoolName = document.getElementById('schoolName').value.trim();
+        const teacherName = document.getElementById('teacherName').value.trim();
+        const className = document.getElementById('classInfo').value.trim();
+        const timeDuration = document.getElementById('classTime').value.trim();
+        const subject = document.getElementById('subjectInfo').value.trim();
+        const date = document.getElementById('lessonDate').value;
+        const unitScope = document.getElementById('unitScope').value.trim();
+        const lessonTitle = document.getElementById('lessonTitle').value.trim();
+        const studentNumber = document.getElementById('studentCount').value;
+        const teachingMethod = document.getElementById('teachingMethod').value.trim();
+        const topicsDesc = document.getElementById('topicsDescription').value.trim();
+        const learningAchievements = document.getElementById('learningAchievements').value.trim();
+        const learningMaterials = document.getElementById('learningMaterials').value.trim();
+        const learningActivities = document.getElementById('learningActivities').value.trim();
+        const evaluation = document.getElementById('evaluation').value.trim();
+        const remedialTeaching = document.getElementById('remedialTeaching').value.trim();
+        const homework = document.getElementById('homeworkAssign').value.trim();
+        const remark = document.getElementById('remarkField').value.trim();
+
+        if (!schoolName || !teacherName || !className || !subject) {
+            document.getElementById('dailyStatus').className = 'status-msg error';
+            document.getElementById('dailyStatus').innerHTML = 'कृपया विद्यालयको नाम, शिक्षक, कक्षा र विषय अनिवार्य भर्नुहोस्।';
+            return;
+        }
+
+        const payload = {
+            action: 'dailyLesson',
+            academicYear: academicYear, schoolName: schoolName, schoolAddress: "लालबन्दी-१७, सर्लाही",
+            teacherName: teacherName, class: className, subject: subject, remark: remark,
+            lessons: [{ date: date, periodNo: teachingMethod, duration: timeDuration, studentNumber: studentNumber, unitTopic: unitScope, lessonTitle: lessonTitle, lessonIntroduction: topicsDesc, learningObjectives: learningAchievements, teachingMaterialsText: learningMaterials, mainActivities: learningActivities, evaluationMethods: evaluation, otherRemedial: remedialTeaching, homework: homework, reflection: remedialTeaching, remark: remark }],
+            timestamp: new Date().toLocaleString('ne-NP')
+        };
+        submitToSheet(payload, 'dailyStatus', 'दैनिक पाठ योजना सफलतापूर्वक सेभ गरियो!', () => {});
+    }
+
+    function submitAnnual() {
+        const plans = collectAnnualData();
+        if (plans.length === 0) { document.getElementById('annualStatus').className = 'status-msg error'; document.getElementById('annualStatus').innerHTML = 'कम्तीमा एउटा पङ्क्ति थप्नुहोस्।'; return; }
+        const payload = { action: 'annualPlan', academicYear: document.getElementById('ann_year').value, schoolName: document.getElementById('ann_school').value, teacherName: document.getElementById('ann_teacher').value, class: document.getElementById('ann_class').value, subject: document.getElementById('ann_subj').value, workingDays: '', term: '', overallGoals: '', resources: '', approvalStatus: '', reflection: '', plans: plans, timestamp: new Date().toLocaleString('ne-NP') };
+        submitToSheet(payload, 'annualStatus', 'वार्षिक योजना सफलतापूर्वक सेभ गरियो!', null);
+    }
+
+    function submitUnit() {
+        const lessons = collectUnitData();
+        if (lessons.length === 0) { document.getElementById('unitStatus').className = 'status-msg error'; document.getElementById('unitStatus').innerHTML = 'कम्तीमा एउटा पाठ थप्नुहोस्।'; return; }
+        const payload = { action: 'unitPlan', academicYear: document.getElementById('unit_year').value, schoolName: document.getElementById('unit_school').value, teacherName: document.getElementById('unit_teacher').value, class: document.getElementById('unit_class').value, subject: document.getElementById('unit_subj').value, unitTitle: document.getElementById('unit_title').value, totalPeriods: document.getElementById('unit_periods').value, unitObjectives: '', reflection: '', lessons: lessons, timestamp: new Date().toLocaleString('ne-NP') };
+        submitToSheet(payload, 'unitStatus', 'एकाइ योजना सफलतापूर्वक सेभ गरियो!', null);
+    }
+
+    function submitCalendar() {
+        const events = collectCalendarData();
+        if (events.length === 0) { document.getElementById('calendarStatus').className = 'status-msg error'; document.getElementById('calendarStatus').innerHTML = 'कम्तीमा एउटा गतिविधि थप्नुहोस्।'; return; }
+        const payload = { action: 'calendarEntry', academicYear: document.getElementById('cal_year').value, schoolName: document.getElementById('cal_school').value, teacherName: document.getElementById('cal_teacher').value, class: document.getElementById('cal_class').value, events: events, timestamp: new Date().toLocaleString('ne-NP') };
+        submitToSheet(payload, 'calendarStatus', 'क्यालेन्डर सफलतापूर्वक सेभ गरियो!', null);
+    }
+
+    // ==================== TAB SWITCHING & INIT ====================
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const tabId = btn.getAttribute('data-tab');
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active-panel'));
+            document.getElementById(tabId + 'Panel').classList.add('active-panel');
+        });
+    });
+
+    document.getElementById('submitSingleDailyBtn').addEventListener('click', submitDailyLesson);
+    document.getElementById('submitAnnualBtn').addEventListener('click', submitAnnual);
+    document.getElementById('submitUnitBtn').addEventListener('click', submitUnit);
+    document.getElementById('submitCalendarBtn').addEventListener('click', submitCalendar);
+
+    // Initialize tables with one row each
+    addAnnualRow();
+    addUnitRow();
+    addCalendarRow();
+
+    const today = new Date().toISOString().split('T')[0];
+    if(document.getElementById('lessonDate')) document.getElementById('lessonDate').value = today;
+</script>
+</body>
+</html>

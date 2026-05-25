@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>दैनिक पाठ योजना तालिका | Daily Lesson Plan Viewer</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Noto Sans', 'Poppins', sans-serif;
+            background: #ffffff;
+            margin: 0;
+            padding: 24px 16px;
+            color: #1e2a1e;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 0px;
+            box-shadow: none;
+            overflow: hidden;
+            padding: 20px 24px 32px;
+            border: 1px solid #ddd;
+        }
+        h1 {
+            font-size: 1.9rem;
+            margin: 0 0 0.25rem 0;
+            color: #1e3a2f;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        h1 small {
+            font-size: 0.8rem;
+            font-weight: normal;
+            background: #f5f5f5;
+            padding: 6px 12px;
+            border-radius: 40px;
+            color: #2b5e2b;
+            border: 1px solid #ddd;
+        }
+        .sub {
+            border-left: 4px solid #4caf50;
+            padding-left: 16px;
+            margin: 12px 0 24px 0;
+            color: #2c4b2c;
+            font-weight: 500;
+        }
+        .filter-panel {
+            background: #fafafa;
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 32px;
+            border: 1px solid #e0e0e0;
+            box-shadow: none;
+        }
+        .filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px;
+            row-gap: 20px;
+            align-items: flex-end;
+        }
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        .filter-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            color: #2d5e2c;
+            letter-spacing: 0.3px;
+        }
+        .filter-group input, .filter-group select {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            background: white;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+        .filter-group input:focus, .filter-group select:focus {
+            border-color: #3c9e3c;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(60,158,60,0.2);
+        }
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        button {
+            background: #2e7d32;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: none;
+            border: 1px solid #1f5a23;
+        }
+        button:hover {
+            background: #1f5a23;
+            transform: translateY(-1px);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #2e7d32;
+            color: #2e7d32;
+            box-shadow: none;
+        }
+        .btn-outline:hover {
+            background: #e8f5e9;
+            transform: none;
+        }
+        .status-msg {
+            margin: 12px 0 10px 0;
+            padding: 12px 18px;
+            border-radius: 8px;
+            background: #fff8e7;
+            font-size: 0.85rem;
+            color: #b45f06;
+            border-left: 5px solid #f4b400;
+            border: 1px solid #f0e0b0;
+        }
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            background: white;
+            margin-top: 16px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+            min-width: 1100px;
+        }
+        th {
+            background: #f5f5f5;
+            padding: 14px 12px;
+            text-align: center;
+            font-weight: 700;
+            color: #1f4020;
+            border-bottom: 2px solid #ddd;
+            border-right: 1px solid #eee;
+            font-size: 0.8rem;
+        }
+        td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #e0e0e0;
+            border-right: 1px solid #f0f0f0;
+            vertical-align: top;
+            line-height: 1.4;
+            color: #1f2a1b;
+        }
+        tr:hover td {
+            background-color: #f9f9f9;
+        }
+        .serial-col {
+            text-align: center;
+            font-weight: 600;
+            background-color: #fefce8;
+        }
+        .no-data {
+            text-align: center;
+            padding: 48px;
+            font-style: italic;
+            color: #7b8a6e;
+        }
+        .badge {
+            background: #f0f0f0;
+            border-radius: 30px;
+            padding: 2px 8px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: inline-block;
+            border: 1px solid #ccc;
+        }
+        footer {
+            margin-top: 28px;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #6a7c68;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+        @media (max-width: 720px) {
+            .container {
+                padding: 16px;
+            }
+            .filter-group {
+                min-width: 100%;
+            }
+        }
+        .loader {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 0.6s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .flex-between {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .btn-secondary {
+            background: #555;
+            border-color: #444;
+        }
+        .btn-secondary:hover {
+            background: #333;
+        }
+        .btn-pdf {
+            background: #d32f2f;
+            border-color: #b71c1c;
+        }
+        .btn-pdf:hover {
+            background: #b71c1c;
+        }
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+            }
+            .container {
+                border: none;
+                padding: 0;
+                margin: 0;
+                max-width: 100%;
+            }
+            .filter-panel, .btn-group, .action-buttons, footer, #lastUpdated, .status-msg, .flex-between button, .btn-outline, #applyFilterBtn, #resetBtn {
+                display: none !important;
+            }
+            .table-wrapper {
+                border: 1px solid #000;
+                overflow-x: visible;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            th, td {
+                border: 1px solid #000 !important;
+            }
+            .badge {
+                display: none;
+            }
+        }
+    </style>
+    <!-- html2pdf library for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<div class="container" id="reportContainer">
+    <div class="flex-between" >
+        <h1>📋 दैनिक पाठ योजना तालिका 
+            <small>अभिलेखिकरणको लागि</small>
+        </h1>
+    </div>
+    <div class="sub">
+        शिक्षक दैनिक पाठ योजना — क्रम संख्या वा मिति दायरा अनुसार फिल्टर गर्नुहोस् (स्वतः डाटा तालिकामा देखिनेछ)
+    </div>
+
+    <div class="filter-panel">
+        <div class="filter-row">
+            <div class="filter-group">
+                <label>🔢 क्रम संख्या (SN) :</label>
+                <div style="display: flex; gap: 8px;">
+                    <input type="number" id="fromSN" placeholder="From SN" value="" style="flex:1">
+                    <input type="number" id="toSN" placeholder="To SN" value="" style="flex:1">
+                </div>
+            </div>
+            <div class="filter-group">
+                <label>📅 मिति (YYYY-MM-DD) :</label>
+                <div style="display: flex; gap: 8px;">
+                    <input type="date" id="fromDate" placeholder="From Date" style="flex:1">
+                    <input type="date" id="toDate" placeholder="To Date" style="flex:1">
+                </div>
+            </div>
+            <div class="btn-group">
+                <button id="resetBtn" class="btn-outline">⟳ रिसेट गर्नुहोस्</button>
+            </div>
+        </div>
+        <div id="infoMsg" class="status-msg" style="display: none;"></div>
+    </div>
+
+    <div class="flex-between" style="margin-bottom: 10px;">
+        <div><strong>📋 पाठ योजना सूची</strong> <span id="recordCount" class="badge">0 रेकर्ड</span></div>
+        <div id="lastUpdated" style="font-size: 0.7rem; color:#658c65;"></div>
+    </div>
+    <div class="table-wrapper" id="tableWrapper">
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>क्र.सं. (SN)</th><th>शैक्षिक सत्र</th><th>विद्यालय</th><th>शिक्षक</th><th>कक्षा</th><th>विषय</th>
+                    <th>मिति</th><th>अवधि</th><th>एकाइ/पाठ</th><th>पाठ शीर्षक</th><th>विवरण/विषयवस्तु</th>
+                    <th>उपचारात्मक</th><th>सिकाइ उद्देश्य</th><th>मूल्यांकन</th><th>गृहकार्य</th><th>टिप्पणी</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <tr><td colspan="16" class="no-data">⏳ डाटा लोड हुँदैछ... कृपया पर्खनुहोस्</td></tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="action-buttons">
+        <button id="printBtn" class="btn-secondary">🖨️ प्रिन्ट गर्नुहोस् (Print)</button>
+        <button id="downloadBtn" class="btn-secondary">⬇ CSV डाउनलोड (Download)</button>
+        <button id="pdfBtn" class="btn-pdf">📄 PDF डाउनलोड गर्नुहोस्</button>
+    </div>
+    
+    <footer>
+        दैनिक पाठ योजना तालिका अभिलेखको लागि - फिल्टर गर्नासाथ तालिका स्वतः परिवर्तन हुन्छ
+    </footer>
+</div>
+
+<script>
+    // ---------- CONFIGURATION ----------
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzAnMfxmhV9HlZvTV6_aonoJV_qDxWQRUrvONjrYmaK5bcMaaT7w4kzPdMHJLnjw1Cq8w/exec';  
+    
+    let masterData = [];     
+    let isLoading = false;
+    
+    // DOM elements
+    const fromSNInput = document.getElementById('fromSN');
+    const toSNInput = document.getElementById('toSN');
+    const fromDateInput = document.getElementById('fromDate');
+    const toDateInput = document.getElementById('toDate');
+    const resetBtn = document.getElementById('resetBtn');
+    const tableBody = document.getElementById('tableBody');
+    const recordCountSpan = document.getElementById('recordCount');
+    const infoMsgDiv = document.getElementById('infoMsg');
+    const lastUpdatedSpan = document.getElementById('lastUpdated');
+    const printBtn = document.getElementById('printBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const pdfBtn = document.getElementById('pdfBtn');
+    
+    function showMessage(msg, isError = false) {
+        infoMsgDiv.style.display = 'block';
+        infoMsgDiv.innerHTML = msg;
+        infoMsgDiv.style.background = isError ? '#ffe6e5' : '#eef5e8';
+        infoMsgDiv.style.borderLeftColor = isError ? '#d32f2f' : '#388e3c';
+        setTimeout(() => {
+            if (infoMsgDiv.style.display === 'block') {
+                infoMsgDiv.style.display = 'none';
+            }
+        }, 4000);
+    }
+    
+    async function fetchAllPlanData() {
+        if (isLoading) return;
+        isLoading = true;
+        tableBody.innerHTML = '<tr><td colspan="16" class="no-data">🔄 डाटा प्राप्त गर्दै... कृपया पर्खनुहोस्</td></tr>';
+        
+        try {
+            const url = `${SCRIPT_URL}?action=getAllPlanData&t=${Date.now()}`;
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            const result = await response.json();
+            
+            if (result.status === 'success' && result.data && result.data.daily) {
+                masterData = result.data.daily;
+                const count = masterData.length;
+                recordCountSpan.innerText = `${count} रेकर्ड`;
+                lastUpdatedSpan.innerText = `अन्तिम अपडेट: ${new Date().toLocaleString('ne-NP')}`;
+                // Auto render after loading
+                applyFiltersAndRender();
+                showMessage(`✅ कुल ${count} वटा पाठ योजना भेटियो। फिल्टर गर्न माथि प्रयोग गर्नुहोस् (स्वतः अपडेट हुन्छ)`, false);
+            } else {
+                throw new Error(result.message || 'डाटा ढाँचा मिलेन');
+            }
+        } catch (err) {
+            console.error(err);
+            tableBody.innerHTML = `<tr><td colspan="16" class="no-data">⚠️ त्रुटि: ${err.message}. कृपया पुन: प्रयास गर्नुहोस् वा URL जाँच गर्नुहोस्।</td></tr>`;
+            showMessage(`डाटा लोड असफल: ${err.message}`, true);
+            masterData = [];
+            recordCountSpan.innerText = '0 रेकर्ड';
+        } finally {
+            isLoading = false;
+        }
+    }
+    
+    function filterData() {
+        let filtered = [...masterData];
+        
+        const fromSN = fromSNInput.value.trim() === '' ? null : parseInt(fromSNInput.value.trim(), 10);
+        const toSN = toSNInput.value.trim() === '' ? null : parseInt(toSNInput.value.trim(), 10);
+        
+        if ((fromSN !== null || toSN !== null)) {
+            filtered = filtered.filter(record => {
+                let snVal = record.serialNo;
+                if (snVal === undefined || snVal === null || snVal === '') return false;
+                let snNum = parseInt(snVal.toString(), 10);
+                if (isNaN(snNum)) return false;
+                if (fromSN !== null && snNum < fromSN) return false;
+                if (toSN !== null && snNum > toSN) return false;
+                return true;
+            });
+        }
+        
+        const fromDateRaw = fromDateInput.value;
+        const toDateRaw = toDateInput.value;
+        
+        if (fromDateRaw || toDateRaw) {
+            filtered = filtered.filter(record => {
+                let dateStr = record.date || '';
+                if (!dateStr) return false;
+                let normalizedDate = dateStr.trim();
+                let compareDate = null;
+                if (normalizedDate.match(/^\d{4}-\d{2}-\d{2}$/)) {
+                    compareDate = normalizedDate;
+                } else {
+                    const parts = normalizedDate.split(/[-/]/);
+                    if (parts.length === 3) {
+                        if (parts[0].length === 4) {
+                            compareDate = `${parts[0]}-${parts[1].padStart(2,'0')}-${parts[2].padStart(2,'0')}`;
+                        } else if (parts[2].length === 4) {
+                            compareDate = `${parts[2]}-${parts[1].padStart(2,'0')}-${parts[0].padStart(2,'0')}`;
+                        } else {
+                            compareDate = null;
+                        }
+                    }
+                }
+                if (!compareDate) return false;
+                if (fromDateRaw && compareDate < fromDateRaw) return false;
+                if (toDateRaw && compareDate > toDateRaw) return false;
+                return true;
+            });
+        }
+        
+        return filtered;
+    }
+    
+    function renderTable(records) {
+        if (!records || records.length === 0) {
+            tableBody.innerHTML = '<tr><td colspan="16" class="no-data">📭 कुनै पनि पाठ योजना फेला परेन । फिल्टर परिवर्तन गर्नुहोस् ।</td></tr>';
+            recordCountSpan.innerText = `0 रेकर्ड (फिल्टर गरिएको)`;
+            return;
+        }
+        
+        recordCountSpan.innerText = `${records.length} रेकर्ड (फिल्टर गरिएको)`;
+        let html = '';
+        for (let row of records) {
+            html += `<tr>
+                        <td class="serial-col">${escapeHtml(row.serialNo || '')}</td>
+                        <td>${escapeHtml(row.academicYear || '')}</td>
+                        <td>${escapeHtml(row.schoolName || '')}</td>
+                        <td>${escapeHtml(row.teacherName || '')}</td>
+                        <td>${escapeHtml(row.class || '')}</td>
+                        <td>${escapeHtml(row.subject || '')}</td>
+                        <td>${escapeHtml(row.date || '')}</td>
+                        <td>${escapeHtml(row.duration || '')}</td>
+                        <td>${escapeHtml(row.unitScope || '')}</td>
+                        <td>${escapeHtml(row.lessonTitle || '')}</td>
+                        <td>${truncateText(escapeHtml(row.topicsDescription || ''), 70)}</td>
+                        <td>${escapeHtml(row.remedialTeaching || '')}</td>
+                        <td>${truncateText(escapeHtml(row.learningObjectives || ''), 80)}</td>
+                        <td>${escapeHtml(row.evaluation || '')}</td>
+                        <td>${escapeHtml(row.homework || '')}</td>
+                        <td>${escapeHtml(row.remark || '')}</td>
+                     </tr>`;
+        }
+        tableBody.innerHTML = html;
+    }
+    
+    function escapeHtml(str) {
+        if (!str) return '';
+        return String(str).replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+    
+    function truncateText(text, maxLen) {
+        if (!text) return '';
+        if (text.length <= maxLen) return text;
+        return text.substr(0, maxLen) + '…';
+    }
+    
+    // Auto filter and render (called on input change)
+    function applyFiltersAndRender() {
+        if (masterData.length === 0 && !isLoading) {
+            // no data yet, skip
+            if (tableBody.innerHTML.includes('लोड हुँदैछ')) return;
+            return;
+        }
+        const filtered = filterData();
+        renderTable(filtered);
+        
+        let snFrom = fromSNInput.value;
+        let snTo = toSNInput.value;
+        let dFrom = fromDateInput.value;
+        let dTo = toDateInput.value;
+        if ((snFrom || snTo) || (dFrom || dTo)) {
+            let msgParts = [];
+            if (snFrom || snTo) msgParts.push(`क्रम संख्या: ${snFrom || '—'} देखि ${snTo || '—'}`);
+            if (dFrom || dTo) msgParts.push(`मिति: ${dFrom || 'सुरु'} देखि ${dTo || 'अन्त्य'}`);
+            // subtle message, no need to popup everytime we can show small status
+            if (filtered.length !== masterData.length) {
+                // optional brief console
+            }
+        }
+    }
+    
+    function resetFilters() {
+        fromSNInput.value = '';
+        toSNInput.value = '';
+        fromDateInput.value = '';
+        toDateInput.value = '';
+        if (masterData.length > 0) {
+            renderTable(masterData);
+            recordCountSpan.innerText = `${masterData.length} रेकर्ड (कुल)`;
+            showMessage(`सबै फिल्टर रिसेट गरियो। ${masterData.length} वटा पाठ योजना देखाइयो।`, false);
+        } else {
+            if(!isLoading) applyFiltersAndRender();
+        }
+    }
+    
+    // PRINT FUNCTION
+    function printTable() {
+        if(masterData.length === 0 && !isLoading){
+            showMessage("प्रिन्ट गर्न डाटा छैन।", true);
+            return;
+        }
+        const originalTitle = document.title;
+        document.title = "दैनिक पाठ योजना तालिका - प्रिन्ट प्रति";
+        window.print();
+        document.title = originalTitle;
+    }
+    
+    // DOWNLOAD CSV FUNCTION
+    function downloadCSV() {
+        let recordsToExport = [];
+        if (masterData.length > 0) {
+            recordsToExport = filterData();
+        } else {
+            recordsToExport = [];
+        }
+        
+        if (recordsToExport.length === 0) {
+            showMessage("डाउनलोड गर्न कुनै डाटा छैन। कृपया पहिले डाटा लोड गर्नुहोस् वा फिल्टर गर्नुहोस्।", true);
+            return;
+        }
+        
+        const headers = [
+            "Serial No (SN)", "Academic Year", "School Name", "Teacher Name", "Class", "Subject",
+            "Date", "Duration", "Unit/Scope", "Lesson Title", "Topics/Description", 
+            "Remedial Teaching", "Learning Objectives", "Evaluation", "Homework", "Remark"
+        ];
+        
+        const csvRows = [];
+        csvRows.push(headers.join(','));
+        
+        for (const row of recordsToExport) {
+            const values = [
+                cleanCSV(row.serialNo || ''),
+                cleanCSV(row.academicYear || ''),
+                cleanCSV(row.schoolName || ''),
+                cleanCSV(row.teacherName || ''),
+                cleanCSV(row.class || ''),
+                cleanCSV(row.subject || ''),
+                cleanCSV(row.date || ''),
+                cleanCSV(row.duration || ''),
+                cleanCSV(row.unitScope || ''),
+                cleanCSV(row.lessonTitle || ''),
+                cleanCSV(row.topicsDescription || ''),
+                cleanCSV(row.remedialTeaching || ''),
+                cleanCSV(row.learningObjectives || ''),
+                cleanCSV(row.evaluation || ''),
+                cleanCSV(row.homework || ''),
+                cleanCSV(row.remark || '')
+            ];
+            csvRows.push(values.join(','));
+        }
+        
+        const blob = new Blob(["\uFEFF" + csvRows.join('\n')], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        link.href = url;
+        link.setAttribute('download', 'daily_lesson_plan_export.csv');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+        showMessage(`✅ ${recordsToExport.length} रेकर्ड CSV मा डाउनलोड गरियो।`, false);
+    }
+    
+    function cleanCSV(value) {
+        if (value === undefined || value === null) return '""';
+        let stringVal = String(value);
+        stringVal = stringVal.replace(/"/g, '""');
+        if (stringVal.includes(',') || stringVal.includes('"') || stringVal.includes('\n')) {
+            return `"${stringVal}"`;
+        }
+        return stringVal;
+    }
+    
+    // PDF GENERATION using html2pdf
+    async function downloadPDF() {
+        if (masterData.length === 0 && !isLoading) {
+            showMessage("PDF बनाउन डाटा उपलब्ध छैन। कृपया पुन: प्रयास गर्नुहोस्।", true);
+            return;
+        }
+        
+        // Ensure we show current filtered view (same as table)
+        const currentFiltered = filterData();
+        if (currentFiltered.length === 0) {
+            showMessage("फिल्टर गरिएको कुनै डाटा छैन, PDF जेनरेट गर्न सकिएन।", true);
+            return;
+        }
+        
+        showMessage("📄 PDF तयार भइरहेको छ, कृपया पर्खनुहोस्...", false);
+        
+        // Create a temporary container for clean printing without UI clutter
+        const printContainer = document.createElement('div');
+        printContainer.style.backgroundColor = 'white';
+        printContainer.style.padding = '20px';
+        printContainer.style.fontFamily = 'Segoe UI, Roboto, sans-serif';
+        printContainer.style.width = '100%';
+        printContainer.style.maxWidth = '1400px';
+        printContainer.style.margin = '0 auto';
+        
+        // Header content
+        const titleHtml = `
+            <div style="text-align: center; margin-bottom: 20px;">
+                <h2 style="color: #1e3a2f; margin-bottom: 5px;">📋 दैनिक पाठ योजना तालिका</h2>
+                <p style="color: #2c4b2c;">Daily Lesson Plan Report</p>
+                <hr style="border-top: 1px solid #ccc;">
+                <p style="font-size: 12px;">मिति: ${new Date().toLocaleString('ne-NP')} | कुल रेकर्ड: ${currentFiltered.length}</p>
+            </div>
+        `;
+        
+        // Build table similar to main view but without truncation and extra UI
+        let tableHtml = `<table style="width:100%; border-collapse: collapse; font-size: 11px;" border="1" cellpadding="6" cellspacing="0">
+            <thead>
+                <tr><th>SN</th><th>शैक्षिक सत्र</th><th>विद्यालय</th><th>शिक्षक</th><th>कक्षा</th><th>विषय</th>
+                <th>मिति</th><th>अवधि</th><th>एकाइ/पाठ</th><th>पाठ शीर्षक</th><th>विवरण/विषयवस्तु</th>
+                <th>उपचारात्मक</th><th>सिकाइ उद्देश्य</th><th>मूल्यांकन</th><th>गृहकार्य</th><th>टिप्पणी</th>
+                </tr>
+            </thead>
+            <tbody>`;
+        
+        for (let row of currentFiltered) {
+            tableHtml += `<tr>
+                <td>${escapePlain(row.serialNo || '')}</td>
+                <td>${escapePlain(row.academicYear || '')}</td>
+                <td>${escapePlain(row.schoolName || '')}</td>
+                <td>${escapePlain(row.teacherName || '')}</td>
+                <td>${escapePlain(row.class || '')}</td>
+                <td>${escapePlain(row.subject || '')}</td>
+                <td>${escapePlain(row.date || '')}</td>
+                <td>${escapePlain(row.duration || '')}</td>
+                <td>${escapePlain(row.unitScope || '')}</td>
+                <td>${escapePlain(row.lessonTitle || '')}</td>
+                <td>${escapePlain(row.topicsDescription || '').substring(0, 150)}</td>
+                <td>${escapePlain(row.remedialTeaching || '')}</td>
+                <td>${escapePlain(row.learningObjectives || '').substring(0, 150)}</td>
+                <td>${escapePlain(row.evaluation || '')}</td>
+                <td>${escapePlain(row.homework || '')}</td>
+                <td>${escapePlain(row.remark || '')}</td>
+            </tr>`;
+        }
+        tableHtml += `</tbody></table>`;
+        
+        printContainer.innerHTML = titleHtml + tableHtml;
+        document.body.appendChild(printContainer);
+        
+        try {
+            const opt = {
+                margin: [0.5, 0.5, 0.5, 0.5],
+                filename: `daily_lesson_plan_${new Date().toISOString().slice(0,19)}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, letterRendering: true, useCORS: false },
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' }
+            };
+            await html2pdf().set(opt).from(printContainer).save();
+            showMessage("✅ PDF सफलतापूर्वक डाउनलोड भयो।", false);
+        } catch (err) {
+            console.error("PDF error:", err);
+            showMessage("PDF जेनरेट गर्न असफल: " + err.message, true);
+        } finally {
+            document.body.removeChild(printContainer);
+        }
+    }
+    
+    function escapePlain(str) {
+        if (!str) return '';
+        return String(str).replace(/[&<>]/g, function(m) {
+            if(m === '&') return '&amp;';
+            if(m === '<') return '&lt;';
+            if(m === '>') return '&gt;';
+            return m;
+        });
+    }
+    
+    // Auto update on input changes
+    function bindAutoFilterEvents() {
+        fromSNInput.addEventListener('input', () => applyFiltersAndRender());
+        toSNInput.addEventListener('input', () => applyFiltersAndRender());
+        fromDateInput.addEventListener('change', () => applyFiltersAndRender());
+        toDateInput.addEventListener('change', () => applyFiltersAndRender());
+    }
+    
+    window.addEventListener('DOMContentLoaded', async () => {
+        await fetchAllPlanData();
+        bindAutoFilterEvents();
+        
+        resetBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            resetFilters();
+        });
+        
+        printBtn.addEventListener('click', () => {
+            if (masterData.length === 0 && !isLoading) {
+                showMessage("प्रिन्ट गर्न डाटा उपलब्ध छैन।", true);
+                return;
+            }
+            printTable();
+        });
+        
+        downloadBtn.addEventListener('click', () => {
+            if (masterData.length === 0 && !isLoading) {
+                showMessage("डाउनलोड गर्न डाटा लोड भइसकेको छैन।", true);
+                return;
+            }
+            downloadCSV();
+        });
+        
+        pdfBtn.addEventListener('click', () => {
+            if (masterData.length === 0 && !isLoading) {
+                showMessage("PDF जेनरेट गर्न डाटा छैन।", true);
+                return;
+            }
+            downloadPDF();
+        });
+    });
+</script>
+</body>
+</html>

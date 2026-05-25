@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>दैनिक पाठ योजना रिपोर्ट | विद्यालय शैक्षिक योजना प्रणाली</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Roboto', 'Noto Sans', 'Kalimati', system-ui, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #e8f0f8 0%, #d4e0ec 100%);
+            padding: 30px 24px;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Filter Card */
+        .filter-card {
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(2px);
+            border-radius: 32px;
+            padding: 28px 32px;
+            margin-bottom: 32px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.15);
+            border: 1px solid rgba(30,58,95,0.15);
+        }
+
+        .filter-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e3a5f, #2c5282);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 22px;
+            border-left: 5px solid #2c5282;
+            padding-left: 18px;
+        }
+
+        .filter-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            align-items: flex-end;
+            margin-bottom: 20px;
+        }
+
+        .filter-field {
+            flex: 1;
+            min-width: 170px;
+        }
+
+        .filter-field label {
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: #475569;
+            display: block;
+            margin-bottom: 6px;
+            letter-spacing: 0.8px;
+        }
+
+        .filter-field select, .filter-field input {
+            width: 100%;
+            padding: 12px 18px;
+            border-radius: 48px;
+            border: 1.5px solid #e2e8f0;
+            background: white;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .filter-field select:focus, .filter-field input:focus {
+            outline: none;
+            border-color: #2c5282;
+            box-shadow: 0 0 0 3px rgba(44,82,130,0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1e3a5f, #2c5282);
+            color: white;
+            border: none;
+            padding: 12px 32px;
+            border-radius: 48px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(30,58,95,0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(30,58,95,0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #2c7a4d, #1f5e3a);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 48px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(44,122,77,0.3);
+        }
+
+        .btn-print {
+            background: linear-gradient(135deg, #d97706, #b45309);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 48px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .btn-print:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(217,119,6,0.3);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        /* Fixed action bar at bottom (outside card) */
+        .global-actions {
+            position: sticky;
+            bottom: 20px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 14px;
+            margin-top: 28px;
+            padding: 12px 20px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(12px);
+            border-radius: 60px;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.2);
+            z-index: 100;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        /* Lesson Plan Card - A4 Style */
+        .lesson-plan-card {
+            background: white;
+            border-radius: 28px;
+            padding: 40px 44px;
+            box-shadow: 0 25px 45px -12px rgba(0,0,0,0.2);
+            border: 1px solid rgba(30,58,95,0.1);
+            transition: all 0.2s;
+        }
+
+        /* Two Column Info Layout (labels + values same line) */
+        .info-grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px 28px;
+            background: linear-gradient(135deg, #f0f4f9, #e9edf2);
+            padding: 20px 28px;
+            border-radius: 28px;
+            margin-bottom: 28px;
+        }
+
+        .info-line {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 6px;
+            font-size: 0.98rem;
+            border-bottom: 1px dashed #cbd5e180;
+            padding-bottom: 6px;
+        }
+
+        .info-label {
+            font-weight: 800;
+            color: #1e3a5f;
+            min-width: 140px;
+            letter-spacing: 0.3px;
+        }
+
+        .info-value {
+            font-weight: 600;
+            color: #0f172a;
+            word-break: break-word;
+            flex: 1;
+        }
+
+        /* Hide filter summary bar & plan list during print/PDF */
+        .no-print, .filter-summary, .plan-list-container {
+            display: block;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+            }
+            .filter-card, .global-actions, .action-buttons, .btn-primary, .btn-secondary, .debug-info,
+            .filter-summary, .plan-list, .badge-info, .plan-list-container {
+                display: none !important;
+            }
+            .lesson-plan-card {
+                padding: 20px 25px !important;
+                margin: 0 !important;
+                box-shadow: none !important;
+                border-radius: 0 !important;
+            }
+            .plan-header h2, .plan-header h3 {
+                color: #000 !important;
+            }
+            .info-grid-2col, .content-block, .footer-sign {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+            .footer-sign {
+                margin-top: 30px;
+            }
+            @page {
+                size: A4 portrait;
+                margin: 0.7in 0.5in;
+            }
+            body * {
+                visibility: visible;
+            }
+        }
+
+        .plan-header {
+            text-align: center;
+            margin-bottom: 32px;
+            border-bottom: 3px solid #2c5282;
+            padding-bottom: 20px;
+        }
+
+        .plan-header h2 {
+            font-size: 1.9rem;
+            color: #1e3a5f;
+            letter-spacing: 1px;
+            font-weight: 800;
+        }
+
+        .school-detail {
+            text-align: center;
+            font-size: 0.95rem;
+            color: #334155;
+            margin-bottom: 28px;
+            border-bottom: 1px dashed #cbd5e1;
+            padding-bottom: 16px;
+            line-height: 1.7;
+            background: #f8fafc;
+            border-radius: 24px;
+            padding: 16px;
+        }
+
+        .content-block {
+            margin-bottom: 28px;
+            border-left: 4px solid #2c5282;
+            padding-left: 22px;
+            background: #fefefe;
+            border-radius: 0 16px 16px 0;
+        }
+
+        .content-block .title {
+            font-weight: 800;
+            font-size: 1rem;
+            color: #1e3a5f;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .content-block .description {
+            color: #1e293b;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            font-size: 0.95rem;
+        }
+
+        .footer-sign {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 45px;
+            padding-top: 25px;
+            border-top: 2px dashed #cbd5e1;
+            font-size: 0.85rem;
+            color: #334155;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .plan-list {
+            margin-top: 20px;
+            margin-bottom: 28px;
+            max-height: 380px;
+            overflow-y: auto;
+            background: #f1f5f9;
+            border-radius: 24px;
+            padding: 12px;
+        }
+
+        .plan-item {
+            background: white;
+            padding: 14px 20px;
+            margin-bottom: 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+        }
+
+        .plan-item:hover {
+            background: linear-gradient(135deg, #e6f0ff, #dce8f5);
+            transform: translateX(6px);
+            border-color: #2c5282;
+        }
+
+        .plan-item.active {
+            background: linear-gradient(135deg, #1e3a5f, #2c5282);
+            color: white;
+            border-color: #1e3a5f;
+        }
+
+        .plan-item .plan-sn {
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .badge-info {
+            background: #e2e8f0;
+            border-radius: 30px;
+            padding: 6px 16px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #1e3a5f;
+        }
+
+        .loading-spinner {
+            text-align: center;
+            padding: 60px;
+            background: white;
+            border-radius: 32px;
+            color: #1e3a5f;
+            font-weight: 600;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #fff8e7, #fef3c7);
+            border-radius: 32px;
+            color: #92400e;
+            font-weight: 500;
+        }
+
+        .error-box {
+            background: #fee2e2;
+            border-left: 5px solid #dc2626;
+            padding: 20px;
+            border-radius: 24px;
+            margin: 20px 0;
+            color: #991b1b;
+        }
+
+        .debug-info {
+            background: #f0fdf4;
+            border-left: 4px solid #22c55e;
+            padding: 12px 18px;
+            border-radius: 20px;
+            margin: 12px 0;
+            font-size: 12px;
+        }
+
+        @media (max-width: 700px) {
+            body { padding: 20px 16px; }
+            .lesson-plan-card { padding: 20px; }
+            .info-grid-2col { grid-template-columns: 1fr; gap: 12px; padding: 18px; }
+            .footer-sign { flex-direction: column; text-align: center; }
+            .filter-grid { flex-direction: column; align-items: stretch; }
+            .global-actions { justify-content: center; bottom: 10px; right: 10px; left: 10px; width: auto; }
+        }
+    </style>
+</head>
+<body>
+<div class="app-container">
+    <!-- Filter Card -->
+    <div class="filter-card">
+        <div class="filter-title">दैनिक पाठ योजना रिपोर्ट | Daily Lesson Plan Report</div>
+        <div class="filter-grid">
+            <div class="filter-field">
+                <label>📌 योजना प्रकार (Plan Type)</label>
+                <select id="planTypeSelect">
+                    <option value="daily"> दैनिक पाठ योजना (Daily Lesson Plan)</option>
+                </select>
+            </div>
+            <div class="filter-field">
+                <label>🏫 कक्षा (Class)</label>
+                <select id="classSelect">
+                    <option value=""> सबै कक्षा (All Classes)</option>
+                </select>
+            </div>
+            <div class="filter-field">
+                <label> विषय (Subject)</label>
+                <select id="subjectSelect">
+                    <option value=""> सबै विषय (All Subjects)</option>
+                </select>
+            </div>
+            <div class="filter-field">
+                <label>योजना सिरियल नं (Plan SN)</label>
+                <input type="number" id="serialSearch" placeholder="जस्तै: 1, 2, 5" step="1">
+            </div>
+        </div>
+        <div class="filter-grid" style="margin-top: 5px;">
+            <div class="action-buttons">
+                <button class="btn-primary" id="searchBtn">योजना हेर्नुहोस्</button>
+                <button class="btn-secondary" id="refreshBtn"> पुन: लोड गर्नुहोस्</button>
+            </div>
+        </div>
+        <div id="connectionStatus" class="debug-info" style="display:none;"></div>
+        <div style="font-size:0.7rem; color:#5b6e8c; margin-top:16px; background:#f0f4f9; padding:10px 18px; border-radius:28px;">
+            ✅ कक्षा र विषयको सूची स्वतः लोड हुन्छ। A4 साइज (पोर्ट्रेट) मा प्रिन्ट तथा PDF डाउनलोडको सुविधा।
+        </div>
+    </div>
+
+    <!-- Report Display Area -->
+    <div id="reportContainer">
+        <div id="dynamicPlanContent">
+            <div class="no-data">📌 कृपया माथि फिल्टर गरी खोजी गर्नुहोस् वा रिफ्रेस गर्नुहोस्।</div>
+        </div>
+    </div>
+
+    <!-- GLOBAL ACTION BUTTONS (fixed at bottom, outside card) -->
+    <div class="global-actions">
+        <button class="btn-print" id="globalPrintBtn">🖨️ प्रिन्ट गर्नुहोस्</button>
+        <button class="btn-print" id="globalPdfBtn">📄 PDF डाउनलोड</button>
+    </div>
+</div>
+
+<script>
+    // ================= CONFIGURATION =================
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzAnMfxmhV9HlZvTV6_aonoJV_qDxWQRUrvONjrYmaK5bcMaaT7w4kzPdMHJLnjw1Cq8w/exec";
+
+    let allDailyPlans = [];
+    let sourceClasses = [];
+    let sourceSubjects = [];
+    
+    function showDebug(message, isError = false) {
+        const statusDiv = document.getElementById('connectionStatus');
+        statusDiv.style.display = 'block';
+        statusDiv.innerHTML = message;
+        statusDiv.style.background = isError ? '#fee2e2' : '#f0fdf4';
+        statusDiv.style.borderLeftColor = isError ? '#dc2626' : '#22c55e';
+        console.log(message);
+        setTimeout(() => {
+            if (statusDiv.style.display !== 'none') {
+                statusDiv.style.opacity = '0';
+                setTimeout(() => { if(statusDiv) statusDiv.style.display = 'none'; statusDiv.style.opacity = ''; }, 500);
+            }
+        }, 4500);
+    }
+    
+    // JSONP Request
+    function fetchJSONP(action) {
+        return new Promise((resolve, reject) => {
+            const callbackName = 'jsonp_callback_' + Date.now() + '_' + Math.random().toString(36).substr(2, 8);
+            const timeout = setTimeout(() => {
+                if (window[callbackName]) delete window[callbackName];
+                reject(new Error('Request timeout - सर्भरले जवाफ दिएन'));
+                if (script && script.parentNode) script.parentNode.removeChild(script);
+            }, 30000);
+            
+            window[callbackName] = function(response) {
+                clearTimeout(timeout);
+                delete window[callbackName];
+                if (script && script.parentNode) script.parentNode.removeChild(script);
+                if (response && typeof response === 'object') {
+                    resolve(response);
+                } else {
+                    reject(new Error('Invalid response format'));
+                }
+            };
+            
+            const url = `${APPS_SCRIPT_URL}?action=${action}&callback=${callbackName}&_=${Date.now()}`;
+            const script = document.createElement('script');
+            script.src = url;
+            script.onerror = () => {
+                clearTimeout(timeout);
+                reject(new Error('Network error - कृपया URL जाँच गर्नुहोस्'));
+                if (window[callbackName]) delete window[callbackName];
+                if (script.parentNode) script.parentNode.removeChild(script);
+            };
+            document.body.appendChild(script);
+        });
+    }
+    
+    function populateDropdowns() {
+        const classSelect = document.getElementById('classSelect');
+        const subjectSelect = document.getElementById('subjectSelect');
+        
+        classSelect.innerHTML = '<option value="">📚 सबै कक्षा (All Classes)</option>';
+        subjectSelect.innerHTML = '<option value="">📖 सबै विषय (All Subjects)</option>';
+        
+        if (sourceClasses && sourceClasses.length > 0) {
+            const uniqueClasses = [...new Set(sourceClasses.filter(c => c && c.toString().trim() !== ''))];
+            uniqueClasses.forEach(cls => {
+                classSelect.innerHTML += `<option value="${cls.toString().replace(/"/g, '&quot;')}">${cls}</option>`;
+            });
+        }
+        
+        if (sourceSubjects && sourceSubjects.length > 0) {
+            const uniqueSubjects = [...new Set(sourceSubjects.filter(s => s && s.toString().trim() !== ''))];
+            uniqueSubjects.forEach(sub => {
+                subjectSelect.innerHTML += `<option value="${sub.toString().replace(/"/g, '&quot;')}">${sub}</option>`;
+            });
+        }
+    }
+    
+    // Helper: Two column info row with label & value same line (left + right layout)
+    function renderTwoColumnInfo(plan) {
+        let formattedDate = plan.date || '_____';
+        if (plan.date && plan.date !== '') {
+            try {
+                const d = new Date(plan.date);
+                if (!isNaN(d.getTime())) {
+                    formattedDate = d.toLocaleDateString('ne-NP', { year:'numeric', month:'long', day:'numeric' });
+                }
+            } catch(e) {}
+        }
+        
+        const classValue = plan.class || '—';
+        const durationValue = plan.duration || ' मिनेट';
+        const subjectValue = plan.subject || '—';
+        const dateValue = formattedDate;
+        const unitValue = plan.unitScope || plan.unitTopic || '—';
+        const lessonTitleValue = plan.lessonTitle || '—';
+        const studentCountValue = plan.studentNumber || '—';
+        const teachingMethodValue = plan.periodMethod || plan.teachingMethod || '—';
+        
+        return `
+            <div class="info-grid-2col">
+                <div class="info-line"><span class="info-label">कक्षा (Class) :</span><span class="info-value">${classValue}</span></div>
+                <div class="info-line"><span class="info-label">समय (Duration) :</span><span class="info-value">${durationValue}</span></div>
+                <div class="info-line"><span class="info-label">विषय (Subject) :</span><span class="info-value">${subjectValue}</span></div>
+                <div class="info-line"><span class="info-label">मिति (Date) :</span><span class="info-value">${dateValue}</span></div>
+                <div class="info-line"><span class="info-label">एकाइ वा क्षेत्र (Unit/Scope) :</span><span class="info-value">${unitValue}</span></div>
+                <div class="info-line"><span class="info-label">पाठ शीर्षक (Title) :</span><span class="info-value">${lessonTitleValue}</span></div>
+                <div class="info-line"><span class="info-label">विद्यार्थी संख्या :</span><span class="info-value">${studentCountValue}</span></div>
+                <div class="info-line"><span class="info-label">शिक्षण विधि :</span><span class="info-value">${teachingMethodValue}</span></div>
+            </div>
+        `;
+    }
+    
+    // Main rendering function (NO print/pdf buttons, NO visible summary bar for print)
+    function renderDailyLesson(plan) {
+        if (!plan) return `<div class="no-data">⚠️ योजना डाटा उपलब्ध छैन।</div>`;
+        
+        const schoolAddress = plan.schoolAddress || 'लालबन्दी-१७, सर्लाही';
+        const academicYear = plan.academicYear || '_____';
+        
+        return `
+            <div class="lesson-plan-card">
+                <div class="plan-header">
+                    <h2>दैनिक पाठ योजना</h2>
+                    <div style="font-size:0.9rem; margin-top:8px;"><strong>पाठ योजना सङ्ख्या :</strong> ${plan.serialNo || '—'}</div>
+                </div>
+                <div class="school-detail">
+                    <h1 style="color:#1e3a5f;">${plan.schoolName || 'विद्यालय'}</h1>
+                    <h3>${schoolAddress}</h3>
+                    <div><strong>शैक्षिक सत्र :</strong> ${academicYear}</div>
+                </div>
+                
+                <!-- TWO COLUMN INFO (LABEL + VALUE SAME LINE) -->
+                ${renderTwoColumnInfo(plan)}
+                
+                <div class="content-block">
+                    <div class="title">१. सिकाइ उपलब्धि (Learning Objectives)</div>
+                    <div class="description">${(plan.learningObjectives || plan.objectives || '—').replace(/\n/g, '<br>')}</div>
+                </div>
+                <div class="content-block">
+                    <div class="title">२. सिकाइ सामग्री (Teaching Materials)</div>
+                    <div class="description">${(plan.teachingMaterials || plan.teachingMaterialsText || '—').replace(/\n/g, '<br>')}</div>
+                </div>
+                <div class="content-block">
+                    <div class="title">३. क्रियाकलाप (Learning Activities)</div>
+                    <div class="description">${(plan.learningActivities || plan.mainActivities || '—').replace(/\n/g, '<br>')}</div>
+                </div>
+                <div class="content-block">
+                    <div class="title">४. मूल्याङ्कन (Evaluation)</div>
+                    <div class="description">${(plan.evaluation || plan.evaluationMethods || '—').replace(/\n/g, '<br>')}</div>
+                </div>
+                <div class="content-block">
+                    <div class="title">५. सुधारात्मक सिकाइ (Remedial Teaching)</div>
+                    <div class="description">${(plan.remedialTeaching || plan.remediation || '—').replace(/\n/g, '<br>')}</div>
+                </div>
+                <div class="content-block">
+                    <div class="title">६. गृहकार्य (Homework)</div>
+                    <div class="description">${(plan.homework || '—').replace(/\n/g, '<br>')}</div>
+                </div>
+                <div class="footer-sign">
+                    <div><strong>शिक्षकको नाम :</strong> ${plan.teacherName || '_________________'}</div>
+                    <div><strong>विद्यालय छाप</strong></div>
+                    <div><strong>प्रधानाध्यापकको सही :</strong> ${plan.principalSign || '_________________'}</div>
+                </div>
+            </div>
+        `;
+    }
+    
+    function filterAndDisplay() {
+        const selectedClass = document.getElementById('classSelect').value;
+        const selectedSubject = document.getElementById('subjectSelect').value;
+        const serialSearchRaw = document.getElementById('serialSearch').value;
+        const serialSearch = serialSearchRaw ? String(serialSearchRaw).trim() : '';
+        
+        let filtered = [...allDailyPlans];
+        
+        if (selectedClass && selectedClass !== "") {
+            filtered = filtered.filter(p => p.class && p.class.toString().trim() === selectedClass);
+        }
+        if (selectedSubject && selectedSubject !== "") {
+            filtered = filtered.filter(p => p.subject && p.subject.toString().trim() === selectedSubject);
+        }
+        if (serialSearch !== "") {
+            filtered = filtered.filter(p => p.serialNo && String(p.serialNo).trim() === serialSearch);
+        }
+        
+        const container = document.getElementById('dynamicPlanContent');
+        
+        if (filtered.length === 0) {
+            container.innerHTML = `<div class="no-data">⚠️ कुनै पनि पाठ योजना फेला परेन। कृपया फिल्टर परिवर्तन गर्नुहोस्।</div>`;
+            return;
+        }
+        
+        if (filtered.length === 1) {
+            container.innerHTML = renderDailyLesson(filtered[0]);
+        } else {
+            // Build filter summary bar (visible on screen, hidden in print)
+            let html = `<div class="filter-summary" style="margin-bottom:20px;background:linear-gradient(135deg,#eef2ff,#e0e8f5);padding:14px 24px;border-radius:32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;">
+                <strong>🔍 ${filtered.length} वटा योजना फेला पर्यो। क्लिक गरी हेर्नुहोस्।</strong>
+                <span class="badge-info">कुल योजना: ${allDailyPlans.length}</span>
+            </div>
+            <div class="plan-list-container">
+                <div class="plan-list" id="planList">`;
+            
+            filtered.forEach((plan, idx) => {
+                html += `<div class="plan-item" data-index="${idx}">
+                    <div class="plan-sn">📄 सिरियल #${plan.serialNo || '—'} &nbsp;📘 ${plan.class || 'कक्षा'} &nbsp;📖 ${plan.subject || 'विषय'}<br><span style="font-size:0.75rem;">📌 ${plan.lessonTitle || 'शीर्षक छैन'}</span></div>
+                </div>`;
+            });
+            html += `</div></div><div id="selectedPlanDetail">${renderDailyLesson(filtered[0])}</div>`;
+            container.innerHTML = html;
+            
+            const items = document.querySelectorAll('.plan-item');
+            items.forEach((item, i) => {
+                item.addEventListener('click', function() {
+                    const idxAttr = this.getAttribute('data-index');
+                    if (idxAttr !== null) {
+                        const idx = parseInt(idxAttr);
+                        if (!isNaN(idx) && filtered[idx]) {
+                            document.getElementById('selectedPlanDetail').innerHTML = renderDailyLesson(filtered[idx]);
+                            items.forEach(el => el.classList.remove('active'));
+                            this.classList.add('active');
+                        }
+                    }
+                });
+            });
+            if (items.length) items[0].classList.add('active');
+        }
+    }
+    
+    // Helper to clean content for print (remove summary bar and plan list)
+    function getPrintableContent() {
+        const container = document.getElementById('dynamicPlanContent');
+        if (!container) return '';
+        // Clone to avoid modifying live DOM
+        const cloneContainer = container.cloneNode(true);
+        // Remove filter-summary and plan-list-container elements from clone
+        const summary = cloneContainer.querySelector('.filter-summary');
+        if (summary) summary.remove();
+        const planListDiv = cloneContainer.querySelector('.plan-list-container');
+        if (planListDiv) planListDiv.remove();
+        return cloneContainer.innerHTML;
+    }
+    
+    // Print Function using cleaned content (no summary bar, no plan list)
+    function printReport() {
+        const cleanContent = getPrintableContent();
+        if (!cleanContent || cleanContent.includes('कुनै पनि पाठ योजना फेला परेन')) {
+            alert('कृपया पहिले एउटा योजना चयन गर्नुहोस् वा डाटा लोड गर्नुहोस्।');
+            return;
+        }
+        const printWindow = window.open('', '_blank');
+        if (!printWindow) {
+            alert('कृपया पप-अप ब्लकर हटाउनुहोस्');
+            return;
+        }
+        printWindow.document.write(`
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>दैनिक पाठ योजना रिपोर्ट</title>
+                <meta charset="UTF-8">
+                <style>
+                    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Roboto', 'Noto Sans', sans-serif; }
+                    body { padding: 0; margin: 0; background: white; }
+                    .print-container { padding: 20px 25px; max-width: 100%; }
+                    .lesson-plan-card { background: white; padding: 20px 25px; }
+                    .plan-header { text-align: center; margin-bottom: 20px; border-bottom: 2px solid #2c5282; padding-bottom: 12px; }
+                    .plan-header h2 { color: #1e3a5f; font-size: 1.6rem; }
+                    .school-detail { text-align: center; margin-bottom: 20px; background: #f8fafc; padding: 12px; border-radius: 16px; }
+                    .info-grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; background: #f0f4f9; padding: 16px 22px; border-radius: 20px; margin-bottom: 24px; }
+                    .info-line { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 5px; }
+                    .info-label { font-weight: 800; color: #1e3a5f; min-width: 140px; }
+                    .info-value { font-weight: 600; color: #0f172a; }
+                    .content-block { margin-bottom: 20px; border-left: 3px solid #2c5282; padding-left: 18px; }
+                    .content-block .title { font-weight: 800; color: #1e3a5f; margin-bottom: 8px; }
+                    .content-block .description { line-height: 1.5; font-size: 0.9rem; }
+                    .footer-sign { display: flex; justify-content: space-between; margin-top: 35px; padding-top: 18px; border-top: 1px dashed #cbd5e1; flex-wrap: wrap; }
+                    @page { size: A4 portrait; margin: 0.6in 0.4in; }
+                </style>
+            </head>
+            <body>
+                <div class="print-container">
+                    ${cleanContent}
+                </div>
+                <script>
+                    window.onload = function() { window.print(); setTimeout(() => window.close(), 500); };
+                <\/script>
+            </body>
+            </html>
+        `);
+        printWindow.document.close();
+    }
+    
+    function downloadPDF() {
+        const cleanContent = getPrintableContent();
+        if (!cleanContent || cleanContent.includes('कुनै पनि पाठ योजना फेला परेन')) {
+            alert('कृपया पहिले एउटा योजना चयन गर्नुहोस्।');
+            return;
+        }
+        const printWindow = window.open('', '_blank');
+        if (!printWindow) {
+            alert('कृपया पप-अप ब्लकर हटाउनुहोस्');
+            return;
+        }
+        printWindow.document.write(`
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>Daily_Lesson_Plan_Report.pdf</title>
+                <meta charset="UTF-8">
+                <style>
+                    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Roboto', 'Noto Sans', sans-serif; }
+                    body { padding: 0; background: white; }
+                    .print-container { padding: 20px 25px; }
+                    .lesson-plan-card { background: white; padding: 20px 25px; }
+                    .plan-header { text-align: center; margin-bottom: 20px; border-bottom: 2px solid #2c5282; }
+                    .plan-header h2 { color: #1e3a5f; }
+                    .school-detail { text-align: center; margin-bottom: 20px; background: #f8fafc; padding: 12px; border-radius: 16px; }
+                    .info-grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; background: #f0f4f9; padding: 16px 22px; border-radius: 20px; margin-bottom: 24px; }
+                    .info-line { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 5px; }
+                    .info-label { font-weight: 800; color: #1e3a5f; min-width: 140px; }
+                    .info-value { font-weight: 600; color: #0f172a; }
+                    .content-block { margin-bottom: 20px; border-left: 3px solid #2c5282; padding-left: 18px; }
+                    .content-block .title { font-weight: 800; color: #1e3a5f; }
+                    .footer-sign { display: flex; justify-content: space-between; margin-top: 35px; padding-top: 18px; border-top: 1px dashed #cbd5e1; flex-wrap: wrap; }
+                    @page { size: A4 portrait; margin: 0.6in 0.4in; }
+                </style>
+            </head>
+            <body>
+                <div class="print-container">
+                    ${cleanContent}
+                </div>
+                <script>
+                    window.onload = function() { window.print(); setTimeout(() => window.close(), 500); };
+                <\/script>
+            </body>
+            </html>
+        `);
+        printWindow.document.close();
+    }
+    
+    async function loadData() {
+        const container = document.getElementById('dynamicPlanContent');
+        container.innerHTML = '<div class="loading-spinner"><div style="font-size:2rem;">📡</div><p>डाटा लोड हुँदै... कृपया पर्खनुहोस्</p></div>';
+        showDebug('🔄 डाटा लोड हुँदै...');
+        
+        try {
+            const response = await fetchJSONP('getAllPlanData');
+            if (response && response.status === 'success' && response.data) {
+                allDailyPlans = response.data.daily || [];
+                sourceClasses = response.data.classList || [];
+                sourceSubjects = response.data.subjectList || [];
+                showDebug(`✅ डाटा लोड सफल: ${allDailyPlans.length} योजनाहरू`);
+                populateDropdowns();
+                if (allDailyPlans.length === 0) {
+                    container.innerHTML = '<div class="no-data">✅ डाटा लोड सफल भयो। तर "daily_lesson" sheet मा कुनै पाठ योजना छैन।</div>';
+                } else {
+                    filterAndDisplay();
+                }
+            } else {
+                throw new Error('Invalid data format');
+            }
+        } catch(error) {
+            console.error(error);
+            container.innerHTML = `<div class="error-box"><strong>❌ त्रुटि:</strong> ${error.message}<br>कृपया Apps Script URL र डिप्लोयमेन्ट जाँच गर्नुहोस्।</div>`;
+            showDebug(`❌ Error: ${error.message}`, true);
+        }
+    }
+    
+    // Event Listeners
+    document.getElementById('searchBtn').addEventListener('click', filterAndDisplay);
+    document.getElementById('refreshBtn').addEventListener('click', loadData);
+    document.getElementById('globalPrintBtn').addEventListener('click', printReport);
+    document.getElementById('globalPdfBtn').addEventListener('click', downloadPDF);
+    document.getElementById('planTypeSelect').addEventListener('change', filterAndDisplay);
+    document.getElementById('classSelect').addEventListener('change', filterAndDisplay);
+    document.getElementById('subjectSelect').addEventListener('change', filterAndDisplay);
+    document.getElementById('serialSearch').addEventListener('input', filterAndDisplay);
+    
+    loadData();
+</script>
+</body>
+</html>

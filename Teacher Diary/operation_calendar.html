@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>School Operation Calendar</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f6f9;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #2c3e50;
+    }
+
+    .top-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input,
+    select,
+    textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    table th,
+    table td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+    }
+
+    table th {
+      background: #2c3e50;
+      color: white;
+    }
+
+    textarea {
+      min-height: 60px;
+      resize: vertical;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 20px;
+      border: none;
+      background: #27ae60;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background: #219150;
+    }
+
+    .success {
+      display: none;
+      margin-top: 15px;
+      padding: 12px;
+      background: #d4edda;
+      color: #155724;
+      border-radius: 5px;
+    }
+
+    @media(max-width: 768px) {
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <h1>School Operation Calendar</h1>
+
+  <div class="top-section">
+
+    <div class="form-group">
+      <label>School Name</label>
+      <input type="text" placeholder="Enter school name">
+    </div>
+
+    <div class="form-group">
+      <label>Academic Year</label>
+      <input type="text" placeholder="2082 / 2026">
+    </div>
+
+    <div class="form-group">
+      <label>Prepared By</label>
+      <input type="text" placeholder="Teacher Name">
+    </div>
+
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>S.N.</th>
+        <th>Month</th>
+        <th>Activity / Program</th>
+        <th>Date</th>
+        <th>Responsible Person</th>
+        <th>Remarks</th>
+      </tr>
+    </thead>
+
+    <tbody id="calendarBody">
+
+      <tr>
+        <td>1</td>
+        <td>
+          <select>
+            <option>Baishakh</option>
+            <option>Jestha</option>
+            <option>Ashadh</option>
+            <option>Shrawan</option>
+            <option>Bhadra</option>
+            <option>Ashwin</option>
+            <option>Kartik</option>
+            <option>Mangsir</option>
+            <option>Poush</option>
+            <option>Magh</option>
+            <option>Falgun</option>
+            <option>Chaitra</option>
+          </select>
+        </td>
+        <td><textarea placeholder="Activity details"></textarea></td>
+        <td><input type="date"></td>
+        <td><input type="text" placeholder="Responsible person"></td>
+        <td><input type="text" placeholder="Remarks"></td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <button onclick="addRow()">Add New Activity</button>
+  <button onclick="saveCalendar()">Save Calendar</button>
+
+  <div class="success" id="successMsg">
+    Operation Calendar Saved Successfully!
+  </div>
+
+</div>
+
+<script>
+
+let rowCount = 1;
+
+function addRow() {
+
+  rowCount++;
+
+  const table = document.getElementById('calendarBody');
+
+  const row = document.createElement('tr');
+
+  row.innerHTML = `
+    <td>${rowCount}</td>
+    <td>
+      <select>
+        <option>Baishakh</option>
+        <option>Jestha</option>
+        <option>Ashadh</option>
+        <option>Shrawan</option>
+        <option>Bhadra</option>
+        <option>Ashwin</option>
+        <option>Kartik</option>
+        <option>Mangsir</option>
+        <option>Poush</option>
+        <option>Magh</option>
+        <option>Falgun</option>
+        <option>Chaitra</option>
+      </select>
+    </td>
+    <td><textarea placeholder="Activity details"></textarea></td>
+    <td><input type="date"></td>
+    <td><input type="text" placeholder="Responsible person"></td>
+    <td><input type="text" placeholder="Remarks"></td>
+  `;
+
+  table.appendChild(row);
+}
+
+function saveCalendar() {
+
+  document.getElementById('successMsg').style.display = 'block';
+
+  setTimeout(() => {
+    document.getElementById('successMsg').style.display = 'none';
+  }, 3000);
+}
+
+</script>
+
+</body>
+</html>

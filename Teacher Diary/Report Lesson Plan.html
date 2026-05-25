@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>School Lesson Plan Report | Multi-Plan View</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #eef2f7;
+            font-family: 'Segoe UI', Roboto, 'Noto Sans', system-ui, sans-serif;
+            padding: 28px 20px;
+        }
+
+        .report-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        /* header */
+        .header {
+            background: linear-gradient(135deg, #1a3c5e 0%, #0e2a45 100%);
+            color: white;
+            padding: 26px 32px;
+        }
+        .header h1 {
+            font-size: 1.9rem;
+            font-weight: 600;
+        }
+        .header p {
+            opacity: 0.85;
+            margin-top: 6px;
+            font-size: 0.9rem;
+        }
+
+        /* filter panel */
+        .filter-panel {
+            background: #f9fafc;
+            padding: 22px 28px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            align-items: flex-end;
+        }
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            min-width: 160px;
+        }
+        .filter-group label {
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: #2c5a7a;
+            letter-spacing: 0.5px;
+        }
+        .filter-group select, .filter-group input {
+            padding: 10px 14px;
+            border-radius: 28px;
+            border: 1px solid #cbd5e1;
+            background: white;
+            font-size: 0.85rem;
+            font-family: inherit;
+            outline: none;
+            transition: 0.2s;
+        }
+        .filter-group select:focus, .filter-group input:focus {
+            border-color: #1e3a5f;
+            box-shadow: 0 0 0 2px rgba(30,58,95,0.2);
+        }
+        .btn {
+            padding: 10px 26px;
+            border-radius: 40px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: 0.2s;
+            font-family: inherit;
+        }
+        .btn-primary {
+            background: #1e3a5f;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #0f2c48;
+            transform: scale(0.97);
+        }
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+        .btn-secondary:hover {
+            background: #cbd5e1;
+        }
+        .btn-success {
+            background: #2c7a4d;
+            color: white;
+        }
+        .btn-success:hover {
+            background: #1e5f3a;
+        }
+
+        /* results area */
+        .results-area {
+            padding: 28px 32px;
+            background: #ffffff;
+        }
+
+        /* plan cards - generic and clean */
+        .plan-card {
+            background: white;
+            border: 1px solid #e4edf5;
+            border-radius: 24px;
+            margin-bottom: 32px;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        .card-header {
+            background: #f8fafd;
+            padding: 18px 24px;
+            border-bottom: 2px solid #e6edf4;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .plan-type-badge {
+            background: #1e3a5f;
+            color: white;
+            padding: 5px 16px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+        .plan-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #0f2c48;
+        }
+        .plan-sub {
+            font-size: 0.75rem;
+            color: #5e7e9e;
+            margin-top: 4px;
+        }
+
+        .info-row {
+            display: flex;
+            flex-wrap: wrap;
+            background: #ffffff;
+            padding: 14px 24px;
+            gap: 24px;
+            border-bottom: 1px solid #ecf3f8;
+        }
+        .info-item {
+            display: flex;
+            gap: 8px;
+            font-size: 0.85rem;
+        }
+        .info-label {
+            font-weight: 700;
+            color: #3a6082;
+            min-width: 100px;
+        }
+
+        .plan-body {
+            padding: 20px 28px;
+        }
+        .section {
+            margin-bottom: 22px;
+        }
+        .section-head {
+            font-weight: 800;
+            font-size: 0.9rem;
+            color: #1e4663;
+            border-left: 4px solid #f4b942;
+            padding-left: 12px;
+            margin-bottom: 12px;
+        }
+        .text-content {
+            color: #2c3e50;
+            line-height: 1.5;
+            font-size: 0.85rem;
+            padding-left: 16px;
+        }
+        .list-styled {
+            padding-left: 36px;
+            line-height: 1.55;
+        }
+        .list-styled li {
+            margin-bottom: 6px;
+        }
+
+        .empty-state, .loading-state {
+            text-align: center;
+            padding: 70px 24px;
+            background: #fefcf5;
+            border-radius: 32px;
+        }
+        .spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid #e2e8f0;
+            border-top-color: #1e3a5f;
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* print A4 portrait 1.75in margins */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+            }
+            .filter-panel, .btn, .no-print {
+                display: none !important;
+            }
+            .report-container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+            .plan-card {
+                break-inside: avoid;
+                page-break-inside: avoid;
+                border: 1px solid #ccc;
+            }
+            @page {
+                size: A4 portrait;
+                margin: 1.75in;
+            }
+            .header {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                background: #1a3c5e;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .filter-panel { flex-direction: column; align-items: stretch; }
+            .info-row { flex-direction: column; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+<div class="report-container">
+    <div class="header">
+        <h1>📚 Integrated Lesson Plan Report</h1>
+        <p>Daily Lesson | Annual Plan | Unit Plan | Operation Calendar</p>
+    </div>
+
+    <div class="filter-panel no-print">
+        <div class="filter-group">
+            <label>📋 Plan Type</label>
+            <select id="planTypeSelect">
+                <option value="daily">Daily Lesson Plan</option>
+                <option value="annual">Annual Plan</option>
+                <option value="unit">Unit Plan</option>
+                <option value="calendar">Operation Calendar</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label>🏫 Class (from Source Col A)</label>
+            <select id="classFilter"></select>
+        </div>
+        <div class="filter-group">
+            <label>📖 Subject (from Source Col B)</label>
+            <select id="subjectFilter"></select>
+        </div>
+        <div class="filter-group">
+            <label>🔢 Serial No.</label>
+            <input type="number" id="snFilter" placeholder="e.g., 5">
+        </div>
+        <div class="filter-group">
+            <label>🔍 Search (Title / Unit / Topic)</label>
+            <input type="text" id="searchInput" placeholder="Keyword...">
+        </div>
+        <button class="btn btn-primary" id="applyBtn">Apply Filters</button>
+        <button class="btn btn-secondary" id="resetBtn">Reset</button>
+        <button class="btn btn-success" id="printPdfBtn">🖨️ Print / PDF</button>
+    </div>
+
+    <div class="results-area" id="resultsContainer">
+        <div class="loading-state">
+            <div class="spinner"></div>
+            <p>Loading data from Google Sheets...</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ======================== CONFIG ========================
+    // IMPORTANT: Replace with your actual Apps Script deployment URL
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzAnMfxmhV9HlZvTV6_aonoJV_qDxWQRUrvONjrYmaK5bcMaaT7w4kzPdMHJLnjw1Cq8w/exec";
+    
+    // Data storage
+    let allDailyLessons = [];      // from daily_lesson sheet
+    let allAnnualPlans = [];       // from annual_plan sheet
+    let allUnitPlans = [];         // from unit_plan sheet
+    let allCalendarEvents = [];     // from operation_calendar sheet
+    
+    let classOptions = [];     // from Source sheet Column A
+    let subjectOptions = [];    // from Source sheet Column B
+    
+    let currentFiltered = [];
+    let currentPlanType = "daily";
+    
+    // Helper: fetch via JSONP
+    function fetchDataFromSheets() {
+        return new Promise((resolve, reject) => {
+            const callbackName = 'masterFetch_' + Date.now() + '_' + Math.random().toString(36).substr(2, 8);
+            const timeout = setTimeout(() => {
+                if (window[callbackName]) delete window[callbackName];
+                reject(new Error('Request timeout. Check Apps Script deployment.'));
+            }, 30000);
+            
+            window[callbackName] = function(response) {
+                clearTimeout(timeout);
+                if (response && response.status === 'success') {
+                    resolve(response.data);
+                } else {
+                    reject(new Error(response?.message || 'Failed to fetch data'));
+                }
+                delete window[callbackName];
+                if (script.parentNode) script.parentNode.removeChild(script);
+            };
+            
+            const params = new URLSearchParams();
+            params.append('callback', callbackName);
+            params.append('action', 'getAllPlanData');  // new combined action
+            const script = document.createElement('script');
+            script.src = APPS_SCRIPT_URL + '?' + params.toString();
+            script.onerror = () => {
+                clearTimeout(timeout);
+                reject(new Error('Network error - unable to connect'));
+                delete window[callbackName];
+            };
+            document.body.appendChild(script);
+        });
+    }
+    
+    // Escape HTML
+    function escapeHtml(str) {
+        if (!str) return '';
+        return String(str).replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+    
+    // Render cards based on current plan type & filters
+    function renderCurrentPlan() {
+        const container = document.getElementById('resultsContainer');
+        if (!currentFiltered.length) {
+            container.innerHTML = `<div class="empty-state">
+                <div style="font-size: 3rem;">📋</div>
+                <h3>No records found</h3>
+                <p>Try changing plan type or filter criteria.</p>
+            </div>`;
+            return;
+        }
+        
+        let html = '';
+        if (currentPlanType === 'daily') {
+            html = renderDailyCards(currentFiltered);
+        } else if (currentPlanType === 'annual') {
+            html = renderAnnualCards(currentFiltered);
+        } else if (currentPlanType === 'unit') {
+            html = renderUnitCards(currentFiltered);
+        } else if (currentPlanType === 'calendar') {
+            html = renderCalendarCards(currentFiltered);
+        }
+        container.innerHTML = html;
+    }
+    
+    // Daily Lesson Card Render
+    function renderDailyCards(lessons) {
+        let cards = '';
+        lessons.forEach((plan, idx) => {
+            cards += `
+                <div class="plan-card">
+                    <div class="card-header">
+                        <div><div class="plan-title">📖 ${escapeHtml(plan.lessonTitle || 'Lesson Plan')}</div>
+                        <div class="plan-sub">${escapeHtml(plan.unitTopic || 'Unit')} | ${escapeHtml(plan.subject || 'Subject')}</div></div>
+                        <div class="plan-type-badge">Daily Plan #${escapeHtml(plan.serialNo || idx+1)}</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-item"><span class="info-label">Class:</span>${escapeHtml(plan.class || '-')}</div>
+                        <div class="info-item"><span class="info-label">Subject:</span>${escapeHtml(plan.subject || '-')}</div>
+                        <div class="info-item"><span class="info-label">Teacher:</span>${escapeHtml(plan.teacherName || '-')}</div>
+                        <div class="info-item"><span class="info-label">Date:</span>${escapeHtml(plan.date || '-')} (${escapeHtml(plan.day || '-')})</div>
+                        <div class="info-item"><span class="info-label">Period/Duration:</span>${escapeHtml(plan.periodNo || '-')} / ${escapeHtml(plan.duration || '-')} min</div>
+                    </div>
+                    <div class="plan-body">
+                        <div class="section"><div class="section-head">🎯 Learning Objectives</div><div class="text-content">${escapeHtml(plan.learningObjectives || 'Not specified')}</div></div>
+                        <div class="section"><div class="section-head">📦 Teaching Materials</div><div class="text-content">${escapeHtml(plan.teachingMaterialsText || '-')}</div></div>
+                        <div class="section"><div class="section-head">⚙️ Activities</div><div class="text-content"><strong>Intro:</strong> ${escapeHtml(plan.introductionActivities || '-')}<br><strong>Main:</strong> ${escapeHtml(plan.mainActivities || '-')}<br><strong>Closing:</strong> ${escapeHtml(plan.closingActivities || '-')}</div></div>
+                        <div class="section"><div class="section-head">📝 Evaluation & Homework</div><div class="text-content">${escapeHtml(plan.evaluationMethods || '-')} | Homework: ${escapeHtml(plan.homework || '-')}</div></div>
+                        <div class="section"><div class="section-head">💭 Reflection</div><div class="text-content">${escapeHtml(plan.reflection || '-')}</div></div>
+                    </div>
+                </div>`;
+        });
+        return cards;
+    }
+    
+    // Annual Plan Card
+    function renderAnnualCards(plans) {
+        let cards = '';
+        plans.forEach((p, idx) => {
+            cards += `
+                <div class="plan-card">
+                    <div class="card-header">
+                        <div><div class="plan-title">📅 Annual Plan: ${escapeHtml(p.term || 'Full Year')}</div>
+                        <div class="plan-sub">${escapeHtml(p.month || 'Monthly Plan')} | ${escapeHtml(p.unit || 'Unit/Chapter')}</div></div>
+                        <div class="plan-type-badge">Annual #${escapeHtml(p.serialNo || idx+1)}</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-item"><span class="info-label">Class:</span>${escapeHtml(p.class || '-')}</div>
+                        <div class="info-item"><span class="info-label">Subject:</span>${escapeHtml(p.subject || '-')}</div>
+                        <div class="info-item"><span class="info-label">Teacher:</span>${escapeHtml(p.teacherName || '-')}</div>
+                        <div class="info-item"><span class="info-label">Academic Year:</span>${escapeHtml(p.academicYear || '-')}</div>
+                        <div class="info-item"><span class="info-label">Working Days:</span>${escapeHtml(p.workingDays || '-')}</div>
+                    </div>
+                    <div class="plan-body">
+                        <div class="section"><div class="section-head">🎯 Overall Goals</div><div class="text-content">${escapeHtml(p.overallGoals || '-')}</div></div>
+                        <div class="section"><div class="section-head">📚 Topics & Methods</div><div class="text-content"><strong>Topics:</strong> ${escapeHtml(p.topics || '-')}<br><strong>Teaching Method:</strong> ${escapeHtml(p.method || '-')}<br><strong>Materials:</strong> ${escapeHtml(p.materials || '-')}</div></div>
+                        <div class="section"><div class="section-head">📊 Evaluation & Remarks</div><div class="text-content">${escapeHtml(p.evaluation || '-')} | Remarks: ${escapeHtml(p.remarks || '-')}</div></div>
+                        <div class="section"><div class="section-head">📌 Teacher Reflection</div><div class="text-content">${escapeHtml(p.reflection || '-')}</div></div>
+                    </div>
+                </div>`;
+        });
+        return cards;
+    }
+    
+    // Unit Plan Card
+    function renderUnitCards(units) {
+        let cards = '';
+        units.forEach((u, idx) => {
+            cards += `
+                <div class="plan-card">
+                    <div class="card-header">
+                        <div><div class="plan-title">📘 Unit Plan: ${escapeHtml(u.unitTitle || 'Unit')}</div>
+                        <div class="plan-sub">Lessons: ${escapeHtml(u.lessonTopic || 'Multiple topics')}</div></div>
+                        <div class="plan-type-badge">Unit #${escapeHtml(u.serialNo || idx+1)}</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-item"><span class="info-label">Class:</span>${escapeHtml(u.class || '-')}</div>
+                        <div class="info-item"><span class="info-label">Subject:</span>${escapeHtml(u.subject || '-')}</div>
+                        <div class="info-item"><span class="info-label">Total Periods:</span>${escapeHtml(u.totalPeriods || '-')}</div>
+                        <div class="info-item"><span class="info-label">Teacher:</span>${escapeHtml(u.teacherName || '-')}</div>
+                    </div>
+                    <div class="plan-body">
+                        <div class="section"><div class="section-head">🎯 Unit Objectives</div><div class="text-content">${escapeHtml(u.unitObjectives || '-')}</div></div>
+                        <div class="section"><div class="section-head">📖 Lesson / Topic</div><div class="text-content"><strong>Lesson:</strong> ${escapeHtml(u.lessonTopic || '-')}<br><strong>Learning Outcomes:</strong> ${escapeHtml(u.outcomes || '-')}</div></div>
+                        <div class="section"><div class="section-head">⚙️ Teaching Method & Activities</div><div class="text-content">Method: ${escapeHtml(u.method || '-')}<br>Activities: ${escapeHtml(u.activities || '-')}<br>Materials: ${escapeHtml(u.materials || '-')}</div></div>
+                        <div class="section"><div class="section-head">📝 Assessment & Remarks</div><div class="text-content">${escapeHtml(u.assessment || '-')} | Periods allocated: ${escapeHtml(u.periodsAllocated || '-')} | Remarks: ${escapeHtml(u.remarks || '-')}</div></div>
+                    </div>
+                </div>`;
+        });
+        return cards;
+    }
+    
+    // Operation Calendar Card
+    function renderCalendarCards(events) {
+        let cards = '';
+        events.forEach((ev, idx) => {
+            cards += `
+                <div class="plan-card">
+                    <div class="card-header">
+                        <div><div class="plan-title">📅 ${escapeHtml(ev.activity || 'School Event')}</div>
+                        <div class="plan-sub">${escapeHtml(ev.month || 'Month')} | ${escapeHtml(ev.eventDate || 'Date')}</div></div>
+                        <div class="plan-type-badge">Calendar #${escapeHtml(ev.serialNo || idx+1)}</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-item"><span class="info-label">Class:</span>${escapeHtml(ev.class || 'All')}</div>
+                        <div class="info-item"><span class="info-label">Academic Year:</span>${escapeHtml(ev.academicYear || '-')}</div>
+                        <div class="info-item"><span class="info-label">Responsible:</span>${escapeHtml(ev.responsiblePerson || '-')}</div>
+                    </div>
+                    <div class="plan-body">
+                        <div class="section"><div class="section-head">📌 Activity / Program</div><div class="text-content">${escapeHtml(ev.activity || '-')}</div></div>
+                        <div class="section"><div class="section-head">📅 Event Date</div><div class="text-content">${escapeHtml(ev.eventDate || '-')}</div></div>
+                        <div class="section"><div class="section-head">👤 Responsible Person</div><div class="text-content">${escapeHtml(ev.responsiblePerson || '-')}</div></div>
+                        <div class="section"><div class="section-head">💬 Remarks</div><div class="text-content">${escapeHtml(ev.remarks || '-')}</div></div>
+                    </div>
+                </div>`;
+        });
+        return cards;
+    }
+    
+    // Filter logic based on current plan type + class/subject/sn/search
+    function applyFilters() {
+        const selectedClass = document.getElementById('classFilter').value;
+        const selectedSubject = document.getElementById('subjectFilter').value;
+        const snRaw = document.getElementById('snFilter').value;
+        const searchRaw = document.getElementById('searchInput').value.trim().toLowerCase();
+        let sourceData = [];
+        if (currentPlanType === 'daily') sourceData = [...allDailyLessons];
+        else if (currentPlanType === 'annual') sourceData = [...allAnnualPlans];
+        else if (currentPlanType === 'unit') sourceData = [...allUnitPlans];
+        else sourceData = [...allCalendarEvents];
+        
+        currentFiltered = sourceData.filter(item => {
+            if (selectedClass && item.class !== selectedClass) return false;
+            if (selectedSubject && item.subject !== selectedSubject) return false;
+            if (snRaw !== "") {
+                const serialNum = parseInt(item.serialNo);
+                if (isNaN(serialNum) || serialNum !== parseInt(snRaw)) return false;
+            }
+            if (searchRaw) {
+                const searchText = `${item.lessonTitle || ''} ${item.unitTopic || ''} ${item.activity || ''} ${item.unitTitle || ''} ${item.topics || ''} ${item.month || ''}`.toLowerCase();
+                if (!searchText.includes(searchRaw)) return false;
+            }
+            return true;
+        });
+        renderCurrentPlan();
+    }
+    
+    function resetFilters() {
+        document.getElementById('classFilter').value = '';
+        document.getElementById('subjectFilter').value = '';
+        document.getElementById('snFilter').value = '';
+        document.getElementById('searchInput').value = '';
+        applyFilters(); // reapply with blank
+    }
+    
+    function onPlanTypeChange() {
+        currentPlanType = document.getElementById('planTypeSelect').value;
+        applyFilters();
+    }
+    
+    // Populate class & subject dropdowns from Source sheet data
+    function populateClassSubjectDropdowns() {
+        const classSelect = document.getElementById('classFilter');
+        const subjectSelect = document.getElementById('subjectFilter');
+        classSelect.innerHTML = '<option value="">All Classes</option>';
+        subjectSelect.innerHTML = '<option value="">All Subjects</option>';
+        classOptions.forEach(cls => {
+            if (cls && cls.trim()) classSelect.innerHTML += `<option value="${escapeHtml(cls)}">${escapeHtml(cls)}</option>`;
+        });
+        subjectOptions.forEach(sub => {
+            if (sub && sub.trim()) subjectSelect.innerHTML += `<option value="${escapeHtml(sub)}">${escapeHtml(sub)}</option>`;
+        });
+    }
+    
+    // Load all data from Apps Script (requires new endpoint: getAllPlanData)
+    async function loadFullData() {
+        const container = document.getElementById('resultsContainer');
+        container.innerHTML = `<div class="loading-state"><div class="spinner"></div><p>Synchronizing lesson plans & source data...</p></div>`;
+        try {
+            const response = await fetchDataFromSheets();
+            // response should contain { daily, annual, unit, calendar, classList, subjectList }
+            allDailyLessons = response.daily || [];
+            allAnnualPlans = response.annual || [];
+            allUnitPlans = response.unit || [];
+            allCalendarEvents = response.calendar || [];
+            classOptions = response.classList || [];
+            subjectOptions = response.subjectList || [];
+            populateClassSubjectDropdowns();
+            // initialize default view: daily
+            currentPlanType = 'daily';
+            document.getElementById('planTypeSelect').value = 'daily';
+            applyFilters();
+        } catch(err) {
+            console.error(err);
+            container.innerHTML = `<div class="empty-state" style="color:#b91c1c;">
+                <div>⚠️</div>
+                <h3>Data Load Error</h3>
+                <p>${escapeHtml(err.message)}</p>
+                <p style="font-size:0.8rem;">Make sure Apps Script has function doGet with action=getAllPlanData that returns {daily, annual, unit, calendar, classList, subjectList}</p>
+            </div>`;
+        }
+    }
+    
+    // Print report
+    function printReport() {
+        window.print();
+    }
+    
+    // Event binding
+    document.getElementById('applyBtn').addEventListener('click', applyFilters);
+    document.getElementById('resetBtn').addEventListener('click', resetFilters);
+    document.getElementById('printPdfBtn').addEventListener('click', printReport);
+    document.getElementById('planTypeSelect').addEventListener('change', onPlanTypeChange);
+    
+    loadFullData();
+</script>
+
+<!-- 
+    ==================== REQUIRED APPS SCRIPT BACKEND (ADD THIS) ====================
+    
+    Add the following function to your existing Code.gs (alongside SHEET_ID and initializeSheets)
+    
+    function doGet(e) {
+      const callback = e && e.parameter ? e.parameter.callback : null;
+      const action = e && e.parameter ? e.parameter.action : null;
+      if (action === 'getAllPlanData') {
+        return getAllPlansData(callback);
+      }
+      return handleRequest(e);
+    }
+    
+    function getAllPlansData(callback) {
+      try {
+        const ss = SpreadsheetApp.openById(SHEET_ID);
+        // 1. Source sheet for class (col A) & subject (col B)
+        let sourceSheet = ss.getSheetByName('Source');
+        let classList = [];
+        let subjectList = [];
+        if (sourceSheet) {
+          let sourceData = sourceSheet.getDataRange().getValues();
+          for (let i = 1; i < sourceData.length; i++) {
+            let cls = sourceData[i][0];
+            let sub = sourceData[i][1];
+            if (cls && !classList.includes(cls)) classList.push(cls);
+            if (sub && !subjectList.includes(sub)) subjectList.push(sub);
+          }
+        }
+        // 2. Fetch all sheets data
+        const dailySheet = ss.getSheetByName('daily_lesson');
+        let daily = [];
+        if (dailySheet) {
+          let d = dailySheet.getDataRange().getValues();
+          for (let i=1; i<d.length; i++) {
+            let row = d[i];
+            daily.push({ serialNo: row[0], academicYear: row[1], schoolName: row[2], teacherName: row[3], class: row[4], subject: row[5], date: row[6], periodNo: row[7], day: row[8], duration: row[9], studentNumber: row[10], unitTopic: row[11], lessonTitle: row[12], lessonIntroduction: row[13], learningObjectives: row[14], teachingMaterialsText: row[15], teachingMaterialsCheckboxes: row[16], introductionActivities: row[17], mainActivities: row[18], closingActivities: row[19], timeAllocation: row[20], evaluationMethods: row[21], classworkDetails: row[22], assessmentNotes: row[23], homework: row[24], homeworkSubmissionDate: row[25], projectWork: row[26], teacherFeedback: row[27], reflection: row[28], peerTeacher: row[29], suggestions: row[30], approvalDate: row[31], timestamp: row[32] });
+          }
+        }
+        const annualSheet = ss.getSheetByName('annual_plan');
+        let annual = [];
+        if (annualSheet) {
+          let a = annualSheet.getDataRange().getValues();
+          for (let i=1; i<a.length; i++) {
+            let row = a[i];
+            annual.push({ serialNo: row[0], academicYear: row[1], schoolName: row[2], teacherName: row[3], class: row[4], subject: row[5], workingDays: row[6], term: row[7], overallGoals: row[8], resources: row[9], approvalStatus: row[10], reflection: row[11], month: row[12], unit: row[13], topics: row[14], method: row[15], materials: row[16], evaluation: row[17], remarks: row[18], timestamp: row[19] });
+          }
+        }
+        const unitSheet = ss.getSheetByName('unit_plan');
+        let unit = [];
+        if (unitSheet) {
+          let u = unitSheet.getDataRange().getValues();
+          for (let i=1; i<u.length; i++) {
+            let row = u[i];
+            unit.push({ serialNo: row[0], academicYear: row[1], schoolName: row[2], teacherName: row[3], class: row[4], subject: row[5], unitTitle: row[6], totalPeriods: row[7], unitObjectives: row[8], reflection: row[9], lessonTopic: row[10], outcomes: row[11], method: row[12], materials: row[13], activities: row[14], assessment: row[15], periodsAllocated: row[16], remarks: row[17], timestamp: row[18] });
+          }
+        }
+        const calSheet = ss.getSheetByName('operation_calendar');
+        let calendar = [];
+        if (calSheet) {
+          let c = calSheet.getDataRange().getValues();
+          for (let i=1; i<c.length; i++) {
+            let row = c[i];
+            calendar.push({ serialNo: row[0], academicYear: row[1], schoolName: row[2], teacherName: row[3], class: row[4], month: row[5], activity: row[6], eventDate: row[7], responsiblePerson: row[8], remarks: row[9], timestamp: row[10] });
+          }
+        }
+        const result = { status: 'success', data: { daily, annual, unit, calendar, classList, subjectList } };
+        const json = JSON.stringify(result);
+        if (callback) return ContentService.createTextOutput(callback + '(' + json + ')').setMimeType(ContentService.MimeType.JAVASCRIPT);
+        return ContentService.createTextOutput(json).setMimeType(ContentService.MimeType.JSON);
+      } catch(err) {
+        const errResult = JSON.stringify({ status: 'error', message: err.toString() });
+        if (callback) return ContentService.createTextOutput(callback + '(' + errResult + ')').setMimeType(ContentService.MimeType.JAVASCRIPT);
+        return ContentService.createTextOutput(errResult).setMimeType(ContentService.MimeType.JSON);
+      }
+    }
+-->
+</body>
+</html>
