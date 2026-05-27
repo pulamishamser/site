@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shamser Info Portal - Interactive Dashboard</title>
+    <!-- Google Fonts & Font Awesome 6 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #1e3c72;
+            --primary-light: #2a5298;
+            --success: #198754;
+            --danger: #dc3545;
+            --info: #0d6efd;
+            --fb-blue: #1877f2;
+            --dark: #1a2d42;
+            --text-muted: #64748b;
+            --bg-gradient: linear-gradient(135deg, #f4f7fc 0%, #e2e8f0 100%);
+            --shadow: 0 10px 25px -5px rgba(30, 60, 114, 0.1), 0 8px 10px -6px rgba(30, 60, 114, 0.1);
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg-gradient);
+            color: var(--dark);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1rem;
+        }
+
+        .modal-body {
+            background: #ffffff;
+            width: 100%;
+            max-width: 960px;
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(219, 234, 254, 0.7);
+        }
+
+        /* Top Grid Structure */
+        .top-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .qr-card, .about-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        .qr-card:hover, .about-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 20px -5px rgba(0,0,0,0.08);
+        }
+
+        .qr-card img {
+            border-radius: 8px;
+            border: 2px solid var(--success);
+            object-fit: cover;
+            background: #f8fafc;
+        }
+
+        .qr-info h3, .about-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            color: var(--dark);
+        }
+
+        .qr-info p {
+            font-size: 0.875rem;
+            color: var(--success);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .url-text {
+            font-family: monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            word-break: break-all;
+        }
+
+        .about-card {
+            background: linear-gradient(135deg, #606c88 0%, #3f4c6b 100%);
+            color: #ffffff;
+            border: none;
+        }
+
+        .about-card h3 {
+            color: #ffffff;
+        }
+
+        .about-icon {
+            font-size: 2.5rem;
+            background: rgba(255, 255, 255, 0.15);
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        /* Core Action CTA Button */
+        .iemis-cta {
+            display: block;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(30, 60, 114, 0.2);
+        }
+
+        .iemis-cta:hover {
+            transform: translateY(-2px);
+            opacity: 0.95;
+            box-shadow: 0 6px 20px rgba(30, 60, 114, 0.3);
+        }
+
+        .iemis-cta h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        /* Divider Design */
+        .section-divider {
+            position: relative;
+            text-align: center;
+            margin: 2.5rem 0;
+        }
+
+        .section-divider::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            height: 1px;
+            background: #e2e8f0;
+            z-index: 1;
+        }
+
+        .section-divider span {
+            position: relative;
+            background: #ffffff;
+            padding: 0 1.5rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--primary);
+            z-index: 2;
+        }
+
+        /* Trending/Additional Services Tag Cloud */
+        .trending-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .trending-tags a {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            color: var(--primary);
+            text-decoration: none;
+            padding: 0.75rem 1.25rem;
+            border-radius: 12px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .trending-tags a:hover {
+            background: #eef2f7;
+            border-color: var(--primary-light);
+            color: #0f2b5c;
+            transform: translateY(-2px);
+        }
+
+        /* Dynamic Visual Context Panel */
+        .context-panel {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .panel-header {
+            background: #edf2f7;
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .window-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .dot-red { background: #ef4444; }
+        .dot-amber { background: #f59e0b; }
+        .dot-green { background: #10b981; }
+
+        .panel-title {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .panel-body {
+            padding: 1.5rem;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: #475569;
+            text-align: left;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .top-row {
+                grid-template-columns: 1fr;
+            }
+            .modal-body {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="modal-body">
+        
+        <!-- ==================== TOP NAVIGATION & DONATION BLOCK ==================== -->
+        <div class="top-row">
+            <!-- Donation Node Card -->
+            <a href="https://shamser.info.np/HomePage/websiteQR.jpeg" class="qr-card" target="_blank" title="Click to view high-resolution QR">
+                <img src="https://shamser.info.np/HomePage/esewa.jpg" alt="Donate" width="130" height="100">
+                <div class="qr-info">
+                    <h3>QR for Donation</h3>
+                    <p><i class="fa-solid stroke-none fa-credit-card"></i> Donate with eSewa</p>
+                    <div class="url-text">websiteQR.jpeg</div>
+                </div>
+            </a>
+
+            <!-- System Information Entry Node -->
+            <a href="https://shamser.info.np/About%20Website.html" class="about-card" target="_blank">
+                <div class="about-icon">
+                    <i class="fa-solid fa-globe"></i>
+                </div>
+                <div>
+                    <h3>About Website</h3>
+                    <div class="url-text" style="color: #cbd5e1;">About Website.html</div>
+                </div>
+            </a>
+        </div>
+
+        <!-- ==================== CORE HIGH-PRIORITY ACTION ==================== -->
+        <a href="https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Dashboard.html" class="iemis-cta" target="_blank">
+            <h2><i class="fa-solid fa-graduation-cap"></i> 🌐 Login IEMIS</h2>
+            <div class="url-text" style="color: #93c5fd;">Integrated Exam Management Information System/Dashboard.html</div>
+        </a>
+
+        <!-- Separation Divider Label -->
+        <div class="section-divider">
+            <span><i class="fa-solid fa-pencil"></i> हाम्रा विभिन्न सेवाहरू प्रयोग गर्नुहोस्</span>
+        </div>
+
+        <!-- ==================== DYNAMIC TRENDING TAGS GRID ==================== -->
+        <div class="trending-tags">
+            <a href="https://shamser.info.np/IndexLibrary.html" target="_blank">
+                <span>📖 Digital Book Library</span>
+            </a>
+            <a href="https://shamser.info.np/Smart%20Teacher%20Diary.html" target="_blank">
+                <span>📓 Smart Teacher Dairy</span>
+            </a>
+            <a href="https://shamser.info.np/SEE/see.ntc.net.np/results/grade.html" target="_blank">
+                <span>🔍 Check SEE Result</span>
+            </a>
+            <a href="https://shamser.info.np/integrated%20services.html" target="_blank">
+                <span>🛠️ Integrated Services</span>
+            </a>
+            <a href="https://shamser.info.np/Multi%20letterpad.html" target="_blank">
+                <span>✉️ Generate Multi letters</span>
+            </a>
+            <a href="https://shamser.info.np/Attendance.v3/Attendance_dashborad_20260427.html" target="_blank">
+                <span>📅 Student Attendance System</span>
+            </a>
+            <a href="https://shamser.info.np/tsc_questions.html" target="_blank">
+                <span>💡 Quiz</span>
+            </a>
+            <a href="https://shamser.info.np/News%20modal.html" target="_blank" style="color: #dc2626; border-color: #fca5a5; background: #fff5f5;">
+                <span>📰 ताजा समाचार</span>
+            </a>
+            <a href="https://shamser.info.np/Sign_up.html" target="_blank">
+                <span>🚀 Service delivery</span>
+            </a>
+            <a href="https://shamser.info.np/Number_to_Text.html" target="_blank">
+                <span>🔢 Number_to_Text</span>
+            </a>
+        </div>
+
+     
+         
+        </div>
+
+    </div>
+
+</body>
+</html>
