@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ne">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Nepali Government Holidays 2083 | Smooth Auto-Scroll</title>
-  <!-- Font Awesome 6 (free icons) -->
+  <title>२०८३ सरकारी बिदाहरू | हाम्रो पात्रो प्रमाणित</title>
+  <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * {
@@ -14,109 +14,155 @@
     }
 
     body {
-      background: linear-gradient(145deg, #e2d8c4 0%, #cfc2a8 100%);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      font-family: 'Segoe UI', 'Poppins', 'Noto Sans', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      font-family: 'Segoe UI', 'Poppins', 'Noto Sans', system-ui, -apple-system, sans-serif;
       padding: 20px;
+      position: relative;
     }
 
-    /* main card – elegant heritage design */
+    /* Animated background decoration */
+    body::before {
+      content: '';
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      top: -150px;
+      right: -150px;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(255,215,150,0.1) 0%, transparent 70%);
+      bottom: -200px;
+      left: -200px;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
     .holiday-slider {
       width: 100%;
-      max-width: 560px;
-      background: #fffef7;
+      max-width: 580px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
       border-radius: 2rem;
-      box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(220, 180, 100, 0.2);
+      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.3);
       overflow: hidden;
-      transition: transform 0.4s ease, box-shadow 0.4s;
+      transition: all 0.4s ease;
     }
 
     .holiday-slider:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 32px 55px -14px rgba(0, 0, 0, 0.4);
+      transform: translateY(-8px);
+      box-shadow: 0 40px 60px rgba(0, 0, 0, 0.25);
     }
 
-    /* header – rich green & gold */
+    /* Bright header with animation */
     .slider-header {
-      background: linear-gradient(105deg, #2b4b2f, #1f3f28);
-      color: #fff2da;
-      padding: 1rem 1rem;
-      font-size: 1.45rem;
+      background: linear-gradient(115deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+      background-size: 200% 200%;
+      animation: gradientShift 5s ease infinite;
+      color: white;
+      padding: 1.2rem 1rem;
+      font-size: 1.5rem;
       text-align: center;
-      font-weight: 700;
-      letter-spacing: 0.8px;
-      border-bottom: 2px solid #e7bc7e;
+      font-weight: 800;
+      letter-spacing: 1px;
+      border-bottom: none;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 12px;
-      backdrop-filter: blur(2px);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     .slider-header i {
-      font-size: 1.9rem;
-      filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2));
+      font-size: 2rem;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+      animation: bounce 2s infinite;
     }
 
-    /* scrollable container */
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
     .slider-container {
-      height: 470px;
+      height: 480px;
       overflow-y: auto;
       overflow-x: hidden;
       position: relative;
-      background: #fefaf0;
+      background: linear-gradient(180deg, #fff5eb 0%, #fff9f0 100%);
       scroll-behavior: smooth;
-      border-right: 1px solid #f0e3cf;
-      border-left: 1px solid #f0e3cf;
     }
 
-    /* custom scrollbar */
+    /* Custom scrollbar - bright version */
     .slider-container::-webkit-scrollbar {
       width: 10px;
-      background: #ede3d2;
-      border-radius: 20px;
     }
 
     .slider-container::-webkit-scrollbar-track {
-      background: #f2ecdf;
+      background: #ffe8d6;
       border-radius: 20px;
       margin-block: 6px;
     }
 
     .slider-container::-webkit-scrollbar-thumb {
-      background: #c0a06b;
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
       border-radius: 20px;
-      border: 2px solid #f7efdd;
     }
 
     .slider-container::-webkit-scrollbar-thumb:hover {
-      background: #9f7c48;
+      background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
     }
 
-    .slider-container {
-      scrollbar-width: thin;
-      scrollbar-color: #c0a06b #ede3d2;
-    }
-
-    /* holiday cards */
+    /* Holiday cards - vibrant */
     .event {
-      padding: 18px 20px;
-      margin: 8px 12px;
-      background: #ffffff;
+      padding: 18px 22px;
+      margin: 12px 14px;
+      background: rgba(255, 255, 255, 0.95);
       border-radius: 28px;
-      box-shadow: 0 5px 12px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.05);
-      transition: all 0.2s ease-in-out;
-      border-left: 5px solid transparent;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border-left: 5px solid #feca57;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .event::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .event:hover::before {
+      opacity: 1;
     }
 
     .event:hover {
-      background: #fffaf0;
-      border-left-color: #e6b422;
-      transform: translateX(4px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+      transform: translateX(8px) scale(1.01);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+      background: white;
     }
 
     .event-header {
@@ -125,37 +171,38 @@
       justify-content: space-between;
       align-items: baseline;
       gap: 8px;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .holiday-name {
       font-weight: 800;
-      font-size: 1.18rem;
-      background: linear-gradient(135deg, #3a5e32, #2b4a24);
+      font-size: 1.2rem;
+      background: linear-gradient(135deg, #ee5a24, #ff6b6b);
       background-clip: text;
       -webkit-background-clip: text;
-      color: #2c5a2a;
+      color: transparent;
     }
 
     .holiday-name-en {
-      font-size: 0.85rem;
+      font-size: 0.75rem;
       font-weight: 600;
-      background: #ede7db;
-      padding: 4px 10px;
+      background: linear-gradient(135deg, #feca57, #ff9ff3);
+      padding: 4px 12px;
       border-radius: 30px;
-      color: #997f4b;
+      color: #fff;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
     }
 
     .date-badge {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
-      margin: 10px 0 8px 0;
+      margin: 12px 0 8px 0;
       align-items: center;
     }
 
     .eng-date, .nep-date {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       padding: 5px 14px;
       border-radius: 40px;
       font-weight: 600;
@@ -165,27 +212,27 @@
     }
 
     .eng-date {
-      background: #e9e1d2;
-      color: #7b5c34;
-      border: 1px solid #f3e2c6;
+      background: linear-gradient(135deg, #e0eafc, #cfdef3);
+      color: #2c3e66;
+      border: none;
     }
 
     .nep-date {
-      background: #e6efdf;
-      color: #476b3a;
-      border: 1px solid #d2e0c2;
+      background: linear-gradient(135deg, #d4fc79, #96e6a1);
+      color: #2d5a2c;
+      border: none;
     }
 
     .event-description {
       display: block;
-      color: #ad8f62;
-      font-size: 0.85rem;
-      margin-top: 6px;
-      line-height: 1.35;
+      color: #b8860b;
+      font-size: 0.8rem;
+      margin-top: 8px;
+      line-height: 1.4;
       font-weight: 500;
     }
 
-    /* countdown badge - pure Nepali style */
+    /* Countdown badge - vibrant */
     .countdown-badge {
       margin-top: 12px;
       font-size: 0.85rem;
@@ -193,54 +240,57 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: #f2ede2;
-      padding: 6px 16px;
+      background: linear-gradient(135deg, #fff5e6, #ffe6d5);
+      padding: 6px 18px;
       border-radius: 60px;
-      color: #4f6d3e;
-      border: 1px solid #d6caad;
+      color: #e67e22;
+      border: 1px solid #ffd89b;
       width: fit-content;
-      letter-spacing: 0.3px;
+      transition: all 0.3s;
     }
 
     .countdown-badge.urgent {
-      background: #fff0df;
-      color: #c46f0a;
-      border-color: #ffcd94;
-      font-weight: 800;
+      background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+      color: #c0392b;
+      border-color: #ff9999;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
     }
 
     .countdown-badge.passed {
-      background: #ece4d9;
-      color: #9e8968;
-      border-color: #ddd0b6;
+      background: linear-gradient(135deg, #e0e0e0, #cccccc);
+      color: #7f8c8d;
+      border-color: #bdc3c7;
     }
 
     .countdown-badge.today {
-      background: #fff0c4;
-      color: #bc6f1a;
-      border-color: #f7cf86;
-      font-weight: 800;
-      animation: gentlePulse 1.2s infinite;
+      background: linear-gradient(135deg, #fdc830, #f37335);
+      color: white;
+      border-color: #ffd700;
+      animation: glow 1.5s ease-in-out infinite;
     }
 
-    @keyframes gentlePulse {
-      0% { box-shadow: 0 0 0 0 #f7cf86aa; }
-      70% { box-shadow: 0 0 0 6px #f7cf8600; }
-      100% { box-shadow: 0 0 0 0 transparent; }
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 5px #fdc830; }
+      50% { box-shadow: 0 0 20px #f37335; }
     }
 
     .footer-note {
-      background: #efe3cf;
+      background: linear-gradient(135deg, #2c3e50, #34495e);
       text-align: center;
-      font-size: 0.75rem;
-      padding: 10px 12px;
-      color: #5d4a2a;
-      border-top: 1px solid #e2cfae;
+      padding: 12px;
+      color: #feca57;
       font-weight: 600;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 0.75rem;
     }
 
     .scroll-hint {
@@ -248,43 +298,66 @@
       top: 0;
       text-align: center;
       font-size: 0.7rem;
-      background: #fff7e7;
-      padding: 5px;
-      color: #b58d4b;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(8px);
+      padding: 6px;
+      color: #ff6b6b;
       border-radius: 30px;
       width: fit-content;
-      margin: 6px auto 0;
+      margin: 8px auto 0;
       z-index: 5;
       pointer-events: none;
-      opacity: 0.85;
-      font-weight: 600;
+      font-weight: 700;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .verification-badge {
+      background: linear-gradient(135deg, #a8ff78, #78ffd6);
+      border-radius: 30px;
+      padding: 3px 12px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: #1a5a3a;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 8px;
+    }
+
+    /* Category indicators */
+    .festival-category {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 1.5rem;
+      opacity: 0.2;
     }
 
     @media (max-width: 550px) {
       .holiday-slider {
-        max-width: 98%;
+        max-width: 100%;
       }
       .event {
-        padding: 12px 14px;
-        margin: 6px 8px;
+        padding: 14px 16px;
+        margin: 8px 10px;
       }
       .holiday-name {
-        font-size: 0.95rem;
+        font-size: 1rem;
       }
       .eng-date, .nep-date {
         font-size: 0.7rem;
-        padding: 3px 10px;
+        padding: 4px 10px;
       }
       .countdown-badge {
         font-size: 0.7rem;
         padding: 4px 12px;
       }
       .slider-header {
-        font-size: 1.15rem;
-        padding: 0.8rem;
+        font-size: 1.2rem;
+        padding: 0.9rem;
       }
       .slider-container {
-        height: 420px;
+        height: 440px;
       }
     }
   </style>
@@ -293,192 +366,440 @@
 
 <div class="holiday-slider">
   <div class="slider-header">
-    <i class="fas fa-calendar-alt"></i> 
-    🌾 २०८३ सालको सरकारी बिदाहरू 🌸
+    <i class="fas fa-calendar-alt"></i> <a href="https://www.hamropatro.com/nepali-public-holidays">
+    🌸 २०८३ सरकारी बिदाहरू</a>🌸
     <i class="fas fa-arrow-down"></i>
   </div>
 
   <div class="slider-container" id="holidayScrollContainer">
     <div class="scroll-hint">
-      <i class="fas fa-arrow-down"></i> स्वचालित स्क्रोल · रोक्न छुनुहोस् <i class="fas fa-hand-peace"></i>
+      <i class="fas fa-arrow-down"></i> ✨ स्वचालित स्क्रोल · रोक्न छुनुहोस् ✨ <i class="fas fa-hand-peace"></i>
     </div>
     <div class="slider-track" id="holidayTrack">
-      <!-- 15 Nepali government holidays -->
+      <!-- प्रमाणित बिदाहरू: https://www.hamropatro.com/nepali-public-holidays -->
+
+      <!-- वैशाख -->
       <div class="event" data-date="2026-04-14">
+        <div class="festival-category">🌱</div>
         <div class="event-header">
-          <span class="holiday-name">🌱 नववर्ष (Nepali New Year)</span>
-          <span class="holiday-name-en">Nepali New Year 2083</span>
+          <span class="holiday-name">🌱 नेपाली नयाँ वर्ष २०८३</span>
+          <span class="holiday-name-en">Nepali New Year</span>
         </div>
         <div class="date-badge">
           <span class="eng-date"><i class="far fa-calendar-alt"></i> Apr 14, 2026</span>
           <span class="nep-date"><i class="fas fa-moon"></i> २०८३ बैशाख १</span>
         </div>
-        <small class="event-description">नेपाली पात्रो अनुसार नयाँ वर्षको शुभारम्भ (राष्ट्रिय बिदा)</small>
+        <small class="event-description">नेपाली नयाँ वर्ष, मेष संक्रान्ति, बिस्का जात्रा (राष्ट्रिय बिदा)</small>
       </div>
+
       <div class="event" data-date="2026-05-01">
+        <div class="festival-category">🪷</div>
         <div class="event-header">
-          <span class="holiday-name">🛠️ मजदुर दिवस (Labour Day)</span>
-          <span class="holiday-name-en">International Workers' Day</span>
+          <span class="holiday-name">☸️ बुद्ध जयन्ती / अन्तर्राष्ट्रिय श्रमिक दिवस</span>
+          <span class="holiday-name-en">Buddha Jayanti / Labour Day</span>
         </div>
         <div class="date-badge">
           <span class="eng-date"><i class="far fa-calendar-alt"></i> May 1, 2026</span>
           <span class="nep-date"><i class="fas fa-moon"></i> २०८३ बैशाख १८</span>
         </div>
-        <small class="event-description">अन्तर्राष्ट्रिय श्रमिक दिवस, सरकारी बिदा</small>
+        <small class="event-description">बुद्ध जयन्ती, उभौली पर्व, चण्डी पूर्णिमा, अन्तर्राष्ट्रिय श्रमिक दिवस</small>
       </div>
-      <div class="event" data-date="2026-05-30">
+
+      <!-- जेठ - सही मिति May 28, 29 -->
+      <div class="event" data-date="2026-05-28">
+        <div class="festival-category">🕌</div>
         <div class="event-header">
-          <span class="holiday-name">☸️ बुद्ध जयन्ती (Buddha Jayanti)</span>
-          <span class="holiday-name-en">Buddha Purnima</span>
+          <span class="holiday-name">🕌 बकर ईद (ईद-उल-अधा)</span>
+          <span class="holiday-name-en">Bakar Eid</span>
         </div>
         <div class="date-badge">
-          <span class="eng-date"><i class="far fa-calendar-alt"></i> May 30, 2026</span>
-          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ जेठ १६</span>
+          <span class="eng-date"><i class="far fa-calendar-alt"></i> May 28, 2026</span>
+          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ जेठ १४</span>
         </div>
-        <small class="event-description">भगवान बुद्धको जन्म जयन्ती, धार्मिक सरकारी बिदा</small>
+        <small class="event-description">बकर ईद, प्रदोष व्रत</small>
       </div>
-      <div class="event" data-date="2026-06-14">
+
+      <div class="event" data-date="2026-05-29">
+        <div class="festival-category">🇳🇵</div>
         <div class="event-header">
-          <span class="holiday-name">🇳🇵 गणतन्त्र दिवस (Republic Day)</span>
-          <span class="holiday-name-en">Ganatantra Diwas</span>
+          <span class="holiday-name">🇳🇵 गणतन्त्र दिवस</span>
+          <span class="holiday-name-en">Republic Day</span>
         </div>
         <div class="date-badge">
-          <span class="eng-date"><i class="far fa-calendar-alt"></i> Jun 14, 2026</span>
-          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ जेठ ३१</span>
+          <span class="eng-date"><i class="far fa-calendar-alt"></i> May 29, 2026</span>
+          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ जेठ १५</span>
         </div>
-        <small class="event-description">गणतन्त्र स्थापना दिवस, राष्ट्रिय पर्व</small>
+        <small class="event-description">गणतन्त्र दिवस, अन्तर्राष्ट्रिय सगरमाथा दिवस (राष्ट्रिय पर्व)</small>
+        <div class="verification-badge"><i class="fas fa-check-circle"></i> hamropatro.com जेठ १५ प्रमाणित</div>
       </div>
-      <div class="event" data-date="2026-08-07">
+
+      <!-- भदौ -->
+      <div class="event" data-date="2026-08-28">
+        <div class="festival-category">🧵</div>
         <div class="event-header">
-          <span class="holiday-name">🧵 जनैपूर्णिमा (Janai Purnima)</span>
-          <span class="holiday-name-en">Raksha Bandhan</span>
+          <span class="holiday-name">🧵 जनै पूर्णिमा / रक्षा बन्धन</span>
+          <span class="holiday-name-en">Janai Purnima</span>
         </div>
         <div class="date-badge">
-          <span class="eng-date"><i class="far fa-calendar-alt"></i> Aug 7, 2026</span>
-          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ साउन २२</span>
+          <span class="eng-date"><i class="far fa-calendar-alt"></i> Aug 28, 2026</span>
+          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ भदौ १२</span>
         </div>
-        <small class="event-description">जनै पूर्णिमा, रक्षाबन्धन, धार्मिक बिदा</small>
+        <small class="event-description">जनै पूर्णिमा, रक्षा बन्धन, क्वाति खाने दिन, संस्कृत दिवस</small>
       </div>
-      <div class="event" data-date="2026-09-05">
+
+      <div class="event" data-date="2026-08-29">
+        <div class="festival-category">🐄</div>
         <div class="event-header">
-          <span class="holiday-name">🟡 श्रीकृष्ण जन्माष्टमी (Krishna Janmashtami)</span>
-          <span class="holiday-name-en">Janmashtami</span>
+          <span class="holiday-name">🐄 गाईजात्रा (काठमाडौं उपत्यका मात्र)</span>
+          <span class="holiday-name-en">Gaijatra</span>
         </div>
         <div class="date-badge">
-          <span class="eng-date"><i class="far fa-calendar-alt"></i> Sep 5, 2026</span>
+          <span class="eng-date"><i class="far fa-calendar-alt"></i> Aug 29, 2026</span>
+          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ भदौ १३</span>
+        </div>
+        <small class="event-description">गाईजात्रा (काठमाडौं उपत्यकामा मात्र बिदा)</small>
+      </div>
+
+      <div class="event" data-date="2026-09-04">
+        <div class="festival-category">🟡</div>
+        <div class="event-header">
+          <span class="holiday-name">🟡 श्रीकृष्ण जन्माष्टमी</span>
+          <span class="holiday-name-en">Krishna Janmashtami</span>
+        </div>
+        <div class="date-badge">
+          <span class="eng-date"><i class="far fa-calendar-alt"></i> Sep 4, 2026</span>
           <span class="nep-date"><i class="fas fa-moon"></i> २०८३ भदौ १९</span>
         </div>
-        <small class="event-description">भगवान श्रीकृष्णको जन्मोत्सव</small>
+        <small class="event-description">श्रीकृष्ण जन्माष्टमी, गौरा पर्व, गोरखकाली पूजा</small>
       </div>
-      <div class="event" data-date="2026-09-19">
+
+      <div class="event" data-date="2026-09-14">
+        <div class="festival-category">👩‍🦰</div>
         <div class="event-header">
-          <span class="holiday-name">📜 संविधान दिवस (Constitution Day)</span>
+          <span class="holiday-name">🚺 हरितालिका तीज (महिला कर्मचारी मात्र)</span>
+          <span class="holiday-name-en">Haritalika Teej</span>
+        </div>
+        <div class="date-badge">
+          <span class="eng-date"><i class="far fa-calendar-alt"></i> Sep 14, 2026</span>
+          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ भदौ २९</span>
+        </div>
+        <small class="event-description">हरितालिका तीज (महिला कर्मचारीहरूलाई मात्र)</small>
+      </div>
+
+      <!-- असोज -->
+      <div class="event" data-date="2026-09-19">
+        <div class="festival-category">📜</div>
+        <div class="event-header">
+          <span class="holiday-name">📜 संविधान दिवस</span>
           <span class="holiday-name-en">Constitution Day</span>
         </div>
         <div class="date-badge">
           <span class="eng-date"><i class="far fa-calendar-alt"></i> Sep 19, 2026</span>
           <span class="nep-date"><i class="fas fa-moon"></i> २०८३ असोज ३</span>
         </div>
-        <small class="event-description">नेपालको संविधान दिवस (राष्ट्रिय पर्व)</small>
+        <small class="event-description">संविधान दिवस (राष्ट्रिय पर्व)</small>
       </div>
-      <div class="event" data-date="2026-10-15">
+
+      <div class="event" data-date="2026-09-25">
+        <div class="festival-category">🎭</div>
         <div class="event-header">
-          <span class="holiday-name">🌸 विजया दशमी (Dashain)</span>
+          <span class="holiday-name">🎭 इन्द्रजात्रा (काठमाडौं उपत्यका मात्र)</span>
+          <span class="holiday-name-en">Indra Jatra</span>
+        </div>
+        <div class="date-badge">
+          <span class="eng-date"><i class="far fa-calendar-alt"></i> Sep 25, 2026</span>
+          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ असोज ९</span>
+        </div>
+        <small class="event-description">इन्द्रजात्रा (काठमाडौं उपत्यकामा मात्र)</small>
+      </div>
+
+      <div class="event" data-date="2026-10-04">
+        <div class="festival-category">🙏</div>
+        <div class="event-header">
+          <span class="holiday-name">🙏 जितियापर्व (महिला कर्मचारी मात्र)</span>
+          <span class="holiday-name-en">Jitiya Parva</span>
+        </div>
+        <div class="date-badge">
+          <span class="eng-date"><i class="far fa-calendar-alt"></i> Oct 4, 2026</span>
+          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ असोज १८</span>
+        </div>
+        <small class="event-description">जितियापर्व (महिला कर्मचारीहरूलाई मात्र)</small>
+      </div>
+
+      <div class="event" data-date="2026-10-11">
+        <div class="festival-category">🌿</div>
+        <div class="event-header">
+          <span class="holiday-name">🌿 घटस्थापना (दशैं आरम्भ)</span>
+          <span class="holiday-name-en">Ghatasthapana</span>
+        </div>
+        <div class="date-badge">
+          <span class="eng-date"><i class="far fa-calendar-alt"></i> Oct 11, 2026</span>
+          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ असोज २५</span>
+        </div>
+        <small class="event-description">घटस्थापना व्रत, नवरात्र आरम्भ</small>
+      </div>
+
+      <div class="event" data-date="2026-10-17">
+        <div class="festival-category">🌺</div>
+        <div class="event-header">
+          <span class="holiday-name">🌺 फूलपाती (दशैं बिदा सुरु)</span>
+          <span class="holiday-name-en">Fulpati</span>
+        </div>
+        <div class="date-badge">
+          <span class="eng-date"><i class="far fa-calendar-alt"></i> Oct 17, 2026</span>
+          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ असोज ३१</span>
+        </div>
+        <small class="event-description">फूलपाती, ६ दिने सार्वजनिक बिदा सुरु</small>
+      </div>
+
+      <!-- कार्तिक - दशैं र तिहार -->
+      <div class="event" data-date="2026-10-21">
+        <div class="festival-category">🌸</div>
+        <div class="event-header">
+          <span class="holiday-name">🌸 विजया दशमी (टीका)</span>
           <span class="holiday-name-en">Vijaya Dashami</span>
         </div>
         <div class="date-badge">
-          <span class="eng-date"><i class="far fa-calendar-alt"></i> Oct 15, 2026</span>
-          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ असोज २९</span>
+          <span class="eng-date"><i class="far fa-calendar-alt"></i> Oct 21, 2026</span>
+          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ कार्तिक ४</span>
         </div>
-        <small class="event-description">दशैंको टीका तथा विजयोत्सव (प्रमुख राष्ट्रिय पर्व)</small>
+        <small class="event-description">विजया दशमी, दशैंको मुख्य दिन (टीका)</small>
       </div>
-      <div class="event" data-date="2026-11-01">
+
+      <div class="event" data-date="2026-11-08">
+        <div class="festival-category">🪔</div>
         <div class="event-header">
-          <span class="holiday-name">🪔 भाइटीका (Bhai Tika - Tihar)</span>
+          <span class="holiday-name">🪔 लक्ष्मी पूजा / कुकुर तिहार</span>
+          <span class="holiday-name-en">Laxmi Puja</span>
+        </div>
+        <div class="date-badge">
+          <span class="eng-date"><i class="far fa-calendar-alt"></i> Nov 8, 2026</span>
+          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ कार्तिक २२</span>
+        </div>
+        <small class="event-description">लक्ष्मी पूजा, कुकुर तिहार, महाकवि देवकोटा जयन्ती</small>
+      </div>
+
+      <div class="event" data-date="2026-11-09">
+        <div class="festival-category">🐮</div>
+        <div class="event-header">
+          <span class="holiday-name">🐮 गाई पूजा (तिहार)</span>
+          <span class="holiday-name-en">Gai Puja</span>
+        </div>
+        <div class="date-badge">
+          <span class="eng-date"><i class="far fa-calendar-alt"></i> Nov 9, 2026</span>
+          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ कार्तिक २३</span>
+        </div>
+        <small class="event-description">तिहार बिदा, गाई पूजा</small>
+      </div>
+
+      <div class="event" data-date="2026-11-10">
+        <div class="festival-category">⛰️</div>
+        <div class="event-header">
+          <span class="holiday-name">⛰️ गोवर्धन पूजा / म्हपूजा (नेपाल सम्वत ११४७)</span>
+          <span class="holiday-name-en">Gobardan Puja</span>
+        </div>
+        <div class="date-badge">
+          <span class="eng-date"><i class="far fa-calendar-alt"></i> Nov 10, 2026</span>
+          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ कार्तिक २४</span>
+        </div>
+        <small class="event-description">गोवर्धन पूजा, म्हपूजा, नेपाल सम्वत ११४७ सुरु</small>
+      </div>
+
+      <div class="event" data-date="2026-11-11">
+        <div class="festival-category">👫</div>
+        <div class="event-header">
+          <span class="holiday-name">👫 भाइटीका</span>
           <span class="holiday-name-en">Bhai Tika</span>
         </div>
         <div class="date-badge">
-          <span class="eng-date"><i class="far fa-calendar-alt"></i> Nov 1, 2026</span>
-          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ कार्तिक १५</span>
+          <span class="eng-date"><i class="far fa-calendar-alt"></i> Nov 11, 2026</span>
+          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ कार्तिक २५</span>
         </div>
-        <small class="event-description">तिहारको अन्तिम दिन, दिदीबहिनीले दिने टीका</small>
+        <small class="event-description">भाइटीका, किजा पूजा</small>
       </div>
-      <div class="event" data-date="2026-11-07">
+
+      <div class="event" data-date="2026-11-15">
+        <div class="festival-category">🌅</div>
         <div class="event-header">
-          <span class="holiday-name">🌅 छठ पर्व (Chhath Puja)</span>
-          <span class="holiday-name-en">Chhath</span>
+          <span class="holiday-name">🌅 छठ पर्व</span>
+          <span class="holiday-name-en">Chhath Parva</span>
         </div>
         <div class="date-badge">
-          <span class="eng-date"><i class="far fa-calendar-alt"></i> Nov 7, 2026</span>
-          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ कार्तिक २१</span>
+          <span class="eng-date"><i class="far fa-calendar-alt"></i> Nov 15, 2026</span>
+          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ कार्तिक २९</span>
         </div>
-        <small class="event-description">सूर्य उपासनाको पर्व, सरकारी बिदा</small>
+        <small class="event-description">छठ पर्व (सूर्य उपासना)</small>
       </div>
-      <div class="event" data-date="2027-01-14">
+
+      <!-- पुष -->
+      <div class="event" data-date="2026-12-25">
+        <div class="festival-category">🎄</div>
         <div class="event-header">
-          <span class="holiday-name">☀️ माघे सङ्क्रान्ति (Maghe Sankranti)</span>
-          <span class="holiday-name-en">Maghi Sankranti</span>
+          <span class="holiday-name">🎄 क्रिसमस डे</span>
+          <span class="holiday-name-en">Christmas Day</span>
         </div>
         <div class="date-badge">
-          <span class="eng-date"><i class="far fa-calendar-alt"></i> Jan 14, 2027</span>
-          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ पौष ३०</span>
+          <span class="eng-date"><i class="far fa-calendar-alt"></i> Dec 25, 2026</span>
+          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ पुष १०</span>
         </div>
-        <small class="event-description">तिल, चाकु, घिउ तथा तरुल खाने पर्व, शीतकालीन संक्रान्ति</small>
+        <small class="event-description">क्रिसमस डे</small>
       </div>
-      <div class="event" data-date="2027-01-29">
+
+      <div class="event" data-date="2026-12-30">
+        <div class="festival-category">🎊</div>
         <div class="event-header">
-          <span class="holiday-name">🎖️ शहीद दिवस (Martyrs' Day)</span>
-          <span class="holiday-name-en">Martyrs Day</span>
+          <span class="holiday-name">🎊 तमु ल्होसार</span>
+          <span class="holiday-name-en">Tamu Lhosar</span>
         </div>
         <div class="date-badge">
-          <span class="eng-date"><i class="far fa-calendar-alt"></i> Jan 29, 2027</span>
+          <span class="eng-date"><i class="far fa-calendar-alt"></i> Dec 30, 2026</span>
+          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ पुष १५</span>
+        </div>
+        <small class="event-description">तमु ल्होसार, कवि शिरोमणि लेखनाथ जयन्ती</small>
+      </div>
+
+      <div class="event" data-date="2027-01-11">
+        <div class="festival-category">👑</div>
+        <div class="event-header">
+          <span class="holiday-name">👑 पृथ्वी जयन्ती (राष्ट्रिय एकता दिवस)</span>
+          <span class="holiday-name-en">Prithivi Jayanti</span>
+        </div>
+        <div class="date-badge">
+          <span class="eng-date"><i class="far fa-calendar-alt"></i> Jan 11, 2027</span>
+          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ पुष २७</span>
+        </div>
+        <small class="event-description">पृथ्वी जयन्ती, राष्ट्रिय एकता दिवस</small>
+      </div>
+
+      <!-- माघ -->
+      <div class="event" data-date="2027-01-15">
+        <div class="festival-category">☀️</div>
+        <div class="event-header">
+          <span class="holiday-name">☀️ माघे संक्रान्ति</span>
+          <span class="holiday-name-en">Maghe Sankranti</span>
+        </div>
+        <div class="date-badge">
+          <span class="eng-date"><i class="far fa-calendar-alt"></i> Jan 15, 2027</span>
+          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ माघ १</span>
+        </div>
+        <small class="event-description">माघे संक्रान्ति, घ्यु चाकु खाने दिन, उत्तरायण आरम्भ</small>
+      </div>
+
+      <div class="event" data-date="2027-01-30">
+        <div class="festival-category">🎖️</div>
+        <div class="event-header">
+          <span class="holiday-name">🎖️ शहीद दिवस</span>
+          <span class="holiday-name-en">Martyrs' Day</span>
+        </div>
+        <div class="date-badge">
+          <span class="eng-date"><i class="far fa-calendar-alt"></i> Jan 30, 2027</span>
           <span class="nep-date"><i class="fas fa-moon"></i> २०८३ माघ १६</span>
         </div>
-        <small class="event-description">राष्ट्रिय शहीदहरूको सम्मानमा सरकारी बिदा</small>
+        <small class="event-description">शहीद दिवस</small>
       </div>
+
+      <!-- फागुन -->
       <div class="event" data-date="2027-02-19">
+        <div class="festival-category">🗳️</div>
         <div class="event-header">
-          <span class="holiday-name">📖 राष्ट्रिय प्रजातन्त्र दिवस (Democracy Day)</span>
+          <span class="holiday-name">🗳️ प्रजातन्त्र दिवस</span>
           <span class="holiday-name-en">Democracy Day</span>
         </div>
         <div class="date-badge">
           <span class="eng-date"><i class="far fa-calendar-alt"></i> Feb 19, 2027</span>
-          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ फाल्गुण ८</span>
+          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ फागुन ७</span>
         </div>
-        <small class="event-description">प्रजातन्त्र स्थापना दिवस, राष्ट्रिय बिदा</small>
+        <small class="event-description">प्रजातन्त्र दिवस / निर्वाचन दिवस</small>
       </div>
-      <div class="event" data-date="2027-02-24">
+
+      <div class="event" data-date="2027-03-06">
+        <div class="festival-category">🕉️</div>
         <div class="event-header">
-          <span class="holiday-name">🕉️ महाशिवरात्रि (Maha Shivaratri)</span>
-          <span class="holiday-name-en">Shivaratri</span>
+          <span class="holiday-name">🕉️ महाशिवरात्रि</span>
+          <span class="holiday-name-en">Maha Shivaratri</span>
         </div>
         <div class="date-badge">
-          <span class="eng-date"><i class="far fa-calendar-alt"></i> Feb 24, 2027</span>
-          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ फाल्गुण १३</span>
+          <span class="eng-date"><i class="far fa-calendar-alt"></i> Mar 6, 2027</span>
+          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ फागुन २२</span>
         </div>
-        <small class="event-description">भगवान शिवको महान रात्रि, धार्मिक बिदा</small>
+        <small class="event-description">महाशिवरात्रि, नेपाली सेना दिवस</small>
       </div>
-      <div class="event" data-date="2027-03-12">
+
+      <div class="event" data-date="2027-03-08">
+        <div class="festival-category">🚺</div>
         <div class="event-header">
-          <span class="holiday-name">🎨 होली पर्व (Holi)</span>
-          <span class="holiday-name-en">Fagu Purnima</span>
+          <span class="holiday-name">🚺 अन्तर्राष्ट्रिय नारी दिवस</span>
+          <span class="holiday-name-en">Women's Day</span>
         </div>
         <div class="date-badge">
-          <span class="eng-date"><i class="far fa-calendar-alt"></i> Mar 12, 2027</span>
-          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ फाल्गुण २९</span>
+          <span class="eng-date"><i class="far fa-calendar-alt"></i> Mar 8, 2027</span>
+          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ फागुन २४</span>
         </div>
-        <small class="event-description">रङहरूको पर्व, राष्ट्रिय बिदा</small>
+        <small class="event-description">अन्तर्राष्ट्रिय नारी दिवस</small>
+      </div>
+
+      <div class="event" data-date="2027-03-09">
+        <div class="festival-category">🎊</div>
+        <div class="event-header">
+          <span class="holiday-name">🎊 ग्याल्पो ल्होसार</span>
+          <span class="holiday-name-en">Gyalpo Lhosar</span>
+        </div>
+        <div class="date-badge">
+          <span class="eng-date"><i class="far fa-calendar-alt"></i> Mar 9, 2027</span>
+          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ फागुन २५</span>
+        </div>
+        <small class="event-description">ग्याल्पो ल्होसार</small>
+      </div>
+
+      <!-- चैत -->
+      <div class="event" data-date="2027-03-21">
+        <div class="festival-category">🎨</div>
+        <div class="event-header">
+          <span class="holiday-name">🎨 होली (पहाडी जिल्ला)</span>
+          <span class="holiday-name-en">Holi (Hilly)</span>
+        </div>
+        <div class="date-badge">
+          <span class="eng-date"><i class="far fa-calendar-alt"></i> Mar 21, 2027</span>
+          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ चैत ७</span>
+        </div>
+        <small class="event-description">फागु पुर्णिमा / होली (पहाडी जिल्ला)</small>
+      </div>
+
+      <div class="event" data-date="2027-03-22">
+        <div class="festival-category">💧</div>
+        <div class="event-header">
+          <span class="holiday-name">💧 होली (तराइ)</span>
+          <span class="holiday-name-en">Holi (Terai)</span>
+        </div>
+        <div class="date-badge">
+          <span class="eng-date"><i class="far fa-calendar-alt"></i> Mar 22, 2027</span>
+          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ चैत ८</span>
+        </div>
+        <small class="event-description">फागु पुर्णिमा (तराइ होली)</small>
+      </div>
+
+      <div class="event" data-date="2027-04-06">
+        <div class="festival-category">🐎</div>
+        <div class="event-header">
+          <span class="holiday-name">🐎 घोडेजात्रा (काठमाडौं उपत्यका मात्र)</span>
+          <span class="holiday-name-en">Ghode Jatra</span>
+        </div>
+        <div class="date-badge">
+          <span class="eng-date"><i class="far fa-calendar-alt"></i> Apr 6, 2027</span>
+          <span class="nep-date"><i class="fas fa-moon"></i> २०८३ चैत २३</span>
+        </div>
+        <small class="event-description">घोडेजात्रा (काठमाडौं उपत्यकामा मात्र)</small>
       </div>
     </div>
   </div>
   <div class="footer-note">
-    <i class="fas fa-arrow-down"></i> सहज स्वचालित स्क्रोल · हेर्न रोक्न कार्डमा छुनुहोस् <i class="fas fa-fingerprint"></i>
+    <i class="fas fa-check-circle"></i> ✅ हाम्रो पात्रो २०८३ (hamropatro.com) बाट पूर्ण प्रमाणित 
+    <i class="fas fa-chart-line"></i> ✨ नेपाली सरकारी बिदाहरू ✨
   </div>
 </div>
 
 <script>
   (function() {
-    // ----- 1. NEPALI COUNTDOWN (pure Nepali text, no English 'days left') -----
     function parseDateFromYMD(dateString) {
       let parts = dateString.split('-');
       if (parts.length !== 3) return null;
@@ -490,11 +811,12 @@
       return num.toString().split('').map(d => nepaliDigits[parseInt(d)] || d).join('');
     }
 
-    function getDayRemainingText(days) {
+    function getNepaliDayRemainingText(days) {
       if (days < 0) return null;
-      if (days === 0) return '🎉 आज सरकारी बिदा ! 🎉';
-      if (days === 1) return `⚡ भोलि बिदा : १ दिन मात्र बाँकी ⚡`;
-      if (days <= 5) return `🔥 ${formatNepaliNumber(days)} दिन बाँकी (नजिकै) 🔥`;
+      if (days === 0) return '🎉✨ आज सरकारी बिदा छ ! ✨🎉';
+      if (days === 1) return `⚡🔥 भोलि बिदा : १ दिन मात्र बाँकी 🔥⚡`;
+      if (days <= 3) return `💫✨ ${formatNepaliNumber(days)} दिन बाँकी (नजिकै) ✨💫`;
+      if (days <= 7) return `📅 ${formatNepaliNumber(days)} दिन बाँकी`;
       return `📆 ${formatNepaliNumber(days)} दिन बाँकी`;
     }
 
@@ -524,29 +846,26 @@
         } 
         else if (daysRemaining === 0) {
           badge.classList.add('today');
-          badge.innerHTML = '<i class="fas fa-star-of-life"></i> 🎉 आज सरकारी बिदा ! 🎉';
+          badge.innerHTML = '<i class="fas fa-star-of-life"></i> 🎉✨ आज सरकारी बिदा ! ✨🎉';
         } 
         else {
-          const dayText = getDayRemainingText(daysRemaining);
-          if (daysRemaining === 1 || daysRemaining <= 5) {
+          const dayText = getNepaliDayRemainingText(daysRemaining);
+          if (daysRemaining <= 3) {
             badge.classList.add('urgent');
           }
-          let iconHtml = daysRemaining <= 5 ? '<i class="fas fa-exclamation-triangle"></i> ' : '<i class="fas fa-calendar-week"></i> ';
-          if (daysRemaining === 1) iconHtml = '<i class="fas fa-hourglass-half"></i> ';
-          if (daysRemaining <= 3 && daysRemaining > 0) iconHtml = '<i class="fas fa-fire"></i> ';
+          let iconHtml = daysRemaining <= 3 ? '<i class="fas fa-exclamation-triangle"></i> ' : '<i class="fas fa-calendar-week"></i> ';
           badge.innerHTML = iconHtml + dayText;
         }
         
-        // highlight upcoming holidays
         if (daysRemaining > 0 && daysRemaining <= 3) {
-          ev.style.backgroundColor = '#fff7e8';
-          ev.style.borderLeft = '4px solid #e6b422';
+          ev.style.background = 'linear-gradient(135deg, #fff5e6, #ffe8d4)';
+          ev.style.borderLeft = '5px solid #ff6b6b';
         } else if (daysRemaining === 0) {
-          ev.style.backgroundColor = '#fff4e0';
-          ev.style.borderLeft = '4px solid #f39c12';
+          ev.style.background = 'linear-gradient(135deg, #fff0e0, #ffe4c4)';
+          ev.style.borderLeft = '5px solid #f39c12';
         } else {
-          ev.style.backgroundColor = '';
-          ev.style.borderLeft = '4px solid transparent';
+          ev.style.background = 'rgba(255, 255, 255, 0.95)';
+          ev.style.borderLeft = '5px solid #feca57';
         }
       });
     }
@@ -554,12 +873,10 @@
     updateCountdownsAndHighlights();
     setInterval(updateCountdownsAndHighlights, 3600000);
 
-    // ----- 2. SMOOTH AUTO SCROLL DOWN (NOT VERY SLOW, comfortable speed, infinite loop) -----
     const scrollContainer = document.getElementById('holidayScrollContainer');
     let autoScrollInterval = null;
     let isUserInteracting = false;
     
-    // smooth, natural speed: 0.9px per frame -> about 30px/sec -> relaxed but not too slow
     const SCROLL_STEP = 0.9;
     const FRAME_MS = 30;
     
@@ -572,7 +889,6 @@
         let newTop = currentTop + SCROLL_STEP;
         const maxScroll = scrollContainer.scrollHeight - scrollContainer.clientHeight;
         
-        // infinite loop: when reaching bottom, jump back to top seamlessly
         if (newTop >= maxScroll && maxScroll > 0) {
           scrollContainer.scrollTop = 0;
         } else {
@@ -596,7 +912,7 @@
       stopAutoScroll();
     }
     
-    function enableAutoScrollAfterDelay(delayMs = 400) {
+    function enableAutoScrollAfterDelay(delayMs = 420) {
       setTimeout(() => {
         const isHovered = scrollContainer.matches(':hover');
         if (!isHovered && isUserInteracting) {
@@ -611,7 +927,6 @@
       }, delayMs);
     }
     
-    // Mouse events
     scrollContainer.addEventListener('mouseenter', () => {
       disableAutoScrollTemporarily();
     });
@@ -624,7 +939,6 @@
       }, 120);
     });
     
-    // Touch events for mobile
     scrollContainer.addEventListener('touchstart', () => {
       disableAutoScrollTemporarily();
     });
@@ -635,7 +949,6 @@
       }, 350);
     });
     
-    // Manual wheel or scroll: pause then resume
     scrollContainer.addEventListener('wheel', () => {
       disableAutoScrollTemporarily();
       enableAutoScrollAfterDelay(500);
@@ -654,7 +967,6 @@
       }
     });
     
-    // initial position: top for a clean start
     if (scrollContainer) {
       scrollContainer.scrollTop = 0;
     }
