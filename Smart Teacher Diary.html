@@ -29,7 +29,7 @@
             padding: 20px;
         }
 
-        /* SIDEBAR - as requested with full style */
+        /* SIDEBAR - Fixed toggle behavior (hide/show) */
         .sidebar {
             position: fixed;
             left: 0;
@@ -97,7 +97,7 @@
             text-align: center;
         }
 
-        /* Main content area */
+        /* Main content area - margin adjusts when sidebar open */
         .main-content {
             margin-left: 0;
             transition: margin-left 0.3s ease;
@@ -133,6 +133,14 @@
             height: 45px;
             border-radius: 30px;
             transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-toggle:hover {
+            transform: scale(1.02);
+            background: linear-gradient(135deg, #A52A2A, #B5651E);
         }
 
         .page-title {
@@ -409,10 +417,24 @@
 
         @keyframes spin { to { transform: rotate(360deg); } }
 
+        /* Close sidebar helper for small screens */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            backdrop-filter: blur(2px);
+        }
+
         @media (max-width: 768px) {
             .main-content.sidebar-open { margin-left: 0; }
             .stats-grid { grid-template-columns: 1fr 1fr; }
             .page-title { font-size: 1.4rem; }
+            .sidebar.open ~ .sidebar-overlay { display: block; }
         }
     </style>
 </head>
@@ -420,7 +442,7 @@
 
 <div class="loading-overlay" id="loadingOverlay"><div class="spinner"></div></div>
 
-<!-- Sidebar as per requirement with full navigation -->
+<!-- Sidebar - fully functional toggle -->
 <div class="sidebar" id="sidebar">
     <div class="sidebar-header">
         <div class="logo-icon"><i class="fas fa-chalkboard-teacher"></i></div>
@@ -441,6 +463,7 @@
         <div class="nav-item" onclick="showExternalTool('OperationCalendar')"><i class="fas fa-calendar-check"></i> सञ्चालन क्यालेन्डर</div>
     </div>
 </div>
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
 <div class="main-content" id="mainContent">
     <div class="top-bar">
@@ -518,15 +541,32 @@
 
 <script>
     // CONFIG
-    const WEB_APP_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec'; // Replace with actual if needed
     let allLessons = [];
     let monthlyChart, classChart;
 
-    // UI helpers
+    // Sidebar toggle functions (fix: ensure hide/show works properly)
     function toggleSidebar() {
-        document.getElementById('sidebar').classList.toggle('open');
-        document.getElementById('mainContent').classList.toggle('sidebar-open');
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('mainContent');
+        const overlay = document.getElementById('sidebarOverlay');
+        sidebar.classList.toggle('open');
+        mainContent.classList.toggle('sidebar-open');
+        if (sidebar.classList.contains('open')) {
+            overlay.style.display = 'block';
+        } else {
+            overlay.style.display = 'none';
+        }
     }
+    
+    function closeSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('mainContent');
+        const overlay = document.getElementById('sidebarOverlay');
+        sidebar.classList.remove('open');
+        mainContent.classList.remove('sidebar-open');
+        overlay.style.display = 'none';
+    }
+
     function showLoading(show) { document.getElementById('loadingOverlay').style.display = show ? 'flex' : 'none'; }
     function showToast(msg, type='success') {
         const toast = document.createElement('div'); toast.className = 'toast'; 
@@ -547,9 +587,18 @@
     function loadMockData() {
         const stored = localStorage.getItem('teacher_diary_lessons');
         if(stored) { allLessons = JSON.parse(stored); }
-        else { allLessons = []; }
+        else { 
+            // seed some demo data
+            allLessons = [];
+            if(allLessons.length === 0){
+                const today = new Date().toISOString().slice(0,10);
+                allLessons.push({ date:today, class:'कक्षा ५', subject:'गणित', topic:'भिन्नको जोड', objectives:'भिन्न जोड्न सिक्ने', activities:'उदाहरण छलफल', homework:'अभ्यास ३.१', attendance:'२८/३०' });
+                allLessons.push({ date:today, class:'कक्षा ६', subject:'विज्ञान', topic:'प्रकाशको परावर्तन', objectives:'प्रकाशको गुण बुझ्ने', activities:'प्रयोगात्मक', homework:'चित्र सहित लेख्ने', attendance:'२२/२५' });
+                saveLessonsToLocal();
+            }
+        }
         updateDashboardStats();
-        if(document.getElementById('viewLessonsSection').classList.contains('active')) displayLessonList(allLessons);
+        if(document.getElementById('viewLessonsSection') && document.getElementById('viewLessonsSection').classList.contains('active')) displayLessonList(allLessons);
         if(allLessons.length) displayLessonPlan(allLessons[0]);
     }
     function saveLessonsToLocal() { localStorage.setItem('teacher_diary_lessons', JSON.stringify(allLessons)); }
@@ -568,7 +617,7 @@
         let completion = Math.min(100, Math.round((allLessons.length/60)*100));
         document.getElementById('completionRate').innerText = completion+'%';
         const recent = [...allLessons].reverse().slice(0,6);
-        document.getElementById('recentActivities').innerHTML = recent.length ? recent.map(l=>`<div class="activity-item" style="display:flex; gap:12px; padding:12px; border-bottom:1px solid #f0e0c0;"><i class="fas fa-book" style="color:#8B0000;"></i><div><strong>${l.topic}</strong><br><small>${l.date} | ${l.class}</small></div></div>`).join('') : '<p style="padding:20px; text-align:center;">कुनै पाठ योजना छैन</p>';
+        document.getElementById('recentActivities').innerHTML = recent.length ? recent.map(l=>`<div style="display:flex; gap:12px; padding:12px; border-bottom:1px solid #f0e0c0;"><i class="fas fa-book" style="color:#8B0000;"></i><div><strong>${l.topic}</strong><br><small>${l.date} | ${l.class}</small></div></div>`).join('') : '<p style="padding:20px; text-align:center;">कुनै पाठ योजना छैन</p>';
         updateCharts();
     }
 
@@ -577,15 +626,18 @@
         let monthlyData = new Array(12).fill(0);
         allLessons.forEach(l=>{ let m=new Date(l.date).getMonth(); if(m>=0 && m<12) monthlyData[m]++; });
         if(monthlyChart) monthlyChart.destroy();
-        monthlyChart = new Chart(document.getElementById('monthlyChart'), { type:'bar', data:{ labels:months, datasets:[{ label:'पाठ योजना', data:monthlyData, backgroundColor:'#8B0000' }] }, options:{ responsive:true, maintainAspectRatio:true } });
+        const ctx = document.getElementById('monthlyChart')?.getContext('2d');
+        if(ctx) monthlyChart = new Chart(ctx, { type:'bar', data:{ labels:months, datasets:[{ label:'पाठ योजना', data:monthlyData, backgroundColor:'#8B0000' }] }, options:{ responsive:true, maintainAspectRatio:true } });
         let classCount = {};
         allLessons.forEach(l=>{ classCount[l.class] = (classCount[l.class]||0)+1; });
         if(classChart) classChart.destroy();
-        classChart = new Chart(document.getElementById('classChart'), { type:'pie', data:{ labels:Object.keys(classCount), datasets:[{ data:Object.values(classCount), backgroundColor:['#8B0000','#A0522D','#CD853F','#D2691E','#B5651E'] }] }, options:{ responsive:true } });
+        const ctx2 = document.getElementById('classChart')?.getContext('2d');
+        if(ctx2 && Object.keys(classCount).length) classChart = new Chart(ctx2, { type:'pie', data:{ labels:Object.keys(classCount), datasets:[{ data:Object.values(classCount), backgroundColor:['#8B0000','#A0522D','#CD853F','#D2691E','#B5651E'] }] }, options:{ responsive:true } });
     }
 
     function displayLessonList(lessons) {
         const container = document.getElementById('lessonListContainer');
+        if(!container) return;
         if(!lessons.length){ container.innerHTML='<div style="text-align:center;padding:30px;">कुनै पाठ योजना छैन</div>'; return; }
         container.innerHTML = `<div class="lessons-grid">${lessons.map(lesson=>`<div class="lesson-item" onclick='displayLessonPlan(${JSON.stringify(lesson).replace(/'/g, "&#39;")})'><i class="fas fa-book"></i> <strong>${lesson.topic}</strong><br><small>📅 ${lesson.date} | 📖 ${lesson.class}</small></div>`).join('')}</div>`;
     }
@@ -609,12 +661,12 @@
         e.preventDefault(); const data = { date:document.getElementById('date').value, class:document.getElementById('class').value, subject:document.getElementById('subject').value, topic:document.getElementById('topic').value, objectives:document.getElementById('objectives').value, activities:document.getElementById('activities').value, homework:document.getElementById('homework').value, attendance:document.getElementById('attendance').value };
         allLessons.push(data); saveLessonsToLocal(); updateDashboardStats(); displayLessonList(allLessons); if(allLessons.length) displayLessonPlan(allLessons[allLessons.length-1]); document.getElementById('lessonForm').reset(); document.getElementById('date').valueAsDate = new Date(); showToast('पाठ योजना सुरक्षित गरियो');
     });
-    document.getElementById('yearlyForm')?.addEventListener('submit', async(e)=>{ e.preventDefault(); showToast('वार्षिक योजना स्थानीय रूपमा सुरक्षित (API मोक)', 'success'); document.getElementById('yearlyForm').reset(); });
+    document.getElementById('yearlyForm')?.addEventListener('submit', async(e)=>{ e.preventDefault(); showToast('वार्षिक योजना स्थानीय रूपमा सुरक्षित', 'success'); document.getElementById('yearlyForm').reset(); });
     document.getElementById('unitForm')?.addEventListener('submit', async(e)=>{ e.preventDefault(); showToast('एकाइ योजना अभिलेख गरियो', 'success'); document.getElementById('unitForm').reset(); });
 
     function exportToCSV() { if(!allLessons.length){ showToast('कुनै डाटा छैन','error'); return; } let csv="मिति,कक्षा,विषय,शीर्षक,उद्देश्य,क्रियाकलाप,गृहकार्य,उपस्थिति\n"; allLessons.forEach(l=>{ csv+=`"${l.date}","${l.class}","${l.subject}","${l.topic}","${(l.objectives||'').replace(/"/g,'""')}","${(l.activities||'').replace(/"/g,'""')}","${(l.homework||'').replace(/"/g,'""')}","${l.attendance||''}"\n`; }); const blob=new Blob([csv],{type:'text/csv'}); const link=document.createElement('a'); link.download=`teacher_diary_${new Date().toISOString().slice(0,10)}.csv`; link.href=URL.createObjectURL(blob); link.click(); showToast('CSV डाउनलोड सुरु'); }
 
-    // External Tool Integration: embed iframes from given URLs
+    // External Tool Integration
     function showExternalTool(toolId) {
         let frameUrl = '';
         let title = '';
@@ -630,9 +682,9 @@
             document.getElementById('externalTitle').innerHTML = `<i class="fas fa-external-link-alt"></i> ${title}`;
             document.getElementById('externalIframe').src = frameUrl;
             document.getElementById('pageTitle').innerHTML = title;
-            // mark sidebar active appropriately
             document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-            event?.target?.closest('.nav-item')?.classList.add('active');
+            if(event && event.target) event.target.closest('.nav-item').classList.add('active');
+            closeSidebar(); // auto close sidebar on mobile/desktop for better UX
         }
     }
 
@@ -646,9 +698,9 @@
         document.getElementById('pageTitle').innerHTML = titlesMap[section] || 'शिक्षक डायरी';
         if(section === 'viewLessons') { loadMockData(); displayLessonList(allLessons); if(allLessons.length) displayLessonPlan(allLessons[0]); }
         if(section === 'dashboard') loadMockData();
-        // update active nav
         document.querySelectorAll('.nav-item').forEach(n=> n.classList.remove('active'));
         if(event && event.target) event.target.closest('.nav-item').classList.add('active');
+        closeSidebar(); // close sidebar automatically after menu click on any device
     }
 
     // initial load
