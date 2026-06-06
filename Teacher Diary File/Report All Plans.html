@@ -1,0 +1,825 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Instruction Planing System | Reports of all plans</title>
+    <style>
+      * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .app-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .tabs-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 28px;
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(4px);
+            border-radius: 60px;
+            padding: 8px 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .tab-btn {
+            background: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #1e3a5f;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .tab-btn.active {
+            background: linear-gradient(135deg, #1e3a5f, #2c5282);
+            color: white;
+            box-shadow: 0 6px 14px rgba(30,58,95,0.25);
+        }
+        .tab-btn:hover:not(.active) {
+            background: #e6edf4;
+            transform: translateY(-2px);
+        }
+
+        .filter-card {
+            background: rgba(255,255,255,0.98);
+            border-radius: 32px;
+            padding: 24px 32px;
+            margin-bottom: 32px;
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.12);
+            border: 1px solid rgba(30,58,95,0.12);
+        }
+        .filter-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e3a5f, #2c5282);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 18px;
+            border-left: 5px solid #2c5282;
+            padding-left: 18px;
+        }
+        .filter-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            align-items: flex-end;
+            margin-bottom: 20px;
+        }
+        .filter-field {
+            flex: 1;
+            min-width: 170px;
+        }
+        .filter-field label {
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: #2c3e5c;
+            display: block;
+            margin-bottom: 6px;
+            letter-spacing: 0.6px;
+        }
+        .filter-field select, .filter-field input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 40px;
+            border: 1.5px solid #e2e8f0;
+            background: white;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        .filter-field select:focus, .filter-field input:focus {
+            border-color: #2c5282;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(44,82,130,0.2);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #1e3a5f, #2c5282);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 48px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 10px rgba(0,0,0,0.1);}
+        .btn-secondary {
+            background: linear-gradient(135deg, #2c7a4d, #1f5e3a);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 48px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .btn-export {
+            background: linear-gradient(135deg, #b45309, #d97706);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 48px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .lesson-plan-card {
+            background: white;
+            border-radius: 28px;
+            padding: 32px 40px;
+            box-shadow: 0 25px 40px -12px rgba(0,0,0,0.15);
+        }
+        .plan-header {
+            text-align: center;
+            border-bottom: 3px solid #2c5282;
+            padding-bottom: 18px;
+            margin-bottom: 24px;
+        }
+        .plan-header h2 {
+            font-size: 1.8rem;
+            color: #1e3a5f;
+            font-weight: 800;
+        }
+        .school-detail {
+            background: #f8fafc;
+            border-radius: 24px;
+            padding: 16px;
+            text-align: center;
+            margin-bottom: 28px;
+            line-height: 1.6;
+        }
+        .info-grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px 28px;
+            background: #f0f4f9;
+            padding: 20px 26px;
+            border-radius: 28px;
+            margin-bottom: 28px;
+        }
+        .info-line {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 8px;
+            border-bottom: 1px dashed #cbd5e180;
+            padding-bottom: 6px;
+        }
+        .info-label {
+            font-weight: 800;
+            color: #1e3a5f;
+            min-width: 140px;
+        }
+        .info-value {
+            font-weight: 600;
+            color: #0f172a;
+            flex: 1;
+        }
+        .content-block {
+            margin-bottom: 24px;
+            border-left: 4px solid #2c5282;
+            padding-left: 20px;
+            background: #fefefe;
+            border-radius: 0 16px 16px 0;
+        }
+        .content-block .title {
+            font-weight: 800;
+            color: #1e3a5f;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+        .footer-sign {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px dashed #cbd5e1;
+            flex-wrap: wrap;
+            gap: 18px;
+        }
+        .plan-list-container {
+            margin-bottom: 28px;
+        }
+        .plan-list {
+            max-height: 360px;
+            overflow-y: auto;
+            background: #f1f5f9;
+            border-radius: 24px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .plan-item {
+            background: white;
+            padding: 12px 20px;
+            border-radius: 28px;
+            cursor: pointer;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s;
+        }
+        .plan-item.active {
+            background: linear-gradient(135deg, #1e3a5f, #2c5282);
+            color: white;
+            border-color: #1e3a5f;
+        }
+        .filter-summary {
+            background: linear-gradient(135deg,#eef2ff,#e0e8f5);
+            padding: 14px 24px;
+            border-radius: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .badge-info {
+            background: #e2e8f0;
+            border-radius: 40px;
+            padding: 6px 18px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        .no-data {
+            text-align: center;
+            padding: 50px 20px;
+            background: #fef9e6;
+            border-radius: 28px;
+            color: #92400e;
+        }
+        .debug-info {
+            background: #e6f4ea;
+            border-left: 4px solid #2e7d32;
+            padding: 8px 16px;
+            border-radius: 24px;
+            margin-top: 12px;
+            font-size: 12px;
+        }
+
+        .report-card {
+            background: white;
+            border-radius: 28px;
+            padding: 32px 40px;
+            box-shadow: 0 25px 40px -12px rgba(0,0,0,0.15);
+        }
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 24px 0;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            background: white;
+        }
+        .data-table th {
+            background: #1e3a5f;
+            color: white;
+            padding: 14px 8px;
+            border: 1px solid #2c5282;
+            text-align: center;
+        }
+        .data-table td {
+            border: 1px solid #cbd5e1;
+            padding: 12px 8px;
+            vertical-align: top;
+        }
+        .stats-card {
+            background: linear-gradient(135deg, #e6f7ff, #f0f9ff);
+            border-radius: 24px;
+            padding: 20px;
+            margin-bottom: 28px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            justify-content: space-around;
+            border-left: 5px solid #2c5282;
+        }
+        .stat-item {
+            text-align: center;
+            flex: 1;
+            min-width: 180px;
+        }
+        .stat-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #1e3a5f;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .stat-value {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #2c5282;
+            margin-top: 8px;
+        }
+        
+        @media print {
+            body { background: white; padding: 0; }
+            .filter-card, .tabs-bar, .plan-list-container, .filter-summary, .action-buttons, .btn-export, .btn-primary, .btn-secondary { display: none !important; }
+            .lesson-plan-card, .report-card { box-shadow: none; padding: 15px; }
+            .stats-card { background: #f0f4f9; border: 1px solid #ccc; }
+        }
+        @media (max-width: 720px) {
+            .lesson-plan-card, .report-card { padding: 18px; }
+            .info-grid-2col { grid-template-columns: 1fr; }
+            .stats-card { flex-direction: column; gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+<div class="app-container">
+        
+  <h2>Instruction Planing System | Reports of all plans</h2>
+
+    <div class="tabs-bar">
+
+        <button class="tab-btn active" data-tab="daily">📖Daily Lesson Plan</button>
+        <button class="tab-btn" data-tab="annual">📅 Yearly Lesson Plan</button>
+        <button class="tab-btn" data-tab="unit">📚 Unit Plan</button>
+        <button class="tab-btn" data-tab="calendar">🗓 Operation Calendar</button>
+    </div>
+
+    <div class="filter-card">
+        <div class="filter-title" class="btn-secondary">🔍 Filter Plan & get reports of all plans</div></div>
+        <div class="filter-grid">
+            <div class="filter-field">
+                <label>📂 योजना प्रकार</label>
+                <select id="planTypeFilter">
+                    <option value="daily">दैनिक पाठ योजना</option>
+                    <option value="annual">वार्षिक योजना</option>
+                    <option value="unit">एकाइ योजना</option>
+                    <option value="calendar">सञ्चालन क्यालेन्डर</option>
+                </select>
+            </div>
+            <div class="filter-field">
+                <label>🏫 शैक्षिक सत्र</label>
+                <input type="text" id="academicYearFilter" placeholder="जस्तै: २०८२" value="">
+            </div>
+            <div class="filter-field">
+                <label>📚 कक्षा</label>
+                <select id="classFilter"><option value="">सबै कक्षा</option></select>
+            </div>
+            <div class="filter-field">
+                <label>📖 विषय</label>
+                <select id="subjectFilter"><option value="">सबै विषय</option></select>
+            </div>
+            <div class="filter-field">
+                <label>🔢 सिरियल नं</label>
+                <input type="text" id="serialFilter" placeholder="जस्तै: 1">
+            </div>
+        </div>
+        <div class="filter-grid">
+            <div class="action-buttons">
+                <button class="btn-primary" id="searchBtn">🔎 Search</button>
+                <button class="btn-secondary" id="refreshBtn">⟳ Reload</button>
+                <button class="btn-export" id="printBtn">🖨️ Print</button>
+                <button class="btn-export" id="pdfBtn">📄 Download as PDF </button>
+                <button class="btn-export" id="csvBtn">📊 Export as CSV </button>
+            </div>
+        </div>
+        <div id="statusMsg" class="debug-info" style="display:none;"></div>
+    </div>
+
+    <div id="reportContainer">
+        <div class="no-data">📌 Please filter and search।</div>
+    </div>
+</div>
+
+<script>
+    // ==================== CONFIGURATION ====================
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzAnMfxmhV9HlZvTV6_aonoJV_qDxWQRUrvONjrYmaK5bcMaaT7w4kzPdMHJLnjw1Cq8w/exec";
+    let allDailyPlans = [];
+    let allAnnualPlans = [];
+    let allUnitPlans = [];
+    let allCalendarPlans = [];
+
+    function fetchJSONP(action) {
+        return new Promise((resolve, reject) => {
+            const callbackName = 'jsonp_cb_' + Date.now() + '_' + Math.random().toString(36).substr(2, 8);
+            const timeout = setTimeout(() => { reject(new Error("Request timeout")); cleanup(); }, 20000);
+            window[callbackName] = function(resp) { clearTimeout(timeout); resolve(resp); cleanup(); };
+            const url = `${APPS_SCRIPT_URL}?action=${action}&callback=${callbackName}&_=${Date.now()}`;
+            const script = document.createElement('script');
+            script.src = url;
+            script.onerror = () => { clearTimeout(timeout); reject(new Error("Network error")); cleanup(); };
+            document.body.appendChild(script);
+            function cleanup() { if(window[callbackName]) delete window[callbackName]; if(script && script.parentNode) script.parentNode.removeChild(script); }
+        });
+    }
+
+    function escapeHtml(str) { if(!str) return ''; return String(str).replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'})[m]); }
+    
+    function showStatus(msg, isError) {
+        const div = document.getElementById('statusMsg');
+        div.style.display = 'block';
+        div.innerHTML = msg;
+        div.style.background = isError ? '#ffe6e5' : '#e6f4ea';
+        setTimeout(() => { div.style.opacity = '0'; setTimeout(() => { div.style.display = 'none'; div.style.opacity = ''; }, 500); }, 3000);
+    }
+
+    function populateDynamicFilters() {
+        const allEntries = [...allDailyPlans, ...allAnnualPlans, ...allUnitPlans, ...allCalendarPlans];
+        const classSet = new Set();
+        const subjectSet = new Set();
+        allEntries.forEach(item => {
+            if(item.class && item.class.toString().trim()) classSet.add(item.class.toString().trim());
+            if(item.subject && item.subject.toString().trim()) subjectSet.add(item.subject.toString().trim());
+        });
+        const classSelect = document.getElementById('classFilter');
+        const subjectSelect = document.getElementById('subjectFilter');
+        classSelect.innerHTML = '<option value="">All Classes</option>';
+        subjectSelect.innerHTML = '<option value="">All Subjects</option>';
+        Array.from(classSet).sort().forEach(c => classSelect.innerHTML += `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`);
+        Array.from(subjectSet).sort().forEach(s => subjectSelect.innerHTML += `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`);
+    }
+
+    // ==================== DAILY LESSON RENDER ====================
+    function renderDailyLesson(plan) {
+        if (!plan) return `<div class="no-data">⚠️ No found data of daily lesson plan !।</div>`;
+        return `
+            <div class="lesson-plan-card">
+                <div class="plan-header">
+                    <h2>📖 दैनिक पाठ योजना</h2>
+                    <div><strong>सिरियल नं:</strong> ${plan.serialNo || '—'}</div>
+                </div>
+                <div class="school-detail">
+                    <h3>${escapeHtml(plan.schoolName || 'विद्यालय')}</h3>
+                    <div>${escapeHtml(plan.schoolAddress || '—')}</div>
+                    <div><strong>शैक्षिक सत्र:</strong> ${escapeHtml(plan.academicYear || '—')}</div>
+                    <div><strong>शिक्षक:</strong> ${escapeHtml(plan.teacherName || '—')}</div>
+                </div>
+                <div class="info-grid-2col">
+                    <div class="info-line"><span class="info-label">कक्षा :</span><span class="info-value">${escapeHtml(plan.class || '—')}</span></div>
+                    <div class="info-line"><span class="info-label">विषय :</span><span class="info-value">${escapeHtml(plan.subject || '—')}</span></div>
+                    <div class="info-line"><span class="info-label">पाठ शीर्षक :</span><span class="info-value">${escapeHtml(plan.lessonTitle || '—')}</span></div>
+                    <div class="info-line"><span class="info-label">पढाइ मिति :</span><span class="info-value">${escapeHtml(plan.teachingDate || '—')}</span></div>
+                    <div class="info-line"><span class="info-label">पिरियड/समय :</span><span class="info-value">${escapeHtml(plan.period || plan.timeAllocation || '—')}</span></div>
+                    <div class="info-line"><span class="info-label">एकाइ/क्षेत्र :</span><span class="info-value">${escapeHtml(plan.unitScope || '—')}</span></div>
+                    <div class="info-line"><span class="info-label">विद्यार्थी संख्या :</span><span class="info-value">${escapeHtml(plan.studentCount || '—')}</span></div>
+                </div>
+                <div class="content-block"><div class="title">विषयवस्तु (Topics)</div><div class="description">${escapeHtml(plan.topics || '—').replace(/\n/g, '<br>')}</div></div>
+                <div class="content-block"><div class="title">सिकाइ उपलब्धि (Learning Objectives)</div><div class="description">${escapeHtml(plan.learningObjectives || '—').replace(/\n/g, '<br>')}</div></div>
+                <div class="content-block"><div class="title">सिकाइ सामग्री (Teaching Materials)</div><div class="description">${escapeHtml(plan.teachingMaterials || '—').replace(/\n/g, '<br>')}</div></div>
+                <div class="content-block"><div class="title">सिकाइ क्रियाकलाप (Activities)</div><div class="description">${escapeHtml(plan.activities || '—').replace(/\n/g, '<br>')}</div></div>
+                <div class="content-block"><div class="title">मूल्याङ्कन विधि (Evaluation)</div><div class="description">${escapeHtml(plan.evaluationMethods || '—').replace(/\n/g, '<br>')}</div></div>
+                <div class="content-block"><div class="title">सुधारात्मक सिकाइ (Remedial)</div><div class="description">${escapeHtml(plan.remedialTeaching || '—').replace(/\n/g, '<br>')}</div></div>
+                <div class="content-block"><div class="title">गृहकार्य/परियोजना</div><div class="description">${escapeHtml(plan.homeworkProject || '—').replace(/\n/g, '<br>')}</div></div>
+                <div class="footer-sign">
+                    <div><strong>पियर शिक्षक:</strong> ${escapeHtml(plan.peerTeacher || '—')}</div>
+                    <div><strong>पियर शिक्षकको सुझाव:</strong> ${escapeHtml(plan.teacherSuggestions || '—')}</div>
+                    <div><strong>टिप्पणी:</strong> ${escapeHtml(plan.remarks || '—')}</div>
+                    <div><strong>स्वीकृत मिति:</strong> ${escapeHtml(plan.approvalDate || '—')}</div>
+                    <div><strong>प्रधानाध्यापक:</strong> __________</div>
+                </div>
+            </div>
+        `;
+    }
+
+    function filterAndDisplayDaily() {
+        const selectedClass = document.getElementById('classFilter').value;
+        const selectedSubject = document.getElementById('subjectFilter').value;
+        const serialRaw = document.getElementById('serialFilter').value.trim();
+        const academicYearRaw = document.getElementById('academicYearFilter').value.trim();
+        let filtered = [...allDailyPlans];
+        if (selectedClass) filtered = filtered.filter(p => p.class && p.class.toString().trim() === selectedClass);
+        if (selectedSubject) filtered = filtered.filter(p => p.subject && p.subject.toString().trim() === selectedSubject);
+        if (serialRaw) filtered = filtered.filter(p => p.serialNo && String(p.serialNo).trim() === serialRaw);
+        if (academicYearRaw) filtered = filtered.filter(p => p.academicYear && String(p.academicYear).trim() === academicYearRaw);
+        const container = document.getElementById('reportContainer');
+        if (filtered.length === 0) { container.innerHTML = `<div class="no-data">⚠️ कुनै दैनिक पाठ योजना फेला परेन।</div>`; return; }
+        if (filtered.length === 1) { container.innerHTML = renderDailyLesson(filtered[0]); return; }
+        let html = `<div class="filter-summary"><strong>🔍 ${filtered.length} वटा योजना फेला पर्यो।</strong><span class="badge-info">कुल: ${allDailyPlans.length}</span></div>
+            <div class="plan-list-container"><div class="plan-list" id="planList">`;
+        filtered.forEach((plan, idx) => {
+            html += `<div class="plan-item" data-index="${idx}"><strong>SN ${plan.serialNo || '—'}</strong> | ${escapeHtml(plan.class || 'कक्षा')} | ${escapeHtml(plan.subject || 'विषय')}<br>📌 ${escapeHtml(plan.lessonTitle || 'शीर्षक')}</div>`;
+        });
+        html += `</div></div><div id="selectedPlanDetail">${renderDailyLesson(filtered[0])}</div>`;
+        container.innerHTML = html;
+        const items = document.querySelectorAll('.plan-item');
+        items.forEach((item, i) => {
+            item.addEventListener('click', function() { 
+                let idx = parseInt(this.dataset.index); 
+                if (!isNaN(idx) && filtered[idx]) { 
+                    document.getElementById('selectedPlanDetail').innerHTML = renderDailyLesson(filtered[idx]); 
+                    items.forEach(el => el.classList.remove('active')); 
+                    this.classList.add('active'); 
+                } 
+            });
+        });
+        if(items.length) items[0].classList.add('active');
+    }
+
+    // ==================== ANNUAL PLAN RENDER ====================
+    function renderAnnualPlanTableView(plans) {
+        if (!plans.length) return `<div class="no-data">⚠️ कुनै वार्षिक योजना छैन।</div>`;
+        const first = plans[0];
+        
+        let totalHours = 0;
+        plans.forEach(p => { let hrs = p.workingHour; if(hrs && !isNaN(parseFloat(hrs))) totalHours += parseFloat(hrs); });
+        
+        let html = `<div class="report-card">
+            <div class="plan-header"><h2>📅 वार्षिक शैक्षिक योजना</h2></div>
+            <div class="school-detail">
+                <strong>${escapeHtml(first.schoolName || 'विद्यालय')}</strong><br>
+                सत्र: ${escapeHtml(first.academicYear || '—')} | कक्षा: ${escapeHtml(first.class || '—')} | विषय: ${escapeHtml(first.subject || '—')}<br>
+                शिक्षक: ${escapeHtml(first.teacherName || '—')}
+            </div>
+            
+            <div class="stats-card">
+                <div class="stat-item"><div class="stat-label">विद्यालय खुल्ने दिन</div><div class="stat-value">${escapeHtml(first.openingDays || '—')}</div></div>
+                <div class="stat-item"><div class="stat-label">कुल कार्यघण्टा</div><div class="stat-value">${escapeHtml(first.totalWorkingHours || '—')}</div></div>
+                <div class="stat-item"><div class="stat-label">खुद पढाई दिन</div><div class="stat-value">${escapeHtml(first.netTeachingDays || '—')}</div></div>
+                <div class="stat-item"><div class="stat-label">योजना अनुसार घण्टा</div><div class="stat-value">${totalHours}</div></div>
+            </div>
+            
+            <div class="table-wrapper"><table class="data-table">
+                <thead><tr><th>क्र.सं.</th><th>महिना</th><th>पढाइ घण्टा</th><th>एकाइ/क्षेत्र</th><th>पाठ</th><th>विषयवस्तु</th><th>उद्देश्य</th><th>शिक्षण विधि</th><th>सामग्री</th><th>मूल्याङ्कन</th><th>टिप्पणी</th></tr></thead>
+                <tbody>`;
+        
+        plans.forEach((p, idx) => {
+            html += `<tr>
+                <td style="text-align:center">${idx+1}</td>
+                <td>${escapeHtml(p.month || '—')}</td>
+                <td style="text-align:center">${escapeHtml(p.workingHour || '—')}</td>
+                <td>${escapeHtml(p.unit || '—')}</td>
+                <td>${escapeHtml(p.lesson || '—')}</td>
+                <td>${escapeHtml(p.topics || '—')}</td>
+                <td>${escapeHtml(p.objectives || '—')}</td>
+                <td>${escapeHtml(p.method || '—')}</td>
+                <td>${escapeHtml(p.materials || '—')}</td>
+                <td>${escapeHtml(p.evaluation || '—')}</td>
+                <td>${escapeHtml(p.remarks || '—')}</td>
+             </tr>`;
+        });
+        
+        html += `</tbody></table></div>
+            <div class="footer-sign">
+                <div>शिक्षक: ${escapeHtml(first.teacherName || '________')}</div>
+                <div>प्रधानाध्यापक: __________</div>
+                <div>मिति: ${new Date().toLocaleDateString('ne-NP')}</div>
+            </div>
+        </div>`;
+        return html;
+    }
+
+    // ==================== UNIT PLAN RENDER ====================
+    function renderUnitPlanTableView(units) {
+        if (!units.length) return `<div class="no-data">⚠️ कुनै एकाइ योजना छैन।</div>`;
+        const first = units[0];
+        
+        let totalPeriods = 0;
+        units.forEach(u => { if(u.periods && !isNaN(parseInt(u.periods))) totalPeriods += parseInt(u.periods); });
+        
+        let html = `<div class="report-card">
+            <div class="plan-header"><h2>📚 एकाइ योजना (Unit Plan)</h2></div>
+            <div class="school-detail">
+                <strong>${escapeHtml(first.schoolName || 'विद्यालय')}</strong><br>
+                सत्र: ${escapeHtml(first.academicYear || '—')} | कक्षा: ${escapeHtml(first.class || '—')} | विषय: ${escapeHtml(first.subject || '—')}<br>
+                शिक्षक: ${escapeHtml(first.teacherName || '—')}
+            </div>
+            
+            <div class="stats-card">
+                <div class="stat-item"><div class="stat-label">कुल एकाइ</div><div class="stat-value">${escapeHtml(first.totalUnit || '—')}</div></div>
+                <div class="stat-item"><div class="stat-label">कुल कार्यघण्टा</div><div class="stat-value">${escapeHtml(first.totalWorkingHours || '—')}</div></div>
+                <div class="stat-item"><div class="stat-label">कुल पीरियड</div><div class="stat-value">${totalPeriods}</div></div>
+            </div>
+            
+            <div class="table-wrapper"><table class="data-table">
+                <thead><tr><th>क्र.सं.</th><th>एकाइ/क्षेत्र</th><th>पाठ शीर्षक</th><th>सिकाइ उपलब्धि</th><th>पीरियड</th><th>शिक्षण विधि</th><th>सामग्री</th><th>क्रियाकलाप</th><th>मूल्याङ्कन</th><th>टिप्पणी</th></tr></thead>
+                <tbody>`;
+        
+        units.forEach((u, idx) => {
+            html += `<tr>
+                <td style="text-align:center">${u.serialNo || idx+1}</td>
+                <td>${escapeHtml(u.unitArea || '—')}</td>
+                <td>${escapeHtml(u.lessonTopic || '—')}</td>
+                <td>${escapeHtml(u.outcomes || '—')}</td>
+                <td style="text-align:center">${escapeHtml(u.periods || '—')}</td>
+                <td>${escapeHtml(u.method || '—')}</td>
+                <td>${escapeHtml(u.materials || '—')}</td>
+                <td>${escapeHtml(u.activities || '—')}</td>
+                <td>${escapeHtml(u.assessment || '—')}</td>
+                <td>${escapeHtml(u.remarks || '—')}</td>
+             </tr>`;
+        });
+        
+        html += `</tbody></table></div>
+            <div class="footer-sign">
+                <div>शिक्षक: ${escapeHtml(first.teacherName || '________')}</div>
+                <div>प्रधानाध्यापक: __________</div>
+                <div>मिति: ${new Date().toLocaleDateString('ne-NP')}</div>
+            </div>
+        </div>`;
+        return html;
+    }
+
+    // ==================== CALENDAR RENDER ====================
+    function renderCalendarTableView(calendars) {
+        if (!calendars.length) return `<div class="no-data">⚠️ कुनै सञ्चालन क्यालेन्डर डाटा छैन।</div>`;
+        const first = calendars[0];
+        
+        let totalCreditHours = 0, totalExtraActivities = 0, totalExamDays = 0;
+        calendars.forEach(cal => {
+            if(cal.creditHour && !isNaN(parseFloat(cal.creditHour))) totalCreditHours += parseFloat(cal.creditHour);
+            if(cal.extraActivities && !isNaN(parseFloat(cal.extraActivities))) totalExtraActivities += parseFloat(cal.extraActivities);
+            if(cal.totalExamDays && !isNaN(parseFloat(cal.totalExamDays))) totalExamDays += parseFloat(cal.totalExamDays);
+        });
+        
+        let html = `<div class="report-card">
+            <div class="plan-header"><h2>🗓 सञ्चालन क्यालेन्डर</h2></div>
+            <div class="school-detail">
+                <strong>${escapeHtml(first.schoolName || 'विद्यालय')}</strong><br>
+                सत्र: ${escapeHtml(first.academicYear || '—')} | कक्षा: ${escapeHtml(first.class || '—')} | विषय: ${escapeHtml(first.subject || '—')}<br>
+                शिक्षक: ${escapeHtml(first.teacherName || '—')}
+            </div>
+            
+            <div class="stats-card">
+                <div class="stat-item"><div class="stat-label">वार्षिक कार्यघण्टा</div><div class="stat-value">${totalCreditHours}</div></div>
+                <div class="stat-item"><div class="stat-label">वार्षिक अतिरिक्त क्रियाकलाप</div><div class="stat-value">${totalExtraActivities}</div></div>
+                <div class="stat-item"><div class="stat-label">परीक्षा संचालन दिन</div><div class="stat-value">${totalExamDays}</div></div>
+            </div>
+            
+            <div class="table-wrapper"><table class="data-table">
+                <thead><tr><th>क्र.सं.</th><th>महिना</th><th>गतिविधि/कार्यक्रम</th><th>मिति</th><th>जिम्मेवार व्यक्ति</th><th>टिप्पणी</th></tr></thead>
+                <tbody>`;
+        
+        calendars.forEach((cal, idx) => {
+            html += `<tr>
+                <td style="text-align:center">${cal.serialNo || idx+1}</td>
+                <td>${escapeHtml(cal.month || '—')}</td>
+                <td>${escapeHtml(cal.activity || '—')}</td>
+                <td>${escapeHtml(cal.eventDate || '—')}</td>
+                <td>${escapeHtml(cal.responsible || '—')}</td>
+                <td>${escapeHtml(cal.remarks || '—')}</td>
+             </tr>`;
+        });
+        
+        html += `</tbody></table></div>
+            <div class="footer-sign">
+                <div>📌 नोट: यो सञ्चालन क्यालेन्डर वार्षिक योजना अनुसार तयार गरिएको हो।</div>
+                <div>मिति: ${new Date().toLocaleDateString('ne-NP')}</div>
+            </div>
+        </div>`;
+        return html;
+    }
+
+    // ==================== MAIN RENDER DISPATCHER ====================
+    function applyFiltersAndRender() {
+        const planType = document.getElementById('planTypeFilter').value;
+        const year = document.getElementById('academicYearFilter').value.trim();
+        const cls = document.getElementById('classFilter').value;
+        const sub = document.getElementById('subjectFilter').value;
+        const sn = document.getElementById('serialFilter').value.trim();
+        
+        if (planType === 'daily') {
+            filterAndDisplayDaily();
+        } 
+        else if (planType === 'annual') {
+            let filtered = [...allAnnualPlans];
+            if(year) filtered = filtered.filter(p => p.academicYear && String(p.academicYear) === year);
+            if(cls) filtered = filtered.filter(p => p.class && p.class.toString().trim() === cls);
+            if(sub) filtered = filtered.filter(p => p.subject && p.subject.toString().trim() === sub);
+            if(sn) filtered = filtered.filter(p => p.serialNo && String(p.serialNo) === sn);
+            document.getElementById('reportContainer').innerHTML = renderAnnualPlanTableView(filtered);
+        }
+        else if (planType === 'unit') {
+            let filtered = [...allUnitPlans];
+            if(year) filtered = filtered.filter(p => p.academicYear && String(p.academicYear) === year);
+            if(cls) filtered = filtered.filter(p => p.class && p.class.toString().trim() === cls);
+            if(sub) filtered = filtered.filter(p => p.subject && p.subject.toString().trim() === sub);
+            if(sn) filtered = filtered.filter(p => p.serialNo && String(p.serialNo) === sn);
+            document.getElementById('reportContainer').innerHTML = renderUnitPlanTableView(filtered);
+        }
+        else if (planType === 'calendar') {
+            let filtered = [...allCalendarPlans];
+            if(year) filtered = filtered.filter(p => p.academicYear && String(p.academicYear) === year);
+            if(cls) filtered = filtered.filter(p => p.class && p.class.toString().trim() === cls);
+            if(sub) filtered = filtered.filter(p => p.subject && p.subject.toString().trim() === sub);
+            if(sn) filtered = filtered.filter(p => p.serialNo && String(p.serialNo) === sn);
+            document.getElementById('reportContainer').innerHTML = renderCalendarTableView(filtered);
+        }
+    }
+
+    function getCurrentHTMLForExport() {
+        const container = document.getElementById('reportContainer');
+        if(!container) return '<div>No content</div>';
+        let clone = container.cloneNode(true);
+        if(clone.querySelector('.plan-list-container')) clone.querySelector('.plan-list-container')?.remove();
+        if(clone.querySelector('.filter-summary')) clone.querySelector('.filter-summary')?.remove();
+        return clone.innerHTML;
+    }
+
+    window.printReport = function() {
+        const htmlContent = getCurrentHTMLForExport();
+        const win = window.open('', '_blank');
+        win.document.write(`<html><head><title>शैक्षिक योजना प्रिन्ट</title><meta charset="UTF-8"><style>body{padding:20px;} button, .filter-card, .tabs-bar { display:none; }</style></head><body>${htmlContent}</body></html>`);
+        win.document.close();
+        win.print();
+    };
+    
+    window.downloadPDF = function() {
+        const htmlContent = getCurrentHTMLForExport();
+        const win = window.open('', '_blank');
+        win.document.write(`<html><head><title>योजना_रिपोर्ट.pdf</title><meta charset="UTF-8"><style>body{padding:20px;} button, .filter-card, .tabs-bar { display:none; }</style></head><body>${htmlContent}<script>window.onload=function(){window.print();setTimeout(()=>window.close(),800)}<\/script></body></html>`);
+        win.document.close();
+    };
+    
+    function downloadCSV() {
+        const planType = document.getElementById('planTypeFilter').value;
+        let dataRows = [];
+        if(planType === 'daily') dataRows = allDailyPlans;
+        else if(planType === 'annual') dataRows = allAnnualPlans;
+        else if(planType === 'unit') dataRows = allUnitPlans;
+        else if(planType === 'calendar') dataRows = allCalendarPlans;
+        if(!dataRows.length) { alert('CSV निर्यात गर्न डाटा छैन'); return; }
+        const headers = Object.keys(dataRows[0]).slice(0,10);
+        let csvContent = headers.join(',') + '\n';
+        dataRows.forEach(row => {
+            let line = headers.map(h => `"${(row[h] || '').toString().replace(/"/g, '""')}"`).join(',');
+            csvContent += line + '\n';
+        });
+        const blob = new Blob(["\uFEFF" + csvContent], {type: 'text/csv;charset=utf-8;'});
+        const link = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        link.href = url;
+        link.setAttribute('download', `plan_export_${planType}.csv`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+    }
+
+    async function loadAllData() {
+        showStatus("🔄 Loading Data...", false);
+        try {
+            const response = await fetchJSONP('getAllPlanData');
+            if (response && response.status === 'success' && response.data) {
+                allDailyPlans = response.data.daily || [];
+                allAnnualPlans = response.data.annual || [];
+                allUnitPlans = response.data.unit || [];
+                allCalendarPlans = response.data.calendar || [];
+                populateDynamicFilters();
+                showStatus(`✅ सफल: दैनिक ${allDailyPlans.length}, वार्षिक ${allAnnualPlans.length}, एकाइ ${allUnitPlans.length}, क्यालेन्डर ${allCalendarPlans.length}`, false);
+                applyFiltersAndRender();
+            } else throw new Error("Invalid response");
+        } catch(err) {
+            showStatus(`❌ त्रुटि: ${err.message}`, true);
+            document.getElementById('reportContainer').innerHTML = `<div class="no-data">⚠️ डाटा लोड असफल। URL जाँच गर्नुहोस्।</div>`;
+        }
+    }
+
+    // Event Listeners
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            let tab = btn.dataset.tab;
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if(tab === 'daily') document.getElementById('planTypeFilter').value = 'daily';
+            else if(tab === 'annual') document.getElementById('planTypeFilter').value = 'annual';
+            else if(tab === 'unit') document.getElementById('planTypeFilter').value = 'unit';
+            else if(tab === 'calendar') document.getElementById('planTypeFilter').value = 'calendar';
+            applyFiltersAndRender();
+        });
+    });
+    
+    document.getElementById('searchBtn').addEventListener('click', applyFiltersAndRender);
+    document.getElementById('refreshBtn').addEventListener('click', loadAllData);
+    document.getElementById('printBtn').addEventListener('click', () => window.printReport());
+    document.getElementById('pdfBtn').addEventListener('click', () => window.downloadPDF());
+    document.getElementById('csvBtn').addEventListener('click', downloadCSV);
+    document.getElementById('planTypeFilter').addEventListener('change', applyFiltersAndRender);
+    document.getElementById('classFilter').addEventListener('change', applyFiltersAndRender);
+    document.getElementById('subjectFilter').addEventListener('change', applyFiltersAndRender);
+    document.getElementById('academicYearFilter').addEventListener('input', applyFiltersAndRender);
+    document.getElementById('serialFilter').addEventListener('input', applyFiltersAndRender);
+    
+    loadAllData();
+</script>
+</body>
+</html>

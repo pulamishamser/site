@@ -1,0 +1,935 @@
+
+
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Instruction Planing System | Update Diary Records</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Roboto', 'Noto Sans', system-ui, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #eef2f5 0%, #dfe6ed 100%);
+            padding: 28px 20px;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+        .header h1 {
+            font-size: 1.8rem;
+            color: #1e3a5f;
+            font-weight: 800;
+        }
+        .header p {
+            color: #475569;
+            margin-top: 8px;
+        }
+
+        /* Tabs */
+        .tabs-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 28px;
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(4px);
+            border-radius: 60px;
+            padding: 8px 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .tab-btn {
+            background: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #1e3a5f;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .tab-btn.active {
+            background: linear-gradient(135deg, #1e3a5f, #2c5282);
+            color: white;
+            box-shadow: 0 6px 14px rgba(30,58,95,0.25);
+        }
+        .tab-btn:hover:not(.active) {
+            background: #e6edf4;
+            transform: translateY(-2px);
+        }
+
+        /* Filter Card */
+        .filter-card {
+            background: rgba(255,255,255,0.98);
+            border-radius: 32px;
+            padding: 24px 32px;
+            margin-bottom: 32px;
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.12);
+            border: 1px solid rgba(30,58,95,0.12);
+        }
+        .filter-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e3a5f, #2c5282);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 18px;
+            border-left: 5px solid #2c5282;
+            padding-left: 18px;
+        }
+        .filter-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            align-items: flex-end;
+            margin-bottom: 20px;
+        }
+        .filter-field {
+            flex: 1;
+            min-width: 170px;
+        }
+        .filter-field label {
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: #2c3e5c;
+            display: block;
+            margin-bottom: 6px;
+            letter-spacing: 0.6px;
+        }
+        .filter-field select, .filter-field input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 40px;
+            border: 1.5px solid #e2e8f0;
+            background: white;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        .filter-field select:focus, .filter-field input:focus {
+            border-color: #2c5282;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(44,82,130,0.2);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #1e3a5f, #2c5282);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 48px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 10px rgba(0,0,0,0.1);}
+        .btn-secondary {
+            background: linear-gradient(135deg, #2c7a4d, #1f5e3a);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 48px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .btn-danger {
+            background: linear-gradient(135deg, #c0392b, #e74c3c);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+        .btn-edit {
+            background: linear-gradient(135deg, #d97706, #f59e0b);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+        .btn-export {
+            background: linear-gradient(135deg, #b45309, #d97706);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 48px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        /* Data Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+        }
+        .data-table th {
+            background: #1e3a5f;
+            color: white;
+            padding: 14px 10px;
+            font-size: 0.85rem;
+            text-align: center;
+            font-weight: 600;
+        }
+        .data-table td {
+            border: 1px solid #cbd5e1;
+            padding: 12px 10px;
+            font-size: 0.8rem;
+            vertical-align: top;
+        }
+        .data-table tr:hover {
+            background: #f1f5f9;
+        }
+        
+        .table-wrapper {
+            overflow-x: auto;
+            margin-top: 20px;
+            border-radius: 24px;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            overflow: auto;
+        }
+        .modal-content {
+            background: white;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 32px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #2c5282;
+            padding-bottom: 12px;
+        }
+        .modal-header h3 {
+            color: #1e3a5f;
+            font-size: 1.4rem;
+        }
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #666;
+        }
+        .close-modal:hover {
+            color: #c0392b;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .form-field {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-field label {
+            font-weight: 600;
+            color: #1e3a5f;
+            margin-bottom: 5px;
+            font-size: 0.8rem;
+        }
+        .form-field input, .form-field select, .form-field textarea {
+            padding: 10px 12px;
+            border-radius: 20px;
+            border: 1px solid #cbd5e1;
+            font-size: 0.9rem;
+        }
+        .form-field textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+        .form-field.full-width {
+            grid-column: span 2;
+        }
+        .btn-save {
+            background: linear-gradient(135deg, #2c7a4d, #1f5e3a);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            width: 100%;
+            font-size: 1rem;
+        }
+        .btn-save:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        /* Status Messages */
+        .status-msg {
+            padding: 12px 20px;
+            border-radius: 60px;
+            margin-top: 15px;
+            text-align: center;
+        }
+        .status-msg.success {
+            background: #d4edda;
+            color: #155724;
+            border-left: 5px solid #2e7d32;
+        }
+        .status-msg.error {
+            background: #f8d7da;
+            color: #721c24;
+            border-left: 5px solid #c62828;
+        }
+        .status-msg.loading {
+            background: #e9ecef;
+            color: #2c3e50;
+        }
+        
+        .no-data {
+            text-align: center;
+            padding: 50px 20px;
+            background: #fef9e6;
+            border-radius: 28px;
+            color: #92400e;
+        }
+        
+        .stats-badge {
+            background: linear-gradient(135deg, #e6f7ff, #f0f9ff);
+            border-radius: 20px;
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            color: #1e3a5f;
+            margin-left: 10px;
+        }
+        
+        @media (max-width: 720px) {
+            .filter-grid {
+                flex-direction: column;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .form-field.full-width {
+                grid-column: span 1;
+            }
+            .modal-content {
+                margin: 20px;
+                width: auto;
+            }
+            .tab-btn {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+        }
+        
+        @media print {
+            body { background: white; padding: 0; }
+            .filter-card, .tabs-bar, .action-buttons, .btn-edit, .btn-danger, .modal { display: none !important; }
+            .data-table th { background: #ccc; color: black; }
+        }
+    </style>
+</head>
+<body>
+<div class="app-container">
+    <div class="header">
+        <h1>📚 Instruction Planing System </h1>
+        <p>Update Diary Records</p>
+    </div>
+
+    <div class="tabs-bar">
+        <button class="tab-btn active" data-tab="daily">📖 दैनिक पाठ योजना</button>
+        <button class="tab-btn" data-tab="annual">📅 वार्षिक योजना</button>
+        <button class="tab-btn" data-tab="unit">📚 एकाइ योजना</button>
+        <button class="tab-btn" data-tab="calendar">🗓 सञ्चालन क्यालेन्डर</button>
+    </div>
+
+    <div class="filter-card">
+        <div class="filter-title">🔍 Filter Records</div>
+        <div class="filter-grid">
+            <div class="filter-field">
+                <label>🏫 शैक्षिक सत्र</label>
+                <input type="text" id="academicYearFilter" placeholder="जस्तै: २०८२">
+            </div>
+            <div class="filter-field">
+                <label>📚 कक्षा</label>
+                <select id="classFilter"><option value="">सबै कक्षा</option></select>
+            </div>
+            <div class="filter-field">
+                <label>📖 विषय</label>
+                <select id="subjectFilter"><option value="">सबै विषय</option></select>
+            </div>
+            <div class="filter-field">
+                <label>🔢 सिरियल नं</label>
+                <input type="text" id="serialFilter" placeholder="जस्तै: 1">
+            </div>
+        </div>
+        <div class="filter-grid">
+            <div class="action-buttons">
+                <button class="btn-primary" id="searchBtn">🔎 Find records</button>
+                <button class="btn-secondary" id="refreshBtn">⟳ Reload</button>
+                <button class="btn-export" id="printBtn">🖨️ Print</button>
+            </div>
+        </div>
+        <div id="statusMsg" class="status-msg" style="display:none;"></div>
+    </div>
+
+    <div id="reportContainer">
+        <div class="no-data">📌Filter & Search Records</div>
+    </div>
+</div>
+
+<!-- Edit Modal -->
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="modalTitle">✏️Update Diary Records</h3>
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+        </div>
+        <div id="editFormContainer"></div>
+        <button class="btn-save" id="saveUpdateBtn">💾 Update Records</button>
+    </div>
+</div>
+
+<script>
+    // ==================== CONFIGURATION ====================
+    // UPDATE THIS WITH YOUR APPS SCRIPT WEB APP URL
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzAnMfxmhV9HlZvTV6_aonoJV_qDxWQRUrvONjrYmaK5bcMaaT7w4kzPdMHJLnjw1Cq8w/exec";
+    
+    let allDailyPlans = [];
+    let allAnnualPlans = [];
+    let allUnitPlans = [];
+    let allCalendarPlans = [];
+    let currentPlanType = 'daily';
+    let currentEditRecord = null;
+
+    // ==================== API FUNCTIONS ====================
+    function fetchJSONP(action, params = {}) {
+        return new Promise((resolve, reject) => {
+            const callbackName = 'jsonp_cb_' + Date.now() + '_' + Math.random().toString(36).substr(2, 8);
+            const timeout = setTimeout(() => { reject(new Error("Request timeout")); cleanup(); }, 30000);
+            
+            window[callbackName] = function(resp) { 
+                clearTimeout(timeout); 
+                resolve(resp); 
+                cleanup(); 
+            };
+            
+            let url = `${APPS_SCRIPT_URL}?action=${action}&callback=${callbackName}&_=${Date.now()}`;
+            for (let key in params) {
+                url += `&${key}=${encodeURIComponent(params[key])}`;
+            }
+            
+            const script = document.createElement('script');
+            script.src = url;
+            script.onerror = () => { 
+                clearTimeout(timeout); 
+                reject(new Error("Network error")); 
+                cleanup(); 
+            };
+            document.body.appendChild(script);
+            
+            function cleanup() { 
+                if(window[callbackName]) delete window[callbackName]; 
+                if(script && script.parentNode) script.parentNode.removeChild(script); 
+            }
+        });
+    }
+
+    function postData(payload) {
+        return new Promise((resolve, reject) => {
+            const callbackName = 'jsonp_cb_' + Date.now() + '_' + Math.random().toString(36).substr(2, 8);
+            const timeout = setTimeout(() => { reject(new Error("Request timeout")); cleanup(); }, 30000);
+            
+            window[callbackName] = function(resp) { 
+                clearTimeout(timeout); 
+                resolve(resp); 
+                cleanup(); 
+            };
+            
+            const url = `${APPS_SCRIPT_URL}?callback=${callbackName}&data=${encodeURIComponent(JSON.stringify(payload))}&_=${Date.now()}`;
+            const script = document.createElement('script');
+            script.src = url;
+            script.onerror = () => { 
+                clearTimeout(timeout); 
+                reject(new Error("Network error")); 
+                cleanup(); 
+            };
+            document.body.appendChild(script);
+            
+            function cleanup() { 
+                if(window[callbackName]) delete window[callbackName]; 
+                if(script && script.parentNode) script.parentNode.removeChild(script); 
+            }
+        });
+    }
+
+    function showStatus(msg, isError) {
+        const div = document.getElementById('statusMsg');
+        div.style.display = 'block';
+        div.innerHTML = msg;
+        div.className = `status-msg ${isError ? 'error' : 'success'}`;
+        setTimeout(() => { 
+            div.style.opacity = '0';
+            setTimeout(() => { 
+                div.style.display = 'none'; 
+                div.style.opacity = ''; 
+            }, 500);
+        }, 4000);
+    }
+
+    function escapeHtml(str) { 
+        if(!str) return ''; 
+        return String(str).replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'})[m]); 
+    }
+
+    // ==================== FILTERS ====================
+    function populateDynamicFilters() {
+        const allEntries = [...allDailyPlans, ...allAnnualPlans, ...allUnitPlans, ...allCalendarPlans];
+        const classSet = new Set();
+        const subjectSet = new Set();
+        
+        allEntries.forEach(item => {
+            if(item.class && item.class.toString().trim()) classSet.add(item.class.toString().trim());
+            if(item.subject && item.subject.toString().trim()) subjectSet.add(item.subject.toString().trim());
+        });
+        
+        const classSelect = document.getElementById('classFilter');
+        const subjectSelect = document.getElementById('subjectFilter');
+        
+        classSelect.innerHTML = '<option value="">सबै कक्षा</option>';
+        subjectSelect.innerHTML = '<option value="">सबै विषय</option>';
+        
+        Array.from(classSet).sort().forEach(c => classSelect.innerHTML += `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`);
+        Array.from(subjectSet).sort().forEach(s => subjectSelect.innerHTML += `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`);
+    }
+
+    // ==================== RENDER FUNCTIONS ====================
+    function renderDailyTable(plans) {
+        if (!plans.length) return `<div class="no-data">⚠️ कुनै दैनिक पाठ योजना छैन।</div>`;
+        
+        let html = `<div class="table-wrapper">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>SN</th><th>सत्र</th><th>विद्यालय</th><th>शिक्षक</th><th>कक्षा</th>
+                        <th>विषय</th><th>पाठ शीर्षक</th><th>मिति</th><th>सम्पादन</th><th>हटाउनुहोस्</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+        
+        plans.forEach(p => {
+            html += `<tr>
+                <td style="text-align:center">${p.serialNo || '—'}</td>
+                <td>${escapeHtml(p.academicYear || '—')}</td>
+                <td>${escapeHtml(p.schoolName || '—')}</td>
+                <td>${escapeHtml(p.teacherName || '—')}</td>
+                <td>${escapeHtml(p.class || '—')}</td>
+                <td>${escapeHtml(p.subject || '—')}</td>
+                <td>${escapeHtml(p.lessonTitle || '—')}</td>
+                <td>${escapeHtml(p.teachingDate || '—')}</td>
+                <td style="text-align:center"><button class="btn-edit" onclick="openEditModal('daily', ${p.serialNo})">✏️ सम्पादन</button></td>
+                <td style="text-align:center"><button class="btn-danger" onclick="deleteRecord('daily', ${p.serialNo})">🗑️ हटाउनुहोस्</button></td>
+            </tr>`;
+        });
+        
+        html += `</tbody></table></div>
+        <div style="margin-top: 10px; text-align: right; font-size: 0.8rem; color: #666;">
+            कुल रेकर्ड: ${plans.length}
+        </div>`;
+        return html;
+    }
+
+    function renderAnnualTable(plans) {
+        if (!plans.length) return `<div class="no-data">⚠️ कुनै वार्षिक योजना छैन।</div>`;
+        
+        let html = `<div class="table-wrapper">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>SN</th><th>सत्र</th><th>विद्यालय</th><th>शिक्षक</th><th>कक्षा</th>
+                        <th>विषय</th><th>महिना</th><th>घण्टा</th><th>एकाइ</th><th>पाठ</th><th>सम्पादन</th><th>हटाउनुहोस्</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+        
+        plans.forEach(p => {
+            html += `<tr>
+                <td style="text-align:center">${p.serialNo || '—'}</td>
+                <td>${escapeHtml(p.academicYear || '—')}</td>
+                <td>${escapeHtml(p.schoolName || '—')}</td>
+                <td>${escapeHtml(p.teacherName || '—')}</td>
+                <td>${escapeHtml(p.class || '—')}</td>
+                <td>${escapeHtml(p.subject || '—')}</td>
+                <td>${escapeHtml(p.month || '—')}</td>
+                <td style="text-align:center">${p.workingHour || '—'}</td>
+                <td>${escapeHtml(p.unit || '—')}</td>
+                <td>${escapeHtml(p.lesson || '—')}</td>
+                <td style="text-align:center"><button class="btn-edit" onclick="openEditModal('annual', ${p.serialNo})">✏️ सम्पादन</button></td>
+                <td style="text-align:center"><button class="btn-danger" onclick="deleteRecord('annual', ${p.serialNo})">🗑️ हटाउनुहोस्</button></td>
+            </tr>`;
+        });
+        
+        html += `</tbody></table></div>
+        <div style="margin-top: 10px; text-align: right; font-size: 0.8rem; color: #666;">
+            कुल रेकर्ड: ${plans.length}
+        </div>`;
+        return html;
+    }
+
+    function renderUnitTable(units) {
+        if (!units.length) return `<div class="no-data">⚠️ कुनै एकाइ योजना छैन।</div>`;
+        
+        let html = `<div class="table-wrapper">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>SN</th><th>सत्र</th><th>विद्यालय</th><th>शिक्षक</th><th>कक्षा</th>
+                        <th>विषय</th><th>एकाइ/क्षेत्र</th><th>पाठ शीर्षक</th><th>पीरियड</th><th>सम्पादन</th><th>हटाउनुहोस्</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+        
+        units.forEach(u => {
+            html += `<tr>
+                <td style="text-align:center">${u.serialNo || '—'}</td>
+                <td>${escapeHtml(u.academicYear || '—')}</td>
+                <td>${escapeHtml(u.schoolName || '—')}</td>
+                <td>${escapeHtml(u.teacherName || '—')}</td>
+                <td>${escapeHtml(u.class || '—')}</td>
+                <td>${escapeHtml(u.subject || '—')}</td>
+                <td>${escapeHtml(u.unitArea || '—')}</td>
+                <td>${escapeHtml(u.lessonTopic || '—')}</td>
+                <td style="text-align:center">${u.periods || '—'}</td>
+                <td style="text-align:center"><button class="btn-edit" onclick="openEditModal('unit', ${u.serialNo})">✏️ सम्पादन</button></td>
+                <td style="text-align:center"><button class="btn-danger" onclick="deleteRecord('unit', ${u.serialNo})">🗑️ हटाउनुहोस्</button></td>
+            </tr>`;
+        });
+        
+        html += `</tbody></table></div>
+        <div style="margin-top: 10px; text-align: right; font-size: 0.8rem; color: #666;">
+            कुल रेकर्ड: ${units.length}
+        </div>`;
+        return html;
+    }
+
+    function renderCalendarTable(calendars) {
+        if (!calendars.length) return `<div class="no-data">⚠️ कुनै सञ्चालन क्यालेन्डर छैन।</div>`;
+        
+        let html = `<div class="table-wrapper">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>SN</th><th>सत्र</th><th>विद्यालय</th><th>शिक्षक</th><th>कक्षा</th>
+                        <th>विषय</th><th>महिना</th><th>गतिविधि</th><th>मिति</th><th>जिम्मेवार</th><th>सम्पादन</th><th>हटाउनुहोस्</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+        
+        calendars.forEach(c => {
+            html += `<tr>
+                <td style="text-align:center">${c.serialNo || '—'}</td>
+                <td>${escapeHtml(c.academicYear || '—')}</td>
+                <td>${escapeHtml(c.schoolName || '—')}</td>
+                <td>${escapeHtml(c.teacherName || '—')}</td>
+                <td>${escapeHtml(c.class || '—')}</td>
+                <td>${escapeHtml(c.subject || '—')}</td>
+                <td>${escapeHtml(c.month || '—')}</td>
+                <td>${escapeHtml(c.activity || '—')}</td>
+                <td>${escapeHtml(c.eventDate || '—')}</td>
+                <td>${escapeHtml(c.responsible || '—')}</td>
+                <td style="text-align:center"><button class="btn-edit" onclick="openEditModal('calendar', ${c.serialNo})">✏️ सम्पादन</button></td>
+                <td style="text-align:center"><button class="btn-danger" onclick="deleteRecord('calendar', ${c.serialNo})">🗑️ हटाउनुहोस्</button></td>
+            </tr>`;
+        });
+        
+        html += `</tbody></table></div>
+        <div style="margin-top: 10px; text-align: right; font-size: 0.8rem; color: #666;">
+            कुल रेकर्ड: ${calendars.length}
+        </div>`;
+        return html;
+    }
+
+    // ==================== FILTER AND DISPLAY ====================
+    function applyFiltersAndRender() {
+        const year = document.getElementById('academicYearFilter').value.trim();
+        const cls = document.getElementById('classFilter').value;
+        const sub = document.getElementById('subjectFilter').value;
+        const sn = document.getElementById('serialFilter').value.trim();
+        const container = document.getElementById('reportContainer');
+        
+        if (currentPlanType === 'daily') {
+            let filtered = [...allDailyPlans];
+            if(year) filtered = filtered.filter(p => p.academicYear && String(p.academicYear) === year);
+            if(cls) filtered = filtered.filter(p => p.class && p.class.toString().trim() === cls);
+            if(sub) filtered = filtered.filter(p => p.subject && p.subject.toString().trim() === sub);
+            if(sn) filtered = filtered.filter(p => p.serialNo && String(p.serialNo) === sn);
+            container.innerHTML = renderDailyTable(filtered);
+        } 
+        else if (currentPlanType === 'annual') {
+            let filtered = [...allAnnualPlans];
+            if(year) filtered = filtered.filter(p => p.academicYear && String(p.academicYear) === year);
+            if(cls) filtered = filtered.filter(p => p.class && p.class.toString().trim() === cls);
+            if(sub) filtered = filtered.filter(p => p.subject && p.subject.toString().trim() === sub);
+            if(sn) filtered = filtered.filter(p => p.serialNo && String(p.serialNo) === sn);
+            container.innerHTML = renderAnnualTable(filtered);
+        } 
+        else if (currentPlanType === 'unit') {
+            let filtered = [...allUnitPlans];
+            if(year) filtered = filtered.filter(p => p.academicYear && String(p.academicYear) === year);
+            if(cls) filtered = filtered.filter(p => p.class && p.class.toString().trim() === cls);
+            if(sub) filtered = filtered.filter(p => p.subject && p.subject.toString().trim() === sub);
+            if(sn) filtered = filtered.filter(p => p.serialNo && String(p.serialNo) === sn);
+            container.innerHTML = renderUnitTable(filtered);
+        } 
+        else if (currentPlanType === 'calendar') {
+            let filtered = [...allCalendarPlans];
+            if(year) filtered = filtered.filter(p => p.academicYear && String(p.academicYear) === year);
+            if(cls) filtered = filtered.filter(p => p.class && p.class.toString().trim() === cls);
+            if(sub) filtered = filtered.filter(p => p.subject && p.subject.toString().trim() === sub);
+            if(sn) filtered = filtered.filter(p => p.serialNo && String(p.serialNo) === sn);
+            container.innerHTML = renderCalendarTable(filtered);
+        }
+    }
+
+    // ==================== EDIT MODAL FUNCTIONS ====================
+    async function openEditModal(planType, serialNo) {
+        currentPlanType = planType;
+        showStatus("डाटा लोड हुँदै...", false);
+        
+        try {
+            const response = await fetchJSONP('getSingleRecord', { planType: planType, serialNo: serialNo });
+            
+            if (response && response.status === 'success') {
+                currentEditRecord = response.data;
+                const modalTitle = document.getElementById('modalTitle');
+                
+                if (planType === 'daily') modalTitle.innerHTML = '✏️ दैनिक पाठ योजना अद्यावधिक गर्नुहोस्';
+                else if (planType === 'annual') modalTitle.innerHTML = '✏️ वार्षिक योजना अद्यावधिक गर्नुहोस्';
+                else if (planType === 'unit') modalTitle.innerHTML = '✏️ एकाइ योजना अद्यावधिक गर्नुहोस्';
+                else modalTitle.innerHTML = '✏️ सञ्चालन क्यालेन्डर अद्यावधिक गर्नुहोस्';
+                
+                let formHtml = `<div class="form-grid">`;
+                
+                for (let [key, value] of Object.entries(response.data)) {
+                    if (key === 'serialNo') continue;
+                    
+                    let inputType = 'text';
+                    if (key === 'teachingDate' || key === 'eventDate' || key === 'approvalDate') inputType = 'text';
+                    if (key === 'studentCount' || key === 'periods' || key === 'workingHour' || key === 'creditHour') inputType = 'number';
+                    
+                    const isTextarea = key.includes('objectives') || key.includes('topics') || key.includes('activities') || 
+                                      key.includes('remarks') || key.includes('suggestions') || key.includes('outcomes');
+                    
+                    formHtml += `
+                        <div class="form-field">
+                            <label>${escapeHtml(key)}</label>
+                            ${isTextarea ? 
+                                `<textarea name="${key}" rows="2">${escapeHtml(value || '')}</textarea>` :
+                                `<input type="${inputType}" name="${key}" value="${escapeHtml(value || '')}">`
+                            }
+                        </div>
+                    `;
+                }
+                
+                formHtml += `</div>`;
+                document.getElementById('editFormContainer').innerHTML = formHtml;
+                document.getElementById('editModal').style.display = 'block';
+                showStatus("", false);
+            } else {
+                showStatus("रेकर्ड फेला परेन", true);
+            }
+        } catch(err) {
+            showStatus("त्रुटि: " + err.message, true);
+        }
+    }
+
+    function closeModal() {
+        document.getElementById('editModal').style.display = 'none';
+        currentEditRecord = null;
+    }
+
+    async function saveUpdate() {
+        if (!currentEditRecord) return;
+        
+        const form = document.getElementById('editFormContainer');
+        const inputs = form.querySelectorAll('input, textarea, select');
+        const updatedData = {};
+        
+        inputs.forEach(input => {
+            updatedData[input.name] = input.value;
+        });
+        
+        updatedData.serialNo = currentEditRecord.serialNo;
+        updatedData.planType = currentPlanType;
+        
+        showStatus("अद्यावधिक हुँदै...", false);
+        
+        try {
+            const response = await fetchJSONP('updateRecord', { data: JSON.stringify(updatedData) });
+            
+            if (response && response.status === 'success') {
+                showStatus("✅ रेकर्ड सफलतापूर्वक अद्यावधिक गरियो!", false);
+                closeModal();
+                await loadAllData();
+            } else {
+                showStatus("❌ अद्यावधिक असफल: " + (response?.message || 'Unknown error'), true);
+            }
+        } catch(err) {
+            showStatus("❌ त्रुटि: " + err.message, true);
+        }
+    }
+
+    // ==================== DELETE RECORD ====================
+    async function deleteRecord(planType, serialNo) {
+        if (!confirm('के तपाईं यो रेकर्ड हटाउन निश्चित हुनुहुन्छ? यो कार्य पूर्ववत गर्न सकिँदैन।')) return;
+        
+        showStatus("हटाउँदै...", false);
+        
+        try {
+            const response = await fetchJSONP('deleteRecord', { planType: planType, serialNo: serialNo });
+            
+            if (response && response.status === 'success') {
+                showStatus("✅ रेकर्ड हटाइयो!", false);
+                await loadAllData();
+            } else {
+                showStatus("❌ हटाउन असफल: " + (response?.message || 'Unknown error'), true);
+            }
+        } catch(err) {
+            showStatus("❌ त्रुटि: " + err.message, true);
+        }
+    }
+
+    // ==================== LOAD ALL DATA ====================
+    async function loadAllData() {
+        showStatus("डाटा लोड हुँदै...", false);
+        
+        try {
+            const response = await fetchJSONP('getAllPlanData');
+            
+            if (response && response.status === 'success' && response.data) {
+                allDailyPlans = response.data.daily || [];
+                allAnnualPlans = response.data.annual || [];
+                allUnitPlans = response.data.unit || [];
+                allCalendarPlans = response.data.calendar || [];
+                
+                populateDynamicFilters();
+                showStatus(`✅ सफल: दैनिक ${allDailyPlans.length}, वार्षिक ${allAnnualPlans.length}, एकाइ ${allUnitPlans.length}, क्यालेन्डर ${allCalendarPlans.length}`, false);
+                applyFiltersAndRender();
+            } else {
+                throw new Error("Invalid response");
+            }
+        } catch(err) {
+            showStatus(`❌ त्रुटि: ${err.message}`, true);
+            document.getElementById('reportContainer').innerHTML = `<div class="no-data">⚠️ डाटा लोड असफल। कृपया URL जाँच गर्नुहोस्।</div>`;
+        }
+    }
+
+    // ==================== PRINT FUNCTION ====================
+    function printReport() {
+        const container = document.getElementById('reportContainer');
+        const printContent = container.cloneNode(true);
+        
+        // Remove edit/delete buttons for printing
+        const btns = printContent.querySelectorAll('.btn-edit, .btn-danger');
+        btns.forEach(btn => btn.remove());
+        
+        const win = window.open('', '_blank');
+        win.document.write(`
+            <html>
+                <head>
+                    <title>शैक्षिक योजना प्रतिवेदन</title>
+                    <meta charset="UTF-8">
+                    <style>
+                        body { font-family: 'Segoe UI', sans-serif; padding: 20px; }
+                        table { width: 100%; border-collapse: collapse; }
+                        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+                        th { background: #1e3a5f; color: white; }
+                        .header { text-align: center; margin-bottom: 20px; }
+                        h2 { color: #1e3a5f; }
+                    </style>
+                </head>
+                <body>
+                    <div class="header">
+                        <h2>शैक्षिक योजना प्रतिवेदन</h2>
+                        <p>मिति: ${new Date().toLocaleDateString('ne-NP')}</p>
+                        <hr>
+                    </div>
+                    ${printContent.innerHTML}
+                </body>
+            </html>
+        `);
+        win.document.close();
+        win.print();
+    }
+
+    // ==================== EVENT LISTENERS ====================
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const tab = btn.dataset.tab;
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentPlanType = tab;
+            applyFiltersAndRender();
+        });
+    });
+    
+    document.getElementById('searchBtn').addEventListener('click', applyFiltersAndRender);
+    document.getElementById('refreshBtn').addEventListener('click', loadAllData);
+    document.getElementById('printBtn').addEventListener('click', printReport);
+    document.getElementById('saveUpdateBtn').addEventListener('click', saveUpdate);
+    document.getElementById('classFilter').addEventListener('change', applyFiltersAndRender);
+    document.getElementById('subjectFilter').addEventListener('change', applyFiltersAndRender);
+    document.getElementById('academicYearFilter').addEventListener('input', applyFiltersAndRender);
+    document.getElementById('serialFilter').addEventListener('input', applyFiltersAndRender);
+    
+    // Make functions global for onclick handlers
+    window.openEditModal = openEditModal;
+    window.deleteRecord = deleteRecord;
+    window.closeModal = closeModal;
+    
+    // Initialize
+    loadAllData();
+</script>
+</body>
+</html>
