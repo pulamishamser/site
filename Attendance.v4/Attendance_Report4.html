@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>📊 Complete Attendance System | Yearly • Weekly • Daily • Monthly</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #f0f2f5; font-family: 'Segoe UI', Roboto, system-ui, sans-serif; padding: 24px 20px; }
+    .dashboard-container { max-width: 1600px; margin: 0 auto; }
+    .card { background: white; border-radius: 28px; box-shadow: 0 12px 28px rgba(0,0,0,0.08); padding: 20px 24px 28px; margin-bottom: 28px; }
+    h2 { font-size: 1.7rem; font-weight: 600; margin: 0 0 6px 0; background: linear-gradient(135deg, #1e3c72, #2b3b5c); background-clip: text; -webkit-background-clip: text; color: transparent; display: inline-block; }
+    .subhead { color: #5a6874; margin-bottom: 24px; border-left: 4px solid #3b82f6; padding-left: 14px; font-size: 0.9rem; }
+    .school-header { background: linear-gradient(135deg, #1e293b, #0f172a); color: white; border-radius: 24px; padding: 16px 24px; margin-bottom: 24px; text-align: center; }
+    .school-name { font-size: 1.6rem; font-weight: 700; margin-bottom: 6px; }
+    .school-address { font-size: 0.85rem; opacity: 0.85; }
+    .message-area { padding: 12px 20px; border-radius: 60px; margin-bottom: 20px; font-weight: 500; display: none; }
+    .message-success { background: #dcfce7; color: #166534; border-left: 5px solid #22c55e; }
+    .message-error { background: #fee2e2; color: #991b1b; border-left: 5px solid #ef4444; }
+    .filter-bar { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end; background: #f8fafc; padding: 18px 20px; border-radius: 32px; margin-bottom: 28px; border: 1px solid #e2edf2; }
+    .filter-group { display: flex; flex-direction: column; gap: 6px; min-width: 120px; }
+    .filter-group label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: #2c3e66; }
+    select, input, button { padding: 10px 14px; border-radius: 60px; border: 1px solid #cbd5e1; background: white; font-size: 0.85rem; outline: none; transition: 0.15s; }
+    button { background: #1e293b; color: white; font-weight: 600; border: none; cursor: pointer; padding: 10px 28px; }
+    button:hover:not(:disabled) { background: #0f172a; transform: translateY(-1px); }
+    button:disabled { opacity: 0.6; cursor: not-allowed; }
+    .btn-primary { background: #3b82f6; }
+    .btn-primary:hover:not(:disabled) { background: #2563eb; }
+    .action-buttons { display: flex; gap: 14px; margin-left: auto; flex-wrap: wrap; }
+    .btn-print { background: #2c5f2d; }
+    .btn-pdf { background: #b22234; }
+    .btn-excel { background: #217346; }
+    .table-wrapper { overflow-x: auto; border-radius: 20px; border: 1px solid #e9eef3; background: white; margin-top: 20px; max-height: 70vh; overflow-y: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    th { background: #f1f5f9; color: #0f2b3d; font-weight: 700; padding: 14px 12px; border-bottom: 1px solid #dce5ec; text-align: left; position: sticky; top: 0; z-index: 10; }
+    td { padding: 12px 12px; border-bottom: 1px solid #ecf3f9; }
+    tr:hover td { background-color: #fafcff; }
+    .present-badge { background: #d1fae5; color: #065f46; font-weight: 600; padding: 4px 12px; border-radius: 40px; display: inline-block; font-size: 0.75rem; }
+    .absent-badge { background: #ffe4e2; color: #9b2c1d; font-weight: 600; padding: 4px 12px; border-radius: 40px; display: inline-block; font-size: 0.75rem; }
+    .holiday-badge { background: #fef3c7; color: #92400e; padding: 4px 12px; border-radius: 40px; display: inline-block; font-size: 0.75rem; }
+    .reason-cell { background: #fefce8; border-radius: 16px; padding: 4px 10px; font-size: 0.75rem; color: #7c5e10; display: inline-block; max-width: 250px; word-break: break-word; border-left: 3px solid #eab308; }
+    .stats-card { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 16px 24px; border-radius: 20px; margin-bottom: 20px; }
+    .error-message { background: #fff1f0; border-left: 6px solid #e11d48; color: #b91c1c; padding: 14px 20px; border-radius: 24px; font-weight: 500; }
+    .loading-spinner { display: inline-block; width: 20px; height: 20px; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: white; animation: spin 0.6s linear infinite; margin-right: 8px; vertical-align: middle; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .info-note { background: #e0f2fe; border-radius: 16px; padding: 10px 16px; margin-top: 16px; font-size: 0.75rem; color: #0369a1; }
+    .family-card { background: #f8fafc; border-radius: 16px; padding: 16px; margin-bottom: 20px; border-left: 4px solid #3b82f6; }
+    .family-card h4 { margin-bottom: 12px; color: #1e293b; }
+    .family-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+    .family-item { display: flex; align-items: baseline; gap: 8px; }
+    .family-label { font-weight: 600; color: #475569; min-width: 80px; }
+    .family-value { color: #1e293b; }
+    @media (max-width: 780px) { .filter-bar, .action-buttons { flex-direction: column; width: 100%; } .filter-group { width: 100%; } button { width: 100%; } .action-buttons { margin-left: 0; } }
+    @media print { .filter-bar, .action-buttons, button, .no-print { display: none !important; } }
+  </style>
+</head>
+<body>
+<div class="dashboard-container">
+  <div class="card">
+    <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;">
+      <div>
+        <h2>📋 Attendance Entry and Update </h2>
+        <div class="subhead">Daily • Weekly • Monthly • Yearly Reports</div>
+      </div>
+      <div style="background: #e6f0ff; border-radius: 30px; padding: 4px 12px; font-size: 0.7rem; font-weight: 600;">📌 Reason : (Day1) → (Day32)</div>
+    </div>
+    <div id="globalMessage" class="message-area"></div>
+
+    <div class="filter-bar">
+      <div class="filter-group"><label>📊 REPORT TYPE</label>
+        <select id="reportTypeSelect">
+          <option value="daily">Daily Report</option>
+          <option value="weekly">Weekly Report </option>
+          <option value="monthly">MonthlyReport </option>
+          <option value="yearly">Yearly Report</option>
+        </select>
+      </div>
+      <div class="filter-group"><label>👥 SCOPE</label>
+        <select id="scopeSelect">
+          <option value="whole">Whole Class</option>
+          <option value="individual">Individual Student</option>
+        </select>
+      </div>
+      <div class="filter-group"><label>📆 YEAR</label>
+        <input type="number" id="yearSelect" value="2083" min="2080" max="2090">
+      </div>
+      <div class="filter-group"><label>🏫 CLASS</label>
+        <select id="classSelect">
+          <option value="all">All Classes</option>
+        <optgroup label="General"><option value="ECD">ECD</option><option value="PG">PG</option><option value="Nursary">Nursary</option><option value="LKG">LKG</option><option value="UKG">UKG</option></optgroup>
+        <optgroup label="Grade"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8" selected>8</option><option value="9">9</option><option value="10">10</option></optgroup>
+        <optgroup label="English Medium"><option value="1EM">1EM</option><option value="2EM">2EM</option><option value="3EM">3EM</option><option value="4EM">4EM</option><option value="5EM">5EM</option><option value="6EM">6EM</option><option value="7EM">7EM</option><option value="8EM">8EM</option><option value="9EM">9EM</option><option value="10EM">10EM</option></optgroup>
+      </select>
+    
+
+
+
+
+
+
+
+
+      </div>
+      <div class="filter-group" id="individualRollGroup" style="display:none">
+        <label>🔢 ROLL NO</label>
+        <input type="text" id="rollNoInput" placeholder="Enter roll number">
+      </div>
+      <div class="filter-group" id="monthGroup">
+        <label>📅 MONTH</label>
+        <select id="monthSelect">
+          <option value="Baisakh">Baisakh</option><option value="Jeshtha">Jeshtha</option><option value="Ashad">Ashad</option>
+          <option value="Shrawan">Shrawan</option><option value="Bhadra">Bhadra</option><option value="Ashwin">Ashwin</option>
+          <option value="Kartik">Kartik</option><option value="Mangsir">Mangsir</option><option value="Poush">Poush</option>
+          <option value="Magh">Magh</option><option value="Falgun">Falgun</option><option value="Chaitra">Chaitra</option>
+        </select>
+      </div>
+      <div class="filter-group" id="dailyDateGroup">
+        <label>📌 DAY (1-32)</label>
+        <input type="number" id="dailyDayInput" value="1" min="1" max="32">
+      </div>
+      <div class="filter-group" id="weeklyRangeGroup" style="display:none">
+        <label>📅 WEEK RANGE</label>
+        <div style="display: flex; gap: 8px;">
+          <input type="number" id="startDayInput" value="1" min="1" max="32" placeholder="Start" style="width: 70px;">
+          <span>to</span>
+          <input type="number" id="endDayInput" value="7" min="1" max="32" placeholder="End" style="width: 70px;">
+        </div>
+      </div>
+      <div class="filter-group">
+        <button id="generateBtn" class="btn-primary">⟳ Generate Report</button>
+        <button id="resetBtn">🔄 Reset</button>
+      </div>
+      <div class="action-buttons">
+        <button id="printReportBtn" class="btn-print">🖨️ Print</button>
+        <button id="downloadPdfBtn" class="btn-pdf">📄 PDF</button>
+      </div>
+    </div>
+
+    <div id="reportContainer">
+      <div class="stats-card" style="text-align:center;">
+        📋 Select report type, filters & click "Generate Report"
+      </div>
+    </div>
+  
+    <div class="info-note no-print">
+      <strong>ℹ️ Information:</strong> 
+      <!----• Day 1 = Column BD (Reason), Day 2 = BE, Day 3 = BF ... Day 32 = CI<br>--->
+      <!---• Day 1 = Column BD (Reason), Day 2 = BE, Day 3 = BF ... Day 32 = CI<br>--->
+      <!---• • Closed Days = Absent + Holiday | Grand Total = Present + Early Grand Total<br>--->
+      • Holiday (H) = सार्वजनिक बिदा | Present (P) = उपस्थित | Absent (A) = अनुपस्थित<br>
+      
+      • Father, Mother, DOB, Mobile are displayed where available
+    </div>
+  </div>
+</div>
+
+<script>
+  // ============================================================
+  // GOOGLE APPS SCRIPT WEB APP URL - UPDATE WITH YOUR DEPLOYED URL
+  // ============================================================
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx6GN0OHGv7RUZqlaCWx4OyDzh4IpcU7KazbQtCtej7Xen_RhEaXEwDpAST6nQ_osW2Zg/exec";
+  
+  let currentSchoolInfo = { schoolName: "", schoolAddress: "" };
+  let lastGeneratedHTML = "";
+  let lastReportTitle = "";
+
+  function showMessage(msg, type) {
+    const div = document.getElementById('globalMessage');
+    div.textContent = msg;
+    div.className = `message-area message-${type}`;
+    div.style.display = "block";
+    setTimeout(() => div.style.display = "none", 5000);
+  }
+
+  async function callAPI(action, payload, timeout = 20000) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeout);
+    try {
+      const params = new URLSearchParams({ action, ...payload }).toString();
+      const response = await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: params,
+        signal: controller.signal
+      });
+      clearTimeout(timeoutId);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const json = await response.json();
+      return json;
+    } catch (err) {
+      clearTimeout(timeoutId);
+      throw err;
+    }
+  }
+
+  async function fetchSchoolInfo() {
+    try {
+      const result = await callAPI('getSchoolInfo', {});
+      if (result.success && result.data) {
+        currentSchoolInfo = {
+          schoolName: result.data.schoolName || "Shree Janakalyan Secondary School",
+          schoolAddress: result.data.schoolAddress || "Nepal"
+        };
+      }
+    } catch(e) {
+      console.warn("Could not fetch school info:", e);
+    }
+  }
+
+  function escapeHtml(str) { 
+    if (!str) return ''; 
+    return String(str).replace(/[&<>]/g, m => m==='&'?'&amp;':m==='<'?'&lt;':'&gt;'); 
+  }
+  
+  function getReasonColumnLetter(dayNum) {
+    const cols = ['BD','BE','BF','BG','BH','BI','BJ','BK','BL','BM','BN','BO','BP','BQ','BR','BS','BT','BU','BV','BW','BX','BY','BZ','CA','CB','CC','CD','CE','CF','CG','CH','CI'];
+    return cols[dayNum-1] || `Day${dayNum}`;
+  }
+
+  function getStatusText(statusCode) {
+    if (statusCode === 'P') return 'उपस्थित (Present)';
+    if (statusCode === 'A') return 'अनुपस्थित (Absent)';
+    if (statusCode === 'H') return 'सार्वजनिक बिदा (Holiday)';
+    return 'Not Marked';
+  }
+
+  // =============== RENDER FUNCTIONS ===============
+  
+  function renderFamilyCard(student) {
+    if (!student.fatherName && !student.motherName && !student.dob && !student.mobile) return '';
+    
+    return `
+      <div class="family-card">
+        <h4>👨‍👩‍👧‍👦 Student & Family Information</h4>
+        <div class="family-grid">
+          <div class="family-item"><span class="family-label">👨 Father:</span><span class="family-value">${escapeHtml(student.fatherName || '—')}</span></div>
+          <div class="family-item"><span class="family-label">👩 Mother:</span><span class="family-value">${escapeHtml(student.motherName || '—')}</span></div>
+          <div class="family-item"><span class="family-label">🎂 DOB:</span><span class="family-value">${escapeHtml(student.dob || '—')}</span></div>
+          <div class="family-item"><span class="family-label">📞 Mobile:</span><span class="family-value">${escapeHtml(student.mobile || '—')}</span></div>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderDailyReport(data, filters, dayNum) {
+    let reportRows = data.report || [];
+    if (!reportRows.length) return '<div class="error-message">⚠️ No daily attendance data found</div>';
+    
+    const reasonCol = getReasonColumnLetter(dayNum);
+    let html = `<div class="stats-card">
+      <strong>📅 Daily Attendance Report with Reason</strong><br>
+      ${escapeHtml(currentSchoolInfo.schoolName)}<br>
+      ${filters.month} - Day ${dayNum} | Year: ${filters.year} | Class: ${filters.class}<br>
+      📌 Reason Column: <strong>${reasonCol}</strong>
+    </div>`;
+    
+    // Show family card for individual student
+    if (filters.scope === 'individual' && reportRows[0]) {
+      html += renderFamilyCard(reportRows[0]);
+    }
+    
+    html += `<div class="table-wrapper"> <table><thead><tr>
+      <th>SN</th><th>Roll No</th><th>Student Name</th><th>👨 Father</th><th>👩 Mother</th>
+      <th>Status</th><th>🎉 Holiday?</th><th>📝 Reason (${reasonCol})</th>
+     </tr></thead><tbody>`;
+    
+    reportRows.forEach(s => {
+      const statusCode = s.statusCode || '';
+      const isHoliday = (statusCode === 'H');
+      let badgeClass = statusCode === 'P' ? 'present-badge' : (isHoliday ? 'holiday-badge' : 'absent-badge');
+      let holidayBadge = isHoliday ? '<span class="holiday-badge">🎉 Holiday</span>' : '—';
+      let reasonText = s.reason || (isHoliday ? 'Public Holiday' : '');
+      let reasonDisplay = reasonText ? `<span class="reason-cell">📌 ${escapeHtml(reasonText)}</span>` : '—';
+      
+      html += `<tr>
+        <td>${s.sn}</td>
+        <td><strong>${escapeHtml(String(s.rollNo))}</strong></td>
+        <td>${escapeHtml(s.name)}</td>
+        <td>${escapeHtml(s.fatherName || '—')}</td>
+        <td>${escapeHtml(s.motherName || '—')}</td>
+        <td><span class="${badgeClass}">${escapeHtml(getStatusText(statusCode))}</span></td>
+        <td>${holidayBadge}</td>
+        <td>${reasonDisplay}</td>
+      </tr>`;
+    });
+    html += `</tbody></table></div>`;
+    
+    const presentCount = reportRows.filter(s => s.statusCode === 'P').length;
+    const absentCount = reportRows.filter(s => s.statusCode === 'A').length;
+    const holidayCount = reportRows.filter(s => s.statusCode === 'H').length;
+    
+    html += `<div style="margin-top: 16px; padding: 12px; background: #f1f5f9; border-radius: 16px; display: flex; gap: 20px; flex-wrap: wrap;">
+      <div><strong>✅ Present:</strong> ${presentCount}</div>
+      <div><strong>❌ Absent:</strong> ${absentCount}</div>
+      <div><strong>🎉 Holiday:</strong> ${holidayCount}</div>
+      <div><strong>📊 Total:</strong> ${reportRows.length}</div>
+    </div>`;
+    
+    return html;
+  }
+
+  function renderWeeklyReport(data, filters, startDay, endDay) {
+    let reportRows = data.report || [];
+    if (!reportRows.length) return '<div class="error-message">⚠️ No weekly data found</div>';
+    
+    let html = `<div class="stats-card">
+      <strong>📆 Weekly Attendance Summary</strong><br>
+      ${escapeHtml(currentSchoolInfo.schoolName)}<br>
+      ${filters.month} - Days ${startDay} to ${endDay} | Year: ${filters.year} | Class: ${filters.class}
+    </div>`;
+    
+    if (filters.scope === 'individual' && reportRows[0]) {
+      html += renderFamilyCard(reportRows[0]);
+    }
+    
+    html += `<div class="table-wrapper"><table><thead><tr>
+      <th>SN</th><th>Roll No</th><th>Student Name</th><th>👨 Father</th><th>👩 Mother</th>
+      <th>✅ Present</th><th>❌ Absent</th><th>🎉 Holiday</th><th>🔒 Closed</th>
+     </tr></thead><tbody>`;
+    
+    reportRows.forEach(s => {
+      html += `<tr>
+        <td>${s.sn}</td>
+        <td><strong>${escapeHtml(String(s.rollNo))}</strong></td>
+        <td>${escapeHtml(s.name)}</td>
+        <td>${escapeHtml(s.fatherName || '—')}</td>
+        <td>${escapeHtml(s.motherName || '—')}</td>
+        <td><strong class="present-badge">${s.totalPresent || 0}</strong></td>
+        <td>${s.totalAbsent || 0}</td>
+        <td><span class="holiday-badge">${s.totalHoliday || 0}</span></td>
+        <td>${s.totalClosed || 0}</td>
+      </tr>`;
+    });
+    html += `</tbody></table></div>`;
+    return html;
+  }
+
+  function renderMonthlyReport(data, filters) {
+    let reportRows = data.report || [];
+    if (!reportRows.length) return '<div class="error-message">⚠️ No monthly data found</div>';
+    
+    let html = `<div class="stats-card">
+      <strong>📊 Monthly Summary Report</strong><br>
+      ${escapeHtml(currentSchoolInfo.schoolName)}<br>
+      ${filters.month} ${filters.year} | Class: ${filters.class}
+    </div>`;
+    
+    if (filters.scope === 'individual' && reportRows[0]) {
+      html += renderFamilyCard(reportRows[0]);
+    }
+    
+    html += `<div class="table-wrapper"><table><thead><tr>
+      <th>SN</th><th>Roll No</th><th>Student Name</th><th>👨 Father</th><th>👩 Mother</th>
+      <th>✅ Present</th><th>❌ Absent</th><th>🎉 Holiday</th><th>🔒 Closed</th><th>📊 Grand Total</th>
+     </tr></thead><tbody>`;
+    
+    let totalPresent = 0, totalAbsent = 0, totalHoliday = 0;
+    
+    reportRows.forEach(s => {
+      const present = s.totalPresent || 0;
+      const absent = s.totalAbsent || 0;
+      const holiday = s.totalHoliday || 0;
+      
+      totalPresent += present;
+      totalAbsent += absent;
+      totalHoliday += holiday;
+      
+      html += `<tr>
+        <td>${s.sn}</td>
+        <td><strong>${escapeHtml(String(s.rollNo))}</strong></td>
+        <td>${escapeHtml(s.name)}</td>
+        <td>${escapeHtml(s.fatherName || '—')}</td>
+        <td>${escapeHtml(s.motherName || '—')}</td>
+        <td><strong class="present-badge">${present}</strong></td>
+        <td>${absent}</td>
+        <td><span class="holiday-badge">${holiday}</span></td>
+        <td>${absent + holiday}</td>
+        <td><strong>${s.grandTotal || 0}</strong></td>
+      </tr>`;
+    });
+    
+    html += `<tr style="background: #e0e7ff; font-weight: bold;">
+      <td colspan="5"><strong>CLASS TOTAL</strong></td>
+      <td><strong>${totalPresent}</strong></td>
+      <td><strong>${totalAbsent}</strong></td>
+      <td><strong>${totalHoliday}</strong></td>
+      <td><strong>${totalAbsent + totalHoliday}</strong></td>
+      <td><strong>—</strong></td>
+    </tr>`;
+    
+    html += `</tbody></table></div>`;
+    return html;
+  }
+
+  function renderYearlyReport(data, filters) {
+    if (!data.yearlyData && !data.studentsSummary) {
+      return '<div class="error-message">⚠️ No yearly data found</div>';
+    }
+    
+    if (filters.scope === 'individual') {
+      // Individual yearly report
+      let html = `<div class="stats-card">
+        <strong>📅 Yearly Performance Report - Individual Student</strong><br>
+        ${escapeHtml(currentSchoolInfo.schoolName)}<br>
+        Year: ${filters.year} | Class: ${filters.class} | Roll No: ${filters.rollNo}
+      </div>`;
+      
+      html += renderFamilyCard({
+        fatherName: data.fatherName,
+        motherName: data.motherName,
+        dob: data.dob,
+        mobile: data.mobile,
+        name: data.studentName
+      });
+      
+      html += `<div class="table-wrapper"> <table>
+        <thead><tr>
+          <th>Month</th><th>✅ Present</th><th>❌ Absent</th><th>🎉 Holiday</th><th>🔒 Closed</th>
+        </tr></thead><tbody>`;
+      
+      (data.yearlyData || []).forEach(d => {
+        html += `<tr>
+          <td><strong>${escapeHtml(d.month)}</strong></td>
+          <td><strong>${d.totalPresent}</strong></td>
+          <td>${d.totalAbsent}</td>
+          <td><span class="holiday-badge">${d.totalHoliday}</span></td>
+          <td>${d.totalClosed}</td>
+        </tr>`;
+      });
+      
+      html += `<tr style="background: #e0e7ff; font-weight: bold;">
+        <td><strong>YEAR TOTAL</strong></td>
+        <td><strong>${data.totalPresent}</strong></td>
+        <td><strong>${data.totalAbsent}</strong></td>
+        <td><strong>${data.totalHoliday}</strong></td>
+        <td><strong>${data.totalClosed}</strong></td>
+      </tr>`;
+      html += `</tbody></table></div>`;
+      
+      const percentage = data.totalPresent + data.totalAbsent > 0 
+        ? ((data.totalPresent / (data.totalPresent + data.totalAbsent)) * 100).toFixed(2) 
+        : 0;
+      html += `<div style="margin-top: 16px; padding: 12px; background: #dcfce7; border-radius: 16px;">
+        <strong>📈 Attendance Percentage:</strong> ${percentage}% (Present: ${data.totalPresent}, Total Working Days: ${data.totalPresent + data.totalAbsent})
+      </div>`;
+      
+      return html;
+    } else {
+      // Class yearly summary
+      let students = data.studentsSummary || [];
+      if (!students.length) return '<div class="error-message">⚠️ No student data found</div>';
+      
+      let html = `<div class="stats-card">
+        <strong>📅 Yearly Summary - Whole Class</strong><br>
+        ${escapeHtml(currentSchoolInfo.schoolName)}<br>
+        Year: ${filters.year} | Class: ${filters.class}
+      </div>`;
+      
+      html += `<div class="table-wrapper"> <table>
+        <thead><tr>
+          <th>SN</th><th>Roll No</th><th>Student Name</th><th>👨 Father</th><th>👩 Mother</th>
+          <th>✅ Present</th><th>❌ Absent</th><th>🎉 Holiday</th><th>🔒 Closed</th><th>📈 Percentage</th>
+        </tr></thead><tbody>`;
+      
+      let sn = 1;
+      students.forEach(s => {
+        html += `<tr>
+          <td>${sn++}</td>
+          <td><strong>${escapeHtml(String(s.rollNo))}</strong></td>
+          <td>${escapeHtml(s.name)}</td>
+          <td>${escapeHtml(s.fatherName || '—')}</td>
+          <td>${escapeHtml(s.motherName || '—')}</td>
+          <td><strong class="present-badge">${s.totalPresent}</strong></td>
+          <td>${s.totalAbsent}</td>
+          <td><span class="holiday-badge">${s.totalHoliday}</span></td>
+          <td>${s.totalClosed}</td>
+          <td><strong>${s.attendancePercentage || 0}%</strong></td>
+        </tr>`;
+      });
+      html += `</tbody></table></div>`;
+      return html;
+    }
+  }
+
+  // ----------------- MAIN GENERATOR -----------------
+  async function generateReport() {
+    const rType = document.getElementById('reportTypeSelect').value;
+    const scope = document.getElementById('scopeSelect').value;
+    const month = document.getElementById('monthSelect').value;
+    const rollNoRaw = document.getElementById('rollNoInput').value.trim();
+    const year = document.getElementById('yearSelect').value.trim();
+    const classVal = document.getElementById('classSelect').value.trim();
+    const container = document.getElementById('reportContainer');
+    
+    if (!year) {
+      showMessage("Please select a year", "error");
+      return;
+    }
+    
+    if (scope === 'individual' && !rollNoRaw) {
+      showMessage("Please enter Roll No for individual report", "error");
+      return;
+    }
+    
+    container.innerHTML = `<div class="stats-card" style="text-align:center;">
+      <span class="loading-spinner"></span> Generating ${rType} report...
+    </div>`;
+    document.getElementById('generateBtn').disabled = true;
+    
+    try {
+      await fetchSchoolInfo();
+      const filters = { year, class: classVal, month, scope, rollNo: rollNoRaw };
+      let html = "";
+      
+      if (rType === 'daily') {
+        const dayNum = parseInt(document.getElementById('dailyDayInput').value);
+        if (isNaN(dayNum) || dayNum < 1 || dayNum > 32) throw new Error("Day must be between 1 and 32");
+        
+        let payload = { year, class: classVal, month, date: `${month} ${dayNum}` };
+        if (scope === 'individual' && rollNoRaw) payload.rollNo = rollNoRaw;
+        
+        const result = await callAPI('getDailyReport', payload, 15000);
+        if (!result.success) throw new Error(result.message || "Daily report API error");
+        
+        html = renderDailyReport(result.data, filters, dayNum);
+        lastReportTitle = `Daily_${month}_Day${dayNum}_${classVal}`;
+      }
+      else if (rType === 'weekly') {
+        const startDay = parseInt(document.getElementById('startDayInput').value);
+        const endDay = parseInt(document.getElementById('endDayInput').value);
+        if (isNaN(startDay) || isNaN(endDay) || startDay < 1 || endDay > 32 || startDay > endDay) {
+          throw new Error("Valid week range required (1-32)");
+        }
+        
+        let payload = { year, class: classVal, month, startDay, endDay };
+        if (scope === 'individual' && rollNoRaw) payload.rollNo = rollNoRaw;
+        
+        const result = await callAPI('getWeeklyReport', payload, 15000);
+        if (!result.success) throw new Error(result.message || "Weekly report API error");
+        
+        html = renderWeeklyReport(result.data, filters, startDay, endDay);
+        lastReportTitle = `Weekly_${month}_${startDay}-${endDay}_${classVal}`;
+      }
+      else if (rType === 'monthly') {
+        let payload = { year, class: classVal, month };
+        if (scope === 'individual' && rollNoRaw) payload.rollNo = rollNoRaw;
+        
+        const result = await callAPI('getMonthlyReport', payload, 15000);
+        if (!result.success) throw new Error(result.message || "Monthly report API error");
+        
+        html = renderMonthlyReport(result.data, filters);
+        lastReportTitle = `Monthly_${month}_${classVal}`;
+      }
+      else if (rType === 'yearly') {
+        if (scope === 'individual' && rollNoRaw) {
+          const result = await callAPI('getYearlyReport', { year, class: classVal, rollNo: rollNoRaw }, 20000);
+          if (!result.success) throw new Error(result.message || "Yearly report API error");
+          html = renderYearlyReport(result.data, filters);
+          lastReportTitle = `Yearly_${rollNoRaw}_${classVal}`;
+        } else {
+          const result = await callAPI('getWholeYearlySummary', { year, class: classVal }, 20000);
+          if (!result.success) throw new Error(result.message || "Yearly summary API error");
+          html = renderYearlyReport(result.data, filters);
+          lastReportTitle = `Yearly_${classVal}_${year}`;
+        }
+      }
+      
+      const finalHtml = `<div class="school-header no-print">
+        <div class="school-name">${escapeHtml(currentSchoolInfo.schoolName)}</div>
+        <div class="school-address">${escapeHtml(currentSchoolInfo.schoolAddress)}</div>
+      </div>${html}`;
+      
+      container.innerHTML = finalHtml;
+      lastGeneratedHTML = container.innerHTML;
+      showMessage(`✅ ${rType.charAt(0).toUpperCase() + rType.slice(1)} report generated successfully`, "success");
+    } catch (err) {
+      console.error(err);
+      container.innerHTML = `<div class="error-message">❌ ${err.message || 'Failed to load report'}</div>`;
+      showMessage(err.message, "error");
+    } finally {
+      document.getElementById('generateBtn').disabled = false;
+    }
+  }
+
+  function printReport() {
+    if (!lastGeneratedHTML) { showMessage("Generate a report first", "error"); return; }
+    const win = window.open('', '_blank');
+    win.document.write(`<html><head><title>Attendance Report</title><style>${document.querySelector('style').innerHTML} .filter-bar, .action-buttons, button, .no-print { display: none !important; }</style></head><body>${lastGeneratedHTML}</body></html>`);
+    win.document.close();
+    win.print();
+  }
+
+  async function downloadPDF() {
+    if (!lastGeneratedHTML) { showMessage("Generate a report first", "error"); return; }
+    const containerDiv = document.createElement('div');
+    containerDiv.innerHTML = lastGeneratedHTML;
+    const opt = { 
+      margin: [0.5, 0.5, 0.5, 0.5], 
+      filename: `${lastReportTitle || 'Attendance_Report'}.pdf`, 
+      image: { type: 'jpeg', quality: 0.98 }, 
+      html2canvas: { scale: 2 }, 
+      jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' } 
+    };
+    try { 
+      await html2pdf().set(opt).from(containerDiv).save(); 
+      showMessage("PDF saved successfully", "success"); 
+    } catch(e) { 
+      showMessage("PDF error: " + e.message, "error"); 
+    }
+  }
+
+  function updateDynamicFields() {
+    const rType = document.getElementById('reportTypeSelect').value;
+    const scope = document.getElementById('scopeSelect').value;
+    
+    document.getElementById('monthGroup').style.display = rType === 'yearly' ? 'none' : 'flex';
+    document.getElementById('individualRollGroup').style.display = scope === 'individual' ? 'flex' : 'none';
+    document.getElementById('dailyDateGroup').style.display = rType === 'daily' ? 'flex' : 'none';
+    document.getElementById('weeklyRangeGroup').style.display = rType === 'weekly' ? 'flex' : 'none';
+  }
+
+  // Event Listeners
+  document.getElementById('reportTypeSelect').addEventListener('change', updateDynamicFields);
+  document.getElementById('scopeSelect').addEventListener('change', updateDynamicFields);
+  document.getElementById('generateBtn').addEventListener('click', generateReport);
+  document.getElementById('printReportBtn').addEventListener('click', printReport);
+  document.getElementById('downloadPdfBtn').addEventListener('click', downloadPDF);
+  document.getElementById('resetBtn').addEventListener('click', () => location.reload());
+  
+  updateDynamicFields();
+  generateReport();
+</script>
+</body>
+</html>

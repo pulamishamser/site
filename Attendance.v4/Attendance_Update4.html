@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>📝 Attendance Entry & Update with Reason</title>
+  <style>
+    * { box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
+    body { background: #f0f2f5; margin: 0; padding: 24px 20px; }
+    .dashboard-container { max-width: 1600px; margin: 0 auto; }
+    .card { background: white; border-radius: 28px; box-shadow: 0 12px 28px rgba(0,0,0,0.08); padding: 20px 24px 28px; margin-bottom: 28px; }
+    h2 { font-size: 1.7rem; font-weight: 600; margin: 0 0 6px 0; background: linear-gradient(135deg, #1e3c72, #2b3b5c); background-clip: text; -webkit-background-clip: text; color: transparent; display: inline-block; }
+    .subhead { color: #5a6874; margin-bottom: 24px; border-left: 4px solid #3b82f6; padding-left: 14px; font-size: 0.9rem; }
+    .message-area { padding: 12px 20px; border-radius: 60px; margin-bottom: 20px; font-weight: 500; display: none; }
+    .message-success { background: #dcfce7; color: #166534; border-left: 5px solid #22c55e; }
+    .message-error { background: #fee2e2; color: #991b1b; border-left: 5px solid #ef4444; }
+    .filter-bar { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end; background: #f8fafc; padding: 18px 20px; border-radius: 32px; margin-bottom: 28px; border: 1px solid #e2edf2; }
+    .filter-group { display: flex; flex-direction: column; gap: 6px; min-width: 130px; }
+    .filter-group label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #2c3e66; }
+    select, input, button { padding: 10px 14px; border-radius: 60px; border: 1px solid #cbd5e1; background: white; font-size: 0.85rem; outline: none; transition: 0.2s; }
+    button { background: #1e293b; color: white; font-weight: 600; border: none; cursor: pointer; padding: 10px 28px; }
+    button:hover:not(:disabled) { background: #0f172a; transform: translateY(-1px); }
+    button:disabled { opacity: 0.6; cursor: not-allowed; }
+    .btn-primary { background: #3b82f6; }
+    .btn-primary:hover:not(:disabled) { background: #2563eb; }
+    .btn-update-month { background: #0f5c6b; }
+    .btn-update-all { background: #8b5cf6; }
+    .btn-recalc { background: #059669; }
+    .btn-recalc:hover:not(:disabled) { background: #047857; }
+    .btn-recalc-all { background: #d97706; }
+    .btn-recalc-all:hover:not(:disabled) { background: #b45309; }
+    .table-wrapper { overflow-x: auto; border-radius: 20px; border: 1px solid #e9eef3; background: white; margin-top: 20px; max-height: 70vh; overflow-y: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    th { background: #f1f5f9; color: #0f2b3d; font-weight: 700; padding: 14px 12px; border-bottom: 1px solid #dce5ec; text-align: left; position: sticky; top: 0; z-index: 10; }
+    td { padding: 12px 12px; border-bottom: 1px solid #ecf3f9; }
+    tr:hover td { background-color: #fafcff; }
+    .editable-input { padding: 6px 10px; border-radius: 12px; border: 1px solid #cbd5e1; font-size: 0.85rem; width: 100%; min-width: 80px; background: #fff; }
+    .editable-input.conflict { background: #fee2e2; border-color: #dc2626; }
+    .attendance-select { padding: 8px 12px; border-radius: 40px; font-weight: 600; cursor: pointer; min-width: 100px; }
+    .attendance-select.P { background: #d1fae5; color: #065f46; border-color: #10b981; }
+    .attendance-select.A { background: #ffe4e2; color: #9b2c1d; border-color: #ef4444; }
+    .attendance-select.H { background: #fef3c7; color: #92400e; border-color: #f59e0b; }
+    .present-badge { background: #d1fae5; color: #065f46; font-weight: 600; padding: 4px 12px; border-radius: 40px; display: inline-block; font-size: 0.75rem; }
+    .absent-badge { background: #ffe4e2; color: #9b2c1d; font-weight: 600; padding: 4px 12px; border-radius: 40px; display: inline-block; font-size: 0.75rem; }
+    .holiday-badge { background: #fef3c7; color: #92400e; font-weight: 600; padding: 4px 12px; border-radius: 40px; display: inline-block; font-size: 0.75rem; }
+    .stats-card { background: linear-gradient(135deg, #1e293b, #2d3a4f); color: white; padding: 16px 24px; border-radius: 20px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .stats-text { font-weight: 500; font-size: 0.9rem; }
+    .bulk-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+    .bulk-btn { padding: 6px 16px; border-radius: 40px; cursor: pointer; font-weight: 600; font-size: 0.8rem; border: none; }
+    .bulk-present { background: #10b981; color: white; }
+    .bulk-absent { background: #ef4444; color: white; }
+    .bulk-holiday { background: #f59e0b; color: white; }
+    .save-all-btn { background: #3b82f6; color: white; border: none; padding: 8px 24px; font-weight: 700; border-radius: 40px; cursor: pointer; margin-top: 16px; }
+    .save-all-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .action-buttons-group { display: flex; gap: 12px; margin-left: auto; flex-wrap: wrap; }
+    .recalc-buttons-group { display: flex; gap: 12px; margin-top: 10px; flex-wrap: wrap; }
+    .loading-spinner { display: inline-block; width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: white; animation: spin 0.6s linear infinite; margin-right: 8px; vertical-align: middle; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .pending-badge { font-size: 11px; margin-left: 8px; background: #facc15; color: #854d0e; padding: 2px 8px; border-radius: 30px; font-weight: 600; }
+    .conflict-icon { display: inline-block; background: #dc2626; color: white; font-size: 10px; border-radius: 20px; padding: 2px 8px; margin-left: 8px; font-weight: bold; }
+    .loading-placeholder { text-align: center; padding: 48px; color: #6c86a3; }
+    .reason-input { padding: 8px 12px; border-radius: 12px; border: 1px solid #cbd5e1; font-size: 0.85rem; width: 100%; min-width: 180px; }
+    .reason-input.changed { background: #fef3c7; border-color: #f59e0b; }
+    @media (max-width: 780px) {
+      .filter-bar, .action-buttons-group, .recalc-buttons-group { flex-direction: column; width: 100%; }
+      .filter-group { width: 100%; }
+      button { width: 100%; }
+      .stats-card { flex-direction: column; align-items: stretch; }
+      .bulk-btns { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+<div class="dashboard-container">
+  <div class="card">
+    <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;">
+      <div>
+        <h2>✏️ Attendance Entry & Update with Reason</h2>
+        <div class="subhead">Reason column maps to BD(day1), BE(day2), BF(day3)... CI(day32) | Totals: P(AU), A(AV), H(AW), Closed(AY)=A+H</div>
+      </div>
+      <div style="background: #e6f0ff; border-radius: 30px; padding: 4px 12px; font-size: 0.7rem;">v3.1 • Fixed Totals</div>
+    </div>
+
+    <div id="globalMessage" class="message-area"></div>
+
+    <div class="filter-bar">
+      <div class="filter-group"><label>📆 YEAR</label><input type="number" id="yearSelect" value="2083" min="2080" max="2090"></div>
+      <div class="filter-group"><label>📅 MONTH</label>
+        <select id="monthSelect">
+          <option value="Baisakh">Baisakh</option><option value="Jeshtha">Jeshtha</option><option value="Ashad">Ashad</option>
+          <option value="Shrawan">Shrawan</option><option value="Bhadra">Bhadra</option><option value="Ashwin">Ashwin</option>
+          <option value="Kartik">Kartik</option><option value="Mangsir">Mangsir</option><option value="Poush">Poush</option>
+          <option value="Magh">Magh</option><option value="Falgun">Falgun</option><option value="Chaitra">Chaitra</option>
+        </select>
+      </div>
+      <div class="filter-group"><label>🏫 CLASS</label>
+        <select id="classSelect">
+          <option value="all">All Classes</option>
+          <option value="8" selected>Grade 8</option><option value="9">Grade 9</option><option value="10">Grade 10</option>
+        </select>
+      </div>
+      <div class="filter-group"><label>📆 DAY (1-32)</label><input type="number" id="dayNumberInput" value="1" min="1" max="32"></div>
+      <div class="filter-group"><button id="loadStudentsBtn" class="btn-primary">⟳ Load Students</button></div>
+      <div class="action-buttons-group">
+        <button id="updateMonthBtn" class="btn-update-month">⚡ Update Month</button>
+        <button id="updateAllMonthsBtn" class="btn-update-all">🔄 Update All</button>
+      </div>
+    </div>
+
+    <div class="recalc-buttons-group">
+      <button id="recalcMonthBtn" class="btn-recalc">📊 Recalculate Month Totals</button>
+      <button id="recalcAllBtn" class="btn-recalc-all">🔄 Recalculate ALL Months Totals</button>
+    </div>
+
+    <div id="statsContainer" style="display: none;">
+      <div class="stats-card">
+        <div class="stats-text" id="statsText">📊 Loading...</div>
+        <div class="bulk-btns">
+          <button class="bulk-btn bulk-present" id="bulkPresentBtn">✅ All Present</button>
+          <button class="bulk-btn bulk-absent" id="bulkAbsentBtn">❌ All Absent</button>
+          <button class="bulk-btn bulk-holiday" id="bulkHolidayBtn">🎉 All Holiday</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="studentsContainer"><div class="loading-placeholder">🔍 Select filters & click "Load Students"</div></div>
+  </div>
+</div>
+
+<script>
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx6GN0OHGv7RUZqlaCWx4OyDzh4IpcU7KazbQtCtej7Xen_RhEaXEwDpAST6nQ_osW2Zg/exec";
+
+let currentStudents = [];
+let pendingChanges = new Map();
+let pendingReasons = new Map();
+let isSaveRunning = false;
+
+function showMessage(msg, type = "success") {
+  const msgDiv = document.getElementById("globalMessage");
+  msgDiv.textContent = msg;
+  msgDiv.className = `message-area message-${type}`;
+  msgDiv.style.display = "block";
+  setTimeout(() => msgDiv.style.display = "none", 5000);
+}
+
+function escapeHtml(str) { return String(str || '').replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'})[m]); }
+
+async function callAPI(action, payload) {
+  const params = new URLSearchParams({ action, ...payload }).toString();
+  const response = await fetch(APPS_SCRIPT_URL, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: params });
+  if (!response.ok) throw new Error(`HTTP ${response.status}`);
+  return await response.json();
+}
+
+function updateStatsAndUI() {
+  if (!currentStudents.length) return;
+  let present = 0, absent = 0, holiday = 0;
+  for (let s of currentStudents) {
+    let status = pendingChanges.get(s.rowNum)?.newStatus || s.currentStatus;
+    if (status === 'P') present++; 
+    else if (status === 'A') absent++; 
+    else if (status === 'H') holiday++;
+  }
+  document.getElementById('statsText').innerHTML = `📚 Total: ${currentStudents.length} | ✅ Present: ${present} | ❌ Absent: ${absent} | 🎉 Holiday: ${holiday} | 📝 Pending: ${pendingChanges.size + pendingReasons.size}`;
+  const saveBtn = document.getElementById('saveAllBtn');
+  if (saveBtn) saveBtn.disabled = (pendingChanges.size === 0 && pendingReasons.size === 0);
+}
+
+function renderTable() {
+  const container = document.getElementById('studentsContainer');
+  if (!currentStudents.length) { container.innerHTML = '<div class="loading-placeholder">No students found</div>'; return; }
+  
+  let html = `<div class="table-wrapper"><table><thead><tr>
+    <th>SN</th><th>Roll No</th><th>Class</th><th>Student Name</th>
+    <th>Current Status</th><th>Update Status</th>
+    <th>Reason (Column ${getReasonColumn(document.getElementById('dayNumberInput').value)})</th>
+  </tr></thead><tbody>`;
+  
+  for (let s of currentStudents) {
+    const displayStatus = pendingChanges.get(s.rowNum)?.newStatus || s.currentStatus;
+    const statusBadge = displayStatus === 'P' ? '<span class="present-badge">✅ Present</span>' : (displayStatus === 'A' ? '<span class="absent-badge">❌ Absent</span>' : (displayStatus === 'H' ? '<span class="holiday-badge">🎉 Holiday</span>' : '<span class="absent-badge">⚪ Not Marked</span>'));
+    const conflict = s._conflict ? `<span class="conflict-icon">duplicate</span>` : '';
+    const reasonValue = pendingReasons.get(s.rowNum)?.reason !== undefined ? pendingReasons.get(s.rowNum).reason : (s.reason || '');
+    
+    html += `<tr>
+      <td>${s.sn}</td>
+      <td><input type="text" class="editable-input" id="roll_${s.rowNum}" value="${escapeHtml(s.roll_no)}" style="width:80px" onchange="updateRoll(${s.rowNum}, this.value)"> ${conflict}</td>
+      <td><input type="text" class="editable-input" id="class_${s.rowNum}" value="${escapeHtml(s.class)}" style="width:80px" onchange="updateClass(${s.rowNum}, this.value)"></td>
+      <td><input type="text" class="editable-input" id="name_${s.rowNum}" value="${escapeHtml(s.name)}" style="min-width:140px" onchange="updateName(${s.rowNum}, this.value)"></td>
+      <td>${statusBadge}</td>
+      <td><select class="attendance-select ${displayStatus}" onchange="updateStatus(${s.rowNum}, this.value)">
+        <option value="">--</option><option value="P" ${displayStatus === 'P' ? 'selected' : ''}>Present (P)</option>
+        <option value="A" ${displayStatus === 'A' ? 'selected' : ''}>Absent (A)</option>
+        <option value="H" ${displayStatus === 'H' ? 'selected' : ''}>Holiday (H)</option>
+      </select>${pendingChanges.get(s.rowNum)?.newStatus ? '<span class="pending-badge">Pending</span>' : ''}</td>
+      <td><input type="text" class="reason-input ${pendingReasons.has(s.rowNum) ? 'changed' : ''}" id="reason_${s.rowNum}" value="${escapeHtml(reasonValue)}" style="min-width:180px" placeholder="Enter reason for absence/holiday..." onchange="updateReason(${s.rowNum}, this.value)">${pendingReasons.has(s.rowNum) ? '<span class="pending-badge">Pending</span>' : ''}</td>
+    </tr>`;
+  }
+  html += `</tbody>}</div><button id="saveAllBtn" class="save-all-btn" disabled>💾 Save All Changes (${pendingChanges.size + pendingReasons.size} pending)</button></div>`;
+  container.innerHTML = html;
+  document.getElementById('saveAllBtn')?.addEventListener('click', saveAllChanges);
+  updateStatsAndUI();
+}
+
+window.updateRoll = (rowNum, val) => {
+  let change = pendingChanges.get(rowNum) || { rollNo: currentStudents.find(s=>s.rowNum==rowNum).roll_no };
+  change.newRollNo = val;
+  pendingChanges.set(rowNum, change);
+  updateStatsAndUI();
+  renderTable();
+};
+window.updateClass = (rowNum, val) => {
+  let change = pendingChanges.get(rowNum) || { rollNo: currentStudents.find(s=>s.rowNum==rowNum).roll_no };
+  change.newClass = val;
+  pendingChanges.set(rowNum, change);
+  updateStatsAndUI();
+  renderTable();
+};
+window.updateName = (rowNum, val) => {
+  let change = pendingChanges.get(rowNum) || { rollNo: currentStudents.find(s=>s.rowNum==rowNum).roll_no };
+  change.newName = val;
+  pendingChanges.set(rowNum, change);
+  updateStatsAndUI();
+  renderTable();
+};
+window.updateStatus = (rowNum, val) => {
+  let change = pendingChanges.get(rowNum) || { rollNo: currentStudents.find(s=>s.rowNum==rowNum).roll_no };
+  change.newStatus = val;
+  pendingChanges.set(rowNum, change);
+  renderTable();
+};
+window.updateReason = (rowNum, val) => {
+  const student = currentStudents.find(s => s.rowNum == rowNum);
+  if (student.reason === val) pendingReasons.delete(rowNum);
+  else pendingReasons.set(rowNum, { rollNo: student.roll_no, reason: val });
+  renderTable();
+};
+
+
+
+async function saveAllChanges() {
+  if (pendingChanges.size === 0 && pendingReasons.size === 0) { showMessage("No changes to save", "error"); return; }
+  if (isSaveRunning) return;
+  isSaveRunning = true;
+  const saveBtn = document.getElementById('saveAllBtn');
+  if (saveBtn) { saveBtn.disabled = true; saveBtn.innerHTML = '<span class="loading-spinner"></span> Saving...'; }
+  
+  const year = document.getElementById('yearSelect').value;
+  const classVal = document.getElementById('classSelect').value;
+  const month = document.getElementById('monthSelect').value;
+  const dayNum = document.getElementById('dayNumberInput').value;
+  const dateStr = `${month} ${dayNum}`;
+  let success = 0, error = 0;
+  
+
+
+
+
+  // Save reasons first
+  for (let [rowNum, data] of pendingReasons) {
+    try {
+      await callAPI('updateReason', { year, class: classVal, month, day: dayNum, rollNo: data.rollNo, reason: data.reason });
+      const student = currentStudents.find(s => s.rowNum == rowNum);
+      if (student) student.reason = data.reason;
+      success++;
+      pendingReasons.delete(rowNum);
+    } catch(e) { 
+      error++; 
+      showMessage(e.message, "error"); 
+    }
+  }
+  
+  // Save attendance and student info
+  for (let [rowNum, change] of pendingChanges) {
+    try {
+      if (change.newStatus) {
+        await callAPI('updateAttendance', { year, class: classVal, month, date: dateStr, rollNo: change.rollNo, status: change.newStatus });
+      }
+      if (change.newRollNo || change.newClass || change.newName) {
+        await callAPI('updateStudentInfo', { year, oldRollNo: change.rollNo, newRollNo: change.newRollNo || change.rollNo, class: change.newClass || classVal, name: change.newName || '', monthSheet: month });
+      }
+      const student = currentStudents.find(s => s.rowNum == rowNum);
+      if (student) {
+        if (change.newStatus) student.currentStatus = change.newStatus;
+        if (change.newRollNo) student.roll_no = change.newRollNo;
+        if (change.newClass) student.class = change.newClass;
+        if (change.newName) student.name = change.newName;
+      }
+      success++;
+      pendingChanges.delete(rowNum);
+    } catch(e) { 
+      error++; 
+      showMessage(e.message, "error"); 
+    }
+  }
+  
+  renderTable();
+  showMessage(`✅ Saved ${success} changes${error ? `, ${error} failed` : ''}`, error ? "error" : "success");
+  if (saveBtn) { saveBtn.disabled = false; saveBtn.innerHTML = "💾 Save All Changes"; }
+  isSaveRunning = false;
+}
+
+window.bulkUpdate = (status) => {
+  for (let s of currentStudents) {
+    let change = pendingChanges.get(s.rowNum) || { rollNo: s.roll_no };
+    change.newStatus = status;
+    pendingChanges.set(s.rowNum, change);
+  }
+  renderTable();
+  showMessage(`Bulk: All marked as ${status === 'P' ? 'Present' : status === 'A' ? 'Absent' : 'Holiday'}`, "success");
+};
+
+async function loadStudents() {
+  const year = document.getElementById('yearSelect').value;
+  const classVal = document.getElementById('classSelect').value;
+  const month = document.getElementById('monthSelect').value;
+  const dayNum = document.getElementById('dayNumberInput').value;
+  
+  if (classVal === 'all') { showMessage("Please select a specific class", "error"); return; }
+  
+  document.getElementById('studentsContainer').innerHTML = '<div class="loading-placeholder"><span class="loading-spinner"></span> Loading students...</div>';
+  document.getElementById('statsContainer').style.display = 'none';
+  
+  try {
+    const dateStr = `${month} ${dayNum}`;
+    const res = await callAPI('getDailyReport', { year, class: classVal, month, date: dateStr });
+    if (!res.success) throw new Error(res.message);
+    
+    const students = res.data?.report || [];
+    if (!students.length) throw new Error("No students found for the selected criteria");
+    
+    currentStudents = students.map((s, idx) => ({
+      rowNum: idx + 1, 
+      sn: s.sn, 
+      roll_no: String(s.rollNo), 
+      class: String(s.class), 
+      name: String(s.name),
+      currentStatus: s.statusCode || '', 
+      reason: s.reason || '', 
+      _conflict: false
+    }));
+    pendingChanges.clear();
+    pendingReasons.clear();
+    renderTable();
+    document.getElementById('statsContainer').style.display = 'block';
+    showMessage(`✅ Loaded ${currentStudents.length} students. Reason column: ${getReasonColumn(dayNum)}`, "success");
+  } catch(e) { 
+    document.getElementById('studentsContainer').innerHTML = `<div class="loading-placeholder" style="color:#b91c1c;">❌ Error: ${e.message}</div>`; 
+    showMessage(e.message, "error"); 
+  }
+}
+
+async function recalcMonthTotals() {
+  const month = document.getElementById('monthSelect').value;
+  const year = document.getElementById('yearSelect').value;
+  const classVal = document.getElementById('classSelect').value;
+  
+  const btn = document.getElementById('recalcMonthBtn');
+  const originalText = btn.innerHTML;
+  btn.innerHTML = '<span class="loading-spinner"></span> Recalculating...';
+  btn.disabled = true;
+  
+  try {
+    const res = await callAPI('recalculateTotals', { month, year, class: classVal });
+    if (res.success) {
+      showMessage(res.message, "success");
+      if (currentStudents.length) loadStudents();
+    } else {
+      throw new Error(res.message);
+    }
+  } catch(e) {
+    showMessage(`Recalculation failed: ${e.message}`, "error");
+  } finally {
+    btn.innerHTML = originalText;
+    btn.disabled = false;
+  }
+}
+
+async function recalcAllMonthsTotals() {
+  const year = document.getElementById('yearSelect').value;
+  const classVal = document.getElementById('classSelect').value;
+  
+  const btn = document.getElementById('recalcAllBtn');
+  const originalText = btn.innerHTML;
+  btn.innerHTML = '<span class="loading-spinner"></span> Recalculating all months...';
+  btn.disabled = true;
+  
+  try {
+    const res = await callAPI('recalculateAllMonths', { year, class: classVal });
+    if (res.success) {
+      showMessage(res.message, "success");
+      if (currentStudents.length) loadStudents();
+    } else {
+      throw new Error(res.message);
+    }
+  } catch(e) {
+    showMessage(`Recalculation failed: ${e.message}`, "error");
+  } finally {
+    btn.innerHTML = originalText;
+    btn.disabled = false;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+function getReasonColumn(day) {
+  const cols = ['BD','BE','BF','BG','BH','BI','BJ','BK','BL','BM','BN','BO','BP','BQ','BR','BS','BT','BU','BV','BW','BX','BY','BZ','CA','CB','CC','CD','CE','CF','CG','CH','CI'];
+  return cols[day-1] || `Day${day}`;
+}
+
+// Event Listeners
+document.getElementById('dayNumberInput').addEventListener('change', () => { if (currentStudents.length) loadStudents(); });
+document.getElementById('loadStudentsBtn').addEventListener('click', loadStudents);
+document.getElementById('updateMonthBtn').addEventListener('click', async () => { 
+  await callAPI('updateDataTransfer', { year: document.getElementById('yearSelect').value, class: document.getElementById('classSelect').value, month: document.getElementById('monthSelect').value }); 
+  showMessage("Month data updated successfully", "success"); 
+  loadStudents(); 
+});
+document.getElementById('updateAllMonthsBtn').addEventListener('click', async () => { 
+  await callAPI('updateAllMonthsTransfer', {}); 
+  showMessage("All months updated successfully", "success"); 
+});
+document.getElementById('bulkPresentBtn').addEventListener('click', () => window.bulkUpdate('P'));
+document.getElementById('bulkAbsentBtn').addEventListener('click', () => window.bulkUpdate('A'));
+document.getElementById('bulkHolidayBtn').addEventListener('click', () => window.bulkUpdate('H'));
+document.getElementById('recalcMonthBtn').addEventListener('click', recalcMonthTotals);
+document.getElementById('recalcAllBtn').addEventListener('click', recalcAllMonthsTotals);
+</script>
+</body>
+</html>
