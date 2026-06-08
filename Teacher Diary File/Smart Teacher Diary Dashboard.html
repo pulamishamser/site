@@ -1,853 +1,841 @@
 <!DOCTYPE html>
 <html lang="ne">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>📚Smart Teacher Diary </title>
-    <!-- External Libraries -->
-    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<title>Smart Teacher Diary </title>
+	<!-- External Libraries -->
+	<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
 
-        body {
-            font-family: 'Poppins', 'Segoe UI', 'Arial', sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
+		body {
+			font-family: 'Poppins', 'Segoe UI', 'Arial', sans-serif;
+			background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+			min-height: 100vh;
+			overflow-x: hidden;
+		}
 
-        .sidebar {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 280px;
-            height: 100vh;
-            background: linear-gradient(180deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
-            z-index: 1000;
-            transform: translateX(-100%);
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 2px 0 25px rgba(0,0,0,0.4);
-            overflow-y: auto;
-        }
+		.sidebar {
+			position: fixed;
+			left: 0;
+			top: 0;
+			width: 280px;
+			height: 100vh;
+			background: linear-gradient(180deg, #1e3c72 0%, #2a5298 100%);
+			color: white;
+			z-index: 1000;
+			transform: translateX(-100%);
+			transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+			box-shadow: 2px 0 25px rgba(0,0,0,0.4);
+			overflow-y: auto;
+		}
 
-        .sidebar.open {
-            transform: translateX(0);
-        }
+		.sidebar.open {
+			transform: translateX(0);
+		}
 
-        .sidebar-header {
-            padding: 25px;
-            text-align: center;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
-        }
+		.sidebar-header {
+			padding: 25px;
+			text-align: center;
+			border-bottom: 1px solid rgba(255,255,255,0.2);
+		}
 
-        .sidebar-header .logo-icon {
-            width: 70px;
-            height: 70px;
-            background: rgba(255,255,255,0.15);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 15px;
-            font-size: 34px;
-        }
+		.sidebar-header .logo-icon {
+			width: 70px;
+			height: 70px;
+			background: rgba(255,255,255,0.15);
+			border-radius: 20px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin: 0 auto 15px;
+			font-size: 34px;
+		}
 
-        .sidebar-nav {
-            padding: 20px 15px;
-        }
+		.sidebar-nav {
+			padding: 20px 15px;
+		}
 
-        .nav-item {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            padding: 12px 18px;
-            margin: 8px 0;
-            border-radius: 14px;
-            cursor: pointer;
-            transition: all 0.25s;
-            color: rgba(255,255,255,0.85);
-            font-weight: 500;
-        }
+		.nav-item {
+			display: flex;
+			align-items: center;
+			gap: 14px;
+			padding: 12px 18px;
+			margin: 8px 0;
+			border-radius: 14px;
+			cursor: pointer;
+			transition: all 0.25s;
+			color: rgba(255,255,255,0.85);
+			font-weight: 500;
+		}
 
-        .nav-item:hover, .nav-item.active {
-            background: rgba(255,255,255,0.2);
-            color: #ffd966;
-            transform: translateX(6px);
-        }
+		.nav-item:hover, .nav-item.active {
+			background: rgba(255,255,255,0.2);
+			color: #ffd966;
+			transform: translateX(6px);
+		}
 
-        .nav-item i {
-            width: 26px;
-            font-size: 1.2rem;
-            text-align: center;
-        }
+		.nav-item i {
+			width: 26px;
+			font-size: 1.2rem;
+			text-align: center;
+		}
 
-        .main-content {
-            margin-left: 0;
-            transition: margin-left 0.3s ease;
-            padding: 20px;
-        }
+		.main-content {
+			margin-left: 0;
+			transition: margin-left 0.3s ease;
+			padding: 20px;
+		}
 
-        .main-content.sidebar-open {
-            margin-left: 280px;
-        }
+		.main-content.sidebar-open {
+			margin-left: 280px;
+		}
 
-        .top-bar {
-            background: rgba(255,255,255,0.96);
-            border-radius: 28px;
-            padding: 15px 28px;
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
+		.top-bar {
+			background: rgba(255,255,255,0.96);
+			border-radius: 28px;
+			padding: 15px 28px;
+			margin-bottom: 30px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			flex-wrap: wrap;
+			gap: 15px;
+			box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+		}
 
-        .menu-toggle {
-            background: linear-gradient(135deg, #8B0000, #A0522D);
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: white;
-            width: 45px;
-            height: 45px;
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+		.menu-toggle {
+			background: linear-gradient(135deg, #8B0000, #A0522D);
+			border: none;
+			font-size: 24px;
+			cursor: pointer;
+			color: white;
+			width: 45px;
+			height: 45px;
+			border-radius: 30px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
 
-        .page-title {
-            font-size: 26px;
-            font-weight: 700;
-            color: #8B0000;
-        }
+		.page-title {
+			font-size: 26px;
+			font-weight: 700;
+			color: #8B0000;
+		}
 
-        .date-time-card {
-            background: linear-gradient(135deg, #8B0000, #A0522D);
-            padding: 10px 22px;
-            border-radius: 40px;
-            color: #ffd966;
-            text-align: right;
-        }
+		.date-time-card {
+			background: linear-gradient(135deg, #8B0000, #A0522D);
+			padding: 10px 22px;
+			border-radius: 40px;
+			color: #ffd966;
+			text-align: right;
+		}
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 22px;
-            margin-bottom: 30px;
-        }
+		.stats-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+			gap: 22px;
+			margin-bottom: 30px;
+		}
 
-        .stat-card {
-            background: rgba(255,255,255,0.95);
-            border-radius: 24px;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            cursor: pointer;
-            box-shadow: 0 6px 14px rgba(0,0,0,0.08);
-            transition: 0.2s;
-        }
+		.stat-card {
+			background: rgba(255,255,255,0.95);
+			border-radius: 24px;
+			padding: 20px;
+			display: flex;
+			align-items: center;
+			gap: 18px;
+			cursor: pointer;
+			box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+			transition: 0.2s;
+		}
 
-        .stat-card:hover { transform: translateY(-6px); }
+		.stat-card:hover { transform: translateY(-6px); }
 
-        .stat-icon {
-            width: 65px;
-            height: 65px;
-            background: linear-gradient(145deg, #8B0000, #B5651E);
-            border-radius: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-            color: #FFD966;
-        }
+		.stat-icon {
+			width: 65px;
+			height: 65px;
+			background: linear-gradient(145deg, #8B0000, #B5651E);
+			border-radius: 25px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 30px;
+			color: #FFD966;
+		}
 
-        .stat-info h3 {
-            font-size: 34px;
-            color: #8B0000;
-            font-weight: 800;
-        }
+		.stat-info h3 {
+			font-size: 34px;
+			color: #8B0000;
+			font-weight: 800;
+		}
 
-        .quick-actions {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-            gap: 18px;
-            margin-bottom: 35px;
-        }
+		.quick-actions {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+			gap: 18px;
+			margin-bottom: 35px;
+		}
 
-        .action-btn {
-            background: linear-gradient(135deg, #8B0000, #A0522D);
-            color: #ffefc0;
-            border: none;
-            padding: 14px 12px;
-            border-radius: 40px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            transition: 0.2s;
-        }
+		.action-btn {
+			background: linear-gradient(135deg, #8B0000, #A0522D);
+			color: #ffefc0;
+			border: none;
+			padding: 14px 12px;
+			border-radius: 40px;
+			font-weight: 600;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 12px;
+			transition: 0.2s;
+		}
 
-        .action-btn:hover {
-            transform: translateY(-3px);
-            background: linear-gradient(135deg, #A52A2A, #CD853F);
-        }
+		.action-btn:hover {
+			transform: translateY(-3px);
+			background: linear-gradient(135deg, #A52A2A, #CD853F);
+		}
 
-        .content-section {
-            display: none;
-            animation: fadeSlideUp 0.35s ease;
-        }
+		.content-section {
+			display: none;
+			animation: fadeSlideUp 0.35s ease;
+		}
 
-        .content-section.active {
-            display: block;
-        }
+		.content-section.active {
+			display: block;
+		}
 
-        @keyframes fadeSlideUp {
-            from { opacity: 0; transform: translateY(18px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+		@keyframes fadeSlideUp {
+			from { opacity: 0; transform: translateY(18px); }
+			to { opacity: 1; transform: translateY(0); }
+		}
 
-        .card {
-            background: rgba(255,255,255,0.96);
-            border-radius: 28px;
-            padding: 28px;
-            margin-bottom: 28px;
-            box-shadow: 0 12px 25px rgba(0,0,0,0.08);
-        }
+		.card {
+			background: rgba(255,255,255,0.96);
+			border-radius: 28px;
+			padding: 28px;
+			margin-bottom: 28px;
+			box-shadow: 0 12px 25px rgba(0,0,0,0.08);
+		}
 
-        .card-title {
-            font-size: 1.7rem;
-            font-weight: 600;
-            color: #8B0000;
-            margin-bottom: 25px;
-            border-left: 5px solid #FFB347;
-            padding-left: 18px;
-        }
+		.card-title {
+			font-size: 1.7rem;
+			font-weight: 600;
+			color: #8B0000;
+			margin-bottom: 25px;
+			border-left: 5px solid #FFB347;
+			padding-left: 18px;
+		}
 
-        /* Enhanced iframe container with back button */
-        .iframe-container {
-            background: white;
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            margin-top: 15px;
-            position: relative;
-        }
+		/* Enhanced iframe container with back button */
+		.iframe-container {
+			background: white;
+			border-radius: 24px;
+			overflow: hidden;
+			box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+			margin-top: 15px;
+			position: relative;
+		}
 
-        iframe {
-            width: 100%;
-            height: 70vh;
-            border: none;
-            background: #fff;
-        }
+		iframe {
+			width: 100%;
+			height: 70vh;
+			border: none;
+			background: #fff;
+		}
 
-        .back-to-dashboard {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: #8B0000;
-            color: #FFD966;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 40px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: 0.2s;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
+		.back-to-dashboard {
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			background: #8B0000;
+			color: #FFD966;
+			border: none;
+			padding: 12px 24px;
+			border-radius: 40px;
+			font-weight: 600;
+			font-size: 1rem;
+			cursor: pointer;
+			transition: 0.2s;
+			margin-bottom: 20px;
+			box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+		}
 
-        .back-to-dashboard i {
-            font-size: 1.2rem;
-        }
+		.back-to-dashboard i {
+			font-size: 1.2rem;
+		}
 
-        .back-to-dashboard:hover {
-            background: #a01818;
-            transform: translateX(-4px);
-            box-shadow: 0 6px 14px rgba(0,0,0,0.15);
-        }
+		.back-to-dashboard:hover {
+			background: #a01818;
+			transform: translateX(-4px);
+			box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+		}
 
-        .chart-container {
-            background: white;
-            border-radius: 24px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
+		.chart-container {
+			background: white;
+			border-radius: 24px;
+			padding: 20px;
+			margin-bottom: 20px;
+		}
 
-        canvas {
-            max-height: 280px;
-        }
+		canvas {
+			max-height: 280px;
+		}
 
-        /* Daily Routine Image Card */
-        .routine-image-card {
-            background: white;
-            border-radius: 28px;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: 0.3s;
-            border: 2px solid #f0e1c0;
-            margin-bottom: 25px;
-        }
-        .routine-image-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-        .routine-image-card img {
-            width: 100%;
-            max-height: 400px;
-            object-fit: contain;
-            border-radius: 20px;
-        }
-        .routine-image-card h3 {
-            color: #8B0000;
-            margin-top: 15px;
-            font-size: 1.4rem;
-        }
-        .routine-image-card p {
-            color: #555;
-            margin-top: 8px;
-        }
+		/* Daily Routine Image Card */
+		.routine-image-card {
+			background: white;
+			border-radius: 28px;
+			padding: 20px;
+			text-align: center;
+			cursor: pointer;
+			transition: 0.3s;
+			border: 2px solid #f0e1c0;
+			margin-bottom: 25px;
+		}
+		.routine-image-card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+		}
+		.routine-image-card img {
+			width: 100%;
+			max-height: 400px;
+			object-fit: contain;
+			border-radius: 20px;
+		}
+		.routine-image-card h3 {
+			color: #8B0000;
+			margin-top: 15px;
+			font-size: 1.4rem;
+		}
+		.routine-image-card p {
+			color: #555;
+			margin-top: 8px;
+		}
 
-        /* Popup Modal for Daily Routine Image */
-        .image-modal {
-            display: none;
-            position: fixed;
-            z-index: 10001;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.9);
-            backdrop-filter: blur(5px);
-            justify-content: center;
-            align-items: center;
-        }
-        .image-modal-content {
-            max-width: 90%;
-            max-height: 90%;
-            margin: auto;
-            display: block;
-            border-radius: 20px;
-            box-shadow: 0 0 30px rgba(0,0,0,0.5);
-            animation: zoomIn 0.3s ease;
-        }
-        @keyframes zoomIn {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-        .close-modal-btn {
-            position: absolute;
-            top: 20px;
-            right: 35px;
-            color: #f1f1f1;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-            background: rgba(0,0,0,0.5);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .close-modal-btn:hover {
-            color: #ffd966;
-            background: rgba(139,0,0,0.7);
-        }
-        .modal-caption {
-            position: absolute;
-            bottom: 30px;
-            left: 0;
-            right: 0;
-            text-align: center;
-            color: white;
-            font-size: 1.2rem;
-            background: rgba(0,0,0,0.6);
-            padding: 10px;
-            border-radius: 30px;
-            width: fit-content;
-            margin: 0 auto;
-        }
+		/* Popup Modal for Daily Routine Image */
+		.image-modal {
+			display: none;
+			position: fixed;
+			z-index: 10001;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0,0,0,0.9);
+			backdrop-filter: blur(5px);
+			justify-content: center;
+			align-items: center;
+		}
+		.image-modal-content {
+			max-width: 90%;
+			max-height: 90%;
+			margin: auto;
+			display: block;
+			border-radius: 20px;
+			box-shadow: 0 0 30px rgba(0,0,0,0.5);
+			animation: zoomIn 0.3s ease;
+		}
+		@keyframes zoomIn {
+			from { transform: scale(0.8); opacity: 0; }
+			to { transform: scale(1); opacity: 1; }
+		}
+		.close-modal-btn {
+			position: absolute;
+			top: 20px;
+			right: 35px;
+			color: #f1f1f1;
+			font-size: 40px;
+			font-weight: bold;
+			cursor: pointer;
+			transition: 0.3s;
+			background: rgba(0,0,0,0.5);
+			width: 50px;
+			height: 50px;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.close-modal-btn:hover {
+			color: #ffd966;
+			background: rgba(139,0,0,0.7);
+		}
+		.modal-caption {
+			position: absolute;
+			bottom: 30px;
+			left: 0;
+			right: 0;
+			text-align: center;
+			color: white;
+			font-size: 1.2rem;
+			background: rgba(0,0,0,0.6);
+			padding: 10px;
+			border-radius: 30px;
+			width: fit-content;
+			margin: 0 auto;
+		}
 
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #28a745;
-            color: white;
-            padding: 14px 24px;
-            border-radius: 50px;
-            z-index: 9999;
-            animation: slideInRight 0.3s ease;
-        }
+		.toast {
+			position: fixed;
+			bottom: 30px;
+			right: 30px;
+			background: #28a745;
+			color: white;
+			padding: 14px 24px;
+			border-radius: 50px;
+			z-index: 9999;
+			animation: slideInRight 0.3s ease;
+		}
 
-        @keyframes slideInRight {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
+		@keyframes slideInRight {
+			from { transform: translateX(100%); opacity: 0; }
+			to { transform: translateX(0); opacity: 1; }
+		}
 
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.6);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-        }
+		.loading-overlay {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0,0,0,0.6);
+			display: none;
+			justify-content: center;
+			align-items: center;
+			z-index: 10000;
+		}
 
-        .spinner {
-            width: 55px;
-            height: 55px;
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid #8B0000;
-            border-radius: 50%;
-            animation: spin 0.9s linear infinite;
-        }
+		.spinner {
+			width: 55px;
+			height: 55px;
+			border: 5px solid #f3f3f3;
+			border-top: 5px solid #8B0000;
+			border-radius: 50%;
+			animation: spin 0.9s linear infinite;
+		}
 
-        @keyframes spin { to { transform: rotate(360deg); } }
+		@keyframes spin { to { transform: rotate(360deg); } }
 
-        .sidebar-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.5);
-            z-index: 999;
-        }
+		.sidebar-overlay {
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: rgba(0,0,0,0.5);
+			z-index: 999;
+		}
 
-        /* Toolbar style for external container */
-        .external-toolbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 5px;
-        }
+		/* Toolbar style for external container */
+		.external-toolbar {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			flex-wrap: wrap;
+			gap: 15px;
+			margin-bottom: 5px;
+		}
 
-        @media (max-width: 768px) {
-            .main-content.sidebar-open { margin-left: 0; }
-            .sidebar.open ~ .sidebar-overlay { display: block; }
-            .image-modal-content { max-width: 95%; }
-            .close-modal-btn { top: 10px; right: 20px; font-size: 30px; width: 40px; height: 40px; }
-            .back-to-dashboard { padding: 8px 16px; font-size: 0.85rem; }
-            iframe { height: 65vh; }
-        }
-    </style>
+		@media (max-width: 768px) {
+			.main-content.sidebar-open { margin-left: 0; }
+			.sidebar.open ~ .sidebar-overlay { display: block; }
+			.image-modal-content { max-width: 95%; }
+			.close-modal-btn { top: 10px; right: 20px; font-size: 30px; width: 40px; height: 40px; }
+			.back-to-dashboard { padding: 8px 16px; font-size: 0.85rem; }
+			iframe { height: 65vh; }
+		}
+	</style>
 </head>
 <body>
 
 <div class="loading-overlay" id="loadingOverlay"><div class="spinner"></div></div>
 
-<!-- Image Popup Modal for Daily Routine -->
+<!-- Image Popup Modal for Daily Routine (kept for consistency, but now we open link directly) -->
 <div id="imageModal" class="image-modal" onclick="closeImageModal()">
-    <span class="close-modal-btn" onclick="closeImageModal()">&times;</span>
-    <img class="image-modal-content" id="modalImage" alt="दैनिक कार्य तालिका">
-    <div class="modal-caption" id="modalCaption">दैनिक कार्य तालिका (Daily Routine Table)</div>
+	<span class="close-modal-btn" onclick="closeImageModal()">&times;</span>
+	<img class="image-modal-content" id="modalImage" alt="दैनिक कार्य तालिका">
+	<div class="modal-caption" id="modalCaption">दैनिक कार्य तालिका (Daily Routine Table)</div>
 </div>
 
 <!-- Sidebar -->
 <div class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-        <div class="logo-icon"><i class="fas fa-chalkboard-teacher"></i></div>
-        <h2>शिक्षक डायरी</h2>
-        <p>पाठ योजना प्रणाली</p>
-    </div>
-    <div class="sidebar-nav">
-        <div class="nav-item active" onclick="showSection('dashboard')"><i class="fas fa-tachometer-alt"></i> ड्यासबोर्ड</div>
-        <div class="nav-item" onclick="showExternalTool('EntryForm')"><i class="fas fa-database"></i> 📝 एन्ट्री फारम (सबै योजना)</div>
-        <div class="nav-item" onclick="showExternalTool('ReportAll')"><i class="fas fa-chart-pie"></i> 📊 प्रतिवेदन (सबै योजना)</div>
-        <div class="nav-item" onclick="showExternalTool('DailyTableReport')"><i class="fas fa-table-list"></i> 📋 दैनिक पाठ योजना तालिका</div>
-        <div class="nav-item" onclick="showExternalTool('UpdateRecords')"><i class="fas fa-edit"></i> ✏️ अपडेट डायरी रेकर्ड</div>
-        <div class="nav-item" onclick="showRoutineImagePopup()"><i class="fas fa-clock"></i> 🗓 दैनिक कार्य तालिका</div>
-        <div class="nav-item" onclick="showSection('reports')"><i class="fas fa-chart-bar"></i> रिपोर्ट्स</div>
-    </div>
+	<div class="sidebar-header">
+		<div class="logo-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+		<h2>शिक्षक डायरी</h2>
+		<p>पाठ योजना प्रणाली</p>
+	</div>
+	<div class="sidebar-nav">
+		<div class="nav-item active" onclick="showSection('dashboard')"><i class="fas fa-tachometer-alt"></i> ड्यासबोर्ड</div>
+		<div class="nav-item" onclick="showExternalTool('EntryForm')"><i class="fas fa-database"></i> 📝 एन्ट्री फारम (सबै योजना)</div>
+		<div class="nav-item" onclick="showExternalTool('ReportAll')"><i class="fas fa-chart-pie"></i> 📊 प्रतिवेदन (सबै योजना)</div>
+		<div class="nav-item" onclick="showExternalTool('DailyTableReport')"><i class="fas fa-table-list"></i> 📋 दैनिक पाठ योजना तालिका</div>
+		<div class="nav-item" onclick="showExternalTool('UpdateRecords')"><i class="fas fa-edit"></i> ✏️ अपडेट डायरी रेकर्ड</div>
+		<div class="nav-item" onclick="showRoutineImagePopup()"><i class="fas fa-clock"></i> 🗓 दैनिक कार्य तालिका</div>
+		<div class="nav-item" onclick="showSection('reports')"><i class="fas fa-chart-bar"></i> रिपोर्ट्स</div>
+	</div>
 </div>
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
 <div class="main-content" id="mainContent">
-    <div class="top-bar">
-        <button class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
-        <div class="page-title" id="pageTitle">📊Smart Teacher Diary Dashboard</div>
-        <div class="date-time-card"><div id="liveTime" style="font-size: 18px; font-weight:bold;"></div><div id="liveDate" style="font-size:12px;"></div></div>
-    </div>
+	<div class="top-bar">
+		<button class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+		<div class="page-title" id="pageTitle">📊Smart Teacher Diary Dashboard</div>
+		<div class="date-time-card"><div id="liveTime" style="font-size: 18px; font-weight:bold;"></div><div id="liveDate" style="font-size:12px;"></div></div>
+	</div>
 
-    <!-- DASHBOARD SECTION -->
-    <div id="dashboardSection" class="content-section active">
-        <div class="stats-grid">
-            <div class="stat-card"><div class="stat-icon"><i class="fas fa-book"></i></div><div class="stat-info"><h3 id="totalLessons">0</h3><p>कुल पाठ योजना</p></div></div>
-            <div class="stat-card"><div class="stat-icon"><i class="fas fa-users"></i></div><div class="stat-info"><h3 id="totalClasses">0</h3><p>कक्षाहरू</p></div></div>
-            <div class="stat-card"><div class="stat-icon"><i class="fas fa-book-open"></i></div><div class="stat-info"><h3 id="totalSubjects">0</h3><p>विषयहरू</p></div></div>
-            <div class="stat-card"><div class="stat-icon"><i class="fas fa-calendar-week"></i></div><div class="stat-info"><h3 id="weeklyLessons">0</h3><p>यो हप्ता</p></div></div>
-        </div>
-        <div class="quick-actions">
-            <button class="action-btn" onclick="showExternalTool('EntryForm')"><i class="fas fa-database"></i> सबै योजना इन्ट्री</button>
-            <button class="action-btn" onclick="showExternalTool('ReportAll')"><i class="fas fa-chart-line"></i> सबै योजना प्रतिवेदन</button>
-            <button class="action-btn" onclick="showExternalTool('DailyTableReport')"><i class="fas fa-table"></i> दैनिक पाठ तालिका</button>
-            <button class="action-btn" onclick="showExternalTool('UpdateRecords')"><i class="fas fa-pen-to-square"></i> डायरी रेकर्ड अपडेट</button>
-        </div>
-        
+	<!-- DASHBOARD SECTION -->
+	<div id="dashboardSection" class="content-section active">
+		<div class="stats-grid">
+			<div class="stat-card"><div class="stat-icon"><i class="fas fa-book"></i></div><div class="stat-info"><h3 id="totalLessons">0</h3><p>कुल पाठ योजना</p></div></div>
+			<div class="stat-card"><div class="stat-icon"><i class="fas fa-users"></i></div><div class="stat-info"><h3 id="totalClasses">0</h3><p>कक्षाहरू</p></div></div>
+			<div class="stat-card"><div class="stat-icon"><i class="fas fa-book-open"></i></div><div class="stat-info"><h3 id="totalSubjects">0</h3><p>विषयहरू</p></div></div>
+			<div class="stat-card"><div class="stat-icon"><i class="fas fa-calendar-week"></i></div><div class="stat-info"><h3 id="weeklyLessons">0</h3><p>यो हप्ता</p></div></div>
+		</div>
+		<div class="quick-actions">
+			<button class="action-btn" onclick="showExternalTool('EntryForm')"><i class="fas fa-database"></i> सबै योजना इन्ट्री</button>
+			<button class="action-btn" onclick="showExternalTool('ReportAll')"><i class="fas fa-chart-line"></i> सबै योजना प्रतिवेदन</button>
+			<button class="action-btn" onclick="showExternalTool('DailyTableReport')"><i class="fas fa-table"></i> दैनिक पाठ तालिका</button>
+			<button class="action-btn" onclick="showExternalTool('UpdateRecords')"><i class="fas fa-pen-to-square"></i> डायरी रेकर्ड अपडेट</button>
+		</div>
+		
 
-    
-        <!-- Daily Routine Image Link Card - Opens Popup -->
-        <div class="routine-image-card" onclick="showRoutineImagePopup()">
-            <img src="https://shamser.info.np/Teacher%20Diary%20File/daily_routine_table.png" 
-                 alt="दैनिक कार्य तालिका"
-                 onerror="this.src='Daily Routine Table'; this.onerror=null;">
-            <h3><i class="fas fa-calendar-day"></i> दैनिक कार्य तालिका (Daily Routine Table)</h3>
-            <p>कक्षा दैनिक दिनचर्या हेर्नको लागि क्लिक गर्नुहोस् | Click to view full daily routine timetable</p>
-        </div>
-        
+	
+		<!-- Link Card - Opens external link in new tab (Replaced image with direct link) -->
+		<div class="routine-image-card" onclick="window.open('https://shamser.info.np/Teacher%20Diary%20File/flip%20files.html', '_blank');">
+			<div style="font-size: 4rem; color: #8B0000; margin-bottom: 15px;"><i class="fas fa-file-alt"></i></div>
+			<h3><i class="fas fa-calendar-day"></i> Education Policy-2083-84</h3>
+			<p>Education Policy-2083-84 and Teacher diary Readmade — क्लिक गर्नुहोस् (Click to open)</p>
+		</div>
 
 
 
 
-    <!-- Daily Routine Image Link Card - Opens Popup -->
-        <div class="routine-image-card" onclick="showRoutineImagePopup()">
-            <img src="https://shamser.info.np/Teacher%20Diary%20File/daily_routine_table.png" 
-                 alt="Education Policy-2083-84"
-                 onerror="this.src='https://shamser.info.np/Teacher Diary File/flip files.html'; this.onerror=null;">
-            <h3><i class="fas fa-calendar-day"></i> Education Policy-2083-84</h3>
-            <p>Education Policy-2083-84 and Teacher diary Readmade</p>
-        </div>
+	<!-- Daily Routine Image Link Card - Opens Popup (Updated to open the specific provided link) -->
+		<div class="routine-image-card" onclick="window.open('https://shamser.info.np/Teacher%20Diary%20File/Upload%20Display/display-files.html', '_blank');">
+			<div style="font-size: 4rem; color: #8B0000; margin-bottom: 15px;"><i class="fas fa-folder-open"></i></div>
+			<h3><i class="fas fa-calendar-day"></i> Uploaded File with Routine</h3>
+			<p>View uploaded files and daily routines — नयाँ ट्याबमा खोल्नुहोस्</p>
+		</div>
 
 
-        <div class="chart-container"><h3 style="color:#8B0000;">📅 मासिक पाठ योजना</h3><canvas id="monthlyChart"></canvas></div>
-        <div class="chart-container"><h3 style="color:#8B0000;">📊 कक्षा अनुसार तथ्यांक</h3><canvas id="classChart"></canvas></div>
-        <div class="card"><div class="card-title"><i class="fas fa-history"></i> हालैका गतिविधिहरू</div><div id="recentActivities" style="max-height:280px; overflow:auto;"></div></div>
-    </div>
+		<div class="chart-container"><h3 style="color:#8B0000;">📅 मासिक पाठ योजना</h3><canvas id="monthlyChart"></canvas></div>
+		<div class="chart-container"><h3 style="color:#8B0000;">📊 कक्षा अनुसार तथ्यांक</h3><canvas id="classChart"></canvas></div>
+		<div class="card"><div class="card-title"><i class="fas fa-history"></i> हालैका गतिविधिहरू</div><div id="recentActivities" style="max-height:280px; overflow:auto;"></div></div>
+	</div>
 
-    <!-- Reports Section -->
-    <div id="reportsSection" class="content-section"><div class="stats-grid"><div class="stat-card"><div class="stat-icon"><i class="fas fa-chart-line"></i></div><div class="stat-info"><h3 id="completionRate">0%</h3><p>पूर्णता दर</p></div></div>
-    <div class="stat-card"><div class="stat-icon"><i class="fas fa-star"></i></div><div class="stat-info"><h3 id="avgAttendance">0%</h3><p>औसत उपस्थिति</p></div></div></div>
-    <div class="card"><div class="card-title">📄 रिपोर्ट डाउनलोड</div><div style="display:flex; gap:20px; flex-wrap:wrap;"><button class="action-btn" onclick="exportToCSV()" style="background:#28a745;">CSV डाउनलोड</button><button class="action-btn" onclick="window.print()" style="background:#17a2b8;">प्रिन्ट गर्नुहोस्</button></div></div></div>
+	<!-- Reports Section -->
+	<div id="reportsSection" class="content-section"><div class="stats-grid"><div class="stat-card"><div class="stat-icon"><i class="fas fa-chart-line"></i></div><div class="stat-info"><h3 id="completionRate">0%</h3><p>पूर्णता दर</p></div></div>
+	<div class="stat-card"><div class="stat-icon"><i class="fas fa-star"></i></div><div class="stat-info"><h3 id="avgAttendance">0%</h3><p>औसत उपस्थिति</p></div></div></div>
+	<div class="card"><div class="card-title">📄 रिपोर्ट डाउनलोड</div><div style="display:flex; gap:20px; flex-wrap:wrap;"><button class="action-btn" onclick="exportToCSV()" style="background:#28a745;">CSV डाउनलोड</button><button class="action-btn" onclick="window.print()" style="background:#17a2b8;">प्रिन्ट गर्नुहोस्</button></div></div></div>
 
-    <!-- External iframe container with enhanced toolbar including Back to Dashboard -->
-    <div id="externalFrameContainer" class="content-section" style="display:none;">
-        <div class="card">
-            <div class="external-toolbar">
-                <div class="card-title" id="externalTitle">बाह्य उपकरण</div>
-                <button class="back-to-dashboard" onclick="goBackToDashboard()">
-                    <i class="fas fa-arrow-left"></i> ड्यासबोर्डमा फर्कनुहोस्
-                </button>
-            </div>
-            <div class="iframe-container">
-                <iframe id="externalIframe" src="about:blank" title="External Tool"></iframe>
-            </div>
-        </div>
-    </div>
+	<!-- External iframe container with enhanced toolbar including Back to Dashboard -->
+	<div id="externalFrameContainer" class="content-section" style="display:none;">
+		<div class="card">
+			<div class="external-toolbar">
+				<div class="card-title" id="externalTitle">बाह्य उपकरण</div>
+				<button class="back-to-dashboard" onclick="goBackToDashboard()">
+					<i class="fas fa-arrow-left"></i> ड्यासबोर्डमा फर्कनुहोस्
+				</button>
+			</div>
+			<div class="iframe-container">
+				<iframe id="externalIframe" src="about:blank" title="External Tool"></iframe>
+			</div>
+		</div>
+	</div>
 </div>
 
 <script>
-    // CONFIGURATION
-    let allLessons = [];
-    let monthlyChart, classChart;
+	// CONFIGURATION
+	let allLessons = [];
+	let monthlyChart, classChart;
 
-    // Base URL for hosted files - Teacher Diary File directory
-    const BASE_URL = "https://shamser.info.np/Teacher%20Diary%20File/";
-    const ROUTINE_IMAGE_URL = "https://shamser.info.np/Teacher%20Diary%20File/daily_routine_table.png";
+	// Base URL for hosted files - Teacher Diary File directory
+	const BASE_URL = "https://shamser.info.np/Teacher%20Diary%20File/";
+	const ROUTINE_IMAGE_URL = "https://shamser.info.np/Teacher%20Diary%20File/daily_routine_table.png";
 
-    function toggleSidebar() {
-        const sidebar = document.getElementById('sidebar');
-        const mainContent = document.getElementById('mainContent');
-        const overlay = document.getElementById('sidebarOverlay');
-        sidebar.classList.toggle('open');
-        mainContent.classList.toggle('sidebar-open');
-        overlay.style.display = sidebar.classList.contains('open') ? 'block' : 'none';
-    }
-    function closeSidebar() { if(document.getElementById('sidebar').classList.contains('open')) toggleSidebar(); }
-    function showLoading(show) { document.getElementById('loadingOverlay').style.display = show ? 'flex' : 'none'; }
-    function showToast(msg, type='success') {
-        const toast = document.createElement('div'); toast.className = 'toast'; 
-        toast.style.backgroundColor = type === 'success' ? '#2e7d32' : '#c62828';
-        toast.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i> ${msg}`;
-        document.body.appendChild(toast); setTimeout(() => toast.remove(), 3000);
-    }
+	function toggleSidebar() {
+		const sidebar = document.getElementById('sidebar');
+		const mainContent = document.getElementById('mainContent');
+		const overlay = document.getElementById('sidebarOverlay');
+		sidebar.classList.toggle('open');
+		mainContent.classList.toggle('sidebar-open');
+		overlay.style.display = sidebar.classList.contains('open') ? 'block' : 'none';
+	}
+	function closeSidebar() { if(document.getElementById('sidebar').classList.contains('open')) toggleSidebar(); }
+	function showLoading(show) { document.getElementById('loadingOverlay').style.display = show ? 'flex' : 'none'; }
+	function showToast(msg, type='success') {
+		const toast = document.createElement('div'); toast.className = 'toast'; 
+		toast.style.backgroundColor = type === 'success' ? '#2e7d32' : '#c62828';
+		toast.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i> ${msg}`;
+		document.body.appendChild(toast); setTimeout(() => toast.remove(), 3000);
+	}
 
-    // Popup Image Modal Functions
-    function showRoutineImagePopup() {
-        const modal = document.getElementById('imageModal');
-        const modalImg = document.getElementById('modalImage');
-        modalImg.src = ROUTINE_IMAGE_URL;
-        modalImg.onerror = function() {
-            this.src = 'https://via.placeholder.com/800x400?text=Daily+Routine+Table+Not+Found';
-        };
-        modal.style.display = 'flex';
-        closeSidebar();
-        document.body.style.overflow = 'hidden';
-    }
+	// Popup Image Modal Functions (kept as fallback but not primary now)
+	function showRoutineImagePopup() {
+		// For sidebar nav item: open the first linked resource in new tab (Education Policy)
+		window.open('https://shamser.info.np/Teacher%20Diary%20File/flip%20files.html', '_blank');
+	}
 
-    function closeImageModal() {
-        const modal = document.getElementById('imageModal');
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
+	function closeImageModal() {
+		const modal = document.getElementById('imageModal');
+		if(modal) modal.style.display = 'none';
+		document.body.style.overflow = 'auto';
+	}
 
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            closeImageModal();
-        }
-    });
+	document.addEventListener('keydown', function(e) {
+		if (e.key === 'Escape') {
+			closeImageModal();
+		}
+	});
 
-    function updateDateTime() {
-        const now = new Date();
-        document.getElementById('liveTime').innerText = now.toLocaleTimeString('ne-NP');
-        document.getElementById('liveDate').innerText = now.toLocaleDateString('ne-NP', { weekday: 'long', year:'numeric', month:'long', day:'numeric' });
-    }
-    setInterval(updateDateTime, 1000); updateDateTime();
+	function updateDateTime() {
+		const now = new Date();
+		document.getElementById('liveTime').innerText = now.toLocaleTimeString('ne-NP');
+		document.getElementById('liveDate').innerText = now.toLocaleDateString('ne-NP', { weekday: 'long', year:'numeric', month:'long', day:'numeric' });
+	}
+	setInterval(updateDateTime, 1000); updateDateTime();
 
-    function saveLessonsToLocal() { localStorage.setItem('teacher_diary_lessons', JSON.stringify(allLessons)); }
-    function loadMockData() {
-        const stored = localStorage.getItem('teacher_diary_lessons');
-        if(stored) { allLessons = JSON.parse(stored); }
-        else { 
-            const today = new Date().toISOString().slice(0,10);
-            allLessons = [
-                { date:today, class:'कक्षा ५', subject:'गणित', topic:'भिन्नको जोड', objectives:'भिन्न जोड्न सिक्ने', activities:'उदाहरण छलफल', homework:'अभ्यास ३.१', attendance:'२८/३०' },
-                { date:today, class:'कक्षा ६', subject:'विज्ञान', topic:'प्रकाशको परावर्तन', objectives:'प्रकाशको गुण बुझ्ने', activities:'प्रयोगात्मक', homework:'चित्र सहित लेख्ने', attendance:'२२/२५' }
-            ];
-            saveLessonsToLocal();
-        }
-        updateDashboardStats();
-    }
+	function saveLessonsToLocal() { localStorage.setItem('teacher_diary_lessons', JSON.stringify(allLessons)); }
+	function loadMockData() {
+		const stored = localStorage.getItem('teacher_diary_lessons');
+		if(stored) { allLessons = JSON.parse(stored); }
+		else { 
+			const today = new Date().toISOString().slice(0,10);
+			allLessons = [
+				{ date:today, class:'कक्षा ५', subject:'गणित', topic:'भिन्नको जोड', objectives:'भिन्न जोड्न सिक्ने', activities:'उदाहरण छलफल', homework:'अभ्यास ३.१', attendance:'२८/३०' },
+				{ date:today, class:'कक्षा ६', subject:'विज्ञान', topic:'प्रकाशको परावर्तन', objectives:'प्रकाशको गुण बुझ्ने', activities:'प्रयोगात्मक', homework:'चित्र सहित लेख्ने', attendance:'२२/२५' }
+			];
+			saveLessonsToLocal();
+		}
+		updateDashboardStats();
+	}
 
-    function updateDashboardStats() {
-        document.getElementById('totalLessons').innerText = allLessons.length;
-        document.getElementById('totalClasses').innerText = new Set(allLessons.map(l=>l.class)).size;
-        document.getElementById('totalSubjects').innerText = new Set(allLessons.map(l=>l.subject)).size;
-        const now = new Date(); const startWeek = new Date(now.getFullYear(),0,1);
-        const weekNum = Math.ceil(((now - startWeek) / 86400000 + startWeek.getDay())/7);
-        const weekly = allLessons.filter(l=>{ let d=new Date(l.date); let w=Math.ceil(((d - new Date(d.getFullYear(),0,1))/86400000 + new Date(d.getFullYear(),0,1).getDay())/7); return w===weekNum;});
-        document.getElementById('weeklyLessons').innerText = weekly.length;
-        let totalAtt=0, attCount=0;
-        allLessons.forEach(l=>{ if(l.attendance && l.attendance.includes('/')){ let [p,t]=l.attendance.split('/'); if(+t>0) totalAtt+=(+p/+t)*100; attCount++;}});
-        let avgAtt = attCount ? Math.round(totalAtt/attCount) : 0;
-        document.getElementById('avgAttendance').innerText = avgAtt+'%';
-        let completion = Math.min(100, Math.round((allLessons.length/60)*100));
-        document.getElementById('completionRate').innerText = completion+'%';
-        const recent = [...allLessons].reverse().slice(0,6);
-        document.getElementById('recentActivities').innerHTML = recent.length ? recent.map(l=>`<div style="display:flex; gap:12px; padding:12px; border-bottom:1px solid #f0e0c0;"><i class="fas fa-book" style="color:#8B0000;"></i><div><strong>${l.topic}</strong><br><small>${l.date} | ${l.class}</small></div></div>`).join('') : '<p style="padding:20px; text-align:center;">कुनै पाठ योजना छैन</p>';
-        updateCharts();
-    }
+	function updateDashboardStats() {
+		document.getElementById('totalLessons').innerText = allLessons.length;
+		document.getElementById('totalClasses').innerText = new Set(allLessons.map(l=>l.class)).size;
+		document.getElementById('totalSubjects').innerText = new Set(allLessons.map(l=>l.subject)).size;
+		const now = new Date(); const startWeek = new Date(now.getFullYear(),0,1);
+		const weekNum = Math.ceil(((now - startWeek) / 86400000 + startWeek.getDay())/7);
+		const weekly = allLessons.filter(l=>{ let d=new Date(l.date); let w=Math.ceil(((d - new Date(d.getFullYear(),0,1))/86400000 + new Date(d.getFullYear(),0,1).getDay())/7); return w===weekNum;});
+		document.getElementById('weeklyLessons').innerText = weekly.length;
+		let totalAtt=0, attCount=0;
+		allLessons.forEach(l=>{ if(l.attendance && l.attendance.includes('/')){ let [p,t]=l.attendance.split('/'); if(+t>0) totalAtt+=(+p/+t)*100; attCount++;}});
+		let avgAtt = attCount ? Math.round(totalAtt/attCount) : 0;
+		document.getElementById('avgAttendance').innerText = avgAtt+'%';
+		let completion = Math.min(100, Math.round((allLessons.length/60)*100));
+		document.getElementById('completionRate').innerText = completion+'%';
+		const recent = [...allLessons].reverse().slice(0,6);
+		document.getElementById('recentActivities').innerHTML = recent.length ? recent.map(l=>`<div style="display:flex; gap:12px; padding:12px; border-bottom:1px solid #f0e0c0;"><i class="fas fa-book" style="color:#8B0000;"></i><div><strong>${l.topic}</strong><br><small>${l.date} | ${l.class}</small></div></div>`).join('') : '<p style="padding:20px; text-align:center;">कुनै पाठ योजना छैन</p>';
+		updateCharts();
+	}
 
-    function updateCharts() {
-        const months = ['बैशाख','जेठ','असार','साउन','भदौ','असोज','कार्तिक','मंसिर','पुष','माघ','फागुन','चैत'];
-        let monthlyData = new Array(12).fill(0);
-        allLessons.forEach(l=>{ let m=new Date(l.date).getMonth(); if(m>=0 && m<12) monthlyData[m]++; });
-        if(monthlyChart) monthlyChart.destroy();
-        const ctx = document.getElementById('monthlyChart')?.getContext('2d');
-        if(ctx) monthlyChart = new Chart(ctx, { type:'bar', data:{ labels:months, datasets:[{ label:'पाठ योजना', data:monthlyData, backgroundColor:'#8B0000' }] }, options:{ responsive:true } });
-        let classCount = {};
-        allLessons.forEach(l=>{ classCount[l.class] = (classCount[l.class]||0)+1; });
-        if(classChart) classChart.destroy();
-        const ctx2 = document.getElementById('classChart')?.getContext('2d');
-        if(ctx2 && Object.keys(classCount).length) classChart = new Chart(ctx2, { type:'pie', data:{ labels:Object.keys(classCount), datasets:[{ data:Object.values(classCount), backgroundColor:['#8B0000','#A0522D','#CD853F','#D2691E','#B5651E'] }] }, options:{ responsive:true } });
-    }
+	function updateCharts() {
+		const months = ['बैशाख','जेठ','असार','साउन','भदौ','असोज','कार्तिक','मंसिर','पुष','माघ','फागुन','चैत'];
+		let monthlyData = new Array(12).fill(0);
+		allLessons.forEach(l=>{ let m=new Date(l.date).getMonth(); if(m>=0 && m<12) monthlyData[m]++; });
+		if(monthlyChart) monthlyChart.destroy();
+		const ctx = document.getElementById('monthlyChart')?.getContext('2d');
+		if(ctx) monthlyChart = new Chart(ctx, { type:'bar', data:{ labels:months, datasets:[{ label:'पाठ योजना', data:monthlyData, backgroundColor:'#8B0000' }] }, options:{ responsive:true } });
+		let classCount = {};
+		allLessons.forEach(l=>{ classCount[l.class] = (classCount[l.class]||0)+1; });
+		if(classChart) classChart.destroy();
+		const ctx2 = document.getElementById('classChart')?.getContext('2d');
+		if(ctx2 && Object.keys(classCount).length) classChart = new Chart(ctx2, { type:'pie', data:{ labels:Object.keys(classCount), datasets:[{ data:Object.values(classCount), backgroundColor:['#8B0000','#A0522D','#CD853F','#D2691E','#B5651E'] }] }, options:{ responsive:true } });
+	}
 
-    function exportToCSV() { 
-        if(!allLessons.length){ showToast('कुनै डाटा छैन','error'); return; } 
-        let csv="मिति,कक्षा,विषय,शीर्षक,उद्देश्य,क्रियाकलाप,गृहकार्य,उपस्थिति\n"; 
-        allLessons.forEach(l=>{ csv+=`"${l.date}","${l.class}","${l.subject}","${l.topic}","${(l.objectives||'').replace(/"/g,'""')}","${(l.activities||'').replace(/"/g,'""')}","${(l.homework||'').replace(/"/g,'""')}","${l.attendance||''}"\n`; }); 
-        const blob=new Blob([csv],{type:'text/csv'}); 
-        const link=document.createElement('a'); 
-        link.download=`teacher_diary_${new Date().toISOString().slice(0,10)}.csv`; 
-        link.href=URL.createObjectURL(blob); 
-        link.click(); 
-        showToast('CSV डाउनलोड सुरु'); 
-    }
+	function exportToCSV() { 
+		if(!allLessons.length){ showToast('कुनै डाटा छैन','error'); return; } 
+		let csv="मिति,कक्षा,विषय,शीर्षक,उद्देश्य,क्रियाकलाप,गृहकार्य,उपस्थिति\n"; 
+		allLessons.forEach(l=>{ csv+=`"${l.date}","${l.class}","${l.subject}","${l.topic}","${(l.objectives||'').replace(/"/g,'""')}","${(l.activities||'').replace(/"/g,'""')}","${(l.homework||'').replace(/"/g,'""')}","${l.attendance||''}"\n`; }); 
+		const blob=new Blob([csv],{type:'text/csv'}); 
+		const link=document.createElement('a'); 
+		link.download=`teacher_diary_${new Date().toISOString().slice(0,10)}.csv`; 
+		link.href=URL.createObjectURL(blob); 
+		link.click(); 
+		showToast('CSV डाउनलोड सुरु'); 
+	}
 
-    // Function to return to dashboard cleanly
-    function goBackToDashboard() {
-        // Hide external container and show dashboard section
-        document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
-        const externalContainer = document.getElementById('externalFrameContainer');
-        externalContainer.style.display = 'none';
-        externalContainer.classList.remove('active');
-        document.getElementById('dashboardSection').classList.add('active');
-        document.getElementById('pageTitle').innerHTML = '📊 ड्यासबोर्ड';
-        // Update active nav item style
-        document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
-        // Find dashboard nav-item and mark active
-        const dashboardNav = Array.from(document.querySelectorAll('.nav-item')).find(nav => nav.innerText.includes('ड्यासबोर्ड'));
-        if(dashboardNav) dashboardNav.classList.add('active');
-        // Refresh dashboard data
-        loadMockData();
-        closeSidebar();
-        showToast('ड्यासबोर्डमा फर्कियो', 'success');
-    }
+	// Function to return to dashboard cleanly
+	function goBackToDashboard() {
+		// Hide external container and show dashboard section
+		document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
+		const externalContainer = document.getElementById('externalFrameContainer');
+		externalContainer.style.display = 'none';
+		externalContainer.classList.remove('active');
+		document.getElementById('dashboardSection').classList.add('active');
+		document.getElementById('pageTitle').innerHTML = '📊 ड्यासबोर्ड';
+		// Update active nav item style
+		document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+		// Find dashboard nav-item and mark active
+		const dashboardNav = Array.from(document.querySelectorAll('.nav-item')).find(nav => nav.innerText.includes('ड्यासबोर्ड'));
+		if(dashboardNav) dashboardNav.classList.add('active');
+		// Refresh dashboard data
+		loadMockData();
+		closeSidebar();
+		showToast('ड्यासबोर्डमा फर्कियो', 'success');
+	}
 
-    // External Tool Integration with Back to Dashboard support
-    function showExternalTool(toolId) {
-        let frameUrl = '';
-        let title = '';
-        if(toolId === 'EntryForm') { 
-            frameUrl = BASE_URL + 'Entry%20form%20for%20all%20plans.html';
-            title = '📝 सबै योजनाको डाटा इन्ट्री फर्म';
-        } else if(toolId === 'ReportAll') { 
-            frameUrl = BASE_URL + 'Report%20All%20Plans.html';
-            title = '📊 सबै योजनाको प्रतिवेदन';
-        } else if(toolId === 'DailyTableReport') { 
-            frameUrl = BASE_URL + 'Report%20Daily%20plan%20as%20Table.html';
-            title = '📋 दैनिक पाठ योजना तालिका प्रतिवेदन';
-        } else if(toolId === 'UpdateRecords') { 
-            frameUrl = BASE_URL + 'Update%20Dairy%20Records.html';
-            title = '✏️ डायरी रेकर्ड अपडेट गर्नुहोस् (Update Dairy Records)';
-        }
-        
-        if(frameUrl) {
-            showLoading(true);
-            // Test if the URL is accessible, if not show fallback message
-            const testFrame = document.createElement('iframe');
-            testFrame.style.display = 'none';
-            let loadCompleted = false;
-            const timeoutId = setTimeout(() => {
-                if(!loadCompleted) {
-                    showLoading(false);
-                    showToast('फाइल लोड हुन ढिलो भयो वा उपलब्ध छैन', 'error');
-                    testFrame.remove();
-                    // Still show container with custom fallback
-                    document.querySelectorAll('.content-section').forEach(s=> s.classList.remove('active'));
-                    const frameContainer = document.getElementById('externalFrameContainer');
-                    frameContainer.style.display = 'block';
-                    frameContainer.classList.add('active');
-                    document.getElementById('externalTitle').innerHTML = `<i class="fas fa-external-link-alt"></i> ${title}`;
-                    document.getElementById('externalIframe').srcdoc = `
-                        <html>
-                        <head><style>body{font-family:sans-serif;display:flex;justify-content:center;align-items:center;height:100vh;background:#f8f9fa;color:#8B0000;text-align:center;margin:0;}</style></head>
-                        <body>
-                            <div>
-                                <i class="fas fa-exclamation-triangle" style="font-size:54px;"></i>
-                                <h2>⚠️ फाइल उपलब्ध छैन वा ढिलो छ</h2>
-                                <p>कृपया पुन: प्रयास गर्नुहोस्। यदि समस्या रह्यो भने:</p>
-                                <p><strong>फाइल नाम: ${frameUrl.split('/').pop()}</strong></p>
-                                <button onclick="parent.goBackToDashboard()" style="background:#8B0000; color:white; padding:12px 24px; border:none; border-radius:40px; margin-top:20px; cursor:pointer;">🏠 ड्यासबोर्डमा फर्कनुहोस्</button>
-                            </div>
-                        </body>
-                        </html>
-                    `;
-                    document.getElementById('pageTitle').innerHTML = title;
-                    const clickedNav = event && event.target ? event.target.closest('.nav-item') : null;
-                    if(clickedNav) {
-                        document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-                        clickedNav.classList.add('active');
-                    }
-                    closeSidebar();
-                }
-            }, 7000);
-            
-            testFrame.onload = function() {
-                loadCompleted = true;
-                clearTimeout(timeoutId);
-                showLoading(false);
-                document.querySelectorAll('.content-section').forEach(s=> s.classList.remove('active'));
-                const frameContainer = document.getElementById('externalFrameContainer');
-                frameContainer.style.display = 'block';
-                frameContainer.classList.add('active');
-                document.getElementById('externalTitle').innerHTML = `<i class="fas fa-external-link-alt"></i> ${title}`;
-                document.getElementById('externalIframe').src = frameUrl;
-                document.getElementById('pageTitle').innerHTML = title;
-                const clickedNav = event && event.target ? event.target.closest('.nav-item') : null;
-                if(clickedNav) {
-                    document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-                    clickedNav.classList.add('active');
-                } else {
-                    // fallback highlight
-                    const navs = document.querySelectorAll('.nav-item');
-                    navs.forEach(nav => nav.classList.remove('active'));
-                    if(toolId === 'EntryForm') navs[1]?.classList.add('active');
-                    else if(toolId === 'ReportAll') navs[2]?.classList.add('active');
-                    else if(toolId === 'DailyTableReport') navs[3]?.classList.add('active');
-                    else if(toolId === 'UpdateRecords') navs[4]?.classList.add('active');
-                }
-                closeSidebar();
-                testFrame.remove();
-            };
-            testFrame.onerror = function() {
-                loadCompleted = true;
-                clearTimeout(timeoutId);
-                showLoading(false);
-                showToast('Update Dairy Records फाइल उपलब्ध छैन। कृपया फाइल अपलोड गर्नुहोस्', 'error');
-                testFrame.remove();
-                document.querySelectorAll('.content-section').forEach(s=> s.classList.remove('active'));
-                const frameContainer = document.getElementById('externalFrameContainer');
-                frameContainer.style.display = 'block';
-                frameContainer.classList.add('active');
-                document.getElementById('externalTitle').innerHTML = `<i class="fas fa-external-link-alt"></i> ${title}`;
-                document.getElementById('externalIframe').srcdoc = `
-                    <html>
-                    <head><style>body{font-family:sans-serif;display:flex;justify-content:center;align-items:center;height:100vh;background:#f5f5f5;color:#8B0000;text-align:center;margin:0;}</style></head>
-                    <body>
-                        <div>
-                            <i class="fas fa-exclamation-triangle" style="font-size:48px;"></i>
-                            <h2>⚠️ फाइल उपलब्ध छैन</h2>
-                            <p>कृपया निम्न फाइल अपलोड गर्नुहोस्:</p>
-                            <p><strong>${frameUrl.split('/').pop()}</strong></p>
-                            <p>यस लिङ्कमा: <a href="${frameUrl}" target="_blank">${frameUrl}</a></p>
-                            <button onclick="parent.goBackToDashboard()" style="background:#8B0000; color:#FFD966; padding:10px 20px; margin-top:20px; border-radius:40px; border:none; cursor:pointer;">🏠 ड्यासबोर्डमा फर्कनुहोस्</button>
-                        </div>
-                    </body>
-                    </html>
-                `;
-                document.getElementById('pageTitle').innerHTML = title;
-                const clickedNav = event && event.target ? event.target.closest('.nav-item') : null;
-                if(clickedNav) {
-                    document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-                    clickedNav.classList.add('active');
-                }
-                closeSidebar();
-            };
-            document.body.appendChild(testFrame);
-        } else {
-            showToast('लिङ्क उपलब्ध छैन', 'error');
-        }
-    }
+	// External Tool Integration with Back to Dashboard support
+	function showExternalTool(toolId) {
+		let frameUrl = '';
+		let title = '';
+		if(toolId === 'EntryForm') { 
+			frameUrl = BASE_URL + 'Entry%20form%20for%20all%20plans.html';
+			title = '📝 सबै योजनाको डाटा इन्ट्री फर्म';
+		} else if(toolId === 'ReportAll') { 
+			frameUrl = BASE_URL + 'Report%20All%20Plans.html';
+			title = '📊 सबै योजनाको प्रतिवेदन';
+		} else if(toolId === 'DailyTableReport') { 
+			frameUrl = BASE_URL + 'Report%20Daily%20plan%20as%20Table.html';
+			title = '📋 दैनिक पाठ योजना तालिका प्रतिवेदन';
+		} else if(toolId === 'UpdateRecords') { 
+			frameUrl = BASE_URL + 'Update%20Dairy%20Records.html';
+			title = '✏️ अपडेट डायरी रेकर्ड  गर्नुहोस् ';
+		}
+		
+		if(frameUrl) {
+			showLoading(true);
+			// Test if the URL is accessible, if not show fallback message
+			const testFrame = document.createElement('iframe');
+			testFrame.style.display = 'none';
+			let loadCompleted = false;
+			const timeoutId = setTimeout(() => {
+				if(!loadCompleted) {
+					showLoading(false);
+					showToast('फाइल लोड हुन ढिलो भयो वा उपलब्ध छैन', 'error');
+					testFrame.remove();
+					// Still show container with custom fallback
+					document.querySelectorAll('.content-section').forEach(s=> s.classList.remove('active'));
+					const frameContainer = document.getElementById('externalFrameContainer');
+					frameContainer.style.display = 'block';
+					frameContainer.classList.add('active');
+					document.getElementById('externalTitle').innerHTML = `<i class="fas fa-external-link-alt"></i> ${title}`;
+					document.getElementById('externalIframe').srcdoc = `
+						<html>
+						<head><style>body{font-family:sans-serif;display:flex;justify-content:center;align-items:center;height:100vh;background:#f8f9fa;color:#8B0000;text-align:center;margin:0;}</style></head>
+						<body>
+							<div>
+								<i class="fas fa-exclamation-triangle" style="font-size:54px;"></i>
+								<h2>⚠️ फाइल उपलब्ध छैन वा ढिलो छ</h2>
+								<p>कृपया पुन: प्रयास गर्नुहोस्। यदि समस्या रह्यो भने:</p>
+								<p><strong>फाइल नाम: ${frameUrl.split('/').pop()}</strong></p>
+								<button onclick="parent.goBackToDashboard()" style="background:#8B0000; color:white; padding:12px 24px; border:none; border-radius:40px; margin-top:20px; cursor:pointer;">🏠 ड्यासबोर्डमा फर्कनुहोस्</button>
+							</div>
+						</body>
+						</html>
+					`;
+					document.getElementById('pageTitle').innerHTML = title;
+					const clickedNav = event && event.target ? event.target.closest('.nav-item') : null;
+					if(clickedNav) {
+						document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+						clickedNav.classList.add('active');
+					}
+					closeSidebar();
+				}
+			}, 7000);
+			
+			testFrame.onload = function() {
+				loadCompleted = true;
+				clearTimeout(timeoutId);
+				showLoading(false);
+				document.querySelectorAll('.content-section').forEach(s=> s.classList.remove('active'));
+				const frameContainer = document.getElementById('externalFrameContainer');
+				frameContainer.style.display = 'block';
+				frameContainer.classList.add('active');
+				document.getElementById('externalTitle').innerHTML = `<i class="fas fa-external-link-alt"></i> ${title}`;
+				document.getElementById('externalIframe').src = frameUrl;
+				document.getElementById('pageTitle').innerHTML = title;
+				const clickedNav = event && event.target ? event.target.closest('.nav-item') : null;
+				if(clickedNav) {
+					document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+					clickedNav.classList.add('active');
+				} else {
+					// fallback highlight
+					const navs = document.querySelectorAll('.nav-item');
+					navs.forEach(nav => nav.classList.remove('active'));
+					if(toolId === 'EntryForm') navs[1]?.classList.add('active');
+					else if(toolId === 'ReportAll') navs[2]?.classList.add('active');
+					else if(toolId === 'DailyTableReport') navs[3]?.classList.add('active');
+					else if(toolId === 'UpdateRecords') navs[4]?.classList.add('active');
+				}
+				closeSidebar();
+				testFrame.remove();
+			};
+			testFrame.onerror = function() {
+				loadCompleted = true;
+				clearTimeout(timeoutId);
+				showLoading(false);
+				showToast('Update Dairy Records फाइल उपलब्ध छैन। कृपया फाइल अपलोड गर्नुहोस्', 'error');
+				testFrame.remove();
+				document.querySelectorAll('.content-section').forEach(s=> s.classList.remove('active'));
+				const frameContainer = document.getElementById('externalFrameContainer');
+				frameContainer.style.display = 'block';
+				frameContainer.classList.add('active');
+				document.getElementById('externalTitle').innerHTML = `<i class="fas fa-external-link-alt"></i> ${title}`;
+				document.getElementById('externalIframe').srcdoc = `
+					<html>
+					<head><style>body{font-family:sans-serif;display:flex;justify-content:center;align-items:center;height:100vh;background:#f5f5f5;color:#8B0000;text-align:center;margin:0;}</style></head>
+					<body>
+						<div>
+							<i class="fas fa-exclamation-triangle" style="font-size:48px;"></i>
+							<h2>⚠️ फाइल उपलब्ध छैन</h2>
+							<p>कृपया निम्न फाइल अपलोड गर्नुहोस्:</p>
+							<p><strong>${frameUrl.split('/').pop()}</strong></p>
+							<p>यस लिङ्कमा: <a href="${frameUrl}" target="_blank">${frameUrl}</a></p>
+							<button onclick="parent.goBackToDashboard()" style="background:#8B0000; color:#FFD966; padding:10px 20px; margin-top:20px; border-radius:40px; border:none; cursor:pointer;">🏠 ड्यासबोर्डमा फर्कनुहोस्</button>
+						</div>
+					</body>
+					</html>
+				`;
+				document.getElementById('pageTitle').innerHTML = title;
+				const clickedNav = event && event.target ? event.target.closest('.nav-item') : null;
+				if(clickedNav) {
+					document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+					clickedNav.classList.add('active');
+				}
+				closeSidebar();
+			};
+			document.body.appendChild(testFrame);
+		} else {
+			showToast('लिङ्क उपलब्ध छैन', 'error');
+		}
+	}
 
-    function showSection(section) {
-        document.querySelectorAll('.content-section').forEach(sec=> sec.classList.remove('active'));
-        const externalContainer = document.getElementById('externalFrameContainer');
-        externalContainer.style.display = 'none';
-        externalContainer.classList.remove('active');
-        document.getElementById(`${section}Section`).classList.add('active');
-        const titlesMap = { dashboard:'📊 ड्यासबोर्ड', reports:'📈 रिपोर्ट्स' };
-        document.getElementById('pageTitle').innerHTML = titlesMap[section] || 'शिक्षक डायरी';
-        if(section === 'dashboard') loadMockData();
-        document.querySelectorAll('.nav-item').forEach(n=> n.classList.remove('active'));
-        if(event && event.target) event.target.closest('.nav-item').classList.add('active');
-        closeSidebar();
-    }
+	function showSection(section) {
+		document.querySelectorAll('.content-section').forEach(sec=> sec.classList.remove('active'));
+		const externalContainer = document.getElementById('externalFrameContainer');
+		externalContainer.style.display = 'none';
+		externalContainer.classList.remove('active');
+		document.getElementById(`${section}Section`).classList.add('active');
+		const titlesMap = { dashboard:'📊 ड्यासबोर्ड', reports:'📈 रिपोर्ट्स' };
+		document.getElementById('pageTitle').innerHTML = titlesMap[section] || 'शिक्षक डायरी';
+		if(section === 'dashboard') loadMockData();
+		document.querySelectorAll('.nav-item').forEach(n=> n.classList.remove('active'));
+		if(event && event.target) event.target.closest('.nav-item').classList.add('active');
+		closeSidebar();
+	}
 
-    // Initialize
-    loadMockData();
-    window.showExternalTool = showExternalTool;
-    window.showSection = showSection;
-    window.toggleSidebar = toggleSidebar;
-    window.closeSidebar = closeSidebar;
-    window.exportToCSV = exportToCSV;
-    window.showRoutineImagePopup = showRoutineImagePopup;
-    window.closeImageModal = closeImageModal;
-    window.goBackToDashboard = goBackToDashboard;
+	// Initialize
+	loadMockData();
+	window.showExternalTool = showExternalTool;
+	window.showSection = showSection;
+	window.toggleSidebar = toggleSidebar;
+	window.closeSidebar = closeSidebar;
+	window.exportToCSV = exportToCSV;
+	window.showRoutineImagePopup = showRoutineImagePopup;
+	window.closeImageModal = closeImageModal;
+	window.goBackToDashboard = goBackToDashboard;
 </script>
 </body>
 </html>
