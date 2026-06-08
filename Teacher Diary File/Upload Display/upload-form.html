@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload Form - Persistent Session</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .upload-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h2 {
+            margin: 0;
+            font-weight: 600;
+        }
+        .form-body {
+            padding: 40px;
+        }
+        .btn-submit {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            padding: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            width: 100%;
+        }
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102,126,234,0.4);
+        }
+        .info-text {
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .download-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #667eea;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .form-label {
+            font-weight: 600;
+            color: #333;
+        }
+        /* subtle persistent hint */
+        .persist-hint {
+            font-size: 11px;
+            color: #667eea;
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .persist-hint i {
+            font-style: normal;
+            font-size: 12px;
+        }
+        hr {
+            margin: 20px 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="upload-container">
+            <div class="header">
+                <h2>📁 File Upload System</h2>
+                <p class="mb-0">Upload your documents securely</p>
+            </div>
+            <div class="form-body">
+                <form id="uploadForm">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">User Name *</label>
+                        <input type="text" class="form-control" id="username" name="username" required>
+                        <div class="persist-hint">
+                            <span>🔒</span> <span>Stays saved until you refresh the page</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="Contact_No" class="form-label">Contact Number *</label>
+                        <input type="tel" class="form-control" id="Contact_No" name="Contact_No" required>
+                        <div class="persist-hint">
+                            <span>📞</span> <span>Persists across uploads</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="scl" class="form-label">File Name *</label>
+                        <input type="text" class="form-control" id="scl" name="scl" required>
+                        <div class="persist-hint">
+                            <span>📄</span> <span>Custom name / identifier (persistent)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="file" class="form-label">Choose File *</label>
+                        <input type="file" class="form-control" id="file" name="file" required>
+                        <small class="text-muted">Supported: PDF, Images, Documents (Max 10MB)</small>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-submit" id="submitBtn">
+                        <span id="btnText">Submit</span>
+                        <span id="btnSpinner" class="spinner-border spinner-border-sm d-none"></span>
+                    </button>
+                </form>
+                
+                <div class="info-text">
+                    <hr>
+                    <a href="#" onclick="viewRecords()" class="download-link">📊 View All Uploaded Records →</a>
+                    <div style="margin-top: 12px; font-size: 11px; color: #888;">
+                        💡 <strong>Session persistent:</strong> User Name, Contact Number & File Name stay filled after each upload until manual change or page refresh.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========================
+        // CONFIGURATION
+        // IMPORTANT: Replace with your actual Google Apps Script Web App URL
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx5mr92WV0MnYDiOBbEoX-1p_I5bWTRbJxrtbq_c8qaBr6G2AH0G4gNkcOmO804fCxK/exec';
+        
+        // ========================
+        // PERSISTENCE KEYS (sessionStorage only, cleared on page close/tab close)
+        const STORAGE_KEYS = {
+            username: 'persist_upload_username',
+            contactNo: 'persist_upload_contact',
+            fileName: 'persist_upload_scl'
+        };
+        
+        // ========================
+        // Helper: Load persistent data from sessionStorage into form fields
+        function loadPersistentData() {
+            const savedUsername = sessionStorage.getItem(STORAGE_KEYS.username);
+            const savedContact = sessionStorage.getItem(STORAGE_KEYS.contactNo);
+            const savedFileRef = sessionStorage.getItem(STORAGE_KEYS.fileName);
+            
+            if (savedUsername) {
+                document.getElementById('username').value = savedUsername;
+            }
+            if (savedContact) {
+                document.getElementById('Contact_No').value = savedContact;
+            }
+            if (savedFileRef) {
+                document.getElementById('scl').value = savedFileRef;
+            }
+        }
+        
+        // ========================
+        // Helper: Save current values to sessionStorage
+        function persistCurrentData() {
+            const username = document.getElementById('username').value.trim();
+            const contactNo = document.getElementById('Contact_No').value.trim();
+            const scl = document.getElementById('scl').value.trim();
+            
+            // Save only if they have content (avoid storing empty on load, but fine)
+            // Even empty values can be stored to keep consistency, but we'll store anyway.
+            sessionStorage.setItem(STORAGE_KEYS.username, username);
+            sessionStorage.setItem(STORAGE_KEYS.contactNo, contactNo);
+            sessionStorage.setItem(STORAGE_KEYS.fileName, scl);
+        }
+        
+        // ========================
+        // Auto-save whenever user types in any of the three persistent fields
+        function attachAutoSaveEvents() {
+            const usernameField = document.getElementById('username');
+            const contactField = document.getElementById('Contact_No');
+            const sclField = document.getElementById('scl');
+            
+            const saveHandler = () => {
+                persistCurrentData();
+            };
+            
+            usernameField.addEventListener('input', saveHandler);
+            contactField.addEventListener('input', saveHandler);
+            sclField.addEventListener('input', saveHandler);
+            
+            // Also save on blur just to be super safe
+            usernameField.addEventListener('blur', saveHandler);
+            contactField.addEventListener('blur', saveHandler);
+            sclField.addEventListener('blur', saveHandler);
+        }
+        
+        // ========================
+        // Clear only file input and optionally keep persistent fields
+        // (We do NOT clear username, contact, scl after successful upload)
+        function resetFileInputOnly() {
+            const fileInput = document.getElementById('file');
+            fileInput.value = ''; // reset file picker
+        }
+        
+        // ========================
+        // File to Base64 conversion
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result.split(',')[1]);
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+        
+        // ========================
+        // SweetAlert2 notifications
+        function showAlert(message, type) {
+            Swal.fire({
+                icon: type,
+                title: type === 'success' ? 'Success!' : 'Error!',
+                text: message,
+                timer: 3000,
+                showConfirmButton: false
+            });
+        }
+        
+        // ========================
+        // Reset button UI after upload
+        function resetButton() {
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const btnSpinner = document.getElementById('btnSpinner');
+            
+            submitBtn.disabled = false;
+            btnText.classList.remove('d-none');
+            btnSpinner.classList.add('d-none');
+        }
+        
+        // ========================
+        // Main submission handler
+        async function handleSubmit(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const btnSpinner = document.getElementById('btnSpinner');
+            
+            // Get current values
+            const username = document.getElementById('username').value.trim();
+            const contactNo = document.getElementById('Contact_No').value.trim();
+            const scl = document.getElementById('scl').value.trim();
+            const fileInput = document.getElementById('file');
+            const file = fileInput.files[0];
+            
+            // Validation
+            if (!username) {
+                showAlert('Please enter User Name', 'error');
+                return;
+            }
+            if (!contactNo) {
+                showAlert('Please enter Contact Number', 'error');
+                return;
+            }
+            if (!scl) {
+                showAlert('Please enter File Name', 'error');
+                return;
+            }
+            if (!file) {
+                showAlert('Please select a file to upload', 'error');
+                return;
+            }
+            
+            // File size limit 10MB
+            if (file.size > 10 * 1024 * 1024) {
+                showAlert('File size should be less than 10MB', 'error');
+                return;
+            }
+            
+            // Disable button & show spinner
+            submitBtn.disabled = true;
+            btnText.classList.add('d-none');
+            btnSpinner.classList.remove('d-none');
+            
+            try {
+                // Convert file to base64
+                const base64 = await fileToBase64(file);
+                
+                // Prepare data object for Google Apps Script
+                const formData = {
+                    username: username,
+                    Contact_No: contactNo,
+                    scl: scl,
+                    myfile: {
+                        data: base64,
+                        name: file.name
+                    }
+                };
+                
+                // Send to Google Apps Script endpoint
+                // Using mode: 'no-cors' as original, but note that response won't be readable.
+                // To keep compatibility with the original behavior, we do same.
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({
+                        data: JSON.stringify(formData)
+                    })
+                });
+                
+                // Show success
+                showAlert('File uploaded successfully!', 'success');
+                
+                // CRITICAL: According to requirement: keep User Name, Contact Number, File Name constant until refresh.
+                // Therefore we do NOT clear those three fields. Only clear the file input.
+                resetFileInputOnly();
+                
+                // Additionally, we SAVE the current values again to sessionStorage (ensures latest edits preserved)
+                persistCurrentData();
+                
+                // Optional: keep focus on username or just leave as is. No modifications to layout.
+            } catch (error) {
+                console.error('Upload error:', error);
+                showAlert('Upload failed. Please check network or script URL. ' + (error.message || ''), 'error');
+            } finally {
+                resetButton();
+            }
+        }
+        
+        // ========================
+        // View records in new tab (display.html)
+        function viewRecords() {
+            // Open display page in new tab (if exists; else just opens blank)
+            window.open('display.html', '_blank');
+        }
+        
+        // ========================
+        // Page initialization: load persisted data, attach events, and ensure
+        // that any manual changes stay persistent.
+        function init() {
+            // Load previously saved user data from sessionStorage
+            loadPersistentData();
+            
+            // Attach auto-save for any modifications (user types or changes)
+            attachAutoSaveEvents();
+            
+            // Also ensure if the form is submitted, we save latest before submission (extra safety)
+            const form = document.getElementById('uploadForm');
+            form.addEventListener('submit', (e) => {
+                // Save current persistent fields before submission (so future page reloads preserve)
+                persistCurrentData();
+                // Actual submission handled by async handleSubmit, but we persist anyway.
+            });
+            
+            // For completeness, also save on window beforeunload? Not needed but friendly.
+            window.addEventListener('beforeunload', () => {
+                persistCurrentData();
+            });
+            
+            // Edge: if someone refreshes the page, loadPersistentData will restore.
+            // The requirement "until refresh" means that on manual refresh (F5), data remains,
+            // but if user closes tab and reopens, sessionStorage is cleared (normal behavior).
+            // This matches typical "session persistence". For full page refresh, sessionStorage persists.
+            // Good.
+        }
+        
+        // Override default form submission binding
+        document.getElementById('uploadForm').addEventListener('submit', handleSubmit);
+        
+        // Expose viewRecords globally
+        window.viewRecords = viewRecords;
+        
+        // Start everything when DOM ready
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

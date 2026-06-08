@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Uploaded Files</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body {
+            background: #f5f5f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .records-container {
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .filter-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .table-container {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            overflow-x: auto;
+        }
+        .btn-view {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            padding: 5px 15px;
+            font-size: 12px;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-view:hover {
+            transform: translateY(-1px);
+            color: white;
+        }
+        .filter-input {
+            border-radius: 10px;
+            border: 2px solid #e0e0e0;
+            padding: 10px;
+        }
+        .filter-input:focus {
+            border-color: #667eea;
+            box-shadow: none;
+        }
+        .badge-date {
+            background: #667eea;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+        }
+        .file-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .file-link:hover {
+            text-decoration: underline;
+        }
+        .refresh-btn {
+            background: #28a745;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 8px;
+            color: white;
+            margin-left: 10px;
+        }
+        .refresh-btn:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="records-container">
+        <div class="header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h2 class="mb-2">📋 Uploaded Records</h2>
+                    <p class="mb-0">View, search, and download uploaded files</p>
+                </div>
+                <button onclick="loadRecords()" class="refresh-btn">
+                    🔄 Refresh Data
+                </button>
+            </div>
+        </div>
+    
+        <div class="filter-card">
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <input type="text" id="filterName" class="form-control filter-input" placeholder="🔍 Filter by User Name...">
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="filterSchool" class="form-control filter-input" placeholder="🏫 Filter by File name...">
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="filterContact" class="form-control filter-input" placeholder="📞 Filter by Contact...">
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-primary w-100" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none;" onclick="clearFilters()">
+                        🔄 Clear All Filters
+                    </button>
+                </div>
+            </div>
+        </div>
+          
+        <div class="table-container">
+            <div id="loading" class="text-center py-5">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p class="mt-2">Loading records...</p>
+            </div>
+        
+            <div id="recordsTable" style="display: none;">
+                <table id="dataTable" class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>SN</th>
+                            <th>Name</th>
+                            <th>Contact No</th>
+                            <th>File Name</th>
+                            <th>Upload Date</th>
+                            <th>File</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // IMPORTANT: Replace with your actual deployed Google Apps Script URL
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx5mr92WV0MnYDiOBbEoX-1p_I5bWTRbJxrtbq_c8qaBr6G2AH0G4gNkcOmO804fCxK/exec';
+        
+        let allRecords = [];
+        let dataTable;
+        
+        // Load data on page load
+        $(document).ready(function() {
+            loadRecords();
+            
+            // Add filter listeners
+            $('#filterName, #filterSchool, #filterContact').on('keyup', function() {
+                applyFilters();
+            });
+        });
+        
+        async function loadRecords() {
+            showLoading(true);
+            
+            try {
+                console.log('Fetching records from:', `${SCRIPT_URL}?action=getRecords`);
+                
+                const response = await fetch(`${SCRIPT_URL}?action=getRecords`, {
+                    method: 'GET',
+                    mode: 'cors',
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                console.log('Response status:', response.status);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                console.log('Data received:', data);
+                
+                if (data.success && data.records) {
+                    allRecords = data.records;
+                    if (allRecords.length > 0) {
+                        displayRecords(allRecords);
+                    } else {
+                        showError('No records found. Please upload some files first.');
+                    }
+                } else {
+                    showError('Failed to load records: ' + (data.error || 'Unknown error'));
+                }
+            } catch (error) {
+                console.error('Detailed error:', error);
+                showError('Failed to load records. Error: ' + error.message + '. Please check the console for more details.');
+            } finally {
+                showLoading(false);
+            }
+        }
+        
+        function displayRecords(records) {
+            const tbody = $('#tableBody');
+            tbody.empty();
+            
+            if (records.length === 0) {
+                tbody.html('<tr><td colspan="6" class="text-center">No records found</td></tr>');
+                $('#recordsTable').show();
+                return;
+            }
+            
+            records.forEach((record, index) => {
+                const fileLink = record.fileUrl && record.fileUrl !== '#' ? 
+                    `<a href="${record.fileUrl}" target="_blank" class="file-link">
+                        📄 View File
+                    </a>` : 
+                    '<span class="text-muted">No file</span>';
+                
+                const row = `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td><strong>${escapeHtml(record.username)}</strong></td>
+                        <td>${escapeHtml(record.Contact_No)}</td>
+                        <td>${escapeHtml(record.scl)}</td>
+                        <td><span class="badge-date">${formatDate(record.timestamp)}</span></td>
+                        <td>${fileLink}</td>
+                    </tr>
+                `;
+                tbody.append(row);
+            });
+            
+            $('#recordsTable').show();
+            
+            // Initialize or update DataTable
+            if (dataTable) {
+                dataTable.destroy();
+            }
+            dataTable = $('#dataTable').DataTable({
+                pageLength: 10,
+                language: {
+                    search: "🔍 Search all:",
+                    lengthMenu: "Show _MENU_ entries",
+                    info: "Showing _START_ to _END_ of _TOTAL_ entries",
+                    emptyTable: "No data available"
+                },
+                order: [[4, 'desc']] // Sort by date descending
+            });
+        }
+        
+        function applyFilters() {
+            if (!allRecords.length) return;
+            
+            const nameFilter = $('#filterName').val().toLowerCase();
+            const schoolFilter = $('#filterSchool').val().toLowerCase();
+            const contactFilter = $('#filterContact').val().toLowerCase();
+            
+            const filtered = allRecords.filter(record => {
+                const matchName = !nameFilter || (record.username || '').toLowerCase().includes(nameFilter);
+                const matchSchool = !schoolFilter || (record.scl || '').toLowerCase().includes(schoolFilter);
+                const matchContact = !contactFilter || (record.Contact_No || '').toLowerCase().includes(contactFilter);
+                return matchName && matchSchool && matchContact;
+            });
+            
+            displayRecords(filtered);
+        }
+        
+        function clearFilters() {
+            $('#filterName, #filterSchool, #filterContact').val('');
+            applyFilters();
+        }
+        
+        function formatDate(timestamp) {
+            if (!timestamp) return 'N/A';
+            try {
+                const date = new Date(timestamp);
+                if (isNaN(date.getTime())) return 'N/A';
+                return date.toLocaleString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+            } catch (e) {
+                return 'N/A';
+            }
+        }
+        
+        function escapeHtml(text) {
+            if (!text) return 'N/A';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        function showLoading(show) {
+            if (show) {
+                $('#loading').show();
+                $('#recordsTable').hide();
+            } else {
+                $('#loading').hide();
+            }
+        }
+        
+        function showError(message) {
+            $('#tableBody').html(`<tr><td colspan="6" class="text-center text-danger">${message}</td></tr>`);
+            $('#recordsTable').show();
+            showLoading(false);
+        }
+    </script>
+</body>
+</html>
