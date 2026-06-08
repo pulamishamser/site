@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Teacher Diary</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(145deg, #e9eef3 0%, #dbe2ea 100%);
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      padding: 2rem 1.5rem;
+      min-height: 100vh;
+    }
+
+    /* main container */
+    .main-container {
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    /* header */
+    .hero {
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(2px);
+      border-radius: 2rem;
+      padding: 1.8rem 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      border: 1px solid rgba(255,255,255,0.6);
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #1f3b4c, #2c6e5c);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.01em;
+    }
+
+    .sub {
+      color: #4b5565;
+      margin-top: 0.5rem;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .btn-flip-popup {
+      background: #1e4b6e;
+      border: none;
+      padding: 0.6rem 1.4rem;
+      border-radius: 40px;
+      color: white;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      font-size: 0.9rem;
+    }
+
+    .btn-flip-popup:hover {
+      background: #0f3a55;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+    }
+
+    /* embed card style */
+    .embed-card {
+      background: white;
+      border-radius: 2rem;
+      overflow: hidden;
+      box-shadow: 0 20px 35px -12px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+      border: 1px solid #eef2f6;
+    }
+
+    .embed-header {
+      padding: 1rem 1.5rem;
+      background: #f9fafc;
+      border-bottom: 1px solid #eef2f6;
+      font-weight: 600;
+      color: #1f3b4c;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    iframe {
+      width: 100%;
+      height: 680px;
+      border: none;
+      display: block;
+      background: white;
+    }
+
+    /* share section */
+    .share-section {
+      margin-top: 2rem;
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .share-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .share-buttons button {
+      padding: 8px 18px;
+      border-radius: 40px;
+      border: none;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.2s;
+      background: #f0f2f5;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .facebook { background: #1877f2; color: white; }
+    .whatsapp { background: #25d366; color: white; }
+    .copy { background: #2d3e50; color: white; }
+    .share-buttons button:hover { transform: translateY(-2px); filter: brightness(0.95); }
+
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      color: #6c757d;
+      font-size: 0.75rem;
+    }
+
+    /* ========== POPUP MODAL (FLIPBOOK OVERLAY) ========== */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0.2s, opacity 0.25s ease;
+    }
+
+    .popup-overlay.active {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .popup-container {
+      background: #fef7e8;
+      background-image: radial-gradient(circle at 20% 35%, rgba(200,170,120,0.08) 2%, transparent 2.5%);
+      background-size: 32px 32px;
+      border-radius: 2rem;
+      width: 90%;
+      max-width: 750px;
+      max-height: 85vh;
+      overflow-y: auto;
+      box-shadow: 0 30px 50px rgba(0,0,0,0.4);
+      border: 1px solid rgba(255,245,200,0.6);
+      transform: scale(0.95);
+      transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+
+    .popup-overlay.active .popup-container {
+      transform: scale(1);
+    }
+
+    .popup-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 1.8rem;
+      background: #2c4a3b;
+      color: white;
+      border-top-left-radius: 2rem;
+      border-top-right-radius: 2rem;
+    }
+
+    .popup-header h2 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .close-popup {
+      background: none;
+      border: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: white;
+      transition: 0.2s;
+      line-height: 1;
+    }
+
+    .close-popup:hover {
+      transform: scale(1.2);
+      color: #ffdd99;
+    }
+
+    /* flipbook inside popup */
+    .flipbook-area {
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .flip-container {
+      perspective: 1800px;
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .flip-card {
+      background: transparent;
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      position: relative;
+      transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+      transform-style: preserve-3d;
+      border-radius: 28px;
+      cursor: pointer;
+      box-shadow: 0 25px 40px -12px rgba(0,0,0,0.4);
+    }
+
+    .flip-card.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .front, .back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 28px;
+      background: #fff9ef;
+      box-shadow: inset 0 0 0 1px rgba(255,245,215,0.9), 0 10px 20px -5px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    .front {
+      transform: rotateY(0deg);
+    }
+
+    .back {
+      transform: rotateY(180deg);
+      background: #fff3e0;
+    }
+
+    .page-img {
+      max-width: 92%;
+      max-height: 75%;
+      object-fit: contain;
+      border-radius: 18px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+      background: #f5ebd2;
+    }
+
+    .page-caption {
+      margin-top: 18px;
+      font-weight: 500;
+      background: #e9ddc7;
+      padding: 6px 20px;
+      border-radius: 60px;
+      font-size: 0.85rem;
+      color: #4a3520;
+    }
+
+    .pagination-panel {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      margin: 20px 0 12px;
+    }
+
+    .nav-btn {
+      background: #2b4b3a;
+      border: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 60px;
+      color: #f7efcf;
+      font-weight: bold;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .nav-btn:hover {
+      background: #3d6b53;
+      transform: scale(1.03);
+    }
+
+    .page-indicator {
+      background: #2c3e2a;
+      padding: 8px 20px;
+      border-radius: 44px;
+      color: #f3e9c0;
+      font-weight: 600;
+    }
+
+    .page-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 12px 0;
+    }
+
+    .page-btn {
+      background: #2b4b3a;
+      border: none;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      color: #f3e3be;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .page-btn.active, .page-btn:hover {
+      background: #6f9e7c;
+      color: #1e2a1a;
+      box-shadow: 0 0 6px #c0e0a0;
+    }
+
+    .goto-section {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 12px 0 8px;
+    }
+
+    .page-input {
+      background: #fef7e0;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 40px;
+      width: 80px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .goto-btn {
+      background: #4a6b4a;
+      border: none;
+      padding: 6px 18px;
+      border-radius: 40px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .flip-hint {
+      font-size: 0.7rem;
+      background: #e3d5ba;
+      padding: 6px 14px;
+      border-radius: 60px;
+      color: #3e2e1c;
+      margin-top: 10px;
+    }
+
+    .toast-msg {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1f2937dd;
+      backdrop-filter: blur(8px);
+      padding: 10px 22px;
+      border-radius: 60px;
+      color: white;
+      font-size: 0.9rem;
+      z-index: 2100;
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+    }
+
+    @media (max-width: 700px) {
+      body { padding: 1rem; }
+      iframe { height: 500px; }
+      .popup-container { max-height: 90vh; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="main-container">
+  <div class="hero">
+    <h1>📖 Smart Teacher Diary</h1>
+    <div class="sub">
+      <button id="openPopupBtn" class="btn-flip-popup">📸 View &nbsp;⟳</button>
+    </div>
+  </div>
+
+  <!-- Embedded Google Doc Section (original) -->
+  <div class="embed-card">
+   
+    <iframe 
+      src="https://docs.google.com/document/d/e/2PACX-1vROzuz1Arp2851Um8WadJFIZopwPt7YUE9Zms9DxfaZl3__YR3tO5h3I1pSnYijlul2WNFCPvki3uzO/pub?embedded=true"
+      title="Published Google Document"
+      loading="lazy"
+      aria-label="Embedded document reader">
+    </iframe>
+  </div>
+
+  <!-- Share section -->
+  <div class="share-section">
+    <div><strong>🔗 Share this page</strong><br><span style="font-size:0.7rem;">include both doc & flipbook</span></div>
+    <div class="share-buttons">
+      <button class="facebook" onclick="shareFB()">📘 Facebook</button>
+      <button class="whatsapp" onclick="shareWA()">💬 WhatsApp</button>
+      <button class="copy" onclick="copyPageLink()">📋 Copy Link</button>
+    </div>
+  </div>
+  <footer>✨ Click the button above to open the visual flipbook — experience the diary in a popup modal with page flips, thumbnails, and keyboard support.</footer>
+</div>
+
+<div id="toastMsg" class="toast-msg">✓ Copied!</div>
+
+<!-- ========== POPUP MODAL : FLIPBOOK ========== -->
+<div id="flipPopup" class="popup-overlay">
+  <div class="popup-container">
+    <div class="popup-header">
+      <h2>view documents</h2>
+      <button class="close-popup" id="closePopupBtn">&times;</button>
+    </div>
+    <div class="flipbook-area">
+      <!-- flip card -->
+      <div class="flip-container">
+        <div class="flip-card" id="popupFlipCard">
+          <div class="front">
+            <img class="page-img" id="popupFrontImg" alt="page front">
+            <div class="page-caption" id="popupFrontCaption"></div>
+          </div>
+          <div class="back">
+            <img class="page-img" id="popupBackImg" alt="page back">
+            <div class="page-caption" id="popupBackCaption"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- navigation controls -->
+      <div class="pagination-panel">
+        <button class="nav-btn" id="popupPrevBtn">◀</button>
+        <div class="page-indicator">
+          <span id="popupPageIdx">1</span> / <span id="popupTotalPages">5</span>
+        </div>
+        <button class="nav-btn" id="popupNextBtn">▶</button>
+      </div>
+
+      <div class="page-buttons" id="popupPageButtons"></div>
+
+      <div class="goto-section">
+        <input type="number" id="popupPageInput" class="page-input" min="1" max="5" value="1">
+        <button id="popupGotoBtn" class="goto-btn">Jump</button>
+      </div>
+      <div class="flip-hint">💡 Click the card to flip • Arrow keys ← → • number buttons quick access</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ==============================================
+  // FLIPBOOK DATA (Google Drive Images)
+  // ==============================================
+  const FILE_IDS = [
+    "19KGh14hL9idVElAmuAHyWbVlHdP7-4cm",   // page1
+    "1GGhinkLaAl4Cvb-tHbEKCHpk2Tml43zS",   // page2
+    "1WFfY3FeVqtVkCAaaPNffVieLfVsdljJ0",   // page3
+    "1Gl8Io7RZHC-dgq47NMwLjjxfMAXHBi3b",   // page4
+    "1lp0eXq7pJkY7tUmB9Zqa_Nb-eRin2X7W"    // page5
+  ];
+  
+  function getImageUrl(fileId) {
+    return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
+  }
+  
+  const imageItems = FILE_IDS.map((id, idx) => ({
+    src: getImageUrl(id),
+    title: `Page ${idx+1}`,
+    fileId: id
+  }));
+  
+  const total = imageItems.length;
+  
+  // ========== FLIPBOOK STATE (popup instance) ==========
+  let currentIdx = 0;          // 0-based
+  let isFlippedState = false;
+  
+  // DOM elements inside popup
+  const popupCard = document.getElementById('popupFlipCard');
+  const frontImg = document.getElementById('popupFrontImg');
+  const backImg = document.getElementById('popupBackImg');
+  const frontCaption = document.getElementById('popupFrontCaption');
+  const backCaption = document.getElementById('popupBackCaption');
+  const pageIdxSpan = document.getElementById('popupPageIdx');
+  const totalSpan = document.getElementById('popupTotalPages');
+  const prevBtn = document.getElementById('popupPrevBtn');
+  const nextBtn = document.getElementById('popupNextBtn');
+  const pageButtonsContainer = document.getElementById('popupPageButtons');
+  const pageInput = document.getElementById('popupPageInput');
+  const gotoBtn = document.getElementById('popupGotoBtn');
+  
+  totalSpan.innerText = total;
+  if(pageInput) pageInput.max = total;
+  
+  // Helper functions
+  function updateFlipbookContent() {
+    if (!imageItems.length) return;
+    const item = imageItems[currentIdx];
+    const cacheBuster = `&nocache=${Date.now()}`;
+    const imgUrl = item.src + cacheBuster;
+    
+    frontImg.src = imgUrl;
+    frontImg.alt = `page ${currentIdx+1}`;
+    frontCaption.innerHTML = `📖 ${item.title} <span style="font-size:0.65rem;">${currentIdx+1}/${total}</span>`;
+    
+    backImg.src = imgUrl;
+    backImg.alt = `back ${currentIdx+1}`;
+    backCaption.innerHTML = `✨ flip side · ${currentIdx+1}`;
+    
+    pageIdxSpan.innerText = currentIdx+1;
+    if(pageInput) pageInput.value = currentIdx+1;
+    
+    // fallback on error
+    frontImg.onerror = () => {
+      const fallback = `https://drive.google.com/uc?export=download&id=${item.fileId}`;
+      frontImg.src = fallback;
+      backImg.src = fallback;
+    };
+    
+    // update active page buttons style
+    const allBtns = document.querySelectorAll('#popupPageButtons .page-btn');
+    allBtns.forEach((btn, i) => {
+      if (i === currentIdx) btn.classList.add('active');
+      else btn.classList.remove('active');
+    });
+  }
+  
+  function resetFlipToFront() {
+    if (isFlippedState && popupCard) {
+      popupCard.classList.remove('flipped');
+      isFlippedState = false;
+    }
+  }
+  
+  function goToPage(pageNum) {
+    let newIdx = pageNum - 1;
+    if (newIdx < 0) newIdx = 0;
+    if (newIdx >= total) newIdx = total - 1;
+    if (newIdx !== currentIdx) {
+      currentIdx = newIdx;
+      resetFlipToFront();
+      updateFlipbookContent();
+    }
+  }
+  
+  function nextPage() {
+    if (currentIdx + 1 < total) {
+      currentIdx++;
+      resetFlipToFront();
+      updateFlipbookContent();
+    }
+  }
+  
+  function prevPage() {
+    if (currentIdx - 1 >= 0) {
+      currentIdx--;
+      resetFlipToFront();
+      updateFlipbookContent();
+    }
+  }
+  
+  function toggleFlip() {
+    if (popupCard) {
+      popupCard.classList.toggle('flipped');
+      isFlippedState = popupCard.classList.contains('flipped');
+    }
+  }
+  
+  // create quick page buttons 1..5
+  function createPageNumberButtons() {
+    if (!pageButtonsContainer) return;
+    pageButtonsContainer.innerHTML = '';
+    for (let i = 1; i <= total; i++) {
+      const btn = document.createElement('button');
+      btn.textContent = i;
+      btn.classList.add('page-btn');
+      if (i === currentIdx+1) btn.classList.add('active');
+      btn.addEventListener('click', (e) => {
+        goToPage(i);
+      });
+      pageButtonsContainer.appendChild(btn);
+    }
+  }
+  
+  // attach events (popup)
+  if (prevBtn) prevBtn.addEventListener('click', prevPage);
+  if (nextBtn) nextBtn.addEventListener('click', nextPage);
+  if (popupCard) popupCard.addEventListener('click', toggleFlip);
+  if (gotoBtn) {
+    gotoBtn.addEventListener('click', () => {
+      let val = parseInt(pageInput.value);
+      if (isNaN(val)) val = currentIdx+1;
+      val = Math.min(total, Math.max(1, val));
+      goToPage(val);
+    });
+  }
+  if (pageInput) {
+    pageInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        let val = parseInt(pageInput.value);
+        if (isNaN(val)) val = currentIdx+1;
+        val = Math.min(total, Math.max(1, val));
+        goToPage(val);
+      }
+    });
+  }
+  
+  // keyboard navigation when popup is OPEN
+  function handleGlobalKeys(e) {
+    const popupActive = document.getElementById('flipPopup').classList.contains('active');
+    if (!popupActive) return;
+    if (e.key === 'ArrowLeft') {
+      prevPage();
+      e.preventDefault();
+    } else if (e.key === 'ArrowRight') {
+      nextPage();
+      e.preventDefault();
+    } else if (e.key === ' ' || e.key === 'Space' || e.key === 'Enter') {
+      if (e.key === ' ' || e.key === 'Space') e.preventDefault();
+      toggleFlip();
+    }
+  }
+  
+  window.addEventListener('keydown', handleGlobalKeys);
+  
+  // ========== POPUP MODAL LOGIC ==========
+  const popupOverlay = document.getElementById('flipPopup');
+  const openBtn = document.getElementById('openPopupBtn');
+  const closePopupBtn = document.getElementById('closePopupBtn');
+  
+  function openPopup() {
+    // reset flip state to front & current content
+    resetFlipToFront();
+    updateFlipbookContent();     // ensure fresh images
+    popupOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  
+  function closePopup() {
+    popupOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+    // optional: reset flip card to front when closed
+    if (popupCard && isFlippedState) {
+      popupCard.classList.remove('flipped');
+      isFlippedState = false;
+    }
+  }
+  
+  if (openBtn) openBtn.addEventListener('click', openPopup);
+  if (closePopupBtn) closePopupBtn.addEventListener('click', closePopup);
+  // click on overlay background closes
+  popupOverlay.addEventListener('click', (e) => {
+    if (e.target === popupOverlay) closePopup();
+  });
+  
+  // initialize flipbook content + page buttons
+  createPageNumberButtons();
+  updateFlipbookContent();
+  
+  // preload images for smoother experience
+  function preloadImages() {
+    imageItems.forEach(item => {
+      const img = new Image();
+      img.src = item.src;
+    });
+  }
+  preloadImages();
+  
+  // ========== SHARE & TOAST ==========
+  const currentUrl = window.location.href.split('#')[0];
+  function showToastMsg(msg, duration = 2000) {
+    const toast = document.getElementById('toastMsg');
+    toast.textContent = msg;
+    toast.style.opacity = '1';
+    setTimeout(() => {
+      toast.style.opacity = '0';
+    }, duration);
+  }
+  
+  function shareFB() {
+    const shareUrl = currentUrl;
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=Check out this insightful published document & flipbook!`, '_blank', 'width=600,height=500');
+  }
+  function shareWA() {
+    window.open(`https://wa.me/?text=${encodeURIComponent(`📖 visual diary → ${currentUrl}`)}`, '_blank');
+  }
+  function copyPageLink() {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(currentUrl).then(() => showToastMsg('✓ Link copied!')).catch(() => fallbackCopy());
+    } else {
+      fallbackCopy();
+    }
+  }
+  function fallbackCopy() {
+    const textarea = document.createElement('textarea');
+    textarea.value = currentUrl;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+    showToastMsg('✓ Link copied');
+  }
+  
+  // subtle entrance
+  window.addEventListener('load', () => {
+    const mainDiv = document.querySelector('.main-container');
+    if(mainDiv) {
+      mainDiv.style.opacity = '0';
+      mainDiv.style.transform = 'translateY(10px)';
+      mainDiv.style.transition = 'opacity 0.4s ease, transform 0.3s';
+      setTimeout(() => {
+        mainDiv.style.opacity = '1';
+        mainDiv.style.transform = 'translateY(0)';
+      }, 50);
+    }
+  });
+  
+  // Also update meta for sharing but not mandatory
+  console.log('Popup Flipbook ready — click "Open Flipbook Popup" to view interactive diary cards!');
+</script>
+</body>
+</html>
