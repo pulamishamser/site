@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>📚 सम्पूर्ण शिक्षक डायरी प्रणाली | Complete Teacher Diary System</title>
+    <title>📚Smart Teacher Diary </title>
     <!-- External Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -490,7 +490,7 @@
 <div class="main-content" id="mainContent">
     <div class="top-bar">
         <button class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
-        <div class="page-title" id="pageTitle">📊 Teacher Diary Dashboard</div>
+        <div class="page-title" id="pageTitle">📊Smart Teacher Diary Dashboard</div>
         <div class="date-time-card"><div id="liveTime" style="font-size: 18px; font-weight:bold;"></div><div id="liveDate" style="font-size:12px;"></div></div>
     </div>
 
@@ -503,23 +503,37 @@
             <div class="stat-card"><div class="stat-icon"><i class="fas fa-calendar-week"></i></div><div class="stat-info"><h3 id="weeklyLessons">0</h3><p>यो हप्ता</p></div></div>
         </div>
         <div class="quick-actions">
-           
-              <button class="action-btn" onclick="showExternalTool(' https://shamser.info.np"><i class="fas fa-database"></i> shamser.info.np</button>
             <button class="action-btn" onclick="showExternalTool('EntryForm')"><i class="fas fa-database"></i> सबै योजना इन्ट्री</button>
             <button class="action-btn" onclick="showExternalTool('ReportAll')"><i class="fas fa-chart-line"></i> सबै योजना प्रतिवेदन</button>
             <button class="action-btn" onclick="showExternalTool('DailyTableReport')"><i class="fas fa-table"></i> दैनिक पाठ तालिका</button>
             <button class="action-btn" onclick="showExternalTool('UpdateRecords')"><i class="fas fa-pen-to-square"></i> डायरी रेकर्ड अपडेट</button>
         </div>
         
+
+    
         <!-- Daily Routine Image Link Card - Opens Popup -->
         <div class="routine-image-card" onclick="showRoutineImagePopup()">
             <img src="https://shamser.info.np/Teacher%20Diary%20File/daily_routine_table.png" 
                  alt="दैनिक कार्य तालिका"
-                 onerror="this.src='https://via.placeholder.com/800x400?text=Daily+Routine+Table+Image'; this.onerror=null;">
+                 onerror="this.src='Daily Routine Table'; this.onerror=null;">
             <h3><i class="fas fa-calendar-day"></i> दैनिक कार्य तालिका (Daily Routine Table)</h3>
             <p>कक्षा दैनिक दिनचर्या हेर्नको लागि क्लिक गर्नुहोस् | Click to view full daily routine timetable</p>
         </div>
         
+
+
+
+
+    <!-- Daily Routine Image Link Card - Opens Popup -->
+        <div class="routine-image-card" onclick="showRoutineImagePopup()">
+            <img src="https://shamser.info.np/Teacher%20Diary%20File/daily_routine_table.png" 
+                 alt="Education Policy-2083-84"
+                 onerror="this.src='https://shamser.info.np/Teacher Diary File/flip files.html'; this.onerror=null;">
+            <h3><i class="fas fa-calendar-day"></i> Education Policy-2083-84</h3>
+            <p>Education Policy-2083-84 and Teacher diary Readmade</p>
+        </div>
+
+
         <div class="chart-container"><h3 style="color:#8B0000;">📅 मासिक पाठ योजना</h3><canvas id="monthlyChart"></canvas></div>
         <div class="chart-container"><h3 style="color:#8B0000;">📊 कक्षा अनुसार तथ्यांक</h3><canvas id="classChart"></canvas></div>
         <div class="card"><div class="card-title"><i class="fas fa-history"></i> हालैका गतिविधिहरू</div><div id="recentActivities" style="max-height:280px; overflow:auto;"></div></div>
