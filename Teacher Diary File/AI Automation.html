@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>🤖shamser.info.np AI Suite - Integrated AI Tools</title>
+    <!-- Bootstrap 5 + Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Tesseract for OCR -->
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            background: #f0f4f8;
+            font-family: 'Segoe UI', 'Poppins', 'Noto Sans Devanagari', sans-serif;
+        }
+        .shamser-header {
+            background: linear-gradient(135deg, #0B2B40 0%, #1A5F5F 100%);
+            border-radius: 32px;
+            padding: 1rem 2rem;
+            margin-bottom: 2rem;
+            color: white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .tool-card {
+            border: none;
+            border-radius: 28px;
+            background: white;
+            transition: all 0.2s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            cursor: pointer;
+            overflow: hidden;
+            height: 100%;
+        }
+        .tool-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.1);
+        }
+        .tool-icon {
+            font-size: 2.5rem;
+            background: #eef2ff;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 30px;
+            margin-bottom: 1rem;
+            color: #1a5f5f;
+        }
+        .modal-xl-custom {
+            max-width: 1000px;
+        }
+        .result-box {
+            background: #f8fafc;
+            border-radius: 20px;
+            border: 1px solid #e2edf2;
+            min-height: 200px;
+            padding: 1.2rem;
+            white-space: pre-wrap;
+            font-size: 0.95rem;
+        }
+        .voice-btn {
+            background: #1e6f5c;
+            color: white;
+            border-radius: 60px;
+            transition: 0.2s;
+        }
+        .voice-btn.listening {
+            background: #dc2626;
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        @media print {
+            .no-print, .tool-card, .shamser-header, button, .modal {
+                display: none;
+            }
+        }
+        .badge-ai {
+            background: #e0f2fe;
+            color: #0f5c6b;
+            border-radius: 40px;
+            padding: 4px 12px;
+            font-size: 0.7rem;
+        }
+        textarea, input {
+            border-radius: 20px !important;
+        }
+        .btn-generic {
+            border-radius: 40px;
+            background: #0f5c6b;
+            border: none;
+            padding: 8px 20px;
+            font-weight: 500;
+            color: white;
+        }
+        .btn-generic:hover {
+            background: #094854;
+            color: white;
+        }
+        .nav-pills .nav-link {
+            border-radius: 40px;
+            color: #1e3a4d;
+        }
+        .nav-pills .nav-link.active {
+            background: #0f5c6b;
+        }
+        /* Loading spinner */
+        .loading-spinner {
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #0f5c6b;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+<div class="container py-3">
+    <div class="shamser-header d-flex justify-content-between align-items-center flex-wrap">
+        <div>
+            <h1>🤖 shamser.info.np AI Suite - Integrated AI Tools</h1>
+            <p class="mb-0">shamser.info.np | 8 AI Toos (Powered by Gemini)</p>
+        </div>
+        <div><span class="badge-ai"><i class="fab fa-google"></i> Gemini 2.0 Flash + Tesseract OCR</span></div>
+    </div>
+
+    <!-- 8 Tool Grid -->
+    <div class="row g-4 mb-5">
+        <div class="col-md-6 col-lg-3" onclick="openTool('chatbot')"><div class="tool-card p-3 text-center"><div class="tool-icon mx-auto"><i class="fas fa-robot"></i></div><h5>🤖 AI Chatbot</h5><p class="small text-muted">Ask Edu Questions</p></div></div>
+        <div class="col-md-6 col-lg-3" onclick="openTool('lesson')"><div class="tool-card p-3 text-center"><div class="tool-icon mx-auto"><i class="fas fa-chalkboard-user"></i></div><h5>📝 AI Lesson Plan</h5><p class="small text-muted">पाठयोजना जेनरेटर</p></div></div>
+        <div class="col-md-6 col-lg-3" onclick="openTool('question')"><div class="tool-card p-3 text-center"><div class="tool-icon mx-auto"><i class="fas fa-file-alt"></i></div><h5>📚 Question Paper</h5><p class="small text-muted">प्रश्नपत्र तयारी</p></div></div>
+        <div class="col-md-6 col-lg-3" onclick="openTool('result')"><div class="tool-card p-3 text-center"><div class="tool-icon mx-auto"><i class="fas fa-chart-line"></i></div><h5>📊 Result Analyzer</h5><p class="small text-muted">नतिजा विश्लेषण</p></div></div>
+        <div class="col-md-6 col-lg-3" onclick="openTool('diary')"><div class="tool-card p-3 text-center"><div class="tool-icon mx-auto"><i class="fas fa-book"></i></div><h5>📖 Teacher Diary</h5><p class="small text-muted">डायरी / दैनिकी</p></div></div>
+        <div class="col-md-6 col-lg-3" onclick="openTool('report')"><div class="tool-card p-3 text-center"><div class="tool-icon mx-auto"><i class="fas fa-pen-fancy"></i></div><h5>🎓 School Report</h5><p class="small text-muted">रिपोर्ट कार्ड लेखन</p></div></div>
+        <div class="col-md-6 col-lg-3" onclick="openTool('ocr')"><div class="tool-card p-3 text-center"><div class="tool-icon mx-auto"><i class="fas fa-image"></i></div><h5>🖼️ OCR Image to Text</h5><p class="small text-muted">चित्रबाट पाठ निकाल्नुहोस्</p>
+<p class="small text-muted">
+<a href="OCR Image to Text</h5>https://aiocr.org/">OCR</a></p>
+</div></div>
+
+
+        <div class="col-md-6 col-lg-3" onclick="openTool('voice')"><div class="tool-card p-3 text-center"><div class="tool-icon mx-auto"><i class="fas fa-microphone-alt"></i></div><h5>🎤 Nepali Voice Assistant</h5><p class="small text-muted">नेपालीमा आवाज आदेश</p></div></div>
+    </div>
+
+    <!-- MODAL DYNAMIC -->
+    <div class="modal fade" id="toolModal" tabindex="-1" data-bs-backdrop="static">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content rounded-4">
+                <div class="modal-header bg-light border-0" style="border-radius: 20px 20px 0 0;">
+                    <h5 class="modal-title" id="modalTitle"><i class="fas fa-cogs"></i> AI Tools </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4" id="modalBodyContent">
+                    <!-- dynamic content -->
+                </div>
+                <div class="modal-footer bg-light border-0">
+                    <button class="btn btn-secondary rounded-pill" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ---------- Google Apps Script Backend Integration ----------
+    // The backend URL will be automatically set to the current script's base URL
+    const SCRIPT_URL = window.location.origin + window.location.pathname;
+    
+    // Helper function to call doPost endpoint
+    async function callAIEndpoint(action, payload) {
+        try {
+            const response = await fetch(SCRIPT_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    action: action,
+                    data: JSON.stringify(payload)
+                })
+            });
+            const result = await response.json();
+            if (result.success) {
+                return result.response;
+            } else {
+                throw new Error(result.error || 'Unknown error occurred');
+            }
+        } catch (error) {
+            console.error('API call failed:', error);
+            throw new Error('Server Error: ' + error.message);
+        }
+    }
+
+    // Wrapper for Gemini AI calls via Apps Script
+    async function callGemini(promptText) {
+        return await callAIEndpoint('gemini', { prompt: promptText });
+    }
+
+    // Bootstrap Modal
+    let currentModal = null;
+    function openTool(tool) {
+        if(!currentModal) currentModal = new bootstrap.Modal(document.getElementById('toolModal'));
+        const modalTitle = document.getElementById('modalTitle');
+        const modalBody = document.getElementById('modalBodyContent');
+        if(tool === 'chatbot') renderChatbot(modalTitle, modalBody);
+        else if(tool === 'lesson') renderLessonPlan(modalTitle, modalBody);
+        else if(tool === 'question') renderQuestionPaper(modalTitle, modalBody);
+        else if(tool === 'result') renderResultAnalyzer(modalTitle, modalBody);
+        else if(tool === 'diary') renderTeacherDiary(modalTitle, modalBody);
+        else if(tool === 'report') renderReportWriter(modalTitle, modalBody);
+        else if(tool === 'ocr') renderOCR(modalTitle, modalBody);
+        else if(tool === 'voice') renderVoiceAssistant(modalTitle, modalBody);
+        currentModal.show();
+    }
+
+    // ----- 1. CHATBOT -----
+    function renderChatbot(titleEl, bodyEl) {
+        titleEl.innerHTML = '<i class="fas fa-robot me-2"></i> 🤖 AI Chatbot';
+        bodyEl.innerHTML = `
+            <div class="mb-3"><div id="chatMessagesModal" style="height:350px; overflow-y:auto; background:#f9f9ff; border-radius:24px; padding:16px;" class="border"><div class="text-muted text-center">AI सँग कुराकानी सुरु गर्नुहोस्</div></div></div>
+            <div class="input-group"><input type="text" id="chatInputModal" class="form-control rounded-pill" placeholder="तपाईंको प्रश्न..."><button id="sendChatModalBtn" class="btn btn-generic rounded-pill px-4">पठाउनुहोस्</button></div>
+        `;
+        const msgBox = document.getElementById('chatMessagesModal');
+        const input = document.getElementById('chatInputModal');
+        const sendBtn = document.getElementById('sendChatModalBtn');
+        function addMsg(sender, text, isUser) {
+            const div = document.createElement('div');
+            div.className = `d-flex ${isUser ? 'justify-content-end' : 'justify-content-start'} mb-2`;
+            div.innerHTML = `<div class="p-2 rounded-3 ${isUser ? 'bg-primary text-white' : 'bg-light border'}" style="max-width:80%;">${text.replace(/\n/g,'<br>')}</div>`;
+            msgBox.appendChild(div);
+            msgBox.scrollTop = msgBox.scrollHeight;
+        }
+        async function sendChat() {
+            let q = input.value.trim();
+            if(!q) return;
+            addMsg("तपाईं", q, true);
+            input.value = "";
+            const loadingDiv = document.createElement('div');
+            loadingDiv.className = 'd-flex justify-content-start mb-2';
+            loadingDiv.innerHTML = `<div class="p-2 rounded-3 bg-light border"><i class="fas fa-spinner fa-pulse"></i> AI लेख्दै...</div>`;
+            msgBox.appendChild(loadingDiv);
+            msgBox.scrollTop = msgBox.scrollHeight;
+            try {
+                const aiResp = await callGemini(`तपाईं शिक्षक हुनुहुन्छ। प्रश्नको जवाफ स्पष्ट र उपयोगी दिनुहोस्: ${q}`);
+                loadingDiv.remove();
+                addMsg("शमशेर AI", aiResp, false);
+            } catch(e) { loadingDiv.remove(); addMsg("AI", "त्रुटि: " + e.message, false); }
+        }
+        sendBtn.onclick = sendChat;
+        input.addEventListener('keypress', (e) => { if(e.key === 'Enter') sendChat(); });
+    }
+
+    // 2. LESSON PLAN
+    function renderLessonPlan(titleEl, bodyEl) {
+        titleEl.innerHTML = '<i class="fas fa-chalkboard-user me-2"></i> 📝 AI Lesson Plan Generator';
+        bodyEl.innerHTML = `
+            <div class="row g-3"><div class="col-md-4"><label>कक्षा</label><input id="lpGrade" class="form-control" placeholder="७"></div>
+            <div class="col-md-4"><label>विषय</label><input id="lpSubject" class="form-control" placeholder="विज्ञान"></div>
+            <div class="col-md-4"><label>पाठ</label><input id="lpLesson" class="form-control" placeholder="प्रकाश"></div>
+            <div class="col-12"><label>समय</label><input id="lpDuration" class="form-control" placeholder="४५ मिनेट"></div>
+            <div class="col-12"><button id="genPlanBtn" class="btn btn-generic">पाठयोजना बनाउनुहोस्</button></div>
+            <div class="col-12"><div id="planResult" class="result-box mt-2" style="min-height:200px;">पाठयोजना यहाँ देखिनेछ</div></div></div>
+        `;
+        document.getElementById('genPlanBtn').onclick = async () => {
+            const grade = document.getElementById('lpGrade').value, subject = document.getElementById('lpSubject').value, lesson = document.getElementById('lpLesson').value, duration = document.getElementById('lpDuration').value;
+            if(!grade||!subject||!lesson) { alert("कृपया सबै भर्नुहोस्"); return; }
+            document.getElementById('planResult').innerHTML = "<div class='loading-spinner'></div> तयार गर्दै...";
+            const prompt = `पाठयोजना: कक्षा ${grade}, विषय ${subject}, पाठ ${lesson}, समय ${duration}. शीर्षक: सिकाइ उद्देश्य, शिक्षण सामग्री, क्रियाकलाप, मूल्याङ्कन, गृहकार्य। नेपालीमा लेख्नुहोस्।`;
+            try { const res = await callGemini(prompt); document.getElementById('planResult').innerHTML = res.replace(/\n/g,'<br>'); } catch(e) { document.getElementById('planResult').innerHTML = `त्रुटि: ${e.message}`; }
+        };
+    }
+
+    // 3. QUESTION PAPER
+    function renderQuestionPaper(titleEl, bodyEl) {
+        titleEl.innerHTML = '<i class="fas fa-file-alt me-2"></i> 📚 AI Question Paper Generator';
+        bodyEl.innerHTML = `<div class="row g-3"><div class="col-6"><label>कक्षा</label><input id="qpGrade" class="form-control"></div><div class="col-6"><label>विषय</label><input id="qpSubject" class="form-control"></div><div class="col-12"><label>एकाइ/पाठ</label><input id="qpUnit" class="form-control" placeholder="एकाइ १"></div><div class="col-12"><label>प्रश्न प्रकार (बहुविकल्पी, लामो, छोटो)</label><input id="qpType" class="form-control" value="छोटो र लामो प्रश्न"></div><div class="col-12"><button id="genPaperBtn" class="btn btn-generic">प्रश्नपत्र बनाउनुहोस्</button></div><div id="paperResult" class="result-box mt-3"></div></div>`;
+        document.getElementById('genPaperBtn').onclick = async () => {
+            const g = document.getElementById('qpGrade').value, sub = document.getElementById('qpSubject').value, unit = document.getElementById('qpUnit').value, type = document.getElementById('qpType').value;
+            if(!g||!sub) { alert("कक्षा र विषय आवश्यक"); return; }
+            document.getElementById('paperResult').innerHTML = "तयार हुँदै...";
+            const prompt = `${g} कक्षाको ${sub} विषयको ${unit} को लागि प्रश्नपत्र तयार गर। प्रश्न प्रकार: ${type}. कुल ८-१० प्रश्नहरू, उपयुक्त अंक विभाजन। नेपालीमा।`;
+            try { const res = await callGemini(prompt); document.getElementById('paperResult').innerHTML = res.replace(/\n/g,'<br>'); } catch(e) { document.getElementById('paperResult').innerHTML = `Error: ${e.message}`; }
+        };
+    }
+
+    // 4. RESULT ANALYZER
+    function renderResultAnalyzer(titleEl, bodyEl) {
+        titleEl.innerHTML = '<i class="fas fa-chart-line me-2"></i> 📊 Result Analyzer';
+        bodyEl.innerHTML = `<div class="mb-3"><label>विद्यार्थीहरूको अंक (अलग अलग गर्नुहोस्, जस्तै: 78,85,92,64,45,88)</label><textarea id="marksData" rows="2" class="form-control" placeholder="उदा: 78, 92, 65, 88, 45, 75"></textarea></div><div><button id="analyzeBtn" class="btn btn-generic">विश्लेषण गर्नुहोस्</button></div><div id="analysisResult" class="result-box mt-3">औसत, उत्तीर्ण दर, ग्रेड विश्लेषण यहाँ देखिनेछ।</div>`;
+        document.getElementById('analyzeBtn').onclick = async () => {
+            let marks = document.getElementById('marksData').value;
+            if(!marks.trim()) { alert("अंकहरू राख्नुहोस्"); return; }
+            document.getElementById('analysisResult').innerHTML = "<div class='loading-spinner'></div> विश्लेषण गर्दै (AI)...";
+            const prompt = `निम्न अंकहरूको विद्यार्थी नतिजा विश्लेषण गर: ${marks}. औसत, उच्चतम, न्यूनतम, उत्तीर्ण प्रतिशत (३५ पास अंक), ग्रेड वितरण, र शिक्षकलाई सुझाव दिनुहोस्। नेपालीमा।`;
+            try { const res = await callGemini(prompt); document.getElementById('analysisResult').innerHTML = res.replace(/\n/g,'<br>'); } catch(e) { document.getElementById('analysisResult').innerHTML = `त्रुटि: ${e.message}`; }
+        };
+    }
+
+    // 5. TEACHER DIARY
+    function renderTeacherDiary(titleEl, bodyEl) {
+        titleEl.innerHTML = '<i class="fas fa-book me-2"></i> 📖 AI Teacher Diary';
+        bodyEl.innerHTML = `<div class="mb-2"><label>आजको मिति</label><input id="diaryDate" class="form-control" value="${new Date().toLocaleDateString('ne-NP')}"></div><div><label>डायरी नोट / क्रियाकलाप</label><textarea id="diaryNote" rows="4" class="form-control" placeholder="आज कक्षामा के सिकाइयो? विशेष घटना..."></textarea></div><div class="mt-3"><button id="enhanceDiaryBtn" class="btn btn-generic">AI सुधार/व्यवस्थित गर्नुहोस्</button></div><div id="diaryResult" class="result-box mt-3">सुझाब सहितको डायरी यहाँ देखिनेछ।</div>`;
+        document.getElementById('enhanceDiaryBtn').onclick = async () => {
+            let note = document.getElementById('diaryNote').value;
+            if(!note) { alert("डायरी नोट लेख्नुहोस्"); return; }
+            document.getElementById('diaryResult').innerHTML = "प्रशोधन गर्दै...";
+            const prompt = `शिक्षक डायरी: "${note}" यसलाई व्यवस्थित, पेशेवर र शिक्षण उद्देश्यसहितको डायरी (क्रियाकलाप, विद्यार्थी प्रतिक्रिया, सुधार) मा परिवर्तन गर। नेपालीमा।`;
+            try { const res = await callGemini(prompt); document.getElementById('diaryResult').innerHTML = res.replace(/\n/g,'<br>'); } catch(e) { document.getElementById('diaryResult').innerHTML = `Error: ${e.message}`; }
+        };
+    }
+
+    // 6. SCHOOL REPORT WRITER
+    function renderReportWriter(titleEl, bodyEl) {
+        titleEl.innerHTML = '<i class="fas fa-pen-fancy me-2"></i> 🎓 AI School Report Writer';
+        bodyEl.innerHTML = `<div class="row"><div class="col-6"><label>विद्यार्थी नाम</label><input id="studentName" class="form-control"></div><div class="col-6"><label>कक्षा</label><input id="reportGrade" class="form-control"></div><div class="col-12"><label>विषयगत प्रगति टिप्पणी</label><textarea id="remarks" rows="3" class="form-control" placeholder="जस्तै: गणितमा कमजोर, विज्ञानमा राम्रो"></textarea></div><div><button id="genReportBtn" class="btn btn-generic mt-2">रिपोर्ट कार्ड टिप्पणी बनाउनुहोस्</button></div><div id="reportResult" class="result-box mt-3"></div></div>`;
+        document.getElementById('genReportBtn').onclick = async () => {
+            let name = document.getElementById('studentName').value, grd = document.getElementById('reportGrade').value, rem = document.getElementById('remarks').value;
+            if(!name || !grd) { alert("नाम र कक्षा भर्नुहोस्"); return; }
+            document.getElementById('reportResult').innerHTML = "तयारी गर्दै...";
+            const prompt = `विद्यार्थी ${name}, कक्षा ${grd} को लागि विद्यालय रिपोर्ट कार्डको टिप्पणी लेख। शैक्षिक प्रगति: ${rem}. व्यवहार र सुधार सुझाव पनि समावेश गर। औपचारिक र प्रोत्साहनात्मक नेपाली भाषामा।`;
+            try { const res = await callGemini(prompt); document.getElementById('reportResult').innerHTML = res.replace(/\n/g,'<br>'); } catch(e) { document.getElementById('reportResult').innerHTML = `Error: ${e.message}`; }
+        };
+    }
+
+    // 7. OCR Image to Text
+    function renderOCR(titleEl, bodyEl) {
+        titleEl.innerHTML = '<i class="fas fa-image me-2"></i> 🖼️ OCR Image to Text (तस्वीरबाट पाठ)';
+        bodyEl.innerHTML = `<div class="text-center"><input type="file" id="ocrImageInput" accept="image/*" class="form-control mb-3"><button id="ocrBtn" class="btn btn-generic mb-3">पाठ निकाल्नुहोस्</button><div id="ocrResult" class="result-box" style="min-height:150px;">OCR परिणाम</div></div>`;
+        document.getElementById('ocrBtn').onclick = () => {
+            const fileInput = document.getElementById('ocrImageInput');
+            if(!fileInput.files.length) { alert("कृपया Image चयन गर्नुहोस्"); return; }
+            const file = fileInput.files[0];
+            document.getElementById('ocrResult').innerHTML = "<div class='loading-spinner'></div> पाठ निकाल्दै... (Tesseract.js)";
+            Tesseract.recognize(file, 'nep', { logger: m => console.log(m) }).then(({ data: { text } }) => {
+                if(text.trim()) document.getElementById('ocrResult').innerHTML = `<pre style="white-space:pre-wrap">${text}</pre>`;
+                else document.getElementById('ocrResult').innerHTML = "कुनै पाठ भेटिएन। स्पष्ट तस्वीर प्रयास गर्नुहोस्।";
+            }).catch(err => { document.getElementById('ocrResult').innerHTML = "OCR Error: " + err; });
+        };
+    }
+
+    // 8. NEPALI VOICE ASSISTANT
+    function renderVoiceAssistant(titleEl, bodyEl) {
+        titleEl.innerHTML = '<i class="fas fa-microphone-alt me-2"></i> 🎤 Nepali Voice Assistant';
+        bodyEl.innerHTML = `<div class="text-center p-3"><button id="voiceRecordBtn" class="btn voice-btn px-5 py-3"><i class="fas fa-microphone fa-2x"></i><br>नेपालीमा बोल्नुहोस्</button><div id="voiceStatus" class="mt-3 text-muted">माइक बटन थिचेर बोल्नुहोस्</div><div id="voiceTranscript" class="result-box mt-3"></div><div id="voiceAIResponse" class="result-box mt-3" style="background:#e6f7f0;"></div></div>`;
+        let recognition = null;
+        if('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognition = new SpeechRecognition();
+            recognition.lang = 'ne-NP';
+            recognition.continuous = false;
+            recognition.interimResults = false;
+        }
+        const recordBtn = document.getElementById('voiceRecordBtn');
+        const statusDiv = document.getElementById('voiceStatus');
+        const transcriptDiv = document.getElementById('voiceTranscript');
+        const aiRespDiv = document.getElementById('voiceAIResponse');
+        if(!recognition) {
+            statusDiv.innerHTML = "तपाईंको ब्राउजरले Nepali Voice लाई समर्थन गर्दैन। Chrome प्रयोग गर्नुहोस्।";
+            if(recordBtn) recordBtn.disabled = true;
+            return;
+        }
+        recordBtn.onclick = () => {
+            recognition.start();
+            recordBtn.classList.add('listening');
+            statusDiv.innerHTML = "🎙️ सुन्दै छु... नेपालीमा बोल्नुहोस्";
+            transcriptDiv.innerHTML = "";
+            aiRespDiv.innerHTML = "";
+        };
+        recognition.onresult = async (event) => {
+            const spokenText = event.results[0][0].transcript;
+            transcriptDiv.innerHTML = `<strong>तपाईंले भन्नुभयो:</strong> ${spokenText}`;
+            statusDiv.innerHTML = "✅ AI ले जवाफ लेख्दै...";
+            recordBtn.classList.remove('listening');
+            try {
+                const aiAnswer = await callGemini(`नेपाली भाषामा उत्तर देऊ। प्रश्न/आदेश: ${spokenText} (यो शिक्षक सहायक हो, पाठ योजना, कक्षा प्रश्नको जवाफ देऊ।)`);
+                aiRespDiv.innerHTML = `<strong>🤖 शमशेर AI:</strong><br>${aiAnswer.replace(/\n/g,'<br>')}`;
+                statusDiv.innerHTML = "आवाज तयार छ। पुन: बोल्न बटन थिच्नुहोस्।";
+            } catch(e) { aiRespDiv.innerHTML = `त्रुटि: ${e.message}`; statusDiv.innerHTML = "पुन: प्रयास गर्नुहोस्"; }
+        };
+        recognition.onerror = (e) => { statusDiv.innerHTML = "त्रुटि: " + e.error; recordBtn.classList.remove('listening'); };
+        recognition.onend = () => { recordBtn.classList.remove('listening'); if(statusDiv.innerHTML.includes("सुन्दै")) statusDiv.innerHTML = "माइक बन्द भयो, पुन: थिच्नुहोस्।"; };
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
