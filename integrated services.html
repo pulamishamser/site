@@ -374,9 +374,9 @@
   <div class="hero">
       <img src="https://shamser.info.np/HomePage/mydynamic img.png" alt="shamser.info.np" style="max-width: 100%;">
     <h2>Integrated Online Service</h2>
-    <p><span>Integrated e-Service system + Marketing Suite | Exam IEMIS | Attendance | TSC Prep | Digital Library & Teacher Diary</span></p>
+    <p><span>Integrated e-Service system + Marketing Suite | Exam IEMIS | Attendance | TSC Prep | Digital Library & Teacher Diary + AI Automation Hub</span></p>
     <div class="stats-row">
-      <div class="stat-card"><i class="fas fa-rocket"></i> 22+ integrated tools</div>
+      <div class="stat-card"><i class="fas fa-rocket"></i> 23+ integrated tools</div>
       <div class="stat-card"><i class="fas fa-users"></i> 2.8k+ active subscribers</div>
       <div class="stat-card"><i class="fas fa-globe"></i> Smart webpage</div>
     </div>
@@ -412,7 +412,7 @@
         <a href="mailto:shamserpulami500@gmail.com"><i class="fas fa-envelope"></i> Contact</a>
       </div>
     </div>
-    <div style="margin-top: 25px; font-size: 0.8rem; text-align: center;">⚡ New: Digital Library, Teacher Digital Diary • Result Demo, TSC Questions, Demand Form • News Modal • Multi Letterpad • Student Attendance System</div>
+    <div style="margin-top: 25px; font-size: 0.8rem; text-align: center;">⚡ New: AI Automation Hub, Digital Library, Teacher Digital Diary • Result Demo, TSC Questions, Demand Form • News Modal • Multi Letterpad • Student Attendance System</div>
   </div>
 </footer>
 
@@ -428,8 +428,8 @@
 </div>
 
 <script>
-  // ======================== COMPLETE TOOLSET (PRESERVING ALL ORIGINAL TOOLS + NEW ADDITIONS: Digital Library & Teacher Diary) =========================
-  // (NO FEATURE LAYOUT MODIFIED, EXACT ADDITIONS AS REQUESTED)
+  // ======================== ENHANCED TOOLSET: PRESERVES ALL ORIGINAL TOOLS + ADDS AI AUTOMATION HUB (EXACT URL: https://shamser.info.np/Teacher%20Diary%20File/AI%20Automation.html) =========================
+  // Total becomes 23 tools. Digital Library, Teacher Diary kept. AI Automation newly added with spotlight.
   const toolsData = [
     { id: "glamourUI", name: "Glamour girls", description: "Aesthetic UI showcase with modern design elements, micro-interactions, and visual inspiration.", iconClass: "fas fa-palette", url: "https://shamser.info.np/glamour.html", primaryAction: "View Showcase", marketingTag: "✨ Trending" },
     { id: "quizApp3", name: "Quiz App V3", description: "Advanced quiz platform with dynamic questions & score tracking. Perfect for TSC & competitive exams.", iconClass: "fas fa-puzzle-piece", url: "https://shamser.info.np/quiz_App3/quiz_app.html", primaryAction: "Launch Quiz", marketingTag: "🔥 Most played" },
@@ -450,10 +450,12 @@
     { id: "resultDemo", name: "Result Demo System", description: "Interactive result demo portal — preview exam results, marksheets, and performance analytics (Demo).", iconClass: "fas fa-chart-simple", url: "https://shamser.info.np/result%20demo.html", primaryAction: "View Demo", marketingTag: "📊 New" },
     { id: "demandForm", name: "Service Demand Form", description: "Official digital Demand Form submission system — quick apply for services, and requests.", iconClass: "fas fa-file-signature", url: "https://www.jotform.com/form/231287552368463", primaryAction: "Fill Form", marketingTag: "📝 Official" },
     { id: "googleFormFeedback", name: "Feedback & Suggestion", description: "Share your thoughts, report issues, or request new features. Your voice shapes the platform.", iconClass: "fab fa-google", url: "https://shamser.info.np/profile/connect%20with%20social%20media.html", primaryAction: "Open Form", marketingTag: "⭐ Rate Us" },
-    // ADDED: Digital Book Library (exactly as requested)
+    // Digital Book Library (preserved)
     { id: "digitalLibrary", name: "Digital Book Library", description: "Access vast collection of digital books, e-textbooks, and educational resources. Read online anytime, anywhere.", iconClass: "fas fa-book-open", url: "https://shamser.info.np/Teacher%20Diary%20File/Smart%20Teacher%20Diary%20Dashboard.html", primaryAction: "Browse Library", marketingTag: "📖 New" },
-    // ADDED: Teacher Digital Diary (exactly as requested)
-    { id: "teacherDiary", name: "Teacher Digital Diary", description: "Digital diary for teachers: plan lessons, track daily activities, maintain records, and organize academic schedules.", iconClass: "fas fa-journal-whills", url: "Teacher%20Diary%20File/Smart%20Teacher%20Diary%20Dashboard.html", primaryAction: "Open Diary", marketingTag: "✏️ New" }
+    // Teacher Digital Diary (preserved)
+    { id: "teacherDiary", name: "Teacher Digital Diary", description: "Digital diary for teachers: plan lessons, track daily activities, maintain records, and organize academic schedules.", iconClass: "fas fa-journal-whills", url: "https://shamser.info.np/Teacher%20Diary%20File/Smart%20Teacher%20Diary%20Dashboard.html", primaryAction: "Open Diary", marketingTag: "✏️ New" },
+    // NEW: AI Automation Hub (exact URL as requested) – with premium highlight
+    { id: "aiAutomationHub", name: "AI Automation Hub", description: "Next-gen AI workflow automation: smart assistants, auto responses, data processing & intelligent automations for education and business.", iconClass: "fas fa-robot", url: "https://shamser.info.np/Teacher%20Diary%20File/AI%20Automation.html", primaryAction: "Launch AI Hub", marketingTag: "🤖 AI POWERED" }
   ];
 
   // Modal logic
@@ -483,7 +485,7 @@
     if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
   });
 
-  // Render all cards (preserves layout exactly, adds two new tools without altering any existing structure)
+  // Render all cards (enhanced grid includes the new AI Automation)
   const toolsGrid = document.getElementById('toolsGrid');
   function renderCards() {
     toolsGrid.innerHTML = '';
@@ -541,14 +543,14 @@
     });
   }
 
-  // Live active users counter (unchanged layout)
+  // Live active users counter (improved total count consistency)
   const statRow = document.querySelector('.stats-row');
   if(statRow) {
     const activeSpan = document.createElement('div');
     activeSpan.className = 'stat-card';
-    activeSpan.innerHTML = `<i class="fas fa-sync-alt"></i> <span id="liveCounter">687</span> active now`;
+    activeSpan.innerHTML = `<i class="fas fa-sync-alt"></i> <span id="liveCounter">703</span> active now`;
     statRow.appendChild(activeSpan);
-    let count = 687;
+    let count = 703;
     setInterval(() => {
       const change = Math.floor(Math.random() * 55) - 15;
       let newCount = count + change;
@@ -560,7 +562,7 @@
     }, 7800);
   }
 
-  // Search filter (preserved)
+  // Search filter (preserved, now with AI Automation searchable)
   const addSearchFilter = () => {
     const sectionTitle = document.querySelector('.section-title');
     if(sectionTitle) {
@@ -570,7 +572,7 @@
       searchDiv.innerHTML = `
         <div style="display: flex; gap: 10px; align-items: center; background: white; border-radius: 60px; padding: 5px 18px; max-width: 380px; border:1px solid #cfe3db;">
           <i class="fas fa-search" style="color:#2c9b7a;"></i>
-          <input type="text" id="globalToolSearch" placeholder="Search tools... Quiz, TSC, Attendance, Library, Diary, Result, Demand..." style="border: none; padding: 12px 6px; width: 100%; background: transparent; outline: none; font-size:0.95rem;">
+          <input type="text" id="globalToolSearch" placeholder="Search tools... Quiz, TSC, AI Automation, Library, Diary, Result, Demand..." style="border: none; padding: 12px 6px; width: 100%; background: transparent; outline: none; font-size:0.95rem;">
         </div>
       `;
       sectionTitle.insertAdjacentElement('afterend', searchDiv);
@@ -589,7 +591,7 @@
   };
   addSearchFilter();
 
-  // Floating tip highlighting newest tools (updated to reflect new additions)
+  // Floating tip highlighting newest tools: includes AI Automation Hub prominently
   const showFloatingTip = () => {
     const tipDiv = document.createElement('div');
     tipDiv.style.position = 'fixed';
@@ -607,11 +609,11 @@
     tipDiv.style.display = 'flex';
     tipDiv.style.alignItems = 'center';
     tipDiv.style.gap = '10px';
-    tipDiv.innerHTML = '<i class="fas fa-star-of-life"></i> 🚀 New: Digital Book Library • Teacher Digital Diary • Result Demo • TSC Questions!';
+    tipDiv.innerHTML = '<i class="fas fa-brain"></i> 🤖 NEW: AI Automation Hub • Digital Library • Teacher Diary • Result Demo!';
     tipDiv.addEventListener('click', () => {
-      const libraryTool = toolsData.find(t => t.id === "digitalLibrary");
-      if(libraryTool) openModalWithUrl(libraryTool.url, libraryTool.name);
-      else openModalWithUrl("https://shamser.info.np/IndexLibrary.html", "Digital Book Library");
+      const aiTool = toolsData.find(t => t.id === "aiAutomationHub");
+      if(aiTool) openModalWithUrl(aiTool.url, aiTool.name);
+      else openModalWithUrl("https://shamser.info.np/Teacher%20Diary%20File/AI%20Automation.html", "AI Automation Hub");
     });
     document.body.appendChild(tipDiv);
     setTimeout(() => {
@@ -620,30 +622,35 @@
   };
   setTimeout(showFloatingTip, 4000);
 
-  // Update marketing badge with total tools count (now 22 tools)
+  // Update marketing badge with total tools count (now 23 tools)
   const badgeElem = document.querySelector('.marketing-badge');
   if(badgeElem) {
     badgeElem.innerHTML = `<i class="fas fa-chart-line"></i> ${toolsData.length}+ dynamic tools • 24/7 access`;
   }
   
-  // Add ribbon effect for new cards (including Digital Library and Teacher Diary)
+  // Add ribbon effect for new cards: AI Automation, Digital Library, Teacher Diary, etc.
   const addRibbonEffect = () => {
-    const newIds = ['resultDemo', 'tscQuestions', 'demandForm', 'googleFormFeedback', 'StudentAttendance', 'digitalLibrary', 'teacherDiary'];
+    const newIds = ['resultDemo', 'tscQuestions', 'demandForm', 'googleFormFeedback', 'StudentAttendance', 'digitalLibrary', 'teacherDiary', 'aiAutomationHub'];
     const cards = document.querySelectorAll('.tool-card');
     cards.forEach(card => {
       const titleElem = card.querySelector('h3');
       if(titleElem) {
         const titleText = titleElem.innerText;
-        if(titleText.includes('Result Demo') || titleText.includes('TSC Question') || titleText.includes('Demand Form') || titleText.includes('Feedback') || titleText.includes('Attendance') || titleText.includes('Digital Book') || titleText.includes('Teacher Digital')) {
+        if(titleText.includes('Result Demo') || titleText.includes('TSC Question') || titleText.includes('Demand Form') || titleText.includes('Feedback') || titleText.includes('Attendance') || titleText.includes('Digital Book') || titleText.includes('Teacher Digital') || titleText.includes('AI Automation')) {
           card.style.borderLeft = '4px solid #2c9b7a';
           card.style.borderRadius = '32px 32px 32px 32px';
+        }
+        if(titleText.includes('AI Automation')) {
+          card.style.background = 'linear-gradient(135deg, #ffffff, #f0f9ff)';
+          const iconDiv = card.querySelector('.card-icon');
+          if(iconDiv) iconDiv.style.background = '#e2eaff';
         }
       }
     });
   };
   setTimeout(addRibbonEffect, 150);
   
-  console.log("Integrated suite with " + toolsData.length + " tools (Digital Library & Teacher Diary added). All buttons open in modal preview. No layout/feature changes.");
+  console.log("Integrated suite with " + toolsData.length + " tools (AI Automation Hub added). All buttons open in modal preview. No layout/feature changes.");
 </script>
 </body>
 </html>
