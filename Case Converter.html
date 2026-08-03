@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Case Converter · shamser.info.np</title>
+  <!-- Font Awesome for social icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ── reset & base ── */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+      background: #f0f4f9;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    /* main card: header + editor + footer */
+    .editor-wrapper {
+      max-width: 860px;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 12px 40px rgba(6, 41, 78, 0.10);
+      padding: 0;
+      transition: box-shadow 0.2s;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .editor-wrapper:hover {
+      box-shadow: 0 16px 48px rgba(6, 41, 78, 0.14);
+    }
+
+    /* ── header ── */
+    .app-header {
+      padding: 20px 28px 14px 28px;
+      background: #ffffff;
+      border-bottom: 1px solid #e9edf3;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .app-header h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #06294e;
+      letter-spacing: -0.3px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .app-header h1 i {
+      color: #2a5f8a;
+      font-size: 1.3rem;
+    }
+
+    .header-tag {
+      font-size: 0.8rem;
+      background: #eef4fa;
+      color: #1f3a57;
+      padding: 4px 14px;
+      border-radius: 30px;
+      font-weight: 500;
+    }
+
+    /* ── editor body ── */
+    .editor-body {
+      padding: 24px 28px 20px;
+    }
+
+    /* ── textarea ── */
+    .input {
+      margin-bottom: 18px;
+    }
+
+    #content {
+      width: 100%;
+      min-height: 180px;
+      padding: 16px 18px;
+      font-size: 1rem;
+      line-height: 1.6;
+      font-family: inherit;
+      border: 2px solid #dce3ec;
+      border-radius: 12px;
+      background: #fafcff;
+      color: #06294e;
+      resize: vertical;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    #content:focus {
+      outline: none;
+      border-color: #0a315b;
+      box-shadow: 0 0 0 4px rgba(10, 49, 91, 0.08);
+    }
+
+    #content::placeholder {
+      color: #8a9eb0;
+      font-weight: 400;
+      letter-spacing: 0.3px;
+    }
+
+    /* ── toolbar / counters ── */
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px 16px;
+      margin-top: 10px;
+      padding: 6px 4px 0;
+    }
+
+    .actions {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .action-btn {
+      background: transparent;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s, transform 0.1s;
+      color: #2c4b6e;
+    }
+
+    .action-btn:hover {
+      background: #e7eef6;
+    }
+    .action-btn:active {
+      transform: scale(0.93);
+    }
+
+    .action-btn img {
+      width: 20px;
+      height: 20px;
+      display: block;
+      filter: invert(18%) sepia(40%) saturate(500%) hue-rotate(190deg) brightness(0.9);
+    }
+
+    .counts {
+      display: flex;
+      gap: 18px;
+      font-size: 0.8rem;
+      color: #3f5b7a;
+      background: #f2f6fc;
+      padding: 4px 14px;
+      border-radius: 30px;
+      letter-spacing: 0.2px;
+    }
+
+    .counts span {
+      white-space: nowrap;
+    }
+
+    .counts span:not(:last-child)::after {
+      content: "·";
+      margin-left: 12px;
+      color: #b2c4d6;
+    }
+
+    /* ── case buttons grid ── */
+    .case-buttons {
+      margin-top: 22px;
+    }
+
+    .cases {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 12px;
+    }
+
+    .btn-case {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px 8px 12px;
+      border: none;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      background: #f1f5fb;
+      color: #06294e;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.08s, box-shadow 0.15s;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    }
+
+    .btn-case:hover {
+      background: #e3eaf4;
+      box-shadow: 0 2px 8px rgba(6, 41, 78, 0.06);
+    }
+    .btn-case:active {
+      transform: scale(0.96);
+    }
+
+    /* ── badges ── */
+    .badge {
+      display: inline-block;
+      font-weight: 800;
+      font-size: 0.65rem;
+      letter-spacing: 0.3px;
+      padding: 0 6px;
+      min-width: 26px;
+      text-align: center;
+      border-radius: 30px;
+      line-height: 1.8;
+      background: #e0e8f2;
+      color: #1f3a57;
+    }
+
+    .badge-sentence { background: #ffebe2; color: #cd5019; }
+    .badge-lower    { background: #efffe2; color: #569712; }
+    .badge-upper    { background: #e2faff; color: #0d8cb2; }
+    .badge-capitalized { background: #f0e2ff; color: #942fc0; }
+    .badge-alternating { background: #fffee2; color: #ab830a; }
+    .badge-title    { background: #e2fff3; color: #04a977; }
+    .badge-inverse  { background: #ffe2f8; color: #b4047c; }
+
+    /* ── messages ── */
+    .messages {
+      margin-top: 6px;
+      min-height: 26px;
+      font-size: 0.85rem;
+      color: #1a4a6f;
+    }
+
+    .msg {
+      padding: 6px 14px;
+      border-radius: 30px;
+      display: inline-block;
+      background: #eef4fa;
+    }
+
+    /* ── social row ── */
+    .social-row {
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid #e9edf3;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .social-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      color: white;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      font-size: 16px;
+      background-color: #6c7a8e;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+
+    .social-icon:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+    }
+
+    .social-icon i {
+      font-size: 16px;
+    }
+
+    .facebook { background-color: #3b5998; }
+    .twitter { background-color: #1da1f2; }
+    .blogspot { background-color: #ff5722; }
+    .email { background-color: #d44638; }
+    .map { background-color: #34a853; }
+
+    .social-label {
+      font-size: 0.85rem;
+      color: #3f5b7a;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+
+    /* ── footer ── */
+    .app-footer {
+      background: #f8fafd;
+      border-top: 1px solid #e9edf3;
+      padding: 14px 28px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 0.85rem;
+      color: #1f3a57;
+    }
+
+    .app-footer .site-name {
+      font-weight: 600;
+      color: #06294e;
+    }
+
+    .app-footer .site-name i {
+      margin-right: 6px;
+      color: #2a5f8a;
+    }
+
+    .app-footer .contact {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #eef4fa;
+      padding: 4px 14px;
+      border-radius: 30px;
+      font-weight: 500;
+    }
+
+    .app-footer .contact i {
+      color: #2a5f8a;
+    }
+
+    /* ── responsive ── */
+    @media (max-width: 550px) {
+      .app-header { padding: 16px 18px 10px; flex-direction: column; align-items: flex-start; }
+      .app-header h1 { font-size: 1.2rem; }
+      .editor-body { padding: 16px 18px 20px; }
+      .toolbar { flex-direction: column; align-items: stretch; }
+      .counts { justify-content: center; font-size: 0.7rem; gap: 6px; }
+      .counts span:not(:last-child)::after { display: none; }
+      .cases { justify-content: center; }
+      .btn-case { font-size: 0.75rem; padding: 6px 12px; }
+      .social-row { flex-direction: column; align-items: flex-start; }
+      .social-links { width: 100%; justify-content: center; }
+      .social-label { text-align: center; width: 100%; }
+      .app-footer { flex-direction: column; text-align: center; padding: 14px 18px; }
+    }
+
+    @media (max-width: 400px) {
+      #content { min-height: 120px; }
+      .actions { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="editor-wrapper">
+
+  <!-- ─── HEADER ─── -->
+  <header class="app-header">
+    <h1>
+      <i class="fas fa-text-height"></i> Case Converter
+    </h1>
+    <span class="header-tag"><i class="far fa-edit"></i> transform text</span>
+  </header>
+
+  <!-- ─── EDITOR BODY ─── -->
+  <div class="editor-body">
+
+    <div class="input">
+      <textarea id="content" placeholder="Type or paste your content here" autofocus></textarea>
+      <div class="messages" id="messages"></div>
+    </div>
+
+    <div class="toolbar">
+      <div class="actions">
+        <button class="action-btn" id="copyBtn" title="Copy to Clipboard">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2306294e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='9' y='9' width='13' height='13' rx='2' ry='2'%3E%3C/rect%3E%3Cpath d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'%3E%3C/path%3E%3C/svg%3E" alt="Copy" />
+        </button>
+        <button class="action-btn" id="clearBtn" title="Clear">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2306294e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 6h18'%3E%3C/path%3E%3Cpath d='M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2'%3E%3C/path%3E%3Cpath d='M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6'%3E%3C/path%3E%3C/svg%3E" alt="Clear" />
+        </button>
+      </div>
+      <div class="counts">
+        <span>Characters: <span id="charCount">0</span></span>
+        <span>Words: <span id="wordCount">0</span></span>
+        <span>Lines: <span id="lineCount">0</span></span>
+      </div>
+    </div>
+
+    <div class="case-buttons">
+      <div class="cases">
+        <button class="btn-case" data-case="sentence">
+          <span class="badge badge-sentence">Sc</span> Sentence case
+        </button>
+        <button class="btn-case" data-case="lower">
+          <span class="badge badge-lower">lc</span> lower case
+        </button>
+        <button class="btn-case" data-case="upper">
+          <span class="badge badge-upper">UC</span> UPPER CASE
+        </button>
+        <button class="btn-case" data-case="capitalized">
+          <span class="badge badge-capitalized">CC</span> Capitalized Case
+        </button>
+        <button class="btn-case" data-case="alternating">
+          <span class="badge badge-alternating">BC</span> aLtErNaTiNg cAsE
+        </button>
+        <button class="btn-case" data-case="title">
+          <span class="badge badge-title">TC</span> Title Case
+        </button>
+        <button class="btn-case" data-case="inverse">
+          <span class="badge badge-inverse">iC</span> InVeRsE CaSe
+        </button>
+      </div>
+    </div>
+
+    <!-- ─── SOCIAL LINKS ─── -->
+    <div class="social-row">
+      <span class="social-label"><i class="fas fa-share-alt" style="margin-right:6px;"></i>Connect</span>
+      <div class="social-links">
+        <a href="https://www.facebook.com/" target="_blank" class="social-icon facebook" aria-label="Facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://twitter.com/" target="_blank" class="social-icon twitter" aria-label="Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://lauro-media.blogspot.com/" target="_blank" class="social-icon blogspot" aria-label="Blogspot">
+          <i class="fab fa-blogger-b"></i>
+        </a>
+        <a href="mailto:shamserpulami500@gmail.com" target="_blank" class="social-icon email" aria-label="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+        <a href="https://maps.app.goo.gl/CQG8KiSPvofKn5RB7" target="_blank" class="social-icon map" aria-label="Map">
+          <i class="fas fa-map-marker-alt"></i>
+        </a>
+      </div>
+    </div>
+
+  </div> <!-- .editor-body -->
+
+  <!-- ─── FOOTER ─── -->
+  <footer class="app-footer">
+    <span class="site-name">
+      <i class="fas fa-globe"></i> shamser.info.np
+    </span>
+    <span class="contact">
+      <i class="fas fa-phone-alt"></i> 9844087012
+    </span>
+  </footer>
+
+</div> <!-- .editor-wrapper -->
+
+<script>
+  (function() {
+    'use strict';
+
+    // ── DOM refs ──
+    const textarea = document.getElementById('content');
+    const charSpan = document.getElementById('charCount');
+    const wordSpan = document.getElementById('wordCount');
+    const lineSpan = document.getElementById('lineCount');
+    const messages = document.getElementById('messages');
+
+    // ── helpers ──
+    function showMessage(text, isError = false) {
+      messages.innerHTML = `<span class="msg" style="${isError ? 'background:#ffe7e5;color:#971812;' : ''}">${text}</span>`;
+      clearTimeout(window._msgTimer);
+      window._msgTimer = setTimeout(() => { messages.innerHTML = ''; }, 3500);
+    }
+
+    function updateCounts() {
+      const val = textarea.value;
+      charSpan.textContent = val.length;
+      wordSpan.textContent = val.trim() === '' ? 0 : val.trim().split(/\s+/).length;
+      lineSpan.textContent = val === '' ? 0 : val.split('\n').length;
+    }
+
+    // ── case transformers ──
+
+    function toSentenceCase(str) {
+      const sentences = str.match(/[^.!?]*[.!?]+\s*|[^.!?]+$/g) || [str];
+      return sentences.map(s => {
+        const trimmed = s.trimStart();
+        if (!trimmed) return s;
+        const first = trimmed.charAt(0).toUpperCase();
+        const rest = trimmed.slice(1).toLowerCase();
+        return s.replace(trimmed, first + rest);
+      }).join('');
+    }
+
+    function toLowerCase(str) {
+      return str.toLowerCase();
+    }
+
+    function toUpperCase(str) {
+      return str.toUpperCase();
+    }
+
+    function toCapitalizedCase(str) {
+      return str.replace(/\w\S*/g, word =>
+        word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+      );
+    }
+
+    function toAlternatingCase(str) {
+      let result = '';
+      let upper = true;
+      for (let i = 0; i < str.length; i++) {
+        const ch = str[i];
+        if (ch.match(/[a-zA-Z]/)) {
+          result += upper ? ch.toUpperCase() : ch.toLowerCase();
+          upper = !upper;
+        } else {
+          result += ch;
+        }
+      }
+      return result;
+    }
+
+    function toTitleCase(str) {
+      const minorWords = new Set(['a', 'an', 'the', 'and', 'but', 'or', 'for', 'nor', 'on', 'at', 'to', 'by', 'in', 'of', 'with', 'without', 'via', 'per']);
+      return str.replace(/\w\S*/g, (word, index) => {
+        const lower = word.toLowerCase();
+        if (index === 0 || !minorWords.has(lower)) {
+          return word.charAt(0).toUpperCase() + lower.slice(1);
+        }
+        return lower;
+      });
+    }
+
+    function toInverseCase(str) {
+      return str.replace(/[a-zA-Z]/g, ch =>
+        ch === ch.toUpperCase() ? ch.toLowerCase() : ch.toUpperCase()
+      );
+    }
+
+    const caseMap = {
+      sentence: toSentenceCase,
+      lower: toLowerCase,
+      upper: toUpperCase,
+      capitalized: toCapitalizedCase,
+      alternating: toAlternatingCase,
+      title: toTitleCase,
+      inverse: toInverseCase
+    };
+
+    function applyCase(type) {
+      const original = textarea.value;
+      if (!original.trim()) {
+        showMessage('Nothing to convert — enter some text first.', true);
+        return;
+      }
+      const fn = caseMap[type];
+      if (!fn) return;
+      const converted = fn(original);
+      textarea.value = converted;
+      updateCounts();
+      const labels = {
+        sentence: 'Sentence case',
+        lower: 'lower case',
+        upper: 'UPPER CASE',
+        capitalized: 'Capitalized Case',
+        alternating: 'aLtErNaTiNg cAsE',
+        title: 'Title Case',
+        inverse: 'InVeRsE CaSe'
+      };
+      showMessage(`✓ Converted to ${labels[type] || type}`);
+      textarea.focus();
+    }
+
+    // ── event listeners ──
+
+    document.querySelectorAll('.btn-case[data-case]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const type = btn.getAttribute('data-case');
+        applyCase(type);
+      });
+    });
+
+    document.getElementById('clearBtn').addEventListener('click', () => {
+      textarea.value = '';
+      updateCounts();
+      showMessage('Cleared');
+      textarea.focus();
+    });
+
+    document.getElementById('copyBtn').addEventListener('click', async () => {
+      const text = textarea.value;
+      if (!text) {
+        showMessage('Nothing to copy — textarea is empty.', true);
+        return;
+      }
+      try {
+        await navigator.clipboard.writeText(text);
+        showMessage('✓ Copied to clipboard!');
+      } catch (_) {
+        textarea.select();
+        document.execCommand('copy');
+        showMessage('✓ Copied!');
+      }
+    });
+
+    textarea.addEventListener('input', updateCounts);
+
+    // ── init ──
+    textarea.value = 'the quick brown fox jumps over the lazy dog. and then it ran away.';
+    updateCounts();
+
+  })();
+</script>
+
+</body>
+</html>
