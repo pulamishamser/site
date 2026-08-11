@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IEMIS New</title>
+  <link rel="icon" type="image/x-icon" href="https://shamser.info.np/HomePage/favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Inter', system-ui, -apple-system, sans-serif; }
+    body { background:#f4f7fc; color:#1e293b; }
+    :root {
+      --primary:#4f46e5;
+      --primary-light:#818cf8;
+      --sidebar-width:270px;
+      --header-h:68px;
+      --radius:20px;
+      --shadow:0 12px 30px rgba(0,0,0,0.04);
+    }
+    .login-modal {
+      position:fixed; inset:0; background:rgba(15,23,42,0.6); backdrop-filter:blur(8px);
+      display:none; align-items:center; justify-content:center; z-index:99999;
+    }
+    .login-modal-content {
+      background:#fff; border-radius:36px; max-width:400px; width:100%; padding:2rem;
+      box-shadow:0 40px 70px rgba(0,0,0,0.15); animation:slideUp 0.3s ease;
+    }
+    @keyframes slideUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+    .login-header { text-align:center; margin-bottom:1.8rem; }
+    .login-header h3 { font-weight:700; color:var(--primary); }
+    .login-form-group { margin-bottom:1.2rem; }
+    .login-form-group label { font-weight:500; font-size:0.9rem; color:#334155; }
+    .login-form-group input {
+      width:100%; padding:12px 16px; border:2px solid #e2e8f0; border-radius:14px;
+      font-size:0.95rem; background:#f8fafc; transition:0.2s;
+    }
+    .login-form-group input:focus { border-color:var(--primary); outline:none; background:#fff; box-shadow:0 0 0 4px rgba(79,70,229,0.08); }
+    .login-button {
+      width:100%; padding:14px; background:var(--primary); color:#fff; border:none;
+      border-radius:40px; font-weight:600; transition:0.2s; cursor:pointer;
+    }
+    .login-button:hover { background:#3730a3; transform:scale(1.01); }
+    .login-message { margin-top:1rem; text-align:center; font-size:0.9rem; }
+    .login-links { display:flex; justify-content:space-between; margin-top:1.5rem; font-size:0.85rem; }
+    .login-links a { color:var(--primary); text-decoration:none; font-weight:500; }
+    .dashboard-container { display:flex; flex-direction:column; min-height:100vh; }
+    .header {
+      display:flex; align-items:center; justify-content:space-between; padding:0 28px;
+      height:var(--header-h); background:#fff; border-bottom:1px solid rgba(0,0,0,0.04);
+      position:fixed; top:0; left:0; right:0; z-index:100;
+    }
+    .logo { font-weight:700; font-size:1.3rem; letter-spacing:-0.3px; color:#0f172a; display:flex; align-items:center; gap:6px; }
+    .logo i { color:var(--primary); font-size:1.5rem; }
+    .menu-toggle { display:none; font-size:1.8rem; cursor:pointer; color:#1e293b; }
+    .user-info { display:flex; align-items:center; gap:20px; position:relative; }
+    .session-timer { font-size:0.8rem; background:#f1f5f9; padding:5px 14px; border-radius:40px; font-weight:500; }
+    .profile-icon { font-size:2.4rem; color:var(--primary); cursor:pointer; }
+    .user-dropdown {
+      position:absolute; top:calc(100% + 8px); right:0; background:#fff;
+      border-radius:20px; box-shadow:0 20px 40px rgba(0,0,0,0.06); width:210px;
+      padding:8px 0; display:none; border:1px solid #f1f5f9;
+    }
+    .user-info:hover .user-dropdown { display:block; }
+    .user-dropdown a, .user-dropdown button {
+      display:flex; align-items:center; gap:12px; padding:10px 20px;
+      color:#1e293b; text-decoration:none; background:transparent; border:none;
+      width:100%; font-size:0.9rem; transition:0.2s; cursor:pointer;
+    }
+    .user-dropdown a:hover, .user-dropdown button:hover { background:#f8fafc; color:var(--primary); }
+    .content-wrapper { display:flex; margin-top:var(--header-h); flex:1; }
+    .sidebar {
+      width:var(--sidebar-width); background:#fff; border-right:1px solid #f1f5f9;
+      height:calc(100vh - var(--header-h)); overflow-y:auto; position:fixed;
+      padding:20px 12px 30px 12px; transition:0.25s;
+      scrollbar-width: thin;
+    }
+    .sidebar::-webkit-scrollbar { width:4px; }
+    .sidebar::-webkit-scrollbar-thumb { background:#d1d5db; border-radius:8px; }
+    .sidebar nav ul { list-style:none; padding:0; margin:0; }
+    .sidebar nav > ul > li { border-radius:14px; margin-bottom:2px; }
+    .sidebar nav > ul > li.active { background:#eef2ff; }
+    .sidebar nav a, .sidebar nav button {
+      display:flex; align-items:left; gap:12px; padding:10px 16px;
+      color:#334155; text-decoration:none; border:none; background:transparent;
+      width:100%; border-radius:14px; font-weight:500; font-size:0.9rem;
+      transition:0.2s; cursor:pointer;
+    }
+    .sidebar nav a i, .sidebar nav button i { width:20px; color:#64748b; font-size:1rem; text-align:left; }
+    .sidebar nav a:hover, .sidebar nav button:hover { background:#f1f5f9; color:var(--primary); }
+    .toggle-submenu { justify-content:space-between; }
+    .arrow { transition:0.25s; font-size:0.5rem; }
+    .submenu { max-height:0; overflow:hidden; transition:max-height 0.35s ease; padding-left:20px; }
+    .submenu.expanded { max-height:1000px; }
+    .arrow.rotated { transform:rotate(180deg); }
+    .sub-submenu { max-height:0; overflow:hidden; transition:max-height 0.3s ease; padding-left:16px; }
+    .sub-submenu.expanded { max-height:800px; }
+    .main-content {
+      flex:1; padding:28px 32px; margin-left:var(--sidebar-width);
+      transition:0.25s;
+    }
+    .quick-menu-grid {
+      display:grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap:16px;
+      margin:18px 0 28px 0;
+    }
+    .quick-menu-item {
+      background:#fff;
+      border-radius:16px;
+      padding:16px 8px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      box-shadow:0 2px 8px rgba(0,0,0,0.02);
+      border:1px solid #f1f5f9;
+      transition:0.2s;
+      cursor:pointer;
+      text-decoration:none;
+      color:#1e293b;
+      font-weight:500;
+      font-size:0.75rem;
+      aspect-ratio: 1 / 1;
+      min-height: 100px;
+    }
+    .quick-menu-item i { color:var(--primary); font-size:2.2rem; margin-bottom:8px; display:block; }
+    .quick-menu-item span { display:block; line-height:1.3; word-break:break-word; }
+    .quick-menu-item:hover { background:#f8fafc; border-color:#dbeafe; transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.04); }
+    .quick-section-title { font-weight:600; font-size:1.1rem; color:#0f172a; display:flex; align-items:center; gap:8px; margin:12px 0 6px 0; }
+    .quick-section-title i { color:var(--primary); font-size:1.4rem; }
+    .stats-cards { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:24px; }
+    .card { background:#fff; border-radius:var(--radius); padding:24px; box-shadow:var(--shadow); border:1px solid rgba(0,0,0,0.02); transition:0.2s; }
+    .card h3 { font-weight:600; font-size:1rem; color:#475569; margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+    .card h3 i { font-size:1.4rem; }
+    .chart-container { height:170px; }
+    .notices-card ul { list-style:none; padding:0; }
+    .notices-card li { padding:8px 0; border-bottom:1px solid #f1f5f9; font-size:0.9rem; }
+    .notices-card li:last-child { border:none; }
+    .pagination { display:flex; justify-content:center; gap:8px; margin-top:16px; }
+    .pagination button, .pagination span { padding:4px 14px; border-radius:30px; border:1px solid #e2e8f0; background:#fff; font-weight:500; transition:0.2s; }
+    .pagination button:hover { background:var(--primary); color:#fff; border-color:var(--primary); }
+    footer { margin-top:40px; text-align:center; color:#94a3b8; font-size:0.85rem; border-top:1px solid #f1f5f9; padding-top:24px; }
+    .modal { display:none; position:fixed; inset:0; z-index:999; background:rgba(15,23,42,0.5); backdrop-filter:blur(6px); }
+    .modal-content { background:#fff; margin:2% auto; width:95%; height:92%; border-radius:32px; display:flex; flex-direction:column; overflow:hidden; }
+    .modal-header { padding:18px 24px; border-bottom:1px solid #f1f5f9; display:flex; justify-content:space-between; align-items:center; }
+    .modal-title { font-weight:600; font-size:1.2rem; }
+    .modal-close { background:none; border:none; font-size:2.2rem; color:#94a3b8; transition:0.2s; padding:0 12px; line-height:1; }
+    .modal-close:hover { color:#0f172a; transform:rotate(90deg); }
+    .modal-body { flex:1; position:relative; }
+    .modal-iframe { width:100%; height:100%; border:none; }
+    .loading-spinner { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; background:#fff; z-index:2; }
+    .session-toast { position:fixed; bottom:30px; right:30px; background:#0f172a; color:#fff; padding:12px 24px; border-radius:40px; font-size:0.9rem; z-index:9999; box-shadow:0 10px 25px rgba(0,0,0,0.15); animation:fadeUp 0.3s; }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+    @media (max-width:992px) {
+      .sidebar { transform:translateX(-100%); z-index:90; }
+      .sidebar.active { transform:translateX(0); }
+      .main-content { margin-left:0; padding:20px; }
+      .menu-toggle { display:block; }
+      .quick-menu-grid { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); }
+    }
+    @media (max-width:600px) {
+      .header { padding:0 16px; }
+      .user-info .session-timer { display:none; }
+      .quick-menu-grid { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); }
+      .quick-menu-item { min-height:80px; }
+      .quick-menu-item i { font-size:1.8rem; }
+    }
+  </style>
+</head>
+<body>
+<!-- login modal -->
+<div id="loginModal" class="login-modal" style="display:flex;">
+  <div class="login-modal-content">
+    <div class="login-header"><h3><i class="fas fa-lock" style="font-size:1.8rem;"></i> IEMIS</h3><small>sign in to continue</small></div>
+    <form id="loginForm">
+      <div class="login-form-group"><label>Username</label><input type="text" id="username" placeholder="your username" required></div>
+      <div class="login-form-group"><label>Password</label><input type="password" id="password" placeholder="••••••••" required></div>
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:18px;">
+        <input type="checkbox" id="rememberMe"> <label for="rememberMe" style="font-size:0.9rem;">Remember me</label>
+      </div>
+      <button type="submit" class="login-button" id="loginButton">Log in</button>
+      <div id="loginMessage" class="login-message"></div>
+      <div class="login-links"><a href="#">Forgot?</a><a href="#">Register</a></div>
+    </form>
+  </div>
+</div>
+
+<!-- iframe modal -->
+<div id="pageModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title" id="modalTitle">Loading…</h5><button class="modal-close" id="modalClose">&times;</button></div>
+    <div class="modal-body">
+      <div class="loading-spinner" id="modalLoading"><div class="spinner-border text-primary"></div><p class="mt-2">Loading…</p></div>
+      <iframe class="modal-iframe" id="modalFrame"></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- dashboard -->
+<div class="dashboard-container" style="display:none;">
+  <header class="header">
+    <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+      <div style="text-align:left; padding:0 0 16px 0;"><i class="fas fa-home"></i> <a href="#" style="color:#1e293b;font-weight:500;text-decoration:none;">shamser.info.np</a></div>
+
+
+
+
+
+    <div class="logo"><img width="36" src="https://media.tenor.com/dhfraztxBo8AAAAj/globe-joypixels.gif" alt="logo"> IEMIS<span style="font-weight:400;color:#64748b;"></span></div>
+    <div class="user-info">
+      <span id="userDisplay" style="font-weight:500;">School Profile</span>
+      <span id="sessionTimer" class="session-timer"></span>
+      <i class="fas fa-user-circle profile-icon"></i>
+      <div class="user-dropdown">
+        <a href="#"><i class="fas fa-user"></i> Profile</a>
+        <a href="#"><i class="fas fa-key"></i> Change password</a>
+        <button onclick="OpenRegisterPage()"><i class="fas fa-user-plus"></i> Register</button>
+        <button id="logoutButtonSidebar"><i class="fas fa-sign-out-alt"></i> Logout</button>
+      </div>
+    </div>
+  </header>
+  <div class="content-wrapper">
+    <aside class="sidebar">
+
+      <nav>
+        <ul>       
+         <li><a href="#" onclick="return showDashboard();"><i class="fas fa-home"></i> Dashboard</a></li>
+
+          <li><a href="#" onclick="return showDashboard();"><i class="fas fa-th-large"></i> Public Dashboard</a></li>
+          <!-- ===== CLASS 6-12 ===== -->
+          <li>
+            <button class="toggle-submenu"><i class="fas fa-users"></i> Class 1-12 <i class="fas fa-chevron-down arrow"></i></button>
+            <ul class="submenu">
+              <!-- 1. Student Information -->
+              <li>
+                <button class="toggle-sub-submenu"><i class="fas fa-user-graduate"></i> Student Information <i class="fas fa-chevron-down arrow" style="margin-left:auto;"></i></button>
+                <ul class="sub-submenu">
+                  <li><a href="#" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/Student Info Entry Form.html','Student Info Data Entry')">Student Info Data Entry</a></li>
+                  <li><a href="#" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/Update Student_info.html','Update Student Info')">Update Student Info</a></li>
+                </ul>
+              </li>
+              <!-- 2. Exam Manage -->
+              <li>
+                <button class="toggle-sub-submenu"><i class="fas fa-pencil-alt"></i> Exam Manage <i class="fas fa-chevron-down arrow" style="margin-left:auto;"></i></button>
+                <ul class="sub-submenu">
+                  <!-- 2.1 Pre-Manage -->
+                  <li>
+                    <button class="toggle-sub-submenu" style="padding-left:4px;"><i class="fas fa-clock"></i> Pre-Manage <i class="fas fa-chevron-down arrow" style="margin-left:auto;"></i></button>
+                    <ul class="sub-submenu">
+                      <li><a href="#" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/Exam_Schedule.html','Exam Schedule')">Exam Schedule</a></li>
+                      <li>
+                        <button class="toggle-sub-submenu" style="padding-left:4px;"><i class="fas fa-id-card"></i> Entrance Card By Class <i class="fas fa-chevron-down arrow" style="margin-left:auto;"></i></button>
+                        <ul class="sub-submenu">
+                          <li><a href="#" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/Entrance Card2.html','Entrance Card 2 Page')">Two Page</a></li>
+                          <li><a href="#" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/Entrance Card4.html','Entrance Card 4 Page')">Four Page</a></li>
+                        </ul>
+                      </li>
+                      <li>
+                        <button class="toggle-sub-submenu" style="padding-left:4px;"><i class="fas fa-filter"></i> Entrance By Range <i class="fas fa-chevron-down arrow" style="margin-left:auto;"></i></button>
+                        <ul class="sub-submenu">
+                          <li><a href="#" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/Entrance Card2 By Rang.html','Entrance Card 2 by Range')">Two Page</a></li>
+                          <li><a href="#" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/Entrance Card4 By Rang.html','Entrance Card 4 by Range')">Four Page</a></li>
+                        </ul>
+                      </li>
+                      <li><a href="#" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/Markslip.html','Markslip')">Markslip</a></li>
+                      <li><a href="#" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/Subject_Mapping.html','Subject Mapping')">Subject Mapping</a></li>
+                    </ul>
+                  </li>
+                  <!-- 2.2 Post-Manage -->
+                  <li>
+                    <button class="toggle-sub-submenu" style="padding-left:4px;"><i class="fas fa-edit"></i> Post-Manage <i class="fas fa-chevron-down arrow" style="margin-left:auto;"></i></button>
+                    <ul class="sub-submenu">
+                      <li><a href="#" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/Transfer_InfoData.html','Fetch Student Info')">Fetch Student Info</a></li>
+                      <li><a href="#" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/Mark Entry Form.html','Mark Entry Form')">Mark Entry Form</a></li>
+                      <li><a href="#" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/Update Exam_info.html','Update Exam Info')">Update Exam Info</a></li>
+                      <li><a href="#" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/Update_Mark.html','Update Mark')">Update Mark</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <!-- 3. Result Manage -->
+              <li>
+                <button class="toggle-sub-submenu"><i class="fas fa-chart-bar"></i> Result Manage <i class="fas fa-chevron-down arrow" style="margin-left:auto;"></i></button>
+                <ul class="sub-submenu">
+                  <li><a href="#" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/Mark Ledger.html','Mark Ledger')">Mark Ledger</a></li>
+                  <li><a href="#" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/Grade Ledger.html','Grade Ledger System')">Grade Ledger System</a></li>
+                  <li><a href="#" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/ResultSheet(Passed).html','Result Sheet (Passed)')">Result Sheet (Passed)</a></li>
+                  <li><a href="#" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/GradeSheet By Range.html','Grade Sheet By Range')">Grade Sheet By Range</a></li>
+                  <li><a href="#" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/Gradesheet Classwise.html','Grade Sheet Classwise')">Grade Sheet Classwise</a></li>
+                </ul>
+              </li>
+              <!-- 4. Record Maintain -->
+              <li><a href="#" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/RecordMaintain.html','Record Maintain')"><i class="fas fa-archive"></i> Record Maintain</a></li>
+            </ul>
+          </li>
+
+          <!-- ===== CLASS 1-5 (CAS) ===== -->
+          <li>
+            <button class="toggle-submenu"><i class="fas fa-child"></i> CAS Class1-5 <i class="fas fa-chevron-down arrow"></i></button>
+            <ul class="submenu">
+              <li>
+                <button class="toggle-sub-submenu"><i class="fas fa-user-graduate"></i> Student Information <i class="fas fa-chevron-down arrow" style="margin-left:auto;"></i></button>
+                <ul class="sub-submenu">
+                  <li><a href="#" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/CAS 1-5/Student_Info_ Entry (CAS).html','Student Info Data Entry CAS')">Student Info Data Entry</a></li>
+                  <li><a href="#" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/CAS 1-5/Update_Student_Info  CAS.html','Update Student Info CAS')">Update Student Info</a></li>
+                </ul>
+              </li>
+              <li>
+                <button class="toggle-sub-submenu"><i class="fas fa-pencil-alt"></i> Exam Manage <i class="fas fa-chevron-down arrow" style="margin-left:auto;"></i></button>
+                <ul class="sub-submenu">
+                  <li>
+                    <button class="toggle-sub-submenu" style="padding-left:4px;"><i class="fas fa-clock"></i> Pre-Manage <i class="fas fa-chevron-down arrow" style="margin-left:auto;"></i></button>
+                    <ul class="sub-submenu">
+                      <li><a href="#" onclick="openModal('#','Exam Schedule CAS')">Exam Schedule</a></li>
+                      <li>
+                        <button class="toggle-sub-submenu" style="padding-left:4px;"><i class="fas fa-id-card"></i> Entrance Card By Class <i class="fas fa-chevron-down arrow" style="margin-left:auto;"></i></button>
+                        <ul class="sub-submenu">
+                          <li><a href="#" onclick="openModal('#','Entrance Card 2 Page CAS')">Two Page</a></li>
+                          <li><a href="#" onclick="openModal('#','Entrance Card 4 Page CAS')">Four Page</a></li>
+                        </ul>
+                      </li>
+                      <li>
+                        <button class="toggle-sub-submenu" style="padding-left:4px;"><i class="fas fa-filter"></i> Entrance By Range <i class="fas fa-chevron-down arrow" style="margin-left:auto;"></i></button>
+                        <ul class="sub-submenu">
+                          <li><a href="#" onclick="openModal('#','Entrance Card 2 by Range CAS')">Two Page</a></li>
+                          <li><a href="#" onclick="openModal('#','Entrance Card 4 by Range CAS')">Four Page</a></li>
+                        </ul>
+                      </li>
+                      <li><a href="#" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/CAS 1-5/Markslip(CAS).html','Markslip CAS')">Markslip</a></li>
+                      <li><a href="#" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/CAS 1-5/Subject Mapping (CAS).html','Subject Mapping CAS')">Subject Mapping</a></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <button class="toggle-sub-submenu" style="padding-left:4px;"><i class="fas fa-edit"></i> Post-Manage <i class="fas fa-chevron-down arrow" style="margin-left:auto;"></i></button>
+                    <ul class="sub-submenu">
+                      <li><a href="#" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/CAS 1-5/Transfer(CAS).html','Fetch Student Info CAS')">Fetch Info_Data</a></li>
+                      <li><a href="#" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/CAS 1-5/Mark Entry System (CAS).html','Mark Entry Form CAS')">Mark Entry Form</a></li>
+                      <li><a href="#" onclick="openModal('#','Update Exam Info CAS')">Update Exam_Info</a></li>
+                      <li><a href="#" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/CAS 1-5/Marks Update Form (CAS).html','Update Mark CAS')">Update Mark</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <button class="toggle-sub-submenu"><i class="fas fa-chart-bar"></i> Result Manage <i class="fas fa-chevron-down arrow" style="margin-left:auto;"></i></button>
+                <ul class="sub-submenu">
+                  <li><a href="#" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/CAS 1-5/Mark Ledger(CAS).html','Mark Ledger CAS')">Mark Ledger</a></li>
+                  <li><a href="#" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/Grade Ledger.html','Grade Ledger System CAS')">Grade Ledger System</a></li>
+                  <li><a href="#" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/ResultSheet(Passed).html','Result Sheet (Passed) CAS')">Result Sheet</a></li>
+                  <li><a href="#" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/GradeSheet By Range.html','Grade Sheet By Range CAS')">Grade Sheet By Range</a></li>
+                  <li><a href="#" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/Gradesheet Classwise.html','Grade Sheet Classwise CAS')">Grade Sheet Classwise</a></li>
+                </ul>
+              </li>
+              <li><a href="#" onclick="openModal('#','Record Maintain CAS')"><i class="fas fa-archive"></i> Record Maintain</a></li>
+            </ul>
+          </li>
+
+          <li style="margin-top:12px; border-top:1px solid #f1f5f9; padding-top:12px;">
+            <button onclick="OpenRegisterPage()" style="background:transparent;border:none;width:100%;text-align:left;padding:10px 16px;font-weight:500;"><i class="fas fa-user-plus"></i> Register</button>
+            <button id="logoutButtonSidebarBottom" style="background:transparent;border:none;width:100%;text-align:left;padding:10px 16px;font-weight:500;"><i class="fas fa-sign-out-alt"></i> Logout</button>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:4px;">
+        <h5 style="font-weight:600; color:#0f172a; margin:0;"><i class="fas fa-bolt" style="color:var(--primary); font-size:1.4rem;"></i> Quick menu</h5>
+        <span style="font-size:0.75rem; background:#eef2ff; color:var(--primary); padding:2px 12px; border-radius:40px; font-weight:500;">shortcuts</span>
+      </div>
+      <div class="quick-menu-grid">
+        <a href="#" class="quick-menu-item" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/Student Info Entry Form.html','Student Entry')"><i class="fas fa-user-plus"></i><span>Student Entry</span></a>
+        <a href="#" class="quick-menu-item" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/Exam_Schedule.html','Exam Schedule')"><i class="fas fa-calendar-alt"></i><span>Exam Schedule</span></a>
+        <a href="#" class="quick-menu-item" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/Mark Entry Form.html','Mark Entry')"><i class="fas fa-pen"></i><span>Mark Entry</span></a>
+        <a href="#" class="quick-menu-item" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/ResultSheet(Passed).html','Result Sheet')"><i class="fas fa-file-alt"></i><span>Result Sheet</span></a>
+        <a href="#" class="quick-menu-item" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/Grade Ledger.html','Grade Ledger')"><i class="fas fa-copy"></i><span>Grade Ledger</span></a>
+        <a href="#" class="quick-menu-item" onclick="openModal('https://shamser.info.np/Internal Exam Management Information System/Entrance Card2.html','Entrance Card')"><i class="fas fa-id-card"></i><span>Entrance Card</span></a>
+      </div>
+
+      <div class="stats-cards">
+        <div class="card"><h3><i class="fas fa-school"></i> SCHOOLS</h3><div class="chart-container"><canvas id="schoolChart"></canvas></div></div>
+        <div class="card"><h3><i class="fas fa-user-graduate"></i> ENROLLMENT</h3><div class="chart-container"><canvas id="studentChart"></canvas></div></div>
+        <div class="card notices-card">
+          <h3><i class="fas fa-bullhorn"></i> NOTICES</h3>
+          <ul><li><strong>Student Update</strong> <span style="float:right;color:#64748b;">2083-01-02</span></li>
+            <li><strong>सिकाइ चौतारी</strong> <span style="float:right;color:#64748b;">2082-12-19</span></li>
+            <li><strong>विद्यालय प्रकार</strong> <span style="float:right;color:#64748b;">2082-11-29</span></li>
+            <li><strong>शिक्षक तलब</strong> <span style="float:right;color:#64748b;">2082-08-25</span></li>
+          </ul>
+          <div class="pagination"><button>&lt; Prev</button><span>1</span><button>Next &gt;</button></div>
+        </div>
+      </div>
+      <footer>© 2025 shamser.info.np · IEMIS re:imagined</footer>
+    </main>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  // ---------- login / session (unchanged) ----------
+  const INACTIVITY_TIMEOUT_MS = 30 * 60 * 1000;
+  let inactivityTimer = null, sessionTimerInterval = null, lastActivityTime = Date.now(), isUserLoggedIn = false;
+
+  function performAutoLogout(){ if(!isUserLoggedIn)return; localStorage.removeItem("iemisUser");localStorage.removeItem("sessionExpiry");sessionStorage.removeItem("iemisUser");sessionStorage.removeItem("sessionExpiry"); isUserLoggedIn=false; if(sessionTimerInterval)clearInterval(sessionTimerInterval); document.querySelector('.dashboard-container').style.display='none'; document.getElementById('loginModal').style.display='flex'; document.getElementById('userDisplay').textContent='School Profile'; document.getElementById('sessionTimer').innerHTML=''; showToast("Session expired."); }
+  window.performManualLogout = function(){ if(!isUserLoggedIn)return; localStorage.removeItem("iemisUser");localStorage.removeItem("sessionExpiry");sessionStorage.removeItem("iemisUser");sessionStorage.removeItem("sessionExpiry"); isUserLoggedIn=false; if(sessionTimerInterval)clearInterval(sessionTimerInterval); document.querySelector('.dashboard-container').style.display='none'; document.getElementById('loginModal').style.display='flex'; document.getElementById('userDisplay').textContent='School Profile'; document.getElementById('sessionTimer').innerHTML=''; showToast("Logged out."); };
+  function showToast(msg){ const t=document.createElement('div');t.className='session-toast';t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),3500); }
+  function resetInactivityTimer(){ if(!isUserLoggedIn)return; lastActivityTime=Date.now(); if(inactivityTimer)clearTimeout(inactivityTimer); inactivityTimer=setTimeout(performAutoLogout,INACTIVITY_TIMEOUT_MS); }
+  function updateSessionTimerDisplay(){ if(!isUserLoggedIn)return; const left=Math.max(0,INACTIVITY_TIMEOUT_MS-(Date.now()-lastActivityTime)); const m=Math.floor(left/60000); const s=Math.floor((left%60000)/1000); const el=document.getElementById('sessionTimer'); if(el){ el.innerHTML=`<i class="fas fa-clock"></i> ${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`; } }
+  function startSessionTimerDisplay(){ if(sessionTimerInterval)clearInterval(sessionTimerInterval); sessionTimerInterval=setInterval(updateSessionTimerDisplay,1000); }
+  function setupInactivityListeners(){ ['mousedown','mousemove','keydown','keypress','scroll','touchstart','click'].forEach(ev=>document.addEventListener(ev,resetInactivityTimer,{passive:true})); }
+  function initSessionAfterLogin(){ isUserLoggedIn=true; lastActivityTime=Date.now(); if(inactivityTimer)clearTimeout(inactivityTimer); inactivityTimer=setTimeout(performAutoLogout,INACTIVITY_TIMEOUT_MS); startSessionTimerDisplay(); setupInactivityListeners(); }
+
+  function checkLoginStatus(){
+    const user = localStorage.getItem("iemisUser") || sessionStorage.getItem("iemisUser");
+    const expiry = localStorage.getItem("sessionExpiry") || sessionStorage.getItem("sessionExpiry");
+    const loginModal=document.getElementById('loginModal'); const dash=document.querySelector('.dashboard-container'); const disp=document.getElementById('userDisplay');
+    if(user && expiry && parseInt(expiry)>Date.now()){
+      loginModal.style.display='none'; dash.style.display='flex'; disp.textContent=user; isUserLoggedIn=true; initSessionAfterLogin();
+    } else { localStorage.removeItem("iemisUser");localStorage.removeItem("sessionExpiry");sessionStorage.removeItem("iemisUser");sessionStorage.removeItem("sessionExpiry"); loginModal.style.display='flex'; dash.style.display='none'; disp.textContent='School Profile'; isUserLoggedIn=false; }
+  }
+
+  function loginUser(){
+    const username=document.getElementById('username').value.trim(); const password=document.getElementById('password').value.trim(); const remember=document.getElementById('rememberMe').checked;
+    const btn=document.getElementById('loginButton'); const msg=document.getElementById('loginMessage');
+    if(!username||!password){ msg.textContent='Please fill both fields.'; msg.className='login-message error'; return; }
+    btn.disabled=true; btn.textContent='Logging…'; msg.textContent='';
+    fetch("https://script.google.com/macros/s/AKfycbw8aVDBPbix7346o647ZapCWJxUYqkNC4rCP9ZRoLFs4IT8EW_tuE3GD9BFjG4UpSPPBQ/exec", {
+      method:"POST", headers:{"Content-Type":"text/plain;charset=utf-8"},
+      body:JSON.stringify({action:"login",username,password})
+    }).then(r=>r.text()).then(t=>{
+      try{ const d=JSON.parse(t); if(d.status==="success"){ const expiry=Date.now()+INACTIVITY_TIMEOUT_MS; if(remember){localStorage.setItem("iemisUser",d.username);localStorage.setItem("sessionExpiry",expiry);}else{sessionStorage.setItem("iemisUser",d.username);sessionStorage.setItem("sessionExpiry",expiry);} msg.textContent='✅ Login successful'; msg.className='login-message success'; setTimeout(checkLoginStatus,600); } else throw new Error(d.message||'Invalid'); }
+      catch(e){ throw new Error('Server error'); }
+    }).catch(err=>{ msg.textContent=err.message||'Login failed'; msg.className='login-message error'; }).finally(()=>{ btn.disabled=false; btn.textContent='Log in'; });
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    checkLoginStatus();
+    document.getElementById('loginForm').addEventListener('submit', e=>{ e.preventDefault(); loginUser(); });
+    document.getElementById('logoutButtonSidebar').addEventListener('click', performManualLogout);
+    document.getElementById('logoutButtonSidebarBottom').addEventListener('click', performManualLogout);
+    document.addEventListener('visibilitychange', ()=>{
+      if(!isUserLoggedIn)return;
+      if(document.visibilityState==='visible'){ const idle=Date.now()-lastActivityTime; if(idle>=INACTIVITY_TIMEOUT_MS)performAutoLogout(); else resetInactivityTimer(); }
+    });
+    window.addEventListener("beforeunload", ()=>{ if(inactivityTimer)clearTimeout(inactivityTimer); if(sessionTimerInterval)clearInterval(sessionTimerInterval); });
+
+    // modal controls
+    window.openModal = function(url, title){
+      const user=localStorage.getItem("iemisUser")||sessionStorage.getItem("iemisUser");
+      if(!user){ checkLoginStatus(); return false; }
+      resetInactivityTimer();
+      const modal=document.getElementById('pageModal'); const iframe=document.getElementById('modalFrame'); const titleEl=document.getElementById('modalTitle'); const loading=document.getElementById('modalLoading');
+      titleEl.textContent=title||'Content'; loading.style.display='flex'; iframe.style.display='none'; modal.style.display='block'; document.body.style.overflow='hidden';
+      iframe.src=url.replace(/ /g,'%20');
+      if(window.innerWidth<=992){ document.querySelector('.sidebar').classList.remove('active'); }
+      return false;
+    };
+    window.closeModal = function(){ document.getElementById('pageModal').style.display='none'; document.getElementById('modalFrame').src=''; document.body.style.overflow='auto'; };
+    window.showDashboard = function(){ closeModal(); resetInactivityTimer(); return false; };
+    window.OpenRegisterPage = function(){ openModal('#','Register Account'); };
+
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    document.getElementById('pageModal').addEventListener('click', e=>{ if(e.target===e.currentTarget) closeModal(); });
+    document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+    document.getElementById('modalFrame').addEventListener('load', function(){ document.getElementById('modalLoading').style.display='none'; this.style.display='block'; });
+
+    // toggle submenus (main)
+    document.querySelectorAll('.toggle-submenu').forEach(btn=>{
+      btn.addEventListener('click', function(e){ e.preventDefault(); const sub=this.nextElementSibling; const arrow=this.querySelector('.arrow'); if(sub){sub.classList.toggle('expanded'); if(arrow)arrow.classList.toggle('rotated');} });
+    });
+    // toggle sub-submenus
+    document.querySelectorAll('.toggle-sub-submenu').forEach(btn=>{
+      btn.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); const sub=this.nextElementSibling; const arrow=this.querySelector('.arrow'); if(sub){sub.classList.toggle('expanded'); if(arrow)arrow.classList.toggle('rotated');} });
+    });
+    document.querySelector('.menu-toggle').addEventListener('click', function(){ document.querySelector('.sidebar').classList.toggle('active'); });
+    document.addEventListener('click', function(e){ const sidebar=document.querySelector('.sidebar'); const toggle=document.querySelector('.menu-toggle'); if(window.innerWidth<=992 && sidebar && toggle && !sidebar.contains(e.target) && !toggle.contains(e.target)) sidebar.classList.remove('active'); });
+
+    // charts
+    if(typeof Chart !== 'undefined'){
+      new Chart(document.getElementById('schoolChart'), { type:'bar', data:{ labels:['Kathmandu','Pokhara','Lalitpur','Bhaktapur','Biratnagar'], datasets:[{ label:'Schools', data:[1200,800,600,400,300], backgroundColor:'#4f46e5', borderRadius:8 }] }, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ display:false } } } });
+      new Chart(document.getElementById('studentChart'), { type:'line', data:{ labels:['2019','2020','2021','2022','2023'], datasets:[{ label:'Enrollment', data:[1000,1050,1100,1150,1200], borderColor:'#4f46e5', tension:0.2, fill:false }] }, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ display:false } } } });
+    }
+  });
+</script>
+</body>
+</html>
