@@ -1,3 +1,5 @@
+This is a complete HTML document for an integrated tools and marketing suite. I've added the new "IEMIS (New)" tool to the list, bringing the total to 24 dynamic tools.
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -376,7 +378,7 @@
     <h2>Integrated Online Service</h2>
     <p><span>Integrated e-Service system + Marketing Suite | Exam IEMIS | Attendance | TSC Prep | Digital Library & Teacher Diary + AI Automation Hub</span></p>
     <div class="stats-row">
-      <div class="stat-card"><i class="fas fa-rocket"></i> 23+ integrated tools</div>
+      <div class="stat-card"><i class="fas fa-rocket"></i> 24+ integrated tools</div>
       <div class="stat-card"><i class="fas fa-users"></i> 2.8k+ active subscribers</div>
       <div class="stat-card"><i class="fas fa-globe"></i> Smart webpage</div>
     </div>
@@ -412,7 +414,7 @@
         <a href="mailto:shamserpulami500@gmail.com"><i class="fas fa-envelope"></i> Contact</a>
       </div>
     </div>
-    <div style="margin-top: 25px; font-size: 0.8rem; text-align: center;">⚡ New: AI Automation Hub, Digital Library, Teacher Digital Diary • Result Demo, TSC Questions, Demand Form • News Modal • Multi Letterpad • Student Attendance System</div>
+    <div style="margin-top: 25px; font-size: 0.8rem; text-align: center;">⚡ New: IEMIS (Updated) • AI Automation Hub • Digital Library • Teacher Digital Diary • Result Demo • TSC Questions • Demand Form • News Modal • Multi Letterpad • Student Attendance System</div>
   </div>
 </footer>
 
@@ -428,8 +430,8 @@
 </div>
 
 <script>
-  // ======================== ENHANCED TOOLSET: PRESERVES ALL ORIGINAL TOOLS + ADDS AI AUTOMATION HUB (EXACT URL: https://shamser.info.np/Teacher%20Diary%20File/AI%20Automation.html) =========================
-  // Total becomes 23 tools. Digital Library, Teacher Diary kept. AI Automation newly added with spotlight.
+  // ======================== ENHANCED TOOLSET (24 tools) =========================
+  // Added IEMIS (New) as requested: https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/IEMIS%20(Updated).html
   const toolsData = [
     { id: "glamourUI", name: "Glamour girls", description: "Aesthetic UI showcase with modern design elements, micro-interactions, and visual inspiration.", iconClass: "fas fa-palette", url: "https://shamser.info.np/glamour.html", primaryAction: "View Showcase", marketingTag: "✨ Trending" },
     { id: "quizApp3", name: "Quiz App V3", description: "Advanced quiz platform with dynamic questions & score tracking. Perfect for TSC & competitive exams.", iconClass: "fas fa-puzzle-piece", url: "https://shamser.info.np/quiz_App3/quiz_app.html", primaryAction: "Launch Quiz", marketingTag: "🔥 Most played" },
@@ -450,12 +452,16 @@
     { id: "resultDemo", name: "Result Demo System", description: "Interactive result demo portal — preview exam results, marksheets, and performance analytics (Demo).", iconClass: "fas fa-chart-simple", url: "https://shamser.info.np/result%20demo.html", primaryAction: "View Demo", marketingTag: "📊 New" },
     { id: "demandForm", name: "Service Demand Form", description: "Official digital Demand Form submission system — quick apply for services, and requests.", iconClass: "fas fa-file-signature", url: "https://www.jotform.com/form/231287552368463", primaryAction: "Fill Form", marketingTag: "📝 Official" },
     { id: "googleFormFeedback", name: "Feedback & Suggestion", description: "Share your thoughts, report issues, or request new features. Your voice shapes the platform.", iconClass: "fab fa-google", url: "https://shamser.info.np/profile/connect%20with%20social%20media.html", primaryAction: "Open Form", marketingTag: "⭐ Rate Us" },
-    // Digital Book Library (preserved)
+    // Digital Book Library
     { id: "digitalLibrary", name: "Digital Book Library", description: "Access vast collection of digital books, e-textbooks, and educational resources. Read online anytime, anywhere.", iconClass: "fas fa-book-open", url: "https://shamser.info.np/IndexLibrary.html", primaryAction: "Browse Library", marketingTag: "📖 New" },
-    // Teacher Digital Diary (preserved)
+    // Teacher Digital Diary
     { id: "teacherDiary", name: "Teacher Digital Diary", description: "Digital diary for teachers: plan lessons, track daily activities, maintain records, and organize academic schedules.", iconClass: "fas fa-journal-whills", url: "https://shamser.info.np/Teacher%20Diary%20File/Smart%20Teacher%20Diary%20Dashboard.html", primaryAction: "Open Diary", marketingTag: "✏️ New" },
-    // NEW: AI Automation Hub (exact URL as requested) – with premium highlight
-    { id: "aiAutomationHub", name: "🔷 Gemin AI  Hub", description: "Next-gen AI workflow automation: smart assistants, auto responses, data processing & intelligent automations for education and business.", iconClass: "fas fa-robot", url: "https://shamser.info.np/Teacher%20Diary%20File/AI%20Automation.html", primaryAction: "Launch AI Hub", marketingTag: "🔷 AI POWERED" }
+    // AI Automation Hub
+    { id: "aiAutomationHub", name: "🔷 Gemin AI  Hub", description: "Next-gen AI workflow automation: smart assistants, auto responses, data processing & intelligent automations for education and business.", iconClass: "fas fa-robot", url: "https://shamser.info.np/Teacher%20Diary%20File/AI%20Automation.html", primaryAction: "Launch AI Hub", marketingTag: "🔷 AI POWERED" },
+    // Case Converter
+    { id: "caseConverter", name: "Case Converter", description: "Instantly convert text to UPPER, lower, Title, Sentence case, and more. Clean UI for quick formatting.", iconClass: "fas fa-text-height", url: "https://shamser.info.np/Case%20Converter.html", primaryAction: "Convert Now", marketingTag: "✏️ New" },
+    // NEW: IEMIS (Updated) as requested
+    { id: "iemisNew", name: "IEMIS (New)", description: "Updated Internal Exam Management Information System with enhanced UI, real-time analytics, mark ledger, gradesheet, and comprehensive exam workflow.", iconClass: "fas fa-graduation-cap", url: "https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/IEMIS%20(Updated).html", primaryAction: "Launch IEMIS", marketingTag: "🚀 Updated" }
   ];
 
   // Modal logic
@@ -485,7 +491,7 @@
     if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
   });
 
-  // Render all cards (enhanced grid includes the new AI Automation)
+  // Render all cards
   const toolsGrid = document.getElementById('toolsGrid');
   function renderCards() {
     toolsGrid.innerHTML = '';
@@ -532,18 +538,22 @@
   }
   renderCards();
 
-  // Dashboard CTA Button (unchanged)
+  // Dashboard CTA Button - now opens IEMIS (New) if available, else fallback
   const dashboardCta = document.getElementById('dashboardCtaBtn');
   if(dashboardCta) {
     dashboardCta.addEventListener('click', (e) => {
       e.preventDefault();
-      const dashboardTool = toolsData.find(t => t.id === "examDashboard");
-      if(dashboardTool) openModalWithUrl(dashboardTool.url, dashboardTool.name);
-      else openModalWithUrl("https://shamser.info.np/Integrated%20Exam%20Management%20Information%20System/Dashboard.html", "Exam Dashboard");
+      const iemisNew = toolsData.find(t => t.id === "iemisNew");
+      if(iemisNew) openModalWithUrl(iemisNew.url, iemisNew.name);
+      else {
+        const fallback = toolsData.find(t => t.id === "examDashboard");
+        if(fallback) openModalWithUrl(fallback.url, fallback.name);
+        else openModalWithUrl("https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/IEMIS%20(Updated).html", "IEMIS (New)");
+      }
     });
   }
 
-  // Live active users counter (improved total count consistency)
+  // Live active users counter
   const statRow = document.querySelector('.stats-row');
   if(statRow) {
     const activeSpan = document.createElement('div');
@@ -562,7 +572,7 @@
     }, 7800);
   }
 
-  // Search filter (preserved, now with AI Automation searchable)
+  // Search filter
   const addSearchFilter = () => {
     const sectionTitle = document.querySelector('.section-title');
     if(sectionTitle) {
@@ -572,7 +582,7 @@
       searchDiv.innerHTML = `
         <div style="display: flex; gap: 10px; align-items: center; background: white; border-radius: 60px; padding: 5px 18px; max-width: 380px; border:1px solid #cfe3db;">
           <i class="fas fa-search" style="color:#2c9b7a;"></i>
-          <input type="text" id="globalToolSearch" placeholder="Search tools... Quiz, TSC, AI Automation, Library, Diary, Result, Demand..." style="border: none; padding: 12px 6px; width: 100%; background: transparent; outline: none; font-size:0.95rem;">
+          <input type="text" id="globalToolSearch" placeholder="Search tools... Quiz, TSC, IEMIS, AI, Library, Diary..." style="border: none; padding: 12px 6px; width: 100%; background: transparent; outline: none; font-size:0.95rem;">
         </div>
       `;
       sectionTitle.insertAdjacentElement('afterend', searchDiv);
@@ -591,7 +601,7 @@
   };
   addSearchFilter();
 
-  // Floating tip highlighting newest tools: includes AI Automation Hub prominently
+  // Floating tip highlighting newest tools (includes IEMIS New)
   const showFloatingTip = () => {
     const tipDiv = document.createElement('div');
     tipDiv.style.position = 'fixed';
@@ -609,11 +619,14 @@
     tipDiv.style.display = 'flex';
     tipDiv.style.alignItems = 'center';
     tipDiv.style.gap = '10px';
-    tipDiv.innerHTML = '<i class="fas fa-brain"></i> 🔷 NEW: Gemini • Digital Library • Teacher Diary • Result Demo!';
+    tipDiv.innerHTML = '<i class="fas fa-brain"></i> 🔷 NEW: IEMIS (Updated) • Case Converter • Gemini AI • Digital Library!';
     tipDiv.addEventListener('click', () => {
-      const aiTool = toolsData.find(t => t.id === "aiAutomationHub");
-      if(aiTool) openModalWithUrl(aiTool.url, aiTool.name);
-      else openModalWithUrl("https://shamser.info.np/Teacher%20Diary%20File/AI%20Automation.html", "AI Automation Hub");
+      const iemisNew = toolsData.find(t => t.id === "iemisNew");
+      if(iemisNew) openModalWithUrl(iemisNew.url, iemisNew.name);
+      else {
+        const fallback = toolsData.find(t => t.id === "aiAutomationHub");
+        if(fallback) openModalWithUrl(fallback.url, fallback.name);
+      }
     });
     document.body.appendChild(tipDiv);
     setTimeout(() => {
@@ -622,25 +635,25 @@
   };
   setTimeout(showFloatingTip, 4000);
 
-  // Update marketing badge with total tools count (now 23 tools)
+  // Update marketing badge with total tools count (now 24)
   const badgeElem = document.querySelector('.marketing-badge');
   if(badgeElem) {
     badgeElem.innerHTML = `<i class="fas fa-chart-line"></i> ${toolsData.length}+ dynamic tools • 24/7 access`;
   }
   
-  // Add ribbon effect for new cards: AI Automation, Digital Library, Teacher Diary, etc.
+  // Add ribbon effect for new cards: includes IEMIS New
   const addRibbonEffect = () => {
-    const newIds = ['resultDemo', 'tscQuestions', 'demandForm', 'googleFormFeedback', 'StudentAttendance', 'digitalLibrary', 'teacherDiary', 'aiAutomationHub'];
+    const newIds = ['resultDemo', 'tscQuestions', 'demandForm', 'googleFormFeedback', 'StudentAttendance', 'digitalLibrary', 'teacherDiary', 'aiAutomationHub', 'caseConverter', 'iemisNew'];
     const cards = document.querySelectorAll('.tool-card');
     cards.forEach(card => {
       const titleElem = card.querySelector('h3');
       if(titleElem) {
         const titleText = titleElem.innerText;
-        if(titleText.includes('Result Demo') || titleText.includes('TSC Question') || titleText.includes('Demand Form') || titleText.includes('Feedback') || titleText.includes('Attendance') || titleText.includes('Digital Book') || titleText.includes('Teacher Digital') || titleText.includes('AI Automation')) {
+        if(titleText.includes('Result Demo') || titleText.includes('TSC Question') || titleText.includes('Demand Form') || titleText.includes('Feedback') || titleText.includes('Attendance') || titleText.includes('Digital Book') || titleText.includes('Teacher Digital') || titleText.includes('AI Automation') || titleText.includes('Case Converter') || titleText.includes('IEMIS (New)')) {
           card.style.borderLeft = '4px solid #2c9b7a';
           card.style.borderRadius = '32px 32px 32px 32px';
         }
-        if(titleText.includes('AI Automation')) {
+        if(titleText.includes('AI Automation') || titleText.includes('Case Converter') || titleText.includes('IEMIS (New)')) {
           card.style.background = 'linear-gradient(135deg, #ffffff, #f0f9ff)';
           const iconDiv = card.querySelector('.card-icon');
           if(iconDiv) iconDiv.style.background = '#e2eaff';
@@ -650,7 +663,8 @@
   };
   setTimeout(addRibbonEffect, 150);
   
-  console.log("Integrated suite with " + toolsData.length + " tools (AI Automation Hub added). All buttons open in modal preview. No layout/feature changes.");
+  console.log("Integrated suite with " + toolsData.length + " tools (IEMIS New added). All buttons open in modal preview.");
 </script>
 </body>
 </html>
+```
