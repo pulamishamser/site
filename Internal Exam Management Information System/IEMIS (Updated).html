@@ -116,7 +116,7 @@
     
     .login-modal-overlay { display:none; position:fixed; inset:0; background:rgba(15,23,42,0.6); backdrop-filter:blur(8px); z-index:99999; align-items:center; justify-content:center; }
     .login-modal-overlay.show { display:flex; }
-    .login-modal-box { background:#fff; max-width:400px; width:100%; padding:2rem 2rem 1.8rem; border-radius:36px; box-shadow:0 40px 70px rgba(0,0,0,0.15); animation:slideUp 0.3s ease; }
+    .login-modal-box { background:#fff; max-width:400px; width:100%; padding:2rem 2rem 1.4rem; border-radius:36px; box-shadow:0 40px 70px rgba(0,0,0,0.15); animation:slideUp 0.3s ease; }
     .login-modal-box .btn-login { background:#0a2647; color:#fff; font-weight:600; border-radius:40px; padding:0.6rem; width:100%; border:none; transition:0.2s; }
     .login-modal-box .btn-login:hover { background:#1a3a6b; }
     .login-error { color:#d43f34; font-size:0.85rem; display:none; }
@@ -247,9 +247,9 @@
   
   <!-- SUB-NAV -->
   <nav class="sub-nav">
-    <a href="#" class="active">Home</a>
-    <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/School%20GIS.html','School GIS')">School GIS</a>
-    <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/LG%20Report.html','LG Report')">LG Report</a>
+    <a href="https://shamser.info.np" class="active">Home</a>
+    <a href="#" onclick="openDashModal('https://emis.cehrd.gov.np','cehrd')">CEHRD</a>
+    <a href="#" onclick="openDashModal('https://shamser.info.np/integrated%20services.html','Integrated Services')">Service</a>
     <div class="dropdown">
       <button class="dropdown-toggle" data-bs-toggle="dropdown">Data Portal</button>
       <ul class="dropdown-menu">
@@ -294,14 +294,16 @@
   <div id="searchResultsInfo" style="padding:0 2rem 0.5rem;display:none;"><div class="d-flex justify-content-between align-items-center bg-white p-2 px-3 rounded-3 shadow-sm"><span id="resultCountText" class="small text-muted">Found 0 results</span><span id="searchQueryDisplay" class="small fw-bold text-base"></span></div></div>
   
   <div class="totals-grid" id="totalsGrid">
-    <div class="total-card filterable-card" data-keywords="municipalities local government palika"><div class="icon">🏘️</div><div class="total-meta"><strong id="totalMun">753</strong><span>Municipalities</span><small>Total Municipalities</small></div></div>
+    <div class="total-card filterable-card" data-keywords="municipalities local government palika">
+      <div class="icon">🏘️</div><div class="total-meta"><strong id="">753</strong><span>Municipalities</span><small>Total Palika</small></div></div>
+      <!-----id=totalMun--<div class="icon">🏘️</div><div class="total-meta"><strong id="totalMun">753</strong><span>Municipalities</span><small>Total Municipalities</small></div></div>------>
     <div class="total-card filterable-card" data-keywords="schools education institutions"><div class="icon">🏫</div><div class="total-meta"><strong id="totalSchools">38,811</strong><span>Schools</span><small>Total Schools</small></div></div>
     <div class="total-card filterable-card" data-keywords="students enrolment learners"><div class="icon">👨‍🎓</div><div class="total-meta"><strong id="totalStudents">7,931,329</strong><span>Students</span><small>Total Students</small></div></div>
     <div class="total-card filterable-card" data-keywords="teachers faculty staff"><div class="icon">👨‍🏫</div><div class="total-meta"><strong id="totalTeachers">244,281</strong><span>Teachers</span><small>Total Teachers</small></div></div>
     <div class="total-card filterable-card" data-keywords="support staff administration"><div class="icon">🧑‍💼</div><div class="total-meta"><strong id="totalStaff">42,797</strong><span>Support Staff</span><small>Total Support Staff</small></div></div>
   </div>
   
-  <div class="section-header"><h2>Explore IEMIS Services</h2><div class="section-line"></div></div>
+  <div class="section-header"><h2>Explore Government (cehrd) IEMIS Services</h2><div class="section-line"></div></div>
   <div class="services-grid" id="servicesGrid">
     <a href="#" class="service-card filterable-card" data-keywords="school performance dashboard progress infrastructure indicators" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/School%20Performance%20Dashboard.html','School Performance Dashboard')"><div class="service-icon">🏫</div><div class="service-title">School Performance Dashboard</div><div class="service-description">View school progress, infrastructure and key indicators.</div></a>
     <a href="#" class="service-card filterable-card" data-keywords="student analysis enrolment attendance performance" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Student%20Analysis%20Dashboard.html','Student Analysis Dashboard')"><div class="service-icon">🎓</div><div class="service-title">Student Analysis Dashboard</div><div class="service-description">Explore student enrolment, attendance and performance data.</div></a>
@@ -313,14 +315,14 @@
   </div>
   <div id="noResults" class="no-results"><i class="bi bi-search" style="font-size:2rem;display:block;margin-bottom:0.5rem;"></i><p>No results found for your search query.</p><small class="text-muted">Try adjusting your filters or search terms.</small></div>
   
-  <footer><span>Copyright © All Rights Reserved to Department of Education, Ministry of Education and Sports</span></footer>
+  <footer><span>Copyright © All Rights Reserved to shamser.info.np</span></footer>
 </div>
 
 <!-- DASHBOARD CONTAINER -->
 <div class="dashboard-container" id="dashboardContainer">
   <header class="dash-header">
     <div class="dash-menu-toggle" id="dashMenuToggle"><i class="fas fa-bars"></i></div>
-    <div class="dash-logo"><i class="fas fa-graduation-cap"></i> IEMIS<span style="font-weight:400;color:#64748b;">·re</span></div>
+    <div class="dash-logo"><i class="fas fa-graduation-cap"></i> IEMIS<span style="font-weight:400;color:#64748b;">Exam Tool</span></div>
     <div class="dash-user-info">
       <span id="dashUserDisplay" style="font-weight:500;">School Profile</span>
       <span id="dashSessionTimer" class="dash-session-timer"></span>
@@ -337,19 +339,19 @@
     <aside class="dash-sidebar" id="dashSidebar">
       <div class="sidebar-brand">
         <img src="https://media.tenor.com/dhfraztxBo8AAAAj/globe-joypixels.gif" alt="logo">
-        <span>shamser.info.np</span>
+        <span><a href="https://shamser.info.np/">shamser.info.np</a></span>
       </div>
       <nav>
         <ul>
-          <li><a href="#" onclick="return showDashboard();"><i class="fas fa-th-large"></i> Dashboard</a></li>
-          <li><a href="#" onclick="return showDashboard();"><i class="fas fa-home"></i> Public Dashboard</a></li>
+          <li><a href="#" onclick="return showDashboard();"><i class="fas fa-home"></i> Dashboard</a></li>
+          <li><a href="https://emis.cehrd.gov.np/" onclick="return showDashboard();"><i class="fas fa-th-large"></i> Public Dashboard(cehrd)</a></li>
           <li>
             <button class="dash-toggle-submenu"><i class="fas fa-users"></i> Class 6-12<i class="fas fa-chevron-down dash-arrow"></i></button>
             <ul class="dash-submenu">
               <li><button class="dash-toggle-sub-submenu"><i class="fas fa-user-graduate"></i> Student Information <i class="fas fa-chevron-down dash-arrow"></i></button>
                 <ul class="dash-sub-submenu">
-                  <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Student%20Info%20Entry%20Form.html','Student Info Data Entry')">Student Info Data Entry</a></li>
-                  <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Update%20Student_info.html','Update Student Info')">Update Student Info</a></li>
+                  <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Student%20Info%20Entry%20Form.html','Student Info Data Entry')">Student_Info Data Entry</a></li>
+                  <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Update%20Student_info.html','Update Student Info')">Update Student_Info</a></li>
                 </ul>
               </li>
               <li><button class="dash-toggle-sub-submenu"><i class="fas fa-pencil-alt"></i> Exam Manage <i class="fas fa-chevron-down dash-arrow"></i></button>
@@ -735,7 +737,7 @@
     loginError.style.display='none'; loginSuccess.style.display='none'; loginSubmitBtn.disabled=true; loginSubmitBtn.textContent='Signing in...';
     fetch("https://script.google.com/macros/s/AKfycbw8aVDBPbix7346o647ZapCWJxUYqkNC4rCP9ZRoLFs4IT8EW_tuE3GD9BFjG4UpSPPBQ/exec", {
       method:"POST", headers:{"Content-Type":"text/plain;charset=utf-8"}, body:JSON.stringify({action:"login", username, password})
-    }).then(r=>r.text()).then(t=>{ try{ const d=JSON.parse(t); if(d.status==="success") handleLoginSuccess(d.username); else throw new Error(d.message||'Invalid'); } catch(e){ throw new Error('Server error'); } }).catch(err=>{ if(username==='demo' && password==='demo123') handleLoginSuccess('demo'); else { loginError.style.display='block'; loginSubmitBtn.disabled=false; loginSubmitBtn.textContent='Sign In'; showToast('❌ Login failed.', false); } });
+    }).then(r=>r.text()).then(t=>{ try{ const d=JSON.parse(t); if(d.status==="success") handleLoginSuccess(d.username); else throw new Error(d.message||'Invalid'); } catch(e){ throw new Error('Server error'); } }).catch(err=>{ if(username==='demo' && password==='123') handleLoginSuccess('demo'); else { loginError.style.display='block'; loginSubmitBtn.disabled=false; loginSubmitBtn.textContent='Sign In'; showToast('❌ Login failed.', false); } });
   }
 
   loginBtn.addEventListener('click', openLoginModal);
