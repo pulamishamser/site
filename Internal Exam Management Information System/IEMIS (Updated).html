@@ -5,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>IEMIS</title>
 
-<!-- You can use Open Graph tags to customize link previews.
-Learn more: /documentation/sharing/webmasters -->
-<meta property="og:url"           content="https://shamser.info.np" />
-<meta property="og:type"          content="website" />
-<meta property="og:title"         content="IEMIS New Version" />
-<meta property="og:description"   content="EMIS brings all examination data together in one system to improve evaluation system in keeping record analyting and decision-making for quality exam of school campus, and educational institution" />
-<meta property="og:image"         content="https://emis.cehrd.gov.np/assets/img/slider1.png" />
+    <meta property="og:url"           content="https://shamser.info.np" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="IEMIS New Version" />
+    <meta property="og:description"   content="EMIS brings all examination data together in one system to improve evaluation system in keeping record analyting and decision-making for quality exam of school campus, and educational institution" />
+    <meta property="og:image"         content="https://emis.cehrd.gov.np/assets/img/slider1.png" />
 </head>
 <body>
 
@@ -31,434 +29,433 @@ data-href="https://shamser.info.np"
 data-layout="button_count">
 </div>
 
+<!-- Bootstrap 5 + Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="icon" type="image/x-icon" href="https://shamser.info.np/HomePage/favicon.ico">
 
+<style>
+    * { box-sizing: border-box; margin:0; padding:0; }
+    body { font-family: 'Poppins', sans-serif; background: #f4f6fc; margin:0; padding:0; }
 
+    /* === FIXED HEADER + SUB-NAV (z-index managed) === */
+    .header-wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 9998;
+        background: #fff;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
 
+    /* Push body down so content isn't hidden behind fixed header */
+    body {
+        padding-top: 130px; /* Adjust based on header height */
+    }
 
+    .top-header {
+        background: linear-gradient(145deg, #06224f 0%, #0a3974 100%);
+        color:#fff;
+        padding:0.8rem 2.5rem;
+        display:flex;
+        flex-wrap:wrap;
+        align-items:center;
+        justify-content:space-between;
+        border-bottom:4px solid #f4b11a;
+    }
+    .gov-brand { display:flex; align-items:center; gap:1.2rem; }
+    .gov-brand img { height:80px; width:auto; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.2)); }
+    .gov-brand h4 { margin:0 0 4px; font-weight:700; font-size:1.2rem; letter-spacing:0.3px; }
+    .gov-brand p { margin:0; font-size:0.7rem; opacity:0.85; line-height:1.3; }
+    .system-title { font-size:1.5rem; font-weight:700; letter-spacing:0.5px; margin:0; text-align:center; flex:1; background:rgba(255,255,255,0.05); padding:0.2rem 1.2rem; border-radius:40px; backdrop-filter:blur(2px); }
+    .live-badge { background:#e53e3e; color:#fff; font-size:0.65rem; font-weight:700; padding:0.2rem 0.9rem; border-radius:30px; margin-left:12px; vertical-align:middle; animation:pulse-badge 1.8s infinite; text-transform:uppercase; letter-spacing:0.5px; }
+    @keyframes pulse-badge { 0%{opacity:0.6} 50%{opacity:1} 100%{opacity:0.6} }
+    .main-nav .login { background:#145da0; color:#fff; padding:0.6rem 2rem; border-radius:60px; font-weight:700; text-decoration:none; font-size:0.9rem; transition:0.2s; border:1px solid #2878b8; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.1); display:inline-block; }
+    .main-nav .login:hover { background:#1976c5; color:#fff; border-color:#4b9bd0; transform:translateY(-1px); box-shadow:0 7px 15px rgba(0,0,0,0.3); }
+    .main-nav .logout-btn { background:#d43f34; color:#fff; padding:0.6rem 2rem; border-radius:60px; font-weight:600; font-size:0.9rem; transition:0.2s; border:none; cursor:pointer; display:none; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
+    .main-nav .logout-btn:hover { background:#b12a1f; }
 
+    .sub-nav {
+        background: linear-gradient(90deg, #0c4d92, #1166ad);
+        color:#fff;
+        display:flex;
+        justify-content:flex-end;
+        align-items:center;
+        padding:0.3rem 2rem;
+        flex-wrap:wrap;
+        gap:0.2rem;
+    }
+    .sub-nav a { color:#fff; text-decoration:none; padding:10px 24px; font-size:13px; font-weight:600; position:relative; border-bottom:2px solid transparent; transition:0.2s; }
+    .sub-nav a:hover, .sub-nav a.active { border-bottom-color:#f4b11a; }
+    .sub-nav .dropdown .dropdown-toggle { color:#fff; background:transparent; border:none; padding:10px 24px; font-size:13px; font-weight:600; }
+    .sub-nav .dropdown .dropdown-toggle:hover { color:#fff; }
+    .sub-nav .dropdown .dropdown-menu { background:#fff; border-radius:0 0 6px 6px; box-shadow:0 6px 15px rgba(0,0,0,0.2); padding:0; min-width:220px; }
+    .sub-nav .dropdown .dropdown-menu .dropdown-item { color:#122b55; padding:12px 16px; font-weight:500; }
+    .sub-nav .dropdown .dropdown-menu .dropdown-item:hover { background:#eaf3ff; }
+    .clock-box { font-size:0.85rem; font-weight:500; color:#fff; background:rgba(255,255,255,0.15); padding:0.2rem 1rem; border-radius:40px; margin-left:auto; }
 
+    .hero-section { background: linear-gradient(145deg, #eef2f9 0%, #dce3f0 100%); padding:2rem 2rem 1.5rem; position:relative; }
+    .hero-slide { display:flex; flex-wrap:wrap; align-items:center; gap:2rem; }
+    .hero-content { flex:1.2; }
+    .hero-badge { background:#d4e7f8; color:#0a4489; display:inline-block; padding:0.2rem 1.2rem; border-radius:30px; font-weight:700; font-size:0.75rem; letter-spacing:0.5px; margin-bottom:1rem; }
+    .hero-content h1 { font-size:2.2rem; font-weight:700; color:#092f6b; line-height:1.2; }
+    .hero-line { width:60px; height:4px; background:#f4b11a; margin:0.8rem 0 1rem; border-radius:4px; }
+    .hero-content p { font-size:0.95rem; line-height:1.6; color:#164477; max-width:550px; }
+    .hero-buttons { display:flex; flex-wrap:wrap; gap:1rem; margin-top:1.2rem; }
+    .hero-buttons button { padding:0.5rem 1.8rem; border:1px solid #0a4b91; border-radius:7px; background:#0a4489; color:#fff; font-weight:600; font-size:0.85rem; cursor:pointer; transition:0.2s; }
+    .hero-buttons button:last-child { background:#fff; color:#0a4489; border:1px solid #0a4b91; }
+    .hero-buttons button:hover { transform:translateY(-2px); box-shadow:0 8px 16px rgba(10,38,71,0.15); }
+    .hero-image-slide { flex:1; text-align:center; position:relative; }
+    .hero-image-slide .img-wrapper { position:relative; width:100%; padding-top:30%; min-height:180px; }
+    .hero-image-slide .img-wrapper img { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); max-height:240px; width:auto; opacity:1; transition:opacity 1.2s ease-in-out; }
+    .hero-image-slide .img-wrapper img.fade-out { opacity:0; }
+    .hero-image-slide .img-wrapper img.fade-in { opacity:1; }
 
+    .hero-search {
+        background:#fff;
+        border-radius:10px;
+        padding:0.8rem 1.2rem;
+        display:grid;
+        grid-template-columns:1fr 1fr 1.5fr 1.5fr 0.8fr 0.5fr;
+        gap:12px;
+        margin-top:1.5rem;
+        box-shadow:0 5px 20px rgba(0,0,0,0.12);
+        border:1px solid #e6ecf5;
+        max-width:1200px;
+        margin-left:auto;
+        margin-right:auto;
+    }
+    .hero-search select, .hero-search input { height:40px; font-size:0.8rem; border-radius:6px; border:1px solid #ced4da; padding:0 10px; background:#fff; }
+    .hero-search .form-select, .hero-search .form-control { border:1px solid #ced4da; border-radius:6px; font-size:0.8rem; padding:0.4rem 1.2rem; background:#fff; height:40px; }
+    .hero-search .form-select:focus, .hero-search .form-control:focus { border-color:#0958c7; box-shadow:0 0 0 0.2rem rgba(9,88,199,0.2); }
+    .search-btn { background:#0958c7; border:1px solid #0958c7; border-radius:6px; padding:0.4rem 1.2rem; font-weight:600; color:#fff; transition:0.2s; height:40px; cursor:pointer; }
+    .search-btn:hover { background:#063f91; border-color:#063f91; }
+    .search-btn#clearBtn { background:#e0e5ec; color:#2c3e50; border-color:#d1d5db; display:none; }
 
+    .totals-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; margin:70px 4% 0; }
+    .total-card { display:flex; align-items:center; gap:14px; padding:16px; background:#fff; border:1px solid #e5e7eb; border-radius:10px; transition:transform 0.2s,box-shadow 0.2s; }
+    .total-card:hover { transform:translateY(-2px); box-shadow:0 6px 16px rgba(15,23,42,0.1); }
+    .total-card .icon { font-size:48px; line-height:1; flex-shrink:0; }
+    .total-meta strong { display:block; font-size:24px; font-weight:700; color:#1f2937; line-height:1.2; }
+    .total-meta span { display:block; font-size:14px; font-weight:600; color:#374151; }
+    .total-meta small { display:block; font-size:11px; color:#6b7280; margin-top:3px; }
 
+    .services-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr)); gap:16px; margin:0 3% 2rem; }
+    .service-card { display:flex; flex-direction:column; align-items:center; padding:16px; background:#fff; border:1px solid #e5e7eb; border-radius:10px; text-decoration:none; text-align:center; transition:transform 0.2s,box-shadow 0.2s; cursor:pointer; }
+    .service-card:hover { transform:translateY(-2px); box-shadow:0 4px 12px rgba(15,23,42,0.08); }
+    .service-icon { font-size:48px; height:70px; display:flex; align-items:center; justify-content:center; margin-bottom:12px; }
+    .service-title { font-size:17px; font-weight:700; color:#003b7a; margin-bottom:8px; }
+    .service-description { font-size:13px; color:#64748b; max-width:180px; }
 
-    
-    <!-- Bootstrap 5 + Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- Poppins -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="icon" type="image/x-icon" href="https://shamser.info.np/HomePage/favicon.ico">
-    <style>
-        * { box-sizing: border-box; margin:0; padding:0; }
-        body { font-family: 'Poppins', sans-serif; background: #f4f6fc; margin:0; padding:0; }
-        .top-header { 
-            background: linear-gradient(145deg, #06224f 0%, #0a3974 100%);
-            color:#fff; 
-            padding:0.8rem 2.5rem; 
-            display:flex; 
-            flex-wrap:wrap; 
-            align-items:center; 
-            justify-content:space-between; 
-            border-bottom:4px solid #f4b11a; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    .section-header { text-align:center; margin:50px 0; }
+    .section-header h2 { font-size:38px; font-weight:700; color:#003b7a; }
+    .section-line { width:60px; height:4px; margin:18px auto 0; background:#f4b11a; border-radius:4px; }
+    footer { display:flex; align-items:center; justify-content:flex-end; margin-top:30px; padding:10px 2rem; background:#1f2937; color:#d1d5db; font-size:12px; }
+
+    /* Login Overlay - z-index HIGHER than header */
+    .login-overlay { display:none; position:fixed; inset:0; background:rgba(15,23,42,0.6); backdrop-filter:blur(8px); z-index:99999; align-items:center; justify-content:center; }
+    .login-overlay.show { display:flex; }
+    .login-box { background:#fff; max-width:400px; width:100%; padding:2rem 2rem 1.4rem; border-radius:36px; box-shadow:0 40px 70px rgba(0,0,0,0.15); animation:slideUp 0.3s ease; position:relative; }
+    .login-box .btn-login { background:#0a2647; color:#fff; font-weight:600; border-radius:40px; padding:0.6rem; width:100%; border:none; transition:0.2s; }
+    .login-box .btn-login:hover { background:#1a3a6b; }
+    .login-error { color:#d43f34; font-size:0.85rem; display:none; }
+    .login-success { color:#0f7b3a; font-size:0.85rem; display:none; }
+    .demo-hint { font-size:0.7rem; color:blue; margin-top:1rem; text-align:center; }
+    .close-login { position:absolute; top:15px; right:20px; font-size:1.8rem; background:none; border:none; color:#94a3b8; cursor:pointer; }
+    .close-login:hover { color:#0f172a; }
+
+    .session-toast { position:fixed; bottom:30px; right:30px; background:#0f172a; color:#fff; padding:12px 24px; border-radius:40px; font-size:0.9rem; z-index:9999; box-shadow:0 10px 25px rgba(0,0,0,0.15); animation:fadeUp 0.3s; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes slideUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+    .dashboard-container { display:none; flex-direction:column; min-height:100vh; background:#f1f5f9; }
+    .dash-header { display:flex; align-items:center; justify-content:space-between; padding:0 28px; height:68px; background:#fff; border-bottom:1px solid rgba(0,0,0,0.06); position:sticky; top:0; z-index:100; box-shadow:0 2px 8px rgba(0,0,0,0.04); }
+    .dash-logo { display:flex; align-items:center; gap:10px; font-weight:700; font-size:1.2rem; color:#0f172a; }
+    .dash-logo i { color:#4f46e5; font-size:1.6rem; }
+    .dash-user-info { display:flex; align-items:center; gap:20px; position:relative; }
+    .dash-session-timer { font-size:0.75rem; background:#f1f5f9; padding:4px 14px; border-radius:40px; font-weight:500; color:#475569; }
+    .dash-profile-icon { font-size:2.2rem; color:#4f46e5; cursor:pointer; transition:0.2s; }
+    .dash-profile-icon:hover { color:#3730a3; transform:scale(1.05); }
+    .dash-user-dropdown { position:absolute; top:calc(100% + 8px); right:0; background:#fff; border-radius:16px; box-shadow:0 20px 40px rgba(0,0,0,0.08); width:220px; padding:8px 0; display:none; border:1px solid #f1f5f9; }
+    .dash-user-info:hover .dash-user-dropdown { display:block; }
+    .dash-user-dropdown a, .dash-user-dropdown button { display:flex; align-items:center; gap:12px; padding:10px 20px; color:#1e293b; text-decoration:none; background:transparent; border:none; width:100%; font-size:0.85rem; transition:0.2s; cursor:pointer; }
+    .dash-user-dropdown a:hover, .dash-user-dropdown button:hover { background:#f8fafc; color:#4f46e5; }
+    .dash-menu-toggle { display:none; font-size:1.6rem; cursor:pointer; color:#1e293b; padding:4px 8px; border-radius:8px; transition:0.2s; }
+    .dash-menu-toggle:hover { background:#f1f5f9; }
+
+    .dash-content-wrapper { display:flex; flex:1; }
+    .dash-sidebar { width:260px; background:#fff; border-right:1px solid #f1f5f9; height:calc(100vh - 68px); overflow-y:auto; position:sticky; padding:16px 10px 30px; top:68px; scrollbar-width:thin; flex-shrink:0; }
+    .dash-sidebar::-webkit-scrollbar { width:4px; }
+    .dash-sidebar::-webkit-scrollbar-thumb { background:#d1d5db; border-radius:8px; }
+    .dash-sidebar .sidebar-brand { text-align:center; padding:0 0 16px 0; border-bottom:1px solid #f1f5f9; margin-bottom:12px; }
+    .dash-sidebar .sidebar-brand img { width:36px; }
+    .dash-sidebar .sidebar-brand span { font-weight:600; color:#1e293b; font-size:0.9rem; margin-left:6px; }
+    .dash-sidebar nav ul { list-style:none; padding:0; margin:0; }
+    .dash-sidebar nav > ul > li { border-radius:12px; margin-bottom:1px; }
+    .dash-sidebar nav > ul > li.active { background:#eef2ff; }
+    .dash-sidebar nav a, .dash-sidebar nav button { display:flex; align-items:center; gap:12px; padding:9px 14px; color:#334155; text-decoration:none; border:none; background:transparent; width:100%; border-radius:12px; font-weight:500; font-size:0.85rem; transition:0.2s; cursor:pointer; }
+    .dash-sidebar nav a i, .dash-sidebar nav button i { width:20px; color:#64748b; font-size:0.95rem; text-align:center; }
+    .dash-sidebar nav a:hover, .dash-sidebar nav button:hover { background:#f1f5f9; color:#4f46e5; }
+    .dash-sidebar nav a:hover i, .dash-sidebar nav button:hover i { color:#4f46e5; }
+    .dash-toggle-submenu { justify-content:space-between; }
+    .dash-arrow { transition:0.25s; font-size:0.6rem; color:#94a3b8; }
+    .dash-arrow.rotated { transform:rotate(180deg); }
+    .dash-submenu { max-height:0; overflow:hidden; transition:max-height 0.35s ease; padding-left:12px; }
+    .dash-submenu.expanded { max-height:1000px; }
+    .dash-sub-submenu { max-height:0; overflow:hidden; transition:max-height 0.3s ease; padding-left:12px; }
+    .dash-sub-submenu.expanded { max-height:800px; }
+
+    .dash-main-content { flex:1; padding:24px 28px; transition:0.25s; background:#f1f5f9; }
+    .dash-quick-menu-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(105px,1fr)); gap:14px; margin:16px 0 24px; }
+    .dash-quick-menu-item { background:#fff; border-radius:14px; padding:14px 6px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; border:1px solid #f1f5f9; transition:0.2s; cursor:pointer; text-decoration:none; color:#1e293b; font-weight:500; font-size:0.7rem; aspect-ratio:1/1; min-height:90px; box-shadow:0 1px 3px rgba(0,0,0,0.02); }
+    .dash-quick-menu-item i { color:#4f46e5; font-size:2rem; margin-bottom:6px; display:block; }
+    .dash-quick-menu-item span { display:block; line-height:1.2; }
+    .dash-quick-menu-item:hover { background:#f8fafc; border-color:#dbeafe; transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.06); }
+
+    .dash-stats-cards { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:20px; margin-bottom:24px; }
+    .dash-card { background:#fff; border-radius:16px; padding:20px 22px; box-shadow:0 1px 3px rgba(0,0,0,0.04); border:1px solid rgba(0,0,0,0.03); transition:0.2s; }
+    .dash-card:hover { box-shadow:0 8px 25px rgba(0,0,0,0.05); }
+    .dash-card h3 { font-weight:600; font-size:0.9rem; color:#475569; margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+    .dash-card h3 i { font-size:1.2rem; color:#4f46e5; }
+    .dash-chart-container { height:150px; }
+    .dash-notices-card ul { list-style:none; padding:0; margin:0; }
+    .dash-notices-card li { padding:8px 0; border-bottom:1px solid #f1f5f9; font-size:0.85rem; display:flex; justify-content:space-between; align-items:center; }
+    .dash-notices-card li:last-child { border:none; }
+    .dash-notices-card li .notice-date { color:#94a3b8; font-size:0.7rem; }
+    .dash-pagination { display:flex; justify-content:center; gap:6px; margin-top:14px; }
+    .dash-pagination button, .dash-pagination span { padding:3px 12px; border-radius:30px; border:1px solid #e2e8f0; background:#fff; font-weight:500; font-size:0.8rem; transition:0.2s; }
+    .dash-pagination button:hover { background:#4f46e5; color:#fff; border-color:#4f46e5; }
+    .dash-footer { margin-top:30px; text-align:center; color:#94a3b8; font-size:0.8rem; border-top:1px solid #f1f5f9; padding-top:20px; }
+
+    #iframeContainer {
+        display:none;
+        margin-top:20px;
+        border:1px solid #e5e7eb;
+        border-radius:12px;
+        overflow:hidden;
+        background:#fff;
+        height:600px;
+        animation:slideUp 0.3s ease;
+    }
+    #iframeContainer .iframe-header {
+        background:#f8fafc;
+        padding:10px 16px;
+        border-bottom:1px solid #e5e7eb;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+    }
+    #iframeContainer .iframe-header span {
+        font-weight:600;
+        color:#0f172a;
+    }
+    #iframeContainer .iframe-header button {
+        background:transparent;
+        border:none;
+        font-size:1.2rem;
+        color:#94a3b8;
+        cursor:pointer;
+        transition:0.2s;
+    }
+    #iframeContainer .iframe-header button:hover {
+        color:#0f172a;
+        transform:rotate(90deg);
+    }
+    #iframeContainer iframe {
+        width:100%;
+        height:calc(100% - 50px);
+        border:none;
+    }
+
+    .service-modal-overlay {
+        display:none;
+        position:fixed;
+        inset:0;
+        background:rgba(15,23,42,0.7);
+        backdrop-filter:blur(8px);
+        z-index:99998;
+        align-items:center;
+        justify-content:center;
+    }
+    .service-modal-overlay.show {
+        display:flex;
+    }
+    .service-modal-box {
+        background:#fff;
+        width:100%;
+        height:100vh;
+        height:100dvh;
+        max-width:100%;
+        max-height:100%;
+        border-radius:0;
+        overflow:hidden;
+        box-shadow:none;
+        animation:slideUp 0.3s ease;
+        display:flex;
+        flex-direction:column;
+    }
+    .service-modal-header {
+        padding:16px 24px;
+        border-bottom:1px solid #f1f5f9;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        background:#fafbfc;
+        flex-shrink:0;
+        min-height:60px;
+    }
+    .service-modal-header h5 {
+        font-weight:600;
+        font-size:1.1rem;
+        color:#0f172a;
+        margin:0;
+    }
+    .service-modal-close {
+        background:none;
+        border:none;
+        font-size:2rem;
+        color:#94a3b8;
+        transition:0.2s;
+        padding:0 8px;
+        line-height:1;
+        cursor:pointer;
+    }
+    .service-modal-close:hover {
+        color:#0f172a;
+        transform:rotate(90deg);
+    }
+    .service-modal-body {
+        flex:1;
+        position:relative;
+        min-height:0;
+    }
+    .service-modal-body iframe {
+        width:100%;
+        height:100%;
+        border:none;
+        display:none;
+    }
+    .service-loading-spinner {
+        position:absolute;
+        inset:0;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        background:#fff;
+        z-index:2;
+    }
+
+    .filterable-card.filter-hidden { display:none; }
+    .no-results { text-align:center; padding:2rem; color:#6c7a94; display:none; }
+
+    .api-status {
+        font-size:0.65rem;
+        padding:2px 10px;
+        border-radius:20px;
+        font-weight:600;
+        display:inline-block;
+        margin-top:4px;
+    }
+    .api-status.online { background:#dcfce7; color:#166534; }
+    .api-status.offline { background:#fee2e2; color:#991b1b; }
+    .api-status.loading { background:#fef3c7; color:#92400e; }
+
+    .dash-dropdown-menu a i {
+        width: 18px;
+        margin-right: 8px;
+        color: #4f46e5;
+    }
+    .dash-quick-menu-item.dash-dropdown {
+        position: relative;
+        cursor: pointer;
+    }
+    .dash-dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: #fff;
+        min-width: 200px;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        border-radius: 8px;
+        padding: 8px 0;
+        z-index: 1000;
+        margin-top: 4px;
+    }
+    .dash-dropdown-menu a {
+        display: block;
+        padding: 8px 16px;
+        color: #0f172a;
+        text-decoration: none;
+        font-size: 0.85rem;
+        transition: background 0.2s;
+    }
+    .dash-dropdown-menu a:hover {
+        background: #eef2ff;
+        color: #4f46e5;
+    }
+    .dash-dropdown-divider {
+        height: 1px;
+        background: #e2e8f0;
+        margin: 4px 0;
+    }
+    .dash-dropdown:hover .dash-dropdown-menu {
+        display: block;
+    }
+    .dash-dropdown-toggle .dash-arrow {
+        font-size: 0.7rem;
+        margin-left: 6px;
+        transition: transform 0.2s;
+    }
+    .dash-dropdown:hover .dash-dropdown-toggle .dash-arrow {
+        transform: rotate(180deg);
+    }
+
+    @media (max-width:992px) {
+        .dash-sidebar { transform:translateX(-100%); z-index:90; position:fixed; top:68px; height:calc(100vh - 68px); width:280px; box-shadow:4px 0 20px rgba(0,0,0,0.05); }
+        .dash-sidebar.active { transform:translateX(0); }
+        .dash-menu-toggle { display:block; }
+        .dash-main-content { padding:16px; }
+        .dash-quick-menu-grid { grid-template-columns:repeat(auto-fill, minmax(90px,1fr)); gap:10px; }
+        .hero-search { grid-template-columns:1fr 1fr; }
+        .services-grid { grid-template-columns:repeat(3,1fr); }
+        .totals-grid { grid-template-columns:repeat(3,1fr); }
+        .top-header { flex-wrap:wrap; gap:10px; }
+        .system-title { font-size:1.2rem; }
+        #iframeContainer { height:400px; }
+        body {
+            padding-top: 130px;
         }
-        .gov-brand { display:flex; align-items:center; gap:1.2rem; }
-        .gov-brand img { height:80px; width:auto; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.2)); }
-        .gov-brand h4 { margin:0 0 4px; font-weight:700; font-size:1.2rem; letter-spacing:0.3px; }
-        .gov-brand p { margin:0; font-size:0.7rem; opacity:0.85; line-height:1.3; }
-        .system-title { font-size:1.5rem; font-weight:700; letter-spacing:0.5px; margin:0; text-align:center; flex:1; background:rgba(255,255,255,0.05); padding:0.2rem 1.2rem; border-radius:40px; backdrop-filter:blur(2px); }
-        .live-badge { background:#e53e3e; color:#fff; font-size:0.65rem; font-weight:700; padding:0.2rem 0.9rem; border-radius:30px; margin-left:12px; vertical-align:middle; animation:pulse-badge 1.8s infinite; text-transform:uppercase; letter-spacing:0.5px; }
-        @keyframes pulse-badge { 0%{opacity:0.6} 50%{opacity:1} 100%{opacity:0.6} }
-        .main-nav .login { background:#145da0; color:#fff; padding:0.6rem 2rem; border-radius:60px; font-weight:700; text-decoration:none; font-size:0.9rem; transition:0.2s; border:1px solid #2878b8; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.1); display:inline-block; }
-        .main-nav .login:hover { background:#1976c5; color:#fff; border-color:#4b9bd0; transform:translateY(-1px); box-shadow:0 7px 15px rgba(0,0,0,0.3); }
-        .main-nav .logout-btn { background:#d43f34; color:#fff; padding:0.6rem 2rem; border-radius:60px; font-weight:600; font-size:0.9rem; transition:0.2s; border:none; cursor:pointer; display:none; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
-        .main-nav .logout-btn:hover { background:#b12a1f; }
-
-        .sub-nav { 
-            background: linear-gradient(90deg, #0c4d92, #1166ad); 
-            color:#fff; 
-            display:flex; 
-            justify-content:flex-end; 
-            align-items:center;
-            padding:0.3rem 2rem;
-            flex-wrap:wrap;
-            gap:0.2rem;
+    }
+    @media (max-width:600px) {
+        .dash-header { padding:0 14px; }
+        .dash-user-info .dash-session-timer { display:none; }
+        .dash-quick-menu-grid { grid-template-columns:repeat(auto-fill, minmax(75px,1fr)); }
+        .dash-quick-menu-item { min-height:75px; font-size:0.65rem; }
+        .dash-quick-menu-item i { font-size:1.6rem; }
+        .dash-stats-cards { grid-template-columns:1fr; }
+        .dash-main-content { padding:12px; }
+        .hero-search { grid-template-columns:1fr; }
+        .services-grid { grid-template-columns:1fr 1fr; }
+        .totals-grid { grid-template-columns:1fr 1fr; }
+        .top-header { flex-direction:column; align-items:stretch; }
+        .system-title { font-size:1rem; }
+        .sub-nav { flex-direction:column; align-items:stretch; }
+        #iframeContainer { height:350px; }
+        body {
+            padding-top: 180px;
         }
-        .sub-nav a { color:#fff; text-decoration:none; padding:10px 24px; font-size:13px; font-weight:600; position:relative; border-bottom:2px solid transparent; transition:0.2s; }
-        .sub-nav a:hover, .sub-nav a.active { border-bottom-color:#f4b11a; }
-        .sub-nav .dropdown .dropdown-toggle { color:#fff; background:transparent; border:none; padding:10px 24px; font-size:13px; font-weight:600; }
-        .sub-nav .dropdown .dropdown-toggle:hover { color:#fff; }
-        .sub-nav .dropdown .dropdown-menu { background:#fff; border-radius:0 0 6px 6px; box-shadow:0 6px 15px rgba(0,0,0,0.2); padding:0; min-width:220px; }
-        .sub-nav .dropdown .dropdown-menu .dropdown-item { color:#122b55; padding:12px 16px; font-weight:500; }
-        .sub-nav .dropdown .dropdown-menu .dropdown-item:hover { background:#eaf3ff; }
-        .clock-box { font-size:0.85rem; font-weight:500; color:#fff; background:rgba(255,255,255,0.15); padding:0.2rem 1rem; border-radius:40px; margin-left:auto; }
-
-        .hero-section { background: linear-gradient(145deg, #eef2f9 0%, #dce3f0 100%); padding:2rem 2rem 1.5rem; position:relative; }
-        .hero-slide { display:flex; flex-wrap:wrap; align-items:center; gap:2rem; }
-        .hero-content { flex:1.2; }
-        .hero-badge { background:#d4e7f8; color:#0a4489; display:inline-block; padding:0.2rem 1.2rem; border-radius:30px; font-weight:700; font-size:0.75rem; letter-spacing:0.5px; margin-bottom:1rem; }
-        .hero-content h1 { font-size:2.2rem; font-weight:700; color:#092f6b; line-height:1.2; }
-        .hero-line { width:60px; height:4px; background:#f4b11a; margin:0.8rem 0 1rem; border-radius:4px; }
-        .hero-content p { font-size:0.95rem; line-height:1.6; color:#164477; max-width:550px; }
-        .hero-buttons { display:flex; flex-wrap:wrap; gap:1rem; margin-top:1.2rem; }
-        .hero-buttons button { padding:0.5rem 1.8rem; border:1px solid #0a4b91; border-radius:7px; background:#0a4489; color:#fff; font-weight:600; font-size:0.85rem; cursor:pointer; transition:0.2s; }
-        .hero-buttons button:last-child { background:#fff; color:#0a4489; border:1px solid #0a4b91; }
-        .hero-buttons button:hover { transform:translateY(-2px); box-shadow:0 8px 16px rgba(10,38,71,0.15); }
-        .hero-image-slide { flex:1; text-align:center; position:relative; }
-        .hero-image-slide .img-wrapper { position:relative; width:100%; padding-top:30%; min-height:180px; }
-        .hero-image-slide .img-wrapper img { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); max-height:240px; width:auto; opacity:1; transition:opacity 1.2s ease-in-out; }
-        .hero-image-slide .img-wrapper img.fade-out { opacity:0; }
-        .hero-image-slide .img-wrapper img.fade-in { opacity:1; }
-
-        .hero-search { 
-            background:#fff; 
-            border-radius:10px; 
-            padding:0.8rem 1.2rem; 
-            display:grid; 
-            grid-template-columns:1fr 1fr 1.5fr 1.5fr 0.8fr 0.5fr; 
-            gap:12px; 
-            margin-top:1.5rem; 
-            box-shadow:0 5px 20px rgba(0,0,0,0.12); 
-            border:1px solid #e6ecf5;
-            max-width:1200px;
-            margin-left:auto;
-            margin-right:auto;
-        }
-        .hero-search select, .hero-search input { height:40px; font-size:0.8rem; border-radius:6px; border:1px solid #ced4da; padding:0 10px; background:#fff; }
-        .hero-search .form-select, .hero-search .form-control { border:1px solid #ced4da; border-radius:6px; font-size:0.8rem; padding:0.4rem 1.2rem; background:#fff; height:40px; }
-        .hero-search .form-select:focus, .hero-search .form-control:focus { border-color:#0958c7; box-shadow:0 0 0 0.2rem rgba(9,88,199,0.2); }
-        .search-btn { background:#0958c7; border:1px solid #0958c7; border-radius:6px; padding:0.4rem 1.2rem; font-weight:600; color:#fff; transition:0.2s; height:40px; cursor:pointer; }
-        .search-btn:hover { background:#063f91; border-color:#063f91; }
-        .search-btn#clearBtn { background:#e0e5ec; color:#2c3e50; border-color:#d1d5db; display:none; }
-
-        .totals-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; margin:70px 4% 0; }
-        .total-card { display:flex; align-items:center; gap:14px; padding:16px; background:#fff; border:1px solid #e5e7eb; border-radius:10px; transition:transform 0.2s,box-shadow 0.2s; }
-        .total-card:hover { transform:translateY(-2px); box-shadow:0 6px 16px rgba(15,23,42,0.1); }
-        .total-card .icon { font-size:48px; line-height:1; flex-shrink:0; }
-        .total-meta strong { display:block; font-size:24px; font-weight:700; color:#1f2937; line-height:1.2; }
-        .total-meta span { display:block; font-size:14px; font-weight:600; color:#374151; }
-        .total-meta small { display:block; font-size:11px; color:#6b7280; margin-top:3px; }
-
-        .services-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr)); gap:16px; margin:0 3% 2rem; }
-        .service-card { display:flex; flex-direction:column; align-items:center; padding:16px; background:#fff; border:1px solid #e5e7eb; border-radius:10px; text-decoration:none; text-align:center; transition:transform 0.2s,box-shadow 0.2s; cursor:pointer; }
-        .service-card:hover { transform:translateY(-2px); box-shadow:0 4px 12px rgba(15,23,42,0.08); }
-        .service-icon { font-size:48px; height:70px; display:flex; align-items:center; justify-content:center; margin-bottom:12px; }
-        .service-title { font-size:17px; font-weight:700; color:#003b7a; margin-bottom:8px; }
-        .service-description { font-size:13px; color:#64748b; max-width:180px; }
-
-        .section-header { text-align:center; margin:50px 0; }
-        .section-header h2 { font-size:38px; font-weight:700; color:#003b7a; }
-        .section-line { width:60px; height:4px; margin:18px auto 0; background:#f4b11a; border-radius:4px; }
-        footer { display:flex; align-items:center; justify-content:flex-end; margin-top:30px; padding:10px 2rem; background:#1f2937; color:#d1d5db; font-size:12px; }
-
-        /* Login Overlay */
-        .login-overlay { display:none; position:fixed; inset:0; background:rgba(15,23,42,0.6); backdrop-filter:blur(8px); z-index:99999; align-items:center; justify-content:center; }
-        .login-overlay.show { display:flex; }
-        .login-box { background:#fff; max-width:400px; width:100%; padding:2rem 2rem 1.4rem; border-radius:36px; box-shadow:0 40px 70px rgba(0,0,0,0.15); animation:slideUp 0.3s ease; position:relative; }
-        .login-box .btn-login { background:#0a2647; color:#fff; font-weight:600; border-radius:40px; padding:0.6rem; width:100%; border:none; transition:0.2s; }
-        .login-box .btn-login:hover { background:#1a3a6b; }
-        .login-error { color:#d43f34; font-size:0.85rem; display:none; }
-        .login-success { color:#0f7b3a; font-size:0.85rem; display:none; }
-        .demo-hint { font-size:0.7rem; color:blue; margin-top:1rem; text-align:center; }
-        .close-login { position:absolute; top:15px; right:20px; font-size:1.8rem; background:none; border:none; color:#94a3b8; cursor:pointer; }
-        .close-login:hover { color:#0f172a; }
-
-        .session-toast { position:fixed; bottom:30px; right:30px; background:#0f172a; color:#fff; padding:12px 24px; border-radius:40px; font-size:0.9rem; z-index:9999; box-shadow:0 10px 25px rgba(0,0,0,0.15); animation:fadeUp 0.3s; }
-        @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-        @keyframes slideUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-
-        .dashboard-container { display:none; flex-direction:column; min-height:100vh; background:#f1f5f9; }
-        .dash-header { display:flex; align-items:center; justify-content:space-between; padding:0 28px; height:68px; background:#fff; border-bottom:1px solid rgba(0,0,0,0.06); position:sticky; top:0; z-index:100; box-shadow:0 2px 8px rgba(0,0,0,0.04); }
-        .dash-logo { display:flex; align-items:center; gap:10px; font-weight:700; font-size:1.2rem; color:#0f172a; }
-        .dash-logo i { color:#4f46e5; font-size:1.6rem; }
-        .dash-user-info { display:flex; align-items:center; gap:20px; position:relative; }
-        .dash-session-timer { font-size:0.75rem; background:#f1f5f9; padding:4px 14px; border-radius:40px; font-weight:500; color:#475569; }
-        .dash-profile-icon { font-size:2.2rem; color:#4f46e5; cursor:pointer; transition:0.2s; }
-        .dash-profile-icon:hover { color:#3730a3; transform:scale(1.05); }
-        .dash-user-dropdown { position:absolute; top:calc(100% + 8px); right:0; background:#fff; border-radius:16px; box-shadow:0 20px 40px rgba(0,0,0,0.08); width:220px; padding:8px 0; display:none; border:1px solid #f1f5f9; }
-        .dash-user-info:hover .dash-user-dropdown { display:block; }
-        .dash-user-dropdown a, .dash-user-dropdown button { display:flex; align-items:center; gap:12px; padding:10px 20px; color:#1e293b; text-decoration:none; background:transparent; border:none; width:100%; font-size:0.85rem; transition:0.2s; cursor:pointer; }
-        .dash-user-dropdown a:hover, .dash-user-dropdown button:hover { background:#f8fafc; color:#4f46e5; }
-        .dash-menu-toggle { display:none; font-size:1.6rem; cursor:pointer; color:#1e293b; padding:4px 8px; border-radius:8px; transition:0.2s; }
-        .dash-menu-toggle:hover { background:#f1f5f9; }
-
-        .dash-content-wrapper { display:flex; flex:1; }
-        .dash-sidebar { width:260px; background:#fff; border-right:1px solid #f1f5f9; height:calc(100vh - 68px); overflow-y:auto; position:sticky; padding:16px 10px 30px; top:68px; scrollbar-width:thin; flex-shrink:0; }
-        .dash-sidebar::-webkit-scrollbar { width:4px; }
-        .dash-sidebar::-webkit-scrollbar-thumb { background:#d1d5db; border-radius:8px; }
-        .dash-sidebar .sidebar-brand { text-align:center; padding:0 0 16px 0; border-bottom:1px solid #f1f5f9; margin-bottom:12px; }
-        .dash-sidebar .sidebar-brand img { width:36px; }
-        .dash-sidebar .sidebar-brand span { font-weight:600; color:#1e293b; font-size:0.9rem; margin-left:6px; }
-        .dash-sidebar nav ul { list-style:none; padding:0; margin:0; }
-        .dash-sidebar nav > ul > li { border-radius:12px; margin-bottom:1px; }
-        .dash-sidebar nav > ul > li.active { background:#eef2ff; }
-        .dash-sidebar nav a, .dash-sidebar nav button { display:flex; align-items:center; gap:12px; padding:9px 14px; color:#334155; text-decoration:none; border:none; background:transparent; width:100%; border-radius:12px; font-weight:500; font-size:0.85rem; transition:0.2s; cursor:pointer; }
-        .dash-sidebar nav a i, .dash-sidebar nav button i { width:20px; color:#64748b; font-size:0.95rem; text-align:center; }
-        .dash-sidebar nav a:hover, .dash-sidebar nav button:hover { background:#f1f5f9; color:#4f46e5; }
-        .dash-sidebar nav a:hover i, .dash-sidebar nav button:hover i { color:#4f46e5; }
-        .dash-toggle-submenu { justify-content:space-between; }
-        .dash-arrow { transition:0.25s; font-size:0.6rem; color:#94a3b8; }
-        .dash-arrow.rotated { transform:rotate(180deg); }
-        .dash-submenu { max-height:0; overflow:hidden; transition:max-height 0.35s ease; padding-left:12px; }
-        .dash-submenu.expanded { max-height:1000px; }
-        .dash-sub-submenu { max-height:0; overflow:hidden; transition:max-height 0.3s ease; padding-left:12px; }
-        .dash-sub-submenu.expanded { max-height:800px; }
-
-        .dash-main-content { flex:1; padding:24px 28px; transition:0.25s; background:#f1f5f9; }
-        .dash-quick-menu-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(105px,1fr)); gap:14px; margin:16px 0 24px; }
-        .dash-quick-menu-item { background:#fff; border-radius:14px; padding:14px 6px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; border:1px solid #f1f5f9; transition:0.2s; cursor:pointer; text-decoration:none; color:#1e293b; font-weight:500; font-size:0.7rem; aspect-ratio:1/1; min-height:90px; box-shadow:0 1px 3px rgba(0,0,0,0.02); }
-        .dash-quick-menu-item i { color:#4f46e5; font-size:2rem; margin-bottom:6px; display:block; }
-        .dash-quick-menu-item span { display:block; line-height:1.2; }
-        .dash-quick-menu-item:hover { background:#f8fafc; border-color:#dbeafe; transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.06); }
-
-        .dash-stats-cards { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:20px; margin-bottom:24px; }
-        .dash-card { background:#fff; border-radius:16px; padding:20px 22px; box-shadow:0 1px 3px rgba(0,0,0,0.04); border:1px solid rgba(0,0,0,0.03); transition:0.2s; }
-        .dash-card:hover { box-shadow:0 8px 25px rgba(0,0,0,0.05); }
-        .dash-card h3 { font-weight:600; font-size:0.9rem; color:#475569; margin-bottom:14px; display:flex; align-items:center; gap:8px; }
-        .dash-card h3 i { font-size:1.2rem; color:#4f46e5; }
-        .dash-chart-container { height:150px; }
-        .dash-notices-card ul { list-style:none; padding:0; margin:0; }
-        .dash-notices-card li { padding:8px 0; border-bottom:1px solid #f1f5f9; font-size:0.85rem; display:flex; justify-content:space-between; align-items:center; }
-        .dash-notices-card li:last-child { border:none; }
-        .dash-notices-card li .notice-date { color:#94a3b8; font-size:0.7rem; }
-        .dash-pagination { display:flex; justify-content:center; gap:6px; margin-top:14px; }
-        .dash-pagination button, .dash-pagination span { padding:3px 12px; border-radius:30px; border:1px solid #e2e8f0; background:#fff; font-weight:500; font-size:0.8rem; transition:0.2s; }
-        .dash-pagination button:hover { background:#4f46e5; color:#fff; border-color:#4f46e5; }
-        .dash-footer { margin-top:30px; text-align:center; color:#94a3b8; font-size:0.8rem; border-top:1px solid #f1f5f9; padding-top:20px; }
-
-        /* iframe container */
-        #iframeContainer {
-            display:none;
-            margin-top:20px;
-            border:1px solid #e5e7eb;
-            border-radius:12px;
-            overflow:hidden;
-            background:#fff;
-            height:600px;
-            animation:slideUp 0.3s ease;
-        }
-        #iframeContainer .iframe-header {
-            background:#f8fafc;
-            padding:10px 16px;
-            border-bottom:1px solid #e5e7eb;
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-        }
-        #iframeContainer .iframe-header span {
-            font-weight:600;
-            color:#0f172a;
-        }
-        #iframeContainer .iframe-header button {
-            background:transparent;
-            border:none;
-            font-size:1.2rem;
-            color:#94a3b8;
-            cursor:pointer;
-            transition:0.2s;
-        }
-        #iframeContainer .iframe-header button:hover {
-            color:#0f172a;
-            transform:rotate(90deg);
-        }
-        #iframeContainer iframe {
-            width:100%;
-            height:calc(100% - 50px);
-            border:none;
-        }
-
-        /* Service Modal - Fullscreen */
-        .service-modal-overlay {
-            display:none;
-            position:fixed;
-            inset:0;
-            background:rgba(15,23,42,0.7);
-            backdrop-filter:blur(8px);
-            z-index:99998;
-            align-items:center;
-            justify-content:center;
-        }
-        .service-modal-overlay.show {
-            display:flex;
-        }
-        .service-modal-box {
-            background:#fff;
-            width:100%;
-            height:100vh;
-            height:100dvh;
-            max-width:100%;
-            max-height:100%;
-            border-radius:0;
-            overflow:hidden;
-            box-shadow:none;
-            animation:slideUp 0.3s ease;
-            display:flex;
-            flex-direction:column;
-        }
-        .service-modal-header {
-            padding:16px 24px;
-            border-bottom:1px solid #f1f5f9;
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            background:#fafbfc;
-            flex-shrink:0;
-            min-height:60px;
-        }
-        .service-modal-header h5 {
-            font-weight:600;
-            font-size:1.1rem;
-            color:#0f172a;
-            margin:0;
-        }
-        .service-modal-close {
-            background:none;
-            border:none;
-            font-size:2rem;
-            color:#94a3b8;
-            transition:0.2s;
-            padding:0 8px;
-            line-height:1;
-            cursor:pointer;
-        }
-        .service-modal-close:hover {
-            color:#0f172a;
-            transform:rotate(90deg);
-        }
-        .service-modal-body {
-            flex:1;
-            position:relative;
-            min-height:0;
-        }
-        .service-modal-body iframe {
-            width:100%;
-            height:100%;
-            border:none;
-            display:none;
-        }
-        .service-loading-spinner {
-            position:absolute;
-            inset:0;
-            display:flex;
-            flex-direction:column;
-            align-items:center;
-            justify-content:center;
-            background:#fff;
-            z-index:2;
-        }
-
-        .filterable-card.filter-hidden { display:none; }
-        .no-results { text-align:center; padding:2rem; color:#6c7a94; display:none; }
-
-        /* API Status Badge */
-        .api-status {
-            font-size:0.65rem;
-            padding:2px 10px;
-            border-radius:20px;
-            font-weight:600;
-            display:inline-block;
-            margin-top:4px;
-        }
-        .api-status.online { background:#dcfce7; color:#166534; }
-        .api-status.offline { background:#fee2e2; color:#991b1b; }
-        .api-status.loading { background:#fef3c7; color:#92400e; }
-
-        @media (max-width:992px) {
-            .dash-sidebar { transform:translateX(-100%); z-index:90; position:fixed; top:68px; height:calc(100vh - 68px); width:280px; box-shadow:4px 0 20px rgba(0,0,0,0.05); }
-            .dash-sidebar.active { transform:translateX(0); }
-            .dash-menu-toggle { display:block; }
-            .dash-main-content { padding:16px; }
-            .dash-quick-menu-grid { grid-template-columns:repeat(auto-fill, minmax(90px,1fr)); gap:10px; }
-            .hero-search { grid-template-columns:1fr 1fr; }
-            .services-grid { grid-template-columns:repeat(3,1fr); }
-            .totals-grid { grid-template-columns:repeat(3,1fr); }
-            .top-header { flex-wrap:wrap; gap:10px; }
-            .system-title { font-size:1.2rem; }
-            #iframeContainer { height:400px; }
-        }
-        @media (max-width:600px) {
-            .dash-header { padding:0 14px; }
-            .dash-user-info .dash-session-timer { display:none; }
-            .dash-quick-menu-grid { grid-template-columns:repeat(auto-fill, minmax(75px,1fr)); }
-            .dash-quick-menu-item { min-height:75px; font-size:0.65rem; }
-            .dash-quick-menu-item i { font-size:1.6rem; }
-            .dash-stats-cards { grid-template-columns:1fr; }
-            .dash-main-content { padding:12px; }
-            .hero-search { grid-template-columns:1fr; }
-            .services-grid { grid-template-columns:1fr 1fr; }
-            .totals-grid { grid-template-columns:1fr 1fr; }
-            .top-header { flex-direction:column; align-items:stretch; }
-            .system-title { font-size:1rem; }
-            .sub-nav { flex-direction:column; align-items:stretch; }
-            #iframeContainer { height:350px; }
-        }
-
-  /*Dropdown Quick Menu*/
-.dash-dropdown-menu a i {
-    width: 18px;
-    margin-right: 8px;
-    color: #4f46e5;
-}
-
-.dash-quick-menu-item.dash-dropdown {
-    position: relative;
-    cursor: pointer;
-}
-
-.dash-dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: #fff;
-    min-width: 200px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-    border-radius: 8px;
-    padding: 8px 0;
-    z-index: 1000;
-    margin-top: 4px;
-}
-
-.dash-dropdown-menu a {
-    display: block;
-    padding: 8px 16px;
-    color: #0f172a;
-    text-decoration: none;
-    font-size: 0.85rem;
-    transition: background 0.2s;
-}
-
-.dash-dropdown-menu a:hover {
-    background: #eef2ff;
-    color: #4f46e5;
-}
-
-.dash-dropdown-divider {
-    height: 1px;
-    background: #e2e8f0;
-    margin: 4px 0;
-}
-
-.dash-dropdown:hover .dash-dropdown-menu {
-    display: block;
-}
-
-.dash-dropdown-toggle .dash-arrow {
-    font-size: 0.7rem;
-    margin-left: 6px;
-    transition: transform 0.2s;
-}
-
-.dash-dropdown:hover .dash-dropdown-toggle .dash-arrow {
-    transform: rotate(180deg);
-}
-
-        
-    </style>
+    }
+</style>
 </head>
 <body>
-<div id="app">
+
+<!-- ===== FIXED HEADER WRAPPER ===== -->
+<div class="header-wrapper">
     <!-- HEADER -->
     <header class="top-header">
         <div class="gov-brand">
@@ -493,160 +490,159 @@ data-layout="button_count">
         </div>
         <span class="clock-box" id="liveClock"><i class="bi bi-clock"></i> --:--:--</span>
     </nav>
-
-    <!-- HERO SECTION -->
-    <section class="hero-section" id="heroSection">
-        <div class="hero-slide">
-            <div class="hero-content">
-                <div class="hero-badge">★ Quality Education for a Prosperous Nepal</div>
-                <h1>Reliable Tool. Better Performance Stronger Quality.</h1>
-                <div class="hero-line"></div>
-                <p>EMIS brings all examination data together in one system to improve evaluation system in keeping record analyting and decision-making for quality exam of school campus, and educational institution.</p>
-                <div class="hero-buttons"><button id="exploreBtn">Explore Data & Reports</button><button id="aboutBtn">About IEMIS</button></div>
-            </div>
-            <div class="hero-image-slide">
-                <div class="img-wrapper" id="heroImageWrapper">
-                    <img id="heroImage" src="https://emis.cehrd.gov.np/assets/img/slider1.png" alt="Education in Nepal" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 250%22%3E%3Crect width=%22400%22 height=%22250%22 fill=%22%23dce3f0%22/%3E%3Ccircle cx=%22200%22 cy=%22125%22 r=%2280%22 fill=%22%230a2647%22 opacity=%220.2%22/%3E%3Cpath d=%22M160 100 L240 100 L240 160 L160 160 Z%22 fill=%22%23f4b11a%22 opacity=%220.7%22/%3E%3Crect x=%22130%22 y=%22180%22 width=%22140%22 height=%2225%22 fill=%22%230a2647%22 opacity=%220.3%22/%3E%3C/svg%3E'">
-                </div>
-            </div>
-        </div>
-        <div class="hero-search" id="searchContainer">
-            <select class="form-select" id="searchProvince"><option value="">🏛️ Province</option></select>
-            <select class="form-select" id="searchDistrict"><option value="">🏢 District</option></select>
-            <select class="form-select" id="searchMunicipality"><option value="">🏘️ Palika</option></select>
-            <input class="form-control" id="searchSchool" placeholder="🏫 EMIS Code | School">
-            <select class="form-select" id="searchYear"><option value="">📅 Year</option><option value="2083">2083</option><option value="2082">2082</option><option value="2081">2081</option></select>
-            <button class="search-btn" id="searchBtn"><i class="bi bi-search"></i> Search</button>
-            <button class="search-btn" id="clearBtn" style="background:#e0e5ec;color:#2c3e50;display:none;"><i class="bi bi-x-circle"></i> Clear</button>
-        </div>
-    </section>
-
-    <div id="searchResultsInfo" style="padding:0 2rem 0.5rem;display:none;"><div class="d-flex justify-content-between align-items-center bg-white p-2 px-3 rounded-3 shadow-sm"><span id="resultCountText" class="small text-muted">Found 0 results</span><span id="searchQueryDisplay" class="small fw-bold text-base"></span></div></div>
-
-    <div class="totals-grid" id="totalsGrid">
-        <div class="total-card filterable-card" data-keywords="Local Level">
-            <div class="icon">🏘️</div>
-            <div class="total-meta">
-              <!---  <strong id="totalMun">753</strong>----->
-                <strong>753</strong>
-                <span>Municipalities</span>
-                <small>Total Palika</small>
-                <span class="api-status" id="apiStatus">Loading...</span>
-            </div>
-        </div>
-        <div class="total-card filterable-card" data-keywords="schools education institutions">
-            <div class="icon">🏫</div>
-            <div class="total-meta">
-                <!---   <strong id="totalSchools">38,811</strong>----->
-                <strong>38,811</strong>
-                <span>Schools</span>
-                <small>Total Schools</small>
-            </div>
-        </div>
-        <div class="total-card filterable-card" data-keywords="students enrolment learners">
-            <div class="icon">👨‍🎓</div>
-            <div class="total-meta">
-                <strong id="totalStudents">7,931,329</strong>
-                <span>Students</span>
-                <small>Total Students</small>
-            </div>
-        </div>
-        <div class="total-card filterable-card" data-keywords="teachers faculty staff">
-            <div class="icon">👨‍🏫</div>
-            <div class="total-meta">
-                <strong id="totalTeachers">244,281</strong>
-                <span>Teachers</span>
-                <small>Total Teachers</small>
-            </div>
-        </div>
-        <div class="total-card filterable-card" data-keywords="support staff administration">
-            <div class="icon">🧑‍💻</div>
-            <div class="total-meta">
-                <strong id="totalStaff">42,797</strong>
-                <span>Support Staff</span>
-                <small>Total Support Staff</small>
-            </div>
-        </div>
-    </div>
-
-    <!-- REPLACED SERVICES SECTION - Login Bina Khulne, Fullscreen Modal -->
-    <div class="section-header"><h2>Explore More Services</h2><div class="section-line"></div></div>
-    <div class="services-grid" id="servicesGrid">
-        <a href="#" class="service-card filterable-card" data-keywords="AI Suite Gemini" onclick="openServiceModal('Teacher Diary File/AI Automation.html','AI Suite Gemini'); return false;">
-            <div class="service-icon">🔷</div>
-            <div class="service-title">AI Suite (Gemini 2.0)</div>
-            <div class="service-description">AI-powered tools and automation.</div>
-        </a>
-        <a href="#" class="service-card filterable-card" data-keywords="pdf editor" onclick="openServiceModal('https://www.sejda.com/pdf-editor','PDF Editor'); return false;">
-            <div class="service-icon">📄</div>
-            <div class="service-title">PDF Editor</div>
-            <div class="service-description">Edit PDF documents online.</div>
-        </a>
-        <a href="#" class="service-card filterable-card" data-keywords="case converter text" onclick="openServiceModal('https://shamser.info.np/Case Converter.html','Case Converter'); return false;">
-            <div class="service-icon">🔤</div>
-            <div class="service-title">Case Converter</div>
-            <div class="service-description">Convert text to different cases.</div>
-        </a>
-        <a href="#" class="service-card filterable-card" data-keywords="digital book library" onclick="openServiceModal('https://shamser.info.np/IndexLibrary.html','Digital Book Library'); return false;">
-            <div class="service-icon">📚</div>
-            <div class="service-title">Digital Book Library</div>
-            <div class="service-description">Access digital books and resources.</div>
-        </a>
-        <a href="#" class="service-card filterable-card" data-keywords="smart teacher diary" onclick="openServiceModal('https://shamser.info.np/Teacher%20Diary%20File/Smart%20Teacher%20Diary%20Dashboard.html','Smart Teacher Diary'); return false;">
-            <div class="service-icon">📓</div>
-            <div class="service-title">Smart Teacher Diary</div>
-            <div class="service-description">Digital diary for teachers.</div>
-        </a>
-        <a href="#" class="service-card filterable-card" data-keywords="SEE result check" onclick="openServiceModal('https://shamser.info.np/SEE/see.ntc.net.np/results/grade.html','Check SEE Result'); return false;">
-            <div class="service-icon">✅</div>
-            <div class="service-title">Check SEE Result</div>
-            <div class="service-description">Check SEE results online.</div>
-        </a>
-        <a href="#" class="service-card filterable-card" data-keywords="integrated services" onclick="openServiceModal('https://shamser.info.np/integrated%20services.html','Integrated Services'); return false;">
-            <div class="service-icon">🔗</div>
-            <div class="service-title">Integrated Services</div>
-            <div class="service-description">Access all integrated services.</div>
-        </a>
-        <a href="#" class="service-card filterable-card" data-keywords="generate multi letters" onclick="openServiceModal('https://shamser.info.np/Multi%20letterpad.html','Generate Multi Letters'); return false;">
-            <div class="service-icon">✉️</div>
-            <div class="service-title">Generate Multi Letters</div>
-            <div class="service-description">Generate multiple letters at once.</div>
-        </a>
-        <a href="#" class="service-card filterable-card" data-keywords="student attendance system" onclick="openServiceModal('https://shamser.info.np/Attendance.v4/Attendance_Dashboard4.html','Student Attendance System'); return false;">
-            <div class="service-icon">📋</div>
-            <div class="service-title">Student Attendance System</div>
-            <div class="service-description">Track student attendance.</div>
-        </a>
-        <a href="#" class="service-card filterable-card" data-keywords="quiz tsc" onclick="openServiceModal('https://shamser.info.np/tsc_questions.html','Quiz'); return false;">
-            <div class="service-icon">🧠</div>
-            <div class="service-title">Quiz</div>
-            <div class="service-description">Test your knowledge with quizzes.</div>
-        </a>
-        <a href="#" class="service-card filterable-card" data-keywords="news taja" onclick="openServiceModal('https://shamser.info.np/News%20modal.html','ताजा समाचार'); return false;">
-            <div class="service-icon">📰</div>
-            <div class="service-title">ताजा समाचार</div>
-            <div class="service-description">Latest news.</div>
-        </a>
-        <a href="#" class="service-card filterable-card" data-keywords="service delivery" onclick="openServiceModal('https://shamser.info.np/Sign_up.html','Service Delivery'); return false;">
-            <div class="service-icon">📬</div>
-            <div class="service-title">Service Delivery</div>
-            <div class="service-description">Request and manage services.</div>
-        </a>
-        <a href="#" class="service-card filterable-card" data-keywords="number to text" onclick="openServiceModal('https://shamser.info.np/Number_to_Text.html','Number to Text'); return false;">
-            <div class="service-icon">🔢</div>
-            <div class="service-title">Number to Text</div>
-            <div class="service-description">Convert numbers to words.</div>
-        </a>
-        <a href="#" class="service-card filterable-card" data-keywords="government holiday list" onclick="openServiceModal('https://shamser.info.np/Holiday_2083_20260405.html','सरकारी बिदाको सूचि'); return false;">
-            <div class="service-icon">🗓️</div>
-            <div class="service-title">सरकारी बिदाको सूचि</div>
-            <div class="service-description">List of government holidays.</div>
-        </a>
-    </div>
-    <div id="noResults" class="no-results"><i class="bi bi-search" style="font-size:2rem;display:block;margin-bottom:0.5rem;"></i><p>No results found for your search query.</p><small class="text-muted">Try adjusting your filters or search terms.</small></div>
-
-    <footer><span>Copyright © All Rights Reserved to shamser.info.np</span></footer>
 </div>
+<!-- ===== END FIXED HEADER WRAPPER ===== -->
+
+<!-- HERO SECTION -->
+<section class="hero-section" id="heroSection">
+    <div class="hero-slide">
+        <div class="hero-content">
+            <div class="hero-badge">★ Quality Education for a Prosperous Nepal</div>
+            <h1>Reliable Tool. Better Performance Stronger Quality.</h1>
+            <div class="hero-line"></div>
+            <p>EMIS brings all examination data together in one system to improve evaluation system in keeping record analyting and decision-making for quality exam of school campus, and educational institution.</p>
+            <div class="hero-buttons"><button id="exploreBtn">Explore Data & Reports</button><button id="aboutBtn">About IEMIS</button></div>
+        </div>
+        <div class="hero-image-slide">
+            <div class="img-wrapper" id="heroImageWrapper">
+                <img id="heroImage" src="https://emis.cehrd.gov.np/assets/img/slider1.png" alt="Education in Nepal" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 250%22%3E%3Crect width=%22400%22 height=%22250%22 fill=%22%23dce3f0%22/%3E%3Ccircle cx=%22200%22 cy=%22125%22 r=%2280%22 fill=%22%230a2647%22 opacity=%220.2%22/%3E%3Cpath d=%22M160 100 L240 100 L240 160 L160 160 Z%22 fill=%22%23f4b11a%22 opacity=%220.7%22/%3E%3Crect x=%22130%22 y=%22180%22 width=%22140%22 height=%2225%22 fill=%22%230a2647%22 opacity=%220.3%22/%3E%3C/svg%3E'">
+            </div>
+        </div>
+    </div>
+    <div class="hero-search" id="searchContainer">
+        <select class="form-select" id="searchProvince"><option value="">🏛️ Province</option></select>
+        <select class="form-select" id="searchDistrict"><option value="">🏢 District</option></select>
+        <select class="form-select" id="searchMunicipality"><option value="">🏘️ Palika</option></select>
+        <input class="form-control" id="searchSchool" placeholder="🏫 EMIS Code | School">
+        <select class="form-select" id="searchYear"><option value="">📅 Year</option><option value="2083">2083</option><option value="2082">2082</option><option value="2081">2081</option></select>
+        <button class="search-btn" id="searchBtn"><i class="bi bi-search"></i> Search</button>
+        <button class="search-btn" id="clearBtn" style="background:#e0e5ec;color:#2c3e50;display:none;"><i class="bi bi-x-circle"></i> Clear</button>
+    </div>
+</section>
+
+<div id="searchResultsInfo" style="padding:0 2rem 0.5rem;display:none;"><div class="d-flex justify-content-between align-items-center bg-white p-2 px-3 rounded-3 shadow-sm"><span id="resultCountText" class="small text-muted">Found 0 results</span><span id="searchQueryDisplay" class="small fw-bold text-base"></span></div></div>
+
+<div class="totals-grid" id="totalsGrid">
+    <div class="total-card filterable-card" data-keywords="Local Level">
+        <div class="icon">🏘️</div>
+        <div class="total-meta">
+            <strong>753</strong>
+            <span>Municipalities</span>
+            <small>Total Palika</small>
+            <span class="api-status" id="apiStatus">Loading...</span>
+        </div>
+    </div>
+    <div class="total-card filterable-card" data-keywords="schools education institutions">
+        <div class="icon">🏫</div>
+        <div class="total-meta">
+            <strong>38,811</strong>
+            <span>Schools</span>
+            <small>Total Schools</small>
+        </div>
+    </div>
+    <div class="total-card filterable-card" data-keywords="students enrolment learners">
+        <div class="icon">👨‍🎓</div>
+        <div class="total-meta">
+            <strong id="totalStudents">7,931,329</strong>
+            <span>Students</span>
+            <small>Total Students</small>
+        </div>
+    </div>
+    <div class="total-card filterable-card" data-keywords="teachers faculty staff">
+        <div class="icon">👨‍🏫</div>
+        <div class="total-meta">
+            <strong id="totalTeachers">244,281</strong>
+            <span>Teachers</span>
+            <small>Total Teachers</small>
+        </div>
+    </div>
+    <div class="total-card filterable-card" data-keywords="support staff administration">
+        <div class="icon">🧑‍💻</div>
+        <div class="total-meta">
+            <strong id="totalStaff">42,797</strong>
+            <span>Support Staff</span>
+            <small>Total Support Staff</small>
+        </div>
+    </div>
+</div>
+
+<!-- SERVICES SECTION -->
+<div class="section-header"><h2>Explore More Services</h2><div class="section-line"></div></div>
+<div class="services-grid" id="servicesGrid">
+    <a href="#" class="service-card filterable-card" data-keywords="AI Suite Gemini" onclick="openServiceModal('Teacher Diary File/AI Automation.html','AI Suite Gemini'); return false;">
+        <div class="service-icon">🔷</div>
+        <div class="service-title">AI Suite (Gemini 2.0)</div>
+        <div class="service-description">AI-powered tools and automation.</div>
+    </a>
+    <a href="#" class="service-card filterable-card" data-keywords="pdf editor" onclick="openServiceModal('https://www.sejda.com/pdf-editor','PDF Editor'); return false;">
+        <div class="service-icon">📄</div>
+        <div class="service-title">PDF Editor</div>
+        <div class="service-description">Edit PDF documents online.</div>
+    </a>
+    <a href="#" class="service-card filterable-card" data-keywords="case converter text" onclick="openServiceModal('https://shamser.info.np/Case Converter.html','Case Converter'); return false;">
+        <div class="service-icon">🔤</div>
+        <div class="service-title">Case Converter</div>
+        <div class="service-description">Convert text to different cases.</div>
+    </a>
+    <a href="#" class="service-card filterable-card" data-keywords="digital book library" onclick="openServiceModal('https://shamser.info.np/IndexLibrary.html','Digital Book Library'); return false;">
+        <div class="service-icon">📚</div>
+        <div class="service-title">Digital Book Library</div>
+        <div class="service-description">Access digital books and resources.</div>
+    </a>
+    <a href="#" class="service-card filterable-card" data-keywords="smart teacher diary" onclick="openServiceModal('https://shamser.info.np/Teacher%20Diary%20File/Smart%20Teacher%20Diary%20Dashboard.html','Smart Teacher Diary'); return false;">
+        <div class="service-icon">📓</div>
+        <div class="service-title">Smart Teacher Diary</div>
+        <div class="service-description">Digital diary for teachers.</div>
+    </a>
+    <a href="#" class="service-card filterable-card" data-keywords="SEE result check" onclick="openServiceModal('https://shamser.info.np/SEE/see.ntc.net.np/results/grade.html','Check SEE Result'); return false;">
+        <div class="service-icon">✅</div>
+        <div class="service-title">Check SEE Result</div>
+        <div class="service-description">Check SEE results online.</div>
+    </a>
+    <a href="#" class="service-card filterable-card" data-keywords="integrated services" onclick="openServiceModal('https://shamser.info.np/integrated%20services.html','Integrated Services'); return false;">
+        <div class="service-icon">🔗</div>
+        <div class="service-title">Integrated Services</div>
+        <div class="service-description">Access all integrated services.</div>
+    </a>
+    <a href="#" class="service-card filterable-card" data-keywords="generate multi letters" onclick="openServiceModal('https://shamser.info.np/Multi%20letterpad.html','Generate Multi Letters'); return false;">
+        <div class="service-icon">✉️</div>
+        <div class="service-title">Generate Multi Letters</div>
+        <div class="service-description">Generate multiple letters at once.</div>
+    </a>
+    <a href="#" class="service-card filterable-card" data-keywords="student attendance system" onclick="openServiceModal('https://shamser.info.np/Attendance.v4/Attendance_Dashboard4.html','Student Attendance System'); return false;">
+        <div class="service-icon">📋</div>
+        <div class="service-title">Student Attendance System</div>
+        <div class="service-description">Track student attendance.</div>
+    </a>
+    <a href="#" class="service-card filterable-card" data-keywords="quiz tsc" onclick="openServiceModal('https://shamser.info.np/tsc_questions.html','Quiz'); return false;">
+        <div class="service-icon">🧠</div>
+        <div class="service-title">Quiz</div>
+        <div class="service-description">Test your knowledge with quizzes.</div>
+    </a>
+    <a href="#" class="service-card filterable-card" data-keywords="news taja" onclick="openServiceModal('https://shamser.info.np/News%20modal.html','ताजा समाचार'); return false;">
+        <div class="service-icon">📰</div>
+        <div class="service-title">ताजा समाचार</div>
+        <div class="service-description">Latest news.</div>
+    </a>
+    <a href="#" class="service-card filterable-card" data-keywords="service delivery" onclick="openServiceModal('https://shamser.info.np/Sign_up.html','Service Delivery'); return false;">
+        <div class="service-icon">📬</div>
+        <div class="service-title">Service Delivery</div>
+        <div class="service-description">Request and manage services.</div>
+    </a>
+    <a href="#" class="service-card filterable-card" data-keywords="number to text" onclick="openServiceModal('https://shamser.info.np/Number_to_Text.html','Number to Text'); return false;">
+        <div class="service-icon">🔢</div>
+        <div class="service-title">Number to Text</div>
+        <div class="service-description">Convert numbers to words.</div>
+    </a>
+    <a href="#" class="service-card filterable-card" data-keywords="government holiday list" onclick="openServiceModal('https://shamser.info.np/Holiday_2083_20260405.html','सरकारी बिदाको सूचि'); return false;">
+        <div class="service-icon">🗓️</div>
+        <div class="service-title">सरकारी बिदाको सूचि</div>
+        <div class="service-description">List of government holidays.</div>
+    </a>
+</div>
+<div id="noResults" class="no-results"><i class="bi bi-search" style="font-size:2rem;display:block;margin-bottom:0.5rem;"></i><p>No results found for your search query.</p><small class="text-muted">Try adjusting your filters or search terms.</small></div>
+
+<footer><span>Copyright © All Rights Reserved to shamser.info.np</span></footer>
 
 <!-- DASHBOARD CONTAINER -->
 <div class="dashboard-container" id="dashboardContainer">
@@ -673,16 +669,11 @@ data-layout="button_count">
             </div>
             <nav>
                 <ul>
-                    <!-- Return Dashboard -->
                     <li><a href="#" onclick="showDashboard(); return false;"><i class="fas fa-home"></i> Return Dashboard</a></li>
-                    <!-- CEHRD Public Dashboard -->
                     <li><a href="#" onclick="openDashModal('https://emis.cehrd.gov.np/','CEHRD Public Dashboard'); return false;"><i class="fas fa-th-large"></i> CEHRD Public Dashboard</a></li>
-
-                    <!-- Class 6-12 -->
                     <li>
                         <button class="dash-toggle-submenu"><i class="fas fa-users"></i> Class 6-12 <i class="fas fa-chevron-down dash-arrow"></i></button>
                         <ul class="dash-submenu">
-                            <!-- Student Information -->
                             <li>
                                 <button class="dash-toggle-sub-submenu"><i class="fas fa-user-graduate"></i> Student Information <i class="fas fa-chevron-down dash-arrow"></i></button>
                                 <ul class="dash-sub-submenu">
@@ -690,11 +681,9 @@ data-layout="button_count">
                                     <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Update%20Student_info.html','Update Student Info'); return false;">Update Student_Info</a></li>
                                 </ul>
                             </li>
-                            <!-- Exam Manage -->
                             <li>
                                 <button class="dash-toggle-sub-submenu"><i class="fas fa-pencil-alt"></i> Exam Manage <i class="fas fa-chevron-down dash-arrow"></i></button>
                                 <ul class="dash-sub-submenu">
-                                    <!-- Pre-Manage -->
                                     <li>
                                         <button class="dash-toggle-sub-submenu"><i class="fas fa-clock"></i> Pre-Manage <i class="fas fa-chevron-down dash-arrow"></i></button>
                                         <ul class="dash-sub-submenu">
@@ -717,7 +706,6 @@ data-layout="button_count">
                                             <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Subject_Mapping.html','Subject Mapping'); return false;">Subject Mapping</a></li>
                                         </ul>
                                     </li>
-                                    <!-- Post-Manage -->
                                     <li>
                                         <button class="dash-toggle-sub-submenu"><i class="fas fa-edit"></i> Post-Manage <i class="fas fa-chevron-down dash-arrow"></i></button>
                                         <ul class="dash-sub-submenu">
@@ -729,7 +717,6 @@ data-layout="button_count">
                                     </li>
                                 </ul>
                             </li>
-                            <!-- Result Manage -->
                             <li>
                                 <button class="dash-toggle-sub-submenu"><i class="fas fa-chart-bar"></i> Result Manage <i class="fas fa-chevron-down dash-arrow"></i></button>
                                 <ul class="dash-sub-submenu">
@@ -743,8 +730,6 @@ data-layout="button_count">
                             <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Transfer_InfoData.html','Copy Student Data'); return false;">Copy_Student_Data</a></li>
                         </ul>
                     </li>
-
-                    <!-- CAS Class 1-5 -->
                     <li>
                         <button class="dash-toggle-submenu"><i class="fas fa-child"></i> CAS Class 1-5 <i class="fas fa-chevron-down dash-arrow"></i></button>
                         <ul class="dash-submenu">
@@ -804,7 +789,6 @@ data-layout="button_count">
                             <li><a href="#" onclick="openDashModal('#','Record Maintain CAS'); return false;"><i class="fas fa-archive"></i> Record Maintain</a></li>
                         </ul>
                     </li>
-
                     <li style="margin-top:12px;border-top:1px solid #f1f5f9;padding-top:12px;">
                         <button onclick="openDashModal('#','Register Account');" style="background:transparent;border:none;width:100%;text-align:left;padding:10px 16px;font-weight:500;border-radius:12px;display:flex;align-items:center;gap:12px;color:#334155;transition:0.2s;cursor:pointer;"><i class="fas fa-user-plus"></i> Register</button>
                         <button id="dashLogoutBtnBottom" style="background:transparent;border:none;width:100%;text-align:left;padding:10px 16px;font-weight:500;border-radius:12px;display:flex;align-items:center;gap:12px;color:#334155;transition:0.2s;cursor:pointer;"><i class="fas fa-sign-out-alt"></i> Logout</button>
@@ -813,70 +797,63 @@ data-layout="button_count">
             </nav>
         </aside>
 
-      <main class="dash-main-content">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px;">
-        <h5 style="font-weight:600;color:#0f172a;margin:0;"><i class="fas fa-bolt" style="color:#4f46e5;font-size:1.2rem;"></i> Quick menu</h5>
-        <span style="font-size:0.7rem;background:#eef2ff;color:#4f46e5;padding:2px 12px;border-radius:40px;font-weight:500;">shortcuts</span>
-    </div>
-
-    <!-- Quick Menu Class 1-12 -->
-    <div style="margin-bottom:0.5rem;font-weight:600;color:#0f172a;font-size:0.9rem;"><i class="fas fa-users" style="color:#4f46e5;"></i> Class 1-12</div>
-    <div class="dash-quick-menu-grid" id="quickMenuClass12">
-        <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Student%20Info%20Entry%20Form.html','Student Entry'); return false;"><i class="fas fa-user-plus"></i><span>Student Entry</span></a>
-        <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Transfer_InfoData.html','Transfer_InfoData'); return false;"><i class="fas fa-file-alt"></i><span>Transfer StdInfo</span></a>
-        <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Exam_Schedule.html','Exam Schedule'); return false;"><i class="fas fa-calendar-alt"></i><span>Exam Schedule</span></a>
-        <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Subject_Mapping.html','Subject Mapping'); return false;">
-<i class="fa-chisel fa-regular fa-gear"></i><span>Subject Mapping</span></a>
-        <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Mark%20Entry%20Form.html','Mark Entry'); return false;"><i class="fas fa-pen"></i><span>Mark Entry</span></a>
-        <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/ResultSheet(Passed).html','Result Sheet'); return false;"><i class="fas fa-file-alt"></i><span>Result Sheet</span></a>
-        
-        <!-- Ledger Dropdown -->
-        <div class="dash-quick-menu-item dash-dropdown">
-            <a href="#" class="dash-dropdown-toggle"><i class="fas fa-id-card"></i><span>Ledger <i class="fas fa-chevron-down dash-arrow"></i></span></a>
-            <div class="dash-dropdown-menu">
-                <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Mark%20Ledger.html','Mark Ledger'); return false;"><i class="fas fa-list-ul"></i> Mark Ledger</a>
-                <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Grade%20Ledger.html','Grade Ledger'); return false;"><i class="fas fa-copy"></i> Grade Ledger</a>
+        <main class="dash-main-content">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px;">
+                <h5 style="font-weight:600;color:#0f172a;margin:0;"><i class="fas fa-bolt" style="color:#4f46e5;font-size:1.2rem;"></i> Quick menu</h5>
+                <span style="font-size:0.7rem;background:#eef2ff;color:#4f46e5;padding:2px 12px;border-radius:40px;font-weight:500;">shortcuts</span>
             </div>
-        </div>
 
-        <!-- Entrance Card Dropdown -->
-        <div class="dash-quick-menu-item dash-dropdown">
-            <a href="#" class="dash-dropdown-toggle"><i class="fas fa-id-card"></i><span>Entrance Card <i class="fas fa-chevron-down dash-arrow"></i></span></a>
-            <div class="dash-dropdown-menu">
-                <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Entrance%20Card2.html','Entrance Card 2 Page'); return false;">Two Page By Class</a>
-                <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Entrance%20Card4.html','Entrance Card 4 Page'); return false;">Four Page By Class</a>
-                <div class="dash-dropdown-divider"></div>
-                <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Entrance%20Card2%20By%20Rang.html','Entrance Card 2 by Range'); return false;">Two Page By SymbolNo.</a>
-                <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Entrance%20Card4%20By%20Rang.html','Entrance Card 4 by Range'); return false;">Four Page By SymbolNo</a>
+            <div style="margin-bottom:0.5rem;font-weight:600;color:#0f172a;font-size:0.9rem;"><i class="fas fa-users" style="color:#4f46e5;"></i> Class 1-12</div>
+            <div class="dash-quick-menu-grid" id="quickMenuClass12">
+                <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Student%20Info%20Entry%20Form.html','Student Entry'); return false;"><i class="fas fa-user-plus"></i><span>Student Entry</span></a>
+                <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Transfer_InfoData.html','Transfer_InfoData'); return false;"><i class="fas fa-file-alt"></i><span>Transfer StdInfo</span></a>
+                <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Exam_Schedule.html','Exam Schedule'); return false;"><i class="fas fa-calendar-alt"></i><span>Exam Schedule</span></a>
+                <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Subject_Mapping.html','Subject Mapping'); return false;"><i class="fas fa-cog"></i><span>Subject Mapping</span></a>
+                <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Mark%20Entry%20Form.html','Mark Entry'); return false;"><i class="fas fa-pen"></i><span>Mark Entry</span></a>
+                <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/ResultSheet(Passed).html','Result Sheet'); return false;"><i class="fas fa-file-alt"></i><span>Result Sheet</span></a>
+
+                <div class="dash-quick-menu-item dash-dropdown">
+                    <a href="#" class="dash-dropdown-toggle"><i class="fas fa-id-card"></i><span>Ledger <i class="fas fa-chevron-down dash-arrow"></i></span></a>
+                    <div class="dash-dropdown-menu">
+                        <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Mark%20Ledger.html','Mark Ledger'); return false;"><i class="fas fa-list-ul"></i> Mark Ledger</a>
+                        <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Grade%20Ledger.html','Grade Ledger'); return false;"><i class="fas fa-copy"></i> Grade Ledger</a>
+                    </div>
+                </div>
+
+                <div class="dash-quick-menu-item dash-dropdown">
+                    <a href="#" class="dash-dropdown-toggle"><i class="fas fa-id-card"></i><span>Entrance Card <i class="fas fa-chevron-down dash-arrow"></i></span></a>
+                    <div class="dash-dropdown-menu">
+                        <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Entrance%20Card2.html','Entrance Card 2 Page'); return false;">Two Page By Class</a>
+                        <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Entrance%20Card4.html','Entrance Card 4 Page'); return false;">Four Page By Class</a>
+                        <div class="dash-dropdown-divider"></div>
+                        <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Entrance%20Card2%20By%20Rang.html','Entrance Card 2 by Range'); return false;">Two Page By SymbolNo.</a>
+                        <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Entrance%20Card4%20By%20Rang.html','Entrance Card 4 by Range'); return false;">Four Page By SymbolNo</a>
+                    </div>
+                </div>
+
+                <div class="dash-quick-menu-item dash-dropdown">
+                    <a href="#" class="dash-dropdown-toggle"><i class="fas fa-chart-bar"></i><span>Grade_Sheet <i class="fas fa-chevron-down dash-arrow"></i></span></a>
+                    <div class="dash-dropdown-menu">
+                        <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/GradeSheet%20By%20Range.html','Grade Sheet By Range'); return false;">Grade Sheet By Range</a>
+                        <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Gradesheet%20Classwise.html','Grade Sheet Classwise'); return false;">Grade Sheet Classwise</a>
+                    </div>
+                </div>
+
+                <div class="dash-quick-menu-item dash-dropdown">
+                    <a href="#" class="dash-dropdown-toggle"><i class="fas fa-edit"></i><span>Update <i class="fas fa-chevron-down dash-arrow"></i></span></a>
+                    <div class="dash-dropdown-menu">
+                        <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Update%20Student_info.html','Update Student'); return false;">Update Student</a>
+                        <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Update%20Exam_info.html','Update Exam'); return false;">Update Exam</a>
+                        <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Update_Mark.html','Update Mark'); return false;">Update Mark</a>
+                        <div class="dash-dropdown-divider"></div>
+                        <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Exam_Schedule.html','Exam Schedule'); return false;"> Update Exam Schedule</a>
+                        <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Update%20Student_info.html','Update Student Info'); return false;"> Update Student_Info</a>
+                    </div>
+                </div>
+
+                <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/','Record Maintain'); return false;"><i class="fas fa-archive"></i><span>Record Maintain</span></a>
             </div>
-        </div>
 
-        <!-- Grade Sheet Dropdown -->
-        <div class="dash-quick-menu-item dash-dropdown">
-            <a href="#" class="dash-dropdown-toggle"><i class="fas fa-chart-bar"></i><span>Grade_Sheet <i class="fas fa-chevron-down dash-arrow"></i></span></a>
-            <div class="dash-dropdown-menu">
-                <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/GradeSheet%20By%20Range.html','Grade Sheet By Range'); return false;">Grade Sheet By Range</a>
-                <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Gradesheet%20Classwise.html','Grade Sheet Classwise'); return false;">Grade Sheet Classwise</a>
-            </div>
-        </div>
-
-        <!-- Update Dropdown -->
-        <div class="dash-quick-menu-item dash-dropdown">
-            <a href="#" class="dash-dropdown-toggle"><i class="fas fa-edit"></i><span>Update <i class="fas fa-chevron-down dash-arrow"></i></span></a>
-            <div class="dash-dropdown-menu">
-                <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Update%20Student_info.html','Update Student'); return false;">Update Student</a>
-                <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Update%20Exam_info.html','Update Exam'); return false;">Update Exam</a>
-                <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Update_Mark.html','Update Mark'); return false;"><Update Mark</a>
-                <div class="dash-dropdown-divider"></div>
-                <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Exam_Schedule.html','Exam Schedule'); return false;"> Update Exam Schedule</a>
-                <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Update%20Student_info.html','Update Student Info'); return false;"> Update Student_Info</a>
-            </div>
-        </div>
-
-        <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/','Record Maintain'); return false;"><i class="fas fa-archive"></i><span>Record Maintain</span></a>
-    </div>
-
-            <!-- Quick Menu CAS -->
             <div style="margin:1rem 0 0.5rem;font-weight:600;color:#0f172a;font-size:0.9rem;"><i class="fas fa-child" style="color:#4f46e5;"></i> CAS Class 1-5</div>
             <div class="dash-quick-menu-grid" id="quickMenuCAS">
                 <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/CAS%201-5/Student_Info_%20Entry%20(CAS).html','Student Entry CAS'); return false;"><i class="fas fa-user-plus"></i><span>Student Entry CAS</span></a>
@@ -889,21 +866,11 @@ data-layout="button_count">
                 <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/CAS%201-5/Transfer(CAS).html','Fetch Info CAS'); return false;"><i class="fas fa-exchange-alt"></i><span>Fetch Info CAS</span></a>
             </div>
 
-            <!-- STATS CARDS -->
             <div class="dash-stats-cards">
                 <div class="dash-card"><h3><i class="fas fa-school"></i> SCHOOLS</h3><div class="dash-chart-container"><canvas id="schoolChart"></canvas></div></div>
                 <div class="dash-card"><h3><i class="fas fa-user-graduate"></i> ENROLLMENT</h3><div class="dash-chart-container"><canvas id="studentChart"></canvas></div></div>
-                  <!-- 
-                <div class="dash-card dash-notices-card"><h3><i class="fas fa-bullhorn"></i> NOTICES</h3>
-                <ul><li><strong>Student Update</strong> <span class="notice-date">2083-01-02</span></li>
-                <li><strong>सिकाइ चौतारी</strong> <span class="notice-date">2082-12-19</span></li>
-                <li><strong>विद्यालय प्रकार</strong> <span class="notice-date">2082-11-29</span></li>
-                <li><strong>शिक्षक तलब</strong> 
-                <span class="notice-date">2082-08-25</span></li></ul><div class="dash-pagination">
-                <button>&lt; Prev</button><span>1</span><button>Next &gt;</button></div></div>-->
             </div>
 
-            <!-- IFRAME CONTAINER - Direct in main content -->
             <div id="iframeContainer">
                 <div class="iframe-header">
                     <span id="iframeTitle"><i class="fas fa-file-alt"></i> Content</span>
@@ -917,7 +884,7 @@ data-layout="button_count">
     </div>
 </div>
 
-<!-- SERVICE MODAL - Fullscreen, Login Bina Khulne -->
+<!-- SERVICE MODAL -->
 <div class="service-modal-overlay" id="serviceModal">
     <div class="service-modal-box">
         <div class="service-modal-header">
@@ -957,7 +924,6 @@ data-layout="button_count">
     (function() {
         "use strict";
 
-        // --- Live Clock ---
         function updateClock() {
             const now = new Date();
             const h = String(now.getHours()).padStart(2, '0');
@@ -968,7 +934,6 @@ data-layout="button_count">
         updateClock();
         setInterval(updateClock, 1000);
 
-        // --- Geo Data ---
         const geoData = {
             "Koshi": { districts: ["Morang","Jhapa","Sunsari","Dhankuta","Bhojpur","Terhathum","Sankhuwasabha","Solukhumbu","Okhaldhunga","Khotang"], municipalities: { "Morang":["Biratnagar","Sundar Haraincha","Ratuwamai","Katahari"], "Jhapa":["Bhadrapur","Damak","Mechinagar","Gauradaha"], "Sunsari":["Itahari","Dharan","Inaruwa","Duhabi"] } },
             "Madhesh": { districts: ["Sarlahi","Mahottari","Dhanusha","Siraha","Saptari","Rautahat","Bara","Parsa"], municipalities: { "Sarlahi":["Malangwa","Lalbandi","Balara","Hariwan"], "Mahottari":["Jaleshwor","Bardibas","Manara","Bhagaha"], "Dhanusha":["Janakpur","Sabaila","Dhanushadham","Mithila"] } },
@@ -1026,7 +991,6 @@ data-layout="button_count">
             }
         });
 
-        // --- Search ---
         const searchBtn = document.getElementById('searchBtn');
         const clearBtn = document.getElementById('clearBtn');
         const resultCountText = document.getElementById('resultCountText');
@@ -1090,7 +1054,6 @@ data-layout="button_count">
         schoolInput.addEventListener('keydown', function(e) { if (e.key === 'Enter') { e.preventDefault(); searchBtn.click(); } });
         [provinceSel, districtSel, municipalitySel, yearSel].forEach(sel => sel.addEventListener('change', function() { searchBtn.click(); }));
 
-        // --- Totals with API ---
         const els = { mun: document.getElementById('totalMun'), schools: document.getElementById('totalSchools'), students: document.getElementById('totalStudents'), teachers: document.getElementById('totalTeachers'), staff: document.getElementById('totalStaff') };
         const apiStatus = document.getElementById('apiStatus');
 
@@ -1118,12 +1081,10 @@ data-layout="button_count">
             try {
                 apiStatus.textContent = 'Loading...';
                 apiStatus.className = 'api-status loading';
-                
                 const response = await fetch('https://api.nepal.gov.np/api/education/stats', {
                     method: 'GET',
                     headers: { 'Accept': 'application/json' }
                 });
-                
                 if (response.ok) {
                     const data = await response.json();
                     if (data) {
@@ -1134,13 +1095,11 @@ data-layout="button_count">
                         if (data.staff) els.staff.textContent = data.staff.toLocaleString();
                         apiStatus.textContent = '✅ Live Data';
                         apiStatus.className = 'api-status online';
-                        console.log('✅ API Data fetched successfully:', data);
                     }
                 } else {
                     useFallbackData();
                 }
             } catch (error) {
-                console.warn('⚠️ API Error, using fallback data:', error);
                 useFallbackData();
             }
         }
@@ -1154,21 +1113,14 @@ data-layout="button_count">
         setTimeout(fetchAPIData, 1000);
         setInterval(updateTotals, 6000);
 
-        // --- Hero Images ---
         const heroImages = [
             "https://emis.cehrd.gov.np/assets/img/slider1.png",
             "https://emis.cehrd.gov.np/assets/img/slider2.png",
-    "https://shamser.info.np/dimjanschool/images/slider/13.JPG",
-       "https://shamser.info.np/dimjanschool/images/slider/6.jpg",
-  "https://shamser.info.np/dimjanschool/images/slider/10.jpg",
-              "https://shamser.info.np/dimjanschool/images/slider/11.JPG",
-              "https://shamser.info.np/dimjanschool/images/slider/6.jpg",
-
-
-
-
-
-            
+            "https://shamser.info.np/dimjanschool/images/slider/13.JPG",
+            "https://shamser.info.np/dimjanschool/images/slider/6.jpg",
+            "https://shamser.info.np/dimjanschool/images/slider/10.jpg",
+            "https://shamser.info.np/dimjanschool/images/slider/11.JPG",
+            "https://shamser.info.np/dimjanschool/images/slider/6.jpg",
         ];
         let currentImageIndex = 0;
         const heroImg = document.getElementById('heroImage');
@@ -1192,25 +1144,20 @@ data-layout="button_count">
         document.getElementById('exploreBtn').addEventListener('click', () => { schoolInput.value = 'dashboard'; searchBtn.click(); });
         document.getElementById('aboutBtn').addEventListener('click', () => alert('ℹ️ IEMIS – Integrated Educational Management Information System \nDeveloped by shamser.info.np'));
 
-        // --- SERVICE MODAL - Fullscreen, Login Bina ---
         window.openServiceModal = function(url, title) {
             const modal = document.getElementById('serviceModal');
             const iframe = document.getElementById('serviceModalFrame');
             const titleEl = document.getElementById('serviceModalTitle');
             const loading = document.getElementById('serviceModalLoading');
-            
             loading.style.display = 'flex';
             iframe.style.display = 'none';
             iframe.src = '';
-            
             titleEl.innerHTML = `<i class="fas fa-cog"></i> ${title || 'Service'}`;
             modal.classList.add('show');
             document.body.style.overflow = 'hidden';
-            
             setTimeout(function() {
                 iframe.src = url.replace(/ /g, '%20');
             }, 300);
-            
             return false;
         };
 
@@ -1244,7 +1191,7 @@ data-layout="button_count">
             }
         });
 
-        // --- LOGIN / LOGOUT with localStorage persistence ---
+        // ===== LOGIN SYSTEM =====
         const loginModal = document.getElementById('loginModal');
         const loginBtn = document.getElementById('loginBtn');
         const logoutBtn = document.getElementById('logoutBtn');
@@ -1257,9 +1204,7 @@ data-layout="button_count">
         const app = document.getElementById('app');
 
         let isUserLoggedIn = false;
-        let inactivityTimer = null,
-            sessionTimerInterval = null,
-            lastActivityTime = Date.now();
+        let inactivityTimer = null, sessionTimerInterval = null, lastActivityTime = Date.now();
         const INACTIVITY_TIMEOUT_MS = 30 * 60 * 1000;
         const SESSION_KEY = 'iemis_session';
 
@@ -1444,30 +1389,24 @@ data-layout="button_count">
         closeLoginBtn.addEventListener('click', closeLoginModalFn);
         loginModal.addEventListener('click', function(e) { if (e.target === this) closeLoginModalFn(); });
         document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && loginModal.classList.contains('show')) closeLoginModalFn(); });
-        loginForm.addEventListener('submit', function(e) { e.preventDefault();
-            loginUser(); });
+        loginForm.addEventListener('submit', function(e) { e.preventDefault(); loginUser(); });
         logoutBtn.addEventListener('click', logoutUser);
         document.getElementById('dashLogoutBtn').addEventListener('click', logoutUser);
         document.getElementById('dashLogoutBtnBottom').addEventListener('click', logoutUser);
 
-        // --- IFRAME DIRECT IN MAIN CONTENT ---
         window.openDashModal = function(url, title) {
             if (!isUserLoggedIn) {
                 openLoginModal();
                 return false;
             }
             resetInactivityTimer();
-
             const iframeContainer = document.getElementById('iframeContainer');
             const iframe = document.getElementById('mainIframe');
             const titleEl = document.getElementById('iframeTitle');
-
             titleEl.innerHTML = `<i class="fas fa-file-alt"></i> ${title || 'Content'}`;
             iframeContainer.style.display = 'block';
             iframe.src = url.replace(/ /g, '%20');
-
             iframeContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
             if (window.innerWidth <= 992) {
                 document.getElementById('dashSidebar').classList.remove('active');
             }
@@ -1485,12 +1424,10 @@ data-layout="button_count">
             return false;
         };
 
-        // --- Sidebar Toggle ---
         document.getElementById('dashMenuToggle').addEventListener('click', function() {
             document.getElementById('dashSidebar').classList.toggle('active');
         });
 
-        // --- Submenu toggles ---
         document.querySelectorAll('.dash-toggle-submenu').forEach(btn => {
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -1499,6 +1436,7 @@ data-layout="button_count">
                 if (sub) { sub.classList.toggle('expanded'); if (arrow) arrow.classList.toggle('rotated'); }
             });
         });
+
         document.querySelectorAll('.dash-toggle-sub-submenu').forEach(btn => {
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -1509,10 +1447,8 @@ data-layout="button_count">
             });
         });
 
-        // --- CHECK EXISTING SESSION ON LOAD ---
         checkExistingSession();
-
-        console.log('✅ IEMIS Live Portal - Fullscreen Service Modal, Login Bina, Session Persistent');
+        console.log('✅ IEMIS Live Portal - Fixed Header, Login works');
     })();
 </script>
 </body>
