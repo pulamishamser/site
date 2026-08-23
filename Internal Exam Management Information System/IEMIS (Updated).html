@@ -1183,7 +1183,7 @@ data-layout="button_count">
             }
         });
 
-        // ===== LOGIN SYSTEM (FULLY INTACT) =====
+        // ===== LOGIN SYSTEM - ONLY API (NO DEMO/123) =====
         const loginModal = document.getElementById('loginModal');
         const loginBtn = document.getElementById('loginBtn');
         const logoutBtn = document.getElementById('logoutBtn');
@@ -1339,11 +1339,15 @@ data-layout="button_count">
             loginSubmitBtn.disabled = true;
             loginSubmitBtn.textContent = 'Signing in...';
 
-            if (username === 'demo' && password === '123') {
-                handleLoginSuccess('demo');
+            if (!username || !password) {
+                loginError.textContent = 'Please enter username and password.';
+                loginError.style.display = 'block';
+                loginSubmitBtn.disabled = false;
+                loginSubmitBtn.textContent = 'Sign In';
                 return;
             }
 
+            // API call only - NO demo/123
             fetch("https://script.google.com/macros/s/AKfycbw8aVDBPbix7346o647ZapCWJxUYqkNC4rCP9ZRoLFs4IT8EW_tuE3GD9BFjG4UpSPPBQ/exec", {
                 method: "POST",
                 headers: { "Content-Type": "text/plain;charset=utf-8" },
@@ -1351,10 +1355,16 @@ data-layout="button_count">
             }).then(r => r.text()).then(t => {
                 try {
                     const d = JSON.parse(t);
-                    if (d.status === "success") handleLoginSuccess(d.username);
-                    else throw new Error(d.message || 'Invalid');
-                } catch (e) { throw new Error('Server error'); }
+                    if (d.status === "success") {
+                        handleLoginSuccess(d.username || username);
+                    } else {
+                        throw new Error(d.message || 'Invalid credentials');
+                    }
+                } catch (e) {
+                    throw new Error('Invalid response from server');
+                }
             }).catch(err => {
+                loginError.textContent = err.message || 'Login failed. Please try again.';
                 loginError.style.display = 'block';
                 loginSubmitBtn.disabled = false;
                 loginSubmitBtn.textContent = 'Sign In';
@@ -1441,7 +1451,7 @@ data-layout="button_count">
         });
 
         checkExistingSession();
-        console.log('✅ IEMIS Live Portal - Sticky Header + Sub-nav, Login intact');
+        console.log('✅ IEMIS Live Portal - Sticky Header + Sub-nav, API Login Only (No demo/123)');
     })();
 </script>
 </body>
