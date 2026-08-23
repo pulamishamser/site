@@ -122,7 +122,7 @@
         .login-box .btn-login:hover { background:#1a3a6b; }
         .login-error { color:#d43f34; font-size:0.85rem; display:none; }
         .login-success { color:#0f7b3a; font-size:0.85rem; display:none; }
-        .demo-hint { font-size:0.7rem; color:#8a9aa8; margin-top:1rem; text-align:center; }
+        .demo-hint { font-size:0.7rem; color:blue; margin-top:1rem; text-align:center; }
         .close-login { position:absolute; top:15px; right:20px; font-size:1.8rem; background:none; border:none; color:#94a3b8; cursor:pointer; }
         .close-login:hover { color:#0f172a; }
 
@@ -713,29 +713,66 @@
             </nav>
         </aside>
 
-        <main class="dash-main-content">
-            <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px;">
-                <h5 style="font-weight:600;color:#0f172a;margin:0;"><i class="fas fa-bolt" style="color:#4f46e5;font-size:1.2rem;"></i> Quick menu</h5>
-                <span style="font-size:0.7rem;background:#eef2ff;color:#4f46e5;padding:2px 12px;border-radius:40px;font-weight:500;">shortcuts</span>
-            </div>
+      <main class="dash-main-content">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px;">
+        <h5 style="font-weight:600;color:#0f172a;margin:0;"><i class="fas fa-bolt" style="color:#4f46e5;font-size:1.2rem;"></i> Quick menu</h5>
+        <span style="font-size:0.7rem;background:#eef2ff;color:#4f46e5;padding:2px 12px;border-radius:40px;font-weight:500;">shortcuts</span>
+    </div>
 
-            <!-- Quick Menu Class 1-12 -->
-            <div style="margin-bottom:0.5rem;font-weight:600;color:#0f172a;font-size:0.9rem;"><i class="fas fa-users" style="color:#4f46e5;"></i> Class 1-12</div>
-            <div class="dash-quick-menu-grid" id="quickMenuClass12">
-                <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Student%20Info%20Entry%20Form.html','Student Entry'); return false;"><i class="fas fa-user-plus"></i><span>Student Entry</span></a>
-                <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Exam_Schedule.html','Exam Schedule'); return false;"><i class="fas fa-calendar-alt"></i><span>Exam Schedule</span></a>
-                <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Mark%20Entry%20Form.html','Mark Entry'); return false;"><i class="fas fa-pen"></i><span>Mark Entry</span></a>
-                <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/ResultSheet(Passed).html','Result Sheet'); return false;"><i class="fas fa-file-alt"></i><span>Result Sheet</span></a>
-                <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Grade%20Ledger.html','Grade Ledger'); return false;"><i class="fas fa-copy"></i><span>Grade Ledger</span></a>
-                <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Entrance%20Card2.html','Entrance Card'); return false;"><i class="fas fa-id-card"></i><span>Entrance Card</span></a>
-                <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Mark%20Ledger.html','Mark Ledger'); return false;"><i class="fas fa-list-ul"></i><span>Mark Ledger</span></a>
-                <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/RecordMaintain.html','Record Maintain'); return false;"><i class="fas fa-archive"></i><span>Record Maintain</span></a>
-                <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Update%20Student_info.html','Update Student'); return false;"><i class="fas fa-edit"></i><span>Update Student</span></a>
-                <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Update%20Exam_info.html','Update Exam'); return false;"><i class="fas fa-sync-alt"></i><span>Update Exam</span></a>
-                <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Update_Mark.html','Update Mark'); return false;"><i class="fas fa-pencil-alt"></i><span>Update Mark</span></a>
-                <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/GradeSheet%20By%20Range.html','Grade Sheet Range'); return false;"><i class="fas fa-chart-bar"></i><span>Grade Sheet Range</span></a>
-                <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Gradesheet%20Classwise.html','Grade Sheet Classwise'); return false;"><i class="fas fa-chart-pie"></i><span>Grade Sheet Classwise</span></a>
+    <!-- Quick Menu Class 1-12 -->
+    <div style="margin-bottom:0.5rem;font-weight:600;color:#0f172a;font-size:0.9rem;"><i class="fas fa-users" style="color:#4f46e5;"></i> Class 1-12</div>
+    <div class="dash-quick-menu-grid" id="quickMenuClass12">
+        <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Student%20Info%20Entry%20Form.html','Student Entry'); return false;"><i class="fas fa-user-plus"></i><span>Student Entry</span></a>
+        <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Transfer_InfoData.html','Transfer_InfoData'); return false;"><i class="fas fa-file-alt"></i><span>Transfer_InfoData</span></a>
+        <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Exam_Schedule.html','Exam Schedule'); return false;"><i class="fas fa-calendar-alt"></i><span>Exam Schedule</span></a>
+        <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Mark%20Entry%20Form.html','Mark Entry'); return false;"><i class="fas fa-pen"></i><span>Mark Entry</span></a>
+        <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/ResultSheet(Passed).html','Result Sheet'); return false;"><i class="fas fa-file-alt"></i><span>Result Sheet</span></a>
+        
+        <!-- Ledger Dropdown -->
+        <div class="dash-quick-menu-item dash-dropdown">
+            <a href="#" class="dash-dropdown-toggle"><i class="fas fa-id-card"></i><span>Ledger <i class="fas fa-chevron-down dash-arrow"></i></span></a>
+            <div class="dash-dropdown-menu">
+                <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Mark%20Ledger.html','Mark Ledger'); return false;"><i class="fas fa-list-ul"></i> Mark Ledger</a>
+                <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Grade%20Ledger.html','Grade Ledger'); return false;"><i class="fas fa-copy"></i> Grade Ledger</a>
             </div>
+        </div>
+
+        <!-- Entrance Card Dropdown -->
+        <div class="dash-quick-menu-item dash-dropdown">
+            <a href="#" class="dash-dropdown-toggle"><i class="fas fa-id-card"></i><span>Entrance Card <i class="fas fa-chevron-down dash-arrow"></i></span></a>
+            <div class="dash-dropdown-menu">
+                <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Entrance%20Card2.html','Entrance Card 2 Page'); return false;">Two Page</a>
+                <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Entrance%20Card4.html','Entrance Card 4 Page'); return false;">Four Page</a>
+                <div class="dash-dropdown-divider"></div>
+                <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Entrance%20Card2%20By%20Rang.html','Entrance Card 2 by Range'); return false;">Two Page (By Range)</a>
+                <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Entrance%20Card4%20By%20Rang.html','Entrance Card 4 by Range'); return false;">Four Page (By Range)</a>
+            </div>
+        </div>
+
+        <!-- Grade Sheet Dropdown -->
+        <div class="dash-quick-menu-item dash-dropdown">
+            <a href="#" class="dash-dropdown-toggle"><i class="fas fa-chart-bar"></i><span>Grade_Sheet <i class="fas fa-chevron-down dash-arrow"></i></span></a>
+            <div class="dash-dropdown-menu">
+                <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/GradeSheet%20By%20Range.html','Grade Sheet By Range'); return false;">Grade Sheet By Range</a>
+                <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Gradesheet%20Classwise.html','Grade Sheet Classwise'); return false;">Grade Sheet Classwise</a>
+            </div>
+        </div>
+
+        <!-- Update Dropdown -->
+        <div class="dash-quick-menu-item dash-dropdown">
+            <a href="#" class="dash-dropdown-toggle"><i class="fas fa-edit"></i><span>Update <i class="fas fa-chevron-down dash-arrow"></i></span></a>
+            <div class="dash-dropdown-menu">
+                <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Update%20Student_info.html','Update Student'); return false;"><i class="fas fa-edit"></i> Update Student</a>
+                <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Update%20Exam_info.html','Update Exam'); return false;"><i class="fas fa-sync-alt"></i> Update Exam</a>
+                <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Update_Mark.html','Update Mark'); return false;"><i class="fas fa-pencil-alt"></i> Update Mark</a>
+                <div class="dash-dropdown-divider"></div>
+                <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Exam_Schedule.html','Exam Schedule'); return false;"><i class="fas fa-calendar-alt"></i> Update Exam Schedule</a>
+                <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Update%20Student_info.html','Update Student Info'); return false;"><i class="fas fa-user-edit"></i> Update Student_Info</a>
+            </div>
+        </div>
+
+        <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/RecordMaintain.html','Record Maintain'); return false;"><i class="fas fa-archive"></i><span>Record Maintain</span></a>
+    </div>
 
             <!-- Quick Menu CAS -->
             <div style="margin:1rem 0 0.5rem;font-weight:600;color:#0f172a;font-size:0.9rem;"><i class="fas fa-child" style="color:#4f46e5;"></i> CAS Class 1-5</div>
