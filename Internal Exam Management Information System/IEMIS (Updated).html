@@ -1,3 +1,6 @@
+
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -145,10 +148,10 @@ data-layout="button_count">
         .service-card:hover { transform:translateY(-2px); box-shadow:0 4px 12px rgba(15,23,42,0.08); }
         .service-icon { font-size:48px; height:70px; display:flex; align-items:center; justify-content:center; margin-bottom:12px; }
         .service-title { font-size:17px; font-weight:700; color:#003b7a; margin-bottom:8px; }
-        .service-description { font-size:13px; color:#64748b; max-width:180px; }
+        .service-description { font-size:12px; color:#64748b; max-width:180px; }
 
         .section-header { text-align:center; margin:50px 0; }
-        .section-header h2 { font-size:38px; font-weight:700; color:#003b7a; }
+        .section-header h2 { font-size:30px; font-weight:700; color:#003b7a; }
         .section-line { width:60px; height:4px; margin:18px auto 0; background:#f4b11a; border-radius:4px; }
         footer { display:flex; align-items:center; justify-content:flex-end; margin-top:30px; padding:10px 2rem; background:#1f2937; color:#d1d5db; font-size:12px; }
 
@@ -377,12 +380,12 @@ data-layout="button_count">
             .system-title { font-size:1.2rem; }
             #iframeContainer { height:400px; }
         }
-        @media (max-width:600px) {
+        @media (max-width:650px) {
             .dash-header { padding:0 14px; }
             .dash-user-info .dash-session-timer { display:none; }
             .dash-quick-menu-grid { grid-template-columns:repeat(auto-fill, minmax(75px,1fr)); }
             .dash-quick-menu-item { min-height:75px; font-size:0.65rem; }
-            .dash-quick-menu-item i { font-size:1.6rem; }
+            .dash-quick-menu-item i { font-size:1.3rem; }
             .dash-stats-cards { grid-template-columns:1fr; }
             .dash-main-content { padding:12px; }
             .hero-search { grid-template-columns:1fr; }
@@ -391,7 +394,7 @@ data-layout="button_count">
             .top-header { flex-direction:column; align-items:stretch; }
             .system-title { font-size:1rem; }
             .sub-nav { flex-direction:column; align-items:stretch; }
-            #iframeContainer { height:350px; }
+            #iframeContainer { height:480px; }
         }
 
   /*Dropdown Quick Menu*/
@@ -813,7 +816,33 @@ data-layout="button_count">
             </nav>
         </aside>
 
-      <main class="dash-main-content">
+
+
+     <main class="dash-main-content">
+
+
+ <!-- IFRAME CONTAINER - Direct in main content -->
+            <div id="iframeContainer">
+                <div class="iframe-header">
+                    <span id="iframeTitle"><i class="fas fa-file-alt"></i> Content</span>
+                    <button onclick="closeIframe();">&times;</button>
+                </div>
+                <iframe id="mainIframe" src=""></iframe>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
     <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px;">
         <h5 style="font-weight:600;color:#0f172a;margin:0;"><i class="fas fa-bolt" style="color:#4f46e5;font-size:1.2rem;"></i> Quick menu</h5>
         <span style="font-size:0.7rem;background:#eef2ff;color:#4f46e5;padding:2px 12px;border-radius:40px;font-weight:500;">shortcuts</span>
@@ -838,6 +867,13 @@ data-layout="button_count">
                 <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Grade%20Ledger.html','Grade Ledger'); return false;"><i class="fas fa-copy"></i> Grade Ledger</a>
             </div>
         </div>
+
+
+
+
+
+
+
 
         <!-- Entrance Card Dropdown -->
         <div class="dash-quick-menu-item dash-dropdown">
@@ -903,14 +939,7 @@ data-layout="button_count">
                 <button>&lt; Prev</button><span>1</span><button>Next &gt;</button></div></div>-->
             </div>
 
-            <!-- IFRAME CONTAINER - Direct in main content -->
-            <div id="iframeContainer">
-                <div class="iframe-header">
-                    <span id="iframeTitle"><i class="fas fa-file-alt"></i> Content</span>
-                    <button onclick="closeIframe();">&times;</button>
-                </div>
-                <iframe id="mainIframe" src=""></iframe>
-            </div>
+           
 
             <div class="dash-footer">©copy 2025 shamser.info.np · IEMIS</div>
         </main>
@@ -950,6 +979,29 @@ data-layout="button_count">
         </form>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
