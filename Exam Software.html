@@ -808,7 +808,7 @@ data-layout="button_count">
         </aside>
 
         <main class="dash-main-content">
-            <!-- FULL-SIZE MODAL - Like first file -->
+         <!-- FULL-SIZE MODAL - -->
             <div class="full-modal-overlay" id="fullModal">
                 <div class="full-modal-box">
                     <div class="full-modal-header">
@@ -823,6 +823,9 @@ data-layout="button_count">
                             <p>Loading content...</p>
                         </div>
                         <iframe id="fullModalFrame" src="" allowfullscreen></iframe>
+                    </div>
+                    <div class="full-modal-footer">
+                        <button type="button" class="btn btn-secondary" id="fullModalFooterClose">Close</button>
                     </div>
                 </div>
             </div>
@@ -1253,6 +1256,7 @@ data-layout="button_count">
         const fullModalTitle = document.getElementById('fullModalTitle');
         const fullModalLoading = document.getElementById('fullModalLoading');
         const fullModalClose = document.getElementById('fullModalClose');
+        const fullModalFooterClose = document.getElementById('fullModalFooterClose');
 
         window.openDashModal = function(url, title) {
             if (!isUserLoggedIn) {
@@ -1298,6 +1302,7 @@ data-layout="button_count">
         };
 
         fullModalClose.addEventListener('click', closeFullModal);
+        fullModalFooterClose.addEventListener('click', closeFullModal);
         fullModal.addEventListener('click', function(e) {
             if (e.target === this) {
                 closeFullModal();
@@ -1308,9 +1313,6 @@ data-layout="button_count">
                 closeFullModal();
             }
         });
-
-
-
 
 
 
