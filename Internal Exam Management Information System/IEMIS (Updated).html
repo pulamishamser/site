@@ -832,7 +832,9 @@ data-layout="button_count">
                 </div>
                 <iframe id="mainIframe" src=""></iframe>
             </div>
-
+ <div class="full-modal-footer">
+                        <button type="button" class="btn btn-secondary" id="fullModalFooterClose">Close</button>
+                    </div>
 
 
 
@@ -1520,7 +1522,7 @@ data-layout="button_count">
             const iframeContainer = document.getElementById('iframeContainer');
             const iframe = document.getElementById('mainIframe');
             const titleEl = document.getElementById('iframeTitle');
-
+          const fullModalFooterClose = document.getElementById('fullModalFooterClose');
             titleEl.innerHTML = `<i class="fas fa-file-alt"></i> ${title || 'Content'}`;
             iframeContainer.style.display = 'block';
             iframe.src = url.replace(/ /g, '%20');
