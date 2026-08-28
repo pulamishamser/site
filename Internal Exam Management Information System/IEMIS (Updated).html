@@ -1527,10 +1527,8 @@ data-layout="button_count">
 
 
 
-
-        
-        // --- IFRAME DIRECT IN MAIN CONTENT ---
-      window.openDashModal = function(url, title) {
+// --- IFRAME DIRECT IN MAIN CONTENT ---
+window.openDashModal = function(url, title) {
     if (!isUserLoggedIn) {
         openLoginModal();
         return false;
@@ -1540,7 +1538,6 @@ data-layout="button_count">
     const iframeContainer = document.getElementById('iframeContainer');
     const iframe = document.getElementById('mainIframe');
     const titleEl = document.getElementById('iframeTitle');
-    const fullModalFooterClose = document.getElementById('fullModalFooterClose');
     
     titleEl.innerHTML = `<i class="fas fa-file-alt"></i> ${title || 'Content'}`;
     iframeContainer.style.display = 'block';
@@ -1551,17 +1548,46 @@ data-layout="button_count">
     if (window.innerWidth <= 992) {
         document.getElementById('dashSidebar').classList.remove('active');
     }
-    
-    // Attach close event to footer button
-    fullModalFooterClose.onclick = function() {
-        closeIframe();
-    };
-    
     return false;
 };
 
+window.closeIframe = function() {
+    const iframeContainer = document.getElementById('iframeContainer');
+    const iframe = document.getElementById('mainIframe');
+    if (iframeContainer) iframeContainer.style.display = 'none';
+    if (iframe) iframe.src = '';
+};
 
+window.showDashboard = function() {
+    closeIframe();
+    resetInactivityTimer();
+    return false;
+};
 
+// --- FIX: Add click listener for footer close button ---
+document.addEventListener('DOMContentLoaded', function() {
+    const footerCloseBtn = document.getElementById('fullModalFooterClose');
+    if (footerCloseBtn) {
+        footerCloseBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            closeIframe();
+        });
+        console.log('Footer close button attached successfully');
+    } else {
+        console.error('Footer close button not found in DOM');
+    }
+});
+
+// Also add listener for the X button if it's not already working
+document.addEventListener('DOMContentLoaded', function() {
+    const closeXBtn = document.querySelector('.iframe-header button');
+    if (closeXBtn) {
+        closeXBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            closeIframe();
+        });
+    }
+});
 
 
 
