@@ -1511,41 +1511,71 @@ data-layout="button_count">
         document.getElementById('dashLogoutBtn').addEventListener('click', logoutUser);
         document.getElementById('dashLogoutBtnBottom').addEventListener('click', logoutUser);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
         // --- IFRAME DIRECT IN MAIN CONTENT ---
-        window.openDashModal = function(url, title) {
-            if (!isUserLoggedIn) {
-                openLoginModal();
-                return false;
-            }
-            resetInactivityTimer();
+      window.openDashModal = function(url, title) {
+    if (!isUserLoggedIn) {
+        openLoginModal();
+        return false;
+    }
+    resetInactivityTimer();
 
-            const iframeContainer = document.getElementById('iframeContainer');
-            const iframe = document.getElementById('mainIframe');
-            const titleEl = document.getElementById('iframeTitle');
-          const fullModalFooterClose = document.getElementById('fullModalFooterClose');
-            titleEl.innerHTML = `<i class="fas fa-file-alt"></i> ${title || 'Content'}`;
-            iframeContainer.style.display = 'block';
-            iframe.src = url.replace(/ /g, '%20');
+    const iframeContainer = document.getElementById('iframeContainer');
+    const iframe = document.getElementById('mainIframe');
+    const titleEl = document.getElementById('iframeTitle');
+    const fullModalFooterClose = document.getElementById('fullModalFooterClose');
+    
+    titleEl.innerHTML = `<i class="fas fa-file-alt"></i> ${title || 'Content'}`;
+    iframeContainer.style.display = 'block';
+    iframe.src = url.replace(/ /g, '%20');
 
-            iframeContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    iframeContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-            if (window.innerWidth <= 992) {
-                document.getElementById('dashSidebar').classList.remove('active');
-            }
-            return false;
-        };
+    if (window.innerWidth <= 992) {
+        document.getElementById('dashSidebar').classList.remove('active');
+    }
+    
+    // Attach close event to footer button
+    fullModalFooterClose.onclick = function() {
+        closeIframe();
+    };
+    
+    return false;
+};
 
-        window.closeIframe = function() {
-            document.getElementById('iframeContainer').style.display = 'none';
-            document.getElementById('mainIframe').src = '';
-        };
 
-        window.showDashboard = function() {
-            closeIframe();
-            resetInactivityTimer();
-            return false;
-        };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
         // --- Sidebar Toggle ---
         document.getElementById('dashMenuToggle').addEventListener('click', function() {
             document.getElementById('dashSidebar').classList.toggle('active');
