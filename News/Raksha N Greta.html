@@ -374,33 +374,21 @@
 
         .justice-quote {
             background: #fffbeb;
-
             border-left-color: var(--highlight);
-
             color: #92400e;
-
             font-size: 20px;
-
             text-align: center;
         }
-
-
         /* =========================================
            ACTION LIST
         ========================================= */
-
         .action-list {
             list-style: none;
-
             margin: 20px 0;
         }
-
-
         .action-list li {
             position: relative;
-
             padding: 13px 15px 13px 40px;
-
             margin-bottom: 10px;
 
             background: #f8fafc;
@@ -1078,9 +1066,26 @@
 
 
 </main>
+<script>
+document.querySelectorAll('.tag').forEach(tag => {
+  tag.addEventListener('click', function() {
+    const searchTerm = this.textContent.trim();
+    // Option 1: Filter page content
+    filterContent(searchTerm);
+    
+    // Option 2: Redirect to search page
+    // window.location.href = '/search?q=' + encodeURIComponent(searchTerm);
+    
+    // Option 3: Show alert (for testing)
+    alert('Filtering by: ' + searchTerm);
+  });
+});
 
-
-
+function filterContent(term) {
+  // Your filtering logic here
+  console.log('Filtering:', term);
+}
+</script>
 <!-- =========================================
      FOOTER
 ========================================= -->
