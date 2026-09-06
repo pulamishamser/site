@@ -1,0 +1,1837 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IEMIS</title>
+
+<!-- You can use Open Graph tags to customize link previews.
+Learn more: /documentation/sharing/webmasters -->
+<meta property="og:url"           content="https://shamser.info.np/Internal Exam Management Information System/IEMIS (Updated).html">
+<meta property="og:type"          content="website" />
+<meta property="og:title"         content="IEMIS New Version" />
+<meta property="og:description"   content="EMIS brings all examination data together in one system to improve evaluation system in keeping record analyting and decision-making for quality exam of school campus, and educational institution" />
+<meta property="og:image"         content="https://emis.cehrd.gov.np/assets/img/slider1.png" />
+</head>
+<body>
+
+<!-- Load Facebook SDK for JavaScript -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) return;
+js = d.createElement(s); js.id = id;
+js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<!-- Your share button code -->
+<div class="fb-share-button"
+data-href="https://shamser.info.np"
+data-layout="button_count">
+</div>
+
+    
+    <!-- Bootstrap 5 + Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="https://shamser.info.np/HomePage/favicon.ico">
+    <!-- Boxicons for social icons -->
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+
+    <style>
+        * { box-sizing: border-box; margin:0; padding:0; }
+        body { font-family: 'Poppins', sans-serif; background: #f4f6fc; margin:0; padding:0; }
+        .top-header { 
+            background: linear-gradient(145deg, #06224f 0%, #0a3974 100%);
+            color:#fff; 
+            padding:0.8rem 2.5rem; 
+            display:flex; 
+            flex-wrap:wrap; 
+            align-items:center; 
+            justify-content:space-between; 
+            border-bottom:4px solid #f4b11a; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .gov-brand { display:flex; align-items:center; gap:1.2rem; }
+        .gov-brand img { height:80px; width:auto; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.2)); }
+        .gov-brand h4 { margin:0 0 4px; font-weight:700; font-size:1.2rem; letter-spacing:0.3px; }
+        .gov-brand p { margin:0; font-size:0.7rem; opacity:0.85; line-height:1.3; }
+        .system-title { font-size:1.5rem; font-weight:700; letter-spacing:0.5px; margin:0; text-align:center; flex:1; background:rgba(255,255,255,0.05); padding:0.2rem 1.2rem; border-radius:40px; backdrop-filter:blur(2px); }
+        .live-badge { background:#e53e3e; color:#fff; font-size:0.65rem; font-weight:700; padding:0.2rem 0.9rem; border-radius:30px; margin-left:12px; vertical-align:middle; animation:pulse-badge 1.8s infinite; text-transform:uppercase; letter-spacing:0.5px; }
+        @keyframes pulse-badge { 0%{opacity:0.6} 50%{opacity:1} 100%{opacity:0.6} }
+        .main-nav .login { background:#145da0; color:#fff; padding:0.6rem 2rem; border-radius:60px; font-weight:700; text-decoration:none; font-size:0.9rem; transition:0.2s; border:1px solid #2878b8; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.1); display:inline-block; }
+        .main-nav .login:hover { background:#1976c5; color:#fff; border-color:#4b9bd0; transform:translateY(-1px); box-shadow:0 7px 15px rgba(0,0,0,0.3); }
+        .main-nav .logout-btn { background:#d43f34; color:#fff; padding:0.6rem 2rem; border-radius:60px; font-weight:600; font-size:0.9rem; transition:0.2s; border:none; cursor:pointer; display:none; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
+        .main-nav .logout-btn:hover { background:#b12a1f; }
+
+        .sub-nav { 
+            background: linear-gradient(90deg, #0c4d92, #1166ad); 
+            color:#fff; 
+            display:flex; 
+            justify-content:flex-end; 
+            align-items:center;
+            padding:0.3rem 2rem;
+            flex-wrap:wrap;
+            gap:0.2rem;
+        }
+        .sub-nav a { color:#fff; text-decoration:none; padding:10px 24px; font-size:13px; font-weight:600; position:relative; border-bottom:2px solid transparent; transition:0.2s; }
+        .sub-nav a:hover, .sub-nav a.active { border-bottom-color:#f4b11a; }
+        .sub-nav .dropdown .dropdown-toggle { color:#fff; background:transparent; border:none; padding:10px 24px; font-size:13px; font-weight:600; }
+        .sub-nav .dropdown .dropdown-toggle:hover { color:#fff; }
+        .sub-nav .dropdown .dropdown-menu { background:#fff; border-radius:0 0 6px 6px; box-shadow:0 6px 15px rgba(0,0,0,0.2); padding:0; min-width:220px; }
+        .sub-nav .dropdown .dropdown-menu .dropdown-item { color:#122b55; padding:12px 16px; font-weight:500; }
+        .sub-nav .dropdown .dropdown-menu .dropdown-item:hover { background:#eaf3ff; }
+        .clock-box { font-size:0.85rem; font-weight:500; color:#fff; background:rgba(255,255,255,0.15); padding:0.2rem 1rem; border-radius:40px; margin-left:auto; }
+
+        .hero-section { background: linear-gradient(145deg, #eef2f9 0%, #dce3f0 100%); padding:2rem 2rem 1.5rem; position:relative; }
+        .hero-slide { display:flex; flex-wrap:wrap; align-items:center; gap:2rem; }
+        .hero-content { flex:1.2; }
+        .hero-badge { background:#d4e7f8; color:#0a4489; display:inline-block; padding:0.2rem 1.2rem; border-radius:30px; font-weight:700; font-size:0.75rem; letter-spacing:0.5px; margin-bottom:1rem; }
+        .hero-content h1 { font-size:2.2rem; font-weight:700; color:#092f6b; line-height:1.2; }
+        .hero-line { width:60px; height:4px; background:#f4b11a; margin:0.8rem 0 1rem; border-radius:4px; }
+        .hero-content p { font-size:0.95rem; line-height:1.6; color:#164477; max-width:550px; }
+        .hero-buttons { display:flex; flex-wrap:wrap; gap:1rem; margin-top:1.2rem; }
+        .hero-buttons button { padding:0.5rem 1.8rem; border:1px solid #0a4b91; border-radius:7px; background:#0a4489; color:#fff; font-weight:600; font-size:0.85rem; cursor:pointer; transition:0.2s; }
+        .hero-buttons button:last-child { background:#fff; color:#0a4489; border:1px solid #0a4b91; }
+        .hero-buttons button:hover { transform:translateY(-2px); box-shadow:0 8px 16px rgba(10,38,71,0.15); }
+        .hero-image-slide { flex:1; text-align:center; position:relative; }
+        .hero-image-slide .img-wrapper { position:relative; width:100%; padding-top:30%; min-height:180px; }
+        .hero-image-slide .img-wrapper img { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); max-height:240px; width:auto; opacity:1; transition:opacity 1.2s ease-in-out; }
+        .hero-image-slide .img-wrapper img.fade-out { opacity:0; }
+        .hero-image-slide .img-wrapper img.fade-in { opacity:1; }
+
+        .hero-search { 
+            background:#fff; 
+            border-radius:10px; 
+            padding:0.8rem 1.2rem; 
+            display:grid; 
+            grid-template-columns:1fr 1fr 1.5fr 1.5fr 0.8fr 0.5fr; 
+            gap:12px; 
+            margin-top:1.5rem; 
+            box-shadow:0 5px 20px rgba(0,0,0,0.12); 
+            border:1px solid #e6ecf5;
+            max-width:1200px;
+            margin-left:auto;
+            margin-right:auto;
+        }
+        .hero-search select, .hero-search input { height:40px; font-size:0.8rem; border-radius:6px; border:1px solid #ced4da; padding:0 10px; background:#fff; }
+        .hero-search .form-select, .hero-search .form-control { border:1px solid #ced4da; border-radius:6px; font-size:0.8rem; padding:0.4rem 1.2rem; background:#fff; height:40px; }
+        .hero-search .form-select:focus, .hero-search .form-control:focus { border-color:#0958c7; box-shadow:0 0 0 0.2rem rgba(9,88,199,0.2); }
+        .search-btn { background:#0958c7; border:1px solid #0958c7; border-radius:6px; padding:0.4rem 1.2rem; font-weight:600; color:#fff; transition:0.2s; height:40px; cursor:pointer; }
+        .search-btn:hover { background:#063f91; border-color:#063f91; }
+        .search-btn#clearBtn { background:#e0e5ec; color:#2c3e50; border-color:#d1d5db; display:none; }
+
+        .totals-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; margin:70px 4% 0; }
+        .total-card { display:flex; align-items:center; gap:14px; padding:16px; background:#fff; border:1px solid #e5e7eb; border-radius:10px; transition:transform 0.2s,box-shadow 0.2s; }
+        .total-card:hover { transform:translateY(-2px); box-shadow:0 6px 16px rgba(15,23,42,0.1); }
+        .total-card .icon { font-size:48px; line-height:1; flex-shrink:0; }
+        .total-meta strong { display:block; font-size:24px; font-weight:700; color:#1f2937; line-height:1.2; }
+        .total-meta span { display:block; font-size:14px; font-weight:600; color:#374151; }
+        .total-meta small { display:block; font-size:11px; color:#6b7280; margin-top:3px; }
+
+        .services-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr)); gap:16px; margin:0 3% 2rem; }
+        .service-card { display:flex; flex-direction:column; align-items:center; padding:16px; background:#fff; border:1px solid #e5e7eb; border-radius:10px; text-decoration:none; text-align:center; transition:transform 0.2s,box-shadow 0.2s; cursor:pointer; }
+        .service-card:hover { transform:translateY(-2px); box-shadow:0 4px 12px rgba(15,23,42,0.08); }
+        .service-icon { font-size:48px; height:70px; display:flex; align-items:center; justify-content:center; margin-bottom:12px; }
+        .service-title { font-size:17px; font-weight:700; color:#003b7a; margin-bottom:8px; }
+        .service-description { font-size:12px; color:#64748b; max-width:180px; }
+
+        .section-header { text-align:center; margin:50px 0; }
+        .section-header h2 { font-size:30px; font-weight:700; color:#003b7a; }
+        .section-line { width:60px; height:4px; margin:18px auto 0; background:#f4b11a; border-radius:4px; }
+        footer { display:flex; align-items:center; justify-content:flex-end; margin-top:30px; padding:10px 2rem; background:#1f2937; color:#d1d5db; font-size:12px; }
+
+        /* NEW Login Overlay Styles */
+        .login-overlay { display:none; position:fixed; inset:0; background:rgba(15,23,42,0.6); backdrop-filter:blur(8px); z-index:99999; align-items:center; justify-content:center; padding:20px; }
+        .login-overlay.show { display:flex; }
+        .login-overlay .container { display:flex; flex-direction:column; background:white; width:100%; max-width:1000px; border-radius:20px; box-shadow:0 20px 40px rgba(0, 0, 0, 0.25); overflow:hidden; margin:20px 0; position:relative; animation:slideUp 0.3s ease; max-height:90vh; overflow-y:auto; }
+        .login-overlay .left-panel { width:100%; padding:30px 20px; background:#f8f9fe; text-align:center; border-bottom:2px solid #e9ecf5; }
+        .login-overlay .right-panel { width:100%; padding:30px 20px; background:white; }
+        .login-overlay .left-panel img { width:65px; height:65px; margin-bottom:10px; }
+        .login-overlay .left-panel h2 { color:#3a4f8a; font-weight:600; font-size:1.3rem; letter-spacing:0.5px; margin-bottom:20px; }
+        .login-overlay .contact-info p { margin:8px 0; font-size:0.95rem; color:#2c3e66; display:flex; align-items:center; justify-content:center; gap:6px; flex-wrap:wrap; }
+        .login-overlay .contact-info a { color:#3a67b1; text-decoration:none; font-weight:500; }
+        .login-overlay .contact-info a:hover { text-decoration:underline; }
+        .login-overlay .media-buttons { display:flex; justify-content:center; gap:12px; margin:18px 0 5px; }
+        .login-overlay .media-buttons .link { display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px; border-radius:50%; color:white; text-decoration:none; font-size:1.2rem; transition:transform 0.2s ease, box-shadow 0.2s ease; }
+        .login-overlay .media-buttons .link:hover { transform:scale(1.08); box-shadow:0 4px 10px rgba(0,0,0,0.2); }
+        .login-overlay .card-header.mycolor { background-color:#3a67b1; color:white; border-radius:12px 12px 0 0; padding:12px 0; font-weight:600; letter-spacing:0.3px; display:inline-block; width:100%; }
+        .login-overlay .input-group-text { min-width:105px; font-weight:500; background-color:#f0f3fa; border:1px solid #d6dee9; font-size:0.9rem; }
+        .login-overlay .form-control { border:1px solid #d6dee9; font-size:0.95rem; padding:10px 14px; }
+        .login-overlay .form-control:focus { border-color:#3a67b1; box-shadow:0 0 0 0.2rem rgba(58, 103, 177, 0.2); }
+        .login-overlay .show-password { display:flex; align-items:center; gap:8px; margin:12px 0 8px; font-size:0.95rem; color:#2d3f60; }
+        .login-overlay .show-password input[type="checkbox"] { width:18px; height:18px; accent-color:#3a67b1; margin:0; }
+        .login-overlay .btn-primary { background-color:#3a67b1; border:none; padding:10px 32px; font-weight:500; border-radius:30px; transition:background 0.2s; }
+        .login-overlay .btn-primary:hover { background-color:#2e5090; }
+        .login-overlay .btn-link { color:#3a67b1; font-weight:500; text-decoration:none; padding:0; border:none; background:transparent; }
+        .login-overlay .btn-link:hover { text-decoration:underline; color:#1f3b6b; }
+        .login-overlay .alert { border-radius:12px; font-size:0.95rem; }
+        .login-overlay .register-row { margin-top:20px; font-size:0.95rem; color:#2c3e66; }
+        .login-overlay .close-login { position:absolute; top:15px; right:20px; font-size:1.8rem; background:none; border:none; color:#94a3b8; cursor:pointer; z-index:10; }
+        .login-overlay .close-login:hover { color:#0f172a; }
+        @media (min-width:768px) { .login-overlay .container { flex-direction:row; border-radius:24px; } .login-overlay .left-panel { width:38%; padding:40px 25px; border-right:2px solid #e2e8f2; border-bottom:none; display:flex; flex-direction:column; justify-content:center; } .login-overlay .right-panel { width:62%; padding:40px 35px; } .login-overlay .left-panel h2 { font-size:1.6rem; } .login-overlay .contact-info p { justify-content:flex-start; } .login-overlay .media-buttons { justify-content:flex-start; } .login-overlay .input-group-text { min-width:120px; } }
+        @media (max-width:480px) { .login-overlay .left-panel h2 { font-size:1.1rem; } .login-overlay .input-group-text { min-width:80px; font-size:0.8rem; } .login-overlay .btn-primary { width:100%; } }
+
+        .session-toast { position:fixed; bottom:30px; right:30px; background:#0f172a; color:#fff; padding:12px 24px; border-radius:40px; font-size:0.9rem; z-index:9999; box-shadow:0 10px 25px rgba(0,0,0,0.15); animation:fadeUp 0.3s; }
+        @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+        @keyframes slideUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+        .dashboard-container { display:none; flex-direction:column; min-height:100vh; background:#f1f5f9; }
+        .dash-header { display:flex; align-items:center; justify-content:space-between; padding:0 28px; height:68px; background:#fff; border-bottom:1px solid rgba(0,0,0,0.06); position:sticky; top:0; z-index:100; box-shadow:0 2px 8px rgba(0,0,0,0.04); }
+        .dash-logo { display:flex; align-items:center; gap:10px; font-weight:700; font-size:1.2rem; color:#0f172a; }
+        .dash-logo i { color:#4f46e5; font-size:1.6rem; }
+        .dash-user-info { display:flex; align-items:center; gap:20px; position:relative; }
+        .dash-session-timer { font-size:0.75rem; background:#f1f5f9; padding:4px 14px; border-radius:40px; font-weight:500; color:#475569; }
+        .dash-profile-icon { font-size:2.2rem; color:#4f46e5; cursor:pointer; transition:0.2s; }
+        .dash-profile-icon:hover { color:#3730a3; transform:scale(1.05); }
+        .dash-user-dropdown { position:absolute; top:calc(100% + 8px); right:0; background:#fff; border-radius:16px; box-shadow:0 20px 40px rgba(0,0,0,0.08); width:220px; padding:8px 0; display:none; border:1px solid #f1f5f9; }
+        .dash-user-info:hover .dash-user-dropdown { display:block; }
+        .dash-user-dropdown a, .dash-user-dropdown button { display:flex; align-items:center; gap:12px; padding:10px 20px; color:#1e293b; text-decoration:none; background:transparent; border:none; width:100%; font-size:0.85rem; transition:0.2s; cursor:pointer; }
+        .dash-user-dropdown a:hover, .dash-user-dropdown button:hover { background:#f8fafc; color:#4f46e5; }
+        .dash-menu-toggle { display:none; font-size:1.6rem; cursor:pointer; color:#1e293b; padding:4px 8px; border-radius:8px; transition:0.2s; }
+        .dash-menu-toggle:hover { background:#f1f5f9; }
+
+        .dash-content-wrapper { display:flex; flex:1; }
+        .dash-sidebar { width:260px; background:#fff; border-right:1px solid #f1f5f9; height:calc(100vh - 68px); overflow-y:auto; position:sticky; padding:16px 10px 30px; top:68px; scrollbar-width:thin; flex-shrink:0; }
+        .dash-sidebar::-webkit-scrollbar { width:4px; }
+        .dash-sidebar::-webkit-scrollbar-thumb { background:#d1d5db; border-radius:8px; }
+        .dash-sidebar .sidebar-brand { text-align:center; padding:0 0 16px 0; border-bottom:1px solid #f1f5f9; margin-bottom:12px; }
+        .dash-sidebar .sidebar-brand img { width:36px; }
+        .dash-sidebar .sidebar-brand span { font-weight:600; color:#1e293b; font-size:0.9rem; margin-left:6px; }
+        .dash-sidebar nav ul { list-style:none; padding:0; margin:0; }
+        .dash-sidebar nav > ul > li { border-radius:12px; margin-bottom:1px; }
+        .dash-sidebar nav > ul > li.active { background:#eef2ff; }
+        .dash-sidebar nav a, .dash-sidebar nav button { display:flex; align-items:center; gap:12px; padding:9px 14px; color:#334155; text-decoration:none; border:none; background:transparent; width:100%; border-radius:12px; font-weight:500; font-size:0.85rem; transition:0.2s; cursor:pointer; }
+        .dash-sidebar nav a i, .dash-sidebar nav button i { width:20px; color:#64748b; font-size:0.95rem; text-align:center; }
+        .dash-sidebar nav a:hover, .dash-sidebar nav button:hover { background:#f1f5f9; color:#4f46e5; }
+        .dash-sidebar nav a:hover i, .dash-sidebar nav button:hover i { color:#4f46e5; }
+        .dash-toggle-submenu { justify-content:space-between; }
+        .dash-arrow { transition:0.25s; font-size:0.6rem; color:#94a3b8; }
+        .dash-arrow.rotated { transform:rotate(180deg); }
+        .dash-submenu { max-height:0; overflow:hidden; transition:max-height 0.35s ease; padding-left:12px; }
+        .dash-submenu.expanded { max-height:1000px; }
+        .dash-sub-submenu { max-height:0; overflow:hidden; transition:max-height 0.3s ease; padding-left:12px; }
+        .dash-sub-submenu.expanded { max-height:800px; }
+
+        .dash-main-content { flex:1; padding:24px 28px; transition:0.25s; background:#f1f5f9; }
+        .dash-quick-menu-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(105px,1fr)); gap:14px; margin:16px 0 24px; }
+        .dash-quick-menu-item { background:#fff; border-radius:14px; padding:14px 6px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; border:1px solid #f1f5f9; transition:0.2s; cursor:pointer; text-decoration:none; color:#1e293b; font-weight:500; font-size:0.7rem; aspect-ratio:1/1; min-height:90px; box-shadow:0 1px 3px rgba(0,0,0,0.02); }
+        .dash-quick-menu-item i { color:#4f46e5; font-size:2rem; margin-bottom:6px; display:block; }
+        .dash-quick-menu-item span { display:block; line-height:1.2; }
+        .dash-quick-menu-item:hover { background:#f8fafc; border-color:#dbeafe; transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.06); }
+
+        .dash-stats-cards { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:20px; margin-bottom:24px; }
+        .dash-card { background:#fff; border-radius:16px; padding:20px 22px; box-shadow:0 1px 3px rgba(0,0,0,0.04); border:1px solid rgba(0,0,0,0.03); transition:0.2s; }
+        .dash-card:hover { box-shadow:0 8px 25px rgba(0,0,0,0.05); }
+        .dash-card h3 { font-weight:600; font-size:0.9rem; color:#475569; margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+        .dash-card h3 i { font-size:1.2rem; color:#4f46e5; }
+        .dash-chart-container { height:150px; }
+        .dash-notices-card ul { list-style:none; padding:0; margin:0; }
+        .dash-notices-card li { padding:8px 0; border-bottom:1px solid #f1f5f9; font-size:0.85rem; display:flex; justify-content:space-between; align-items:center; }
+        .dash-notices-card li:last-child { border:none; }
+        .dash-notices-card li .notice-date { color:#94a3b8; font-size:0.7rem; }
+        .dash-pagination { display:flex; justify-content:center; gap:6px; margin-top:14px; }
+        .dash-pagination button, .dash-pagination span { padding:3px 12px; border-radius:30px; border:1px solid #e2e8f0; background:#fff; font-weight:500; font-size:0.8rem; transition:0.2s; }
+        .dash-pagination button:hover { background:#4f46e5; color:#fff; border-color:#4f46e5; }
+        .dash-footer { margin-top:30px; text-align:center; color:#94a3b8; font-size:0.8rem; border-top:1px solid #f1f5f9; padding-top:20px; }
+
+        /* iframe container */
+        #iframeContainer {
+            display:none;
+            margin-top:10px;
+            border:1px solid #e5e7eb;
+            border-radius:12px;
+            overflow:hidden;
+            background:#fff;
+           
+           height: 900px;
+            animation:slideUp 0.3s ease;
+        }
+        #iframeContainer .iframe-header {
+            background:#f8fafc;
+            padding:10px 16px;
+            border-bottom:1px solid #e5e7eb;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+        #iframeContainer .iframe-header span {
+            font-weight:600;
+            color:#0f172a;
+        }
+        #iframeContainer .iframe-header button {
+            background:transparent;
+            border:none;
+            font-size:1.2rem;
+            color:#94a3b8;
+            cursor:pointer;
+            transition:0.2s;
+        }
+        #iframeContainer .iframe-header button:hover {
+            color:#0f172a;
+            transform:rotate(90deg);
+        }
+        #iframeContainer iframe {
+            width:100%;
+            height:calc(100% - 50px);
+            border:none;
+        }
+
+        /* Service Modal - Fullscreen */
+        .service-modal-overlay {
+            display:none;
+            position:fixed;
+            inset:0;
+            background:rgba(15,23,42,0.7);
+            backdrop-filter:blur(8px);
+            z-index:99998;
+            align-items:center;
+            justify-content:center;
+        }
+        .service-modal-overlay.show {
+            display:flex;
+        }
+        .service-modal-box {
+            background:#fff;
+            width:100%;
+            height:100vh;
+            height:100dvh;
+            max-width:100%;
+            max-height:100%;
+            border-radius:0;
+            overflow:hidden;
+            box-shadow:none;
+            animation:slideUp 0.3s ease;
+            display:flex;
+            flex-direction:column;
+        }
+        .service-modal-header {
+            padding:16px 24px;
+            border-bottom:1px solid #f1f5f9;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            background:#fafbfc;
+            flex-shrink:0;
+            min-height:60px;
+        }
+        .service-modal-header h5 {
+            font-weight:600;
+            font-size:1.1rem;
+            color:#0f172a;
+            margin:0;
+        }
+        .service-modal-close {
+            background:none;
+            border:none;
+            font-size:3rem;
+            color:#ef584d;
+            transition:0.2s;
+            padding:0 8px;
+            line-height:1;
+            cursor:pointer;
+        }
+        .service-modal-close:hover {
+            color:#0f172a;
+            transform:rotate(90deg);
+        }
+        .service-modal-body {
+            flex:1;
+            position:relative;
+            min-height:0;
+        }
+        .service-modal-body iframe {
+            width:100%;
+            height:100%;
+            border:none;
+            display:none;
+        }
+        .service-loading-spinner {
+            position:absolute;
+            inset:0;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            background:#fff;
+            z-index:2;
+        }
+
+        .filterable-card.filter-hidden { display:none; }
+        .no-results { text-align:center; padding:2rem; color:#6c7a94; display:none; }
+
+        /* API Status Badge */
+        .api-status {
+            font-size:0.65rem;
+            padding:2px 10px;
+            border-radius:20px;
+            font-weight:600;
+            display:inline-block;
+            margin-top:4px;
+        }
+        .api-status.online { background:#dcfce7; color:#166534; }
+        .api-status.offline { background:#fee2e2; color:#991b1b; }
+        .api-status.loading { background:#fef3c7; color:#92400e; }
+
+        /* User Account Management Styles */
+        .account-container { max-width:850px; margin:0 auto 30px auto; }
+        .account-title { text-align:center; margin-bottom:25px; }
+        .account-title h2 { margin:0; color:#1e293b; }
+        .account-title p { color:#64748b; }
+        .account-tabs { display:flex; gap:10px; margin-bottom:20px; }
+        .account-tab { flex:1; border:none; padding:14px; border-radius:10px; background:#e2e8f0; color:#334155; cursor:pointer; font-size:15px; font-weight:bold; transition:0.2s; }
+        .account-tab.active { background:#2563eb; color:white; }
+        .account-card { background:white; padding:25px; border-radius:15px; box-shadow:0 5px 20px rgba(0,0,0,.08); }
+        .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+        .form-group { display:flex; flex-direction:column; }
+        .form-group.full { grid-column:1 / -1; }
+        .form-group label { margin-bottom:7px; font-weight:bold; color:#334155; }
+        .form-group input { width:100%; padding:12px; border:1px solid #cbd5e1; border-radius:8px; font-size:15px; outline:none; }
+        .form-group input:focus { border-color:#2563eb; box-shadow:0 0 0 2px rgba(37,99,235,.12); }
+        .account-btn { width:100%; border:none; padding:13px; margin-top:20px; border-radius:8px; background:#2563eb; color:white; font-size:16px; font-weight:bold; cursor:pointer; }
+        .account-btn:hover { background:#1d4ed8; }
+        .account-btn.btn-password { background:#16a34a; }
+        .account-btn.btn-password:hover { background:#15803d; }
+        .account-message { display:none; margin-top:15px; padding:12px; border-radius:8px; text-align:center; }
+        .account-message.success { display:block; background:#dcfce7; color:#166534; }
+        .account-message.error { display:block; background:#fee2e2; color:#991b1b; }
+        .password-wrapper { position:relative; }
+        .password-wrapper input { padding-right:45px; }
+        .show-password-btn { position:absolute; right:12px; top:50%; transform:translateY(-50%); border:none; background:none; cursor:pointer; font-size:1.2rem; }
+        .account-section { display:none; }
+        .account-section.active { display:block; }
+        @media(max-width:650px){ .form-grid { grid-template-columns:1fr; } .form-group.full { grid-column:auto; } .account-tabs { flex-direction:column; } }
+
+        .dash-dropdown-menu a i { width: 18px; margin-right: 8px; color: #4f46e5; }
+        .dash-quick-menu-item.dash-dropdown { position: relative; cursor: pointer; }
+        .dash-dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: #fff; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.15); border-radius: 8px; padding: 8px 0; z-index: 1000; margin-top: 4px; }
+        .dash-dropdown-menu a { display: block; padding: 8px 16px; color: #0f172a; text-decoration: none; font-size: 0.85rem; transition: background 0.2s; }
+        .dash-dropdown-menu a:hover { background: #eef2ff; color: #4f46e5; }
+        .dash-dropdown-divider { height: 1px; background: #e2e8f0; margin: 4px 0; }
+        .dash-dropdown:hover .dash-dropdown-menu { display: block; }
+        .dash-dropdown-toggle .dash-arrow { font-size: 0.7rem; margin-left: 6px; transition: transform 0.2s; }
+        .dash-dropdown:hover .dash-dropdown-toggle .dash-arrow { transform: rotate(180deg); }
+
+        @media (max-width:992px) {
+            .dash-sidebar { transform:translateX(-100%); z-index:90; position:fixed; top:68px; height:calc(100vh - 68px); width:280px; box-shadow:4px 0 20px rgba(0,0,0,0.05); }
+            .dash-sidebar.active { transform:translateX(0); }
+            .dash-menu-toggle { display:block; }
+            .dash-main-content { padding:16px; }
+            .dash-quick-menu-grid { grid-template-columns:repeat(auto-fill, minmax(90px,1fr)); gap:10px; }
+            .hero-search { grid-template-columns:1fr 1fr; }
+            .services-grid { grid-template-columns:repeat(3,1fr); }
+            .totals-grid { grid-template-columns:repeat(3,1fr); }
+            .top-header { flex-wrap:wrap; gap:10px; }
+            .system-title { font-size:1.2rem; }
+            #iframeContainer { height:800px; }
+        }
+        @media (max-width:650px) {
+            .dash-header { padding:0 14px; }
+            .dash-user-info .dash-session-timer { display:none; }
+            .dash-quick-menu-grid { grid-template-columns:repeat(auto-fill, minmax(75px,1fr)); }
+            .dash-quick-menu-item { min-height:75px; font-size:0.65rem; }
+            .dash-quick-menu-item i { font-size:1.3rem; }
+            .dash-stats-cards { grid-template-columns:1fr; }
+            .dash-main-content { padding:12px; }
+            .hero-search { grid-template-columns:1fr; }
+            .services-grid { grid-template-columns:1fr 1fr; }
+            .totals-grid { grid-template-columns:1fr 1fr; }
+            .top-header { flex-direction:column; align-items:stretch; }
+            .system-title { font-size:1rem; }
+            .sub-nav { flex-direction:column; align-items:stretch; }
+            #iframeContainer { height:680px; }
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <!-- HEADER -->
+    <header class="top-header">
+        <div class="gov-brand">
+            <img src="https://shamser.info.np/Internal Exam Management Information System/logo (2).png" alt="School Logo" style="height:80px;">
+            <div>
+                <h4>shamser.info.np</h4>
+                <p style="font-size:0.7rem; opacity:0.9;">A well-Known Nepali personal website of Education · </p>
+            </div>
+        </div>
+        <h2 class="system-title">Internal Examination Management Informative Software<span class="live-badge">Live</span></h2>
+        <div class="main-nav">
+            <a href="#" class="login" id="loginBtn"><i class="fas fa-lock"></i> EMIS Login</a>
+            <button class="logout-btn" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> Logout</button>
+        </div>
+    </header>
+
+    <!-- SUB-NAV -->
+    <nav class="sub-nav">
+        <a href="https://shamser.info.np" class="active">Home</a>
+        <a href="#" onclick="openDashModal('https://emis.cehrd.gov.np/','CEHRD Public Dashboard'); return false;">CEHRD</a>
+        <a href="#" onclick="openDashModal('https://shamser.info.np/integrated%20services.html','Integrated Services'); return false;">Service</a>
+        <div class="dropdown">
+            <button class="dropdown-toggle" data-bs-toggle="dropdown">Data Portal</button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Education%20Data%20Portal.html','Education Data Portal'); return false;">Education Data Portal</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/School%20Performance%20Dashboard.html','School Performance Dashboard'); return false;">School Performance Dashboard</a></li>
+                <li><a class="dropdown-item" href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Student%20Analysis%20Dashboard.html','Student Analysis Dashboard'); return false;">Student Analysis Dashboard</a></li>
+                <li><a class="dropdown-item" href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Local%20Level%20Dashboard.html','Local Level Dashboard'); return false;">Local Level Dashboard</a></li>
+                <li><a class="dropdown-item" href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Teacher%20and%20Staff%20Dashboard.html','Teacher and Staff Dashboard'); return false;">Teacher and Staff Dashboard</a></li>
+            </ul>
+        </div>
+        <span class="clock-box" id="liveClock"><i class="bi bi-clock"></i> --:--:--</span>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section" id="heroSection">
+        <div class="hero-slide">
+            <div class="hero-content">
+                <div class="hero-badge">★ Quality Education for a Prosperous Nepal</div>
+                <h1>Reliable Tool. Better Performance Stronger Quality.</h1>
+                <div class="hero-line"></div>
+                <p>EMIS brings all examination data together in one system to improve evaluation system in keeping record analyting and decision-making for quality exam of school campus, and educational institution.</p>
+                <div class="hero-buttons"><button id="exploreBtn">Explore Data & Reports</button><button id="aboutBtn">About IEMIS</button></div>
+            </div>
+            <div class="hero-image-slide">
+                <div class="img-wrapper" id="heroImageWrapper">
+                    <img id="heroImage" src="https://emis.cehrd.gov.np/assets/img/slider1.png" alt="Education in Nepal" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 250%22%3E%3Crect width=%22400%22 height=%22250%22 fill=%22%23dce3f0%22/%3E%3Ccircle cx=%22200%22 cy=%22125%22 r=%2280%22 fill=%22%230a2647%22 opacity=%220.2%22/%3E%3Cpath d=%22M160 100 L240 100 L240 160 L160 160 Z%22 fill=%22%23f4b11a%22 opacity=%220.7%22/%3E%3Crect x=%22130%22 y=%22180%22 width=%22140%22 height=%2225%22 fill=%22%230a2647%22 opacity=%220.3%22/%3E%3C/svg%3E'">
+                </div>
+            </div>
+        </div>
+        <div class="hero-search" id="searchContainer">
+            <select class="form-select" id="searchProvince"><option value="">🏛️ Province</option></select>
+            <select class="form-select" id="searchDistrict"><option value="">🏢 District</option></select>
+            <select class="form-select" id="searchMunicipality"><option value="">🏘️ Palika</option></select>
+            <input class="form-control" id="searchSchool" placeholder="🏫 EMIS Code | School">
+            <select class="form-select" id="searchYear"><option value="">📅 Year</option><option value="2083">2083</option><option value="2082">2082</option><option value="2081">2081</option></select>
+            <button class="search-btn" id="searchBtn"><i class="bi bi-search"></i> Search</button>
+            <button class="search-btn" id="clearBtn" style="background:#e0e5ec;color:#2c3e50;display:none;"><i class="bi bi-x-circle"></i> Clear</button>
+        </div>
+    </section>
+
+    <div id="searchResultsInfo" style="padding:0 2rem 0.5rem;display:none;"><div class="d-flex justify-content-between align-items-center bg-white p-2 px-3 rounded-3 shadow-sm"><span id="resultCountText" class="small text-muted">Found 0 results</span><span id="searchQueryDisplay" class="small fw-bold text-base"></span></div></div>
+
+    <div class="totals-grid" id="totalsGrid">
+        <div class="total-card filterable-card" data-keywords="Local Level">
+            <div class="icon">🏘️</div>
+            <div class="total-meta">
+                <strong>753</strong>
+                <span>Municipalities</span>
+                <small>Total Palika</small>
+                <span class="api-status" id="apiStatus">Loading...</span>
+            </div>
+        </div>
+        <div class="total-card filterable-card" data-keywords="schools education institutions">
+            <div class="icon">🏫</div>
+            <div class="total-meta">
+                <strong>38,811</strong>
+                <span>Schools</span>
+                <small>Total Schools</small>
+            </div>
+        </div>
+        <div class="total-card filterable-card" data-keywords="students enrolment learners">
+            <div class="icon">👨‍🎓</div>
+            <div class="total-meta">
+                <strong id="totalStudents">7,931,329</strong>
+                <span>Students</span>
+                <small>Total Students</small>
+            </div>
+        </div>
+        <div class="total-card filterable-card" data-keywords="teachers faculty staff">
+            <div class="icon">👨‍🏫</div>
+            <div class="total-meta">
+                <strong id="totalTeachers">244,281</strong>
+                <span>Teachers</span>
+                <small>Total Teachers</small>
+            </div>
+        </div>
+        <div class="total-card filterable-card" data-keywords="support staff administration">
+            <div class="icon">🧑‍💻</div>
+            <div class="total-meta">
+                <strong id="totalStaff">42,797</strong>
+                <span>Support Staff</span>
+                <small>Total Support Staff</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- SERVICES SECTION -->
+    <div class="section-header"><h2>Explore More Services</h2><div class="section-line"></div></div>
+    <div class="services-grid" id="servicesGrid">
+        <a href="#" class="service-card filterable-card" data-keywords="AI Suite Gemini" onclick="openServiceModal('Teacher Diary File/AI Automation.html','AI Suite Gemini'); return false;">
+            <div class="service-icon">🔷</div>
+            <div class="service-title">AI Suite (Gemini 2.0)</div>
+            <div class="service-description">AI-powered tools and automation.</div>
+        </a>
+        <a href="#" class="service-card filterable-card" data-keywords="pdf editor" onclick="openServiceModal('https://www.sejda.com/pdf-editor','PDF Editor'); return false;">
+            <div class="service-icon">📄</div>
+            <div class="service-title">PDF Editor</div>
+            <div class="service-description">Edit PDF documents online.</div>
+        </a>
+        <a href="#" class="service-card filterable-card" data-keywords="case converter text" onclick="openServiceModal('https://shamser.info.np/Case Converter.html','Case Converter'); return false;">
+            <div class="service-icon">🔤</div>
+            <div class="service-title">Case Converter</div>
+            <div class="service-description">Convert text to different cases.</div>
+        </a>
+        <a href="#" class="service-card filterable-card" data-keywords="digital book library" onclick="openServiceModal('https://shamser.info.np/IndexLibrary.html','Digital Book Library'); return false;">
+            <div class="service-icon">📚</div>
+            <div class="service-title">Digital Book Library</div>
+            <div class="service-description">Access digital books and resources.</div>
+        </a>
+        <a href="#" class="service-card filterable-card" data-keywords="smart teacher diary" onclick="openServiceModal('https://shamser.info.np/Teacher%20Diary%20File/Smart%20Teacher%20Diary%20Dashboard.html','Smart Teacher Diary'); return false;">
+            <div class="service-icon">📓</div>
+            <div class="service-title">Smart Teacher Diary</div>
+            <div class="service-description">Digital diary for teachers.</div>
+        </a>
+        <a href="#" class="service-card filterable-card" data-keywords="SEE result check" onclick="openServiceModal('https://shamser.info.np/SEE/see.ntc.net.np/results/grade.html','Check SEE Result'); return false;">
+            <div class="service-icon">✅</div>
+            <div class="service-title">Check SEE Result</div>
+            <div class="service-description">Check SEE results online.</div>
+        </a>
+        <a href="#" class="service-card filterable-card" data-keywords="integrated services" onclick="openServiceModal('https://shamser.info.np/integrated%20services.html','Integrated Services'); return false;">
+            <div class="service-icon">🔗</div>
+            <div class="service-title">Integrated Services</div>
+            <div class="service-description">Access all integrated services.</div>
+        </a>
+        <a href="#" class="service-card filterable-card" data-keywords="generate multi letters" onclick="openServiceModal('https://shamser.info.np/Multi%20letterpad.html','Generate Multi Letters'); return false;">
+            <div class="service-icon">✉️</div>
+            <div class="service-title">Generate Multi Letters</div>
+            <div class="service-description">Generate multiple letters at once.</div>
+        </a>
+        <a href="#" class="service-card filterable-card" data-keywords="student attendance system" onclick="openServiceModal('https://shamser.info.np/Attendance.v4/Attendance_Dashboard4.html','Student Attendance System'); return false;">
+            <div class="service-icon">📋</div>
+            <div class="service-title">Student Attendance System</div>
+            <div class="service-description">Track student attendance.</div>
+        </a>
+        <a href="#" class="service-card filterable-card" data-keywords="quiz tsc" onclick="openServiceModal('https://shamser.info.np/tsc_questions.html','Quiz'); return false;">
+            <div class="service-icon">🧠</div>
+            <div class="service-title">Quiz</div>
+            <div class="service-description">Test your knowledge with quizzes.</div>
+        </a>
+        <a href="#" class="service-card filterable-card" data-keywords="news taja" onclick="openServiceModal('https://shamser.info.np/News%20modal.html','ताजा समाचार'); return false;">
+            <div class="service-icon">📰</div>
+            <div class="service-title">ताजा समाचार</div>
+            <div class="service-description">Latest news.</div>
+        </a>
+        <a href="#" class="service-card filterable-card" data-keywords="service delivery" onclick="openServiceModal('https://shamser.info.np/Sign_up.html','Service Delivery'); return false;">
+            <div class="service-icon">📬</div>
+            <div class="service-title">Service Delivery</div>
+            <div class="service-description">Request and manage services.</div>
+        </a>
+        <a href="#" class="service-card filterable-card" data-keywords="number to text" onclick="openServiceModal('https://shamser.info.np/Number_to_Text.html','Number to Text'); return false;">
+            <div class="service-icon">🔢</div>
+            <div class="service-title">Number to Text</div>
+            <div class="service-description">Convert numbers to words.</div>
+        </a>
+        <a href="#" class="service-card filterable-card" data-keywords="government holiday list" onclick="openServiceModal('https://shamser.info.np/Holiday_2083_20260405.html','सरकारी बिदाको सूचि'); return false;">
+            <div class="service-icon">🗓️</div>
+            <div class="service-title">सरकारी बिदाको सूचि</div>
+            <div class="service-description">List of government holidays.</div>
+        </a>
+    </div>
+    <div id="noResults" class="no-results"><i class="bi bi-search" style="font-size:2rem;display:block;margin-bottom:0.5rem;"></i><p>No results found for your search query.</p><small class="text-muted">Try adjusting your filters or search terms.</small></div>
+
+    <footer><span>Copyright © All Rights Reserved to shamser.info.np</span></footer>
+</div>
+
+<!-- DASHBOARD CONTAINER -->
+<div class="dashboard-container" id="dashboardContainer">
+    <header class="dash-header">
+        <div class="dash-menu-toggle" id="dashMenuToggle"><i class="fas fa-bars"></i></div>
+        <div class="dash-logo"><i class="fas fa-graduation-cap"></i> IEMIS<span style="font-weight:400;color:#64748b;">Exam Tool</span></div>
+        <div class="dash-user-info">
+            <span id="dashUserDisplay" style="font-weight:500;">School Profile</span>
+            <span id="dashSessionTimer" class="dash-session-timer"></span>
+            <i class="fas fa-user-circle dash-profile-icon"></i>
+            <div class="dash-user-dropdown">
+                <a href="#" onclick="scrollToAccountManagement(); return false;"><i class="fas fa-user-cog"></i> View Account</a>
+                <a href="#" onclick="scrollToAccountManagement('changePassword'); return false;"><i class="fas fa-key"></i> Change Password</a>
+                <button onclick="scrollToAccountManagement('newUser');"><i class="fas fa-user-plus"></i> Register New User</button>
+                <button id="dashLogoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </div>
+    </header>
+    <div class="dash-content-wrapper">
+        <aside class="dash-sidebar" id="dashSidebar">
+            <div class="sidebar-brand">
+                <img src="https://media.tenor.com/dhfraztxBo8AAAAj/globe-joypixels.gif" alt="logo">
+                <span><a href="https://shamser.info.np/">shamser.info.np</a></span>
+            </div>
+            <nav>
+                <ul>
+                    <!-- Return Dashboard -->
+                    <li><a href="#" onclick="showDashboard(); return false;"><i class="fas fa-home"></i> Return Dashboard</a></li>
+                    <!-- CEHRD Public Dashboard -->
+                    <li><a href="#" onclick="openDashModal('https://emis.cehrd.gov.np/','CEHRD Public Dashboard'); return false;"><i class="fas fa-th-large"></i> CEHRD Public Dashboard</a></li>
+
+                    <!-- Class 6-12 -->
+                    <li>
+                        <button class="dash-toggle-submenu"><i class="fas fa-users"></i> Class 6-12 <i class="fas fa-chevron-down dash-arrow"></i></button>
+                        <ul class="dash-submenu">
+                            <!-- Student Information -->
+                            <li>
+                                <button class="dash-toggle-sub-submenu"><i class="fas fa-user-graduate"></i> Student Information <i class="fas fa-chevron-down dash-arrow"></i></button>
+                                <ul class="dash-sub-submenu">
+                                    <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Student%20Info%20Entry%20Form.html','Student Info Data Entry'); return false;">Student_Info Data Entry</a></li>
+                                    <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Update%20Student_info.html','Update Student Info'); return false;">Update Student_Info</a></li>
+                                </ul>
+                            </li>
+                            <!-- Exam Manage -->
+                            <li>
+                                <button class="dash-toggle-sub-submenu"><i class="fas fa-pencil-alt"></i> Exam Manage <i class="fas fa-chevron-down dash-arrow"></i></button>
+                                <ul class="dash-sub-submenu">
+                                    <!-- Pre-Manage -->
+                                    <li>
+                                        <button class="dash-toggle-sub-submenu"><i class="fas fa-clock"></i> Pre-Manage <i class="fas fa-chevron-down dash-arrow"></i></button>
+                                        <ul class="dash-sub-submenu">
+                                            <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Exam_Schedule.html','Exam Schedule'); return false;">Exam Schedule</a></li>
+                                            <li>
+                                                <button class="dash-toggle-sub-submenu"><i class="fas fa-id-card"></i> Entrance Card By Class <i class="fas fa-chevron-down dash-arrow"></i></button>
+                                                <ul class="dash-sub-submenu">
+                                                    <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Entrance%20Card2.html','Entrance Card 2 Page'); return false;">Two Page</a></li>
+                                                    <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Entrance%20Card4.html','Entrance Card 4 Page'); return false;">Four Page</a></li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <button class="dash-toggle-sub-submenu"><i class="fas fa-filter"></i> Entrance By Range <i class="fas fa-chevron-down dash-arrow"></i></button>
+                                                <ul class="dash-sub-submenu">
+                                                    <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Entrance%20Card2%20By%20Rang.html','Entrance Card 2 by Range'); return false;">Two Page</a></li>
+                                                    <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Entrance%20Card4%20By%20Rang.html','Entrance Card 4 by Range'); return false;">Four Page</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Markslip.html','Markslip'); return false;">Markslip</a></li>
+                                            <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Subject_Mapping.html','Subject Mapping'); return false;">Subject Mapping</a></li>
+                                        </ul>
+                                    </li>
+                                    <!-- Post-Manage -->
+                                    <li>
+                                        <button class="dash-toggle-sub-submenu"><i class="fas fa-edit"></i> Post-Manage <i class="fas fa-chevron-down dash-arrow"></i></button>
+                                        <ul class="dash-sub-submenu">
+                                            <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Transfer_InfoData.html','Copy Student Data'); return false;">Copy_Student_Data</a></li>
+                                            <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Mark%20Entry%20Form.html','Mark Entry Form'); return false;">Mark Entry Form</a></li>
+                                            <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Update%20Exam_info.html','Update Exam Info'); return false;">Update Exam Info</a></li>
+                                            <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Update_Mark.html','Update Mark'); return false;">Update Mark</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- Result Manage -->
+                            <li>
+                                <button class="dash-toggle-sub-submenu"><i class="fas fa-chart-bar"></i> Result Manage <i class="fas fa-chevron-down dash-arrow"></i></button>
+                                <ul class="dash-sub-submenu">
+                                    <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Mark%20Ledger.html','Mark Ledger'); return false;">Mark Ledger</a></li>
+                                    <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Grade%20Ledger.html','Grade Ledger System'); return false;">Grade Ledger System</a></li>
+                                    <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/ResultSheet(Passed).html','Result Sheet Passed'); return false;">Result Sheet (Passed)</a></li>
+                                    <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Result_Sheet_All.html','Result Sheet Passed'); return false;">Result_Sheet_All (>1.6)</a></li>
+                                    <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/GradeSheet%20By%20Range.html','Grade Sheet By Range'); return false;">Grade Sheet By Range</a></li>
+                                    <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Gradesheet%20Classwise.html','Grade Sheet Classwise'); return false;">Grade Sheet BY Class</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Transfer_InfoData.html','Copy Student Data'); return false;">Copy_Student_Data</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- CAS Class 1-5 -->
+                    <li>
+                        <button class="dash-toggle-submenu"><i class="fas fa-child"></i> CAS Class 1-5 <i class="fas fa-chevron-down dash-arrow"></i></button>
+                        <ul class="dash-submenu">
+                            <li>
+                                <button class="dash-toggle-sub-submenu"><i class="fas fa-user-graduate"></i> Student Information <i class="fas fa-chevron-down dash-arrow"></i></button>
+                                <ul class="dash-sub-submenu">
+                                    <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/CAS%201-5/Student_Info_%20Entry%20(CAS).html','Student Info Entry CAS'); return false;">Student Info Data Entry</a></li>
+                                    <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/CAS%201-5/Update_Student_Info%20%20CAS.html','Update Student Info CAS'); return false;">Update Student Info</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <button class="dash-toggle-sub-submenu"><i class="fas fa-pencil-alt"></i> Exam Manage <i class="fas fa-chevron-down dash-arrow"></i></button>
+                                <ul class="dash-sub-submenu">
+                                    <li>
+                                        <button class="dash-toggle-sub-submenu"><i class="fas fa-clock"></i> Pre-Manage <i class="fas fa-chevron-down dash-arrow"></i></button>
+                                        <ul class="dash-sub-submenu">
+                                            <li><a href="#" onclick="openDashModal('#','Exam Schedule CAS'); return false;">Exam Schedule</a></li>
+                                            <li>
+                                                <button class="dash-toggle-sub-submenu"><i class="fas fa-id-card"></i> Entrance Card  <i class="fas fa-chevron-down dash-arrow"></i></button>
+                                                <ul class="dash-sub-submenu">
+                                                    <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal Exam Management Information System/CAS 1-5/EntranceCard By Range CAS.html','Entrance By Rang'); return false;">Entrance By Rang</a></li>
+                                                    <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal Exam Management Information System/CAS 1-5/EntranceCardByClass.html','Entrance Card By class'); return false;">Entrance Card By class</a></li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <button class="dash-toggle-sub-submenu"><i class="fas fa-filter"></i> Gradesheet <i class="fas fa-chevron-down dash-arrow"></i></button>
+                                                <ul class="dash-sub-submenu">
+                                                    <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/GradeSheet%20By%20Range.html','Grade Sheet By Range CAS'); return false;">Grade Sheet By Range</a></li>
+                                                    <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal Exam Management Information System/CAS 1-5/Grade Sheet By Class.html','Grade Sheet Classwise CAS'); return false;">GradeSheet Classwise</a></li>
+                                                </ul>   
+                                            </li>
+                                            <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/CAS%201-5/Markslip(CAS).html','Markslip CAS'); return false;">Markslip</a></li>
+                                            <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/CAS%201-5/Subject%20Mapping%20(CAS).html','Subject Mapping CAS'); return false;">Subject Mapping</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <button class="dash-toggle-sub-submenu"><i class="fas fa-edit"></i> Post-Manage <i class="fas fa-chevron-down dash-arrow"></i></button>
+                                        <ul class="dash-sub-submenu">
+                                            <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/CAS%201-5/Transfer(CAS).html','Fetch Student Info CAS'); return false;">Fetch Info_Data</a></li>
+                                            <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/CAS%201-5/Mark%20Entry%20System%20(CAS).html','Mark Entry Form CAS'); return false;">Mark Entry Form</a></li>
+                                            <li><a href="#" onclick="openDashModal('#','Update Exam Info CAS'); return false;">Update Exam_Info</a></li>
+                                            <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/CAS%201-5/Marks%20Update%20Form%20(CAS).html','Update Mark CAS'); return false;">Update Mark</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <button class="dash-toggle-sub-submenu"><i class="fas fa-chart-bar"></i> Result Manage <i class="fas fa-chevron-down dash-arrow"></i></button>
+                                <ul class="dash-sub-submenu">
+                                    <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/CAS%201-5/Mark%20Ledger(CAS).html','Mark Ledger CAS'); return false;">Mark Ledger</a></li>
+                                    <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal Exam Management Information System/CAS 1-5/Grade Ledger (CAS).html','Grade Ledger System CAS'); return false;">Grade LedgerCAS</a></li>
+                                    <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal Exam Management Information System/CAS 1-5/Result Sheet (CAS).html','Result Sheet Passed CAS'); return false;">Result Sheet</a></li>
+                                    <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/GradeSheet%20By%20Range.html','Grade Sheet By Range CAS'); return false;">Grade Sheet By Range</a></li>
+                                    <li><a href="#" onclick="openDashModal('https://shamser.info.np/Internal Exam Management Information System/CAS 1-5/Grade Sheet By Class.html','Grade Sheet Classwise CAS'); return false;">GradeSheet Classwise</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#" onclick="openDashModal('#','Record Maintain CAS'); return false;"><i class="fas fa-archive"></i> Record Maintain</a></li>
+                        </ul>
+                    </li>
+
+                    <li style="margin-top:12px;border-top:1px solid #f1f5f9;padding-top:12px;">
+                        <button onclick="scrollToAccountManagement('newUser');" style="background:transparent;border:none;width:100%;text-align:left;padding:10px 16px;font-weight:500;border-radius:12px;display:flex;align-items:center;gap:12px;color:#334155;transition:0.2s;cursor:pointer;"><i class="fas fa-user-plus"></i> Register</button>
+                        <button id="dashLogoutBtnBottom" style="background:transparent;border:none;width:100%;text-align:left;padding:10px 16px;font-weight:500;border-radius:12px;display:flex;align-items:center;gap:12px;color:#334155;transition:0.2s;cursor:pointer;"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="dash-main-content">
+            <!-- IFRAME CONTAINER - Direct in main content -->
+            <div id="iframeContainer">
+                <div class="iframe-header">
+                    <span id="iframeTitle"><i class="fas fa-file-alt"></i> Content</span>
+                    <button onclick="closeIframe();">&times;</button>
+                </div>
+                <iframe id="mainIframe" src=""></iframe>
+            </div>      
+            <div class="full-modal-footer">
+                <button type="button" class="btn btn-secondary" id="fullModalFooterClose">Close</button>
+            </div>
+
+            <!-- ACCOUNT MANAGEMENT SECTION -->
+            <div id="accountManagementSection" class="account-container">
+                <div class="account-title">
+                    <h2>👤 User Account Management</h2>
+                    <p>Create new account or change your password</p>
+                </div>
+                <div class="account-tabs">
+                    <button class="account-tab active" onclick="showAccountSection('newUser',this)">➕ New User Account</button>
+                    <button class="account-tab" onclick="showAccountSection('changePassword',this)">🔑 Change Password</button>
+                </div>
+                <!-- New User -->
+                <div id="newUser" class="account-section active">
+                    <div class="account-card">
+                        <h3>➕ Create New User Account</h3>
+                        <div class="form-grid">
+                            <div class="form-group"><label>User Name</label><input type="text" id="newUsername" placeholder="Enter user name"></div>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <div class="password-wrapper">
+                                    <input type="password" id="newPassword" placeholder="Enter password">
+                                    <button type="button" class="show-password-btn" onclick="togglePassword('newPassword')">👁️</button>
+                                </div>
+                            </div>
+                            <div class="form-group"><label>Name</label><input type="text" id="newName" placeholder="Full name"></div>
+                            <div class="form-group"><label>Mobile Number</label><input type="tel" id="newMobile" placeholder="Mobile number"></div>
+                            <div class="form-group full"><label>School Name</label><input type="text" id="newSchool" placeholder="School name"></div>
+                        </div>
+                        <button class="account-btn" id="createUserBtn" onclick="createNewUser()">➕ Create Account</button>
+                        <div id="newUserMessage" class="account-message"></div>
+                    </div>
+                </div>
+                <!-- Change Password -->
+                <div id="changePassword" class="account-section">
+                    <div class="account-card">
+                        <h3>🔑 Change Password</h3>
+                        <div class="form-grid">
+                            <div class="form-group full"><label>User Name</label><input type="text" id="changeUsername" placeholder="Enter user name"></div>
+                            <div class="form-group full">
+                                <label>Current Password</label>
+                                <div class="password-wrapper">
+                                    <input type="password" id="currentPassword" placeholder="Current password">
+                                    <button type="button" class="show-password-btn" onclick="togglePassword('currentPassword')">👁️</button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>New Password</label>
+                                <div class="password-wrapper">
+                                    <input type="password" id="newChangePassword" placeholder="New password">
+                                    <button type="button" class="show-password-btn" onclick="togglePassword('newChangePassword')">👁️</button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Confirm New Password</label>
+                                <div class="password-wrapper">
+                                    <input type="password" id="confirmPassword" placeholder="Confirm password">
+                                    <button type="button" class="show-password-btn" onclick="togglePassword('confirmPassword')">👁️</button>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="account-btn btn-password" id="changePasswordBtn" onclick="changeUserPassword()">🔐 Change Password</button>
+                        <div id="passwordMessage" class="account-message"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Menu Class 1-12 -->
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px;">
+                <h5 style="font-weight:600;color:#0f172a;margin:0;"><i class="fas fa-bolt" style="color:#4f46e5;font-size:1.2rem;"></i> Quick menu</h5>
+                <span style="font-size:0.7rem;background:#eef2ff;color:#4f46e5;padding:2px 12px;border-radius:40px;font-weight:500;">shortcuts</span>
+            </div>
+            <div style="margin-bottom:0.5rem;font-weight:600;color:#0f172a;font-size:0.9rem;"><i class="fas fa-users" style="color:#4f46e5;"></i> Class 1-12</div>
+            <div class="dash-quick-menu-grid" id="quickMenuClass12">
+                <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Student%20Info%20Entry%20Form.html','Student Entry'); return false;"><i class="fas fa-user-plus"></i><span>Student Entry</span></a>
+                <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Transfer_InfoData.html','Transfer_InfoData'); return false;"><i class="fas fa-file-alt"></i><span>Transfer StdInfo</span></a>
+                <!-- Ledger Dropdown -->
+                <div class="dash-quick-menu-item dash-dropdown">
+                    <a href="#" class="dash-dropdown-toggle"><i class="fas fa-id-card"></i><span>Ledger <i class="fas fa-chevron-down dash-arrow"></i></span></a>
+                    <div class="dash-dropdown-menu">
+                        <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Mark%20Ledger.html','Mark Ledger'); return false;"><i class="fas fa-list-ul"></i> Mark Ledger</a>
+                        <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Grade%20Ledger.html','Grade Ledger'); return false;"><i class="fas fa-copy"></i> Grade Ledger</a>
+                    </div>
+                </div>
+                <!-- Entrance Card Dropdown -->
+                <div class="dash-quick-menu-item dash-dropdown">
+                    <a href="#" class="dash-dropdown-toggle"><i class="fas fa-id-card"></i><span>Entrance Card <i class="fas fa-chevron-down dash-arrow"></i></span></a>
+                    <div class="dash-dropdown-menu">
+                        <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Entrance%20Card2.html','Entrance Card 2 Page'); return false;">Two Page By Class</a>
+                        <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Entrance%20Card4.html','Entrance Card 4 Page'); return false;">Four Page By Class</a>
+                        <div class="dash-dropdown-divider"></div>
+                        <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Entrance%20Card2%20By%20Rang.html','Entrance Card 2 by Range'); return false;">Two Page By SymbolNo.</a>
+                        <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Entrance%20Card4%20By%20Rang.html','Entrance Card 4 by Range'); return false;">Four Page By SymbolNo</a>
+                    </div>
+                </div>
+                <!-- Grade Sheet Dropdown -->
+                <div class="dash-quick-menu-item dash-dropdown">
+                    <a href="#" class="dash-dropdown-toggle"><i class="fas fa-chart-bar"></i><span>Grade_Sheet <i class="fas fa-chevron-down dash-arrow"></i></span></a>
+                    <div class="dash-dropdown-menu">
+                        <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/GradeSheet%20By%20Range.html','Grade Sheet By Range'); return false;">Grade Sheet By Range</a>
+                        <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Gradesheet%20Classwise.html','Grade Sheet Classwise'); return false;">Grade Sheet Classwise</a>
+                    </div>
+                </div>
+                <!-- Update Dropdown -->
+                <div class="dash-quick-menu-item dash-dropdown">
+                    <a href="#" class="dash-dropdown-toggle"><i class="fas fa-edit"></i><span>Update <i class="fas fa-chevron-down dash-arrow"></i></span></a>
+                    <div class="dash-dropdown-menu">
+                        <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Update%20Student_info.html','Update Student Info'); return false;"> Update Student_Info</a>
+                        <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Update_Mark.html','Update Mark'); return false;">Update Mark</a>
+                        <div class="dash-dropdown-divider"></div>
+                        <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Exam_Schedule.html','Exam Schedule'); return false;"> Update Exam Schedule</a>
+                        <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Update%20Exam_info.html','Update Exam'); return false;">Update Exam</a>
+                    </div>
+                </div>
+                <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Mark%20Entry%20Form.html','Mark Entry'); return false;"><i class="fas fa-pen"></i><span>Mark Entry</span></a>            
+                <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Exam_Schedule.html','Exam Schedule'); return false;"><i class="fas fa-calendar-alt"></i><span>Exam Schedule</span></a>
+                <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/Subject_Mapping.html','Subject Mapping'); return false;"><i class="fa-chisel fa-regular fa-gear"></i><span>Subject Mapping</span></a>
+                <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/ResultSheet(Passed).html','Result Sheet'); return false;"><i class="fas fa-file-alt"></i><span>Result Sheet</span></a>
+                <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/','Record Maintain'); return false;"><i class="fas fa-archive"></i><span>Record Maintain</span></a>
+            </div>
+
+            <!-- Quick Menu CAS -->
+            <div style="margin:1rem 0 0.5rem;font-weight:600;color:#0f172a;font-size:0.9rem;"><i class="fas fa-child" style="color:#4f46e5;"></i> CAS Class 1-5</div>
+            <div class="dash-quick-menu-grid" id="quickMenuCAS">
+                <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/CAS%201-5/Student_Info_%20Entry%20(CAS).html','Student Entry CAS'); return false;"><i class="fas fa-user-plus"></i><span>Student Entry CAS</span></a>
+                <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/CAS%201-5/Mark%20Entry%20System%20(CAS).html','Mark Entry CAS'); return false;"><i class="fas fa-pen"></i><span>Mark Entry CAS</span></a>
+                <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/CAS%201-5/Markslip(CAS).html','Markslip CAS'); return false;"><i class="fas fa-file-alt"></i><span>Markslip CAS</span></a>
+                <!--Update Dropdown -->
+                <div class="dash-quick-menu-item dash-dropdown">
+                    <a href="#" class="dash-dropdown-toggle"><i class="fas fa-id-card"></i><span>Update0(Mark_Info) <i class="fas fa-chevron-down dash-arrow"></i></span></a>
+                    <div class="dash-dropdown-menu">
+                        <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/CAS%201-5/Marks%20Update%20Form%20(CAS).html','Update Mark CAS'); return false;"><i class="fas fa-list-ul"></i>Update Mark CAS</a>
+                        <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/CAS%201-5/Update_Student_Info%20%20CAS.html','Update Student_Info(CAS)'); return false;"><i class="fas fa-copy"></i> Update Student Info(CAS)</a>
+                    </div>
+                </div>
+                <!-- Ledger Dropdown -->
+                <div class="dash-quick-menu-item dash-dropdown">
+                    <a href="#" class="dash-dropdown-toggle"><i class="fas fa-id-card"></i><span>Ledger <i class="fas fa-chevron-down dash-arrow"></i></span></a>
+                    <div class="dash-dropdown-menu">
+                        <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/CAS%201-5/Mark%20Ledger(CAS).html','Mark Ledger CAS'); return false;"><i class="fas fa-list-ul"></i> Mark Ledger CAS</a>
+                        <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/CAS%201-5/Grade%20Ledger%20(CAS).html','Grade Ledger (CAS)'); return false;"><i class="fas fa-copy"></i> Grade Ledger (CAS)</a>
+                    </div>
+                </div>
+                <!-- Entrance Card Dropdown -->
+                <div class="dash-quick-menu-item dash-dropdown">
+                    <a href="#" class="dash-dropdown-toggle"><i class="fas fa-id-card"></i><span>Entrance Card <i class="fas fa-chevron-down dash-arrow"></i></span></a>
+                    <div class="dash-dropdown-menu">
+                        <a href="#" onclick="openDashModal('https://shamser.info.np/Internal Exam Management Information System/CAS 1-5/EntranceCardByClass.html','EntranceCard ByClass<'); return false;">EntranceCard ByClass</a>
+                        <div class="dash-dropdown-divider"></div>
+                        <a href="#" onclick="openDashModal('https://shamser.info.np/Internal Exam Management Information System/CAS 1-5/EntranceCard By Range CAS.html','EntranceCard ByRang'); return false;">EntranceCard ByRange</a>
+                    </div>
+                </div>
+                <!-- Grade Sheet Dropdown -->
+                <div class="dash-quick-menu-item dash-dropdown">
+                    <a href="#" class="dash-dropdown-toggle"><i class="fas fa-chart-bar"></i><span>Grade_Sheet <i class="fas fa-chevron-down dash-arrow"></i></span></a>
+                    <div class="dash-dropdown-menu">
+                        <a href="#" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/GradeSheet%20By%20Range.html','GradeSheet ByRange'); return false;">GradeSheet ByRange</a>
+                        <a href="#" onclick="openDashModal('https://shamser.info.np/Internal Exam Management Information System/CAS 1-5/Grade Sheet By Class.html','GradeSheet ByClass'); return false;">GradeSheet ByClass</a>
+                    </div>
+                </div>
+                <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/CAS%201-5/Subject%20Mapping%20(CAS).html','Subject Mapping CAS'); return false;"><i class="fas fa-map"></i><span>Subject Mapping CAS</span></a>
+                <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/CAS%201-5/Transfer(CAS).html','Transfer Std_Info CAS'); return false;"><i class="fas fa-exchange-alt"></i><span>Transfer Std_Info CAS</span></a>
+                <a href="#" class="dash-quick-menu-item" onclick="openDashModal('https://shamser.info.np/Internal Exam Management Information System/CAS 1-5/Result Sheet (CAS).html','Result Sheet'); return false;"><i class="fas fa-file-alt"></i><span>Result Sheet</span></a>
+            </div>
+
+            <!-- STATS CARDS -->
+            <div class="dash-stats-cards">
+                <div class="dash-card"><h3><i class="fas fa-school"></i> SCHOOLS</h3><div class="dash-chart-container"><canvas id="schoolChart"></canvas></div></div>
+                <div class="dash-card"><h3><i class="fas fa-user-graduate"></i> ENROLLMENT</h3><div class="dash-chart-container"><canvas id="studentChart"></canvas></div></div>
+            </div>
+            <div class="dash-footer">©copy 2025 shamser.info.np · IEMIS</div>
+        </main>
+    </div>
+</div>
+
+<!-- SERVICE MODAL - Fullscreen, Login Bina Khulne -->
+<div class="service-modal-overlay" id="serviceModal">
+    <div class="service-modal-box">
+        <div class="service-modal-header">
+            <h5 id="serviceModalTitle"><i class="fas fa-cog"></i> Service</h5>
+            <button class="service-modal-close" onclick="closeServiceModal();">&times;</button>
+        </div>
+        <div class="service-modal-body">
+            <div class="service-loading-spinner" id="serviceModalLoading">
+                <div class="spinner-border text-primary" style="width:3rem;height:3rem;"></div>
+                <p class="mt-3" style="color:#64748b;">Loading content...</p>
+            </div>
+            <iframe id="serviceModalFrame" src=""></iframe>
+        </div>
+    </div>
+</div>
+
+<!-- NEW LOGIN OVERLAY -->
+<div class="login-overlay" id="loginModal">
+    <button class="close-login" id="closeLoginModal">&times;</button>
+    <div class="container">
+        <!-- LEFT PANEL : brand & contact -->
+        <div class="left-panel">
+            <img width="65" height="65" src="https://media.tenor.com/dhfraztxBo8AAAAj/globe-joypixels.gif" alt="IEMIS Logo">
+            <h2>एकिकृत परीक्षा तथा सूचना प्रणाली IEMIS</h2>
+            <div class="contact-info">
+                <p><i class="fas fa-phone"></i> Support: <a href="tel:9817826200">+977 9817826200</a></p>
+                <p><i class="fas fa-envelope"></i> Send in: <a href="mailto:shamserpulami500@gmail.com">info@shamser.info.np</a></p>
+                <p><i class="fas fa-globe"></i> Visit: <a href="https://shamser.info.np">shamser.info.np</a></p>
+                <p><i class="fa-solid fa-users"></i> Stay with: social media</p>
+            </div>
+            <div class="media-buttons">
+                <a href="https://www.facebook.com/" style="background: #4267b2" class="link"><i class="bx bxl-facebook"></i></a>
+                <a href="https://twitter.com/shamser_info" style="background: #1da1f2" class="link"><i class="bx bxl-twitter"></i></a>
+                <a href="https://lauro-media.blogspot.com/" style="background: #e1306c" class="link"><i class="bx bxl-blogger"></i></a>
+                <a href="https://www.youtube.com/channel/UCfGP1pKJErzg10EjftyC3lg?sub_confirmation=1" style="background: #ff0000" class="link"><i class="bx bxl-youtube"></i></a>
+            </div>
+        </div>
+        <!-- RIGHT PANEL : login form -->
+        <div class="right-panel">
+            <div id="DivLogin">
+                <div class="text-center mb-3">
+                    <h5 class="card-header mycolor rounded-3">Login account</h5>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text"><i class="fas fa-user me-1"></i> User Name*</span>
+                    <input type="text" class="form-control" id="loginUsername" placeholder="Enter Username" onchange="clearLoginMessage()">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text"><i class="fas fa-lock me-1"></i> Password*</span>
+                    <input type="password" class="form-control" id="loginPassword" placeholder="Enter Password" onchange="clearLoginMessage()">
+                </div>
+                <div class="show-password">
+                    <input type="checkbox" id="showPassCheck" onclick="toggleLoginPassword()">
+                    <label for="showPassCheck">Show Password</label>
+                </div>
+                <div id="loginError" class="alert alert-danger" style="display:none" role="alert"></div>
+                <div id="loginSuccess" class="alert alert-success" style="display:none" role="alert"></div>
+                <button type="button" onclick="loginUser()" class="btn btn-primary float-end px-5 text-white" id="loginSubmitBtn">Login</button>
+                <div class="register-row text-center mt-4 clearfix">
+                    <span>Don't have an account?</span>
+                    <button type="button" class="btn btn-link" onclick="handleRegisterClick()">Register New Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    (function() {
+        "use strict";
+
+        // --- Live Clock ---
+        function updateClock() {
+            const now = new Date();
+            const h = String(now.getHours()).padStart(2, '0');
+            const m = String(now.getMinutes()).padStart(2, '0');
+            const s = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('liveClock').innerHTML = `<i class="bi bi-clock"></i> ${h}:${m}:${s}`;
+        }
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        // --- Geo Data ---
+        const geoData = {
+            "Koshi": { districts: ["Morang","Jhapa","Sunsari","Dhankuta","Bhojpur","Terhathum","Sankhuwasabha","Solukhumbu","Okhaldhunga","Khotang"], municipalities: { "Morang":["Biratnagar","Sundar Haraincha","Ratuwamai","Katahari"], "Jhapa":["Bhadrapur","Damak","Mechinagar","Gauradaha"], "Sunsari":["Itahari","Dharan","Inaruwa","Duhabi"] } },
+            "Madhesh": { districts: ["Sarlahi","Mahottari","Dhanusha","Siraha","Saptari","Rautahat","Bara","Parsa"], municipalities: { "Sarlahi":["Malangwa","Lalbandi","Balara","Hariwan"], "Mahottari":["Jaleshwor","Bardibas","Manara","Bhagaha"], "Dhanusha":["Janakpur","Sabaila","Dhanushadham","Mithila"] } },
+            "Bagamati": { districts: ["Kathmandu","Lalitpur","Bhaktapur","Makwanpur","Chitwan","Nuwakot","Rasuwa","Dhading","Sindhupalchok","Kavre"], municipalities: { "Kathmandu":["Kathmandu Met.","Kirtipur","Tokha","Budhanilkantha"], "Lalitpur":["Lalitpur Sub-Met.","Mahalaxmi","Godawari","Bagmati"], "Bhaktapur":["Bhaktapur Mun.","Madhyapur Thimi","Changunarayan","Suryabinayak"] } },
+            "Gandaki": { districts: ["Kaski","Tanahun","Lamjung","Gorkha","Manang","Mustang","Myagdi","Nawalparasi","Syangja","Parbat"], municipalities: { "Kaski":["Pokhara Met.","Machhapuchchhre","Madi","Rupa"], "Tanahun":["Bhanu","Byas","Bandipur","Dumre"], "Lamjung":["Besisahar","Rainas","Dordi","Marsyangdi"] } },
+            "Lumbini": { districts: ["Rupandehi","Kapilvastu","Nawalparasi","Gulmi","Palpa","Arghakhanchi","Rolpa","Pyuthan","Dang","Banke"], municipalities: { "Rupandehi":["Butwal Sub-Met.","Devdaha","Siddharthanagar","Lumbini"], "Kapilvastu":["Kapilvastu","Krishnanagar","Shivaraj","Buddhabhumi"], "Dang":["Ghorahi","Tulsipur","Lamahi","Gadhawa"] } },
+            "Karnali": { districts: ["Surkhet","Banke","Bardiya","Dolpa","Jumla","Kalikot","Mugu","Humla","Rukum","Salyan"], municipalities: { "Surkhet":["Birendranagar","Gurbhakot","Bheriganga","Chaukune"], "Jumla":["Chandannath","Patarasi","Tila","Guthichaur"], "Dolpa":["Tripura Sundari","Shey Phoksundo","Thuli Bheri"] } },
+            "Sudurpashchim": { districts: ["Kailali","Kanchanpur","Doti","Achham","Bajhang","Bajura","Dadeldhura","Baitadi","Darchula"], municipalities: { "Kailali":["Dhangadhi Sub-Met.","Lamki Chuha","Tikapur","Ghodi Ghodi"], "Kanchanpur":["Bhimdatta Mun.","Bedkot","Belauri","Shuklaphanta"], "Doti":["Dipayal Silgadhi","Purbichauki","Sayal","Bogtan"] } }
+        };
+
+        const provinceSel = document.getElementById('searchProvince');
+        const districtSel = document.getElementById('searchDistrict');
+        const municipalitySel = document.getElementById('searchMunicipality');
+        const schoolInput = document.getElementById('searchSchool');
+        const yearSel = document.getElementById('searchYear');
+
+        function populateProvinces() {
+            const provs = Object.keys(geoData);
+            provs.forEach(p => {
+                const opt = document.createElement('option');
+                opt.value = p;
+                opt.textContent = p;
+                provinceSel.appendChild(opt);
+            });
+        }
+        populateProvinces();
+
+        provinceSel.addEventListener('change', function() {
+            const prov = this.value;
+            districtSel.innerHTML = '<option value="">🏢 District</option>';
+            municipalitySel.innerHTML = '<option value="">🏘️ Municipality</option>';
+            if (prov && geoData[prov]) {
+                const dists = geoData[prov].districts;
+                dists.forEach(d => {
+                    const opt = document.createElement('option');
+                    opt.value = d;
+                    opt.textContent = d;
+                    districtSel.appendChild(opt);
+                });
+            }
+        });
+
+        districtSel.addEventListener('change', function() {
+            const prov = provinceSel.value;
+            const dist = this.value;
+            municipalitySel.innerHTML = '<option value="">🏘️ Municipality</option>';
+            if (prov && dist && geoData[prov] && geoData[prov].municipalities && geoData[prov].municipalities[dist]) {
+                const muns = geoData[prov].municipalities[dist];
+                muns.forEach(m => {
+                    const opt = document.createElement('option');
+                    opt.value = m;
+                    opt.textContent = m;
+                    municipalitySel.appendChild(opt);
+                });
+            }
+        });
+
+        // --- Search ---
+        const searchBtn = document.getElementById('searchBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const resultCountText = document.getElementById('resultCountText');
+        const searchQueryDisplay = document.getElementById('searchQueryDisplay');
+        const searchResultsInfo = document.getElementById('searchResultsInfo');
+        const noResults = document.getElementById('noResults');
+        const allCards = document.querySelectorAll('.filterable-card');
+
+        function performSearch() {
+            const schoolQuery = schoolInput.value.trim().toLowerCase();
+            const province = provinceSel.value.toLowerCase();
+            const district = districtSel.value.toLowerCase();
+            const municipality = municipalitySel.value.toLowerCase();
+            const year = yearSel.value;
+
+            let queryParts = [];
+            if (schoolQuery) queryParts.push(`"${schoolInput.value}"`);
+            if (province) queryParts.push(province);
+            if (district) queryParts.push(district);
+            if (municipality) queryParts.push(municipality);
+            if (year) queryParts.push(`Year ${year}`);
+            const displayQuery = queryParts.length > 0 ? queryParts.join(' · ') : 'All items';
+            searchQueryDisplay.textContent = displayQuery;
+
+            let visibleCount = 0;
+            allCards.forEach(card => {
+                const keywords = (card.dataset.keywords || '').toLowerCase();
+                const textContent = card.textContent.toLowerCase();
+                let matches = true;
+                if (schoolQuery && !textContent.includes(schoolQuery) && !keywords.includes(schoolQuery)) matches = false;
+                if (province && !keywords.includes(province) && !textContent.includes(province)) matches = false;
+                if (district && !keywords.includes(district) && !textContent.includes(district)) matches = false;
+                if (municipality && !keywords.includes(municipality) && !textContent.includes(municipality)) matches = false;
+                if (year && !textContent.includes(year)) matches = false;
+                if (matches) { card.classList.remove('filter-hidden'); visibleCount++; } else { card.classList.add('filter-hidden'); }
+            });
+
+            if (visibleCount === 0 && (schoolQuery || province || district || municipality || year)) {
+                noResults.style.display = 'block';
+                resultCountText.textContent = 'Found 0 results';
+            } else {
+                noResults.style.display = 'none';
+                resultCountText.textContent = `Found ${visibleCount} result${visibleCount !== 1 ? 's' : ''}`;
+            }
+
+            if (schoolQuery || province || district || municipality || year) {
+                searchResultsInfo.style.display = 'block';
+                clearBtn.style.display = 'inline-block';
+            } else {
+                searchResultsInfo.style.display = 'none';
+                clearBtn.style.display = 'none';
+                allCards.forEach(c => c.classList.remove('filter-hidden'));
+                noResults.style.display = 'none';
+                resultCountText.textContent = `Showing all ${allCards.length} items`;
+            }
+            searchBtn.innerHTML = '<i class="bi bi-search"></i> Search';
+        }
+
+        searchBtn.addEventListener('click', function(e) { e.preventDefault(); this.innerHTML = '<i class="bi bi-arrow-repeat"></i> Searching...'; setTimeout(performSearch, 300); });
+        clearBtn.addEventListener('click', function() { schoolInput.value = ''; provinceSel.value = ''; districtSel.value = ''; municipalitySel.value = ''; yearSel.value = ''; performSearch(); });
+        schoolInput.addEventListener('keydown', function(e) { if (e.key === 'Enter') { e.preventDefault(); searchBtn.click(); } });
+        [provinceSel, districtSel, municipalitySel, yearSel].forEach(sel => sel.addEventListener('change', function() { searchBtn.click(); }));
+
+        // --- Totals with API ---
+        const els = { mun: document.getElementById('totalMun'), schools: document.getElementById('totalSchools'), students: document.getElementById('totalStudents'), teachers: document.getElementById('totalTeachers'), staff: document.getElementById('totalStaff') };
+        const apiStatus = document.getElementById('apiStatus');
+
+        function rand(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+
+        function updateTotals() {
+            let mun = parseInt(els.mun.textContent.replace(/,/g, '')) || 753;
+            mun = Math.max(740, Math.min(770, mun + rand(-1, 2)));
+            els.mun.textContent = mun.toLocaleString();
+            let schools = parseInt(els.schools.textContent.replace(/,/g, '')) || 38811;
+            schools = Math.max(38500, Math.min(39200, schools + rand(-3, 5)));
+            els.schools.textContent = schools.toLocaleString();
+            let students = parseInt(els.students.textContent.replace(/,/g, '')) || 7931329;
+            students = Math.max(7900000, Math.min(7950000, students + rand(-15, 25)));
+            els.students.textContent = students.toLocaleString();
+            let teachers = parseInt(els.teachers.textContent.replace(/,/g, '')) || 244281;
+            teachers = Math.max(243000, Math.min(246000, teachers + rand(-5, 8)));
+            els.teachers.textContent = teachers.toLocaleString();
+            let staff = parseInt(els.staff.textContent.replace(/,/g, '')) || 42797;
+            staff = Math.max(42000, Math.min(43500, staff + rand(-3, 6)));
+            els.staff.textContent = staff.toLocaleString();
+        }
+
+        async function fetchAPIData() {
+            try {
+                apiStatus.textContent = 'Loading...';
+                apiStatus.className = 'api-status loading';
+                
+                const response = await fetch('https://api.nepal.gov.np/api/education/stats', {
+                    method: 'GET',
+                    headers: { 'Accept': 'application/json' }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data) {
+                        if (data.schools) els.schools.textContent = data.schools.toLocaleString();
+                        if (data.students) els.students.textContent = data.students.toLocaleString();
+                        if (data.teachers) els.teachers.textContent = data.teachers.toLocaleString();
+                        if (data.municipalities) els.mun.textContent = data.municipalities.toLocaleString();
+                        if (data.staff) els.staff.textContent = data.staff.toLocaleString();
+                        apiStatus.textContent = '✅ Live Data';
+                        apiStatus.className = 'api-status online';
+                        console.log('✅ API Data fetched successfully:', data);
+                    }
+                } else {
+                    useFallbackData();
+                }
+            } catch (error) {
+                console.warn('⚠️ API Error, using fallback data:', error);
+                useFallbackData();
+            }
+        }
+
+        function useFallbackData() {
+            apiStatus.textContent = '';
+            apiStatus.className = 'api-status offline';
+            updateTotals();
+        }
+
+        setTimeout(fetchAPIData, 1000);
+        setInterval(updateTotals, 6000);
+
+        // --- Hero Images ---
+        const heroImages = [
+            "https://emis.cehrd.gov.np/assets/img/slider1.png",
+            "https://emis.cehrd.gov.np/assets/img/slider2.png",
+            "https://shamser.info.np/dimjanschool/images/slider/13.JPG",
+            "https://shamser.info.np/dimjanschool/images/slider/6.jpg",
+            "https://shamser.info.np/dimjanschool/images/slider/10.jpg",
+            "https://shamser.info.np/dimjanschool/images/slider/11.JPG",
+        ];
+        let currentImageIndex = 0;
+        const heroImg = document.getElementById('heroImage');
+
+        function rotateHeroImage() {
+            heroImg.classList.add('fade-out');
+            heroImg.classList.remove('fade-in');
+            setTimeout(() => {
+                currentImageIndex = (currentImageIndex + 1) % heroImages.length;
+                heroImg.src = heroImages[currentImageIndex];
+                heroImg.onerror = function() {
+                    this.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%23dce3f0'/%3E%3Ccircle cx='150' cy='100' r='60' fill='%230a2647' opacity='0.2'/%3E%3Cpath d='M120 80 L180 80 L180 130 L120 130 Z' fill='%23f4b11a' opacity='0.7'/%3E%3Crect x='100' y='140' width='100' height='20' fill='%230a2647' opacity='0.3'/%3E%3C/svg%3E";
+                };
+                heroImg.classList.remove('fade-out');
+                heroImg.classList.add('fade-in');
+            }, 1000);
+        }
+        heroImg.classList.add('fade-in');
+        setInterval(rotateHeroImage, 5000);
+
+        document.getElementById('exploreBtn').addEventListener('click', () => { schoolInput.value = 'dashboard'; searchBtn.click(); });
+        document.getElementById('aboutBtn').addEventListener('click', () => alert('ℹ️ IEMIS – Integrated Educational Management Information System \nDeveloped by shamser.info.np'));
+
+        // --- SERVICE MODAL - Fullscreen, Login Bina ---
+        window.openServiceModal = function(url, title) {
+            const modal = document.getElementById('serviceModal');
+            const iframe = document.getElementById('serviceModalFrame');
+            const titleEl = document.getElementById('serviceModalTitle');
+            const loading = document.getElementById('serviceModalLoading');
+            
+            loading.style.display = 'flex';
+            iframe.style.display = 'none';
+            iframe.src = '';
+            
+            titleEl.innerHTML = `<i class="fas fa-cog"></i> ${title || 'Service'}`;
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+            
+            setTimeout(function() {
+                iframe.src = url.replace(/ /g, '%20');
+            }, 300);
+            
+            return false;
+        };
+
+        document.getElementById('serviceModalFrame').addEventListener('load', function() {
+            document.getElementById('serviceModalLoading').style.display = 'none';
+            this.style.display = 'block';
+        });
+
+        document.getElementById('serviceModalFrame').addEventListener('error', function() {
+            document.getElementById('serviceModalLoading').style.display = 'none';
+            this.style.display = 'block';
+            this.srcdoc = '<html><body style="padding:40px;text-align:center;font-family:sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;"><h3 style="color:#d43f34;">⚠️ Unable to load content</h3><p style="color:#64748b;">The page could not be loaded. Please try again.</p><button onclick="closeServiceModal();" style="margin-top:20px;padding:10px 30px;background:#0a2647;color:#fff;border:none;border-radius:8px;cursor:pointer;">Close</button></body></html>';
+        });
+
+        window.closeServiceModal = function() {
+            document.getElementById('serviceModal').classList.remove('show');
+            document.getElementById('serviceModalFrame').src = '';
+            document.getElementById('serviceModalLoading').style.display = 'flex';
+            document.body.style.overflow = 'auto';
+        };
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeServiceModal();
+            }
+        });
+
+        document.getElementById('serviceModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeServiceModal();
+            }
+        });
+
+        // --- LOGIN / LOGOUT with localStorage persistence ---
+        const GAS_LOGIN_URL = "https://script.google.com/macros/s/AKfycbzbtXnFO8126M23XW7bF2IbyVk8Rh_aqJ8R8ydF4LcToHeCbJDjkKj0Ks6gyPiiCkcm/exec";
+        
+        const loginModal = document.getElementById('loginModal');
+        const loginBtn = document.getElementById('loginBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const closeLoginBtn = document.getElementById('closeLoginModal');
+        const loginError = document.getElementById('loginError');
+        const loginSuccess = document.getElementById('loginSuccess');
+        const loginSubmitBtn = document.getElementById('loginSubmitBtn');
+        const dashboardContainer = document.getElementById('dashboardContainer');
+        const app = document.getElementById('app');
+
+        let isUserLoggedIn = false;
+        let inactivityTimer = null,
+            sessionTimerInterval = null,
+            lastActivityTime = Date.now();
+        const INACTIVITY_TIMEOUT_MS = 30 * 60 * 1000;
+        const SESSION_KEY = 'iemis_session';
+
+        function saveSession(username) {
+            localStorage.setItem(SESSION_KEY, JSON.stringify({ username: username, loginTime: Date.now() }));
+        }
+
+        function getSession() {
+            try {
+                const data = localStorage.getItem(SESSION_KEY);
+                if (data) {
+                    const session = JSON.parse(data);
+                    if (Date.now() - session.loginTime < 24 * 60 * 60 * 1000) {
+                        return session;
+                    }
+                }
+            } catch (e) {}
+            return null;
+        }
+
+        function clearSession() { localStorage.removeItem(SESSION_KEY); }
+
+        function showToast(msg, isSuccess = true) {
+            const t = document.createElement('div');
+            t.className = 'session-toast';
+            t.style.background = isSuccess ? '#0a2647' : '#d43f34';
+            t.innerHTML = msg;
+            document.body.appendChild(t);
+            setTimeout(() => t.remove(), 4000);
+        }
+
+        function openLoginModal() {
+            loginModal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+            loginError.style.display = 'none';
+            loginSuccess.style.display = 'none';
+            loginSubmitBtn.disabled = false;
+            loginSubmitBtn.textContent = 'Login';
+        }
+
+        function closeLoginModalFn() {
+            loginModal.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        function performAutoLogout() {
+            if (!isUserLoggedIn) return;
+            logoutUser();
+            showToast("Session expired.", false);
+        }
+
+        function resetInactivityTimer() {
+            if (!isUserLoggedIn) return;
+            lastActivityTime = Date.now();
+            if (inactivityTimer) clearTimeout(inactivityTimer);
+            inactivityTimer = setTimeout(performAutoLogout, INACTIVITY_TIMEOUT_MS);
+        }
+
+        function updateSessionTimerDisplay() {
+            if (!isUserLoggedIn) return;
+            const left = Math.max(0, INACTIVITY_TIMEOUT_MS - (Date.now() - lastActivityTime));
+            const m = Math.floor(left / 60000);
+            const s = Math.floor((left % 60000) / 1000);
+            const el = document.getElementById('dashSessionTimer');
+            if (el) el.innerHTML = `<i class="fas fa-clock"></i> ${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        }
+
+        function startSessionTimerDisplay() {
+            if (sessionTimerInterval) clearInterval(sessionTimerInterval);
+            sessionTimerInterval = setInterval(updateSessionTimerDisplay, 1000);
+        }
+
+        function setupInactivityListeners() {
+            ['mousedown', 'mousemove', 'keydown', 'keypress', 'scroll', 'touchstart', 'click'].forEach(ev =>
+                document.addEventListener(ev, resetInactivityTimer, { passive: true })
+            );
+        }
+
+        function initSessionAfterLogin(username) {
+            isUserLoggedIn = true;
+            saveSession(username);
+            lastActivityTime = Date.now();
+            if (inactivityTimer) clearTimeout(inactivityTimer);
+            inactivityTimer = setTimeout(performAutoLogout, INACTIVITY_TIMEOUT_MS);
+            startSessionTimerDisplay();
+            setupInactivityListeners();
+            document.getElementById('dashUserDisplay').textContent = username;
+        }
+
+        function showDashboard() {
+            document.getElementById('app').style.display = 'none';
+            dashboardContainer.style.display = 'flex';
+            if (typeof Chart !== 'undefined') {
+                if (document.getElementById('schoolChart')) new Chart(document.getElementById('schoolChart'), {
+                    type: 'bar',
+                    data: { labels: ['Kathmandu', 'Pokhara', 'Lalitpur', 'Bhaktapur', 'Biratnagar'], datasets: [{ label: 'Schools', data: [1200, 800, 600, 400, 300], backgroundColor: '#4f46e5', borderRadius: 8 }] },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+                });
+                if (document.getElementById('studentChart')) new Chart(document.getElementById('studentChart'), {
+                    type: 'line',
+                    data: { labels: ['2019', '2020', '2021', '2022', '2023'], datasets: [{ label: 'Enrollment', data: [1000, 1050, 1100, 1150, 1200], borderColor: '#4f46e5', tension: 0.2, fill: false }] },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+                });
+            }
+            resetInactivityTimer();
+        }
+
+        function logoutUser() {
+            isUserLoggedIn = false;
+            clearSession();
+            if (sessionTimerInterval) clearInterval(sessionTimerInterval);
+            if (inactivityTimer) clearTimeout(inactivityTimer);
+            dashboardContainer.style.display = 'none';
+            document.getElementById('app').style.display = 'block';
+            loginBtn.style.display = 'inline-block';
+            logoutBtn.style.display = 'none';
+            showToast('👋 Logged out.', false);
+        }
+
+        function clearLoginMessage() {
+            loginError.style.display = 'none';
+            loginSuccess.style.display = 'none';
+        }
+
+        function toggleLoginPassword() {
+            const passField = document.getElementById('loginPassword');
+            const check = document.getElementById('showPassCheck');
+            passField.type = check.checked ? 'text' : 'password';
+        }
+
+        function loginUser() {
+            const username = document.getElementById('loginUsername').value.trim();
+            const password = document.getElementById('loginPassword').value.trim();
+            loginError.style.display = 'none';
+            loginSuccess.style.display = 'none';
+            loginSubmitBtn.disabled = true;
+            loginSubmitBtn.textContent = 'Signing in...';
+
+            // Demo fallback for testing
+            if (username === 'demo' && password === '123') {
+                loginSuccess.style.display = 'block';
+                loginSuccess.textContent = '✅ Login successful! Redirecting...';
+                setTimeout(() => {
+                    closeLoginModalFn();
+                    loginSubmitBtn.disabled = false;
+                    loginSubmitBtn.textContent = 'Login';
+                    loginBtn.style.display = 'none';
+                    logoutBtn.style.display = 'inline-block';
+                    showToast('✅ Welcome, demo!');
+                    initSessionAfterLogin('demo');
+                    showDashboard();
+                }, 600);
+                return;
+            }
+
+            // Real API call
+            fetch(GAS_LOGIN_URL, {
+                method: "POST",
+                headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify({ action: "login", username, password })
+            }).then(r => r.text()).then(t => {
+                try {
+                    const d = JSON.parse(t);
+                    if (d.status === "success") {
+                        loginSuccess.style.display = 'block';
+                        loginSuccess.textContent = '✅ Login successful! Redirecting...';
+                        setTimeout(() => {
+                            closeLoginModalFn();
+                            loginSubmitBtn.disabled = false;
+                            loginSubmitBtn.textContent = 'Login';
+                            loginBtn.style.display = 'none';
+                            logoutBtn.style.display = 'inline-block';
+                            showToast('✅ Welcome, ' + username + '!');
+                            initSessionAfterLogin(username);
+                            showDashboard();
+                        }, 600);
+                    } else {
+                        throw new Error(d.message || 'Invalid credentials');
+                    }
+                } catch (e) {
+                    loginError.style.display = 'block';
+                    loginError.textContent = '❌ ' + (e.message || 'Server error. Please try again.');
+                    loginSubmitBtn.disabled = false;
+                    loginSubmitBtn.textContent = 'Login';
+                    showToast('❌ Login failed.', false);
+                }
+            }).catch(err => {
+                loginError.style.display = 'block';
+                loginError.textContent = '❌ Connection error. Please try again.';
+                loginSubmitBtn.disabled = false;
+                loginSubmitBtn.textContent = 'Login';
+                showToast('❌ Login failed.', false);
+            });
+        }
+
+        function handleRegisterClick() {
+            closeLoginModalFn();
+            // After login, show dashboard and scroll to account management
+            if (!isUserLoggedIn) {
+                openLoginModal();
+                return;
+            }
+            scrollToAccountManagement('newUser');
+        }
+
+        function scrollToAccountManagement(tab) {
+            const section = document.getElementById('accountManagementSection');
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                if (tab === 'newUser' || tab === 'changePassword') {
+                    const tabs = document.querySelectorAll('.account-tab');
+                    const sections = {
+                        'newUser': document.getElementById('newUser'),
+                        'changePassword': document.getElementById('changePassword')
+                    };
+                    tabs.forEach((t, index) => {
+                        if ((index === 0 && tab === 'newUser') || (index === 1 && tab === 'changePassword')) {
+                            t.classList.add('active');
+                        } else {
+                            t.classList.remove('active');
+                        }
+                    });
+                    Object.keys(sections).forEach(key => {
+                        if (key === tab) {
+                            sections[key].classList.add('active');
+                        } else {
+                            sections[key].classList.remove('active');
+                        }
+                    });
+                }
+            }
+        }
+
+        function checkExistingSession() {
+            const session = getSession();
+            if (session) {
+                isUserLoggedIn = true;
+                loginBtn.style.display = 'none';
+                logoutBtn.style.display = 'inline-block';
+                document.getElementById('dashUserDisplay').textContent = session.username;
+                initSessionAfterLogin(session.username);
+                showDashboard();
+                showToast('🔄 Session restored. Welcome back!', true);
+                return true;
+            }
+            return false;
+        }
+
+        // --- IFRAME DIRECT IN MAIN CONTENT ---
+        window.openDashModal = function(url, title) {
+            if (!isUserLoggedIn) {
+                openLoginModal();
+                return false;
+            }
+            resetInactivityTimer();
+
+            const iframeContainer = document.getElementById('iframeContainer');
+            const iframe = document.getElementById('mainIframe');
+            const titleEl = document.getElementById('iframeTitle');
+            
+            titleEl.innerHTML = `<i class="fas fa-file-alt"></i> ${title || 'Content'}`;
+            iframeContainer.style.display = 'block';
+            iframe.src = url.replace(/ /g, '%20');
+
+            iframeContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            if (window.innerWidth <= 992) {
+                document.getElementById('dashSidebar').classList.remove('active');
+            }
+            return false;
+        };
+
+        window.closeIframe = function() {
+            const iframeContainer = document.getElementById('iframeContainer');
+            const iframe = document.getElementById('mainIframe');
+            if (iframeContainer) iframeContainer.style.display = 'none';
+            if (iframe) iframe.src = '';
+        };
+
+        window.showDashboard = function() {
+            closeIframe();
+            resetInactivityTimer();
+            return false;
+        };
+
+        // --- Sidebar Toggle ---
+        document.getElementById('dashMenuToggle').addEventListener('click', function() {
+            document.getElementById('dashSidebar').classList.toggle('active');
+        });
+
+        // --- Submenu toggles ---
+        document.querySelectorAll('.dash-toggle-submenu').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const sub = this.nextElementSibling;
+                const arrow = this.querySelector('.dash-arrow');
+                if (sub) { sub.classList.toggle('expanded'); if (arrow) arrow.classList.toggle('rotated'); }
+            });
+        });
+        document.querySelectorAll('.dash-toggle-sub-submenu').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                const sub = this.nextElementSibling;
+                const arrow = this.querySelector('.dash-arrow');
+                if (sub) { sub.classList.toggle('expanded'); if (arrow) arrow.classList.toggle('rotated'); }
+            });
+        });
+
+        // --- Event Listeners for Login ---
+        loginBtn.addEventListener('click', openLoginModal);
+        closeLoginBtn.addEventListener('click', closeLoginModalFn);
+        loginModal.addEventListener('click', function(e) { if (e.target === this) closeLoginModalFn(); });
+        document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && loginModal.classList.contains('show')) closeLoginModalFn(); });
+        logoutBtn.addEventListener('click', logoutUser);
+        document.getElementById('dashLogoutBtn').addEventListener('click', logoutUser);
+        document.getElementById('dashLogoutBtnBottom').addEventListener('click', logoutUser);
+
+        // --- Account Management Functions ---
+        function showAccountSection(sectionId, button) {
+            document.querySelectorAll(".account-section").forEach(section => section.classList.remove("active"));
+            document.querySelectorAll(".account-tab").forEach(tab => tab.classList.remove("active"));
+            document.getElementById(sectionId).classList.add("active");
+            button.classList.add("active");
+        }
+
+        function togglePassword(id) {
+            const input = document.getElementById(id);
+            if (input.type === "password") { input.type = "text"; } else { input.type = "password"; }
+        }
+
+        async function callGAS(data) {
+            const response = await fetch(GAS_LOGIN_URL, {
+                method: "POST",
+                headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify(data)
+            });
+            return await response.json();
+        }
+
+        async function createNewUser() {
+            const username = document.getElementById("newUsername").value.trim();
+            const password = document.getElementById("newPassword").value;
+            const name = document.getElementById("newName").value.trim();
+            const mobile = document.getElementById("newMobile").value.trim();
+            const school = document.getElementById("newSchool").value.trim();
+            const message = document.getElementById("newUserMessage");
+            const button = document.getElementById("createUserBtn");
+
+            if (!username || !password || !name || !mobile || !school) {
+                showMessage(message, "Please fill all fields.", false);
+                return;
+            }
+            if (password.length < 4) {
+                showMessage(message, "Password must be at least 4 characters.", false);
+                return;
+            }
+
+            button.disabled = true;
+            button.textContent = "Creating...";
+            try {
+                const result = await callGAS({
+                    action: "createUser",
+                    username, password, name,
+                    mobileNumber: mobile,
+                    schoolName: school
+                });
+                if (result.status === "success") {
+                    showMessage(message, "✅ User account created successfully.", true);
+                    document.getElementById("newUsername").value = "";
+                    document.getElementById("newPassword").value = "";
+                    document.getElementById("newName").value = "";
+                    document.getElementById("newMobile").value = "";
+                    document.getElementById("newSchool").value = "";
+                } else {
+                    showMessage(message, "❌ " + result.message, false);
+                }
+            } catch (error) {
+                showMessage(message, "❌ Connection error.", false);
+                console.error(error);
+            }
+            button.disabled = false;
+            button.textContent = "➕ Create Account";
+        }
+
+        async function changeUserPassword() {
+            const username = document.getElementById("changeUsername").value.trim();
+            const currentPassword = document.getElementById("currentPassword").value;
+            const newPassword = document.getElementById("newChangePassword").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+            const message = document.getElementById("passwordMessage");
+            const button = document.getElementById("changePasswordBtn");
+
+            if (!username || !currentPassword || !newPassword || !confirmPassword) {
+                showMessage(message, "Please fill all fields.", false);
+                return;
+            }
+            if (newPassword !== confirmPassword) {
+                showMessage(message, "❌ New passwords do not match.", false);
+                return;
+            }
+            if (newPassword.length < 4) {
+                showMessage(message, "Password must be at least 4 characters.", false);
+                return;
+            }
+
+            button.disabled = true;
+            button.textContent = "Changing...";
+            try {
+                const result = await callGAS({
+                    action: "changePassword",
+                    username,
+                    currentPassword,
+                    newPassword
+                });
+                if (result.status === "success") {
+                    showMessage(message, "✅ Password changed successfully.", true);
+                    document.getElementById("currentPassword").value = "";
+                    document.getElementById("newChangePassword").value = "";
+                    document.getElementById("confirmPassword").value = "";
+                } else {
+                    showMessage(message, "❌ " + result.message, false);
+                }
+            } catch (error) {
+                showMessage(message, "❌ Connection error.", false);
+                console.error(error);
+            }
+            button.disabled = false;
+            button.textContent = "🔐 Change Password";
+        }
+
+        function showMessage(element, text, success) {
+            element.textContent = text;
+            element.className = "account-message " + (success ? "success" : "error");
+        }
+
+        // --- Fix: Add click listener for footer close button ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const footerCloseBtn = document.getElementById('fullModalFooterClose');
+            if (footerCloseBtn) {
+                footerCloseBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    closeIframe();
+                });
+                console.log('Footer close button attached successfully');
+            }
+            // Also add listener for the X button
+            const closeXBtn = document.querySelector('.iframe-header button');
+            if (closeXBtn) {
+                closeXBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    closeIframe();
+                });
+            }
+            // Ensure account management is visible
+            document.getElementById('accountManagementSection').style.display = 'block';
+        });
+
+        // Expose functions to global scope
+        window.showAccountSection = showAccountSection;
+        window.togglePassword = togglePassword;
+        window.createNewUser = createNewUser;
+        window.changeUserPassword = changeUserPassword;
+        window.scrollToAccountManagement = scrollToAccountManagement;
+        window.handleRegisterClick = handleRegisterClick;
+        window.loginUser = loginUser;
+        window.toggleLoginPassword = toggleLoginPassword;
+        window.clearLoginMessage = clearLoginMessage;
+
+        // --- CHECK EXISTING SESSION ON LOAD ---
+        checkExistingSession();
+
+        console.log('✅ IEMIS Live Portal - Fullscreen Service Modal, New Login UI, Account Management Integrated');
+    })();
+</script>
+</body>
+</html>
