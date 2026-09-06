@@ -806,22 +806,19 @@
         <span class="tag">#नेपाल</span>
     </div>
 </main>
+    <!-- =========================================
+         TAGS JS
+========================================= -->
 <script>
 document.querySelectorAll('.tag').forEach(tag => {
   tag.addEventListener('click', function() {
-    const searchTerm = this.textContent.trim();
-    // Option 1: Filter page content
-    filterContent(searchTerm);
-        // Option 2: Redirect to search page
-    // window.location.href = '/search?q=' + encodeURIComponent(searchTerm);
-        // Option 3: Show alert (for testing)
-    alert('Filtering by: ' + searchTerm);
+    // Extract tag text and remove '#' or ' ' if present
+    const searchTerm = this.textContent.trim().replace(/^#/, '');
+    
+    // Redirect to TikTok search page
+    window.location.href = `https://www.tiktok.com/tag/${encodeURIComponent(searchTerm)}`;
   });
 });
-function filterContent(term) {
-  // Your filtering logic here
-  console.log('Filtering:', term);
-}
 </script>
 <!-- =========================================
      FOOTER
