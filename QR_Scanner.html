@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>QR Code Scanner Online - ScanQR Clone</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css"/>
+    <!-- HTML5 QR Code Scanner Library -->
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+
+    <style>
+      :root {
+        --primary: #1a73e8;
+        --border: #dde8eb;
+        --bg-raised: #f1f3f4;
+      }
+      body {
+        background-color: #f8f9fa;
+        font-family: sans-serif;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      .tool-card {
+        background: #fff;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      }
+      .drop-zone {
+        border: 2px dashed var(--border);
+        border-radius: 8px;
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg-raised);
+        cursor: pointer;
+      }
+      .drop-zone:hover {
+        border-color: var(--primary);
+      }
+      #reader {
+        width: 100%;
+        background: #000;
+        border-radius: 8px;
+        overflow: hidden;
+        min-height: 220px;
+      }
+      .footer-info {
+        background: #ffffff;
+        border-top: 1px solid var(--border);
+      }
+      .footer-info a {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 500;
+      }
+      .footer-info a:hover {
+        text-decoration: underline;
+      }
+      .header-brand {
+        font-size: 1.5rem;
+        letter-spacing: -0.5px;
+      }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER with shamser.info.np + contact -->
+    <header>
+      <nav class="navbar navbar-light bg-white border-bottom py-3">
+        <div class="container d-flex flex-wrap align-items-center justify-content-between">
+          <a class="navbar-brand fw-bold text-primary header-brand d-flex align-items-center" href="#">
+            <i class="bi bi-qr-code-scan me-2"></i>ScanQR
+          </a>
+          <div class="d-flex flex-wrap align-items-center gap-3 mt-2 mt-sm-0">
+            <a href="https://shamser.info.np" target="_blank" class="text-decoration-none fw-semibold text-dark">
+              <i class="bi bi-globe2 me-1 text-primary"></i>shamser.info.np
+            </a>
+            <span class="text-muted d-none d-sm-inline">|</span>
+            <a href="tel:+9779844087012" class="text-decoration-none fw-semibold text-dark">
+              <i class="bi bi-telephone-fill me-1 text-primary"></i>9844087012
+            </a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- MAIN -->
+    <main class="container my-5 flex-grow-1">
+        <div class="text-center mb-4">
+            <h1 class="fw-bold">QR Code Scanner Online</h1>
+            <p class="text-muted">Upload an image or use your camera to scan a QR code.</p>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-lg-8">
+                <div class="tool-card p-4">
+                    
+                    <!-- Mode Tabs -->
+                    <ul class="nav nav-pills mb-3" id="scannerTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="img-tab" data-bs-toggle="tab" data-bs-target="#img-pane" type="button" role="tab"><i class="bi bi-qr-code-scan me-2"></i>Scan Image</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="cam-tab" data-bs-toggle="tab" data-bs-target="#cam-pane" type="button" role="tab" onclick="startCamera()"><i class="bi bi-camera me-2"></i>Camera</button>
+                        </li>
+                    </ul>
+
+                    <div class="row">
+                        <!-- Input Pane -->
+                        <div class="col-md-6 border-end">
+                            <div class="tab-content" id="scannerTabContent">
+                                <!-- Image Upload Tab -->
+                                <div class="tab-pane fade show active" id="img-pane" role="tabpanel">
+                                    <div class="drop-zone p-3 text-center" onclick="document.getElementById('file-input').click()">
+                                        <i class="bi bi-cloud-upload fs-1 text-primary"></i>
+                                        <p class="fw-bold mb-1">Click to Upload Image</p>
+                                        <small class="text-muted">PNG, JPG, WEBP</small>
+                                    </div>
+                                    <input type="file" id="file-input" accept="image/*" class="d-none" onchange="scanImage(this)">
+                                </div>
+                                <!-- Camera Tab -->
+                                <div class="tab-pane fade" id="cam-pane" role="tabpanel">
+                                    <div id="reader"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Result Pane -->
+                        <div class="col-md-6 d-flex flex-column justify-content-between mt-3 mt-md-0">
+                            <div>
+                                <h5>Scanned Result</h5>
+                                <div id="result-box" class="p-3 bg-light border rounded" style="min-height: 120px; word-break: break-all;">
+                                    <span class="text-muted">Scan a QR code to see results here…</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary w-100 mt-3" id="copy-btn" onclick="copyResult()" disabled>Copy Result</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER with shamser.info.np + contact -->
+    <footer class="footer-info py-4 mt-auto">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
+                    <span class="text-muted small">© 2025 ScanQR — All rights reserved.</span>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <span class="fw-semibold me-2">Connect:</span>
+                    <a href="https://shamser.info.np" target="_blank" class="me-3">
+                        <i class="bi bi-globe2 me-1"></i>shamser.info.np
+                    </a>
+                    <a href="tel:+9779844087012">
+                        <i class="bi bi-telephone-fill me-1"></i>9844087012
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const html5QrCode = new Html5Qrcode("reader");
+        let scannedText = "";
+
+        // File Scan Handler
+        function scanImage(input) {
+            if (input.files && input.files[0]) {
+                const imageFile = input.files[0];
+                html5QrCode.scanFile(imageFile, true)
+                    .then(decodedText => {
+                        showResult(decodedText);
+                    })
+                    .catch(err => {
+                        showResult("QR Code not found or unreadable.", true);
+                    });
+            }
+        }
+
+        // Camera Scan Handler
+        function startCamera() {
+            // If already scanning, stop first (prevents double start)
+            if (html5QrCode.isScanning) {
+                html5QrCode.stop().then(() => {
+                    startCamera();
+                }).catch(err => {
+                    console.warn("Stop before restart failed", err);
+                });
+                return;
+            }
+            html5QrCode.start(
+                { facingMode: "environment" },
+                { fps: 10, qrbox: { width: 250, height: 250 } },
+                (decodedText) => {
+                    showResult(decodedText);
+                    html5QrCode.stop();
+                },
+                (errorMessage) => { /* scanning... */ }
+            ).catch(err => {
+                showResult("Camera access denied or unavailable.", true);
+            });
+        }
+
+        function showResult(text, isError = false) {
+            const resultBox = document.getElementById("result-box");
+            const copyBtn = document.getElementById("copy-btn");
+            if(isError) {
+                resultBox.innerHTML = `<span class="text-danger">${text}</span>`;
+                copyBtn.disabled = true;
+                scannedText = "";
+            } else {
+                scannedText = text;
+                resultBox.innerText = text;
+                copyBtn.disabled = false;
+            }
+        }
+
+        function copyResult() {
+            if(scannedText) {
+                navigator.clipboard.writeText(scannedText).then(() => {
+                    alert("Copied to clipboard!");
+                }).catch(() => {
+                    // fallback
+                    const textarea = document.createElement('textarea');
+                    textarea.value = scannedText;
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textarea);
+                    alert("Copied to clipboard!");
+                });
+            }
+        }
+
+        // When tab switches away from camera, stop scanning
+        document.addEventListener('DOMContentLoaded', function() {
+            const camTab = document.getElementById('cam-tab');
+            const imgTab = document.getElementById('img-tab');
+            
+            // Stop camera when switching to image tab
+            imgTab.addEventListener('shown.bs.tab', function () {
+                if (html5QrCode.isScanning) {
+                    html5QrCode.stop().catch(err => console.log("Stop error:", err));
+                }
+            });
+
+            // Optional: stop camera when switching away from cam tab
+            camTab.addEventListener('hidden.bs.tab', function () {
+                if (html5QrCode.isScanning) {
+                    html5QrCode.stop().catch(err => console.log("Stop error:", err));
+                }
+            });
+        });
+    </script>
+</body>
+</html>
