@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IEMIS — Internal Exam Management Information System</title>
+  <meta name="description" content="IEMIS - Integrated Educational Management Information System">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #f4f6fc;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+    .loader {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(145deg, #f6f9fc 0%, #e9f0f5 100%);
+      z-index: 10;
+      transition: opacity 0.3s;
+    }
+    .loader.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid rgba(29, 95, 114, 0.2);
+      border-top-color: #1d5f72;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-bottom: 1.5rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loader h1 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #0b2b3b;
+      margin-bottom: 0.4rem;
+    }
+    .loader p {
+      font-size: 0.85rem;
+      color: #3a5e6e;
+    }
+    iframe {
+      width: 100vw;
+      height: 100vh;
+      border: none;
+      display: block;
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="loader" id="loader">
+    <div class="spinner"></div>
+    <h1>Loading IEMIS...</h1>
+    <p>Please wait</p>
+  </div>
+
+  <iframe
+    id="iemisFrame"
+    src="https://script.google.com/macros/s/AKfycbwgtAyD0xtfx_Oszx2O7fo-p2zQRbyPKU_RhKbpGczAVaOhXmAjjWBt68yBMFgVgYMC/exec"
+    allow="clipboard-write; clipboard-read; fullscreen"
+    loading="eager"
+    referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+
+  <script>
+    // Hide loader when iframe loads
+    var frame = document.getElementById('iemisFrame');
+    var loader = document.getElementById('loader');
+
+    frame.addEventListener('load', function() {
+      setTimeout(function() {
+        loader.classList.add('hidden');
+      }, 500);
+    });
+
+    // Fallback: hide loader after 8 seconds anyway
+    setTimeout(function() {
+      loader.classList.add('hidden');
+    }, 8000);
+  </script>
+</body>
+</html>
