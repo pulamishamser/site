@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="https://shamser.info.np/HomePage/favicon.ico">
+  <link rel="apple-touch-icon" href="https://shamser.info.np/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+  <!-- Meta Tags -->
+  <meta property="og:title" content="Unicode → Preeti · पूर्ण शुद्ध" />
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://shamser.info.np/unicode-to-preeti"/>
+  <meta property="og:image" content="https://shamser.info.np/HomePage/img gallery/images/24-computer.jpg">
+  <meta property="og:description" content="Unicode to Preeti converter - fast and accurate Nepali font conversion">
+  <meta name="keywords" content="Unicode to Preeti, Nepali font converter, Preeti font, Nepali typing">
+  <meta name="author" content="shamserpulami">
+
+  <title>Unicode → Preeti </title>
+
+  <style>
+    @font-face {
+      font-family: 'Preeti';
+      src: url('https://cdn.jsdelivr.net/gh/mppbtw/Preeti-Font@main/PREETI.TTF') format('truetype');
+      font-display: swap;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+    }
+    body {
+      background: #eef2f7;
+      font-family: 'Nirmala UI', 'Segoe UI', 'Times New Roman', sans-serif;
+      padding: 1.5rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+    .app-wrapper {
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* ===== HEADER ===== */
+    .brand-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+      border-bottom: 2px solid #dc143c;
+      padding-bottom: 0.75rem;
+    }
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-icon {
+      background: #dc143c;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 14px;
+      color: white;
+      font-weight: 700;
+      font-size: 1.4rem;
+    }
+    .brand h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: #0f172a;
+    }
+    .brand p {
+      font-size: 0.8rem;
+      color: #334155;
+    }
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #1e293b;
+      font-weight: 500;
+      transition: 0.2s;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .nav-links a:hover {
+      color: #dc143c;
+    }
+
+    /* ===== CONVERTER BOXES ===== */
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .box {
+      flex: 1 1 300px;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px -10px rgba(0,0,0,0.15);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #eef2f8;
+    }
+    .box label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      color: #1e293b;
+      margin-bottom: 0.75rem;
+    }
+    textarea {
+      width: 100%;
+      height: 70vh;
+      min-height: 360px;
+      padding: 1rem;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      border: 2px solid #e2e8f0;
+      border-radius: 16px;
+      resize: vertical;
+      background: #fafcff;
+      outline: none;
+      font-family: 'Segoe UI', 'Noto Sans Devanagari', sans-serif;
+    }
+    textarea:focus {
+      border-color: #dc143c;
+      box-shadow: 0 0 0 3px rgba(220,20,60,0.1);
+    }
+    #pre {
+      font-family: 'Preeti', 'Segoe UI', 'Noto Sans Devanagari', sans-serif;
+      font-size: 1.6rem;
+      line-height: 1.8;
+      background: #f9fbfd;
+    }
+    .badge {
+      font-size: 0.7rem;
+      background: #e9edf2;
+      color: #2c3e50;
+      padding: 0.2rem 0.6rem;
+      border-radius: 30px;
+      margin-left: auto;
+      font-weight: 600;
+      text-transform: none;
+    }
+    .note {
+      margin-top: 0.6rem;
+      font-size: 0.8rem;
+      color: #5a6e85;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    /* ===== SOCIAL LINKS ===== */
+    .social-links-wrapper {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 20px;
+    }
+    .social-links {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+    }
+    .social-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 16px;
+    }
+    .social-icon:hover {
+      transform: translateY(-3px);
+      color: white;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+    .facebook { background-color: #3b5998; }
+    .twitter { background-color: #1da1f2; }
+    .blogspot { background-color: #ff5722; }
+    .email { background-color: #d44638; }
+    .map { background-color: #34a853; }
+
+    /* ===== FOOTER ===== */
+    .site-footer {
+      width: 100%;
+      max-width: 1200px;
+      background: #ffffffcc;
+      backdrop-filter: blur(8px);
+      padding: 1.2rem 1.8rem;
+      border-radius: 30px;
+      margin-top: 0.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      box-shadow: 0 8px 20px -8px rgba(0,0,0,0.1);
+      border: 1px solid #e2e8f0;
+      color: #1e293b;
+      font-size: 0.9rem;
+    }
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+    .footer-left .brand {
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .footer-left .brand i {
+      font-style: normal;
+      font-size: 1.2rem;
+    }
+    .footer-contacts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .footer-contacts span {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .footer-contacts i {
+      font-style: normal;
+      font-size: 1.1rem;
+    }
+    .footer-contacts a {
+      color: #1e293b;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .footer-contacts a:hover {
+      color: #dc143c;
+      text-decoration: underline;
+    }
+    .footer-copyright {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #64748b;
+      width: 100%;
+      margin-top: 0.5rem;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 0.8rem;
+    }
+
+    @media (max-width: 720px) {
+      body { padding: 1rem; }
+      .brand-header { flex-direction: column; align-items: flex-start; gap: 0.7rem; }
+      .nav-links { gap: 16px; }
+      .site-footer { flex-direction: column; align-items: flex-start; }
+      .footer-contacts { gap: 1rem; flex-direction: column; align-items: flex-start; }
+      .social-links-wrapper { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+<div class="app-wrapper">
+
+  <!-- ===== HEADER ===== -->
+  <header class="brand-header">
+    <div class="logo-area">
+      <div class="logo-icon">📝</div>
+      <img src="HomePage/team_img/team1.JPG" alt="letter head preview" style="width: 10%; border-radius: 10px; max-width: 48px;" onerror="this.style.display='none';">
+      <div class="brand">
+        <h1>Unicode → Preeti</h1>
+        <p> नेपाली युनिकोडलाई प्रितीमा</p>
+      </div>
+    </div>
+    <nav class="nav-links">
+      <a href="https://shamser.info.np/"><i class="fas fa-home"></i> Back to home</a>
+      <a href="https://shamser.info.np/Shaikshik_Sansar/sobiztrend.com/preeti_to_unicode.html" target="_blank"><i class="fas fa-exchange-alt"></i> Preeti to Unicode</a>
+      <a href="https://shamser.info.np/Shaikshik_Sansar/sobiztrend.com/unicode_to_preeti.html" target="_blank"><i class="fas fa-font"></i> Unicode to Preeti</a>
+    </nav>
+  </header>
+
+  <!-- ===== CONVERTER ===== -->
+  <div class="container">
+    <div class="box">
+      <label><i>📄</i> Unicode (नेपाली) <span class="badge">source</span></label>
+      <textarea id="u">विद्यार्थी, गर्छिन्, पछार्छिन्, दगुर्दै
+कार्यालय, धैर्य, कार्य, सूर्य, कर्म
+विष्णु, विष्णुकुमारी
+लक्ष्य, लक्ष्यप्रति, क्षमता
+शुद्ध, बुद्ध, युद्ध
+विद्या, विद्यालय
+पद : कार्यालय :
+काम : जागिर :
+स्थानमा, स्थान, स्थिति
+छु, छौ, छन्
+भयो। गयो। आयो।
+परिस्थिति, विश्वास, भविष्य, निर्माण
+आए, गए, पुगौँ
+यस्तै, मार्गदर्शक
+रहेछ । भयो । गर्यो । सिकें ।
+सार्वजनिक, सार्वजनिक सेवा
+गर्नु, आशिर्वाद, आफ्नो, पूर्ण
+हरु हरू सारथिहरू
+प्राविधिक सहायक पद : कार्यालय :
+यो वाक्य पूर्ण भयो ।
+सारथी, पनि, यदि
+श्रीमान्को प्रेरणा, परिवार
+प्रति, प्रकृति
+मेरो संघर्ष, मेरो यात्रा र सफलताका सारथिहरू
+— सपना, संघर्ष, विश्वास र सफलताको एउटा अविस्मरणीय यात्रा
+भनिन्, पुग्छन्, गर्छिन्</textarea>
+    </div>
+    <div class="box">
+      <label><i>⌨️</i> Preeti Output <span class="badge">converted</span></label>
+      <textarea id="p" readonly></textarea>
+      <div class="note"><span>✅ Auto show Preeti Text</span><span>√ Pure Text</span></div>
+    </div>
+  </div>
+
+  <!-- ===== SOCIAL LINKS ===== -->
+  <div class="social-links-wrapper">
+    <div class="social-links">
+      <a href="https://www.facebook.com/" target="_blank" class="social-icon facebook" title="Facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="https://twitter.com/" target="_blank" class="social-icon twitter" title="Twitter">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="https://lauro-media.blogspot.com/" target="_blank" class="social-icon blogspot" title="Blogspot">
+        <i class="fab fa-blogger-b"></i>
+      </a>
+      <a href="mailto:infoshamser@gmail.np.com" class="social-icon email" title="Email">
+        <i class="fas fa-envelope"></i>
+      </a>
+      <a href="https://maps.app.goo.gl/CQG8KiSPvofKn5RB7" target="_blank" class="social-icon map" title="Location">
+        <i class="fas fa-map-marker-alt"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-left">
+      <span class="brand"><i>🛠️</i> shamser.info.np</span>
+    </div>
+    <div class="footer-contacts">
+      <span><i>📞</i> <a href="tel:9844087012">9844087012</a></span>
+      <span><i>✉️</i> <a href="mailto:infoshamser@gmail.np.com">infoshamser@gmail.np.com</a></span>
+    </div>
+    <div class="footer-copyright">
+      © 2026 EasyTranslation— All rights reserved.shamser.info.np
+    </div>
+  </footer>
+
+</div>
+
+<!-- ===== SCRIPT ===== -->
+<script>
+  // ============================================================
+  // UnicodeToPreeti — पूर्ण शुद्ध (रेफको नियम सही)
+  // ============================================================
+  class UnicodeToPreeti {
+    static _map = {
+      "अ":"c","आ":"cf","ा":"f","इ":"O","ई":"O{","उ":"p","ए":"P",
+      "े":"]","ै":"}","ो":"f]","ौ":"f}","ओ":"cf]","औ":"cf}",
+      "ं":"+","ँ":"F","ी":"L","ु":"'","ू":"\"",
+      "क":"s","ख":"v","ग":"u","घ":"3","ङ":"ª",
+      "च":"r","छ":"5","ज":"h","झ":"´","ञ":"`",
+      "ट":"6","ठ":"7","ड":"8","ढ":"9","ण":"0f",
+      "त":"t","थ":"y","द":"b","ध":"w","न":"g",
+      "प":"k","फ":"km","ब":"a","भ":"e","म":"d",
+      "य":"o","र":"/","रू":"?","ृ":"[","ल":"n",
+      "व":"j","स":";","श":"z","ष":"if","ज्ञ":"1","ह":"x",
+      "१":"!","२":"@","३":"#","४":"$","५":"%",
+      "६":"^","७":"&","८":"*","९":"(","०":")",
+      "।":".","्":"\\","ऊ":"pm","-":" ","(":"-",")":"_","ॐ":"¿"
+    };
+
+    static _special2 = {
+      "क्ष":"I","त्र":"q","ज्ञ":"1","द्ध":"4","द्य":"B","द्व":"å",
+      "हृ":"õ","ट्ट":"§","ठ्ठ":"¨","ड्ड":"©","ढ्ढ":"ª","ण्ण":"«",
+      "त्त":"¥","थ्थ":"¦","द्द":"§","ध्ध":"¨","न्न":"©",
+      "प्प":"ª","फ्फ":"«","ब्ब":"¬","भ्भ":"­","म्म":"®",
+      "य्य":"¯","ल्ल":"°","व्व":"±","श्श":"²","ष्ष":"³",
+      "स्स":"´","ह्ह":"µ"
+    };
+
+    static _special3 = {
+      "र्ष":"if{","र्व":"j{","र्म":"d{","र्ग":"u{","र्न":"g{","र्छ":"5{",
+      "र्द":"b{","र्श":"z{","र्थ":"y{","र्स":";{","र्ह":"x{","र्क":"s{",
+      "र्ख":"v{","र्घ":"3{","र्च":"r{","र्ज":"h{","र्झ":"´{","र्ट":"6{",
+      "र्ठ":"7{","र्ड":"8{","र्ढ":"9{","र्ण":"0f{","र्त":"t{","र्ध":"w{",
+      "र्प":"k{","र्फ":"km{","र्ब":"a{","र्भ":"e{","र्य":"o{","र्ल":"n{",
+      "ष्णु":"i0f'","ष्ण":"i0f",
+      "श्व":"Zj","श्र":">",
+      "क्र":"s|","प्र":"k|","ग्र":"u|","भ्र":"e|","म्र":"d|",
+      "ब्र":"a|","स्र":":/","ह्र":"x|","द्र":"b|","ध्र":"w|",
+      "न्र":"g|","व्र":"j|","ट्र":"6|","ठ्र":"7|","ड्र":"8|",
+      "ढ्र":"9|","ण्र":"0f|",
+      "द्या":"Bf","द्य":"B",
+      "द्धा":"4f","द्धि":"4l","द्धी":"4L",
+      "स्त":":t","स्थ":":y","स्न":":g","स्प":":k","स्फ":":km",
+      "स्म":":d","स्य":":o","स्व":":j","स्स":":;","स्ह":":x",
+      "स्क":":s","स्ख":":v","स्ग":":u","स्घ":":3","स्च":":r",
+      "स्छ":":5","स्ज":":h","स्झ":":´","स्ट":":6","स्ठ":":7",
+      "स्ड":":8","स्ढ":":9","स्ण":":0f","स्द":":b","स्ध":":w",
+      "स्ब":":a","स्भ":":e","स्र":":/","स्ल":":n","स्श":":z"
+    };
+
+    static _halfFormMap = {
+      "क":"S","ख":"V","ग":"U","घ":"3","ङ":"ª",
+      "च":"R","छ":"5","ज":"H","झ":"´","ञ":"`",
+      "ट":"6","ठ":"7","ड":"8","ढ":"9","ण":"0f",
+      "त":"T","थ":"Y","द":"B","ध":"W","न":"G",
+      "प":"K","फ":"Km","ब":"A","भ":"E","म":"D",
+      "य":"O","र":"/","ल":"N","व":"J",
+      "श":"Z","ष":"i","स":":","ह":"X"
+    };
+
+    static _isConsonant(c) {
+      return "कखगघङचछजझञटठडढणतथदधनपफबभमयरलवशषसह".includes(c);
+    }
+
+    static _preprocessShortI(text) {
+      let result = '';
+      let i = 0;
+      const len = text.length;
+      while (i < len) {
+        const c = text[i];
+        if (c === 'ि') {
+          let clusterStart = result.length;
+          let j = result.length - 1;
+          let cluster = '';
+          if (j >= 0 && this._isConsonant(result[j])) {
+            cluster = result[j];
+            j--;
+            while (j >= 1 && result[j] === '्' && this._isConsonant(result[j-1])) {
+              cluster = result[j-1] + '्' + cluster;
+              j -= 2;
+            }
+            clusterStart = j + 1;
+          }
+          if (cluster.length > 0 && this._isConsonant(cluster[0])) {
+            result = result.slice(0, clusterStart) + 'l' + cluster;
+          } else {
+            result += 'l';
+          }
+          i++;
+          continue;
+        }
+        result += c;
+        i++;
+      }
+      return result;
+    }
+
+    static _normalize(text) {
+      const pre = this._preprocessShortI(text);
+      let out = '';
+      let i = 0;
+      const len = pre.length;
+      while (i < len) {
+        if (i + 2 < len) {
+          const tri = pre.substring(i, i + 3);
+          if (this._special3[tri] !== undefined) {
+            out += this._special3[tri];
+            i += 3;
+            continue;
+          }
+        }
+        if (i + 1 < len) {
+          const two = pre.substring(i, i + 2);
+          if (this._special2[two] !== undefined) {
+            out += this._special2[two];
+            i += 2;
+            continue;
+          }
+        }
+        if (pre[i] === 'र' && pre[i+1] === '्' && i + 2 < len) {
+          const nc = pre[i+2];
+          if (this._map[nc] && nc !== 'र') {
+            out += this._map[nc] + "{";
+            i += 3;
+            continue;
+          }
+        }
+        if (pre[i] !== 'र' && pre[i+1] === '्') {
+          const nc = i + 2 < len ? pre[i+2] : '';
+          if (nc !== 'र' && nc !== '' && nc !== ' ' && nc !== '।' && nc !== ',') {
+            if (this._halfFormMap[pre[i]]) {
+              out += this._halfFormMap[pre[i]];
+              i += 2;
+              continue;
+            }
+            if (pre[i] === 'स') { out += ":"; i += 2; continue; }
+            if (pre[i] === 'ष') { out += "i"; i += 2; continue; }
+          }
+        }
+        if (i > 0 && pre[i-1] !== 'र' && pre[i] === '्' && pre[i+1] === 'र') {
+          const p = pre[i-1];
+          if (p !== 'ट' && p !== 'ठ' && p !== 'ड') {
+            out += '|'; i += 2; continue;
+          } else {
+            out += '«'; i += 2; continue;
+          }
+        }
+        out += pre[i];
+        i++;
+      }
+      return out.replaceAll("त|", "q");
+    }
+
+    static convert(text) {
+      const norm = this._normalize(text);
+      let out = '';
+      for (let i = 0; i < norm.length; i++) {
+        const c = norm[i];
+        if (c === '\ufeff') continue;
+        out += (this._map[c] !== undefined) ? this._map[c] : c;
+      }
+
+      let f = out;
+
+      f = f.replaceAll("Si", "I");
+      f = f.replaceAll("H`", "1");
+      f = f.replaceAll("b\\\\w", "4");
+      f = f.replaceAll("z|", ">");
+      f = f.replaceAll("/'", "?");
+      f = f.replaceAll("Tt", "Q");
+      f = f.replaceAll("b\\\\lj", "lå");
+      f = f.replaceAll("b\\\\\\j", "å");
+      f = f.replaceAll("0f\\", "0");
+      f = f.replaceAll("`\\", "~");
+      f = f.replace(/(.)[l][|]/g, (m, p1) => "l" + p1 + "|");
+      f = f.replace(/[k][l][m][|]/g, "lk|m");
+
+      f = f.replaceAll("x/\"", "x¿");
+      f = f.replaceAll("x/'", "x¿");
+      f = f.replaceAll("x/", "x¿");
+      f = f.replaceAll("/\"", "?");
+
+      const refPairs = [
+        ["{s","s{"],["{v","v{"],["{u","u{"],["{3","3{"],
+        ["{r","r{"],["{5","5{"],["{h","h{"],["{´","´{"],
+        ["{`","`{"],["{6","6{"],["{7","7{"],["{8","8{"],
+        ["{9","9{"],["{0f","0f{"],["{t","t{"],["{y","y{"],
+        ["{b","b{"],["{w","w{"],["{g","g{"],["{k","k{"],
+        ["{km","km{"],["{a","a{"],["{e","e{"],["{d","d{"],
+        ["{o","o{"],["{n","n{"],["{j","j{"],["{;",";{"],
+        ["{z","z{"],["{if","if{"],["{x","x{"]
+      ];
+      refPairs.sort((a, b) => b[0].length - a[0].length);
+      for (const [bad, good] of refPairs) {
+        f = f.replaceAll(bad, good);
+      }
+
+      f = f.replaceAll("ljBfy{L", "ljBfyL{");
+      f = f.replaceAll("ljBfyoL", "ljBfyL");
+      f = f.replaceAll("ljBfyL", "ljBfyL");
+
+      f = f.replaceAll("ul5{g\\", "u5{g\\");
+      f = f.replaceAll("ul5{g", "u5{g");
+      f = f.replaceAll("k%fl%{g\\", "k%5{g\\");
+      f = f.replaceAll("k%fl%{g", "k%5{g");
+      f = f.replaceAll("k%5{g\\", "k%5{g\\");
+
+      f = f.replace(/([a-zA-Z%´])l([0-9]*)5\{/g, "$1$2 5{");
+      f = f.replaceAll("l5{g", "5{g");
+
+      f = f.replaceAll("bu'{b", "bu'b{");
+      f = f.replaceAll("bu'b}{", "bu'b}{");
+
+      f = f.replaceAll("al;0f'", "lji0f'");
+      f = f.replaceAll("ali0f'", "lji0f'");
+      f = f.replaceAll("alIf0f'", "lji0f'");
+      f = f.replaceAll("al0f'", "lji0f'");
+
+      f = f.replaceAll("nSIfo", "nIo");
+      f = f.replaceAll("SIfo", "Io");
+      f = f.replaceAll("nSIf", "nIo");
+
+      f = f.replaceAll("Bw", "4");
+      f = f.replaceAll("Bo", "B");
+
+      f = f.replaceAll("ljBof", "ljBf");
+      f = f.replaceAll("ljBofno", "ljBfno");
+
+      f = f.replaceAll("eljIfo", "eljio");
+
+      f = f.replaceAll("lg{df0f", "lgdf{0f");
+
+      f = f.replaceAll("Myfgdf", ":yfgdf");
+      f = f.replaceAll("Myfg", ":yfg");
+      f = f.replaceAll("Mylt", ":ylt");
+
+      f = f.replaceAll("oMt}", "o:t}");
+      f = f.replaceAll("Mt}", ":t}");
+
+      f = f.replaceAll("df{ub{zs", "dfu{bz{s");
+
+      f = f.replaceAll(";f{j", ";fj{");
+      f = f.replaceAll("cf{j", "cfj{");
+      f = f.replaceAll("sf{j", "sfj{");
+      f = f.replaceAll("gf{j", "gfj{");
+      f = f.replaceAll("tf{j", "tfj{");
+      f = f.replaceAll("df{j", "dfj{");
+      f = f.replaceAll("af{j", "afj{");
+      f = f.replaceAll("kf{j", "kfj{");
+      f = f.replaceAll("bf{j", "bfj{");
+      f = f.replaceAll("vf{j", "vfj{");
+      f = f.replaceAll("yf{j", "yfj{");
+      f = f.replaceAll("nf{j", "nfj{");
+      f = f.replaceAll("hf{j", "hfj{");
+      f = f.replaceAll("0f{j", "0fj{");
+      f = f.replaceAll(":f{j", ":fj{");
+      f = f.replaceAll("zf{j", "zfj{");
+
+      f = f.replaceAll("u{g'", "ug'{");
+      f = f.replaceAll("u{gf", "ugf{");
+      f = f.replaceAll("u{g]", "ug]{");
+
+      f = f.replaceAll("cfzL{jfb", "cflzjf{b");
+
+      f = f.replaceAll("cfKmgf]", "cfˆgf]");
+      f = f.replaceAll("cfKmgf", "cfˆgf");
+      f = f.replaceAll("cfKmg}", "cfˆg}");
+      f = f.replaceAll("cfKmg", "cfˆg");
+
+      f = f.replaceAll("k\"{0f", "k\"0f{");
+
+      f = f.replace(/\s+:\s+/g, " M ");
+      f = f.replace(/\s+:/g, " M");
+      f = f.replace(/^:/g, "M");
+
+      f = f.replaceAll(".", " .");
+      f = f.replaceAll("  .", " .");
+      f = f.replaceAll("   .", " .");
+
+      f = f.replaceAll(" .", "\u0001DOT\u0001");
+
+      f = f.replace(/\\/g, (match, offset, str) => {
+        const next = str[offset + 1];
+        if (next === undefined || next === ' ' || next === '\n' || next === '\t') {
+          return '';
+        }
+        return '\\';
+      });
+
+      f = f.replaceAll("\u0001DOT\u0001", " .");
+
+      f = f.replaceAll("sxl", "slx");
+      f = f.replaceAll("k7g]", "p7\\g]");
+      f = f.replaceAll("s7lg", "sl7g");
+      f = f.replaceAll("gl/Gt/", "lg/Gt/");
+      f = f.replaceAll("JoStlsf]", "JolStsf]");
+      f = f.replaceAll("b]vlg]", "b]lvg]");
+      f = f.replaceAll(" blg", " lbg");
+      f = f.replaceAll("oyf{ydf", "oyfy{df");
+      f = f.replaceAll("k/l0ft", "kl/0ft");
+
+      return f;
+    }
+  }
+
+  // ============================================================
+  // UI Initialization
+  // ============================================================
+  (function() {
+    const u = document.getElementById('u');
+    const p = document.getElementById('p');
+    p.style.fontFamily = "'Preeti', 'Segoe UI', 'Noto Sans Devanagari', sans-serif";
+
+    function run() {
+      try {
+        p.value = UnicodeToPreeti.convert(u.value);
+        p.style.fontFamily = "'Preeti', 'Segoe UI', 'Noto Sans Devanagari', sans-serif";
+      } catch (e) {
+        p.value = '⚠️ त्रुटि: ' + e.message;
+      }
+    }
+
+    u.addEventListener('input', run);
+    run();
+  })();
+</script>
+</body>
+</html>
