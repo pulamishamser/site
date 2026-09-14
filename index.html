@@ -683,356 +683,147 @@ a:hover i {
 
 </section>  <!-- Flash -->
 
-<!-- ================= SITE PAGE POPUP ================= -->
-<div id="sitePagePopup" class="site-popup-overlay">
-    <div class="site-popup-box">
-        <!-- Close Button -->
-        <button type="button" class="site-popup-close" onclick="closeSitePopup()">
-            &times;
-        </button>
-        <!-- Popup Content -->
-        <div class="site-popup-content">
-            <iframe
-                src="https://shamser.info.np/News/Raksha N Greta.html"
-                title="Shamser.info.np News/Raksha N Greta>
-            </iframe>
-        </div>
-    </div>
-</div>
-<style>
-/* ================= POPUP OVERLAY ================= */
-.site-popup-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.70);
-    z-index: 999999;
-    align-items: center;
-    justify-content: center;
-    padding: 15px;
-}
-/* ================= POPUP BOX ================= */
-.site-popup-box {
-    position: relative;
-
-    width: 95%;
-    max-width: 1100px;
-
-    height: 90vh;
-
-    background: #fff;
-    border-radius: 12px;
-
-    overflow: hidden;
-
-    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-
-    animation: sitePopupShow 0.35s ease;
-}
-
-/* ================= POPUP CONTENT ================= */
-.site-popup-content {
-    width: 100%;
-    height: 100%;
-}
-
-.site-popup-content iframe {
-    width: 100%;
-    height: 100%;
-
-    border: none;
-    display: block;
-}
-
-/* ================= CLOSE BUTTON ================= */
-.site-popup-close {
-    position: absolute;
-
-    top: 8px;
-    right: 10px;
-
-    width: 40px;
-    height: 40px;
-
-    border: none;
-    border-radius: 50%;
-
-    background: #dc3545;
-    color: white;
-
-    font-size: 30px;
-    line-height: 35px;
-
-    cursor: pointer;
-
-    z-index: 10;
-
-    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
-}
-
-.site-popup-close:hover {
-    background: #b02a37;
-    transform: scale(1.08);
-}
-
-/* ================= ANIMATION ================= */
-@keyframes sitePopupShow {
-
-    from {
-        opacity: 0;
-        transform: scale(0.85);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-
-}
 
 
-/* ================= MOBILE ================= */
-@media (max-width: 768px) {
-
-    .site-popup-overlay {
-        padding: 8px;
-    }
-
-    .site-popup-box {
-        width: 100%;
-        height: 94vh;
-        border-radius: 8px;
-    }
-
-    .site-popup-close {
-        width: 36px;
-        height: 36px;
-
-        font-size: 27px;
-        line-height: 32px;
-
-        top: 5px;
-        right: 5px;
-    }
-
-}
-</style>
 
 
-<script>
-/* ================= OPEN POPUP WHEN SITE LOADS ================= */
 
-window.addEventListener("load", function () {
-
-    document.getElementById("sitePagePopup").style.display = "flex";
-
-});
-
-
-/* ================= CLOSE POPUP ================= */
-function closeSitePopup() {
-    document.getElementById("sitePagePopup").style.display = "none";
-}
-/* ================= CLOSE WHEN CLICK OUTSIDE ================= */
-document.getElementById("sitePagePopup").addEventListener("click", function(event) {
-    if (event.target === this) {
-        closeSitePopup();
-    }
-
-});
-</script>
 
 
 
 
 	
-<!-- ================= END SITE PAGE POPUP ================= -->
-
-
-
 <!-- ================= SITE PAGE POPUP ================= -->
+<!-- ================= SITE PAGE POPUP (BRICS 2026) ================= -->
 <div id="sitePagePopup" class="site-popup-overlay">
-
-    <div class="site-popup-box">
-
-        <!-- Close Button -->
-        <button type="button" class="site-popup-close" onclick="closeSitePopup()">
-            &times;
-        </button>
-
-        <!-- Popup Content -->
-        <div class="site-popup-content">
-<iframe
+  <div class="site-popup-box">
+    <button type="button" class="site-popup-close" onclick="closeSitePopup()" aria-label="Close popup">&times;</button>
+    <div class="site-popup-content">
+      <iframe
         src="https://shamser.info.np/News/BRICS%202026.html"
         title="Shamser.info.np - BRICS 2026"
-        loading="lazy"
+        loading="eager"
+        allow="autoplay"
       ></iframe>
-
-
-        </div>
-
     </div>
-
+  </div>
 </div>
 
-
 <style>
-/* ================= POPUP OVERLAY ================= */
 .site-popup-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.70);
-    z-index: 999999;
-
-    align-items: center;
-    justify-content: center;
-
-    padding: 15px;
+  display: none;
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 999999;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  backdrop-filter: blur(4px);
 }
-
-/* ================= POPUP BOX ================= */
 .site-popup-box {
-    position: relative;
-
-    width: 95%;
-    max-width: 1100px;
-
-    height: 90vh;
-
-    background: #fff;
-    border-radius: 12px;
-
-    overflow: hidden;
-
-    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-
-    animation: sitePopupShow 0.35s ease;
+  position: relative;
+  width: 95%;
+  max-width: 1100px;
+  height: 90vh;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: sitePopupShow 0.25s ease;
 }
-
-/* ================= POPUP CONTENT ================= */
 .site-popup-content {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
-
 .site-popup-content iframe {
-    width: 100%;
-    height: 100%;
-
-    border: none;
-    display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
 }
-
-/* ================= CLOSE BUTTON ================= */
 .site-popup-close {
-    position: absolute;
-
-    top: 8px;
-    right: 10px;
-
-    width: 40px;
-    height: 40px;
-
-    border: none;
-    border-radius: 50%;
-
-    background: #dc3545;
-    color: white;
-
-    font-size: 30px;
-    line-height: 35px;
-
-    cursor: pointer;
-
-    z-index: 10;
-
-    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: #dc3545;
+  color: white;
+  font-size: 32px;
+  line-height: 40px;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  transition: background 0.15s, transform 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 300;
 }
-
 .site-popup-close:hover {
-    background: #b02a37;
-    transform: scale(1.08);
+  background: #b02a37;
+  transform: scale(1.08);
 }
-
-/* ================= ANIMATION ================= */
 @keyframes sitePopupShow {
-
-    from {
-        opacity: 0;
-        transform: scale(0.85);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
 }
-
-
-/* ================= MOBILE ================= */
 @media (max-width: 768px) {
-
-    .site-popup-overlay {
-        padding: 8px;
-    }
-
-    .site-popup-box {
-        width: 100%;
-        height: 94vh;
-        border-radius: 8px;
-    }
-
-    .site-popup-close {
-        width: 36px;
-        height: 36px;
-
-        font-size: 27px;
-        line-height: 32px;
-
-        top: 5px;
-        right: 5px;
-    }
-
+  .site-popup-overlay { padding: 8px; }
+  .site-popup-box { width: 100%; height: 94vh; border-radius: 12px; }
+  .site-popup-close {
+    width: 38px; height: 38px; font-size: 28px; line-height: 34px;
+    top: 6px; right: 6px;
+  }
 }
 </style>
 
-
 <script>
-/* ================= OPEN POPUP WHEN SITE LOADS ================= */
+/* ================= PRELOAD IFRAME FOR FAST POPUP ================= */
+(function preloadPopupIframe() {
+  var preload = document.createElement('link');
+  preload.rel = 'preload';
+  preload.as = 'document';
+  preload.href = 'https://shamser.info.np/News/BRICS%202026.html';
+  document.head.appendChild(preload);
+})();
 
-window.addEventListener("load", function () {
-
-    document.getElementById("sitePagePopup").style.display = "flex";
-
+/* ================= OPEN POPUP IMMEDIATELY ON DOM READY ================= */
+document.addEventListener('DOMContentLoaded', function () {
+  var popup = document.getElementById('sitePagePopup');
+  if (popup) {
+    popup.style.display = 'flex';
+  }
 });
-
 
 /* ================= CLOSE POPUP ================= */
-
 function closeSitePopup() {
-
-    document.getElementById("sitePagePopup").style.display = "none";
-
+  var popup = document.getElementById('sitePagePopup');
+  if (popup) {
+    popup.style.display = 'none';
+  }
 }
 
-
 /* ================= CLOSE WHEN CLICK OUTSIDE ================= */
+document.addEventListener('click', function (event) {
+  var popup = document.getElementById('sitePagePopup');
+  if (popup && event.target === popup) {
+    closeSitePopup();
+  }
+});
 
-document.getElementById("sitePagePopup").addEventListener("click", function(event) {
-
-    if (event.target === this) {
-        closeSitePopup();
-    }
-
+/* ================= ESC KEY TO CLOSE ================= */
+document.addEventListener('keydown', function (event) {
+  if (event.key === 'Escape') {
+    closeSitePopup();
+  }
 });
 </script>
-
 <!-- ================= END SITE PAGE POPUP ================= -->
 
 
