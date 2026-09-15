@@ -9,14 +9,15 @@
 <body>
 <h1>Download data as excel file</h1>
 
-
+// User को IP वा session ID watermark
+document.body.setAttribute('data-watermark', '© shamser.info.np');
    <center>        <!-- Other form fields go here -->
         
         <!-- Embed the Google Apps Script web app -->
-        <iframe src="https://script.google.com/macros/s/AKfycbxtOcpSednaO-gXt9uJUuZMAY1M2zPLZBYwCaddezV3Q1H5VmNFAthjDKOGBcm-l0xgXQ/exec" 
-                width="100%" 
-                height="500px" 
-                frameborder="0">
-        </iframe>
+
+<iframe id="externalIframe" 
+        src="https://script.google.com/macros/s/AKfycbxtOcpSednaO-gXt9uJUuZMAY1M2zPLZBYwCaddezV3Q1H5VmNFAthjDKOGBcm-l0xgXQ/exec" 
+        sandbox="allow-scripts allow-same-origin allow-forms"
+        title="External Tool"  width="100%"  height="600" frameborder="0"></iframe>
   
    </center>
