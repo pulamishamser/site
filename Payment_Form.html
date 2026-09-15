@@ -30,75 +30,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
 
-<!-- 🔐 DEVTOOLS PROTECTION START -->
-<script>
-(function(){
-    document.addEventListener('contextmenu', function(e){
-        e.preventDefault();
-        return false;
-    });
-
-    document.addEventListener('keydown', function(e){
-        if(e.key === 'F12' || e.keyCode === 123){
-            e.preventDefault();
-            return false;
-        }
-        if(e.ctrlKey && e.shiftKey && ['I','J','C'].indexOf(e.key.toUpperCase()) > -1){
-            e.preventDefault();
-            return false;
-        }
-        if(e.ctrlKey && e.shiftKey && [73,74,67].indexOf(e.keyCode) > -1){
-            e.preventDefault();
-            return false;
-        }
-        if(e.ctrlKey && e.key.toUpperCase() === 'U'){
-            e.preventDefault();
-            return false;
-        }
-        if(e.ctrlKey && e.key.toUpperCase() === 'S'){
-            e.preventDefault();
-            return false;
-        }
-    });
-
-    var devtoolsOpen = false;
-    var checkInterval = setInterval(function(){
-        var t0 = performance.now();
-        debugger;
-        var t1 = performance.now();
-        if(t1 - t0 > 100){
-            if(!devtoolsOpen){
-                devtoolsOpen = true;
-                document.body.innerHTML = '<div style="text-align:center;margin-top:120px;font-family:sans-serif;padding:20px;"><h1 style="color:#8B0000;font-size:2rem;">🔒 पहुँच अस्वीकृत</h1><p style="color:#555;margin-top:15px;font-size:1.1rem;">कृपया DevTools बन्द गर्नुहोस् र page refresh गर्नुहोस्।</p></div>';
-            }
-        } else {
-            devtoolsOpen = false;
-        }
-    }, 1000);
-
-    document.addEventListener('touchstart', function(e){
-        if(e.touches.length > 1){ e.preventDefault(); }
-    }, {passive:false});
-})();
-</script>
-<!-- 🔐 DEVTOOLS PROTECTION END -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
  
  <script src="//code.tidio.co/le8tdbjfwz7vgrvuydo6wgejptyqd82i.js" async></script>
 <title>Online_Payment_Form</title>
@@ -135,13 +66,13 @@
       window.open(  this.options[ this.selectedIndex ].value );
  };
 </script>
-
+// User को IP वा session ID watermark
+document.body.setAttribute('data-watermark', '© shamser.info.np');
 
 
 
 <iframe id="externalIframe" 
-        src="https://script.google.com/macros/s/AKfycbwKJilVfY9clCZUNJ7WhfPySBMC-7BpR8zTp34gzcroPU-9tAir2IsBEk9Aph5nGZx5/exec" width="100%" height="650"" 
-        sandbox="allow-scripts allow-same-origin allow-forms"
+        src="https://script.google.com/macros/s/AKfycbwKJilVfY9clCZUNJ7WhfPySBMC-7BpR8zTp34gzcroPU-9tAir2IsBEk9Aph5nGZx5/exec" width="100%" height="650" sandbox="allow-scripts allow-same-origin allow-forms"
         title="External Tool"></iframe>
 
 
