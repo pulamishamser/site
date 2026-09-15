@@ -10,6 +10,61 @@
     <link rel="stylesheet" href="style.css">
     <!-- FontAweome CDN Link for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+
+
+
+	<!-- 🔐 DEVTOOLS PROTECTION START -->
+<script>
+(function(){
+    document.addEventListener('contextmenu', function(e){
+        e.preventDefault();
+        return false;
+    });
+
+    document.addEventListener('keydown', function(e){
+        if(e.key === 'F12' || e.keyCode === 123){
+            e.preventDefault();
+            return false;
+        }
+        if(e.ctrlKey && e.shiftKey && ['I','J','C'].indexOf(e.key.toUpperCase()) > -1){
+            e.preventDefault();
+            return false;
+        }
+        if(e.ctrlKey && e.shiftKey && [73,74,67].indexOf(e.keyCode) > -1){
+            e.preventDefault();
+            return false;
+        }
+        if(e.ctrlKey && e.key.toUpperCase() === 'U'){
+            e.preventDefault();
+            return false;
+        }
+        if(e.ctrlKey && e.key.toUpperCase() === 'S'){
+            e.preventDefault();
+            return false;
+        }
+    });
+
+    var devtoolsOpen = false;
+    var checkInterval = setInterval(function(){
+        var t0 = performance.now();
+        debugger;
+        var t1 = performance.now();
+        if(t1 - t0 > 100){
+            if(!devtoolsOpen){
+                devtoolsOpen = true;
+                document.body.innerHTML = '<div style="text-align:center;margin-top:120px;font-family:sans-serif;padding:20px;"><h1 style="color:#8B0000;font-size:2rem;">🔒 पहुँच अस्वीकृत</h1><p style="color:#555;margin-top:15px;font-size:1.1rem;">कृपया DevTools बन्द गर्नुहोस् र page refresh गर्नुहोस्।</p></div>';
+            }
+        } else {
+            devtoolsOpen = false;
+        }
+    }, 1000);
+
+    document.addEventListener('touchstart', function(e){
+        if(e.touches.length > 1){ e.preventDefault(); }
+    }, {passive:false});
+})();
+</script>
+<!-- 🔐 DEVTOOLS PROTECTION END -->
 </head>
 <body>
 
