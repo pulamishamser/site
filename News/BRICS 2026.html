@@ -4,10 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ब्रिक्स (BRICS) – १८औँ शिखर सम्मेलन | नयाँ दिल्ली घोषणापत्र</title>
-  <!-- Google Fonts for clean typography -->
+
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <style>
     * {
       margin: 0;
@@ -60,14 +68,12 @@
       color: #0b1e33;
     }
 
-    /* paragraph */
     p {
       margin: 1rem 0;
       text-align: justify;
-      font-size: 1.05rem;
+      font-size: 0.9rem;
     }
 
-    /* list styling */
     ul {
       margin: 0.8rem 0 1.5rem 1.5rem;
       padding-left: 0.5rem;
@@ -79,92 +85,17 @@
       text-align: justify;
     }
 
-    /* strong */
     strong, b {
       font-weight: 700;
       color: #0a1a2b;
     }
 
-    /* horizontal rule */
     hr {
       border: none;
       border-top: 2px dashed #d0d9e2;
       margin: 2.5rem 0;
     }
 
-    /* special styling for the declaration box */
-    .highlight-box {
-      background: #f0f4fe;
-      border-left: 6px solid #1a4c8c;
-      padding: 1.5rem 1.8rem;
-      border-radius: 14px;
-      margin: 2rem 0;
-    }
-
-    /* small meta / source */
-    .meta {
-      font-size: 0.9rem;
-      color: #5e6f8c;
-      margin-top: 0.3rem;
-    }
-
-    /* partner list styling */
-    .partner-list {
-      background: #f9fcff;
-      border-radius: 14px;
-      padding: 0.8rem 1.5rem;
-    }
-
-    /* header images row */
-    .img-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.2rem;
-      justify-content: center;
-      margin: 1.8rem 0;
-    }
-
-    .img-row img {
-      flex: 1 1 240px;
-      max-width: 100%;
-      height: auto;
-      object-fit: cover;
-      border-radius: 18px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    }
-
-    /* stats numbers */
-    .stat-number {
-      font-weight: 700;
-      color: #1a4c8c;
-      background: #e9eff9;
-      padding: 0.1rem 0.5rem;
-      border-radius: 20px;
-      display: inline-block;
-      font-size: 0.95rem;
-      margin-right: 0.2rem;
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 600px) {
-      .page {
-        padding: 1.5rem 1.2rem;
-      }
-      h1 {
-        font-size: 1.7rem;
-      }
-      h2 {
-        font-size: 1.35rem;
-      }
-      p, li {
-        font-size: 1rem;
-      }
-      .img-row img {
-        flex: 1 1 100%;
-      }
-    }
-
-    /* copy icon / small details */
     .small-note {
       font-size: 0.9rem;
       color: #4a5f7a;
@@ -173,31 +104,213 @@
       border-radius: 12px;
       margin: 1.8rem 0;
     }
+
+    /* ====== TOP HEADER BAR (social icons + site title) ====== */
+    .top-bar {
+      max-width: 1000px;
+      margin: 0 auto 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 0.8rem 1.5rem;
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px -10px rgba(0, 0, 0, 0.1);
+    }
+
+    .top-bar .social-links-left {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .top-bar .site-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #0b1e33;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .top-bar .site-title:hover {
+      color: #1a4c8c;
+    }
+
+    /* social icon buttons */
+    .social-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .social-icon:hover {
+      transform: translateY(-3px);
+      opacity: 0.9;
+    }
+
+    .social-icon.facebook  { background: #1877f2; }
+    .social-icon.twitter   { background: #1da1f2; }
+    .social-icon.blogspot  { background: #f57d00; }
+    .social-icon.email     { background: #ea4335; }
+    .social-icon.map       { background: #34a853; }
+
+    /* ====== SITE HEADER (title + donation) ====== */
+    .site-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .site-header h1 {
+      border-bottom: none;
+      margin-bottom: 0.5rem;
+    }
+
+    .site-header a {
+      text-decoration: none;
+      color: #0b1e33;
+    }
+
+    .donate-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.1rem;
+      margin-top: 0.5rem;
+    }
+
+    .donate-box img {
+      margin: 0.5rem auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    /* ====== FOOTER ====== */
+    .footer-info {
+      background: #ffffff;
+      border-radius: 24px;
+      box-shadow: 0 10px 24px -10px rgba(0,0,0,0.1);
+      max-width: 1000px;
+      margin: 2rem auto 0;
+      padding: 1.8rem 2rem;
+    }
+
+    .footer-info .container {
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    .footer-info .row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .footer-info .col {
+      flex: 1 1 240px;
+    }
+
+    .footer-info .text-center { text-align: center; }
+    .footer-info .text-md-start { text-align: left; }
+    .footer-info .text-md-end { text-align: right; }
+
+    .footer-info .text-muted { color: #5e6f8c; }
+    .footer-info .small { font-size: 0.9rem; }
+
+    .footer-info a {
+      color: #1a4c8c;
+      text-decoration: none;
+      margin-right: 1rem;
+    }
+
+    .footer-info a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .page { padding: 1.5rem 1.2rem; }
+      h1 { font-size: 1.7rem; }
+      h2 { font-size: 1.35rem; }
+      p, li { font-size: 0.9rem; }
+
+      .top-bar {
+        justify-content: center;
+        text-align: center;
+      }
+      .top-bar .social-links-left {
+        justify-content: center;
+        width: 100%;
+      }
+      .top-bar .site-title {
+        width: 100%;
+        justify-content: center;
+      }
+      .footer-info .text-md-start,
+      .footer-info .text-md-end {
+        text-align: center;
+      }
+    }
   </style>
 </head>
 <body>
+
+  <!-- ====== TOP BAR: Social icons (left) + Site name (right) ====== -->
+  <div class="top-bar">
+    <div class="social-links-left">
+      <a href="https://www.facebook.com/share/v/18aZrtoJXA/" class="social-icon facebook" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.twitter.com/" class="social-icon twitter" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="https://lauro-media.blogspot.com/2025/06/news-summary-generated-by-ok-ai.html" class="social-icon blogspot" target="_blank" aria-label="Blogspot"><i class="fab fa-blogger-b"></i></a>
+      <a href="mailto:shamserpulami500@gmail.com" class="social-icon email" aria-label="Email"><i class="fas fa-envelope"></i></a>
+      <a href="https://maps.app.goo.gl/Ld6Tbjpzd4FNF9xF8" class="social-icon map" target="_blank" aria-label="Map"><i class="fas fa-map-marker-alt"></i></a>
+    </div>
+
+    <a href="https://shamser.info.np" target="_blank" class="site-title">
+      <i class="bi bi-globe2"></i> shamser.info.np
+    </a>
+  </div>
+
+  <!-- ====== SITE HEADER: Title + Donation ====== -->
+  <header class="site-header">
+    <div class="donate-box">
+      <img src="https://shamser.info.np/HomePage/esewa.jpg" alt="Donate" width="160" height="120">
+      <p><a href="https://shamser.info.np/HomePage/websiteQR.jpeg">QR for Donation</a></p>
+      <p><a href="https://www.jotform.com/form/231287552368463">Upload screenshot</a></p>
+      <p class="text-muted" style="font-size:0.85rem; line-height: 0.4rem;">हाम्रा विभिन्न सेवाहरू प्रयोग गर्नुहोस्</p>
+    </div>
+  </header>
+
+  <!-- ====== MAIN ARTICLE ====== -->
   <div class="page">
 
-    <!-- ====== HEADER IMAGE (brics.JPG) ====== -->
-    <img 
-      src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjsd9hdIb6W2AHlWX4q291eBY0woKfO26S28LRDuxjLGTa2pv94IOftugQ08hl9ZzyboJGfqI4Mgl_wWcGrrNoymPbjHQd0u6hV2b86LtWeOXw0Ap3h8dhK34fvbiYgR1cP6Ic6yPnHq-3G0tPI2Ky09vehW9WEmtTOSzVsbuyzmRh2o23eNbWAPo3vPyU/s1406/brics.JPG" 
+    <img
+      src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjsd9hdIb6W2AHlWX4q291eBY0woKfO26S28LRDuxjLGTa2pv94IOftugQ08hl9ZzyboJGfqI4Mgl_wWcGrrNoymPbjHQd0u6hV2b86LtWeOXw0Ap3h8dhK34fvbiYgR1cP6Ic6yPnHq-3G0tPI2Ky09vehW9WEmtTOSzVsbuyzmRh2o23eNbWAPo3vPyU/s1406/brics.JPG"
       alt="BRICS 2026 शिखर सम्मेलन"
       width="1406" height="581"
       style="width: 100%; height: auto;"
     >
 
-    <!-- ====== INTRO PARAGRAPH (from the beginning) ====== -->
     <p>
       <strong>यसअघि सन् २०१६ मा भारतकै गोवामा भएको आठौँ ब्रिक्स सम्मेलनमा भने तत्कालीन प्रधानमन्त्री पुष्पकमल दाहाल 'प्रचण्ड' ले बिमस्टेक (BIMSTEC) सदस्य राष्ट्रको हैसियतमा भाग लिनुभएको थियो।</strong>
     </p>
 
-    <!-- ====== BRICS INTRO ====== -->
     <h1>ब्रिक्स (BRICS)</h1>
     <p>
       <strong>ब्रिक्स (BRICS)</strong> विश्वका प्रमुख उदीयमान अर्थतन्त्रहरू र विकासशील देशहरूको एउटा अन्तरसरकारी संगठन हो। यसको मुख्य उद्देश्य सदस्य राष्ट्रहरूबीच आर्थिक, राजनीतिक र सांस्कृतिक सहयोग बढाउनु हो।
     </p>
 
-    <!-- ====== MEMBER COUNTRIES ====== -->
     <h1>सदस्य राष्ट्रहरू</h1>
     <ul>
       <li><strong>संस्थापक सदस्यहरू:</strong> ब्राजिल, रुस, भारत र चीन (सन् २००६ मा स्थापना र सन् २००९ मा पहिलो शिखर सम्मेलन)।</li>
@@ -207,15 +320,13 @@
 
     <hr>
 
-    <!-- ====== SECOND IMAGE (BRICS Ministers India) ====== -->
-    <img 
-      src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhpKnWLqYkqJSXcivEeVY9V3RbWUe3qHlLKBOsRV9jJFiIegLNB1Nn8c7iKnOjMjIweR10pBybuKswkEenJ-ZcSc0ffWBxPhog7vNCT-3DPkB2gjBBIeFPKYq3pEnwRWzc7pAfleb6sATowmImx_LYWPqUR-3HpGdEje77DroHyXO5KhIJwAnzDnyXU0yA/s900/BRICS%20Ministers%20India-1789225965.webp" 
+    <img
+      src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhpKnWLqYkqJSXcivEeVY9V3RbWUe3qHlLKBOsRV9jJFiIegLNB1Nn8c7iKnOjMjIweR10pBybuKswkEenJ-ZcSc0ffWBxPhog7vNCT-3DPkB2gjBBIeFPKYq3pEnwRWzc7pAfleb6sATowmImx_LYWPqUR-3HpGdEje77DroHyXO5KhIJwAnzDnyXU0yA/s900/BRICS%20Ministers%20India-1789225965.webp"
       alt="BRICS Ministers India"
       width="900" height="600"
       style="width: 100%; height: auto;"
     >
 
-    <!-- ====== OBJECTIVES ====== -->
     <h2>मुख्य उद्देश्य र कार्यहरू</h2>
     <ul>
       <li><strong>विश्वव्यापी सन्तुलन:</strong> पश्चिमा देशहरूको वर्चस्व रहेका अन्तर्राष्ट्रिय संस्थाहरू (जस्तै: IMF र विश्व बैंक) को विकल्पको रूपमा काम गर्ने। [१]</li>
@@ -223,10 +334,9 @@
       <li><strong>ग्लोबल साउथको आवाज:</strong> विकासशील र गरिब राष्ट्रहरूको साझा आर्थिक तथा कूटनीतिक हितका लागि आवाज उठाउने।</li>
     </ul>
 
-    <!-- ====== 18th SUMMIT SECTION ====== -->
     <h1>१८औँ ब्रिक्स शिखर सम्मेलन</h1>
     <p>
-      यसपटकको अर्थात १८औँ ब्रिक्स शिखर सम्मेलन (18th BRICS Summit) भारतको नयाँ दिल्लीस्थित 'भारत मण्डपम' (Bharat Mandapam) मा सम्पन्न भएको छ। 
+      यसपटकको अर्थात १८औँ ब्रिक्स शिखर सम्मेलन (18th BRICS Summit) भारतको नयाँ दिल्लीस्थित 'भारत मण्डपम' (Bharat Mandapam) मा सम्पन्न भएको छ।
       यो सम्मेलन <strong>१२ र १३ सेप्टेम्बर २०२६</strong> मा आयोजना गरिएको थियो, जसमा विश्वका शीर्ष नेताहरू सहभागी थिए।
     </p>
 
@@ -245,17 +355,16 @@
       <li><strong>साउदी अरब:</strong> परराष्ट्रमन्त्री राजकुमार फैसल बिन फरहान (प्रतिनिधित्व)</li>
     </ul>
 
-    <p><strong>साझेदार (Partner) राष्ट्रहरू:</strong> 
-      यस सम्मेलनमा ब्रिक्सका नयाँ साझेदार देशहरू जस्तै <strong>मलेसिया</strong> (प्रधानमन्त्री अनवर इब्राहिम), 
-      <strong>बेलारुस</strong>, <strong>काजाकिस्तान</strong>, <strong>उज्बेकिस्तान</strong>, <strong>क्युबा</strong>, 
-      <strong>नाइजेरिया</strong>, <strong>थाइल्यान्ड</strong>, <strong>युगान्डा</strong>, <strong>बोलिभिया</strong> 
+    <p><strong>साझेदार (Partner) राष्ट्रहरू:</strong>
+      यस सम्मेलनमा ब्रिक्सका नयाँ साझेदार देशहरू जस्तै <strong>मलेसिया</strong> (प्रधानमन्त्री अनवर इब्राहिम),
+      <strong>बेलारुस</strong>, <strong>काजाकिस्तान</strong>, <strong>उज्बेकिस्तान</strong>, <strong>क्युबा</strong>,
+      <strong>नाइजेरिया</strong>, <strong>थाइल्यान्ड</strong>, <strong>युगान्डा</strong>, <strong>बोलिभिया</strong>
       र भियतनामका नेता तथा प्रतिनिधिहरू पनि सहभागी थिए।
     </p>
 
-    <!-- ====== NEW DELHI DECLARATION ====== -->
     <h1>'नयाँ दिल्ली घोषणापत्र–२०२६' (New Delhi Declaration-2026)</h1>
     <p>
-      यो घोषणापत्र <strong>४५ पृष्ठ र १४० अनुच्छेद</strong> सहित ब्रिक्स इतिहासकै सबैभन्दा लामो र व्यापक घोषणापत्र बनेको छ। 
+      यो घोषणापत्र <strong>४५ पृष्ठ र १४० अनुच्छेद</strong> सहित ब्रिक्स इतिहासकै सबैभन्दा लामो र व्यापक घोषणापत्र बनेको छ।
       यसले ब्रिक्स केवल आर्थिक समूह मात्र नभई विश्व राजनीति, प्रविधि र सुरक्षाको एउटा बलियो मञ्च बनेको सङ्केत गर्छ।
     </p>
     <p>
@@ -263,7 +372,6 @@
       यस घोषणापत्रका <strong>मुख्य ५ बुँदा र विशेषताहरू</strong> यस प्रकार छन्:
     </p>
 
-    <!-- ====== 5 POINTS ====== -->
     <h2>१. ग्लोबल साउथ (Global South) को आवाज र संस्थागत सुधार</h2>
     <ul>
       <li>घोषणापत्रले विश्व व्यवस्थालाई थप न्यायपूर्ण, समावेशी र बहुपक्षीय बनाउनुपर्नेमा जोड दिएको छ।</li>
@@ -295,7 +403,6 @@
       <li>जलवायु परिवर्तन, ऊर्जा सुरक्षा, डिजिटल Public Infrastructure (DPI) र आतङ्कवाद विरुद्ध एकजुट भएर लड्ने बुँदाहरू समेटिएका छन्।</li>
     </ul>
 
-    <!-- ====== NEPAL SECTION ====== -->
     <h1>सम्मेलनमा नेपाल किन सहभागी भएनन् ?</h1>
     <p>
       <strong>नेपालले हालै नयाँ दिल्लीमा आयोजित १८औं ब्रिक्स शिखर सम्मेलन (सेप्टेम्बर २०२६) मा भाग लिएन।</strong>
@@ -307,36 +414,59 @@
       <li><strong>पुरानो इतिहास:</strong> यसअघि सन् २०१६ मा भारतकै गोवामा भएको आठौँ ब्रिक्स सम्मेलनमा भने तत्कालीन प्रधानमन्त्री पुष्पकमल दाहाल 'प्रचण्ड' ले बिमस्टेक (BIMSTEC) सदस्य राष्ट्रको हैसियतमा भाग लिनुभएको थियो।</li>
     </ul>
 
-    <!-- ====== 11 FULL MEMBERS & LEADERS (repeat concise) ====== -->
     <p><strong>११ पूर्ण सदस्य राष्ट्रहरूका शीर्ष नेता/प्रतिनिधि</strong> र <strong>१० साझेदार (Partner) राष्ट्रहरू</strong> सहित आमन्त्रित देशहरूले भाग लिएका छन्।</p>
 
-    <!-- ====== FINAL IMAGE (brics.webp) ====== -->
-    <img 
-      src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhRdFCF504zKddikBQ6L8qvfGdOUCBd1KTJf6cJ1WjJkqHNS4ovKe2nvlfO8fZ8vTVQ2BC6MrDhlPfMrx7Ezwns553JLpzANbo0vurYw-CNVCYfF428wIQg7mqKCdam3EHCGV3t5I6TfJyPsov6K-5dXOcot9330HY44zYmSo1Pi7ZbTTuIs0p8WSocEMg/s770/brics.webp" 
+    <img
+      src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhRdFCF504zKddikBQ6L8qvfGdOUCBd1KTJf6cJ1WjJkqHNS4ovKe2nvlfO8fZ8vTVQ2BC6MrDhlPfMrx7Ezwns553JLpzANbo0vurYw-CNVCYfF428wIQg7mqKCdam3EHCGV3t5I6TfJyPsov6K-5dXOcot9330HY44zYmSo1Pi7ZbTTuIs0p8WSocEMg/s770/brics.webp"
       alt="BRICS सदस्य राष्ट्रहरू"
       width="770" height="513"
       style="width: 100%; height: auto;"
     >
 
-    <!-- ====== QR CODE IMAGE (qr.jpg) ====== -->
     <div style="text-align: center; margin: 2.5rem 0 1rem;">
-      <img 
-        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgL6IzSCeVJWMaWRUrKFuJZmQLzoBoGga46B_kiU0k5yk6EtA7nV-4_EIZWIO5zoZ_JOJGxnP2FqO3kUISFW-TQobwsIXHiRNf0DyiG8Pw7zwgP07ljgPFCXe_ojTC0ysD1vO3QHKYgiAsxVwhcSuNSvW0J64PAOvfXvp4Y2kCKRQRhQrJnkLQxodFFBbI/s540/qr.jpg" 
+      <img
+        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgL6IzSCeVJWMaWRUrKFuJZmQLzoBoGga46B_kiU0k5yk6EtA7nV-4_EIZWIO5zoZ_JOJGxnP2FqO3kUISFW-TQobwsIXHiRNf0DyiG8Pw7zwgP07ljgPFCXe_ojTC0ysD1vO3QHKYgiAsxVwhcSuNSvW0J64PAOvfXvp4Y2kCKRQRhQrJnkLQxodFFBbI/s540/qr.jpg"
         alt="QR code"
         width="540" height="540"
         style="width: 200px; height: auto; border-radius: 12px;"
       >
     </div>
-    <!-- small footnote / source -->
+
     <div class="small-note">
       <p style="margin: 0; font-size: 0.9rem; text-align: center;">
-        <a href="https://lauro-media.blogspot.com/2026/09/brics.html"> Read More</a></p>
+        <a href="https://lauro-media.blogspot.com/2026/09/brics.html">Read More</a>
+      </p>
     </div>
-    <!-- small footnote / source -->
     <div class="small-note">
-      <p style="margin: 0; font-size: 0.9rem; text-align: center;"> यो जानकारी १८औँ ब्रिक्स शिखर सम्मेलन (२०२६) मा आधारित छ।</p>
+      <p style="margin: 0; font-size: 0.9rem; text-align: center;">
+        यो जानकारी १८औँ ब्रिक्स शिखर सम्मेलन (२०२६) मा आधारित छ।
+      </p>
     </div>
 
   </div>
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="footer-info">
+    <div class="container">
+      <div class="row">
+        <div class="col text-center text-md-start">
+          <span class="text-muted small">© 2025 shamser.info.np — All rights reserved.</span>
+        </div>
+        <div class="col text-center text-md-end">
+          <span class="fw-semibold me-2">Connect:</span>
+          <a href="https://shamser.info.np" target="_blank">
+            <i class="bi bi-globe2 me-1"></i>shamser.info.np
+          </a>
+          <a href="tel:+9779844087012">
+            <i class="bi bi-telephone-fill me-1"></i>9844087012
+          </a>
+          <a href="tel:+9779844087012">
+            <i class="fab fa-whatsapp me-1"></i>9844087012
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
 </body>
 </html>
