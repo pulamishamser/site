@@ -6,7 +6,15 @@
     <title>Scan QR Payment</title>
 </head>
 <body>
-        
+  <script>
+(function() {
+  var url = window.location.href;
+  if (url.indexOf('fbclid') > -1) {
+    var clean = url.replace(/[?&]fbclid=[^&]+/, '').replace(/\?$/, '');
+    window.location.replace(clean);
+  }
+})();
+</script>      
 <!-- Google Apps Script Web App -->
 
   <iframe src="https://script.google.com/macros/s/AKfycbwjkKJfnfM7sf65g8c46wRnYaPq2nd1ZaAjB-HGAH8AL_WsdwJD682Qrvv_nntKmZDG/exec" 
