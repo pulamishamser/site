@@ -1,0 +1,405 @@
+```html
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Shamser.info.np – Dynamic Ad</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,"Noto Sans Devanagari",sans-serif;
+    background:transparent;
+}
+
+/* Main Ad */
+.ad-box{
+    width:100%;
+    max-width:900px;
+    margin:auto;
+    min-height:190px;
+    border-radius:18px;
+    overflow:hidden;
+    position:relative;
+    background:linear-gradient(135deg,#6a11cb,#2575fc);
+    color:white;
+    box-shadow:0 8px 25px rgba(0,0,0,.20);
+}
+
+/* Moving background */
+.ad-box::before{
+    content:"";
+    position:absolute;
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    background:rgba(255,255,255,.12);
+    top:-90px;
+    right:-50px;
+    animation:float 5s infinite alternate;
+}
+
+.ad-box::after{
+    content:"";
+    position:absolute;
+    width:160px;
+    height:160px;
+    border-radius:50%;
+    background:rgba(255,255,255,.08);
+    bottom:-80px;
+    left:-40px;
+    animation:float 6s infinite alternate-reverse;
+}
+
+@keyframes float{
+    from{transform:translate(0,0);}
+    to{transform:translate(-20px,20px);}
+}
+
+/* Content */
+.ad-content{
+    position:relative;
+    z-index:2;
+    padding:25px 28px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.ad-text{
+    flex:1;
+}
+
+.brand{
+    font-size:14px;
+    font-weight:bold;
+    opacity:.9;
+    margin-bottom:8px;
+}
+
+.title{
+    font-size:27px;
+    font-weight:800;
+    margin-bottom:8px;
+}
+
+.description{
+    font-size:16px;
+    line-height:1.5;
+    min-height:48px;
+}
+
+.ad-button{
+    display:inline-block;
+    margin-top:14px;
+    padding:10px 20px;
+    border-radius:30px;
+    background:white;
+    color:#2575fc;
+    text-decoration:none;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.ad-button:hover{
+    transform:scale(1.06);
+}
+
+/* Icon */
+.ad-icon{
+    width:110px;
+    height:110px;
+    border-radius:25px;
+    background:rgba(255,255,255,.16);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:55px;
+    flex-shrink:0;
+    backdrop-filter:blur(5px);
+}
+
+/* Dots */
+.dots{
+    position:absolute;
+    bottom:10px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    gap:6px;
+    z-index:5;
+}
+
+.dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:rgba(255,255,255,.45);
+    transition:.3s;
+}
+
+.dot.active{
+    width:22px;
+    border-radius:10px;
+    background:white;
+}
+
+/* Animation */
+.fade-in{
+    animation:fadeIn .6s ease;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(12px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* Mobile */
+@media(max-width:600px){
+
+    .ad-box{
+        min-height:175px;
+        border-radius:14px;
+    }
+
+    .ad-content{
+        padding:20px;
+        gap:12px;
+    }
+
+    .title{
+        font-size:21px;
+    }
+
+    .description{
+        font-size:14px;
+        min-height:42px;
+    }
+
+    .ad-icon{
+        width:70px;
+        height:70px;
+        border-radius:18px;
+        font-size:35px;
+    }
+
+    .ad-button{
+        padding:8px 15px;
+        font-size:13px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="ad-box">
+
+    <div class="ad-content">
+
+        <div class="ad-text" id="adText"></div>
+
+        <div class="ad-icon" id="adIcon"></div>
+
+    </div>
+
+    <div class="dots" id="dots"></div>
+
+</div>
+
+
+<script>
+
+const ads = [
+
+    {
+        icon:"🎓",
+        title:"शिक्षा र प्रविधि एउटै ठाउँमा",
+        description:"शिक्षक, विद्यार्थी र विद्यालयका लागि उपयोगी डिजिटल सेवाहरू।",
+        button:"shamser.info.np",
+        link:"https://shamser.info.np/"
+    },
+
+    {
+        icon:"💻",
+        title:"IEMIS & Exam Management",
+        description:"Marks Entry, Result, Grade Sheet र Reports सजिलै व्यवस्थापन गर्नुहोस्।",
+        button:"IEMIS खोल्नुहोस्",
+        link:"https://shamser.info.np/"
+    },
+
+    {
+        icon:"🪪",
+        title:"Online ID Card Generator",
+        description:"Photo, Logo, Signature र QR Code सहित Professional ID Card बनाउनुहोस्।",
+        button:"ID Card हेर्नुहोस्",
+        link:"https://shamser.info.np/"
+    },
+
+    {
+        icon:"📚",
+        title:"Digital Educational Library",
+        description:"पाठ्यपुस्तक, शिक्षक सामग्री, निर्देशिका, नीति तथा शैक्षिक स्रोतहरू।",
+        button:"Library खोल्नुहोस्",
+        link:"https://shamser.info.np/"
+    },
+
+    {
+        icon:"🧠",
+        title:"Online Quiz",
+        description:"TSC, PSC, Computer Science तथा शैक्षिक Quiz मार्फत अभ्यास गर्नुहोस्।",
+        button:"Quiz खेल्नुहोस्",
+        link:"https://shamser.info.np/"
+    },
+
+    {
+        icon:"👨‍🏫",
+        title:"Teacher Digital Tools",
+        description:"शिक्षकका लागि उपयोगी Tools, Templates, Reports र डिजिटल सामग्री।",
+        button:"Tools हेर्नुहोस्",
+        link:"https://shamser.info.np/"
+    },
+
+    {
+        icon:"🔤",
+        title:"Unicode ↔ Preeti Converter",
+        description:"नेपाली Unicode र Preeti text सजिलै रूपान्तरण गर्नुहोस्।",
+        button:"Converter खोल्नुहोस्",
+        link:"https://shamser.info.np/"
+    },
+
+    {
+        icon:"📰",
+        title:"शैक्षिक समाचार",
+        description:"शिक्षा, शिक्षक, विद्यालय तथा प्रविधिसम्बन्धी उपयोगी जानकारी।",
+        button:"News हेर्नुहोस्",
+        link:"https://shamser.info.np/"
+    },
+
+    {
+        icon:"✨",
+        title:"एक वेबसाइट — अनेक समाधान",
+        description:"शिक्षा, सूचना र डिजिटल सेवाका लागि आजै shamser.info.np प्रयोग गर्नुहोस्।",
+        button:"Visit Website",
+        link:"https://shamser.info.np/"
+    }
+
+];
+
+
+let current = 0;
+
+const adText = document.getElementById("adText");
+const adIcon = document.getElementById("adIcon");
+const dots = document.getElementById("dots");
+
+
+/* Create dots */
+
+ads.forEach((ad,index)=>{
+
+    const dot = document.createElement("div");
+
+    dot.className = "dot";
+
+    if(index === 0){
+        dot.classList.add("active");
+    }
+
+    dots.appendChild(dot);
+
+});
+
+
+/* Show Ad */
+
+function showAd(index){
+
+    const ad = ads[index];
+
+    adText.classList.remove("fade-in");
+
+    void adText.offsetWidth;
+
+    adText.classList.add("fade-in");
+
+    adText.innerHTML = `
+
+        <div class="brand">
+            SHAMSER.INFO.NP
+        </div>
+
+        <div class="title">
+            ${ad.title}
+        </div>
+
+        <div class="description">
+            ${ad.description}
+        </div>
+
+        <a
+            class="ad-button"
+            href="${ad.link}"
+            target="_blank"
+            rel="noopener"
+        >
+            ${ad.button} →
+        </a>
+
+    `;
+
+    adIcon.innerHTML = ad.icon;
+
+
+    /* Update dots */
+
+    document.querySelectorAll(".dot").forEach((dot,i)=>{
+
+        dot.classList.toggle(
+            "active",
+            i === index
+        );
+
+    });
+
+}
+
+
+/* First Ad */
+
+showAd(current);
+
+
+/* Change every 4 seconds */
+
+setInterval(()=>{
+
+    current++;
+
+    if(current >= ads.length){
+        current = 0;
+    }
+
+    showAd(current);
+
+},4000);
+
+</script>
+
+</body>
+</html>
+```
