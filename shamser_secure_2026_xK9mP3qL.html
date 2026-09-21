@@ -31,7 +31,7 @@
     min-height: 100vh;
   }
 
-  /* ============ PAGE HEADER (optional) ============ */
+  /* ============ PAGE HEADER ============ */
   .page-header {
     text-align: center;
     margin-bottom: 24px;
@@ -60,7 +60,6 @@
     overflow: hidden;
     background: #ffffff;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-    /* Reserve space so layout doesn't jump while loading */
     min-height: 220px;
   }
 
@@ -174,7 +173,7 @@
     transform: translateY(-1px);
   }
 
-  /* ============ PAGE FOOTER (optional) ============ */
+  /* ============ PAGE FOOTER ============ */
   .page-footer {
     margin-top: 22px;
     font-size: 12px;
@@ -208,7 +207,7 @@
 
 <body>
 
-  <!-- Optional page header -->
+  <!-- Page header -->
   <div class="page-header">
     <h1>Shamser Educational &amp; Digital Tools</h1>
     <p>सुरक्षित डिजिटल विज्ञापन सेवा</p>
@@ -233,11 +232,11 @@
       <button class="retry-btn" id="retryBtn">Retry</button>
     </div>
 
-    <!-- The secure iframe -->
+    <!-- The secure iframe — verified endpoint -->
     <iframe
       id="secureAdFrame"
       class="secure-iframe"
-      src="https://script.google.com/macros/s/AKfycb.../exec?action=html&token=shamser_secure_2026_xK9mP3qL"
+      src="https://script.google.com/macros/s/AKfycbw08q7K604hcpvcH7A1UP4PbiH1D3X1oiLrO3a3evxrnseUccQHTneyMaxy8C4LE2_euw/exec?action=html&token=shamser_secure_2026_xK9mP3qL"
       title="Shamser Secure Ads"
       loading="lazy"
       referrerpolicy="no-referrer"
@@ -247,7 +246,7 @@
 
   </div>
 
-  <!-- Optional footer -->
+  <!-- Footer -->
   <div class="page-footer">
     &copy; <span id="year"></span> shamser.info.np — All rights reserved.
   </div>
@@ -257,19 +256,20 @@
     "use strict";
 
     /* ============ CONFIG ============ */
-    // Replace with your real deployed Apps Script URL
+    // Verified Google Apps Script endpoint from your existing project
     const APPS_SCRIPT_URL =
-      "https://script.google.com/macros/s/AKfycb.../exec" +
-      "?action=html&token=shamser_secure_2026_xK9mP3qL";
+      "https://script.google.com/macros/s/" +
+      "AKfycbw08q7K604hcpvcH7A1UP4PbiH1D3X1oiLrO3a3evxrnseUccQHTneyMaxy8C4LE2_euw" +
+      "/exec?action=html&token=shamser_secure_2026_xK9mP3qL";
 
     const LOAD_TIMEOUT_MS = 12000; // 12s fallback timeout
 
     /* ============ ELEMENTS ============ */
-    const iframe      = document.getElementById("secureAdFrame");
-    const loader      = document.getElementById("iframeLoader");
-    const errorBox    = document.getElementById("iframeError");
-    const retryBtn    = document.getElementById("retryBtn");
-    const yearSpan    = document.getElementById("year");
+    const iframe    = document.getElementById("secureAdFrame");
+    const loader    = document.getElementById("iframeLoader");
+    const errorBox  = document.getElementById("iframeError");
+    const retryBtn  = document.getElementById("retryBtn");
+    const yearSpan  = document.getElementById("year");
 
     /* ============ STATE ============ */
     let loadTimer = null;
@@ -299,7 +299,6 @@
     function startTimer() {
       clearTimer();
       loadTimer = setTimeout(function () {
-        // If iframe hasn't loaded within timeout, show error
         if (!iframe.classList.contains("is-loaded")) {
           showError();
         }
@@ -330,13 +329,12 @@
     });
 
     /* ============ INIT ============ */
-    // Footer year
     if (yearSpan) {
       yearSpan.textContent = new Date().getFullYear();
     }
 
-    // Kick off load (in case src was set inline already, this ensures timer starts)
-    startTimer();
+    // Kick off initial load
+    loadIframe();
 
   })();
 </script>
