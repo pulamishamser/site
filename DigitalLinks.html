@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Shamser.info.np – Dynamic Ad</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,"Noto Sans Devanagari",sans-serif;
+    background:transparent;
+}
+
+/* Main Ad */
+.ad-box{
+    width:100%;
+    max-width:900px;
+    margin:auto;
+    min-height:190px;
+    border-radius:18px;
+    overflow:hidden;
+    position:relative;
+    background:linear-gradient(135deg,#6a11cb,#2575fc);
+    color:white;
+    box-shadow:0 8px 25px rgba(0,0,0,.20);
+}
+
+/* Moving background */
+.ad-box::before{
+    content:"";
+    position:absolute;
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    background:rgba(255,255,255,.12);
+    top:-90px;
+    right:-50px;
+    animation:float 5s infinite alternate;
+}
+
+.ad-box::after{
+    content:"";
+    position:absolute;
+    width:160px;
+    height:160px;
+    border-radius:50%;
+    background:rgba(255,255,255,.08);
+    bottom:-80px;
+    left:-40px;
+    animation:float 6s infinite alternate-reverse;
+}
+
+@keyframes float{
+    from{transform:translate(0,0);}
+    to{transform:translate(-20px,20px);}
+}
+
+/* Content */
+.ad-content{
+    position:relative;
+    z-index:2;
+    padding:25px 28px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.ad-text{
+    flex:1;
+}
+
+.brand{
+    font-size:14px;
+    font-weight:bold;
+    opacity:.9;
+    margin-bottom:8px;
+}
+
+.title{
+    font-size:27px;
+    font-weight:800;
+    margin-bottom:8px;
+}
+
+.description{
+    font-size:16px;
+    line-height:1.5;
+    min-height:48px;
+}
+
+.ad-button{
+    display:inline-block;
+    margin-top:14px;
+    padding:10px 20px;
+    border-radius:30px;
+    background:white;
+    color:#2575fc;
+    text-decoration:none;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.ad-button:hover{
+    transform:scale(1.06);
+}
+
+/* Icon */
+.ad-icon{
+    width:110px;
+    height:110px;
+    border-radius:25px;
+    background:rgba(255,255,255,.16);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:55px;
+    flex-shrink:0;
+    backdrop-filter:blur(5px);
+}
+
+/* Dots */
+.dots{
+    position:absolute;
+    bottom:10px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    gap:6px;
+    z-index:5;
+}
+
+.dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:rgba(255,255,255,.45);
+    transition:.3s;
+}
+
+.dot.active{
+    width:22px;
+    border-radius:10px;
+    background:white;
+}
+
+/* Animation */
+.fade-in{
+    animation:fadeIn .6s ease;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(12px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* Mobile */
+@media(max-width:600px){
+
+    .ad-box{
+        min-height:175px;
+        border-radius:14px;
+    }
+
+    .ad-content{
+        padding:20px;
+        gap:12px;
+    }
+
+    .title{
+        font-size:21px;
+    }
+
+    .description{
+        font-size:14px;
+        min-height:42px;
+    }
+
+    .ad-icon{
+        width:70px;
+        height:70px;
+        border-radius:18px;
+        font-size:35px;
+    }
+
+    .ad-button{
+        padding:8px 15px;
+        font-size:13px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="ad-box">
+
+    <div class="ad-content">
+
+        <div class="ad-text" id="adText"></div>
+
+        <div class="ad-icon" id="adIcon"></div>
+
+    </div>
+
+    <div class="dots" id="dots"></div>
+
+</div>
+
+<iframe 
+  src="https://script.google.com/macros/s/AKfycb.../exec?action=html&token=shamser_secure_2026_xK9mP3qL"
+  style="width:100%; max-width:900px; height:220px; border:0;"
+  sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox">
+</iframe>
+</body>
+</html>
