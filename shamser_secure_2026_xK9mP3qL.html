@@ -1,230 +1,345 @@
-
 <!DOCTYPE html>
 <html lang="ne">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Shamser.info.np – Dynamic Ad</title>
+<title>Shamser.info.np – Secure Ad Embed</title>
 
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
+  /* ============ RESET ============ */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
-body{
-    font-family:Arial,"Noto Sans Devanagari",sans-serif;
-    background:transparent;
-}
+  html, body {
+    height: 100%;
+  }
 
-/* Main Ad */
-.ad-box{
-    width:100%;
-    max-width:900px;
-    margin:auto;
-    min-height:190px;
-    border-radius:18px;
-    overflow:hidden;
-    position:relative;
-    background:linear-gradient(135deg,#6a11cb,#2575fc);
-    color:white;
-    box-shadow:0 8px 25px rgba(0,0,0,.20);
-}
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, Arial, sans-serif;
+    background: #f4f6fb;
+    color: #1f2937;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    min-height: 100vh;
+  }
 
-/* Moving background */
-.ad-box::before{
-    content:"";
-    position:absolute;
-    width:220px;
-    height:220px;
-    border-radius:50%;
-    background:rgba(255,255,255,.12);
-    top:-90px;
-    right:-50px;
-    animation:float 5s infinite alternate;
-}
+  /* ============ PAGE HEADER (optional) ============ */
+  .page-header {
+    text-align: center;
+    margin-bottom: 24px;
+    max-width: 900px;
+    width: 100%;
+  }
 
-.ad-box::after{
-    content:"";
-    position:absolute;
-    width:160px;
-    height:160px;
-    border-radius:50%;
-    background:rgba(255,255,255,.08);
-    bottom:-80px;
-    left:-40px;
-    animation:float 6s infinite alternate-reverse;
-}
+  .page-header h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 4px;
+  }
 
-@keyframes float{
-    from{transform:translate(0,0);}
-    to{transform:translate(-20px,20px);}
-}
+  .page-header p {
+    font-size: 14px;
+    color: #6b7280;
+  }
 
-/* Content */
-.ad-content{
-    position:relative;
-    z-index:2;
-    padding:25px 28px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:20px;
-}
+  /* ============ IFRAME WRAPPER ============ */
+  .iframe-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    /* Reserve space so layout doesn't jump while loading */
+    min-height: 220px;
+  }
 
-.ad-text{
-    flex:1;
-}
+  /* ============ THE IFRAME ============ */
+  .secure-iframe {
+    display: block;
+    width: 100%;
+    height: 220px;
+    border: 0;
+    background: transparent;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
 
-.brand{
-    font-size:14px;
-    font-weight:bold;
-    opacity:.9;
-    margin-bottom:8px;
-}
+  .secure-iframe.is-loaded {
+    opacity: 1;
+  }
 
-.title{
-    font-size:27px;
-    font-weight:800;
-    margin-bottom:8px;
-}
+  /* ============ LOADING SKELETON ============ */
+  .iframe-loader {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: #ffffff;
+    z-index: 2;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+  }
 
-.description{
-    font-size:16px;
-    line-height:1.5;
-    min-height:48px;
-}
+  .iframe-loader.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
 
-.ad-button{
-    display:inline-block;
-    margin-top:14px;
-    padding:10px 20px;
-    border-radius:30px;
-    background:white;
-    color:#2575fc;
-    text-decoration:none;
-    font-weight:bold;
-    transition:.3s;
-}
+  .spinner {
+    width: 38px;
+    height: 38px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: spin 0.9s linear infinite;
+  }
 
-.ad-button:hover{
-    transform:scale(1.06);
-}
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
 
-/* Icon */
-.ad-icon{
-    width:110px;
-    height:110px;
-    border-radius:25px;
-    background:rgba(255,255,255,.16);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:55px;
-    flex-shrink:0;
-    backdrop-filter:blur(5px);
-}
+  .loader-text {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    opacity: 0.95;
+  }
 
-/* Dots */
-.dots{
-    position:absolute;
-    bottom:10px;
-    left:50%;
-    transform:translateX(-50%);
-    display:flex;
-    gap:6px;
-    z-index:5;
-}
+  /* ============ ERROR FALLBACK ============ */
+  .iframe-error {
+    position: absolute;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #fff5f5;
+    color: #b91c1c;
+    text-align: center;
+    padding: 20px;
+    z-index: 3;
+  }
 
-.dot{
-    width:7px;
-    height:7px;
-    border-radius:50%;
-    background:rgba(255,255,255,.45);
-    transition:.3s;
-}
+  .iframe-error.is-visible {
+    display: flex;
+  }
 
-.dot.active{
-    width:22px;
-    border-radius:10px;
-    background:white;
-}
+  .iframe-error .error-icon {
+    font-size: 32px;
+  }
 
-/* Animation */
-.fade-in{
-    animation:fadeIn .6s ease;
-}
+  .iframe-error .error-title {
+    font-size: 15px;
+    font-weight: 700;
+  }
 
-@keyframes fadeIn{
-    from{
-        opacity:0;
-        transform:translateY(12px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
+  .iframe-error .error-msg {
+    font-size: 12.5px;
+    color: #7f1d1d;
+    max-width: 420px;
+    line-height: 1.5;
+  }
 
-/* Mobile */
-@media(max-width:600px){
+  .iframe-error .retry-btn {
+    margin-top: 6px;
+    padding: 7px 18px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #ffffff;
+    background: #b91c1c;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
 
-    .ad-box{
-        min-height:175px;
-        border-radius:14px;
-    }
+  .iframe-error .retry-btn:hover {
+    background: #991b1b;
+    transform: translateY(-1px);
+  }
 
-    .ad-content{
-        padding:20px;
-        gap:12px;
-    }
+  /* ============ PAGE FOOTER (optional) ============ */
+  .page-footer {
+    margin-top: 22px;
+    font-size: 12px;
+    color: #9ca3af;
+    text-align: center;
+  }
 
-    .title{
-        font-size:21px;
-    }
-
-    .description{
-        font-size:14px;
-        min-height:42px;
-    }
-
-    .ad-icon{
-        width:70px;
-        height:70px;
-        border-radius:18px;
-        font-size:35px;
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 600px) {
+    body {
+      padding: 14px;
     }
 
-    .ad-button{
-        padding:8px 15px;
-        font-size:13px;
+    .page-header h1 {
+      font-size: 18px;
     }
-}
+
+    .page-header p {
+      font-size: 12.5px;
+    }
+
+    .iframe-wrapper,
+    .secure-iframe {
+      min-height: 190px;
+      height: 190px;
+      border-radius: 14px;
+    }
+  }
 </style>
 </head>
 
 <body>
 
-<div class="ad-box">
+  <!-- Optional page header -->
+  <div class="page-header">
+    <h1>Shamser Educational &amp; Digital Tools</h1>
+    <p>सुरक्षित डिजिटल विज्ञापन सेवा</p>
+  </div>
 
-    <div class="ad-content">
+  <!-- ============ SECURE IFRAME WRAPPER ============ -->
+  <div class="iframe-wrapper" id="iframeWrapper">
 
-        <div class="ad-text" id="adText"></div>
-
-        <div class="ad-icon" id="adIcon"></div>
-
+    <!-- Loading skeleton -->
+    <div class="iframe-loader" id="iframeLoader">
+      <div class="spinner"></div>
+      <div class="loader-text">Loading secure ads…</div>
     </div>
 
-    <div class="dots" id="dots"></div>
+    <!-- Error fallback -->
+    <div class="iframe-error" id="iframeError">
+      <div class="error-icon">⚠️</div>
+      <div class="error-title">Unable to load ads</div>
+      <div class="error-msg">
+        Please check your internet connection or try again later.
+      </div>
+      <button class="retry-btn" id="retryBtn">Retry</button>
+    </div>
 
-</div>
+    <!-- The secure iframe -->
+    <iframe
+      id="secureAdFrame"
+      class="secure-iframe"
+      src="https://script.google.com/macros/s/AKfycb.../exec?action=html&token=shamser_secure_2026_xK9mP3qL"
+      title="Shamser Secure Ads"
+      loading="lazy"
+      referrerpolicy="no-referrer"
+      sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox"
+      allow="clipboard-write"
+    ></iframe>
 
-<iframe 
-  src="https://script.google.com/macros/s/AKfycbzoFNEQBmXRivUh70Zy6pGQCYQqQxsG7MN0tcW8GBKF_XWoQ83tmie9YbcECQ6ofPBG1g/exec?action=html&token=shamser_secure_2026_xK9mP3qL"
-  style="width:100%; max-width:900px; height:220px; border:0;"
-  sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox">
-</iframe>
+  </div>
+
+  <!-- Optional footer -->
+  <div class="page-footer">
+    &copy; <span id="year"></span> shamser.info.np — All rights reserved.
+  </div>
+
+<script>
+  (function () {
+    "use strict";
+
+    /* ============ CONFIG ============ */
+    // Replace with your real deployed Apps Script URL
+    const APPS_SCRIPT_URL =
+      "https://script.google.com/macros/s/AKfycb.../exec" +
+      "?action=html&token=shamser_secure_2026_xK9mP3qL";
+
+    const LOAD_TIMEOUT_MS = 12000; // 12s fallback timeout
+
+    /* ============ ELEMENTS ============ */
+    const iframe      = document.getElementById("secureAdFrame");
+    const loader      = document.getElementById("iframeLoader");
+    const errorBox    = document.getElementById("iframeError");
+    const retryBtn    = document.getElementById("retryBtn");
+    const yearSpan    = document.getElementById("year");
+
+    /* ============ STATE ============ */
+    let loadTimer = null;
+
+    /* ============ HELPERS ============ */
+    function hideLoader() {
+      loader.classList.add("is-hidden");
+    }
+
+    function showLoader() {
+      loader.classList.remove("is-hidden");
+      errorBox.classList.remove("is-visible");
+    }
+
+    function showError() {
+      hideLoader();
+      errorBox.classList.add("is-visible");
+    }
+
+    function clearTimer() {
+      if (loadTimer) {
+        clearTimeout(loadTimer);
+        loadTimer = null;
+      }
+    }
+
+    function startTimer() {
+      clearTimer();
+      loadTimer = setTimeout(function () {
+        // If iframe hasn't loaded within timeout, show error
+        if (!iframe.classList.contains("is-loaded")) {
+          showError();
+        }
+      }, LOAD_TIMEOUT_MS);
+    }
+
+    function loadIframe() {
+      showLoader();
+      iframe.classList.remove("is-loaded");
+      iframe.src = APPS_SCRIPT_URL;
+      startTimer();
+    }
+
+    /* ============ EVENTS ============ */
+    iframe.addEventListener("load", function () {
+      clearTimer();
+      hideLoader();
+      iframe.classList.add("is-loaded");
+    });
+
+    iframe.addEventListener("error", function () {
+      clearTimer();
+      showError();
+    });
+
+    retryBtn.addEventListener("click", function () {
+      loadIframe();
+    });
+
+    /* ============ INIT ============ */
+    // Footer year
+    if (yearSpan) {
+      yearSpan.textContent = new Date().getFullYear();
+    }
+
+    // Kick off load (in case src was set inline already, this ensures timer starts)
+    startTimer();
+
+  })();
+</script>
+
 </body>
 </html>
