@@ -3,225 +3,45 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shamser.info.np – Secure Ad Embed</title>
-
+<title>Ad Embed Test</title>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { height: 100%; }
-
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, Arial, sans-serif;
-    background: #f4f6fb;
-    color: #1f2937;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    min-height: 100vh;
+  body{
+    margin:0;
+    padding:20px;
+    background:#f5f6fa;
+    font-family:Arial,"Noto Sans Devanagari",sans-serif;
   }
-
-  .page-header {
-    text-align: center;
-    margin-bottom: 24px;
-    max-width: 900px;
-    width: 100%;
+  .ad-embed{
+    width:100%;
+    max-width:900px;
+    margin:0 auto;
   }
-  .page-header h1 { font-size: 22px; font-weight: 700; color: #111827; margin-bottom: 4px; }
-  .page-header p  { font-size: 14px; color: #6b7280; }
-
-  .iframe-wrapper {
-    position: relative;
-    width: 100%;
-    max-width: 900px;
-    border-radius: 18px;
-    overflow: hidden;
-    background: #ffffff;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-    min-height: 220px;
+  .ad-embed iframe{
+    width:100%;
+    height:230px;
+    border:0;
+    border-radius:18px;
+    display:block;
+    box-shadow:0 8px 25px rgba(0,0,0,.15);
   }
-
-  .secure-iframe {
-    display: block;
-    width: 100%;
-    height: 220px;
-    border: 0;
-    background: transparent;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-  }
-  .secure-iframe.is-loaded { opacity: 1; }
-
-  .iframe-loader {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    background: linear-gradient(135deg, #6a11cb, #2575fc);
-    color: #fff;
-    z-index: 2;
-    transition: opacity 0.4s ease, visibility 0.4s ease;
-  }
-  .iframe-loader.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-
-  .spinner {
-    width: 38px; height: 38px;
-    border: 3px solid rgba(255,255,255,0.3);
-    border-top-color: #fff;
-    border-radius: 50%;
-    animation: spin 0.9s linear infinite;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .loader-text { font-size: 13px; font-weight: 600; letter-spacing: 0.4px; }
-
-  .iframe-error {
-    position: absolute;
-    inset: 0;
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    background: #fff5f5;
-    color: #b91c1c;
-    text-align: center;
-    padding: 20px;
-    z-index: 3;
-  }
-  .iframe-error.is-visible { display: flex; }
-  .iframe-error .error-icon  { font-size: 32px; }
-  .iframe-error .error-title { font-size: 15px; font-weight: 700; }
-  .iframe-error .error-msg   { font-size: 12.5px; color: #7f1d1d; max-width: 420px; line-height: 1.5; }
-  .iframe-error .retry-btn {
-    margin-top: 6px;
-    padding: 7px 18px;
-    font-size: 12.5px;
-    font-weight: 600;
-    color: #fff;
-    background: #b91c1c;
-    border: none;
-    border-radius: 999px;
-    cursor: pointer;
-    transition: transform 0.2s ease, background 0.2s ease;
-  }
-  .iframe-error .retry-btn:hover { background: #991b1b; transform: translateY(-1px); }
-
-  .page-footer { margin-top: 22px; font-size: 12px; color: #9ca3af; text-align: center; }
-
-  @media (max-width: 600px) {
-    body { padding: 14px; }
-    .page-header h1 { font-size: 18px; }
-    .page-header p  { font-size: 12.5px; }
-    .iframe-wrapper, .secure-iframe { min-height: 190px; height: 190px; border-radius: 14px; }
+  @media (max-width:600px){
+    .ad-embed iframe{
+      height:210px;
+      border-radius:14px;
+    }
   }
 </style>
 </head>
-
 <body>
 
-  <div class="page-header">
-    <h1>Shamser Educational &amp; Digital Tools</h1>
-    <p>सुरक्षित डिजिटल विज्ञापन सेवा</p>
-  </div>
-
-  <div class="iframe-wrapper" id="iframeWrapper">
-    <div class="iframe-loader" id="iframeLoader">
-      <div class="spinner"></div>
-      <div class="loader-text">Loading secure ads…</div>
-    </div>
-
-    <div class="iframe-error" id="iframeError">
-      <div class="error-icon">⚠️</div>
-      <div class="error-title">Unable to load ads</div>
-      <div class="error-msg">Please check your internet connection or try again later.</div>
-      <button class="retry-btn" id="retryBtn">Retry</button>
-    </div>
-
-    <iframe
-      id="secureAdFrame"
-      class="secure-iframe"
-      src="about:blank"
-      title="Shamser Secure Ads"
-      loading="lazy"
-      referrerpolicy="no-referrer"
-      sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox"
-    ></iframe>
-  </div>
-
-  <div class="page-footer">
-    &copy; <span id="year"></span> shamser.info.np — All rights reserved.
-  </div>
-
-<script>
-  (function () {
-    "use strict";
-
-    // ⚠️ Replace with YOUR deployment ID after deploying Code.gs
-    const DEPLOYMENT_ID = "AKfycbw08q7K604hcpvcH7A1UP4PbiH1D3X1oiLrO3a3evxrnseUccQHTneyMaxy8C4LE2_euw";
-    const TOKEN = "shamser_secure_2026_xK9mP3qL";
-
-    const APPS_SCRIPT_URL =
-      "https://script.google.com/macros/s/" + DEPLOYMENT_ID +
-      "/exec?action=html&token=" + encodeURIComponent(TOKEN);
-
-    const LOAD_TIMEOUT_MS = 12000;
-
-    const iframe   = document.getElementById("secureAdFrame");
-    const loader   = document.getElementById("iframeLoader");
-    const errorBox = document.getElementById("iframeError");
-    const retryBtn = document.getElementById("retryBtn");
-    const yearSpan = document.getElementById("year");
-
-    let loadTimer = null;
-
-    function hideLoader() { loader.classList.add("is-hidden"); }
-    function showLoader() {
-      loader.classList.remove("is-hidden");
-      errorBox.classList.remove("is-visible");
-    }
-    function showError() {
-      hideLoader();
-      errorBox.classList.add("is-visible");
-    }
-    function clearTimer() {
-      if (loadTimer) { clearTimeout(loadTimer); loadTimer = null; }
-    }
-    function startTimer() {
-      clearTimer();
-      loadTimer = setTimeout(function () {
-        if (!iframe.classList.contains("is-loaded")) showError();
-      }, LOAD_TIMEOUT_MS);
-    }
-
-    function loadIframe() {
-      showLoader();
-      iframe.classList.remove("is-loaded");
-      // cache-bust so retry actually re-fetches
-      iframe.src = APPS_SCRIPT_URL + "&_=" + Date.now();
-      startTimer();
-    }
-
-    iframe.addEventListener("load", function () {
-      clearTimer();
-      hideLoader();
-      iframe.classList.add("is-loaded");
-    });
-
-    iframe.addEventListener("error", function () {
-      clearTimer();
-      showError();
-    });
-
-    retryBtn.addEventListener("click", loadIframe);
-
-    if (yearSpan) yearSpan.textContent = new Date().getFullYear();
-
-    loadIframe();
-  })();
-</script>
+<div class="ad-embed">
+  <iframe
+    src="https://script.google.com/macros/s/AKfycbzoFNEQBmXRivUh70Zy6pGQCYQqQxsG7MN0tcW8GBKF_XWoQ83tmie9YbcECQ6ofPBG1g/exec"
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+    title="Shamser.info.np – Dynamic Ad">
+  </iframe>
+</div>
 
 </body>
 </html>
