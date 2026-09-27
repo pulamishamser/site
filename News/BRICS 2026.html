@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
+    /* ---------- RESET & BASE ---------- */
     * {
       margin: 0;
       padding: 0;
@@ -31,6 +32,7 @@
       padding: 2rem 1rem;
     }
 
+    /* ---------- LAYOUT CONTAINERS ---------- */
     .page {
       max-width: 1000px;
       margin: 0 auto;
@@ -40,7 +42,7 @@
       padding: 2.2rem 2rem 3rem;
     }
 
-    /* images responsive */
+    /* ---------- IMAGES ---------- */
     img {
       max-width: 100%;
       height: auto;
@@ -50,7 +52,7 @@
       box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
     }
 
-    /* headings */
+    /* ---------- HEADINGS ---------- */
     h1 {
       font-size: 2rem;
       font-weight: 700;
@@ -105,7 +107,7 @@
       margin: 1.8rem 0;
     }
 
-    /* ====== TOP HEADER BAR (social icons + site title) ====== */
+    /* ---------- TOP BAR (social + site) ---------- */
     .top-bar {
       max-width: 1000px;
       margin: 0 auto 1.2rem;
@@ -141,7 +143,6 @@
       color: #1a4c8c;
     }
 
-    /* social icon buttons */
     .social-icon {
       display: inline-flex;
       align-items: center;
@@ -166,7 +167,7 @@
     .social-icon.email     { background: #ea4335; }
     .social-icon.map       { background: #34a853; }
 
-    /* ====== SITE HEADER (title + donation) ====== */
+    /* ---------- SITE HEADER (title + donate) ---------- */
     .site-header {
       text-align: center;
       margin-bottom: 2rem;
@@ -196,7 +197,26 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     }
 
-    /* ====== FOOTER ====== */
+    /* ---------- IFRAME (facebook post) ---------- */
+    .fb-iframe-wrapper {
+      max-width: 1000px;
+      margin: 0 auto 2rem;
+      display: flex;
+      justify-content: center;
+      overflow-x: auto;
+      padding: 0 1rem;
+    }
+
+    .fb-iframe-wrapper iframe {
+      max-width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px -8px rgba(0,0,0,0.12);
+      background: #fff;
+      border: none;
+      overflow: hidden;
+    }
+
+    /* ---------- FOOTER ---------- */
     .footer-info {
       background: #ffffff;
       border-radius: 24px;
@@ -240,6 +260,7 @@
       text-decoration: underline;
     }
 
+    /* ---------- RESPONSIVE ---------- */
     @media (max-width: 600px) {
       .page { padding: 1.5rem 1.2rem; }
       h1 { font-size: 1.7rem; }
@@ -267,7 +288,7 @@
 </head>
 <body>
 
-  <!-- ====== TOP BAR: Social icons (left) + Site name (right) ====== -->
+  <!-- ====== TOP BAR ====== -->
   <div class="top-bar">
     <div class="social-links-left">
       <a href="https://www.facebook.com/share/v/18aZrtoJXA/" class="social-icon facebook" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
@@ -282,7 +303,7 @@
     </a>
   </div>
 
-  <!-- ====== SITE HEADER: Title + Donation ====== -->
+  <!-- ====== SITE HEADER ====== -->
   <header class="site-header">
     <div class="donate-box">
       <img src="https://shamser.info.np/HomePage/esewa.jpg" alt="Donate" width="160" height="120">
@@ -292,9 +313,15 @@
     </div>
   </header>
 
+  <!-- ====== FACEBOOK IFRAME (wrapper added) ====== -->
+  <div class="fb-iframe-wrapper">
+    <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fshamser.bahadur.magar%2Fposts%2Fpfbid01G9gUhsW27rDvL4Dm8xCMXudHoGS3UEg4SXhdiFpYjLxrAxkzuzMfqJ8aUWJvhSpl&show_text=true&width=500" width="500" height="584" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+  </div>
+
   <!-- ====== MAIN ARTICLE ====== -->
   <div class="page">
-<iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fshamser.bahadur.magar%2Fposts%2Fpfbid01G9gUhsW27rDvL4Dm8xCMXudHoGS3UEg4SXhdiFpYjLxrAxkzuzMfqJ8aUWJvhSpl&show_text=true&width=500" width="500" height="584" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+    <h1>ब्रिक्स (BRICS)</h1>
+
     <img
       src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjsd9hdIb6W2AHlWX4q291eBY0woKfO26S28LRDuxjLGTa2pv94IOftugQ08hl9ZzyboJGfqI4Mgl_wWcGrrNoymPbjHQd0u6hV2b86LtWeOXw0Ap3h8dhK34fvbiYgR1cP6Ic6yPnHq-3G0tPI2Ky09vehW9WEmtTOSzVsbuyzmRh2o23eNbWAPo3vPyU/s1406/brics.JPG"
       alt="BRICS 2026 शिखर सम्मेलन"
@@ -302,11 +329,6 @@
       style="width: 100%; height: auto;"
     >
 
-    <p>
-      <strong>यसअघि सन् २०१६ मा भारतकै गोवामा भएको आठौँ ब्रिक्स सम्मेलनमा भने तत्कालीन प्रधानमन्त्री पुष्पकमल दाहाल 'प्रचण्ड' ले बिमस्टेक (BIMSTEC) सदस्य राष्ट्रको हैसियतमा भाग लिनुभएको थियो।</strong>
-    </p>
-
-    <h1>ब्रिक्स (BRICS)</h1>
     <p>
       <strong>ब्रिक्स (BRICS)</strong> विश्वका प्रमुख उदीयमान अर्थतन्त्रहरू र विकासशील देशहरूको एउटा अन्तरसरकारी संगठन हो। यसको मुख्य उद्देश्य सदस्य राष्ट्रहरूबीच आर्थिक, राजनीतिक र सांस्कृतिक सहयोग बढाउनु हो।
     </p>
@@ -443,6 +465,9 @@
       </p>
     </div>
 
+    <p>
+      <strong>यसअघि सन् २०१६ मा भारतकै गोवामा भएको आठौँ ब्रिक्स सम्मेलनमा भने तत्कालीन प्रधानमन्त्री पुष्पकमल दाहाल 'प्रचण्ड' ले बिमस्टेक (BIMSTEC) सदस्य राष्ट्रको हैसियतमा भाग लिनुभएको थियो।</strong>
+    </p>
   </div>
 
   <!-- ====== FOOTER ====== -->
