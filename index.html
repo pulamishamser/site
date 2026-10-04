@@ -4554,10 +4554,6 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
     </div>
    </div>
 
-
-
-<br>
-
 <!---COMMENT----->
 
 
@@ -4597,9 +4593,133 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
                     </div>
                 </section>
 </section>
-                     
-                    
-                  
+<!----===================================================================--------->                     
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Like & Follow Buttons</title>
+  <style>
+    .action-container {
+      display: flex;
+      gap: 12px;
+      font-family: Arial, sans-serif;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      font-size: 15px;
+      font-weight: 600;
+      border: 2px solid #007bff;
+      border-radius: 20px;
+      background-color: #ffffff;
+      color: #007bff;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Active Liked State */
+    .btn-like.active {
+      background-color: #ffe6e6;
+      border-color: #dc3545;
+      color: #dc3545;
+    }
+
+    /* Active Following State */
+    .btn-follow.active {
+      background-color: #007bff;
+      color: #ffffff;
+    }
+
+    .btn:hover {
+      opacity: 0.85;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="action-container">
+    <!-- Like Button -->
+    <button id="likeBtn" class="btn btn-like" data-active="false">
+      <span class="icon">❤️</span>
+      <span class="label">Like</span>
+    </button>
+
+    <!-- Follow Button -->
+    <button id="followBtn" class="btn btn-follow" data-active="false">
+      <span class="icon">➕</span>
+      <span class="label">Follow</span>
+    </button>
+  </div>
+
+  <script>
+    // Replace with your Google Apps Script Web App URL
+    const SCRIPT_URL = https://script.google.com/macros/library/d/1Q1XhF2CULgRSv9jj7etp3sYaLrAtALHWiRKC2oOv6v85b7I2hkWNn-sg/1';
+    const PAGE_ID = 'post_101';
+    const CURRENT_USER = 'user_456';
+
+    // Core function to send engagement requests to Google Apps Script backend
+    function sendEngagement(type, action) {
+      fetch(SCRIPT_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8' // Prevents CORS preflight issues with GAS
+        },
+        body: JSON.stringify({
+          type: type,         // 'like' or 'follow'
+          action: action,     // 'like'/'unlike' or 'follow'/'unfollow'
+          targetId: PAGE_ID,
+          userId: CURRENT_USER
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (!data.success) {
+          console.error(`Backend error logging ${type}:`, data.error);
+        }
+      })
+      .catch(err => console.error(`Network error:`, err));
+    }
+
+    // Like Button Logic
+    const likeBtn = document.getElementById('likeBtn');
+    likeBtn.addEventListener('click', function() {
+      const isLiked = this.getAttribute('data-active') === 'true';
+      const action = isLiked ? 'unlike' : 'like';
+
+      // Update UI state immediately
+      this.setAttribute('data-active', !isLiked);
+      this.classList.toggle('active');
+      this.querySelector('.label').innerText = !isLiked ? 'Liked' : 'Like';
+
+      // Send to backend
+      sendEngagement('like', action);
+    });
+
+    // Follow Button Logic
+    const followBtn = document.getElementById('followBtn');
+    followBtn.addEventListener('click', function() {
+      const isFollowing = this.getAttribute('data-active') === 'true';
+      const action = isFollowing ? 'unfollow' : 'follow';
+
+      // Update UI state immediately
+      this.setAttribute('data-active', !isFollowing);
+      this.classList.toggle('active');
+      this.querySelector('.label').innerText = !isFollowing ? 'Following' : 'Follow';
+      this.querySelector('.icon').innerText = !isFollowing ? '✓' : '➕';
+
+      // Send to backend
+      sendEngagement('follow', action);
+    });
+  </script>
+
+</body>
+</html>                    
+<!------------------------------------------------------------------------------------------------->                  
 
                 <div class="col-12">
                     <div style="position:relative;padding-top:max(100%,524px);width:100%;height:0;">
