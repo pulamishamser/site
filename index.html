@@ -4522,7 +4522,7 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
 
 
   <!-----------------<title>Like & Follow Buttons</title>----------------------->
-  <style>
+ <style>
     .action-container {
       display: flex;
       gap: 12px;
@@ -4567,16 +4567,16 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
   <div class="action-container">
     <!-- Like Button with Count -->
     <button id="likeBtn" class="btn btn-like" data-active="false">
-      <span class="icon">👍</span>
+      <span class="icon">❤️</span>
       <span class="label">Like</span>
-      <span id="likeCount" class="count">11012</span>
+      <span id="likeCount" class="count">0</span>
     </button>
 
     <!-- Follow Button with Count -->
     <button id="followBtn" class="btn btn-follow" data-active="false">
-      <span class="icon">🔔</span>
+      <span class="icon">➕</span>
       <span class="label">Follow</span>
-      <span id="followCount" class="count">1648</span>
+      <span id="followCount" class="count">0</span>
     </button>
   </div>
 
@@ -4584,6 +4584,40 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw_OOWjT-NvhPgD07muBq3OIZmiLyyCd4QTNVcFKB25GdDY-E02vgi25XIgHvcf94XoEw/exec';
     const PAGE_ID = 'https://shamser.info.np';
     const CURRENT_USER = 'user_456';
+
+    const likeBtn = document.getElementById('likeBtn');
+    const likeCountSpan = document.getElementById('likeCount');
+    const followBtn = document.getElementById('followBtn');
+    const followCountSpan = document.getElementById('followCount');
+
+    // Load initial counts and user state from Google Sheets when the page loads
+    window.addEventListener('DOMContentLoaded', function() {
+      fetch(`${SCRIPT_URL}?targetId=${encodeURIComponent(PAGE_ID)}&userId=${encodeURIComponent(CURRENT_USER)}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            // Set counts dynamically from sheet data
+            likeCountSpan.innerText = data.likes;
+            followCountSpan.innerText = data.followers;
+
+            // Restore Like button state if user already liked
+            if (data.userLiked) {
+              likeBtn.setAttribute('data-active', 'true');
+              likeBtn.classList.add('active');
+              likeBtn.querySelector('.label').innerText = 'Liked';
+            }
+
+            // Restore Follow button state if user already follows
+            if (data.userFollowing) {
+              followBtn.setAttribute('data-active', 'true');
+              followBtn.classList.add('active');
+              followBtn.querySelector('.label').innerText = 'Following';
+              followBtn.querySelector('.icon').innerText = '✓';
+            }
+          }
+        })
+        .catch(err => console.error('Error loading initial state:', err));
+    });
 
     // Core function to send engagement requests to Google Apps Script backend
     function sendEngagement(type, action) {
@@ -4609,9 +4643,6 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
     }
 
     // Like Button Logic
-    const likeBtn = document.getElementById('likeBtn');
-    const likeCountSpan = document.getElementById('likeCount');
-
     likeBtn.addEventListener('click', function() {
       const isLiked = this.getAttribute('data-active') === 'true';
       const action = isLiked ? 'unlike' : 'like';
@@ -4622,17 +4653,13 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
       this.classList.toggle('active');
       this.querySelector('.label').innerText = !isLiked ? 'Liked' : 'Like';
       
-      // Increment or decrement the like counter dynamically
-      likeCountSpan.innerText = !isLiked ? currentLikes + 1 : currentLikes - 1;
+      likeCountSpan.innerText = !isLiked ? currentLikes + 1 : Math.max(0, currentLikes - 1);
 
       // Send to backend
       sendEngagement('like', action);
     });
 
     // Follow Button Logic
-    const followBtn = document.getElementById('followBtn');
-    const followCountSpan = document.getElementById('followCount');
-
     followBtn.addEventListener('click', function() {
       const isFollowing = this.getAttribute('data-active') === 'true';
       const action = isFollowing ? 'unfollow' : 'follow';
@@ -4644,13 +4671,13 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
       this.querySelector('.label').innerText = !isFollowing ? 'Following' : 'Follow';
       this.querySelector('.icon').innerText = !isFollowing ? '✓' : '➕';
       
-      // Increment or decrement the follower counter dynamically
-      followCountSpan.innerText = !isFollowing ? currentFollowers + 1 : currentFollowers - 1;
+      followCountSpan.innerText = !isFollowing ? currentFollowers + 1 : Math.max(0, currentFollowers - 1);
 
       // Send to backend
       sendEngagement('follow', action);
     });
   </script>
+
   <!-------------End----<title>Like & Follow Buttons</title>----------------------->
 
 
