@@ -4518,6 +4518,146 @@ $('#datetimenw').attr('data-livestamp', new Date().toLocaleString());
                     Share
                 </a>
 
+<!------------------------Like Follow---------------------------->
+
+
+  <!-----------------<title>Like & Follow Buttons</title>----------------------->
+  <style>
+    .action-container {
+      display: flex;
+      gap: 12px;
+      font-family: Arial, sans-serif;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      font-size: 15px;
+      font-weight: 600;
+      border: 2px solid #007bff;
+      border-radius: 20px;
+      background-color: #ffffff;
+      color: #007bff;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Active Liked State */
+    .btn-like.active {
+      background-color: #ffe6e6;
+      border-color: #dc3545;
+      color: #dc3545;
+    }
+
+    /* Active Following State */
+    .btn-follow.active {
+      background-color: #007bff;
+      color: #ffffff;
+    }
+
+    .btn:hover {
+      opacity: 0.85;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="action-container">
+    <!-- Like Button with Count -->
+    <button id="likeBtn" class="btn btn-like" data-active="false">
+      <span class="icon">👍</span>
+      <span class="label">Like</span>
+      <span id="likeCount" class="count">11012</span>
+    </button>
+
+    <!-- Follow Button with Count -->
+    <button id="followBtn" class="btn btn-follow" data-active="false">
+      <span class="icon">🔔</span>
+      <span class="label">Follow</span>
+      <span id="followCount" class="count">1648</span>
+    </button>
+  </div>
+
+  <script>
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw_OOWjT-NvhPgD07muBq3OIZmiLyyCd4QTNVcFKB25GdDY-E02vgi25XIgHvcf94XoEw/exec';
+    const PAGE_ID = 'https://shamser.info.np';
+    const CURRENT_USER = 'user_456';
+
+    // Core function to send engagement requests to Google Apps Script backend
+    function sendEngagement(type, action) {
+      fetch(SCRIPT_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8'
+        },
+        body: JSON.stringify({
+          type: type,        
+          action: action,    
+          targetId: PAGE_ID,
+          userId: CURRENT_USER
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (!data.success) {
+          console.error(`Backend error logging ${type}:`, data.error);
+        }
+      })
+      .catch(err => console.error(`Network error:`, err));
+    }
+
+    // Like Button Logic
+    const likeBtn = document.getElementById('likeBtn');
+    const likeCountSpan = document.getElementById('likeCount');
+
+    likeBtn.addEventListener('click', function() {
+      const isLiked = this.getAttribute('data-active') === 'true';
+      const action = isLiked ? 'unlike' : 'like';
+      let currentLikes = parseInt(likeCountSpan.innerText);
+
+      // Update UI state immediately
+      this.setAttribute('data-active', !isLiked);
+      this.classList.toggle('active');
+      this.querySelector('.label').innerText = !isLiked ? 'Liked' : 'Like';
+      
+      // Increment or decrement the like counter dynamically
+      likeCountSpan.innerText = !isLiked ? currentLikes + 1 : currentLikes - 1;
+
+      // Send to backend
+      sendEngagement('like', action);
+    });
+
+    // Follow Button Logic
+    const followBtn = document.getElementById('followBtn');
+    const followCountSpan = document.getElementById('followCount');
+
+    followBtn.addEventListener('click', function() {
+      const isFollowing = this.getAttribute('data-active') === 'true';
+      const action = isFollowing ? 'unfollow' : 'follow';
+      let currentFollowers = parseInt(followCountSpan.innerText);
+
+      // Update UI state immediately
+      this.setAttribute('data-active', !isFollowing);
+      this.classList.toggle('active');
+      this.querySelector('.label').innerText = !isFollowing ? 'Following' : 'Follow';
+      this.querySelector('.icon').innerText = !isFollowing ? '✓' : '➕';
+      
+      // Increment or decrement the follower counter dynamically
+      followCountSpan.innerText = !isFollowing ? currentFollowers + 1 : currentFollowers - 1;
+
+      // Send to backend
+      sendEngagement('follow', action);
+    });
+  </script>
+  <!-------------End----<title>Like & Follow Buttons</title>----------------------->
+
+
+
+
+
+               
                 <!-- Trending Section -->
              <!-- Trending Section -->
 <!-- Trending Section -->
