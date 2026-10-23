@@ -6,79 +6,32 @@
 <meta name="theme-color" content="#027f7f">
 <title>shamser.info.np — शैक्षिक सूचना पोर्टल</title>
 
-
-
-
-
-
-
-
-
 <meta name="description" content="शिक्षा नीति, शिक्षक सरुवा, IEMIS, रिजल्ट, स्मारिका र नेपाली शैक्षिक समाचारहरूको भरपर्दो पोर्टल।">
 <meta name="robots" content="index, follow">
-<!-- Google AdSense Verification -->
 <meta name="google-adsense-account" content="ca-pub-8245820863085476">
-
-<!-- Google AdSense Script -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8245820863085476" crossorigin="anonymous"></script>
-
-
-
-
-
 
 <link rel="canonical" href="https://shamser.info.np/">
 <link rel="icon" type="image/ico" href="https://shamser.info.np/HomePage/favicon.ico">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-
-
-
-
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 
 <style>
-
 :root { --primary: #027f7f; --accent: #e67e22; --text: #1e2a3a; --bg: #f5f7fa; --card-bg: #ffffff; --border: #e9ecef; --footer-bg: #2d3748; }
 [data-theme="dark"] { --text: #e9ecef; --bg: #121212; --card-bg: #1e1e2e; --border: #333344; --footer-bg: #1a202c; }
-body { transition: background 0.3s, color 0.3s; background-color: var(--bg); color: var(--text); overflow-x: hidden; font-family: 'Arial', sans-serif; margin: 0; padding-bottom: 70px; }
+
+body { transition: background 0.3s, color 0.3s; background-color: var(--bg); color: var(--text); font-family: 'Arial', sans-serif; margin: 0; padding-bottom: 70px; }
 a:hover i { color: #ff9800; transform: scale(1.2); }
-::-webkit-scrollbar { width: 8px; } ::-webkit-scrollbar-track { background: var(--bg); } ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
 
+/* ⬇️ यो महत्त्वपूर्ण: hidden होइन, clip */
+html, body { margin: 0 !important; padding: 0 !important; width: 100%; overflow-x: clip; }
 
-
-
-
-
-
-
-
-html, body {
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 100%;
-    overflow-x: hidden;
-}
-
-/* Bootstrap default is ~1140px for XXL. Let's expand it. */
-@media (min-width: 1200px) {
-    .container {
-        max-width: 1400px !important; /* Or 95% */
-        width: 95% !important;
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
+@media (min-width: 1200px) { .container { max-width: 1400px !important; width: 95% !important; } }
 
 /* Fixed Elements */
 #reading-progress { position: fixed; top: 0; left: 0; width: 0%; height: 4px; background: linear-gradient(90deg, #027f7f, #e67e22); z-index: 10001; transition: width 0.1s; }
@@ -87,8 +40,17 @@ html, body {
 #toastBox { position: fixed; bottom: 150px; left: 50%; transform: translateX(-50%) translateY(100px); background: #2c3e50; color: #fff; padding: 10px 24px; border-radius: 30px; opacity: 0; transition: 0.3s; z-index: 10002; pointer-events: none; }
 #toastBox.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-/* Header & Menu */
-#header { background: #027f7f; padding: 0; position: relative; z-index: 9999; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+/* ⬇️ Sticky Header — सच्याइएको */
+#header {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  background-color: #027f7f;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  width: 100%;
+}
+
 .nav-menu { list-style: none; padding: 0; margin: 0; display: flex; align-items: center; flex-wrap: wrap; }
 .nav-menu li { position: relative; }
 .nav-menu li a { color: #fff; text-decoration: none; padding: 12px 15px; display: block; font-size: 15px; font-weight: 500; }
@@ -98,12 +60,24 @@ html, body {
 .nav-menu ul li a { color: #333; padding: 10px 20px; font-size: 14px; border-bottom: 1px solid #f1f1f1; }
 .nav-menu ul ul { top: 0; left: 100%; }
 
+/* मोबाइल मेनु आइकन */
+.mobile-menu-toggle { display: none; font-size: 24px; color: #fff; cursor: pointer; padding: 12px 15px; text-align: right; }
+@media (max-width: 991px) {
+  .mobile-menu-toggle { display: block; }
+  .nav-menu { display: none; flex-direction: column; width: 100%; background: #027f7f; }
+  .nav-menu.show { display: flex; }
+  .nav-menu li { width: 100%; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .nav-menu ul { position: static; display: none; background: #026363; width: 100%; box-shadow: none; }
+  .nav-menu li:hover > ul { display: none; }
+  .nav-menu li.open > ul { display: block; }
+  .nav-menu ul li a { color: #fff; padding-left: 30px; }
+}
+
 /* Content Sections */
 .trending-section { border-radius: 24px; padding: 10px 14px; margin-bottom: 32px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); background: var(--card-bg); }
 .trending-tags span { padding: 10px 18px; border-radius: 40px; font-size: 13px; font-weight: 600; color: #1e4663; border: 1px solid #e2e8f0; display: inline-block; margin: 5px;}
 .legal-section { background: var(--card-bg); border-radius: 16px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid var(--border); }
 .legal-section h2 { color: #027f7f; border-bottom: 3px solid #e67e22; padding-bottom: 10px; font-size: 20px; }
-
 
 .news-section { background: var(--card-bg); border-radius: 24px; padding: 20px; margin-bottom: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border: 1px solid var(--border); }
 .news-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
@@ -116,19 +90,7 @@ html, body {
 /* AdSense Space */
 .adsense-box { background: #f8f9fa; border: 2px dashed #ccc; text-align: center; padding: 20px; margin: 20px 0; border-radius: 8px; color: #666; font-size: 14px; }
 
-/* Influential Women 
-.women-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
-.women-card { border-radius: 12px; overflow: hidden; background: var(--card-bg); box-shadow: 0 2px 8px rgba(0,0,0,0.1); position: relative; }
-.women-card img { width: 100%; height: 160px; object-fit: cover; }
-.women-card .card-title { padding: 10px; text-align: center; font-size: 15px; font-weight: 600; color: var(--text); margin: 0;}
-.women-badge { position: absolute; bottom: 50px; right: 0; background: rgba(0,0,0,0.6); color: #fff; font-size: 10px; padding: 2px 8px; }
-.sidebar-women { background: var(--card-bg); padding: 15px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-.sidebar-women-item { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 8px;}
-*/
-
-
-
-/* ============ AI & ALGORITHM SECTION CSS ============ */
+/* AI */
 .ai-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; }
 .ai-card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: transform 0.3s; border: 1px solid #eee; }
 .ai-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
@@ -137,8 +99,6 @@ html, body {
 .ai-card .card-title { font-size: 16px; font-weight: 700; color: #1a202c; margin-bottom: 8px; }
 .ai-card .btn-read { display: inline-block; font-size: 13px; color: #027f7f; font-weight: bold; text-decoration: none; padding: 6px 12px; border: 1px solid #027f7f; border-radius: 20px; transition: 0.3s; cursor: pointer; }
 .ai-card .btn-read:hover { background: #027f7f; color: #fff; }
-
-/* Sidebar Style */
 .sidebar-ai { background: #f8f9fa; padding: 20px; border-radius: 12px; border-left: 4px solid #027f7f; }
 .sidebar-ai h3 { font-size: 18px; color: #d32f2f; margin-bottom: 15px; font-weight: bold; }
 .sidebar-ai-item { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px dashed #ccc; }
@@ -146,17 +106,7 @@ html, body {
 .sidebar-ai-item div strong { display: block; font-size: 14px; color: #333; }
 .sidebar-ai-item div span { font-size: 12px; color: #666; }
 
-
-
-
-
-
-
-
-
-
-
-/* Quick Services (IEMIS, QR, ID Card) */
+/* Quick Services */
 .quick-services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
 .service-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 15px; text-align: center; text-decoration: none; color: var(--text); transition: 0.3s; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .service-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-color: var(--primary); }
@@ -165,7 +115,7 @@ html, body {
 .qr-box { text-align: center; padding: 15px; background: #fff; border-radius: 10px; border: 1px solid var(--border); }
 .qr-box img { max-width: 100%; height: auto; border-radius: 8px; }
 
-/* Footer & Widgets */
+/* Footer */
 .ft-custom { background: var(--footer-bg); color: #fff; padding: 40px 15px 20px; }
 .ft-custom .container { display: flex; flex-wrap: wrap; justify-content: space-between; }
 .ft-col { flex: 1; min-width: 200px; padding: 0 15px; }
@@ -182,95 +132,24 @@ html, body {
 .modal-header { background: #027f7f; color: #fff; }
 .modal-header .btn-close { filter: invert(1); }
 
+/* Flash */
+#flash { background: #fff; padding: 8px 0; margin-bottom: 15px; border: 1px solid #eaeaea; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border-radius: 8px; display: flex; align-items: center; overflow: hidden; }
+#flash .news-tag { background-color: #e74c3c; color: #fff; border-radius: 6px; padding: 8px 15px; display: flex; align-items: center; justify-content: center; white-space: nowrap; z-index: 2; }
+#flash .news-tag p { margin: 0; font-size: 15px; font-weight: bold; }
+.flash-wrapper { flex: 1; overflow: hidden; position: relative; display: flex; align-items: center; }
+.flash-marquee { display: flex; align-items: center; white-space: nowrap; animation: scrollFlash 60s linear infinite; }
+.flash-marquee:hover { animation-play-state: paused; }
+.flash-marquee a { text-decoration: none; color: #e74c3c; font-weight: 600; font-size: 14px; margin: 0 20px; }
+@keyframes scrollFlash { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
-
-/* ==========================================
-   Flash / Highlight (Fixed)
-   ========================================== */
-/* ==========================================
-   Flash / Highlight (Pure CSS - 100% Working)
-   ========================================== */
-#flash {
-  background: #fff;
-  padding: 8px 0;
-  margin-bottom: 15px;
-  border: 1px solid #eaeaea;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  overflow: hidden; /* बाहिर जानबाट रोक्न */
-}
-
-/* रातो हाइलाइट बक्स */
-#flash .news-tag {
-  background-color: #e74c3c; 
-  color: #fff;
-  border-radius: 6px;
-  padding: 8px 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  white-space: nowrap;
-  z-index: 2; /* समाचार माथि देखाउन */
-}
-#flash .news-tag p {
-  margin: 0;
-  font-size: 15px;
-  font-weight: bold;
-}
-
-/* स्क्रोल हुने भागको सेटिङ */
-.flash-wrapper {
-  flex: 1;
-  overflow: hidden;
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-/* एनिमेसन चल्ने भाग */
-.flash-marquee {
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-  /* यहाँ 25s लाई 60s बनाउनुहोस्, यसले गति ढिलो गर्छ */
-  animation: scrollFlash 60s linear infinite; 
-}
-
-/* माउस लगाउँदा स्क्रोल रोकिने (Google AdSense को लागि राम्रो) */
-.flash-marquee:hover {
-  animation-play-state: paused; 
-}
-
-.flash-marquee a {
-  text-decoration: none;
-  color: #e74c3c;
-  font-weight: 600;
-  font-size: 14px;
-  margin: 0 20px;
-}
-
-/* दायाँबाट बायाँ सर्ने एनिमेसन */
-@keyframes scrollFlash {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
-}
-
-
-
-/* ============ NEW SCHOOL SECTION CSS ============ */
+/* School / Gallery / Upcoming / Academic */
 .school-section { background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 20px; }
 .school-section h2 { font-size: 22px; color: #027f7f; border-bottom: 2px solid #e67e22; padding-bottom: 10px; margin-bottom: 20px; font-weight: 700; }
-
-/* Gallery Grid */
 .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
 .gallery-card { border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: transform 0.3s; position: relative; cursor: pointer; }
 .gallery-card:hover { transform: translateY(-5px); }
 .gallery-card img { width: 100%; height: 150px; object-fit: cover; display: block; }
 .gallery-card .card-caption { padding: 10px; background: #f8f9fa; font-size: 14px; font-weight: 600; text-align: center; color: #333; }
-
-/* Upcoming Programme */
 .upcoming-list { list-style: none; padding: 0; margin: 0; }
 .upcoming-item { display: flex; gap: 15px; padding: 15px; border-bottom: 1px dashed #ddd; transition: background 0.3s; border-radius: 8px; }
 .upcoming-item:hover { background: #f0f8ff; }
@@ -279,134 +158,91 @@ html, body {
 .upcoming-date .month { font-size: 11px; text-transform: uppercase; }
 .upcoming-info h5 { margin: 0 0 5px; font-size: 15px; font-weight: 700; color: #333; }
 .upcoming-info p { margin: 0; font-size: 13px; color: #666; }
-
-/* Academic Program Box */
 .academic-box { background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%); border-left: 5px solid #e67e22; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
 .academic-box h4 { font-size: 16px; color: #d35400; margin-bottom: 5px; font-weight: 700; }
 .academic-box p { font-size: 13px; color: #555; margin: 0; line-height: 1.5; }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ==========================================
-   Menu Sticky र Topbar (Scroll भएपछि मात्र टाँसिने)
-   ========================================== */
-#topbar {
-  position: relative; /* सुरुमा सामान्य रहने */
-  z-index: 1050;
-}
-
-#header {
-  position: sticky !important;
-  top: 0 !important;
-  z-index: 1040 !important;
-  background-color: #0d6efd !important; /* तपाईंको मेन्युको निलो रंग (स्थिर) */
-  transition: none !important; /* रंग परिवर्तन हुने एनिमेसन हटाउन */
-}
-
-/* स्क्रोल भएर माथि जाँदा रंग नबदलियोस् भनेर app.js लाई रोक्न */
-#header.header-scrolled, #header.header-fixed {
-  background-color: #0d6efd !important; 
-  padding: 0 !important;
-}
-
-/* school-img size */
-
-.school-img {
-  width: 100%;
-  aspect-ratio: 5 / 2; /* वा 4 / 3 */
-  object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
-}
-
-
-
-
-/* ============ VIEW ALL (Show More/Less) CSS ============ */
-/* चेकबक्स लुकाउने (यसले टोगलको काम गर्छ) */
+/* View All */
 #toggle-schools { display: none; }
-
-/* सुरुमा ८ वटा भन्दा माथिका सबै विद्यालय लुकाउने */
 .extra-school-item { display: none !important; }
-
-/* जब बटन थिचिन्छ (Checked), तब बाँकी विद्यालय देखाउने */
 #toggle-schools:checked ~ .row .extra-school-item { display: block !important; }
-
-/* "सबै हेर्नुहोस्" बटनको डिजाइन */
-.view-all-btn {
-  display: inline-block;
-  color: #027f7f;
-  font-size: 14px;
-  text-decoration: none;
-  font-weight: 600;
-  padding: 8px 20px;
-  border: 1px solid #027f7f;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  background: #fff;
-  margin-top: 10px;
-}
-
-.view-all-btn:hover {
-  background: #027f7f;
-  color: #fff;
-}
-
-/* बटन भित्रको लेख (सबै हेर्नुहोस् / कम हेर्नुहोस्) परिवर्तन गर्न */
+.view-all-btn { display: inline-block; color: #027f7f; font-size: 14px; text-decoration: none; font-weight: 600; padding: 8px 20px; border: 1px solid #027f7f; border-radius: 20px; cursor: pointer; transition: all 0.3s ease; background: #fff; margin-top: 10px; }
+.view-all-btn:hover { background: #027f7f; color: #fff; }
 .text-hide { display: none; }
-
-/* चेकबक्स थिचिएपछि लेख परिवर्तन गर्ने */
 #toggle-schools:checked ~ .text-center .view-all-btn .text-show { display: none; }
 #toggle-schools:checked ~ .text-center .view-all-btn .text-hide { display: inline-block; }
 
-
+/* topbar social */
+.social-links { display: flex; gap: 12px; justify-content: flex-end; }
+.social-icon { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; color: #fff; text-decoration: none; transition: all 0.3s ease; }
+.social-icon:hover { transform: translateY(-3px); }
+.facebook  { background-color: #3b5998; }
+.twitter   { background-color: #1da1f2; }
+.blogspot  { background-color: #ff5722; }
+.email     { background-color: #d44638; }
+.map       { background-color: #34a853; }
+.social-icon i { font-size: 14px; }
 </style>
-
-
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 </head>
 <body>
 
+<!-- Top Bar -->
+<section id="topbar" class="d-none d-lg-block bg-light py-2">
+  <div class="container clearfix d-flex justify-content-between align-items-center">
+    <div class="contact-info">
+      <div class="btn-group rounded-0 bg-secondary" role="group">
+        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#weather1" title="मौसम">
+          <img src="Lauro-Khabar/assets/images/weather.png" alt="मौसम" width="20">
+        </button>
+        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#calendar1" title="पात्रो">
+          <img src="Lauro-Khabar/assets/images/schedule.png" alt="पात्रो" width="20">
+        </button>
+        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#forex1" title="विनिमय दर">
+          <img src="Lauro-Khabar/assets/images/coins.png" alt="विनिमय दर" width="20">
+        </button>
+        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#gold1" title="सुन चाँदी">
+          <img src="Lauro-Khabar/assets/images/gold.png" alt="सुन चाँदी" width="20">
+        </button>
+        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#hor1" title="राशिफल">
+          <img src="Lauro-Khabar/assets/images/astrology.png" alt="राशिफल" width="20">
+        </button>
+        <button type="button" class="btn btn-secondary" title="यूनिकोड">
+          <a class="text-white" href="unicode.html" aria-label="Unicode">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/26/New_Unicode_logo.png" width="20" alt="Unicode">
+          </a>
+        </button>
+      </div>
+    </div>
 
-<!-- ==========================
-     LOGO
-     ========================== -->
+    <div class="social-links d-flex gap-2">
+      <a href="https://www.facebook.com/" target="_blank" rel="noopener" class="social-icon facebook" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://twitter.com/" target="_blank" rel="noopener" class="social-icon twitter" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="https://lauro-media.blogspot.com/" target="_blank" rel="noopener" class="social-icon blogspot" aria-label="Blogspot"><i class="fab fa-blogger-b"></i></a>
+      <a href="mailto:shamserpulami500@gmail.com" class="social-icon email" aria-label="Email"><i class="fas fa-envelope"></i></a>
+      <a href="https://maps.app.goo.gl/CQG8KiSPvofKn5RB7" target="_blank" rel="noopener" class="social-icon map" aria-label="Map"><i class="fas fa-map-marker-alt"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- MODALS -->
+<div class="modal fade" id="weather1" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">मौसम</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><iframe src="https://www.ashesh.com.np/weather/widget.php" height="550" width="100%" title="Weather"></iframe></div></div></div></div>
+<div class="modal fade" id="calendar1" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">पात्रो</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><iframe src="https://www.hamropatro.com/widgets/calender-medium.php" scrolling="no" style="border:none; width:100%; height:385px;" title="Calendar"></iframe></div></div></div></div>
+<div class="modal fade" id="forex1" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">विनिमय दर</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><iframe src="https://www.ashesh.com.np/forex/widget2.php" style="border:none; width:100%; height:383px;" title="Forex"></iframe></div></div></div></div>
+<div class="modal fade" id="gold1" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">सुन चाँदी</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><iframe src="https://www.ashesh.com.np/gold/widget.php" height="250" width="100%" title="Gold"></iframe></div></div></div></div>
+<div class="modal fade" id="hor1" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">राशिफल</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><iframe src="https://www.ashesh.com.np/rashifal/widget.php" height="900" width="100%" title="Horoscope"></iframe></div></div></div></div>
+
+<!-- LOGO -->
 <div class="container logo text-center mt-3">
   <h1 class="text-primary">
     <img src="https://media.tenor.com/dhfraztxBo8AAAAj/globe-joypixels.gif" width="45" height="45" alt="Globe logo">
     &nbsp;shamser.info.np
   </h1>
   <div class="d-inline-block border rounded bg-light p-1 mt-1">
-    <iframe scrolling="no"
-            src="https://www.ashesh.com.np/linknepali-time.php?time_only=no&font_color=666666&aj_time=yes&font_size=12&line_brake=1&api=003098o090"
-            width="175" height="45" title="Nepali Time"
-            style="border:0;"></iframe>
+    <iframe scrolling="no" src="https://www.ashesh.com.np/linknepali-time.php?time_only=no&font_color=666666&aj_time=yes&font_size=12&line_brake=1&api=003098o090" width="175" height="45" title="Nepali Time" style="border:0;"></iframe>
   </div>
 </div>
 
-<!-- ==========================
-     Quick links
-     ========================== -->
+<!-- Quick Links -->
 <div class="container text-center my-2">
   <i class="fas fa-map-marker-alt fa-lg" aria-hidden="true"></i>
   <a href="https://maps.app.goo.gl/jVmhRZi3Em8abMSV8">Site Map</a>
@@ -417,109 +253,40 @@ html, body {
   <i class="fa fa-file-text" aria-hidden="true"></i>
   <a href="https://docs.google.com/forms/d/e/1FAIpQLSfuwHgJ0hH9X5h4j7L1LTWQArfojFetLhuFtSbyDdCphqqoxQ/viewform">Admission</a>
 </div>
-<!-- ==========================
-     Flash / Highlight (Pure CSS)
-     ========================== -->
+
+<!-- Flash -->
 <section id="flash">
-  <div class="container-fluid p-0"> <!-- container-fluid प्रयोग गर्दा पूरा चौडाइमा मिल्छ -->
+  <div class="container-fluid p-0">
     <div class="d-flex">
-      
-      <!-- Highlight ट्याग -->
-      <div class="news-tag">
-        <p>📢 Highlight:</p>
-      </div>
-      
-      <!-- स्क्रोल हुने भाग -->
+      <div class="news-tag"><p>📢 Highlight:</p></div>
       <div class="flash-wrapper">
         <div class="flash-marquee">
-          <a href="https://www.ratopati.com/story/494671/gen-g-concludes-that-local-levels-have-not-been-able-to-do-a-good-job">
-            स्थानीय तहले राम्रो काम गर्न नसकेको ‘जेन–जी’को निष्कर्ष — रातोपाटी
-          </a>
-          <a href="https://lauro-media.blogspot.com/2025/06/teachers-guide-for-all-classes.html">
-            शिक्षक निर्देशिका डाउनलोड गर्नुहोस्
-          </a>
-          <a href="News modal.html">
-            ताजा नेपाली समाचार Live News पढ्नुहोस्
-          </a>
-          <a href="https://www.facebook.com/share/p/f7NyJ5yHhtyUDS1c/">
-            विद्यालयहरूमा दशैं तिहार छठ विशेष कार्यक्रमको झलकहरू
-          </a>
-          <a href="https://shamser.info.np/Service_Site/index.html">
-            lauro media/shamser.info.np बाट उपलब्ध हुने सेवा सुविधा प्राप्त गरी फाइदा लिन अनुरोध
-          </a>
+          <a href="https://www.ratopati.com/story/494671/gen-g-concludes-that-local-levels-have-not-been-able-to-do-a-good-job">स्थानीय तहले राम्रो काम गर्न नसकेको ‘जेन–जी’को निष्कर्ष — रातोपाटी</a>
+          <a href="https://lauro-media.blogspot.com/2025/06/teachers-guide-for-all-classes.html">शिक्षक निर्देशिका डाउनलोड गर्नुहोस्</a>
+          <a href="News modal.html">ताजा नेपाली समाचार Live News पढ्नुहोस्</a>
+          <a href="https://www.facebook.com/share/p/f7NyJ5yHhtyUDS1c/">विद्यालयहरूमा दशैं तिहार छठ विशेष कार्यक्रमको झलकहरू</a>
+          <a href="https://shamser.info.np/Service_Site/index.html">lauro media/shamser.info.np बाट उपलब्ध हुने सेवा सुविधा प्राप्त गरी फाइदा लिन अनुरोध</a>
         </div>
       </div>
-      
     </div>
   </div>
 </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- ==========================
-     Floating UI elements
-     ========================== -->
+<!-- Floating UI -->
 <div id="reading-progress"></div>
 <button id="themeToggle" aria-label="Toggle theme"><i class="fas fa-moon" aria-hidden="true"></i></button>
 <button id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
 <div id="toastBox"></div>
 
-<!-- Scripts -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-<script>
-  $(document).ready(function(){
-    $('.flash-caresol').owlCarousel({
-      loop: true,
-      margin: 10,
-      nav: false,
-      autoplay: true,
-      autoplayTimeout: 4000,
-      responsive: { 0: { items: 1 }, 600: { items: 1 }, 1000: { items: 1 } }
-    });
-  });
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- ============ MENU ============ -->
+<!-- ============ MENU (सम्पूर्ण लिङ्क सहित) ============ -->
 <header id="header">
   <div class="container">
+    <div class="mobile-menu-toggle" id="mobileMenuToggle" onclick="toggleMobileMenu()">
+      <i class="fas fa-bars"></i>
+    </div>
+
     <nav id="nav-menu-container">
-      <ul class="nav-menu">
+      <ul class="nav-menu" id="navMenu">
         <!-- Home -->
         <li class="menu-active"><a href="https://shamser.info.np/"><i class="fa fa-home fa-lg"></i></a></li>
 
@@ -963,18 +730,82 @@ html, body {
   </div>
 </header>
 
+<!-- ====== JavaScript ====== -->
+<script>
+  // मोबाइल मेनु टोगल
+  function toggleMobileMenu() {
+    var navMenu = document.getElementById('navMenu');
+    var toggleIcon = document.querySelector('#mobileMenuToggle i');
+    if (navMenu) {
+      navMenu.classList.toggle('show');
+      if (toggleIcon) {
+        toggleIcon.className = navMenu.classList.contains('show') ? 'fas fa-times' : 'fas fa-bars';
+      }
+    }
+  }
 
+  // मोबाइलमा सबमेनु क्लिक गरेर खोल्ने
+  document.querySelectorAll('.nav-menu .menu-has-children > a').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      if (window.innerWidth <= 991) {
+        var parentLi = this.parentElement;
+        var submenu = parentLi.querySelector('ul');
+        if (submenu && this.getAttribute('href') === 'javascript:;') {
+          e.preventDefault();
+          parentLi.classList.toggle('open');
+        }
+      }
+    });
+  });
 
+  // डार्क मोड
+  (function() {
+    var themeToggle = document.getElementById('themeToggle');
+    var icon = themeToggle ? themeToggle.querySelector('i') : null;
+    var saved = localStorage.getItem('theme');
+    if (saved === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      if (icon) icon.className = 'fas fa-sun';
+    }
+    if (themeToggle) {
+      themeToggle.addEventListener('click', function() {
+        var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        if (isDark) {
+          document.documentElement.removeAttribute('data-theme');
+          localStorage.setItem('theme', 'light');
+          if (icon) icon.className = 'fas fa-moon';
+        } else {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          localStorage.setItem('theme', 'dark');
+          if (icon) icon.className = 'fas fa-sun';
+        }
+      });
+    }
+  })();
 
+  // Back to Top
+  (function() {
+    var btn = document.getElementById('backToTop');
+    if (!btn) return;
+    window.addEventListener('scroll', function() {
+      btn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+    });
+    btn.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
 
-
-
-
-
-
-
-
-
+  // Reading Progress
+  (function() {
+    var bar = document.getElementById('reading-progress');
+    if (!bar) return;
+    window.addEventListener('scroll', function() {
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      var p = h > 0 ? (window.scrollY / h) * 100 : 0;
+      bar.style.width = p + '%';
+    });
+  })();
+</script>
 
 
 
@@ -1081,6 +912,11 @@ html, body {
     .headline-title { font-size: 18px; }
   }
 </style>
+
+
+
+
+
 
         <!-- EDUCATION NEWS -->
         <div class="news-section" id="content_education">
