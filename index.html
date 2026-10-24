@@ -3404,135 +3404,6 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- ==========================================
      FIREBASE LIKES SYSTEM (Final Fixed)
      ========================================== -->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { getFirestore, doc, setDoc, increment, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyCxa3_j0iaTYRDRnqtRwVJfp-DWGanyZao",
-    authDomain: "like-viewercounter-follow.firebaseapp.com",
-    projectId: "like-viewercounter-follow",
-    storageBucket: "like-viewercounter-follow.firebasestorage.app",
-    messagingSenderId: "422303894987",
-    appId: "1:422303894987:web:b5027c6a8c54e87bfa3a4e"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-
-  document.addEventListener('DOMContentLoaded', function () {
-    console.log("✅ Firebase Initialized");
-
-    // ==========================================
-    // १. LIKE SYSTEM (ID: myLikeButton मिलाइएको)
-    // ==========================================
-    const likeBtn = document.getElementById('myLikeButton');
-    const likeCountSpan = document.getElementById('myLikeCount');
-    const likeRef = doc(db, "stats", "page_likes");
-    let isLiked = localStorage.getItem('pageLiked') === 'true';
-
-    // Firebase बाट लाइक काउन्टर लोड गर्ने (Real-time)
-    onSnapshot(likeRef, (docSnap) => {
-      const count = docSnap.exists() ? docSnap.data().count : 0;
-      if (likeCountSpan) likeCountSpan.innerText = count;
-    });
-
-    if (likeBtn) {
-      // पहिले नै लाइक गरेको छ भने बटन निलो बनाउने
-      if (isLiked) {
-        likeBtn.classList.add('active');
-        likeBtn.style.backgroundColor = '#0d6efd';
-        likeBtn.style.color = '#fff';
-      }
-
-      likeBtn.addEventListener('click', async function () {
-        console.log("🔴 Like button clicked! Current state:", isLiked);
-        try {
-          if (!isLiked) {
-            await setDoc(likeRef, { count: increment(1) }, { merge: true });
-            isLiked = true;
-            localStorage.setItem('pageLiked', 'true');
-            likeBtn.style.backgroundColor = '#0d6efd';
-            likeBtn.style.color = '#fff';
-            console.log("✅ Like saved!");
-          } else {
-            await setDoc(likeRef, { count: increment(-1) }, { merge: true });
-            isLiked = false;
-            localStorage.setItem('pageLiked', 'false');
-            likeBtn.style.backgroundColor = 'transparent';
-            likeBtn.style.color = '#0d6efd';
-            console.log("❌ Like removed!");
-          }
-        } catch (err) {
-          console.error("❌ Like Error:", err);
-        }
-      });
-    }
-
-    // ==========================================
-    // २. FOLLOW SYSTEM (ID: pageFollowBtn मिलाइएको)
-    // ==========================================
-    const followBtn = document.getElementById('pageFollowBtn');
-    const followText = document.getElementById('pageFollowText');
-    const followRef = doc(db, "stats", "page_follows");
-    let isFollowing = localStorage.getItem('pageFollowed') === 'true';
-
-    if (followText) {
-      if (isFollowing) {
-        followText.innerText = 'Following';
-        followBtn.style.backgroundColor = '#ffc107';
-        followBtn.style.color = '#000';
-      } else {
-        followText.innerText = 'Follow';
-        followBtn.style.backgroundColor = 'transparent';
-        followBtn.style.color = '#ffc107';
-      }
-    }
-
-    if (followBtn) {
-      followBtn.addEventListener('click', async function () {
-        try {
-          if (!isFollowing) {
-            await setDoc(followRef, { count: increment(1) }, { merge: true });
-            isFollowing = true;
-            localStorage.setItem('pageFollowed', 'true');
-            followText.innerText = 'Following';
-            followBtn.style.backgroundColor = '#ffc107';
-            followBtn.style.color = '#000';
-          } else {
-            await setDoc(followRef, { count: increment(-1) }, { merge: true });
-            isFollowing = false;
-            localStorage.setItem('pageFollowed', 'false');
-            followText.innerText = 'Follow';
-            followBtn.style.backgroundColor = 'transparent';
-            followBtn.style.color = '#ffc107';
-          }
-        } catch (err) {
-          console.error("❌ Follow Error:", err);
-        }
-      });
-    }
-
-    // ==========================================
-    // ३. VIEW SYSTEM
-    // ==========================================
-    const viewRef = doc(db, "stats", "homepage_views");
-    const viewSpan = document.getElementById('viewCount');
-    const today = new Date().toDateString();
-    const lastView = localStorage.getItem('lastViewDate');
-
-    onSnapshot(viewRef, (docSnap) => {
-      if (viewSpan) viewSpan.innerText = docSnap.exists() ? docSnap.data().views.toLocaleString() : 0;
-    });
-
-    if (lastView !== today) {
-      setDoc(viewRef, { views: increment(1) }, { merge: true })
-        .then(() => localStorage.setItem('lastViewDate', today))
-        .catch(err => console.error("❌ View Error:", err));
-    }
-  });
-</script>
-
 
 
 
@@ -3799,95 +3670,6 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- JavaScript भाग (यसलाई </body> भन्दा माथि राख्नुहोस्) -->
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const btn = document.getElementById('eduLikeBtn');
-    const countSpan = document.getElementById('eduLikeCount');
-    const timeSpan = document.getElementById('eduTime');
-    
-    // १. LocalStorage बाट पुरानो डाटा लोड गर्ने
-    let isLiked = localStorage.getItem('eduLiked') === 'true';
-    let count = parseInt(localStorage.getItem('eduCount')) || 0;
-
-    // यदि पहिलो पटक हो भने सुरुवाती लाइक सेट गर्ने (तपाईंले चाहे अनुसार 0 वा 85 राख्न सक्नुहुन्छ)
-    if (localStorage.getItem('eduCount') === null) {
-      count = 85; 
-      localStorage.setItem('eduCount', count);
-    }
-
-    // २. UI अपडेट गर्ने फंक्शन
-    function updateUI() {
-      countSpan.innerText = count;
-      if (isLiked) {
-        btn.classList.add('active');
-        btn.innerHTML = '❤️ <span class="like-text">मन पर्यो</span>';
-      } else {
-        btn.classList.remove('active');
-        btn.innerHTML = '🤍 <span class="like-text">मन पर्यो</span>';
-      }
-    }
-
-    // ३. समय अपडेट गर्ने (आजको मिति देखाउने)
-    const now = new Date();
-    const options = { year: 'numeric', month: 'short', day: 'numeric' };
-    timeSpan.innerText = now.toLocaleDateString('ne-NP', options); // जस्तै: २०८३ मंसिर १५
-
-    // पहिलो पटक UI लोड गर्ने
-    updateUI();
-
-    // ४. क्लिक गर्दा हुने काम
-    btn.addEventListener('click', function() {
-      if (!isLiked) {
-        // Like गर्दा
-        isLiked = true;
-        count++;
-        localStorage.setItem('eduLiked', 'true');
-        localStorage.setItem('eduCount', count);
-      } else {
-        // Unlike गर्दा
-        isLiked = false;
-        count = Math.max(0, count - 1); // लाइक ० भन्दा तल जान नदिने
-        localStorage.setItem('eduLiked', 'false');
-        localStorage.setItem('eduCount', count);
-      }
-      updateUI(); // UI अपडेट गर्ने
-    });
-  });
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- ==========================================
      IFRAME POPUP MODALS (AdSense 100% Safe)
      ========================================== -->
@@ -3925,26 +3707,6 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <script>
   window.addEventListener('load', function () {
     var target = document.getElementById('news2');
@@ -3961,7 +3723,125 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getFirestore, doc, setDoc, increment, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
+  const firebaseConfig = {
+    apiKey: "AIzaSyCxa3_j0iaTYRDRnqtRwVJfp-DWGanyZao",
+    authDomain: "like-viewercounter-follow.firebaseapp.com",
+    projectId: "like-viewercounter-follow",
+    storageBucket: "like-viewercounter-follow.firebasestorage.app",
+    messagingSenderId: "422303894987",
+    appId: "1:422303894987:web:b5027c6a8c54e87bfa3a4e"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  document.addEventListener('DOMContentLoaded', function () {
+    console.log("✅ Firebase Initialized");
+
+    // ==========================================
+    // १. LIKE SYSTEM (ID: myLikeButton)
+    // ==========================================
+    const likeBtn = document.getElementById('myLikeButton');
+    const likeCountSpan = document.getElementById('myLikeCount');
+    const likeRef = doc(db, "stats", "page_likes");
+    let isLiked = localStorage.getItem('pageLiked') === 'true';
+
+    onSnapshot(likeRef, (docSnap) => {
+      const count = docSnap.exists() ? docSnap.data().count : 0;
+      if (likeCountSpan) likeCountSpan.innerText = count;
+    });
+
+    if (likeBtn) {
+      if (isLiked) {
+        likeBtn.classList.add('active');
+        likeBtn.style.backgroundColor = '#0d6efd';
+        likeBtn.style.color = '#fff';
+      }
+
+      likeBtn.addEventListener('click', async function () {
+        try {
+          if (!isLiked) {
+            await setDoc(likeRef, { count: increment(1) }, { merge: true });
+            isLiked = true;
+            localStorage.setItem('pageLiked', 'true');
+            likeBtn.style.backgroundColor = '#0d6efd';
+            likeBtn.style.color = '#fff';
+          } else {
+            await setDoc(likeRef, { count: increment(-1) }, { merge: true });
+            isLiked = false;
+            localStorage.setItem('pageLiked', 'false');
+            likeBtn.style.backgroundColor = 'transparent';
+            likeBtn.style.color = '#0d6efd';
+          }
+        } catch (err) { console.error("❌ Like Error:", err); }
+      });
+    }
+
+    // ==========================================
+    // २. FOLLOW SYSTEM
+    // ==========================================
+    const followBtn = document.getElementById('pageFollowBtn');
+    const followText = document.getElementById('pageFollowText');
+    const followRef = doc(db, "stats", "page_follows");
+    let isFollowing = localStorage.getItem('pageFollowed') === 'true';
+
+    if (followText) {
+      if (isFollowing) {
+        followText.innerText = 'Following';
+        followBtn.style.backgroundColor = '#ffc107';
+        followBtn.style.color = '#000';
+      } else {
+        followText.innerText = 'Follow';
+        followBtn.style.backgroundColor = 'transparent';
+        followBtn.style.color = '#ffc107';
+      }
+    }
+
+    if (followBtn) {
+      followBtn.addEventListener('click', async function () {
+        try {
+          if (!isFollowing) {
+            await setDoc(followRef, { count: increment(1) }, { merge: true });
+            isFollowing = true;
+            localStorage.setItem('pageFollowed', 'true');
+            followText.innerText = 'Following';
+            followBtn.style.backgroundColor = '#ffc107';
+            followBtn.style.color = '#000';
+          } else {
+            await setDoc(followRef, { count: increment(-1) }, { merge: true });
+            isFollowing = false;
+            localStorage.setItem('pageFollowed', 'false');
+            followText.innerText = 'Follow';
+            followBtn.style.backgroundColor = 'transparent';
+            followBtn.style.color = '#ffc107';
+          }
+        } catch (err) { console.error("❌ Follow Error:", err); }
+      });
+    }
+
+    // ==========================================
+    // ३. VIEW SYSTEM
+    // ==========================================
+    const viewRef = doc(db, "stats", "homepage_views");
+    const viewSpan = document.getElementById('viewCount');
+    const today = new Date().toDateString();
+    const lastView = localStorage.getItem('lastViewDate');
+
+    onSnapshot(viewRef, (docSnap) => {
+      if (viewSpan) viewSpan.innerText = docSnap.exists() ? docSnap.data().views.toLocaleString() : 0;
+    });
+
+    if (lastView !== today) {
+      setDoc(viewRef, { views: increment(1) }, { merge: true })
+        .then(() => localStorage.setItem('lastViewDate', today))
+        .catch(err => console.error("❌ View Error:", err));
+    }
+  });
+</script>
 
 
 
