@@ -3407,7 +3407,7 @@ document.addEventListener('DOMContentLoaded', function() {
      ========================================== -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { getFirestore, doc, getDoc, setDoc, increment, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+  import { getFirestore, doc, setDoc, increment, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyCxa3_j0iaTYRDRnqtRwVJfp-DWGanyZao",
@@ -3422,61 +3422,74 @@ document.addEventListener('DOMContentLoaded', function() {
   const db = getFirestore(app);
 
   document.addEventListener('DOMContentLoaded', function () {
-    
-    // १. Like System
+    console.log("✅ Firebase Initialized");
+
+    // ==========================================
+    // १. LIKE SYSTEM
+    // ==========================================
     const likeBtn = document.getElementById('pageLikeBtn');
     const likeCountSpan = document.getElementById('pageLikeCount');
     const likeRef = doc(db, "stats", "page_likes");
     let isLiked = localStorage.getItem('pageLiked') === 'true';
 
     onSnapshot(likeRef, (docSnap) => {
-      if (likeCountSpan) likeCountSpan.innerText = docSnap.exists() ? docSnap.data().count : 0;
+      const count = docSnap.exists() ? docSnap.data().count : 0;
+      if (likeCountSpan) likeCountSpan.innerText = count;
     });
 
-    function updateLikeUI() {
-      if (!likeBtn) return;
+    if (likeBtn) {
+      // सुरुमा UI मिलाउने
       if (isLiked) {
         likeBtn.classList.add('active');
         likeBtn.style.backgroundColor = '#0d6efd';
         likeBtn.style.color = '#fff';
-      } else {
-        likeBtn.classList.remove('active');
-        likeBtn.style.backgroundColor = 'transparent';
-        likeBtn.style.color = '#0d6efd';
       }
-    }
-    updateLikeUI();
 
-    if (likeBtn) {
       likeBtn.addEventListener('click', async function () {
+        console.log("🔴 Like button clicked! Current state:", isLiked);
         try {
           if (!isLiked) {
             await setDoc(likeRef, { count: increment(1) }, { merge: true });
             isLiked = true;
             localStorage.setItem('pageLiked', 'true');
+            likeBtn.classList.add('active');
+            likeBtn.style.backgroundColor = '#0d6efd';
+            likeBtn.style.color = '#fff';
+            console.log("✅ Like saved!");
           } else {
             await setDoc(likeRef, { count: increment(-1) }, { merge: true });
             isLiked = false;
             localStorage.setItem('pageLiked', 'false');
+            likeBtn.classList.remove('active');
+            likeBtn.style.backgroundColor = 'transparent';
+            likeBtn.style.color = '#0d6efd';
+            console.log("❌ Like removed!");
           }
-          updateLikeUI();
-        } catch (err) { console.error(err); }
+        } catch (err) {
+          console.error("❌ Like Error:", err);
+        }
       });
     }
 
-    // २. Follow System
+    // ==========================================
+    // २. FOLLOW SYSTEM
+    // ==========================================
     const followBtn = document.getElementById('pageFollowBtn');
     const followText = document.getElementById('pageFollowText');
     const followRef = doc(db, "stats", "page_follows");
     let isFollowing = localStorage.getItem('pageFollowed') === 'true';
 
-    function updateFollowUI() {
-      if (!followText) return;
-      followText.innerText = isFollowing ? 'Following' : 'Follow';
-      if (isFollowing) followBtn.classList.add('active');
-      else followBtn.classList.remove('active');
+    if (followText) {
+      if (isFollowing) {
+        followText.innerText = 'Following';
+        followBtn.style.backgroundColor = '#ffc107';
+        followBtn.style.color = '#000';
+      } else {
+        followText.innerText = 'Follow';
+        followBtn.style.backgroundColor = 'transparent';
+        followBtn.style.color = '#ffc107';
+      }
     }
-    updateFollowUI();
 
     if (followBtn) {
       followBtn.addEventListener('click', async function () {
@@ -3485,17 +3498,26 @@ document.addEventListener('DOMContentLoaded', function() {
             await setDoc(followRef, { count: increment(1) }, { merge: true });
             isFollowing = true;
             localStorage.setItem('pageFollowed', 'true');
+            followText.innerText = 'Following';
+            followBtn.style.backgroundColor = '#ffc107';
+            followBtn.style.color = '#000';
           } else {
             await setDoc(followRef, { count: increment(-1) }, { merge: true });
             isFollowing = false;
             localStorage.setItem('pageFollowed', 'false');
+            followText.innerText = 'Follow';
+            followBtn.style.backgroundColor = 'transparent';
+            followBtn.style.color = '#ffc107';
           }
-          updateFollowUI();
-        } catch (err) { console.error(err); }
+        } catch (err) {
+          console.error("❌ Follow Error:", err);
+        }
       });
     }
 
-    // ३. View System
+    // ==========================================
+    // ३. VIEW SYSTEM
+    // ==========================================
     const viewRef = doc(db, "stats", "homepage_views");
     const viewSpan = document.getElementById('viewCount');
     const today = new Date().toDateString();
@@ -3508,12 +3530,10 @@ document.addEventListener('DOMContentLoaded', function() {
     if (lastView !== today) {
       setDoc(viewRef, { views: increment(1) }, { merge: true })
         .then(() => localStorage.setItem('lastViewDate', today))
-        .catch(err => console.error(err));
+        .catch(err => console.error("❌ View Error:", err));
     }
   });
 </script>
-
-
 
 
 
