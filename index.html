@@ -914,175 +914,143 @@ html, body { margin: 0 !important; padding: 0 !important; width: 100%; overflow-
 
 
 
+<!-- ============ समाचारको लागि CSS (यो <head> भित्र वा <style> भित्र राख्नु) ============ -->
+<style>
+  .hidden-content {
+    display: none;
+  }
+  .read-more-btn {
+    background: none;
+    border: none;
+    color: #0d6efd;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 0;
+    margin-top: 10px;
+    display: inline-block;
+  }
+  .read-more-btn:hover {
+    text-decoration: underline;
+  }
+</style>
 
+<!-- ============ समाचारको HTML (यो मुख्य भागमा राख्नु) ============ -->
+<div class="news-section" id="content_education">
+  <div class="news-header">
+    <h2 class="header3">✍️ 'विद्यार्थीबाट शुल्क लिनु गैरकानूनी हो; शिक्षा उद्योग होइन'</h2>
+  </div>
+  <p>विद्या भट्टराई, निवर्तमान शिक्षा, विज्ञान तथा प्रविधि मन्त्री</p>
+  <img src="https://www.onlinekhabar.com/wp-content/uploads/2025/06/Bidhya-Bhattarai-Banner.png" alt="Bidhya Bhattarai" loading="lazy" width="100%" height="500" style="object-fit:cover; border-radius:16px;">
+  
+  <div style="margin:15px 0; overflow:auto;">
+    <img src="https://pbs.twimg.com/profile_images/1579086841227059200/JyklJEUx_400x400.jpg" alt="Editor" loading="lazy" style="width:60px;height:60px;border-radius:50%;float:left;margin-right:15px;">
+    <p style="text-align:justify;">
+      अनिवार्य तथा निःशुल्क शिक्षा ऐन २०७५ कार्यान्वयन गर्न निवर्तमान शिक्षा, विज्ञान तथा प्रविधि मन्त्री विद्या भट्टराईले २०८३ सालसम्मको कार्ययोजना बनाएकी थिइन् । तर भट्टराईले ९ महिनामै पदबाट राजीनामा दिइन् । उनले आफ्नो कार्यकालमा अनिवार्य तथा निःशुल्क शिक्षा ऐन कति कार्यान्वयन गरिन् त ?
+      
+      <span id="eduMore" class="hidden-content">
+        <br><br>
+        अनलाइनखबरकर्मी दिनेश गौतमले गरेको कुराकानीको सम्पादित अंश : नौ महिना मन्त्री हुनुभयो । शुरूदेखि नै अनिवार्य तथा निःशुल्क शिक्षा ऐन कार्यान्वयनमा जोड दिनुभएको थियो । किताब निःशुल्क दिने, खाजा दिने र छात्रवृत्तिको काम भएको थियो ।<br><br>
+        उनले आफ्नो कार्यकालमा शिक्षक दरबन्दी मिलान, विद्यालय सुधार योजना र डिजिटल शिक्षामा पनि जोर दिएकी थिइन्। तर, बजेट अभाव र कोभिडपछिको शैक्षिक क्षतिले गर्दा उनका योजनाहरू पूर्ण रूपमा कार्यान्वयन हुन सकेनन्। निजी विद्यालयहरूले अझै पनि मनपरी शुल्क लिइरहेको र सरकारी विद्यालयको शैक्षिक गुणस्तर खस्किएको उनको भनाइ छ। शिक्षा क्षेत्रलाई उद्योगको रूपमा विकास गर्न नहुने र यसलाई सेवाको रूपमा लिनुपर्ने उनले बताइन्।
+        <br><br>
+        <a href="news-details.html" class="btn btn-sm btn-primary">बाँकी पूरा समाचार पढ्नुहोस्</a>
+      </span>
+      
+      <button class="read-more-btn" onclick="toggleContent('eduMore', this)">थप पढ्नुहोस्</button>
+    </p>
+  </div>
+  <div class="like-block" data-like-key="education">
+    <div class="like-group">
+      <button class="like-btn" data-like-key="education">❤️ <span class="like-text">मन पर्यो</span></button>
+      <div class="like-count-badge" data-count-key="education">0</div>
+    </div>
+    <div class="time-micro">🕐 <span data-time-key="education">अहिले</span></div>
+  </div>
+</div>
 
-<!-- EDUCATION NEWS -->
-        <div class="news-section" id="content_education">
-          <div class="news-header">
-            <h2 class="header3">✍️ 'विद्यार्थीबाट शुल्क लिनु गैरकानूनी हो; शिक्षा उद्योग होइन'</h2>
-          </div>
-          
-          <p>विद्या भट्टराई, निवर्तमान शिक्षा, विज्ञान तथा प्रविधि मन्त्री</p>
-          
-          <img src="https://www.onlinekhabar.com/wp-content/uploads/2025/06/Bidhya-Bhattarai-Banner.png" alt="Bidhya Bhattarai" loading="lazy" width="100%" height="500" style="object-fit:cover; border-radius:16px;">
-          
-          <div style="margin:15px 0; overflow:auto;">
-            <img src="https://pbs.twimg.com/profile_images/1579086841227059200/JyklJEUx_400x400.jpg" alt="Editor" loading="lazy" style="width:60px;height:60px;border-radius:50%;float:left;margin-right:15px;">
-            
-            <p style="text-align:justify;">
-              अनिवार्य तथा निःशुल्क शिक्षा ऐन २०७५ कार्यान्वयन गर्न निवर्तमान शिक्षा, विज्ञान तथा प्रविधि मन्त्री विद्या भट्टराईले २०८३ सालसम्मको कार्ययोजना बनाएकी थिइन् । तर भट्टराईले ९ महिनामै पदबाट राजीनामा दिइन् । उनले आफ्नो कार्यकालमा अनिवार्य तथा निःशुल्क शिक्षा ऐन कति कार्यान्वयन गरिन् त ?
-              
-              <span id="eduDots">...</span>
-              
-              <!-- यो भाग सुरुमा लुकेको हुन्छ, थप पढ्नुहोस् थिचेपछि मात्र देखिन्छ -->
-              <span id="eduMore" class="hidden-content">
-                अनलाइनखबरकर्मी दिनेश गौतमले गरेको कुराकानीको सम्पादित अंश : नौ महिना मन्त्री हुनुभयो । शुरूदेखि नै अनिवार्य तथा निःशुल्क शिक्षा ऐन कार्यान्वयनमा जोड दिनुभएको थियो । किताब निःशुल्क दिने, खाजा दिने र छात्रवृत्तिको काम भएको थियो ।<br><br>
-                उनले आफ्नो कार्यकालमा शिक्षक दरबन्दी मिलान, विद्यालय सुधार योजना र डिजिटल शिक्षामा पनि जोर दिएकी थिइन्। तर, बजेट अभाव र कोभिडपछिको शैक्षिक क्षतिले गर्दा उनका योजनाहरू पूर्ण रूपमा कार्यान्वयन हुन सकेनन्। निजी विद्यालयहरूले अझै पनि मनपरी शुल्क लिइरहेको र सरकारी विद्यालयको शैक्षिक गुणस्तर खस्किएको उनको भनाइ छ। शिक्षा क्षेत्रलाई उद्योगको रूपमा विकास गर्न नहुने र यसलाई सेवाको रूपमा लिनुपर्ने उनले बताइन्।
-                <br>
-                <a href="news-details.html" class="btn btn-sm btn-primary mt-2" style="display:inline-block;">
-                  <i class="fas fa-book-open"></i> बाँकी पूरा समाचार पढ्नुहोस्
-                </a>
-              </span>
-              
-              <button class="read-more-btn" onclick="toggleContent('eduMore', 'eduDots', this)">थप पढ्नुहोस्</button>
-            </p>
-          </div>
+<!-- KARA NEWS -->
+<div class="news-section" id="content_kara">
+  <div class="news-header">
+    <h2 class="header3">✍️ सुशीला कार्कीद्वारा लिखित नेपाली उपन्यास - कारा (Kara)</h2>
+  </div>
+  <p>जेल जीवन, महिला हिंसा र सामाजिक बन्धनको कथा। पुस्तक समीक्षा, कथावस्तु र पात्रहरूको विस्तृत विश्लेषण</p>
+  <img src="https://media.thuprai.com/front_covers/Kara_by_Sushila_Karki_-_front.jpg" alt="Kara Novel" loading="lazy" width="100%" height="500" style="object-fit:cover; border-radius:16px;">
+  
+  <div style="margin:15px 0; overflow:auto;">
+    <img src="https://pbs.twimg.com/profile_images/1579086841227059200/JyklJEUx_400x400.jpg" alt="Editor" loading="lazy" style="width:60px;height:60px;border-radius:50%;float:left;margin-right:15px;">
+    <p style="text-align:justify;">
+      सुशीला कार्कीद्वारा लिखित नेपाली उपन्यास कारा (Kara) जेल जीवन, महिला हिंसा र सामाजिक बन्धनको कथा पुस्तक समीक्षा, कथावस्तु र पात्रहरूको विस्तृत विश्लेषण। महिला कैदीहरूको भौतिक र सामाजिक बन्धनको कथा – कारा उपन्यासको विस्तृत समीक्षा।
+      
+      <span id="karaMore" class="hidden-content">
+        <br><br>
+        उपन्यास 'कारा' मा लेखिका सुशीला कार्कीले नेपाली समाजमा भित्रिएको विकृतिलाई उजागर गरेकी छन्। जेलभित्र पुरुष र महिला कैदीहरूबीच हुने व्यवहार, कानुनको पक्षपाती भूमिका र महिला हिंसाको मानसिक पीडालाई उनले निकै नजिकबाट चित्रण गरेकी छन्। यो उपन्यास केवल एउटा कथा मात्र नभई समाजको ऐना पनि हो।<br><br>
+        काराको मुख्य पात्रले जेलमा भोगेका कष्ट, उनीमाथि भएको अन्याय र त्यसलाई पार गर्दै उनले गरेको सङ्घर्षले पाठकलाई भावुक बनाउँछ।
+        <br><br>
+        <a href="javascript:void(0);" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#karaModal">बाँकी पूरा समाचार पढ्नुहोस्</a>
+      </span>
+      
+      <button class="read-more-btn" onclick="toggleContent('karaMore', this)">थप पढ्नुहोस्</button>
+    </p>
+  </div>
+  <div class="like-block" data-like-key="kara">
+    <div class="like-group">
+      <button class="like-btn" data-like-key="kara">❤️ <span class="like-text">मन पर्यो</span></button>
+      <div class="like-count-badge" data-count-key="kara">0</div>
+    </div>
+    <div class="time-micro">🕐 <span data-time-key="kara">अहिले</span></div>
+  </div>
+</div>
 
-          <div class="like-block" data-like-key="education">
-            <div class="like-group">
-              <button class="like-btn" data-like-key="education">❤️ <span class="like-text">मन पर्यो</span></button>
-              <div class="like-count-badge" data-count-key="education">0</div>
-            </div>
-            <div class="time-micro">🕐 <span data-time-key="education">अहिले</span></div>
-          </div>
-        </div>
+<!-- BRICS SUMMIT NEWS -->
+<div class="news-section" id="content_brics">
+  <div class="news-header">
+    <h2 class="header3">🌍 भारतमा सम्पन्न १८औँ ब्रिक्स शिखर सम्मेलन: ग्लोबल साउथको आवाज बुलन्द</h2>
+  </div>
+  <p>नयाँ दिल्ली घोषणापत्र–२०२६ सर्वसम्मतिले पारित, अन्तर्राष्ट्रिय संस्थाहरूमा विकासशील देशको प्रतिनिधित्व बढाउने माग</p>
+  <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhpKnWLqYkqJSXcivEeVY9V3RbWUe3qHlLKBOsRV9jJFiIegLNB1Nn8c7iKnOjMjIweR10pBybuKswkEenJ-ZcSc0ffWBxPhog7vNCT-3DPkB2gjBBIeFPKYq3pEnwRWzc7pAfleb6sATowmImx_LYWPqUR-3HpGdEje77DroHyXO5KhIJwAnzDnyXU0yA/s900/BRICS%20Ministers%20India-1789225965.webp" alt="BRICS" loading="lazy" width="100%" height="auto" style="object-fit:cover; border-radius:16px; margin-bottom:15px;">
+  
+  <div style="margin:15px 0; overflow:auto;">
+    <img src="https://pbs.twimg.com/profile_images/1579086841227059200/JyklJEUx_400x400.jpg" alt="Editor" loading="lazy" style="width:60px;height:60px;border-radius:50%;float:left;margin-right:15px;">
+    <p style="text-align:justify;">
+      भारतको नयाँ दिल्लीस्थित 'भारत मण्डपम' मा सम्पन्न १८औँ ब्रिक्स शिखर सम्मेलन (१२–१३ सेप्टेम्बर २०२६) ले पश्चिमा देशहरूको वर्चस्व रहेका संस्थाहरूको विकल्पको रूपमा काम गर्दै ग्लोबल साउथको आवाजलाई बुलन्द बनाएको छ।
+      
+      <span id="bricsMore" class="hidden-content">
+        <br><br>
+        ११ पूर्ण सदस्य राष्ट्र र विभिन्न साझेदार देशहरूको सहभागिता रहेको यस सम्मेलनमा ४५ पृष्ठ र १४० अनुच्छेदसहितको 'नयाँ दिल्ली घोषणापत्र–२०२६' सर्वसम्मतिले पारित गरिएको छ, जसमा संयुक्त राष्ट्रसंघको सुरक्षा परिषद्, IMF र विश्व बैंक जस्ता अन्तर्राष्ट्रिय संस्थाहरूमा विकासशील देशहरूको प्रतिनिधित्व बढाउन माग गर्दै भारत र ब्राजिलको स्थायी सदस्यताका लागि चीन र रुसले समर्थन दोहोर्‍याएका छन्।<br><br>
+        यस सम्मेलनले विश्व राजनीतिमा एसियाली र अफ्रिकी देशहरूको सामूहिक आवाजलाई थप बलियो बनाएको छ। भारतले आफ्नो अध्यक्षतामा यो सम्मेलन गर्दै ग्लोबल साउथका मुद्दाहरूलाई अन्तर्राष्ट्रिय मञ्चमा प्राथमिकताका साथ उठाएको छ। साथै, आतंकवाद, जलवायु परिवर्तन र खाद्य सुरक्षा जस्ता विषयमा पनि सदस्य राष्ट्रहरूबीच सहमति बनेको छ।
+        <br><br>
+        <a href="javascript:void(0);" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#bricsModal">पूरा समाचार पढ्नुहोस्</a>
+      </span>
+      
+      <button class="read-more-btn" onclick="toggleContent('bricsMore', this)">थप पढ्नुहोस्</button>
+    </p>
+  </div>
+  <div class="like-block" data-like-key="brics">
+    <div class="like-group">
+      <button class="like-btn" data-like-key="brics">❤️ <span class="like-text">मन पर्यो</span></button>
+      <div class="like-count-badge" data-count-key="brics">0</div>
+    </div>
+    <div class="time-micro">🕐 <span data-time-key="brics">अहिले</span></div>
+  </div>
+</div>
 
-        <!-- KARA NEWS -->
-        <div class="news-section" id="content_kara">
-          <div class="news-header">
-            <h2 class="header3">✍️ सुशीला कार्कीद्वारा लिखित नेपाली उपन्यास - कारा (Kara)</h2>
-          </div>
-          <p>जेल जीवन, महिला हिंसा र सामाजिक बन्धनको कथा। पुस्तक समीक्षा, कथावस्तु र पात्रहरूको विस्तृत विश्लेषण</p>
-          
-          <img src="https://media.thuprai.com/front_covers/Kara_by_Sushila_Karki_-_front.jpg" alt="Kara Novel" loading="lazy" width="100%" height="500" style="object-fit:cover; border-radius:16px;">
-          
-          <div style="margin:15px 0; overflow:auto;">
-            <img src="https://pbs.twimg.com/profile_images/1579086841227059200/JyklJEUx_400x400.jpg" alt="Editor" loading="lazy" style="width:60px;height:60px;border-radius:50%;float:left;margin-right:15px;">
-            <p style="text-align:justify;">
-              सुशीला कार्कीद्वारा लिखित नेपाली उपन्यास कारा (Kara) जेल जीवन, महिला हिंसा र सामाजिक बन्धनको कथा पुस्तक समीक्षा, कथावस्तु र पात्रहरूको विस्तृत विश्लेषण। महिला कैदीहरूको भौतिक र सामाजिक बन्धनको कथा – कारा उपन्यासको विस्तृत समीक्षा।
-              
-              <span id="karaDots">...</span>
-              
-              <!-- यो भाग सुरुमा लुकेको हुन्छ -->
-              <span id="karaMore" class="hidden-content">
-                उपन्यास 'कारा' मा लेखिका सुशीला कार्कीले नेपाली समाजमा भित्रिएको विकृतिलाई उजागर गरेकी छन्। जेलभित्र पुरुष र महिला कैदीहरूबीच हुने व्यवहार, कानुनको पक्षपाती भूमिका र महिला हिंसाको मानसिक पीडालाई उनले निकै नजिकबाट चित्रण गरेकी छन्। यो उपन्यास केवल एउटा कथा मात्र नभई समाजको ऐना पनि हो।<br><br>
-                काराको मुख्य पात्रले जेलमा भोगेका कष्ट, उनीमाथि भएको अन्याय र त्यसलाई पार गर्दै उनले गरेको सङ्घर्षले पाठकलाई भावुक बनाउँछ। लेखिकाले महिला कैदीहरूको मनोविज्ञानलाई पनि निकै सूक्ष्म रूपमा प्रस्तुत गरेकी छन्।
-                <br>
-                <a href="javascript:void(0);" class="btn btn-sm btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#karaModal">
-                  <i class="fas fa-book-open"></i> बाँकी पूरा समाचार पढ्नुहोस्
-                </a>
-              </span>
-              
-              <button class="read-more-btn" onclick="toggleContent('karaMore', 'karaDots', this)">थप पढ्नुहोस्</button>
-            </p>
-          </div>
-          
-          <div class="like-block" data-like-key="kara">
-            <div class="like-group">
-              <button class="like-btn" data-like-key="kara">❤️ <span class="like-text">मन पर्यो</span></button>
-              <div class="like-count-badge" data-count-key="kara">0</div>
-            </div>
-            <div class="time-micro">🕐 <span data-time-key="kara">अहिले</span></div>
-          </div>
-        </div>
-
-        <!-- ================= BRICS SUMMIT NEWS ================= -->
-        <div class="news-section" id="content_brics">
-          <div class="news-header">
-            <h2 class="header3">🌍 भारतमा सम्पन्न १८औँ ब्रिक्स शिखर सम्मेलन: ग्लोबल साउथको आवाज बुलन्द</h2>
-          </div>
-          
-          <p>नयाँ दिल्ली घोषणापत्र–२०२६ सर्वसम्मतिले पारित, अन्तर्राष्ट्रिय संस्थाहरूमा विकासशील देशको प्रतिनिधित्व बढाउने माग</p>
-          
-          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhpKnWLqYkqJSXcivEeVY9V3RbWUe3qHlLKBOsRV9jJFiIegLNB1Nn8c7iKnOjMjIweR10pBybuKswkEenJ-ZcSc0ffWBxPhog7vNCT-3DPkB2gjBBIeFPKYq3pEnwRWzc7pAfleb6sATowmImx_LYWPqUR-3HpGdEje77DroHyXO5KhIJwAnzDnyXU0yA/s900/BRICS%20Ministers%20India-1789225965.webp" 
-               alt="BRICS Ministers India Summit" 
-               loading="lazy" 
-               width="100%" height="auto" 
-               style="object-fit:cover; border-radius:16px; margin-bottom:15px;">
-          
-          <div style="margin:15px 0; overflow:auto;">
-            <img src="https://pbs.twimg.com/profile_images/1579086841227059200/JyklJEUx_400x400.jpg" alt="Editor" loading="lazy" style="width:60px;height:60px;border-radius:50%;float:left;margin-right:15px;">
-            
-            <p style="text-align:justify;">
-              भारतको नयाँ दिल्लीस्थित 'भारत मण्डपम' मा सम्पन्न १८औँ ब्रिक्स शिखर सम्मेलन (१२–१३ सेप्टेम्बर २०२६) ले पश्चिमा देशहरूको वर्चस्व रहेका संस्थाहरूको विकल्पको रूपमा काम गर्दै ग्लोबल साउथको आवाजलाई बुलन्द बनाएको छ।
-              
-              <span id="bricsDots">...</span>
-              
-              <!-- यो भाग सुरुमा लुकेको हुन्छ -->
-              <span id="bricsMore" class="hidden-content">
-                ११ पूर्ण सदस्य राष्ट्र र विभिन्न साझेदार देशहरूको सहभागिता रहेको यस सम्मेलनमा ४५ पृष्ठ र १४० अनुच्छेदसहितको 'नयाँ दिल्ली घोषणापत्र–२०२६' सर्वसम्मतिले पारित गरिएको छ, जसमा संयुक्त राष्ट्रसंघको सुरक्षा परिषद्, IMF र विश्व बैंक जस्ता अन्तर्राष्ट्रिय संस्थाहरूमा विकासशील देशहरूको प्रतिनिधित्व बढाउन माग गर्दै भारत र ब्राजिलको स्थायी सदस्यताका लागि चीन र रुसले समर्थन दोहोर्‍याएका छन्।<br><br>
-                यस सम्मेलनले विश्व राजनीतिमा एसियाली र अफ्रिकी देशहरूको सामूहिक आवाजलाई थप बलियो बनाएको छ। भारतले आफ्नो अध्यक्षतामा यो सम्मेलन गर्दै ग्लोबल साउथका मुद्दाहरूलाई अन्तर्राष्ट्रिय मञ्चमा प्राथमिकताका साथ उठाएको छ। साथै, आतंकवाद, जलवायु परिवर्तन र खाद्य सुरक्षा जस्ता विषयमा पनि सदस्य राष्ट्रहरूबीच सहमति बनेको छ।
-                <br>
-                <a href="javascript:void(0);" class="btn btn-sm btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#bricsModal">
-                  <i class="fas fa-book-open"></i> पूरा समाचार पढ्नुहोस्
-                </a>
-              </span>
-              
-              <button class="read-more-btn" onclick="toggleContent('bricsMore', 'bricsDots', this)">थप पढ्नुहोस्</button>
-            </p>
-          </div>
-
-          <div class="like-block" data-like-key="brics">
-            <div class="like-group">
-              <button class="like-btn" data-like-key="brics">❤️ <span class="like-text">मन पर्यो</span></button>
-              <div class="like-count-badge" data-count-key="brics">0</div>
-            </div>
-            <div class="time-micro">🕐 <span data-time-key="brics">अहिले</span></div>
-          </div>
-        </div>
-
+<!-- ============ JavaScript (यो </body> भन्दा माथि राख्नु) ============ -->
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    
-    // १. थप पढ्नुहोस् (Read More) बटन चलाउनको लागि
-    window.toggleContent = function(moreId, dotsId, btn) {
+    // समाचार खोल्ने/बन्द गर्ने फंक्शन
+    window.toggleContent = function(moreId, btn) {
       var moreText = document.getElementById(moreId);
-      var dots = document.getElementById(dotsId);
-      
       if (!moreText) return;
 
       if (moreText.classList.contains('hidden-content')) {
         moreText.classList.remove('hidden-content');
-        if (dots) dots.style.display = "none";
         btn.innerText = "कम पढ्नुहोस्";
       } else {
         moreText.classList.add('hidden-content');
-        if (dots) dots.style.display = "inline";
         btn.innerText = "थप पढ्नुहोस्";
       }
     };
-
-    // २. "अहिले" भनेको ठाउँमा आजको मिति राख्नको लागि
-    var timeSpans = document.querySelectorAll('.time-micro span');
-    if (timeSpans.length > 0) {
-      var today = new Date();
-      var options = { year: 'numeric', month: 'short', day: 'numeric' };
-      var nepaliDate = today.toLocaleDateString('ne-NP', options);
-      
-      timeSpans.forEach(function(span) {
-        // यदि लाइक भइसकेको छैन भने मात्र मिति राख्ने
-        if (span.innerText === 'अहिले') {
-          span.innerText = nepaliDate; 
-        }
-      });
-    }
-
   });
 </script>
-
-
-
-
 
 
 
