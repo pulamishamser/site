@@ -3815,13 +3815,35 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
 
+     // ==========================================
+    // ३. VIEW SYSTEM (स्थिर बनाइएको)
+    // ==========================================
     const viewRef = doc(db, "stats", "homepage_views");
     const viewSpan = document.getElementById('viewCount');
+    
+    // सुरुमा ब्राउजरमा सेभ भएको पुरानो नम्बर देखाउने (ताकि '०' नदेखियोस्)
+    const savedViews = localStorage.getItem('lastKnownViews');
+    if (viewSpan && savedViews) {
+      viewSpan.innerText = savedViews;
+    }
+
+    // Firebase बाट नयाँ नम्बर आएपछि अपडेट गर्ने
+    onSnapshot(viewRef, (docSnap) => {
+      if (docSnap.exists() && viewSpan) {
+        const latestViews = docSnap.data().views.toLocaleString();
+        viewSpan.innerText = latestViews;
+        // नयाँ नम्बर ब्राउजरमा सेभ गर्ने
+        localStorage.setItem('lastKnownViews', latestViews);
+      }
+    });
+
+    // आजको भ्यु १ थप्ने (यदि आज देखेको छैन भने)
     const today = new Date().toDateString();
     const lastView = localStorage.getItem('lastViewDate');
-    onSnapshot(viewRef, (snap) => { if(viewSpan) viewSpan.innerText = snap.exists() ? snap.data().views.toLocaleString() : 0; });
     if (lastView !== today) {
-      setDoc(viewRef, { views: increment(1) }, { merge: true }).then(() => localStorage.setItem('lastViewDate', today));
+      setDoc(viewRef, { views: increment(1) }, { merge: true })
+        .then(() => localStorage.setItem('lastViewDate', today))
+        .catch(err => console.error("View Error:", err));
     }
 
     // ==========================================
