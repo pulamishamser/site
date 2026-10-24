@@ -3784,12 +3784,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==========================================
     // २. FOLLOW SYSTEM
     // ==========================================
+
+  // Follow बटनको लागि सिधा कोड (बिना झन्झट)
+  document.addEventListener('DOMContentLoaded', function() {
     const followBtn = document.getElementById('pageFollowBtn');
     const followText = document.getElementById('pageFollowText');
-    const followRef = doc(db, "stats", "page_follows");
+    
+    // ब्राउजरले सम्झेको छ कि छैन हेर्ने
     let isFollowing = localStorage.getItem('pageFollowed') === 'true';
 
-    if (followText) {
+    if (followBtn && followText) {
+      // पहिले नै फलो गरेको छ भने पहेँलो देखाउने
       if (isFollowing) {
         followText.innerText = 'Following';
         followBtn.style.backgroundColor = '#ffc107';
@@ -3799,50 +3804,25 @@ document.addEventListener('DOMContentLoaded', function() {
         followBtn.style.backgroundColor = 'transparent';
         followBtn.style.color = '#ffc107';
       }
-    }
 
-    if (followBtn) {
-      followBtn.addEventListener('click', async function () {
-        try {
-          if (!isFollowing) {
-            await setDoc(followRef, { count: increment(1) }, { merge: true });
-            isFollowing = true;
-            localStorage.setItem('pageFollowed', 'true');
-            followText.innerText = 'Following';
-            followBtn.style.backgroundColor = '#ffc107';
-            followBtn.style.color = '#000';
-          } else {
-            await setDoc(followRef, { count: increment(-1) }, { merge: true });
-            isFollowing = false;
-            localStorage.setItem('pageFollowed', 'false');
-            followText.innerText = 'Follow';
-            followBtn.style.backgroundColor = 'transparent';
-            followBtn.style.color = '#ffc107';
-          }
-        } catch (err) { console.error("❌ Follow Error:", err); }
+      followBtn.addEventListener('click', function() {
+        if (!isFollowing) {
+          isFollowing = true;
+          localStorage.setItem('pageFollowed', 'true');
+          followText.innerText = 'Following';
+          followBtn.style.backgroundColor = '#ffc107';
+          followBtn.style.color = '#000';
+        } else {
+          isFollowing = false;
+          localStorage.setItem('pageFollowed', 'false');
+          followText.innerText = 'Follow';
+          followBtn.style.backgroundColor = 'transparent';
+          followBtn.style.color = '#ffc107';
+        }
       });
-    }
-
-    // ==========================================
-    // ३. VIEW SYSTEM
-    // ==========================================
-    const viewRef = doc(db, "stats", "homepage_views");
-    const viewSpan = document.getElementById('viewCount');
-    const today = new Date().toDateString();
-    const lastView = localStorage.getItem('lastViewDate');
-
-    onSnapshot(viewRef, (docSnap) => {
-      if (viewSpan) viewSpan.innerText = docSnap.exists() ? docSnap.data().views.toLocaleString() : 0;
-    });
-
-    if (lastView !== today) {
-      setDoc(viewRef, { views: increment(1) }, { merge: true })
-        .then(() => localStorage.setItem('lastViewDate', today))
-        .catch(err => console.error("❌ View Error:", err));
     }
   });
 </script>
-
 
 
 
