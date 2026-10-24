@@ -3722,7 +3722,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 </script>
 
-
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
   import { getFirestore, doc, setDoc, increment, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -3740,47 +3739,57 @@ document.addEventListener('DOMContentLoaded', function() {
   const db = getFirestore(app);
 
   document.addEventListener('DOMContentLoaded', function () {
-    console.log("✅ Firebase Initialized");
+    console.log("✅ Firebase Ready");
 
-    // ==========================================
-    // १. LIKE SYSTEM (ID: myLikeButton)
-    // ==========================================
+    // १. VIEW SYSTEM (भ्यु काउन्टर)
+    const viewRef = doc(db, "stats", "homepage_views");
+    const viewSpan = document.getElementById('viewCount');
+    const today = new Date().toDateString();
+    const lastView = localStorage.getItem('lastViewDate');
+
+    // Firebase बाट भ्यु लोड गर्ने
+    onSnapshot(viewRef, (docSnap) => {
+      if (viewSpan) {
+        viewSpan.innerText = docSnap.exists() ? docSnap.data().views.toLocaleString() : 0;
+      }
+    });
+
+    // यदि आज देखेको छैन भने १ थप्ने
+    if (lastView !== today) {
+      setDoc(viewRef, { views: increment(1) }, { merge: true })
+        .then(() => localStorage.setItem('lastViewDate', today))
+        .catch(err => console.error("❌ View Error:", err));
+    }
+
+    // २. LIKE SYSTEM (तिम्रो अघिल्लो कोड नै यहीँ छ)
     const likeBtn = document.getElementById('myLikeButton');
     const likeCountSpan = document.getElementById('myLikeCount');
     const likeRef = doc(db, "stats", "page_likes");
     let isLiked = localStorage.getItem('pageLiked') === 'true';
 
     onSnapshot(likeRef, (docSnap) => {
-      const count = docSnap.exists() ? docSnap.data().count : 0;
-      if (likeCountSpan) likeCountSpan.innerText = count;
+      if (likeCountSpan) likeCountSpan.innerText = docSnap.exists() ? docSnap.data().count : 0;
     });
 
     if (likeBtn) {
-      if (isLiked) {
-        likeBtn.classList.add('active');
-        likeBtn.style.backgroundColor = '#0d6efd';
-        likeBtn.style.color = '#fff';
-      }
-
       likeBtn.addEventListener('click', async function () {
         try {
           if (!isLiked) {
             await setDoc(likeRef, { count: increment(1) }, { merge: true });
             isLiked = true;
             localStorage.setItem('pageLiked', 'true');
-            likeBtn.style.backgroundColor = '#0d6efd';
-            likeBtn.style.color = '#fff';
+            likeBtn.style.backgroundColor = '#0d6efd'; likeBtn.style.color = '#fff';
           } else {
             await setDoc(likeRef, { count: increment(-1) }, { merge: true });
             isLiked = false;
             localStorage.setItem('pageLiked', 'false');
-            likeBtn.style.backgroundColor = 'transparent';
-            likeBtn.style.color = '#0d6efd';
+            likeBtn.style.backgroundColor = 'transparent'; likeBtn.style.color = '#0d6efd';
           }
-        } catch (err) { console.error("❌ Like Error:", err); }
+        } catch (err) { console.error(err); }
       });
     }
-
+  });
+</script>
     // ==========================================
     // २. FOLLOW SYSTEM
     // ==========================================
