@@ -3401,9 +3401,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   };
 </script>
-
 <!-- ==========================================
-     FIREBASE LIKES SYSTEM (Fixed)
+     FIREBASE LIKES SYSTEM (Final Fixed)
      ========================================== -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
@@ -3425,20 +3424,21 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log("✅ Firebase Initialized");
 
     // ==========================================
-    // १. LIKE SYSTEM
+    // १. LIKE SYSTEM (ID: myLikeButton मिलाइएको)
     // ==========================================
-    const likeBtn = document.getElementById('pageLikeBtn');
-    const likeCountSpan = document.getElementById('pageLikeCount');
+    const likeBtn = document.getElementById('myLikeButton');
+    const likeCountSpan = document.getElementById('myLikeCount');
     const likeRef = doc(db, "stats", "page_likes");
     let isLiked = localStorage.getItem('pageLiked') === 'true';
 
+    // Firebase बाट लाइक काउन्टर लोड गर्ने (Real-time)
     onSnapshot(likeRef, (docSnap) => {
       const count = docSnap.exists() ? docSnap.data().count : 0;
       if (likeCountSpan) likeCountSpan.innerText = count;
     });
 
     if (likeBtn) {
-      // सुरुमा UI मिलाउने
+      // पहिले नै लाइक गरेको छ भने बटन निलो बनाउने
       if (isLiked) {
         likeBtn.classList.add('active');
         likeBtn.style.backgroundColor = '#0d6efd';
@@ -3452,7 +3452,6 @@ document.addEventListener('DOMContentLoaded', function() {
             await setDoc(likeRef, { count: increment(1) }, { merge: true });
             isLiked = true;
             localStorage.setItem('pageLiked', 'true');
-            likeBtn.classList.add('active');
             likeBtn.style.backgroundColor = '#0d6efd';
             likeBtn.style.color = '#fff';
             console.log("✅ Like saved!");
@@ -3460,7 +3459,6 @@ document.addEventListener('DOMContentLoaded', function() {
             await setDoc(likeRef, { count: increment(-1) }, { merge: true });
             isLiked = false;
             localStorage.setItem('pageLiked', 'false');
-            likeBtn.classList.remove('active');
             likeBtn.style.backgroundColor = 'transparent';
             likeBtn.style.color = '#0d6efd';
             console.log("❌ Like removed!");
@@ -3472,7 +3470,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ==========================================
-    // २. FOLLOW SYSTEM
+    // २. FOLLOW SYSTEM (ID: pageFollowBtn मिलाइएको)
     // ==========================================
     const followBtn = document.getElementById('pageFollowBtn');
     const followText = document.getElementById('pageFollowText');
@@ -3534,8 +3532,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 </script>
-
-
 
 
 
