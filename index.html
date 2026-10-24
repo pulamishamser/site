@@ -834,14 +834,18 @@ html, body { margin: 0 !important; padding: 0 !important; width: 100%; overflow-
 
 
 
-<!-- LIKE/FOLLOW -->
+<!-- LIKE/FOLLOW (Firebase Connected) -->
 <div class="container mt-3 d-flex justify-content-between">
   <div>
     <div class="text-center my-3" style="font-size: 15px; color: #555;">
-  <i class="fas fa-eye text-primary"></i> <strong id="viewCount">views</strong>  
-</div>
-    <button id="pageLikeBtn" class="btn btn-outline-primary rounded-pill"><i class="fas fa-thumbs-up"></i> Like</button>
-    <button id="pageFollowBtn" class="btn btn-outline-warning rounded-pill"><i class="fas fa-bell"></i> Follow</button>
+      <i class="fas fa-eye text-primary"></i> <strong id="viewCount">0</strong> views
+    </div>
+    <button id="pageLikeBtn" class="btn btn-outline-primary rounded-pill">
+      <i class="fas fa-thumbs-up"></i> Like (<span id="pageLikeCount">0</span>)
+    </button>
+    <button id="pageFollowBtn" class="btn btn-outline-warning rounded-pill">
+      <i class="fas fa-bell"></i> <span id="pageFollowText">Follow</span>
+    </button>
   </div>
   <div>
     <button id="searchToggle" class="btn btn-sm btn-outline-secondary rounded-pill"><i class="fas fa-search"></i></button>
