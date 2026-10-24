@@ -25,8 +25,6 @@ function googleTranslateElementInit() {
 }
 </script>
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-  
 <style>
 :root { --primary: #027f7f; --accent: #e67e22; --text: #1e2a3a; --bg: #f5f7fa; --card-bg: #ffffff; --border: #e9ecef; --footer-bg: #2d3748; }
 [data-theme="dark"] { --text: #e9ecef; --bg: #121212; --card-bg: #1e1e2e; --border: #333344; --footer-bg: #1a202c; }
@@ -828,13 +826,7 @@ html, body { margin: 0 !important; padding: 0 !important; width: 100%; overflow-
 
 
 
-
-
-
-
-
-
-<!-- LIKE/FOLLOW (Firebase Connected) -->
+<!-- LIKE/FOLLOW (नयाँ डिजाइन) -->
 <div class="container mt-3 d-flex justify-content-between">
   <div>
     <div class="text-center my-3" style="font-size: 15px; color: #555;">
@@ -853,7 +845,6 @@ html, body { margin: 0 !important; padding: 0 !important; width: 100%; overflow-
     <button id="fontInc" class="btn btn-sm btn-outline-secondary rounded-pill">A+</button>
   </div>
 </div>
-
 <div class="container">
   <div id="searchBox" style="display:none; padding:15px; background:var(--card-bg); border-radius:10px; margin-bottom:15px;">
     <input type="text" id="searchInput" class="form-control" placeholder="खोज्नुहोस्...">
@@ -2801,7 +2792,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body p-0">
-        <iframe src="SitePage/sub_index/about.html" style="width:100%; height:70vh; border:none;"></iframe>
+        <iframe src="about.html" style="width:100%; height:70vh; border:none;"></iframe>
       </div>
     </div>
   </div>
@@ -2846,7 +2837,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body p-0">
-        <iframe src="SitePage/sub_index/terms.html" style="width:100%; height:70vh; border:none;"></iframe>
+        <iframe src="terms.html" style="width:100%; height:70vh; border:none;"></iframe>
       </div>
     </div>
   </div>
@@ -3426,7 +3417,7 @@ document.addEventListener('DOMContentLoaded', function() {
      ========================================== -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { getFirestore, doc, getDoc, setDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+  import { getFirestore, doc, getDoc, setDoc, increment, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyCxa3_j0iaTYRDRnqtRwVJfp-DWGanyZao",
@@ -3434,122 +3425,103 @@ document.addEventListener('DOMContentLoaded', function() {
     projectId: "like-viewercounter-follow",
     storageBucket: "like-viewercounter-follow.firebasestorage.app",
     messagingSenderId: "422303894987",
-    appId: "1:422303894987:web:b5027c6a8c54e87bfa3a4e",
-    measurementId: "G-242G6HV2W6"
+    appId: "1:422303894987:web:b5027c6a8c54e87bfa3a4e"
   };
 
-  let db = null;
-  try {
-    const app = initializeApp(firebaseConfig);
-    db = getFirestore(app);
-  } catch (error) {
-    console.warn("Firebase initialization failed. Likes will not work.");
-  }
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
 
-  // ===== Like System =====
-  window.loadFirebaseLikes = async function(keys) {
-    if (!db) return; // यदि Firebase लोड भएन भने चुपचाप बस्ने
-    for (const key of keys) {
-      try {
-        const likeRef = doc(db, "likes", key);
-        const docSnap = await getDoc(likeRef);
-        const countElement = document.querySelector(`.like-count-badge[data-count-key="${key}"]`);
-        const btnElement = document.querySelector(`.like-btn[data-like-key="${key}"]`);
-        if (countElement) countElement.innerText = docSnap.exists() ? docSnap.data().count : 0;
-        if (btnElement && localStorage.getItem(`shamser_liked_${key}`) === 'true') {
-          btnElement.classList.add('liked');
-        }
-      } catch (error) {
-        console.warn("Like loading skipped due to network.");
-      }
-    }
-  };
+  document.addEventListener('DOMContentLoaded', function () {
+    
+    // १. Like System
+    const likeBtn = document.getElementById('pageLikeBtn');
+    const likeCountSpan = document.getElementById('pageLikeCount');
+    const likeRef = doc(db, "stats", "page_likes");
+    let isLiked = localStorage.getItem('pageLiked') === 'true';
 
-  window.handleFirebaseLike = async function(key, btnElement, countElement, timeElement) {
-    if (!db || btnElement.dataset.loading === 'true') return;
-    btnElement.dataset.loading = 'true';
-    const likeRef = doc(db, "likes", key);
-    let isLiked = localStorage.getItem(`shamser_liked_${key}`) === 'true';
-
-    try {
-      if (!isLiked) {
-        await setDoc(likeRef, { count: increment(1) }, { merge: true });
-        localStorage.setItem(`shamser_liked_${key}`, 'true');
-        btnElement.classList.add('liked');
-        if (timeElement) timeElement.innerText = 'भर्खरै';
-      } else {
-        await setDoc(likeRef, { count: increment(-1) }, { merge: true });
-        localStorage.setItem(`shamser_liked_${key}`, 'false');
-        btnElement.classList.remove('liked');
-      }
-      const docSnap = await getDoc(likeRef);
-      if (docSnap.exists()) countElement.innerText = docSnap.data().count;
-    } catch (error) {
-      console.warn("Like update failed.");
-    } finally {
-      btnElement.dataset.loading = 'false';
-    }
-  };
-
-  function initLikeButtons() {
-    const likeKeys = ['education', 'kara', 'brics'];
-    if (db) window.loadFirebaseLikes(likeKeys);
-
-    likeKeys.forEach(function(key) {
-      const btn = document.querySelector(`.like-btn[data-like-key="${key}"]`);
-      const countSpan = document.querySelector(`.like-count-badge[data-count-key="${key}"]`);
-      const timeSpan = document.querySelector(`.time-micro span[data-time-key="${key}"]`);
-      
-      if (btn && countSpan) {
-        const newBtn = btn.cloneNode(true);
-        btn.parentNode.replaceChild(newBtn, btn);
-        newBtn.addEventListener('click', function() {
-          window.handleFirebaseLike(key, newBtn, countSpan, timeSpan);
-        });
-      }
+    onSnapshot(likeRef, (docSnap) => {
+      if (likeCountSpan) likeCountSpan.innerText = docSnap.exists() ? docSnap.data().count : 0;
     });
-  }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initLikeButtons);
-  } else {
-    initLikeButtons();
-  }
-
-  // ===== Smart View Counter =====
-  async function updateViewCounter() {
-    if (!db) return;
-    try {
-      const today = new Date().toDateString(); 
-      const lastViewed = localStorage.getItem('lastViewedDate');
-      const viewRef = doc(db, "stats", "homepage");
-      const viewElement = document.getElementById('viewCount');
-
-      if (lastViewed === today) {
-        const docSnap = await getDoc(viewRef);
-        if (docSnap.exists() && viewElement) viewElement.innerText = docSnap.data().views.toLocaleString();
-        return; 
+    function updateLikeUI() {
+      if (!likeBtn) return;
+      if (isLiked) {
+        likeBtn.classList.add('active');
+        likeBtn.style.backgroundColor = '#0d6efd';
+        likeBtn.style.color = '#fff';
+      } else {
+        likeBtn.classList.remove('active');
+        likeBtn.style.backgroundColor = 'transparent';
+        likeBtn.style.color = '#0d6efd';
       }
-
-      await setDoc(viewRef, { views: increment(1) }, { merge: true });
-      localStorage.setItem('lastViewedDate', today); 
-
-      const docSnap = await getDoc(viewRef);
-      if (docSnap.exists() && viewElement) viewElement.innerText = docSnap.data().views.toLocaleString();
-    } catch (error) {
-      console.warn("View counter failed.");
-      const viewElement = document.getElementById('viewCount');
-      if(viewElement) viewElement.innerText = "0";
     }
-  }
+    updateLikeUI();
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', updateViewCounter);
-  } else {
-    updateViewCounter();
-  }
+    if (likeBtn) {
+      likeBtn.addEventListener('click', async function () {
+        try {
+          if (!isLiked) {
+            await setDoc(likeRef, { count: increment(1) }, { merge: true });
+            isLiked = true;
+            localStorage.setItem('pageLiked', 'true');
+          } else {
+            await setDoc(likeRef, { count: increment(-1) }, { merge: true });
+            isLiked = false;
+            localStorage.setItem('pageLiked', 'false');
+          }
+          updateLikeUI();
+        } catch (err) { console.error(err); }
+      });
+    }
+
+    // २. Follow System
+    const followBtn = document.getElementById('pageFollowBtn');
+    const followText = document.getElementById('pageFollowText');
+    const followRef = doc(db, "stats", "page_follows");
+    let isFollowing = localStorage.getItem('pageFollowed') === 'true';
+
+    function updateFollowUI() {
+      if (!followText) return;
+      followText.innerText = isFollowing ? 'Following' : 'Follow';
+      if (isFollowing) followBtn.classList.add('active');
+      else followBtn.classList.remove('active');
+    }
+    updateFollowUI();
+
+    if (followBtn) {
+      followBtn.addEventListener('click', async function () {
+        try {
+          if (!isFollowing) {
+            await setDoc(followRef, { count: increment(1) }, { merge: true });
+            isFollowing = true;
+            localStorage.setItem('pageFollowed', 'true');
+          } else {
+            await setDoc(followRef, { count: increment(-1) }, { merge: true });
+            isFollowing = false;
+            localStorage.setItem('pageFollowed', 'false');
+          }
+          updateFollowUI();
+        } catch (err) { console.error(err); }
+      });
+    }
+
+    // ३. View System
+    const viewRef = doc(db, "stats", "homepage_views");
+    const viewSpan = document.getElementById('viewCount');
+    const today = new Date().toDateString();
+    const lastView = localStorage.getItem('lastViewDate');
+
+    onSnapshot(viewRef, (docSnap) => {
+      if (viewSpan) viewSpan.innerText = docSnap.exists() ? docSnap.data().views.toLocaleString() : 0;
+    });
+
+    if (lastView !== today) {
+      setDoc(viewRef, { views: increment(1) }, { merge: true })
+        .then(() => localStorage.setItem('lastViewDate', today))
+        .catch(err => console.error(err));
+    }
+  });
 </script>
-
 
 
 
@@ -3786,6 +3758,16 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </div>
 
+
+
+
+
+
+
+
+
+
+
 <!-- ============ JAVASCRIPT ============ -->
 <script>
   function openHelpModal() {
@@ -3935,5 +3917,50 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('load', function () {
+    var target = document.getElementById('news2');
+    if (!target) return;
+
+    // sticky header को उचाइ घटाएर scroll गर्नुपर्छ, नत्र news header मुनि लुक्छ
+    var header = document.getElementById('header');
+    var headerH = header ? header.offsetHeight : 0;
+
+    var y = target.getBoundingClientRect().top + window.scrollY - headerH - 10;
+
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  });
+</script>
+
+
+
+
+
+
+
+
+
 </body>
 </html>
