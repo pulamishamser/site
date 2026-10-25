@@ -1172,16 +1172,8 @@ html, body { margin: 0 !important; padding: 0 !important; width: 100%; overflow-
         </div>
       </section>
 
-
-
-
-
-
-
-
-
 <!-- ===== QUICK SERVICES (थप सेवाहरू) ===== -->
-<section class="legal-section">
+<section class="legal-section" id="more-services">
   <h2><i class="fas fa-tools"></i> थप सेवाहरू (More Services)</h2>
   
   <div class="quick-services-grid">
@@ -3782,7 +3774,148 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 
+<!-- Welcome Popup Modal -->
+<div class="modal fade" id="welcomePopupModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="welcomePopupModalLabel" aria-hidden="true" style="z-index: 10600;">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content border-0 shadow-lg" style="border-radius: 15px; overflow: visible;">
+      
+      <!-- हेडर -->
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title d-flex align-items-center flex-wrap gap-2" id="welcomePopupModalLabel" style="font-size: 18px;">
+          <i class="fas fa-hand-peace"></i> स्वागतम्!
+          
+          <!-- तिम्रो CSS Dropdown यहाँ राखियो -->
+          <div class="custom-dropdown ms-2">
+            <button class="dropbtn"><i class="fas fa-tags"></i> Service Pricing</button>
+            <div class="dropdown-content">
+              <a href="https://shamser.info.np/Entry_Form/our_service.html" target="_blank">Payable Services</a>
+              <a href="https://shamser.info.np/Home/Get free service.html" target="_blank">Free Services</a>
+            </div>
+          </div>
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      
+      <div class="modal-body text-center p-0">
+        <!-- Image (Full Width) -->
+        <img src="https://shamser.info.np/SitePage/AI img/shamser_info_np.jpg" alt="Shamser" style="width: 100%; height: 260px; object-fit: cover; object-position: center;">
+        
+        <div class="p-3">
+          <span class="badge bg-success mb-2 px-2 py-1" style="font-size: 11px;">✨ शिक्षक र विद्यार्थीका लागि उत्कृष्ट</span>
+          
+          <h4 style="color: #027f7f; font-weight: bold; font-size: 18px;">हाम्रा विशेषताहरू</h4>
+          
+          <p style="font-size: 13px; color: #444; text-align: justify; line-height: 1.5;">
+            शिक्षक, विद्यार्थी र विद्यालयका लागि <strong>IEMIS, ताजा शैक्षिक समाचार, AI ज्ञान, सोसल मिडिया फलोअर्स</strong> र अन्य उपयोगी सेवाहरू एकै ठाउँमा।
+          </p>
+          
+          <a href="#more-services" class="btn btn-success fw-bold w-100 mt-2" data-bs-dismiss="modal">
+            <i class="fas fa-arrow-down"></i> थप सेवाहरू हेर्नुहोस्
+          </a>
+          
+          <button type="button" class="btn btn-outline-secondary w-100 mt-2" data-bs-dismiss="modal">
+            बन्द गर्नुहोस् (Close)
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
+<!-- Dropdown को CSS (Hover गर्दा खुल्ने) -->
+<style>
+  /* Dropdown कन्टेनर */
+  .custom-dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  /* Dropdown बटन */
+  .custom-dropdown .dropbtn {
+    background-color: #ffc107;
+    color: #000;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  /* Dropdown सूची (सुरुमा लुकेको) */
+  .custom-dropdown .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 180px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 10700; /* पपअप भन्दा माथि देखिन */
+    border-radius: 5px;
+    overflow: hidden;
+    top: 100%;
+    left: 0;
+  }
+
+  /* सूचीका लिङ्कहरू */
+  .custom-dropdown .dropdown-content a {
+    color: #333;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+  }
+
+  /* माउस लग्दा (Hover) रङ फेरिने */
+  .custom-dropdown .dropdown-content a:hover {
+    background-color: #f1f1f1;
+  }
+
+  /* Dropdown मा माउस लग्दा सूची देखिने */
+  .custom-dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  /* Dropdown मा माउस लग्दा बटनको रङ फेरिने */
+  .custom-dropdown:hover .dropbtn {
+    background-color: #ffca2c;
+  }
+</style>
+
+<!-- स्क्रिप्ट -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // २ सेकेन्डपछि पपअप खोल्ने
+    setTimeout(function() {
+      var myModal = new bootstrap.Modal(document.getElementById('welcomePopupModal'));
+      myModal.show();
+    }, 2000);
+
+    // "थप सेवाहरू" थिच्दा स्क्रोल हुने
+    document.querySelectorAll('a[href="#more-services"]').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        var target = document.getElementById('more-services');
+        if(target) {
+          var modalEl = document.getElementById('welcomePopupModal');
+          var modal = bootstrap.Modal.getInstance(modalEl);
+          if(modal) modal.hide();
+
+          setTimeout(function() {
+            var headerOffset = 80; 
+            var elementPosition = target.getBoundingClientRect().top;
+            var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+  
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
+          }, 300);
+        }
+      });
+    });
+  });
+</script>
 
 
 
