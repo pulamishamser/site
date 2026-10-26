@@ -457,6 +457,17 @@ html, body { margin: 0 !important; padding: 0 !important; width: 100%; overflow-
   </div>
 </div>
 
+
+
+
+
+
+
+
+
+
+     
+
 <!-- Floating UI -->
 <div id="reading-progress"></div>
 <button id="themeToggle" aria-label="Toggle theme"><i class="fas fa-moon" aria-hidden="true"></i></button>
@@ -1258,31 +1269,103 @@ html, body { margin: 0 !important; padding: 0 !important; width: 100%; overflow-
     });
   });
 </script>
+     
+
       <!-- Trending -->
-      <section class="trending-section">
-        <h2>📈 ट्रेन्डिङ विषयहरू</h2>
-        <div class="trending-tags">
-          <a href="#"><span>शिक्षामा जुत्ता बेचेजस्तो</span></a><a href="#"><span>Quiz</span></a><a href="#"><span>शिक्षकको सरुवा</span></a><a href="#"><span>Login IEMIS</span></a>
-        </div>
-      </section>
+   <!-- Trending -->
+<section class="trending-section">
+  <h2>📈 ट्रेन्डिङ विषयहरू</h2>
+  <div class="trending-tags">
+    <!-- यी २ वटाले तल भएको AI र Facebook सेक्सनमा जम्प गर्नेछन् -->
+    <a href="#ai-section"><span>चर्चित AI उपकरणहरू</span></a>
+    <a href="#fb-section"><span>Facebook Mastery Guide</span></a>
+    
+    <!-- यो थप सेवाहरूमा जान्छ -->
+    <a href="#more-services"><span>थप सेवाहरू</span></a>
+  </div>
+</section>
+
+<!-- News Section -->
+<section class="news-section" id="news-section">
+  <div class="news-header" style="margin-bottom:20px; border-left:5px solid #e67e22; padding-left:16px;">
+    <h2 style="font-size:22px; color:var(--text); display:flex; align-items:center; gap:10px;">
+      <i class="fas fa-newspaper text-warning"></i> ताजा शैक्षिक समाचारहरु
+    </h2>
+  </div>
+  
+  <div class="news-list">
+    
+    <!-- १. शिक्षामा जुत्ता बेचेजस्तो (पपअप खोल्ने) -->
+    <div class="news-item" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#juttaModal">
+      <img src="https://shamser.info.np/HomePage/See-2081.png" alt="News" loading="lazy">
+      <div class="news-item-content">
+        <h5>शिक्षामा जुत्ता बेचेजस्तो</h5>
+        <p>पूर्व शिक्षामन्त्री सुमना श्रेष्ठको अभिव्यक्ति।</p>
+      </div>
+    </div>
+    
+    <!-- २. पाठ्यपुस्तक डाउनलोड को समस्या (पपअप खोल्ने) -->
+    <div class="news-item" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#highlightModal">
+      <img src="https://shamser.info.np/HomePage/smarika.png" alt="News" loading="lazy">
+      <div class="news-item-content">
+        <h5>पाठ्यपुस्तक डाउनलोड को समस्या</h5>
+        <p>विद्यार्थीहरूले भोगिरहेको समस्या।</p>
+      </div>
+    </div>
+
+  </div>
+</section>
 
 
-     <!-- News Section -->
-      <section class="news-section">
-        <div class="news-header" style="margin-bottom:20px; border-left:5px solid #e67e22; padding-left:16px;">
-          <h2 style="font-size:22px; color:var(--text); display:flex; align-items:center; gap:10px;"><i class="fas fa-newspaper text-warning"></i> ताजा शैक्षिक समाचारहरु</h2>
-        </div>
-        <div class="news-list">
-          <div class="news-item">
-            <img src="https://shamser.info.np/HomePage/See-2081.png" alt="News" loading="lazy">
-            <div class="news-item-content"><h5>SEE २०८१ को नतिजा प्रकाशित</h5><p>यस वर्षको एसईई नतिजा हेर्नका लागि यहाँ क्लिक गर्नुहोस्।</p></div>
-          </div>
-          <div class="news-item">
-            <img src="https://shamser.info.np/HomePage/smarika.png" alt="News" loading="lazy">
-            <div class="news-item-content"><h5>विद्यालय स्मारिका विमोचन</h5><p>विद्यालयको वार्षिक स्मारिका विमोचन कार्यक्रम सम्पन्न।</p></div>
-          </div>
-        </div>
-      </section>
+<!-- ================= १. शिक्षामा जुत्ता बेचेजस्तो (News Modal) ================= -->
+<div class="modal fade" id="juttaModal" tabindex="-1" aria-hidden="true" style="z-index: 10600;">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content border-0 shadow-lg">
+      
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title"><i class="fas fa-newspaper"></i> शिक्षामा जुत्ता बेचेजस्तो मुनाफा गर्नुहुँदैन</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      
+      <div class="modal-body p-4" style="background: #f8f9fa;">
+        <p style="text-align:justify; font-size: 16px; line-height: 1.6;">
+          <strong>काठमाडौं।</strong> तत्कालीन राष्ट्रिय स्वतन्त्र पार्टी (रास्वपा)की सांसद तथा पूर्व शिक्षामन्त्री सुमना श्रेष्ठले निजी विद्यालयको नाफामुखी प्रवृत्तिलाई सीधा लक्षित गर्दै "शिक्षामा जुत्ता बेचेजस्तो मुनाफा गर्नुहुँदैन" भनी बलियो अभिव्यक्ति दिएकी थिइन्।
+        </p>
+        <p style="text-align:justify; font-size: 16px; line-height: 1.6;">
+          प्रतिनिधिसभा अन्तर्गतको शिक्षा, विज्ञान तथा प्रविधि समितिको बैठकमा उनले भनिन्, "निजी विद्यालय खोल्न दिने वा नदिने भन्ने प्रश्न छ, पहिले नै खोलिएकाहरूलाई के गर्ने? शिक्षालाई गैरनाफामूलक बनाउनुपर्छ। जुत्ता बेचेजस्तो मुनाफा गर्नुहुँदैन।" उनले निजी विद्यालयलाई नयाँ मापदण्डअनुसार सञ्चालन गर्न र १५ वर्षभित्र क्रमशः गैरनाफामूलक लोककल्याणकारी संस्थामा रूपान्तरण गर्ने प्रस्ताव गरेकी थिइन् — राष्ट्रियकरण होइन।
+        </p>
+        <p style="text-align:justify; font-size: 16px; line-height: 1.6;">
+          यो अभिव्यक्तिले तत्कालीन रास्वपा सांसदका रूपमा उनको शिक्षा सुधारको अडानलाई प्रतिबिम्बित गर्दछ। यसअघि उनले विद्यालय शिक्षा विधेयकमा बालविकास, छात्रवृत्ति र महिला अधिकारका सम्बन्धमा फरक मत दर्ता गराएकी थिइन् र विधेयकले विद्यार्थी तथा अभिभावकको आवाजलाई बेवास्ता गरेको आलोचना गरेकी थिइन्।
+        </p>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बन्द गर्नुहोस्</button>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        var targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        var target = document.querySelector(targetId);
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({
+            top: target.offsetTop - 80, // मेनुको उचाइ जति माथिबाट स्क्रोल रोकिन्छ
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  });
+</script>
 
 
 
@@ -1792,7 +1875,11 @@ document.addEventListener('DOMContentLoaded', function() {
   
  <!-- ============ AI & ALGORITHM SECTION ============ -->
 <hr>
-<div class="row mt-4">
+   <!-- AI Section -->
+  <div class="col-md-3">
+<div class="row mt-4" id="ai-section">
+   <h2>आर्टिफिसियल इन्टेलिजेन्स (AI) र Algorithm</h2>
+
   
   <!-- Left Side (Grid) -->
   <div class="col-md-9">
@@ -1974,9 +2061,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- ============================================================
      २. FACEBOOK MASTERY GUIDE SECTION (तल - AI CSS प्रयोग गरिएको)
-     ============================================================ -->
 <hr class="mt-5">
-<div class="row mt-4">
+<div class="row mt-4" id="fb-section">
+   <h2>Facebook Mastery Guide</h2>
   
   <!-- Left Side (Grid) -->
   <div class="col-md-9">
