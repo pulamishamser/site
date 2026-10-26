@@ -354,25 +354,104 @@ html, body { margin: 0 !important; padding: 0 !important; width: 100%; overflow-
 
 
 <i class="fas fa-eye text-primary"></i> <strong id="viewCount">0</strong> views
-
-     
-<!-- Flash -->
+<!-- ================= Flash / Highlight Section ================= -->
 <section id="flash">
   <div class="container-fluid p-0">
     <div class="d-flex">
-      <div class="news-tag"><p>📢 Highlight:</p></div>
+      
+      <!-- 📢 Highlight बटन (क्लिक गर्दा पपअप खुल्ने) -->
+      <div class="news-tag" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#highlightModal">
+        <p>📢 Highlight:</p>
+      </div>
+      
       <div class="flash-wrapper">
         <div class="flash-marquee">
-          <a href="https://www.ratopati.com/story/494671/gen-g-concludes-that-local-levels-have-not-been-able-to-do-a-good-job">स्थानीय तहले राम्रो काम गर्न नसकेको ‘जेन–जी’को निष्कर्ष — रातोपाटी</a>
-          <a href="https://lauro-media.blogspot.com/2025/06/teachers-guide-for-all-classes.html">शिक्षक निर्देशिका डाउनलोड गर्नुहोस्</a>
-          <a href="News modal.html">ताजा नेपाली समाचार Live News पढ्नुहोस्</a>
-          <a href="https://www.facebook.com/share/p/f7NyJ5yHhtyUDS1c/">विद्यालयहरूमा दशैं तिहार छठ विशेष कार्यक्रमको झलकहरू</a>
-          <a href="https://shamser.info.np/Service_Site/index.html">lauro media/shamser.info.np बाट उपलब्ध हुने सेवा सुविधा प्राप्त गरी फाइदा लिन अनुरोध</a>
+          
+          <!-- १. नयाँ समाचारको शीर्षक -->
+          <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#highlightModal">पाठ्यक्रम विकास केन्द्रको वेबसाइटमा समस्या, विद्यार्थीहरू पीडित</a>
+          
+          <!-- २. बुक लाइब्रेरी -->
+          <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#iframeModal" data-url="https://shamser.info.np/IndexLibrary.html" data-title="Book Library">बुक लाइब्रेरीमा जानुहोस्</a>
+          
+          <!-- ३. ताजा समाचार -->
+          <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#iframeModal" data-url="https://shamser.info.np/News%20modal.html" data-title="ताजा समाचार">ताजा नेपाली समाचार Live News पढ्नुहोस्</a>
+          
+          <!-- ४. सेवा सुविधा -->
+          <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#iframeModal" data-url="https://shamser.info.np/Service_Site/index.html" data-title="सेवा सुविधा">lauro media/shamser.info.np बाट उपलब्ध हुने सेवा सुविधा प्राप्त गरी फाइदा लिन अनुरोध</a>
+          
         </div>
       </div>
+      
     </div>
   </div>
 </section>
+
+<!-- ================= १. Highlight News Modal (समाचार पपअप) ================= -->
+<div class="modal fade" id="highlightModal" tabindex="-1" aria-hidden="true" style="z-index: 10600;">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content border-0 shadow-lg">
+      
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title"><i class="fas fa-newspaper"></i> ताजा शैक्षिक समाचार (Highlight)</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      
+      <div class="modal-body p-4" style="background: #f8f9fa;">
+        
+        <h3 style="color: #c0392b; font-weight: bold; margin-bottom: 15px;">पाठ्यपुस्तक डाउनलोड र डिजिटल पुस्तकालय लिङ्कमा समस्या, विद्यार्थीहरू पीडित</h3>
+        
+        <img src="https://shamser.info.np/HomePage/smarika.png" alt="Books" style="width: 100%; max-height: 300px; object-fit: cover; border-radius: 10px; margin-bottom: 20px;">
+
+        <p style="text-align:justify; font-size: 16px; line-height: 1.6;">
+          <strong>काठमाडौं।</strong> पाठ्यक्रम विकास केन्द्र (CDC) ले उपलब्ध गराएको आधिकारिक वेबसाइटबाट पाठ्यपुस्तक डाउनलोड गर्न नसकिने र डिजिटल पुस्तकालयको लिङ्क खोल्न नसकिने समस्या देखा परेको छ। विद्यार्थी तथा अभिभावकहरूले अनलाइन माध्यमबाट पाठ्यपुस्तक प्राप्त गर्न कठिनाइ भोगिरहेका छन्।
+        </p>
+
+        <h5 style="color: #027f7f; font-weight: bold; margin-top: 25px; border-bottom: 2px solid #e67e22; padding-bottom: 5px; display: inline-block;">आधिकारिक वेबसाइटको डाउनलोड लिङ्कमा समस्या</h5>
+        <p style="text-align:justify; font-size: 16px; line-height: 1.6;">
+          पाठ्यक्रम विकास केन्द्रको आधिकारिक वेबसाइट (moecdc.gov.np) अन्तर्गत पाठ्यपुस्तक डाउनलोडका लागि प्रदान गरिएका धेरै PDF लिङ्कहरू खोल्न नसकिने अवस्था रहेको छ। उदाहरणका लागि, "मेरो नेपाली कक्षा १", "मेरो अंग्रेजी कक्षा १", "मेरो गणित कक्षा १" लगायत पाठ्यपुस्तकहरूको लिङ्कमा क्लिक गर्दा अपेक्षित PDF फाइल लोड हुन नसकेको वा डाउनलोड हुन नसकेको जानकारी प्राप्त भएको छ। यी लिङ्कहरू केन्द्रको भण्डारण सेवामा निर्भर रहेको देखिन्छ, तर हाल सो सेवामा पहुँच समस्या उत्पन्न भएको छ।
+        </p>
+
+        <h5 style="color: #027f7f; font-weight: bold; margin-top: 25px; border-bottom: 2px solid #e67e22; padding-bottom: 5px; display: inline-block;">डिजिटल पुस्तकालय लिङ्क खोल्न नसकिने</h5>
+        <p style="text-align:justify; font-size: 16px; line-height: 1.6;">
+          यसैगरी, शमसेर इन्फो (shamser.info.np) अन्तर्गतको डिजिटल पुस्तकालय पृष्ठमा राखिएका लिङ्कहरू पनि खोल्न नसकिने समस्या रहेको छ। उक्त पृष्ठमा विभिन्न कक्षाका पाठ्यपुस्तकहरूको लिङ्क उपलब्ध गराइए पनि, प्रयोगकर्ताहरूले ती लिङ्कमा क्लिक गर्दा पृष्ठ लोड नहुने वा त्रुटि सन्देश देखा पर्ने गुनासो गरेका छन्। यसले गर्दा डिजिटल माध्यमबाट अध्ययन सामग्री प्राप्त गर्न चाहने विद्यार्थीहरू प्रभावित भएका छन्।
+        </p>
+
+        <h5 style="color: #027f7f; font-weight: bold; margin-top: 25px; border-bottom: 2px solid #e67e22; padding-bottom: 5px; display: inline-block;">प्राविधिक कारणको अनुमान</h5>
+        <p style="text-align:justify; font-size: 16px; line-height: 1.6;">
+          प्राविधिक विज्ञहरूका अनुसार यस्तो समस्या विभिन्न कारणले उत्पन्न हुन सक्छ। पहिलो, सर्भरमा उच्च चाप वा सर्भर डाउन हुनु। दोस्रो, PDF फाइलको आकार धेरै ठूलो हुँदा मोबाइल वा कमजोर इन्टरनेटमा डाउनलोड असफल हुनु। तेस्रो, वेबसाइटको लिङ्क संरचना परिवर्तन भएको वा फाइल स्थानान्तरण गरिएको हुन सक्नु। साथै, केही ब्राउजरहरूले PDF लाई सिधै खोल्न नसक्दा पनि समस्या देखिन सक्छ।
+        </p>
+
+        <h5 style="color: #027f7f; font-weight: bold; margin-top: 25px; border-bottom: 2px solid #e67e22; padding-bottom: 5px; display: inline-block;">समाधानको अपेक्षा</h5>
+        <p style="text-align:justify; font-size: 16px; line-height: 1.6;">
+          विद्यार्थीहरूले सरकारी निकायले यथाशीघ्र प्राविधिक समस्या समाधान गरी पाठ्यपुस्तक डाउनलोड सेवा सुचारु गर्नुपर्ने माग गरेका छन्। शिक्षा सत्र सुरु भइसकेको अवस्थामा पाठ्यपुस्तक अभावले पठनपाठनमा असर पर्ने भएकाले सम्बन्धित निकायको ध्यानाकर्षण भएको छ। पाठ्यक्रम विकास केन्द्रले अहिलेसम्म यस विषयमा आधिकारिक सूचना जारी गरेको छैन।
+        </p>
+      </div>
+      
+      <div class="modal-footer bg-light">
+        <button type="button" class="btn btn-secondary px-4 rounded-pill" data-bs-dismiss="modal">बन्द गर्नुहोस् (Close)</button>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<!-- ================= २. Iframe Modal (लिङ्कहरू पपअपमा खोल्न) ================= -->
+<div class="modal fade" id="iframeModal" tabindex="-1" aria-hidden="true" style="z-index: 10600;">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content border-0 shadow-lg">
+      
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="iframeModalTitle"><i class="fas fa-globe"></i> पेज लोड हुँदैछ...</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      
+      <div class="modal-body p-0" style="height: 80vh;">
+        <iframe id="iframeModalSrc" src="" width="100%" height="100%" style="border:none;"></iframe>
+      </div>
+      
+    </div>
+  </div>
+</div>
 
 <!-- Floating UI -->
 <div id="reading-progress"></div>
