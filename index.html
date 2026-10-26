@@ -458,6 +458,32 @@ html, body { margin: 0 !important; padding: 0 !important; width: 100%; overflow-
 </div>
 
 
+<!-- ================= ३. JavaScript (Iframe खोल्ने र हेडर फेर्ने) ================= -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var iframeModal = document.getElementById('iframeModal');
+  if (iframeModal) {
+    iframeModal.addEventListener('show.bs.modal', function (event) {
+      var button = event.relatedTarget; 
+      var url = button.getAttribute('data-url');
+      var title = button.getAttribute('data-title');
+      
+      var iframe = document.getElementById('iframeModalSrc');
+      var modalTitle = document.getElementById('iframeModalTitle');
+      
+      iframe.src = url;
+      modalTitle.innerHTML = '<i class="fas fa-globe"></i> ' + title;
+    });
+
+    iframeModal.addEventListener('hidden.bs.modal', function () {
+      document.getElementById('iframeModalSrc').src = '';
+    });
+  }
+});
+</script>
+
+
+
 
 
 
