@@ -3935,6 +3935,13 @@ document.addEventListener('DOMContentLoaded', function() {
     window.scrollTo({ top: y, behavior: 'smooth' });
   });
 </script>
+
+
+
+
+<!-- ==========================================
+     FINAL FIREBASE SYSTEM (Like, Follow, View, News Like)
+     ========================================== -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
   import { getFirestore, doc, setDoc, increment, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -3954,57 +3961,97 @@ document.addEventListener('DOMContentLoaded', function() {
   document.addEventListener('DOMContentLoaded', function () {
     
     // ==========================================
-    // १. मुख्य पेजको LIKE / FOLLOW / VIEW (Top Button)
+    // १. मुख्य पेजको LIKE SYSTEM
     // ==========================================
-    // (यो तिम्रो अघिल्लो कोड जस्तै नै हो)
-    const myLikeBtn = document.getElementById('myLikeButton');
-    const myLikeCount = document.getElementById('myLikeCount');
+    const myLikeBtn = document.getElementById('pageLikeBtn');
+    const myLikeCount = document.getElementById('pageLikeCount');
     if (myLikeBtn) {
       const myLikeRef = doc(db, "stats", "page_likes");
       let isLiked = localStorage.getItem('pageLiked') === 'true';
-      onSnapshot(myLikeRef, (snap) => { if(myLikeCount) myLikeCount.innerText = snap.exists() ? snap.data().count : 0; });
       
+      // Firebase बाट नम्बर लोड गर्ने
+      onSnapshot(myLikeRef, (snap) => { 
+        if(myLikeCount) myLikeCount.innerText = snap.exists() ? snap.data().count : 0; 
+      });
+      
+      // पहिले नै लाइक गरेको छ भने निलो देखाउने
+      if (isLiked) {
+        myLikeBtn.style.backgroundColor = '#0d6efd';
+        myLikeBtn.style.color = '#fff';
+      }
+
+      // क्लिक गर्दा हुने काम
       myLikeBtn.addEventListener('click', async function () {
-        if (!isLiked) {
-          await setDoc(myLikeRef, { count: increment(1) }, { merge: true });
-          isLiked = true; localStorage.setItem('pageLiked', 'true');
-          myLikeBtn.style.backgroundColor = '#0d6efd'; myLikeBtn.style.color = '#fff';
-        } else {
-          await setDoc(myLikeRef, { count: increment(-1) }, { merge: true });
-          isLiked = false; localStorage.setItem('pageLiked', 'false');
-          myLikeBtn.style.backgroundColor = 'transparent'; myLikeBtn.style.color = '#0d6efd';
-        }
+        try {
+          if (!isLiked) {
+            await setDoc(myLikeRef, { count: increment(1) }, { merge: true });
+            isLiked = true; 
+            localStorage.setItem('pageLiked', 'true');
+            myLikeBtn.style.backgroundColor = '#0d6efd'; 
+            myLikeBtn.style.color = '#fff';
+          } else {
+            await setDoc(myLikeRef, { count: increment(-1) }, { merge: true });
+            isLiked = false; 
+            localStorage.setItem('pageLiked', 'false');
+            myLikeBtn.style.backgroundColor = 'transparent'; 
+            myLikeBtn.style.color = '#0d6efd';
+          }
+        } catch (err) { console.error("Like Error:", err); }
       });
     }
 
-    // (Follow र View को कोड पनि यहीँ राख्नु, मैले छोटो बनाउन भनेको मात्र हो)
+    // ==========================================
+    // २. मुख्य पेजको FOLLOW SYSTEM (नम्बर सहित)
+    // ==========================================
     const followBtn = document.getElementById('pageFollowBtn');
     const followText = document.getElementById('pageFollowText');
+    const followCountSpan = document.getElementById('pageFollowCount');
+    
     if (followBtn) {
       const followRef = doc(db, "stats", "page_follows");
       let isFollowing = localStorage.getItem('pageFollowed') === 'true';
-      if (isFollowing) { followText.innerText = 'Following'; followBtn.style.backgroundColor = '#ffc107'; followBtn.style.color = '#000'; }
+      
+      // Firebase बाट फलो नम्बर लोड गर्ने
+      onSnapshot(followRef, (docSnap) => {
+        const count = docSnap.exists() ? docSnap.data().count : 0;
+        if (followCountSpan) followCountSpan.innerText = count; 
+      });
+
+      // पहिले नै फलो गरेको छ भने पहेँलो देखाउने
+      if (isFollowing) { 
+        followText.innerText = 'Following'; 
+        followBtn.style.backgroundColor = '#ffc107'; 
+        followBtn.style.color = '#000'; 
+      }
       
       followBtn.addEventListener('click', async function () {
-        if (!isFollowing) {
-          await setDoc(followRef, { count: increment(1) }, { merge: true });
-          isFollowing = true; localStorage.setItem('pageFollowed', 'true');
-          followText.innerText = 'Following'; followBtn.style.backgroundColor = '#ffc107'; followBtn.style.color = '#000';
-        } else {
-          await setDoc(followRef, { count: increment(-1) }, { merge: true });
-          isFollowing = false; localStorage.setItem('pageFollowed', 'false');
-          followText.innerText = 'Follow'; followBtn.style.backgroundColor = 'transparent'; followBtn.style.color = '#ffc107';
-        }
+        try {
+          if (!isFollowing) {
+            await setDoc(followRef, { count: increment(1) }, { merge: true });
+            isFollowing = true; 
+            localStorage.setItem('pageFollowed', 'true');
+            followText.innerText = 'Following'; 
+            followBtn.style.backgroundColor = '#ffc107'; 
+            followBtn.style.color = '#000';
+          } else {
+            await setDoc(followRef, { count: increment(-1) }, { merge: true });
+            isFollowing = false; 
+            localStorage.setItem('pageFollowed', 'false');
+            followText.innerText = 'Follow'; 
+            followBtn.style.backgroundColor = 'transparent'; 
+            followBtn.style.color = '#ffc107';
+          }
+        } catch (err) { console.error("Follow Error:", err); }
       });
     }
 
-     // ==========================================
-    // ३. VIEW SYSTEM (स्थिर बनाइएको)
+    // ==========================================
+    // ३. VIEW SYSTEM
     // ==========================================
     const viewRef = doc(db, "stats", "homepage_views");
     const viewSpan = document.getElementById('viewCount');
     
-    // सुरुमा ब्राउजरमा सेभ भएको पुरानो नम्बर देखाउने (ताकि '०' नदेखियोस्)
+    // ब्राउजरमा सेभ भएको पुरानो नम्बर देखाउने
     const savedViews = localStorage.getItem('lastKnownViews');
     if (viewSpan && savedViews) {
       viewSpan.innerText = savedViews;
@@ -4015,12 +4062,11 @@ document.addEventListener('DOMContentLoaded', function() {
       if (docSnap.exists() && viewSpan) {
         const latestViews = docSnap.data().views.toLocaleString();
         viewSpan.innerText = latestViews;
-        // नयाँ नम्बर ब्राउजरमा सेभ गर्ने
         localStorage.setItem('lastKnownViews', latestViews);
       }
     });
 
-    // आजको भ्यु १ थप्ने (यदि आज देखेको छैन भने)
+    // आजको भ्यु १ थप्ने
     const today = new Date().toDateString();
     const lastView = localStorage.getItem('lastViewDate');
     if (lastView !== today) {
@@ -4030,7 +4076,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ==========================================
-    // २. समाचार भित्रको छुट्टाछुट्टै LIKE (Education, Kara, Brics)
+    // ४. समाचार भित्रको छुट्टाछुट्टै LIKE
     // ==========================================
     const newsLikeKeys = ['education', 'kara', 'brics'];
 
@@ -4041,17 +4087,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
       if (!btn || !countSpan) return;
 
-      // Firebase मा यो समाचारको लागि छुट्टै डकुमेन्ट (news_likes/education, news_likes/kara आदि)
       const docRef = doc(db, "news_likes", key); 
       let isLiked = localStorage.getItem(`news_liked_${key}`) === 'true';
 
-      // Firebase बाट लाइक काउन्टर तान्ने
       onSnapshot(docRef, (docSnap) => {
         const count = docSnap.exists() ? docSnap.data().count : 0;
         countSpan.innerText = count;
       });
 
-      // UI अपडेट गर्ने (रातो बनाउने र समय फेर्ने)
       function updateUI() {
         if (isLiked) {
           btn.classList.add('active');
@@ -4066,7 +4109,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
       updateUI();
 
-      // क्लिक गर्दा हुने काम
       btn.addEventListener('click', async function () {
         try {
           if (!isLiked) {
@@ -4086,51 +4128,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
   });
 </script>
-    // ==========================================
-    // २. FOLLOW SYSTEM
-    // ==========================================
-<script>
-  // Follow बटनको लागि सिधा कोड (बिना झन्झट)
-  document.addEventListener('DOMContentLoaded', function() {
-    const followBtn = document.getElementById('pageFollowBtn');
-    const followText = document.getElementById('pageFollowText');
-    
-    // ब्राउजरले सम्झेको छ कि छैन हेर्ने
-    let isFollowing = localStorage.getItem('pageFollowed') === 'true';
-
-    if (followBtn && followText) {
-      // पहिले नै फलो गरेको छ भने पहेँलो देखाउने
-      if (isFollowing) {
-        followText.innerText = 'Following';
-        followBtn.style.backgroundColor = '#ffc107';
-        followBtn.style.color = '#000';
-      } else {
-        followText.innerText = 'Follow';
-        followBtn.style.backgroundColor = 'transparent';
-        followBtn.style.color = '#ffc107';
-      }
-
-      followBtn.addEventListener('click', function() {
-        if (!isFollowing) {
-          isFollowing = true;
-          localStorage.setItem('pageFollowed', 'true');
-          followText.innerText = 'Following';
-          followBtn.style.backgroundColor = '#ffc107';
-          followBtn.style.color = '#000';
-        } else {
-          isFollowing = false;
-          localStorage.setItem('pageFollowed', 'false');
-          followText.innerText = 'Follow';
-          followBtn.style.backgroundColor = 'transparent';
-          followBtn.style.color = '#ffc107';
-        }
-      });
-    }
-  });
-</script>
 
 
 
+
+
+
+
+
+
+     
 
 
 </body>
