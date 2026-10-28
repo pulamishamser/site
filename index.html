@@ -276,34 +276,6 @@ html, body { margin: 0 !important; padding: 0 !important; width: 100%; overflow-
   text-align: center;
 }
   
-</style>
-<!-- Facebook Share Button -->
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 50px 15px;
-    }
-
-    .share-btn {
-      display: inline-block;
-      background: #1877F2;
-      color: white;
-      padding: 8px 18px;
-      border-radius: 4px;
-      text-decoration: none;
-      font-size: 12px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .share-btn:hover {
-      background: #0c5fc7;
-    }
-  </style>
-
-
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
 <body>
@@ -378,13 +350,27 @@ html, body { margin: 0 !important; padding: 0 !important; width: 100%; overflow-
 
 <!-- Your share button code -->
 
-  <a
-    class="share-btn"
-    href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fshamser.info.np%2F"
-    target="_blank"
-    rel="noopener noreferrer">
-  </a>
-  <span>f</span> 
+<!-- Font Awesome (यदि पहिले नै छैन भने <head> मा थप्नुहोस्) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<a class="share-btn" href="javascript:void(0)" onclick="shareToFacebook()" rel="noopener noreferrer">
+  <i class="fab fa-facebook-f"></i>
+</a>
+
+<script>
+function shareToFacebook() {
+  if (navigator.share) {
+    navigator.share({
+      title: document.title,
+      url: 'https://shamser.info.np/'
+    }).catch(() => {});
+  } else {
+    window.open('https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fshamser.info.np%2F', '_blank');
+  }
+}
+</script>
+
+    
     <div class="text-center my-3" style="font-size: 15px; color: #555;">Visitors
       <i class="fas fa-eye text-primary"></i> <strong id="viewCount">0</strong> 
     </div>
