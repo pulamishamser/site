@@ -16,7 +16,7 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="shamser.info.np - उपयोगी शैक्षिक पोर्टल"> 
 <meta property="og:url" content="https://shamser.info.np">
-<meta property="og:image" content="https://shamser.info.np/SitePage/AI img/shamser_info_np.jpg">
+<meta property="og:image" content="https://shamser.info.np/SitePage/AI img/shamser_info_np.jpeg">
 <title>shamser.info.np -उपयोगी डिजिटल शैक्षिक सामग्री   | शिक्षा, समाचार, उपकरण र सेवाहरू</title>
 
     
@@ -78,6 +78,24 @@ function googleTranslateElementInit() {
 </script>
 
 
+<script>
+function shareToFacebook() {
+  // यदि फोनले नेटिभ शेयर सपोर्ट गर्छ भने (मोबाइलमा)
+  if (navigator.share) {
+    navigator.share({
+      title: document.title,
+      url: 'https://shamser.info.np/'
+    }).catch((error) => {
+      console.log('Share failed', error);
+      // यदि नेटिभ शेयर फेल भयो भने, पुरानो तरिकामा फर्कने
+      window.open('https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fshamser.info.np%2F', '_blank');
+    });
+  } else {
+    // कम्प्युटरमा (जहाँ नेटिभ शेयर हुँदैन) पुरानो तरिका
+    window.open('https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fshamser.info.np%2F', '_blank');
+  }
+}
+</script>
 
 
 
@@ -1208,7 +1226,7 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
   <p>IEMIS, ताजा शैक्षिक समाचार, AI, लोकसेवा तयारी, र Facebook Guide सहित एकै प्लेटफर्ममा सम्पूर्ण शैक्षिक सामग्री।</p>
   
-  <img src="https://shamser.info.np/SitePage/AI img/shamser_info_np.jpg" alt="Shamser Portal" loading="lazy" width="100%" height="100%" style="object-fit:cover; border-radius:16px;">
+  <img src="https://shamser.info.np/SitePage/AI img/shamser_info_np.jpeg" alt="Shamser Portal" loading="lazy" width="100%" height="100%" style="object-fit:cover; border-radius:16px;">
   
   <div style="margin:15px 0; overflow:auto;">
     <img src="https://pbs.twimg.com/profile_images/1579086841227059200/JyklJEUx_400x400.jpg" alt="Editor" loading="lazy" style="width:60px;height:60px;border-radius:50%;float:left;margin-right:15px;">
@@ -4303,7 +4321,7 @@ document.addEventListener('DOMContentLoaded', function() {
       
       <div class="modal-body text-center p-0">
         <!-- Image (Full Width) -->
-        <img src="https://shamser.info.np/SitePage/AI img/shamser_info_np.jpg" alt="shamser_info_np" style="width: 100%; height: 270px; object-fit: cover; object-position: center;">
+        <img src="https://shamser.info.np/SitePage/AI img/shamser_info_np.jpeg" alt="shamser_info_np" style="width: 100%; height: 270px; object-fit: cover; object-position: center;">
         
         <div class="p-3">
           <span class="badge bg-success mb-2 px-2 py-1" style="font-size: 11px;">✨ शिक्षक र विद्यार्थीका लागि उत्कृष्ट</span>
@@ -4675,23 +4693,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-<script>
-function shareToFacebook() {
-  // यदि फोनले नेटिभ शेयर सपोर्ट गर्छ भने (मोबाइलमा)
-  if (navigator.share) {
-    navigator.share({
-      title: document.title,
-      url: 'https://shamser.info.np/'
-    }).catch((error) => {
-      console.log('Share failed', error);
-      // यदि नेटिभ शेयर फेल भयो भने, पुरानो तरिकामा फर्कने
-      window.open('https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fshamser.info.np%2F', '_blank');
-    });
-  } else {
-    // कम्प्युटरमा (जहाँ नेटिभ शेयर हुँदैन) पुरानो तरिका
-    window.open('https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fshamser.info.np%2F', '_blank');
-  }
-}
-</script>
 </body>
 </html>
