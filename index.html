@@ -361,28 +361,12 @@ html, body { margin: 0 !important; padding: 0 !important; width: 100%; overflow-
 </div>
 
 
-<div class="social-links">
-   <a class="share-btn" href="javascript:void(0)" onclick="shareToFacebook()">
-     <i class="fab fa-facebook-f"></i> Share
-   </a>
-</div>
-<!-- Share JavaScript -->
-<script>
-function shareToFacebook() {
-  if (navigator.share) {
-    navigator.share({
-      title: document.title,
-      url: 'https://shamser.info.np/'
-    }).catch(() => {});
-  } else {
-    window.open('https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fshamser.info.np%2F', '_blank');
-  }
-}
-</script>
 
 
-
-    
+    <!-- Share Button -->
+<a class="share-btn" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fshamser.info.np%2F" target="_blank" rel="noopener noreferrer">
+  <i class="fab fa-facebook-f"></i> Share
+</a>
     <div class="text-center my-3" style="font-size: 15px; color: #555;">Visitors
       <i class="fas fa-eye text-primary"></i> <strong id="viewCount">0</strong> 
     </div>
