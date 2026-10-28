@@ -4661,5 +4661,26 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(err => console.error("View Error:", err));
     }
 </script>
+
+
+
+
+
+
+
+
+
+ <script>
+function shareToFacebook() {
+  if (navigator.share) {
+    navigator.share({
+      title: document.title,
+      url: 'https://shamser.info.np/'
+    }).catch(() => {});
+  } else {
+    window.open('https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fshamser.info.np%2F', '_blank');
+  }
+}
+</script>
 </body>
 </html>
