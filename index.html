@@ -65,7 +65,7 @@
     });
   });
 </script>
-<!-- OneSignal End गर्ने कोड --
+<!-- OneSignal End गर्ने कोड -->
 
 
 <script type="text/javascript">
@@ -260,15 +260,29 @@ html, body { margin: 0 !important; padding: 0 !important; width: 100%; overflow-
 
 /* फोटोको तलको नाम (School Title) मिलाउन */
 .school-title {
-  font-size: 14px;
-  font-weight: bold;
-  margin-top: 8px;
-  color: #027f7f;
-  min-height: 35px; /* नाम लामो भएपनि उचाइ मिलाउन */
-  display: flex;
+/* Facebook Share Button Style */
+.share-btn {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
+  gap: 8px;
+  background: #1877F2;
+  color: white !important;
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  border: none;
+}
+.share-btn:hover {
+  background: #0c5fc7;
+  transform: translateY(-2px);
+}
+.share-btn i {
+  color: white; /* आइकन सेतो देखाउन */
 }
 </style>  
 
@@ -345,7 +359,24 @@ html, body { margin: 0 !important; padding: 0 !important; width: 100%; overflow-
 
 
 
+<!-- Share Button -->
+<a class="share-btn" href="javascript:void(0)" onclick="shareToFacebook()">
+  <i class="fab fa-facebook-f"></i> Share
+</a>
 
+<!-- Share JavaScript -->
+<script>
+function shareToFacebook() {
+  if (navigator.share) {
+    navigator.share({
+      title: document.title,
+      url: 'https://shamser.info.np/'
+    }).catch(() => {});
+  } else {
+    window.open('https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fshamser.info.np%2F', '_blank');
+  }
+}
+</script>
 
     
     <div class="text-center my-3" style="font-size: 15px; color: #555;">Visitors
