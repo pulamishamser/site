@@ -18,8 +18,21 @@
 
     
     
-    
-    
+<script>
+function shareToFacebook() {
+  if (navigator.share) {
+    navigator.share({
+      title: document.title,
+      url: 'https://shamser.info.np/'
+    }).catch(() => {});
+  } else {
+    window.open('https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fshamser.info.np%2F', '_blank');
+  }
+}
+</script>    
+
+<!-- Font Awesome (यदि पहिले नै छैन भने <head> मा थप्नुहोस्) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">    
     
     <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -350,25 +363,12 @@ html, body { margin: 0 !important; padding: 0 !important; width: 100%; overflow-
 
 <!-- Your share button code -->
 
-<!-- Font Awesome (यदि पहिले नै छैन भने <head> मा थप्नुहोस्) -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <a class="share-btn" href="javascript:void(0)" onclick="shareToFacebook()" rel="noopener noreferrer">
   <i class="fab fa-facebook-f"></i>
 </a>
 
-<script>
-function shareToFacebook() {
-  if (navigator.share) {
-    navigator.share({
-      title: document.title,
-      url: 'https://shamser.info.np/'
-    }).catch(() => {});
-  } else {
-    window.open('https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fshamser.info.np%2F', '_blank');
-  }
-}
-</script>
+
 
     
     <div class="text-center my-3" style="font-size: 15px; color: #555;">Visitors
