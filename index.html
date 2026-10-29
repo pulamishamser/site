@@ -3672,11 +3672,11 @@ document.addEventListener('DOMContentLoaded', function() {
     width: 95%;
     max-width: 500px;
     position: fixed;
-    bottom: 80px; 
+    bottom: 80px;
     left: 0;
     right: 0;
     z-index: 1001;
-    max-height: 75vh; 
+    max-height: 75vh;
     overflow-y: auto;
   }
   .widget { display: none; }
@@ -3710,8 +3710,8 @@ document.addEventListener('DOMContentLoaded', function() {
   .radio-player audio { width: 100%; margin-bottom: 15px; }
   .radio-stations { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
   .radio-stations button { background: #3498db; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; }
-  
-  .date-converter iframe { border:none; width:100%; height:100px; }
+
+  .date-converter iframe { border:none; width:100%; height:320px; }  /* ✅ height बढाइयो */
   .close-btn { position: absolute; top: 10px; right: 10px; background: #e74c3c; color: white; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px;}
   .external-links { margin-top: 15px; }
   .external-links a { display: inline-block; padding: 8px 15px; background: #3498db; color: white; text-decoration: none; border-radius: 5px; margin-right: 10px; margin-bottom: 10px; font-size: 14px;}
@@ -3725,7 +3725,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <div id="calendar-widget" class="widget active">
     <h3><i class="fas fa-calendar-alt"></i> पात्रो</h3>
     <div class="calendar-content">
-      <iframe src="https://www.hamropatro.com/widgets/calender-medium.php" scrolling="no" style="border:none; width:100%; height:385px;" title="Calendar"></iframe>
+      <iframe src="https://www.hamropatro.com/widgets/calender-medium.php" scrolling="yes" style="border:none; width:100%; height:385px;" title="Calendar"></iframe>
     </div>
   </div>
 
@@ -3747,7 +3747,11 @@ document.addEventListener('DOMContentLoaded', function() {
   <div id="date-conversion-widget" class="widget">
     <h3><i class="fas fa-calendar-day"></i> मिति रुपान्तरण</h3>
     <div class="date-converter">
-      <iframe src="https://www.hamropatro.com/widgets/dateconverter.php" scrolling="no" style="height:120px;" title="Date Converter"></iframe>
+      <!-- ✅ scrolling yes + height बढाइयो ताकि content पूरा देखियोस् -->
+      <iframe src="https://www.hamropatro.com/widgets/dateconverter.php"
+              scrolling="yes"
+              style="height:320px;"
+              title="Date Converter"></iframe>
     </div>
   </div>
 
@@ -3763,6 +3767,8 @@ document.addEventListener('DOMContentLoaded', function() {
         <strong>पूर्ण रूपान्तरणका लागि:</strong><br>
         <a href="https://shamser.info.np/Shaikshik_Sansar/sobiztrend.com/preeti_to_unicode.html" target="_blank">प्रीतिबाट युनिकोड</a>
         <a href="https://shamser.info.np/Shaikshik_Sansar/sobiztrend/unicode_to_preeti.html" target="_blank">युनिकोडबाट प्रीति</a>
+        <!-- ✅ नयाँ लिङ्क थपियो -->
+        <a href="https://shamser.info.np/Unicode%20%E2%86%92%20Preeti.html" target="_blank">Unicode → Preeti (नयाँ)</a>
       </div>
     </div>
   </div>
@@ -3771,7 +3777,6 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- Bottom Navigation Bar -->
 <div class="bottom-nav">
   <a href="#" onclick="showWidget('calendar-widget'); return false;"><i class="fas fa-calendar-alt"></i>पात्रो</a>
-  <!-- यी दुईले Modal खोल्नेछन् (widget होइन) -->
   <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#numberTextModal"><i class="fas fa-sort-numeric-up"></i>संख्या</a>
   <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#caseConverterModal"><i class="fas fa-font"></i>Case</a>
   <a href="#" onclick="showWidget('radio-widget'); return false;"><i class="fas fa-broadcast-tower"></i>रेडियो</a>
@@ -3790,7 +3795,6 @@ document.addEventListener('DOMContentLoaded', function() {
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body p-0">
-        <!-- यहाँ लिङ्क लुकेको छ र पेज भित्रै लोड हुन्छ -->
         <iframe src="https://shamser.info.np/Number_to_Text.html" width="100%" height="500" style="border:none;" title="Number to Text"></iframe>
       </div>
     </div>
@@ -3806,17 +3810,44 @@ document.addEventListener('DOMContentLoaded', function() {
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body p-0">
-        <!-- यहाँ लिङ्क लुकेको छ र पेज भित्रै लोड हुन्छ -->
         <iframe src="https://shamser.info.np/Case%20Converter.html" width="100%" height="500" style="border:none;" title="Case Converter"></iframe>
       </div>
     </div>
   </div>
 </div>
 
+<!-- ================= JAVASCRIPT ====WIDGETS (Bottom Nav)============= -->
+<script>
+  function showWidget(id) {
+    // सबै widget लुकाउने
+    document.querySelectorAll('.widget').forEach(w => w.classList.remove('active'));
+    // container देखाउने
+    const container = document.getElementById('widget-container');
+    container.style.display = 'block';
+    // चयनित widget देखाउने
+    const target = document.getElementById(id);
+    if (target) target.classList.add('active');
+  }
+
+  function hideWidgets() {
+    document.getElementById('widget-container').style.display = 'none';
+  }
+
+  // सुरुमा container लुकाएर राख्ने (widget active भए पनि)
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('widget-container').style.display = 'none';
+  });
+
+  // Unicode converter (placeholder — आफ्नो logic राख्नुहोस्)
+  function convertToUnicode() {
+    const input = document.getElementById('preeti-input').value;
+    document.getElementById('unicode-output').textContent = input || 'कृपया केही लेख्नुहोस्...';
+  }
+</script>
 
 
 
-
+<!-- =============End==== JAVASCRIPT ====WIDGETS (Bottom Nav)============= -->
 
 
 
