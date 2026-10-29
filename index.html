@@ -3711,7 +3711,7 @@ document.addEventListener('DOMContentLoaded', function() {
   .radio-stations { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
   .radio-stations button { background: #3498db; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; }
 
-  .date-converter iframe { border:none; width:100%; height:320px; }  /* ✅ height बढाइयो */
+  .date-converter iframe { border:none; width:100%; height:320px; }
   .close-btn { position: absolute; top: 10px; right: 10px; background: #e74c3c; color: white; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px;}
   .external-links { margin-top: 15px; }
   .external-links a { display: inline-block; padding: 8px 15px; background: #3498db; color: white; text-decoration: none; border-radius: 5px; margin-right: 10px; margin-bottom: 10px; font-size: 14px;}
@@ -3747,29 +3747,10 @@ document.addEventListener('DOMContentLoaded', function() {
   <div id="date-conversion-widget" class="widget">
     <h3><i class="fas fa-calendar-day"></i> मिति रुपान्तरण</h3>
     <div class="date-converter">
-      <!-- ✅ scrolling yes + height बढाइयो ताकि content पूरा देखियोस् -->
       <iframe src="https://www.hamropatro.com/widgets/dateconverter.php"
               scrolling="yes"
               style="height:320px;"
               title="Date Converter"></iframe>
-    </div>
-  </div>
-
-  <!-- Unicode Widget -->
-  <div id="unicode-widget" class="widget">
-    <h3><i class="fas fa-keyboard"></i> युनिकोड रुपान्तरण</h3>
-    <div class="unicode-converter">
-      <textarea id="preeti-input" class="form-control" placeholder="प्रीटी/Roman text यहाँ टाइप गर्नुहोस्..." style="height:100px;"></textarea>
-      <button onclick="convertToUnicode()" class="btn btn-success w-100 mt-2">युनिकोडमा रूपान्तरण गर्नुहोस्</button>
-      <div class="number-result" id="unicode-output">नतिजा यहाँ देखिनेछ...</div>
-
-      <div class="external-links mt-3">
-        <strong>पूर्ण रूपान्तरणका लागि:</strong><br>
-        <a href="https://shamser.info.np/Shaikshik_Sansar/sobiztrend.com/preeti_to_unicode.html" target="_blank">प्रीतिबाट युनिकोड</a>
-        <a href="https://shamser.info.np/Shaikshik_Sansar/sobiztrend/unicode_to_preeti.html" target="_blank">युनिकोडबाट प्रीति</a>
-        <!-- ✅ नयाँ लिङ्क थपियो -->
-        <a href="https://shamser.info.np/Unicode%20%E2%86%92%20Preeti.html" target="_blank">Unicode → Preeti (नयाँ)</a>
-      </div>
     </div>
   </div>
 </div>
@@ -3781,10 +3762,11 @@ document.addEventListener('DOMContentLoaded', function() {
   <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#caseConverterModal"><i class="fas fa-font"></i>Case</a>
   <a href="#" onclick="showWidget('radio-widget'); return false;"><i class="fas fa-broadcast-tower"></i>रेडियो</a>
   <a href="#" onclick="showWidget('date-conversion-widget'); return false;"><i class="fas fa-calendar-day"></i>मिति</a>
-  <a href="#" onclick="showWidget('unicode-widget'); return false;"><i class="fas fa-keyboard"></i>युनिकोड</a>
+  <!-- ✅ युनिकोड अब Modal खोल्छ -->
+  <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#unicodeModal"><i class="fas fa-keyboard"></i>युनिकोड</a>
 </div>
 
-<!-- ================= MODALS (Number & Case) ================= -->
+<!-- ================= MODALS (Number, Case & Unicode) ================= -->
 
 <!-- Number to Text Modal -->
 <div class="modal fade" id="numberTextModal" tabindex="-1" aria-hidden="true">
@@ -3816,15 +3798,37 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </div>
 
-<!-- ================= JAVASCRIPT ====WIDGETS (Bottom Nav)============= -->
+<!-- ✅ नयाँ Unicode Converter Modal -->
+<div class="modal fade" id="unicodeModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header bg-info text-white">
+        <h5 class="modal-title"><i class="fas fa-keyboard"></i> युनिकोड रुपान्तरण</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-0">
+        <!-- ✅ iframe भित्र पूर्ण युनिकोड रूपान्तरण उपकरण लोड हुन्छ -->
+        <iframe src="https://shamser.info.np/Unicode%20%E2%86%92%20Preeti.html"
+                width="100%"
+                height="500"
+                style="border:none;"
+                title="Unicode Converter"></iframe>
+      </div>
+      <div class="modal-footer py-2">
+        <a href="https://shamser.info.np/Shaikshik_Sansar/sobiztrend.com/preeti_to_unicode.html" target="_blank" class="btn btn-sm btn-outline-primary">प्रीतिबाट युनिकोड</a>
+        <a href="https://shamser.info.np/Shaikshik_Sansar/sobiztrend/unicode_to_preeti.html" target="_blank" class="btn btn-sm btn-outline-success">युनिकोडबाट प्रीति</a>
+        <a href="https://shamser.info.np/Unicode%20%E2%86%92%20Preeti.html" target="_blank" class="btn btn-sm btn-outline-info">Unicode → Preeti</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= JAVASCRIPT ================= -->
 <script>
   function showWidget(id) {
-    // सबै widget लुकाउने
     document.querySelectorAll('.widget').forEach(w => w.classList.remove('active'));
-    // container देखाउने
     const container = document.getElementById('widget-container');
     container.style.display = 'block';
-    // चयनित widget देखाउने
     const target = document.getElementById(id);
     if (target) target.classList.add('active');
   }
@@ -3833,25 +3837,10 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('widget-container').style.display = 'none';
   }
 
-  // सुरुमा container लुकाएर राख्ने (widget active भए पनि)
   document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('widget-container').style.display = 'none';
   });
-
-  // Unicode converter (placeholder — आफ्नो logic राख्नुहोस्)
-  function convertToUnicode() {
-    const input = document.getElementById('preeti-input').value;
-    document.getElementById('unicode-output').textContent = input || 'कृपया केही लेख्नुहोस्...';
-  }
 </script>
-
-
-
-<!-- =============End==== JAVASCRIPT ====WIDGETS (Bottom Nav)============= -->
-
-
-
-
 
 
 
