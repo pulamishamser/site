@@ -1395,6 +1395,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- ================= MORE SERVICES SECTION ================= -->
 <!-- ================= थप सेवाहरू (Daraz Style Gallery) ================= -->
 <!-- CSS (यसलाई <style> भित्र राख्नुहोस् वा यसै कोडसँगै राख्नुहोस्) -->
+<!-- ================= CSS (डिजाइन) ================= -->
 <style>
   /* दराज शैलीको ग्रिड */
   .my-daraz-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; margin-top: 15px; }
@@ -1419,7 +1420,7 @@ document.addEventListener('DOMContentLoaded', function() {
   .my-daraz-qr img { width: 130px; height: 130px; object-fit: contain; }
 
   /* =========================================
-     पपअप (Modal) को CSS - यसले पेज भित्रै खोल्छ
+     पपअप (Modal) को CSS - पेज भित्रै खोल्ने
      ========================================= */
   .my-form-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 99999; justify-content: center; align-items: center; }
   .my-form-content { background: #fff; width: 90%; max-width: 600px; height: 85vh; border-radius: 8px; position: relative; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
@@ -1432,13 +1433,14 @@ document.addEventListener('DOMContentLoaded', function() {
   @media (max-width: 600px) { .my-form-content { width: 100%; height: 100%; border-radius: 0; } }
 </style>
 
-<!-- HTML सेक्सन -->
+<!-- ================= HTML (थप सेवाहरू) ================= -->
 <section class="legal-section" id="more-services">
   <h2 style="color: #027f7f; border-bottom: 3px solid #e67e22; padding-bottom: 10px; font-size: 20px; margin-bottom: 20px;">
     <i class="fas fa-tools"></i> थप सेवाहरू (More Services)
   </h2>
   
   <div class="my-daraz-grid">
+    
     <!-- 1. Online Quiz -->
     <div class="my-daraz-card">
       <img src="https://via.placeholder.com/300x160?text=Quiz" alt="Quiz" class="my-daraz-img">
@@ -1504,6 +1506,62 @@ document.addEventListener('DOMContentLoaded', function() {
         <button onclick="openMyForm()" class="my-daraz-btn">विस्तृत हेर्नुहोस्</button>
       </div>
     </div>
+
+    <!-- 7. Case Converter (नयाँ थपिएको) -->
+    <div class="my-daraz-card">
+      <img src="https://via.placeholder.com/300x160?text=Case+Converter" alt="Case Converter" class="my-daraz-img">
+      <div class="my-daraz-body">
+        <h3 class="my-daraz-title">Case Converter</h3>
+        <p class="my-daraz-desc">अक्षरहरूको केस (Upper/Lower) परिवर्तन गर्न मिल्ने।</p>
+        <div class="my-daraz-price">नि:शुल्क</div>
+        <button onclick="openMyForm()" class="my-daraz-btn">विस्तृत हेर्नुहोस्</button>
+      </div>
+    </div>
+
+    <!-- 8. IEMIS New Login (नयाँ थपिएको) -->
+    <div class="my-daraz-card">
+      <img src="https://via.placeholder.com/300x160?text=IEMIS+Login" alt="IEMIS" class="my-daraz-img">
+      <div class="my-daraz-body">
+        <h3 class="my-daraz-title">IEMIS Login (New)</h3>
+        <p class="my-daraz-desc">नयाँ IEMIS प्रणालीमा लगइन गर्न मिल्ने।</p>
+        <div class="my-daraz-price">नि:शुल्क</div>
+        <button onclick="openMyForm()" class="my-daraz-btn">विस्तृत हेर्नुहोस्</button>
+      </div>
+    </div>
+
+    <!-- 9. शिक्षक बचत खाता (नयाँ थपिएको) -->
+    <div class="my-daraz-card">
+      <img src="https://via.placeholder.com/300x160?text=Teacher+Saving" alt="Teacher Saving" class="my-daraz-img">
+      <div class="my-daraz-body">
+        <h3 class="my-daraz-title">शिक्षक बचत खाता</h3>
+        <p class="my-daraz-desc">शिक्षकहरूको बचत खाता व्यवस्थापन र जानकारी।</p>
+        <div class="my-daraz-price">सम्पर्क गर्नुहोस्</div>
+        <button onclick="openMyForm()" class="my-daraz-btn">विस्तृत हेर्नुहोस्</button>
+      </div>
+    </div>
+
+    <!-- 10. फि कलेक्शन सफ्टवेयर (नयाँ थपिएको) -->
+    <div class="my-daraz-card">
+      <img src="https://via.placeholder.com/300x160?text=Fee+Collection" alt="Fee Collection" class="my-daraz-img">
+      <div class="my-daraz-body">
+        <h3 class="my-daraz-title">फि कलेक्शन सफ्टवेयर</h3>
+        <p class="my-daraz-desc">विद्यालयको शुल्क सजिलै व्यवस्थापन गर्न मिल्ने।</p>
+        <div class="my-daraz-price">सम्पर्क गर्नुहोस्</div>
+        <button onclick="openMyForm()" class="my-daraz-btn">विस्तृत हेर्नुहोस्</button>
+      </div>
+    </div>
+
+    <!-- 11. Online Software (नयाँ थपिएको) -->
+    <div class="my-daraz-card">
+      <img src="https://via.placeholder.com/300x160?text=Online+Software" alt="Online Software" class="my-daraz-img">
+      <div class="my-daraz-body">
+        <h3 class="my-daraz-title">Online सफ्टवेयर</h3>
+        <p class="my-daraz-desc">विद्यालय व्यवस्थापनका लागि विभिन्न अनलाइन सफ्टवेयर।</p>
+        <div class="my-daraz-price">सम्पर्क गर्नुहोस्</div>
+        <button onclick="openMyForm()" class="my-daraz-btn">विस्तृत हेर्नुहोस्</button>
+      </div>
+    </div>
+
   </div>
 
   <!-- विशेष जानकारी (भिडियो, WhatsApp, QR) -->
@@ -1545,7 +1603,7 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </section>
 
-<!-- ================= पपअप (Modal) को HTML ================= -->
+<!-- ================= पपअप (Modal) को HTML - गुगल फर्मको लागि ================= -->
 <div id="myFormModal" class="my-form-modal">
   <div class="my-form-content">
     <div class="my-form-header">
@@ -1553,8 +1611,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <button class="my-close-btn" onclick="closeMyForm()">&times;</button>
     </div>
     <div class="my-form-body">
-      <!-- ⚠️ यहाँ तपाईंको गुगल फर्मको लिङ्क राख्नुहोस् -->
-      <!-- तपाईंले दिनुभएको लिङ्कलाई यसरी राख्नुहोस्: -->
+      <!-- ⚠️ ध्यान दिनुहोस्: तपाईंको गुगल फर्मको Embed लिङ्क यहाँ राख्नुहोस् -->
       <iframe src="https://docs.google.com/forms/d/1MkMpJ35I8SOmfuY2jbI6WY23ZDVM29wrPlFsxoXd3Xc/viewform?embedded=true" width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
     </div>
   </div>
@@ -1568,7 +1625,6 @@ document.addEventListener('DOMContentLoaded', function() {
   function closeMyForm() {
     document.getElementById('myFormModal').style.display = 'none';
   }
-  // बाहिर क्लिक गर्दा बन्द गर्न
   window.addEventListener('click', function(event) {
     var modal = document.getElementById('myFormModal');
     if (event.target == modal) {
@@ -1576,7 +1632,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 </script>
-
 
 <!---End-Advertisement------>
 
