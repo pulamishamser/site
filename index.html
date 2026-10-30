@@ -1391,7 +1391,201 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </section>
 
+     
 <!-- ================= MORE SERVICES SECTION ================= -->
+<!-- ================= थप सेवाहरू (Daraz Style Gallery) ================= -->
+<!-- CSS (यसलाई <style> भित्र राख्नुहोस् वा यसै कोडसँगै राख्नुहोस्) -->
+<style>
+  /* दराज शैलीको ग्रिड */
+  .my-daraz-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; margin-top: 15px; }
+  
+  .my-daraz-card { background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s; display: flex; flex-direction: column; border: 1px solid #eee; }
+  .my-daraz-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.15); transform: translateY(-3px); }
+  
+  .my-daraz-img { width: 100%; height: 160px; object-fit: cover; background-color: #f9f9f9; }
+  
+  .my-daraz-body { padding: 12px; display: flex; flex-direction: column; flex-grow: 1; }
+  .my-daraz-title { font-size: 15px; color: #333; margin: 0 0 5px 0; line-height: 1.3; font-weight: 600; }
+  .my-daraz-desc { font-size: 12px; color: #777; margin: 0 0 10px 0; flex-grow: 1; line-height: 1.4; }
+  
+  .my-daraz-price { font-size: 16px; font-weight: bold; color: #ff5722; margin-bottom: 8px; }
+  
+  .my-daraz-btn { display: block; width: 100%; text-align: center; background: #ff5722; color: #fff; padding: 8px 0; border-radius: 4px; text-decoration: none; font-size: 13px; font-weight: 500; transition: background 0.2s; border: none; cursor: pointer; }
+  .my-daraz-btn:hover { background: #e64a19; color: #fff; }
+  
+  /* भिडियो र QR को लागि विशेष */
+  .my-daraz-video iframe { width: 100%; height: 160px; border: none; background: #000; }
+  .my-daraz-qr { display: flex; align-items: center; justify-content: center; height: 160px; background: #fff; }
+  .my-daraz-qr img { width: 130px; height: 130px; object-fit: contain; }
+
+  /* =========================================
+     पपअप (Modal) को CSS - यसले पेज भित्रै खोल्छ
+     ========================================= */
+  .my-form-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 99999; justify-content: center; align-items: center; }
+  .my-form-content { background: #fff; width: 90%; max-width: 600px; height: 85vh; border-radius: 8px; position: relative; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+  .my-form-header { padding: 15px; background: #ff5722; color: #fff; display: flex; justify-content: space-between; align-items: center; }
+  .my-form-header h3 { margin: 0; font-size: 18px; }
+  .my-close-btn { background: none; border: none; color: #fff; font-size: 28px; cursor: pointer; line-height: 1; padding: 0 5px; }
+  .my-close-btn:hover { color: #ffd; }
+  .my-form-body { flex-grow: 1; background: #f9f9f9; }
+  .my-form-body iframe { width: 100%; height: 100%; border: none; }
+  @media (max-width: 600px) { .my-form-content { width: 100%; height: 100%; border-radius: 0; } }
+</style>
+
+<!-- HTML सेक्सन -->
+<section class="legal-section" id="more-services">
+  <h2 style="color: #027f7f; border-bottom: 3px solid #e67e22; padding-bottom: 10px; font-size: 20px; margin-bottom: 20px;">
+    <i class="fas fa-tools"></i> थप सेवाहरू (More Services)
+  </h2>
+  
+  <div class="my-daraz-grid">
+    <!-- 1. Online Quiz -->
+    <div class="my-daraz-card">
+      <img src="https://via.placeholder.com/300x160?text=Quiz" alt="Quiz" class="my-daraz-img">
+      <div class="my-daraz-body">
+        <h3 class="my-daraz-title">Online Quiz System</h3>
+        <p class="my-daraz-desc">मोबाइलबाटै नतिजा हेर्न मिल्ने।</p>
+        <div class="my-daraz-price">रु. ५००</div>
+        <button onclick="openMyForm()" class="my-daraz-btn">विस्तृत हेर्नुहोस्</button>
+      </div>
+    </div>
+
+    <!-- 2. Multi Letter -->
+    <div class="my-daraz-card">
+      <img src="https://via.placeholder.com/300x160?text=Multi+Letter" alt="Letter" class="my-daraz-img">
+      <div class="my-daraz-body">
+        <h3 class="my-daraz-title">Multi Letter Generator</h3>
+        <p class="my-daraz-desc">एकै पटक धेरै पत्रहरू तयार गर्न मिल्ने।</p>
+        <div class="my-daraz-price">रु. ३००</div>
+        <button onclick="openMyForm()" class="my-daraz-btn">विस्तृत हेर्नुहोस्</button>
+      </div>
+    </div>
+
+    <!-- 3. Student Attendance -->
+    <div class="my-daraz-card">
+      <img src="https://via.placeholder.com/300x160?text=Attendance" alt="Attendance" class="my-daraz-img">
+      <div class="my-daraz-body">
+        <h3 class="my-daraz-title">Student Attendance</h3>
+        <p class="my-daraz-desc">विद्यार्थीहरूको उपस्थिति सजिलै राख्न मिल्ने।</p>
+        <div class="my-daraz-price">रु. ४००</div>
+        <button onclick="openMyForm()" class="my-daraz-btn">विस्तृत हेर्नुहोस्</button>
+      </div>
+    </div>
+
+    <!-- 4. Teacher Diary -->
+    <div class="my-daraz-card">
+      <img src="https://via.placeholder.com/300x160?text=Teacher+Diary" alt="Diary" class="my-daraz-img">
+      <div class="my-daraz-body">
+        <h3 class="my-daraz-title">Teacher Diary</h3>
+        <p class="my-daraz-desc">शिक्षकहरूको दैनिकी व्यवस्थापन।</p>
+        <div class="my-daraz-price">रु. २००</div>
+        <button onclick="openMyForm()" class="my-daraz-btn">विस्तृत हेर्नुहोस्</button>
+      </div>
+    </div>
+
+    <!-- 5. Unicode to Preeti -->
+    <div class="my-daraz-card">
+      <img src="https://via.placeholder.com/300x160?text=Unicode" alt="Unicode" class="my-daraz-img">
+      <div class="my-daraz-body">
+        <h3 class="my-daraz-title">Unicode to Preeti</h3>
+        <p class="my-daraz-desc">९९% शुद्ध युनिकोड रूपान्तरण।</p>
+        <div class="my-daraz-price">नि:शुल्क</div>
+        <button onclick="openMyForm()" class="my-daraz-btn">विस्तृत हेर्नुहोस्</button>
+      </div>
+    </div>
+
+    <!-- 6. Number to Text -->
+    <div class="my-daraz-card">
+      <img src="https://via.placeholder.com/300x160?text=Number" alt="Number" class="my-daraz-img">
+      <div class="my-daraz-body">
+        <h3 class="my-daraz-title">Number to Text</h3>
+        <p class="my-daraz-desc">अंकलाई नेपाली शब्दमा बदल्न मिल्ने।</p>
+        <div class="my-daraz-price">नि:शुल्क</div>
+        <button onclick="openMyForm()" class="my-daraz-btn">विस्तृत हेर्नुहोस्</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- विशेष जानकारी (भिडियो, WhatsApp, QR) -->
+  <h2 style="color: #027f7f; border-bottom: 3px solid #e67e22; padding-bottom: 10px; font-size: 20px; margin-top: 40px; margin-bottom: 20px;">
+    <i class="fas fa-phone-alt"></i> विशेष जानकारी र भुक्तानी
+  </h2>
+  
+  <div class="my-daraz-grid">
+    <!-- फेसबुक भिडियो -->
+    <div class="my-daraz-card my-daraz-video">
+      <iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1797331904807969%2F&show_text=false&width=421&t=0" width="100%" height="160" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+      <div class="my-daraz-body">
+        <h3 class="my-daraz-title">हाम्रो सेवाको भिडियो</h3>
+        <p class="my-daraz-desc">हाम्रा सेवाहरूको बारेमा थप जान्नुहोस्।</p>
+        <a href="https://www.facebook.com/reel/1797331904807969/" target="_blank" class="my-daraz-btn" style="background: #1877F2;">फेसबुकमा हेर्नुहोस्</a>
+      </div>
+    </div>
+
+    <!-- ह्वाट्सएप सम्पर्क -->
+    <div class="my-daraz-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="my-daraz-img" style="padding: 40px; object-fit: contain; background: #e8f5e9;">
+      <div class="my-daraz-body">
+        <h3 class="my-daraz-title">ह्वाट्सएपमा सम्पर्क</h3>
+        <p class="my-daraz-desc">कुनै पनि जिज्ञासाको लागि सम्पर्क गर्नुहोस्।</p>
+        <a href="https://wa.me/9779844087012" target="_blank" class="my-daraz-btn" style="background: #25D366;">9844087012</a>
+      </div>
+    </div>
+
+    <!-- eSewa QR -->
+    <div class="my-daraz-card">
+      <div class="my-daraz-qr">
+        <img src="https://shamser.info.np/HomePage/esewa.jpg" alt="eSewa QR">
+      </div>
+      <div class="my-daraz-body">
+        <h3 class="my-daraz-title">भुक्तानी गर्नुहोस् (eSewa)</h3>
+        <p class="my-daraz-desc">QR स्क्यान गरेर सिधै भुक्तानी गर्नुहोस्।</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= पपअप (Modal) को HTML ================= -->
+<div id="myFormModal" class="my-form-modal">
+  <div class="my-form-content">
+    <div class="my-form-header">
+      <h3>सेवा अर्डर फर्म</h3>
+      <button class="my-close-btn" onclick="closeMyForm()">&times;</button>
+    </div>
+    <div class="my-form-body">
+      <!-- ⚠️ यहाँ तपाईंको गुगल फर्मको लिङ्क राख्नुहोस् -->
+      <!-- तपाईंले दिनुभएको लिङ्कलाई यसरी राख्नुहोस्: -->
+      <iframe src="https://docs.google.com/forms/d/1MkMpJ35I8SOmfuY2jbI6WY23ZDVM29wrPlFsxoXd3Xc/viewform?embedded=true" width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+    </div>
+  </div>
+</div>
+
+<!-- ================= जाभास्क्रिप्ट (Popup खोल्ने/बन्द गर्ने) ================= -->
+<script>
+  function openMyForm() {
+    document.getElementById('myFormModal').style.display = 'flex';
+  }
+  function closeMyForm() {
+    document.getElementById('myFormModal').style.display = 'none';
+  }
+  // बाहिर क्लिक गर्दा बन्द गर्न
+  window.addEventListener('click', function(event) {
+    var modal = document.getElementById('myFormModal');
+    if (event.target == modal) {
+      modal.style.display = 'none';
+    }
+  });
+</script>
+
+
+<!---End-Advertisement------>
+
+
+
+
+
+
+     
 <section class="legal-section" id="more-services">
   <h2><i class="fas fa-tools"></i> थप सेवाहरू (More Services)</h2>
   <div class="quick-services-grid">
