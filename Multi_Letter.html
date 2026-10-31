@@ -3,11 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Multi Letterpad (Offline) – Generator</title>
-
-<!-- PDF libraries (CDN). पूर्ण offline चाहिए तलको नोट हेर्नुहोस् -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<title>Multi Letterpad (Offline PDF) – Generator</title>
 
 <style>
     :root {
@@ -421,32 +417,14 @@
 
     @media print {
         @page { size: A4; margin: 0; }
-        body {
-            background: #fff !important;
-            padding: 0 !important;
-            margin: 0 !important;
-        }
+        body { background: #fff !important; padding: 0 !important; margin: 0 !important; }
         body * { visibility: hidden; }
         #output, #output * { visibility: visible; }
         #output { position: absolute; top: 0; left: 0; width: 100%; }
-        .card, .layout-dropdown-area, .instructions, .actions, .modal, #pdfOverlay {
-            display: none !important;
-        }
-        .page-portrait {
-            width: 210mm; height: 297mm;
-            margin: 0; padding: 18mm 16mm;
-            box-shadow: none;
-            page-break-after: always;
-        }
-        .page-landscape-two, .page-landscape-four {
-            width: 297mm; height: 210mm;
-            margin: 0;
-            box-shadow: none;
-            page-break-after: always;
-        }
-        .page-portrait:last-child,
-        .page-landscape-two:last-child,
-        .page-landscape-four:last-child { page-break-after: auto; }
+        .card, .layout-dropdown-area, .instructions, .actions, .modal, #pdfOverlay { display: none !important; }
+        .page-portrait { width: 210mm; height: 297mm; margin: 0; padding: 18mm 16mm; box-shadow: none; page-break-after: always; }
+        .page-landscape-two, .page-landscape-four { width: 297mm; height: 210mm; margin: 0; box-shadow: none; page-break-after: always; }
+        .page-portrait:last-child, .page-landscape-two:last-child, .page-landscape-four:last-child { page-break-after: auto; }
         .body { overflow: visible !important; }
     }
 
@@ -524,11 +502,11 @@
     <div class="modal-content">
         <div class="modal-header">
             <i class="fas fa-hands-helping"></i>
-            <h2><strong>Multi Letter Generator (Offline)</strong></h2>
+            <h2><strong>Multi Letter Generator (Offline PDF)</strong></h2>
             <button class="close-btn" onclick="closeModal()">&times;</button>
         </div>
         <div class="modal-body">
-            <p>📄 आजको युग डिजिटल युग हो । यो टुलले एउटै विषयमा धेरैजनालाई पत्र तयार गर्न सहयोग गर्छ ।</p>
+            <p>📄 यो टुलले एउटै विषयमा धेरैजनालाई पत्र तयार गर्न सहयोग गर्छ ।</p>
             <p style="background:#fbeec2; padding:12px;"><i class="fas fa-exclamation-triangle"></i> <strong>चेतावनी :</strong> अनाधिकृत लोगो/सिग्नेचर प्रयोग नगर्नुहोला ।</p>
             <p><small>यो संस्करण पूर्ण रूपमा अफलाइन चल्छ र PDF डाउनलोड सुविधा सहित छ ।</small></p>
         </div>
@@ -541,7 +519,7 @@
 <div class="container">
     <div class="card">
         <h1><i class="fas fa-envelope-open-text"></i> Generate Multi Letter</h1>
-        <p class="subtitle">लेखेर वा बोलेर एउटै विषयमा धेरैजनालाई पत्र लेख्नुहोस् । (अफलाइन)</p>
+        <p class="subtitle">एउटै विषयमा धेरैजनालाई पत्र लेख्नुहोस् । (अफलाइन PDF)</p>
 
         <div class="layout-dropdown-area">
             <div class="dropdown-group">
@@ -617,6 +595,23 @@
     <div class="pdf-substatus" id="pdfSubstatus">कृपया पर्खनुहोस्</div>
 </div>
 
+<!-- ========================================================= -->
+<!-- 📚 OFFLINE LIBRARIES — यहाँ दुई library कोड paste गर्नुहोस् -->
+<!-- ========================================================= -->
+
+<!-- १) html2canvas (https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js) -->
+<script>
+/* PASTE html2canvas FULL SOURCE HERE */
+</script>
+
+<!-- २) jsPDF (https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js) -->
+<script>
+/* PASTE jsPDF FULL SOURCE HERE */
+</script>
+
+<!-- ========================================================= -->
+<!-- 🧠 MAIN APP SCRIPT                                        -->
+<!-- ========================================================= -->
 <script>
 // ================== State ==================
 let logoData = "";
@@ -643,6 +638,13 @@ function formatRecipientWithBreaks(recipient) {
 document.getElementById("logoFile").onchange = function(e) {
     const file = e.target.files[0];
     if (!file) return;
+    const reader
+
+
+// ================== File inputs ==================
+document.getElementById("logoFile").onchange = function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
     const reader = new FileReader();
     reader.onload = (ev) => { logoData = ev.target.result; generateLetters(); };
     reader.readAsDataURL(file);
@@ -655,7 +657,6 @@ document.getElementById("signatureFile").onchange = function(e) {
     reader.readAsDataURL(file);
 };
 
-// ================== Letter HTML builder ==================
 // ================== Letter HTML builder ==================
 function buildLetterHTML(recipientRaw, org, addr1, addr2, date, letterNo, refNo, subjectTxt, sender, position, email, mobile, bodyTemplate, logo, signature) {
     const personalizedBody = bodyTemplate.replace(/\[नाम\]/g, recipientRaw);
@@ -797,13 +798,13 @@ async function downloadPDF() {
     const statusEl = document.getElementById('pdfStatus');
     const subEl = document.getElementById('pdfSubstatus');
 
-    // Check libraries
+    // Library check
     if (typeof html2canvas === 'undefined' || !window.jspdf || !window.jspdf.jsPDF) {
-        alert('⚠️ PDF library लोड भएको छैन।\nInternet जोड्नुहोस् वा "प्रिन्ट" → "Save as PDF" प्रयोग गर्नुहोस्।');
+        alert('⚠️ PDF library लोड भएको छैन।\nकृपया सुनिश्चित गर्नुहोस् कि html2canvas र jsPDF को कोड inline राखिएको छ।');
         return;
     }
 
-    // Ensure letters generated
+    // Letters ensure
     let pages = document.querySelectorAll('#output .page-portrait, #output .page-landscape-two, #output .page-landscape-four');
     if (!pages.length) {
         generateLetters();
@@ -830,7 +831,6 @@ async function downloadPDF() {
 
             subEl.innerText = `${i + 1} / ${pages.length} पृष्ठ render हुँदैछ...`;
 
-            // Render page to canvas at 2x scale for crisp output
             const canvas = await html2canvas(page, {
                 scale: 2,
                 useCORS: true,
@@ -857,7 +857,7 @@ async function downloadPDF() {
             const pw = pdf.internal.pageSize.getWidth();
             const ph = pdf.internal.pageSize.getHeight();
 
-            // Fit image to page while preserving aspect ratio
+            // Aspect ratio fit
             const imgRatio = canvas.width / canvas.height;
             const pageRatio = pw / ph;
             let drawW = pw, drawH = ph, drawX = 0, drawY = 0;
@@ -871,17 +871,30 @@ async function downloadPDF() {
 
             pdf.addImage(imgData, 'JPEG', drawX, drawY, drawW, drawH, undefined, 'FAST');
 
-            // Allow UI to update between pages
             await new Promise(r => setTimeout(r, 50));
         }
 
         subEl.innerText = 'PDF save हुँदैछ...';
         const stamp = new Date().toISOString().slice(0, 10);
-        pdf.save(`letters-${stamp}.pdf`);
 
-        statusEl.innerText = '✔ PDF डाउनलोड भयो';
-        subEl.innerText = `${pages.length} पृष्ठ सेभ भयो`;
-        setTimeout(() => overlay.classList.remove('active'), 1200);
+        // Mobile vs desktop handling
+        if (/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) {
+            // Mobile: blob URL खोल्ने (प्रयोगकर्ताले Download/Share गर्न सक्छ)
+            const blobUrl = pdf.output('bloburl');
+            const newWin = window.open(blobUrl, '_blank');
+            if (!newWin) {
+                // Popup block भए fallback
+                pdf.save(`letters-${stamp}.pdf`);
+            }
+            statusEl.innerText = '✔ PDF खुल्यो';
+            subEl.innerText = 'Download/Share बटन प्रयोग गर्नुहोस्';
+        } else {
+            pdf.save(`letters-${stamp}.pdf`);
+            statusEl.innerText = '✔ PDF डाउनलोड भयो';
+            subEl.innerText = `${pages.length} पृष्ठ सेभ भयो`;
+        }
+
+        setTimeout(() => overlay.classList.remove('active'), 1500);
     } catch (err) {
         console.error('PDF error:', err);
         alert('PDF बनाउँदा समस्या आयो:\n' + (err && err.message ? err.message : err) + '\n\n"प्रिन्ट" → "Save as PDF" प्रयोग गर्नुहोस्।');
@@ -907,3 +920,11 @@ window.addEventListener('load', function() {
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
+    
