@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Multi Letterpad (Offline PDF) – Generator</title>
 
+<!-- PDF Libraries (internet चाहिन्छ; offline चाहिए तल नोट हेर्नुहोस्) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 <style>
     :root {
         --primary-color: #0b3552;
@@ -595,23 +599,21 @@
     <div class="pdf-substatus" id="pdfSubstatus">कृपया पर्खनुहोस्</div>
 </div>
 
-<!-- ========================================================= -->
-<!-- 📚 OFFLINE LIBRARIES — यहाँ दुई library कोड paste गर्नुहोस् -->
-<!-- ========================================================= -->
-
-<!-- १) html2canvas (https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js) -->
 <script>
-/* PASTE html2canvas FULL SOURCE HERE */
-</script>
+// ================== State ==================
+let logoData = "";
+let signatureData = "";
+let currentLayout = "one";
 
-<!-- २) jsPDF (https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js) -->
-<script>
-/* PASTE jsPDF FULL SOURCE HERE */
-</script>
+const layoutSelect = document.getElementById('layoutSelect');
+const orientationHint = document.getElementById('orientationHint');
 
-<!-- ========================================================= -->
-<!-- 🧠 MAIN APP SCRIPT                                        -->
-<!-- ========================================================= -->
+layoutSelect.addEventListener('change', function() {
+    currentLayout = this.value;
+    if (currentLayout === 'one') orientationHint.innerText = 'एक पत्र: 16px (पोर्ट्रेट)';
+    else if (currentLayout === 'two') orientationHint.innerText = 'दुई पत्र: 14px (ल्याण्डस्के
+
+
 <script>
 // ================== State ==================
 let logoData = "";
@@ -633,13 +635,6 @@ function formatRecipientWithBreaks(recipient) {
     if (!recipient.includes(',')) return recipient;
     return recipient.split(',').map(p => p.trim()).join(',<br>');
 }
-
-// ================== File inputs ==================
-document.getElementById("logoFile").onchange = function(e) {
-    const file = e.target.files[0];
-    if (!file) return;
-    const reader
-
 
 // ================== File inputs ==================
 document.getElementById("logoFile").onchange = function(e) {
@@ -800,7 +795,7 @@ async function downloadPDF() {
 
     // Library check
     if (typeof html2canvas === 'undefined' || !window.jspdf || !window.jspdf.jsPDF) {
-        alert('⚠️ PDF library लोड भएको छैन।\nकृपया सुनिश्चित गर्नुहोस् कि html2canvas र jsPDF को कोड inline राखिएको छ।');
+        alert('⚠️ PDF library लोड भएको छैन।\nकृपया internet जोड्नुहोस् वा library inline राख्नुहोस्।');
         return;
     }
 
@@ -921,10 +916,4 @@ window.addEventListener('load', function() {
 </body>
 </html>
 
-
-
-
-
-
-
-    
+                              
