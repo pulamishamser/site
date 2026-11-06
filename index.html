@@ -4723,17 +4723,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
  
 <!-- Welcome Popup Modal -->
-<!-- Welcome Popup Modal -->
 <div class="modal fade" id="welcomePopupModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="welcomePopupModalLabel" aria-hidden="true" style="z-index: 10600;">
   <div class="modal-dialog modal-dialog-centered modal-md">
-    <div class="modal-content border-0 shadow-lg" style="border-radius: 15px; overflow: visible;">
+    <div class="modal-content border-0 shadow-lg" style="border-radius: 15px; overflow: hidden;">
       
       <!-- हेडर -->
       <div class="modal-header bg-primary text-white">
         <h5 class="modal-title d-flex align-items-center flex-wrap gap-2" id="welcomePopupModalLabel" style="font-size: 18px;">
           <i class="fas fa-hand-peace"></i> shamser.info.np मा तपाईलाई हार्दिक स्वागत छ!
           
-          <!-- तिम्रो CSS Dropdown यहाँ राखियो -->
+          <!-- CSS Dropdown -->
           <div class="custom-dropdown ms-2">
             <button class="dropbtn"><i class="fas fa-tags"></i> Service Pricing</button>
             <div class="dropdown-content">
@@ -4746,11 +4745,8 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
       
       <div class="modal-body text-center p-0">
-        <!-- परिवर्तन: तस्बिर हटाएर भिडियो राखियो -->
-        <video autoplay muted loop playsinline style="width: 100%; height: 270px; object-fit: cover; object-position: center; border-top-left-radius: 0; border-top-right-radius: 0;">
-          <source src="SitePage/fb img/Dipawali.mp4" type="video/mp4">
-          तपाईंको ब्राउजरले भिडियो सपोर्ट गर्दैन।
-        </video>
+        <!-- Image (Full Width) -->
+        <img src="https://shamser.info.np/SitePage/AI img/shamser_info_np.jpeg" alt="shamser_info_np" style="width: 100%; height: 220px; object-fit: cover; object-position: center;">
         
         <div class="p-3">
           <span class="badge bg-success mb-2 px-2 py-1" style="font-size: 11px;">✨ शिक्षक र विद्यार्थीका लागि उत्कृष्ट</span>
@@ -4760,9 +4756,18 @@ document.addEventListener('DOMContentLoaded', function() {
           <p style="font-size: 13px; color: #444; text-align: justify; line-height: 1.5;">
             शिक्षक, विद्यार्थी र विद्यालयका लागि <strong>IEMIS, ताजा शैक्षिक समाचार, AI ज्ञान, सोसल मिडिया फलोअर्स</strong> र अन्य उपयोगी सेवाहरू एकै ठाउँमा।
             <a href="https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/IEMIS%20(Updated).html">
-          <span class="badge bg-success mb-2 px-2 py-1" style="font-size: 11px;">🔗New IEMIS </span> </a></p>
+              <span class="badge bg-success mb-2 px-2 py-1" style="font-size: 11px;">🔗New IEMIS</span>
+            </a>
+          </p>
 
-          
+          <!-- Embedded Video Section (तल्लो छेउमा राखिएको) -->
+          <div class="my-2 rounded overflow-hidden shadow-sm" style="background: #000;">
+            <video width="100%" height="180" autoplay loop muted playsinline style="object-fit: cover; display: block;">
+              <source src="SitePage/fb img/Dipawali.mp4" type="video/mp4">
+              तपाईंको ब्राउजरले भिडियो ट्याग सपोर्ट गर्दैन।
+            </video>
+          </div>
+
           <a href="#more-services" class="btn btn-success fw-bold w-100 mt-2" data-bs-dismiss="modal">
             <i class="fas fa-arrow-down"></i> थप सेवाहरू हेर्नुहोस्
           </a>
@@ -4776,6 +4781,91 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </div>
 
+<!-- Dropdown को CSS -->
+<style>
+  .custom-dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .custom-dropdown .dropbtn {
+    background-color: #ffc107;
+    color: #000;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .custom-dropdown .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 180px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 10700;
+    border-radius: 5px;
+    overflow: hidden;
+    top: 100%;
+    left: 0;
+  }
+
+  .custom-dropdown .dropdown-content a {
+    color: #333;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+  }
+
+  .custom-dropdown .dropdown-content a:hover {
+    background-color: #f1f1f1;
+  }
+
+  .custom-dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .custom-dropdown:hover .dropbtn {
+    background-color: #ffca2c;
+  }
+</style>
+
+<!-- स्क्रिप्ट -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    setTimeout(function() {
+      var myModal = new bootstrap.Modal(document.getElementById('welcomePopupModal'));
+      myModal.show();
+    }, 2000);
+
+    document.querySelectorAll('a[href="#more-services"]').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        var target = document.getElementById('more-services');
+        if(target) {
+          var modalEl = document.getElementById('welcomePopupModal');
+          var modal = bootstrap.Modal.getInstance(modalEl);
+          if(modal) modal.hide();
+
+          setTimeout(function() {
+            var headerOffset = 80; 
+            var elementPosition = target.getBoundingClientRect().top;
+            var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
+          }, 300);
+        }
+      });
+    });
+  });
+</script>
 
 
 
@@ -4783,6 +4873,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
 
 
 
