@@ -1140,7 +1140,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
 <!-- MAIN CONTENT -->
 <div class="container mt-4">
   <div class="row">
@@ -1151,32 +1150,69 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="marquee-content">सामुदायिक विद्यालयको शैक्षिक उन्नयनमा समर्पित खोजमूलक प्रस्तुति र निष्पक्ष विश्लेषणका साथमा सदैव पाठकलाई सुसुचित गराउने प्रविधिमैत्री, शैक्षिक सूचना संचारहरूको पोर्टल shamser.info.np ।</div>
       </div>
 
-<!-- ============ CSS ============ -->
+
+<!-- ============ TOP HEADLINE NEWS (Feature Style) ============ -->
 <style>
-  .headline-news-box { background: #fff; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); margin-bottom: 25px; border: 1px solid #eaeaea; overflow: hidden; display: flex; flex-direction: column; }
-  .headline-header { background: #c0392b; color: #fff; padding: 12px 18px; font-size: 18px; font-weight: 800; display: flex; align-items: center; gap: 10px; text-transform: uppercase; }
+  /* मुख्य हेडलाइन बक्सको डिजाइन */
+  .headline-news-box {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+    border: 1px solid #eaeaea;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* माथिको आकर्षक Bold हेडर */
+  .headline-header {
+    background: #c0392b;
+    color: #fff;
+    padding: 12px 18px;
+    font-size: 18px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+  }
+
   .headline-body { display: flex; flex-wrap: wrap; }
+
+  /* बायाँतिर इमेज */
   .headline-image { flex: 1; min-width: 300px; padding: 15px; }
   .headline-image img { width: 100%; height: 300px; object-fit: cover; border-radius: 8px; }
+
+  /* दायाँतिर समाचारको टेक्स्ट */
   .headline-content { flex: 1.5; min-width: 300px; padding: 15px 20px 15px 0; display: flex; flex-direction: column; justify-content: center; }
   .headline-title { font-size: 22px; font-weight: 700; color: #222; margin-bottom: 10px; line-height: 1.3; }
   .headline-author { font-size: 14px; color: #e67e22; font-weight: 600; margin-bottom: 10px; }
   .headline-text { font-size: 15px; color: #555; line-height: 1.6; text-align: justify; }
+
+  /* Like र समयको भाग */
   .like-block { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; padding-top: 10px; border-top: 1px solid #eee; }
   .like-group { display: flex; align-items: center; gap: 10px; }
   .like-btn { background: #fff; border: 1px solid #dc3545; color: #dc3545; padding: 6px 15px; border-radius: 20px; cursor: pointer; font-weight: 600; transition: 0.2s; }
   .like-btn.active { background: #dc3545; color: #fff; }
   .like-count-badge { background: #eee; padding: 4px 10px; border-radius: 12px; font-size: 13px; font-weight: bold; }
   .time-micro { font-size: 13px; color: #777; }
+
   @media (max-width: 768px) {
     .headline-image img { height: 220px; }
     .headline-content { padding: 0 15px 15px 15px; }
     .headline-title { font-size: 18px; }
   }
+</style>
+
+
+<!-- ============ समाचारको लागि CSS ============ -->
+<style>
   .hidden-content { display: none; }
   .read-more-btn { background: none; border: none; color: #0d6efd; cursor: pointer; font-weight: bold; padding: 0; margin-top: 10px; display: inline-block; }
   .read-more-btn:hover { text-decoration: underline; }
 </style>
+
 
 <!-- ============ समाचार १ : विद्या भट्टराई ============ -->
 <div class="news-section" id="content_education">
@@ -1223,7 +1259,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <div style="margin:15px 0; overflow:auto;">
     <img src="https://pbs.twimg.com/profile_images/1579086841227059200/JyklJEUx_400x400.jpg" alt="Editor" loading="lazy" style="width:60px;height:60px;border-radius:50%;float:left;margin-right:15px;">
     <p style="text-align:justify;">
-      आजको डिजिटल युगमा शिक्षक, विद्यार्थी र अभिभावकका लागि सही र भरपर्दो सूचना प्राप्त गर्नु चुनौतीपूर्ण छ। यही चुनौतीलाई समाधान गर्न <strong>shamser.info.np</strong> ले एउटा 'सम्पूर्ण शैक्षिक पोर्टल' को रूपमा आफूलाई स्थापित गरेको छ। यसले केवल IEMIS मात्र नभई शिक्षा क्षेत्रसँग सम्बन्धित सम्पूर्ण डिजिटल सामग्री एकै ठाउँमा उपलब्ध गराएको छ।
+      आजको डिजिटल युगमा शिक्षक, विद्यार्थी र अभिभावकका लागि सही र भरपर्दो सूचना प्राप्त गर्नु चुनौतीपूर्ण छ। यही चुनौतीलाई समाधान गर्न **shamser.info.np** ले एउटा 'सम्पूर्ण शैक्षिक पोर्टल' को रूपमा आफूलाई स्थापित गरेको छ। यसले केवल IEMIS मात्र नभई शिक्षा क्षेत्रसँग सम्बन्धित सम्पूर्ण डिजिटल सामग्री एकै ठाउँमा उपलब्ध गराएको छ।
       
       <span id="featureMore" class="hidden-content">
         <br><br>
@@ -1405,16 +1441,15 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </div>
 
-    </div><!-- /.col-md-9 बन्द -->
-  </div><!-- /.row बन्द -->
-</div><!-- /.container बन्द -->
-
-<!-- ============ JavaScript ============ -->
+<!-- ============ JavaScript (यो </body> भन्दा माथि राख्नु) ============ -->
 <script>
   document.addEventListener("DOMContentLoaded", function() {
+    
+    // १. थप पढ्नुहोस् (Read More) फंक्शन
     window.toggleContent = function(moreId, btn) {
       var moreText = document.getElementById(moreId);
       if (!moreText) return;
+
       if (moreText.classList.contains('hidden-content')) {
         moreText.classList.remove('hidden-content');
         btn.innerText = "कम पढ्नुहोस्";
@@ -1424,10 +1459,12 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     };
 
+    // २. समय गणना (Time Ago) फंक्शन
     function timeAgo(dateString) {
       const date = new Date(dateString);
       const now = new Date();
       const seconds = Math.floor((now - date) / 1000);
+
       if (seconds < 60) return "भर्खरै";
       const minutes = Math.floor(seconds / 60);
       if (minutes < 60) return minutes + " मिनेट अघि";
@@ -1437,12 +1474,18 @@ document.addEventListener('DOMContentLoaded', function() {
       if (days < 30) return days + " दिन पहिले";
       const months = Math.floor(days / 30);
       if (months < 12) return months + " महिना अघि";
-      return Math.floor(days / 365) + " वर्ष अघि";
+      const years = Math.floor(days / 365);
+      return years + " वर्ष अघि";
     }
 
+    // सबै समाचारको समय अपडेट गर्ने
     document.querySelectorAll('.time-ago').forEach(function(el) {
       const dateStr = el.getAttribute('data-date');
-      el.innerText = dateStr ? timeAgo(dateStr) : "भर्खरै";
+      if (dateStr) {
+        el.innerText = timeAgo(dateStr);
+      } else {
+        el.innerText = "भर्खरै";
+      }
     });
   });
 </script>
@@ -1452,6 +1495,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
 
 
 
