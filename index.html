@@ -1207,28 +1207,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- ============ समाचारको लागि CSS ============ -->
 
-
-<!DOCTYPE html>
-<html lang="ne">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Standard SEO Meta Tags -->
-    <title>सफलताको शिखर र धरातलको यथार्थ: "चढेको बुई नबिर्स, टेकेको भुइँ नबिर्स"</title>
-    <meta name="description" content="नेपाली समाजको गहिरो जीवनदर्शन 'चढेको बुई नबिर्स, टेकेको भुइँ नबिर्स' को वास्तविक मर्म र यसमा आधारित चलचित्र 'बा: एक योद्धा' को विस्तृत समीक्षा।">
-    <meta name="keywords" content="चढेको बुई नबिर्स, टेकेको भुइँ नबिर्स, बा एक योद्धा, Baa Ek Yoddha, नेपाली उखान, बुवाको त्याग, नेपाली चलचित्र, हरि लम्साल, दिव्यदेव">
-    <meta name="robots" content="index, follow">
-    <meta name="author" content="Shamser Pulami">
-
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:type" content="article">
-    <meta property="og:title" content="सफलताको शिखरमा पुग्दा सम्झनैपर्ने दर्शन: 'चढेको बुई नबिर्स, टेकेको भुइँ नबिर्स'">
-    <meta property="og:description" content="सन्तानको भविष्यका लागि बुबाले गर्ने त्याग र हाम्रो मौलिक धरातल बुझाउने एउटा वास्तविक तथ्यपरक विश्लेषण।">
-    <meta property="og:image" content="https://glamournepal.com">
-    <meta property="og:url" content="https://shamser.info.np">
-    <meta property="og:site_name" content="Shamser Educational Portal">
-
+    <!-- ============ CSS ============ -->
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -1365,11 +1344,66 @@ document.addEventListener('DOMContentLoaded', function() {
             font-weight: bold;
             color: #2c3e50;
         }
-    </style>
-</head>
-<body>
 
-    <!-- Top Header -->
+        /* ===== समाचार ब्लकको लागि थप CSS ===== */
+        .news-section { margin-bottom: 30px; }
+        .news-header h2.header3 {
+            color: #1a1a1a;
+            font-size: 1.6rem;
+            border-bottom: 3px solid #e67e22;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        .hidden-content { display: none; }
+        .read-more-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 16px;
+            background: #e67e22;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .read-more-btn:hover { background: #d35400; }
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .btn-primary { background: #2980b9; color: #fff; }
+        .btn-sm { font-size: 0.9rem; }
+        .like-block { margin-top: 15px; }
+        .like-group {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #f4f6f7;
+            padding: 6px 12px;
+            border-radius: 20px;
+        }
+        .like-btn {
+            background: none;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            color: #c0392b;
+        }
+        .like-count-badge {
+            background: #c0392b;
+            color: #fff;
+            border-radius: 10px;
+            padding: 2px 8px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+    </style>
+
+
+    <!-- ============ Top Header ============ -->
     <div class="top-header">
         <a href="https://shamser.info.np" target="_blank">shamser.info.np</a>
     </div>
@@ -1386,18 +1420,82 @@ document.addEventListener('DOMContentLoaded', function() {
             टेकेको भुइँ नबिर्स…
         </div>
 
-
-
-
-
-
-
         <!-- Featured Image -->
         <img class="featured-image" src="https://shamser.info.np/SitePage/fb img/Buba.jpeg" alt="धरातल र मार्गदर्शन बुझाउने तस्बिर">
 
         <p>नेपाली जनमानसमा एउटा स्थापित र गहिरो अर्थ बोकेको उखान छ— <strong>"चढेको बुई नबिर्स, ओढेको रुई नबिर्स, जति माथि पुगे पनि आकाश नै चुमे पनि टेकेको भुइँ नबिर्स"</strong>। यो केवल मनगढन्ते गफगाफ वा सतही संवाद मात्र होइन, बरु मानव मनोविज्ञान, सामाजिक उत्तरदायित्व र पारिवारिक कृतज्ञतासँग जोडिएको एउटा अकाट्य सत्य हो। मानिसले आफ्नो जीवनमा प्रगति गर्दै जाँदा कुन धरातलबाट यात्रा सुरु गरेको थियो र कसको सहारामा अगाडि बढेको थियो भन्ने कुरा भुल्नु नै पतनको पहिलो खुड्किलो मानिन्छ।</p>
 
-        <!-- भावनात्मक गहकिला शब्दहरूको संयोजन -->
+        <!-- ============ समाचारको HTML ============ -->
+        <div class="news-section" id="content_education">
+            <div class="news-header">
+                <h2 class="header3">✍️ 'चढेको बुई नबिर्स, टेकेको भुइँ नबिर्स'</h2>
+            </div>
+            <p>सफलताको शिखर र धरातलको यथार्थ</p>
+            <img src="https://shamser.info.np/SitePage/fb img/Buba.jpeg" alt="चढेको बुई नबिर्स" loading="lazy" width="100%" height="500" style="object-fit:cover; border-radius:16px;">
+            
+            <div style="margin:15px 0; overflow:auto;">
+                <img src="https://pbs.twimg.com/profile_images/1579086841227059200/JyklJEUx_400x400.jpg" alt="Editor" loading="lazy" style="width:60px;height:60px;border-radius:50%;float:left;margin-right:15px;">
+                <p style="text-align:justify;">
+                    नेपाली जनमानसमा एउटा स्थापित र गहिरो अर्थ बोकेको उखान छ— <strong>"चढेको बुई नबिर्स, ओढेको रुई नबिर्स, जति माथि पुगे पनि आकाश नै चुमे पनि टेकेको भुइँ नबिर्स"</strong>। यो केवल मनगढन्ते गफगाफ वा सतही संवाद मात्र होइन, बरु मानव मनोविज्ञान, सामाजिक उत्तरदायित्व र पारिवारिक कृतज्ञतासँग जोडिएको एउटा अकाट्य सत्य हो। मानिसले आफ्नो जीवनमा प्रगति गर्दै जाँदा कुन धरातलबाट यात्रा सुरु गरेको थियो र कसको सहारामा अगाडि बढेको थियो भन्ने कुरा भुल्नु नै पतनको पहिलो खुड्किलो मानिन्छ।
+                    
+                    <span id="eduMore" class="hidden-content">
+                        <br><br>
+                        <strong>१. जीवनको यथार्थ दर्शन: कृतज्ञता, त्याग र विनम्रता</strong><br><br>
+                        आकाश चुम्ने महत्त्वाकांक्षा पाल्नु स्वाभाविक हो, तर आकाशमा उड्ने चराले पनि बस्नका लागि जमिनकै रुख रोज्नुपर्छ। हाम्रो जीवनको जग पनि त्यस्तै धरातलमा अडिएको छ। जीवनका अनेकौँ उकाली-ओरालीमा सफलताको चुचुरो चुम्दा हामीलाई काँध दिने ती अदृश्य हातहरूलाई बिर्सनु कृतघ्नता हो।<br><br>
+                        <strong>आमाबुबाको पसिना र काँधको बुई:</strong> सन्तानको उज्यालो भविष्यका लागि बुबाले आफू अँध्यारोमा बसेर बगाएको पसिना र आमाले काखमा च्यापेर खुवाएको ममताको कुनै मूल्य हुँदैन। बुबाको बुई चढेर देखेको संसार र आमाको रुईजस्तो कोमल स्नेहले ओढाएको न्यानोपन नै मानिसको जीवनको असली सम्पत्ति हो।<br><br>
+                        <strong>गुरु र धरातलको सम्बन्ध:</strong> अज्ञानताको धमिलो बाटोबाट ज्ञानको उज्यालोतिर डोहोर्याउने गुरु, गाउँ-घरको माटो र बाल्यावस्थाको सरल जीवनशैली नै हाम्रो वास्तविक पहिचान हुन्। वृक्ष जतिसुकै अग्लो भएर फले-फुले पनि यदि उसले आफ्नो जरासँगको नाता तोड्छ भने त्यो ढल्न धेरै समय लाग्दैन।<br><br>
+                        <strong>कृतज्ञता:</strong> आफूलाई सफलताको शिखरमा पुर्‍याउन सहयोग गर्ने व्यक्तिहरू जस्तै बुबाआमा, गुरु, वा साथीभाइ जसको काँध वा बुई चढेर सफलता पाइयो, उनीहरूलाई सधैं सम्मान र स्मरण गर्नुपर्छ।<br><br>
+                        <strong>विनम्रता:</strong> जीवनमा जतिसुकै प्रगति गरेर आकाश नै चुमे पनि आफ्नो खुट्टा सधैं भुइँमै (धरातलमै) रहनुपर्छ। रुख र जराको नाता तथा माटो र पानीको साथ टुट्यो भने त्यसको अस्तित्व नरहने यथार्थ यसले सिकाउँछ।<br><br>
+                        <strong>२. चलचित्र 'बा: एक योद्धा' मा सामाजिक प्रतिविम्ब</strong><br><br>
+                        यही रैथाने उखान र सामाजिक यथार्थलाई केन्द्रमा राखेर प्रसिद्ध सङ्गीतकार हरि लम्सालको लेखन तथा निर्देशनमा चलचित्र <strong>'बा: एक योद्धा'</strong> निर्माण भएको छ। यस चलचित्रका केही मुख्य तथ्यहरू यस प्रकार छन्:<br><br>
+                        <strong>मार्मिक शीर्षक गीत:</strong> चलचित्रको मुख्य गीतको रूपमा 'चढेको बुई नबिर्स, टेकेको भुइँ नबिर्स' लाई प्रस्तुत गरिएको छ। उक्त गीतमा सञ्जीव थापाको शब्द तथा हरि लम्सालको संगीत र स्वर रहेको छ।<br><br>
+                        <strong>कथावस्तु:</strong> चलचित्रले सन्तानका लागि बुबाले गर्ने त्याग, संघर्ष र जीवनभरका चुनौतीलाई मुख्य कथावस्तु बनाएको छ।<br><br>
+                        <strong>कलाकारहरू:</strong> यस गीतको भिडियो तथा चलचित्रमा मुख्य कलाकार दिव्यदेव, सुहाना थापा र झरना थापालगायतको जीवन्त अभिनय समेटिएको छ।<br><br>
+                        <strong>३. टिकटक र रील्सका लागि भावनात्मक भिडियो कन्सेप्ट तथा क्याप्सनहरू</strong><br><br>
+                        सिकाउने शिक्षक, हुर्काउने आमाबुबा र संघर्ष बुझ्ने सन्तानका लागि सामाजिक सञ्जालमा प्रयोग गर्न सकिने मन छुने सामग्रीहरू:<br><br>
+                        <strong>१. शिक्षकले विद्यार्थीलाई सम्झाउँदा (School/Teacher Version)</strong><br>
+                        चढेको बुई नबिर्स<br>
+                        ओढेको रुई नबिर्स<br>
+                        जति नै माथि पुगेपनि, आकाश नै चुमे पनि<br>
+                        आफूले टेकेको भुइँ नबिर्स।<br>
+                        दुःखमा साथ दिने हातहरू नबिर्स<br>
+                        आँसु पुछिदिने ती साथहरू नबिर्स।<br>
+                        सफलताको शिखरमा पुगेर घमण्ड नगर<br>
+                        तिमीलाई चिनाउने गुरुको बात नबिर्स<br><br>
+                        <strong>भिडियो आइडिया:</strong> भिडियोको सुरुमा विद्यार्थीहरू परीक्षा दिइरहेको वा पुरस्कार जितेर हाँसिरहेको क्लिप राख्नुहोस् र अन्त्यमा शिक्षकले विद्यार्थीको काँधमा हात राखेर मायालु ढङ्गले सम्झाइरहेको वा आशीर्वाद दिइरहेको दृश्य (Slow-motion) देखाउनुहोस्।<br><br>
+                        <strong>क्याप्सन:</strong> "भोलि सफलताको आकाश जति नै चुमे पनि, तिमीलाई अक्षर चिनाउने यो भुईँ र विद्यालयलाई सधैं सम्झिरहनू है बाबु/नानी। तिमीहरू धेरै माथि पुगेको हेर्ने चाहना छ, तर विनम्रता कहिल्यै नछुटोस्। 🎓❤️ #TeacherStudent #MoralValues #NeverForgetYourRoots"<br><br>
+                        <strong>२. छोराछोरीले आमाबुबाको लागि (Children to Parents Version)</strong><br><br>
+                        <strong>भिडियो आइडिया:</strong> सुरुमा आमाबुबाले हलो जोतेको, मेलापात गरेको वा दुःख गरेर पसिना बगाएको पुराना/नयाँ भिजुअलहरू राख्नुहोस्। त्यसपछि तुरुन्तै (Transition पछि) आफू अफिसमा काम गरिरहेको, गाडी चढेको वा नयाँ सफलता पाएको क्लिप जोड्नुहोस्।<br><br>
+                        <strong>क्याप्सन:</strong> "आज म जहाँ छु, जे छु, केवल हजुरहरूको त्यही च्यातिएको दौरा र बदलिएको चप्पलको पसिनाका कारण छु। हजुरहरूले हालेको जग (धरातल) म कहिल्यै बिर्सने छैन आमा-बुबा। 🥺🙏❤️ #Gratitude #ParentsLove #Respect #MiddleClassStruggle"<br><br>
+                        <strong>३. आमाबुबाले छोराछोरीलाई आशिष दिँदा (Parents to Children Version)</strong><br><br>
+                        <strong>भिडियो आइडिया:</strong> छोराछोरीको बाल्यकालको फोटो वा भिडियो (जहाँ उनीहरू बुबाको बुई चढेका छन् वा आमाको काखमा छन्) बाट सुरु गरेर अहिले उनीहरू ठूलो भई आफ्नै खुट्टामा उभिएको, विदेश जान लागेको वा नयाँ काम सुरु गरेको क्लिप राख्नुहोस्।<br><br>
+                        <strong>क्याप्सन:</strong> "हाम्रो बुई चढेर संसार हेर्न सिकेका तिमीहरू आज आकाश छुने दौडमा छौ। प्रगति धेरै गर्नु, तर यो बुई र तिमीलाई ताते-ताते गराउने यो माटोलाई सधैं मनमा सजाइराख्नू। हाम्रो आशिर्वाद सधैं साथ छ। 💖✨ #ParentalBlessings #FamilyFirst #BaaEkYoddha"<br><br>
+                        <strong>४. डिजिटल रिसोर्स तथा भिडियो लिङ्कहरू</strong><br><br>
+                        यस विषय र चलचित्रसँग सम्बन्धित फेसबुक रिल, टिकटक र ट्रेलरका वास्तविक सामग्रीहरू तलका लिङ्कहरूमा हेर्न सक्नुहुन्छ:<br><br>
+                        📸 फिचर फोटो Hub: <a href="https://sabastaentertainment.com/wp-content/uploads/2026/07/BA-SONG.jpg.jpeg" target="_blank" rel="noopener">Ba: Ek Yoddha Official Media Hub</a><br>
+                        🎬 युट्युब: <a href="https://youtube.com/shorts/ApUiQ-URaPs?si=5Uw2QgkpuKhjGiNT" target="_blank" rel="noopener">Nabirsa | Hari Lamsal | Ba Ek</a><br>
+                        📱 फेसबुक रिल-१: <a href="https://www.facebook.com/reel/1808001993427543" target="_blank" rel="noopener">The Cinema Nepal Trailer Video</a><br>
+                        📱 फेसबुक रिल-२: <a href="https://www.facebook.com/reel/1808001993427543" target="_blank" rel="noopener">Lion Bhawani Angdembe</a><br>
+                        📱 फेसबुक रिल-३: <a href="https://www.facebook.com/share/r/1EEGZW2R7v/" target="_blank" rel="noopener">नमस्ते खोटाङ - Namaste Khotang</a><br>
+                        🎵 टिकटक Profile: <a href="https://www.tiktok.com/@harilamsalofficial/video/7668926689090686228?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener">Baa - Ek Yoddha Official TikTok Page</a><br>
+                        🎵 टिकटक Feed: <a href="https://www.tiktok.com/@harilamsalofficial/video/7700430360370367764?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener">एयरपोर्टमा छोरीलाई बिदा गर्दा</a><br><br>
+                        <strong>निष्कर्ष:</strong> भौतिक प्रगतिको अन्धो दौडमा दौडिरहँदा हामीले आफ्नो जरा बिर्सनु हुँदैन। 'बा: एक योद्धा' चलचित्र र यसको शीर्षक गीतले समाजलाई यही गहिरो सत्यको पुनर्बोध गराएका छन्। हामी जतिसुकै आधुनिक भए पनि हाम्रा बुबाआमाको काँध (बुई) र हाम्रो आफ्नोपनको धरातल (भुइँ) नै हाम्रो वास्तविक अस्तित्व हो।<br><br>
+                        <a href="https://lauro-media.blogspot.com/2026/05/blog-post_28.html" class="btn btn-sm btn-primary">बाँकी पूरा समाचार पढ्नुहोस्</a>
+                    </span>
+                    
+                    <button class="read-more-btn" onclick="toggleContent('eduMore', this)">थप पढ्नुहोस्</button>
+                </p>
+            </div>
+            <div class="like-block" data-like-key="education">
+                <div class="like-group">
+                    <button class="like-btn" data-like-key="education">❤️ <span class="like-text">मन पर्यो</span></button>
+                    <div class="like-count-badge" data-count-key="education">0</div>
+                </div>
+            </div>
+        </div>
+        <!-- ============ समाचार ब्लक बन्द ============ -->
+
+        <!-- बाँकी सामग्री (कविता, भिडियो, लिङ्क, फुटर) -->
         <h2>१. जीवनको यथार्थ दर्शन: कृतज्ञता, त्याग र विनम्रता</h2>
         <p>आकाश चुम्ने महत्त्वाकांक्षा पाल्नु स्वाभाविक हो, तर आकाशमा उड्ने चराले पनि बस्नका लागि जमिनकै रुख रोज्नुपर्छ। हाम्रो जीवनको जग पनि त्यस्तै धरातलमा अडिएको छ। जीवनका अनेकौँ उकाली-ओरालीमा सफलताको चुचुरो चुम्दा हामीलाई काँध दिने ती अदृश्य हातहरूलाई बिर्सनु कृतघ्नता हो।</p>
         
@@ -1420,8 +1518,6 @@ document.addEventListener('DOMContentLoaded', function() {
             <li><strong>कलाकारहरू:</strong> यस गीतको भिडियो तथा चलचित्रमा मुख्य कलाकार दिव्यदेव, सुहाना थापा र झरना थापालगायतको जीवन्त अभिनय समेटिएको छ।</li>
         </ul>
 
-     
-
         <!-- टिकटक र रील्सका लागि भावनात्मक भिडियो आइडिया तथा क्याप्सनहरू -->
         <h2>३. टिकटक र रील्सका लागि भावनात्मक भिडियो कन्सेप्ट तथा क्याप्सनहरू</h2>
         <p>सिकाउने शिक्षक, हुर्काउने आमाबुबा र संघर्ष बुझ्ने सन्तानका लागि सामाजिक सञ्जालमा प्रयोग गर्न सकिने मन छुने सामग्रीहरू:</p>
@@ -1429,45 +1525,36 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="concept-card">
             <h3>१. शिक्षकले विद्यार्थीलाई सम्झाउँदा (School/Teacher Version)</h3>
 
- <p><strong>चढेको बुई नबिर्स<br>
-ओढेको रुई नबिर्स<br>
-जति नै माथि पुगेपनि, आकाश नै चुमे पनि<br>
-आफूले टेकेको भुइँ नबिर्स।<br>
-दुःखमा साथ दिने हातहरू नबिर्स<br>
-आँसु पुछिदिने ती साथहरू नबिर्स।<br>
-सफलताको शिखरमा पुगेर घमण्ड नगर<br>
-तिमीलाई चिनाउने गुरुको  बात नबिर्स <br></strong> </p>
+            <p><strong>चढेको बुई नबिर्स<br>
+            ओढेको रुई नबिर्स<br>
+            जति नै माथि पुगेपनि, आकाश नै चुमे पनि<br>
+            आफूले टेकेको भुइँ नबिर्स।<br>
+            दुःखमा साथ दिने हातहरू नबिर्स<br>
+            आँसु पुछिदिने ती साथहरू नबिर्स।<br>
+            सफलताको शिखरमा पुगेर घमण्ड नगर<br>
+            तिमीलाई चिनाउने गुरुको  बात नबिर्स <br></strong> </p>
             <p><strong>भिडियो आइडिया:</strong> भिडियोको सुरुमा विद्यार्थीहरू परीक्षा दिइरहेको वा पुरस्कार जितेर हाँसिरहेको क्लिप राख्नुहोस् र अन्त्यमा शिक्षकले विद्यार्थीको काँधमा हात राखेर मायालु ढङ्गले सम्झाइरहेको वा आशीर्वाद दिइरहेको दृश्य (Slow-motion) देखाउनुहोस्।</p>
             <p><strong>क्याप्सन:</strong> "भोलि सफलताको आकाश जति नै चुमे पनि, तिमीलाई अक्षर चिनाउने यो भुईँ र विद्यालयलाई सधैं सम्झिरहनू है बाबु/नानी। तिमीहरू धेरै माथि पुगेको हेर्ने चाहना छ, तर विनम्रता कहिल्यै नछुटोस्। 🎓❤️ #TeacherStudent #MoralValues #NeverForgetYourRoots"</p>
         </div>
 
-
-
-
-   <video width="100%" height="320" autoplay muted playsinline loop controls>
+        <video width="100%" height="320" autoplay muted playsinline loop controls>
             <source src="https://shamser.info.np/SitePage/fb img/चढेको बुई नबिर्स.MP4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
-
-
-
-
-
-
-
 
         <div class="concept-card">
             <h3>२. छोराछोरीले आमाबुबाको लागि (Children to Parents Version)</h3>
             <p><strong>भिडियो आइडिया:</strong> सुरुमा आमाबुबाले हलो जोतेको, मेलापात गरेको वा दुःख गरेर पसिना बगाएको पुराना/नयाँ भिजुअलहरू राख्नुहोस्। त्यसपछि तुरुन्तै (Transition पछि) आफू अफिसमा काम गरिरहेको, गाडी चढेको वा नयाँ सफलता पाएको क्लिप जोड्नुहोस्।</p>
             <p><strong>क्याप्सन:</strong> "आज म जहाँ छु, जे छु, केवल हजुरहरूको त्यही च्यातिएको दौरा र बदलिएको चप्पलको पसिनाका कारण छु। हजुरहरूले हालेको जग (धरातल) म कहिल्यै बिर्सने छैन आमा-बुबा। 🥺🙏❤️ #Gratitude #ParentsLove #Respect #MiddleClassStruggle"</p>
         </div>
-          <div class="concept-card">
+        <div class="concept-card">
             <h3><strong> एयरपोर्टमा छोरीलाई बिदा गर्दा</strong></h3>
 
-   <video width="100%" height="420" autoplay muted playsinline loop controls>
-            <source src="https://shamser.info.np/SitePage/fb img/'चढेको बुई नबिर्स ओढेको रुई नबिर्स'.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+            <video width="100%" height="420" autoplay muted playsinline loop controls>
+                <source src="https://shamser.info.np/SitePage/fb img/'चढेको बुई नबिर्स ओढेको रुई नबिर्स'.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
         <div class="concept-card">
             <h3>३. आमाबुबाले छोराछोरीलाई आशिष दिँदा (Parents to Children Version)</h3>
             <p><strong>भिडियो आइडिया:</strong> छोराछोरीको बाल्यकालको फोटो वा भिडियो (जहाँ उनीहरू बुबाको बुई चढेका छन् वा आमाको काखमा छन्) बाट सुरु गरेर अहिले उनीहरू ठूलो भई आफ्नै खुट्टामा उभिएको, विदेश जान लागेको वा नयाँ काम सुरु गरेको क्लिप राख्नुहोस्।</p>
@@ -1521,16 +1608,18 @@ document.addEventListener('DOMContentLoaded', function() {
         </footer>
     </div>
 
-</body>
-</html>
-
-
-
-
-
-
-
-
+    <script>
+        function toggleContent(id, btn) {
+            var el = document.getElementById(id);
+            if (el.style.display === "none" || el.style.display === "") {
+                el.style.display = "inline";
+                btn.textContent = "कम पढ्नुहोस्";
+            } else {
+                el.style.display = "none";
+                btn.textContent = "थप पढ्नुहोस्";
+            }
+        }
+    </script>
 
 
 
