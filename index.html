@@ -4825,9 +4825,26 @@ document.addEventListener('DOMContentLoaded', function() {
           <div class="d-flex align-items-center gap-3 my-3 text-start">
             <!-- गोलो आकारको सानो भिडियो (छेउमा राखिएको) -->
             <div class="flex-shrink-0">
-<video width="100" height="100" autoplay loop muted playsinline onloadeddata="this.play();" style="object-fit: cover; border-radius: 50%; border: 3px solid #027f7f; display: block; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+<!------autoplay-------->
+<video id="dipawaliVid" width="100" height="100" autoplay loop muted playsinline style="object-fit: cover; border-radius: 50%; border: 3px solid #027f7f; display: block; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
   <source src="https://shamser.info.np/SitePage/fb%20img/Dipawali.mp4" type="video/mp4">
 </video>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var v = document.getElementById('dipawaliVid');
+    if (v) {
+      v.muted = true; // आवाज बन्द गर्नैपर्छ
+      var playPromise = v.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(function(error) {
+          console.log("Autoplay रोकियो:", error);
+        });
+      }
+    }
+  });
+</script>
+ <!-----End-autopl-------->
             </div>
             
             <!-- विवरण टेक्स्ट -->
@@ -4941,26 +4958,7 @@ document.addEventListener('DOMContentLoaded', function() {
  
 
 
-<!------autoplay-------->
- <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var videos = document.querySelectorAll('.autoplay-vid');
-    
-    var observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          entry.target.muted = true;
-          entry.target.play().catch(function(){});
-        } else {
-          entry.target.pause();
-        }
-      });
-    }, { threshold: 0.5 }); // ५०% भिडियो देखिएपछि मात्र चल्ने
-    
-    videos.forEach(function(vid) { observer.observe(vid); });
-  });
-</script>
- <!-----End-autopl-------->
+
 
 
 
