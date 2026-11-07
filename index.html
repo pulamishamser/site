@@ -4884,11 +4884,32 @@ document.addEventListener('DOMContentLoaded', function() {
             <!-- गोलो आकारको सानो भिडियो (छेउमा राखिएको) -->
             <div class="flex-shrink-0">
 <!------autoplay-------->
-<video width="100%" height="200" controls autoplay style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #027f7f; display: block; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-  <source src="https://shamser.info.np/SitePage/fb%20img/Dipawali.mp4" type="video/mp4">
-  <source src="Home/About.ogg" type="video/ogg">
-  Your browser does not support the video tag.
-</video>	
+<div style="position: relative; width: 120px; height: 120px; border-radius: 50%; overflow: hidden; border: 3px solid #027f7f; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+  
+  <!-- १. पछाडि चल्ने भिडियो (पारदर्शी, आवाज मात्र आउने) -->
+  <video id="myAudioVideo" autoplay loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; pointer-events: none;">
+    <source src="https://shamser.info.np/SitePage/fb%20img/Dipawali.mp4" type="video/mp4">
+    <source src="Home/About.ogg" type="video/ogg">
+  </video>
+
+  <!-- २. अगाडि देखिने GIF इमेज -->
+  <img src="यहाँ तपाईंको GIF को लिंक राख्नुहोस्" alt="GIF" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+  
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var vid = document.getElementById('myAudioVideo');
+    if (vid) {
+      vid.muted = true; // पहिले म्युट गरेर चलाउने
+      vid.play().then(function() {
+        vid.muted = false; // चलेपछि आवाज अन गर्ने
+      }).catch(function(error) {
+        console.log("Browser ले अटोप्ले रोक्यो:", error);
+      });
+    }
+  });
+</script>
  <!-----End-autoplay-------->
             </div>
             
