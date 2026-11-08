@@ -326,6 +326,134 @@ html, body { margin: 0 !important; padding: 0 !important; width: 100%; overflow-
 }
 </style>  
 
+
+
+
+  <style>
+    /* ===== Carousel slider को लागि मात्र CSS ===== */
+    .my-carousel {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      background: #e9ecef;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      will-change: transform;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      position: relative;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 340px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Caption */
+    .carousel-caption {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.55);
+      color: #fff;
+      padding: 8px 20px;
+      border-radius: 40px;
+      font-size: 1rem;
+      font-weight: 500;
+      backdrop-filter: blur(4px);
+      white-space: nowrap;
+      max-width: 90%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Buttons */
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.5);
+      color: #fff;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      z-index: 10;
+    }
+
+    .carousel-btn:hover {
+      background: rgba(0,0,0,0.8);
+    }
+
+    .carousel-btn.prev {
+      left: 12px;
+    }
+
+    .carousel-btn.next {
+      right: 12px;
+    }
+
+    /* Dots */
+    .carousel-dots {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
+
+    .carousel-dots .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.6);
+      border: 1px solid #aaa;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .carousel-dots .dot.active {
+      background: #0d6efd;
+      border-color: #0d6efd;
+    }
+  </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
 </head>
 <body>
 
@@ -2466,6 +2594,98 @@ document.addEventListener('DOMContentLoaded', function() {
     title="PriceNepal">
 </iframe>
 
+</head>
+<body>
+
+<!-- ===== Carousel slider HTML ===== -->
+<div class="my-carousel" id="myCarousel">
+  <div class="carousel-track" id="carouselTrack">
+
+    <!-- Slide 1 -->
+    <div class="carousel-slide">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhIlQY-Hkl7gEX2dSAUaQdRKarICWRQ8OsG0LceRSb8uP9NNbPA5I3qWyPrHoRGkDBmCnJ50wktPgc77VdeKLN8gGFvk3RtYfRmrXX6Pi4qfb8-70KUG137vSncSN68BKQixabuSuukzGtbCY7kGwsaVv2GpPBue4ju4cFMJh9StIsxl7Mz7uF4ShWMOtg/s16000/IMG20220420130802.jpg" alt="Exam">
+      <div class="carousel-caption">📝 परीक्षा (Exam)</div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="carousel-slide">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgU5nRAIx4tbmOCZ1WgufP-fX-E8Nu-O3m5MkcdHsgAOG-VE4B7amO2AocKRIPJc0j2ahWIy6TJNnfB-ulU6ATi1fjD99PvhiyjrN6mUWTG-4yHrv6-obOzy0ER517uZNwESPtmkJcQTGr5VzoF81nQ7wooVqJse_mCckDL26u-h925lzyBdeI1PemASKg/s16000/IMG20220923081259.jpg" alt="NMB Training">
+      <div class="carousel-caption">🏦 एनएमबी बैंकबाट विद्यार्थीलाई प्रशिक्षण</div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="carousel-slide">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhjGFsuuKMUy4LJ7Daz_ynxGxSIUxv-NJqZU-ltSuw5VW20r3EpOltpmY6OKw5D0LnYXAvTiAPQ6HRJrP4BPEKnCckTU0ZqkzGHClG-Z6N5SlToNv0WH0nRJfCPvqDJBqQfWUxS6DDkq4tWPPSkM18wwc9hUhZUxISmAZYd9oUdw9G2fiMf8ud2Dl6y0xE/s16000/FB_IMG_1653295883894.jpg8" alt="SIP Seminar">
+      <div class="carousel-caption">🎓 SIP SEMINAR</div>
+    </div>
+
+    <!-- Slide 4 -->
+    <div class="carousel-slide">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjMfs_2WZfDuDMbFRorDJU15QW_yK5K42UItjr6yUwTw_aOAYD3yo8DVgh147aKSSsRs0Z01BfqpoZwbtYlzJQsDfSzwBQ8NFAu9haU75OcZoww7tZpWFDQMDgTY9M8qvewwma9-bBw1qEY8SdNTPF_3P4xxkRrJqWTrTgqHt3PPgeC8dwnU1sTIXO7ZtQ/s16000/2023-02-25%20(5).jpg" alt="Halesi Temple Tour">
+      <div class="carousel-caption">🕉️ Halesi Temple Tour</div>
+    </div>
+
+    <!-- Slide 5 -->
+    <div class="carousel-slide">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjH7GNuuLGicDjciHwZNe0JjbVgarpSGvMMf3bqoqnOv2_KfPpRzzbBJdS7_pVooCunj-P4U-miAFFi5NSIsYe4nssmP-XlBEF30Ox9CwnJJN3faWpiQZvRpTePC_yiJMWtVNmoX_pMYas0B5q3Mw7hs_wV4CVsoKiXYax6zf_wlDa0x0wxBBW6R8paOYs/s16000/Screenshot%202023-06-17%20134807.png" alt="NCC">
+      <div class="carousel-caption">🎖️ NCC</div>
+    </div>
+
+    <!-- Slide 6 -->
+    <div class="carousel-slide">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhkv95W0zOtt_9y4-EjP2KuhwE5JtsQMRojXXS-DHjK8roPAfAgx5Dc85H31zmKPS00mwXthdq2UcukjBU-zVp2cD08bzNV0J2566TufSmmq_4NMlZT5_4e-df7hegnMMTkMhAdcBIcFFhO2O0PqTVzQBDFEvV1DojXVWIh_UU3AoD1DYNkokkDMD-qLEs/s16000/IMG20220326110937.jpg" alt="Jutpani Ashram">
+      <div class="carousel-caption">🌿 Observation Tour in Jutpani Ashram</div>
+    </div>
+
+    <!-- Slide 7 -->
+    <div class="carousel-slide">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiIzLxSFSo_l-5YMEPH9ljTkNaG_hzqwBVulKyX1u8uprq3of07ck4w9up0w2ySNeml4Znvl2VpFlfbtks6kI9dcqHmCRwx2mSSDA61gnnWj2IkxSoqEKNwV5VHMZKaNMTezPi1-KbLYHEl_ZAPhoTNrvsqJUjLlGZjkITAAqNiNF7d2HJH3ZAGi6ZDNW8/s16000/VID20220927090238.jpg" alt="Friday Quiz Pro">
+      <div class="carousel-caption">🧠 Friday Quiz Pro</div>
+    </div>
+
+    <!-- Slide 8 -->
+    <div class="carousel-slide">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjlCbNVz_me7MW5S8nr2W0_53FTx1MCPpZETJiQz_d53qw9ez9fdoXhz0GSZ3jH17sWw17FU_9KahJl7O9muXSzhOQ_dRaxzUJq5ARcAOSx_EcegvRO7CwFHiYQAqcdUNlFAeSBNU5dQlesrf7WGfvwt-1arvuwFwBZ3L8SkOLkoGqqUFdfFgp49GTc3Qg/s16000/IMG20220923081351.jpg" alt="Projector Class">
+      <div class="carousel-caption">📽️ Projector Class</div>
+    </div>
+
+    <!-- Slide 9 -->
+    <div class="carousel-slide">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiIzLxSFSo_l-5YMEPH9ljTkNaG_hzqwBVulKyX1u8uprq3of07ck4w9up0w2ySNeml4Znvl2VpFlfbtks6kI9dcqHmCRwx2mSSDA61gnnWj2IkxSoqEKNwV5VHMZKaNMTezPi1-KbLYHEl_ZAPhoTNrvsqJUjLlGZjkITAAqNiNF7d2HJH3ZAGi6ZDNW8/s16000/VID20220927090238.jpg" alt="Friday Quiz Pro">
+      <div class="carousel-caption">🧠 Friday Quiz Pro</div>
+    </div>
+
+    <!-- Slide 10 -->
+    <div class="carousel-slide">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgb-R1Q1dM0KdGN07vnqzzEV8KvMKRaLysxhW-HlnhQtQu7KKzzZ9pAvq5DwrTnS34kQPcTjEkhhXnkqdTfNL9kLJ1podNnCOrpawHLMEytNaYfgZeq2473a-TZPSTiOBV6Y7hr7a2y1dsFMPjGZrzKxx-hpD2x0777Xnumjgd6rkJf_dsjU9wheGEXgSY/s16000/VID20220927080148.jpg" alt="Quiz">
+      <div class="carousel-caption">❓ Quiz</div>
+    </div>
+
+    <!-- Slide 11 -->
+    <div class="carousel-slide">
+      <img src="https://shamser.info.np/dimjanschool/images/slider/6.jpg" alt="Quiz">
+      <div class="carousel-caption">📸 विद्यालय गतिविधि</div>
+    </div>
+
+  </div>
+
+  <!-- Buttons -->
+  <button class="carousel-btn prev" id="prevBtn" aria-label="Previous">&#10094;</button>
+  <button class="carousel-btn next" id="nextBtn" aria-label="Next">&#10095;</button>
+
+  <!-- Dots -->
+  <div class="carousel-dots" id="carouselDots"></div>
+</div>
+
+
+
+
+
+
+
+
+
+		
     </div>
 
   </div>
@@ -5362,6 +5582,92 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(err => console.error("View Error:", err));
     }
 </script>
+
+
+
+
+<script>
+  // ===== Carousel slider को लागि मात्र JS =====
+  (function() {
+    const track = document.getElementById('carouselTrack');
+    const slides = track.children;
+    const totalSlides = slides.length;
+    const dotsContainer = document.getElementById('carouselDots');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    let currentIndex = 0;
+    let autoSlideInterval;
+    const AUTO_DELAY = 3500; // 3.5 seconds
+
+    // Create dots
+    for (let i = 0; i < totalSlides; i++) {
+      const dot = document.createElement('span');
+      dot.classList.add('dot');
+      if (i === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => goToSlide(i));
+      dotsContainer.appendChild(dot);
+    }
+
+    const dots = dotsContainer.children;
+
+    // Update carousel position and dot states
+    function updateCarousel() {
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+      for (let i = 0; i < dots.length; i++) {
+        dots[i].classList.toggle('active', i === currentIndex);
+      }
+    }
+
+    // Go to specific slide
+    function goToSlide(index) {
+      currentIndex = (index + totalSlides) % totalSlides; // wrap around
+      updateCarousel();
+      resetAutoSlide();
+    }
+
+    // Next slide
+    function nextSlide() {
+      goToSlide(currentIndex + 1);
+    }
+
+    // Previous slide
+    function prevSlide() {
+      goToSlide(currentIndex - 1);
+    }
+
+    // Auto slide
+    function startAutoSlide() {
+      autoSlideInterval = setInterval(nextSlide, AUTO_DELAY);
+    }
+
+    function resetAutoSlide() {
+      clearInterval(autoSlideInterval);
+      startAutoSlide();
+    }
+
+    // Button events
+    nextBtn.addEventListener('click', () => {
+      nextSlide();
+      resetAutoSlide();
+    });
+
+    prevBtn.addEventListener('click', () => {
+      prevSlide();
+      resetAutoSlide();
+    });
+
+    // Pause auto-slide on hover
+    const carouselEl = document.getElementById('myCarousel');
+    carouselEl.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+    carouselEl.addEventListener('mouseleave', startAutoSlide);
+
+    // Initialize
+    updateCarousel();
+    startAutoSlide();
+  })();
+</script>
+  // ====End = Carousel slider को लागि मात्र JS =====
 
 
 
