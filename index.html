@@ -4190,7 +4190,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- Column 4: Contact Info & Legal Links -->
 <div class="ft-col">
-  <h6>Contact Us</h6>
+  <h6>Social Contact Us</h6>
   <ul style="list-style: none; padding: 0;">
     <li>
       <a href="#" data-bs-toggle="modal" data-bs-target="#contactModal" style="text-decoration: none;">
@@ -4231,6 +4231,7 @@ document.addEventListener('DOMContentLoaded', function() {
          <a href="#" data-bs-toggle="modal" data-bs-target="#aboutModal" class="text-light me-2 text-decoration-none">About</a> | 
          <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal" class="text-light me-2 ms-2 text-decoration-none">Privacy</a> |
          <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal" class="text-light ms-2 text-decoration-none">Terms</a>
+		<a href="SitePage/sub_index/contact.html" data-bs-toggle="modal" data-bs-target="#contactModal" class="text-light ms-2 text-decoration-none">Contact</a>
       </div>
     </div>
 
@@ -4916,6 +4917,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
  
 <!-- Welcome Popup Modal -->
+<!-- Welcome Popup Modal -->
 <div class="modal fade" id="welcomePopupModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="welcomePopupModalLabel" aria-hidden="true" style="z-index: 10600;">
   <div class="modal-dialog modal-dialog-centered modal-md">
     <div class="modal-content border-0 shadow-lg" style="border-radius: 15px; overflow: hidden;">
@@ -4949,27 +4951,32 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>
         </div>
 
-        <!-- Diyo GIF & Content Section -->
-        <div class="d-flex align-items-center justify-content-center gap-3 my-3">
+        <!-- GIF (Left) & Text (Right) Section -->
+        <div class="d-flex align-items-center p-3 gap-3">
+          
+          <!-- बायाँ छेउमा GIF -->
           <div class="flex-shrink-0">
             <img src="https://shamser.info.np/SitePage/fb img/Diwali.gif" alt="Dipawali Diyo" width="80" height="80" style="border-radius: 50%; object-fit: cover; border: 3px solid #027f7f; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
           </div>
+
+          <!-- दायाँ छेउमा टेक्स्ट -->
+          <div class="flex-grow-1 text-start">
+            <span class="badge bg-success mb-2 px-2 py-1" style="font-size: 11px;">✨ शिक्षक र विद्यार्थीका लागि उत्कृष्ट</span>
+            
+            <h4 style="color: #027f7f; font-weight: bold; font-size: 18px;">हाम्रा विशेषताहरू</h4>
+            
+            <!-- विवरण टेक्स्ट -->
+            <p style="font-size: 13px; color: #444; margin-bottom: 0; text-align: justify; line-height: 1.4;">
+              शिक्षक, विद्यार्थी र विद्यालयका लागि <strong>IEMIS, ताजा शैक्षिक समाचार, AI ज्ञान, सोसल मिडिया फलोअर्स</strong> र अन्य सेवाहरू।
+              <a href="https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/IEMIS%20(Updated).html" class="d-inline-block mt-1">
+                <span class="badge bg-success px-2 py-1" style="font-size: 10px;">🔗New IEMIS</span>
+              </a>
+            </p>
+          </div>
+
         </div>
 
-        <div class="p-3">
-          <span class="badge bg-success mb-2 px-2 py-1" style="font-size: 11px;">✨ शिक्षक र विद्यार्थीका लागि उत्कृष्ट</span>
-          
-          <h4 style="color: #027f7f; font-weight: bold; font-size: 18px;">हाम्रा विशेषताहरू</h4>
-          
-          <!-- विवरण टेक्स्ट -->
-          <p style="font-size: 13px; color: #444; margin-bottom: 0; text-align: justify; line-height: 1.4;">
-            शिक्षक, विद्यार्थी र विद्यालयका लागि <strong>IEMIS, ताजा शैक्षिक समाचार, AI ज्ञान, सोसल मिडिया फलोअर्स</strong> र अन्य सेवाहरू।
-            <a href="https://shamser.info.np/Internal%20Exam%20Management%20Information%20System/IEMIS%20(Updated).html" class="d-inline-block mt-1">
-              <span class="badge bg-success px-2 py-1" style="font-size: 10px;">🔗New IEMIS</span>
-            </a>
-          </p>
-        </div>
-
+        <!-- बटनहरू -->
         <div class="px-3 pb-3">
           <a href="#more-services" class="btn btn-success fw-bold w-100 mt-2" data-bs-dismiss="modal">
             <i class="fas fa-arrow-down"></i> थप सेवाहरू हेर्नुहोस्
@@ -4985,7 +4992,7 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </div>
 
-<!-- Dropdown को CSS -->
+<!-- Dropdown र Animation को CSS -->
 <style>
   @keyframes marquee {
     0% { transform: translate(0, 0); }
