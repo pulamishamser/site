@@ -3963,86 +3963,118 @@ School Activities (विद्यालयका गतिविधिहरू
   </div>
 </section>
       <hr>
-    
+<!-- ===========End=========== ------------>
+
 
 <!-- ============ TEAM & TESTIMONIALS (Dynamic & AdSense Safe) ============ -->
 <style>
-  /* यो CSS ले बक्सहरूलाई बराबर र डायनामिक बनाउँछ */
+  /* ===== Team & Testimonial Grid ===== */
   .team-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* कम्प्युटरमा ४ वटा */
-    gap: 20px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+    margin-bottom: 10px;
   }
   @media (max-width: 992px) {
-    .team-grid { grid-template-columns: repeat(2, 1fr); } /* ट्याब्लेटमा २ वटा */
+    .team-grid { grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 576px) {
-    .team-grid { grid-template-columns: 1fr; } /* मोबाइलमा १ वटा */
+    .team-grid { grid-template-columns: 1fr; }
   }
 
+  /* ===== Team Card ===== */
   .team-card {
     background: #fff;
-    border-radius: 12px;
-    padding: 20px;
+    border-radius: 14px;
+    padding: 24px 18px 20px;
     text-align: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
     border: 1px solid #eee;
-    border-left: 4px solid #e67e22;
+    border-top: 4px solid #e67e22;
     display: flex;
     flex-direction: column;
     height: 100%;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
-  
+  .team-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 26px rgba(0,0,0,0.14);
+  }
   .team-card img {
-    width: 100px;
-    height: 90px;
+    width: 110px;
+    height: 110px;
     object-fit: cover;
     border-radius: 50%;
-    border: 3px solid #027f7f;
-    margin: 0 auto 10px;
+    border: 4px solid #027f7f;
+    margin: 0 auto 14px;
+    display: block;
+    transition: border-color 0.25s ease;
   }
-
+  .team-card:hover img {
+    border-color: #e67e22;
+  }
   .team-card h5 {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #333;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: #222;
   }
-
   .team-card .role {
     color: #dc3545;
-    font-size: 13px;
-    font-weight: 600;
-    margin-bottom: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
   }
-
   .team-card p {
     font-size: 13px;
     text-align: justify;
     color: #555;
-    flex-grow: 1; /* सबै कार्ड बराबर अग्लो बनाउन */
+    line-height: 1.55;
+    flex-grow: 1;
+    margin: 0;
   }
 
-  .testimonial-card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 15px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-    border: 1px solid #eee;
-    height: 100%;
+  /* ===== Section Heading ===== */
+  .section-heading {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+    margin: 30px 0 22px;
   }
-  .testimonial-card img {
+  .section-heading i {
+    margin-right: 8px;
+  }
+  .section-heading.danger { color: #dc3545; }
+
+  /* ===== Testimonial Iframe ===== */
+  .testimonial-iframe-wrap {
+    background: #fff;
+    border-radius: 14px;
+    padding: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    border: 1px solid #eee;
+    border-top: 4px solid #027f7f;
+  }
+  .testimonial-iframe-wrap iframe {
     width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 10px;
+    height: 700px;
+    border: 0;
+    border-radius: 10px;
+    display: block;
+  }
+  @media (max-width: 576px) {
+    .team-card img { width: 95px; height: 95px; }
+    .testimonial-iframe-wrap iframe { height: 900px; }
   }
 </style>
 
-<!-- हाम्रो टिम -->
+<!-- ===== हाम्रो टिम ===== -->
 <section class="legal-section mt-4">
-  <h2 class="text-center mb-4"><i class="fas fa-user-circle"></i> हाम्रो टिम</h2>
-  
+  <h2 class="section-heading"><i class="fas fa-user-circle"></i> हाम्रो टिम</h2>
+
   <div class="team-grid">
     <!-- Team 1 -->
     <div class="team-card">
@@ -4050,7 +4082,7 @@ School Activities (विद्यालयका गतिविधिहरू
         <img src="https://shamser.info.np/HomePage/img/brp.jpg" alt="admin">
       </a>
       <h5>शमसेर पुलामी</h5>
-      <div class="role">Web creator</div>
+      <div class="role">Web Creator</div>
       <p>I spent about twenty to twenty two years in the field of teaching, keeping up with modern technology and constantly updating my skills.</p>
     </div>
 
@@ -4079,54 +4111,28 @@ School Activities (विद्यालयका गतिविधिहरू
       <a href="https://lisa.mofaga.gov.np/home" target="_blank">
         <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgF1dn0QKBSD0_YpbYY7wTwWOCz4vNdLdYPeXiCGFjvA8ajWwxmnGfaSi8f-LspH7sUguKY_jJYeEHECms2AovLiNHyyhFsU-v4SfzhPdnuZ70vEfeJyqU2FPLhyXXuzdrsfWQrmxb0ecjzZF5hOXnQzNKGQ49KQrMBZ-79bpPJ9-1kmsdcuLkeiryoIxI/w720-h148/Screenshot_2022-05-07-07-01-53-50_40deb401b9ffe8e1df2f1cc5ba480b12.jpg" alt="Dim Janta">
       </a>
-      <h5>Dim Janta Secondary school</h5>
+      <h5>Dim Janta Secondary School</h5>
       <div class="role">Supporter School</div>
       <p>Dim Janta Secondary school is supporter team member. This school lies in the Parwanipur Municipality, Sarlahi district.</p>
     </div>
   </div>
 </section>
 
-<!-- Student Testimonials -->
-<section class="legal-section mt-4">
-  <h2 class="text-center text-danger mb-4"><i class="fas fa-user-graduate"></i> Student Testimonials</h2>
-  
-  <div class="team-grid">
-    <!-- Testimonial 1 -->
-    <div class="testimonial-card">
-      <p style="font-size:12px; font-weight:bold; margin-bottom:5px;">सनीमाया थोकर<br><small>कक्षा ११</small></p>
-      <img src="dimjanschool/images/testimonial/Sani.jpg" alt="Sani">
-      <p style="font-size:12px; text-align:justify;">शमसेर सरले बनाउनुभएको वेबसाइट निकै ज्ञानबर्धक छ। उहाँको प्रविधिमैत्री पढाउने तरीकाले म प्रभावित भएको छु।</p>
-    </div>
+<!-- ===== Student Testimonials (Iframe Only) ===== -->
+<section class="legal-section mt-5">
+  <h2 class="section-heading danger"><i class="fas fa-user-graduate"></i> Student Testimonials</h2>
 
-    <!-- Testimonial 2 -->
-    <div class="testimonial-card">
-      <p style="font-size:12px; font-weight:bold; margin-bottom:5px;">Gagan Budhathoki<br><small>Class 9</small></p>
-      <img src="dimjanschool/images/testimonial/Gagan.jpeg" alt="Gagan">
-      <p style="font-size:12px; text-align:justify;">I am very impressed with his technology-friendly way of teaching. I gained good knowledge from his website.</p>
-    </div>
-
-    <!-- Testimonial 3 -->
-    <div class="testimonial-card">
-      <p style="font-size:12px; font-weight:bold; margin-bottom:5px;">Dipa Bhandari<br><small>Class 9</small></p>
-      <img src="dimjanschool/images/testimonial/Dipa.jpeg" alt="Dipa">
-      <p style="font-size:12px; text-align:justify;">School is my Second House, Really i feel Teachers of this school like Father, Mother, friends. I gain good knowledge with love from teachers.</p>
-    </div>
-
-    <!-- Testimonial 4 -->
-    <div class="testimonial-card">
-      <p style="font-size:12px; font-weight:bold; margin-bottom:5px;">Sanjila Ghimire<br><small>Class 8</small></p>
-      <img src="dimjanschool/images/testimonial/Sanjila.jpeg" alt="Sanjila">
-      <p style="font-size:12px; text-align:justify;">I have always felt that I was so lucky to be a student at Shree Dim janta Sec.School. I admire the support I received from everyone.</p>
-    </div>
-  </div>
-
-  <div class="text-center mt-3">
-    <a href="https://shamser.info.np/student%20testimonial.html" class="btn btn-sm btn-outline-primary">बिस्तृतमा <i class="fas fa-angle-double-right"></i></a>
+  <div class="testimonial-iframe-wrap">
+    <iframe
+      src="https://shamser.info.np/student%20testimonial.html"
+      title="Student Testimonials"
+      loading="lazy">
+    </iframe>
   </div>
 </section>
 
 
-  </div>
+<!-- ===== End Student Testimonials (Iframe Only) ===== -->
 
 
 
@@ -4138,14 +4144,7 @@ School Activities (विद्यालयका गतिविधिहरू
 
 
 
-
-
-
-
-
-
-
-
+	
 
 
 
