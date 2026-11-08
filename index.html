@@ -603,20 +603,42 @@ document.addEventListener('DOMContentLoaded', function() {
         <!-- Home -->
         <li class="menu-active"><a href="https://shamser.info.np/"><i class="fa fa-home fa-lg"></i></a></li>
 
-        <!-- About -->
-        <li class="menu-has-children">
-          <a href="javascript:;">About</a>
-          <ul>
-            <li><a href="https://shamser.info.np/Home/About.html">Website</a></li>
-            <li class="menu-has-children">
-              <a href="javascript:;">Our Services</a>
-              <ul>
-                <li><a href="https://shamser.info.np/Home/Get free service.html">Free Service</a></li>
-                <li><a href="https://shamser.info.np/Entry_Form/our_service.html">Payable Service</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
+
+
+
+		  
+<!-- Navigation -->
+
+  <li class="menu-has-children">
+    <a href="javascript:;">About</a>
+    <ul>
+      <li><a href="#" data-bs-toggle="modal" data-bs-target="#aboutModal">Website</a></li>
+      <li class="menu-has-children">
+        <a href="javascript:;">Our Services</a>
+        <ul>
+          <li><a href="...">Free Service</a></li>
+          <li><a href="...">Payable Service</a></li>
+  
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<!-- Modal — UL को बाहिर, body को अन्त्यमा -->
+<div class="modal fade" id="aboutModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="fas fa-info-circle"></i> हाम्रो बारेमा</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-0">
+        <iframe src="SitePage/sub_index/about.html" style="width:100%; height:70vh; border:none;"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
 
         <!-- Text Book -->
         <li class="menu-has-children">
