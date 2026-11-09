@@ -256,14 +256,72 @@ html, body { margin: 0 !important; padding: 0 !important; width: 100%; overflow-
 .flash-marquee a { text-decoration: none; color: #e74c3c; font-weight: 600; font-size: 14px; margin: 0 20px; }
 @keyframes scrollFlash { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
-/* School / Gallery / Upcoming / Academic */
-.school-section { background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 20px; }
-.school-section h2 { font-size: 22px; color: #027f7f; border-bottom: 2px solid #e67e22; padding-bottom: 10px; margin-bottom: 20px; font-weight: 700; }
-.gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
-.gallery-card { border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: transform 0.3s; position: relative; cursor: pointer; }
-.gallery-card:hover { transform: translateY(-5px); }
-.gallery-card img { width: 100%; height: 150px; object-fit: cover; display: block; }
-.gallery-card .card-caption { padding: 10px; background: #f8f9fa; font-size: 14px; font-weight: 600; text-align: center; color: #333; }
+
+<style>
+  /* School / Gallery */
+  .school-img {
+    width: 100%;
+    height: 120px; 
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+  }
+
+  .school-title {
+    background-color: #027f7f; /* स्क्रिनसटको निलो/हरियो रङ */
+    color: white;
+    padding: 8px 4px;
+    margin-top: -4px; /* तस्बिर र नाम जोडिन */
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    border-radius: 0 0 4px 4px;
+  }
+
+  /* डेस्कटपमा ६ वटा कोलम देखाउन (col-lg-2) */
+  @media (min-width: 992px) {
+    .col-custom {
+      flex: 0 0 auto;
+      width: 16.66666667%; /* १००% / ६ = १६.६६% */
+    }
+  }
+
+  /* थपिएका विद्यालयहरू सुरुमा लुकाउन */
+  .extra-school-item {
+    display: none;
+  }
+
+  /* चेकबक्स चेक भएपछि थपिएका विद्यालय देखाउन */
+  #toggle-schools:checked ~ .row .extra-school-item {
+    display: block;
+  }
+
+  /* बटनको डिजाइन */
+  .view-all-btn {
+    display: inline-block;
+    padding: 8px 24px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    cursor: pointer;
+    color: #027f7f;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  /* चेकबक्स लुकाउने */
+  #toggle-schools {
+    display: none;
+  }
+
+  .text-hide { display: none; }
+  #toggle-schools:checked ~ .text-center .text-show { display: none; }
+  #toggle-schools:checked ~ .text-center .text-hide { display: inline-block; }
+</style>
+<!-- End  School Page, Team, Testimonials -->
+
+
+	
 .upcoming-list { list-style: none; padding: 0; margin: 0; }
 .upcoming-item { display: flex; gap: 15px; padding: 15px; border-bottom: 1px dashed #ddd; transition: background 0.3s; border-radius: 8px; }
 .upcoming-item:hover { background: #f0f8ff; }
@@ -277,14 +335,14 @@ html, body { margin: 0 !important; padding: 0 !important; width: 100%; overflow-
 .academic-box p { font-size: 13px; color: #555; margin: 0; line-height: 1.5; }
 
 /* View All */
-#toggle-schools { display: none; }
-.extra-school-item { display: none !important; }
-#toggle-schools:checked ~ .row .extra-school-item { display: block !important; }
+#toggle-s { display: none; }
+.extra--item { display: none !important; }
+#toggle-s:checked ~ .row .extra--item { display: block !important; }
 .view-all-btn { display: inline-block; color: #027f7f; font-size: 14px; text-decoration: none; font-weight: 600; padding: 8px 20px; border: 1px solid #027f7f; border-radius: 20px; cursor: pointer; transition: all 0.3s ease; background: #fff; margin-top: 10px; }
 .view-all-btn:hover { background: #027f7f; color: #fff; }
 .text-hide { display: none; }
-#toggle-schools:checked ~ .text-center .view-all-btn .text-show { display: none; }
-#toggle-schools:checked ~ .text-center .view-all-btn .text-hide { display: inline-block; }
+#toggle-s:checked ~ .text-center .view-all-btn .text-show { display: none; }
+#toggle-s:checked ~ .text-center .view-all-btn .text-hide { display: inline-block; }
 
 /* topbar social */
 .social-links { display: flex; gap: 12px; justify-content: flex-end; }
@@ -297,7 +355,7 @@ html, body { margin: 0 !important; padding: 0 !important; width: 100%; overflow-
 .map       { background-color: #34a853; }
 .social-icon i { font-size: 14px; }
 /* विद्यालयको फोटो एउटै साइज बनाउन */
-.school-img {
+.-img {
   width: 100%;
   height: 180px; /* उचाइ १८०px बनाइएको, चाहे अनुसार १५० वा २०० बनाउन सकिन्छ */
   object-fit: cover; /* फोटो नबिग्रिकन काटेर मिलाउन */
@@ -305,8 +363,8 @@ html, body { margin: 0 !important; padding: 0 !important; width: 100%; overflow-
   border-radius: 8px; /* कुनाहरू गोलो बनाउन */
 }
 
-/* फोटोको तलको नाम (School Title) मिलाउन */
-.school-title {
+/* फोटोको तलको नाम ( Title) मिलाउन */
+.-title {
 /* Facebook Share Button Style */
 .share-btn {
   display: inline-flex;
@@ -1162,7 +1220,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <li class="menu-has-children"><a href="javascript:;">नियमावली</a>
               <ul>
                 <li><a href="https://aathraitribenimun.gov.np/sites/default/files/शिक्षा%20नियमावली%2C%20२०७९.pdf">शिक्षा नियम २०५९</a></li>
-                <li><a href="https://shamser.info.np/dimjanschool/download/Lalbandidownload/sikchya-niyamwali.pdf">लालबन्दी नपाको शिक्षा नियमावली</a></li>
+                <li><a href="https://shamser.info.np/dimjan/download/Lalbandidownload/sikchya-niyamwali.pdf">लालबन्दी नपाको शिक्षा नियमावली</a></li>
                 <li><a href="https://drive.google.com/file/d/1-XC00FkOUiDAXslpK4yA8qnuea3dnLK7/view?usp=sharing">प्रअ व्यवस्थापन कार्यबिधि २०७९</a></li>
               </ul>
             </li>
@@ -1204,7 +1262,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <li class="menu-has-children"><a href="javascript:;">Research Report</a>
               <ul>
                 <li><a href="https://docs.google.com/document/d/1FRgmP3h4pxOeukbTaRElUdlZ6AtG8mMYxBaUPT-HeWw/edit?usp=sharing">Action Research</a></li>
-                <li><a href="#">School Report</a></li>
+                <li><a href="#"> Report</a></li>
                 <li><a href="https://shamser.info.np/articles.html#">Article</a></li>
                 <li><a href="#">Case study</a></li>
               </ul>
@@ -1358,19 +1416,19 @@ document.addEventListener('DOMContentLoaded', function() {
     <marquee direction="left" scrollamount="5" style="background: rgba(255, 255, 255, 0.1); padding: 10px; border-radius: 10px; margin-bottom: 15px;">
 
         <img src="https://shamser.info.np/HomePage/img/Dashain5.png" width="auto" height="180" style="border-radius: 8px; margin-right: 10px;">
-        <img src="https://shamser.info.np/SitePage/school img/Tinghare.JPG" width="auto" height="180" alt="notice" style="border-radius: 8px; margin-right: 10px;">
-        <img src="https://shamser.info.np/SitePage/school img/dim.JPG" width="auto" height="180" style="border-radius: 8px; margin-right: 10px;">
-        <img src="https://shamser.info.np/SitePage/school img/ghurkauki.JPG" width="auto" height="180" style="border-radius: 8px; margin-right: 10px;">
-        <img src="https://shamser.info.np/SitePage/school img/ishorpur.JPG" width="auto" height="180" style="border-radius: 8px; margin-right: 10px;">
-    <img src="https://shamser.info.np/SitePage/school img/narayan.JPG" width="auto" height="180" style="border-radius: 8px; margin-right: 10px;">
-       <img src="SitePage/school img/setivi.JPG" width="auto" height="180" style="border-radius: 8px; margin-right: 10px;">
+        <img src="https://shamser.info.np/SitePage/ img/Tinghare.JPG" width="auto" height="180" alt="notice" style="border-radius: 8px; margin-right: 10px;">
+        <img src="https://shamser.info.np/SitePage/ img/dim.JPG" width="auto" height="180" style="border-radius: 8px; margin-right: 10px;">
+        <img src="https://shamser.info.np/SitePage/ img/ghurkauki.JPG" width="auto" height="180" style="border-radius: 8px; margin-right: 10px;">
+        <img src="https://shamser.info.np/SitePage/ img/ishorpur.JPG" width="auto" height="180" style="border-radius: 8px; margin-right: 10px;">
+    <img src="https://shamser.info.np/SitePage/ img/narayan.JPG" width="auto" height="180" style="border-radius: 8px; margin-right: 10px;">
+       <img src="SitePage/ img/setivi.JPG" width="auto" height="180" style="border-radius: 8px; margin-right: 10px;">
 
-        <img src="https://shamser.info.np/SitePage/school img/जनज्योति मावि.jpg" width="auto" height="180" style="border-radius: 8px; margin-right: 10px;">
+        <img src="https://shamser.info.np/SitePage/ img/जनज्योति मावि.jpg" width="auto" height="180" style="border-radius: 8px; margin-right: 10px;">
 
 
-        <img src="https://shamser.info.np/SitePage/school img/lauro.JPG" width="auto" height="180" style="border-radius: 8px; margin-right: 10px;">
+        <img src="https://shamser.info.np/SitePage/ img/lauro.JPG" width="auto" height="180" style="border-radius: 8px; margin-right: 10px;">
 
-        <img src="https://shamser.info.np/SitePage/school img/shisu.JPG" width="auto" height="180" style="border-radius: 8px; margin-right: 10px;">
+        <img src="https://shamser.info.np/SitePage/ img/shisu.JPG" width="auto" height="180" style="border-radius: 8px; margin-right: 10px;">
 
   <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj0Doh44-KgCoWgeylnyu86LEoS8kLFRYrnCNDGU5Xm_hSNNzmTzV3pFktIY802cIwc0IGPcEk0rsa8VUG3IEkeUtlRd5Y6qmje_aGhYG5NKGGnK66JlcI7544QBv6LIFtL_DLnlM4TXM76MuZHLci30wpVRs6SL-tC3JRqC5vI5T_wmahRnIMF1Kfr/w483-h291/ezgif.com-video-to-gif.gif" width="auto" height="180" style="border-radius: 8px; margin-right: 10px;">
         <img src="https://shamser.info.np/HomePage/gif/NAVASHISHU MONTESSORI.gif" width="auto" height="180" style="border-radius: 8px;">
@@ -1626,7 +1684,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <p>सिकाउने शिक्षक, हुर्काउने आमाबुबा र संघर्ष बुझ्ने सन्तानका लागि सामाजिक सञ्जालमा प्रयोग गर्न सकिने मन छुने सामग्रीहरू:</p>
 
         <div class="concept-card">
-            <h3>१. शिक्षकले विद्यार्थीलाई सम्झाउँदा (School/Teacher Version)</h3>
+            <h3>१. शिक्षकले विद्यार्थीलाई सम्झाउँदा (/Teacher Version)</h3>
             <p><strong>चढेको बुई नबिर्स<br>
             ओढेको रुई नबिर्स<br>
             जति नै माथि पुगेपनि, आकाश नै चुमे पनि<br>
@@ -2146,7 +2204,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <i class="fas fa-keyboard text-secondary"></i><span>Unicode → Preeti</span>
     </a>
 
-    <!-- School & Teacher Tools -->
+    <!--  & Teacher Tools -->
     <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#quickModal" data-url="https://shamser.info.np/Teacher%20Diary%20File/Smart%20Teacher%20Diary%20Dashboard.html" data-title="Teacher Diary" class="service-card">
       <i class="fas fa-book-open text-primary"></i><span>Teacher Diary</span>
     </a>
@@ -2421,7 +2479,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- RIGHT SIDEBAR -->
 
 <div class="col-md-3 col-sm-12 p-0 m-0">
-School Activities (विद्यालयका गतिविधिहरू)
+ Activities (विद्यालयका गतिविधिहरू)
 <!-- ===== Carousel slider HTML ===== -->
 <div class="my-carousel" id="myCarousel">
   <div class="carousel-track" id="carouselTrack">
@@ -2488,7 +2546,7 @@ School Activities (विद्यालयका गतिविधिहरू
 
     <!-- Slide 11 -->
     <div class="carousel-slide">
-      <img src="https://shamser.info.np/dimjanschool/images/slider/6.jpg" alt="Quiz">
+      <img src="https://shamser.info.np/dimjan/images/slider/6.jpg" alt="Quiz">
       <div class="carousel-caption">📸 विद्यालय गतिविधि</div>
     </div>
 
@@ -2677,7 +2735,7 @@ School Activities (विद्यालयका गतिविधिहरू
 
 
             <!-- Kara Book Summary (Sidebar) -->
-      <div class="school-section mt-4" style="padding: 15px;">
+      <div class="-section mt-4" style="padding: 15px;">
         <h5 style="color: #027f7f; font-weight: bold; border-bottom: 2px solid #e67e22; padding-bottom: 5px; margin-bottom: 10px;">
           📚 पुस्तक समीक्षा: कारा (Kara)
         </h5>
@@ -2743,7 +2801,7 @@ School Activities (विद्यालयका गतिविधिहरू
 
 
   <!-- 1. Upcoming Programme -->
-    <div class="school-section">
+    <div class="-section">
       <h2><i class="fas fa-calendar-alt"></i> Upcoming Programme (आउँदै गरेका कार्यक्रम)</h2>
       <ul class="upcoming-list">
         
@@ -2790,7 +2848,7 @@ School Activities (विद्यालयका गतिविधिहरू
     
   
     <!-- 2. Academic Program -->
-    <div class="school-section">
+    <div class="-section">
       <h2><i class="fas fa-graduation-cap"></i> Academic Program (शैक्षिक कार्यक्रम)</h2>
       
       <div class="academic-box">
@@ -3663,8 +3721,8 @@ School Activities (विद्यालयका गतिविधिहरू
   <!-- ================= LEFT SIDE (col-lg-8) ================= -->
   <div class="col-lg-12">
     
-    <!-- 1. School Activities (Gallery Grid) -->
-    <div class="school-section">
+    <!-- 1.  Activities (Gallery Grid) -->
+    <div class="-section">
       <h2><i class="fas fa-images"></i> Galleries</h2>
       <div class="gallery-grid">
         
@@ -3849,17 +3907,10 @@ School Activities (विद्यालयका गतिविधिहरू
 </style>
 </div>
 
-
-
-
-
-
-
-
-
-      <!-- School Page, Team, Testimonials -->
-      <hr>
-    <section class="legal-section mt-4">
+<!--------------------------------- Page, Team, Testimonials -->
+<!-- School Page, Team, Testimonials -->
+<hr>
+<section class="legal-section mt-4">
   <!-- चेकबक्स (यो लुकेको हुन्छ, यसले टोगलको काम गर्छ) -->
   <input type="checkbox" id="toggle-schools">
 
@@ -3867,98 +3918,98 @@ School Activities (विद्यालयका गतिविधिहरू
     विद्यालयहरू (School Page)
   </h2>
   
-  <div class="row text-center">
+  <div class="row text-center justify-content-center">
     
-    <!-- १ देखि ८ सम्म (सधैं देखिने) -->
-    <div class="col-lg-3 col-md-4 col-6 mb-4">
+    <!-- १ देखि ८ सम्म (सधैं देखिने) - col-custom ले ६ वटा कोलम मिलाउँछ -->
+    <div class="col-lg-2 col-md-4 col-6 mb-4 col-custom">
       <a href="https://www.facebook.com/dimjanata.mavi" target="_blank" rel="noopener">
-        <img src="/school img/school.jpg" class="img-fluid rounded school-img" alt="डिमजनता परवानीपुर" loading="lazy">
+        <img src="/school img/school.jpg" class="img-fluid school-img" alt="डिमजनता परवानीपुर" loading="lazy">
         <div class="school-title">डिमजनता परवानीपुर</div>
       </a>
     </div>
 
-    <div class="col-lg-3 col-md-4 col-6 mb-4">
+    <div class="col-lg-2 col-md-4 col-6 mb-4 col-custom">
       <a href="https://www.facebook.com/janajyoti.mavi.7" target="_blank" rel="noopener">
-        <img src="/school img/जनज्योति मावि.jpg" class="img-fluid rounded school-img" alt="जनज्योति मावि" loading="lazy">
+        <img src="/school img/जनज्योति मावि.jpg" class="img-fluid school-img" alt="जनज्योति मावि" loading="lazy">
         <div class="school-title">जनज्योति मावि</div>
       </a>
     </div>
 
-    <div class="col-lg-3 col-md-4 col-6 mb-4">
+    <div class="col-lg-2 col-md-4 col-6 mb-4 col-custom">
       <a href="https://www.facebook.com/profile.php?id=100092535324619" target="_blank" rel="noopener">
-        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRcvV9xbLXRsxSuSegqk0AqJS9j97q4bBbL6LCQ8g1eNDGnIjRYgfcQ09akpJYQD1SVk7UT6N2iDV8vZNS-1r8f-5M3PtHh8NxjfnVuDHwtSB467Q8ldID3u5X-XFtc7R1DAjAYxGUCC_TyqiTHOcVMSYYeNILyYBtoHtzYavNnR9paf5Z8vZAXpvSTms/w620-h392/ghari.jpg" class="img-fluid rounded school-img" alt="ने.रा.ज.इश्वरपुर" loading="lazy">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRcvV9xbLXRsxSuSegqk0AqJS9j97q4bBbL6LCQ8g1eNDGnIjRYgfcQ09akpJYQD1SVk7UT6N2iDV8vZNS-1r8f-5M3PtHh8NxjfnVuDHwtSB467Q8ldID3u5X-XFtc7R1DAjAYxGUCC_TyqiTHOcVMSYYeNILyYBtoHtzYavNnR9paf5Z8vZAXpvSTms/w620-h392/ghari.jpg" class="img-fluid school-img" alt="ने.रा.ज.इश्वरपुर" loading="lazy">
         <div class="school-title">ने.रा.ज.इश्वरपुर</div>
       </a>
     </div>
 
-    <div class="col-lg-3 col-md-4 col-6 mb-4">
+    <div class="col-lg-2 col-md-4 col-6 mb-4 col-custom">
       <a href="https://www.facebook.com/janajyoti.mavi.7" target="_blank" rel="noopener">
-        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgy89aKBnZw5q2TCO6luS49ZYxWSM2Jnfxs1xSNJ2KvKLWrGYda6wrR9dP9pZIFDAOxX2XzESQE2yR1wVQ1DIZTqskOd9QUAcp4i0eba0xSQjNRxgsIKB4HM7-pCr6cvXLNoEdqI2dmXvfxXMCR6pYXSGIWY_dK9x2jUZJ3Widef0i9wP4_umNVUMBHL84/w574-h521/119166783_103387048184074_3432238316538758540_n.jpg" class="img-fluid rounded school-img" alt="जनज्योिति मावि लालबन्दी" loading="lazy">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgy89aKBnZw5q2TCO6luS49ZYxWSM2Jnfxs1xSNJ2KvKLWrGYda6wrR9dP9pZIFDAOxX2XzESQE2yR1wVQ1DIZTqskOd9QUAcp4i0eba0xSQjNRxgsIKB4HM7-pCr6cvXLNoEdqI2dmXvfxXMCR6pYXSGIWY_dK9x2jUZJ3Widef0i9wP4_umNVUMBHL84/w574-h521/119166783_103387048184074_3432238316538758540_n.jpg" class="img-fluid school-img" alt="जनज्योिति मावि लालबन्दी" loading="lazy">
         <div class="school-title">जनज्योिति मावि लालबन्दी</div>
       </a>
     </div>
 
-    <div class="col-lg-3 col-md-4 col-6 mb-4">
+    <div class="col-lg-2 col-md-4 col-6 mb-4 col-custom">
       <a href="https://www.facebook.com/profile.php?id=100015750109310" target="_blank" rel="noopener">
-        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEganlSKg9tpI1ac4hWYmfFRH_nzZpMEJtGwIVxPgkApdNWkz0mamQf79uTu7HnrUgF7LcQ021AGwSNllZ8WrMSC3sT9-wu3HvfuVPjzl5hvrSuDlr-wkjNguhf-UdKTDH7hIBPZGoUPfEokj4l5ZVnbLtmBtCkOGnXui35GAUAJSarsORUIE2chVEWgKsg/w658-h362/naran.jpg" class="img-fluid rounded school-img" alt="नारायणजनता जियाजोर" loading="lazy">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEganlSKg9tpI1ac4hWYmfFRH_nzZpMEJtGwIVxPgkApdNWkz0mamQf79uTu7HnrUgF7LcQ021AGwSNllZ8WrMSC3sT9-wu3HvfuVPjzl5hvrSuDlr-wkjNguhf-UdKTDH7hIBPZGoUPfEokj4l5ZVnbLtmBtCkOGnXui35GAUAJSarsORUIE2chVEWgKsg/w658-h362/naran.jpg" class="img-fluid school-img" alt="नारायणजनता जियाजोर" loading="lazy">
         <div class="school-title">नारायणजनता जियाजोर</div>
       </a>
     </div>
 
-    <div class="col-lg-3 col-md-4 col-6 mb-4">
+    <div class="col-lg-2 col-md-4 col-6 mb-4 col-custom">
       <a href="https://www.facebook.com/profile.php?id=100068420967280" target="_blank" rel="noopener">
-        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgvVJE1OwDOPHN_GxPxezijz3s1u4hvK3SU2YJkOoFyy5YihwMliqoxtrHT5xLffxKhKTMmk0dtY5xMinvxOqbsLB0zYw0dVQ2m7S8fcyNfcLWp0moLIUP4VwuPjFSQW5n8yLGPuH1Y7kKsTVnJapbCT1Bd5VIyLcPw_1EJGBv4a4LxSqjK2ZSvkMSUc7w/w650-h352/273327502_245500381073992_5611157776999453042_n.jpg" class="img-fluid rounded school-img" alt="मनपुरन मावि जब्दी" loading="lazy">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgvVJE1OwDOPHN_GxPxezijz3s1u4hvK3SU2YJkOoFyy5YihwMliqoxtrHT5xLffxKhKTMmk0dtY5xMinvxOqbsLB0zYw0dVQ2m7S8fcyNfcLWp0moLIUP4VwuPjFSQW5n8yLGPuH1Y7kKsTVnJapbCT1Bd5VIyLcPw_1EJGBv4a4LxSqjK2ZSvkMSUc7w/w650-h352/273327502_245500381073992_5611157776999453042_n.jpg" class="img-fluid school-img" alt="मनपुरन मावि जब्दी" loading="lazy">
         <div class="school-title">मनपुरन मावि जब्दी</div>
       </a>
     </div>
 
-    <div class="col-lg-3 col-md-4 col-6 mb-4">
+    <div class="col-lg-2 col-md-4 col-6 mb-4 col-custom">
       <a href="https://www.facebook.com/profile.php?id=100091777394720" target="_blank" rel="noopener">
-        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjGXERsCLziNRBnOkHOkSR9arFfkH2khwGe70uhNgks2CiXZ8PyY5jNgwY6yBmQtexTjTTcKafy5z6mu1YfrDPvkeYgQvKw4cYi5YatCGw7qPy4Fecnl-k0MrkKLQoqqvTvTRhMT5WqB7sVDjpXf1BKKJVLWBvdW2UL1Wcj3xildqxbPpc0PvCzn77ZLW0/w675-h386/janki.jpg" class="img-fluid rounded school-img" alt="जानकी मावि" loading="lazy">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjGXERsCLziNRBnOkHOkSR9arFfkH2khwGe70uhNgks2CiXZ8PyY5jNgwY6yBmQtexTjTTcKafy5z6mu1YfrDPvkeYgQvKw4cYi5YatCGw7qPy4Fecnl-k0MrkKLQoqqvTvTRhMT5WqB7sVDjpXf1BKKJVLWBvdW2UL1Wcj3xildqxbPpc0PvCzn77ZLW0/w675-h386/janki.jpg" class="img-fluid school-img" alt="जानकी मावि" loading="lazy">
         <div class="school-title">जानकी मावि, लालबन्दी</div>
       </a>
     </div>
 
-    <div class="col-lg-3 col-md-4 col-6 mb-4">
+    <div class="col-lg-2 col-md-4 col-6 mb-4 col-custom">
       <a href="https://www.facebook.com/profile.php?id=100091618344104" target="_blank" rel="noopener">
-        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgorWg9G6YQ2VUXWobCBQgX2diQd17PKGLUKesyeBdp44FMrIzGRTTtK1crT6CkpB-LvB8pqnGXtsuIb5kknM-SRXo1H_gN7jzuWK1BAUE0Ndhgok-q-Vi6SUUhOA4EPTihjAxNGytUvJDMDkd-veq461Hq-mMeJhoEkKTGcJzAysJwx8yr-tseC3OGC6E/w666-h337/prem.jpg" class="img-fluid rounded school-img" alt="प्रेमज्योती आ बि" loading="lazy">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgorWg9G6YQ2VUXWobCBQgX2diQd17PKGLUKesyeBdp44FMrIzGRTTtK1crT6CkpB-LvB8pqnGXtsuIb5kknM-SRXo1H_gN7jzuWK1BAUE0Ndhgok-q-Vi6SUUhOA4EPTihjAxNGytUvJDMDkd-veq461Hq-mMeJhoEkKTGcJzAysJwx8yr-tseC3OGC6E/w666-h337/prem.jpg" class="img-fluid school-img" alt="प्रेमज्योती आ बि" loading="lazy">
         <div class="school-title">प्रेमज्योती आ बि, लालबन्दी ६</div>
       </a>
     </div>
 
     <!-- ⚠️ यहाँबाट तलका सबैमा "extra-school-item" क्लास थपिएको छ (यी सुरुमा लुकेका हुन्छन्) -->
     
-    <div class="col-lg-3 col-md-4 col-6 mb-4 extra-school-item">
+    <div class="col-lg-2 col-md-4 col-6 mb-4 extra-school-item col-custom">
       <a href="https://www.facebook.com/profile.php?id=100064032665316" target="_blank" rel="noopener">
-        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgp06zK5gfOit4Asrc_Hj5hWu-ZPMUZnhQm4Y-iUg0YqhjgC9spxHinZgzGa8Ha_6Bdu28pxdJvYptiQc5zkpgS6G8Wydsdd6ysdMFkcb51dwYLt3E00QC4ttfOzvuR1V4EhXzIZvFrQfNsZB3j9HXN3kf32ZtCOS_PIra1os8A4B_8G35gVLlORGg-2nI/w626-h498/amr.jpg" class="img-fluid rounded school-img" alt="अमरज्यान मा वि" loading="lazy">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgp06zK5gfOit4Asrc_Hj5hWu-ZPMUZnhQm4Y-iUg0YqhjgC9spxHinZgzGa8Ha_6Bdu28pxdJvYptiQc5zkpgS6G8Wydsdd6ysdMFkcb51dwYLt3E00QC4ttfOzvuR1V4EhXzIZvFrQfNsZB3j9HXN3kf32ZtCOS_PIra1os8A4B_8G35gVLlORGg-2nI/w626-h498/amr.jpg" class="img-fluid school-img" alt="अमरज्यान मा वि" loading="lazy">
         <div class="school-title">अमरज्यान मा वि</div>
       </a>
     </div>
 
-    <div class="col-lg-3 col-md-4 col-6 mb-4 extra-school-item">
+    <div class="col-lg-2 col-md-4 col-6 mb-4 extra-school-item col-custom">
       <a href="https://www.facebook.com/profile.php?id=10008981370582" target="_blank" rel="noopener">
-        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRRKIdv7UrxXEPEVR-18jbEEn2dqUoqk9-oKjfKLi4j-q7_S1OcNF8CcZWVu0r8k31RFHnxld8v8yhfPwV7CfvFnHzGxde_w0oUU1gR1t4alKMJ5kT8AvU8PngDNu3F4iMgNoOYCgg9QH7hWvJwyVeCyejtZNRELAsz1CJMe-fdi6yhfRrhHmNB1psNHA/w724-h428/326895375_1174463899853251_4004827747672897691_n.jpg" class="img-fluid rounded school-img" alt="फौदसिंह मावि" loading="lazy">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRRKIdv7UrxXEPEVR-18jbEEn2dqUoqk9-oKjfKLi4j-q7_S1OcNF8CcZWVu0r8k31RFHnxld8v8yhfPwV7CfvFnHzGxde_w0oUU1gR1t4alKMJ5kT8AvU8PngDNu3F4iMgNoOYCgg9QH7hWvJwyVeCyejtZNRELAsz1CJMe-fdi6yhfRrhHmNB1psNHA/w724-h428/326895375_1174463899853251_4004827747672897691_n.jpg" class="img-fluid school-img" alt="फौदसिंह मावि" loading="lazy">
         <div class="school-title">फौदसिंह मावि</div>
       </a>
     </div>
 
-    <div class="col-lg-3 col-md-4 col-6 mb-4 extra-school-item">
+    <div class="col-lg-2 col-md-4 col-6 mb-4 extra-school-item col-custom">
       <a href="https://www.facebook.com/groups/230876141531607" target="_blank" rel="noopener">
-        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjWSMGGELs34jGLTze99W4LO15-6W3VMqNcbvoF3fyDJ92Ub5kSDuSiFVE4tcsGhDkAnNCdEqBqyxpZc_RKNkRU-37rirQ-qd0Xawsy9j13ghb0nxL2tC1diLj7l1TajrhMroHwX4U3A2XukGrSmsqo_ZSgng1_uyNVDdlJdxEUW8WSbVMdlyDDXNkVQhY/s320/94673216_891415684669066_1102383212845334528_n.jpg" class="img-fluid rounded school-img" alt="आबि खतिवडाचौक" loading="lazy">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjWSMGGELs34jGLTze99W4LO15-6W3VMqNcbvoF3fyDJ92Ub5kSDuSiFVE4tcsGhDkAnNCdEqBqyxpZc_RKNkRU-37rirQ-qd0Xawsy9j13ghb0nxL2tC1diLj7l1TajrhMroHwX4U3A2XukGrSmsqo_ZSgng1_uyNVDdlJdxEUW8WSbVMdlyDDXNkVQhY/s320/94673216_891415684669066_1102383212845334528_n.jpg" class="img-fluid school-img" alt="आबि खतिवडाचौक" loading="lazy">
         <div class="school-title">आबि खतिवडाचौक</div>
       </a>
     </div>
 
-    <div class="col-lg-3 col-md-4 col-6 mb-4 extra-school-item">
+    <div class="col-lg-2 col-md-4 col-6 mb-4 extra-school-item col-custom">
       <a href="https://www.facebook.com/profile.php?id=100016009982702" target="_blank" rel="noopener">
-        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjEarCdiZgnrABMWbERXVzArmVydLhuMNOVPkVV9GT-uhr9GaZ7l-U4zvvfijZ4t4C_U9_oAGsHmITdhZYb3a2SeBRroKJaanU3Odg69wCoz6XQjBXk_b4idf2V9IYvxrBiSoFSeU4SnGKFUwTm6SZIqBU9xyjFmX1M_0ae_UqxMPyMMR3OybfLHvhGRDM/s320/308477357_457617203072187_1829151269226691825_n.jpg" class="img-fluid rounded school-img" alt="शिशुकल्याण मा.वि. हरिभवन" loading="lazy">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjEarCdiZgnrABMWbERXVzArmVydLhuMNOVPkVV9GT-uhr9GaZ7l-U4zvvfijZ4t4C_U9_oAGsHmITdhZYb3a2SeBRroKJaanU3Odg69wCoz6XQjBXk_b4idf2V9IYvxrBiSoFSeU4SnGKFUwTm6SZIqBU9xyjFmX1M_0ae_UqxMPyMMR3OybfLHvhGRDM/s320/308477357_457617203072187_1829151269226691825_n.jpg" class="img-fluid school-img" alt="शिशुकल्याण मा.वि. हरिभवन" loading="lazy">
         <div class="school-title">शिशुकल्याण मा.वि. हरिभवन</div>
       </a>
     </div>
 
-    <div class="col-lg-3 col-md-4 col-6 mb-4 extra-school-item">
+    <div class="col-lg-2 col-md-4 col-6 mb-4 extra-school-item col-custom">
       <a href="https://fb.watch/uYYDwSyXSV/" target="_blank" rel="noopener">
-        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjWSMGGELs34jGLTze99W4LO15-6W3VMqNcbvoF3fyDJ92Ub5kSDuSiFVE4tcsGhDkAnNCdEqBqyxpZc_RKNkRU-37rirQ-qd0Xawsy9j13ghb0nxL2tC1diLj7l1TajrhMroHwX4U3A2XukGrSmsqo_ZSgng1_uyNVDdlJdxEUW8WSbVMdlyDDXNkVQhY/s320/94673216_891415684669066_1102383212845334528_n.jpg" class="img-fluid rounded school-img" alt="कालिन्जोर मा वि" loading="lazy">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjWSMGGELs34jGLTze99W4LO15-6W3VMqNcbvoF3fyDJ92Ub5kSDuSiFVE4tcsGhDkAnNCdEqBqyxpZc_RKNkRU-37rirQ-qd0Xawsy9j13ghb0nxL2tC1diLj7l1TajrhMroHwX4U3A2XukGrSmsqo_ZSgng1_uyNVDdlJdxEUW8WSbVMdlyDDXNkVQhY/s320/94673216_891415684669066_1102383212845334528_n.jpg" class="img-fluid school-img" alt="कालिन्जोर मा वि" loading="lazy">
         <div class="school-title">कालिन्जोर मा वि</div>
       </a>
     </div>
@@ -3966,7 +4017,7 @@ School Activities (विद्यालयका गतिविधिहरू
   </div>
 
   <!-- "सबै हेर्नुहोस्" बटन -->
-  <div class="text-center">
+  <div class="text-center mt-3">
     <label for="toggle-schools" class="view-all-btn">
       <span class="text-show">सबै हेर्नुहोस् <i class="fas fa-chevron-down" style="font-size:12px;"></i></span>
       <span class="text-hide">कम हेर्नुहोस् <i class="fas fa-chevron-up" style="font-size:12px;"></i></span>
@@ -3974,6 +4025,8 @@ School Activities (विद्यालयका गतिविधिहरू
   </div>
 
 </section>
+<!------End----------------- Page, Team, Testimonials -->
+
 
 
 
@@ -4015,7 +4068,7 @@ School Activities (विद्यालयका गतिविधिहरू
     <div class="col-md-3 col-6">
       <div class="card h-100 text-center p-2">
         <h6 class="mt-2" style="font-size:14px; min-height:40px;">नेपालको संविधान २०७२</h6>
-        <a href="dimjanschool/download/constitution.html" target="_blank">
+        <a href="dimjan/download/constitution.html" target="_blank">
           <img src="https://aamsanchar.com/wp-content/uploads/2020/09/%E0%A4%B8%E0%A4%82%E0%A4%B5%E0%A4%BF%E0%A4%A7%E0%A4%BE%E0%A4%A8.jpg" class="img-fluid rounded" style="height:120px; object-fit:cover; width:100%;" alt="संविधान" loading="lazy">
         </a>
         <a href="https://doenv.gov.np/public/uploads/Pdffile/%E0%A4%A8%E0%A5%87%E0%A4%AA%E0%A4%BE%E0%A4%B2%E0%A4%95%E0%A5%8B-%E0%A4%B8%E0%A4%82%E0%A4%B5%E0%A4%BF%E0%A4%A7%E0%A4%BE%E0%A4%A8-72560.pdf" class="btn btn-sm btn-primary mt-2 w-100" target="_blank">
@@ -4189,9 +4242,9 @@ School Activities (विद्यालयका गतिविधिहरू
       <a href="https://lisa.mofaga.gov.np/home" target="_blank">
         <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgF1dn0QKBSD0_YpbYY7wTwWOCz4vNdLdYPeXiCGFjvA8ajWwxmnGfaSi8f-LspH7sUguKY_jJYeEHECms2AovLiNHyyhFsU-v4SfzhPdnuZ70vEfeJyqU2FPLhyXXuzdrsfWQrmxb0ecjzZF5hOXnQzNKGQ49KQrMBZ-79bpPJ9-1kmsdcuLkeiryoIxI/w720-h148/Screenshot_2022-05-07-07-01-53-50_40deb401b9ffe8e1df2f1cc5ba480b12.jpg" alt="Dim Janta">
       </a>
-      <h5>Dim Janta Secondary School</h5>
-      <div class="role">Supporter School</div>
-      <p>Dim Janta Secondary school is supporter team member. This school lies in the Parwanipur Municipality, Sarlahi district.</p>
+      <h5>Dim Janta Secondary </h5>
+      <div class="role">Supporter </div>
+      <p>Dim Janta Secondary  is supporter team member. This  lies in the Parwanipur Municipality, Sarlahi district.</p>
     </div>
   </div>
 </section>
@@ -4245,7 +4298,7 @@ School Activities (विद्यालयका गतिविधिहरू
         <div class="alert alert-warning"><i class="fas fa-info-circle me-2"></i><strong>जानकारी:</strong> यो सफ्टवेयर शैक्षिक उद्देश्यका लागि मात्र हो।</div>
         <div class="text-center mb-4"><h4 class="text-primary">ID Card Generator Software</h4></div>
         <div class="row mb-4">
-          <div class="col-md-6"><div class="card h-100"><div class="card-header bg-primary text-white"><h5 class="mb-0">Features:</h5></div><div class="card-body"><ul class="list-group list-group-flush"><li class="list-group-item"><i class="fas fa-qrcode text-success me-2"></i> Auto QR code generation</li><li class="list-group-item"><i class="fas fa-camera text-success me-2"></i> Auto photo path creation</li><li class="list-group-item"><i class="fas fa-print text-success me-2"></i> Bulk printing support</li><li class="list-group-item"><i class="fas fa-id-badge text-success me-2"></i> School logo upload</li></ul></div></div></div>
+          <div class="col-md-6"><div class="card h-100"><div class="card-header bg-primary text-white"><h5 class="mb-0">Features:</h5></div><div class="card-body"><ul class="list-group list-group-flush"><li class="list-group-item"><i class="fas fa-qrcode text-success me-2"></i> Auto QR code generation</li><li class="list-group-item"><i class="fas fa-camera text-success me-2"></i> Auto photo path creation</li><li class="list-group-item"><i class="fas fa-print text-success me-2"></i> Bulk printing support</li><li class="list-group-item"><i class="fas fa-id-badge text-success me-2"></i>  logo upload</li></ul></div></div></div>
           <div class="col-md-6"><div class="card mb-3"><div class="card-header bg-info text-white"><h5 class="mb-0">Demo Video:</h5></div><div class="card-body"><div class="ratio ratio-16x9"><video controls class="rounded"><source src="https://shamser.info.np/HomePage/ID%20Card%20Generator%20Software%20Demo%20video.mp4" type="video/mp4"></video></div></div></div></div>
         </div>
         <div class="row mb-4">
