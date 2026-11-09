@@ -5755,7 +5755,29 @@ School Activities (विद्यालयका गतिविधिहरू
 
 
 
-
+<!-- ====== TERMS & CONTACT KO LAGI FIX ====== -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Bootstrap 5.3 को aria-hidden focus bug को workaround
+  document.querySelectorAll('[data-bs-toggle="modal"]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      // पहिले focus हटाउने
+      this.blur();
+      // त्यसपछि modal खोल्ने
+      const target = this.getAttribute('data-bs-target');
+      if (target) {
+        const modalEl = document.querySelector(target);
+        if (modalEl) {
+          e.preventDefault();
+          const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+          modal.show();
+        }
+      }
+    });
+  });
+});
+</script>
+<!-- ======  TERMS & CONTACT KO LAGI FIX = END ====== -->
 
 
 </body>
