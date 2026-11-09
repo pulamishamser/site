@@ -4122,243 +4122,557 @@ document.addEventListener('DOMContentLoaded', function() {
      SCHOOL PAGE HTML START
 ========================================= -->
 
+
+<style>
+/* ==========================================
+   SCHOOL PAGE - COMPLETE RESPONSIVE DESIGN
+   Desktop: 6 Columns
+   Tablet: 3 Columns
+   Mobile: 2 Columns
+========================================== */
+
+/* MAIN SECTION */
+.school-page-section {
+  width: 100%;
+  max-width: 100%;
+  padding: 15px;
+  margin: 0 auto 20px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.school-page-section *,
+.school-page-section *::before,
+.school-page-section *::after {
+  box-sizing: border-box;
+}
+
+/* HEADING */
+.school-page-section h2 {
+  font-size: 22px;
+  color: #027f7f;
+  border-bottom: 2px solid #e67e22;
+  padding-bottom: 10px;
+  margin: 0 0 20px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* HIDE CHECKBOX */
+.school-page-section #toggle-schools {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+/* DESKTOP GRID - 6 COLUMNS */
+.school-page-section .school-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  width: 100%;
+  gap: 12px;
+}
+
+/* SCHOOL CARD */
+.school-page-section .school-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 240px;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  background: #027f7f;
+  border-radius: 7px;
+  text-decoration: none !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  transition: transform 0.25s ease,
+              box-shadow 0.25s ease;
+}
+
+.school-page-section .school-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+}
+
+/* SCHOOL IMAGE */
+.school-page-section .school-img {
+  display: block;
+  width: 100%;
+  height: 195px;
+  min-height: 0;
+  flex: 1 1 auto;
+  object-fit: cover;
+  object-position: center;
+  border: none;
+  border-bottom: 2px solid #ffffff;
+  padding: 0;
+  margin: 0;
+}
+
+/* SCHOOL NAME */
+.school-page-section .school-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 45px;
+  min-height: 45px;
+  flex: 0 0 45px;
+  padding: 5px 3px;
+  background: #027f7f;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
+  white-space: normal;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+
+/* HIDE EXTRA SCHOOLS */
+.school-page-section .extra-school-item {
+  display: none;
+}
+
+/* SHOW EXTRA SCHOOLS */
+.school-page-section #toggle-schools:checked
+~ .school-grid .extra-school-item {
+  display: flex;
+}
+
+/* VIEW BUTTON CONTAINER */
+.school-page-section .text-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+}
+
+/* VIEW ALL BUTTON */
+.school-page-section .view-all-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  padding: 9px 25px;
+  background: #f8f9fa;
+  border: 1px solid #027f7f;
+  border-radius: 30px;
+  color: #027f7f;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.school-page-section .view-all-btn:hover {
+  background: #027f7f;
+  color: #ffffff;
+}
+
+.school-page-section .text-hide {
+  display: none;
+}
+
+.school-page-section #toggle-schools:checked
+~ .text-center .text-show {
+  display: none;
+}
+
+.school-page-section #toggle-schools:checked
+~ .text-center .text-hide {
+  display: inline-flex;
+}
+
+/* ==========================================
+   LAPTOP / SMALL DESKTOP
+========================================== */
+
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+
+  .school-page-section .school-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .school-page-section .school-card {
+    height: 240px;
+  }
+
+  .school-page-section .school-title {
+    font-size: 12px;
+  }
+
+}
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media screen and (min-width: 576px) and (max-width: 991px) {
+
+  .school-page-section {
+    padding: 12px;
+  }
+
+  .school-page-section .school-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .school-page-section .school-card {
+    height: 230px;
+  }
+
+  .school-page-section .school-img {
+    height: 185px;
+  }
+
+  .school-page-section .school-title {
+    height: 45px;
+    min-height: 45px;
+    flex-basis: 45px;
+    font-size: 13px;
+  }
+
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media screen and (max-width: 575px) {
+
+  .school-page-section {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border-radius: 7px;
+  }
+
+  .school-page-section h2 {
+    font-size: 19px;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+  }
+
+  .school-page-section .school-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+  }
+
+  .school-page-section .school-card {
+    height: 200px;
+    border-radius: 6px;
+  }
+
+  .school-page-section .school-img {
+    width: 100%;
+    height: 160px;
+    flex: 1 1 auto;
+    object-fit: cover;
+  }
+
+  .school-page-section .school-title {
+    height: 40px;
+    min-height: 40px;
+    flex-basis: 40px;
+    padding: 4px 2px;
+    font-size: 11px;
+    line-height: 1.35;
+  }
+
+  .school-page-section .view-all-btn {
+    margin-top: 15px;
+    padding: 8px 22px;
+    font-size: 13px;
+  }
+
+}
+
+/* VERY SMALL MOBILE */
+@media screen and (max-width: 360px) {
+
+  .school-page-section {
+    padding: 6px;
+  }
+
+  .school-page-section .school-grid {
+    gap: 7px;
+  }
+
+  .school-page-section .school-card {
+    height: 180px;
+  }
+
+  .school-page-section .school-img {
+    height: 145px;
+  }
+
+  .school-page-section .school-title {
+    height: 35px;
+    min-height: 35px;
+    flex-basis: 35px;
+    font-size: 10px;
+  }
+
+}
+
+/* ACCESSIBILITY */
+.school-page-section #toggle-schools:focus-visible
+~ .school-grid {
+  outline: 2px solid #027f7f;
+  outline-offset: 3px;
+}
+
+/* REDUCE ANIMATION */
+@media (prefers-reduced-motion: reduce) {
+  .school-page-section .school-card,
+  .school-page-section .view-all-btn {
+    transition: none;
+  }
+}
+</style>
+
+
+<!-- ==========================================
+     SCHOOL SECTION START
+========================================== -->
+
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 col-md-12">
+
 <section class="school-page-section">
 
-  <h2>विद्यालयहरू (School Page)</h2>
+<h2>विद्यालयहरू (School Page)</h2>
 
-  <!-- Toggle Checkbox -->
-  <input type="checkbox" id="toggle-schools">
+<input type="checkbox" id="toggle-schools">
 
-  <!-- SCHOOL GRID -->
-  <div class="school-grid">
+<div class="school-grid">
 
 
-    <!-- 1. डिमजनता परवानीपुर -->
-    <a href="https://www.facebook.com/dimjanata.mavi"
-       target="_blank"
-       rel="noopener noreferrer"
-       class="school-card">
+<!-- 1. डिमजनता परवानीपुर -->
+<a href="https://www.facebook.com/dimjanata.mavi"
+   target="_blank" rel="noopener noreferrer"
+   class="school-card">
 
-      <img src="/school img/school.jpg"
-           class="school-img"
-           alt="डिमजनता परवानीपुर"
-           loading="lazy">
+<img src="/school img/school.jpg"
+     class="school-img"
+     alt="डिमजनता परवानीपुर"
+     loading="lazy">
 
-      <div class="school-title">डिमजनता परवानीपुर</div>
-    </a>
+<div class="school-title">डिमजनता परवानीपुर</div>
+</a>
 
 
-    <!-- 2. जनज्योति मावि -->
-    <a href="https://www.facebook.com/janajyoti.mavi.7"
-       target="_blank"
-       rel="noopener noreferrer"
-       class="school-card">
+<!-- 2. जनज्योति मावि -->
+<a href="https://www.facebook.com/janajyoti.mavi.7"
+   target="_blank" rel="noopener noreferrer"
+   class="school-card">
 
-      <img src="/school img/जनज्योति मावि.jpg"
-           class="school-img"
-           alt="जनज्योति मावि"
-           loading="lazy">
+<img src="/school img/जनज्योति मावि.jpg"
+     class="school-img"
+     alt="जनज्योति मावि"
+     loading="lazy">
 
-      <div class="school-title">जनज्योति मावि</div>
-    </a>
+<div class="school-title">जनज्योति मावि</div>
+</a>
 
 
-    <!-- 3. ने.रा.ज. इश्वरपुर -->
-    <a href="https://www.facebook.com/profile.php?id=100092535324619"
-       target="_blank"
-       rel="noopener noreferrer"
-       class="school-card">
+<!-- 3. ने.रा.ज. इश्वरपुर -->
+<a href="https://www.facebook.com/profile.php?id=100092535324619"
+   target="_blank" rel="noopener noreferrer"
+   class="school-card">
 
-      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRcvV9xbLXRsxSuSegqk0AqJS9j97q4bBbL6LCQ8g1eNDGnIjRYgfcQ09akpJYQD1SVk7UT6N2iDV8vZNS-1r8f-5M3PtHh8NxjfnVuDHwtSB467Q8ldID3u5X-XFtc7R1DAjAYxGUCC_TyqiTHOcVMSYYeNILyYBtoHtzYavNnR9paf5Z8vZAXpvSTms/w620-h392/ghari.jpg"
-           class="school-img"
-           alt="ने.रा.ज.इश्वरपुर"
-           loading="lazy">
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRcvV9xbLXRsxSuSegqk0AqJS9j97q4bBbL6LCQ8g1eNDGnIjRYgfcQ09akpJYQD1SVk7UT6N2iDV8vZNS-1r8f-5M3PtHh8NxjfnVuDHwtSB467Q8ldID3u5X-XFtc7R1DAjAYxGUCC_TyqiTHOcVMSYYeNILyYBtoHtzYavNnR9paf5Z8vZAXpvSTms/w620-h392/ghari.jpg"
+     class="school-img"
+     alt="ने.रा.ज.इश्वरपुर"
+     loading="lazy">
 
-      <div class="school-title">ने.रा.ज.इश्वरपुर</div>
-    </a>
+<div class="school-title">ने.रा.ज.इश्वरपुर</div>
+</a>
 
 
-    <!-- 4. जनज्योति मावि लालबन्दी -->
-    <a href="https://www.facebook.com/janajyoti.mavi.7"
-       target="_blank"
-       rel="noopener noreferrer"
-       class="school-card">
+<!-- 4. जनज्योति मावि लालबन्दी -->
+<a href="https://www.facebook.com/janajyoti.mavi.7"
+   target="_blank" rel="noopener noreferrer"
+   class="school-card">
 
-      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgy89aKBnZw5q2TCO6luS49ZYxWSM2Jnfxs1xSNJ2KvKLWrGYda6wrR9dP9pZIFDAOxX2XzESQE2yR1wVQ1DIZTqskOd9QUAcp4i0eba0xSQjNRxgsIKB4HM7-pCr6cvXLNoEdqI2dmXvfxXMCR6pYXSGIWY_dK9x2jUZJ3Widef0i9wP4_umNVUMBHL84/w574-h521/119166783_103387048184074_3432238316538758540_n.jpg"
-           class="school-img"
-           alt="जनज्योति मावि लालबन्दी"
-           loading="lazy">
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgy89aKBnZw5q2TCO6luS49ZYxWSM2Jnfxs1xSNJ2KvKLWrGYda6wrR9dP9pZIFDAOxX2XzESQE2yR1wVQ1DIZTqskOd9QUAcp4i0eba0xSQjNRxgsIKB4HM7-pCr6cvXLNoEdqI2dmXvfxXMCR6pYXSGIWY_dK9x2jUZJ3Widef0i9wP4_umNVUMBHL84/w574-h521/119166783_103387048184074_3432238316538758540_n.jpg"
+     class="school-img"
+     alt="जनज्योति मावि लालबन्दी"
+     loading="lazy">
 
-      <div class="school-title">जनज्योति मावि लालबन्दी</div>
-    </a>
+<div class="school-title">जनज्योति मावि लालबन्दी</div>
+</a>
 
 
-    <!-- 5. नारायणजनता जियाजोर -->
-    <a href="https://www.facebook.com/profile.php?id=100015750109310"
-       target="_blank"
-       rel="noopener noreferrer"
-       class="school-card">
+<!-- 5. नारायणजनता जियाजोर -->
+<a href="https://www.facebook.com/profile.php?id=100015750109310"
+   target="_blank" rel="noopener noreferrer"
+   class="school-card">
 
-      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEganlSKg9tpI1ac4hWYmfFRH_nzZpMEJtGwIVxPgkApdNWkz0mamQf79uTu7HnrUgF7LcQ021AGwSNllZ8WrMSC3sT9-wu3HvfuVPjzl5hvrSuDlr-wkjNguhf-UdKTDH7hIBPZGoUPfEokj4l5ZVnbLtmBtCkOGnXui35GAUAJSarsORUIE2chVEWgKsg/w658-h362/naran.jpg"
-           class="school-img"
-           alt="नारायणजनता जियाजोर"
-           loading="lazy">
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEganlSKg9tpI1ac4hWYmfFRH_nzZpMEJtGwIVxPgkApdNWkz0mamQf79uTu7HnrUgF7LcQ021AGwSNllZ8WrMSC3sT9-wu3HvfuVPjzl5hvrSuDlr-wkjNguhf-UdKTDH7hIBPZGoUPfEokj4l5ZVnbLtmBtCkOGnXui35GAUAJSarsORUIE2chVEWgKsg/w658-h362/naran.jpg"
+     class="school-img"
+     alt="नारायणजनता जियाजोर"
+     loading="lazy">
 
-      <div class="school-title">नारायणजनता जियाजोर</div>
-    </a>
+<div class="school-title">नारायणजनता जियाजोर</div>
+</a>
 
 
-    <!-- 6. मनपुरन मावि जब्दी -->
-    <a href="https://www.facebook.com/profile.php?id=100068420967280"
-       target="_blank"
-       rel="noopener noreferrer"
-       class="school-card">
+<!-- 6. मनपुरन मावि जब्दी -->
+<a href="https://www.facebook.com/profile.php?id=100068420967280"
+   target="_blank" rel="noopener noreferrer"
+   class="school-card">
 
-      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgvVJE1OwDOPHN_GxPxezijz3s1u4hvK3SU2YJkOoFyy5YihwMliqoxtrHT5xLffxKhKTMmk0dtY5xMinvxOqbsLB0zYw0dVQ2m7S8fcyNfcLWp0moLIUP4VwuPjFSQW5n8yLGPuH1Y7kKsTVnJapbCT1Bd5VIyLcPw_1EJGBv4a4LxSqjK2ZSvkMSUc7w/w650-h352/273327502_245500381073992_5611157776999453042_n.jpg"
-           class="school-img"
-           alt="मनपुरन मावि जब्दी"
-           loading="lazy">
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgvVJE1OwDOPHN_GxPxezijz3s1u4hvK3SU2YJkOoFyy5YihwMliqoxtrHT5xLffxKhKTMmk0dtY5xMinvxOqbsLB0zYw0dVQ2m7S8fcyNfcLWp0moLIUP4VwuPjFSQW5n8yLGPuH1Y7kKsTVnJapbCT1Bd5VIyLcPw_1EJGBv4a4LxSqjK2ZSvkMSUc7w/w650-h352/273327502_245500381073992_5611157776999453042_n.jpg"
+     class="school-img"
+     alt="मनपुरन मावि जब्दी"
+     loading="lazy">
 
-      <div class="school-title">मनपुरन मावि जब्दी</div>
-    </a>
+<div class="school-title">मनपुरन मावि जब्दी</div>
+</a>
 
 
-    <!-- 7. जानकी मावि -->
-    <a href="https://www.facebook.com/profile.php?id=100091777394720"
-       target="_blank"
-       rel="noopener noreferrer"
-       class="school-card">
+<!-- 7. जानकी मावि -->
+<a href="https://www.facebook.com/profile.php?id=100091777394720"
+   target="_blank" rel="noopener noreferrer"
+   class="school-card">
 
-      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjGXERsCLziNRBnOkHOkSR9arFfkH2khwGe70uhNgks2CiXZ8PyY5jNgwY6yBmQtexTjTTcKafy5z6mu1YfrDPvkeYgQvKw4cYi5YatCGw7qPy4Fecnl-k0MrkKLQoqqvTvTRhMT5WqB7sVDjpXf1BKKJVLWBvdW2UL1Wcj3xildqxbPpc0PvCzn77ZLW0/w675-h386/janki.jpg"
-           class="school-img"
-           alt="जानकी मावि"
-           loading="lazy">
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjGXERsCLziNRBnOkHOkSR9arFfkH2khwGe70uhNgks2CiXZ8PyY5jNgwY6yBmQtexTjTTcKafy5z6mu1YfrDPvkeYgQvKw4cYi5YatCGw7qPy4Fecnl-k0MrkKLQoqqvTvTRhMT5WqB7sVDjpXf1BKKJVLWBvdW2UL1Wcj3xildqxbPpc0PvCzn77ZLW0/w675-h386/janki.jpg"
+     class="school-img"
+     alt="जानकी मावि"
+     loading="lazy">
 
-      <div class="school-title">जानकी मावि, लालबन्दी</div>
-    </a>
+<div class="school-title">जानकी मावि, लालबन्दी</div>
+</a>
 
 
-    <!-- 8. प्रेमज्योती आ.वि. -->
-    <a href="https://www.facebook.com/profile.php?id=100091618344104"
-       target="_blank"
-       rel="noopener noreferrer"
-       class="school-card">
+<!-- 8. प्रेमज्योती आ.वि. -->
+<a href="https://www.facebook.com/profile.php?id=100091618344104"
+   target="_blank" rel="noopener noreferrer"
+   class="school-card">
 
-      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgorWg9G6YQ2VUXWobCBQgX2diQd17PKGLUKesyeBdp44FMrIzGRTTtK1crT6CkpB-LvB8pqnGXtsuIb5kknM-SRXo1H_gN7jzuWK1BAUE0Ndhgok-q-Vi6SUUhOA4EPTihjAxNGytUvJDMDkd-veq461Hq-mMeJhoEkKTGcJzAysJwx8yr-tseC3OGC6E/w666-h337/prem.jpg"
-           class="school-img"
-           alt="प्रेमज्योती आ बि"
-           loading="lazy">
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgorWg9G6YQ2VUXWobCBQgX2diQd17PKGLUKesyeBdp44FMrIzGRTTtK1crT6CkpB-LvB8pqnGXtsuIb5kknM-SRXo1H_gN7jzuWK1BAUE0Ndhgok-q-Vi6SUUhOA4EPTihjAxNGytUvJDMDkd-veq461Hq-mMeJhoEkKTGcJzAysJwx8yr-tseC3OGC6E/w666-h337/prem.jpg"
+     class="school-img"
+     alt="प्रेमज्योती आ बि"
+     loading="lazy">
 
-      <div class="school-title">प्रेमज्योती आ बि, लालबन्दी ६</div>
-    </a>
+<div class="school-title">प्रेमज्योती आ बि, लालबन्दी ६</div>
+</a>
 
 
-    <!-- =================================
-         EXTRA SCHOOLS (HIDDEN INITIALLY)
-    ================================== -->
+<!-- 9. अमरज्यान मा वि -->
+<a href="https://www.facebook.com/profile.php?id=100064032665316"
+   target="_blank" rel="noopener noreferrer"
+   class="school-card extra-school-item">
 
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgp06zK5gfOit4Asrc_Hj5hWu-ZPMUZnhQ4M-iUg0YqhjgC9spxHinZgzGa8Ha_6Bdu28pxdJvYptiQc5zkpgS6G8Wydsdd6ysdMFkcb51dwYLt3E00QC4ttfOzvuR1V4EhXzIZvFrQfNsZB3j9HXN3kf32ZtCOS_PIra1os8A4B_8G35gVLlORGg-2nI/w626-h498/amr.jpg"
+     class="school-img"
+     alt="अमरज्यान मा वि"
+     loading="lazy">
 
-    <!-- 9. अमरज्यान मा.वि. -->
-    <a href="https://www.facebook.com/profile.php?id=100064032665316"
-       target="_blank"
-       rel="noopener noreferrer"
-       class="school-card extra-school-item">
+<div class="school-title">अमरज्यान मा वि</div>
+</a>
 
-      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgp06zK5gfOit4Asrc_Hj5hWu-ZPMUZnhQ4M-iUg0YqhjgC9spxHinZgzGa8Ha_6Bdu28pxdJvYptiQc5zkpgS6G8Wydsdd6ysdMFkcb51dwYLt3E00QC4ttfOzvuR1V4EhXzIZvFrQfNsZB3j9HXN3kf32ZtCOS_PIra1os8A4B_8G35gVLlORGg-2nI/w626-h498/amr.jpg"
-           class="school-img"
-           alt="अमरज्यान मा वि"
-           loading="lazy">
 
-      <div class="school-title">अमरज्यान मा वि</div>
-    </a>
+<!-- 10. फौदसिंह मावि -->
+<a href="https://www.facebook.com/profile.php?id=10008981370582"
+   target="_blank" rel="noopener noreferrer"
+   class="school-card extra-school-item">
 
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRRKIdv7UrxXEPEVR-18jbEEn2dqUoqk9-oKjfKLi4j-q7_S1OcNF8CcZWVu0r8k31RFHnxld8v8yhfPwV7CfvFnHzGxde_w0oUU1gR1t4alKMJ5kT8AvU8PngDNu3F4iMgNoOYCgg9QH7hWvJwyVeCyejtZNRELAsz1CJMe-fdi6yhfRrhHmNB1psNHA/w724-h428/326895375_1174463899853251_4004827747672897691_n.jpg"
+     class="school-img"
+     alt="फौदसिंह मावि"
+     loading="lazy">
 
-    <!-- 10. फौदसिंह मावि -->
-    <a href="https://www.facebook.com/profile.php?id=10008981370582"
-       target="_blank"
-       rel="noopener noreferrer"
-       class="school-card extra-school-item">
+<div class="school-title">फौदसिंह मावि</div>
+</a>
 
-      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRRKIdv7UrxXEPEVR-18jbEEn2dqUoqk9-oKjfKLi4j-q7_S1OcNF8CcZWVu0r8k31RFHnxld8v8yhfPwV7CfvFnHzGxde_w0oUU1gR1t4alKMJ5kT8AvU8PngDNu3F4iMgNoOYCgg9QH7hWvJwyVeCyejtZNRELAsz1CJMe-fdi6yhfRrhHmNB1psNHA/w724-h428/326895375_1174463899853251_4004827747672897691_n.jpg"
-           class="school-img"
-           alt="फौदसिंह मावि"
-           loading="lazy">
 
-      <div class="school-title">फौदसिंह मावि</div>
-    </a>
+<!-- 11. आबि खतिवडाचौक -->
+<a href="https://www.facebook.com/groups/230876141531607"
+   target="_blank" rel="noopener noreferrer"
+   class="school-card extra-school-item">
 
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjWSMGGELs34jGLTze99W4LO15-6W3VMqNcbvoF3fyDJ92Ub5kSDuSiFVE4tcsGhDkAnNCdEqBqyxpZc_RKNkRU-37rirQ-qd0Xawsy9j13ghb0nxL2tC1diLj7l1TajrhMroHwX4U3A2XukGrSmsqo_ZSgng1_uyNVDdlJdxEUW8WSbVMdlyDDXNkVQhY/s320/94673216_891415684669066_1102383212845334528_n.jpg"
+     class="school-img"
+     alt="आबि खतिवडाचौक"
+     loading="lazy">
 
-    <!-- 11. आबि खतिवडाचौक -->
-    <a href="https://www.facebook.com/groups/230876141531607"
-       target="_blank"
-       rel="noopener noreferrer"
-       class="school-card extra-school-item">
+<div class="school-title">आबि खतिवडाचौक</div>
+</a>
 
-      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjWSMGGELs34jGLTze99W4LO15-6W3VMqNcbvoF3fyDJ92Ub5kSDuSiFVE4tcsGhDkAnNCdEqBqyxpZc_RKNkRU-37rirQ-qd0Xawsy9j13ghb0nxL2tC1diLj7l1TajrhMroHwX4U3A2XukGrSmsqo_ZSgng1_uyNVDdlJdxEUW8WSbVMdlyDDXNkVQhY/s320/94673216_891415684669066_1102383212845334528_n.jpg"
-           class="school-img"
-           alt="आबि खतिवडाचौक"
-           loading="lazy">
 
-      <div class="school-title">आबि खतिवडाचौक</div>
-    </a>
+<!-- 12. शिशुकल्याण मा.वि. -->
+<a href="https://www.facebook.com/profile.php?id=100016009982702"
+   target="_blank" rel="noopener noreferrer"
+   class="school-card extra-school-item">
 
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjEarCdiZgnrABMWbERXVzArmVydLhuMNOVPkVV9GT-uhr9GaZ7l-U4zvvfijZ4t4C_U9_oAGsHmITdhZYb3a2SeBRroKJaanU3Odg69wCoz6XQjBXk_b4idf2V9IYvxrBiSoFSeU4SnGKFUwTm6SZIqBU9xyjFmX1M_0ae_UqxMPyMMR3OybfLHvhGRDM/s320/308477357_457617203072187_1829151269226691825_n.jpg"
+     class="school-img"
+     alt="शिशुकल्याण मा.वि. हरिभवन"
+     loading="lazy">
 
-    <!-- 12. शिशुकल्याण मा.वि. -->
-    <a href="https://www.facebook.com/profile.php?id=100016009982702"
-       target="_blank"
-       rel="noopener noreferrer"
-       class="school-card extra-school-item">
+<div class="school-title">शिशुकल्याण मा.वि. हरिभवन</div>
+</a>
 
-      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjEarCdiZgnrABMWbERXVzArmVydLhuMNOVPkVV9GT-uhr9GaZ7l-U4zvvfijZ4t4C_U9_oAGsHmITdhZYb3a2SeBRroKJaanU3Odg69wCoz6XQjBXk_b4idf2V9IYvxrBiSoFSeU4SnGKFUwTm6SZIqBU9xyjFmX1M_0ae_UqxMPyMMR3OybfLHvhGRDM/s320/308477357_457617203072187_1829151269226691825_n.jpg"
-           class="school-img"
-           alt="शिशुकल्याण मा.वि. हरिभवन"
-           loading="lazy">
 
-      <div class="school-title">शिशुकल्याण मा.वि. हरिभवन</div>
-    </a>
+<!-- 13. कालिन्जोर मा वि -->
+<a href="https://fb.watch/uYYDwSyXSV/"
+   target="_blank" rel="noopener noreferrer"
+   class="school-card extra-school-item">
 
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjWSMGGELs34jGLTze99W4LO15-6W3VMqNcbvoF3fyDJ92Ub5kSDuSiFVE4tcsGhDkAnNCdEqBqyxpZc_RKNkRU-37rirQ-qd0Xawsy9j13ghb0nxL2tC1diLj7l1TajrhMroHwX4U3A2XukGrSmsqo_ZSgng1_uyNVDdlJdxEUW8WSbVMdlyDDXNkVQhY/s320/94673216_891415684669066_1102383212845334528_n.jpg"
+     class="school-img"
+     alt="कालिन्जोर मा वि"
+     loading="lazy">
 
-    <!-- 13. कालिन्जोर मा.वि. -->
-    <a href="https://fb.watch/uYYDwSyXSV/"
-       target="_blank"
-       rel="noopener noreferrer"
-       class="school-card extra-school-item">
+<div class="school-title">कालिन्जोर मा वि</div>
+</a>
 
-      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjWSMGGELs34jGLTze99W4LO15-6W3VMqNcbvoF3fyDJ92Ub5kSDuSiFVE4tcsGhDkAnNCdEqBqyxpZc_RKNkRU-37rirQ-qd0Xawsy9j13ghb0nxL2tC1diLj7l1TajrhMroHwX4U3A2XukGrSmsqo_ZSgng1_uyNVDdlJdxEUW8WSbVMdlyDDXNkVQhY/s320/94673216_891415684669066_1102383212845334528_n.jpg"
-           class="school-img"
-           alt="कालिन्जोर मा वि"
-           loading="lazy">
 
-      <div class="school-title">कालिन्जोर मा वि</div>
-    </a>
+</div>
+<!-- END SCHOOL GRID -->
 
 
-  </div>
-  <!-- END SCHOOL GRID -->
+<!-- VIEW ALL BUTTON -->
+<div class="text-center">
 
+<label for="toggle-schools" class="view-all-btn">
 
-  <!-- VIEW ALL / VIEW LESS BUTTON -->
-  <div class="text-center">
+<span class="text-show">
+सबै हेर्नुहोस् ▼
+</span>
 
-    <label for="toggle-schools" class="view-all-btn">
+<span class="text-hide">
+कम हेर्नुहोस् ▲
+</span>
 
-      <span class="text-show">
-        सबै हेर्नुहोस्
-        <span>▼</span>
-      </span>
+</label>
 
-      <span class="text-hide">
-        कम हेर्नुहोस्
-        <span>▲</span>
-      </span>
-
-    </label>
-
-  </div>
+</div>
 
 </section>
 
-<!-- SCHOOL PAGE HTML END -->
+</div>
+</div>
+</div>
+
+<!-- SCHOOL SECTION END -->
+
+
 
 
 
