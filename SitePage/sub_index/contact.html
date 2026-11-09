@@ -4,9 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Contact - shamser.info.np</title>
-  <!---- AdSense code------->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8245820863085476"
-     crossorigin="anonymous"></script>
 
 <meta name="description" content="Contact shamser.info.np - Email, Phone, Form">
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
@@ -148,6 +145,7 @@
   .back-btn:hover {
     background: #016161;
     text-decoration: none;
+    transform: translateY(-2px);
   }
   @media (max-width: 600px) {
     .container { padding: 20px; }
@@ -170,35 +168,36 @@
   <h2>Contact Details</h2>
   <div class="info-grid">
     <div class="info-item">
-      <strong>Website</strong>
+      <strong>🌐 Website</strong>
       <p><a href="https://shamser.info.np">shamser.info.np</a></p>
     </div>
     <div class="info-item">
-      <strong>Email</strong>
-      <p>[Enter your email here]</p>
+      <strong>📧 Email</strong>
+      <p><a href="mailto:shamserpulami500@gmail.com">shamserpulami500@gmail.com</a></p>
     </div>
     <div class="info-item">
-      <strong>Phone</strong>
-      <p>[Enter your phone number here]</p>
+      <strong>📞 Phone</strong>
+      <p><a href="tel:+9779844087012">+977 9844087012</a></p>
     </div>
     <div class="info-item">
-      <strong>Address</strong>
-      <p>[Enter your address here]</p>
+      <strong>📍 Address</strong>
+      <p>Nepal</p>
     </div>
     <div class="info-item">
-      <strong>Facebook</strong>
-      <p><a href="[Enter your Facebook link here]" target="_blank">Facebook Page</a></p>
+      <strong>📘 Facebook</strong>
+      <p><a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook Page</a></p>
     </div>
     <div class="info-item">
-      <strong>YouTube</strong>
-      <p><a href="[Enter your YouTube link here]" target="_blank">YouTube Channel</a></p>
+      <strong>▶️ YouTube</strong>
+      <p><a href="https://www.youtube.com/" target="_blank" rel="noopener">YouTube Channel</a></p>
     </div>
   </div>
 
   <h2>Send a Message</h2>
-  <p>You can send us your question or suggestion by filling out the form below.</p>
+  <p>You can send us your question or suggestion by filling out the form below. We will receive your message directly in our email.</p>
 
-  <form id="contactForm">
+  <!-- Formspree Form -->
+  <form id="contactForm" action="https://formspree.io/f/mwlldvdb" method="POST">
     <div class="form-group">
       <label for="name">Your Name *</label>
       <input type="text" id="name" name="name" required placeholder="Write your full name">
@@ -222,23 +221,15 @@
 
 </div>
 
+<!-- Script to show success message after Formspree submission -->
 <script>
-document.getElementById('contactForm').addEventListener('submit', function (e) {
-  e.preventDefault();
-  const name = document.getElementById('name').value;
-  const email = document.getElementById('email').value;
-  const subject = document.getElementById('subject').value || 'Contact Form Message';
-  const message = document.getElementById('message').value;
-  
-  // Send email (Enter your email here)
-  const myEmail = '[Enter your email here]';
-  const mailtoLink = 'mailto:' + myEmail + 
-    '?subject=' + encodeURIComponent(subject) + 
-    '&body=' + encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\nMessage:\n' + message);
-  
-  window.location.href = mailtoLink;
-  alert('Thank you! Your message is being sent.');
-});
+  const form = document.getElementById('contactForm');
+  form.addEventListener('submit', function(e) {
+    // Show message but let Formspree submit naturally
+    setTimeout(() => {
+      alert('Thank you! Your message has been sent successfully.');
+    }, 100);
+  });
 </script>
 
 </body>
