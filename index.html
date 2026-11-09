@@ -257,69 +257,6 @@ html, body { margin: 0 !important; padding: 0 !important; width: 100%; overflow-
 @keyframes scrollFlash { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
 
-<style>
-  /* School / Gallery */
-  .school-img {
-    width: 100%;
-    height: 120px; 
-    object-fit: cover;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-  }
-
-  .school-title {
-    background-color: #027f7f; /* स्क्रिनसटको निलो/हरियो रङ */
-    color: white;
-    padding: 8px 4px;
-    margin-top: -4px; /* तस्बिर र नाम जोडिन */
-    font-size: 14px;
-    font-weight: 500;
-    text-align: center;
-    border-radius: 0 0 4px 4px;
-  }
-
-  /* डेस्कटपमा ६ वटा कोलम देखाउन (col-lg-2) */
-  @media (min-width: 992px) {
-    .col-custom {
-      flex: 0 0 auto;
-      width: 16.66666667%; /* १००% / ६ = १६.६६% */
-    }
-  }
-
-  /* थपिएका विद्यालयहरू सुरुमा लुकाउन */
-  .extra-school-item {
-    display: none;
-  }
-
-  /* चेकबक्स चेक भएपछि थपिएका विद्यालय देखाउन */
-  #toggle-schools:checked ~ .row .extra-school-item {
-    display: block;
-  }
-
-  /* बटनको डिजाइन */
-  .view-all-btn {
-    display: inline-block;
-    padding: 8px 24px;
-    background-color: #f8f9fa;
-    border: 1px solid #ddd;
-    border-radius: 20px;
-    cursor: pointer;
-    color: #027f7f;
-    font-weight: bold;
-    margin-top: 10px;
-  }
-
-  /* चेकबक्स लुकाउने */
-  #toggle-schools {
-    display: none;
-  }
-
-  .text-hide { display: none; }
-  #toggle-schools:checked ~ .text-center .text-show { display: none; }
-  #toggle-schools:checked ~ .text-center .text-hide { display: inline-block; }
-
-<!-- End  School Page, Team, Testimonials -->
-
 
 	
 .upcoming-list { list-style: none; padding: 0; margin: 0; }
@@ -3908,6 +3845,70 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 <!--------------------------------- Page, Team, Testimonials -->
+
+<style>
+  /* स्क्रिनसट जस्तै लेआउट मिलाउनका लागि CSS */
+  .school-img {
+    width: 100%;
+    height: 120px; /* तस्बिरको उचाई एकनासको बनाउन */
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+  }
+
+  .school-title {
+    background-color: #027f7f; /* स्क्रिनसटको निलो/हरियो रङ */
+    color: white;
+    padding: 8px 4px;
+    margin-top: -4px; /* तस्बिर र नाम जोडिन */
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    border-radius: 0 0 4px 4px;
+  }
+
+  /* डेस्कटपमा ६ वटा कोलम देखाउन (col-lg-2) */
+  @media (min-width: 992px) {
+    .col-custom {
+      flex: 0 0 auto;
+      width: 16.66666667%; /* १००% / ६ = १६.६६% */
+    }
+  }
+
+  /* थपिएका विद्यालयहरू सुरुमा लुकाउन */
+  .extra-school-item {
+    display: none;
+  }
+
+  /* चेकबक्स चेक भएपछि थपिएका विद्यालय देखाउन */
+  #toggle-schools:checked ~ .row .extra-school-item {
+    display: block;
+  }
+
+  /* बटनको डिजाइन */
+  .view-all-btn {
+    display: inline-block;
+    padding: 8px 24px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    cursor: pointer;
+    color: #027f7f;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  /* चेकबक्स लुकाउने */
+  #toggle-schools {
+    display: none;
+  }
+
+  /* चेकबक्सको अवस्था अनुसार 'सबै हेर्नुहोस्' र 'कम हेर्नुहोस्' टेक्स्ट टोगल गर्न */
+  .text-hide { display: none; }
+  #toggle-schools:checked ~ .text-center .text-show { display: none; }
+  #toggle-schools:checked ~ .text-center .text-hide { display: inline-block; }
+</style>
+
 <!-- School Page, Team, Testimonials -->
 <hr>
 <section class="legal-section mt-4">
@@ -4025,6 +4026,24 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 
 </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
 <!------End----------------- Page, Team, Testimonials -->
 
 
