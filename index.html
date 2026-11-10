@@ -6296,21 +6296,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
         </div>
 
-        <!-- बटन 1 -->
-        <div class="px-3 pb-3">
-          <a href="#more-services" class="btn btn-success fw-bold w-100 mt-2" data-bs-dismiss="modal">
-            <i class="fas fa-arrow-down"></i> थप सेवाहरू हेर्नुहोस्
-          </a>
-           <!-- बटन 2 -->
-        <div class="px-3 pb-3">
-          <a href="#Headlines" class="btn btn-success fw-bold w-100 mt-2" data-bs-dismiss="modal">
-            <i class="fas fa-arrow-down"></i> Headlines Info_News
-          </a>
+       <!-- बटन 1 -->
+<div class="px-3 pb-3">
+  <!-- बटन 1: थप सेवाहरू -->
+  <a href="#more-services" class="btn btn-success fw-bold w-100 mt-2" data-bs-dismiss="modal">
+    <i class="fas fa-arrow-down"></i> थप सेवाहरू हेर्नुहोस्
+  </a>
 
-          <button type="button" class="btn btn-outline-secondary w-100 mt-2" data-bs-dismiss="modal">
-            बन्द गर्नुहोस् (Close)
-          </button>
-        </div>
+  <!-- बटन 2: Headlines -->
+  <a href="#Headlines" class="btn btn-success fw-bold w-100 mt-2" data-bs-dismiss="modal">
+    <i class="fas fa-arrow-down"></i> Headlines Info_News
+  </a>
+
+  <!-- बटन 3: Close -->
+  <button type="button" class="btn btn-outline-secondary w-100 mt-2" data-bs-dismiss="modal">
+    बन्द गर्नुहोस् (Close)
+  </button>
+</div>
 
       </div>
     </div>
@@ -6374,8 +6376,13 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 </style>
 
-<!-- स्क्रिप्ट -->
-<script>
+
+
+
+
+	
+<!-- welcome  popup modal -->
+  <script>
   document.addEventListener("DOMContentLoaded", function() {
     // २ सेकेन्ड पछि पपअप देखाउने
     setTimeout(function() {
@@ -6383,25 +6390,27 @@ document.addEventListener('DOMContentLoaded', function() {
       myModal.show();
     }, 2000);
 
-    // 'थप सेवाहरू हेर्नुहोस्' थिच्दा स्क्रोल गर्ने लजिक
-    document.querySelectorAll('a[href="#more-services"]').forEach(function(link) {
+    // Smooth scroll logic — दुवै anchor (#more-services र #Headlines) का लागि
+    document.querySelectorAll('a[href="#more-services"], a[href="#Headlines"]').forEach(function(link) {
       link.addEventListener('click', function(e) {
         e.preventDefault();
-        
-        var target = document.getElementById('more-services');
-        if(target) {
+
+        var targetId = this.getAttribute('href').substring(1); // '#' हटाउने
+        var target = document.getElementById(targetId);
+
+        if (target) {
           var modalEl = document.getElementById('welcomePopupModal');
           var modal = bootstrap.Modal.getInstance(modalEl);
-          if(modal) modal.hide();
+          if (modal) modal.hide();
 
           setTimeout(function() {
-            var headerOffset = 80; 
+            var headerOffset = 80;
             var elementPosition = target.getBoundingClientRect().top;
             var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
             window.scrollTo({
-                top: offsetPosition,
-                behavior: "smooth"
+              top: offsetPosition,
+              behavior: "smooth"
             });
           }, 300);
         }
@@ -6409,7 +6418,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 </script>
-
 
 
 
