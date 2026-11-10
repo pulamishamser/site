@@ -1377,8 +1377,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 <!-- ============ TOP HEADLINE NEWS (Feature Style) ============ -->
+
+		
+<!-- ============ TOP HEADLINE NEWS CSS ============ -->
 <style>
-  /* मुख्य हेडलाइन बक्सको डिजाइन */
   .headline-news-box {
     background: #fff;
     border-radius: 12px;
@@ -1390,7 +1392,6 @@ document.addEventListener('DOMContentLoaded', function() {
     flex-direction: column;
   }
 
-  /* माथिको आकर्षक Bold हेडर */
   .headline-header {
     background: #c0392b;
     color: #fff;
@@ -1400,48 +1401,185 @@ document.addEventListener('DOMContentLoaded', function() {
     display: flex;
     align-items: center;
     gap: 10px;
-    text-transform: uppercase;
   }
 
-  .headline-body { display: flex; flex-wrap: wrap; }
+  .headline-body {
+    display: flex;
+    flex-wrap: wrap;
+  }
 
-  /* बायाँतिर इमेज */
-  .headline-image { flex: 1; min-width: 300px; padding: 15px; }
-  .headline-image img { width: 100%; height: 300px; object-fit: cover; border-radius: 8px; }
+  .headline-image {
+    flex: 1;
+    min-width: 300px;
+    padding: 15px;
+  }
 
-  /* दायाँतिर समाचारको टेक्स्ट */
-  .headline-content { flex: 1.5; min-width: 300px; padding: 15px 20px 15px 0; display: flex; flex-direction: column; justify-content: center; }
-  .headline-title { font-size: 22px; font-weight: 700; color: #222; margin-bottom: 10px; line-height: 1.3; }
-  .headline-author { font-size: 14px; color: #e67e22; font-weight: 600; margin-bottom: 10px; }
-  .headline-text { font-size: 15px; color: #555; line-height: 1.6; text-align: justify; }
+  .headline-image img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
 
-  /* Like र समयको भाग */
-  .like-block { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; padding-top: 10px; border-top: 1px solid #eee; }
-  .like-group { display: flex; align-items: center; gap: 10px; }
-  .like-btn { background: #fff; border: 1px solid #dc3545; color: #dc3545; padding: 6px 15px; border-radius: 20px; cursor: pointer; font-weight: 600; transition: 0.2s; }
-  .like-btn.active { background: #dc3545; color: #fff; }
-  .like-count-badge { background: #eee; padding: 4px 10px; border-radius: 12px; font-size: 13px; font-weight: bold; }
-  .time-micro { font-size: 13px; color: #777; }
+  .headline-content {
+    flex: 1.5;
+    min-width: 300px;
+    padding: 15px 20px 15px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .headline-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+
+  .headline-author {
+    font-size: 14px;
+    color: #e67e22;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .headline-text {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.6;
+    text-align: justify;
+  }
+
+  .like-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+  }
+
+  .like-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .like-btn {
+    background: #fff;
+    border: 1px solid #dc3545;
+    color: #dc3545;
+    padding: 6px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+  }
+
+  .like-btn.active {
+    background: #dc3545;
+    color: #fff;
+  }
+
+  .like-count-badge {
+    background: #eee;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: bold;
+  }
+
+  .time-micro {
+    font-size: 13px;
+    color: #777;
+  }
+
+  /* News Gallery */
+  .gallery-card {
+    height: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.10);
+    transition: transform 0.25s ease;
+  }
+
+  .gallery-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .gallery-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .card-caption {
+    padding: 10px 8px;
+    font-weight: 700;
+    font-size: 14px;
+    text-align: center;
+    color: #222;
+  }
+
+  .news-card-link {
+    display: block;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+  }
 
   @media (max-width: 768px) {
-    .headline-image img { height: 220px; }
-    .headline-content { padding: 0 15px 15px 15px; }
-    .headline-title { font-size: 18px; }
+    .headline-image img {
+      height: 220px;
+    }
+
+    .headline-content {
+      padding: 0 15px 15px;
+    }
+
+    .headline-title {
+      font-size: 18px;
+    }
+
+    .gallery-card img {
+      height: 125px;
+    }
+
+    .card-caption {
+      font-size: 13px;
+    }
+  }
+
+  /* Modal Responsive */
+  #newsIframe {
+    width: 100%;
+    height: 75vh;
+    border: 0;
+    display: block;
+  }
+
+  @media (max-width: 576px) {
+    #newsIframe {
+      height: 80vh;
+    }
+
+    #newsIframeModal .modal-dialog {
+      margin: 8px;
+    }
   }
 </style>
-
-
-
-
-
-
-<!-- ============ NEWS HEADLINES GRID ============ -->
 
 
 <!-- ============ NEWS HEADLINES GRID ============ -->
 
 <div class="container-fluid mb-4">
+
   <div class="row g-2">
+
     <!-- News Heading -->
     <div class="col-12">
       <h2 class="header3">
@@ -1451,77 +1589,158 @@ document.addEventListener('DOMContentLoaded', function() {
 
     <!-- News 1 -->
     <div class="col-6 col-md-4 col-lg">
-      <a href="News/rai_maila.html" class="text-decoration-none text-dark">
+      <a href="News/rai_maila.html"
+         class="news-card-link"
+         onclick="openNewsIframe(event, this.href)">
+
         <div class="gallery-card">
           <img
             src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhw3Ei2TPM7aB4FSYOfT3Dj_HxH0z2Rjm5Gxmj1pz7RGFPQGvnFsP9dfPL96KjAI9sSHaRLY0jbCj5MB5hllAW_91e7V59cdJK5gp7XGwO-QJBmOT4UkxPBCtGZlOpWfNg5FBuwzqSDyoTEZirgWn6OV0LBpmRMvtcULzUuGWhuHNZiXwEziaKhH48TreE/s660/rai1.JPG"
             alt="राई माइलाले गाउँ किन छाडेछ"
             loading="lazy">
-          <div class="card-caption">राई माइलाले गाउँ किन छाडेछ</div>
+
+          <div class="card-caption">
+            राई माइलाले गाउँ किन छाडेछ
+          </div>
         </div>
       </a>
     </div>
 
     <!-- News 2 -->
     <div class="col-6 col-md-4 col-lg">
-      <div class="gallery-card">
-        <img
-          src="https://shamser.info.np/HomePage/IEMIS%20SHAMSER.jpg"
-          alt="IEMIS Training"
-          loading="lazy">
-        <div class="card-caption">IEMIS प्रशिक्षण</div>
-      </div>
+      <a href="News/iemis_training.html"
+         class="news-card-link"
+         onclick="openNewsIframe(event, this.href)">
+
+        <div class="gallery-card">
+          <img
+            src="https://shamser.info.np/HomePage/IEMIS%20SHAMSER.jpg"
+            alt="IEMIS Training"
+            loading="lazy">
+
+          <div class="card-caption">IEMIS प्रशिक्षण</div>
+        </div>
+      </a>
     </div>
 
     <!-- News 3 -->
     <div class="col-6 col-md-4 col-lg">
-      <div class="gallery-card">
-        <img
-          src="https://shamser.info.np/HomePage/smarika.png"
-          alt="Smarika Launch"
-          loading="lazy">
-        <div class="card-caption">स्मारिका विमोचन</div>
-      </div>
+      <a href="News/smarika.html"
+         class="news-card-link"
+         onclick="openNewsIframe(event, this.href)">
+
+        <div class="gallery-card">
+          <img
+            src="https://shamser.info.np/HomePage/smarika.png"
+            alt="Smarika Launch"
+            loading="lazy">
+
+          <div class="card-caption">स्मारिका विमोचन</div>
+        </div>
+      </a>
     </div>
 
     <!-- News 4 -->
     <div class="col-6 col-md-4 col-lg">
-      <div class="gallery-card">
-        <img
-          src="https://shamser.info.np/HomePage/img/krishna.jfif"
-          alt="Cultural Program"
-          loading="lazy">
-        <div class="card-caption">सांस्कृतिक कार्यक्रम</div>
-      </div>
+      <a href="News/cultural_program.html"
+         class="news-card-link"
+         onclick="openNewsIframe(event, this.href)">
+
+        <div class="gallery-card">
+          <img
+            src="https://shamser.info.np/HomePage/img/krishna.jfif"
+            alt="Cultural Program"
+            loading="lazy">
+
+          <div class="card-caption">सांस्कृतिक कार्यक्रम</div>
+        </div>
+      </a>
     </div>
 
     <!-- News 5 -->
     <div class="col-6 col-md-4 col-lg">
-      <div class="gallery-card">
-        <img
-          src="https://shamser.info.np/HomePage/img/krishna.jfif"
-          alt="Cultural Program"
-          loading="lazy">
-        <div class="card-caption">कृष्ण कार्यक्रम</div>
-      </div>
+      <a href="News/krishna.html"
+         class="news-card-link"
+         onclick="openNewsIframe(event, this.href)">
+
+        <div class="gallery-card">
+          <img
+            src="https://shamser.info.np/HomePage/img/krishna.jfif"
+            alt="Krishna Program"
+            loading="lazy">
+
+          <div class="card-caption">कृष्ण कार्यक्रम</div>
+        </div>
+      </a>
     </div>
 
   </div>
 </div>
 
 
-<!-- ============ MAIN NEWS ============ -->
+<!-- ============ COMMON NEWS IFRAME MODAL ============ -->
+<div class="modal fade"
+     id="newsIframeModal"
+     tabindex="-1"
+     aria-labelledby="newsModalTitle"
+     aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="newsModalTitle">
+          <i class="fas fa-newspaper"></i> News Headlines
+        </h5>
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close">
+        </button>
+      </div>
+      <div class="modal-body p-0">
+        <iframe
+          id="newsIframe"
+          src="about:blank"
+          title="News Details"
+          loading="lazy"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </div>
+</div>
 
+
+<!-- ============ NEWS IFRAME JAVASCRIPT ============ -->
+<script>
+(function () {
+  const modalElement = document.getElementById('newsIframeModal');
+  const iframe = document.getElementById('newsIframe');
+  if (!modalElement || !iframe) return;
+  window.openNewsIframe = function (event, url) {
+    event.preventDefault();
+    if (!window.bootstrap || !bootstrap.Modal) {
+      window.location.href = url;
+      return;
+    }
+    iframe.src = url;
+    const modal = bootstrap.Modal.getOrCreateInstance(modalElement);
+    modal.show();
+  };
+  // Modal बन्द हुँदा iframe खाली गर्ने
+  modalElement.addEventListener('hidden.bs.modal', function () {
+    iframe.src = 'about:blank';
+  });
+})();
+</script>
+
+<!-- =========== MAIN NEWS ============ -->
 <div class="news-section" id="content_education">
-
   <div class="news-header">
     <h2 class="header3">
       ✍️ 'विद्यार्थीबाट शुल्क लिनु गैरकानूनी हो'
     </h2>
   </div>
-
   <p>विद्या भट्टराई, पूर्वशिक्षा, विज्ञान तथा प्रविधि मन्त्री</p>
-
   <img
     src="https://shamser.info.np/SitePage/daraj/Bidhya-Bhattarai.jpg"
     alt="Bidhya Bhattarai"
@@ -1529,65 +1748,51 @@ document.addEventListener('DOMContentLoaded', function() {
     width="100%"
     height="500"
     style="object-fit:cover; border-radius:16px;">
-
   <div style="margin:15px 0; overflow:auto;">
-
     <img
       src="https://pbs.twimg.com/profile_images/1579086841227059200/JyklJEUx_400x400.jpg"
       alt="Editor"
       loading="lazy"
       style="width:60px;height:60px;border-radius:50%;float:left;margin-right:15px;">
-
     <p style="text-align:justify;">
-
       अनिवार्य तथा निःशुल्क शिक्षा ऐन २०७५ कार्यान्वयन गर्न पूर्वशिक्षा, विज्ञान तथा प्रविधि मन्त्री विद्या भट्टराईले २०८३ सालसम्मको कार्ययोजना बनाएकी थिइन् । तर भट्टराईले ९ महिनामै पदबाट राजीनामा दिइन् । उनले आफ्नो कार्यकालमा अनिवार्य तथा निःशुल्क शिक्षा ऐन कति कार्यान्वयन गरिन् त ?
-
       <span id="eduMore" class="hidden-content">
         <br><br>
-
         अनलाइनखबरकर्मी दिनेश गौतमले गरेको कुराकानीको सम्पादित अंश : नौ महिना मन्त्री हुनुभयो । शुरूदेखि नै अनिवार्य तथा निःशुल्क शिक्षा ऐन कार्यान्वयनमा जोड दिनुभएको थियो । किताब निःशुल्क दिने, खाजा दिने र छात्रवृत्तिको काम भएको थियो।
 
         <br><br>
-
         उनले आफ्नो कार्यकालमा शिक्षक दरबन्दी मिलान, विद्यालय सुधार योजना र डिजिटल शिक्षामा पनि जोड दिएकी थिइन्। तर, बजेट अभाव र कोभिडपछिको शैक्षिक क्षतिले गर्दा उनका योजनाहरू पूर्ण रूपमा कार्यान्वयन हुन सकेनन्। निजी विद्यालयहरूले अझै पनि मनपरी शुल्क लिइरहेको र सरकारी विद्यालयको शैक्षिक गुणस्तर खस्किएको उनको भनाइ छ। शिक्षा क्षेत्रलाई उद्योगको रूपमा विकास गर्न नहुने र यसलाई सेवाको रूपमा लिनुपर्ने उनले बताइन्।
-
         <br><br>
-
         <a href="https://lauro-media.blogspot.com/2026/05/blog-post_28.html"
            class="btn btn-sm btn-primary">
           बाँकी पूरा समाचार पढ्नुहोस्
         </a>
       </span>
-
       <button class="read-more-btn"
               onclick="toggleContent('eduMore', this)">
         थप पढ्नुहोस्
       </button>
-
     </p>
   </div>
-
   <!-- LIKE SYSTEM -->
   <div class="like-block" data-like-key="education">
-
     <div class="like-group">
       <button class="like-btn" data-like-key="education">
         ❤️ <span class="like-text">मन पर्यो</span>
       </button>
-
-      <div class="like-count-badge" data-count-key="education">0</div>
+      <div class="like-count-badge" data-count-key="education">
+        0
+      </div>
     </div>
-
     <div class="time-micro">
-      🕐 <span class="time-ago"
-              data-date="2026-10-24T10:00:00">अहिले</span>
+      🕐
+      <span class="time-ago"
+            data-date="2026-10-24T10:00:00">
+        अहिले
+      </span>
     </div>
-
   </div>
-
 </div>
-
-
 
 
 
