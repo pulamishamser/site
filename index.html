@@ -2062,19 +2062,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 </script>
-<script>
-window.toggleContent = function(id, btn) {
-  var el = document.getElementById(id);
-  if (!el) return;
-  if (el.classList.contains('hidden-content')) {
-    el.classList.remove('hidden-content');
-    btn.innerText = "कम पढ्नुहोस्";
-  } else {
-    el.classList.add('hidden-content');
-    btn.innerText = "थप पढ्नुहोस्";
-  }
-};
-</script>
+
 
 <!---=================----End------जरा बिर्सनु हुँदैन। ----===========------>
 
@@ -6430,18 +6418,6 @@ document.addEventListener('DOMContentLoaded', function() {
 <!----------End-------------------popup------------>
 
 
-
-
-
-
-
-
-
-
- 
-
-
-
 <script>
   window.addEventListener('load', function () {
     var target = document.getElementById('news2');
@@ -6792,6 +6768,21 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 <!-- ======  TERMS & CONTACT KO LAGI FIX = END ====== -->
 
-
+<!-- कम पढ्नुहोस् समाचार-->
+<script>
+// ✅ Global scope मा define गर्नुहोस् (दोस्रो फाइलमा जस्तै)
+window.toggleContent = function(id, btn) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  if (el.classList.contains('hidden-content')) {
+    el.classList.remove('hidden-content');
+    btn.innerText = "कम पढ्नुहोस्";
+  } else {
+    el.classList.add('hidden-content');
+    btn.innerText = "थप पढ्नुहोस्";
+  }
+};
+</script>
+	<!--  समाचार End कम पढ्नुहोस् -->
 </body>
 </html>
