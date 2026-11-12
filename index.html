@@ -214,15 +214,26 @@ html, body { margin: 0 !important; padding: 0 !important; width: 100%; overflow-
 .marquee-content { display: inline-block; padding-left: 100%; animation: marquee 30s linear infinite; font-size: 18px; color: #000; }
 @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
-.hidden-content {  display: none !important;  visibility: hidden;  height: 0;  overflow: hidden;}
-.read-more-btn { display:block; margin:12px 0 0; padding:8px 18px; border:none; border-radius:10px; background:#0d6efd; color:#fff; font-size:14px; cursor:pointer; }
-.read-more-btn:hover { background:#0b5ed7; }
-.editor-wrap { margin:15px 0; }
-.editor-wrap::after { content:""; display:table; clear:both; }
-.editor-wrap > img { width:60px; height:60px; border-radius:50%; float:left; margin-right:15px; }
-.editor-wrap p { text-align: justify; margin: 0; }
+/* थप पढ्नुहोस् / कम पढ्नुहोस् */
+.hidden-content {
+    display: none !important;
+}
 
+.read-more-btn {
+    display: inline-block;
+    margin: 12px 0 0;
+    padding: 8px 18px;
+    border: none;
+    border-radius: 10px;
+    background: #0d6efd;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+}
 
+.read-more-btn:hover {
+    background: #0b5ed7;
+}
 	
 /* End news-section */
 
@@ -1229,6 +1240,14 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </header>
 
+
+
+
+
+
+
+
+	
 <!-- ====== JavaScript ====== -->
 <script>
   // मोबाइल मेनु टोगल
@@ -6625,22 +6644,25 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 <!-- ======  TERMS & CONTACT KO LAGI FIX = END ====== -->
-
-<!-- कम पढ्नुहोस् समाचार-->
 <script>
-// ✅ Global scope मा define गर्नुहोस् (दोस्रो फाइलमा जस्तै)
 window.toggleContent = function(id, btn) {
-  var el = document.getElementById(id);
-  if (!el) return;
-  if (el.classList.contains('hidden-content')) {
-    el.classList.remove('hidden-content');
-    btn.innerText = "कम पढ्नुहोस्";
-  } else {
-    el.classList.add('hidden-content');
-    btn.innerText = "थप पढ्नुहोस्";
-  }
+
+    const el = document.getElementById(id);
+
+    if (!el || !btn) return;
+
+    if (el.classList.contains('hidden-content')) {
+
+        el.classList.remove('hidden-content');
+        btn.innerText = "कम पढ्नुहोस्";
+
+    } else {
+
+        el.classList.add('hidden-content');
+        btn.innerText = "थप पढ्नुहोस्";
+
+    }
 };
 </script>
-	<!--  समाचार End कम पढ्नुहोस् -->
 </body>
 </html>
