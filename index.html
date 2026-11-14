@@ -6450,8 +6450,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==========================================
     // ४. समाचार भित्रको छुट्टाछुट्टै LIKE
     // ==========================================
-    const newsLikeKeys = ['education', 'kara', 'brics'];
-
+	const newsLikeKeys = ['education',  'kara',  'brics',  'features'];
     newsLikeKeys.forEach(function(key) {
       const btn = document.querySelector(`.like-btn[data-like-key="${key}"]`);
       const countSpan = document.querySelector(`.like-count-badge[data-count-key="${key}"]`);
@@ -6466,6 +6465,15 @@ document.addEventListener('DOMContentLoaded', function() {
         const count = docSnap.exists() ? docSnap.data().count : 0;
         countSpan.innerText = count;
       });
+
+
+
+
+
+
+
+
+		
 
       function updateUI() {
         if (isLiked) {
