@@ -6651,6 +6651,9 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
+
+
+	
 <!-- ======  TERMS & CONTACT KO LAGI FIX = END ====== -->
 <script>
 window.toggleContent = function(id, btn) {
@@ -6672,5 +6675,43 @@ window.toggleContent = function(id, btn) {
     }
 };
 </script>
+
+
+<!-----------------------News ----time-ago---------------->
+<script>
+function updateNewsTime() {
+  document.querySelectorAll('.time-ago').forEach(function(el) {
+
+    const dateValue = el.getAttribute('data-date');
+    if (!dateValue) return;
+
+    const publishedDate = new Date(dateValue);
+    const now = new Date();
+
+    if (isNaN(publishedDate.getTime())) return;
+
+    const diff = Math.floor((now - publishedDate) / 1000);
+
+    if (diff < 0) {
+      el.innerText = 'भविष्यको मिति';
+    } else if (diff < 60) {
+      el.innerText = 'अहिले';
+    } else if (diff < 3600) {
+      el.innerText = Math.floor(diff / 60) + ' मिनेटअघि';
+    } else if (diff < 86400) {
+      el.innerText = Math.floor(diff / 3600) + ' घण्टाअघि';
+    } else if (diff < 2592000) {
+      el.innerText = Math.floor(diff / 86400) + ' दिनअघि';
+    } else {
+      el.innerText = Math.floor(diff / 2592000) + ' महिनाअघि';
+    }
+  });
+}
+
+updateNewsTime();
+setInterval(updateNewsTime, 60000);
+</script>
+	
+	<!-----------------------News ----time-ago---------------->
 </body>
 </html>
