@@ -288,16 +288,366 @@ html, body { margin: 0 !important; padding: 0 !important; width: 100%; overflow-
 .qr-box img { max-width: 100%; height: auto; border-radius: 8px; }
 
 /* Footer */
-.ft-custom { background: #0000CD; color: #FFFFC2; padding: 40px 15px 20px; }
-.ft-custom .container { display: flex; flex-wrap: wrap; justify-content: space-between; }
-.ft-col { flex: 1; min-width: 200px; padding: 0 15px; }
-.ft-col h6 { color: #fff; border-bottom: 1px solid #4a5568; padding-bottom: 10px; margin-bottom: 15px; }
-.ft-col a { color: #e2e8f0; text-decoration: none; font-size: 14px; display: flex; align-items: center; gap: 8px; }
-.widget-container { display: none; padding: 15px; background: var(--card-bg); border-radius: 10px; margin: 15px; width: calc(100% - 30px); position: fixed; bottom: 60px; left: 0; z-index: 999; max-height: 420px; overflow-y: auto; }
-.widget { display: none; } .widget.active { display: block; }
-.bottom-nav { position: fixed; bottom: 0; width: 100%; background: #027f7f; display: flex; justify-content: space-around; padding: 12px 0; z-index: 1000; }
-.bottom-nav a { color: white; text-decoration: none; text-align: center; font-size: 14px; padding: 8px 5px; flex: 1; }
-.bottom-nav i { display: block; font-size: 22px; margin-bottom: 5px; }
+
+/* ============ FOOTER MAIN ============ */
+
+.ft-custom {
+  background: #0000CD;
+  color: #FFFFC2;
+  padding: 40px 15px 20px;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  clear: both;
+}
+
+.ft-custom * {
+  box-sizing: border-box;
+}
+
+.ft-custom .container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 25px 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ============ FOOTER COLUMNS ============ */
+
+.ft-col {
+  flex: 1 1 220px;
+  min-width: 200px;
+  padding: 0 15px;
+}
+
+.ft-col h6 {
+  color: #fff;
+  border-bottom: 1px solid #4a5568;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.ft-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ft-col ul li {
+  margin-bottom: 10px;
+}
+
+.ft-col a {
+  color: #e2e8f0;
+  text-decoration: none;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.2s ease;
+}
+
+.ft-col a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.ft-col a i {
+  min-width: 16px;
+}
+
+.ft-no-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* ============ LEGAL LINKS ============ */
+
+.ft-legal {
+  border-top: 1px dashed #4a5568;
+  padding-top: 12px;
+  margin-top: 15px;
+  font-size: 12px;
+  line-height: 2;
+}
+
+.ft-legal a {
+  display: inline;
+  margin: 0 3px;
+  white-space: nowrap;
+}
+
+/* ============ WEBSITE IDENTITY ============ */
+
+.footer-portal-info {
+  max-width: 1100px;
+  margin: 35px auto 0;
+  padding: 25px 20px;
+  border-top: 1px solid rgba(255,255,255,0.35);
+  border-bottom: 1px solid rgba(255,255,255,0.35);
+  text-align: center;
+  background: rgba(0,0,0,0.10);
+  border-radius: 10px;
+}
+
+.portal-brand h4 {
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin: 0 0 8px;
+}
+
+.portal-tagline {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 5px 0;
+}
+
+.portal-categories {
+  color: #FFFFC2;
+  font-size: 13px;
+  margin: 8px 0 20px;
+}
+
+.portal-categories span {
+  padding: 0 6px;
+  color: #ffffff;
+}
+
+/* ============ PORTAL DETAILS ============ */
+
+.portal-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px 30px;
+  margin: 20px auto;
+}
+
+.portal-detail {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+  font-size: 13px;
+  color: #e2e8f0;
+  min-width: 190px;
+}
+
+.portal-detail > i {
+  font-size: 18px;
+  color: #FFFFC2;
+  width: 22px;
+  text-align: center;
+}
+
+.portal-detail span {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.portal-detail strong {
+  color: #ffffff;
+  font-size: 12px;
+}
+
+.portal-detail a {
+  color: #FFFFC2;
+  text-decoration: none;
+}
+
+.portal-detail a:hover {
+  text-decoration: underline;
+}
+
+/* ============ DOMAIN INFORMATION ============ */
+
+.domain-info {
+  border-top: 1px dashed rgba(255,255,255,0.3);
+  padding-top: 15px;
+  margin-top: 20px;
+  color: #dbeafe;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.domain-info i {
+  margin-right: 5px;
+}
+
+.domain-info a {
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* ============ COPYRIGHT ============ */
+
+.ft-copyright {
+  text-align: center;
+  margin-top: 20px;
+  border-top: 1px solid #4a5568;
+  padding: 15px 10px 0;
+  font-size: 13px;
+  color: #a0aec0;
+  line-height: 1.9;
+}
+
+.ft-copyright strong {
+  color: #ffffff;
+}
+
+.ft-copyright span {
+  font-size: 12px;
+}
+
+/* ============ EXISTING WIDGET CSS ============ */
+
+.widget-container {
+  display: none;
+  padding: 15px;
+  background: var(--card-bg);
+  border-radius: 10px;
+  margin: 15px;
+  width: calc(100% - 30px);
+  position: fixed;
+  bottom: 60px;
+  left: 0;
+  z-index: 999;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.widget {
+  display: none;
+}
+
+.widget.active {
+  display: block;
+}
+
+/* ============ BOTTOM NAVIGATION ============ */
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #027f7f;
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 0;
+  z-index: 1000;
+}
+
+.bottom-nav a {
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  font-size: 14px;
+  padding: 8px 5px;
+  flex: 1;
+}
+
+.bottom-nav i {
+  display: block;
+  font-size: 22px;
+  margin-bottom: 5px;
+}
+
+/* ============ TABLET ============ */
+
+@media (max-width: 768px) {
+
+  .ft-custom {
+    padding: 30px 10px 20px;
+  }
+
+  .ft-col {
+    flex: 1 1 50%;
+    min-width: 0;
+    padding: 0 10px;
+  }
+
+  .footer-portal-info {
+    padding: 20px 12px;
+  }
+
+  .portal-details {
+    gap: 18px;
+  }
+
+}
+
+/* ============ MOBILE ============ */
+
+@media (max-width: 480px) {
+
+  .ft-custom .container {
+    gap: 25px 0;
+  }
+
+  .ft-col {
+    flex: 1 1 100%;
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .ft-col h6 {
+    font-size: 15px;
+  }
+
+  .ft-col.text-center {
+    text-align: left !important;
+  }
+
+  .footer-portal-info {
+    margin-top: 25px;
+    padding: 18px 12px;
+  }
+
+  .portal-brand h4 {
+    font-size: 21px;
+  }
+
+  .portal-tagline {
+    font-size: 14px;
+  }
+
+  .portal-categories {
+    font-size: 12px;
+  }
+
+  .portal-details {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 10px;
+    gap: 15px;
+  }
+
+  .portal-detail {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .domain-info {
+    font-size: 11px;
+  }
+
+  .ft-copyright {
+    font-size: 12px;
+  }
+
+}
+
 
 /* Modal */
 .modal-content { border-radius: 12px; border: none; }
@@ -5379,37 +5729,41 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-<!-- ============ FOOTER (Layout Fixed) ============ -->
+
+
+
+<!-- ============ FOOTER START ============ -->
 <footer class="ft-custom mt-4">
+
   <div class="container">
-    
+
     <!-- Column 1: Social Links -->
     <div class="ft-col">
       <h6>Facebook Page Link</h6>
       <ul>
-        <li><a href="https://www.facebook.com/shiksha"><i class="fab fa-facebook"></i> Shiksha</a></li>
-        <li><a href="https://www.facebook.com/edukhabar"><i class="fab fa-facebook"></i> Edukhabar</a></li>
-        <li><a href="https://www.facebook.com/edupatra"><i class="fab fa-facebook"></i> Edupatra</a></li>
-        <li><a href="https://www.facebook.com/shikshakkitabkhana"><i class="fab fa-facebook"></i> Shikshak Kitabkhana</a></li>
+        <li><a href="https://www.facebook.com/shiksha" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i> Shiksha</a></li>
+        <li><a href="https://www.facebook.com/edukhabar" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i> Edukhabar</a></li>
+        <li><a href="https://www.facebook.com/edupatra" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i> Edupatra</a></li>
+        <li><a href="https://www.facebook.com/shikshakkitabkhana" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i> Shikshak Kitabkhana</a></li>
       </ul>
     </div>
 
     <!-- Column 2: Advertisement -->
     <div class="ft-col text-center">
       <h6>Advertising Branch</h6>
-      <ul style="list-style: none; padding: 0;">
+      <ul class="ft-no-list">
         <li>
-          <a href="tel:+9779844064953" style="color: inherit; text-decoration: none;">
+          <a href="tel:+9779844064953">
             <i class="fas fa-phone-alt"></i> GK - 9844064953
           </a>
         </li>
         <li>
-          <a href="tel:+9779861483792" style="color: inherit; text-decoration: none;">
+          <a href="tel:+9779861483792">
             <i class="fas fa-phone-alt"></i> Sugam - 9861483792
           </a>
         </li>
         <li>
-          <a href="tel:+9779814842523" style="color: inherit; text-decoration: none;">
+          <a href="tel:+9779814842523">
             <i class="fas fa-phone-alt"></i> PKS - 9814842523
           </a>
         </li>
@@ -5431,51 +5785,141 @@ document.addEventListener('DOMContentLoaded', function() {
       </ul>
     </div>
 
-    <!-- Column 4: Contact Info & Legal Links -->
+    <!-- Column 4: Contact & Legal -->
     <div class="ft-col">
       <h6>Contact Us</h6>
-      <ul style="list-style: none; padding: 0;">
+      <ul class="ft-no-list">
+
         <li>
-          <a href="#" data-bs-toggle="modal" data-bs-target="#contactModal" style="text-decoration: none;">
+          <a href="#" data-bs-toggle="modal" data-bs-target="#contactModal">
             <i class="fas fa-file-alt text-info"></i> Contact Form
           </a>
         </li>
+
         <li>
-          <a href="tel:+9779844087012" style="color: inherit; text-decoration: none;">
+          <a href="tel:+9779844087012">
             <i class="fas fa-phone-alt text-success"></i> 9844087012
           </a>
         </li>
+
         <li>
-          <a href="mailto:info@shamser.com.np" style="color: inherit; text-decoration: none;">
+          <a href="mailto:info@shamser.com.np">
             <i class="fas fa-envelope text-light"></i> info@shamser.com.np
           </a>
         </li>
+
         <li>
-          <a href="https://shamser.info.np" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">
+          <a href="https://shamser.info.np/" target="_blank" rel="noopener noreferrer">
             <i class="fas fa-globe text-info"></i> shamser.info.np
           </a>
         </li>
+
       </ul>
 
-      <!-- ✅ CORRECTED LEGAL LINKS -->
-      <div class="mt-3 pt-2" style="border-top: 1px dashed #4a5568; font-size: 12px;">
-        <a href="#" data-bs-toggle="modal" data-bs-target="#aboutModal" class="text-light me-2 text-decoration-none">About</a> |
-        <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal" class="text-light mx-2 text-decoration-none">Privacy Policy</a> |
-        <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal" class="text-light mx-2 text-decoration-none">Terms of Service</a> |
-        <a href="#" data-bs-toggle="modal" data-bs-target="#contactModal" class="text-light ms-2 text-decoration-none">Contact</a>
+      <!-- Legal Links -->
+      <div class="ft-legal">
+        <a href="#" data-bs-toggle="modal" data-bs-target="#aboutModal">About</a> |
+        <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">Privacy Policy</a> |
+        <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terms of Service</a> |
+        <a href="#" data-bs-toggle="modal" data-bs-target="#contactModal">Contact</a>
       </div>
     </div>
+
   </div>
-  
+
+  <!-- ============ WEBSITE IDENTITY / PAN DETAILS ============ -->
+  <div class="footer-portal-info">
+
+    <div class="portal-brand">
+      <h4>SHAMSER.INFO.NP</h4>
+      <p class="portal-tagline">
+        Educational &amp; Information Portal
+      </p>
+      <p class="portal-categories">
+        Education <span>|</span> Information <span>|</span> Online News
+      </p>
+    </div>
+
+    <div class="portal-details">
+
+      <div class="portal-detail">
+        <i class="fas fa-user"></i>
+        <span>
+          <strong>Website Owner &amp; Operator</strong>
+          Shamser Pulami
+        </span>
+      </div>
+
+      <div class="portal-detail">
+        <i class="fas fa-id-card"></i>
+        <span>
+          <strong>PAN No.</strong>
+          104509531
+        </span>
+      </div>
+
+      <div class="portal-detail">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>
+          <strong>Address</strong>
+          Lalbandi, Sarlahi, Nepal
+        </span>
+      </div>
+
+      <div class="portal-detail">
+        <i class="fas fa-globe"></i>
+        <span>
+          <strong>Official Website</strong>
+          <a href="https://shamser.info.np/">
+            shamser.info.np
+          </a>
+        </span>
+      </div>
+
+    </div>
+
+    <!-- Domain Information -->
+    <div class="domain-info">
+      <i class="fas fa-server"></i>
+      .NP Domain Registry Manager:
+      <a href="https://register.com.np/"
+         target="_blank"
+         rel="noopener noreferrer">
+        Mercantile Communications Pvt. Ltd.
+      </a>
+    </div>
+
+  </div>
+
   <!-- Copyright -->
-  <div class="text-center mt-4" style="border-top: 1px solid #4a5568; padding-top: 15px; font-size: 13px; color: #a0aec0;">
-    &copy; Copyrights 2022-2026 <strong>shamser pulami</strong> All Rights Reserved
+  <div class="ft-copyright">
+    © Copyright 2022-2026
+    <strong>SHAMSER.INFO.NP</strong>.
+    All Rights Reserved.
+    <br>
+    <span>Website Owner: Shamser Pulami</span>
   </div>
 
 </footer>
+<!-- ============ FOOTER END ============ -->
 
 
-<!-- ================= WIDGETS (Bottom Nav) ================= -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
 <!-- ================= WIDGETS (Bottom Nav) ================= -->
 <style>
   .widget-container {
