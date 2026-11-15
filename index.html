@@ -288,13 +288,105 @@ html, body { margin: 0 !important; padding: 0 !important; width: 100%; overflow-
 .qr-box img { max-width: 100%; height: auto; border-radius: 8px; }
 
 /* Footer */
+
 /* ============ FOOTER MAIN ============ */
+
+.ft-custom {
+  background: #0000CD;
+  color: #FFFFC2;
+  padding: 40px 15px 20px;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  clear: both;
+}
+
+.ft-custom * {
+  box-sizing: border-box;
+}
+
+.ft-custom .container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 25px 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ============ FOOTER COLUMNS ============ */
+
+.ft-col {
+  flex: 1 1 220px;
+  min-width: 200px;
+  padding: 0 15px;
+}
+
+.ft-col h6 {
+  color: #fff;
+  border-bottom: 1px solid #4a5568;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.ft-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ft-col ul li {
+  margin-bottom: 10px;
+}
+
+.ft-col a {
+  color: #e2e8f0;
+  text-decoration: none;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.2s ease;
+}
+
+.ft-col a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.ft-col a i {
+  min-width: 16px;
+}
+
+.ft-no-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* ============ LEGAL LINKS ============ */
+
+.ft-legal {
+  border-top: 1px dashed #4a5568;
+  padding-top: 12px;
+  margin-top: 15px;
+  font-size: 12px;
+  line-height: 2;
+}
+
+.ft-legal a {
+  display: inline;
+  margin: 0 3px;
+  white-space: nowrap;
+}
 
 /* ============ WEBSITE IDENTITY ============ */
 
 .footer-portal-info {
   max-width: 1100px;
-  width: 100%;
   margin: 35px auto 0;
   padding: 25px 20px;
   border-top: 1px solid rgba(255,255,255,0.35);
@@ -336,8 +428,7 @@ html, body { margin: 0 !important; padding: 0 !important; width: 100%; overflow-
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  gap: 20px 30px;
+  gap: 15px 30px;
   margin: 20px auto;
 }
 
@@ -355,14 +446,13 @@ html, body { margin: 0 !important; padding: 0 !important; width: 100%; overflow-
   font-size: 18px;
   color: #FFFFC2;
   width: 22px;
-  min-width: 22px;
   text-align: center;
 }
 
-.portal-detail > span {
+.portal-detail span {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 3px;
 }
 
 .portal-detail strong {
@@ -377,27 +467,6 @@ html, body { margin: 0 !important; padding: 0 !important; width: 100%; overflow-
 
 .portal-detail a:hover {
   text-decoration: underline;
-}
-
-/* ============ OWNER PHOTO ============ */
-
-.portal-owner {
-  display: flex;
-  flex-direction: row !important;
-  align-items: center;
-  gap: 8px;
-  color: #ffffff;
-}
-
-.portal-owner-img {
-  width: 38px;
-  height: 38px;
-  min-width: 38px;
-  border-radius: 50%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-  border: 2px solid #FFFFC2;
 }
 
 /* ============ DOMAIN INFORMATION ============ */
@@ -441,19 +510,127 @@ html, body { margin: 0 !important; padding: 0 !important; width: 100%; overflow-
   font-size: 12px;
 }
 
-/* ============ MOBILE RESPONSIVE ============ */
+/* ============ EXISTING WIDGET CSS ============ */
 
-@media (max-width: 600px) {
+.widget-container {
+  display: none;
+  padding: 15px;
+  background: var(--card-bg);
+  border-radius: 10px;
+  margin: 15px;
+  width: calc(100% - 30px);
+  position: fixed;
+  bottom: 60px;
+  left: 0;
+  z-index: 999;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.widget {
+  display: none;
+}
+
+.widget.active {
+  display: block;
+}
+
+/* ============ BOTTOM NAVIGATION ============ */
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #027f7f;
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 0;
+  z-index: 1000;
+}
+
+.bottom-nav a {
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  font-size: 14px;
+  padding: 8px 5px;
+  flex: 1;
+}
+
+.bottom-nav i {
+  display: block;
+  font-size: 22px;
+  margin-bottom: 5px;
+}
+
+/* ============ TABLET ============ */
+
+@media (max-width: 768px) {
+
+  .ft-custom {
+    padding: 30px 10px 20px;
+  }
+
+  .ft-col {
+    flex: 1 1 50%;
+    min-width: 0;
+    padding: 0 10px;
+  }
 
   .footer-portal-info {
     padding: 20px 12px;
   }
 
   .portal-details {
+    gap: 18px;
+  }
+
+}
+
+/* ============ MOBILE ============ */
+
+@media (max-width: 480px) {
+
+  .ft-custom .container {
+    gap: 25px 0;
+  }
+
+  .ft-col {
+    flex: 1 1 100%;
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .ft-col h6 {
+    font-size: 15px;
+  }
+
+  .ft-col.text-center {
+    text-align: left !important;
+  }
+
+  .footer-portal-info {
+    margin-top: 25px;
+    padding: 18px 12px;
+  }
+
+  .portal-brand h4 {
+    font-size: 21px;
+  }
+
+  .portal-tagline {
+    font-size: 14px;
+  }
+
+  .portal-categories {
+    font-size: 12px;
+  }
+
+  .portal-details {
     flex-direction: column;
     align-items: flex-start;
-    gap: 18px;
     padding: 0 10px;
+    gap: 15px;
   }
 
   .portal-detail {
@@ -461,22 +638,18 @@ html, body { margin: 0 !important; padding: 0 !important; width: 100%; overflow-
     min-width: 0;
   }
 
-  .portal-brand h4 {
-    font-size: 21px;
-  }
-
-  .portal-owner-img {
-    width: 36px;
-    height: 36px;
-    min-width: 36px;
-  }
-
   .domain-info {
     font-size: 11px;
   }
 
+  .ft-copyright {
+    font-size: 12px;
+  }
+
 }
 /* ========End===Footer============ */
+
+
 	
 .widget-container {
   display: none;
@@ -5668,6 +5841,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 <!-- ============ FOOTER START ============ -->
+
+<!-- ============ FOOTER START ============ -->
 <footer class="ft-custom mt-4">
 
   <div class="container">
@@ -5762,101 +5937,83 @@ document.addEventListener('DOMContentLoaded', function() {
 
   </div>
 
-<!-- ============ WEBSITE IDENTITY / PAN DETAILS ============ -->
+  <!-- ============ WEBSITE IDENTITY / PAN DETAILS ============ -->
+  <div class="footer-portal-info">
 
-<div class="footer-portal-info">
+    <div class="portal-brand">
+      <h4>SHAMSER.INFO.NP</h4>
+      <p class="portal-tagline">
+        Educational &amp; Information Portal
+      </p>
+      <p class="portal-categories">
+        Education <span>|</span> Information <span>|</span> Online News
+      </p>
+    </div>
 
-  <!-- Website Branding -->
-  <div class="portal-brand">
-    <h4>SHAMSER.INFO.NP</h4>
+    <div class="portal-details">
 
-    <p class="portal-tagline">
-      Educational &amp; Information Portal
-    </p>
-
-    <p class="portal-categories">
-      Education <span>|</span> Information <span>|</span> Online News
-    </p>
-  </div>
-
-  <!-- Portal Details -->
-  <div class="portal-details">
-
-    <!-- Website Owner -->
-    <div class="portal-detail">
-      <i class="fas fa-user"></i>
-
-      <span>
-        <strong>Website Owner &amp; Operator</strong>
-
-        <span class="portal-owner">
-          <img
-            src="https://shamser.info.np/HomePage/img/brp.jpg"
-            alt="Shamser Pulami"
-            class="portal-owner-img">
-
-          <span>Shamser Pulami</span>
+      <div class="portal-detail">
+        <i class="fas fa-user"></i>
+        <span>
+          <strong>Website Owner &amp; Operator</strong>
+          Shamser Pulami
         </span>
+      </div>
 
-      </span>
+      <div class="portal-detail">
+        <i class="fas fa-id-card"></i>
+        <span>
+          <strong>PAN No.</strong>
+          104509531
+        </span>
+      </div>
+
+      <div class="portal-detail">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>
+          <strong>Address</strong>
+          Lalbandi, Sarlahi, Nepal
+        </span>
+      </div>
+
+      <div class="portal-detail">
+        <i class="fas fa-globe"></i>
+        <span>
+          <strong>Official Website</strong>
+          <a href="https://shamser.info.np/">
+            shamser.info.np
+          </a>
+        </span>
+      </div>
+
     </div>
 
-    <!-- PAN -->
-    <div class="portal-detail">
-      <i class="fas fa-id-card"></i>
-      <span>
-        <strong>PAN No.</strong>
-        104509531
-      </span>
-    </div>
-
-    <!-- Address -->
-    <div class="portal-detail">
-      <i class="fas fa-map-marker-alt"></i>
-      <span>
-        <strong>Address</strong>
-        Lalbandi, Sarlahi, Nepal
-      </span>
-    </div>
-
-    <!-- Website -->
-    <div class="portal-detail">
-      <i class="fas fa-globe"></i>
-      <span>
-        <strong>Official Website</strong>
-        <a href="https://shamser.info.np/">
-          shamser.info.np
-        </a>
-      </span>
+    <!-- Domain Information -->
+    <div class="domain-info">
+      <i class="fas fa-server"></i>
+      .NP Domain Registry Manager:
+      <a href="https://register.com.np/"
+         target="_blank"
+         rel="noopener noreferrer">
+        Mercantile Communications Pvt. Ltd.
+      </a>
     </div>
 
   </div>
 
-  <!-- Domain Information -->
-  <div class="domain-info">
-    <i class="fas fa-server"></i>
-    .NP Domain Registry Manager:
-
-    <a href="https://register.com.np/"
-       target="_blank"
-       rel="noopener noreferrer">   </a>
-      Mercantile Communications Pvt. Ltd.
- 
+  <!-- Copyright -->
+  <div class="ft-copyright">
+    © Copyright 2022-2026
+    <strong>SHAMSER.INFO.NP</strong>.
+    All Rights Reserved.
+    <br>
+    <span>Website Owner: Shamser Pulami</span>
   </div>
 
-</div>
-
-<!-- ============ COPYRIGHT ============ -->
-
-<div class="ft-copyright">
-  © Copyright 2022-2026
-  <strong>SHAMSER.INFO.NP</strong>.
-  All Rights Reserved.
-  <br>
-  <span>Website Owner: Shamser Pulami</span>
-</div>
 </footer>
 <!-- ============ FOOTER END ============ -->
+
+
 
 
 
